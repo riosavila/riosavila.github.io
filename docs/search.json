@@ -2398,7 +2398,7 @@
     "href": "rm_class.html",
     "title": "Research Methods: Econometrics I",
     "section": "",
-    "text": "Introduction: Once Upon a time, there was Econometrics I"
+    "text": "Introduction: Once Upon a time, why Econometrics? Chapter 1"
   },
   {
     "objectID": "rm_class.html#part-i-the-tools",
@@ -2413,5 +2413,61 @@
     "title": "Research Methods: Econometrics I",
     "section": "Part II: The methods",
     "text": "Part II: The methods\n\n6. Chronicles of Fate: Exploring the Mystical What-Ifs in the Web of Causal Models\nPotential outcomes and Causal Models html or pdf\n\n\n7. The Mirror’s Embrace: Taming Unobservables with the Power of Fixed Effects\nPanel Data and Fixed Effects (Many FE) html or pdf\n\n\n8. The Summoner’s Call: Using Instrumental Variables to estimate LATE’s\nInstrumental Variables html or pdf\n\n\n9. The Blade of Equivalence: Unleashing the Art of Matching in the Realm of Divergence\nMatching and Re-weighting html or pdf\n\n\n10. Beyond the Discontinuity Veil: Crossing thresholds to Illuminate Secrets\nRegression Discontinuity Design html or pdf\n\n\n11. Twofold Wisdom: Unraveling Truths with the Dual Forces of Differences in Differences\nDifferences in Differences pdf\n\n\n12. Cosmic Recreations: Forging New Realities through Synthetic Control\nSynthetic Control html or pdf"
+  },
+  {
+    "objectID": "rm_class.html#part-i-basic-tools",
+    "href": "rm_class.html#part-i-basic-tools",
+    "title": "Research Methods: Econometrics I",
+    "section": "Part I: Basic Tools",
+    "text": "Part I: Basic Tools\n\n1. Chapter 2:\nThe Simple Regression Model\n\n\n2. Chapter 3:\nMultiple Regression Analysis: Estimation\n\n\n3. Chapter 4 - 5\nMRA: Inference and Asymptotics\n\n\nHomeWork 1: here"
+  },
+  {
+    "objectID": "rm_class.html#part-ii-addressing-problems-with-mra",
+    "href": "rm_class.html#part-ii-addressing-problems-with-mra",
+    "title": "Research Methods: Econometrics I",
+    "section": "Part II: Addressing Problems with MRA",
+    "text": "Part II: Addressing Problems with MRA\n\n4. Chapter 6 - 7\nMRA: Scaling, functional forms, Goodness of Fit, and Qualitative Information\n\n\n5. Chapter 8\nHeteroskedasticity\n\n\n6. Chapter 9\nFurther Problems: Functional form, Missing variables, measurement errors, missing data\n\n\nHomeWork 2: here\n\n\nMIDTERM!\n\n7. Chapter 15\nInstrumental Variables and 2SLS\n\n\n8. Chapter 17\nLimited Dep Variables"
+  },
+  {
+    "objectID": "rm_class.html#part-iii-panel-data-methods",
+    "href": "rm_class.html#part-iii-panel-data-methods",
+    "title": "Research Methods: Econometrics I",
+    "section": "Part III: Panel Data Methods",
+    "text": "Part III: Panel Data Methods\n\n9. Chapter 13\nPool Cross Section and Panel Data\n\n\n10. Chapter 14\nAdvanced Panel Data Methods\n\n\nHomework 3: Here"
+  },
+  {
+    "objectID": "rm_class.html#part-iv-time-series",
+    "href": "rm_class.html#part-iv-time-series",
+    "title": "Research Methods: Econometrics I",
+    "section": "Part IV: Time Series",
+    "text": "Part IV: Time Series\n\n11. Chapter 10 - 11\nBasics of Regression analysis with TSD\n\n\n12. Chapter 12 & 18\nAdvanced TSD Problems\n\n\nFinal TBD"
+  },
+  {
+    "objectID": "resources.html",
+    "href": "resources.html",
+    "title": "Resources",
+    "section": "",
+    "text": "The goal of the class is for you to become familiar and proficient with some essential tools that are used in most empirical analysis.\nWhile learning to implement all the methods we cover by hand is a great excercise to learn what they do, and how they work, it may not be a feasible practice in most real-world work, unless you decide to follow that path (Econometrics/applied Econometrics).\nFor this purpose, the main software we will use in this class (as evidence from all the code shared in the slides) its `Stata’. A self contained program that is yet flexible enough to add custom add on programs/commands.\nNevertheless, if you are new to Stata, there are quite few resources you may want to look into using this software"
+  },
+  {
+    "objectID": "resources.html#stata",
+    "href": "resources.html#stata",
+    "title": "Resources",
+    "section": "Stata",
+    "text": "Stata\n\nStata Free-Webinars: https://www.stata.com/training/webinar/\nStata Video-Tutorials: https://www.stata.com/links/video-tutorials/\nGeneral Learning resources: https://www.stata.com/links/resources-for-learning-stata/\n\nBut of course, Stata is not free. There are other resources you may want to explore, if you are interested in doing econometric analysis, but no longer have access to Stata. These are R, Python and Julia."
+  },
+  {
+    "objectID": "resources.html#r-julia-python",
+    "href": "resources.html#r-julia-python",
+    "title": "Resources",
+    "section": "R, Julia, Python",
+    "text": "R, Julia, Python\nThese software are free, but usually require add-ons from different sources to estimate specialized models. They also have a step, or rather step-er (than Stata) learning curve. However, it is smart to learn other languages, at least to implement basic analysis. One resource you may find very convinient is the following:\n\nR, Python, Julia: http://www.upfie.net/\n\nThis site and its author(s) have put together a set of companion books to go along with the Textbook “Introductory Econometrics: A Modern Approach”. These books are rather inexpensive, providing some of the authors own insights, with full code in all three languages, that replicate the examples in the textbook.\n\nExample Codes: http://www.upfie.net/code.html\n\nThe authors also suggest other resources that could be of interest\n\nFurther Resources: http://www.upfie.net/links.html"
+  },
+  {
+    "objectID": "resources.html#quarto",
+    "href": "resources.html#quarto",
+    "title": "Resources",
+    "section": "Quarto",
+    "text": "Quarto\nQuarto is not a programming language. Rather an interpreter that converts plain text to nicely formating documents, presentations, websites, etc. This site, for instance, was built using Quarto.\nBecause of this, I’m encouraging the use of Quarto, combined with nbstata/python, to produce answers to ALL homeworks or group works. So it will be easy to check and cross check your work with the code.\nTo use this, you need to have R-Studio here, or Visual Studio Code here with Quarto plug-in (if you use VSC) in your computers. You will also need python and nbstata.\nA good place to start learning how to use Quarto for dynamic documents its here (for R-studio) or here (for VCS).\nI also have a small example using Quarto with Stata here.\nTry it on, and let me know if you have any problems."
   }
 ]

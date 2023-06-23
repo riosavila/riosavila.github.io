@@ -1,0 +1,63 @@
+---
+title: "Resources"
+---
+
+The goal of the class is for you to become familiar and proficient 
+with some essential tools that are used in most empirical analysis.
+
+While learning to implement all the methods we cover by hand is a great excercise 
+to learn what they do, and how they work, it may not be a feasible practice in 
+most real-world work, unless you decide to follow that path (Econometrics/applied Econometrics).
+
+For this purpose, the main software we will use in this class (as evidence from all the code 
+shared in the slides) its `Stata'. A self contained program that is yet flexible enough to add custom 
+add on programs/commands. 
+
+Nevertheless, if you are new to `Stata`, there are quite few resources you may want to look into
+using this software
+
+## `Stata`
+
+- Stata Free-Webinars: <https://www.stata.com/training/webinar/>
+- Stata Video-Tutorials: <https://www.stata.com/links/video-tutorials/>
+- General Learning resources: <https://www.stata.com/links/resources-for-learning-stata/>
+
+But of course, `Stata` is not **free**. There are other resources you may want to explore, if you are interested
+in doing econometric analysis, but no longer have access to Stata. These are R, Python and Julia.
+
+## `R`, `Julia`, `Python`
+
+These software are free, but usually require add-ons from different sources to estimate specialized models. They also have a step, or rather ***step-er*** (than `Stata`) learning curve. However, it is smart to learn other languages, at least to implement basic analysis. One resource you may find very convinient is the following:
+
+- R, Python, Julia: <http://www.upfie.net/>
+
+This site and its author(s) have put together a set of companion books to go along with the Textbook "Introductory Econometrics: A Modern Approach". These books are rather inexpensive, providing some of the authors own insights, with full code in all three languages, that replicate the examples in the textbook. 
+
+- Example Codes: <http://www.upfie.net/code.html>
+
+The authors also suggest other resources that could be of interest
+
+- Further Resources: <http://www.upfie.net/links.html>
+
+## Quarto
+
+`Quarto` is not a programming language. Rather an interpreter that converts plain text to nicely formating documents, presentations, websites, etc. This site, for instance, was built using `Quarto`. 
+
+Because of this, I'm encouraging the use of `Quarto`, combined with `nbstata`/`python`, to produce answers to ALL homeworks or group works. 
+So it will be easy to check and cross check your work with the code.
+
+To use this, you need to have `R-Studio` [here](https://posit.co/download/rstudio-desktop/), or Visual Studio Code [here](https://code.visualstudio.com/) with `Quarto` plug-in (if you use VSC) in your computers. You will also need `python` and `nbstata`.
+
+A good place to start learning how to use `Quarto` for dynamic documents its [here](https://quarto.org/docs/get-started/hello/rstudio.html) (for R-studio) or [here](https://quarto.org/docs/get-started/hello/vscode.html) (for VCS). 
+
+I also have a small example using `Quarto` with `Stata` [here](https://friosavila.github.io/stata_do/stata_do1.html).
+
+Try it on, and let me know if you have any problems.
+
+
+
+
+
+
+
+
