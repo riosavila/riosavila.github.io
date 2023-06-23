@@ -2,7 +2,7 @@
 title: "Advance Econometrics: Causal Effects"
 ---
 
-[**Introduction**](adv_class/01introduction.html): The longest journay starts somewhere
+[**Introduction**](adv_class/01introduction.html): Even the longest journey starts somewhere
 
 ## Part I: The tools
 
