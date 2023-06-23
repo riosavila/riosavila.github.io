@@ -1,0 +1,27 @@
+project:
+  type: website
+  output-dir: docs
+
+execute:
+  freeze: true
+
+website:
+  title: "Econometrics MSC Levy"
+  navbar:
+    left:        
+      - href: index.qmd
+        text: Home
+      - href: adv_class.qmd
+        text: "Adv Methods and Causal Effects"
+      - href: rm_class.qmd
+        text: "Research Methods: Econometrics I"
+      - about.qmd
+
+format:
+  html:
+    theme: cerulean
+    css: styles.css
+    toc: true
+ 
+
+

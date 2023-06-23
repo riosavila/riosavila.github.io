@@ -1,0 +1,57 @@
+---
+title: "Advance Econometrics: Causal Effects"
+---
+
+[**Introduction**](adv_class/01introduction.html): The longest journay starts somewhere
+
+## Part I: The tools
+
+#### 1. Unveiling the Tapestry of Truth: The Grand Saga of Linear Regression and its Statistical Inference
+   
+   Linear Regression Model: Statistical Inference and Extensions: [html](adv_class/02OLS.html) or [pdf](adv_class/02OLS.pdf)
+
+#### 2. Unleashing the Power of Infinite Flexibility: Exploring the Cosmos of Semi- and Non-Parametric Regression
+   
+   Semi- and Non-Parametric Regression: How Flexible is Flexible Enough?: [html](adv_class/03par_spar_npar.html) or [pdf](adv_class/03par_spar_npar.pdf)
+
+#### 3. Beyond the Ordinary: Embarking on the Quest of Conditional Quantile Regressions
+   
+   Conditional Quantile Regressions: Because No One is Average [html](adv_class/04cqreg.html) or [pdf](adv_class/04cqreg.pdf)
+
+#### 4. Ascending the Ladder of Equality: Studying the Mysteries of Unconditional Quantile Regressions
+   
+   Unconditional Quantile Regressions: When We Care About Everyone [html](adv_class/05uqreg.html) or [pdf](adv_class/05uqreg.pdf)
+
+#### 5. Breaking the Chains of Linearity: A Transcendent Expedition into NLS, IRLS, and MLE
+   
+   NLS, IRLS, and MLE: Going Truly Nonlinear [html](adv_class/06nlreg.html) or [pdf](adv_class/06nlreg.pdf)
+
+## Part II: The methods
+
+#### 6. Chronicles of Fate: Exploring the Mystical What-Ifs in the Web of Causal Models
+   
+   Potential outcomes and Causal Models [html](adv_class/07po_ci.html) or [pdf](adv_class/07po_ci.pdf)
+
+#### 7. The Mirror's Embrace: Taming Unobservables with the Power of Fixed Effects
+   
+   Panel Data and Fixed Effects (Many FE) [html](adv_class/08panel_FE.html) or [pdf](adv_class/08panel_FE.pdf)
+
+#### 8. The Summoner's Call: Using Instrumental Variables to estimate LATE's
+   
+   Instrumental Variables [html](adv_class/09iv.html) or [pdf](adv_class/09iv.pdf)
+
+#### 9. The Blade of Equivalence: Unleashing the Art of Matching in the Realm of Divergence
+   
+   Matching and Re-weighting [html](adv_class/10matching.html) or [pdf](adv_class/10matching.pdf)   
+
+#### 10. Beyond the Discontinuity Veil: Crossing thresholds to Illuminate Secrets
+   
+   Regression Discontinuity Design [html](adv_class/11rdd.html) or [pdf](adv_class/11rdd.pdf)
+
+#### 11. Twofold Wisdom: Unraveling Truths with the Dual Forces of Differences in Differences
+   
+   Differences in Differences [pdf](adv_class/resources/DRDID_CSDID.pdf)      
+
+#### 12. Cosmic Recreations: Forging New Realities through Synthetic Control 
+   
+   Synthetic Control [html](adv_class/13SC.html) or [pdf](adv_class/13SC.pdf)      

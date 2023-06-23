@@ -1,0 +1,8 @@
+---
+title: "About"
+---
+
+This site was created with the only purpose of sharing the class slides with all Students. 
+
+It will also (at some point) contain the homeworks and class assigments.
+
