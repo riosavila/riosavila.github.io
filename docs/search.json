@@ -2363,7 +2363,7 @@
     "href": "adv_class.html",
     "title": "Advance Econometrics: Causal Effects",
     "section": "",
-    "text": "Introduction: The longest journay starts somewhere"
+    "text": "Introduction: Even the longest journey starts somewhere"
   },
   {
     "objectID": "adv_class.html#part-i-the-tools",
@@ -2398,6 +2398,20 @@
     "href": "rm_class.html",
     "title": "Research Methods: Econometrics I",
     "section": "",
-    "text": "Nothing to see here yet"
+    "text": "Introduction: Once Upon a time, there was Econometrics I"
+  },
+  {
+    "objectID": "rm_class.html#part-i-the-tools",
+    "href": "rm_class.html#part-i-the-tools",
+    "title": "Research Methods: Econometrics I",
+    "section": "Part I: The tools",
+    "text": "Part I: The tools\n\n1. Unveiling the Tapestry of Truth: The Grand Saga of Linear Regression and its Statistical Inference\nLinear Regression Model: Statistical Inference and Extensions: html or pdf\n\n\n2. Unleashing the Power of Infinite Flexibility: Exploring the Cosmos of Semi- and Non-Parametric Regression\nSemi- and Non-Parametric Regression: How Flexible is Flexible Enough?: html or pdf\n\n\n3. Beyond the Ordinary: Embarking on the Quest of Conditional Quantile Regressions\nConditional Quantile Regressions: Because No One is Average html or pdf\n\n\n4. Ascending the Ladder of Equality: Studying the Mysteries of Unconditional Quantile Regressions\nUnconditional Quantile Regressions: When We Care About Everyone html or pdf\n\n\n5. Breaking the Chains of Linearity: A Transcendent Expedition into NLS, IRLS, and MLE\nNLS, IRLS, and MLE: Going Truly Nonlinear html or pdf"
+  },
+  {
+    "objectID": "rm_class.html#part-ii-the-methods",
+    "href": "rm_class.html#part-ii-the-methods",
+    "title": "Research Methods: Econometrics I",
+    "section": "Part II: The methods",
+    "text": "Part II: The methods\n\n6. Chronicles of Fate: Exploring the Mystical What-Ifs in the Web of Causal Models\nPotential outcomes and Causal Models html or pdf\n\n\n7. The Mirror’s Embrace: Taming Unobservables with the Power of Fixed Effects\nPanel Data and Fixed Effects (Many FE) html or pdf\n\n\n8. The Summoner’s Call: Using Instrumental Variables to estimate LATE’s\nInstrumental Variables html or pdf\n\n\n9. The Blade of Equivalence: Unleashing the Art of Matching in the Realm of Divergence\nMatching and Re-weighting html or pdf\n\n\n10. Beyond the Discontinuity Veil: Crossing thresholds to Illuminate Secrets\nRegression Discontinuity Design html or pdf\n\n\n11. Twofold Wisdom: Unraveling Truths with the Dual Forces of Differences in Differences\nDifferences in Differences pdf\n\n\n12. Cosmic Recreations: Forging New Realities through Synthetic Control\nSynthetic Control html or pdf"
   }
 ]
