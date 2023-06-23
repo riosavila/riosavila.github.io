@@ -1,0 +1,28 @@
+---
+title: "Introduction"
+subtitle: "Why Econometrics?!"
+author: Fernando Rios-Avila
+---
+
+What is econometrics? why do we care?
+
+How can we use Econometrics in Economics?
+ From theory to Results
+
+What type of Data exists to do Econometrics?
+
+Population vs Survey vs Admin Data
+
+Crossection Panel Repeated Crossection 
+
+How should we think about Econometric analysis
+
+Testing Theories, 
+
+- Causal Effect 
+
+- Ceteris Paribus
+
+- Counterfactuals
+
+Assessing predictions
