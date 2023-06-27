@@ -2469,5 +2469,467 @@
     "title": "Resources",
     "section": "Quarto",
     "text": "Quarto\nQuarto is not a programming language. Rather an interpreter that converts plain text to nicely formating documents, presentations, websites, etc. This site, for instance, was built using Quarto.\nBecause of this, I’m encouraging the use of Quarto, combined with nbstata/python, to produce answers to ALL homeworks or group works. So it will be easy to check and cross check your work with the code.\nTo use this, you need to have R-Studio here, or Visual Studio Code here with Quarto plug-in (if you use VSC) in your computers. You will also need python and nbstata.\nA good place to start learning how to use Quarto for dynamic documents its here (for R-studio) or here (for VCS).\nI also have a small example using Quarto with Stata here.\nTry it on, and let me know if you have any problems."
+  },
+  {
+    "objectID": "rmethods/1_introduction.html",
+    "href": "rmethods/1_introduction.html",
+    "title": "Introduction",
+    "section": "",
+    "text": "Econometrics is an amalgamation of Statistics and Economics.\n\nStatistics: Because we make use of numerous properties and mathematical properties to obtain derive Statitics related to our data\nEconomics: Because we aknowledge that we use data that comes from Agents interactions, and as such as subject to erros.\n\nWe use both tools to analyze data from the world around us.\n\nYour Economic intuition to make sense and explain relationships that you find, and mathematics/statistics to obtain estimates that are statistically sound."
+  },
+  {
+    "objectID": "rmethods/1_introduction.html#what-is-econometrics",
+    "href": "rmethods/1_introduction.html#what-is-econometrics",
+    "title": "Introduction",
+    "section": "What is econometrics?",
+    "text": "What is econometrics?\nEconometrics is an amalgamation of Statistics and Economics, that typically analysis nonexperimental data.\n\nStatistics: Because we make use of numerous properties and mathematical properties to obtain derive Statitics related to our data\nEconomics: Because we aknowledge that we use data that comes from Agents interactions, and as such as subject to erros.\n\nWe use both tools to analyze data from the world around us.\n\nYour Economic intuition to make sense and explain relationships that you find, and mathematics/statistics to obtain estimates that are statistically sound."
+  },
+  {
+    "objectID": "rmethods/1_introduction.html#when-is-it-useful",
+    "href": "rmethods/1_introduction.html#when-is-it-useful",
+    "title": "Introduction",
+    "section": "When is it useful?",
+    "text": "When is it useful?\nEconometrics is useful whenever we aim to:\n\nTest theories, Explore theoretical relationships, Verify Predictions\n\nBut also\n\nWe use Econometrics when we want to evaluate policies, or provide evidence for policy makers. Find that Causal effect.\n\nCaveat: We may not have the best data for this, but we can come up with cleaver designs to still do our job!"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html",
+    "href": "rmethods/2_SRA.html",
+    "title": "Simple Regression Model",
+    "section": "",
+    "text": "asdasd - As we saw in the previous slides, one of the important steps when doing empirical analysis is to develop a model that describes reality.\n\nThis model is quite abstract, as it rarely provides guidance regarding on How should you build your econometric model.\nIn this chapter, we introduce the first (boring) tool to solve this problem. The simple Regression model or SRL"
+  },
+  {
+    "objectID": "rmethods/1_introduction.html#how-does-it-fit-within-empirical-research",
+    "href": "rmethods/1_introduction.html#how-does-it-fit-within-empirical-research",
+    "title": "Introduction",
+    "section": "How does it Fit within Empirical Research",
+    "text": "How does it Fit within Empirical Research\n\n\n\nHow can we use Econometrics in Economics? From theory to Results\nWhat type of Data exists to do Econometrics?\nPopulation vs Survey vs Admin Data\nCrossection Panel Repeated Crossection\nHow should we think about Econometric analysis\nTesting Theories,\n\nCausal Effect\nCeteris Paribus\nCounterfactuals\n\nAssessing predictions"
+  },
+  {
+    "objectID": "rmethods/1_introduction.html#where-does-econometric-fits-in-empirical-research",
+    "href": "rmethods/1_introduction.html#where-does-econometric-fits-in-empirical-research",
+    "title": "Introduction",
+    "section": "Where does Econometric Fits in Empirical Research",
+    "text": "Where does Econometric Fits in Empirical Research\nObvious answer\n\nYou will need Econometrics methods to analyze your data, however, (just as a reminder) you should be aware of “HOW” an Empirical Research should be made:\n\nS1. Research Question:\n\nA question that is Answerable (within bounderies of Time/Money/and availabilty)\nThat should help us understand a Topic Better\nThat is Specific Enough to be feasible, but General Enough to be of interest.\n\nKeep it simple"
+  },
+  {
+    "objectID": "rmethods/1_introduction.html#obvious-answer",
+    "href": "rmethods/1_introduction.html#obvious-answer",
+    "title": "Introduction",
+    "section": "Obvious answer",
+    "text": "Obvious answer\n\nYou will need Econometrics methods to analyze your data, however, (just as a reminder) you should be aware of “HOW” an Empirical Research should be made:\n\nS1. Research Question:\n\nA question that is Answerable (within bounderies of Time/Money/and availabilty)\nThat should help us understand a Topic Better\nThat is Specific Enough to be feasible, but General Enough to be of interest.\n\nKeep it simple\n\n\nHow can we use Econometrics in Economics? From theory to Results\nWhat type of Data exists to do Econometrics?\nPopulation vs Survey vs Admin Data\nCrossection Panel Repeated Crossection\nHow should we think about Econometric analysis\nTesting Theories,\n\nCausal Effect\nCeteris Paribus\nCounterfactuals\n\nAssessing predictions"
+  },
+  {
+    "objectID": "rmethods/1_introduction.html#where-does-econometric-fits-in-empirical-research-1",
+    "href": "rmethods/1_introduction.html#where-does-econometric-fits-in-empirical-research-1",
+    "title": "Introduction",
+    "section": "Where does Econometric Fits in Empirical Research",
+    "text": "Where does Econometric Fits in Empirical Research\nS2. Construct an Economic model\n\nTo understand what the problem before you start analyzing the research question. May not need a formal modeling (Heavy Math), but enough to have some understanding of the problem.\n\nS3. Decide on the Econometric model\n\nYou need to decide what data is needed and is available your model.\nHow you will estimate the model (assumptions on methods)\n\nS4. Estimate model, and Analyze Data\n\nEstimate the model, using Economtric tools and Methods fitted to the data and the research question.\nExplain results in light of your Economic Model, and theoretical predictions. The Economist in you!"
+  },
+  {
+    "objectID": "rmethods/1_introduction.html#so-you-need-data",
+    "href": "rmethods/1_introduction.html#so-you-need-data",
+    "title": "Introduction",
+    "section": "So you need Data",
+    "text": "So you need Data"
+  },
+  {
+    "objectID": "rmethods/1_introduction.html#so-you-need-data-1",
+    "href": "rmethods/1_introduction.html#so-you-need-data-1",
+    "title": "Introduction",
+    "section": "So you need Data",
+    "text": "So you need Data\nDifferent types of data may allow for using different econometric methodologies, and answer different types of questions.\n\nKeep in mind you will only have access to SAMPLES, never the Population\n\nHere, We will only consider How can we use Econometrics in Economics? From theory to Results\nWhat type of Data exists to do Econometrics?\nPopulation vs Survey vs Admin Data\nCrossection Panel Repeated Crossection\nHow should we think about Econometric analysis\nTesting Theories,\n\nCausal Effect\nCeteris Paribus\nCounterfactuals\n\nAssessing predictions"
+  },
+  {
+    "objectID": "rmethods/1_introduction.html#need-for-data",
+    "href": "rmethods/1_introduction.html#need-for-data",
+    "title": "Introduction",
+    "section": "Need for Data",
+    "text": "Need for Data\nDifferent types of data may allow for using different econometric methodologies, and answer different types of questions.\n\nKeep in mind you will only have access to SAMPLES, never the Population\nThere will be instances that you come close to Population data, ie Census.\nBut Even Census data is not the Population (or Super Population we use in Econometrics)."
+  },
+  {
+    "objectID": "rmethods/1_introduction.html#types-of-data",
+    "href": "rmethods/1_introduction.html#types-of-data",
+    "title": "Introduction",
+    "section": "Types of Data:",
+    "text": "Types of Data:\nCross-Section: Sample of the population collects data on Many individuals in a single point in time.\nTime Series Data: Data collected on a single individual across time.\nPanel Data: Data collected for Many individuals who are followed across time.\nRepeated Cross-Section: Pooled Cross-Section Data for different individuals collected at different points in time. Individuals are not followed across time."
+  },
+  {
+    "objectID": "rmethods/1_introduction.html#before-the-break",
+    "href": "rmethods/1_introduction.html#before-the-break",
+    "title": "Introduction",
+    "section": "Before the Break:",
+    "text": "Before the Break:\nCausality, Ceteris Paribus, and Counterfactuals\nThee important concepts for the Class\n\nCausality: This is what most applied research aims to identify. A causal effect is a change the variable interest experiences, only because a second variable changed, while all other factors remained FIXED.\n\nThis is different from associations or correlations.\n\nCeteris Paribus: In Econometric analysis, ceteris paribus implies that all factors, except the one analyzed, are assumed constant (There is no change), thus leading to causality\nCounterfactual: It is the consideration of what would have been if only a single factor changed in the analysis (for a given observation).\n\nWhat if didn’t apply to the MSC at Levy? If you got miss your plane to the US? etc."
+  },
+  {
+    "objectID": "rmethods/1_introduction.html#visually",
+    "href": "rmethods/1_introduction.html#visually",
+    "title": "Introduction",
+    "section": "Visually",
+    "text": "Visually\n\nCrossectionTime SeriesPanel DataRepeated Crossection"
+  },
+  {
+    "objectID": "rmethods/1_introduction.html#homework-0",
+    "href": "rmethods/1_introduction.html#homework-0",
+    "title": "Introduction",
+    "section": "Homework 0",
+    "text": "Homework 0\nRead Chapter 2 of -The Effect- by Nick Hungtington-Klein. here\nIn groups of X:\n\nCome up with a Research question,\nIdentify your main dependent variable, and the variable you want to analyze the causal effect.\nDescribe relevant factors that may need to be considered for the analysis (Economic model).\nDescribe how those factors may relate to the outcome, and your variable of interest.\nDescribe an ideal Experiment you may run to identify the effect. Is it a feasible experiment?\nIs there any data you could use to answer this question?"
+  },
+  {
+    "objectID": "rmethods/1_introduction.html#causality-ceteris-paribus-and-counterfactuals",
+    "href": "rmethods/1_introduction.html#causality-ceteris-paribus-and-counterfactuals",
+    "title": "Introduction",
+    "section": "Causality, Ceteris Paribus, and Counterfactuals",
+    "text": "Causality, Ceteris Paribus, and Counterfactuals\nThrough the Semester, we will use certain terms that are not used often outside Economics, or that could be subject to different meanings. They are highly connected to each other:\n\nCausality: This is what most applied research aims to identify. A causal effect is a change a variable of interest experiences, only because a second variable changed, while the rest remained FIXED.\n\nThis is different from associations or correlations.\n\nCeteris Paribus: This assumption is related to Causality. In Econometric analysis, ceteris paribus implies that, except for the variable being analyzed, all other factors are assumed Constant (There is no Change).\n\nIts because of this that we can Say something is Causal, because the rest did not Change\n\nCounterfactual: Also related to Causality and Ceteris Paribus. Its the idea of considering what would have been if only a Single factor change in the analysis.\n\nWhat if didn’t apply to the MSC at Levy? If you got miss your plane to the US? etc."
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#what-is-a-regression",
+    "href": "rmethods/2_SRA.html#what-is-a-regression",
+    "title": "Simple Regression Model",
+    "section": "What is a Regression?",
+    "text": "What is a Regression?\nAs What does it mean to be linear?\nWhat basic assumptions are needed?\nHow do we estimate it?\nProperties of SLR y = yhat + e\nSST = SSE + SSR\nLets Formalize this:\nAssumptions is unbiased 1, 2, 3 ,4\nBut what about Variance 5\nExtra: Dummies!"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#the-simple-regression-model",
+    "href": "rmethods/2_SRA.html#the-simple-regression-model",
+    "title": "Simple Regression Model",
+    "section": "The Simple Regression Model",
+    "text": "The Simple Regression Model\n\nAs we saw in the previous slides, one of the important steps when doing empirical analysis is to develop a model that describes reality.\nThis model is quite abstract, as it rarely provides guidance regarding on How should you build your econometric model.\nIn this chapter, we introduce the first (boring) tool to solve this problem. The simple Regression model or SRL"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#what-is-a-simple-regression-model",
+    "href": "rmethods/2_SRA.html#what-is-a-simple-regression-model",
+    "title": "Simple Regression Model",
+    "section": "What is a Simple Regression Model?",
+    "text": "What is a Simple Regression Model?\nIn fact, if we assume \\(u\\) is fixed (ceteris paribus) it will even help us quantify the effect \\(x\\) will have on \\(y\\):\n\\[\\Delta y = \\beta_1 \\Delta x \\rightarrow \\frac{\\Delta y}{\\Delta x} = \\beta_1\n\\]\nWhat basic assumptions are needed?\nHow do we estimate it?\nProperties of SLR y = yhat + e\nSST = SSE + SSR\nLets Formalize this:\nAssumptions is unbiased 1, 2, 3 ,4\nBut what about Variance 5\nExtra: Dummies!"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#what-is-a-simple-regression-model-1",
+    "href": "rmethods/2_SRA.html#what-is-a-simple-regression-model-1",
+    "title": "Simple Regression Model",
+    "section": "What is a Simple Regression Model?",
+    "text": "What is a Simple Regression Model?\nIn fact, if we assume \\(u\\) is fixed (ceteris paribus) it will even help us quantify the effect \\(x\\) will have on \\(y\\):\n\\[\\Delta y = \\beta_1 \\Delta x \\rightarrow \\frac{\\Delta y}{\\Delta x} = \\beta_1\n\\]\nWhat basic assumptions are needed?\nHow do we estimate it?\nProperties of SLR y = yhat + e\nSST = SSE + SSR\nLets Formalize this:\nAssumptions is unbiased 1, 2, 3 ,4\nBut what about Variance 5\nExtra: Dummies!"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#what-is-a-simple-regression-model-srm",
+    "href": "rmethods/2_SRA.html#what-is-a-simple-regression-model-srm",
+    "title": "Simple Regression Model",
+    "section": "What is a Simple Regression Model (SRM) ?",
+    "text": "What is a Simple Regression Model (SRM) ?\n\nA Simple regression model is known as such because it aims to capture the relationship between two variables.\nIt does not mean it ignores other factors, but rather, bundles them together as part of a Bag of Holding or error. In its most flexible setup, a simple regression model can be written as:\n\n\\[y = f(x,u)\n\\]\nThis model simply says that there is some relationship between:\n\n\\(y\\), your outcome, dependent, explained, response, variable\nand \\(x\\), your independent, explanatory, regression, variable\n\nwhereas everything else not considered is assumed to be part of the unobserved \\(u\\)."
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#from-abstract-to-concrete",
+    "href": "rmethods/2_SRA.html#from-abstract-to-concrete",
+    "title": "Simple Regression Model",
+    "section": "From Abstract to Concrete",
+    "text": "From Abstract to Concrete\n\nA good reason why one should start thinking about the model as shown earlier is to acknowledge that we Do not know the functional form between \\(x\\) and \\(y\\).\nFurther, we don’t even know how \\(u\\) interacts with \\(x\\).\n\nThis brings us to the first step one should do (almost always) when analyzing data…Create a plot to see if there is any relationship in the data"
+  },
+  {
+    "objectID": "rmethods/1_introduction.html#thinking-about-counterfactuals-is-key",
+    "href": "rmethods/1_introduction.html#thinking-about-counterfactuals-is-key",
+    "title": "Introduction",
+    "section": "Thinking about Counterfactuals is Key",
+    "text": "Thinking about Counterfactuals is Key\nFor empirical work that aims to identify Causal Effects, it is important to understand the concept of counterfactual.\n\nIt will help you understand what is what you need to analyze,\nHow could those effects be identified in ideal scenarios (Experiments)\nWhat the limitation of those scenarios are\nAnd what alternatives are there to void those limitations"
+  },
+  {
+    "objectID": "rmethods/1_introduction.html#example-causal-effect-of-fertilizer-on-crops",
+    "href": "rmethods/1_introduction.html#example-causal-effect-of-fertilizer-on-crops",
+    "title": "Introduction",
+    "section": "Example: Causal effect of Fertilizer on Crops",
+    "text": "Example: Causal effect of Fertilizer on Crops\nRQ: By how much will the production of soybeans increase if one increases the amount of fertilizer applied to the ground?\nCF: Same Piece of Land with and without Fertilizer (Impossible)\nEXP: Randomly Use Fertilizers Across different Plots of Land (Expensive but feasible)\nEA: Use Regressions to keep other all factors that can affect Land productivity fixed when Analyzing Expost Data (Inexpensive)"
+  },
+  {
+    "objectID": "rmethods/1_introduction.html#example-causal-effect-of-smoking-on-babies-health",
+    "href": "rmethods/1_introduction.html#example-causal-effect-of-smoking-on-babies-health",
+    "title": "Introduction",
+    "section": "Example: Causal Effect of Smoking on Babie’s health",
+    "text": "Example: Causal Effect of Smoking on Babie’s health\nRQ: Does Smoking during Pregnancy decreases birthweight?\nCF: We consider the same woman. In one case she smokes through pregnancy, in the other she doesnt. Compare Babies Weight.\nEXP: Select a random sample of Pregnant Women and randomly select those who will be “forced” to smoke during pregnancy.\nEXP1: Select a Randome sample of PW with history of smoking. Randomly offer them a voucher and Counceling to quit smoking.\nEA: Consider women with similar characteristics, except for smoking, and compare their babies outcomes."
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#a-simple-scatter",
+    "href": "rmethods/2_SRA.html#a-simple-scatter",
+    "title": "Simple Regression Model",
+    "section": "A simple Scatter",
+    "text": "A simple Scatter\n\n\nCode\n** To download all Wooldrige Files\nqui: ssc install frause, replace\n** Loads file wage1\nfrause wage1, clear\nscatter wage educ\n\n\n\n\nWe observe a positive relationship between Wages and years of education\nThis relationship does not seem to be linear"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#ss",
+    "href": "rmethods/2_SRA.html#ss",
+    "title": "Simple Regression Model",
+    "section": "ss",
+    "text": "ss\nFurthremore, the simple regression model, establishes a specific relationship between this two: \\[y = \\beta_0 + \\beta_1 x + u\\]\nThis model has a lot packed in.\n\nIt imposes a relationship between \\(y\\) and \\(x\\) (linear)\nAnd addresses the fact that there could be other factors not considered \\(u\\)."
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#simple-scatter-2",
+    "href": "rmethods/2_SRA.html#simple-scatter-2",
+    "title": "Simple Regression Model",
+    "section": "Simple Scatter 2",
+    "text": "Simple Scatter 2"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#even-more-concrete",
+    "href": "rmethods/2_SRA.html#even-more-concrete",
+    "title": "Simple Regression Model",
+    "section": "Even more Concrete",
+    "text": "Even more Concrete\n\nThis first “model” provides little guidance for the modeling itself.\nThe Simple Linear Regression Model corrects for that, establishing a specific relationship between the variables of interest and the error: \\[y = \\beta_0 + \\beta_1 x + u\\]\n\nThis model has a lot packed in.\n\nIt imposes a relationship between \\(y\\) and \\(x\\) (linear)\nAnd addresses the fact that there could be other factors not considered \\(u\\). Impossing the assumption they are additive errors.\n\nIt also assumes the population relationships: \\[E(y|x) = \\beta_0 + \\beta_1 x\\]"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#simple-scatter-1",
+    "href": "rmethods/2_SRA.html#simple-scatter-1",
+    "title": "Simple Regression Model",
+    "section": "Simple Scatter 1",
+    "text": "Simple Scatter 1\n*| fig-align: center\n** To download all Wooldrige Files\nqui: ssc install frause, replace\n** for some additional color schemes\nqui: ssc install color_style\n** Loads file wage1\nfrause wage1, clear\nscatter wage educ\n\nWe observe a positive relationship between Wages and years of education\nThis relationship does not seem to be linear"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#what-can-we-learn-from-it",
+    "href": "rmethods/2_SRA.html#what-can-we-learn-from-it",
+    "title": "Simple Regression Model",
+    "section": "What can we learn from it?",
+    "text": "What can we learn from it?\n\\[E(y|x) = \\beta_0 + \\beta_1 x\\]\nThis is your Population Regresson function. To interpret it, we need to assume \\(u\\) is fixed (ceteris paribus). This implies that \\[E(u|x)=c=0\\]\nWhich says that the errors are mean independent of \\(x\\). Thus, for all practical purposes, when \\(x\\) changes, we will assume \\(u\\) is as good as fixed.\nUnder these conditions, we can interpret the coefficients:\n\n\\(\\beta_0\\) is the constant, or expected outcome when \\(x=0\\).\n\\(\\beta_1\\) is the slope of \\(x\\), or the expected change in \\(y\\) when \\(x\\) changes in 1 unit:\n\n\\[\\Delta y = \\beta_1 \\Delta x \\rightarrow \\frac{\\Delta y}{\\Delta x} = \\beta_1\n\\]"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#section",
+    "href": "rmethods/2_SRA.html#section",
+    "title": "Simple Regression Model",
+    "section": "",
+    "text": "Asumption 1: Linear in Parameters\n\n\nWe need to assume the population model is linear in parameters:\n\\[y_i = \\beta_0 + \\beta_1 x_i + u_i\\]\n\n\n\nIn other words, we need to assume that the model we chose is a good representation of what the true population model is.\nAdditive error with a linear relationship between \\(x_i\\) on \\(y_i\\)."
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#example",
+    "href": "rmethods/2_SRA.html#example",
+    "title": "Simple Regression Model",
+    "section": "Example",
+    "text": "Example\n\nSoybean and Yield Fertilizer:\n\n\\[yield = \\beta_0 + \\beta_1 fertilizer + u\\]\n\\(\\beta_1\\) Effect of Fertilizer (an additional dosage) on Soybean Yield\n\nSimple wage equation\n\n\\[wage = \\beta_0 + \\beta_1 educ + u\n\\]\n\\(\\beta_1\\) Change in wages given an additional year of education."
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#deriving-coefficients-ordinary-least-squares---ols",
+    "href": "rmethods/2_SRA.html#deriving-coefficients-ordinary-least-squares---ols",
+    "title": "Simple Regression Model",
+    "section": "Deriving Coefficients: Ordinary Least Squares - OLS",
+    "text": "Deriving Coefficients: Ordinary Least Squares - OLS\n\nThere are an infinite number of candiates for \\(\\beta_0 \\& \\beta_1\\).\nOLS, is one of the multiple methods that allows us to estimate the coefficients of a SLRM1.\nThe goal is to Choose parameters \\(\\beta={\\beta_0,\\beta_1}\\) that “minimizes” the Squared of the residuals.\n\nIn other words, OLS aims to maximize Explantion power by minimizing errors.\n\n\nSimple Linear Regression Model"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#section-1",
+    "href": "rmethods/2_SRA.html#section-1",
+    "title": "Simple Regression Model",
+    "section": "",
+    "text": "How do we estimate it?\nProperties of SLR y = yhat + e\nSST = SSE + SSR\nLets Formalize this:\nAssumptions is unbiased 1, 2, 3 ,4\nBut what about Variance 5\nExtra: Dummies!"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#section-5",
+    "href": "rmethods/2_SRA.html#section-5",
+    "title": "Simple Regression Model",
+    "section": "",
+    "text": "How do we estimate it?\nProperties of SLR y = yhat + e\nSST = SSE + SSR\nLets Formalize this:\nAssumptions is unbiased 1, 2, 3 ,4\nBut what about Variance 5\nExtra: Dummies!"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#a",
+    "href": "rmethods/2_SRA.html#a",
+    "title": "Simple Regression Model",
+    "section": "a",
+    "text": "a"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#b",
+    "href": "rmethods/2_SRA.html#b",
+    "title": "Simple Regression Model",
+    "section": "b",
+    "text": "b"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#c",
+    "href": "rmethods/2_SRA.html#c",
+    "title": "Simple Regression Model",
+    "section": "c",
+    "text": "c"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#d",
+    "href": "rmethods/2_SRA.html#d",
+    "title": "Simple Regression Model",
+    "section": "d",
+    "text": "d"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#just-a-minimization-problem",
+    "href": "rmethods/2_SRA.html#just-a-minimization-problem",
+    "title": "Simple Regression Model",
+    "section": "Just a Minimization Problem",
+    "text": "Just a Minimization Problem\n\\[y_i =\\beta_0 + \\beta_1 x_i + u_i \\rightarrow u_i = y_i - \\beta_0 - \\beta_1 x_i\n\\]\n\\[{\\hat\\beta_0,\\hat\\beta_1} = \\min_{\\beta_0,\\beta_1} = SSR =\\sum_{i=1}^N u_i^2 = \\sum_{i=1}^N (y-\\beta_0 - \\beta_1 x_i)^2 \\\\\n\\]\nFirst Order Conditions: \\[\n\\begin{aligned}\n\\frac{\\partial SSR}{\\partial \\beta_0} &= -2 \\sum (y_i-\\beta_0 - \\beta_1 x_i) = -2 \\sum u_i =0 \\\\\n\\frac{\\partial SSR}{\\partial \\beta_1} &= -2 \\sum x_i (y_i-\\beta_0 - \\beta_1 x_i) =- 2 \\sum x_i u_i =0\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#just-a-minimization-problem-1",
+    "href": "rmethods/2_SRA.html#just-a-minimization-problem-1",
+    "title": "Simple Regression Model",
+    "section": "Just a Minimization Problem",
+    "text": "Just a Minimization Problem\nSimilar conditions as before (but now Mathematically):\n\\[\n\\begin{aligned}\n\\sum u_i &=0 \\rightarrow nE(e) = 0 \\\\\n\\sum x_i u_i &=0 \\rightarrow nE(x*e) \\rightarrow  n Cov(x,e) =0  \n\\end{aligned}\n\\]\nAnd the First Order Conditions simply provide a sysmtem of \\(k+1\\) equations with \\(k+1\\) unknowns.\n\\[\\begin{aligned}\n\\hat\\beta_0 &= \\bar y - \\beta_1 \\bar x \\\\\n\\hat\\beta_1 &= \\frac{\\sum (x_i-\\bar x)(y_i-\\bar y)}{\\sum (x_i-\\bar x)^2}\n= \\frac{\\hat \\rho \\hat \\sigma_x \\hat \\sigma_y}{\\hat \\sigma_x^2}\n= \\frac{\\hat \\rho \\hat \\sigma_y}{\\hat \\sigma_y}\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#interpretation",
+    "href": "rmethods/2_SRA.html#interpretation",
+    "title": "Simple Regression Model",
+    "section": "Interpretation?",
+    "text": "Interpretation?\n\\[\\hat\\beta_0 = \\bar y - \\hat \\beta_1 \\bar x\\]\n\n\\(\\beta_0\\) is usually estimated as a “residual”, thus is often of little of no interest.\n\nExpected outcome when \\(X=0\\)\n\n\n\\[\n\\hat\\beta_1 = \\frac{\\hat \\rho \\hat \\sigma_x \\hat \\sigma_y}{\\hat \\sigma_x^2}\n= \\frac{\\hat \\rho \\hat \\sigma_y}{\\hat \\sigma_x}\n\\]\n\n\\(\\beta_1\\) is a slope, which is directly related to the correlation between \\(y\\) and \\(x\\).\n\nIt can only be estimated if \\(\\sigma_x\\)&gt;&gt;0\n\n\nAlso, this \\(\\hat y = \\hat \\beta_0 + \\hat \\beta_1 x\\) becomes your sample regression function\n\nwhere \\(\\hat y\\) is the fitted value of \\(y\\) (proyection or prediction), given some value of \\(x\\)."
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#visualization",
+    "href": "rmethods/2_SRA.html#visualization",
+    "title": "Simple Regression Model",
+    "section": "Visualization",
+    "text": "Visualization\n*| output: false\nset seed 10\nclear\nrange x -2 2 20\ngen y = 1 + x + rnormal()\ncolor_style tableau\ntwo (scatter  y x) ///\n    (function y = 0.5 + 2*x, range(-1.8 2.4)) ///\n    (function y = 2 + 0.5*x, range(-1.8 2.4)) ///\n    (function y = 1 + 1*x, range(-1.8 2.4)) , ///\n    legend(order(2 \"y=0.5+2x\" 3 \"y=2+0.5x\" 4 \"y=1+1x\"))\ngraph export images\\fig2_1.png , replace width(1000)\n\ngen y1=.5+2*x\ngen y2=2+0.5*x\ngen y3=+1+1*x\n\ntwo (scatter y x) ///\n    (function y = 0.5 + 2*x, range(-1.8 2.4)) ///\n    (rspike y y1 x), ylabel(-4/6) ytitle(y) ///\n    legend(order(1 \"Data\" 2 \"Prediction \" 3 \"Residual\"))\ngraph export images\\fig2_2.png , replace width(1000) \n    \ntwo (scatter y x) ///\n    (function y = 2 + 0.5*x, range(-1.8 2.4)) ///\n    (rspike y y2 x), ylabel(-4/6) ytitle(y) ///\n    legend(order(1 \"Data\" 2 \"Prediction \" 3 \"Residual\"))\ngraph export images\\fig2_3.png , replace width(1000) \n    \ntwo (scatter y x) ///\n    (function y = 1 + 1*x, range(-1.8 2.4)) ///\n    (rspike y y3 x) , ylabel(-4/6) ytitle(y) ///\n    legend(order(1 \"Data\" 2 \"Prediction \" 3 \"Residual\"))\ngraph export images\\fig2_4.png , replace width(1000)    \n\nreg y x\npredict yh\ntwo (scatter y x) ///\n    (function y = _b[_cons] + _b[x]*x, range(-1.8 2.4)) ///\n    (rspike y yh x) , ylabel(-4/6) ytitle(y) ///\n    legend(order(1 \"Data\" 2 \"Prediction \" 3 \"Residual\"))    \ngraph export images\\fig2_5.png , replace width(1000)    \n\n\nOptionsOpt1Opt2Opt3Opt4"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#visualization-1",
+    "href": "rmethods/2_SRA.html#visualization-1",
+    "title": "Simple Regression Model",
+    "section": "Visualization",
+    "text": "Visualization\n*| output: false\ngen y0 = 0\ntwo (scatter y x) ///\n    (function y = _b[_cons] + _b[x]*x, range(-2.1 2.1)) ///\n    (rspike y y0 x, color(gs9%50) lw(1)) ///\n    , ylabel(-4/6) ytitle(y) yline(0) ///\n    title(\"Data\")   legend(off)\ngraph export images\\fig2_6.png, replace width(1000)\ntwo (scatter y x) ///\n    (function y = _b[_cons] + _b[x]*x, range(-2.1 2.1)) ///\n    (rspike yh y0 x, color(gs9%50) lw(1)) ///\n    , ylabel(-4/6) ytitle(y) yline(0) ///\n    title(\"Prediction\") legend(off)\ngraph export images\\fig2_7.png, replace width(1000) \ntwo (scatter y x) ///\n    (function y = _b[_cons] + _b[x]*x, range(-2.1 2.1)) ///\n    (rspike y yh x, color(gs9%50) lw(1)) ///\n    , ylabel(-4/6) ytitle(y) yline(0) ///\n    title(\"Residual\")   legend(off)\ngraph export images\\fig2_8.png, replace width(1000) \n\nDataPredictionResiduals"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#properties-of-the-estimator",
+    "href": "rmethods/2_SRA.html#properties-of-the-estimator",
+    "title": "Simple Regression Model",
+    "section": "Properties of the Estimator",
+    "text": "Properties of the Estimator\n\nBased on F.O.C., we know the following:\n\n\\[\n\\sum_i^n \\hat u_i = 0 \\ \\& \\ \\sum_i^n x_i \\hat u_i = 0\n\\]\nIn average \\(u_i\\) is zero, and uncorrelated with \\(x\\), and \\(\\bar y , \\bar x\\) is on the regression line\n\nBy construction \\(y_i = \\hat y_i + \\hat u_i\\), so that\n\n\\[\n\\begin{aligned}\n    \\sum_{i=1}^n(y_i-\\bar y)^2 &=\n    \\sum_{i=1}^n(y_i-\\hat y)^2  +\n    \\sum_{i=1}^n(\\hat y-\\bar y)^2  \\\\\n    SST &= SSE + SSR\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#properties-of-the-estimator-1",
+    "href": "rmethods/2_SRA.html#properties-of-the-estimator-1",
+    "title": "Simple Regression Model",
+    "section": "Properties of the Estimator",
+    "text": "Properties of the Estimator\n\nGoodness of FIT is defined as\n\n\\[R^2= 1-\\frac {SSR} {SST}=\\frac {SSE} {SST}\\]\n\nHow much of the Data variation (SST) is explained by the model (SSE)"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#some-discussion",
+    "href": "rmethods/2_SRA.html#some-discussion",
+    "title": "Simple Regression Model",
+    "section": "Some Discussion",
+    "text": "Some Discussion\nWe now know how to estimate coefficients given some data, but we need to ask the questions:\n\nHow do we know if the estimated coefficients are indeed appropriate for the population parameters?\nHow can we know the precision (or lack there off) of the estimates\nRemember, \\(\\hat \\beta's\\) depend on the sample. Different Samples will lead to different estimates. Thus \\(\\hat \\beta's\\) are random.\nIn repeated sampling scenarios, we could empirically obtain the distribution of the estimated parameters, and verify if estimations are unbiased.\nHowever, we can also do that based on analytical solutions. Lets see those assumptions"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#assumptions-for-unbiased-estimations",
+    "href": "rmethods/2_SRA.html#assumptions-for-unbiased-estimations",
+    "title": "Simple Regression Model",
+    "section": "Assumptions: For unbiased estimations",
+    "text": "Assumptions: For unbiased estimations\n\nAn estimator is said to be unbiased if \\(E(\\hat\\beta)=\\beta\\)\n\n\n\n\n\n\n\nAsumption 1: Linear in Parameters\n\n\nWe need to assume the population model is linear in parameters:\n\\[y_i = \\beta_0 + \\beta_1 x_i + u_i\\]\n\n\n\nIn other words, we need to assume that the model we chose is a good representation of what the true population model is. Additive error with a linear relationship between \\(x_i\\) on \\(y_i\\).\nHow do we estimate it?\nProperties of SLR y = yhat + e\nSST = SSE + SSR\nLets Formalize this:\nAssumptions is unbiased 1, 2, 3 ,4\nBut what about Variance 5\nExtra: Dummies!"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#asumption-1",
+    "href": "rmethods/2_SRA.html#asumption-1",
+    "title": "Simple Regression Model",
+    "section": "Asumption 1:",
+    "text": "Asumption 1:\n\n\n\n\n\n\nLinear in Parameters\n\n\nWe need to assume the population model is linear in parameters:\n\\[y_i = \\beta_0 + \\beta_1 x_i + u_i\\]\n\n\n\nIn other words, we need to assume that the model we chose is a good representation of what the true population model is.\n\nAdditive error, with a linear relationship between \\(x_i\\) on \\(y_i\\).\nWe can make it more flexible using some transformations of \\(x_i\\)."
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#assumption-2",
+    "href": "rmethods/2_SRA.html#assumption-2",
+    "title": "Simple Regression Model",
+    "section": "Assumption 2:",
+    "text": "Assumption 2:\n\n\n\n\n\n\nRandom Sampling\n\n\nThe data we are using is collected from a Random sample of the population, for which the linear model is valid.\n\n\n\n\nData should be representative from the population (for whom the Linear model Holds)\nThe Data Sampling should not depend the data collected, specially the dependent variable.\nAlso helps to ensure units “unobservables” \\(u's\\) are independent from each other."
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#asumption-3",
+    "href": "rmethods/2_SRA.html#asumption-3",
+    "title": "Simple Regression Model",
+    "section": "Asumption 3",
+    "text": "Asumption 3\n\n\n\n\n\n\nThere is variation in the explanatory variables\n\n\n\\[\\sum_{i=1}^n (x_i - \\bar x)^2 &gt;0\n\\]\n\n\n\nIf there is no variation in the data, there are no slopes to estmate, and a solution cannot be found to the linear model."
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#asumption-4",
+    "href": "rmethods/2_SRA.html#asumption-4",
+    "title": "Simple Regression Model",
+    "section": "Asumption 4",
+    "text": "Asumption 4\n\n\n\n\n\n\nZero Conditional Mean\n\n\n\\[E(u_i)= E(u_i\\x_i) = 0\n\\]\n\n\n\n\nWe expect unobserved factors \\(u_i\\) to have a zero average effect on the outcome. This helps identify the constant \\(\\beta_0\\).\nWe also expect that covariance between the error \\(u_i\\) an \\(x_i\\) to be zero."
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#unbiased-coefficients",
+    "href": "rmethods/2_SRA.html#unbiased-coefficients",
+    "title": "Simple Regression Model",
+    "section": "Unbiased Coefficients:",
+    "text": "Unbiased Coefficients:\nIf Assumptions 1-4 Hold, then OLS allows you to estimate the coefficents of the linear Regression model.\n\\[\\hat \\beta_1 = \\frac {\\sum \\tilde x_i \\tilde y_i}{\\sum \\tilde x_i^2} , \\tilde x_i=x_i - \\bar x\n\\]\n\\[\\begin{aligned}\n\\hat \\beta_1 &= \\frac {\\sum \\tilde x_i (\\beta_1 \\tilde x_i +e)}{\\sum \\tilde x_i^2} = \\beta_1 \\frac {\\sum  \\tilde x_i^2 }{\\sum \\tilde x_i^2} + \\frac {\\sum  \\tilde x_i u_i }{\\sum \\tilde x_i^2}  \\\\  \nE(\\hat \\beta_1) &= \\beta_1\n\\end{aligned}\n\\]\nWhile coefficients can be different for each sample, In average, they will be the same as the true parameters."
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#variance-of-the-coefficients",
+    "href": "rmethods/2_SRA.html#variance-of-the-coefficients",
+    "title": "Simple Regression Model",
+    "section": "Variance of the Coefficients",
+    "text": "Variance of the Coefficients\nHow precise are the estimates? Recall\n\\[\\hat \\beta_1 = \\frac {\\sum \\tilde x_i (\\beta_1 \\tilde x_i +e)}{\\sum \\tilde x_i^2}\n\\]"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#variance-of-ols-estimators",
+    "href": "rmethods/2_SRA.html#variance-of-ols-estimators",
+    "title": "Simple Regression Model",
+    "section": "Variance of OLS Estimators",
+    "text": "Variance of OLS Estimators\nHow precise are the estimates?\n\\[\\hat \\beta_1 = \\beta_1 + \\frac {\\sum  \\tilde x_i u_i }{\\sum \\tilde x_i^2}\n\\]\n\nIf we assume \\(x's\\) are assume fixed, the distribution from \\(\\beta's\\) will depend only on the variation of the error \\(u_i\\).\nThus we need to impose an additional assumption on this errors, to estimate the variance of \\(\\beta's\\). (at least for convinience)"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#assumption-1",
+    "href": "rmethods/2_SRA.html#assumption-1",
+    "title": "Simple Regression Model",
+    "section": "Assumption 1:",
+    "text": "Assumption 1:\n\n\n\n\n\n\nLinear in Parameters\n\n\nWe need to assume the population model is linear in parameters:\n\\[y_i = \\beta_0 + \\beta_1 x_i + u_i\\]\n\n\n\nIn other words, we need to assume that the model we chose is a good representation of what the true population model is.\n\nAdditive error, with a linear relationship between \\(x_i\\) on \\(y_i\\).\nWe can make it more flexible using some transformations of \\(x_i\\)."
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#assumption-3",
+    "href": "rmethods/2_SRA.html#assumption-3",
+    "title": "Simple Regression Model",
+    "section": "Assumption 3:",
+    "text": "Assumption 3:\n\n\n\n\n\n\nThere is variation in the explanatory variable\n\n\n\\[\\sum_{i=1}^n (x_i - \\bar x)^2 &gt;0\n\\]\n\n\n\nIf there is no variation in the data, there are no slopes to estmate, and a solution cannot be found to the linear model."
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#assumption-4",
+    "href": "rmethods/2_SRA.html#assumption-4",
+    "title": "Simple Regression Model",
+    "section": "Assumption 4:",
+    "text": "Assumption 4:\n\n\n\n\n\n\nZero Conditional Mean\n\n\n\\[E(u_i)= E(u_i|x_i) = 0\n\\]\n\n\n\n\nWe expect unobserved factors \\(u_i\\) to have a zero average effect on the outcome. This helps identify the constant \\(\\beta_0\\).\nWe also expect that the expected value of \\(u_i\\) to be zero for any value of \\(x\\)."
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#assumption-5",
+    "href": "rmethods/2_SRA.html#assumption-5",
+    "title": "Simple Regression Model",
+    "section": "Assumption 5:",
+    "text": "Assumption 5:\n\n\n\n\n\n\nErrors are Homoskedastic\n\n\n\\[E(u_i^2)= E(u_i ^2 | x_i) = \\sigma_u ^2\n\\]\n\n\n\n\nThis simplifying assumption states that the “distribution” of the errors is constant, regardless of \\(x\\)."
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#visualization-2",
+    "href": "rmethods/2_SRA.html#visualization-2",
+    "title": "Simple Regression Model",
+    "section": "Visualization",
+    "text": "Visualization\n*| output: false\nclear\nset scheme white2\nset obs 1000\ngen x = runiform(-2 , 2)    \ngen u = rnormal()\ngen y1 = x + u\ngen y2 = x + u*abs(x)\ngen y3 = x + u*(2-abs(x))\ngen y4 = x + u*(sin(2*x))\n\n\ntwo scatter y1 x, name(m1, replace)\nscatter y2 x, name(m2, replace)\nscatter y3 x, name(m3, replace)\nscatter y4 x, name(m4, replace)\ngraph combine m1 m2 m3 m4\ngraph export images/fig2_9.png, replace width(1000)"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#sampling-variance-of-ols",
+    "href": "rmethods/2_SRA.html#sampling-variance-of-ols",
+    "title": "Simple Regression Model",
+    "section": "Sampling Variance of OLS",
+    "text": "Sampling Variance of OLS\nWe Start with: \\[\n\\hat \\beta_1 - \\beta_1 = \\frac {\\sum  \\tilde x_i u_i }{\\sum \\tilde x_i^2}\n\\]\nAnd apply the Variance operator:\n\\[\n\\begin{aligned}\nVar(\\hat \\beta_1 - \\beta_1) &= Var \\left( \\frac {\\sum  \\tilde x_i u_i }{\\sum \\tilde x_i^2} \\right) \\\\\n            &= \\frac {\\sum  \\tilde x_i^2 Var( u_i) }{(\\sum \\tilde x_i^2)^2} =\\frac {\\sum  \\tilde x_i^2 \\sigma_u^2 }{(\\sum \\tilde x_i^2)^2} \\\\\n            &= \\sigma_u^2 \\frac {\\sum  \\tilde x_i^2 }{(\\sum \\tilde x_i^2)^2} = \\frac{\\sigma_u^2}{\\sum \\tilde x_i^2}\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#last-piece-of-the-puzze-sigma2_u",
+    "href": "rmethods/2_SRA.html#last-piece-of-the-puzze-sigma2_u",
+    "title": "Simple Regression Model",
+    "section": "Last Piece of the Puzze \\(\\sigma^2_u\\)",
+    "text": "Last Piece of the Puzze \\(\\sigma^2_u\\)\nTo estimate \\(Var(\\beta's)\\) we also need \\(\\sigma^2_u\\). But \\(u\\) is not observed, since we only observe \\(\\hat u\\).\n\\[\\hat u_i = u_i + (\\beta_0 - \\hat \\beta_0) + (\\beta_1 - \\hat \\beta_1)*x_i\n\\]\nAnd since to estimate \\(\\hat u_i\\) we need to estimate \\(\\beta_0\\) and \\(\\beta_1\\), we “lose” degrees of freedom that will require adjustment.\nSo, we use the following:\n\\[\\hat \\sigma^2_u = \\frac {1}{N-2} \\sum_{i=1}^N \\hat u_i^2\n\\]"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#examples",
+    "href": "rmethods/2_SRA.html#examples",
+    "title": "Simple Regression Model",
+    "section": "Examples",
+    "text": "Examples\nDeriving OLS \\(\\beta's\\):\n\n** Wage and Education: Example 2.7\n\nfrause wage1, clear\nmata: y = st_data(.,\"wage\")\nmata: x = st_data(.,\"educ\")\nmata: b1 = sum( (x :- mean(x)) :* (y :- mean(y)) ) / sum( (x :- mean(x)):^2 ) \nmata: b0 = mean(y)-mean(x)*b1\nmata: b1, b0\n\n                 1             2\n    +-----------------------------+\n  1 |  .5413592547   -.904851612  |\n    +-----------------------------+\n\n\nSST = SSE + SSR\n\nmata: yh  = b0:+b1*x\nmata: sst = sum( (y:-mean(y)):^2 )\nmata: sse = sum( (yh:-mean(y)):^2 )\nmata: ssr = sum( (y:-yh):^2 )\nmata: sst, sse, ssr, sse + ssr\n\n                 1             2             3             4\n    +---------------------------------------------------------+\n  1 |  7160.414291   1179.732036   5980.682255   7160.414291  |\n    +---------------------------------------------------------+\n\n\n\\(R^2\\):\n\nmata: sse/sst , 1-ssr/sst\n\n                1            2\n    +---------------------------+\n  1 |  .164757511   .164757511  |\n    +---------------------------+\n\n\n\\(\\hat\\sigma_\\beta\\)\n\nmata: sig2_u = ssr / (rows(y)-2)\nmata: sst_x  = sum( (x:-mean(x)):^2 )\nmata: sig_b1 = sqrt( sig2_u / sst_x )\nmata: sig_b0 = sqrt( sig2_u * mean(x:^2) / sst_x ) \nmata: sig_b1 , sig_b0\n\n                 1             2\n    +-----------------------------+\n  1 |  .0532480368   .6849678211  |\n    +-----------------------------+\n\n\nStata command:\n\n\nCode\nregress wage educ\n\n\n\n      Source |       SS           df       MS      Number of obs   =       526\n-------------+----------------------------------   F(1, 524)       =    103.36\n       Model |  1179.73204         1  1179.73204   Prob &gt; F        =    0.0000\n    Residual |  5980.68225       524  11.4135158   R-squared       =    0.1648\n-------------+----------------------------------   Adj R-squared   =    0.1632\n       Total |  7160.41429       525  13.6388844   Root MSE        =    3.3784\n\n------------------------------------------------------------------------------\n        wage | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n        educ |   .5413593    .053248    10.17   0.000     .4367534    .6459651\n       _cons |  -.9048516   .6849678    -1.32   0.187    -2.250472    .4407687\n------------------------------------------------------------------------------"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#expanding-on-slrm-units-of-measure",
+    "href": "rmethods/2_SRA.html#expanding-on-slrm-units-of-measure",
+    "title": "Simple Regression Model",
+    "section": "Expanding on SLRM: Units of Measure",
+    "text": "Expanding on SLRM: Units of Measure\n\n\nCode\nfrause ceosal1, clear\ndisplay \"***Variables Description***\"\ndes salary roe\n\ndisplay \"***Summary Statistics***\"\nsum salary roe\n\ndisplay \"***Simple Regression***\"\nreg salary roe\n\n\n***Variables Description***\n\nVariable      Storage   Display    Value\n    name         type    format    label      Variable label\n-------------------------------------------------------------------------------\nsalary          int     %9.0g                 1990 salary, thousands $\nroe             float   %9.0g                 return on equity, 88-90 avg\n***Summary Statistics***\n\n    Variable |        Obs        Mean    Std. dev.       Min        Max\n-------------+---------------------------------------------------------\n      salary |        209     1281.12    1372.345        223      14822\n         roe |        209    17.18421    8.518509         .5       56.3\n***Simple Regression***\n\n      Source |       SS           df       MS      Number of obs   =       209\n-------------+----------------------------------   F(1, 207)       =      2.77\n       Model |  5166419.04         1  5166419.04   Prob &gt; F        =    0.0978\n    Residual |   386566563       207  1867471.32   R-squared       =    0.0132\n-------------+----------------------------------   Adj R-squared   =    0.0084\n       Total |   391732982       208  1883331.64   Root MSE        =    1366.6\n\n------------------------------------------------------------------------------\n      salary | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         roe |   18.50119   11.12325     1.66   0.098    -3.428196    40.43057\n       _cons |   963.1913   213.2403     4.52   0.000     542.7902    1383.592\n------------------------------------------------------------------------------\n\n\nChanging Scale\n\n\nCode\ngen saldol=salary*1000\ngen roedec=roe / 100\nqui: reg salary roe\nest sto m1\nqui: reg saldol roe\nest sto m2\nqui: reg salary roedec\nest sto m3\nesttab m1 m2 m3, se r2\n\n\n\n------------------------------------------------------------\n                      (1)             (2)             (3)   \n                   salary          saldol          salary   \n------------------------------------------------------------\nroe                 18.50         18501.2                   \n                  (11.12)       (11123.3)                   \n\nroedec                                             1850.1   \n                                                 (1112.3)   \n\n_cons               963.2***     963191.3***        963.2***\n                  (213.2)      (213240.3)         (213.2)   \n------------------------------------------------------------\nN                     209             209             209   \nR-sq                0.013           0.013           0.013   \n------------------------------------------------------------\nStandard errors in parentheses\n* p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#expanding-on-slrm-nonlinearities",
+    "href": "rmethods/2_SRA.html#expanding-on-slrm-nonlinearities",
+    "title": "Simple Regression Model",
+    "section": "Expanding on SLRM: Nonlinearities",
+    "text": "Expanding on SLRM: Nonlinearities\nIt is possible to incorporate some nonlinearities by using “log” transformations:\n\\[log(y) = \\beta_0 + \\beta_1 x + e \\rightarrow 100\\beta_1 = \\frac{\\% \\Delta y}{\\Delta x}\\] \\[y = \\beta_0 + \\beta_1 log(x) + e \\rightarrow \\frac {\\beta_1}{100} = \\frac{\\Delta y}{\\% \\Delta x}\\] \\[log(y) = \\beta_0 + \\beta_1 log(x) + e \\rightarrow \\beta_1 =\\frac{\\% \\Delta y}{\\% \\Delta x}\\]"
   }
 ]
