@@ -52,12 +52,14 @@ This brings us to the first step one should do (almost always) when analyzing da
 
 ## Simple Scatter 1
 
-```stata
+```{stata}
 *| fig-align: center
 ** To download all Wooldrige Files
 qui: ssc install frause, replace
 ** for some additional color schemes
 qui: ssc install color_style
+set scheme white2
+color_style tableau
 ** Loads file wage1
 frause wage1, clear
 scatter wage educ
@@ -68,48 +70,45 @@ scatter wage educ
 
 ## Simple Scatter 2
 
-![](images/paste-3.png){ fig-align="center"}
+![](images/paste-3.png){fig-align="center"}
 
 ## Even more Concrete
 
-- This first "model" provides little guidance for the modeling itself. 
-- The Simple Linear Regression Model corrects for that, establishing a specific relationship between the variables of interest and the error: 
-$$y = \beta_0 + \beta_1 x + u$$
+-   This first "model" provides little guidance for the modeling itself.
+-   The Simple Linear Regression Model corrects for that, establishing a specific relationship between the variables of interest and the error: $$y = \beta_0 + \beta_1 x + u$$
 
 This model has a lot packed in.
 
 -   It imposes a relationship between $y$ and $x$ (linear)
--   And addresses the fact that there could be other factors not considered $u$. Impossing the assumption they are additive errors. 
+-   And addresses the fact that there could be other factors not considered $u$. Impossing the assumption they are additive errors.
 
-It also assumes the population relationships:
-$$E(y|x) = \beta_0 + \beta_1 x$$
+It also assumes the population relationships: $$E(y|x) = \beta_0 + \beta_1 x$$
 
 ## What can we learn from it?
 
 $$E(y|x) = \beta_0 + \beta_1 x$$
 
-This is your Population Regresson function. To interpret it, we need to assume $u$ is fixed (*ceteris paribus*). This implies that
-$$E(u|x)=c=0$$
+This is your Population Regresson function. To interpret it, we need to assume $u$ is fixed (*ceteris paribus*). This implies that $$E(u|x)=c=0$$
 
 Which says that the errors are **mean independent** of $x$. Thus, for all practical purposes, when $x$ changes, we will assume $u$ is as good as fixed.
 
 Under these conditions, we can interpret the coefficients:
 
-- $\beta_0$ is the constant, or expected outcome when $x=0$.
-- $\beta_1$ is the slope of $x$, or the expected change in $y$ when $x$ changes in 1 unit:
+-   $\beta_0$ is the constant, or expected outcome when $x=0$.
+-   $\beta_1$ is the slope of $x$, or the expected change in $y$ when $x$ changes in 1 unit:
 
 $$\Delta y = \beta_1 \Delta x \rightarrow \frac{\Delta y}{\Delta x} = \beta_1
 $$
 
 ## Example
 
-- Soybean and Yield Fertilizer:
+-   Soybean and Yield Fertilizer:
 
 $$yield = \beta_0 + \beta_1 fertilizer + u$$
 
 $\beta_1$ Effect of Fertilizer (an additional dosage) on Soybean Yield
 
-- Simple wage equation
+-   Simple wage equation
 
 $$wage = \beta_0 + \beta_1 educ + u
 $$
@@ -118,16 +117,19 @@ $\beta_1$ Change in wages given an additional year of education.
 
 ## Deriving Coefficients: Ordinary Least Squares - OLS
 
-- There are an infinite number of candiates for $\beta_0 \& \beta_1$. 
+-   There are an infinite number of candiates for $\beta_0 \& \beta_1$.
 
-- OLS, is **one** of the multiple methods that allows us to estimate the coefficients of a SLRM^[Simple Linear Regression Model].
+-   OLS, is **one** of the multiple methods that allows us to estimate the coefficients of a SLRM[^1].
 
-- The goal is to Choose parameters $\beta={\beta_0,\beta_1}$ that "minimizes" the Squared of the residuals.
-  - In other words, OLS aims to maximize Explantion power by minimizing errors.
+-   The goal is to Choose parameters $\beta={\beta_0,\beta_1}$ that "minimizes" the Squared of the residuals.
+
+    -   In other words, OLS aims to maximize Explantion power by minimizing errors.
+
+[^1]: Simple Linear Regression Model
 
 ## Visualization
 
-```stata
+```{stata}
 *| output: false
 set seed 10
 clear
@@ -135,67 +137,63 @@ range x -2 2 20
 gen y = 1 + x + rnormal()
 color_style tableau
 two (scatter  y x) ///
-	(function y = 0.5 + 2*x, range(-1.8 2.4)) ///
-	(function y = 2 + 0.5*x, range(-1.8 2.4)) ///
-	(function y = 1 + 1*x, range(-1.8 2.4)) , ///
-	legend(order(2 "y=0.5+2x" 3 "y=2+0.5x" 4 "y=1+1x"))
-graph export images\fig2_1.png , replace width(1000)
+    (function y = 0.5 + 2*x, range(-1.8 2.4)) ///
+    (function y = 2 + 0.5*x, range(-1.8 2.4)) ///
+    (function y = 1 + 1*x, range(-1.8 2.4)) , ///
+    legend(order(2 "y=0.5+2x" 3 "y=2+0.5x" 4 "y=1+1x"))
+graph export images/fig2_1.png , replace width(1000)
 
 gen y1=.5+2*x
 gen y2=2+0.5*x
 gen y3=+1+1*x
 
 two (scatter y x) ///
-	(function y = 0.5 + 2*x, range(-1.8 2.4)) ///
-	(rspike y y1 x), ylabel(-4/6) ytitle(y) ///
-	legend(order(1 "Data" 2 "Prediction " 3 "Residual"))
-graph export images\fig2_2.png , replace width(1000) 
-	
+    (function y = 0.5 + 2*x, range(-1.8 2.4)) ///
+    (rspike y y1 x), ylabel(-4/6) ytitle(y) ///
+    legend(order(1 "Data" 2 "Prediction " 3 "Residual"))
+graph export images/fig2_2.png , replace width(1000) 
+    
 two (scatter y x) ///
-	(function y = 2 + 0.5*x, range(-1.8 2.4)) ///
-	(rspike y y2 x), ylabel(-4/6) ytitle(y) ///
-	legend(order(1 "Data" 2 "Prediction " 3 "Residual"))
-graph export images\fig2_3.png , replace width(1000) 
-	
+    (function y = 2 + 0.5*x, range(-1.8 2.4)) ///
+    (rspike y y2 x), ylabel(-4/6) ytitle(y) ///
+    legend(order(1 "Data" 2 "Prediction " 3 "Residual"))
+graph export images/fig2_3.png , replace width(1000) 
+    
 two (scatter y x) ///
-	(function y = 1 + 1*x, range(-1.8 2.4)) ///
-	(rspike y y3 x)	, ylabel(-4/6) ytitle(y) ///
-	legend(order(1 "Data" 2 "Prediction " 3 "Residual"))
-graph export images\fig2_4.png , replace width(1000) 	
+    (function y = 1 + 1*x, range(-1.8 2.4)) ///
+    (rspike y y3 x) , ylabel(-4/6) ytitle(y) ///
+    legend(order(1 "Data" 2 "Prediction " 3 "Residual"))
+graph export images/fig2_4.png , replace width(1000)    
 
 reg y x
 predict yh
 two (scatter y x) ///
-	(function y = _b[_cons] + _b[x]*x, range(-1.8 2.4)) ///
-	(rspike y yh x)	, ylabel(-4/6) ytitle(y) ///
-	legend(order(1 "Data" 2 "Prediction " 3 "Residual"))	
-graph export images\fig2_5.png , replace width(1000) 	
-
-
+    (function y = _b[_cons] + _b[x]*x, range(-1.8 2.4)) ///
+    (rspike y yh x) , ylabel(-4/6) ytitle(y) ///
+    legend(order(1 "Data" 2 "Prediction " 3 "Residual"))    
+graph export images/fig2_5.png , replace width(1000)    
 ```
 
-:::{.panel-tabset}
-
+::: panel-tabset
 ## Options
 
-![](images\fig2_1.png)
+![](images/fig2_1.png)
 
 ## Opt1
 
-![](images\fig2_2.png)
+![](images/fig2_2.png)
 
 ## Opt2
 
-![](images\fig2_3.png)
+![](images/fig2_3.png)
 
 ## Opt3
 
-![](images\fig2_4.png)
+![](images/fig2_4.png)
 
 ## Opt4
 
-![](images\fig2_5.png)
-
+![](images/fig2_5.png)
 :::
 
 ## Just a Minimization Problem
@@ -206,8 +204,7 @@ $$
 $${\hat\beta_0,\hat\beta_1} = \min_{\beta_0,\beta_1} = SSR =\sum_{i=1}^N u_i^2 = \sum_{i=1}^N (y-\beta_0 - \beta_1 x_i)^2 \\
 $$
 
-First Order Conditions:
-$$
+First Order Conditions: $$
 \begin{aligned}
 \frac{\partial SSR}{\partial \beta_0} &= -2 \sum (y_i-\beta_0 - \beta_1 x_i) = -2 \sum u_i =0 \\
 \frac{\partial SSR}{\partial \beta_1} &= -2 \sum x_i (y_i-\beta_0 - \beta_1 x_i) =- 2 \sum x_i u_i =0
@@ -223,9 +220,9 @@ $$
 \sum u_i &=0 \rightarrow nE(e) = 0 \\ 
 \sum x_i u_i &=0 \rightarrow nE(x*e) \rightarrow  n Cov(x,e) =0  
 \end{aligned}
-$$ 
+$$
 
-And the First Order Conditions simply provide a sysmtem of $k+1$ equations with $k+1$ unknowns.
+And the First Order Conditions simply provide a system of $k+1$ equations with $k+1$ unknowns.
 
 $$\begin{aligned}
 \hat\beta_0 &= \bar y - \beta_1 \bar x \\
@@ -239,112 +236,111 @@ $$
 
 $$\hat\beta_0 = \bar y - \hat \beta_1 \bar x$$
 
-- $\beta_0$ is usually estimated as a "residual", thus is often of little of no interest.
-  - Expected outcome when $X=0$
+-   $\beta_0$ is usually estimated as a "residual", thus is often of little of no interest.
+    -   Expected outcome when $X=0$
 
 $$
-\hat\beta_1 = \frac{\hat \rho \hat \sigma_x \hat \sigma_y}{\hat \sigma_x^2} 
-= \frac{\hat \rho \hat \sigma_y}{\hat \sigma_x}
+\hat\beta_1 = \frac {cov(x,y)}{var(x)}= \hat \rho\frac{ \hat \sigma_x \hat \sigma_y}{\hat \sigma_x^2} 
+= \hat \rho\frac{ \hat \sigma_y}{\hat \sigma_x}
 $$
 
-- $\beta_1$ is a slope, which is directly related to the correlation between $y$ and $x$. 
-  - It can only be estimated if $\sigma_x$>>0
+-   $\beta_1$ is a slope, which is directly related to the correlation between $y$ and $x$.
+    -   It can only be estimated if $\sigma_x$\>\>0
 
 Also, this $\hat y = \hat \beta_0 + \hat \beta_1 x$ becomes your sample regression function
 
-- where $\hat y$ is the fitted value of $y$ (proyection or prediction), given some value of $x$.
+-   where $\hat y$ is the fitted value of $y$ (proyection or prediction), given some value of $x$.
 
 ## Visualization
 
-```stata
+```{stata}
 *| output: false
 gen y0 = 0
 two (scatter y x) ///
-	(function y = _b[_cons] + _b[x]*x, range(-2.1 2.1)) ///
-	(rspike y y0 x, color(gs9%50) lw(1)) ///
-	, ylabel(-4/6) ytitle(y) yline(0) ///
-	title("Data")	legend(off)
-graph export images\fig2_6.png, replace width(1000)
+    (function y = _b[_cons] + _b[x]*x, range(-2.1 2.1)) ///
+    (rspike y y0 x, color(gs9%50) lw(1)) ///
+    , ylabel(-4/6) ytitle(y) yline(0) ///
+    title("Data")   legend(off)
+graph export images/fig2_6.png, replace width(1000)
 two (scatter y x) ///
-	(function y = _b[_cons] + _b[x]*x, range(-2.1 2.1)) ///
-	(rspike yh y0 x, color(gs9%50) lw(1)) ///
-	, ylabel(-4/6) ytitle(y) yline(0) ///
-	title("Prediction")	legend(off)
-graph export images\fig2_7.png, replace width(1000)	
+    (function y = _b[_cons] + _b[x]*x, range(-2.1 2.1)) ///
+    (rspike yh y0 x, color(gs9%50) lw(1)) ///
+    , ylabel(-4/6) ytitle(y) yline(0) ///
+    title("Prediction") legend(off)
+graph export images/fig2_7.png, replace width(1000) 
 two (scatter y x) ///
-	(function y = _b[_cons] + _b[x]*x, range(-2.1 2.1)) ///
-	(rspike y yh x, color(gs9%50) lw(1)) ///
-	, ylabel(-4/6) ytitle(y) yline(0) ///
-	title("Residual")	legend(off)
-graph export images\fig2_8.png, replace width(1000)	
+    (function y = _b[_cons] + _b[x]*x, range(-2.1 2.1)) ///
+    (rspike y yh x, color(gs9%50) lw(1)) ///
+    , ylabel(-4/6) ytitle(y) yline(0) ///
+    title("Residual")   legend(off)
+graph export images/fig2_8.png, replace width(1000) 
 ```
 
-:::{.panel-tabset}
-
+::: panel-tabset
 ## Data
 
-![](images\fig2_6.png)
+![](images/fig2_6.png)
 
 ## Prediction
 
-![](images\fig2_7.png)
+![](images/fig2_7.png)
 
 ## Residuals
 
-![](images\fig2_8.png)
-
+![](images/fig2_8.png)
 :::
 
 ## Properties of the Estimator
 
-1. Based on F.O.C., we know the following:
+1.  Based on F.O.C., we know the following:
 
 $$
 \sum_i^n \hat u_i = 0 \ \& \ \sum_i^n x_i \hat u_i = 0
 $$
 
-In average $u_i$ is zero, and uncorrelated with $x$, 
-and  $\bar y ,  \bar x$ **is** on the regression line
+In average $u_i$ is zero, and uncorrelated with $x$, and $\bar y , \bar x$ **is** on the regression line
 
-2. By construction $y_i = \hat y_i + \hat u_i$, so that
+2.  By construction $y_i = \hat y_i + \hat u_i$, so that
 
 $$
 \begin{aligned}
-	\sum_{i=1}^n(y_i-\bar y)^2 &= 
-	\sum_{i=1}^n(y_i-\hat y)^2  + 
-	\sum_{i=1}^n(\hat y-\bar y)^2  \\
-	SST &= SSE + SSR
+    \sum_{i=1}^n(y_i-\bar y)^2 &= 
+    \sum_{i=1}^n(y_i-\hat y)^2  + 
+    \sum_{i=1}^n(\hat y-\bar y)^2  \\
+    SST &= SSE + SSR
 \end{aligned}
 $$
 
 ## Properties of the Estimator
- 
-4. Goodness of FIT is defined as
+
+4.  Goodness of FIT is defined as
 
 $$R^2= 1-\frac {SSR} {SST}=\frac {SSE} {SST}$$
 
-- How much of the Data variation (SST) is explained by the model (SSE)
+-   How much of the Data variation (SST) is explained by the model (SSE), or
+-   1-amount not explained by the model
 
 ## Some Discussion
 
 We now know how to estimate coefficients given some data, but we need to ask the questions:
 
-- How do we know if the estimated coefficients are indeed appropriate for the population parameters?
-- How can we know the precision (or lack there off) of the estimates
+-   How do we know if the estimated coefficients are indeed appropriate for the population parameters?
 
-- Remember, $\hat \beta's$ depend on the sample. Different Samples will lead to different estimates. Thus  $\hat \beta's$ are random.
+-   How can we know the precision (or lack there off) of the estimates
 
-- In repeated sampling scenarios, we could empirically obtain the distribution of the estimated parameters, and verify if estimations are unbiased. 
-  
-- However, we can also do that based on analytical solutions. Lets see those assumptions
+-   Remember, $\hat \beta's$ depend on the sample. Different Samples will lead to different estimates. Thus $\hat \beta's$ are random.
+
+-   In repeated sampling scenarios, we could empirically obtain the distribution of the estimated parameters, and verify if estimations are unbiased.
+
+-   However, we can also do that based on analytical solutions. Lets see those assumptions
 
 # Assumptions: For unbiased estimations
+
 An estimator is said to be unbiased if $E(\hat\beta)=\beta$
 
 ## Assumption 1:
 
-:::{.callout-important}
-
+::: callout-important
 ## Linear in Parameters
 
 We need to assume the population model is linear in parameters:
@@ -352,67 +348,58 @@ We need to assume the population model is linear in parameters:
 $$y_i = \beta_0 + \beta_1 x_i + u_i$$
 :::
 
-In other words, we need to assume that the model we chose is a good representation of what the true population model is. 
+In other words, we need to assume that the model we chose is a good representation of what the true population model is.
 
-- Additive error, with a linear relationship between $x_i$ on $y_i$.
+-   Additive error, with a linear relationship between $x_i$ on $y_i$.
 
-- We can make it more flexible using some transformations of $x_i$.
-
+-   We can make it more flexible using some transformations of $x_i$.
 
 ## Assumption 2:
 
-:::{.callout-important}
-
+::: callout-important
 ## Random Sampling
 
 The data we are using is collected from a Random sample of the population, for which the linear model is valid.
-
 :::
 
-- Data should be representative from the population (for whom the Linear model Holds)
-- The Data Sampling should not depend the data collected, specially the dependent variable.
-- Also helps to ensure units "unobservables" $u's$ are independent from each other. 
-
+-   Data should be representative from the population (for whom the Linear model Holds)
+-   The Data Sampling should not depend the data collected, specially the dependent variable.
+-   Also helps to ensure units "unobservables" $u's$ are independent from each other.
 
 ## Assumption 3:
 
-:::{.callout-important}
-
+::: callout-important
 ## There is variation in the explanatory variable
 
 $$\sum_{i=1}^n (x_i - \bar x)^2 >0
 $$
-
 :::
 
-If there is no variation in the data, there are no slopes to estmate, and a solution cannot be found to the linear model. 
+If there is no variation in the data, there are no slopes to estmate, and a solution cannot be found to the linear model.
 
 ## Assumption 4:
 
-:::{.callout-important}
-
+::: callout-important
 ## Zero Conditional Mean
 
 $$E(u_i)= E(u_i|x_i) = 0
 $$
-
 :::
 
-- We expect unobserved factors $u_i$ to have a zero average effect on the outcome. This helps identify the constant $\beta_0$.
+-   We expect unobserved factors $u_i$ to have a zero average effect on the outcome. This helps identify the constant $\beta_0$.
 
-- We also expect that the expected value of $u_i$ to be zero for any value of $x$. 	
+-   We also expect that the expected value of $u_i$ to be zero for any value of $x$.
 
 ## Unbiased Coefficients:
 
-If Assumptions 1-4 Hold, then OLS allows you to estimate the coefficents of the linear Regression model. 
+If Assumptions 1-4 Hold, then OLS allows you to estimate the coefficents of the linear Regression model.
 
 $$\hat \beta_1 = \frac {\sum \tilde x_i \tilde y_i}{\sum \tilde x_i^2} , \tilde x_i=x_i - \bar x
 $$
 
-
 $$\begin{aligned}
 \hat \beta_1 &= \frac {\sum \tilde x_i (\beta_1 \tilde x_i +e)}{\sum \tilde x_i^2} = \beta_1 \frac {\sum  \tilde x_i^2 }{\sum \tilde x_i^2} + \frac {\sum  \tilde x_i u_i }{\sum \tilde x_i^2}  \\  
-E(\hat \beta_1)	&= \beta_1
+E(\hat \beta_1) &= \beta_1
 \end{aligned}
 $$
 
@@ -420,36 +407,34 @@ While coefficients can be different for each sample, In average, they will be th
 
 ## Variance of OLS Estimators
 
-How precise are the estimates? 
+How precise are the estimates?
 
 $$\hat \beta_1 = \beta_1 + \frac {\sum  \tilde x_i u_i }{\sum \tilde x_i^2}
 $$
 
-- If we assume $x's$ are assume fixed, the distribution from $\beta's$ will depend only on the variation of the error $u_i$. 
+-   If we assume $x's$ are assume fixed, the distribution from $\beta's$ will depend only on the variation of the error $u_i$.
 
-- Thus we need to impose an additional assumption on this errors, to estimate the variance of $\beta's$. (at least for convinience)
+-   Thus we need to impose an additional assumption on this errors, to estimate the variance of $\beta's$. (at least for convinience)
 
 ## Assumption 5:
 
-:::{.callout-important}
-
+::: callout-important
 ## Errors are Homoskedastic
 
 $$E(u_i^2)= E(u_i ^2 | x_i) = \sigma_u ^2
 $$
-
 :::
 
-- This simplifying assumption states that the "distribution" of the errors is constant, regardless of $x$. 
+-   This simplifying assumption states that the "distribution" of the errors is constant, regardless of $x$.
 
 ## Visualization
 
-```stata
+```{stata}
 *| output: false
 clear
 set scheme white2
 set obs 1000
-gen x = runiform(-2 , 2)	
+gen x = runiform(-2 , 2)    
 gen u = rnormal()
 gen y1 = x + u
 gen y2 = x + u*abs(x)
@@ -465,22 +450,23 @@ graph combine m1 m2 m3 m4
 graph export images/fig2_9.png, replace width(1000)
 ```
 
-![](images\fig2_9.png)
+![](images/fig2_9.png)
 
 ## Sampling Variance of OLS
 
 We Start with:
+
 $$
 \hat \beta_1 - \beta_1 = \frac {\sum  \tilde x_i u_i }{\sum \tilde x_i^2}
 $$
 
 And apply the Variance operator:
 
-$$
-\begin{aligned}
-Var(\hat \beta_1 - \beta_1) &= Var \left( \frac {\sum  \tilde x_i u_i }{\sum \tilde x_i^2} \right) \\
-			&= \frac {\sum  \tilde x_i^2 Var( u_i) }{(\sum \tilde x_i^2)^2} =\frac {\sum  \tilde x_i^2 \sigma_u^2 }{(\sum \tilde x_i^2)^2} \\
-			&= \sigma_u^2 \frac {\sum  \tilde x_i^2 }{(\sum \tilde x_i^2)^2} = \frac{\sigma_u^2}{\sum \tilde x_i^2}
+$$\begin{aligned}
+Var(\hat \beta_1 - \beta_1) &= Var \left( \frac {\sum  \tilde x_i u_i }{\sum \tilde x_i^2} \right)=
+            \frac{\tilde x_1 Var(u_i)}{(\sum x_i^2)^2}+\frac{\tilde x_2^2 Var(u_i)}{(\sum x_i^2)^2}+...+\frac{\tilde x_n^2 Var(u_i)}{(\sum x_i^2)^2} \\
+            &= \frac {\sum  \tilde x_i^2 Var( u_i) }{(\sum \tilde x_i^2)^2} =\frac {\sum  \tilde x_i^2 \sigma_u^2 }{(\sum \tilde x_i^2)^2} \\
+            &= \sigma_u^2 \frac {\sum  \tilde x_i^2 }{(\sum \tilde x_i^2)^2} = \frac{\sigma_u^2}{\sum \tilde x_i^2}
 \end{aligned}
 $$
 
@@ -500,9 +486,9 @@ $$
 
 # Another Break?
 
-## Examples{.scrollable}
+## Examples {.scrollable}
 
-Deriving OLS $\beta's$: 
+Deriving OLS $\beta's$:
 
 ```{stata}
 *| code-fold: false
@@ -538,7 +524,7 @@ mata: sse/sst , 1-ssr/sst
  
 ```
 
-$\hat\sigma_\beta$ 
+$\hat\sigma_\beta$
 
 ```{stata}
 *| code-fold: false
@@ -547,7 +533,6 @@ mata: sst_x  = sum( (x:-mean(x)):^2 )
 mata: sig_b1 = sqrt( sig2_u / sst_x )
 mata: sig_b0 = sqrt( sig2_u * mean(x:^2) / sst_x ) 
 mata: sig_b1 , sig_b0
- 
 ```
 
 Stata command:
@@ -558,23 +543,26 @@ regress wage educ
 
 ## Expanding on SLRM: Units of Measure {.scrollable}
 
-```{stata}
+First thing you should always consider doing is obtaining some summary statistics.
 
+without that its difficult o understand the magnitud of the coefficients and their effects.
+
+```{stata}
 frause ceosal1, clear
 display "***Variables Description***"
 des salary roe
-
 display "***Summary Statistics***"
 sum salary roe
-
 display "***Simple Regression***"
 reg salary roe
-
 ```
 
-Changing Scale
+Now, Changing scales has no effect on $R^2$, nor the coefficient to Standard error ratio ($t-stat$)
+
+It could allow for easier interpretation of the results.
 
 ```{stata}
+*| code-fold: false
 gen saldol=salary*1000
 gen roedec=roe / 100
 qui: reg salary roe
@@ -590,6 +578,128 @@ esttab m1 m2 m3, se r2
 
 It is possible to incorporate some nonlinearities by using "log" transformations:
 
-$$log(y) = \beta_0 + \beta_1 x + e \rightarrow 100\beta_1 = \frac{\% \Delta y}{\Delta x}$$
-$$y = \beta_0 + \beta_1 log(x) + e \rightarrow \frac {\beta_1}{100} = \frac{\Delta y}{\% \Delta x}$$
-$$log(y) = \beta_0 + \beta_1 log(x) + e \rightarrow \beta_1 =\frac{\% \Delta y}{\% \Delta x}$$
+$$
+\begin{aligned}
+log(y) &= \beta_0 + \beta_1 x + e \rightarrow & 100\beta_1 \simeq \frac{\% \Delta y}{\Delta x} \\
+y &= \beta_0 + \beta_1 log(x) + e \rightarrow & \frac {\beta_1}{100} \simeq \frac{\Delta y}{\% \Delta x} \\
+log(y) &= \beta_0 + \beta_1 log(x) + e \rightarrow & \beta_1 =\frac{\% \Delta y}{\% \Delta x}
+\end{aligned} 
+$$
+
+-   This allows us to estimate other interesting relationships with a the SRM. Specifically Semi-elasticities and Elasticities.
+
+-   This transformation compresses the distribution of a variable, potentially addressing problems of Heteroskedasticity (non-constant variance)
+
+```{stata}
+*| codefold: false
+*| output: false
+*** Example 2.10
+frause wage1, clear
+gen lnwage = log(wage)
+gen lneduc = log(educ)
+two scatter wage educ     || lfit wage educ    , ///
+    name(m1, replace) title(lin-lin) legend(off)
+two scatter lnwage educ   || lfit lnwage educ  , ///
+    name(m2, replace) title(log-lin) legend(off)
+two scatter wage lneduc   || lfit wage lneduc  , ///
+    name(m3, replace) title(lin-log) legend(off)
+two scatter lnwage lneduc || lfit lnwage lneduc, ///
+    name(m4, replace) title(log-log) legend(off)
+graph combine m1 m2 m3 m4, 
+graph export images/fig2_10.png, width(1000) replace
+```
+
+![](images/fig2_10.png){height="70%"}
+
+::: columns
+::: {.column width="50%"}
+```{stata}
+set linesize 255
+qui: reg wage educ
+est sto m1
+qui: reg lnwage educ
+est sto m2
+qui: reg wage lneduc
+est sto m3
+qui: reg lnwage lneduc
+est sto m4
+esttab m1 m2 m3 m4, se r2 nonumber  compress nostar nogaps
+```
+:::
+
+::: {.column width="50%"}
+```         
+
+An additional year of education
+
+1. Increases hourly wages in 54cnts
+
+2. Increases hourly wages in 8.3%
+
+3. A 1% increase in years of education (about 1.5months) increases wages in 5.3cnts
+
+4. A 1% increase in years of education would increase wages in 0.82%.
+```
+:::
+:::
+
+## Expanding on SLRM: Using Dummies {.scrollable}
+
+-   A SLRM can also be done using **Dummy** variables. (Those that take only two values: 0 or 1)
+
+-   This type of modeling may be observed when evaluating programs (Were you treated?(Tr=1) or not (Tr=0))
+
+-   And can be used to Easily compare means across two groups:
+
+$$wage = \beta_0 + \beta_1 female + e
+$$
+
+In this particular case, both $\beta_0 \& \beta_1$ have clear interpretation:
+
+$$
+\begin{aligned}
+\beta_0 &= E(wage|female=0) \\
+\beta_1 &= E(wage|female=1) - E(wage|female=0)
+\end{aligned}
+$$
+
+In most Software, you need to either Create the new variable explicitly, or use internal code to make it for you:
+
+```{stata}
+*| code-fold: false
+frause wage1, clear
+** verify Coding
+ssc install fre, replace
+fre female
+** create your own
+gen is_male = female==0
+** Regression using Newly created variable
+reg wage is_male
+** Regression using Stata "factor notation"
+reg wage i.female
+```
+
+if the Dummy is a treatment, and Assumption 4 Holds, then you can use this to estimate Average Treatment Effects (ATE) aka Average Casual Effects. (Usually requires randomization)
+
+$$
+\begin{aligned}
+y_i &= y_i(0)(1-D) + y_i(1)D  \\
+y_i &= y_i(0) + (y_i(1)-y_i(0))*D \\
+y_i &= \bar y_0 + u_i(0) + (\bar y_1 - \bar y_0)*D + (u_i(1)-u_i(0))*D \\
+y_i &= \alpha_0 + \tau_{ate} D + u_i
+\end{aligned}
+$$
+
+But we expect $u_i(1)-u_i(0)=0$
+
+```{stata}
+*| code-fold: false
+** Example 2.14
+frause jtrain2, clear
+** Training was Randomly assigned
+reg re78 i.train
+```
+
+# Thats all for today
+
+## { background-image="images/paste-7.png" background-size="contain"} 
