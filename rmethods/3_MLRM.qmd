@@ -1,7 +1,7 @@
 ---
 title: "Multiple Regression Analysis: Estimation"
 title-slide-attributes:
-    data-background-image: images/paste-2.png
+    data-background-image: images/paste-4.png
     data-background-size: contain
     data-background-opacity: "0.5"
 subtitle: "The first tool of Many"
@@ -17,8 +17,7 @@ format:
     css: styles.css 
 ---
 
-## asd
+## Why stay with 1 when you can use Many? ... Why not?
 
-ss
-s
+
 
