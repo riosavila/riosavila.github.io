@@ -19,5 +19,186 @@ format:
 
 ## Why stay with 1 when you can use Many? ... Why not?
 
+- The SLRM we cover last week is a powerful tool to understand the mechanics behind regression analysis, however is too limited.
+  - Use one control? to fix everything ?! 
+- The Natural alternative is to relax the assumption and Make things more flexible. 
+  - In other words...Allow for adding More controls
+  
+Thus, instead of:
+$$y_i = \beta_0 + \beta_1 x_i + e_i
+$$
 
+we have to consider:
+
+$$y_i = \beta_0 + \beta_1 x_{1i} +\beta_2 x_{2i} + \dots + \beta_k x_{ki} + u_i
+$$
+
+How many can we add? and why does it help?
+
+## The power of MLR: Why do more controls help?
+
+1. One more explicitly accounts for variables that before were *hidden* in $e_i$.
+   $x_{2i},x_{3i},\dots,x_{ki} \rightarrow$ Model not $u_i$
+   *ceteris paribus*
+2. Allows for richer model specifications and nonlinearities:
+   
+   Before: $y_i = \beta_0 + \beta_1 x_{1i} + e_i$
+
+   Now   : $y_i = \beta_0 + \beta_1 x_{1i} +\beta_2 x^2_{1i} + \beta_3 x^{1/2}_{1i} + \beta_4 x^{-1}_{1i} + 
+   \beta_5 x_{2i}+\dots+e_i$
+
+Thus, we can get closer to the unknown Population function, and explicitly handle *some* endogeneity problems (we control for it).
+
+:::{.callout-caution}
+
+## With great power...
+
+Being able to add more controls is good, but:
+
+  - May make things worse (bad controls)
+  - Or might not be feasible (small Sample)
+  - Or may be difficult to interpret (unless you know how to)
+:::
+
+# Do assumptions change?
+Not really, but lets make some math changes:
+
+$$y=\begin{bmatrix}y_1 \\ y_2 \\ \vdots \\ y_n
+\end{bmatrix} 
+; 
+X=\begin{bmatrix}x_1' \\ x_2' \\ \vdots \\ x_n'
+\end{bmatrix} = \begin{bmatrix} 1 & x_{11} & x_{21} & \dots &  x_{k1} 
+\\ 1 & x_{12} & x_{22} & \dots &  x_{k2} 
+\\ \vdots & \vdots  & \vdots & \ddots & \vdots
+\\ 1 & x_{1n} & x_{2n} & \dots &  x_{kn} 
+\end{bmatrix};
+\beta =\begin{bmatrix} \beta_0 \\ \beta_1 \\ \beta_2 \\ \vdots \\ \beta_k 
+\end{bmatrix}; e=\begin{bmatrix}e_1 \\ e_2 \\ \vdots \\ e_n
+\end{bmatrix} 
+ $$
+
+$$y=X\beta + e
+$$
+
+## Mostly the same
+
+1. **Linear in Parameters**: $y = X\beta + e$ (And this is the pop function)
+2. **Random Sampling** from the population of interest. (So errors $e_i$ is independent from $e_j$)
+3. **No Perfect Collinearity**:
+   
+   This is the alternative to $Var(x)>0$ (SLRM), and deserves more attention.
+
+- We want each variable in $X$ to have [***some***]{.bluetxt} independent variation, from all other variables in the model.
+  - In the SLRM, the independent variation idea was with respect to the constant.
+- [**If**]{.redtxt} a variable was a linear combination of others, then $\beta's$ cannot be identified. You need to choose what to keep:
+$$\begin{aligned}
+y &= \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 (X_1+X_2) + e \\ 
+&=  \beta_0 + (\beta_1+\beta_3) X_1 + (\beta_2+\beta_3) X_2 + e  
+\end{aligned}
+$$
+
+## 
+
+4. **Zero Conditional mean** (Exogeneity): $E(e_i|X)=0$ 
+   
+   Requires that the errors and the explanatory variables are uncorrelated. This is "easier" to achieve, because we can now move variables form the error to the model.
+
+   However, there could be things you can't controls for (and remain lurking in your errors)
+
+> I call this the most important assumption, because is the hardest to deal with
+
+#### If A1-A4 Hold, then your estimates will be unbiased! 
+
+5. **Homoskedasticity** Same as before. Errors dispersion does not change with respect to **all** $X's$.
+$$Var(e|X)=c
+$$
+
+Just as with SLRM, this assumption will help with the estimation of Standard Errors.
+
+## MLRM estimation 
+
+As before, not much has changed. We are still interested in finding $\beta's$ that Minimizes the (squared) error of the model when compared to the observed data:
+
+$$\hat \beta = \min_\beta \sum (y_i-X_i'\beta)^2 = \min_\beta \sum (y_i-\beta_0-\beta_1 x_{1i}-\dots-\beta_k x_{ki})^2
+$$
+
+The corresponding FOC generate $K+1$ equations to identify $K+1$ parameters:
+
+$$\begin{aligned}
+\sum (y_i-X_i'\beta) &= 0  \\
+\sum x_{1i}(y_i-X_i'\beta) &= 0 \\
+\sum x_{2i}(y_i-X_i'\beta) &= 0 \\ \dots \\\
+\sum x_{ki}(y_i-X_i'\beta) &= 0 
+\end{aligned} \rightarrow X'(y-X\beta) =0 \rightarrow \hat \beta = (X'X)^{-1}X'y
+$$
+
+## `mata` Interlute (for those curious){.scrollable}
+
+```{stata}
+*| classes: larger
+
+frause gpa1, clear
+gen one =1 
+mata: y=st_data(.,"colgpa"); mata: x=st_data(.,"hsgpa act one")
+mata: xx=x'x ; ixx=invsym(xx) ; xy = x'y 
+mata: b = ixx * xy ; b
+```
+
+## You got the $\beta's$, how do you interpret them?
+
+Interpretation of MLRM is similar to the SLRM. For **most** cases, you simply look into the coefficients, and interpret effects in terms of Changes:
+
+$$\begin{aligned}
+y_i = \hat\beta_0 + \hat\beta_1 x_{1i}  + \hat\beta_2 x_{2i} + e_i \\
+\Delta y_i =  \hat\beta_1 \Delta  x_{1i}  + \hat\beta_2 \Delta  x_{2i} + \Delta e_i
+\end{aligned}
+$$
+
+Under A1-A5 I can make use the above to make interpretations
+
+1. $\hat \beta_0$ has no effect on "changes" of $y$. Only its levels.
+2. $\hat \beta_1$ indicates how much $\Delta y_i$ will be if $\Delta x_{1i}$ increases in 1 unit, if both $\Delta x_{2i}$ and $\Delta e_i$ remain constant (*Ceteris Paribus*)
+
+$\Delta e_i=0$ by assumption, and $\Delta x_{2i}=0$ becuse we are explicilty controlling for it (We impute this based on extrapolations)
+
+You could also analyze the effect of $\Delta x_{1i}$ and $\Delta x_{2i}$ Simultaneously!
+
+## Example
+
+```{stata}
+*| output: asis
+*| classes: larger
+
+qui: frause wage1, clear
+qui: reg lwage educ exper tenure
+local b0:display %5.3f _b[_cons]
+local b1:display %5.3f _b[educ]
+local b2:display %5.3f _b[exper]
+local b3:display %5.3f _b[tenure]
+display "\$log(wage) = `b0' + `b1' educ + `b2' exper + `b3' tenure$"
+```
+
+$\beta_0$ has no effect on changes, but level. If someone has no education, experience or tenure, log(wages) will be 0.284. (why not estimate Wages?)
+
+$\beta_1$ : An additional year of education increases wages in 0.092log points or about 9.2%, if Experience and tenure do nor change (ceteris paribus).
+
+Notes:
+
+1. Think of Interpretations as comparing someone's outcome to him/herself: $y_{post} - y_{pre}$ 
+2. We make a more explicit assumption other factors (not under observation) SHOULD remain fixed (is it always credible?? $y=b_0 + b_1 x + b_2 x^2 + e$) 
+   
+3. You could combine effects. How much more would wages be if a person gains 1 year of education but losses 3 of tenure?
+
+## More on Interpretation
+
+Under A1-A5, you can still interpret results as "counterfactual" at the individual level. However, its more common to do it based on Conditional means:
+
+$$\frac {\Delta E(y|X)}{\Delta X_k} \simeq E(y|X_{-k},X_k+1)-E(y|X)
+$$
+
+Which mostly changes Language.
+
+> The expected effect of an increase in $X$ in one unit.
+
+## Alternative Interpretation: *Partialling out*
 
