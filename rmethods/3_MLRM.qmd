@@ -10,7 +10,7 @@ jupyter: nbstata
 format: 
   revealjs: 
     slide-number: true
-    width: 1500
+    width: 1600
     height: 900
     code-fold: true
     echo: true
@@ -19,13 +19,12 @@ format:
 
 ## Why stay with 1 when you can use Many? ... Why not?
 
-- The SLRM we cover last week is a powerful tool to understand the mechanics behind regression analysis, however is too limited.
-  - Use one control? to fix everything ?! 
-- The Natural alternative is to relax the assumption and Make things more flexible. 
-  - In other words...Allow for adding More controls
-  
-Thus, instead of:
-$$y_i = \beta_0 + \beta_1 x_i + e_i
+-   The SLRM we cover last week is a powerful tool to understand the mechanics behind regression analysis, however is too limited.
+    -   Use one control? to fix everything ?!
+-   The Natural alternative is to relax the assumption and Make things more flexible.
+    -   In other words...Allow for adding More controls
+
+Thus, instead of: $$y_i = \beta_0 + \beta_1 x_i + e_i
 $$
 
 we have to consider:
@@ -37,30 +36,28 @@ How many can we add? and why does it help?
 
 ## The power of MLR: Why do more controls help?
 
-1. One more explicitly accounts for variables that before were *hidden* in $e_i$.
-   $x_{2i},x_{3i},\dots,x_{ki} \rightarrow$ Model not $u_i$
-   *ceteris paribus*
-2. Allows for richer model specifications and nonlinearities:
-   
-   Before: $y_i = \beta_0 + \beta_1 x_{1i} + e_i$
+1.  One more explicitly accounts for variables that before were *hidden* in $e_i$. $x_{2i},x_{3i},\dots,x_{ki} \rightarrow$ Model not $u_i$ *ceteris paribus*
 
-   Now   : $y_i = \beta_0 + \beta_1 x_{1i} +\beta_2 x^2_{1i} + \beta_3 x^{1/2}_{1i} + \beta_4 x^{-1}_{1i} + 
-   \beta_5 x_{2i}+\dots+e_i$
+2.  Allows for richer model specifications and nonlinearities:
+
+    Before: $y_i = \beta_0 + \beta_1 x_{1i} + e_i$
+
+    Now : $y_i = \beta_0 + \beta_1 x_{1i} +\beta_2 x^2_{1i} + \beta_3 x^{1/2}_{1i} + \beta_4 x^{-1}_{1i} + \beta_5 x_{2i}+\dots+e_i$
 
 Thus, we can get closer to the unknown Population function, and explicitly handle *some* endogeneity problems (we control for it).
 
-:::{.callout-caution}
-
+::: callout-caution
 ## With great power...
 
 Being able to add more controls is good, but:
 
-  - May make things worse (bad controls)
-  - Or might not be feasible (small Sample)
-  - Or may be difficult to interpret (unless you know how to)
+-   May make things worse (bad controls)
+-   Or might not be feasible (small Sample)
+-   Or may be difficult to interpret (unless you know how to)
 :::
 
 # Do assumptions change?
+
 Not really, but lets make some math changes:
 
 $$y=\begin{bmatrix}y_1 \\ y_2 \\ \vdots \\ y_n
@@ -82,40 +79,40 @@ $$
 
 ## Mostly the same
 
-1. **Linear in Parameters**: $y = X\beta + e$ (And this is the pop function)
-2. **Random Sampling** from the population of interest. (So errors $e_i$ is independent from $e_j$)
-3. **No Perfect Collinearity**:
-   
-   This is the alternative to $Var(x)>0$ (SLRM), and deserves more attention.
+1.  **Linear in Parameters**: $y = X\beta + e$ (And this is the pop function)
 
-- We want each variable in $X$ to have [***some***]{.bluetxt} independent variation, from all other variables in the model.
-  - In the SLRM, the independent variation idea was with respect to the constant.
-- [**If**]{.redtxt} a variable was a linear combination of others, then $\beta's$ cannot be identified. You need to choose what to keep:
-$$\begin{aligned}
-y &= \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 (X_1+X_2) + e \\ 
-&=  \beta_0 + (\beta_1+\beta_3) X_1 + (\beta_2+\beta_3) X_2 + e  
-\end{aligned}
-$$
+2.  **Random Sampling** from the population of interest. (So errors $e_i$ is independent from $e_j$)
+
+3.  **No Perfect Collinearity**:
+
+    This is the alternative to $Var(x)>0$ (SLRM), and deserves more attention.
+
+-   We want each variable in $X$ to have [***some***]{.bluetxt} independent variation, from all other variables in the model.
+    -   In the SLRM, the independent variation idea was with respect to the constant.
+-   [**If**]{.redtxt} a variable was a linear combination of others, then $\beta's$ cannot be identified. You need to choose what to keep: $$\begin{aligned}
+    y &= \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 (X_1+X_2) + e \\ 
+    &=  \beta_0 + (\beta_1+\beta_3) X_1 + (\beta_2+\beta_3) X_2 + e  
+    \end{aligned}
+    $$
 
 ## 
 
-4. **Zero Conditional mean** (Exogeneity): $E(e_i|X)=0$ 
-   
-   Requires that the errors and the explanatory variables are uncorrelated. This is "easier" to achieve, because we can now move variables form the error to the model.
+4.  **Zero Conditional mean** (Exogeneity): $E(e_i|X)=0$
 
-   However, there could be things you can't controls for (and remain lurking in your errors)
+    Requires that the errors and the explanatory variables are uncorrelated. This is "easier" to achieve, because we can now move variables form the error to the model.
+
+    However, there could be things you can't controls for (and remain lurking in your errors)
 
 > I call this the most important assumption, because is the hardest to deal with
 
-#### If A1-A4 Hold, then your estimates will be unbiased! 
+#### If A1-A4 Hold, then your estimates will be unbiased!
 
-5. **Homoskedasticity** Same as before. Errors dispersion does not change with respect to **all** $X's$.
-$$Var(e|X)=c
-$$
+5.  **Homoskedasticity** Same as before. Errors dispersion does not change with respect to **all** $X's$. $$Var(e|X)=c
+    $$
 
 Just as with SLRM, this assumption will help with the estimation of Standard Errors.
 
-## MLRM estimation 
+## MLRM estimation
 
 As before, not much has changed. We are still interested in finding $\beta's$ that Minimizes the (squared) error of the model when compared to the observed data:
 
@@ -132,7 +129,7 @@ $$\begin{aligned}
 \end{aligned} \rightarrow X'(y-X\beta) =0 \rightarrow \hat \beta = (X'X)^{-1}X'y
 $$
 
-## `mata` Interlute (for those curious){.scrollable}
+## `mata` Interlute (for those curious) {.scrollable}
 
 ```{stata}
 *| classes: larger
@@ -156,8 +153,8 @@ $$
 
 Under A1-A5 I can make use the above to make interpretations
 
-1. $\hat \beta_0$ has no effect on "changes" of $y$. Only its levels.
-2. $\hat \beta_1$ indicates how much $\Delta y_i$ will be if $\Delta x_{1i}$ increases in 1 unit, if both $\Delta x_{2i}$ and $\Delta e_i$ remain constant (*Ceteris Paribus*)
+1.  $\hat \beta_0$ has no effect on "changes" of $y$. Only its levels.
+2.  $\hat \beta_1$ indicates how much $\Delta y_i$ will be if $\Delta x_{1i}$ increases in 1 unit, if both $\Delta x_{2i}$ and $\Delta e_i$ remain constant (*Ceteris Paribus*)
 
 $\Delta e_i=0$ by assumption, and $\Delta x_{2i}=0$ becuse we are explicilty controlling for it (We impute this based on extrapolations)
 
@@ -178,16 +175,17 @@ local b3:display %5.3f _b[tenure]
 display "\$log(wage) = `b0' + `b1' educ + `b2' exper + `b3' tenure$"
 ```
 
-$\beta_0$ has no effect on changes, but level. If someone has no education, experience or tenure, log(wages) will be 0.284. (why not estimate Wages?)
+-   $\beta_0$ has no effect on changes, but level.
+    -   If someone has no education, experience or tenure, log(wages) will be 0.284. Why not wages? and Does it make sense to assume 0 education, experience and tenure?
+-   $\beta_1$: An additional year of education increases wages in 0.092log points or about 9.2%, if Experience and tenure do nor change (ceteris paribus).
 
-$\beta_1$ : An additional year of education increases wages in 0.092log points or about 9.2%, if Experience and tenure do nor change (ceteris paribus).
+**Notes:**
 
-Notes:
+1.  Think of Interpretations as counterfactual: $y_{post} - y_{pre}$
 
-1. Think of Interpretations as comparing someone's outcome to him/herself: $y_{post} - y_{pre}$ 
-2. We make a more explicit assumption other factors (not under observation) SHOULD remain fixed (is it always credible?? $y=b_0 + b_1 x + b_2 x^2 + e$) 
-   
-3. You could combine effects. How much more would wages be if a person gains 1 year of education but losses 3 of tenure?
+2.  Assumption: Other factors (unobserved $e$) remain fixed (is it always credible??)
+
+3.  Effects can be combined. What if a person gains 1 year of education but losses 3 of tenure?
 
 ## More on Interpretation
 
@@ -202,3 +200,260 @@ Which mostly changes Language.
 
 ## Alternative Interpretation: *Partialling out*
 
+-   An alternative way of interpreting (and understanding) MLRM is to think about *partialling out* interpretation.
+
+-   This interpretation is based on the Frisch-Waugh-Lowell Theorem, which states that the following models should give you the **SAME** $\beta's$:
+
+$$\begin{aligned}
+y &= \color{blue}{\beta_1 } X_1 + \beta_2 X_2 + e \\
+(I-P_{X^c_2}) y &= \color{green}{\beta_1} (I-P_{X^c_2}) X_1 + e \\
+P_{X^c_2} &= X^c_2 (X'^{c}_2  X^{c}_2) X'^{c}_2 : \text{Projection Matrix}
+\end{aligned}
+$$
+
+::: callout-tip
+## Partialling out
+
+$\beta_1$ can be interpreted as the effect of $X_1$ on $y$, after all variation related to $X_2$ has been "eliminated".
+
+Thus $\beta_1$ is the effect uniquely driven by $X_1$.
+:::
+
+## Example {.scrollable}
+
+```{stata}
+*| echo: true
+*| code-fold: false
+*| classes: larger
+qui {
+  frause oaxaca, clear
+  drop if lnwage==.
+  reg lnwage educ exper tenure
+  est sto m1
+  reg educ        exper tenure
+  predict r_educ , res
+  reg lnwage      exper tenure
+  predict r_lnwage , res
+  reg r_lnwage r_educ
+  est sto m2
+  reg lnwage educ
+  est sto m3
+}
+esttab m1 m2 m3, se  
+```
+
+## Estimator Properties: Unbiased
+
+Recall, the estimator of $\beta's$ when you have multiple dependent variables:
+
+$$\begin{aligned}
+0  &: \hat \beta = (X'X)^{-1} X'y \\
+A1 \text{ & }  A2 &: \hat \beta = (X'X)^{-1} X'(X\beta + e) \\
+1  &: \hat \beta = (X'X)^{-1} X'X\beta + (X'X)^{-1} X'e \\
+A3 &: det(X'X)\neq 0 \rightarrow (X'X)^{-1} \text{ exists} \\
+2  &: \hat \beta = \beta + (X'X)^{-1} X'e \\
+A4 &: E(e|X)=0 \rightarrow E[(X'X)^{-1} X'e]=0 \\
+3  &: E(\hat\beta)= \beta \text{ unbiased} 
+\end{aligned}
+$$
+
+## Estimator Properties: Variance under Homoskedasticity
+
+Lets start with (2). $\beta's$ are random functions of the errors. Thus its variance will depend on $e$.
+
+$$\begin{aligned}
+1 &: \hat \beta = \beta + (X'X)^{-1} X'e \\
+2 &:\hat \beta - \beta = (X'X)^{-1} X'e \\
+3 &: Var(\hat \beta - \beta) = Var((X'X)^{-1} X'e) \\
+4 &: Var(\hat \beta - \beta) = (X'X)^{-1} X' Var(e) X' (X'X)^{-1}  \\
+\end{aligned}
+$$
+
+$Var(e)$ considers variance and covariance of each $e_i$ and its combinations.
+
+## 
+
+By assumption A2, $cov(e_i,e_j)=0$. And by assumption A5 $Var(e_i)=Var(e_j)$.
+
+$$\begin{aligned}
+Var(\hat \beta - \beta) &= (X'X)^{-1} X' \sigma_e^2 I X' (X'X)^{-1} \\
+Var(\hat \beta - \beta) &= \sigma_e^2 (X'X)^{-1} \\
+Var(\hat \beta_j - \beta_j) &= \frac{\sigma_e^2}{SST_j (1-R^2_j)} 
+\end{aligned}
+$$
+
+But we do not know $\sigma^2_e$. Thus, we also "estimate it"
+
+$$\hat \sigma^2_e = \frac{\sum \hat e^2}{N-K-1}
+$$
+
+Which is unbiased estimator for $\sigma^2_e$ if A1-A5 hold.
+
+## Estimator Properties: Variance under Homoskedasticity
+
+$$\begin{aligned}
+Var(\hat \beta - \beta) &= \sigma_e^2 (X'X)^{-1} \\
+Var(\hat \beta_j - \beta_j) &= \frac{\sigma_e^2}{SST_j (1-R^2_j)}  \\\
+& = \frac{\sigma_e^2}{(N-1)Var(X_j) (1-R^2_j)} = \frac{\sigma_e^2}{(N-1)Var(X_j)}VIF_j
+\end{aligned}
+$$
+
+To consider:
+
+-   $Var(\beta)$ increases with $\sigma_e^2$. More variation in the error, more variation of the coefficients.
+-   $Var(\beta)$ decreases with Sample size $N$
+-   $Var(\beta)$ also decreases with Variation in $X$
+-   However, it **increases** if there is less unique variation (Multicolinearity problem and VIF)
+
+## Quick Note
+
+-   $R^2$ are the same as SLRM: How much of variation is explained by the model.
+    -   Also $R^2 = corr(y,\hat y)^2$
+-   The fitted line goes over the "mean" of all variables
+-   MLRM Fits *hyper*-planes to the data
+-   Regression through the origin still a bad idea
+
+# Using Many controls is Fun! 
+
+::: {.incremental}
+- You can add more *stuff* for better fit (high R^2)
+- Making sure nothing remains in "$e$"
+- It would also allow you for very "flexible" models
+- But...(these things are not necessarily good)
+:::
+
+## {background-image="images/paste-5.png" background-size="contain"}
+
+## Ignoring Variables
+
+In the MLRM framework, its easier to see what happens when important variables are ignored. 
+
+$$\text{True: } y = b_0 + b_1 x_1 + b_2 x_2 + e
+$$
+
+But instead you estimate the following :
+
+$$\text{Estimated: }y = g_0 + g_1 x_1 + v
+$$
+
+Unless stronger assumptions are imposed, $g_1$ will be a biased estimate of $b_1$. 
+
+$$\begin{aligned}
+\hat g_1 &= \frac{\sum \tilde x_1 \tilde y}{\sum \tilde x_1^2} 
+         = \frac{\sum \tilde x_1 (b_1 \tilde x_1 +\tilde b_2 \tilde x_2 + e) }{\sum \tilde x_1^2} \\
+         &= \frac{b_1 \sum \tilde x_1^2}{\sum \tilde x_1^2}
+          + b_2 \frac{\sum \tilde x_1\tilde x_2}{\sum \tilde x_1^2}
+          +\frac{\sum \tilde x_1 e}{\sum \tilde x_1^2} \\
+         &= b_1+b_2 \delta_1 +\frac{\sum \tilde x_1 e}{\sum \tilde x_1^2} \\
+\end{aligned}
+$$
+
+## 
+
+This implies that $g_1$ is biased:
+
+$$E(\hat g_1) = b_1+b_2 \delta_1
+$$
+
+Where $\delta_1$ is the coefficient in $x_2=\delta_0+\delta_1 x_1 + v$.
+
+Implications: 
+
+- Unless 
+  - $\delta_1$ is zero ($x_1$ and $x_2$ are linearly independent) or,
+  - $b_2$ is zero ($x_2$ was irrelevant)
+  
+  ignoring $x_2$ will generate biased (and inconsistent) estimates for $b_1$.
+
+In models with more controls, the direction of the biases will be harder to define, but similar rule's of thumb can be used. 
+
+## Adding irrelevant controls
+
+Adding irrelevant controls will have no effect on bias and consistency. 
+
+if your model is:
+
+$$y=b_0+b_1 x_1 +e
+$$
+
+but you estimate: 
+
+$$y=g_0+g_1 x_1+g_2 x_2 +v
+$$
+
+your model is still unbiased:
+$$\begin{aligned}
+g &= (X'X)^{-1}X'(X \beta^+ + e) \\
+    \beta^+ &= [\beta \ ; 0] \\
+g &=  \beta^+ + (X'X)^{-1}X'e \rightarrow E(g) = \beta^+
+\end{aligned}
+$$
+
+## Adding "bad" Controls
+
+The worst case, yet hard to see, is when you add "bad" Controls, also known as Colliers.
+
+For example:
+
+- Say you want to analyze the effect of **education** on **wages**, and you control for **occupation**. 
+  Will it create an unbiased estimate for education?
+  - No. Your education **affects**  your occupation choice. So some of the effect of education will be "absorbed" by occupation.
+- Say you want to see the impact of **health expenditure** on **health**, and you control for "#visits to the doctor"
+  - This may also affect your estimates, as expenditure may change how many times you Visits are highly related. 
+
+In general, you want to avoid using "channels" as Controls. 
+
+
+
+## What about Standard Errors
+
+:::{.panel-tabset}
+
+## Case 1
+
+Omitting relevant variables that are correlated to $X's$
+
+We wont talk about this. It violates A4, and creates endogeneity
+
+## Case 2
+
+Omitting relevant variables that are uncorrelated to $X's$
+
+- Omitted variables will be in the error $e$. Thus variance of coefficients will be larger
+
+$$\begin{aligned}
+True: & y = b_0 + b_1 x_1 + b_2 x_2 + e  \\
+Estimated: & y = g_0 + g_1 x_1 + v   \\
+ & Var(e)<Var(v) \rightarrow Var(b_1)<Var(g_1)
+\end{aligned}
+$$
+
+Thus Adding controls in Randomized experiements is still a good idea!
+
+## Case 3
+
+Adding Irrelevant controls (related to X's)
+
+Coefficients are unbiased, and $\sigma^2_e$ will also be unbiased. 
+
+However, you may increase Multicolinearity in the model increasing $R_j^2$ and $VIF_j$.
+
+Variance of relevant coefficients will be larger. 
+
+$$\begin{aligned}
+True: & y = b_0 + b_1 x_1  + e  \\
+Estimated: & y = g_0 + g_1 x_1 + g_2 x_2 + v   \\
+& Var(b_1)<Var(g_1)
+\end{aligned}
+$$
+
+:::
+
+
+# Examples!
+
+## Prediction
+
+## Efficient Market
+
+## Treatment Evaluation

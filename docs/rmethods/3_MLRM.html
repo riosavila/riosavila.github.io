@@ -524,7 +524,7 @@ y &amp;= \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 (X_1+X_2) + e \\
 </section>
 <section id="mata-interlute-for-those-curious" class="slide level2 scrollable">
 <h2><code>mata</code> Interlute (for those curious)</h2>
-<div id="ef83e8b0" class="cell larger" data-execution_count="1">
+<div id="2508ef87" class="cell larger" data-execution_count="1">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a>frause gpa1, <span class="kw">clear</span></span>
@@ -572,13 +572,18 @@ y_i = \hat\beta_0 + \hat\beta_1 x_{1i}  + \hat\beta_2 x_{2i} + e_i \\
 <span id="cb3-7"><a href="#cb3-7"></a><span class="kw">display</span> <span class="st">"\$log(wage) = `b0' + `b1' educ + `b2' exper + `b3' tenure$"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <p><span class="math inline">\(log(wage) = 0.284 + 0.092 educ + 0.004 exper + 0.022 tenure\)</span></p>
-<p><span class="math inline">\(\beta_0\)</span> has no effect on changes, but level. If someone has no education, experience or tenure, log(wages) will be 0.284. (why not estimate Wages?)</p>
-<p><span class="math inline">\(\beta_1\)</span> : An additional year of education increases wages in 0.092log points or about 9.2%, if Experience and tenure do nor change (ceteris paribus).</p>
-<p>Notes:</p>
+<ul>
+<li><span class="math inline">\(\beta_0\)</span> has no effect on changes, but level.
+<ul>
+<li>If someone has no education, experience or tenure, log(wages) will be 0.284. Why not wages? and Does it make sense to assume 0 education, experience and tenure?</li>
+</ul></li>
+<li><span class="math inline">\(\beta_1\)</span>: An additional year of education increases wages in 0.092log points or about 9.2%, if Experience and tenure do nor change (ceteris paribus).</li>
+</ul>
+<p><strong>Notes:</strong></p>
 <ol type="1">
-<li><p>Think of Interpretations as comparing someone’s outcome to him/herself: <span class="math inline">\(y_{post} - y_{pre}\)</span></p></li>
-<li><p>We make a more explicit assumption other factors (not under observation) SHOULD remain fixed (is it always credible?? <span class="math inline">\(y=b_0 + b_1 x + b_2 x^2 + e\)</span>)</p></li>
-<li><p>You could combine effects. How much more would wages be if a person gains 1 year of education but losses 3 of tenure?</p></li>
+<li><p>Think of Interpretations as counterfactual: <span class="math inline">\(y_{post} - y_{pre}\)</span></p></li>
+<li><p>Assumption: Other factors (unobserved <span class="math inline">\(e\)</span>) remain fixed (is it always credible??)</p></li>
+<li><p>Effects can be combined. What if a person gains 1 year of education but losses 3 of tenure?</p></li>
 </ol>
 </section>
 <section id="more-on-interpretation" class="slide level2">
@@ -593,6 +598,278 @@ y_i = \hat\beta_0 + \hat\beta_1 x_{1i}  + \hat\beta_2 x_{2i} + e_i \\
 </section>
 <section id="alternative-interpretation-partialling-out" class="slide level2">
 <h2>Alternative Interpretation: <em>Partialling out</em></h2>
+<ul>
+<li><p>An alternative way of interpreting (and understanding) MLRM is to think about <em>partialling out</em> interpretation.</p></li>
+<li><p>This interpretation is based on the Frisch-Waugh-Lowell Theorem, which states that the following models should give you the <strong>SAME</strong> <span class="math inline">\(\beta's\)</span>:</p></li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+y &amp;= \color{blue}{\beta_1 } X_1 + \beta_2 X_2 + e \\
+(I-P_{X^c_2}) y &amp;= \color{green}{\beta_1} (I-P_{X^c_2}) X_1 + e \\
+P_{X^c_2} &amp;= X^c_2 (X'^{c}_2  X^{c}_2) X'^{c}_2 : \text{Projection Matrix}
+\end{aligned}
+\]</span></p>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Partialling out</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math inline">\(\beta_1\)</span> can be interpreted as the effect of <span class="math inline">\(X_1\)</span> on <span class="math inline">\(y\)</span>, after all variation related to <span class="math inline">\(X_2\)</span> has been “eliminated”.</p>
+<p>Thus <span class="math inline">\(\beta_1\)</span> is the effect uniquely driven by <span class="math inline">\(X_1\)</span>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="example-1" class="slide level2 scrollable">
+<h2>Example</h2>
+<div id="01cc697e" class="cell larger" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">qui</span> {</span>
+<span id="cb4-2"><a href="#cb4-2"></a>  frause oaxaca, <span class="kw">clear</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="kw">drop</span> <span class="kw">if</span> lnwage==.</span>
+<span id="cb4-4"><a href="#cb4-4"></a>  <span class="kw">reg</span> lnwage educ exper tenure</span>
+<span id="cb4-5"><a href="#cb4-5"></a>  <span class="kw">est</span> sto m1</span>
+<span id="cb4-6"><a href="#cb4-6"></a>  <span class="kw">reg</span> educ        exper tenure</span>
+<span id="cb4-7"><a href="#cb4-7"></a>  <span class="kw">predict</span> r_educ , res</span>
+<span id="cb4-8"><a href="#cb4-8"></a>  <span class="kw">reg</span> lnwage      exper tenure</span>
+<span id="cb4-9"><a href="#cb4-9"></a>  <span class="kw">predict</span> r_lnwage , res</span>
+<span id="cb4-10"><a href="#cb4-10"></a>  <span class="kw">reg</span> r_lnwage r_educ</span>
+<span id="cb4-11"><a href="#cb4-11"></a>  <span class="kw">est</span> sto m2</span>
+<span id="cb4-12"><a href="#cb4-12"></a>  <span class="kw">reg</span> lnwage educ</span>
+<span id="cb4-13"><a href="#cb4-13"></a>  <span class="kw">est</span> sto m3</span>
+<span id="cb4-14"><a href="#cb4-14"></a>}</span>
+<span id="cb4-15"><a href="#cb4-15"></a>esttab m1 m2 m3, se  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+------------------------------------------------------------
+                      (1)             (2)             (3)   
+                   lnwage        r_lnwage          lnwage   
+------------------------------------------------------------
+educ               0.0870***                       0.0800***
+                (0.00516)                       (0.00539)   
+
+exper              0.0113***                                
+                (0.00154)                                   
+
+tenure            0.00837***                                
+                (0.00188)                                   
+
+r_educ                             0.0870***                
+                                (0.00516)                   
+
+_cons               2.140***     8.93e-10           2.434***
+                 (0.0650)        (0.0124)        (0.0636)   
+------------------------------------------------------------
+N                    1434            1434            1434   
+------------------------------------------------------------
+Standard errors in parentheses
+* p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001</code></pre>
+</div>
+</div>
+</section>
+<section id="estimator-properties-unbiased" class="slide level2">
+<h2>Estimator Properties: Unbiased</h2>
+<p>Recall, the estimator of <span class="math inline">\(\beta's\)</span> when you have multiple dependent variables:</p>
+<p><span class="math display">\[\begin{aligned}
+0  &amp;: \hat \beta = (X'X)^{-1} X'y \\
+A1 \text{ &amp; }  A2 &amp;: \hat \beta = (X'X)^{-1} X'(X\beta + e) \\
+1  &amp;: \hat \beta = (X'X)^{-1} X'X\beta + (X'X)^{-1} X'e \\
+A3 &amp;: det(X'X)\neq 0 \rightarrow (X'X)^{-1} \text{ exists} \\
+2  &amp;: \hat \beta = \beta + (X'X)^{-1} X'e \\
+A4 &amp;: E(e|X)=0 \rightarrow E[(X'X)^{-1} X'e]=0 \\
+3  &amp;: E(\hat\beta)= \beta \text{ unbiased}
+\end{aligned}
+\]</span></p>
+</section>
+<section id="estimator-properties-variance-under-homoskedasticity" class="slide level2">
+<h2>Estimator Properties: Variance under Homoskedasticity</h2>
+<p>Lets start with (2). <span class="math inline">\(\beta's\)</span> are random functions of the errors. Thus its variance will depend on <span class="math inline">\(e\)</span>.</p>
+<p><span class="math display">\[\begin{aligned}
+1 &amp;: \hat \beta = \beta + (X'X)^{-1} X'e \\
+2 &amp;:\hat \beta - \beta = (X'X)^{-1} X'e \\
+3 &amp;: Var(\hat \beta - \beta) = Var((X'X)^{-1} X'e) \\
+4 &amp;: Var(\hat \beta - \beta) = (X'X)^{-1} X' Var(e) X' (X'X)^{-1}  \\
+\end{aligned}
+\]</span></p>
+<p><span class="math inline">\(Var(e)\)</span> considers variance and covariance of each <span class="math inline">\(e_i\)</span> and its combinations.</p>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<p>By assumption A2, <span class="math inline">\(cov(e_i,e_j)=0\)</span>. And by assumption A5 <span class="math inline">\(Var(e_i)=Var(e_j)\)</span>.</p>
+<p><span class="math display">\[\begin{aligned}
+Var(\hat \beta - \beta) &amp;= (X'X)^{-1} X' \sigma_e^2 I X' (X'X)^{-1} \\
+Var(\hat \beta - \beta) &amp;= \sigma_e^2 (X'X)^{-1} \\
+Var(\hat \beta_j - \beta_j) &amp;= \frac{\sigma_e^2}{SST_j (1-R^2_j)}
+\end{aligned}
+\]</span></p>
+<p>But we do not know <span class="math inline">\(\sigma^2_e\)</span>. Thus, we also “estimate it”</p>
+<p><span class="math display">\[\hat \sigma^2_e = \frac{\sum \hat e^2}{N-K-1}
+\]</span></p>
+<p>Which is unbiased estimator for <span class="math inline">\(\sigma^2_e\)</span> if A1-A5 hold.</p>
+</section>
+<section id="estimator-properties-variance-under-homoskedasticity-1" class="slide level2">
+<h2>Estimator Properties: Variance under Homoskedasticity</h2>
+<p><span class="math display">\[\begin{aligned}
+Var(\hat \beta - \beta) &amp;= \sigma_e^2 (X'X)^{-1} \\
+Var(\hat \beta_j - \beta_j) &amp;= \frac{\sigma_e^2}{SST_j (1-R^2_j)}  \\\
+&amp; = \frac{\sigma_e^2}{(N-1)Var(X_j) (1-R^2_j)} = \frac{\sigma_e^2}{(N-1)Var(X_j)}VIF_j
+\end{aligned}
+\]</span></p>
+<p>To consider:</p>
+<ul>
+<li><span class="math inline">\(Var(\beta)\)</span> increases with <span class="math inline">\(\sigma_e^2\)</span>. More variation in the error, more variation of the coefficients.</li>
+<li><span class="math inline">\(Var(\beta)\)</span> decreases with Sample size <span class="math inline">\(N\)</span></li>
+<li><span class="math inline">\(Var(\beta)\)</span> also decreases with Variation in <span class="math inline">\(X\)</span></li>
+<li>However, it <strong>increases</strong> if there is less unique variation (Multicolinearity problem and VIF)</li>
+</ul>
+</section>
+<section id="quick-note" class="slide level2">
+<h2>Quick Note</h2>
+<ul>
+<li><span class="math inline">\(R^2\)</span> are the same as SLRM: How much of variation is explained by the model.
+<ul>
+<li>Also <span class="math inline">\(R^2 = corr(y,\hat y)^2\)</span></li>
+</ul></li>
+<li>The fitted line goes over the “mean” of all variables</li>
+<li>MLRM Fits <em>hyper</em>-planes to the data</li>
+<li>Regression through the origin still a bad idea</li>
+</ul>
+</section></section>
+<section>
+<section id="using-many-controls-is-fun" class="title-slide slide level1 center">
+<h1>Using Many controls is Fun!</h1>
+<div>
+<ul>
+<li class="fragment">You can add more <em>stuff</em> for better fit (high R^2)</li>
+<li class="fragment">Making sure nothing remains in “<span class="math inline">\(e\)</span>”</li>
+<li class="fragment">It would also allow you for very “flexible” models</li>
+<li class="fragment">But…(these things are not necessarily good)</li>
+</ul>
+</div>
+</section>
+<section id="section-2" class="slide level2" data-background-image="images/paste-5.png" data-background-size="contain">
+<h2></h2>
+</section>
+<section id="ignoring-variables" class="slide level2">
+<h2>Ignoring Variables</h2>
+<p>In the MLRM framework, its easier to see what happens when important variables are ignored.</p>
+<p><span class="math display">\[\text{True: } y = b_0 + b_1 x_1 + b_2 x_2 + e
+\]</span></p>
+<p>But instead you estimate the following :</p>
+<p><span class="math display">\[\text{Estimated: }y = g_0 + g_1 x_1 + v
+\]</span></p>
+<p>Unless stronger assumptions are imposed, <span class="math inline">\(g_1\)</span> will be a biased estimate of <span class="math inline">\(b_1\)</span>.</p>
+<p><span class="math display">\[\begin{aligned}
+\hat g_1 &amp;= \frac{\sum \tilde x_1 \tilde y}{\sum \tilde x_1^2}
+         = \frac{\sum \tilde x_1 (b_1 \tilde x_1 +\tilde b_2 \tilde x_2 + e) }{\sum \tilde x_1^2} \\
+         &amp;= \frac{b_1 \sum \tilde x_1^2}{\sum \tilde x_1^2}
+          + b_2 \frac{\sum \tilde x_1\tilde x_2}{\sum \tilde x_1^2}
+          +\frac{\sum \tilde x_1 e}{\sum \tilde x_1^2} \\
+         &amp;= b_1+b_2 \delta_1 +\frac{\sum \tilde x_1 e}{\sum \tilde x_1^2} \\
+\end{aligned}
+\]</span></p>
+</section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+<p>This implies that <span class="math inline">\(g_1\)</span> is biased:</p>
+<p><span class="math display">\[E(\hat g_1) = b_1+b_2 \delta_1
+\]</span></p>
+<p>Where <span class="math inline">\(\delta_1\)</span> is the coefficient in <span class="math inline">\(x_2=\delta_0+\delta_1 x_1 + v\)</span>.</p>
+<p>Implications:</p>
+<ul>
+<li>Unless
+<ul>
+<li><span class="math inline">\(\delta_1\)</span> is zero (<span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> are linearly independent) or,</li>
+<li><span class="math inline">\(b_2\)</span> is zero (<span class="math inline">\(x_2\)</span> was irrelevant)</li>
+</ul>
+ignoring <span class="math inline">\(x_2\)</span> will generate biased (and inconsistent) estimates for <span class="math inline">\(b_1\)</span>.</li>
+</ul>
+<p>In models with more controls, the direction of the biases will be harder to define, but similar rule’s of thumb can be used.</p>
+</section>
+<section id="adding-irrelevant-controls" class="slide level2">
+<h2>Adding irrelevant controls</h2>
+<p>Adding irrelevant controls will have no effect on bias and consistency.</p>
+<p>if your model is:</p>
+<p><span class="math display">\[y=b_0+b_1 x_1 +e
+\]</span></p>
+<p>but you estimate:</p>
+<p><span class="math display">\[y=g_0+g_1 x_1+g_2 x_2 +v
+\]</span></p>
+<p>your model is still unbiased: <span class="math display">\[\begin{aligned}
+g &amp;= (X'X)^{-1}X'(X \beta^+ + e) \\
+    \beta^+ &amp;= [\beta \ ; 0] \\
+g &amp;=  \beta^+ + (X'X)^{-1}X'e \rightarrow E(g) = \beta^+
+\end{aligned}
+\]</span></p>
+</section>
+<section id="adding-bad-controls" class="slide level2">
+<h2>Adding “bad” Controls</h2>
+<p>The worst case, yet hard to see, is when you add “bad” Controls, also known as Colliers.</p>
+<p>For example:</p>
+<ul>
+<li>Say you want to analyze the effect of <strong>education</strong> on <strong>wages</strong>, and you control for <strong>occupation</strong>. Will it create an unbiased estimate for education?
+<ul>
+<li>No.&nbsp;Your education <strong>affects</strong> your occupation choice. So some of the effect of education will be “absorbed” by occupation.</li>
+</ul></li>
+<li>Say you want to see the impact of <strong>health expenditure</strong> on <strong>health</strong>, and you control for “#visits to the doctor”
+<ul>
+<li>This may also affect your estimates, as expenditure may change how many times you Visits are highly related.</li>
+</ul></li>
+</ul>
+<p>In general, you want to avoid using “channels” as Controls.</p>
+</section>
+<section id="what-about-standard-errors" class="slide level2">
+<h2>What about Standard Errors</h2>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Case 1</a></li><li><a href="#tabset-1-2">Case 2</a></li><li><a href="#tabset-1-3">Case 3</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<p>Omitting relevant variables that are correlated to <span class="math inline">\(X's\)</span></p>
+<p>We wont talk about this. It violates A4, and creates endogeneity</p>
+</div>
+<div id="tabset-1-2">
+<p>Omitting relevant variables that are uncorrelated to <span class="math inline">\(X's\)</span></p>
+<ul>
+<li>Omitted variables will be in the error <span class="math inline">\(e\)</span>. Thus variance of coefficients will be larger</li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+True: &amp; y = b_0 + b_1 x_1 + b_2 x_2 + e  \\
+Estimated: &amp; y = g_0 + g_1 x_1 + v   \\
+&amp; Var(e)&lt;Var(v) \rightarrow Var(b_1)&lt;Var(g_1)
+\end{aligned}
+\]</span></p>
+<p>Thus Adding controls in Randomized experiements is still a good idea!</p>
+</div>
+<div id="tabset-1-3">
+<p>Adding Irrelevant controls (related to X’s)</p>
+<p>Coefficients are unbiased, and <span class="math inline">\(\sigma^2_e\)</span> will also be unbiased.</p>
+<p>However, you may increase Multicolinearity in the model increasing <span class="math inline">\(R_j^2\)</span> and <span class="math inline">\(VIF_j\)</span>.</p>
+<p>Variance of relevant coefficients will be larger.</p>
+<p><span class="math display">\[\begin{aligned}
+True: &amp; y = b_0 + b_1 x_1  + e  \\
+Estimated: &amp; y = g_0 + g_1 x_1 + g_2 x_2 + v   \\
+&amp; Var(b_1)&lt;Var(g_1)
+\end{aligned}
+\]</span></p>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="examples" class="title-slide slide level1 center">
+<h1>Examples!</h1>
+
+</section>
+<section id="prediction" class="slide level2">
+<h2>Prediction</h2>
+</section>
+<section id="efficient-market" class="slide level2">
+<h2>Efficient Market</h2>
+</section>
+<section id="treatment-evaluation" class="slide level2">
+<h2>Treatment Evaluation</h2>
 
 <div class="footer footer-default">
 
@@ -774,7 +1051,7 @@ y_i = \hat\beta_0 + \hat\beta_1 x_{1i}  + \hat\beta_2 x_{2i} + e_i \\
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1500,
+        width: 1600,
 
         height: 900,
 

@@ -3042,7 +3042,7 @@
     "href": "rmethods/3_MLRM.html#example",
     "title": "Multiple Regression Analysis: Estimation",
     "section": "Example",
-    "text": "Example\n\nCode\nqui: frause wage1, clear\nqui: reg lwage educ exper tenure\nlocal b0:display %5.3f _b[_cons]\nlocal b1:display %5.3f _b[educ]\nlocal b2:display %5.3f _b[exper]\nlocal b3:display %5.3f _b[tenure]\ndisplay \"\\$log(wage) = `b0' + `b1' educ + `b2' exper + `b3' tenure$\"\n\n\\(log(wage) = 0.284 + 0.092 educ + 0.004 exper + 0.022 tenure\\)\n\\(\\beta_0\\) has no effect on changes, but level. If someone has no education, experience or tenure, log(wages) will be 0.284. (why not estimate Wages?)\n\\(\\beta_1\\) : An additional year of education increases wages in 0.092log points or about 9.2%, if Experience and tenure do nor change (ceteris paribus).\nNotes:\n\nThink of Interpretations as comparing someone’s outcome to him/herself: \\(y_{post} - y_{pre}\\)\nWe make a more explicit assumption other factors (not under observation) SHOULD remain fixed (is it always credible?? \\(y=b_0 + b_1 x + b_2 x^2 + e\\))\nYou could combine effects. How much more would wages be if a person gains 1 year of education but losses 3 of tenure?"
+    "text": "Example\n\nCode\nqui: frause wage1, clear\nqui: reg lwage educ exper tenure\nlocal b0:display %5.3f _b[_cons]\nlocal b1:display %5.3f _b[educ]\nlocal b2:display %5.3f _b[exper]\nlocal b3:display %5.3f _b[tenure]\ndisplay \"\\$log(wage) = `b0' + `b1' educ + `b2' exper + `b3' tenure$\"\n\n\\(log(wage) = 0.284 + 0.092 educ + 0.004 exper + 0.022 tenure\\)\n\n\\(\\beta_0\\) has no effect on changes, but level.\n\nIf someone has no education, experience or tenure, log(wages) will be 0.284. Why not wages? and Does it make sense to assume 0 education, experience and tenure?\n\n\\(\\beta_1\\): An additional year of education increases wages in 0.092log points or about 9.2%, if Experience and tenure do nor change (ceteris paribus).\n\nNotes:\n\nThink of Interpretations as counterfactual: \\(y_{post} - y_{pre}\\)\nAssumption: Other factors (unobserved \\(e\\)) remain fixed (is it always credible??)\nEffects can be combined. What if a person gains 1 year of education but losses 3 of tenure?"
   },
   {
     "objectID": "rmethods/3_MLRM.html#more-on-interpretation",
@@ -3056,6 +3056,118 @@
     "href": "rmethods/3_MLRM.html#alternative-interpretation-partialling-out",
     "title": "Multiple Regression Analysis: Estimation",
     "section": "Alternative Interpretation: Partialling out",
-    "text": "Alternative Interpretation: Partialling out"
+    "text": "Alternative Interpretation: Partialling out\n\nAn alternative way of interpreting (and understanding) MLRM is to think about partialling out interpretation.\nThis interpretation is based on the Frisch-Waugh-Lowell Theorem, which states that the following models should give you the SAME \\(\\beta's\\):\n\n\\[\\begin{aligned}\ny &= \\color{blue}{\\beta_1 } X_1 + \\beta_2 X_2 + e \\\\\n(I-P_{X^c_2}) y &= \\color{green}{\\beta_1} (I-P_{X^c_2}) X_1 + e \\\\\nP_{X^c_2} &= X^c_2 (X'^{c}_2  X^{c}_2) X'^{c}_2 : \\text{Projection Matrix}\n\\end{aligned}\n\\]\n\n\n\n\n\n\nPartialling out\n\n\n\\(\\beta_1\\) can be interpreted as the effect of \\(X_1\\) on \\(y\\), after all variation related to \\(X_2\\) has been “eliminated”.\nThus \\(\\beta_1\\) is the effect uniquely driven by \\(X_1\\)."
+  },
+  {
+    "objectID": "rmethods/3_MLRM.html#example-1",
+    "href": "rmethods/3_MLRM.html#example-1",
+    "title": "Multiple Regression Analysis: Estimation",
+    "section": "Example",
+    "text": "Example\n\nqui {\n  frause oaxaca, clear\n  drop if lnwage==.\n  reg lnwage educ exper tenure\n  est sto m1\n  reg educ        exper tenure\n  predict r_educ , res\n  reg lnwage      exper tenure\n  predict r_lnwage , res\n  reg r_lnwage r_educ\n  est sto m2\n  reg lnwage educ\n  est sto m3\n}\nesttab m1 m2 m3, se  \n\n\n------------------------------------------------------------\n                      (1)             (2)             (3)   \n                   lnwage        r_lnwage          lnwage   \n------------------------------------------------------------\neduc               0.0870***                       0.0800***\n                (0.00516)                       (0.00539)   \n\nexper              0.0113***                                \n                (0.00154)                                   \n\ntenure            0.00837***                                \n                (0.00188)                                   \n\nr_educ                             0.0870***                \n                                (0.00516)                   \n\n_cons               2.140***     8.93e-10           2.434***\n                 (0.0650)        (0.0124)        (0.0636)   \n------------------------------------------------------------\nN                    1434            1434            1434   \n------------------------------------------------------------\nStandard errors in parentheses\n* p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001"
+  },
+  {
+    "objectID": "rmethods/3_MLRM.html#estimator-properties",
+    "href": "rmethods/3_MLRM.html#estimator-properties",
+    "title": "Multiple Regression Analysis: Estimation",
+    "section": "Estimator Properties",
+    "text": "Estimator Properties\nRecall, the estimator of \\(\\beta's\\) when you have multiple dependent variables:\n\\[\\begin{aligned}\n0  &: \\hat \\beta = (X'X)^{-1} X'y \\\\\nA1 \\text{ & }  A2 &: \\hat \\beta = (X'X)^{-1} X'(X\\beta + e) \\\\\n   &: \\hat \\beta = (X'X)^{-1} X'X\\beta + (X'X)^{-1} X'e \\\\\nA3 &: det(X'X)\\neq 0 \\rightarrow (X'X)^{-1} \\text{ exists} \\\\\n1  &: \\hat \\beta = \\beta + (X'X)^{-1} X'e \\\\\nA4 &: E(e|X)=0 \\rightarrow E[(X'X)^{-1} X'e]=0 \\\\\n   &: E(\\hat\\beta)= \\beta \\text{ unbiased}\n\\end{aligned}\n\\]\nUnder A"
+  },
+  {
+    "objectID": "rmethods/3_MLRM.html#estimator-properties-unbiased",
+    "href": "rmethods/3_MLRM.html#estimator-properties-unbiased",
+    "title": "Multiple Regression Analysis: Estimation",
+    "section": "Estimator Properties: Unbiased",
+    "text": "Estimator Properties: Unbiased\nRecall, the estimator of \\(\\beta's\\) when you have multiple dependent variables:\n\\[\\begin{aligned}\n0  &: \\hat \\beta = (X'X)^{-1} X'y \\\\\nA1 \\text{ & }  A2 &: \\hat \\beta = (X'X)^{-1} X'(X\\beta + e) \\\\\n1  &: \\hat \\beta = (X'X)^{-1} X'X\\beta + (X'X)^{-1} X'e \\\\\nA3 &: det(X'X)\\neq 0 \\rightarrow (X'X)^{-1} \\text{ exists} \\\\\n2  &: \\hat \\beta = \\beta + (X'X)^{-1} X'e \\\\\nA4 &: E(e|X)=0 \\rightarrow E[(X'X)^{-1} X'e]=0 \\\\\n3  &: E(\\hat\\beta)= \\beta \\text{ unbiased}\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "rmethods/3_MLRM.html#estimator-properties-variance-under-homoskedasticity",
+    "href": "rmethods/3_MLRM.html#estimator-properties-variance-under-homoskedasticity",
+    "title": "Multiple Regression Analysis: Estimation",
+    "section": "Estimator Properties: Variance under Homoskedasticity",
+    "text": "Estimator Properties: Variance under Homoskedasticity\nLets start with (2). \\(\\beta's\\) are random functions of the errors. Thus its variance will depend on \\(e\\).\n\\[\\begin{aligned}\n1 &: \\hat \\beta = \\beta + (X'X)^{-1} X'e \\\\\n2 &:\\hat \\beta - \\beta = (X'X)^{-1} X'e \\\\\n3 &: Var(\\hat \\beta - \\beta) = Var((X'X)^{-1} X'e) \\\\\n4 &: Var(\\hat \\beta - \\beta) = (X'X)^{-1} X' Var(e) X' (X'X)^{-1}  \\\\\n\\end{aligned}\n\\]\n\\(Var(e)\\) considers variance and covariance of each \\(e_i\\) and its combinations."
+  },
+  {
+    "objectID": "rmethods/3_MLRM.html#estimator-properties-variance-under-homoskedasticity-1",
+    "href": "rmethods/3_MLRM.html#estimator-properties-variance-under-homoskedasticity-1",
+    "title": "Multiple Regression Analysis: Estimation",
+    "section": "Estimator Properties: Variance under Homoskedasticity",
+    "text": "Estimator Properties: Variance under Homoskedasticity\n\\[\\begin{aligned}\nVar(\\hat \\beta - \\beta) &= \\sigma_e^2 (X'X)^{-1} \\\\\nVar(\\hat \\beta_j - \\beta_j) &= \\frac{\\sigma_e^2}{SST_j (1-R^2_j)}  \\\\\\\n& = \\frac{\\sigma_e^2}{(N-1)Var(X_j) (1-R^2_j)} = \\frac{\\sigma_e^2}{(N-1)Var(X_j)}VIF_j\n\\end{aligned}\n\\]\nTo consider:\n\n\\(Var(\\beta)\\) increases with \\(\\sigma_e^2\\). More variation in the error, more variation of the coefficients.\n\\(Var(\\beta)\\) decreases with Sample size \\(N\\)\n\\(Var(\\beta)\\) also decreases with Variation in \\(X\\)\nHowever, it increases if there is less unique variation (Multicolinearity problem and VIF)"
+  },
+  {
+    "objectID": "rmethods/3_MLRM.html#section-1",
+    "href": "rmethods/3_MLRM.html#section-1",
+    "title": "Multiple Regression Analysis: Estimation",
+    "section": "",
+    "text": "By assumption A2, \\(cov(e_i,e_j)=0\\). And by assumption A5 \\(Var(e_i)=Var(e_j)\\).\n\\[\\begin{aligned}\nVar(\\hat \\beta - \\beta) &= (X'X)^{-1} X' \\sigma_e^2 I X' (X'X)^{-1} \\\\\nVar(\\hat \\beta - \\beta) &= \\sigma_e^2 (X'X)^{-1} \\\\\nVar(\\hat \\beta_j - \\beta_j) &= \\frac{\\sigma_e^2}{SST_j (1-R^2_j)}\n\\end{aligned}\n\\]\nBut we do not know \\(\\sigma^2_e\\). Thus, we also “estimate it”\n\\[\\hat \\sigma^2_e = \\frac{\\sum \\hat e^2}{N-K-1}\n\\]\nWhich is unbiased estimator for \\(\\sigma^2_e\\) if A1-A5 hold."
+  },
+  {
+    "objectID": "rmethods/3_MLRM.html#quick-note",
+    "href": "rmethods/3_MLRM.html#quick-note",
+    "title": "Multiple Regression Analysis: Estimation",
+    "section": "Quick Note",
+    "text": "Quick Note\n\n\\(R^2\\) are the same as SLRM: How much of variation is explained by the model.\n\nAlso \\(R^2 = corr(y,\\hat y)^2\\)\n\nThe fitted line goes over the “mean” of all variables\nMLRM Fits hyper-planes to the data\nRegression through the origin still a bad idea"
+  },
+  {
+    "objectID": "rmethods/3_MLRM.html#ignoring-variables",
+    "href": "rmethods/3_MLRM.html#ignoring-variables",
+    "title": "Multiple Regression Analysis: Estimation",
+    "section": "Ignoring Variables",
+    "text": "Ignoring Variables\nIn the MLRM framework, its easier to see what happens when important variables are ignored.\n\\[\\text{True: } y = b_0 + b_1 x_1 + b_2 x_2 + e\n\\]\nBut instead you estimate the following :\n\\[\\text{Estimated: }y = g_0 + g_1 x_1 + v\n\\]\nUnless stronger assumptions are imposed, \\(g_1\\) will be a biased estimate of \\(b_1\\).\n\\[\\begin{aligned}\n\\hat g_1 &= \\frac{\\sum \\tilde x_1 \\tilde y}{\\sum \\tilde x_1^2}\n         = \\frac{\\sum \\tilde x_1 (b_1 \\tilde x_1 +\\tilde b_2 \\tilde x_2 + e) }{\\sum \\tilde x_1^2} \\\\\n         &= \\frac{b_1 \\sum \\tilde x_1^2}{\\sum \\tilde x_1^2}\n          + b_2 \\frac{\\sum \\tilde x_1\\tilde x_2}{\\sum \\tilde x_1^2}\n          +\\frac{\\sum \\tilde x_1 e}{\\sum \\tilde x_1^2} \\\\\n         &= b_1+b_2 \\delta_1 +\\frac{\\sum \\tilde x_1 e}{\\sum \\tilde x_1^2} \\\\\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "rmethods/3_MLRM.html#section-3",
+    "href": "rmethods/3_MLRM.html#section-3",
+    "title": "Multiple Regression Analysis: Estimation",
+    "section": "",
+    "text": "This implies that \\(g_1\\) is biased:\n\\[E(\\hat g_1) = b_1+b_2 \\delta_1\n\\]\nWhere \\(\\delta_1\\) is the coefficient in \\(x_2=\\delta_0+\\delta_1 x_1 + v\\).\nImplications:\n\nUnless\n\n\\(\\delta_1\\) is zero (\\(x_1\\) and \\(x_2\\) are linearly independent) or,\n\\(b_2\\) is zero (\\(x_2\\) was irrelevant)\n\nignoring \\(x_2\\) will generate biased (and inconsistent) estimates for \\(b_1\\).\n\nIn models with more controls, the direction of the biases will be harder to define, but similar rule’s of thumb can be used."
+  },
+  {
+    "objectID": "rmethods/3_MLRM.html#adding-unnecessary-controls",
+    "href": "rmethods/3_MLRM.html#adding-unnecessary-controls",
+    "title": "Multiple Regression Analysis: Estimation",
+    "section": "Adding unnecessary controls",
+    "text": "Adding unnecessary controls"
+  },
+  {
+    "objectID": "rmethods/3_MLRM.html#adding-irrelevant-controls",
+    "href": "rmethods/3_MLRM.html#adding-irrelevant-controls",
+    "title": "Multiple Regression Analysis: Estimation",
+    "section": "Adding irrelevant controls",
+    "text": "Adding irrelevant controls\nAdding irrelevant controls will have no effect on bias and consistency.\nif your model is:\n\\[y=b_0+b_1 x_1 +e\n\\]\nbut you estimate:\n\\[y=g_0+g_1 x_1+g_2 x_2 +v\n\\]\nyour model is still unbiased: \\[\\begin{aligned}\ng &= (X'X)^{-1}X'(X \\beta^+ + e) \\\\\n    \\beta^+ &= [\\beta \\ ; 0] \\\\\ng &=  \\beta^+ + (X'X)^{-1}X'e \\rightarrow E(g) = \\beta^+\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "rmethods/3_MLRM.html#what-about-standard-errors",
+    "href": "rmethods/3_MLRM.html#what-about-standard-errors",
+    "title": "Multiple Regression Analysis: Estimation",
+    "section": "What about Standard Errors",
+    "text": "What about Standard Errors\n\nCase 1Case 2Case 3\n\n\nOmitting relevant variables that are correlated to \\(X's\\)\nWe wont talk about this. It violates A4, and creates endogeneity\n\n\nOmitting relevant variables that are uncorrelated to \\(X's\\)\n\nOmitted variables will be in the error \\(e\\). Thus variance of coefficients will be larger\n\n\\[\\begin{aligned}\nTrue: & y = b_0 + b_1 x_1 + b_2 x_2 + e  \\\\\nEstimated: & y = g_0 + g_1 x_1 + v   \\\\\n& Var(e)&lt;Var(v) \\rightarrow Var(b_1)&lt;Var(g_1)\n\\end{aligned}\n\\]\nThus Adding controls in Randomized experiements is still a good idea!\n\n\nAdding Irrelevant controls (related to X’s)\nCoefficients are unbiased, and \\(\\sigma^2_e\\) will also be unbiased.\nHowever, you may increase Multicolinearity in the model increasing \\(R_j^2\\) and \\(VIF_j\\).\nVariance of relevant coefficients will be larger.\n\\[\\begin{aligned}\nTrue: & y = b_0 + b_1 x_1  + e  \\\\\nEstimated: & y = g_0 + g_1 x_1 + g_2 x_2 + v   \\\\\n& Var(b_1)&lt;Var(g_1)\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "rmethods/3_MLRM.html#adding-bad-controls",
+    "href": "rmethods/3_MLRM.html#adding-bad-controls",
+    "title": "Multiple Regression Analysis: Estimation",
+    "section": "Adding “bad” Controls",
+    "text": "Adding “bad” Controls\nThe worst case, yet hard to see, is when you add “bad” Controls, also known as Colliers.\nFor example:\n\nSay you want to analyze the effect of education on wages, and you control for occupation. Will it create an unbiased estimate for education?\n\nNo. Your education affects your occupation choice. So some of the effect of education will be “absorbed” by occupation.\n\nSay you want to see the impact of health expenditure on health, and you control for “#visits to the doctor”\n\nThis may also affect your estimates, as expenditure may change how many times you Visits are highly related.\n\n\nIn general, you want to avoid using “channels” as Controls."
+  },
+  {
+    "objectID": "rmethods/3_MLRM.html#prediction",
+    "href": "rmethods/3_MLRM.html#prediction",
+    "title": "Multiple Regression Analysis: Estimation",
+    "section": "Prediction",
+    "text": "Prediction"
+  },
+  {
+    "objectID": "rmethods/3_MLRM.html#efficient-market",
+    "href": "rmethods/3_MLRM.html#efficient-market",
+    "title": "Multiple Regression Analysis: Estimation",
+    "section": "Efficient Market",
+    "text": "Efficient Market"
+  },
+  {
+    "objectID": "rmethods/3_MLRM.html#treatment-evaluation",
+    "href": "rmethods/3_MLRM.html#treatment-evaluation",
+    "title": "Multiple Regression Analysis: Estimation",
+    "section": "Treatment Evaluation",
+    "text": "Treatment Evaluation"
   }
 ]
