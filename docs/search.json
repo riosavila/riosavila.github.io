@@ -2993,21 +2993,21 @@
     "href": "rmethods/3_MLRM.html#why-stay-with-1-when-you-can-use-many-why-not",
     "title": "Multiple Regression Analysis: Estimation",
     "section": "Why stay with 1 when you can use Many? … Why not?",
-    "text": "Why stay with 1 when you can use Many? … Why not?\n\nThe SLRM we cover last week is a powerful tool to understand the mechanics behind regression analysis, however is too limited.\n\nUse one control? to fix everything ?!\n\nThe Natural alternative is to relax the assumption and Make things more flexible.\n\nIn other words…Allow for adding More controls\n\n\nThus, instead of: \\[y_i = \\beta_0 + \\beta_1 x_i + e_i\n\\]\nwe have to consider:\n\\[y_i = \\beta_0 + \\beta_1 x_{1i} +\\beta_2 x_{2i} + \\dots + \\beta_k x_{ki} + u_i\n\\]\nHow many can we add? and why does it help?"
+    "text": "Why stay with 1 when you can use Many? … Why not?\n\nThe SLRM we cover last week is a powerful tool to understand the mechanics behind regression analysis, however is too limited.\n\nUse one control? to fix everything ?!\n\nThe Natural alternative is to relax the assumption and Make things more flexible.\n\nIn other words…Allow for adding More controls\n\n\nThus, instead of:\n\\[y_i = \\beta_0 + \\beta_1 x_i + e_i\n\\]\nwe have to consider:\n\\[y_i = \\beta_0 + \\beta_1 x_{1i} +\\beta_2 x_{2i} + \\dots + \\beta_k x_{ki} + u_i\n\\]\nHow many can we add? and why does it help?"
   },
   {
     "objectID": "rmethods/3_MLRM.html#the-power-of-mlr-why-do-more-controls-help",
     "href": "rmethods/3_MLRM.html#the-power-of-mlr-why-do-more-controls-help",
     "title": "Multiple Regression Analysis: Estimation",
     "section": "The power of MLR: Why do more controls help?",
-    "text": "The power of MLR: Why do more controls help?\n\nOne more explicitly accounts for variables that before were hidden in \\(e_i\\). \\(x_{2i},x_{3i},\\dots,x_{ki} \\rightarrow\\) Model not \\(u_i\\) ceteris paribus\nAllows for richer model specifications and nonlinearities:\nBefore: \\(y_i = \\beta_0 + \\beta_1 x_{1i} + e_i\\)\nNow : \\(y_i = \\beta_0 + \\beta_1 x_{1i} +\\beta_2 x^2_{1i} + \\beta_3 x^{1/2}_{1i} + \\beta_4 x^{-1}_{1i} + \\beta_5 x_{2i}+\\dots+e_i\\)\n\nThus, we can get closer to the unknown Population function, and explicitly handle some endogeneity problems (we control for it).\n\n\n\n\n\n\nWith great power…\n\n\nBeing able to add more controls is good, but:\n\nMay make things worse (bad controls)\nOr might not be feasible (small Sample)\nOr may be difficult to interpret (unless you know how to)"
+    "text": "The power of MLR: Why do more controls help?\n\nOne more explicitly accounts for variables that before were hidden in \\(e_i\\).\nWe add \\(x_{2i},x_{3i},\\dots,x_{ki}\\) to the model model, and is no longer in \\(e_i\\)\nAllows for richer model specifications and nonlinearities:\nBefore: \\(y_i = \\beta_0 + \\beta_1 x_{1i} + e_i\\)\nNow : \\(y_i = \\beta_0 + \\beta_1 x_{1i} +\\beta_2 x^2_{1i} + \\beta_3 x^{1/2}_{1i} + \\beta_4 x^{-1}_{1i} + \\beta_5 x_{2i}+\\dots+e_i\\)\n\nThus, we can get closer to the unknown Population function, and explicitly handle some endogeneity problems (we control for it).\n\n\n\n\n\n\nWith great power…\n\n\nBeing able to add more controls is good, but:\n\nMay make things worse (bad controls)\nOr might not be feasible (small Sample)\nOr may be difficult to interpret (unless you know how to)"
   },
   {
     "objectID": "rmethods/3_MLRM.html#mostly-the-same",
     "href": "rmethods/3_MLRM.html#mostly-the-same",
     "title": "Multiple Regression Analysis: Estimation",
     "section": "Mostly the same",
-    "text": "Mostly the same\n\nLinear in Parameters: \\(y = X\\beta + e\\) (And this is the pop function)\nRandom Sampling from the population of interest. (So errors \\(e_i\\) is independent from \\(e_j\\))\nNo Perfect Collinearity:\nThis is the alternative to \\(Var(x)&gt;0\\) (SLRM), and deserves more attention.\n\n\nWe want each variable in \\(X\\) to have some independent variation, from all other variables in the model.\n\nIn the SLRM, the independent variation idea was with respect to the constant.\n\nIf a variable was a linear combination of others, then \\(\\beta's\\) cannot be identified. You need to choose what to keep: \\[\\begin{aligned}\ny &= \\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\beta_3 (X_1+X_2) + e \\\\\n&=  \\beta_0 + (\\beta_1+\\beta_3) X_1 + (\\beta_2+\\beta_3) X_2 + e  \n\\end{aligned}\n\\]"
+    "text": "Mostly the same\n\nLinear in Parameters: \\(y = X\\beta + e\\) (And this is the pop function)\nRandom Sampling from the population of interest. (So errors \\(e_i\\) is independent from \\(e_j\\))\nNo Perfect Collinearity:\nThis is the alternative to \\(Var(x)&gt;0\\) (SLRM), and deserves more attention.\n\n\nWe want each variable in \\(X\\) to have some independent variation, from all other variables in the model.\n\nIn the SLRM, the independent variation idea was with respect to the constant.\n\nIf a variable was a linear combination of others, then \\(\\beta's\\) cannot be identified. You need to choose what to keep:\n\n\\[\\begin{aligned}\ny &= \\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\beta_3 (X_1+X_2) + e \\\\\n&=  \\beta_0 + (\\beta_1+\\beta_3) X_1 + (\\beta_2+\\beta_3) X_2 + e  \n\\end{aligned}\n\\]"
   },
   {
     "objectID": "rmethods/3_MLRM.html#section",
@@ -3098,14 +3098,14 @@
     "href": "rmethods/3_MLRM.html#section-1",
     "title": "Multiple Regression Analysis: Estimation",
     "section": "",
-    "text": "By assumption A2, \\(cov(e_i,e_j)=0\\). And by assumption A5 \\(Var(e_i)=Var(e_j)\\).\n\\[\\begin{aligned}\nVar(\\hat \\beta - \\beta) &= (X'X)^{-1} X' \\sigma_e^2 I X' (X'X)^{-1} \\\\\nVar(\\hat \\beta - \\beta) &= \\sigma_e^2 (X'X)^{-1} \\\\\nVar(\\hat \\beta_j - \\beta_j) &= \\frac{\\sigma_e^2}{SST_j (1-R^2_j)}\n\\end{aligned}\n\\]\nBut we do not know \\(\\sigma^2_e\\). Thus, we also “estimate it”\n\\[\\hat \\sigma^2_e = \\frac{\\sum \\hat e^2}{N-K-1}\n\\]\nWhich is unbiased estimator for \\(\\sigma^2_e\\) if A1-A5 hold."
+    "text": "Zero Conditional mean (Exogeneity): \\(E(e_i|X)=0\\)\nRequires that the errors and the explanatory variables are uncorrelated. This is “easier” to achieve, because we can now move variables form the error to the model.\nHowever, there could be things you can’t controls for (and remain lurking in your errors)\n\n\nI call this the most important assumption, because is the hardest to deal with\n\nIf A1-A4 Hold, then your estimates will be unbiased!\n\nHomoskedasticity Same as before. Errors dispersion does not change with respect to all \\(X's\\). \\[Var(e|X)=c\n\\]\n\nJust as with SLRM, this assumption will help with the estimation of Standard Errors."
   },
   {
     "objectID": "rmethods/3_MLRM.html#quick-note",
     "href": "rmethods/3_MLRM.html#quick-note",
     "title": "Multiple Regression Analysis: Estimation",
     "section": "Quick Note",
-    "text": "Quick Note\n\n\\(R^2\\) are the same as SLRM: How much of variation is explained by the model.\n\nAlso \\(R^2 = corr(y,\\hat y)^2\\)\n\nThe fitted line goes over the “mean” of all variables\nMLRM Fits hyper-planes to the data\nRegression through the origin still a bad idea"
+    "text": "Quick Note\n\n\\(R^2\\) are the same as SLRM: How much of variation is explained by the model.\n\nAlso \\(R^2 = corr(y,\\hat y)^2\\)\n\nThe fitted line goes over the “mean” of all variables\nMLRM Fits hyper-planes to the data\nRegression through the origin still a bad idea\nAlso, under A1-A5 OLS is the Best Linear Unbiased Estimator (BLUE)"
   },
   {
     "objectID": "rmethods/3_MLRM.html#ignoring-variables",
@@ -3119,7 +3119,7 @@
     "href": "rmethods/3_MLRM.html#section-3",
     "title": "Multiple Regression Analysis: Estimation",
     "section": "",
-    "text": "This implies that \\(g_1\\) is biased:\n\\[E(\\hat g_1) = b_1+b_2 \\delta_1\n\\]\nWhere \\(\\delta_1\\) is the coefficient in \\(x_2=\\delta_0+\\delta_1 x_1 + v\\).\nImplications:\n\nUnless\n\n\\(\\delta_1\\) is zero (\\(x_1\\) and \\(x_2\\) are linearly independent) or,\n\\(b_2\\) is zero (\\(x_2\\) was irrelevant)\n\nignoring \\(x_2\\) will generate biased (and inconsistent) estimates for \\(b_1\\).\n\nIn models with more controls, the direction of the biases will be harder to define, but similar rule’s of thumb can be used."
+    "text": "\\[\\begin{aligned}\nVar(\\hat \\beta - \\beta) &= \\sigma_e^2 (X'X)^{-1} \\\\\nVar(\\hat \\beta_j - \\beta_j) &= \\frac{\\sigma_e^2}{SST_j (1-R^2_j)}  \\\\\\\n& = \\frac{\\sigma_e^2}{(N-1)Var(X_j) (1-R^2_j)} = \\frac{\\sigma_e^2}{(N-1)Var(X_j)}VIF_j\n\\end{aligned}\n\\]\nTo consider:\n\n\\(Var(\\beta)\\) increases with \\(\\sigma_e^2\\). More variation in the error, more variation of the coefficients.\n\\(Var(\\beta)\\) decreases with Sample size \\(N\\)\n\\(Var(\\beta)\\) also decreases with Variation in \\(X\\)\nHowever, it increases if there is less unique variation (Multicolinearity problem and VIF)"
   },
   {
     "objectID": "rmethods/3_MLRM.html#adding-unnecessary-controls",
@@ -3133,7 +3133,7 @@
     "href": "rmethods/3_MLRM.html#adding-irrelevant-controls",
     "title": "Multiple Regression Analysis: Estimation",
     "section": "Adding irrelevant controls",
-    "text": "Adding irrelevant controls\nAdding irrelevant controls will have no effect on bias and consistency.\nif your model is:\n\\[y=b_0+b_1 x_1 +e\n\\]\nbut you estimate:\n\\[y=g_0+g_1 x_1+g_2 x_2 +v\n\\]\nyour model is still unbiased: \\[\\begin{aligned}\ng &= (X'X)^{-1}X'(X \\beta^+ + e) \\\\\n    \\beta^+ &= [\\beta \\ ; 0] \\\\\ng &=  \\beta^+ + (X'X)^{-1}X'e \\rightarrow E(g) = \\beta^+\n\\end{aligned}\n\\]"
+    "text": "Adding irrelevant controls\nAdding irrelevant controls will have no effect on bias and consistency.\nif your model is:\n\\[y=b_0+b_1 x_1 +e\n\\]\nbut you estimate:\n\\[y=g_0+g_1 x_1+g_2 x_2 +v\n\\]\nyour model is still unbiased:\n\\[\\begin{aligned}\ng &= (X'X)^{-1}X'(X \\beta^+ + e) \\\\\n    \\beta^+ &= [\\beta \\ ; 0] \\\\\ng &=  \\beta^+ + (X'X)^{-1}X'e \\rightarrow E(g) = \\beta^+\n\\end{aligned}\n\\]"
   },
   {
     "objectID": "rmethods/3_MLRM.html#what-about-standard-errors",
@@ -3154,20 +3154,167 @@
     "href": "rmethods/3_MLRM.html#prediction",
     "title": "Multiple Regression Analysis: Estimation",
     "section": "Prediction",
-    "text": "Prediction"
+    "text": "Prediction\n\nYou can use MLRM to obtain predictions of outcomes.\nThey will be subject to the model specification.\nFor prediction you do not need to worry about “endogeneity” as much. Just on Predictive power (how ??)\n\n\nqui:frause oaxaca, clear\ngen wage = exp(lnwage)\nqui:reg wage educ female age agesq single married\npredict wage_hat\nlist wage wage_hat educ female age agesq single married in 1/5\n\n(213 missing values generated)\n(option xb assumed; fitted values)\n\n     +----------------------------------------------------------------------+\n     |     wage   wage_hat   educ   female   age   agesq   single   married |\n     |----------------------------------------------------------------------|\n  1. | 41.80602   25.61872      9        1    37    1369        1         0 |\n  2. | 36.63003   31.70813      9        0    62    3844        0         1 |\n  3. | 23.54788   30.71257   10.5        1    40    1600        0         1 |\n  4. | 29.76191    42.7976     12        0    55    3025        0         0 |\n  5. | 44.95504   35.76914     12        0    36    1296        0         1 |\n     +----------------------------------------------------------------------+"
   },
   {
     "objectID": "rmethods/3_MLRM.html#efficient-market",
     "href": "rmethods/3_MLRM.html#efficient-market",
     "title": "Multiple Regression Analysis: Estimation",
     "section": "Efficient Market",
-    "text": "Efficient Market"
+    "text": "Efficient Market\n\nWe could use MLRM to test theories, like the Efficient Market Theory.\nFor housing, the Assessed price of a house should be all information needed to assess the price of the house. (other ammenities should not matter)\n\nfrause hprice1, clear\nqui:reg price assess bdrms llotsize lsqrft colonial\nmodel_display\nprice_hat = 206.645 + 1.007 assess + 11.404 bdrms + 1.363 llotsize - 38.335 lsqrft + 9.297 colonial\nN= 88 R2=0.831\nqui:reg lprice lassess bdrms llotsize lsqrft colonial\nmodel_display\nlprice_hat = 0.210 + 1.036 lassess + 0.025 bdrms + 0.008 llotsize - 0.092 lsqrft + 0.045 colonial\nN= 88 R2=0.777"
   },
   {
     "objectID": "rmethods/3_MLRM.html#treatment-evaluation",
     "href": "rmethods/3_MLRM.html#treatment-evaluation",
     "title": "Multiple Regression Analysis: Estimation",
     "section": "Treatment Evaluation",
-    "text": "Treatment Evaluation"
+    "text": "Treatment Evaluation\n\nUnder Random Assingment SRM was enough to estimate ATTs.\nBut if assigment was conditionally random, a better approach would be using MLRM\n\nfrause jtrain98, clear\nqui:reg earn98 train \nmodel_display\nearn98_hat = 10.610 - 2.050 train\nN= 1130 R2=0.016\nqui:reg earn98 train earn96 educ age married\nmodel_display\nearn98_hat = 4.667 + 2.411 train + 0.373 earn96 + 0.363 educ - 0.181 age + 2.482 married\nN= 1130 R2=0.405"
+  },
+  {
+    "objectID": "rmethods/3_MLRM.html#section-4",
+    "href": "rmethods/3_MLRM.html#section-4",
+    "title": "Multiple Regression Analysis: Estimation",
+    "section": "",
+    "text": "This implies that \\(g_1\\) is biased:\n\\[E(\\hat g_1) = b_1+b_2 \\delta_1\n\\]\nWhere \\(\\delta_1\\) is the coefficient in \\(x_2=\\delta_0+\\delta_1 x_1 + v\\).\nImplications:\n\nUnless\n\n\\(\\delta_1\\) is zero (\\(x_1\\) and \\(x_2\\) are linearly independent) or,\n\\(b_2\\) is zero (\\(x_2\\) was irrelevant)\n\nignoring \\(x_2\\) will generate biased (and inconsistent) estimates for \\(b_1\\).\n\nIn models with more controls, the direction of the biases will be harder to define, but similar rule’s of thumb can be used."
+  },
+  {
+    "objectID": "rmethods/3_MLRM.html#testing-for-discrimination-cp",
+    "href": "rmethods/3_MLRM.html#testing-for-discrimination-cp",
+    "title": "Multiple Regression Analysis: Estimation",
+    "section": "Testing for Discrimination (CP)",
+    "text": "Testing for Discrimination (CP)\n\nWe could test for discrimination: Unexplained differences in outcomes once other factors are kept fixed.\nIt does require that groups are similar in terms of unobservables.\n\nqui: frause oaxaca, clear\nqui:reg lnwage female \nmodel_display\nlnwage_hat = 3.440 - 0.173 female\nN= 1434 R2=0.027\nqui:reg lnwage female educ age agesq single married exper tenure\nmodel_display\nlnwage_hat = 0.383 - 0.160 female + 0.064 educ + 0.113 age - 0.001 agesq - 0.072 single - 0.094 married - 0.000 exper + 0.007 tenure\nN= 1434 R2=0.345"
+  },
+  {
+    "objectID": "rmethods/3_MLRM.html#section-2",
+    "href": "rmethods/3_MLRM.html#section-2",
+    "title": "Multiple Regression Analysis: Estimation",
+    "section": "",
+    "text": "By assumption A2, \\(cov(e_i,e_j)=0\\). And by assumption A5 \\(Var(e_i)=Var(e_j)\\).\n\\[\\begin{aligned}\nVar(\\hat \\beta - \\beta) &= (X'X)^{-1} X' \\sigma_e^2 I X' (X'X)^{-1} \\\\\nVar(\\hat \\beta - \\beta) &= \\sigma_e^2 (X'X)^{-1} \\\\\nVar(\\hat \\beta_j - \\beta_j) &= \\frac{\\sigma_e^2}{SST_j (1-R^2_j)}\n\\end{aligned}\n\\]\nBut we do not know \\(\\sigma^2_e\\). Thus, we also “estimate it”\n\\[\\hat \\sigma^2_e = \\frac{\\sum \\hat e^2}{N-K-1}\n\\]\nWhich is unbiased estimator for \\(\\sigma^2_e\\) if A1-A5 hold."
+  },
+  {
+    "objectID": "rmethods/3_MLRM.html#section-5",
+    "href": "rmethods/3_MLRM.html#section-5",
+    "title": "Multiple Regression Analysis: Estimation",
+    "section": "",
+    "text": "This implies that \\(g_1\\) is biased:\n\\[E(\\hat g_1) = b_1+b_2 \\delta_1\n\\]\nWhere \\(\\delta_1\\) is the coefficient in \\(x_2=\\delta_0+\\delta_1 x_1 + v\\).\nImplications:\n\nUnless\n\n\\(\\delta_1\\) is zero (\\(x_1\\) and \\(x_2\\) are linearly independent) or,\n\\(b_2\\) is zero (\\(x_2\\) was irrelevant)\n\nignoring \\(x_2\\) will generate biased (and inconsistent) estimates for \\(b_1\\).\n\nIn models with more controls, the direction of the biases will be harder to define, but similar rule’s of thumb can be used."
+  },
+  {
+    "objectID": "rmethods/3_MLRM.html#section-6",
+    "href": "rmethods/3_MLRM.html#section-6",
+    "title": "Multiple Regression Analysis: Estimation",
+    "section": "",
+    "text": "This implies that \\(g_1\\) is biased:\n\\[E(\\hat g_1) = b_1+b_2 \\delta_1\n\\]\nWhere \\(\\delta_1\\) is the coefficient in \\(x_2=\\delta_0+\\delta_1 x_1 + v\\).\nImplications:\n\nUnless\n\n\\(\\delta_1\\) is zero (\\(x_1\\) and \\(x_2\\) are linearly independent) or,\n\\(b_2\\) is zero (\\(x_2\\) was irrelevant)\n\nignoring \\(x_2\\) will generate biased (and inconsistent) estimates for \\(b_1\\).\n\nIn models with more controls, the direction of the biases will be harder to define, but similar rule’s of thumb can be used."
+  },
+  {
+    "objectID": "4_MLRM_IA.html#how-do-you-know-if-what-you-see-is-relevant",
+    "href": "4_MLRM_IA.html#how-do-you-know-if-what-you-see-is-relevant",
+    "title": "Multiple Regression Analysis: Inference and Asymptotics",
+    "section": "How do you know if what you see is relevant?",
+    "text": "How do you know if what you see is relevant?\n\nLast time, we talk a bit about the estimation of MLRM. For those who do not remember:\n\n\\[\\hat\\beta=(X'X)^{-1}X'y\n\\]\n\nWe also defined how, under A5 (homoskedasticity), we can estimate the variance covariance of coefficients:\n\n\\[Var(\\beta) = \\frac{\\sum \\hat e^2}{N-K-1} (X'X)^{-1}\n\\]\n\nThe next question: how to know how precise your estimates are?\nThat should be simple, just divide coefficient by its Standard error. The larger this is, the more precise, and more significant.\nIs this enough to say something about the population coefficients?\n\n(lets assume A1-A5 holds)"
+  },
+  {
+    "objectID": "4_MLRM_IA.html#distribution-of-coefficients",
+    "href": "4_MLRM_IA.html#distribution-of-coefficients",
+    "title": "Multiple Regression Analysis: Inference and Asymptotics",
+    "section": "Distribution of coefficients",
+    "text": "Distribution of coefficients\n\nThe right answer is…Perhaps.\nUnless you know something about the distribution of \\(\\beta's\\), it would be hard to make any inferences from the estimates. Why?\nBecause not all distributions are made equal!\n\n\n\nCode\nclear\nrange x -4 4 1000\ngen funiform = 0 \nreplace funiform = 1/(2*sqrt(3)) if inrange(x,-sqrt(3),sqrt(3))\n\ngen fnormal = 0 \nreplace fnormal = normalden(x)\n\ngen fchi2 = 0 \nreplace fchi2 = sqrt(8)*chi2den(4,x*sqrt(8)+4)\n\ninteg funiform x, gen(F1)\ninteg fnormal x, gen(F2)\ninteg fchi2 x, gen(F3)\n\ncolor_style egypt\n#delimit;\ntwo (area funiform x           , pstyle(p1) color(%20)) \n    (area funiform x if F1&lt;0.05, pstyle(p1) color(%80)) \n    (area funiform x if F1&gt;0.95, pstyle(p1) color(%80)) \n    (area fnormal  x           , pstyle(p2) color(%20))  \n    (area fnormal  x if F2&lt;0.05, pstyle(p2) color(%80)) \n    (area fnormal  x if F2&gt;0.95, pstyle(p2) color(%80)) \n    (area fchi2    x           , pstyle(p3) color(%20)) \n    (area fchi2    x if F3&gt;0.95, pstyle(p3) color(%80)) \n    (area fchi2    x if F3&lt;0.05, pstyle(p3) color(%80)) \n    , xlabel(-4 / 4) legend(order(2 \"Uniform\" 5 \"Normal\" 8 \"C-Chi2\")) \n    xtitle(\"True Beta Distribution\");\ngraph export f4_1.pdf, replace ;"
+  },
+  {
+    "objectID": "rmethods/4_MLRM_IA.html#how-do-you-know-if-what-you-see-is-relevant",
+    "href": "rmethods/4_MLRM_IA.html#how-do-you-know-if-what-you-see-is-relevant",
+    "title": "Multiple Regression Analysis: Inference and Asymptotics",
+    "section": "How do you know if what you see is relevant?",
+    "text": "How do you know if what you see is relevant?\n\nLast time, we talk a bit about the estimation of MLRM. For those who do not remember:\n\n\\[\\hat\\beta=(X'X)^{-1}X'y\n\\]\n\nWe also defined how, under A5 (homoskedasticity), we can estimate the variance covariance of coefficients:\n\n\\[Var(\\beta) = \\frac{\\sum \\hat e^2}{N-K-1} (X'X)^{-1}\n\\]\n\nThe next question: how to know how precise your estimates are?\nThat should be simple, just divide coefficient by its Standard error. The larger this is, the more precise, and more significant.\nIs this enough to say something about the population coefficients?\n\n(lets assume A1-A5 holds)"
+  },
+  {
+    "objectID": "rmethods/4_MLRM_IA.html#distribution-of-coefficients",
+    "href": "rmethods/4_MLRM_IA.html#distribution-of-coefficients",
+    "title": "Multiple Regression Analysis: Inference and Asymptotics",
+    "section": "Distribution of coefficients",
+    "text": "Distribution of coefficients\n\nThe right answer is…Perhaps.\nUnless you know something about the distribution of \\(\\beta's\\), it would be hard to make any inferences from the estimates. Why?\nBecause not all distributions are made equal!\n\n\n\nCode\nclear\nrange x -4 4 1000\ngen funiform = 0 \nreplace funiform = 1/(2*sqrt(3)) if inrange(x,-sqrt(3),sqrt(3))\n\ngen fnormal = 0 \nreplace fnormal = normalden(x)\n\ngen fchi2 = 0 \nreplace fchi2 = sqrt(8)*chi2den(4,x*sqrt(8)+4)\n\ninteg funiform x, gen(F1)\ninteg fnormal x, gen(F2)\ninteg fchi2 x, gen(F3)\n\nset scheme white2\ncolor_style egypt\nreplace x = x + 1.5\ntwo (area funiform x           , pstyle(p1) color(%20)) ///\n    (area funiform x if F1&lt;0.05, pstyle(p1) color(%80)) /// \n    (area funiform x if F1&gt;0.95, pstyle(p1) color(%80)) /// \n    (area fnormal  x           , pstyle(p2) color(%20)) ///  \n    (area fnormal  x if F2&lt;0.05, pstyle(p2) color(%80)) /// \n    (area fnormal  x if F2&gt;0.95, pstyle(p2) color(%80)) /// \n    (area fchi2    x           , pstyle(p3) color(%20)) /// \n    (area fchi2    x if F3&gt;0.95, pstyle(p3) color(%80)) /// \n    (area fchi2    x if F3&lt;0.05, pstyle(p3) color(%80)), ///\n    xlabel(-4 / 4) legend(order(2 \"Uniform\" 5 \"Normal\" 8 \"C-Chi2\")) /// \n    xtitle(\"Beta hat Distribution\") ///\n    xline( 0, lstyle(1) lwidth(1)) xline(1.5)\n\ngraph export images/f4_1.png, replace width(1200)"
+  },
+  {
+    "objectID": "rmethods/4_MLRM_IA.html#section-1",
+    "href": "rmethods/4_MLRM_IA.html#section-1",
+    "title": "Multiple Regression Analysis: Inference and Asymptotics",
+    "section": "",
+    "text": "Why does it matter?\n\nIf you combine two variables with the same distributions, the combined variable will not have the same distributions as the “parents”\nExcept with normals! if you add two -normal- distributions together. The outcome will also be normal. (Dont believe me try it)\n\nRecall:\n\\[\\hat \\beta=\\beta + (X'X)^{-1}X'e\n\\]\nIf \\(e\\) is normal, then \\(\\beta's\\) will also be normal\nAnd this works for ANY Sample size!"
+  },
+  {
+    "objectID": "rmethods/4_MLRM_IA.html#not-all-distributions-are-the-same",
+    "href": "rmethods/4_MLRM_IA.html#not-all-distributions-are-the-same",
+    "title": "Multiple Regression Analysis: Inference and Asymptotics",
+    "section": "Not all Distributions are the Same",
+    "text": "Not all Distributions are the Same"
+  },
+  {
+    "objectID": "rmethods/4_MLRM_IA.html#new-assumption",
+    "href": "rmethods/4_MLRM_IA.html#new-assumption",
+    "title": "Multiple Regression Analysis: Inference and Asymptotics",
+    "section": "New Assumption",
+    "text": "New Assumption\n\nA6: Errors are normal \\(e\\sim N(0,\\sigma^2_e)\\).\n\nA1-A6 are the Classical Linear Model Assumption\nThis assumes the outcome is “conditionally” normal. \\(y|X \\sim N(X\\beta,\\sigma^2_e)\\)\nAnd with this assumption OLS is no longer blue. Its now BUE!"
+  },
+  {
+    "objectID": "rmethods/4_MLRM_IA.html#section-2",
+    "href": "rmethods/4_MLRM_IA.html#section-2",
+    "title": "Multiple Regression Analysis: Inference and Asymptotics",
+    "section": "",
+    "text": "If \\(e\\) normal then \\(\\beta\\) is normal\n\nIf \\(\\hat \\beta's\\) are normal, then we can use this distribution to make inferences about \\(\\beta's\\) using normal distribution.\nThis is good, because we know how to do math with Normal distributions. And can used the modified Ratio:\n\n\\[z_j = \\frac{\\hat \\beta_j - \\beta_j}{sd(\\hat\\beta)}\\sim N(0,1)\n\\]\n\nWhere \\(\\beta_j\\) is what you think the True Population parameter is (your hypothesis), and \\(\\hat\\beta_j\\) is what you estimate in your data.\nDepending on the size of this, you can either reject your hypothesis, or not Reject it.\n\nbut do we know \\(SE(\\beta)\\)?"
+  },
+  {
+    "objectID": "rmethods/4_MLRM_IA.html#section-3",
+    "href": "rmethods/4_MLRM_IA.html#section-3",
+    "title": "Multiple Regression Analysis: Inference and Asymptotics",
+    "section": "",
+    "text": "Do we “know” \\(SE(\\beta)\\)?\nWe don’t, which is why we can use a normal directly. Instead we use a t-distribution\n\\[t_j = \\frac{\\hat \\beta_j - \\beta_j}{se(\\hat\\beta)}\\sim t_{N-k-1}\n\\]\nThen\n\nIf \\(e\\) is normal, \\(\\beta\\) will be normal.\nWhen Samples are “small” Standardized \\(\\beta\\) will follow a t-distribution\nBut, as \\(N\\rightarrow \\infty\\), \\(t_{N-k-1}\\sim N(0,1)\\)"
+  },
+  {
+    "objectID": "rmethods/4_MLRM_IA.html#testing-hypothesis",
+    "href": "rmethods/4_MLRM_IA.html#testing-hypothesis",
+    "title": "Multiple Regression Analysis: Inference and Asymptotics",
+    "section": "Testing Hypothesis",
+    "text": "Testing Hypothesis\n\nThe idea of hypothesis testing is contrasting the “evidence” from your data (estimates) with the beliefs we have about the population.\n\n\\[y=\\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + e\n\\]\nSay I have two hypothesis.\n\n\\(x_2\\) has no effect on \\(y\\). ie \\(H_0: \\beta_2 = 0\\)\n\\(x_1\\) has an effect equal to 1. ie \\(H_0: \\beta_1 = 1\\)\n\nNotice we make hypothesis about the population coefficients not the estimates\n\n\nI can “test” each hypothesis separately using a “t-statistic”\n\\[ \\color{green}{t_2=\\frac{\\hat \\beta_2 - 0}{se(\\hat \\beta_2)}} ;\nt_1=\\frac{\\hat \\beta_1 - 1}{se(\\hat \\beta_1)}\n\\]"
+  },
+  {
+    "objectID": "rmethods/4_MLRM_IA.html#types-of-hypothesis",
+    "href": "rmethods/4_MLRM_IA.html#types-of-hypothesis",
+    "title": "Multiple Regression Analysis: Inference and Asymptotics",
+    "section": "Types of Hypothesis:",
+    "text": "Types of Hypothesis:\nWhen talking about hypothesis testing there are two types:\n\nOne sided: when your alternative hypothesis compares your null to something either strictly larger, or strictly smaller than your hypothesis.\n\nEducation has no effect on wages vs Returns to education are positive.\nSkipping class has no effect on grades vs Skiping class reduces grades.\n\nTwo sided: When your alternative hypothesis is to say, “its different than”\n\nReturns to education is 10%, vs is not 10%\nSkipping class reduces grades in 0.5 points, vs not 0.5points\n\n\nIn both cases, you use the same t-statistic.\n\\[t_\\beta=\\frac{\\hat\\beta - \\beta_{hyp}}{se(\\hat \\beta)} \\sim t_{N-k-1}\n\\]"
+  },
+  {
+    "objectID": "rmethods/4_MLRM_IA.html#section-4",
+    "href": "rmethods/4_MLRM_IA.html#section-4",
+    "title": "Multiple Regression Analysis: Inference and Asymptotics",
+    "section": "",
+    "text": "What changes are the “thresholds” to Judge something significant or not.\nOne sided test:\n\\[\\begin{aligned}\nH_0: & \\beta_k=\\beta^{hyp}_k \\text{ vs } H_1: \\beta_k&gt;\\beta^{hyp}_k \\\\\n& t_{\\beta_k}&gt;t_{N-k-1}(1-\\alpha) \\\\\nH_0: & \\beta_k=\\beta^{hyp}_k \\text{ vs } H_1: \\beta_k&lt;\\beta^{hyp}_k \\\\\n& t_{\\beta_k}&lt;t_{N-k-1}(\\alpha)\n\\end{aligned}\n\\]\n\nWhere \\(\\alpha\\) is your level of significance, and \\(t_{N-k-1}(\\alpha)\\) and \\(t_{N-k-1}(1-\\alpha)\\) are critical values.\n\\(\\alpha\\) determines the “risk” of commiting an error type I: Rejecting the Null when its true.\nIntuitively, the smaller \\(\\alpha\\) is, the more possitive (negative) “t” needs to be reject the Null."
+  },
+  {
+    "objectID": "rmethods/4_MLRM_IA.html#section-5",
+    "href": "rmethods/4_MLRM_IA.html#section-5",
+    "title": "Multiple Regression Analysis: Inference and Asymptotics",
+    "section": "",
+    "text": "Two sided test:\n\\[\\begin{aligned}\nH_0: & \\beta_k=\\beta^{hyp}_k \\text{ vs } H_1: \\beta_k \\neq \\beta^{hyp}_k \\\\\n& | t_{\\beta_k} | &gt;t_{N-k-1}(1-\\alpha/2)\n\\end{aligned}\n\\]\n\nSimilar to before, except the one needs to consider both tails of the distribution to determine critical values (see \\(t_{N-k-1}(1-\\alpha/2)\\))\nIntuitively, the smaller \\(\\alpha\\) is, the larger the absolute value of “t” needs to be reject the Null.\n\nBut, what is an error type I? and why we don’t we “accept” \\(H_0\\) s?"
+  },
+  {
+    "objectID": "rmethods/4_MLRM_IA.html#error-types-and-we-why-never-accept",
+    "href": "rmethods/4_MLRM_IA.html#error-types-and-we-why-never-accept",
+    "title": "Multiple Regression Analysis: Inference and Asymptotics",
+    "section": "Error Types and we why never “Accept”",
+    "text": "Error Types and we why never “Accept”\nDont reject - never accept:\n\nAs stated few times before, \\(\\hat \\beta\\) @b"
+  },
+  {
+    "objectID": "rmethods/4_MLRM_IA.html#dont-reject---never-accept",
+    "href": "rmethods/4_MLRM_IA.html#dont-reject---never-accept",
+    "title": "Multiple Regression Analysis: Inference and Asymptotics",
+    "section": "Dont reject - never accept:",
+    "text": "Dont reject - never accept:\n\nAs stated few times before, \\(\\hat \\beta\\) @b"
+  },
+  {
+    "objectID": "rmethods/4_MLRM_IA.html#why-we-never-accept",
+    "href": "rmethods/4_MLRM_IA.html#why-we-never-accept",
+    "title": "Multiple Regression Analysis: Inference and Asymptotics",
+    "section": "Why we never accept?:",
+    "text": "Why we never accept?:\n\nAs stated few times before, \\(\\hat \\beta\\) @b"
   }
 ]

@@ -17,6 +17,40 @@ format:
     css: styles.css 
 ---
 
+```{stata}
+*| echo: false
+*| output: false
+capture program drop model_display
+program model_display
+	syntax, [format(string asis)]
+	
+	if missing("`format'") local format "%5.3f"
+	tempname b
+	matrix `b'=e(b)
+	local cname:colname `b'
+	local k = colsof(`b')
+	local dep ="`e(depvar)'"+"_hat"
+	
+	local coef = `b'[1,`k']
+	if sign(`coef')==-1 local sgn "-"
+	local coef:display %5.3f (`coef')
+	local todisp "`dep' = `coef'"
+	
+	forvalues i = 1/`=`k'-1' {
+		local coef = `b'[1,`i']
+		local sgn  "+"
+		if sign(`coef')==-1 local sgn "-"
+		local coef:display `format' abs(`coef')
+		local cnamex:word `i' of `cname'
+		local todisp `todisp' `sgn' `coef' `cnamex'
+	}
+    display "{p}`todisp'{p_end}" _n
+    display "N=" %10.0f `=e(N)' " R2=" %5.3f `=e(r2)'
+end
+```
+
+# {background-image="https://i.imgflip.com/6rj8vc.jpg" background-size="contain"}
+
 ## Why stay with 1 when you can use Many? ... Why not?
 
 -   The SLRM we cover last week is a powerful tool to understand the mechanics behind regression analysis, however is too limited.
@@ -24,7 +58,9 @@ format:
 -   The Natural alternative is to relax the assumption and Make things more flexible.
     -   In other words...Allow for adding More controls
 
-Thus, instead of: $$y_i = \beta_0 + \beta_1 x_i + e_i
+Thus, instead of: 
+
+$$y_i = \beta_0 + \beta_1 x_i + e_i
 $$
 
 we have to consider:
@@ -36,7 +72,8 @@ How many can we add? and why does it help?
 
 ## The power of MLR: Why do more controls help?
 
-1.  One more explicitly accounts for variables that before were *hidden* in $e_i$. $x_{2i},x_{3i},\dots,x_{ki} \rightarrow$ Model not $u_i$ *ceteris paribus*
+1.  One more explicitly accounts for variables that before were *hidden* in $e_i$.  
+    We add $x_{2i},x_{3i},\dots,x_{ki}$ to the model model, and is no longer in $e_i$
 
 2.  Allows for richer model specifications and nonlinearities:
 
@@ -46,7 +83,8 @@ How many can we add? and why does it help?
 
 Thus, we can get closer to the unknown Population function, and explicitly handle *some* endogeneity problems (we control for it).
 
-::: callout-caution
+::: {.callout-caution}
+
 ## With great power...
 
 Being able to add more controls is good, but:
@@ -89,11 +127,13 @@ $$
 
 -   We want each variable in $X$ to have [***some***]{.bluetxt} independent variation, from all other variables in the model.
     -   In the SLRM, the independent variation idea was with respect to the constant.
--   [**If**]{.redtxt} a variable was a linear combination of others, then $\beta's$ cannot be identified. You need to choose what to keep: $$\begin{aligned}
-    y &= \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 (X_1+X_2) + e \\ 
-    &=  \beta_0 + (\beta_1+\beta_3) X_1 + (\beta_2+\beta_3) X_2 + e  
-    \end{aligned}
-    $$
+-   [**If**]{.redtxt} a variable was a linear combination of others, then $\beta's$ cannot be identified. You need to choose what to keep: 
+
+$$\begin{aligned}
+y &= \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 (X_1+X_2) + e \\ 
+&=  \beta_0 + (\beta_1+\beta_3) X_1 + (\beta_2+\beta_3) X_2 + e  
+\end{aligned}
+$$
 
 ## 
 
@@ -289,7 +329,7 @@ $$
 
 Which is unbiased estimator for $\sigma^2_e$ if A1-A5 hold.
 
-## Estimator Properties: Variance under Homoskedasticity
+##  
 
 $$\begin{aligned}
 Var(\hat \beta - \beta) &= \sigma_e^2 (X'X)^{-1} \\
@@ -312,21 +352,24 @@ To consider:
 -   The fitted line goes over the "mean" of all variables
 -   MLRM Fits *hyper*-planes to the data
 -   Regression through the origin still a bad idea
+-   Also, under A1-A5 OLS is the **B**est **L**inear **U**nbiased **E**stimator (BLUE)
 
-# Using Many controls is Fun! 
+# {background-image="https://i.imgflip.com/7u1fzg.jpg" background-size="contain"}
 
-::: {.incremental}
-- You can add more *stuff* for better fit (high R^2)
-- Making sure nothing remains in "$e$"
-- It would also allow you for very "flexible" models
-- But...(these things are not necessarily good)
+# Using Many controls is Fun!
+
+::: incremental
+-   You can add more *stuff* for better fit (high R\^2)
+-   Making sure nothing remains in "$e$"
+-   It would also allow you for very "flexible" models
+-   But...(these things are not necessarily good)
 :::
 
-## {background-image="images/paste-5.png" background-size="contain"}
+##  {background-image="images/paste-5.png" background-size="contain"}
 
 ## Ignoring Variables
 
-In the MLRM framework, its easier to see what happens when important variables are ignored. 
+In the MLRM framework, its easier to see what happens when important variables are ignored.
 
 $$\text{True: } y = b_0 + b_1 x_1 + b_2 x_2 + e
 $$
@@ -336,7 +379,7 @@ But instead you estimate the following :
 $$\text{Estimated: }y = g_0 + g_1 x_1 + v
 $$
 
-Unless stronger assumptions are imposed, $g_1$ will be a biased estimate of $b_1$. 
+Unless stronger assumptions are imposed, $g_1$ will be a biased estimate of $b_1$.
 
 $$\begin{aligned}
 \hat g_1 &= \frac{\sum \tilde x_1 \tilde y}{\sum \tilde x_1^2} 
@@ -357,31 +400,33 @@ $$
 
 Where $\delta_1$ is the coefficient in $x_2=\delta_0+\delta_1 x_1 + v$.
 
-Implications: 
+Implications:
 
-- Unless 
-  - $\delta_1$ is zero ($x_1$ and $x_2$ are linearly independent) or,
-  - $b_2$ is zero ($x_2$ was irrelevant)
-  
-  ignoring $x_2$ will generate biased (and inconsistent) estimates for $b_1$.
+-   Unless
 
-In models with more controls, the direction of the biases will be harder to define, but similar rule's of thumb can be used. 
+    -   $\delta_1$ is zero ($x_1$ and $x_2$ are linearly independent) or,
+    -   $b_2$ is zero ($x_2$ was irrelevant)
+
+    ignoring $x_2$ will generate biased (and inconsistent) estimates for $b_1$.
+
+In models with more controls, the direction of the biases will be harder to define, but similar rule's of thumb can be used.
 
 ## Adding irrelevant controls
 
-Adding irrelevant controls will have no effect on bias and consistency. 
+Adding irrelevant controls will have no effect on bias and consistency.
 
 if your model is:
 
 $$y=b_0+b_1 x_1 +e
 $$
 
-but you estimate: 
+but you estimate:
 
 $$y=g_0+g_1 x_1+g_2 x_2 +v
 $$
 
-your model is still unbiased:
+your model is still unbiased: 
+
 $$\begin{aligned}
 g &= (X'X)^{-1}X'(X \beta^+ + e) \\
     \beta^+ &= [\beta \ ; 0] \\
@@ -395,20 +440,16 @@ The worst case, yet hard to see, is when you add "bad" Controls, also known as C
 
 For example:
 
-- Say you want to analyze the effect of **education** on **wages**, and you control for **occupation**. 
-  Will it create an unbiased estimate for education?
-  - No. Your education **affects**  your occupation choice. So some of the effect of education will be "absorbed" by occupation.
-- Say you want to see the impact of **health expenditure** on **health**, and you control for "#visits to the doctor"
-  - This may also affect your estimates, as expenditure may change how many times you Visits are highly related. 
+-   Say you want to analyze the effect of **education** on **wages**, and you control for **occupation**. Will it create an unbiased estimate for education?
+    -   No. Your education **affects** your occupation choice. So some of the effect of education will be "absorbed" by occupation.
+-   Say you want to see the impact of **health expenditure** on **health**, and you control for "#visits to the doctor"
+    -   This may also affect your estimates, as expenditure may change how many times you Visits are highly related.
 
-In general, you want to avoid using "channels" as Controls. 
-
-
+In general, you want to avoid using "channels" as Controls.
 
 ## What about Standard Errors
 
-:::{.panel-tabset}
-
+::: panel-tabset
 ## Case 1
 
 Omitting relevant variables that are correlated to $X's$
@@ -419,7 +460,7 @@ We wont talk about this. It violates A4, and creates endogeneity
 
 Omitting relevant variables that are uncorrelated to $X's$
 
-- Omitted variables will be in the error $e$. Thus variance of coefficients will be larger
+-   Omitted variables will be in the error $e$. Thus variance of coefficients will be larger
 
 $$\begin{aligned}
 True: & y = b_0 + b_1 x_1 + b_2 x_2 + e  \\
@@ -434,11 +475,11 @@ Thus Adding controls in Randomized experiements is still a good idea!
 
 Adding Irrelevant controls (related to X's)
 
-Coefficients are unbiased, and $\sigma^2_e$ will also be unbiased. 
+Coefficients are unbiased, and $\sigma^2_e$ will also be unbiased.
 
 However, you may increase Multicolinearity in the model increasing $R_j^2$ and $VIF_j$.
 
-Variance of relevant coefficients will be larger. 
+Variance of relevant coefficients will be larger.
 
 $$\begin{aligned}
 True: & y = b_0 + b_1 x_1  + e  \\
@@ -446,14 +487,105 @@ Estimated: & y = g_0 + g_1 x_1 + g_2 x_2 + v   \\
 & Var(b_1)<Var(g_1)
 \end{aligned}
 $$
-
 :::
-
 
 # Examples!
 
-## Prediction
+## Prediction {.scrollable}
 
-## Efficient Market
+- You can use MLRM to obtain predictions of outcomes.
+
+- They will be subject to the model specification.
+  
+- For prediction you do not need to worry about "endogeneity" as much. Just on Predictive power (how ??)
+
+```{stata}
+*| echo: true
+*| code-fold: false
+*| classes: larger
+qui:frause oaxaca, clear
+gen wage = exp(lnwage)
+qui:reg wage educ female age agesq single married
+predict wage_hat
+list wage wage_hat educ female age agesq single married in 1/5
+```
+
+## Efficient Market {.scrollable}
+
+- We could use MLRM to test theories, like the Efficient Market Theory. 
+
+- For housing, the Assessed price of a house should be all information needed to assess the price of the house. (other ammenities should not matter)
+
+```{stata}
+*| echo: true
+*| code-fold: false
+*| classes: larger
+*| output: asis
+
+frause hprice1, clear
+qui:reg price assess bdrms llotsize lsqrft colonial
+model_display
+```
+
+```{stata}
+*| echo: true
+*| code-fold: false
+*| classes: larger
+*| output: asis
+
+qui:reg lprice lassess bdrms llotsize lsqrft colonial
+model_display
+```
+
+## Testing for Discrimination (*CP*) {.scrollable}
+
+- We could test for discrimination: Unexplained differences in outcomes once other factors are kept fixed.
+
+- It does require that groups are similar in terms of unobservables.
+
+```{stata}
+*| echo: true
+*| code-fold: false
+*| output: asis
+*| classes: larger
+qui: frause oaxaca, clear
+qui:reg lnwage female 
+model_display
+```
+
+```{stata}
+*| echo: true
+*| code-fold: false
+*| output: asis
+*| classes: larger
+qui:reg lnwage female educ age agesq single married exper tenure
+model_display
+```
 
 ## Treatment Evaluation
+
+- Under Random Assingment SRM was enough to estimate ATTs. 
+- But if assigment was conditionally random, a better approach would be using MLRM
+
+
+```{stata}
+*| echo: true
+*| code-fold: false
+*| output: asis
+*| classes: larger
+frause jtrain98, clear
+qui:reg earn98 train 
+model_display
+```
+
+```{stata}
+*| echo: true
+*| code-fold: false
+*| output: asis
+*| classes: larger
+qui:reg earn98 train earn96 educ age married
+model_display
+```
+
+# Thats all for Today
+Next Week: Inference and Asymptotics

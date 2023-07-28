@@ -1,0 +1,217 @@
+---
+title: "Multiple Regression Analysis: Inference and Asymptotics"
+subtitle: "Are they Significant?"
+author: Fernando Rios-Avila
+jupyter: nbstata
+format: 
+  revealjs: 
+    slide-number: true
+    width: 1600
+    height: 900
+    code-fold: true
+    echo: true
+    css: styles.css 
+---
+
+# {background-image="https://i.imgflip.com/7u1i0l.jpg" background-size="contain"}
+
+## How do you know if what you see is relevant?
+
+- Last time, we talk a bit about the estimation of MLRM. For those who do not remember:
+
+$$\hat\beta=(X'X)^{-1}X'y
+$$
+
+- We also defined how, under A5 (homoskedasticity), we can estimate the variance covariance of coefficients:
+
+$$Var(\beta) = \frac{\sum \hat e^2}{N-K-1} (X'X)^{-1}
+$$
+
+- The next question: how to know how precise your estimates are?
+
+- That *should* be simple, just divide coefficient by its Standard error. The larger this is, the more precise, and more significant.  
+
+- Is this enough to say something about the population coefficients?
+
+(lets assume A1-A5 holds)
+
+## Distribution of coefficients
+
+- The right answer is...Perhaps.
+
+- Unless you know something about the distribution of $\beta's$, it would be hard to make any inferences from the estimates. Why?
+
+- Because not all distributions are made equal!
+ 
+
+```{stata}
+*| output: false
+*| code-fold: true
+clear
+range x -4 4 1000
+gen funiform = 0 
+replace funiform = 1/(2*sqrt(3)) if inrange(x,-sqrt(3),sqrt(3))
+
+gen fnormal = 0 
+replace fnormal = normalden(x)
+
+gen fchi2 = 0 
+replace fchi2 = sqrt(8)*chi2den(4,x*sqrt(8)+4)
+
+integ funiform x, gen(F1)
+integ fnormal x, gen(F2)
+integ fchi2 x, gen(F3)
+
+set scheme white2
+color_style egypt
+replace x = x + 1.5
+two (area funiform x           , pstyle(p1) color(%20)) ///
+    (area funiform x if F1<0.05, pstyle(p1) color(%80)) /// 
+    (area funiform x if F1>0.95, pstyle(p1) color(%80)) /// 
+    (area fnormal  x           , pstyle(p2) color(%20)) ///  
+    (area fnormal  x if F2<0.05, pstyle(p2) color(%80)) /// 
+    (area fnormal  x if F2>0.95, pstyle(p2) color(%80)) /// 
+    (area fchi2    x           , pstyle(p3) color(%20)) /// 
+    (area fchi2    x if F3>0.95, pstyle(p3) color(%80)) /// 
+    (area fchi2    x if F3<0.05, pstyle(p3) color(%80)), ///
+    xlabel(-4 / 4) legend(order(2 "Uniform" 5 "Normal" 8 "C-Chi2")) /// 
+    xtitle("Beta hat Distribution") ///
+	xline( 0, lstyle(1) lwidth(1)) xline(1.5)
+
+graph export images/f4_1.png, replace width(1200)  
+```
+
+## Not all Distributions are the Same
+
+![](images/f4_1.png){size="contained" fig-align="center"}
+
+## New Assumption
+
+- A6: Errors are normal $e\sim N(0,\sigma^2_e)$.
+  - A1-A6 are the Classical Linear Model Assumption
+  - This assumes the outcome is "conditionally" normal. $y|X \sim N(X\beta,\sigma^2_e)$
+  - And with this assumption OLS is no longer [blue]{.bluetxt}. Its now **BUE**!
+
+## 
+
+### Why does it matter?
+
+  - If you combine two variables with the same distributions, the combined variable will not have the same distributions as the "parents"
+  - Except with normals! if you add two -normal- distributions together. The outcome will also be normal. (Dont believe me try it)
+
+Recall:
+
+$$\hat \beta=\beta + (X'X)^{-1}X'e
+$$
+
+If $e$ is normal, then $\beta's$ will also be normal
+
+And this works for ANY Sample size!
+
+##
+### If $e$ normal then $\beta$ is normal
+
+- If $\hat \beta's$ are normal, then we can use this distribution to make inferences about $\beta's$ using normal distribution.
+
+- This is good, because we know how to do math with Normal distributions. And can used the modified Ratio:
+  
+$$z_j = \frac{\hat \beta_j - \beta_j}{sd(\hat\beta)}\sim N(0,1)
+$$
+
+- Where $\beta_j$ is what you think the True Population parameter is (your hypothesis), and $\hat\beta_j$ is what you estimate in your data. 
+- Depending on the size of this, you can either reject your hypothesis, or **not** Reject it.
+
+but do we know   $SE(\beta)$?
+
+## 
+
+### Do we "know" $SE(\beta)$?
+
+We don't, which is why we can use a normal directly. Instead we use a t-distribution
+
+$$t_j = \frac{\hat \beta_j - \beta_j}{se(\hat\beta)}\sim t_{N-k-1}
+$$
+
+Then 
+
+- If $e$ is normal, $\beta$ will be normal.
+- When Samples are "small" Standardized $\beta$ will follow a t-distribution
+- But, as $N\rightarrow \infty$, $t_{N-k-1}\sim N(0,1)$
+
+## Testing Hypothesis
+
+- The idea of hypothesis testing is contrasting the "evidence" from your data (estimates) with the beliefs we have about the population.
+
+$$y=\beta_0 + \beta_1 x_1 + \beta_2 x_2 + e
+$$
+
+Say I have two hypothesis. 
+
+- $x_2$ has no effect on $y$. ie $H_0: \beta_2 = 0$ 
+- $x_1$ has an effect equal to 1. ie $H_0: \beta_1 = 1$ 
+
+    - Notice we make hypothesis about the population coefficients not the estimates
+
+I can "test" each hypothesis separately using a "t-statistic"
+
+$$ \color{green}{t_2=\frac{\hat \beta_2 - 0}{se(\hat \beta_2)}} ;
+t_1=\frac{\hat \beta_1 - 1}{se(\hat \beta_1)} 
+$$
+
+## Types of Hypothesis:
+
+When talking about hypothesis testing there are two types:
+
+- **One sided**: when your alternative hypothesis compares your null to something either strictly larger, or strictly smaller than your hypothesis.
+	- Education has **no effect** on wages vs Returns to education are positive.
+	- Skipping class has **no effect** on grades vs Skiping class reduces grades.
+- **Two sided**: When your alternative hypothesis is to say, "its different than"
+    - Returns to education is 10%, vs is not 10%
+    - Skipping class reduces grades in 0.5 points, vs not 0.5points
+
+In both cases, you use the same t-statistic. 
+
+$$t_\beta=\frac{\hat\beta - \beta_{hyp}}{se(\hat \beta)} \sim t_{N-k-1}
+$$
+
+##
+
+What changes are the "thresholds" to Judge something significant or not.
+
+#### One sided test:
+
+$$\begin{aligned}
+H_0: & \beta_k=\beta^{hyp}_k \text{ vs } H_1: \beta_k>\beta^{hyp}_k \\
+ & t_{\beta_k}>t_{N-k-1}(1-\alpha) \\
+H_0: & \beta_k=\beta^{hyp}_k \text{ vs } H_1: \beta_k<\beta^{hyp}_k \\
+ & t_{\beta_k}<t_{N-k-1}(\alpha) 
+\end{aligned}
+$$
+
+- Where $\alpha$ is your level of **significance**, and $t_{N-k-1}(\alpha)$ and $t_{N-k-1}(1-\alpha)$ are critical values.
+ 
+- $\alpha$ determines the "risk" of commiting an **error type I**: Rejecting the Null when its true.
+
+- Intuitively, the smaller $\alpha$ is, the more possitive (negative) "t" needs to be reject the Null.
+
+##
+
+#### Two sided test:
+
+$$\begin{aligned}
+H_0: & \beta_k=\beta^{hyp}_k \text{ vs } H_1: \beta_k \neq \beta^{hyp}_k \\
+ & | t_{\beta_k} | >t_{N-k-1}(1-\alpha/2) 
+\end{aligned}
+$$
+
+- Similar to before, except the one needs to consider both tails of the distribution to determine critical values (see $t_{N-k-1}(1-\alpha/2)$)
+ 
+- Intuitively, the smaller $\alpha$ is, the larger the absolute value of "t" needs to be reject the Null.
+
+#### But, what is an error type I? and why we don't we "accept" $H_0$ s?
+
+# {background-image="https://i.imgflip.com/7u2hqd.jpg" background-size="contain"}
+
+## Why we never accept?:
+
+- As stated few times before, $\hat \beta$ @b  
