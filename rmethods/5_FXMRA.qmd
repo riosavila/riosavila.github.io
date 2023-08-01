@@ -1,0 +1,103 @@
+---
+title: "Multiple Regression Analysis"
+subtitle: "Adding and Understanding features"
+title-slide-attributes:
+    data-background-image: https://www.mysantacruzrealestate.com/uploads/shutterstock_179346260_500.jpg
+    data-background-size: contain
+    data-background-opacity: "0.3"
+
+author: Fernando Rios-Avila
+jupyter: nbstata
+format: 
+  revealjs: 
+    slide-number: true
+    width: 1600
+    height: 900
+    code-fold: true
+    echo: true
+    css: styles.css 
+    chalkboard: true
+---
+
+## Introduction
+
+- Multiple Linear Regression models (MLRM), estimated via OLS, have very good properties, if all Assumptions (A1-A5,A6') Hold.
+
+- Up until now, we have discussed how to estimate them, and analyze them under "optimal" assumptions, in simplified cases. 
+
+- Today we will be adding other "minor" Features to MLR, better understanding its features
+
+## Scaling and shifting
+
+1. Something that we do not emphasize enough. Before analyzing your data, its important to analyze the nature of the data (summary stats, ranges, scales)
+   
+2. When I talk about Scaling and shifting, I refer exclusibly to afine transormations of the following type:
+
+$$x^* = a*x+c
+$$
+
+They either Shift, or change the scale of the data. Not the shape!
+
+3. If one applies afine transformations to the data, it will have **NO** effect on your model what-so-ever. (Same t's same F's, same $R^2$)
+
+4. But, your $\beta's$ will change. This could help understading and explaining the results.
+
+## Example: {.smaller}
+
+```{stata}
+*| output: false
+set linesize 255
+frause bwght, clear
+gen bwkg = bwghtlbs*0.454
+gen bwgr = bwkg*1000
+regress bwght male white cigs lfaminc 
+est sto m1
+regress bwghtlbs male white cigs lfaminc
+est sto m2
+regress bwkg male white cigs lfaminc
+est sto m3
+regress bwgr male white cigs lfaminc
+est sto m4
+```
+
+```{stata}
+*| echo: false
+*| output: asis 
+*| classes: smaller
+esttab m1 m2 m3 m4 , cell(b(fmt(3) star) ///
+ (se( par) t(par("[" "]")) )) starlevels(* 0.1 ** 0.05 *** 0.01) ///
+r2 nonumber mtitle("Oz" "lbs" "Kgs" "Gr") collabels(none) md note(": Birthweight and Cig {.striped .hover}")
+```
+
+## Scaling X's and Y's
+
+- Re-scaling $y$ will affect the all coefficients.
+  - Reducing Scale, reduces scale of coefficients
+- Re-scaling $x's$ will only affect its coefficient and possible the constant.
+  - Reducing (increasing) Scale will increase (reduce) Scale of coefficient
+- In both cases, Shifting the variable only affects the constant.
+
+:::{.callout-important}
+
+Re-Scaling is an important tool/trick that can be used for interpreting more complex models. 
+
+:::
+
+## Beta or Standardized Coefficients
+
+## Functional Forms: Single Dummies
+
+## Functional Forms: Multiple Dummies
+
+## Functional Forms: Logarithms
+
+## Functional Forms: Polynomials ($x^2, x^3, $ etc)
+
+## Functional Forms: Interactions ($x*z, x*d$)
+
+## Functional Forms: Full Interactions
+
+## Dummies as Dep Variable
+
+## Discrete Vriable as Dep Variable
+

@@ -3231,7 +3231,7 @@
     "href": "rmethods/4_MLRM_IA.html#distribution-of-coefficients",
     "title": "Multiple Regression Analysis: Inference and Asymptotics",
     "section": "Distribution of coefficients",
-    "text": "Distribution of coefficients\n\nThe right answer is…Perhaps.\nUnless you know something about the distribution of \\(\\beta's\\), it would be hard to make any inferences from the estimates. Why?\nBecause not all distributions are made equal!\n\n*| output: false\n*| code-fold: true\n\nclear\nrange x -4 4 1000\ngen funiform = 0 \nreplace funiform = 1/(2*sqrt(3)) if inrange(x,-sqrt(3),sqrt(3))\n\ngen fnormal = 0 \nreplace fnormal = normalden(x)\n\ngen fchi2 = 0 \nreplace fchi2 = sqrt(8)*chi2den(4,x*sqrt(8)+4)\n\ninteg funiform x, gen(F1)\ninteg fnormal x, gen(F2)\ninteg fchi2 x, gen(F3)\n\nset scheme white2\ncolor_style egypt\nreplace x = x + 1.5\ntwo (area funiform x           , pstyle(p1) color(%20)) ///\n    (area funiform x if F1&lt;0.05, pstyle(p1) color(%80)) /// \n    (area funiform x if F1&gt;0.95, pstyle(p1) color(%80)) /// \n    (area fnormal  x           , pstyle(p2) color(%20)) ///  \n    (area fnormal  x if F2&lt;0.05, pstyle(p2) color(%80)) /// \n    (area fnormal  x if F2&gt;0.95, pstyle(p2) color(%80)) /// \n    (area fchi2    x           , pstyle(p3) color(%20)) /// \n    (area fchi2    x if F3&gt;0.95, pstyle(p3) color(%80)) /// \n    (area fchi2    x if F3&lt;0.05, pstyle(p3) color(%80)), ///\n    xlabel(-4 / 4) legend(order(2 \"Uniform\" 5 \"Normal\" 8 \"C-Chi2\")) /// \n    xtitle(\"Beta hat Distribution\") ///\n    xline( 0, lstyle(1) lwidth(1)) xline(1.5)\n\ngraph export images/f4_1.png, replace width(1200)"
+    "text": "Distribution of coefficients\n\nThe right answer is…Perhaps.\nUnless you know something about the distribution of \\(\\beta's\\), it would be hard to make any inferences from the estimates. Why?\nBecause not all distributions are made equal!\n\n\n\nCode\nclear\nrange x -4 4 1000\ngen funiform = 0 \nreplace funiform = 1/(2*sqrt(3)) if inrange(x,-sqrt(3),sqrt(3))\n\ngen fnormal = 0 \nreplace fnormal = normalden(x)\n\ngen fchi2 = 0 \nreplace fchi2 = sqrt(8)*chi2den(4,x*sqrt(8)+4)\n\ninteg funiform x, gen(F1)\ninteg fnormal x, gen(F2)\ninteg fchi2 x, gen(F3)\n\nset scheme white2\ncolor_style egypt\nreplace x = x + 1.5\ntwo (area funiform x           , pstyle(p1) color(%20)) ///\n    (area funiform x if F1&lt;0.05, pstyle(p1) color(%80)) /// \n    (area funiform x if F1&gt;0.95, pstyle(p1) color(%80)) /// \n    (area fnormal  x           , pstyle(p2) color(%20)) ///  \n    (area fnormal  x if F2&lt;0.05, pstyle(p2) color(%80)) /// \n    (area fnormal  x if F2&gt;0.95, pstyle(p2) color(%80)) /// \n    (area fchi2    x           , pstyle(p3) color(%20)) /// \n    (area fchi2    x if F3&gt;0.95, pstyle(p3) color(%80)) /// \n    (area fchi2    x if F3&lt;0.05, pstyle(p3) color(%80)), ///\n    xlabel(-4 / 4) legend(order(2 \"Uniform\" 5 \"Normal\" 8 \"C-Chi2\")) /// \n    xtitle(\"Beta hat Distribution\") ///\n    xline( 0, lstyle(1) lwidth(1)) xline(1.5)\n\ngraph export images/f4_1.png, replace width(1200)"
   },
   {
     "objectID": "rmethods/4_MLRM_IA.html#section-1",
@@ -3259,14 +3259,14 @@
     "href": "rmethods/4_MLRM_IA.html#section-2",
     "title": "Multiple Regression Analysis: Inference and Asymptotics",
     "section": "",
-    "text": "If \\(e\\) normal then \\(\\beta\\) is normal\n\nIf \\(\\hat \\beta's\\) are normal, then we can use this distribution to make inferences about \\(\\beta's\\) using normal distribution.\nThis is good, because we know how to do math with Normal distributions. And can used the modified Ratio:\n\n\\[z_j = \\frac{\\hat \\beta_j - \\beta_j}{sd(\\hat\\beta)}\\sim N(0,1)\n\\]\n\nWhere \\(\\beta_j\\) is what you think the True Population parameter is (your hypothesis), and \\(\\hat\\beta_j\\) is what you estimate in your data.\nDepending on the size of this, you can either reject your hypothesis, or not Reject it.\n\nbut do we know \\(sd(\\beta)\\)?"
+    "text": "If \\(e\\) normal then \\(\\beta\\) is normal\n\nIf \\(\\hat \\beta's\\) are normal, then we can use this distribution to make inferences about \\(\\beta's\\) using normal distribution.\nThis is good, because we know how to do math with Normal distributions. And can used the modified Ratio:\n\n\\[z_j = \\frac{\\hat \\beta_j - \\beta_j}{sd(\\hat\\beta)}\\sim N(0,1)\n\\]\n\nWhere \\(\\beta_j\\) is what you think the True Population parameter is (your hypothesis), and \\(\\hat\\beta_j\\) is what you estimate in your data.\nDepending on the size of this, you can either reject your hypothesis, or not Reject it.\n\nbut do we “know” \\(sd(\\beta)\\)?"
   },
   {
     "objectID": "rmethods/4_MLRM_IA.html#section-3",
     "href": "rmethods/4_MLRM_IA.html#section-3",
     "title": "Multiple Regression Analysis: Inference and Asymptotics",
     "section": "",
-    "text": "Do we “know” \\(sd(\\beta)\\)?\nWe don’t, which is why we can use a normal directly. Instead we use a t-distribution, which uses \\(se(\\beta\\hat)\\)\n\\[t_j = \\frac{\\hat \\beta_j - \\beta_j}{se(\\hat\\beta)}\\sim t_{N-k-1}\n\\]\nThen\n\nIf \\(e\\) is normal, \\(\\beta\\) will be normal.\nWhen Samples are “small” Standardized \\(\\beta\\) will follow a t-distribution\nBut, as \\(N\\rightarrow \\infty\\), \\(t_{N-k-1}\\sim N(0,1)\\)"
+    "text": "Do we “know” \\(sd(\\beta)\\)?\nWe don’t, which is why we can use a normal directly. Instead we use a t-distribution, which uses \\(se(\\hat\\beta )\\)\n\\[t_j = \\frac{\\hat \\beta_j - \\beta_j}{se(\\hat\\beta)}\\sim t_{N-k-1}\n\\]\nThen\n\nIf \\(e\\) is normal, \\(\\beta\\) will be normal.\nWhen Samples are “small” Standardized \\(\\beta\\) will follow a t-distribution\nBut, as \\(N\\rightarrow \\infty\\), \\(t_{N-k-1}\\sim N(0,1)\\)"
   },
   {
     "objectID": "rmethods/4_MLRM_IA.html#testing-hypothesis",
@@ -3287,7 +3287,7 @@
     "href": "rmethods/4_MLRM_IA.html#section-4",
     "title": "Multiple Regression Analysis: Inference and Asymptotics",
     "section": "",
-    "text": "What changes are the “thresholds” to Judge something significant or not.\nOne sided test:\n\\[\\begin{aligned}\nH_0: & \\beta_k=\\beta^{hyp}_k \\text{ vs } H_1: \\beta_k&gt;\\beta^{hyp}_k \\\\\n& t_{\\beta_k}&gt;t_{N-k-1}(1-\\alpha) \\\\\nH_0: & \\beta_k=\\beta^{hyp}_k \\text{ vs } H_1: \\beta_k&lt;\\beta^{hyp}_k \\\\\n& t_{\\beta_k}&lt;-t_{N-k-1}(1-\\alpha)\n\\end{aligned}\n\\]\n\nWhere \\(\\alpha\\) is your level of significance, and \\(t_{N-k-1}(\\alpha)\\) and \\(t_{N-k-1}(1-\\alpha)\\) are critical values.\n\\(\\alpha\\) determines the “risk” of commiting an error type I: Rejecting the Null when its true.\nIntuitively, the smaller \\(\\alpha\\) is, the more possitive (negative) “t” needs to be reject the Null."
+    "text": "What changes are the “thresholds” to Judge something significant or not.\nOne sided test:\n\\[\\begin{aligned}\nH_0: & \\beta_k=\\beta^{hyp}_k \\text{ vs } H_1: \\beta_k&gt;\\beta^{hyp}_k \\\\\n& t_{\\beta_k}&gt;t_{N-k-1}(1-\\alpha) \\\\\nH_0: & \\beta_k=\\beta^{hyp}_k \\text{ vs } H_1: \\beta_k&lt;\\beta^{hyp}_k \\\\\n& t_{\\beta_k}&lt;-t_{N-k-1}(1-\\alpha)\n\\end{aligned}\n\\]\n\nWhere \\(\\alpha\\) is your level of significance, and \\(t_{N-k-1}(1-\\alpha)\\) is the critical value.\n\\(\\alpha\\) determines the “risk” of commiting an error type I: Rejecting the Null when its true.\nIntuitively, the smaller \\(\\alpha\\) is, the more possitive (negative) “t” needs to be reject the Null."
   },
   {
     "objectID": "rmethods/4_MLRM_IA.html#section-5",
@@ -3322,7 +3322,7 @@
     "href": "rmethods/4_MLRM_IA.html#section-7",
     "title": "Multiple Regression Analysis: Inference and Asymptotics",
     "section": "",
-    "text": "*| output: false\n*| code-fold: true\nclear\nrange x -5 5 1000\ngen fx = normalden(x) \nset scheme white2\ncolor_style tableau\ngen xx = x+1\ntwo (area fx x , pstyle(p1) color(%20)) ///\n    (area fx x if x&lt;invnormal(.025), pstyle(p1) color(%80) ) ///\n    (area fx x if x&gt;invnormal(.975), pstyle(p1) color(%80) ) ///\n    (area fx xx , pstyle(p2) color(%20)) ///\n    (area fx xx if x&lt;invnormal(.025), pstyle(p2) color(%80) ) /// \n    (area fx xx if x&gt;invnormal(.975), pstyle(p2) color(%80) ) ///\n    , xline(1.8) legend(order(1 \"H0: b=0\" 4 \"H0: b=1\"))  ///\n    xlabel(-4(2)4)  ylabel(0(.1).5)  xsize(8) ysize(4)\ngraph export images/f4_2.png, height(1000)  replace"
+    "text": "Code\nclear\nrange x -5 5 1000\ngen fx = normalden(x) \nset scheme white2\ncolor_style tableau\ngen xx = x+1\ntwo (area fx x , pstyle(p1) color(%20)) ///\n    (area fx x if x&lt;invnormal(.025), pstyle(p1) color(%80) ) ///\n    (area fx x if x&gt;invnormal(.975), pstyle(p1) color(%80) ) ///\n    (area fx xx , pstyle(p2) color(%20)) ///\n    (area fx xx if x&lt;invnormal(.025), pstyle(p2) color(%80) ) /// \n    (area fx xx if x&gt;invnormal(.975), pstyle(p2) color(%80) ) ///\n    , xline(1.8) legend(order(1 \"H0: b=0\" 4 \"H0: b=1\"))  ///\n    xlabel(-4(2)4)  ylabel(0(.1).5)  xsize(8) ysize(4)\ngraph export images/f4_2.png, height(1000)  replace"
   },
   {
     "objectID": "rmethods/4_MLRM_IA.html#what-about-type-error-i-and-ii",
@@ -3336,14 +3336,14 @@
     "href": "rmethods/4_MLRM_IA.html#section-8",
     "title": "Multiple Regression Analysis: Inference and Asymptotics",
     "section": "",
-    "text": "*| output: false\n*| code-fold: true\nclear\nrange x -5 5 1000\ngen fx = normalden(x) \n\ngen xxx=x+3 \ntwo (area fx x , pstyle(p1) color(%20)) ///\n    (area fx xxx, pstyle(p2) color(%20)) ///\n    (area fx x if x&gt;2, pstyle(p1) color(%80)) ///\n    (area fx xxx if xxx &lt;2, pstyle(p2) color(%80))  ///\n    ,legend(order(1 \"H0\"3 \"Type I \" 2 \"H1\"  4 \"Type II \") cols(2))   ///\n    xlabel(-4(2)7)  ylabel(0(.1).5) xsize(8) ysize(4)  \ngraph export images/f4_3.png, height(1000)  replace"
+    "text": "Code\nclear\nrange x -5 5 1000\ngen fx = normalden(x) \n\ngen xxx=x+3 \ntwo (area fx x , pstyle(p1) color(%20)) ///\n    (area fx xxx, pstyle(p2) color(%20)) ///\n    (area fx x if x&gt;2, pstyle(p1) color(%80)) ///\n    (area fx xxx if xxx &lt;2, pstyle(p2) color(%80))  ///\n    ,legend(order(1 \"H0\"3 \"Type I \" 2 \"H1\"  4 \"Type II \") cols(2))   ///\n    xlabel(-4(2)7)  ylabel(0(.1).5) xsize(8) ysize(4)  \ngraph export images/f4_3.png, height(1000)  replace"
   },
   {
     "objectID": "rmethods/4_MLRM_IA.html#example-determinants-of-college-gpa",
     "href": "rmethods/4_MLRM_IA.html#example-determinants-of-college-gpa",
     "title": "Multiple Regression Analysis: Inference and Asymptotics",
     "section": "Example: Determinants of College GPA",
-    "text": "Example: Determinants of College GPA\n*| echo: true\n\nfrause gpa1, clear\nreg colgpa hsgpa act skipped\n\nHypothesis: Skipping classes has no effect on College GPA.\n\n\\[H_0: \\beta_{skip} = 0 \\text{ vs } H_1: \\beta_{skip} \\neq 0\n\\]\n\nTest, \\(a=95%\\), \\(|t_{skip}|=3.2\\) vs \\(t_{n-k-1}(0.975)\\):\n\n*| output: asis\n*| echo: true\n*| code-folde: false\ndisplay invt(141-4,0.975)\n\nConclusion: \\(H_0\\) is rejected."
+    "text": "Example: Determinants of College GPA\n\n\nCode\nfrause gpa1, clear\nreg colgpa hsgpa act skipped\n\n\n\n      Source |       SS           df       MS      Number of obs   =       141\n-------------+----------------------------------   F(3, 137)       =     13.92\n       Model |  4.53313314         3  1.51104438   Prob &gt; F        =    0.0000\n    Residual |  14.8729663       137  .108561798   R-squared       =    0.2336\n-------------+----------------------------------   Adj R-squared   =    0.2168\n       Total |  19.4060994       140  .138614996   Root MSE        =    .32949\n\n------------------------------------------------------------------------------\n      colgpa | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n       hsgpa |   .4118162   .0936742     4.40   0.000     .2265819    .5970505\n         act |   .0147202   .0105649     1.39   0.166    -.0061711    .0356115\n     skipped |  -.0831131   .0259985    -3.20   0.002    -.1345234   -.0317028\n       _cons |   1.389554   .3315535     4.19   0.000     .7339295    2.045178\n------------------------------------------------------------------------------\n\n\n\nHypothesis: Skipping classes has no effect on College GPA.\n\n\\[H_0: \\beta_{skip} = 0 \\text{ vs } H_1: \\beta_{skip} \\neq 0\n\\]\n\nTest, \\(a=95%\\), \\(|t_{skip}|=3.2\\) vs \\(t_{n-k-1}(0.975)\\):\n\n\nCode\ndisplay invt(141-4,0.975)\n\n1.9774312\n\nConclusion: \\(H_0\\) is rejected."
   },
   {
     "objectID": "rmethods/4_MLRM_IA.html#section-9",
@@ -3357,21 +3357,21 @@
     "href": "rmethods/4_MLRM_IA.html#section-10",
     "title": "Multiple Regression Analysis: Inference and Asymptotics",
     "section": "",
-    "text": "\\(t_{ACT}=1.39\\)\nHyp: ACT has no effect on College GPA vs It has a non-zero effect\nHyp: ACT has no effect on College GPA vs it has a positive effect\nCritical:\n\n\\(t_{137}(0.95)=1.6560\\) Donot Reject\\(H_0\\) with \\(\\alpha = 5\\%\\)\n\\(t_{137}(0.90)=1.2878\\) Reject \\(H_0\\) with \\(\\alpha = 10\\%\\)\n\nEach GPA point in highschool translates into half a point in College GPA. vs Is less than .5\n\n*| echo: true\n*| code-fold: false\ntest hsgpa = 0.5\nlincom hsgpa - 0.5\n\nCritical at 5%: \\(t=-1.6560\\)\nCannot Reject \\(H_0\\)"
+    "text": "\\(t_{ACT}=1.39\\)\nHyp: ACT has no effect on College GPA vs It has a non-zero effect\nHyp: ACT has no effect on College GPA vs it has a positive effect\nCritical:\n\n\\(t_{137}(0.95)=1.6560\\) Donot Reject\\(H_0\\) with \\(\\alpha = 5\\%\\)\n\\(t_{137}(0.90)=1.2878\\) Reject \\(H_0\\) with \\(\\alpha = 10\\%\\)\n\nEach GPA point in highschool translates into half a point in College GPA. vs Is less than .5\n\n\ntest hsgpa = 0.5\nlincom hsgpa - 0.5\n\n\n ( 1)  hsgpa = .5\n\n       F(  1,   137) =    0.89\n            Prob &gt; F =    0.3482\n\n ( 1)  hsgpa = .5\n\n------------------------------------------------------------------------------\n      colgpa | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         (1) |  -.0881838   .0936742    -0.94   0.348    -.2734181    .0970505\n------------------------------------------------------------------------------\n\n\n\nCritical at 5%: \\(t=-1.6560\\)\nCannot Reject \\(H_0\\)"
   },
   {
     "objectID": "rmethods/4_MLRM_IA.html#p-values",
     "href": "rmethods/4_MLRM_IA.html#p-values",
     "title": "Multiple Regression Analysis: Inference and Asymptotics",
     "section": "p-values",
-    "text": "p-values\n\nSomething you may or may not have noticed. The significance level \\(\\alpha\\) can be choosen by the resercher.\n\nConventional levels are 10%, 5% and 1%.\n\nThis may lead to researchers choosing any value that would make their theory fit.\n\nThere is a better alternative. Using \\(p-values\\) to capture the smallest significance level that you could use to reject your Null.\n\n\\[p-value = P(|t|&gt;|t-stat|) \\text{ or } p-value = 2*P(|t|&gt;|t-stat|)\n\\]\n\nThe smallest the better! (for rejection)\nHow?\n\nOne tail : display 1-t(df = n-k-1, |t-stat|)\ntwo tails: display 2-2*t(df = n-k-1, |t-stat|)"
+    "text": "p-values\n\nSomething you may or may not have noticed. The significance level \\(\\alpha\\) can be choosen by the researcher.\n\nConventional levels are 10%, 5% and 1%.\n\nThis may lead to researchers choosing any value that would make their theory fit.\n\nThere is a better alternative. Using \\(p-values\\) to capture the smallest significance level that you could use to reject your Null.\n\n\\[p-value = P(|t|&gt;|t-stat|) \\text{ or } p-value = 2*P(|t|&gt;|t-stat|)\n\\]\n\nThe smallest the better! (for rejection)\nHow?\n\nOne tail : display 1-t(df = n-k-1, |t-stat|)\ntwo tails: display 2-2*t(df = n-k-1, |t-stat|)"
   },
   {
     "objectID": "rmethods/4_MLRM_IA.html#section-11",
     "href": "rmethods/4_MLRM_IA.html#section-11",
     "title": "Multiple Regression Analysis: Inference and Asymptotics",
     "section": "",
-    "text": "*| output: false\nclear\nrange x -5 5 1000\ngen fx = normalden(x) \nlocal p1:display %5.1f 100*2*(1-normal(1.5)) \nlocal p2:display %5.1f 100*2*(1-normal(2.5)) \ntwo (area fx x , pstyle(p1) color(%20)) ///\n    (area fx x if x&lt;-1.5, pstyle(p3) color(%80) ) ///\n    (area fx x if x&gt;+1.5, pstyle(p3) color(%80) ) ///\n    (area fx x if x&lt;invnormal(.025), pstyle(p1) color(%80) ) ///\n    (area fx x if x&gt;invnormal(.975), pstyle(p1) color(%80) ) ///\n    (area fx x if x&lt;-2.5, pstyle(p2) color(%80) ) ///\n    (area fx x if x&gt;+2.5, pstyle(p2) color(%80) ) , ///\n    xline(-1.5 2.5) legend(order(4 \"{&alpha}=5%\" 6 \"p-value = `p2'%\" 2 \"p-value = `p1'%\")) ///\n    ylabel(0(.1).5) xlabel(-5 0 5 -1.5 2.5)\ngraph export images/f4_4.png, replace width(1200)"
+    "text": "Code\nclear\nrange x -5 5 1000\ngen fx = normalden(x) \nlocal p1:display %5.1f 100*2*(1-normal(1.5)) \nlocal p2:display %5.1f 100*2*(1-normal(2.5)) \ntwo (area fx x , pstyle(p1) color(%20)) ///\n    (area fx x if x&lt;-1.5, pstyle(p3) color(%80) ) ///\n    (area fx x if x&gt;+1.5, pstyle(p3) color(%80) ) ///\n    (area fx x if x&lt;invnormal(.025), pstyle(p1) color(%80) ) ///\n    (area fx x if x&gt;invnormal(.975), pstyle(p1) color(%80) ) ///\n    (area fx x if x&lt;-2.5, pstyle(p2) color(%80) ) ///\n    (area fx x if x&gt;+2.5, pstyle(p2) color(%80) ) , ///\n    xline(-1.5 2.5) legend(order(4 \"{&alpha}=5%\" 6 \"p-value = `p2'%\" 2 \"p-value = `p1'%\")) ///\n    ylabel(0(.1).5) xlabel(-5 0 5 -1.5 2.5)\ngraph export images/f4_4.png, replace width(1200)"
   },
   {
     "objectID": "rmethods/4_MLRM_IA.html#note-on-statistically-significance",
@@ -3413,7 +3413,7 @@
     "href": "rmethods/4_MLRM_IA.html#section-15",
     "title": "Multiple Regression Analysis: Inference and Asymptotics",
     "section": "",
-    "text": "Alternative: Substitution\n\nOne can manipulate the regression model to consider a model with the contrained coefficient.\nOnce model is estimated, it simplifies testing:\n\n\\[\\begin{aligned}\n& y = b_0 + b_1 x_1 + b_2  x_2 + b_3 x_3 + e  \\\\\nh0: & b_1 - 2b_2 +b_3=0 \\rightarrow \\theta = b_1 - 2b_2 +b_3 \\rightarrow b_1 = \\theta + 2b_2 - b_3 \\\\\n& y = b_0 + ( \\theta + 2b_2 - b_3) x_1 + b_2 x_2 + b_3 x_3 + e \\\\\n& y = b_0 +  \\theta x_1 + b_2( x_2 +2 x_1) + b_3 (x_3-x_1) + e \\\\\n& y = b_0 +  \\theta x_1 + b_2 \\tilde x_2 + b_3 \\tilde x_3 + e \\\\\n\\end{aligned}\n\\]\nHere testing for \\(\\theta=0\\) is the same as testing for \\(b_1 - 2b_2 +b_3\\) in the original model.\n\n\n\n\n\n\nNote\n\n\nAlways ask something like this in Midterm, so brush up your math."
+    "text": "Alternative: Substitution\n\nOne can manipulate the regression model to consider a model with the contrained coefficient.\nOnce model is estimated, it simplifies testing:\n\n\\[\\begin{aligned}\n& y = b_0 + b_1 x_1 + b_2  x_2 + b_3 x_3 + e  \\\\\nh0: & b_1 - 2b_2 +b_3=0 \\rightarrow \\theta = b_1 - 2b_2 +b_3 \\rightarrow b_1 = \\theta + 2b_2 - b_3 \\\\\n& y = b_0 + ( \\theta + 2b_2 - b_3) x_1 + b_2 x_2 + b_3 x_3 + e \\\\\n& y = b_0 +  \\theta x_1 + b_2( x_2 +2 x_1) + b_3 (x_3-x_1) + e \\\\\n& y = b_0 +  \\theta x_1 + b_2 \\tilde x_2 + b_3 \\tilde x_3 + e \\\\\n\\end{aligned}\n\\]\nHere testing for \\(\\theta=0\\) is the same as testing for \\(b_1 - 2b_2 +b_3\\) in the original model.\n\n\n\n\n\n\n\n\n\nAlways ask something like this in Midterm, so brush up your math."
   },
   {
     "objectID": "rmethods/4_MLRM_IA.html#testing-multiple-restrictions",
@@ -3449,5 +3449,159 @@
     "title": "Multiple Regression Analysis: Inference and Asymptotics",
     "section": "Example",
     "text": "Example\n\nfrause hprice1, clear\nreg lprice lasses bdrms llotsize lsqrft\n\n\n      Source |       SS           df       MS      Number of obs   =        88\n-------------+----------------------------------   F(4, 83)        =     70.58\n       Model |  6.19607473         4  1.54901868   Prob &gt; F        =    0.0000\n    Residual |  1.82152879        83   .02194613   R-squared       =    0.7728\n-------------+----------------------------------   Adj R-squared   =    0.7619\n       Total |  8.01760352        87  .092156362   Root MSE        =    .14814\n\n------------------------------------------------------------------------------\n      lprice | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n     lassess |   1.043065    .151446     6.89   0.000     .7418453    1.344285\n       bdrms |   .0338392   .0220983     1.53   0.129    -.0101135    .0777918\n    llotsize |   .0074379   .0385615     0.19   0.848    -.0692593    .0841352\n      lsqrft |  -.1032384   .1384305    -0.75   0.458     -.378571    .1720942\n       _cons |    .263743   .5696647     0.46   0.645    -.8692972    1.396783\n------------------------------------------------------------------------------\n\n\n\ntest (lasses=1)\ntest (lasses=1) (bdrms=llotsize=lsqrft=0)\n\n\n ( 1)  lassess = 1\n\n       F(  1,    83) =    0.08\n            Prob &gt; F =    0.7768\n\n ( 1)  lassess = 1\n ( 2)  bdrms - llotsize = 0\n ( 3)  bdrms - lsqrft = 0\n ( 4)  bdrms = 0\n\n       F(  4,    83) =    0.67\n            Prob &gt; F =    0.6162\n\n\n\nfrause mlb1, clear\nreg lsalary years gamesyr bavg hrunsyr rbisy\n\n\n      Source |       SS           df       MS      Number of obs   =       353\n-------------+----------------------------------   F(5, 347)       =    117.06\n       Model |  308.989208         5  61.7978416   Prob &gt; F        =    0.0000\n    Residual |  183.186327       347  .527914487   R-squared       =    0.6278\n-------------+----------------------------------   Adj R-squared   =    0.6224\n       Total |  492.175535       352  1.39822595   Root MSE        =    .72658\n\n------------------------------------------------------------------------------\n     lsalary | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n       years |   .0688626   .0121145     5.68   0.000     .0450355    .0926898\n     gamesyr |   .0125521   .0026468     4.74   0.000     .0073464    .0177578\n        bavg |   .0009786   .0011035     0.89   0.376    -.0011918     .003149\n     hrunsyr |   .0144295    .016057     0.90   0.369    -.0171518    .0460107\n      rbisyr |   .0107657    .007175     1.50   0.134    -.0033462    .0248776\n       _cons |   11.19242   .2888229    38.75   0.000     10.62435    11.76048\n------------------------------------------------------------------------------\n\n\n\ntest bavg hrunsyr rbisy\n\n\n ( 1)  bavg = 0\n ( 2)  hrunsyr = 0\n ( 3)  rbisyr = 0\n\n       F(  3,   347) =    9.55\n            Prob &gt; F =    0.0000"
+  },
+  {
+    "objectID": "rmethods/4_MLRM_IA.html#note-on-statistical-significance",
+    "href": "rmethods/4_MLRM_IA.html#note-on-statistical-significance",
+    "title": "Multiple Regression Analysis: Inference and Asymptotics",
+    "section": "Note on Statistical Significance",
+    "text": "Note on Statistical Significance\n\nStatistically significant doesnt mean meaninful. And lack of it, doesnt mean is not important\n\nKeep in mind that SE may be larger or smaller due to other factors (N or Mcollinearity)\n\nBe careful of discussing the effect size. (a 1US increase in min wage is different from 1chp in min Wage)\nIf non-significant, pay attention to the magnitude and relevance for your research. Does it have the correct sign?\nIncorrect signs with significant results. Either there is something wrong, or you found something interesting."
+  },
+  {
+    "objectID": "rmethods/4_MLRM_IA.html#introduction",
+    "href": "rmethods/4_MLRM_IA.html#introduction",
+    "title": "Multiple Regression Analysis: Inference and Asymptotics",
+    "section": "Introduction",
+    "text": "Introduction\n\nWhen considering the topic of asymptotic theory, there are few concepts that are important ton consider.\n\nAsymtotics refer to properties of OLS when \\(N\\rightarrow \\infty\\)\nWhen samples grow, we are more concern about consistency rather than “just” unbiased estimators.\nWe are also concern with how flexible is the normality assumption when samples grow large."
+  },
+  {
+    "objectID": "rmethods/4_MLRM_IA.html#what-is-consistency",
+    "href": "rmethods/4_MLRM_IA.html#what-is-consistency",
+    "title": "Multiple Regression Analysis: Inference and Asymptotics",
+    "section": "What is consistency?",
+    "text": "What is consistency?\n\nUp until now, we have been concerned with Unbiased estimates\n\n\\[E(\\hat\\beta)=\\beta\n\\]\n\nIn large samples, this is no longer enough. One requires Consistency!\n\nConsistency says that as \\(N\\rightarrow \\infty\\) then \\(plim \\hat \\beta = \\beta\\).\n\\(p(|\\hat \\beta - \\beta|&lt;\\varepsilon) = 1\\) or that The variance shrinks to zero, or we can estimate \\(\\beta\\) almost surely.\nThis is also known as asymptotic unbiasness.\n\nIn linear regression analysis, consistency can be achieved with a weaker A4’: \\(Cov(e,x)=0\\), assuming that we require only linear independence."
+  },
+  {
+    "objectID": "rmethods/4_MLRM_IA.html#consistency-vs-bias",
+    "href": "rmethods/4_MLRM_IA.html#consistency-vs-bias",
+    "title": "Multiple Regression Analysis: Inference and Asymptotics",
+    "section": "Consistency vs Bias",
+    "text": "Consistency vs Bias\n\nConsistent and UnbiasedConsistent and Biased"
+  },
+  {
+    "objectID": "rmethods/4_MLRM_IA.html#what-about-normality-assumption",
+    "href": "rmethods/4_MLRM_IA.html#what-about-normality-assumption",
+    "title": "Multiple Regression Analysis: Inference and Asymptotics",
+    "section": "What about Normality Assumption?",
+    "text": "What about Normality Assumption?\n\nEverything we have seen so far was possible under the normality assumption of the errors.\n\nif \\(e\\) is normal, then \\(b\\) is normal (even in small samples), thus we can use \\(t\\), \\(F\\), etc\n\nBut what if this assumption fails? would we care?\n\n\n\nPerhaps. If your sample is small, \\(b\\) will not be normal, and standard procedures will not work.\nIn large Samples, however, \\(\\beta's\\) will be normal, even if \\(e\\) is not. Thanks to CLT"
+  },
+  {
+    "objectID": "rmethods/4_MLRM_IA.html#is-normality-assumption-important",
+    "href": "rmethods/4_MLRM_IA.html#is-normality-assumption-important",
+    "title": "Multiple Regression Analysis: Inference and Asymptotics",
+    "section": "Is normality assumption important?",
+    "text": "Is normality assumption important?\n\nEverything we have seen so far was possible under the normality assumption of the errors.\nif \\(e\\) is normal, then \\(b\\) is normal (even in small samples)\nBut what if this assumption fails? would we care?\n\nNot really! When samples are large"
+  },
+  {
+    "objectID": "rmethods/4_MLRM_IA.html#lm-lagrange-multiplier",
+    "href": "rmethods/4_MLRM_IA.html#lm-lagrange-multiplier",
+    "title": "Multiple Regression Analysis: Inference and Asymptotics",
+    "section": "LM-Lagrange Multiplier",
+    "text": "LM-Lagrange Multiplier\n\nWhile you can still use t-stat and F-stat to draw inference from your model, there is a better test (given the large sample): Lagrange Multiplier Statistic\nThe idea: Does impossing restrictions affect the model Fitness?\n\n\nRegress \\(y\\) on restricted \\(x_1,\\dots,x_{k-q}\\), and obtain \\(\\tilde e\\)\nRegress \\(\\tilde e\\) on all \\(x's\\), and obtain \\(R^2_e\\).\n\nIf the excluded regressors were not significant, the \\(R^2_e\\) should be very small.\n\nCompare \\(nR^2_e\\) with \\(\\chi^2(n,1-\\alpha)\\), and draw conclusions."
+  },
+  {
+    "objectID": "rmethods/4_MLRM_IA.html#example-1",
+    "href": "rmethods/4_MLRM_IA.html#example-1",
+    "title": "Multiple Regression Analysis: Inference and Asymptotics",
+    "section": "Example:",
+    "text": "Example:\n\nfrause crime1, clear\nqui: reg narr86 pcnv avgsen tottime ptime86 qemp86\n** H0: avgsen=0 and tottime=0\ntest (avgsen=0) (tottime=0)\n\n\n ( 1)  avgsen = 0\n ( 2)  tottime = 0\n\n       F(  2,  2719) =    2.03\n            Prob &gt; F =    0.1310\n\n\n\nqui: reg narr86 pcnv                ptime86 qemp86\n* Predict residuals of constrained model\npredict u_tilde , res\n* regress residuals againts all variables\nreg u_tilde  pcnv avgsen tottime ptime86 qemp86\n\n\n      Source |       SS           df       MS      Number of obs   =     2,725\n-------------+----------------------------------   F(5, 2719)      =      0.81\n       Model |  2.87904835         5  .575809669   Prob &gt; F        =    0.5398\n    Residual |  1924.39392     2,719  .707757969   R-squared       =    0.0015\n-------------+----------------------------------   Adj R-squared   =   -0.0003\n       Total |  1927.27297     2,724  .707515773   Root MSE        =    .84128\n\n------------------------------------------------------------------------------\n     u_tilde | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n        pcnv |  -.0012971    .040855    -0.03   0.975    -.0814072    .0788129\n      avgsen |  -.0070487   .0124122    -0.57   0.570     -.031387    .0172897\n     tottime |   .0120953   .0095768     1.26   0.207    -.0066833     .030874\n     ptime86 |  -.0048386   .0089166    -0.54   0.587    -.0223226    .0126454\n      qemp86 |   .0010221   .0103972     0.10   0.922    -.0193652    .0214093\n       _cons |  -.0057108   .0331524    -0.17   0.863    -.0707173    .0592956\n------------------------------------------------------------------------------\n\n\n\nCode\ndisplay \"Chi2(2)=\" `=e(N)*e(r2)'\ndisplay \"Its p-value=\" %5.4f `=1-chi2(2, `=e(N)*e(r2)' )'\n\nChi2(2)=4.0707294 Its p-value=0.1306\nTry making it a program if you “dare”"
+  },
+  {
+    "objectID": "rmethods/4_MLRM_IA.html#section-18",
+    "href": "rmethods/4_MLRM_IA.html#section-18",
+    "title": "Multiple Regression Analysis: Inference and Asymptotics",
+    "section": "",
+    "text": "Good news\n\nBottom line, when \\(N\\) is large, you do not need \\(e\\) to be normal.\nif A1-A5 hold, you can rely on asymptotic normality!\nThus you can still use t’s and F’s, but you can also use LM"
+  },
+  {
+    "objectID": "rmethods/5_FXMRA.html#introduction",
+    "href": "rmethods/5_FXMRA.html#introduction",
+    "title": "Multiple Regression Analysis",
+    "section": "Introduction",
+    "text": "Introduction\n\nMultiple Linear Regression models (MLRM), estimated via OLS, have very good properties, if all Assumptions (A1-A5,A6’) Hold.\nUp until now, we have discussed how to estimate them, and analyze them under “optimal” assumptions, in simplified cases.\nToday we will be adding other “minor” Features to MLR, better understanding its features"
+  },
+  {
+    "objectID": "rmethods/5_FXMRA.html#scaling-and-shifting",
+    "href": "rmethods/5_FXMRA.html#scaling-and-shifting",
+    "title": "Multiple Regression Analysis",
+    "section": "Scaling and shifting",
+    "text": "Scaling and shifting\n\nSomething that we do not emphasize enough. Before analyzing your data, its important to analyze the nature of the data (summary stats, ranges, scales)\nWhen I talk about Scaling and shifting, I refer exclusibly to afine transormations of the following type:\n\n\\[x^* = a*x+c\n\\]\nThey either Shift, or change the scale of the data. Not the shape!\n\nIf one applies afine transformations to the data, it will have NO effect on your model what-so-ever. (Same t’s same F’s, same \\(R^2\\))\nBut, your \\(\\beta's\\) will change. This could help understading and explaining the results."
+  },
+  {
+    "objectID": "rmethods/5_FXMRA.html#example",
+    "href": "rmethods/5_FXMRA.html#example",
+    "title": "Multiple Regression Analysis",
+    "section": "Example:",
+    "text": "Example:\n\n\nCode\nset linesize 255\nfrause bwght, clear\ngen bwkg = bwghtlbs*0.454\ngen bwgr = bwkg*1000\nregress bwght male white cigs lfaminc \nest sto m1\nregress bwghtlbs male white cigs lfaminc\nest sto m2\nregress bwkg male white cigs lfaminc\nest sto m3\nregress bwgr male white cigs lfaminc\nest sto m4\n\n\n\nBirthweight and Cig\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOz\n\nlbs\n\nKgs\n\nGr\n\n\n\n\n\nmale\n3.123***\n\n0.195***\n\n0.089***\n\n88.605***\n\n\n\n\n(1.071)\n[2.916]\n(0.067)\n[2.916]\n(0.030)\n[2.916]\n(30.389)\n[2.916]\n\n\nwhite\n5.404***\n\n0.338***\n\n0.153***\n\n153.346***\n\n\n\n\n(1.392)\n[3.882]\n(0.087)\n[3.882]\n(0.039)\n[3.882]\n(39.497)\n[3.882]\n\n\ncigs\n-0.480***\n\n-0.030***\n\n-0.014***\n\n-13.628***\n\n\n\n\n(0.091)\n[-5.288]\n(0.006)\n[-5.288]\n(0.003)\n[-5.288]\n(2.577)\n[-5.288]\n\n\nlfaminc\n1.053*\n\n0.066*\n\n0.030*\n\n29.867*\n\n\n\n\n(0.632)\n[1.664]\n(0.040)\n[1.664]\n(0.018)\n[1.664]\n(17.946)\n[1.664]\n\n\n_cons\n110.603***\n\n6.913***\n\n3.138***\n\n3138.351***\n\n\n\n\n(2.071)\n[53.410]\n(0.129)\n[53.410]\n(0.059)\n[53.410]\n(58.760)\n[53.410]\n\n\nN\n1388\n\n1388\n\n1388\n\n1388\n\n\n\nR2\n0.046\n\n0.046\n\n0.046\n\n0.046"
+  },
+  {
+    "objectID": "rmethods/5_FXMRA.html#scaling-xs-and-ys",
+    "href": "rmethods/5_FXMRA.html#scaling-xs-and-ys",
+    "title": "Multiple Regression Analysis",
+    "section": "Scaling X’s and Y’s",
+    "text": "Scaling X’s and Y’s\n\nRe-scaling \\(y\\) will affect the all coefficients.\n\nReducing Scale, reduces scale of coefficients\n\nRe-scaling \\(x's\\) will only affect its coefficient and possible the constant.\n\nReducing (increasing) Scale will increase (reduce) Scale of coefficient\n\nIn both cases, Shifting the variable only affects the constant.\n\n\n\n\n\n\n\n\n\n\nRe-Scaling is an important tool/trick that can be used for interpreting more complex models."
+  },
+  {
+    "objectID": "rmethods/5_FXMRA.html#beta-or-standardized-coefficients",
+    "href": "rmethods/5_FXMRA.html#beta-or-standardized-coefficients",
+    "title": "Multiple Regression Analysis",
+    "section": "Beta or Standardized Coefficients",
+    "text": "Beta or Standardized Coefficients"
+  },
+  {
+    "objectID": "rmethods/5_FXMRA.html#functional-forms-logarithms",
+    "href": "rmethods/5_FXMRA.html#functional-forms-logarithms",
+    "title": "Multiple Regression Analysis",
+    "section": "Functional Forms: Logarithms",
+    "text": "Functional Forms: Logarithms"
+  },
+  {
+    "objectID": "rmethods/5_FXMRA.html#functional-forms-polynomials-x2-x3-etc",
+    "href": "rmethods/5_FXMRA.html#functional-forms-polynomials-x2-x3-etc",
+    "title": "Multiple Regression Analysis",
+    "section": "Functional Forms: Polynomials ($x^2, x^3, $ etc)",
+    "text": "Functional Forms: Polynomials ($x^2, x^3, $ etc)"
+  },
+  {
+    "objectID": "rmethods/5_FXMRA.html#functional-forms-single-dummies",
+    "href": "rmethods/5_FXMRA.html#functional-forms-single-dummies",
+    "title": "Multiple Regression Analysis",
+    "section": "Functional Forms: Single Dummies",
+    "text": "Functional Forms: Single Dummies"
+  },
+  {
+    "objectID": "rmethods/5_FXMRA.html#functional-forms-multiple-dummies",
+    "href": "rmethods/5_FXMRA.html#functional-forms-multiple-dummies",
+    "title": "Multiple Regression Analysis",
+    "section": "Functional Forms: Multiple Dummies",
+    "text": "Functional Forms: Multiple Dummies"
+  },
+  {
+    "objectID": "rmethods/5_FXMRA.html#functional-forms-interactions-xz-xd",
+    "href": "rmethods/5_FXMRA.html#functional-forms-interactions-xz-xd",
+    "title": "Multiple Regression Analysis",
+    "section": "Functional Forms: Interactions (\\(x*z, x*d\\))",
+    "text": "Functional Forms: Interactions (\\(x*z, x*d\\))"
+  },
+  {
+    "objectID": "rmethods/5_FXMRA.html#functional-forms-full-interactions",
+    "href": "rmethods/5_FXMRA.html#functional-forms-full-interactions",
+    "title": "Multiple Regression Analysis",
+    "section": "Functional Forms: Full Interactions",
+    "text": "Functional Forms: Full Interactions"
+  },
+  {
+    "objectID": "rmethods/5_FXMRA.html#dummies-as-dep-variable",
+    "href": "rmethods/5_FXMRA.html#dummies-as-dep-variable",
+    "title": "Multiple Regression Analysis",
+    "section": "Dummies as Dep Variable",
+    "text": "Dummies as Dep Variable"
+  },
+  {
+    "objectID": "rmethods/5_FXMRA.html#discrete-vriable-as-dep-variable",
+    "href": "rmethods/5_FXMRA.html#discrete-vriable-as-dep-variable",
+    "title": "Multiple Regression Analysis",
+    "section": "Discrete Vriable as Dep Variable",
+    "text": "Discrete Vriable as Dep Variable"
   }
 ]

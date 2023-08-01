@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.433">
+  <meta name="generator" content="quarto-1.4.251">
 
   <meta name="author" content="Fernando Rios-Avila">
   <title>Econometrics MSC Levy - Multiple Regression Analysis: Inference and Asymptotics</title>
@@ -222,7 +222,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -437,41 +438,43 @@ Fernando Rios-Avila
 <li><p>Unless you know something about the distribution of <span class="math inline">\(\beta's\)</span>, it would be hard to make any inferences from the estimates. Why?</p></li>
 <li><p>Because not all distributions are made equal!</p></li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a>*| output: false</span>
-<span id="cb1-2"><a href="#cb1-2"></a>*| code-fold: true</span>
-<span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">clear</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">range</span> x -4 4 1000</span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="kw">gen</span> funiform = 0 </span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="kw">replace</span> funiform = 1/(2*<span class="fu">sqrt</span>(3)) <span class="kw">if</span> <span class="fu">inrange</span>(x,-<span class="fu">sqrt</span>(3),<span class="fu">sqrt</span>(3))</span>
+<div id="bbcd5d20" class="cell" data-execution_count="1">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">clear</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">range</span> x -4 4 1000</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">gen</span> funiform = 0 </span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">replace</span> funiform = 1/(2*<span class="fu">sqrt</span>(3)) <span class="kw">if</span> <span class="fu">inrange</span>(x,-<span class="fu">sqrt</span>(3),<span class="fu">sqrt</span>(3))</span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="kw">gen</span> fnormal = 0 </span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="kw">replace</span> fnormal = <span class="fu">normalden</span>(x)</span>
 <span id="cb1-8"><a href="#cb1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="kw">gen</span> fnormal = 0 </span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="kw">replace</span> fnormal = <span class="fu">normalden</span>(x)</span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="kw">gen</span> fchi2 = 0 </span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="kw">replace</span> fchi2 = <span class="fu">sqrt</span>(8)*chi2den(4,x*<span class="fu">sqrt</span>(8)+4)</span>
 <span id="cb1-11"><a href="#cb1-11"></a></span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="kw">gen</span> fchi2 = 0 </span>
-<span id="cb1-13"><a href="#cb1-13"></a><span class="kw">replace</span> fchi2 = <span class="fu">sqrt</span>(8)*chi2den(4,x*<span class="fu">sqrt</span>(8)+4)</span>
-<span id="cb1-14"><a href="#cb1-14"></a></span>
-<span id="cb1-15"><a href="#cb1-15"></a><span class="kw">integ</span> funiform x, <span class="kw">gen</span>(F1)</span>
-<span id="cb1-16"><a href="#cb1-16"></a><span class="kw">integ</span> fnormal x, <span class="kw">gen</span>(F2)</span>
-<span id="cb1-17"><a href="#cb1-17"></a><span class="kw">integ</span> fchi2 x, <span class="kw">gen</span>(F3)</span>
-<span id="cb1-18"><a href="#cb1-18"></a></span>
-<span id="cb1-19"><a href="#cb1-19"></a><span class="kw">set</span> <span class="dv">scheme</span> white2</span>
-<span id="cb1-20"><a href="#cb1-20"></a>color_style egypt</span>
-<span id="cb1-21"><a href="#cb1-21"></a><span class="kw">replace</span> x = x + 1.5</span>
-<span id="cb1-22"><a href="#cb1-22"></a><span class="kw">two</span> (area funiform x           , pstyle(p1) <span class="kw">color</span>(%20)) <span class="co">///</span></span>
-<span id="cb1-23"><a href="#cb1-23"></a>    (area funiform x <span class="kw">if</span> F1&lt;0.05, pstyle(p1) <span class="kw">color</span>(%80)) <span class="co">/// </span></span>
-<span id="cb1-24"><a href="#cb1-24"></a>    (area funiform x <span class="kw">if</span> F1&gt;0.95, pstyle(p1) <span class="kw">color</span>(%80)) <span class="co">/// </span></span>
-<span id="cb1-25"><a href="#cb1-25"></a>    (area fnormal  x           , pstyle(p2) <span class="kw">color</span>(%20)) <span class="co">///  </span></span>
-<span id="cb1-26"><a href="#cb1-26"></a>    (area fnormal  x <span class="kw">if</span> F2&lt;0.05, pstyle(p2) <span class="kw">color</span>(%80)) <span class="co">/// </span></span>
-<span id="cb1-27"><a href="#cb1-27"></a>    (area fnormal  x <span class="kw">if</span> F2&gt;0.95, pstyle(p2) <span class="kw">color</span>(%80)) <span class="co">/// </span></span>
-<span id="cb1-28"><a href="#cb1-28"></a>    (area fchi2    x           , pstyle(p3) <span class="kw">color</span>(%20)) <span class="co">/// </span></span>
-<span id="cb1-29"><a href="#cb1-29"></a>    (area fchi2    x <span class="kw">if</span> F3&gt;0.95, pstyle(p3) <span class="kw">color</span>(%80)) <span class="co">/// </span></span>
-<span id="cb1-30"><a href="#cb1-30"></a>    (area fchi2    x <span class="kw">if</span> F3&lt;0.05, pstyle(p3) <span class="kw">color</span>(%80)), <span class="co">///</span></span>
-<span id="cb1-31"><a href="#cb1-31"></a>    <span class="kw">xlabel</span>(-4 / 4) <span class="bn">legend</span>(<span class="kw">order</span>(2 <span class="st">"Uniform"</span> 5 <span class="st">"Normal"</span> 8 <span class="st">"C-Chi2"</span>)) <span class="co">/// </span></span>
-<span id="cb1-32"><a href="#cb1-32"></a>    <span class="bn">xtitle</span>(<span class="st">"Beta hat Distribution"</span>) <span class="co">///</span></span>
-<span id="cb1-33"><a href="#cb1-33"></a>    <span class="bn">xline</span>( 0, lstyle(1) lwidth(1)) <span class="bn">xline</span>(1.5)</span>
-<span id="cb1-34"><a href="#cb1-34"></a></span>
-<span id="cb1-35"><a href="#cb1-35"></a><span class="kw">graph</span> <span class="kw">export</span> images/f4_1.png, <span class="kw">replace</span> <span class="kw">width</span>(1200)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="kw">integ</span> funiform x, <span class="kw">gen</span>(F1)</span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="kw">integ</span> fnormal x, <span class="kw">gen</span>(F2)</span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="kw">integ</span> fchi2 x, <span class="kw">gen</span>(F3)</span>
+<span id="cb1-15"><a href="#cb1-15"></a></span>
+<span id="cb1-16"><a href="#cb1-16"></a><span class="kw">set</span> <span class="dv">scheme</span> white2</span>
+<span id="cb1-17"><a href="#cb1-17"></a>color_style egypt</span>
+<span id="cb1-18"><a href="#cb1-18"></a><span class="kw">replace</span> x = x + 1.5</span>
+<span id="cb1-19"><a href="#cb1-19"></a><span class="kw">two</span> (area funiform x           , pstyle(p1) <span class="kw">color</span>(%20)) <span class="co">///</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a>    (area funiform x <span class="kw">if</span> F1&lt;0.05, pstyle(p1) <span class="kw">color</span>(%80)) <span class="co">/// </span></span>
+<span id="cb1-21"><a href="#cb1-21"></a>    (area funiform x <span class="kw">if</span> F1&gt;0.95, pstyle(p1) <span class="kw">color</span>(%80)) <span class="co">/// </span></span>
+<span id="cb1-22"><a href="#cb1-22"></a>    (area fnormal  x           , pstyle(p2) <span class="kw">color</span>(%20)) <span class="co">///  </span></span>
+<span id="cb1-23"><a href="#cb1-23"></a>    (area fnormal  x <span class="kw">if</span> F2&lt;0.05, pstyle(p2) <span class="kw">color</span>(%80)) <span class="co">/// </span></span>
+<span id="cb1-24"><a href="#cb1-24"></a>    (area fnormal  x <span class="kw">if</span> F2&gt;0.95, pstyle(p2) <span class="kw">color</span>(%80)) <span class="co">/// </span></span>
+<span id="cb1-25"><a href="#cb1-25"></a>    (area fchi2    x           , pstyle(p3) <span class="kw">color</span>(%20)) <span class="co">/// </span></span>
+<span id="cb1-26"><a href="#cb1-26"></a>    (area fchi2    x <span class="kw">if</span> F3&gt;0.95, pstyle(p3) <span class="kw">color</span>(%80)) <span class="co">/// </span></span>
+<span id="cb1-27"><a href="#cb1-27"></a>    (area fchi2    x <span class="kw">if</span> F3&lt;0.05, pstyle(p3) <span class="kw">color</span>(%80)), <span class="co">///</span></span>
+<span id="cb1-28"><a href="#cb1-28"></a>    <span class="kw">xlabel</span>(-4 / 4) <span class="bn">legend</span>(<span class="kw">order</span>(2 <span class="st">"Uniform"</span> 5 <span class="st">"Normal"</span> 8 <span class="st">"C-Chi2"</span>)) <span class="co">/// </span></span>
+<span id="cb1-29"><a href="#cb1-29"></a>    <span class="bn">xtitle</span>(<span class="st">"Beta hat Distribution"</span>) <span class="co">///</span></span>
+<span id="cb1-30"><a href="#cb1-30"></a>    <span class="bn">xline</span>( 0, lstyle(1) lwidth(1)) <span class="bn">xline</span>(1.5)</span>
+<span id="cb1-31"><a href="#cb1-31"></a></span>
+<span id="cb1-32"><a href="#cb1-32"></a><span class="kw">graph</span> <span class="kw">export</span> images/f4_1.png, <span class="kw">replace</span> <span class="kw">width</span>(1200)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 </section>
 <section id="not-all-distributions-are-the-same" class="slide level2">
 <h2>Not all Distributions are the Same</h2>
@@ -514,12 +517,12 @@ Fernando Rios-Avila
 <li>Where <span class="math inline">\(\beta_j\)</span> is what you think the True Population parameter is (your hypothesis), and <span class="math inline">\(\hat\beta_j\)</span> is what you estimate in your data.</li>
 <li>Depending on the size of this, you can either reject your hypothesis, or <strong>not</strong> Reject it.</li>
 </ul>
-<p>but do we know <span class="math inline">\(sd(\beta)\)</span>?</p>
+<p>but do we “know” <span class="math inline">\(sd(\beta)\)</span>?</p>
 </section>
 <section id="section-3" class="slide level2">
 <h2></h2>
 <h3 id="do-we-know-sdbeta">Do we “know” <span class="math inline">\(sd(\beta)\)</span>?</h3>
-<p>We don’t, which is why we can use a normal directly. Instead we use a t-distribution, which uses <span class="math inline">\(se(\beta\hat)\)</span></p>
+<p>We don’t, which is why we can use a normal directly. Instead we use a t-distribution, which uses <span class="math inline">\(se(\hat\beta )\)</span></p>
 <p><span class="math display">\[t_j = \frac{\hat \beta_j - \beta_j}{se(\hat\beta)}\sim t_{N-k-1}
 \]</span></p>
 <p>Then</p>
@@ -580,7 +583,7 @@ H_0: &amp; \beta_k=\beta^{hyp}_k \text{ vs } H_1: \beta_k&lt;\beta^{hyp}_k \\
 \end{aligned}
 \]</span></p>
 <ul>
-<li><p>Where <span class="math inline">\(\alpha\)</span> is your level of <strong>significance</strong>, and <span class="math inline">\(t_{N-k-1}(\alpha)\)</span> and <span class="math inline">\(t_{N-k-1}(1-\alpha)\)</span> are critical values.</p></li>
+<li><p>Where <span class="math inline">\(\alpha\)</span> is your level of <strong>significance</strong>, and <span class="math inline">\(t_{N-k-1}(1-\alpha)\)</span> is the critical value.</p></li>
 <li><p><span class="math inline">\(\alpha\)</span> determines the “risk” of commiting an <strong>error type I</strong>: Rejecting the Null when its true.</p></li>
 <li><p>Intuitively, the smaller <span class="math inline">\(\alpha\)</span> is, the more possitive (negative) “t” needs to be reject the Null.</p></li>
 </ul>
@@ -614,23 +617,26 @@ H_0: &amp; \beta_k=\beta^{hyp}_k \text{ vs } H_1: \beta_k \neq \beta^{hyp}_k \\
 </section>
 <section id="section-7" class="slide level2">
 <h2></h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1"></a>*| output: false</span>
-<span id="cb2-2"><a href="#cb2-2"></a>*| code-fold: true</span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">clear</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="kw">range</span> x -5 5 1000</span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="kw">gen</span> fx = <span class="fu">normalden</span>(x) </span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="kw">set</span> <span class="dv">scheme</span> white2</span>
-<span id="cb2-7"><a href="#cb2-7"></a>color_style tableau</span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="kw">gen</span> xx = x+1</span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="kw">two</span> (area fx x , pstyle(p1) <span class="kw">color</span>(%20)) <span class="co">///</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a>    (area fx x <span class="kw">if</span> x&lt;<span class="fu">invnormal</span>(.025), pstyle(p1) <span class="kw">color</span>(%80) ) <span class="co">///</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a>    (area fx x <span class="kw">if</span> x&gt;<span class="fu">invnormal</span>(.975), pstyle(p1) <span class="kw">color</span>(%80) ) <span class="co">///</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a>    (area fx xx , pstyle(p2) <span class="kw">color</span>(%20)) <span class="co">///</span></span>
-<span id="cb2-13"><a href="#cb2-13"></a>    (area fx xx <span class="kw">if</span> x&lt;<span class="fu">invnormal</span>(.025), pstyle(p2) <span class="kw">color</span>(%80) ) <span class="co">/// </span></span>
-<span id="cb2-14"><a href="#cb2-14"></a>    (area fx xx <span class="kw">if</span> x&gt;<span class="fu">invnormal</span>(.975), pstyle(p2) <span class="kw">color</span>(%80) ) <span class="co">///</span></span>
-<span id="cb2-15"><a href="#cb2-15"></a>    , <span class="bn">xline</span>(1.8) <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"H0: b=0"</span> 4 <span class="st">"H0: b=1"</span>))  <span class="co">///</span></span>
-<span id="cb2-16"><a href="#cb2-16"></a>    <span class="kw">xlabel</span>(-4(2)4)  <span class="kw">ylabel</span>(0(.1).5)  <span class="bn">xsize</span>(8) <span class="bn">ysize</span>(4)</span>
-<span id="cb2-17"><a href="#cb2-17"></a><span class="kw">graph</span> <span class="kw">export</span> images/f4_2.png, height(1000)  <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="4b5487f7" class="cell" data-execution_count="2">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">clear</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">range</span> x -5 5 1000</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">gen</span> fx = <span class="fu">normalden</span>(x) </span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="kw">set</span> <span class="dv">scheme</span> white2</span>
+<span id="cb2-5"><a href="#cb2-5"></a>color_style tableau</span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="kw">gen</span> xx = x+1</span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="kw">two</span> (area fx x , pstyle(p1) <span class="kw">color</span>(%20)) <span class="co">///</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>    (area fx x <span class="kw">if</span> x&lt;<span class="fu">invnormal</span>(.025), pstyle(p1) <span class="kw">color</span>(%80) ) <span class="co">///</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>    (area fx x <span class="kw">if</span> x&gt;<span class="fu">invnormal</span>(.975), pstyle(p1) <span class="kw">color</span>(%80) ) <span class="co">///</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a>    (area fx xx , pstyle(p2) <span class="kw">color</span>(%20)) <span class="co">///</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>    (area fx xx <span class="kw">if</span> x&lt;<span class="fu">invnormal</span>(.025), pstyle(p2) <span class="kw">color</span>(%80) ) <span class="co">/// </span></span>
+<span id="cb2-12"><a href="#cb2-12"></a>    (area fx xx <span class="kw">if</span> x&gt;<span class="fu">invnormal</span>(.975), pstyle(p2) <span class="kw">color</span>(%80) ) <span class="co">///</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a>    , <span class="bn">xline</span>(1.8) <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"H0: b=0"</span> 4 <span class="st">"H0: b=1"</span>))  <span class="co">///</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a>    <span class="kw">xlabel</span>(-4(2)4)  <span class="kw">ylabel</span>(0(.1).5)  <span class="bn">xsize</span>(8) <span class="bn">ysize</span>(4)</span>
+<span id="cb2-15"><a href="#cb2-15"></a><span class="kw">graph</span> <span class="kw">export</span> images/f4_2.png, height(1000)  <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 
 <img data-src="images/f4_2.png" class="r-stretch quarto-figure-center"></section>
 <section id="what-about-type-error-i-and-ii" class="slide level2">
@@ -649,29 +655,52 @@ H_0: &amp; \beta_k=\beta^{hyp}_k \text{ vs } H_1: \beta_k \neq \beta^{hyp}_k \\
 </section>
 <section id="section-8" class="slide level2">
 <h2></h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a>*| output: false</span>
-<span id="cb3-2"><a href="#cb3-2"></a>*| code-fold: true</span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">clear</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="kw">range</span> x -5 5 1000</span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="kw">gen</span> fx = <span class="fu">normalden</span>(x) </span>
-<span id="cb3-6"><a href="#cb3-6"></a></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="kw">gen</span> xxx=x+3 </span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="kw">two</span> (area fx x , pstyle(p1) <span class="kw">color</span>(%20)) <span class="co">///</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a>    (area fx xxx, pstyle(p2) <span class="kw">color</span>(%20)) <span class="co">///</span></span>
-<span id="cb3-10"><a href="#cb3-10"></a>    (area fx x <span class="kw">if</span> x&gt;2, pstyle(p1) <span class="kw">color</span>(%80)) <span class="co">///</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a>    (area fx xxx <span class="kw">if</span> xxx &lt;2, pstyle(p2) <span class="kw">color</span>(%80))  <span class="co">///</span></span>
-<span id="cb3-12"><a href="#cb3-12"></a>    ,<span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"H0"</span>3 <span class="st">"Type I "</span> 2 <span class="st">"H1"</span>  4 <span class="st">"Type II "</span>) <span class="bn">cols</span>(2))   <span class="co">///</span></span>
-<span id="cb3-13"><a href="#cb3-13"></a>    <span class="kw">xlabel</span>(-4(2)7)  <span class="kw">ylabel</span>(0(.1).5) <span class="bn">xsize</span>(8) <span class="bn">ysize</span>(4)  </span>
-<span id="cb3-14"><a href="#cb3-14"></a><span class="kw">graph</span> <span class="kw">export</span> images/f4_3.png, height(1000)  <span class="kw">replace</span></span>
-<span id="cb3-15"><a href="#cb3-15"></a> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="62afc2e4" class="cell" data-execution_count="3">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">clear</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">range</span> x -5 5 1000</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">gen</span> fx = <span class="fu">normalden</span>(x) </span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="kw">gen</span> xxx=x+3 </span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="kw">two</span> (area fx x , pstyle(p1) <span class="kw">color</span>(%20)) <span class="co">///</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>    (area fx xxx, pstyle(p2) <span class="kw">color</span>(%20)) <span class="co">///</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>    (area fx x <span class="kw">if</span> x&gt;2, pstyle(p1) <span class="kw">color</span>(%80)) <span class="co">///</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a>    (area fx xxx <span class="kw">if</span> xxx &lt;2, pstyle(p2) <span class="kw">color</span>(%80))  <span class="co">///</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a>    ,<span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"H0"</span>3 <span class="st">"Type I "</span> 2 <span class="st">"H1"</span>  4 <span class="st">"Type II "</span>) <span class="bn">cols</span>(2))   <span class="co">///</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a>    <span class="kw">xlabel</span>(-4(2)7)  <span class="kw">ylabel</span>(0(.1).5) <span class="bn">xsize</span>(8) <span class="bn">ysize</span>(4)  </span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="kw">graph</span> <span class="kw">export</span> images/f4_3.png, height(1000)  <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 
 <img data-src="images/f4_3.png" class="r-stretch quarto-figure-center"></section>
 <section id="example-determinants-of-college-gpa" class="slide level2 scrollable">
 <h2>Example: Determinants of College GPA</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1"></a>*| echo: true</span>
-<span id="cb4-2"><a href="#cb4-2"></a></span>
-<span id="cb4-3"><a href="#cb4-3"></a>frause gpa1, <span class="kw">clear</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">reg</span> colgpa hsgpa act skipped</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="92448eb0" class="cell" data-execution_count="4">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1"></a>frause gpa1, <span class="kw">clear</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">reg</span> colgpa hsgpa act skipped</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Source |       SS           df       MS      Number of obs   =       141
+-------------+----------------------------------   F(3, 137)       =     13.92
+       Model |  4.53313314         3  1.51104438   Prob &gt; F        =    0.0000
+    Residual |  14.8729663       137  .108561798   R-squared       =    0.2336
+-------------+----------------------------------   Adj R-squared   =    0.2168
+       Total |  19.4060994       140  .138614996   Root MSE        =    .32949
+
+------------------------------------------------------------------------------
+      colgpa | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       hsgpa |   .4118162   .0936742     4.40   0.000     .2265819    .5970505
+         act |   .0147202   .0105649     1.39   0.166    -.0061711    .0356115
+     skipped |  -.0831131   .0259985    -3.20   0.002    -.1345234   -.0317028
+       _cons |   1.389554   .3315535     4.19   0.000     .7339295    2.045178
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
 <ul>
 <li>Hypothesis: Skipping classes has no effect on College GPA.</li>
 </ul>
@@ -680,10 +709,11 @@ H_0: &amp; \beta_k=\beta^{hyp}_k \text{ vs } H_1: \beta_k \neq \beta^{hyp}_k \\
 <ul>
 <li>Test, <span class="math inline">\(a=95%\)</span>, <span class="math inline">\(|t_{skip}|=3.2\)</span> vs <span class="math inline">\(t_{n-k-1}(0.975)\)</span>:</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1"></a>*| output: asis</span>
-<span id="cb5-2"><a href="#cb5-2"></a>*| echo: true</span>
-<span id="cb5-3"><a href="#cb5-3"></a>*| code-folde: false</span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">display</span> invt(141-4,0.975)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">display</span> invt(141-4,0.975)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p>1.9774312</p>
 <ul>
 <li>Conclusion: <span class="math inline">\(H_0\)</span> is rejected.</li>
 </ul>
@@ -713,10 +743,25 @@ H_0: &amp; \beta_k=\beta^{hyp}_k \text{ vs } H_1: \beta_k \neq \beta^{hyp}_k \\
 </ul></li>
 <li>Each GPA point in highschool translates into half a point in College GPA. vs Is less than .5</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1"></a>*| echo: true</span>
-<span id="cb6-2"><a href="#cb6-2"></a>*| code-fold: false</span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">test</span> hsgpa = 0.5</span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="kw">lincom</span> hsgpa - 0.5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="edb7c32a" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">test</span> hsgpa = 0.5</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">lincom</span> hsgpa - 0.5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ ( 1)  hsgpa = .5
+
+       F(  1,   137) =    0.89
+            Prob &gt; F =    0.3482
+
+ ( 1)  hsgpa = .5
+
+------------------------------------------------------------------------------
+      colgpa | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         (1) |  -.0881838   .0936742    -0.94   0.348    -.2734181    .0970505
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
 <ul>
 <li>Critical at 5%: <span class="math inline">\(t=-1.6560\)</span></li>
 <li>Cannot Reject <span class="math inline">\(H_0\)</span></li>
@@ -725,7 +770,7 @@ H_0: &amp; \beta_k=\beta^{hyp}_k \text{ vs } H_1: \beta_k \neq \beta^{hyp}_k \\
 <section id="p-values" class="slide level2">
 <h2>p-values</h2>
 <ul>
-<li>Something you may or may not have noticed. The significance level <span class="math inline">\(\alpha\)</span> can be choosen by the resercher.
+<li>Something you may or may not have noticed. The significance level <span class="math inline">\(\alpha\)</span> can be choosen by the researcher.
 <ul>
 <li>Conventional levels are 10%, 5% and 1%.</li>
 </ul></li>
@@ -746,26 +791,30 @@ H_0: &amp; \beta_k=\beta^{hyp}_k \text{ vs } H_1: \beta_k \neq \beta^{hyp}_k \\
 </section>
 <section id="section-11" class="slide level2">
 <h2></h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1"></a>*| output: false</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">clear</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">range</span> x -5 5 1000</span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="kw">gen</span> fx = <span class="fu">normalden</span>(x) </span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="kw">local</span> p1:<span class="kw">display</span> %5.1f 100*2*(1-<span class="fu">normal</span>(1.5)) </span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="kw">local</span> p2:<span class="kw">display</span> %5.1f 100*2*(1-<span class="fu">normal</span>(2.5)) </span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="kw">two</span> (area fx x , pstyle(p1) <span class="kw">color</span>(%20)) <span class="co">///</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a>    (area fx x <span class="kw">if</span> x&lt;-1.5, pstyle(p3) <span class="kw">color</span>(%80) ) <span class="co">///</span></span>
-<span id="cb7-9"><a href="#cb7-9"></a>    (area fx x <span class="kw">if</span> x&gt;+1.5, pstyle(p3) <span class="kw">color</span>(%80) ) <span class="co">///</span></span>
-<span id="cb7-10"><a href="#cb7-10"></a>    (area fx x <span class="kw">if</span> x&lt;<span class="fu">invnormal</span>(.025), pstyle(p1) <span class="kw">color</span>(%80) ) <span class="co">///</span></span>
-<span id="cb7-11"><a href="#cb7-11"></a>    (area fx x <span class="kw">if</span> x&gt;<span class="fu">invnormal</span>(.975), pstyle(p1) <span class="kw">color</span>(%80) ) <span class="co">///</span></span>
-<span id="cb7-12"><a href="#cb7-12"></a>    (area fx x <span class="kw">if</span> x&lt;-2.5, pstyle(p2) <span class="kw">color</span>(%80) ) <span class="co">///</span></span>
-<span id="cb7-13"><a href="#cb7-13"></a>    (area fx x <span class="kw">if</span> x&gt;+2.5, pstyle(p2) <span class="kw">color</span>(%80) ) , <span class="co">///</span></span>
-<span id="cb7-14"><a href="#cb7-14"></a>    <span class="bn">xline</span>(-1.5 2.5) <span class="bn">legend</span>(<span class="kw">order</span>(4 <span class="st">"{&amp;alpha}=5%"</span> 6 <span class="st">"p-value = `p2'%"</span> 2 <span class="st">"p-value = `p1'%"</span>)) <span class="co">///</span></span>
-<span id="cb7-15"><a href="#cb7-15"></a>    <span class="kw">ylabel</span>(0(.1).5) <span class="kw">xlabel</span>(-5 0 5 -1.5 2.5)</span>
-<span id="cb7-16"><a href="#cb7-16"></a><span class="kw">graph</span> <span class="kw">export</span> images/f4_4.png, <span class="kw">replace</span> <span class="kw">width</span>(1200)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="270743be" class="cell" data-execution_count="7">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">clear</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">range</span> x -5 5 1000</span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="kw">gen</span> fx = <span class="fu">normalden</span>(x) </span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="kw">local</span> p1:<span class="kw">display</span> %5.1f 100*2*(1-<span class="fu">normal</span>(1.5)) </span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="kw">local</span> p2:<span class="kw">display</span> %5.1f 100*2*(1-<span class="fu">normal</span>(2.5)) </span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="kw">two</span> (area fx x , pstyle(p1) <span class="kw">color</span>(%20)) <span class="co">///</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>    (area fx x <span class="kw">if</span> x&lt;-1.5, pstyle(p3) <span class="kw">color</span>(%80) ) <span class="co">///</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a>    (area fx x <span class="kw">if</span> x&gt;+1.5, pstyle(p3) <span class="kw">color</span>(%80) ) <span class="co">///</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a>    (area fx x <span class="kw">if</span> x&lt;<span class="fu">invnormal</span>(.025), pstyle(p1) <span class="kw">color</span>(%80) ) <span class="co">///</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>    (area fx x <span class="kw">if</span> x&gt;<span class="fu">invnormal</span>(.975), pstyle(p1) <span class="kw">color</span>(%80) ) <span class="co">///</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a>    (area fx x <span class="kw">if</span> x&lt;-2.5, pstyle(p2) <span class="kw">color</span>(%80) ) <span class="co">///</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a>    (area fx x <span class="kw">if</span> x&gt;+2.5, pstyle(p2) <span class="kw">color</span>(%80) ) , <span class="co">///</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a>    <span class="bn">xline</span>(-1.5 2.5) <span class="bn">legend</span>(<span class="kw">order</span>(4 <span class="st">"{&amp;alpha}=5%"</span> 6 <span class="st">"p-value = `p2'%"</span> 2 <span class="st">"p-value = `p1'%"</span>)) <span class="co">///</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a>    <span class="kw">ylabel</span>(0(.1).5) <span class="kw">xlabel</span>(-5 0 5 -1.5 2.5)</span>
+<span id="cb9-15"><a href="#cb9-15"></a><span class="kw">graph</span> <span class="kw">export</span> images/f4_4.png, <span class="kw">replace</span> <span class="kw">width</span>(1200)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 
 <img data-src="images/f4_4.png" class="r-stretch quarto-figure-center"></section>
-<section id="note-on-statistically-significance" class="slide level2">
-<h2>Note on Statistically Significance</h2>
+<section id="note-on-statistical-significance" class="slide level2">
+<h2>Note on Statistical Significance</h2>
 <ol type="1">
 <li>Statistically significant doesnt mean meaninful. And lack of it, doesnt mean is not important
 <ul>
@@ -798,29 +847,29 @@ H_0: &amp; \beta_k=\beta^{hyp}_k \text{ vs } H_1: \beta_k \neq \beta^{hyp}_k \\
 </section>
 <section id="section-13" class="slide level2">
 <h2></h2>
-<div class="cell" data-execution_count="1">
+<div id="d42f51a9" class="cell" data-execution_count="8">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">clear</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">range</span> x -5 5 1000</span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="kw">gen</span> fx = <span class="fu">normalden</span>(x) </span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="kw">local</span> p1:<span class="kw">display</span> %5.1f 100*2*(1-<span class="fu">normal</span>(1.5)) </span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="kw">local</span> p2:<span class="kw">display</span> %5.1f 100*2*(1-<span class="fu">normal</span>(2.5)) </span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="kw">gen</span> xx = x+2</span>
-<span id="cb8-7"><a href="#cb8-7"></a></span>
-<span id="cb8-8"><a href="#cb8-8"></a><span class="kw">two</span> (area fx x , pstyle(p1) <span class="kw">color</span>(%10)) <span class="co">///</span></span>
-<span id="cb8-9"><a href="#cb8-9"></a>    (area fx x <span class="kw">if</span> x&lt;<span class="fu">invnormal</span>(.025), pstyle(p1) <span class="kw">color</span>(%60) ) <span class="co">///</span></span>
-<span id="cb8-10"><a href="#cb8-10"></a>    (area fx x <span class="kw">if</span> x&gt;<span class="fu">invnormal</span>(.975), pstyle(p1) <span class="kw">color</span>(%60) ) <span class="co">///</span></span>
-<span id="cb8-11"><a href="#cb8-11"></a>    (area fx xx , <span class="kw">color</span>(gs1%10) ) <span class="co">///</span></span>
-<span id="cb8-12"><a href="#cb8-12"></a>    (area fx xx <span class="kw">if</span> x&lt;<span class="fu">invnormal</span>(.005),  <span class="kw">color</span>(gs1%80) ) <span class="co">///</span></span>
-<span id="cb8-13"><a href="#cb8-13"></a>    (area fx xx <span class="kw">if</span> x&gt;<span class="fu">invnormal</span>(.995),  <span class="kw">color</span>(gs1%80) ) <span class="co">///</span></span>
-<span id="cb8-14"><a href="#cb8-14"></a>    (area fx xx <span class="kw">if</span> x&lt;<span class="fu">invnormal</span>(.025),  <span class="kw">color</span>(gs1%60) ) <span class="co">///</span></span>
-<span id="cb8-15"><a href="#cb8-15"></a>    (area fx xx <span class="kw">if</span> x&gt;<span class="fu">invnormal</span>(.975),  <span class="kw">color</span>(gs1%60) ) <span class="co">///</span></span>
-<span id="cb8-16"><a href="#cb8-16"></a>    (area fx xx <span class="kw">if</span> x&lt;<span class="fu">invnormal</span>(.05),  <span class="kw">color</span>(gs1%40) ) <span class="co">///</span></span>
-<span id="cb8-17"><a href="#cb8-17"></a>    (area fx xx <span class="kw">if</span> x&gt;<span class="fu">invnormal</span>(.95),  <span class="kw">color</span>(gs1%40) ), <span class="co">///</span></span>
-<span id="cb8-18"><a href="#cb8-18"></a>    <span class="bn">xline</span>(2) <span class="bn">legend</span>(<span class="kw">order</span>(5 <span class="st">"CI-1%"</span> 7 <span class="st">"CI-5%"</span> 9 <span class="st">"CI-10%"</span>)) <span class="co">///</span></span>
-<span id="cb8-19"><a href="#cb8-19"></a>    <span class="kw">ylabel</span>(0(.1).5) <span class="kw">xlabel</span>(-5 0 5 )  </span>
-<span id="cb8-20"><a href="#cb8-20"></a><span class="kw">graph</span> <span class="kw">export</span> images/f4_5.png, <span class="kw">replace</span> <span class="kw">width</span>(1000)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">clear</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="kw">range</span> x -5 5 1000</span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="kw">gen</span> fx = <span class="fu">normalden</span>(x) </span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="kw">local</span> p1:<span class="kw">display</span> %5.1f 100*2*(1-<span class="fu">normal</span>(1.5)) </span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="kw">local</span> p2:<span class="kw">display</span> %5.1f 100*2*(1-<span class="fu">normal</span>(2.5)) </span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="kw">gen</span> xx = x+2</span>
+<span id="cb10-7"><a href="#cb10-7"></a></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="kw">two</span> (area fx x , pstyle(p1) <span class="kw">color</span>(%10)) <span class="co">///</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a>    (area fx x <span class="kw">if</span> x&lt;<span class="fu">invnormal</span>(.025), pstyle(p1) <span class="kw">color</span>(%60) ) <span class="co">///</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a>    (area fx x <span class="kw">if</span> x&gt;<span class="fu">invnormal</span>(.975), pstyle(p1) <span class="kw">color</span>(%60) ) <span class="co">///</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a>    (area fx xx , <span class="kw">color</span>(gs1%10) ) <span class="co">///</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a>    (area fx xx <span class="kw">if</span> x&lt;<span class="fu">invnormal</span>(.005),  <span class="kw">color</span>(gs1%80) ) <span class="co">///</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a>    (area fx xx <span class="kw">if</span> x&gt;<span class="fu">invnormal</span>(.995),  <span class="kw">color</span>(gs1%80) ) <span class="co">///</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a>    (area fx xx <span class="kw">if</span> x&lt;<span class="fu">invnormal</span>(.025),  <span class="kw">color</span>(gs1%60) ) <span class="co">///</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a>    (area fx xx <span class="kw">if</span> x&gt;<span class="fu">invnormal</span>(.975),  <span class="kw">color</span>(gs1%60) ) <span class="co">///</span></span>
+<span id="cb10-16"><a href="#cb10-16"></a>    (area fx xx <span class="kw">if</span> x&lt;<span class="fu">invnormal</span>(.05),  <span class="kw">color</span>(gs1%40) ) <span class="co">///</span></span>
+<span id="cb10-17"><a href="#cb10-17"></a>    (area fx xx <span class="kw">if</span> x&gt;<span class="fu">invnormal</span>(.95),  <span class="kw">color</span>(gs1%40) ), <span class="co">///</span></span>
+<span id="cb10-18"><a href="#cb10-18"></a>    <span class="bn">xline</span>(2) <span class="bn">legend</span>(<span class="kw">order</span>(5 <span class="st">"CI-1%"</span> 7 <span class="st">"CI-5%"</span> 9 <span class="st">"CI-10%"</span>)) <span class="co">///</span></span>
+<span id="cb10-19"><a href="#cb10-19"></a>    <span class="kw">ylabel</span>(0(.1).5) <span class="kw">xlabel</span>(-5 0 5 )  </span>
+<span id="cb10-20"><a href="#cb10-20"></a><span class="kw">graph</span> <span class="kw">export</span> images/f4_5.png, <span class="kw">replace</span> <span class="kw">width</span>(1000)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 
@@ -844,9 +893,9 @@ H_0: &amp; \beta_k=\beta^{hyp}_k \text{ vs } H_1: \beta_k \neq \beta^{hyp}_k \\
 <li><p>Just need SE for combined coefficients (requires knowing Variances and Covariances)</p></li>
 <li><p>Easy way, you could use <code>Stata</code>:</p></li>
 </ul>
-<div class="sourceCode" id="cb9" style="font-size: 50px"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">reg</span> <span class="fu">y</span> x1 <span class="kw">x2</span> x3 x4 x5 x6</span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">lincom</span> x1-<span class="kw">x2</span> <span class="kw">or</span> <span class="kw">lincom</span> 2*x4-x5-x6</span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="kw">test</span> (x1-<span class="kw">x2</span>=0) (<span class="kw">x2</span>+x3=1) (2*x4-x5=x6), mtest</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11" style="font-size: 50px"><pre class="sourceCode numberSource {stata} number-lines code-with-copy"><code class="sourceCode"><span id="cb11-1"><a href="#cb11-1"></a>reg y x1 x2 x3 x4 x5 x6</span>
+<span id="cb11-2"><a href="#cb11-2"></a>lincom x1-x2 or lincom 2*x4-x5-x6</span>
+<span id="cb11-3"><a href="#cb11-3"></a>test (x1-x2=0) (x2+x3=1) (2*x4-x5=x6), mtest</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="section-14" class="slide level2">
 <h2></h2>
@@ -881,7 +930,7 @@ h0: &amp; b_1 - 2b_2 +b_3=0 \rightarrow \theta = b_1 - 2b_2 +b_3 \rightarrow b_1
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Note</strong></p>
+<p><strong></strong></p>
 </div>
 <div class="callout-content">
 <p>Always ask something like this in Midterm, so brush up your math.</p>
@@ -945,9 +994,9 @@ F-stat = \frac 1 q (R\beta-c)' \Sigma_R^{-1} (R\beta-c)
 </section>
 <section id="example" class="slide level2 scrollable">
 <h2>Example</h2>
-<div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1"></a>frause hprice1, <span class="kw">clear</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="kw">reg</span> lprice lasses bdrms llotsize lsqrft</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="9f995736" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1"></a>frause hprice1, <span class="kw">clear</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="kw">reg</span> lprice lasses bdrms llotsize lsqrft</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
       Source |       SS           df       MS      Number of obs   =        88
@@ -968,9 +1017,9 @@ F-stat = \frac 1 q (R\beta-c)' \Sigma_R^{-1} (R\beta-c)
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">test</span> (lasses=1)</span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="kw">test</span> (lasses=1) (bdrms=llotsize=lsqrft=0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="0d523328" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">test</span> (lasses=1)</span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="kw">test</span> (lasses=1) (bdrms=llotsize=lsqrft=0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
  ( 1)  lassess = 1
@@ -987,9 +1036,9 @@ F-stat = \frac 1 q (R\beta-c)' \Sigma_R^{-1} (R\beta-c)
             Prob &gt; F =    0.6162</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1"></a>frause mlb1, <span class="kw">clear</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="kw">reg</span> lsalary years gamesyr bavg hrunsyr rbisy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="a0f13fe5" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a href="#cb16-1"></a>frause mlb1, <span class="kw">clear</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="kw">reg</span> lsalary years gamesyr bavg hrunsyr rbisy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
       Source |       SS           df       MS      Number of obs   =       353
@@ -1011,8 +1060,8 @@ F-stat = \frac 1 q (R\beta-c)' \Sigma_R^{-1} (R\beta-c)
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">test</span> bavg hrunsyr rbisy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="03e6bc1a" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">test</span> bavg hrunsyr rbisy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
  ( 1)  bavg = 0
@@ -1023,11 +1072,175 @@ F-stat = \frac 1 q (R\beta-c)' \Sigma_R^{-1} (R\beta-c)
             Prob &gt; F =    0.0000</code></pre>
 </div>
 </div>
+</section></section>
+<section id="lets-take-one-more-step-what-if-errors-are-not-normal" class="title-slide slide level1 center">
+<h1>Lets take one more Step: What if errors are not normal?</h1>
+
+</section>
+
+<section>
+<section id="section-17" class="title-slide slide level1 center" data-background-image="https://i.imgflip.com/6qwgsh.jpg" data-background-size="contain">
+<h1></h1>
+
+</section>
+<section id="introduction" class="slide level2">
+<h2>Introduction</h2>
+<ul>
+<li><p>When considering the topic of asymptotic theory, there are few concepts that are important ton consider.</p>
+<ol type="1">
+<li>Asymtotics refer to properties of OLS when <span class="math inline">\(N\rightarrow \infty\)</span></li>
+<li>When samples grow, we are more concern about consistency rather than “just” unbiased estimators.</li>
+<li>We are also concern with how flexible is the normality assumption when samples grow large.</li>
+</ol></li>
+</ul>
+</section>
+<section id="what-is-consistency" class="slide level2">
+<h2>What is consistency?</h2>
+<ul>
+<li>Up until now, we have been concerned with Unbiased estimates</li>
+</ul>
+<p><span class="math display">\[E(\hat\beta)=\beta
+\]</span></p>
+<ul>
+<li>In large samples, this is no longer enough. One requires Consistency!
+<ul>
+<li>Consistency says that as <span class="math inline">\(N\rightarrow \infty\)</span> then <span class="math inline">\(plim \hat \beta = \beta\)</span>.</li>
+<li><span class="math inline">\(p(|\hat \beta - \beta|&lt;\varepsilon) = 1\)</span> or that The variance shrinks to zero, or we can estimate <span class="math inline">\(\beta\)</span> almost surely.</li>
+<li>This is also known as asymptotic unbiasness.</li>
+</ul></li>
+<li>In linear regression analysis, consistency can be achieved with a weaker A4’: <span class="math inline">\(Cov(e,x)=0\)</span>, assuming that we require only linear independence.</li>
+</ul>
+</section>
+<section id="consistency-vs-bias" class="slide level2">
+<h2>Consistency vs Bias</h2>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Consistent and Unbiased</a></li><li><a href="#tabset-1-2">Consistent and Biased</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/f4_6.png" style="width:70.0%"></p>
+</figure>
+</div>
+</div>
+<div id="tabset-1-2">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/f4_7.png" style="width:70.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="what-about-normality-assumption" class="slide level2">
+<h2>What about Normality Assumption?</h2>
+<ul>
+<li>Everything we have seen so far was possible under the normality assumption of the errors.
+<ul>
+<li>if <span class="math inline">\(e\)</span> is normal, then <span class="math inline">\(b\)</span> is normal (even in small samples), thus we can use <span class="math inline">\(t\)</span>, <span class="math inline">\(F\)</span>, etc</li>
+</ul></li>
+<li>But what if this assumption fails? would we care?</li>
+</ul>
+<div>
+<ul>
+<li class="fragment">Perhaps. If your sample is small, <span class="math inline">\(b\)</span> will not be normal, and standard procedures will not work.</li>
+<li class="fragment">In large Samples, however, <span class="math inline">\(\beta's\)</span> will be normal, even if <span class="math inline">\(e\)</span> is not. Thanks to CLT</li>
+</ul>
+</div>
+</section>
+<section id="section-18" class="slide level2">
+<h2></h2>
+<h3 id="good-news">Good news</h3>
+<ul>
+<li><p>Bottom line, when <span class="math inline">\(N\)</span> is large, you do not need <span class="math inline">\(e\)</span> to be normal.</p></li>
+<li><p>if A1-A5 hold, you can rely on asymptotic normality!</p></li>
+<li><p>Thus you can still use t’s and F’s, but you can also use LM</p></li>
+</ul>
+</section>
+<section id="lm-lagrange-multiplier" class="slide level2">
+<h2>LM-Lagrange Multiplier</h2>
+<ul>
+<li>While you can still use t-stat and F-stat to draw inference from your model, there is a better test (given the large sample): Lagrange Multiplier Statistic</li>
+<li>The idea: Does impossing restrictions affect the model Fitness?</li>
+</ul>
+<ol type="1">
+<li>Regress <span class="math inline">\(y\)</span> on restricted <span class="math inline">\(x_1,\dots,x_{k-q}\)</span>, and obtain <span class="math inline">\(\tilde e\)</span></li>
+<li>Regress <span class="math inline">\(\tilde e\)</span> on all <span class="math inline">\(x's\)</span>, and obtain <span class="math inline">\(R^2_e\)</span>.</li>
+</ol>
+<p>If the excluded regressors were not significant, the <span class="math inline">\(R^2_e\)</span> should be very small.</p>
+<ol start="3" type="1">
+<li>Compare <span class="math inline">\(nR^2_e\)</span> with <span class="math inline">\(\chi^2(n,1-\alpha)\)</span>, and draw conclusions.</li>
+</ol>
+</section>
+<section id="example-1" class="slide level2 scrollable">
+<h2>Example:</h2>
+<div id="160757a9" class="cell larger" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb20-1"><a href="#cb20-1"></a>frause crime1, <span class="kw">clear</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="kw">qui</span>: <span class="kw">reg</span> narr86 pcnv avgsen tottime ptime86 qemp86</span>
+<span id="cb20-3"><a href="#cb20-3"></a>** H0: avgsen=0 and tottime=0</span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="kw">test</span> (avgsen=0) (tottime=0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ ( 1)  avgsen = 0
+ ( 2)  tottime = 0
+
+       F(  2,  2719) =    2.03
+            Prob &gt; F =    0.1310</code></pre>
+</div>
+</div>
+<div id="d8520de6" class="cell larger" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw">qui</span>: <span class="kw">reg</span> narr86 pcnv                ptime86 qemp86</span>
+<span id="cb22-2"><a href="#cb22-2"></a>* Predict residuals <span class="kw">of</span> constrained <span class="kw">model</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="kw">predict</span> u_tilde , res</span>
+<span id="cb22-4"><a href="#cb22-4"></a>* <span class="kw">regress</span> residuals againts <span class="ot">all</span> variables</span>
+<span id="cb22-5"><a href="#cb22-5"></a><span class="kw">reg</span> u_tilde  pcnv avgsen tottime ptime86 qemp86</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Source |       SS           df       MS      Number of obs   =     2,725
+-------------+----------------------------------   F(5, 2719)      =      0.81
+       Model |  2.87904835         5  .575809669   Prob &gt; F        =    0.5398
+    Residual |  1924.39392     2,719  .707757969   R-squared       =    0.0015
+-------------+----------------------------------   Adj R-squared   =   -0.0003
+       Total |  1927.27297     2,724  .707515773   Root MSE        =    .84128
+
+------------------------------------------------------------------------------
+     u_tilde | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        pcnv |  -.0012971    .040855    -0.03   0.975    -.0814072    .0788129
+      avgsen |  -.0070487   .0124122    -0.57   0.570     -.031387    .0172897
+     tottime |   .0120953   .0095768     1.26   0.207    -.0066833     .030874
+     ptime86 |  -.0048386   .0089166    -0.54   0.587    -.0223226    .0126454
+      qemp86 |   .0010221   .0103972     0.10   0.922    -.0193652    .0214093
+       _cons |  -.0057108   .0331524    -0.17   0.863    -.0707173    .0592956
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb24-1"><a href="#cb24-1"></a><span class="kw">display</span> <span class="st">"Chi2(2)="</span> <span class="ot">`=e(N)*e(r2)'</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="kw">display</span> <span class="st">"Its p-value="</span> %5.4f <span class="ot">`=1-chi2(2, `=e(N)*e(r2)'</span> )'</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p>Chi2(2)=4.0707294 Its p-value=0.1306</p>
+<p>Try making it a program if you “dare”</p>
+</section></section>
+<section id="thats-all-folks" class="title-slide slide level1 center">
+<h1>Thats All folks!</h1>
+
+</section>
+
+<section id="part-ii" class="title-slide slide level1 center">
+<h1>Part II:</h1>
+
+</section>
+
+<section id="addressing-problems-with-mra" class="title-slide slide level1 center">
+<h1>Addressing Problems with MRA</h1>
 
 <div class="footer footer-default">
 
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
@@ -1054,7 +1267,6 @@ F-stat = \frac 1 q (R\beta-c)' \Sigma_R^{-1} (R\beta-c)
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -1315,10 +1527,9 @@ F-stat = \frac 1 q (R\beta-c)' \Sigma_R^{-1} (R\beta-c)
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn) {
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -1328,8 +1539,17 @@ F-stat = \frac 1 q (R\beta-c)' \Sigma_R^{-1} (R\beta-c)
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
