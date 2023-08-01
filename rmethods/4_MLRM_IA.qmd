@@ -44,9 +44,10 @@ $$
 - Because not all distributions are made equal!
  
 
-```{stata}
+```stata
 *| output: false
 *| code-fold: true
+
 clear
 range x -4 4 1000
 gen funiform = 0 
@@ -121,13 +122,13 @@ $$
 - Where $\beta_j$ is what you think the True Population parameter is (your hypothesis), and $\hat\beta_j$ is what you estimate in your data. 
 - Depending on the size of this, you can either reject your hypothesis, or **not** Reject it.
 
-but do we know   $SE(\beta)$?
+but do we know   $sd(\beta)$?
 
 ## 
 
-### Do we "know" $SE(\beta)$?
+### Do we "know" $sd(\beta)$?
 
-We don't, which is why we can use a normal directly. Instead we use a t-distribution
+We don't, which is why we can use a normal directly. Instead we use a t-distribution, which uses $se(\beta\hat)$
 
 $$t_j = \frac{\hat \beta_j - \beta_j}{se(\hat\beta)}\sim t_{N-k-1}
 $$
@@ -184,7 +185,7 @@ $$\begin{aligned}
 H_0: & \beta_k=\beta^{hyp}_k \text{ vs } H_1: \beta_k>\beta^{hyp}_k \\
  & t_{\beta_k}>t_{N-k-1}(1-\alpha) \\
 H_0: & \beta_k=\beta^{hyp}_k \text{ vs } H_1: \beta_k<\beta^{hyp}_k \\
- & t_{\beta_k}<t_{N-k-1}(\alpha) 
+ & t_{\beta_k}<-t_{N-k-1}(1-\alpha)
 \end{aligned}
 $$
 
@@ -214,4 +215,422 @@ $$
 
 ## Why we never accept?:
 
-- As stated few times before, $\hat \beta$ @b  
+- As stated few times before, $\hat \beta$ are just approximations to the true $\beta$ coefficients. Its the "evidence" you have based on the data available.
+- With this evidence, you can **reject** some hypothesis. (Some more strongly than others) 
+- However, there could exists many scenarios that would fit the evidence.
+
+##
+
+```stata
+*| output: false
+*| code-fold: true
+clear
+range x -5 5 1000
+gen fx = normalden(x) 
+set scheme white2
+color_style tableau
+gen xx = x+1
+two (area fx x , pstyle(p1) color(%20)) ///
+	(area fx x if x<invnormal(.025), pstyle(p1) color(%80) ) ///
+	(area fx x if x>invnormal(.975), pstyle(p1) color(%80) ) ///
+	(area fx xx , pstyle(p2) color(%20)) ///
+	(area fx xx if x<invnormal(.025), pstyle(p2) color(%80) ) /// 
+	(area fx xx if x>invnormal(.975), pstyle(p2) color(%80) ) ///
+    , xline(1.8) legend(order(1 "H0: b=0" 4 "H0: b=1"))	 ///
+	xlabel(-4(2)4)	ylabel(0(.1).5)  xsize(8) ysize(4)
+graph export images/f4_2.png, height(1000)	replace
+```
+
+![](images/f4_2.png){fig-align="center"}
+
+## What about Type error I and II?
+
+:::{.incremental}
+
+- Because we do not know the truth, we are bound to commit errors in our assessment of the data.
+
+- So given the data evidence and the hypothesis, there could be 2 scenarios:
+
+  - GOOD: You either reject when $H_0$ is false, or not reject when $H_0$ is true.
+  - $TE-I$: You reject $H_0$ when it is true, 
+  - $TE-II$: Not reject $H_0$ when it is false (Something else was true)
+
+:::
+
+## 
+```stata
+*| output: false
+*| code-fold: true
+clear
+range x -5 5 1000
+gen fx = normalden(x) 
+
+gen xxx=x+3	
+two (area fx x , pstyle(p1) color(%20)) ///
+    (area fx xxx, pstyle(p2) color(%20)) ///
+	(area fx x if x>2, pstyle(p1) color(%80)) ///
+    (area fx xxx if xxx <2, pstyle(p2) color(%80))  ///
+    ,legend(order(1 "H0"3 "Type I " 2 "H1"  4 "Type II ") cols(2))	 ///
+	xlabel(-4(2)7)	ylabel(0(.1).5) xsize(8) ysize(4)  
+graph export images/f4_3.png, height(1000)	replace
+ 
+```	
+
+![](images/f4_3.png){fig-align="center"}
+
+## Example: Determinants of College GPA {.scrollable}
+
+```stata
+*| echo: true
+
+frause gpa1, clear
+reg colgpa hsgpa act skipped
+```
+
+- Hypothesis: Skipping classes has no effect on College GPA.
+
+$$H_0: \beta_{skip} = 0 \text{ vs } H_1: \beta_{skip} \neq 0
+$$
+
+- Test, $a=95%$, $|t_{skip}|=3.2$ vs $t_{n-k-1}(0.975)$: 
+
+```stata
+*| output: asis
+*| echo: true
+*| code-folde: false
+display invt(141-4,0.975)
+```
+
+- Conclusion: $H_0$ is rejected.
+
+## 
+
+- Hyp: Skipping college has no effect on College GPA vs has a negative effect
+ 
+$$H_0: \beta_{skip} = 0 \text{ vs } H_1: \beta_{skip}<0
+$$
+
+- Test, $a=95\%$, $|t_{skip}|=3.2$ vs $t_{n-k-1}(0.95)=1.6560$
+- Also Reject $H_0$
+
+##
+
+- $t_{ACT}=1.39$
+- Hyp: ACT has no effect on College GPA vs It has a non-zero effect
+- Hyp: ACT has no effect on College GPA vs it has a positive effect
+- Critical: 
+  - $t_{137}(0.95)=1.6560$ Donot Reject$H_0$ with $\alpha = 5\%$
+  - $t_{137}(0.90)=1.2878$ Reject $H_0$ with $\alpha = 10\%$ 
+  
+- Each GPA point in highschool translates into half a point in College GPA. vs Is less than .5
+ 
+```stata
+*| echo: true
+*| code-fold: false
+test hsgpa = 0.5
+lincom hsgpa - 0.5
+```
+
+- Critical at 5%: $t=-1.6560$
+- Cannot Reject $H_0$
+
+## p-values
+
+- Something you may or may not have noticed. The significance level $\alpha$ can be choosen by the resercher.
+  - Conventional levels are 10%, 5% and 1%. 
+- This may lead to researchers choosing any value that would make their theory fit.  
+- There is a better alternative. Using $p-values$ to capture the smallest significance level that you could use to reject your Null.
+
+$$p-value = P(|t|>|t-stat|) \text{ or } p-value = 2*P(|t|>|t-stat|)
+$$
+
+  - The smallest the better! (for rejection)
+- How? 
+  - One tail : `display 1-t(df = n-k-1, |t-stat|)`
+  - two tails: `display 2-2*t(df = n-k-1, |t-stat|)`
+
+## 
+
+```stata
+*| output: false
+clear
+range x -5 5 1000
+gen fx = normalden(x) 
+local p1:display %5.1f 100*2*(1-normal(1.5)) 
+local p2:display %5.1f 100*2*(1-normal(2.5)) 
+two (area fx x , pstyle(p1) color(%20)) ///
+	(area fx x if x<-1.5, pstyle(p3) color(%80) ) ///
+	(area fx x if x>+1.5, pstyle(p3) color(%80) ) ///
+	(area fx x if x<invnormal(.025), pstyle(p1) color(%80) ) ///
+	(area fx x if x>invnormal(.975), pstyle(p1) color(%80) ) ///
+	(area fx x if x<-2.5, pstyle(p2) color(%80) ) ///
+	(area fx x if x>+2.5, pstyle(p2) color(%80) ) , ///
+	xline(-1.5 2.5) legend(order(4 "{&alpha}=5%" 6 "p-value = `p2'%" 2 "p-value = `p1'%")) ///
+	ylabel(0(.1).5) xlabel(-5 0 5 -1.5 2.5)
+graph export images/f4_4.png, replace width(1200)
+```  
+
+![](images/f4_4.png){fig-align="center"}
+
+## Note on Statistical Significance
+
+1. Statistically significant doesnt mean meaninful. And lack of it, doesnt mean is not important
+   - Keep in mind that SE may be larger or smaller due to other factors (N or Mcollinearity)
+2. Be careful of discussing the effect size. (a 1US increase in min wage is different from 1chp in min Wage)
+3. If non-significant, pay attention to the magnitude and relevance for your research. Does it have the correct sign?
+4. Incorrect signs with significant results. Either there is something wrong, or you found something interesting.
+
+# {background-image="https://i.imgflip.com/6qvajf.jpg" background-size="contain"}
+
+## Confidence Intervals
+
+- This is the third approach to assess how precise or significant an estimate is. You provide a Range of possible values, given the level of coverage, and SE.
+
+$$CI(\beta_i) = [\hat \beta_i - t_{n-k-1}(1-\alpha),\hat \beta_i + t_{n-k-1}(1-\alpha)]
+$$
+
+- Interpretation:
+  - If we were to draw M samples, the true beta would be in this interval $1-\alpha\%$ of the time.
+- It allows you to see what other "hypothesis" would be consistent with the evidence of the estimate (you wouldnt be able to reject the Null)
+
+##
+
+```{stata}
+*| output: false
+
+clear
+range x -5 5 1000
+gen fx = normalden(x) 
+local p1:display %5.1f 100*2*(1-normal(1.5)) 
+local p2:display %5.1f 100*2*(1-normal(2.5)) 
+gen xx = x+2
+
+two (area fx x , pstyle(p1) color(%10)) ///
+	(area fx x if x<invnormal(.025), pstyle(p1) color(%60) ) ///
+	(area fx x if x>invnormal(.975), pstyle(p1) color(%60) ) ///
+	(area fx xx , color(gs1%10) ) ///
+	(area fx xx if x<invnormal(.005),  color(gs1%80) ) ///
+	(area fx xx if x>invnormal(.995),  color(gs1%80) ) ///
+	(area fx xx if x<invnormal(.025),  color(gs1%60) ) ///
+	(area fx xx if x>invnormal(.975),  color(gs1%60) ) ///
+	(area fx xx if x<invnormal(.05),  color(gs1%40) ) ///
+	(area fx xx if x>invnormal(.95),  color(gs1%40) ), ///
+	xline(2) legend(order(5 "CI-1%" 7 "CI-5%" 9 "CI-10%")) ///
+	ylabel(0(.1).5) xlabel(-5 0 5 )  
+graph export images/f4_5.png, replace width(1000)
+```
+
+![](images/f4_5.png){fig-align="center"}
+
+# Lets make things interestings (Harder)
+
+## Testing Linear Combinations:
+
+- You may be interested in testing particular linear combinations of coefficients:
+
+$b_1 - b_2 =0 ; b_2+b_3=1 ; 2*b_4-b_5=b_6$
+
+- Doing this is "simple". Because is a single linear combination, you can still use "t-stat".
+
+$t-stat = \frac{2*\hat b_4 -\hat b_5 -\hat b_6}{se(2*\hat b_4 -\hat b_5 -\hat b_6)}$
+
+- Just need SE for combined coefficients (requires knowing Variances and Covariances)
+
+- Easy way, you could use `Stata`:
+
+```stata{style="font-size: 50px"}
+reg y x1 x2 x3 x4 x5 x6
+lincom x1-x2 or lincom 2*x4-x5-x6
+test (x1-x2=0) (x2+x3=1) (2*x4-x5=x6), mtest
+```
+
+## 
+
+### Harder Way: (if you dare)
+
+**Matrix Multiplication**
+
+Assume Constant is the last coefficient:
+$$V( 2*b_4-b_5- b_6) = R' V R ; R = [0,0,0,2,-1,-1]
+$$
+
+where R are the restrictions, and V is the variance covariance matrix of $\beta's$.
+
+Then your t-stat
+
+$$t-stat = \frac{2*b_4-b_5- b_6}{\sqrt{V(2*b_4-b_5- b_6)}}
+$$
+
+## 
+
+### Alternative: Substitution
+
+- One can manipulate the regression model to consider a model with the contrained coefficient.
+- Once model is estimated, it simplifies testing:
+
+$$\begin{aligned}
+ & y = b_0 + b_1 x_1 + b_2  x_2 + b_3 x_3 + e  \\
+h0: & b_1 - 2b_2 +b_3=0 \rightarrow \theta = b_1 - 2b_2 +b_3 \rightarrow b_1 = \theta + 2b_2 - b_3 \\
+& y = b_0 + ( \theta + 2b_2 - b_3) x_1 + b_2 x_2 + b_3 x_3 + e \\
+& y = b_0 +  \theta x_1 + b_2( x_2 +2 x_1) + b_3 (x_3-x_1) + e \\
+& y = b_0 +  \theta x_1 + b_2 \tilde x_2 + b_3 \tilde x_3 + e \\
+\end{aligned}
+$$
+
+Here testing for $\theta=0$ is the same as testing for $b_1 - 2b_2 +b_3$ in the original model.
+
+:::{.callout-note}
+
+Always ask something like this in Midterm, so brush up your math.
+
+:::
+
+## Testing Multiple Restrictions
+
+What if you are interested in testing multiple restrictions:
+
+$$\begin{aligned}
+y &= b_0 + b_1 x_1 + b_2 x_2 +b_3 x_3 + e \\
+& H_0: b_1 = 0 ; b_2 - b_3 =0 \\
+& H_1: H_0 \text{ is false}
+\end{aligned}
+$$
+
+Easy way: `Stata` command `test` allows you to do this
+
+Otherwise, you can do it by hand:
+
+##
+
+  1. Estimate unrestricted model (original) and "save" $SSR_{ur}$ or $R_{ur}^2$
+  2. Impose restrictions on the model and "save" $SSR_r$ or $R_{r}^2$
+  3. Estimate F-stat:
+
+$$F_{q,n-k-1} = \frac{(SSR_r - SSR_{ur})/q}{SSR_{ur}/(n-k-1)}  \text{ or }
+\frac{(R^2_{ur}-R^2_r)/q}{(1-R^2_{ur})/(n-k-1)} \sim F(q,n-k-1)
+$$
+
+$SSR$ Sum of Squared Residuals, $q$ number of restrictions
+
+- Idea, you are comparing how the overall fitness of the model changes with restrictions.
+- If restrictions slightly decreases the model Fitness, you cannot be rejected them.
+- Otherwise, They are rejected! (you just dont know which)
+
+## Overall Model Significance
+
+One test, we often don't do anymore, is testing the overall fitness of a model:
+
+$$H_0: x_1, x_2, \dots , x_k \text{ do not explain y}
+$$
+
+$$H_0: \beta_1=\beta_2=\dots=\beta_k =0
+$$
+
+Where we kind of suggest that a model with only an intercept is better than the one with covariates.
+
+$$F_{q,n-k-1} = \frac{(R^2_{ur}-\color{red}{R^2_r})/q}{(1-R^2_{ur})/(n-k-1)} \sim F(q,n-k-1)
+$$
+
+In this case $\color{red}{R^2_r}=0$
+
+## **Not** For the faint for heart
+
+Matrix form for F-Stat!
+Restrictions:
+
+$$H_0: R_{q,k+1}\beta_{k+1,1}=c_{q,1}
+$$
+
+First. Define matrix with all Matrix Restriction
+$$
+\Sigma_R = R_{q,k+1} V_\beta R'_{q,k+1}
+$$
+
+Second: F-statistic
+
+$$
+F-stat = \frac 1 q (R\beta-c)' \Sigma_R^{-1} (R\beta-c) 
+$$
+
+## Example {.scrollable}
+
+```{stata}
+*| code-fold: false
+frause hprice1, clear
+reg lprice lasses bdrms llotsize lsqrft
+```
+
+```{stata}
+*| code-fold: false
+test (lasses=1)
+test (lasses=1) (bdrms=llotsize=lsqrft=0)
+```
+
+```{stata}
+*| code-fold: false
+frause mlb1, clear
+reg lsalary years gamesyr bavg hrunsyr rbisy
+```
+
+```{stata}
+*| code-fold: false
+test bavg hrunsyr rbisy
+```
+
+# Lets take one more Step: What if errors are not normal?
+
+# {background-image="https://i.imgflip.com/6qwgsh.jpg" background-size="contain"}
+
+## Introduction
+
+- When considering the topic of asymptotic theory, there are few concepts that are important ton consider.
+
+  1. Asymtotics refer to properties of OLS when $N\rightarrow \infty$
+  2. When samples grow, we are more concern about consistency instead rather than "just" unbiased estimators.
+  3. We are also concern with how flexible is the normality assumption when samples grow large.
+
+## What is consistency?
+
+- Up until now, we have been concerned with Unbiased estimates
+
+$$E(\hat\beta)=\beta
+$$
+
+- In large samples, this is no longer enough. One requires Consistency!
+  - Consistency says that as $N\rightarrow \infty$ then $plim \hat \beta = \beta$.
+  - $p(|\hat \beta - \beta|<\varepsilon) = 1$ or that The variance shrinks to zero. (we can estimate $\beta$ almost surely.
+  - This is also known as asymptotic unbiasness.
+  
+- Interestingly, Consistency can be achieved with a weaker A4': $Cov(e,x)=0$, assuming that we require only linear independence.
+
+## What about Normality Assumption?
+
+- Consider 
+
+clear
+set obs 25
+gen x1 = runiformint(1,10)
+gen x2 = runiformint(1,10)
+gen y = 1 + x1 + x2
+gen cns =1
+mata
+y=st_data(.,"y")
+x=st_data(.,"x1 x2 cns")
+xx=cross(x,x);ixx = invsym(xx)
+beta = J(5000,3,0)
+for(i=1;i<=5000;i++){
+	beta[i,]=(ixx*cross(x,y:+runiform(25,1,-sqrt(12)/2,sqrt(12)/2)))'
+}
+end
+getmata beta1*=beta, force
+
+
+## Is normality assumption important?
+
+- Everything we have seen so far was possible under the normality assumption of the errors.
+
+- if $e$ is normal, then $b$ is normal (even in small samples)
+
+- But what if this assumption fails? would we care?
+
+  - Not really! When samples are large

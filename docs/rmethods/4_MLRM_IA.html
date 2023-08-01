@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.251">
+  <meta name="generator" content="quarto-1.3.433">
 
   <meta name="author" content="Fernando Rios-Avila">
   <title>Econometrics MSC Levy - Multiple Regression Analysis: Inference and Asymptotics</title>
@@ -222,8 +222,7 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    padding-bottom: 0.5rem;
-    margin-bottom: 0;
+    margin-bottom: 0.5rem;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -386,6 +385,9 @@
       margin-right: 0; 
     }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -435,43 +437,41 @@ Fernando Rios-Avila
 <li><p>Unless you know something about the distribution of <span class="math inline">\(\beta's\)</span>, it would be hard to make any inferences from the estimates. Why?</p></li>
 <li><p>Because not all distributions are made equal!</p></li>
 </ul>
-<div id="b89e2ef3" class="cell" data-execution_count="1">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">clear</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">range</span> x -4 4 1000</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">gen</span> funiform = 0 </span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">replace</span> funiform = 1/(2*<span class="fu">sqrt</span>(3)) <span class="kw">if</span> <span class="fu">inrange</span>(x,-<span class="fu">sqrt</span>(3),<span class="fu">sqrt</span>(3))</span>
-<span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="kw">gen</span> fnormal = 0 </span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="kw">replace</span> fnormal = <span class="fu">normalden</span>(x)</span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a>*| output: false</span>
+<span id="cb1-2"><a href="#cb1-2"></a>*| code-fold: true</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">clear</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">range</span> x -4 4 1000</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="kw">gen</span> funiform = 0 </span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="kw">replace</span> funiform = 1/(2*<span class="fu">sqrt</span>(3)) <span class="kw">if</span> <span class="fu">inrange</span>(x,-<span class="fu">sqrt</span>(3),<span class="fu">sqrt</span>(3))</span>
 <span id="cb1-8"><a href="#cb1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="kw">gen</span> fchi2 = 0 </span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="kw">replace</span> fchi2 = <span class="fu">sqrt</span>(8)*chi2den(4,x*<span class="fu">sqrt</span>(8)+4)</span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="kw">gen</span> fnormal = 0 </span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="kw">replace</span> fnormal = <span class="fu">normalden</span>(x)</span>
 <span id="cb1-11"><a href="#cb1-11"></a></span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="kw">integ</span> funiform x, <span class="kw">gen</span>(F1)</span>
-<span id="cb1-13"><a href="#cb1-13"></a><span class="kw">integ</span> fnormal x, <span class="kw">gen</span>(F2)</span>
-<span id="cb1-14"><a href="#cb1-14"></a><span class="kw">integ</span> fchi2 x, <span class="kw">gen</span>(F3)</span>
-<span id="cb1-15"><a href="#cb1-15"></a></span>
-<span id="cb1-16"><a href="#cb1-16"></a><span class="kw">set</span> <span class="dv">scheme</span> white2</span>
-<span id="cb1-17"><a href="#cb1-17"></a>color_style egypt</span>
-<span id="cb1-18"><a href="#cb1-18"></a><span class="kw">replace</span> x = x + 1.5</span>
-<span id="cb1-19"><a href="#cb1-19"></a><span class="kw">two</span> (area funiform x           , pstyle(p1) <span class="kw">color</span>(%20)) <span class="co">///</span></span>
-<span id="cb1-20"><a href="#cb1-20"></a>    (area funiform x <span class="kw">if</span> F1&lt;0.05, pstyle(p1) <span class="kw">color</span>(%80)) <span class="co">/// </span></span>
-<span id="cb1-21"><a href="#cb1-21"></a>    (area funiform x <span class="kw">if</span> F1&gt;0.95, pstyle(p1) <span class="kw">color</span>(%80)) <span class="co">/// </span></span>
-<span id="cb1-22"><a href="#cb1-22"></a>    (area fnormal  x           , pstyle(p2) <span class="kw">color</span>(%20)) <span class="co">///  </span></span>
-<span id="cb1-23"><a href="#cb1-23"></a>    (area fnormal  x <span class="kw">if</span> F2&lt;0.05, pstyle(p2) <span class="kw">color</span>(%80)) <span class="co">/// </span></span>
-<span id="cb1-24"><a href="#cb1-24"></a>    (area fnormal  x <span class="kw">if</span> F2&gt;0.95, pstyle(p2) <span class="kw">color</span>(%80)) <span class="co">/// </span></span>
-<span id="cb1-25"><a href="#cb1-25"></a>    (area fchi2    x           , pstyle(p3) <span class="kw">color</span>(%20)) <span class="co">/// </span></span>
-<span id="cb1-26"><a href="#cb1-26"></a>    (area fchi2    x <span class="kw">if</span> F3&gt;0.95, pstyle(p3) <span class="kw">color</span>(%80)) <span class="co">/// </span></span>
-<span id="cb1-27"><a href="#cb1-27"></a>    (area fchi2    x <span class="kw">if</span> F3&lt;0.05, pstyle(p3) <span class="kw">color</span>(%80)), <span class="co">///</span></span>
-<span id="cb1-28"><a href="#cb1-28"></a>    <span class="kw">xlabel</span>(-4 / 4) <span class="bn">legend</span>(<span class="kw">order</span>(2 <span class="st">"Uniform"</span> 5 <span class="st">"Normal"</span> 8 <span class="st">"C-Chi2"</span>)) <span class="co">/// </span></span>
-<span id="cb1-29"><a href="#cb1-29"></a>    <span class="bn">xtitle</span>(<span class="st">"Beta hat Distribution"</span>) <span class="co">///</span></span>
-<span id="cb1-30"><a href="#cb1-30"></a>    <span class="bn">xline</span>( 0, lstyle(1) lwidth(1)) <span class="bn">xline</span>(1.5)</span>
-<span id="cb1-31"><a href="#cb1-31"></a></span>
-<span id="cb1-32"><a href="#cb1-32"></a><span class="kw">graph</span> <span class="kw">export</span> images/f4_1.png, <span class="kw">replace</span> <span class="kw">width</span>(1200)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="kw">gen</span> fchi2 = 0 </span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="kw">replace</span> fchi2 = <span class="fu">sqrt</span>(8)*chi2den(4,x*<span class="fu">sqrt</span>(8)+4)</span>
+<span id="cb1-14"><a href="#cb1-14"></a></span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="kw">integ</span> funiform x, <span class="kw">gen</span>(F1)</span>
+<span id="cb1-16"><a href="#cb1-16"></a><span class="kw">integ</span> fnormal x, <span class="kw">gen</span>(F2)</span>
+<span id="cb1-17"><a href="#cb1-17"></a><span class="kw">integ</span> fchi2 x, <span class="kw">gen</span>(F3)</span>
+<span id="cb1-18"><a href="#cb1-18"></a></span>
+<span id="cb1-19"><a href="#cb1-19"></a><span class="kw">set</span> <span class="dv">scheme</span> white2</span>
+<span id="cb1-20"><a href="#cb1-20"></a>color_style egypt</span>
+<span id="cb1-21"><a href="#cb1-21"></a><span class="kw">replace</span> x = x + 1.5</span>
+<span id="cb1-22"><a href="#cb1-22"></a><span class="kw">two</span> (area funiform x           , pstyle(p1) <span class="kw">color</span>(%20)) <span class="co">///</span></span>
+<span id="cb1-23"><a href="#cb1-23"></a>    (area funiform x <span class="kw">if</span> F1&lt;0.05, pstyle(p1) <span class="kw">color</span>(%80)) <span class="co">/// </span></span>
+<span id="cb1-24"><a href="#cb1-24"></a>    (area funiform x <span class="kw">if</span> F1&gt;0.95, pstyle(p1) <span class="kw">color</span>(%80)) <span class="co">/// </span></span>
+<span id="cb1-25"><a href="#cb1-25"></a>    (area fnormal  x           , pstyle(p2) <span class="kw">color</span>(%20)) <span class="co">///  </span></span>
+<span id="cb1-26"><a href="#cb1-26"></a>    (area fnormal  x <span class="kw">if</span> F2&lt;0.05, pstyle(p2) <span class="kw">color</span>(%80)) <span class="co">/// </span></span>
+<span id="cb1-27"><a href="#cb1-27"></a>    (area fnormal  x <span class="kw">if</span> F2&gt;0.95, pstyle(p2) <span class="kw">color</span>(%80)) <span class="co">/// </span></span>
+<span id="cb1-28"><a href="#cb1-28"></a>    (area fchi2    x           , pstyle(p3) <span class="kw">color</span>(%20)) <span class="co">/// </span></span>
+<span id="cb1-29"><a href="#cb1-29"></a>    (area fchi2    x <span class="kw">if</span> F3&gt;0.95, pstyle(p3) <span class="kw">color</span>(%80)) <span class="co">/// </span></span>
+<span id="cb1-30"><a href="#cb1-30"></a>    (area fchi2    x <span class="kw">if</span> F3&lt;0.05, pstyle(p3) <span class="kw">color</span>(%80)), <span class="co">///</span></span>
+<span id="cb1-31"><a href="#cb1-31"></a>    <span class="kw">xlabel</span>(-4 / 4) <span class="bn">legend</span>(<span class="kw">order</span>(2 <span class="st">"Uniform"</span> 5 <span class="st">"Normal"</span> 8 <span class="st">"C-Chi2"</span>)) <span class="co">/// </span></span>
+<span id="cb1-32"><a href="#cb1-32"></a>    <span class="bn">xtitle</span>(<span class="st">"Beta hat Distribution"</span>) <span class="co">///</span></span>
+<span id="cb1-33"><a href="#cb1-33"></a>    <span class="bn">xline</span>( 0, lstyle(1) lwidth(1)) <span class="bn">xline</span>(1.5)</span>
+<span id="cb1-34"><a href="#cb1-34"></a></span>
+<span id="cb1-35"><a href="#cb1-35"></a><span class="kw">graph</span> <span class="kw">export</span> images/f4_1.png, <span class="kw">replace</span> <span class="kw">width</span>(1200)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="not-all-distributions-are-the-same" class="slide level2">
 <h2>Not all Distributions are the Same</h2>
@@ -514,12 +514,12 @@ Fernando Rios-Avila
 <li>Where <span class="math inline">\(\beta_j\)</span> is what you think the True Population parameter is (your hypothesis), and <span class="math inline">\(\hat\beta_j\)</span> is what you estimate in your data.</li>
 <li>Depending on the size of this, you can either reject your hypothesis, or <strong>not</strong> Reject it.</li>
 </ul>
-<p>but do we know <span class="math inline">\(SE(\beta)\)</span>?</p>
+<p>but do we know <span class="math inline">\(sd(\beta)\)</span>?</p>
 </section>
 <section id="section-3" class="slide level2">
 <h2></h2>
-<h3 id="do-we-know-sebeta">Do we “know” <span class="math inline">\(SE(\beta)\)</span>?</h3>
-<p>We don’t, which is why we can use a normal directly. Instead we use a t-distribution</p>
+<h3 id="do-we-know-sdbeta">Do we “know” <span class="math inline">\(sd(\beta)\)</span>?</h3>
+<p>We don’t, which is why we can use a normal directly. Instead we use a t-distribution, which uses <span class="math inline">\(se(\beta\hat)\)</span></p>
 <p><span class="math display">\[t_j = \frac{\hat \beta_j - \beta_j}{se(\hat\beta)}\sim t_{N-k-1}
 \]</span></p>
 <p>Then</p>
@@ -576,7 +576,7 @@ t_1=\frac{\hat \beta_1 - 1}{se(\hat \beta_1)}
 H_0: &amp; \beta_k=\beta^{hyp}_k \text{ vs } H_1: \beta_k&gt;\beta^{hyp}_k \\
 &amp; t_{\beta_k}&gt;t_{N-k-1}(1-\alpha) \\
 H_0: &amp; \beta_k=\beta^{hyp}_k \text{ vs } H_1: \beta_k&lt;\beta^{hyp}_k \\
-&amp; t_{\beta_k}&lt;t_{N-k-1}(\alpha)
+&amp; t_{\beta_k}&lt;-t_{N-k-1}(1-\alpha)
 \end{aligned}
 \]</span></p>
 <ul>
@@ -607,8 +607,422 @@ H_0: &amp; \beta_k=\beta^{hyp}_k \text{ vs } H_1: \beta_k \neq \beta^{hyp}_k \\
 <section id="why-we-never-accept" class="slide level2">
 <h2>Why we never accept?:</h2>
 <ul>
-<li>As stated few times before, <span class="math inline">\(\hat \beta\)</span> <span class="citation" data-cites="b">@b</span></li>
+<li>As stated few times before, <span class="math inline">\(\hat \beta\)</span> are just approximations to the true <span class="math inline">\(\beta\)</span> coefficients. Its the “evidence” you have based on the data available.</li>
+<li>With this evidence, you can <strong>reject</strong> some hypothesis. (Some more strongly than others)</li>
+<li>However, there could exists many scenarios that would fit the evidence.</li>
 </ul>
+</section>
+<section id="section-7" class="slide level2">
+<h2></h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1"></a>*| output: false</span>
+<span id="cb2-2"><a href="#cb2-2"></a>*| code-fold: true</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">clear</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="kw">range</span> x -5 5 1000</span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="kw">gen</span> fx = <span class="fu">normalden</span>(x) </span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="kw">set</span> <span class="dv">scheme</span> white2</span>
+<span id="cb2-7"><a href="#cb2-7"></a>color_style tableau</span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="kw">gen</span> xx = x+1</span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="kw">two</span> (area fx x , pstyle(p1) <span class="kw">color</span>(%20)) <span class="co">///</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a>    (area fx x <span class="kw">if</span> x&lt;<span class="fu">invnormal</span>(.025), pstyle(p1) <span class="kw">color</span>(%80) ) <span class="co">///</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>    (area fx x <span class="kw">if</span> x&gt;<span class="fu">invnormal</span>(.975), pstyle(p1) <span class="kw">color</span>(%80) ) <span class="co">///</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a>    (area fx xx , pstyle(p2) <span class="kw">color</span>(%20)) <span class="co">///</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a>    (area fx xx <span class="kw">if</span> x&lt;<span class="fu">invnormal</span>(.025), pstyle(p2) <span class="kw">color</span>(%80) ) <span class="co">/// </span></span>
+<span id="cb2-14"><a href="#cb2-14"></a>    (area fx xx <span class="kw">if</span> x&gt;<span class="fu">invnormal</span>(.975), pstyle(p2) <span class="kw">color</span>(%80) ) <span class="co">///</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a>    , <span class="bn">xline</span>(1.8) <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"H0: b=0"</span> 4 <span class="st">"H0: b=1"</span>))  <span class="co">///</span></span>
+<span id="cb2-16"><a href="#cb2-16"></a>    <span class="kw">xlabel</span>(-4(2)4)  <span class="kw">ylabel</span>(0(.1).5)  <span class="bn">xsize</span>(8) <span class="bn">ysize</span>(4)</span>
+<span id="cb2-17"><a href="#cb2-17"></a><span class="kw">graph</span> <span class="kw">export</span> images/f4_2.png, height(1000)  <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<img data-src="images/f4_2.png" class="r-stretch quarto-figure-center"></section>
+<section id="what-about-type-error-i-and-ii" class="slide level2">
+<h2>What about Type error I and II?</h2>
+<div>
+<ul>
+<li class="fragment"><p>Because we do not know the truth, we are bound to commit errors in our assessment of the data.</p></li>
+<li class="fragment"><p>So given the data evidence and the hypothesis, there could be 2 scenarios:</p>
+<ul>
+<li class="fragment">GOOD: You either reject when <span class="math inline">\(H_0\)</span> is false, or not reject when <span class="math inline">\(H_0\)</span> is true.</li>
+<li class="fragment"><span class="math inline">\(TE-I\)</span>: You reject <span class="math inline">\(H_0\)</span> when it is true,</li>
+<li class="fragment"><span class="math inline">\(TE-II\)</span>: Not reject <span class="math inline">\(H_0\)</span> when it is false (Something else was true)</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="section-8" class="slide level2">
+<h2></h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a>*| output: false</span>
+<span id="cb3-2"><a href="#cb3-2"></a>*| code-fold: true</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">clear</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="kw">range</span> x -5 5 1000</span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="kw">gen</span> fx = <span class="fu">normalden</span>(x) </span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="kw">gen</span> xxx=x+3 </span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="kw">two</span> (area fx x , pstyle(p1) <span class="kw">color</span>(%20)) <span class="co">///</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a>    (area fx xxx, pstyle(p2) <span class="kw">color</span>(%20)) <span class="co">///</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a>    (area fx x <span class="kw">if</span> x&gt;2, pstyle(p1) <span class="kw">color</span>(%80)) <span class="co">///</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a>    (area fx xxx <span class="kw">if</span> xxx &lt;2, pstyle(p2) <span class="kw">color</span>(%80))  <span class="co">///</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a>    ,<span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"H0"</span>3 <span class="st">"Type I "</span> 2 <span class="st">"H1"</span>  4 <span class="st">"Type II "</span>) <span class="bn">cols</span>(2))   <span class="co">///</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a>    <span class="kw">xlabel</span>(-4(2)7)  <span class="kw">ylabel</span>(0(.1).5) <span class="bn">xsize</span>(8) <span class="bn">ysize</span>(4)  </span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="kw">graph</span> <span class="kw">export</span> images/f4_3.png, height(1000)  <span class="kw">replace</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<img data-src="images/f4_3.png" class="r-stretch quarto-figure-center"></section>
+<section id="example-determinants-of-college-gpa" class="slide level2 scrollable">
+<h2>Example: Determinants of College GPA</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1"></a>*| echo: true</span>
+<span id="cb4-2"><a href="#cb4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3"></a>frause gpa1, <span class="kw">clear</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">reg</span> colgpa hsgpa act skipped</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Hypothesis: Skipping classes has no effect on College GPA.</li>
+</ul>
+<p><span class="math display">\[H_0: \beta_{skip} = 0 \text{ vs } H_1: \beta_{skip} \neq 0
+\]</span></p>
+<ul>
+<li>Test, <span class="math inline">\(a=95%\)</span>, <span class="math inline">\(|t_{skip}|=3.2\)</span> vs <span class="math inline">\(t_{n-k-1}(0.975)\)</span>:</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1"></a>*| output: asis</span>
+<span id="cb5-2"><a href="#cb5-2"></a>*| echo: true</span>
+<span id="cb5-3"><a href="#cb5-3"></a>*| code-folde: false</span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">display</span> invt(141-4,0.975)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Conclusion: <span class="math inline">\(H_0\)</span> is rejected.</li>
+</ul>
+</section>
+<section id="section-9" class="slide level2">
+<h2></h2>
+<ul>
+<li>Hyp: Skipping college has no effect on College GPA vs has a negative effect</li>
+</ul>
+<p><span class="math display">\[H_0: \beta_{skip} = 0 \text{ vs } H_1: \beta_{skip}&lt;0
+\]</span></p>
+<ul>
+<li>Test, <span class="math inline">\(a=95\%\)</span>, <span class="math inline">\(|t_{skip}|=3.2\)</span> vs <span class="math inline">\(t_{n-k-1}(0.95)=1.6560\)</span></li>
+<li>Also Reject <span class="math inline">\(H_0\)</span></li>
+</ul>
+</section>
+<section id="section-10" class="slide level2">
+<h2></h2>
+<ul>
+<li><span class="math inline">\(t_{ACT}=1.39\)</span></li>
+<li>Hyp: ACT has no effect on College GPA vs It has a non-zero effect</li>
+<li>Hyp: ACT has no effect on College GPA vs it has a positive effect</li>
+<li>Critical:
+<ul>
+<li><span class="math inline">\(t_{137}(0.95)=1.6560\)</span> Donot Reject<span class="math inline">\(H_0\)</span> with <span class="math inline">\(\alpha = 5\%\)</span></li>
+<li><span class="math inline">\(t_{137}(0.90)=1.2878\)</span> Reject <span class="math inline">\(H_0\)</span> with <span class="math inline">\(\alpha = 10\%\)</span></li>
+</ul></li>
+<li>Each GPA point in highschool translates into half a point in College GPA. vs Is less than .5</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1"></a>*| echo: true</span>
+<span id="cb6-2"><a href="#cb6-2"></a>*| code-fold: false</span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">test</span> hsgpa = 0.5</span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="kw">lincom</span> hsgpa - 0.5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Critical at 5%: <span class="math inline">\(t=-1.6560\)</span></li>
+<li>Cannot Reject <span class="math inline">\(H_0\)</span></li>
+</ul>
+</section>
+<section id="p-values" class="slide level2">
+<h2>p-values</h2>
+<ul>
+<li>Something you may or may not have noticed. The significance level <span class="math inline">\(\alpha\)</span> can be choosen by the resercher.
+<ul>
+<li>Conventional levels are 10%, 5% and 1%.</li>
+</ul></li>
+<li>This may lead to researchers choosing any value that would make their theory fit.<br>
+</li>
+<li>There is a better alternative. Using <span class="math inline">\(p-values\)</span> to capture the smallest significance level that you could use to reject your Null.</li>
+</ul>
+<p><span class="math display">\[p-value = P(|t|&gt;|t-stat|) \text{ or } p-value = 2*P(|t|&gt;|t-stat|)
+\]</span></p>
+<ul>
+<li>The smallest the better! (for rejection)</li>
+<li>How?
+<ul>
+<li>One tail : <code>display 1-t(df = n-k-1, |t-stat|)</code></li>
+<li>two tails: <code>display 2-2*t(df = n-k-1, |t-stat|)</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="section-11" class="slide level2">
+<h2></h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1"></a>*| output: false</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">clear</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">range</span> x -5 5 1000</span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="kw">gen</span> fx = <span class="fu">normalden</span>(x) </span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="kw">local</span> p1:<span class="kw">display</span> %5.1f 100*2*(1-<span class="fu">normal</span>(1.5)) </span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="kw">local</span> p2:<span class="kw">display</span> %5.1f 100*2*(1-<span class="fu">normal</span>(2.5)) </span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="kw">two</span> (area fx x , pstyle(p1) <span class="kw">color</span>(%20)) <span class="co">///</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>    (area fx x <span class="kw">if</span> x&lt;-1.5, pstyle(p3) <span class="kw">color</span>(%80) ) <span class="co">///</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>    (area fx x <span class="kw">if</span> x&gt;+1.5, pstyle(p3) <span class="kw">color</span>(%80) ) <span class="co">///</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>    (area fx x <span class="kw">if</span> x&lt;<span class="fu">invnormal</span>(.025), pstyle(p1) <span class="kw">color</span>(%80) ) <span class="co">///</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a>    (area fx x <span class="kw">if</span> x&gt;<span class="fu">invnormal</span>(.975), pstyle(p1) <span class="kw">color</span>(%80) ) <span class="co">///</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a>    (area fx x <span class="kw">if</span> x&lt;-2.5, pstyle(p2) <span class="kw">color</span>(%80) ) <span class="co">///</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a>    (area fx x <span class="kw">if</span> x&gt;+2.5, pstyle(p2) <span class="kw">color</span>(%80) ) , <span class="co">///</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a>    <span class="bn">xline</span>(-1.5 2.5) <span class="bn">legend</span>(<span class="kw">order</span>(4 <span class="st">"{&amp;alpha}=5%"</span> 6 <span class="st">"p-value = `p2'%"</span> 2 <span class="st">"p-value = `p1'%"</span>)) <span class="co">///</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a>    <span class="kw">ylabel</span>(0(.1).5) <span class="kw">xlabel</span>(-5 0 5 -1.5 2.5)</span>
+<span id="cb7-16"><a href="#cb7-16"></a><span class="kw">graph</span> <span class="kw">export</span> images/f4_4.png, <span class="kw">replace</span> <span class="kw">width</span>(1200)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<img data-src="images/f4_4.png" class="r-stretch quarto-figure-center"></section>
+<section id="note-on-statistically-significance" class="slide level2">
+<h2>Note on Statistically Significance</h2>
+<ol type="1">
+<li>Statistically significant doesnt mean meaninful. And lack of it, doesnt mean is not important
+<ul>
+<li>Keep in mind that SE may be larger or smaller due to other factors (N or Mcollinearity)</li>
+</ul></li>
+<li>Be careful of discussing the effect size. (a 1US increase in min wage is different from 1chp in min Wage)</li>
+<li>If non-significant, pay attention to the magnitude and relevance for your research. Does it have the correct sign?</li>
+<li>Incorrect signs with significant results. Either there is something wrong, or you found something interesting.</li>
+</ol>
+</section></section>
+<section>
+<section id="section-12" class="title-slide slide level1 center" data-background-image="https://i.imgflip.com/6qvajf.jpg" data-background-size="contain">
+<h1></h1>
+
+</section>
+<section id="confidence-intervals" class="slide level2">
+<h2>Confidence Intervals</h2>
+<ul>
+<li>This is the third approach to assess how precise or significant an estimate is. You provide a Range of possible values, given the level of coverage, and SE.</li>
+</ul>
+<p><span class="math display">\[CI(\beta_i) = [\hat \beta_i - t_{n-k-1}(1-\alpha),\hat \beta_i + t_{n-k-1}(1-\alpha)]
+\]</span></p>
+<ul>
+<li>Interpretation:
+<ul>
+<li>If we were to draw M samples, the true beta would be in this interval <span class="math inline">\(1-\alpha\%\)</span> of the time.</li>
+</ul></li>
+<li>It allows you to see what other “hypothesis” would be consistent with the evidence of the estimate (you wouldnt be able to reject the Null)</li>
+</ul>
+</section>
+<section id="section-13" class="slide level2">
+<h2></h2>
+<div class="cell" data-execution_count="1">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">clear</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">range</span> x -5 5 1000</span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="kw">gen</span> fx = <span class="fu">normalden</span>(x) </span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="kw">local</span> p1:<span class="kw">display</span> %5.1f 100*2*(1-<span class="fu">normal</span>(1.5)) </span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="kw">local</span> p2:<span class="kw">display</span> %5.1f 100*2*(1-<span class="fu">normal</span>(2.5)) </span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="kw">gen</span> xx = x+2</span>
+<span id="cb8-7"><a href="#cb8-7"></a></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="kw">two</span> (area fx x , pstyle(p1) <span class="kw">color</span>(%10)) <span class="co">///</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a>    (area fx x <span class="kw">if</span> x&lt;<span class="fu">invnormal</span>(.025), pstyle(p1) <span class="kw">color</span>(%60) ) <span class="co">///</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a>    (area fx x <span class="kw">if</span> x&gt;<span class="fu">invnormal</span>(.975), pstyle(p1) <span class="kw">color</span>(%60) ) <span class="co">///</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a>    (area fx xx , <span class="kw">color</span>(gs1%10) ) <span class="co">///</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a>    (area fx xx <span class="kw">if</span> x&lt;<span class="fu">invnormal</span>(.005),  <span class="kw">color</span>(gs1%80) ) <span class="co">///</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a>    (area fx xx <span class="kw">if</span> x&gt;<span class="fu">invnormal</span>(.995),  <span class="kw">color</span>(gs1%80) ) <span class="co">///</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a>    (area fx xx <span class="kw">if</span> x&lt;<span class="fu">invnormal</span>(.025),  <span class="kw">color</span>(gs1%60) ) <span class="co">///</span></span>
+<span id="cb8-15"><a href="#cb8-15"></a>    (area fx xx <span class="kw">if</span> x&gt;<span class="fu">invnormal</span>(.975),  <span class="kw">color</span>(gs1%60) ) <span class="co">///</span></span>
+<span id="cb8-16"><a href="#cb8-16"></a>    (area fx xx <span class="kw">if</span> x&lt;<span class="fu">invnormal</span>(.05),  <span class="kw">color</span>(gs1%40) ) <span class="co">///</span></span>
+<span id="cb8-17"><a href="#cb8-17"></a>    (area fx xx <span class="kw">if</span> x&gt;<span class="fu">invnormal</span>(.95),  <span class="kw">color</span>(gs1%40) ), <span class="co">///</span></span>
+<span id="cb8-18"><a href="#cb8-18"></a>    <span class="bn">xline</span>(2) <span class="bn">legend</span>(<span class="kw">order</span>(5 <span class="st">"CI-1%"</span> 7 <span class="st">"CI-5%"</span> 9 <span class="st">"CI-10%"</span>)) <span class="co">///</span></span>
+<span id="cb8-19"><a href="#cb8-19"></a>    <span class="kw">ylabel</span>(0(.1).5) <span class="kw">xlabel</span>(-5 0 5 )  </span>
+<span id="cb8-20"><a href="#cb8-20"></a><span class="kw">graph</span> <span class="kw">export</span> images/f4_5.png, <span class="kw">replace</span> <span class="kw">width</span>(1000)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+
+<img data-src="images/f4_5.png" class="r-stretch quarto-figure-center"></section></section>
+<section>
+<section id="lets-make-things-interestings-harder" class="title-slide slide level1 center">
+<h1>Lets make things interestings (Harder)</h1>
+
+</section>
+<section id="testing-linear-combinations" class="slide level2">
+<h2>Testing Linear Combinations:</h2>
+<ul>
+<li>You may be interested in testing particular linear combinations of coefficients:</li>
+</ul>
+<p><span class="math inline">\(b_1 - b_2 =0 ; b_2+b_3=1 ; 2*b_4-b_5=b_6\)</span></p>
+<ul>
+<li>Doing this is “simple”. Because is a single linear combination, you can still use “t-stat”.</li>
+</ul>
+<p><span class="math inline">\(t-stat = \frac{2*\hat b_4 -\hat b_5 -\hat b_6}{se(2*\hat b_4 -\hat b_5 -\hat b_6)}\)</span></p>
+<ul>
+<li><p>Just need SE for combined coefficients (requires knowing Variances and Covariances)</p></li>
+<li><p>Easy way, you could use <code>Stata</code>:</p></li>
+</ul>
+<div class="sourceCode" id="cb9" style="font-size: 50px"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">reg</span> <span class="fu">y</span> x1 <span class="kw">x2</span> x3 x4 x5 x6</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">lincom</span> x1-<span class="kw">x2</span> <span class="kw">or</span> <span class="kw">lincom</span> 2*x4-x5-x6</span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="kw">test</span> (x1-<span class="kw">x2</span>=0) (<span class="kw">x2</span>+x3=1) (2*x4-x5=x6), mtest</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="section-14" class="slide level2">
+<h2></h2>
+<h3 id="harder-way-if-you-dare">Harder Way: (if you dare)</h3>
+<p><strong>Matrix Multiplication</strong></p>
+<p>Assume Constant is the last coefficient: <span class="math display">\[V( 2*b_4-b_5- b_6) = R' V R ; R = [0,0,0,2,-1,-1]
+\]</span></p>
+<p>where R are the restrictions, and V is the variance covariance matrix of <span class="math inline">\(\beta's\)</span>.</p>
+<p>Then your t-stat</p>
+<p><span class="math display">\[t-stat = \frac{2*b_4-b_5- b_6}{\sqrt{V(2*b_4-b_5- b_6)}}
+\]</span></p>
+</section>
+<section id="section-15" class="slide level2">
+<h2></h2>
+<h3 id="alternative-substitution">Alternative: Substitution</h3>
+<ul>
+<li>One can manipulate the regression model to consider a model with the contrained coefficient.</li>
+<li>Once model is estimated, it simplifies testing:</li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+&amp; y = b_0 + b_1 x_1 + b_2  x_2 + b_3 x_3 + e  \\
+h0: &amp; b_1 - 2b_2 +b_3=0 \rightarrow \theta = b_1 - 2b_2 +b_3 \rightarrow b_1 = \theta + 2b_2 - b_3 \\
+&amp; y = b_0 + ( \theta + 2b_2 - b_3) x_1 + b_2 x_2 + b_3 x_3 + e \\
+&amp; y = b_0 +  \theta x_1 + b_2( x_2 +2 x_1) + b_3 (x_3-x_1) + e \\
+&amp; y = b_0 +  \theta x_1 + b_2 \tilde x_2 + b_3 \tilde x_3 + e \\
+\end{aligned}
+\]</span></p>
+<p>Here testing for <span class="math inline">\(\theta=0\)</span> is the same as testing for <span class="math inline">\(b_1 - 2b_2 +b_3\)</span> in the original model.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Always ask something like this in Midterm, so brush up your math.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="testing-multiple-restrictions" class="slide level2">
+<h2>Testing Multiple Restrictions</h2>
+<p>What if you are interested in testing multiple restrictions:</p>
+<p><span class="math display">\[\begin{aligned}
+y &amp;= b_0 + b_1 x_1 + b_2 x_2 +b_3 x_3 + e \\
+&amp; H_0: b_1 = 0 ; b_2 - b_3 =0 \\
+&amp; H_1: H_0 \text{ is false}
+\end{aligned}
+\]</span></p>
+<p>Easy way: <code>Stata</code> command <code>test</code> allows you to do this</p>
+<p>Otherwise, you can do it by hand:</p>
+</section>
+<section id="section-16" class="slide level2">
+<h2></h2>
+<ol type="1">
+<li>Estimate unrestricted model (original) and “save” <span class="math inline">\(SSR_{ur}\)</span> or <span class="math inline">\(R_{ur}^2\)</span></li>
+<li>Impose restrictions on the model and “save” <span class="math inline">\(SSR_r\)</span> or <span class="math inline">\(R_{r}^2\)</span></li>
+<li>Estimate F-stat:</li>
+</ol>
+<p><span class="math display">\[F_{q,n-k-1} = \frac{(SSR_r - SSR_{ur})/q}{SSR_{ur}/(n-k-1)}  \text{ or }
+\frac{(R^2_{ur}-R^2_r)/q}{(1-R^2_{ur})/(n-k-1)} \sim F(q,n-k-1)
+\]</span></p>
+<p><span class="math inline">\(SSR\)</span> Sum of Squared Residuals, <span class="math inline">\(q\)</span> number of restrictions</p>
+<ul>
+<li>Idea, you are comparing how the overall fitness of the model changes with restrictions.</li>
+<li>If restrictions slightly decreases the model Fitness, you cannot be rejected them.</li>
+<li>Otherwise, They are rejected! (you just dont know which)</li>
+</ul>
+</section>
+<section id="overall-model-significance" class="slide level2">
+<h2>Overall Model Significance</h2>
+<p>One test, we often don’t do anymore, is testing the overall fitness of a model:</p>
+<p><span class="math display">\[H_0: x_1, x_2, \dots , x_k \text{ do not explain y}
+\]</span></p>
+<p><span class="math display">\[H_0: \beta_1=\beta_2=\dots=\beta_k =0
+\]</span></p>
+<p>Where we kind of suggest that a model with only an intercept is better than the one with covariates.</p>
+<p><span class="math display">\[F_{q,n-k-1} = \frac{(R^2_{ur}-\color{red}{R^2_r})/q}{(1-R^2_{ur})/(n-k-1)} \sim F(q,n-k-1)
+\]</span></p>
+<p>In this case <span class="math inline">\(\color{red}{R^2_r}=0\)</span></p>
+</section>
+<section id="not-for-the-faint-for-heart" class="slide level2">
+<h2><strong>Not</strong> For the faint for heart</h2>
+<p>Matrix form for F-Stat! Restrictions:</p>
+<p><span class="math display">\[H_0: R_{q,k+1}\beta_{k+1,1}=c_{q,1}
+\]</span></p>
+<p>First. Define matrix with all Matrix Restriction <span class="math display">\[
+\Sigma_R = R_{q,k+1} V_\beta R'_{q,k+1}
+\]</span></p>
+<p>Second: F-statistic</p>
+<p><span class="math display">\[
+F-stat = \frac 1 q (R\beta-c)' \Sigma_R^{-1} (R\beta-c)
+\]</span></p>
+</section>
+<section id="example" class="slide level2 scrollable">
+<h2>Example</h2>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1"></a>frause hprice1, <span class="kw">clear</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="kw">reg</span> lprice lasses bdrms llotsize lsqrft</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Source |       SS           df       MS      Number of obs   =        88
+-------------+----------------------------------   F(4, 83)        =     70.58
+       Model |  6.19607473         4  1.54901868   Prob &gt; F        =    0.0000
+    Residual |  1.82152879        83   .02194613   R-squared       =    0.7728
+-------------+----------------------------------   Adj R-squared   =    0.7619
+       Total |  8.01760352        87  .092156362   Root MSE        =    .14814
+
+------------------------------------------------------------------------------
+      lprice | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     lassess |   1.043065    .151446     6.89   0.000     .7418453    1.344285
+       bdrms |   .0338392   .0220983     1.53   0.129    -.0101135    .0777918
+    llotsize |   .0074379   .0385615     0.19   0.848    -.0692593    .0841352
+      lsqrft |  -.1032384   .1384305    -0.75   0.458     -.378571    .1720942
+       _cons |    .263743   .5696647     0.46   0.645    -.8692972    1.396783
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">test</span> (lasses=1)</span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="kw">test</span> (lasses=1) (bdrms=llotsize=lsqrft=0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ ( 1)  lassess = 1
+
+       F(  1,    83) =    0.08
+            Prob &gt; F =    0.7768
+
+ ( 1)  lassess = 1
+ ( 2)  bdrms - llotsize = 0
+ ( 3)  bdrms - lsqrft = 0
+ ( 4)  bdrms = 0
+
+       F(  4,    83) =    0.67
+            Prob &gt; F =    0.6162</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1"></a>frause mlb1, <span class="kw">clear</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="kw">reg</span> lsalary years gamesyr bavg hrunsyr rbisy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Source |       SS           df       MS      Number of obs   =       353
+-------------+----------------------------------   F(5, 347)       =    117.06
+       Model |  308.989208         5  61.7978416   Prob &gt; F        =    0.0000
+    Residual |  183.186327       347  .527914487   R-squared       =    0.6278
+-------------+----------------------------------   Adj R-squared   =    0.6224
+       Total |  492.175535       352  1.39822595   Root MSE        =    .72658
+
+------------------------------------------------------------------------------
+     lsalary | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       years |   .0688626   .0121145     5.68   0.000     .0450355    .0926898
+     gamesyr |   .0125521   .0026468     4.74   0.000     .0073464    .0177578
+        bavg |   .0009786   .0011035     0.89   0.376    -.0011918     .003149
+     hrunsyr |   .0144295    .016057     0.90   0.369    -.0171518    .0460107
+      rbisyr |   .0107657    .007175     1.50   0.134    -.0033462    .0248776
+       _cons |   11.19242   .2888229    38.75   0.000     10.62435    11.76048
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">test</span> bavg hrunsyr rbisy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ ( 1)  bavg = 0
+ ( 2)  hrunsyr = 0
+ ( 3)  rbisyr = 0
+
+       F(  3,   347) =    9.55
+            Prob &gt; F =    0.0000</code></pre>
+</div>
+</div>
 
 <div class="footer footer-default">
 
@@ -640,6 +1054,7 @@ H_0: &amp; \beta_k=\beta^{hyp}_k \text{ vs } H_1: \beta_k \neq \beta^{hyp}_k \\
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
+'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -900,9 +1315,10 @@ H_0: &amp; \beta_k=\beta^{hyp}_k \text{ vs } H_1: \beta_k \neq \beta^{hyp}_k \\
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      function tippyHover(el, contentFn) {
         const config = {
           allowHTML: true,
+          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -912,17 +1328,8 @@ H_0: &amp; \beta_k=\beta^{hyp}_k \text{ vs } H_1: \beta_k \neq \beta^{hyp}_k \\
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start',
+          placement: 'bottom-start'
         };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
