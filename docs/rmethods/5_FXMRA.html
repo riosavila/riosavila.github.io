@@ -388,9 +388,6 @@
       margin-right: 0; 
     }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -414,7 +411,7 @@ Fernando Rios-Avila
 <ul>
 <li><p>Multiple Linear Regression models (MLRM), estimated via OLS, have very good properties, if all Assumptions (A1-A5,A6’) Hold.</p></li>
 <li><p>Up until now, we have discussed how to estimate them, and analyze them under “optimal” assumptions, in simplified cases.</p></li>
-<li><p>Today we will be adding other “minor” Features to MLR, better understanding its features</p></li>
+<li><p>Today we will be adding other “minor” Features to MLR, and aim to better understand its features</p></li>
 </ul>
 </section>
 <section id="scaling-and-shifting" class="slide level2">
@@ -423,9 +420,9 @@ Fernando Rios-Avila
 <li><p>Something that we do not emphasize enough. Before analyzing your data, its important to analyze the nature of the data (summary stats, ranges, scales)</p></li>
 <li><p>When I talk about Scaling and shifting, I refer exclusibly to afine transormations of the following type:</p></li>
 </ol>
-<p><span class="math display">\[x^* = a*x+c
+<p><span class="math display">\[x^* = a*x+c \text{ or } x^* = a*(x+c1)+c2
 \]</span></p>
-<p>They either Shift, or change the scale of the data. Not the shape!</p>
+<p>They either Shift, or change the scale of the data. Not the shape! (logs change shape)</p>
 <ol start="3" type="1">
 <li><p>If one applies afine transformations to the data, it will have <strong>NO</strong> effect on your model what-so-ever. (Same t’s same F’s, same <span class="math inline">\(R^2\)</span>)</p></li>
 <li><p>But, your <span class="math inline">\(\beta's\)</span> will change. This could help understading and explaining the results.</p></li>
@@ -433,7 +430,7 @@ Fernando Rios-Avila
 </section>
 <section id="example" class="slide level2 smaller">
 <h2>Example:</h2>
-<div id="dba0ed7b" class="cell" data-execution_count="1">
+<div id="756878ab" class="cell" data-execution_count="1">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">set</span> <span class="dv">linesize</span> 255</span>
@@ -641,24 +638,285 @@ Fernando Rios-Avila
 </section>
 <section id="beta-or-standardized-coefficients" class="slide level2">
 <h2>Beta or Standardized Coefficients</h2>
+<ul>
+<li>In some fields (health), making inferences based on default scales can be difficult (the impact of 1microgram ?).</li>
+<li>To avoid this type of problem researchers may opt to use <strong>Standardized</strong> or <strong>Beta</strong> coefficients.
+<ul>
+<li>How a <span class="math inline">\(sd\)</span> change in <span class="math inline">\(X's\)</span> affect the outcome (in <span class="math inline">\(sd\)</span>)</li>
+</ul></li>
+<li>Getting these coefficient is similar to applying the following transformation to all variables:</li>
+</ul>
+<p><span class="math display">\[\tilde w = \frac{w-\bar w}{\sigma_w} \rightarrow E(\tilde w)=0 \text{ and } Var(\tilde w) = 1
+\]</span></p>
+<div class="sourceCode" id="cb2" style="font-size: 1.3em"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">reg</span> <span class="fu">y</span> x1 <span class="kw">x2</span> x3, beta</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">est</span> sto m1</span>
+<span id="cb2-3"><a href="#cb2-3"></a>esttab m1, beta </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>It also helps you make comparison of the relative importance of each covariate explanatory power.</li>
+</ul>
 </section>
 <section id="functional-forms-single-dummies" class="slide level2">
 <h2>Functional Forms: Single Dummies</h2>
+<ul>
+<li><p>Dummies are variables that take only two values (preferably 0 and 1).</p></li>
+<li><p>They are used to capture qualitative (binary) characteristics (ie Democrat, Union worker, etc)</p></li>
+<li><p>When used in regression analysis, they represent “shifts” in the Intercept: <span class="math display">\[y = b_0 + b_1 male + b_2 x_1 + b_3 x_2 + e
+\]</span></p>
+<ul>
+<li>Here, <span class="math inline">\(b_0\)</span> would be the “intercept” for “women” (base) while <span class="math inline">\(b_0+b_1\)</span> would be the intercept for men.
+<ul>
+<li>Under A4, <span class="math inline">\(b_1\)</span> is the expected outcome difference <strong>men</strong> have over <strong>women</strong>, everything else constant.</li>
+</ul></li>
+</ul></li>
+<li><p>Unless further restrictions are used, you can’t add Dummies for both categories in the model.</p></li>
+</ul>
+<div class="sourceCode" id="cb3" style="font-size: 1.3em"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a>* Stata Code</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">reg</span> <span class="fu">y</span> x1 <span class="kw">x2</span> <span class="kw">d</span>    &lt;-- Possible <span class="kw">if</span> <span class="kw">d</span> = 0 <span class="kw">or</span> 1</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">reg</span> <span class="fu">y</span> x1 <span class="kw">x2</span> i.<span class="kw">d</span>  &lt;-- Better</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="functional-forms-multiple-dummies" class="slide level2">
 <h2>Functional Forms: Multiple Dummies</h2>
+<ul>
+<li>We can use dummies to represent multiple (nonoverlapping) characteristics like Race, ranking or age group).</li>
+<li>One needs a “base” or comparison group to analyze coefficients (or more).</li>
+<li>Ordered variables can be used as continuous, but using them as dummies requires creating dummies for each category.</li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+y &amp;= b_0 + b_1 black + b_2 hispanic + b_3 other + b_4 x + e &amp; || Base = White \\
+y &amp;= b_0 + b_1 young + b_2 old + b_3 x + e &amp; || Base = Adult
+\end{aligned}
+\]</span></p>
+<ul>
+<li>When using with ordered data, multiple dummies may create somewhat counterintuitive results</li>
+</ul>
+<div class="sourceCode" id="cb4" style="font-size: 1.3em"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">tab</span> race, <span class="kw">gen</span>(race_)  &lt;- creates dummies</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">reg</span> <span class="fu">y</span> i.race x1 <span class="kw">x2</span> x3 &lt;- generally uses first <span class="fu">group</span> <span class="kw">as</span> base</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">reg</span> <span class="fu">y</span> ib2.race x1 <span class="kw">x2</span> x3 &lt;- indicates a particular <span class="st">"base"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="example-1" class="slide level2 scrollable">
+<h2>Example</h2>
+<div id="e969928c" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1"></a>frause beauty, <span class="kw">clear</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>** Union also a dummy. </span>
+<span id="cb5-3"><a href="#cb5-3"></a>** looks <span class="kw">as</span> Continous</span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">qui</span>:<span class="kw">reg</span> lwage exper <span class="kw">union</span> educ female looks</span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="kw">est</span> sto m1</span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="kw">gen</span> looks_good = looks&gt;=4 <span class="kw">if</span> !<span class="fu">missing</span>(looks)</span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="kw">qui</span>:<span class="kw">reg</span> lwage exper <span class="kw">union</span> educ female looks_good</span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="kw">est</span> sto m2</span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="kw">qui</span>:<span class="kw">reg</span> lwage exper <span class="kw">union</span> educ female i.looks</span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="kw">est</span> sto m3</span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="kw">qui</span>:<span class="kw">reg</span> lwage exper <span class="kw">union</span> educ female ib3.looks</span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="kw">est</span> sto m4</span>
+<span id="cb5-13"><a href="#cb5-13"></a>esttab m1 m2 m3 m4, se <span class="kw">star</span>( * 0.1 ** 0.05 *** 0.01  ) nogaps nomtitle</span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="kw">display</span> <span class="dt">_n</span> <span class="st">"Exact Change Union : "</span> %5.3f (<span class="fu">exp</span>(_b[<span class="kw">union</span>])-1)*100 <span class="st">"%"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+----------------------------------------------------------------------------
+                      (1)             (2)             (3)             (4)   
+----------------------------------------------------------------------------
+exper              0.0137***       0.0134***       0.0135***       0.0135***
+                (0.00119)       (0.00120)       (0.00120)       (0.00120)   
+union               0.201***        0.201***        0.196***        0.196***
+                 (0.0305)        (0.0307)        (0.0306)        (0.0306)   
+educ               0.0737***       0.0750***       0.0735***       0.0735***
+                (0.00528)       (0.00528)       (0.00528)       (0.00528)   
+female             -0.448***       -0.450***       -0.446***       -0.446***
+                 (0.0293)        (0.0294)        (0.0293)        (0.0293)   
+looks              0.0555***                                                
+                 (0.0201)                                                   
+looks_good                         0.0276                                   
+                                 (0.0299)                                   
+1.looks                                                 0          -0.266** 
+                                                      (.)         (0.134)   
+2.looks                                             0.146          -0.121***
+                                                  (0.139)        (0.0439)   
+3.looks                                             0.266**             0   
+                                                  (0.134)             (.)   
+4.looks                                             0.264*       -0.00255   
+                                                  (0.136)        (0.0312)   
+5.looks                                             0.422**         0.156   
+                                                  (0.173)         (0.111)   
+_cons               0.408***        0.565***        0.338**         0.604***
+                 (0.0968)        (0.0774)         (0.149)        (0.0781)   
+----------------------------------------------------------------------------
+N                    1260            1260            1260            1260   
+----------------------------------------------------------------------------
+Standard errors in parentheses
+* p&lt;0.1, ** p&lt;0.05, *** p&lt;0.01
+
+Exact Change Union : 21.598%</code></pre>
+</div>
+</div>
 </section>
 <section id="functional-forms-logarithms" class="slide level2">
 <h2>Functional Forms: Logarithms</h2>
+<ul>
+<li>Using Logarithms can help modeling some nonlinearities in the data.</li>
+<li>Because it changes the “shape” of variables, it also changes the interpretation (Changes vs %changes)</li>
+<li>Because it reduces dispersion of dep. variable, it often helps fullfilling CLM assumptions. But this is not as important as helping with model interpretation and inference.</li>
+</ul>
+<p>But: - You cannot apply this transformation to all data types (ie Dummies, negatives), or should not (ie shares, years of education) - In a log-lin model, while <span class="math inline">\(\beta\)</span> can be interpreted as a <span class="math inline">\(\beta \%\)</span> change on the outcome, it is often better to use the exact percentage change: <span class="math display">\[\begin{aligned}
+log(y) &amp;= b_0 + b_1 x_1 + b_2 x_2 + b_3 D + e \\
+\frac{\% \Delta y}{\Delta D} &amp;= 100 (exp(b_3)-1)\%
+\end{aligned}
+\]</span> Can be very different when <span class="math inline">\(b_3\)</span> is large (try it on and see)</p>
+</section>
+<section>
+<section id="break" class="title-slide slide level1 center">
+<h1>Break?!</h1>
+
 </section>
 <section id="functional-forms-polynomials-x2-x3-etc" class="slide level2">
-<h2>Functional Forms: Polynomials ($x^2, x^3, $ etc)</h2>
+<h2>Functional Forms: Polynomials (<span class="math inline">\(x^2, x^3, etc\)</span>)</h2>
+<ul>
+<li>Up to this point, we have only considered linear models (<span class="math inline">\(X's\)</span> enter asis or in logs). This almost always works! (Taylor expansion justification)
+<ul>
+<li>Specially if interested in Average Effects</li>
+</ul></li>
+<li>Some times, you may be interest in capturing some heterogeneity for <span class="math inline">\(dy/dx\)</span>. That can be done just adding “ANY” transformation of <span class="math inline">\(X\)</span> in the model (<span class="math inline">\(sin(x), 1/x, \sqrt x\)</span>, etc)</li>
+<li>For practical, and theoretical purposes, however, we usually concentrate on quadratic terms (<span class="math inline">\(x^2\)</span>).
+<ul>
+<li>FE: Increasing returns with decreasing marginal returns</li>
+<li>We may be interested in “turning” points</li>
+</ul></li>
+<li>However, we now need to be careful about marginal effects!</li>
+</ul>
 </section>
-<section id="functional-forms-interactions-xz-xd" class="slide level2">
-<h2>Functional Forms: Interactions (<span class="math inline">\(x*z, x*d\)</span>)</h2>
+<section id="section" class="slide level2">
+<h2></h2>
+<p><span class="math display">\[\begin{aligned}
+y &amp;=b_0+b_1 x_1 + b_2 x_1^2 + b_3 x_2 + e \\
+\frac{dy}{dx_1} &amp;= b_1+2b_2 x_1 =0 \\
+x_1^* &amp;= - \frac{b_1}{2b_2} x_1
+\end{aligned}
+\]</span></p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>To consider</strong></p>
+</div>
+<div class="callout-content">
+<ol type="1">
+<li>Marginal effects are no longer constant. You need an <span class="math inline">\(x_1\)</span> value to obtain them (mean? average?)</li>
+<li>With Quadratic models, there is <strong><em>ALWAYS</em></strong> a turning point (but may not be relevant)</li>
+<li>MFX can be positive or negative for <strong><em>some</em></strong> value of <span class="math inline">\(x_1\)</span> (but may not be relevant)</li>
+<li>Unless something else is done, coefficients may not make sense on their own.</li>
+</ol>
+</div>
+</div>
+</div>
+<ul>
+<li>Why not add further polynomials?
+<ul>
+<li>Estimating them is easy (except for numerical precision), and add added complexity for interpretation. Nothing else.</li>
+</ul></li>
+</ul>
+</section>
+<section id="example-2" class="slide level2 scrollable">
+<h2>Example</h2>
+<div id="2aaa2823" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1"></a>frause hprice2, <span class="kw">clear</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">gen</span> rooms2=rooms*rooms</span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">qui</span>:<span class="kw">reg</span> lprice lnox dist rooms </span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="kw">est</span> sto m0</span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="kw">qui</span>:<span class="kw">reg</span> lprice lnox dist rooms rooms2</span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="kw">est</span> sto m1</span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="kw">qui</span>:<span class="kw">reg</span> lprice lnox dist c.rooms c.rooms#c.rooms</span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="kw">est</span> sto m2</span>
+<span id="cb7-9"><a href="#cb7-9"></a>esttab m0 m1 m2, se varwidth(20) <span class="kw">star</span>(* 0.1 ** 0.05 *** 0.01) nogaps</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+--------------------------------------------------------------------
+                              (1)             (2)             (3)   
+                           lprice          lprice          lprice   
+--------------------------------------------------------------------
+lnox                       -0.968***       -0.975***       -0.975***
+                          (0.110)         (0.106)         (0.106)   
+dist                      -0.0291***      -0.0223**       -0.0223** 
+                         (0.0102)       (0.00995)       (0.00995)   
+rooms                       0.302***       -0.724***       -0.724***
+                         (0.0189)         (0.171)         (0.171)   
+rooms2                                     0.0794***                
+                                         (0.0131)                   
+c.rooms#c.rooms                                            0.0794***
+                                                         (0.0131)   
+_cons                       9.793***        13.05***        13.05***
+                          (0.271)         (0.599)         (0.599)   
+--------------------------------------------------------------------
+N                             506             506             506   
+--------------------------------------------------------------------
+Standard errors in parentheses
+* p&lt;0.1, ** p&lt;0.05, *** p&lt;0.01</code></pre>
+</div>
+</div>
+<ul>
+<li>Negative coefficient for <span class="math inline">\(rooms\)</span>, so is there a problem?
+<ul>
+<li>Find “turnpoint” and summary Stats</li>
+</ul></li>
+</ul>
+<p>Turn point: 4.55</p>
+<div id="2a99dbca" class="cell" data-execution_count="6">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Variable |       Min        p1        p5       p10       p25       p50       p75       p90       p99       Max
+-------------+----------------------------------------------------------------------------------------------------
+       rooms |      3.56      4.52       5.3      5.59      5.88      6.21      6.62      7.15      8.34      8.78
+------------------------------------------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<ul>
+<li>Does it make a difference how we estimate the model?</li>
+</ul>
+<div id="cc345f14" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">qui</span>:<span class="kw">reg</span> lprice lnox dist rooms rooms2</span>
+<span id="cb10-2"><a href="#cb10-2"></a>margins, <span class="kw">dydx</span>(rooms)</span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="kw">qui</span>:<span class="kw">reg</span> lprice lnox dist c.rooms c.rooms#c.rooms</span>
+<span id="cb10-4"><a href="#cb10-4"></a>margins, <span class="kw">dydx</span>(rooms) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Average marginal effects                                   Number of obs = 506
+Model VCE: OLS
+
+Expression: Linear prediction, predict()
+dy/dx wrt:  rooms
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |      dy/dx   std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       rooms |  -.7236433   .1706763    -4.24   0.000    -1.058973   -.3883139
+------------------------------------------------------------------------------
+
+Average marginal effects                                   Number of obs = 506
+Model VCE: OLS
+
+Expression: Linear prediction, predict()
+dy/dx wrt:  rooms
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |      dy/dx   std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       rooms |   .2747106   .0188463    14.58   0.000     .2376831    .3117382
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="functional-forms-interactions-d1d2-xz-xd" class="slide level2">
+<h2>Functional Forms: Interactions (<span class="math inline">\(d1*d2, x*z, x*d\)</span>)</h2>
 </section>
 <section id="functional-forms-full-interactions" class="slide level2">
 <h2>Functional Forms: Full Interactions</h2>
+</section></section>
+<section>
+<section id="break-1" class="title-slide slide level1 center">
+<h1>Break?!</h1>
+
 </section>
 <section id="dummies-as-dep-variable" class="slide level2">
 <h2>Dummies as Dep Variable</h2>
@@ -669,7 +927,7 @@ Fernando Rios-Avila
 <div class="footer footer-default">
 
 </div>
-</section>
+</section></section>
     </div>
   </div>
 

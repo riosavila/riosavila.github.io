@@ -25,7 +25,7 @@ format:
 
 - Up until now, we have discussed how to estimate them, and analyze them under "optimal" assumptions, in simplified cases. 
 
-- Today we will be adding other "minor" Features to MLR, better understanding its features
+- Today we will be adding other "minor" Features to MLR, and aim to better understand its features
 
 ## Scaling and shifting
 
@@ -33,10 +33,10 @@ format:
    
 2. When I talk about Scaling and shifting, I refer exclusibly to afine transormations of the following type:
 
-$$x^* = a*x+c
+$$x^* = a*x+c \text{ or } x^* = a*(x+c1)+c2
 $$
 
-They either Shift, or change the scale of the data. Not the shape!
+They either Shift, or change the scale of the data. Not the shape! (logs change shape)
 
 3. If one applies afine transformations to the data, it will have **NO** effect on your model what-so-ever. (Same t's same F's, same $R^2$)
 
@@ -85,17 +85,183 @@ Re-Scaling is an important tool/trick that can be used for interpreting more com
 
 ## Beta or Standardized Coefficients
 
+- In some fields (health), making inferences based on default scales can be difficult (the impact of 1microgram ?).
+- To avoid this type of problem researchers may opt to use **Standardized** or **Beta** coefficients. 
+  - How a $sd$ change in $X's$ affect the outcome (in $sd$)
+- Getting these coefficient is similar to applying the following transformation to all variables:
+
+$$\tilde w = \frac{w-\bar w}{\sigma_w} \rightarrow E(\tilde w)=0 \text{ and } Var(\tilde w) = 1
+$$
+
+```stata{style="font-size: 1.3em"}
+reg y x1 x2 x3, beta
+est sto m1
+esttab m1, beta 
+```
+
+- It also helps you make comparison of the relative importance of each covariate explanatory power.
+
 ## Functional Forms: Single Dummies
+
+- Dummies are variables that take only two values (preferably 0 and 1). 
+- They are used to capture qualitative (binary) characteristics (ie Democrat, Union worker, etc)
+- When used in regression analysis, they represent "shifts" in the Intercept:
+$$y = b_0 + b_1 male + b_2 x_1 + b_3 x_2 + e
+$$
+
+  - Here, $b_0$ would be the "intercept" for "women" (base) while $b_0+b_1$ would be the intercept for men. 
+    - Under A4, $b_1$ is the expected outcome difference **men** have over **women**, everything else constant. 
+- Unless further restrictions are used, you can't add Dummies for both categories in the model. 
+
+```stata{style="font-size: 1.3em"}
+* Stata Code
+reg y x1 x2 d    <-- Possible if d = 0 or 1
+reg y x1 x2 i.d  <-- Better
+```
 
 ## Functional Forms: Multiple Dummies
 
+- We can use dummies to represent multiple (nonoverlapping) characteristics like Race, ranking or age group).
+- One needs a "base" or comparison group to analyze coefficients (or more).
+- Ordered variables can be used as continuous, but using them as dummies requires creating dummies for each category.
+
+$$\begin{aligned}
+y &= b_0 + b_1 black + b_2 hispanic + b_3 other + b_4 x + e & || Base = White \\
+y &= b_0 + b_1 young + b_2 old + b_3 x + e & || Base = Adult
+\end{aligned}
+$$
+
+- When using with ordered data,  multiple dummies may create somewhat counterintuitive results
+
+```stata{style="font-size: 1.3em"}
+tab race, gen(race_)  <- creates dummies
+reg y i.race x1 x2 x3 <- generally uses first group as base
+reg y ib2.race x1 x2 x3 <- indicates a particular "base"
+```
+
+## Example {.scrollable}
+
+```{stata}
+*| code-fold: false
+frause beauty, clear
+** Union also a dummy. 
+** looks as Continous
+qui:reg lwage exper union educ female looks
+est sto m1
+gen looks_good = looks>=4 if !missing(looks)
+qui:reg lwage exper union educ female looks_good
+est sto m2
+qui:reg lwage exper union educ female i.looks
+est sto m3
+qui:reg lwage exper union educ female ib3.looks
+est sto m4
+esttab m1 m2 m3 m4, se star( * 0.1 ** 0.05 *** 0.01  ) nogaps nomtitle
+display _n "Exact Change Union : " %5.3f (exp(_b[union])-1)*100 "%"
+```
+
 ## Functional Forms: Logarithms
 
-## Functional Forms: Polynomials ($x^2, x^3, $ etc)
+- Using Logarithms can help modeling some nonlinearities in the data.
+- Because it changes the "shape" of variables, it also changes the interpretation (Changes vs %changes)
+- Because it reduces dispersion of dep. variable, it often helps fullfilling CLM assumptions. But this is not as important as helping with model interpretation and inference.
+  
+But:
+- You cannot apply this transformation to all data types (ie Dummies, negatives), or should not (ie shares, years of education)
+- In a log-lin model, while $\beta$ can be interpreted as a $\beta \%$ change on the outcome, it is often better to use the exact percentage change:
+$$\begin{aligned}
+log(y) &= b_0 + b_1 x_1 + b_2 x_2 + b_3 D + e \\
+\frac{\% \Delta y}{\Delta D} &= 100 (exp(b_3)-1)\%
+\end{aligned}
+$$
+Can be very different when $b_3$ is large (try it on and see)
 
-## Functional Forms: Interactions ($x*z, x*d$)
+# Break?!
 
-## Functional Forms: Full Interactions
+## Functional Forms: Polynomials ($x^2, x^3, etc$)
+
+- Up to this point, we have only considered linear models ($X's$ enter asis or in logs). This almost always works! (Taylor expansion justification)
+  - Specially if interested in Average Effects
+- Some times, you may be interest in capturing some heterogeneity for $dy/dx$. That can be done just adding "ANY" transformation of $X$ in the model ($sin(x), 1/x, \sqrt x$, etc)
+- For practical, and theoretical purposes, however, we usually concentrate on quadratic terms ($x^2$).
+  - FE: Increasing returns with decreasing marginal returns
+  - We may be interested in "turning" points
+- However, we now need to be careful about marginal effects!  
+
+## 
+$$\begin{aligned}
+y &=b_0+b_1 x_1 + b_2 x_1^2 + b_3 x_2 + e \\
+\frac{dy}{dx_1} &= b_1+2b_2 x_1 =0 \\
+x_1^* &= - \frac{b_1}{2b_2} x_1
+\end{aligned}
+$$
+
+:::{.callout-note}
+
+## To consider 
+
+1. Marginal effects are no longer constant. You need an $x_1$ value to obtain them (mean? average?)
+2. With Quadratic models, there is ***ALWAYS*** a turning point (but may not be relevant)
+3. MFX can be positive or negative for ***some*** value of $x_1$ (but may not be relevant)
+4. Unless something else is done, coefficients may not make sense on their own.
+
+:::  
+
+- Why not add further polynomials? 
+  - Estimating them is easy (except for numerical precision), and add added complexity for interpretation. Nothing else.
+
+## Example {.scrollable}
+
+```{stata}
+*| code-fold: false
+frause hprice2, clear
+gen rooms2=rooms*rooms
+qui:reg lprice lnox dist rooms 
+est sto m0
+qui:reg lprice lnox dist rooms rooms2
+est sto m1
+qui:reg lprice lnox dist c.rooms c.rooms#c.rooms
+est sto m2
+esttab m0 m1 m2, se varwidth(20) star(* 0.1 ** 0.05 *** 0.01) nogaps
+```
+
+- Negative coefficient for $rooms$, so is there a problem? 
+  - Find "turnpoint" and summary Stats
+
+```{stata}
+*| echo: false
+*| output: asis
+qui:reg lprice lnox dist rooms rooms2
+display "Turn point:" %5.2f -_b[rooms]/(2*_b[rooms2])
+```
+
+```{stata}
+*| echo: false
+tabstat rooms, stats(min p1 p5 p10 p25  p50 p75 p90 p99 max)
+```
+
+- Does it make a difference how we estimate the model?
+
+```{stata}
+*| code-fold: false
+qui:reg lprice lnox dist rooms rooms2
+margins, dydx(rooms)
+qui:reg lprice lnox dist c.rooms c.rooms#c.rooms
+margins, dydx(rooms) 
+```
+
+## Functional Forms: Interactions ($d1*d2, x*z, x*d$)
+
+Continuous variables: 
+
+- One may be interested in allowing for compound effects among variables. (Synergy of experience and education)
+
+Discrete variables 
+
+- Or allow for 
+
+## Functional Forms: Full Interactions (with dummies)
+
+# Break?!
 
 ## Dummies as Dep Variable
 

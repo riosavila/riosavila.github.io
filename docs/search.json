@@ -3518,14 +3518,14 @@
     "href": "rmethods/5_FXMRA.html#introduction",
     "title": "Multiple Regression Analysis",
     "section": "Introduction",
-    "text": "Introduction\n\nMultiple Linear Regression models (MLRM), estimated via OLS, have very good properties, if all Assumptions (A1-A5,A6’) Hold.\nUp until now, we have discussed how to estimate them, and analyze them under “optimal” assumptions, in simplified cases.\nToday we will be adding other “minor” Features to MLR, better understanding its features"
+    "text": "Introduction\n\nMultiple Linear Regression models (MLRM), estimated via OLS, have very good properties, if all Assumptions (A1-A5,A6’) Hold.\nUp until now, we have discussed how to estimate them, and analyze them under “optimal” assumptions, in simplified cases.\nToday we will be adding other “minor” Features to MLR, and aim to better understand its features"
   },
   {
     "objectID": "rmethods/5_FXMRA.html#scaling-and-shifting",
     "href": "rmethods/5_FXMRA.html#scaling-and-shifting",
     "title": "Multiple Regression Analysis",
     "section": "Scaling and shifting",
-    "text": "Scaling and shifting\n\nSomething that we do not emphasize enough. Before analyzing your data, its important to analyze the nature of the data (summary stats, ranges, scales)\nWhen I talk about Scaling and shifting, I refer exclusibly to afine transormations of the following type:\n\n\\[x^* = a*x+c\n\\]\nThey either Shift, or change the scale of the data. Not the shape!\n\nIf one applies afine transformations to the data, it will have NO effect on your model what-so-ever. (Same t’s same F’s, same \\(R^2\\))\nBut, your \\(\\beta's\\) will change. This could help understading and explaining the results."
+    "text": "Scaling and shifting\n\nSomething that we do not emphasize enough. Before analyzing your data, its important to analyze the nature of the data (summary stats, ranges, scales)\nWhen I talk about Scaling and shifting, I refer exclusibly to afine transormations of the following type:\n\n\\[x^* = a*x+c \\text{ or } x^* = a*(x+c1)+c2\n\\]\nThey either Shift, or change the scale of the data. Not the shape! (logs change shape)\n\nIf one applies afine transformations to the data, it will have NO effect on your model what-so-ever. (Same t’s same F’s, same \\(R^2\\))\nBut, your \\(\\beta's\\) will change. This could help understading and explaining the results."
   },
   {
     "objectID": "rmethods/5_FXMRA.html#example",
@@ -3546,35 +3546,35 @@
     "href": "rmethods/5_FXMRA.html#beta-or-standardized-coefficients",
     "title": "Multiple Regression Analysis",
     "section": "Beta or Standardized Coefficients",
-    "text": "Beta or Standardized Coefficients"
+    "text": "Beta or Standardized Coefficients\n\nIn some fields (health), making inferences based on default scales can be difficult (the impact of 1microgram ?).\nTo avoid this type of problem researchers may opt to use Standardized or Beta coefficients.\n\nHow a \\(sd\\) change in \\(X's\\) affect the outcome (in \\(sd\\))\n\nGetting these coefficient is similar to applying the following transformation to all variables:\n\n\\[\\tilde w = \\frac{w-\\bar w}{\\sigma_w} \\rightarrow E(\\tilde w)=0 \\text{ and } Var(\\tilde w) = 1\n\\]\nreg y x1 x2 x3, beta\nest sto m1\nesttab m1, beta \n\nIt also helps you make comparison of the relative importance of each covariate explanatory power."
   },
   {
     "objectID": "rmethods/5_FXMRA.html#functional-forms-logarithms",
     "href": "rmethods/5_FXMRA.html#functional-forms-logarithms",
     "title": "Multiple Regression Analysis",
     "section": "Functional Forms: Logarithms",
-    "text": "Functional Forms: Logarithms"
+    "text": "Functional Forms: Logarithms\n\nUsing Logarithms can help modeling some nonlinearities in the data.\nBecause it changes the “shape” of variables, it also changes the interpretation (Changes vs %changes)\nBecause it reduces dispersion of dep. variable, it often helps fullfilling CLM assumptions. But this is not as important as helping with model interpretation and inference.\n\nBut: - You cannot apply this transformation to all data types (ie Dummies, negatives), or should not (ie shares, years of education) - In a log-lin model, while \\(\\beta\\) can be interpreted as a \\(\\beta \\%\\) change on the outcome, it is often better to use the exact percentage change: \\[\\begin{aligned}\nlog(y) &= b_0 + b_1 x_1 + b_2 x_2 + b_3 D + e \\\\\n\\frac{\\% \\Delta y}{\\Delta D} &= 100 (exp(b_3)-1)\\%\n\\end{aligned}\n\\] Can be very different when \\(b_3\\) is large (try it on and see)"
   },
   {
     "objectID": "rmethods/5_FXMRA.html#functional-forms-polynomials-x2-x3-etc",
     "href": "rmethods/5_FXMRA.html#functional-forms-polynomials-x2-x3-etc",
     "title": "Multiple Regression Analysis",
-    "section": "Functional Forms: Polynomials ($x^2, x^3, $ etc)",
-    "text": "Functional Forms: Polynomials ($x^2, x^3, $ etc)"
+    "section": "Functional Forms: Polynomials (\\(x^2, x^3, etc\\))",
+    "text": "Functional Forms: Polynomials (\\(x^2, x^3, etc\\))\n\nUp to this point, we have only considered linear models (\\(X's\\) enter asis or in logs). This almost always works! (Taylor expansion justification)\n\nSpecially if interested in Average Effects\n\nSome times, you may be interest in capturing some heterogeneity for \\(dy/dx\\). That can be done just adding “ANY” transformation of \\(X\\) in the model (\\(sin(x), 1/x, \\sqrt x\\), etc)\nFor practical, and theoretical purposes, however, we usually concentrate on quadratic terms (\\(x^2\\)).\n\nFE: Increasing returns with decreasing marginal returns\nWe may be interested in “turning” points\n\nHowever, we now need to be careful about marginal effects!"
   },
   {
     "objectID": "rmethods/5_FXMRA.html#functional-forms-single-dummies",
     "href": "rmethods/5_FXMRA.html#functional-forms-single-dummies",
     "title": "Multiple Regression Analysis",
     "section": "Functional Forms: Single Dummies",
-    "text": "Functional Forms: Single Dummies"
+    "text": "Functional Forms: Single Dummies\n\nDummies are variables that take only two values (preferably 0 and 1).\nThey are used to capture qualitative (binary) characteristics (ie Democrat, Union worker, etc)\nWhen used in regression analysis, they represent “shifts” in the Intercept: \\[y = b_0 + b_1 male + b_2 x_1 + b_3 x_2 + e\n\\]\n\nHere, \\(b_0\\) would be the “intercept” for “women” (base) while \\(b_0+b_1\\) would be the intercept for men.\n\nUnder A4, \\(b_1\\) is the expected outcome difference men have over women, everything else constant.\n\n\nUnless further restrictions are used, you can’t add Dummies for both categories in the model.\n\n* Stata Code\nreg y x1 x2 d    &lt;-- Possible if d = 0 or 1\nreg y x1 x2 i.d  &lt;-- Better"
   },
   {
     "objectID": "rmethods/5_FXMRA.html#functional-forms-multiple-dummies",
     "href": "rmethods/5_FXMRA.html#functional-forms-multiple-dummies",
     "title": "Multiple Regression Analysis",
     "section": "Functional Forms: Multiple Dummies",
-    "text": "Functional Forms: Multiple Dummies"
+    "text": "Functional Forms: Multiple Dummies\n\nWe can use dummies to represent multiple (nonoverlapping) characteristics like Race, ranking or age group).\nOne needs a “base” or comparison group to analyze coefficients (or more).\nOrdered variables can be used as continuous, but using them as dummies requires creating dummies for each category.\n\n\\[\\begin{aligned}\ny &= b_0 + b_1 black + b_2 hispanic + b_3 other + b_4 x + e & || Base = White \\\\\ny &= b_0 + b_1 young + b_2 old + b_3 x + e & || Base = Adult\n\\end{aligned}\n\\]\n\nWhen using with ordered data, multiple dummies may create somewhat counterintuitive results\n\ntab race, gen(race_)  &lt;- creates dummies\nreg y i.race x1 x2 x3 &lt;- generally uses first group as base\nreg y ib2.race x1 x2 x3 &lt;- indicates a particular \"base\""
   },
   {
     "objectID": "rmethods/5_FXMRA.html#functional-forms-interactions-xz-xd",
@@ -3603,5 +3603,33 @@
     "title": "Multiple Regression Analysis",
     "section": "Discrete Vriable as Dep Variable",
     "text": "Discrete Vriable as Dep Variable"
+  },
+  {
+    "objectID": "rmethods/5_FXMRA.html#functional-forms-interactions-d1d2-xz-xd",
+    "href": "rmethods/5_FXMRA.html#functional-forms-interactions-d1d2-xz-xd",
+    "title": "Multiple Regression Analysis",
+    "section": "Functional Forms: Interactions (\\(d1*d2, x*z, x*d\\))",
+    "text": "Functional Forms: Interactions (\\(d1*d2, x*z, x*d\\))"
+  },
+  {
+    "objectID": "rmethods/5_FXMRA.html#example-1",
+    "href": "rmethods/5_FXMRA.html#example-1",
+    "title": "Multiple Regression Analysis",
+    "section": "Example",
+    "text": "Example\n\nfrause beauty, clear\n** Union also a dummy. \n** looks as Continous\nqui:reg lwage exper union educ female looks\nest sto m1\ngen looks_good = looks&gt;=4 if !missing(looks)\nqui:reg lwage exper union educ female looks_good\nest sto m2\nqui:reg lwage exper union educ female i.looks\nest sto m3\nqui:reg lwage exper union educ female ib3.looks\nest sto m4\nesttab m1 m2 m3 m4, se star( * 0.1 ** 0.05 *** 0.01  ) nogaps nomtitle\ndisplay _n \"Exact Change Union : \" %5.3f (exp(_b[union])-1)*100 \"%\"\n\n\n----------------------------------------------------------------------------\n                      (1)             (2)             (3)             (4)   \n----------------------------------------------------------------------------\nexper              0.0137***       0.0134***       0.0135***       0.0135***\n                (0.00119)       (0.00120)       (0.00120)       (0.00120)   \nunion               0.201***        0.201***        0.196***        0.196***\n                 (0.0305)        (0.0307)        (0.0306)        (0.0306)   \neduc               0.0737***       0.0750***       0.0735***       0.0735***\n                (0.00528)       (0.00528)       (0.00528)       (0.00528)   \nfemale             -0.448***       -0.450***       -0.446***       -0.446***\n                 (0.0293)        (0.0294)        (0.0293)        (0.0293)   \nlooks              0.0555***                                                \n                 (0.0201)                                                   \nlooks_good                         0.0276                                   \n                                 (0.0299)                                   \n1.looks                                                 0          -0.266** \n                                                      (.)         (0.134)   \n2.looks                                             0.146          -0.121***\n                                                  (0.139)        (0.0439)   \n3.looks                                             0.266**             0   \n                                                  (0.134)             (.)   \n4.looks                                             0.264*       -0.00255   \n                                                  (0.136)        (0.0312)   \n5.looks                                             0.422**         0.156   \n                                                  (0.173)         (0.111)   \n_cons               0.408***        0.565***        0.338**         0.604***\n                 (0.0968)        (0.0774)         (0.149)        (0.0781)   \n----------------------------------------------------------------------------\nN                    1260            1260            1260            1260   \n----------------------------------------------------------------------------\nStandard errors in parentheses\n* p&lt;0.1, ** p&lt;0.05, *** p&lt;0.01\n\nExact Change Union : 21.598%"
+  },
+  {
+    "objectID": "rmethods/5_FXMRA.html#section",
+    "href": "rmethods/5_FXMRA.html#section",
+    "title": "Multiple Regression Analysis",
+    "section": "",
+    "text": "\\[\\begin{aligned}\ny &=b_0+b_1 x_1 + b_2 x_1^2 + b_3 x_2 + e \\\\\n\\frac{dy}{dx_1} &= b_1+2b_2 x_1 =0 \\\\\nx_1^* &= - \\frac{b_1}{2b_2} x_1\n\\end{aligned}\n\\]\n\n\n\n\n\n\nTo consider\n\n\n\nMarginal effects are no longer constant. You need an \\(x_1\\) value to obtain them (mean? average?)\nWith Quadratic models, there is ALWAYS a turning point (but may not be relevant)\nMFX can be positive or negative for some value of \\(x_1\\) (but may not be relevant)\nUnless something else is done, coefficients may not make sense on their own.\n\n\n\n\n\nWhy not add further polynomials?\n\nEstimating them is easy (except for numerical precision), and add added complexity for interpretation. Nothing else."
+  },
+  {
+    "objectID": "rmethods/5_FXMRA.html#example-2",
+    "href": "rmethods/5_FXMRA.html#example-2",
+    "title": "Multiple Regression Analysis",
+    "section": "Example",
+    "text": "Example\n\nfrause hprice2, clear\ngen rooms2=rooms*rooms\nqui:reg lprice lnox dist rooms \nest sto m0\nqui:reg lprice lnox dist rooms rooms2\nest sto m1\nqui:reg lprice lnox dist c.rooms c.rooms#c.rooms\nest sto m2\nesttab m0 m1 m2, se varwidth(20) star(* 0.1 ** 0.05 *** 0.01) nogaps\n\n\n--------------------------------------------------------------------\n                              (1)             (2)             (3)   \n                           lprice          lprice          lprice   \n--------------------------------------------------------------------\nlnox                       -0.968***       -0.975***       -0.975***\n                          (0.110)         (0.106)         (0.106)   \ndist                      -0.0291***      -0.0223**       -0.0223** \n                         (0.0102)       (0.00995)       (0.00995)   \nrooms                       0.302***       -0.724***       -0.724***\n                         (0.0189)         (0.171)         (0.171)   \nrooms2                                     0.0794***                \n                                         (0.0131)                   \nc.rooms#c.rooms                                            0.0794***\n                                                         (0.0131)   \n_cons                       9.793***        13.05***        13.05***\n                          (0.271)         (0.599)         (0.599)   \n--------------------------------------------------------------------\nN                             506             506             506   \n--------------------------------------------------------------------\nStandard errors in parentheses\n* p&lt;0.1, ** p&lt;0.05, *** p&lt;0.01\n\n\n\nNegative coefficient for \\(rooms\\), so is there a problem?\n\nFind “turnpoint” and summary Stats\n\n\nTurn point: 4.55\n\n\n\n    Variable |       Min        p1        p5       p10       p25       p50       p75       p90       p99       Max\n-------------+----------------------------------------------------------------------------------------------------\n       rooms |      3.56      4.52       5.3      5.59      5.88      6.21      6.62      7.15      8.34      8.78\n------------------------------------------------------------------------------------------------------------------\n\n\n\nDoes it make a difference how we estimate the model?\n\n\nqui:reg lprice lnox dist rooms rooms2\nmargins, dydx(rooms)\nqui:reg lprice lnox dist c.rooms c.rooms#c.rooms\nmargins, dydx(rooms) \n\n\nAverage marginal effects                                   Number of obs = 506\nModel VCE: OLS\n\nExpression: Linear prediction, predict()\ndy/dx wrt:  rooms\n\n------------------------------------------------------------------------------\n             |            Delta-method\n             |      dy/dx   std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n       rooms |  -.7236433   .1706763    -4.24   0.000    -1.058973   -.3883139\n------------------------------------------------------------------------------\n\nAverage marginal effects                                   Number of obs = 506\nModel VCE: OLS\n\nExpression: Linear prediction, predict()\ndy/dx wrt:  rooms\n\n------------------------------------------------------------------------------\n             |            Delta-method\n             |      dy/dx   std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n       rooms |   .2747106   .0188463    14.58   0.000     .2376831    .3117382\n------------------------------------------------------------------------------"
   }
 ]
