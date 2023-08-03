@@ -19,9 +19,13 @@
   }  
   
   .larger {
-    font-size: 1.2em;
+    font-size: 1.1em;
   } 
 
-  .smaller {
+  .small90 {
+    font-size: 0.9em;
+  } 
+  
+  .small80 {
     font-size: 0.8em;
   } 

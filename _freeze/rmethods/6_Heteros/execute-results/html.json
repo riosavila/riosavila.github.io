@@ -1,0 +1,11 @@
+{
+  "hash": "e47c73ed7b0bc2c722f5026fc3bbb77f",
+  "result": {
+    "markdown": "---\ntitle: Multiple Regression Analysis\nsubtitle: Adding and Understanding features\nauthor: Fernando Rios-Avila\nformat:\n  revealjs:\n    slide-number: true\n    width: 1600\n    height: 900\n    code-fold: true\n    echo: true\n    css: styles.css\n    chalkboard: true\n---\n\n## What is Heteroskedasticity?\n\n## Consequences\n\n## Plots using homoskedastic errors, and heterskedastic errors\n\n## Detecting the Problem\n\n### BP\n\n### White\n\n### MWhite\n\n## Solving the problem\n\n## GLS: weighted Least Squares\n\n## GLS: Analytical\n\n## FGLS: Estimating Heteroskedasticity\n\n## Robust Standard Errors: White Sandwitch Formula\n\n## Inference: How things change\n\n## Prediction and log(y)\n\n## LPM revised\n\n",
+    "supporting": [
+      "6_Heteros_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

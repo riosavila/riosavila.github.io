@@ -1,0 +1,45 @@
+---
+title: "Multiple Regression Analysis"
+subtitle: "Adding and Understanding features"
+author: Fernando Rios-Avila
+jupyter: nbstata
+format: 
+  revealjs: 
+    slide-number: true
+    width: 1600
+    height: 900
+    code-fold: true
+    echo: true
+    css: styles.css 
+    chalkboard: true
+---
+
+## What is Heteroskedasticity?
+
+## Consequences
+
+## Plots using homoskedastic errors, and heterskedastic errors
+
+## Detecting the Problem
+
+### BP
+
+### White
+
+### MWhite
+
+## Solving the problem
+
+## GLS: weighted Least Squares
+
+## GLS: Analytical
+
+## FGLS: Estimating Heteroskedasticity
+
+## Robust Standard Errors: White Sandwitch Formula
+
+## Inference: How things change
+
+## Prediction and log(y)
+
+## LPM revised

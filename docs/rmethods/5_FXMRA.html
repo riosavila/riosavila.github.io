@@ -388,6 +388,9 @@
       margin-right: 0; 
     }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -418,19 +421,19 @@ Fernando Rios-Avila
 <h2>Scaling and shifting</h2>
 <ol type="1">
 <li><p>Something that we do not emphasize enough. Before analyzing your data, its important to analyze the nature of the data (summary stats, ranges, scales)</p></li>
-<li><p>When I talk about Scaling and shifting, I refer exclusibly to afine transormations of the following type:</p></li>
+<li><p>When I talk about Scaling and shifting, I refer exclusibly to affine transormations of the following type:</p></li>
 </ol>
 <p><span class="math display">\[x^* = a*x+c \text{ or } x^* = a*(x+c1)+c2
 \]</span></p>
 <p>They either Shift, or change the scale of the data. Not the shape! (logs change shape)</p>
 <ol start="3" type="1">
-<li><p>If one applies afine transformations to the data, it will have <strong>NO</strong> effect on your model what-so-ever. (Same t’s same F’s, same <span class="math inline">\(R^2\)</span>)</p></li>
+<li><p>If one applies affine transformations to the data, it will have <strong>NO</strong> effect on your model what-so-ever. (Same t’s same F’s, same <span class="math inline">\(R^2\)</span>)</p></li>
 <li><p>But, your <span class="math inline">\(\beta's\)</span> will change. This could help understading and explaining the results.</p></li>
 </ol>
 </section>
 <section id="example" class="slide level2 smaller">
 <h2>Example:</h2>
-<div id="756878ab" class="cell" data-execution_count="1">
+<div id="7e8d3d55" class="cell" data-execution_count="1">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">set</span> <span class="dv">linesize</span> 255</span>
@@ -695,7 +698,7 @@ y &amp;= b_0 + b_1 young + b_2 old + b_3 x + e &amp; || Base = Adult
 </section>
 <section id="example-1" class="slide level2 scrollable">
 <h2>Example</h2>
-<div id="e969928c" class="cell" data-execution_count="3">
+<div id="dec9fba2" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1"></a>frause beauty, <span class="kw">clear</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a>** Union also a dummy. </span>
 <span id="cb5-3"><a href="#cb5-3"></a>** looks <span class="kw">as</span> Continous</span>
@@ -753,14 +756,18 @@ Exact Change Union : 21.598%</code></pre>
 <h2>Functional Forms: Logarithms</h2>
 <ul>
 <li>Using Logarithms can help modeling some nonlinearities in the data.</li>
-<li>Because it changes the “shape” of variables, it also changes the interpretation (Changes vs %changes)</li>
-<li>Because it reduces dispersion of dep. variable, it often helps fullfilling CLM assumptions. But this is not as important as helping with model interpretation and inference.</li>
+<li>Because it changes the “shape” of variables, it also changes the interpretation (Changes vs %Changes)</li>
+<li>By reducing dispersion of dep. variable, CLM assumptions may hold.</li>
 </ul>
-<p>But: - You cannot apply this transformation to all data types (ie Dummies, negatives), or should not (ie shares, years of education) - In a log-lin model, while <span class="math inline">\(\beta\)</span> can be interpreted as a <span class="math inline">\(\beta \%\)</span> change on the outcome, it is often better to use the exact percentage change: <span class="math display">\[\begin{aligned}
+<p>But:</p>
+<ul>
+<li>Cannot or should not be applied to all data types (ie Dummies, negatives, shares)</li>
+<li>(log-lin model): It is often better to use the exact percentage change rather than approximation: <span class="math display">\[\begin{aligned}
 log(y) &amp;= b_0 + b_1 x_1 + b_2 x_2 + b_3 D + e \\
 \frac{\% \Delta y}{\Delta D} &amp;= 100 (exp(b_3)-1)\%
 \end{aligned}
-\]</span> Can be very different when <span class="math inline">\(b_3\)</span> is large (try it on and see)</p>
+\]</span></li>
+</ul>
 </section>
 <section>
 <section id="break" class="title-slide slide level1 center">
@@ -775,9 +782,9 @@ log(y) &amp;= b_0 + b_1 x_1 + b_2 x_2 + b_3 D + e \\
 <li>Specially if interested in Average Effects</li>
 </ul></li>
 <li>Some times, you may be interest in capturing some heterogeneity for <span class="math inline">\(dy/dx\)</span>. That can be done just adding “ANY” transformation of <span class="math inline">\(X\)</span> in the model (<span class="math inline">\(sin(x), 1/x, \sqrt x\)</span>, etc)</li>
-<li>For practical, and theoretical purposes, however, we usually concentrate on quadratic terms (<span class="math inline">\(x^2\)</span>).
+<li>For practical, and theoretical purposes, however, we usually concentrate on quadratic terms.
 <ul>
-<li>FE: Increasing returns with decreasing marginal returns</li>
+<li>For example: Increasing returns with decreasing marginal returns</li>
 <li>We may be interested in “turning” points</li>
 </ul></li>
 <li>However, we now need to be careful about marginal effects!</li>
@@ -812,13 +819,13 @@ x_1^* &amp;= - \frac{b_1}{2b_2} x_1
 <ul>
 <li>Why not add further polynomials?
 <ul>
-<li>Estimating them is easy (except for numerical precision), and add added complexity for interpretation. Nothing else.</li>
+<li>Estimating them is easy (except for numerical precision), but adds complexity for interpretation. Nothing else.</li>
 </ul></li>
 </ul>
 </section>
 <section id="example-2" class="slide level2 scrollable">
 <h2>Example</h2>
-<div id="2aaa2823" class="cell" data-execution_count="4">
+<div id="49dcf32c" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1"></a>frause hprice2, <span class="kw">clear</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="kw">gen</span> rooms2=rooms*rooms</span>
 <span id="cb7-3"><a href="#cb7-3"></a><span class="kw">qui</span>:<span class="kw">reg</span> lprice lnox dist rooms </span>
@@ -860,7 +867,7 @@ Standard errors in parentheses
 </ul></li>
 </ul>
 <p>Turn point: 4.55</p>
-<div id="2a99dbca" class="cell" data-execution_count="6">
+<div id="d9299651" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Variable |       Min        p1        p5       p10       p25       p50       p75       p90       p99       Max
@@ -872,7 +879,7 @@ Standard errors in parentheses
 <ul>
 <li>Does it make a difference how we estimate the model?</li>
 </ul>
-<div id="cc345f14" class="cell" data-execution_count="7">
+<div id="6e51796c" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">qui</span>:<span class="kw">reg</span> lprice lnox dist rooms rooms2</span>
 <span id="cb10-2"><a href="#cb10-2"></a>margins, <span class="kw">dydx</span>(rooms)</span>
 <span id="cb10-3"><a href="#cb10-3"></a><span class="kw">qui</span>:<span class="kw">reg</span> lprice lnox dist c.rooms c.rooms#c.rooms</span>
@@ -907,27 +914,592 @@ dy/dx wrt:  rooms
 </div>
 </div>
 </section>
-<section id="functional-forms-interactions-d1d2-xz-xd" class="slide level2">
-<h2>Functional Forms: Interactions (<span class="math inline">\(d1*d2, x*z, x*d\)</span>)</h2>
+<section id="functional-forms-interactions-i-d1d2" class="slide level2">
+<h2>Functional Forms: Interactions I (<span class="math inline">\(d1*d2\)</span>)</h2>
+<ul>
+<li>It is possible to use multiple (unrelated) dummy variables.</li>
+<li>Dummy interactions are feasible to allow for differential means across groups combined groups.</li>
+<li>You still need a reference group that should be identified: <span class="math display">\[\begin{aligned}
+y &amp;= a_0 + a_1 female + a_2 union + a_3 female \times union + e \\
+y &amp;= b_0 + b_1 female \times nonunion + b_2 male \times union +b_3 female \times union + e
+\end{aligned}
+\]</span> Both models are equivalent. Also <span class="math display">\[\begin{aligned}
+&amp; E(y|male,nonunion)    &amp;&amp; =a_0  &amp;&amp;= b_0   \\
+&amp; E(y|female,nonunion) &amp;&amp; = a_0 + a_1 &amp;&amp; = b_0 + b_1 \\
+&amp; E(y|male,union) &amp;&amp; =a_0+a_2  &amp;&amp;= b_0+b_2 \\
+&amp; E(y|female,union)  &amp;&amp; = a_0 + a_1 + a_2 + a_3  &amp;&amp;= b_0 + b_3
+\end{aligned}
+\]</span></li>
+</ul>
 </section>
-<section id="functional-forms-full-interactions" class="slide level2">
-<h2>Functional Forms: Full Interactions</h2>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<p>For this, you may need to use manual dummy creation, or use explicit interactions:</p>
+<div class="sourceCode" id="cb12" style="font-size: 1.5em"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">reg</span> <span class="fu">y</span> i.d1 i.d2 i.d1#i.d2</span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="kw">reg</span> <span class="fu">y</span> i.d1##i.d2</span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="kw">reg</span> <span class="fu">y</span> i.d1#i.d2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol type="1">
+<li>You set the interactions</li>
+<li>Similar to one, but <code>Stata</code> does it for you</li>
+<li>Creates full set of interactions, as in 2nd model before</li>
+</ol>
+<p>Options 1 and 3 will allow you using <code>margins</code>. For overall groups (all women, all unions) you need to decide how to get representative samples.</p>
+</section>
+<section id="functional-forms-interactions-ii-x1x2" class="slide level2">
+<h2>Functional Forms: Interactions II (<span class="math inline">\(x1*x2\)</span>)</h2>
+<ul>
+<li>You may be interested in allowing for some interaction across continuous variables.
+<ul>
+<li>ie Interacted effect of household size and number of bedrooms</li>
+</ul></li>
+<li>As with Polynomials, this allows for heterogeneity, thus effects are not constant.</li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+y &amp;= a_0 + a_1 x_1 + a_2 x_2 + a_3 x_1 x_2 + e \\
+\frac{\Delta E(y|x_1,x_2) }{\Delta x_1} &amp;= a_1  + a_3 x_2 \\
+\frac{\Delta E(y|x_1,x_2) }{\Delta x_2} &amp;= a_2  + a_3 x_1
+\end{aligned}
+\]</span></p>
+<ul>
+<li>Thus, coefficients, on their own, are difficult to interpret, unless <span class="math inline">\(x_1\)</span> or <span class="math inline">\(x_2\)</span> are zero</li>
+</ul>
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+<h3 id="shortcut-affine-transformation">Shortcut: Affine transformation</h3>
+<ul>
+<li>There is a trick that could help easy and direct interpretation. re-scaling variables:</li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+y &amp;= b_0 + b_1 x_1 + b_2 x_2 + b_3 (x_1-\bar x_1)(x_2-\bar x_2) + e \\
+\frac{\Delta E(y|x_1,x_2) }{\Delta x_1} &amp;= b_1  + b_3 (x_2-\bar x_2) \simeq b_1 \\
+\frac{\Delta E(y|x_1,x_2) }{\Delta x_2} &amp;= b_2  + b_3 (x_1-\bar x_1) \simeq b_2
+\end{aligned}
+\]</span></p>
+<ul>
+<li>Also works with quadratic terms!</li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+y &amp;= b_0 + b_1 x_1 + b_2 (x_1-\bar x_1)^2 + b_3 x_2 + e \\
+\frac{\Delta E(y|x_1,x_2) }{\Delta x_1} &amp;= b_1  + 2 b_2 (x_1-\bar x_1) \simeq b_1 \\
+\end{aligned}
+\]</span></p>
+</section>
+<section id="functional-forms-interactions-iii-d1x1" class="slide level2">
+<h2>Functional Forms: Interactions III (<span class="math inline">\(d1*x1\)</span>)</h2>
+<ul>
+<li>Dummy variables allows for shifts to the constant (intercept).</li>
+<li>Interacting with continuous variables allows for shifts in slopes!.
+<ul>
+<li>This can be useful to testing hypothesis: differences in returns to education by gender.</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[wage=b_0 + b_1 female + b_2 educ + b_3 educ \times female + e
+\]</span></p>
+<ul>
+<li><span class="math inline">\(b_1\)</span>: Baseline wage differential between men and women.</li>
+<li><span class="math inline">\(b_2+b_3\)</span>: Returns to education for women.</li>
+<li><span class="math inline">\(b_1 + b_3 \overline{educ}\)</span>: Average wage difference between men and women.</li>
+</ul>
+<p><code>Stata</code>:</p>
+<div class="sourceCode" id="cb13" style="font-size: 1.3em"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">reg</span> <span class="fu">y</span> x1 i.<span class="kw">d</span> c.x1#i.<span class="kw">d</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="functional-forms-full-interactions-with-dummies" class="slide level2">
+<h2>Functional Forms: Full Interactions (with dummies)</h2>
+<ul>
+<li>It is possible to estimate models where all variables are interacted with a single dummy. This allows you to test the hypothesis if two groups have the same underlying parameters.
+<ul>
+<li>Do men and women have the same wage structure?</li>
+</ul></li>
+<li>Full interactions is equivalent to estimating separate models:</li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+FT: &amp; y = b_0 + b_1 x_1 + b_2 x_2 + g_0 d +g_1 x_1 d +g_2 x_2 d +e \\
+D0: &amp; y = b_0 + b_1 x_1 + b_2 x_2  +e  &amp;&amp; \text{ if d=0 } \\
+D1: &amp; y = (b_0+g_0) + (b_1+g_1) x_1 + (b_2+g_2) x_2 +e &amp;&amp; \text{ if d=1 } \\
+    &amp; y = a_0 + a_1 x_1 + a_1 x_2 +e &amp;&amp; \text{ if d=1 } \\
+CS1: &amp; H_0: g_0=g_1=g_2=0
+\end{aligned}
+\]</span></p>
+</section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+<h3 id="chow-test">Chow test</h3>
+<ul>
+<li><span class="math inline">\(CS1\)</span> can be tested using F-stat for multiple hypothesis.</li>
+<li>But, under homoskedasticty, one could also use what is known as the <strong>Chow test</strong></li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+M1 &amp;: y = b_0 + b_1 x_1 + b_2 x_2 + e \\
+M2 &amp;: y = b_0 + b_1 x_1 + b_2 x_2 + b_3 d + e \\
+if \ D=0 &amp;: y = b_{00} + b_{01} x_1 + b_{02} x2 + e_0 \\
+if \ D=1 &amp;: y = b_{10} + b_{11} x_1 + b_{12} x2 + e_1
+\end{aligned}
+\]</span></p>
+<p>F-Stat (similar to before):</p>
+<p><span class="math display">\[\begin{aligned}
+F_{M1} = \frac{(SSR_{M1}-SSR_0-SSR_1)/(k+1)}{(SSR_0+SSR_1)/(n - 2(k+1))} \\
+F_{M2} = \frac{(SSR_{M2}-SSR_0-SSR_1)/k}{(SSR_0+SSR_1)/(n - 2(k+1))}
+\end{aligned}
+\]</span></p>
+</section>
+<section id="example-3" class="slide level2 scrollable">
+<h2>Example</h2>
+<div id="1cf3d161" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1"></a> frause gpa3, <span class="kw">clear</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="kw">drop</span> <span class="kw">if</span> cumgpa==0</span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="kw">replace</span> sat = sat /100</span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="kw">qui</span>:<span class="kw">reg</span> cumgpa sat hsperc tothrs</span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="kw">est</span> sto m1</span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="kw">qui</span>:<span class="kw">reg</span> cumgpa sat hsperc tothrs female</span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="kw">est</span> sto m2</span>
+<span id="cb14-8"><a href="#cb14-8"></a><span class="kw">qui</span>:<span class="kw">reg</span> cumgpa sat hsperc tothrs <span class="kw">if</span> female==0</span>
+<span id="cb14-9"><a href="#cb14-9"></a><span class="kw">est</span> sto m3</span>
+<span id="cb14-10"><a href="#cb14-10"></a><span class="kw">qui</span>:<span class="kw">reg</span> cumgpa sat hsperc tothrs <span class="kw">if</span> female==1</span>
+<span id="cb14-11"><a href="#cb14-11"></a><span class="kw">est</span> sto m4</span>
+<span id="cb14-12"><a href="#cb14-12"></a><span class="kw">qui</span>:<span class="kw">reg</span> cumgpa i.female##c.(sat hsperc tothrs)</span>
+<span id="cb14-13"><a href="#cb14-13"></a><span class="kw">est</span> sto m5</span>
+<span id="cb14-14"><a href="#cb14-14"></a>esttab m1 m2 m3 m4 m5, mtitle( Simple With_fem Men Women Full_int) <span class="co">///</span></span>
+<span id="cb14-15"><a href="#cb14-15"></a>se <span class="kw">star</span>(* .1 ** 0.05 *** 0.01) nogaps noomitted </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(98 observations deleted)
+variable sat was int now float
+(634 real changes made)
+
+--------------------------------------------------------------------------------------------
+                      (1)             (2)             (3)             (4)             (5)   
+                   Simple        With_fem             Men           Women        Full_int   
+--------------------------------------------------------------------------------------------
+sat                0.0933***       0.0938***       0.0679***        0.177***       0.0679***
+                 (0.0133)        (0.0130)        (0.0151)        (0.0244)        (0.0146)   
+hsperc           -0.00865***     -0.00730***     -0.00748***     -0.00869***     -0.00748***
+                (0.00105)       (0.00106)       (0.00119)       (0.00219)       (0.00116)   
+tothrs          -0.000599       -0.000586        -0.00155**       0.00141        -0.00155** 
+               (0.000662)      (0.000647)      (0.000771)       (0.00111)      (0.000748)   
+female                              0.277***                                                
+                                 (0.0493)                                                   
+0.female                                                                                0   
+                                                                                      (.)   
+1.female                                                                           -0.855** 
+                                                                                  (0.333)   
+1.female#c~t                                                                        0.109***
+                                                                                 (0.0310)   
+1.female#c~c                                                                     -0.00121   
+                                                                                (0.00271)   
+1.female#c~s                                                                      0.00296** 
+                                                                                (0.00145)   
+_cons               1.900***        1.782***        2.070***        1.215***        2.070***
+                  (0.149)         (0.147)         (0.173)         (0.257)         (0.168)   
+--------------------------------------------------------------------------------------------
+N                     634             634             483             151             634   
+--------------------------------------------------------------------------------------------
+Standard errors in parentheses
+* p&lt;.1, ** p&lt;0.05, *** p&lt;0.01</code></pre>
+</div>
+</div>
+<div id="5422b499" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">test</span> 1.female#c.sat 1.female#c.hsperc 1.female#c.tothrs</span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="kw">test</span> 1.female 1.female#c.sat 1.female#c.hsperc 1.female#c.tothrs</span>
+<span id="cb16-3"><a href="#cb16-3"></a>margins female, <span class="kw">dydx</span>(sat hsperc tothrs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ ( 1)  1.female#c.sat = 0
+ ( 2)  1.female#c.hsperc = 0
+ ( 3)  1.female#c.tothrs = 0
+
+       F(  3,   626) =    6.26
+            Prob &gt; F =    0.0003
+
+ ( 1)  1.female = 0
+ ( 2)  1.female#c.sat = 0
+ ( 3)  1.female#c.hsperc = 0
+ ( 4)  1.female#c.tothrs = 0
+
+       F(  4,   626) =   12.75
+            Prob &gt; F =    0.0000
+
+Average marginal effects                                   Number of obs = 634
+Model VCE: OLS
+
+Expression: Linear prediction, predict()
+dy/dx wrt:  sat hsperc tothrs
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |      dy/dx   std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+sat          |
+      female |
+          0  |   .0679302    .014607     4.65   0.000     .0392454    .0966149
+          1  |   .1772582   .0273126     6.49   0.000     .1236229    .2308936
+-------------+----------------------------------------------------------------
+hsperc       |
+      female |
+          0  |    -.00748   .0011573    -6.46   0.000    -.0097526   -.0052073
+          1  |  -.0086922   .0024524    -3.54   0.000    -.0135081   -.0038763
+-------------+----------------------------------------------------------------
+tothrs       |
+      female |
+          0  |  -.0015482   .0007477    -2.07   0.039    -.0030165   -.0000798
+          1  |    .001412   .0012472     1.13   0.258    -.0010371    .0038612
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
 </section></section>
 <section>
 <section id="break-1" class="title-slide slide level1 center">
 <h1>Break?!</h1>
 
 </section>
-<section id="dummies-as-dep-variable" class="slide level2">
-<h2>Dummies as Dep Variable</h2>
+<section id="avg-partial-effects-vs-partial-effects-at-x_c" class="slide level2">
+<h2>Avg Partial effects vs Partial effects at <span class="math inline">\(X_c\)</span></h2>
+<ul>
+<li>Whenever you have interactions, higher order polynomials (or any nonlinear transformation of <span class="math inline">\(X\)</span>), marginal effects are no longer constant, and may depend on additional information:</li>
+</ul>
+<p><span class="math display">\[y = b_0 + b_1 x_1 + b_2 x_1^2 + e \rightarrow \frac{dy}{dx} = b_1 + 2b_2 x_1
+\]</span></p>
+<ul>
+<li>What to do in this cases?
+<ol type="1">
+<li>Estimate Average marginal effects: <span class="math inline">\(AME = E\left(\frac{dy}{dx}\right) = b_1 + 2b_2 \overline{x}_1\)</span></li>
+<li>Estimate Marginal effects at means: <span class="math inline">\(MEM = \frac{dy}{dx}\Big|_{x=\bar x} = b_1 + 2b_2 \overline{x}_1\)</span></li>
+<li>Estimate Marginal effects at relevant values</li>
+<li>Report ALL marginal effects</li>
+</ol></li>
+</ul>
 </section>
-<section id="discrete-vriable-as-dep-variable" class="slide level2">
-<h2>Discrete Vriable as Dep Variable</h2>
+<section id="section-4" class="slide level2">
+<h2></h2>
+<ul>
+<li>In <code>Stata</code> you can do this only for interactions. For constructed variables you need <code>f_able</code>, or do it by hand.</li>
+</ul>
+<div class="sourceCode" id="cb18" style="font-size: 1.3em"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">reg</span> <span class="fu">y</span> c.x1##c.x1##c.x1</span>
+<span id="cb18-2"><a href="#cb18-2"></a>margins, <span class="kw">dydx</span>(x1) &lt;-- Default is Average Marginal Effects</span>
+<span id="cb18-3"><a href="#cb18-3"></a>margins, <span class="kw">dydx</span>(x1) atmeans &lt;-- Request marginal <span class="kw">effects</span> <span class="fu">at</span> <span class="kw">means</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a>margins, <span class="kw">dydx</span>(x1) <span class="fu">at</span>(x1=(1/5)) &lt;-- Request marginal <span class="kw">effects</span> <span class="fu">at</span> specific <span class="kw">values</span> <span class="kw">of</span> x1</span>
+<span id="cb18-5"><a href="#cb18-5"></a>* and plot afterwards</span>
+<span id="cb18-6"><a href="#cb18-6"></a>marginsplot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="goodness-of-fit-r2-vs-r2_adj" class="slide level2">
+<h2>Goodness of Fit: <span class="math inline">\(R^2\)</span> vs <span class="math inline">\(R^2_{adj}\)</span></h2>
+<h4 id="with-great-power">With Great power…</h4>
+<p><strong>IMPORTANT</strong>: Low <span class="math inline">\(R^2\)</span> does not mean a bad model, nor high <span class="math inline">\(R^2\)</span> mean a good one.</p>
+<ul>
+<li>If <span class="math inline">\(N\)</span> is constant, adding more variables to your model will increase the Goodness of fit <span class="math inline">\(R^2\)</span> (even if marginally)
+<ul>
+<li>This may lead to the incorrect intuition of choosing models with the highest <span class="math inline">\(R^2\)</span></li>
+<li>This is wrong because <span class="math inline">\(R^2\)</span> only measures in-sample fitness.</li>
+</ul></li>
+<li>Alternative, the Adjusted <span class="math inline">\(R^2\)</span> (<span class="math inline">\(R_{adj}^2\)</span>), which penalizes using multiple controls</li>
+</ul>
+<p><span class="math display">\[R^2_{adj} = 1-\frac{SSR/(n-k-1)}{SST/(n-1)}=1-(1-R^2)\frac{n-1}{n-k-1}
+\]</span></p>
+<ul>
+<li>More controls <span class="math inline">\(k\)</span> will not always increase <span class="math inline">\(R^2_{adj}\)</span></li>
+</ul>
+</section>
+<section id="section-5" class="slide level2">
+<h2></h2>
+<h3 id="r2_adj-and-model-selection"><span class="math inline">\(R^2_{adj}\)</span> and Model Selection</h3>
+<ul>
+<li><span class="math inline">\(R^2_{adj}\)</span> can be used to choose between nested models.
+<ul>
+<li>If adding variables improves <span class="math inline">\(R_{adj}^2\)</span>, then choose that model.</li>
+</ul></li>
+<li>But it can also be used to choose between non-nested models:</li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+M1: &amp; y = b_0 + b_1 x_1 + b_2 x_2 + e \\
+M2: &amp; y = b_0 + b_1 x_1 + b_3 x_3 + e \\
+M3: &amp; y = b_0 + b_1 ln(x_1) + b_2 ln(x_2) + e \\
+M4: &amp; y = b_0 + b_1 x_1 + b_2 x_2 + b_3 x_3 + e
+\end{aligned}
+\]</span></p>
+</section>
+<section id="log-models-and-prediction" class="slide level2">
+<h2>log models and Prediction</h2>
+<ul>
+<li>Transforming the Depvariable with logs is quite useful for interpretation, and addressing overdispersion</li>
+<li>However, obtaining predictions from such models is not straight forward:</li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+ln(y) &amp;= a_0 + a_1 x_1 + a_2 x_2 + \varepsilon \\
+y &amp;= exp(a_0 + a_1 x_1 + a_2 x_2 + \varepsilon ) \\
+E(y|x_1,x_2) &amp;=E(e^{a_0 + a_1 x_1 + a_2 x_2}) \times E(e^ \varepsilon ) \\
+&amp; E(e^ \varepsilon )\neq 1
+\end{aligned}
+\]</span></p>
+<ul>
+<li>To make Predictions in a log model we need some approximation for <span class="math inline">\(E(e^ \varepsilon )\)</span></li>
+</ul>
+</section>
+<section id="section-6" class="slide level2">
+<h2></h2>
+<h3 id="we-have-options">We have Options:</h3>
+<p>Lets call <span class="math inline">\(E(e^ \varepsilon ) = \alpha_0\)</span></p>
+<p><strong>Option 1</strong> : <span class="math inline">\(\alpha_0 = n^{-1} \sum( \exp {\hat\varepsilon})\)</span></p>
+<p><strong>Option 2</strong> : Under Normality of <span class="math inline">\(\varepsilon\)</span>, <span class="math inline">\(\alpha_0 = \exp(\hat \sigma^2/2)\)</span></p>
+<p><strong>Option 3</strong> : Call <span class="math inline">\(\hat m = \exp(a_0 + a_1 x_1 + a_2 x_2)\)</span>.</p>
+<p>Regress <span class="math inline">\(y\)</span> on <span class="math inline">\(\hat m\)</span> without intercept. <span class="math inline">\(\alpha_0 = \frac{\hat m'y}{\hat m'\hat m}\)</span></p>
+<ul>
+<li>Your <span class="math inline">\(\hat y\)</span> prediction can now be used to estimate a comparable <span class="math inline">\(R^2\)</span></li>
+</ul>
+<p><span class="math display">\[R^2 = Corr(y,\hat y)^2 \text{ or } 1-\frac{\sum(y_i-\alpha_0 \hat m_i)^2}{\sum(y-\bar y)^2}
+\]</span></p>
+</section>
+<section id="section-7" class="slide level2 scrollable">
+<h2></h2>
+<h3 id="example-4">Example</h3>
+<div id="00b5e028" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb19-1"><a href="#cb19-1"></a>frause oaxaca, <span class="kw">clear</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="kw">drop</span> <span class="kw">if</span> lnwage==.</span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="kw">gen</span> wage = <span class="fu">exp</span>(lnwage)</span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="kw">qui</span>:<span class="kw">reg</span> lnwage educ exper tenure female married divorced</span>
+<span id="cb19-5"><a href="#cb19-5"></a><span class="kw">predict</span> lnw_hat</span>
+<span id="cb19-6"><a href="#cb19-6"></a><span class="kw">predict</span> lnw_res, res</span>
+<span id="cb19-7"><a href="#cb19-7"></a>** Case 1:</span>
+<span id="cb19-8"><a href="#cb19-8"></a><span class="kw">egen</span> alpha_01 = <span class="kw">mean</span>( <span class="fu">exp</span>(lnw_res))</span>
+<span id="cb19-9"><a href="#cb19-9"></a>** Case 2:</span>
+<span id="cb19-10"><a href="#cb19-10"></a><span class="kw">qui</span>:<span class="kw">sum</span> lnw_res</span>
+<span id="cb19-11"><a href="#cb19-11"></a><span class="kw">gen</span> alpha_02 = <span class="fu">exp</span>(<span class="fu">r</span>(Var)/2)</span>
+<span id="cb19-12"><a href="#cb19-12"></a><span class="kw">gen</span> elnw_hat = <span class="fu">exp</span>(lnw_hat)</span>
+<span id="cb19-13"><a href="#cb19-13"></a><span class="kw">qui</span>: <span class="kw">reg</span> wage elnw_hat, <span class="kw">nocons</span></span>
+<span id="cb19-14"><a href="#cb19-14"></a><span class="kw">gen</span> alpha_03 = _b[elnw_hat]</span>
+<span id="cb19-15"><a href="#cb19-15"></a><span class="kw">gen</span> wage_1 = elnw_hat</span>
+<span id="cb19-16"><a href="#cb19-16"></a><span class="kw">gen</span> wage_2 = elnw_hat*alpha_01</span>
+<span id="cb19-17"><a href="#cb19-17"></a><span class="kw">gen</span> wage_3 = elnw_hat*alpha_02</span>
+<span id="cb19-18"><a href="#cb19-18"></a><span class="kw">gen</span> wage_4 = elnw_hat*alpha_03</span>
+<span id="cb19-19"><a href="#cb19-19"></a><span class="kw">mata</span>:  <span class="fu">y</span> = st_data(.,<span class="st">"wage"</span>); my = <span class="kw">mean</span>(<span class="fu">y</span>)</span>
+<span id="cb19-20"><a href="#cb19-20"></a><span class="kw">mata</span>:  <span class="fu">yh</span> = st_data(.,<span class="st">"wage_1 wage_2 wage_3 wage_4"</span>)</span>
+<span id="cb19-21"><a href="#cb19-21"></a><span class="kw">mata</span>:<span class="st">"R2_1 "</span>; 1 - <span class="kw">sum</span>((<span class="fu">y</span>:-<span class="fu">yh</span>[,1]):^2)/<span class="kw">sum</span>( (<span class="fu">y</span>:-my):^2 )</span>
+<span id="cb19-22"><a href="#cb19-22"></a><span class="kw">mata</span>:<span class="st">"R2_2 "</span>; 1 - <span class="kw">sum</span>((<span class="fu">y</span>:-<span class="fu">yh</span>[,2]):^2)/<span class="kw">sum</span>( (<span class="fu">y</span>:-my):^2 )</span>
+<span id="cb19-23"><a href="#cb19-23"></a><span class="kw">mata</span>:<span class="st">"R2_3 "</span>; 1 - <span class="kw">sum</span>((<span class="fu">y</span>:-<span class="fu">yh</span>[,3]):^2)/<span class="kw">sum</span>( (<span class="fu">y</span>:-my):^2 )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Excerpt from the Swiss Labor Market Survey 1998)
+(213 observations deleted)
+(option xb assumed; fitted values)
+  R2_1 
+  .1569552664
+  R2_2 
+  .1692562931
+  R2_3 
+  .1658805115</code></pre>
+</div>
+</div>
+</section>
+<section id="limited-dependent-variables" class="slide level2">
+<h2>Limited Dependent variables</h2>
+<ul>
+<li>So far, we have impliclity assumed your dep. variable is continuous and unbounded.</li>
+<li>However, OLS imposes no distributional assumptions (A6 is more convinience)</li>
+<li>This means that LRM using OLS can be used for variables with limited distribution!
+<ul>
+<li>like Dummies or count variables</li>
+</ul></li>
+</ul>
+</section>
+<section id="linear-probability-model---lpm" class="slide level2">
+<h2>Linear Probability Model - LPM</h2>
+<ul>
+<li>LPM can be used when the dep.variable is a dummy, and the goal is to explain the Likelihood of something to happen.</li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+D &amp;= b_0 + b_1 x_1 + b_2 x_2 +b_3 x_3 + e \\
+E(D|Xs) &amp;= P(D=1|Xs) \\
+        &amp;= b_0 + b_1 x_1 + b_2 x_2 +b_3 x_3
+\end{aligned}
+\]</span></p>
+<p>Note:</p>
+<ul>
+<li>For marginal effects, we no longer consider effects at the individual level.</li>
+<li>Instead we look into conditional means, and likelihood</li>
+</ul>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb21-1"><a href="#cb21-1"></a>frause mroz, <span class="kw">clear</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="kw">qui</span>: <span class="kw">reg</span> inlf  age educ exper kidsge6 kidslt6 nwifeinc </span>
+<span id="cb21-3"><a href="#cb21-3"></a>model_display</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p>E(inlf|X) = 0.707 - 0.018 age + 0.040 educ + 0.023 exper + 0.013 kidsge6 - 0.272 kidslt6 - 0.003 nwifeinc</p>
+</section>
+<section id="section-8" class="slide level2">
+<h2></h2>
+<h3 id="problems-with-lpm">Problems with LPM</h3>
+<ul>
+<li>LPM are easy to estimate and interpret but it has some problems:
+<ul>
+<li>Predictions could fall below 0 or above 1 (what does it mean?)</li>
+<li>Unless more flexible functional forms are allowed, mfx are fixed.</li>
+<li>The model is, by construction, Heteroskedastic:</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[Var(y|x)=p(x)*(1-p(x))
+\]</span></p>
+<p>Thus SE will be incorrect, affecting inference</p>
+</section>
+<section id="modeling-count-data" class="slide level2">
+<h2>Modeling Count Data</h2>
+<ul>
+<li>You could also use LRM (via OLS) to model count data.
+<ul>
+<li>Count data is always possitive, but with discrete values</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[Children = b_0 + b_1 age + b_2 education + e\]</span></p>
+<ul>
+<li>Nothing changes for estimation, but its useful to change language:</li>
+</ul>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb22-1"><a href="#cb22-1"></a>frause fertil2, <span class="kw">clear</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="kw">qui</span> <span class="kw">reg</span> children age educ</span>
+<span id="cb22-3"><a href="#cb22-3"></a>model_display</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p>E(children|X) = -1.997 + 0.175 age - 0.090 educ</p>
+<ul>
+<li>1 year of education decreases # of children in .09.</li>
+<li>1 year of education decreases Fertility .09 children per women.</li>
+<li>Every 100 women, If they were 1 year more educated, we would expect to see 9 fewer children among them.</li>
+</ul>
+</section>
+<section id="prediction-policy-and-shifting" class="slide level2 scrollable">
+<h2>Prediction, Policy and Shifting</h2>
+<ul>
+<li>As mentioned before, intercepts, or constant in model regressions are usually meaningless.
+<ul>
+<li>Because <span class="math inline">\(a_0 = E(y|X=0)\)</span> (does it make sense)</li>
+</ul></li>
+<li>Constant, however, can be useful if we apply some transformations to the data. <span class="math display">\[y = b_0 +  b_1 (x_1 - c_1) +  b_2 (x_2 - c_2) +  b_3 (x_3 - c_3) +e
+\]</span></li>
+</ul>
+<p>In this case <span class="math inline">\(b_0\)</span> is the expected value of <span class="math inline">\(y\)</span> when <span class="math inline">\(x_1=c_1\)</span>, <span class="math inline">\(x_2=c_2\)</span> and <span class="math inline">\(x_3=c_3\)</span>. Thus, its now Useful!</p>
+<ul>
+<li><p>Using this <strong>affine</strong> transformation, we can easily make predictions (and get SE) for any specific values of interest.</p>
+<ul>
+<li>Granted, you could also use “margins”</li>
+</ul></li>
+</ul>
+<div id="e2d6d823" class="cell" data-execution_count="13">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><a href="#cb23-1"></a>frause gpa2, <span class="kw">clear</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="kw">gen</span> sat0=sat-1200</span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="kw">gen</span> hsperc0=hsperc-30</span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="kw">gen</span> hsize0=hsize-5</span>
+<span id="cb23-5"><a href="#cb23-5"></a><span class="kw">gen</span> hsize20=hsize^2-25</span>
+<span id="cb23-6"><a href="#cb23-6"></a><span class="kw">qui</span>:<span class="kw">reg</span> colgpa sat hsperc c.hsize##c.hsize</span>
+<span id="cb23-7"><a href="#cb23-7"></a>margins, <span class="fu">at</span>(sat = 1200 hsperc = 30 hsize = 5)</span>
+<span id="cb23-8"><a href="#cb23-8"></a><span class="kw">reg</span> colgpa sat0 hsperc0 hsize0 hsize20</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Adjusted predictions                                     Number of obs = 4,137
+Model VCE: OLS
+
+Expression: Linear prediction, predict()
+At: sat    = 1200
+    hsperc =   30
+    hsize  =    5
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       _cons |   2.700075   .0198778   135.83   0.000     2.661104    2.739047
+------------------------------------------------------------------------------
+
+      Source |       SS           df       MS      Number of obs   =     4,137
+-------------+----------------------------------   F(4, 4132)      =    398.02
+       Model |  499.030503         4  124.757626   Prob &gt; F        =    0.0000
+    Residual |  1295.16517     4,132  .313447524   R-squared       =    0.2781
+-------------+----------------------------------   Adj R-squared   =    0.2774
+       Total |  1794.19567     4,136  .433799728   Root MSE        =    .55986
+
+------------------------------------------------------------------------------
+      colgpa | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        sat0 |   .0014925   .0000652    22.89   0.000     .0013646    .0016204
+     hsperc0 |  -.0138558    .000561   -24.70   0.000    -.0149557   -.0127559
+      hsize0 |  -.0608815   .0165012    -3.69   0.000    -.0932328   -.0285302
+     hsize20 |   .0054603   .0022698     2.41   0.016     .0010102    .0099104
+       _cons |   2.700075   .0198778   135.83   0.000     2.661104    2.739047
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="section-9" class="slide level2">
+<h2></h2>
+<h3 id="policy-evaluation">Policy Evaluation</h3>
+<ul>
+<li><p>When modeling <span class="math inline">\(y = b_0 + \delta \ trt + b_1 x_1 + b_2 x_2 + e\)</span> the treatment effect <span class="math inline">\(\delta\)</span> was estimated under homogeneity assumption (only intercept shift)</p></li>
+<li><p>This assumption can be relaxed by estimating separate models or using interactions.</p></li>
+<li><p>Effects can be estimated manually (separate models), margins (for ATE’s) or using shifts!</p></li>
+</ul>
+<p>Using Separate models: <span class="math display">\[\begin{aligned}
+y &amp;= b^0_0 +  b^0_1 x_1 + b^0_2 x_2 + e^0 \text{ if trt=0} \\
+y &amp;= b^1_0 +  b^1_1 x_1 + b^1_2 x_2 + e^1 \text{ if trt=1} \\
+&amp; ATE = E(\hat y_1 - \hat y_0 ) \\
+&amp; ATT = E(\hat y_1 - \hat y_0 | trt=1) \\
+&amp; ATU = E(\hat y_1 - \hat y_0 | trt=0)
+\end{aligned}
+\]</span></p>
+</section>
+<section id="section-10" class="slide level2">
+<h2></h2>
+<p>Or using Model Shits</p>
+<p><span class="math display">\[\begin{aligned}
+y  &amp;= b_0 + \delta_{ate} trt + b_1 x_1 + g_1 trt (x_1- E(x_1)) + e \\
+y  &amp;= b_0 + \delta_{att} trt + b_1 x_1 + g_1 trt (x_1- E(x_1|trt=1)) + e \\
+y  &amp;= b_0 + \delta_{atu} trt + b_1 x_1 + g_1 trt (x_1- E(x_1|trt=0)) + e \\
+\end{aligned}
+\]</span></p>
+<div id="1cff8729" class="cell" data-execution_count="14">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb25-1"><a href="#cb25-1"></a>frause jtrain98, <span class="kw">clear</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="kw">foreach</span> i <span class="kw">in</span> earn96 educ age married {</span>
+<span id="cb25-3"><a href="#cb25-3"></a>  <span class="kw">sum</span> <span class="ot">`i'</span> <span class="kw">if</span> train==0, <span class="kw">meanonly</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a>  <span class="kw">gen</span> atu_<span class="ot">`i'</span> = (<span class="ot">`i'</span> - <span class="fu">r</span>(<span class="kw">mean</span>))*train</span>
+<span id="cb25-5"><a href="#cb25-5"></a>  <span class="kw">sum</span> <span class="ot">`i'</span> <span class="kw">if</span> train==1, <span class="kw">meanonly</span></span>
+<span id="cb25-6"><a href="#cb25-6"></a>  <span class="kw">gen</span> att_<span class="ot">`i'</span> = (<span class="ot">`i'</span> - <span class="fu">r</span>(<span class="kw">mean</span>))*train</span>
+<span id="cb25-7"><a href="#cb25-7"></a>  <span class="kw">sum</span> <span class="ot">`i'</span> , <span class="kw">meanonly</span></span>
+<span id="cb25-8"><a href="#cb25-8"></a>  <span class="kw">gen</span> ate_<span class="ot">`i'</span> = (<span class="ot">`i'</span> - <span class="fu">r</span>(<span class="kw">mean</span>))*train</span>
+<span id="cb25-9"><a href="#cb25-9"></a>}</span>
+<span id="cb25-10"><a href="#cb25-10"></a><span class="kw">qui</span>:<span class="kw">reg</span> earn98 train earn96 educ age married</span>
+<span id="cb25-11"><a href="#cb25-11"></a><span class="kw">est</span> sto m1</span>
+<span id="cb25-12"><a href="#cb25-12"></a><span class="kw">qui</span>:<span class="kw">reg</span> earn98 train earn96 educ age married ate*</span>
+<span id="cb25-13"><a href="#cb25-13"></a><span class="kw">est</span> sto m2</span>
+<span id="cb25-14"><a href="#cb25-14"></a><span class="kw">qui</span>:<span class="kw">reg</span> earn98 train earn96 educ age married atu*</span>
+<span id="cb25-15"><a href="#cb25-15"></a><span class="kw">est</span> sto m3</span>
+<span id="cb25-16"><a href="#cb25-16"></a><span class="kw">qui</span>:<span class="kw">reg</span> earn98 train earn96 educ age married att*</span>
+<span id="cb25-17"><a href="#cb25-17"></a><span class="kw">est</span> sto m4</span>
+<span id="cb25-18"><a href="#cb25-18"></a></span>
+<span id="cb25-19"><a href="#cb25-19"></a>esttab m1 m2 m3 m4, <span class="kw">keep</span>(train) mtitle(Homogenous ATE ATU ATT) se</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+----------------------------------------------------------------------------
+                      (1)             (2)             (3)             (4)   
+               Homogenous             ATE             ATU             ATT   
+----------------------------------------------------------------------------
+train               2.411***        3.106***        3.533***        2.250***
+                  (0.435)         (0.532)         (0.667)         (0.449)   
+----------------------------------------------------------------------------
+N                    1130            1130            1130            1130   
+----------------------------------------------------------------------------
+Standard errors in parentheses
+* p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001</code></pre>
+</div>
+</div>
+</section></section>
+<section id="thanks-all" class="title-slide slide level1 center">
+<h1>Thanks all !</h1>
+<p>Next week Lifting Assumptions: Heteroskedasticity</p>
 
 <div class="footer footer-default">
 
 </div>
-</section></section>
+</section>
     </div>
   </div>
 

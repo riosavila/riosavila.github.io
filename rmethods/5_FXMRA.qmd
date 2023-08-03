@@ -31,14 +31,14 @@ format:
 
 1. Something that we do not emphasize enough. Before analyzing your data, its important to analyze the nature of the data (summary stats, ranges, scales)
    
-2. When I talk about Scaling and shifting, I refer exclusibly to afine transormations of the following type:
+2. When I talk about Scaling and shifting, I refer exclusibly to affine transormations of the following type:
 
 $$x^* = a*x+c \text{ or } x^* = a*(x+c1)+c2
 $$
 
 They either Shift, or change the scale of the data. Not the shape! (logs change shape)
 
-3. If one applies afine transformations to the data, it will have **NO** effect on your model what-so-ever. (Same t's same F's, same $R^2$)
+3. If one applies affine transformations to the data, it will have **NO** effect on your model what-so-ever. (Same t's same F's, same $R^2$)
 
 4. But, your $\beta's$ will change. This could help understading and explaining the results.
 
@@ -162,18 +162,19 @@ display _n "Exact Change Union : " %5.3f (exp(_b[union])-1)*100 "%"
 ## Functional Forms: Logarithms
 
 - Using Logarithms can help modeling some nonlinearities in the data.
-- Because it changes the "shape" of variables, it also changes the interpretation (Changes vs %changes)
-- Because it reduces dispersion of dep. variable, it often helps fullfilling CLM assumptions. But this is not as important as helping with model interpretation and inference.
+- Because it changes the "shape" of variables, it also changes the interpretation (Changes vs %Changes)
+- By reducing dispersion of dep. variable, CLM assumptions may hold.
   
 But:
-- You cannot apply this transformation to all data types (ie Dummies, negatives), or should not (ie shares, years of education)
-- In a log-lin model, while $\beta$ can be interpreted as a $\beta \%$ change on the outcome, it is often better to use the exact percentage change:
+
+- Cannot or should not be applied to all data types (ie Dummies, negatives, shares)
+- (log-lin model): It is often better to use the exact percentage change rather than approximation:
 $$\begin{aligned}
 log(y) &= b_0 + b_1 x_1 + b_2 x_2 + b_3 D + e \\
-\frac{\% \Delta y}{\Delta D} &= 100 (exp(b_3)-1)\%
+\frac{\% \Delta y}{\Delta D} &= 100 (exp(b_3)-1)\% 
 \end{aligned}
 $$
-Can be very different when $b_3$ is large (try it on and see)
+ 
 
 # Break?!
 
@@ -182,8 +183,8 @@ Can be very different when $b_3$ is large (try it on and see)
 - Up to this point, we have only considered linear models ($X's$ enter asis or in logs). This almost always works! (Taylor expansion justification)
   - Specially if interested in Average Effects
 - Some times, you may be interest in capturing some heterogeneity for $dy/dx$. That can be done just adding "ANY" transformation of $X$ in the model ($sin(x), 1/x, \sqrt x$, etc)
-- For practical, and theoretical purposes, however, we usually concentrate on quadratic terms ($x^2$).
-  - FE: Increasing returns with decreasing marginal returns
+- For practical, and theoretical purposes, however, we usually concentrate on quadratic terms.
+  - For example: Increasing returns with decreasing marginal returns
   - We may be interested in "turning" points
 - However, we now need to be careful about marginal effects!  
 
@@ -207,7 +208,7 @@ $$
 :::  
 
 - Why not add further polynomials? 
-  - Estimating them is easy (except for numerical precision), and add added complexity for interpretation. Nothing else.
+  - Estimating them is easy (except for numerical precision), but adds complexity for interpretation. Nothing else.
 
 ## Example {.scrollable}
 
@@ -249,21 +250,422 @@ qui:reg lprice lnox dist c.rooms c.rooms#c.rooms
 margins, dydx(rooms) 
 ```
 
-## Functional Forms: Interactions ($d1*d2, x*z, x*d$)
+## Functional Forms: Interactions I ($d1*d2$)
 
-Continuous variables: 
+- It is possible to use multiple (unrelated) dummy variables. 
+- Dummy interactions are feasible to allow for differential means across groups combined groups.
+- You still need a reference group that should be identified:
+$$\begin{aligned}
+y &= a_0 + a_1 female + a_2 union + a_3 female \times union + e \\
+y &= b_0 + b_1 female \times nonunion + b_2 male \times union +b_3 female \times union + e
+\end{aligned}
+$$
+Both models are equivalent. Also
+$$\begin{aligned}
+& E(y|male,nonunion)    && =a_0  &&= b_0   \\ 
+& E(y|female,nonunion) && = a_0 + a_1 && = b_0 + b_1 \\
+& E(y|male,union) && =a_0+a_2  &&= b_0+b_2 \\ 
+& E(y|female,union)  && = a_0 + a_1 + a_2 + a_3  &&= b_0 + b_3
+\end{aligned}
+$$
 
-- One may be interested in allowing for compound effects among variables. (Synergy of experience and education)
+## 
 
-Discrete variables 
+For this, you may need to use manual dummy creation, or use explicit interactions:
 
-- Or allow for 
+```stata{style="font-size: 1.5em"}
+reg y i.d1 i.d2 i.d1#i.d2
+reg y i.d1##i.d2
+reg y i.d1#i.d2
+```
+1. You set the interactions
+2. Similar to one, but `Stata` does it for you
+3. Creates full set of interactions, as in 2nd model before
+
+Options 1 and 3 will allow you using `margins`. For overall groups (all women, all unions) you need to decide how to get representative samples.
+
+## Functional Forms: Interactions II ($x1*x2$)
+
+- You may be interested in allowing for some interaction across continuous variables.
+  - ie Interacted effect of household size and number of bedrooms
+- As with Polynomials, this allows for heterogeneity, thus effects are not constant.
+
+$$\begin{aligned}
+y &= a_0 + a_1 x_1 + a_2 x_2 + a_3 x_1 x_2 + e \\
+\frac{\Delta E(y|x_1,x_2) }{\Delta x_1} &= a_1  + a_3 x_2 \\
+\frac{\Delta E(y|x_1,x_2) }{\Delta x_2} &= a_2  + a_3 x_1
+\end{aligned}
+$$
+
+- Thus, coefficients, on their own, are difficult to interpret, unless $x_1$ or $x_2$ are zero
+
+##
+### Shortcut: Affine transformation 
+
+- There is a trick that could help easy and direct interpretation. re-scaling variables:
+
+$$\begin{aligned}
+y &= b_0 + b_1 x_1 + b_2 x_2 + b_3 (x_1-\bar x_1)(x_2-\bar x_2) + e \\
+\frac{\Delta E(y|x_1,x_2) }{\Delta x_1} &= b_1  + b_3 (x_2-\bar x_2) \simeq b_1 \\
+\frac{\Delta E(y|x_1,x_2) }{\Delta x_2} &= b_2  + b_3 (x_1-\bar x_1) \simeq b_2 
+\end{aligned}
+$$
+
+- Also works with quadratic terms!
+
+$$\begin{aligned}
+y &= b_0 + b_1 x_1 + b_2 (x_1-\bar x_1)^2 + b_3 x_2 + e \\
+\frac{\Delta E(y|x_1,x_2) }{\Delta x_1} &= b_1  + 2 b_2 (x_1-\bar x_1) \simeq b_1 \\
+\end{aligned}
+$$
+
+## Functional Forms: Interactions III ($d1*x1$)
+
+- Dummy variables allows for shifts to the constant (intercept). 
+- Interacting with continuous variables allows for shifts in slopes!. 
+  - This can be useful to testing hypothesis: differences in returns to education by gender. 
+  
+$$wage=b_0 + b_1 female + b_2 educ + b_3 educ \times female + e
+$$
+
+  - $b_1$: Baseline wage differential between men and women.
+  - $b_2+b_3$: Returns to education for women.
+  - $b_1 + b_3 \overline{educ}$: Average wage difference between men and women.
+
+`Stata`:
+```stata{style="font-size: 1.3em"}
+reg y x1 i.d c.x1#i.d
+```
 
 ## Functional Forms: Full Interactions (with dummies)
 
+- It is possible to estimate models where all variables are interacted with a single dummy. This allows you to test the hypothesis if two groups have the same underlying parameters.
+  - Do men and women have the same wage structure?
+
+- Full interactions is equivalent to estimating separate models:
+
+$$\begin{aligned}
+FT: & y = b_0 + b_1 x_1 + b_2 x_2 + g_0 d +g_1 x_1 d +g_2 x_2 d +e \\
+D0: & y = b_0 + b_1 x_1 + b_2 x_2  +e  && \text{ if d=0 } \\
+D1: & y = (b_0+g_0) + (b_1+g_1) x_1 + (b_2+g_2) x_2 +e && \text{ if d=1 } \\
+    & y = a_0 + a_1 x_1 + a_1 x_2 +e && \text{ if d=1 } \\
+CS1: & H_0: g_0=g_1=g_2=0 
+\end{aligned}
+$$
+
+##
+### Chow test
+
+- $CS1$ can be tested using F-stat for multiple hypothesis.
+- But, under homoskedasticty, one could also use what is known as the **Chow test**
+
+$$\begin{aligned}
+ M1 &: y = b_0 + b_1 x_1 + b_2 x_2 + e \\
+ M2 &: y = b_0 + b_1 x_1 + b_2 x_2 + b_3 d + e \\
+ if \ D=0 &: y = b_{00} + b_{01} x_1 + b_{02} x2 + e_0 \\
+ if \ D=1 &: y = b_{10} + b_{11} x_1 + b_{12} x2 + e_1 
+\end{aligned}
+$$
+
+
+
+F-Stat (similar to before):
+
+$$\begin{aligned}
+F_{M1} = \frac{(SSR_{M1}-SSR_0-SSR_1)/(k+1)}{(SSR_0+SSR_1)/(n - 2(k+1))} \\
+F_{M2} = \frac{(SSR_{M2}-SSR_0-SSR_1)/k}{(SSR_0+SSR_1)/(n - 2(k+1))}
+\end{aligned}
+$$
+
+## Example {.scrollable}
+
+```{stata}
+*| code-fold: false
+ frause gpa3, clear
+drop if cumgpa==0
+replace sat = sat /100
+qui:reg cumgpa sat hsperc tothrs
+est sto m1
+qui:reg cumgpa sat hsperc tothrs female
+est sto m2
+qui:reg cumgpa sat hsperc tothrs if female==0
+est sto m3
+qui:reg cumgpa sat hsperc tothrs if female==1
+est sto m4
+qui:reg cumgpa i.female##c.(sat hsperc tothrs)
+est sto m5
+esttab m1 m2 m3 m4 m5, mtitle( Simple With_fem Men Women Full_int) ///
+se star(* .1 ** 0.05 *** 0.01) nogaps noomitted 
+```
+
+```{stata}
+*| code-fold: false
+test 1.female#c.sat 1.female#c.hsperc 1.female#c.tothrs
+test 1.female 1.female#c.sat 1.female#c.hsperc 1.female#c.tothrs
+margins female, dydx(sat hsperc tothrs)
+```
+
 # Break?!
 
-## Dummies as Dep Variable
+## Avg Partial effects vs Partial effects at $X_c$
 
-## Discrete Vriable as Dep Variable
+- Whenever you have interactions, higher order polynomials (or any nonlinear transformation of $X$), marginal effects are no longer constant, and may depend on additional information:
 
+$$y = b_0 + b_1 x_1 + b_2 x_1^2 + e \rightarrow \frac{dy}{dx} = b_1 + 2b_2 x_1
+$$
+
+- What to do in this cases? 
+  1. Estimate Average marginal effects: $AME = E\left(\frac{dy}{dx}\right) = b_1 + 2b_2 \overline{x}_1$
+  2. Estimate Marginal effects at means: $MEM = \frac{dy}{dx}\Big|_{x=\bar x} = b_1 + 2b_2 \overline{x}_1$
+  3. Estimate Marginal effects at relevant values
+  4. Report ALL marginal effects
+
+## 
+
+- In `Stata` you can do this only for interactions. For constructed variables you need `f_able`, or do it by hand.
+
+```stata{style="font-size: 1.3em"}
+reg y c.x1##c.x1##c.x1
+margins, dydx(x1) <-- Default is Average Marginal Effects
+margins, dydx(x1) atmeans <-- Request marginal effects at means
+margins, dydx(x1) at(x1=(1/5)) <-- Request marginal effects at specific values of x1
+* and plot afterwards
+marginsplot
+```
+
+## Goodness of Fit: $R^2$ vs $R^2_{adj}$  
+#### With Great power...
+
+**IMPORTANT**: Low $R^2$ does not mean a bad model, nor high $R^2$ mean a good one.
+
+- If $N$ is constant, adding more variables to your model will increase the Goodness of fit $R^2$ (even if marginally)
+  - This may lead to the incorrect intuition of choosing models with the highest $R^2$
+  - This is wrong because $R^2$ only measures in-sample fitness. 
+- Alternative, the Adjusted $R^2$ ($R_{adj}^2$), which penalizes using multiple controls
+
+$$R^2_{adj} = 1-\frac{SSR/(n-k-1)}{SST/(n-1)}=1-(1-R^2)\frac{n-1}{n-k-1}
+$$ 
+
+- More controls $k$ will not always increase $R^2_{adj}$
+
+## 
+### $R^2_{adj}$ and Model Selection
+
+- $R^2_{adj}$ can be used to choose between nested models. 
+  - If adding variables improves $R_{adj}^2$, then choose that model.
+- But it can also be used to choose between non-nested models:
+
+$$\begin{aligned}
+M1: & y = b_0 + b_1 x_1 + b_2 x_2 + e \\
+M2: & y = b_0 + b_1 x_1 + b_3 x_3 + e \\
+M3: & y = b_0 + b_1 ln(x_1) + b_2 ln(x_2) + e \\
+M4: & y = b_0 + b_1 x_1 + b_2 x_2 + b_3 x_3 + e 
+\end{aligned}
+$$
+
+## log models and Prediction
+
+- Transforming the Depvariable with logs is quite useful for interpretation, and addressing overdispersion
+- However, obtaining predictions from such models is not straight forward:
+
+$$\begin{aligned}
+ln(y) &= a_0 + a_1 x_1 + a_2 x_2 + \varepsilon \\
+y &= exp(a_0 + a_1 x_1 + a_2 x_2 + \varepsilon ) \\
+E(y|x_1,x_2) &=E(e^{a_0 + a_1 x_1 + a_2 x_2}) \times E(e^ \varepsilon ) \\
+ & E(e^ \varepsilon )\neq 1
+\end{aligned}
+$$
+
+- To make Predictions in a log model we need some approximation for $E(e^ \varepsilon )$
+
+##  
+### We have Options:
+
+Lets call $E(e^ \varepsilon ) = \alpha_0$
+
+**Option 1** : $\alpha_0 = n^{-1} \sum( \exp {\hat\varepsilon})$
+
+**Option 2** : Under Normality of $\varepsilon$,   $\alpha_0 = \exp(\hat \sigma^2/2)$
+
+**Option 3** : Call $\hat m = \exp(a_0 + a_1 x_1 + a_2 x_2)$. 
+
+Regress $y$ on $\hat m$ without intercept.  $\alpha_0 = \frac{\hat m'y}{\hat m'\hat m}$
+
+- Your $\hat y$ prediction can now be used to estimate a comparable $R^2$
+
+$$R^2 = Corr(y,\hat y)^2 \text{ or } 1-\frac{\sum(y_i-\alpha_0 \hat m_i)^2}{\sum(y-\bar y)^2}
+$$
+
+## {.scrollable}
+### Example
+
+```{stata}
+*| code-fold: false
+frause oaxaca, clear
+drop if lnwage==.
+gen wage = exp(lnwage)
+qui:reg lnwage educ exper tenure female married divorced
+predict lnw_hat
+predict lnw_res, res
+** Case 1:
+egen alpha_01 = mean( exp(lnw_res))
+** Case 2:
+qui:sum lnw_res
+gen alpha_02 = exp(r(Var)/2)
+gen elnw_hat = exp(lnw_hat)
+qui: reg wage elnw_hat, nocons
+gen alpha_03 = _b[elnw_hat]
+gen wage_1 = elnw_hat
+gen wage_2 = elnw_hat*alpha_01
+gen wage_3 = elnw_hat*alpha_02
+gen wage_4 = elnw_hat*alpha_03
+mata:  y = st_data(.,"wage"); my = mean(y)
+mata:  yh = st_data(.,"wage_1 wage_2 wage_3 wage_4")
+mata:"R2_1 "; 1 - sum((y:-yh[,1]):^2)/sum( (y:-my):^2 )
+mata:"R2_2 "; 1 - sum((y:-yh[,2]):^2)/sum( (y:-my):^2 )
+mata:"R2_3 "; 1 - sum((y:-yh[,3]):^2)/sum( (y:-my):^2 )
+```
+
+## Limited Dependent variables
+
+- So far, we have impliclity assumed your dep. variable is continuous and unbounded.
+- However, OLS imposes no distributional assumptions (A6 is more convinience)
+- This means that LRM using OLS can be used for variables with limited distribution! 
+  - like Dummies or count variables
+  
+## Linear Probability Model - LPM
+
+- LPM can be used when the dep.variable is a dummy, and the goal is to explain the Likelihood of something to happen.
+
+$$\begin{aligned}
+D &= b_0 + b_1 x_1 + b_2 x_2 +b_3 x_3 + e \\
+E(D|Xs) &= P(D=1|Xs) \\
+        &= b_0 + b_1 x_1 + b_2 x_2 +b_3 x_3 
+\end{aligned}
+$$
+
+Note: 
+
+- For marginal effects, we no longer consider effects at the individual level.
+- Instead we look into conditional means, and likelihood
+
+```{stata}
+*| output: asis
+frause mroz, clear
+qui: reg inlf  age educ exper kidsge6 kidslt6 nwifeinc 
+model_display
+```
+
+##
+### Problems with LPM
+
+- LPM are easy to estimate and interpret but it has some problems:
+  - Predictions could fall below 0 or above 1 (what does it mean?)
+  - Unless more flexible functional forms are allowed, mfx are fixed.
+  - The model is, by construction, Heteroskedastic:
+ 
+$$Var(y|x)=p(x)*(1-p(x))
+$$
+
+Thus SE will be incorrect, affecting inference 
+
+## Modeling Count Data
+
+- You could also use LRM (via OLS) to model count data. 
+  - Count data is always possitive, but with discrete values
+
+$$Children = b_0 + b_1 age + b_2 education + e$$
+
+- Nothing changes for estimation, but its useful to change language:
+
+```{stata}
+*| output: asis
+frause fertil2, clear
+qui reg children age educ
+model_display
+```
+
+- 1 year of education decreases # of children in .09.
+- 1 year of education decreases Fertility .09 children per women.
+- Every 100 women, If they were 1 year more educated, we would expect to see 9 fewer children among them.
+
+## Prediction, Policy and Shifting {.scrollable}
+
+- As mentioned before, intercepts, or constant in model regressions are usually meaningless.
+  - Because $a_0 = E(y|X=0)$ (does it make sense)
+- Constant, however, can be useful if we apply some transformations to the data.
+$$y = b_0 +  b_1 (x_1 - c_1) +  b_2 (x_2 - c_2) +  b_3 (x_3 - c_3) +e
+$$
+
+In this case $b_0$ is the expected value of $y$ when $x_1=c_1$, $x_2=c_2$ and $x_3=c_3$. Thus, its now Useful!
+
+- Using this **affine** transformation, we can easily make predictions (and get SE) for any specific values of interest.
+
+  - Granted, you could also use "margins"
+
+```{stata}
+frause gpa2, clear
+gen sat0=sat-1200
+gen hsperc0=hsperc-30
+gen hsize0=hsize-5
+gen hsize20=hsize^2-25
+qui:reg colgpa sat hsperc c.hsize##c.hsize
+margins, at(sat = 1200 hsperc = 30 hsize = 5)
+reg colgpa sat0 hsperc0 hsize0 hsize20
+```
+
+##
+### Policy Evaluation
+
+- When modeling $y = b_0 + \delta \ trt + b_1 x_1 + b_2 x_2 + e$ the treatment effect $\delta$ was estimated under homogeneity assumption (only intercept shift)
+
+- This assumption can be relaxed by estimating separate models or using interactions.
+  
+- Effects can be estimated manually (separate models), margins or using shifts!
+
+Using Separate models:
+$$\begin{aligned} 
+y &= b^0_0 +  b^0_1 x_1 + b^0_2 x_2 + e^0 \text{ if trt=0} \\
+y &= b^1_0 +  b^1_1 x_1 + b^1_2 x_2 + e^1 \text{ if trt=1} \\
+& ATE = E(\hat y_1 - \hat y_0 ) \\
+& ATT = E(\hat y_1 - \hat y_0 | trt=1) \\
+& ATU = E(\hat y_1 - \hat y_0 | trt=0) 
+\end{aligned}
+$$
+
+## 
+
+Or using Model Shits
+
+$$\begin{aligned} 
+y  &= b_0 + \delta_{ate} trt + b_1 x_1 + g_1 trt (x_1- E(x_1)) + e \\
+y  &= b_0 + \delta_{att} trt + b_1 x_1 + g_1 trt (x_1- E(x_1|trt=1)) + e \\
+y  &= b_0 + \delta_{atu} trt + b_1 x_1 + g_1 trt (x_1- E(x_1|trt=0)) + e \\
+\end{aligned}
+$$
+
+```{stata}
+
+frause jtrain98, clear
+foreach i in earn96 educ age married {
+  sum `i' if train==0, meanonly
+  gen atu_`i' = (`i' - r(mean))*train
+  sum `i' if train==1, meanonly
+  gen att_`i' = (`i' - r(mean))*train
+  sum `i' , meanonly
+  gen ate_`i' = (`i' - r(mean))*train
+}
+qui:reg earn98 train earn96 educ age married
+est sto m1
+qui:reg earn98 train earn96 educ age married ate*
+est sto m2
+qui:reg earn98 train earn96 educ age married atu*
+est sto m3
+qui:reg earn98 train earn96 educ age married att*
+est sto m4
+
+esttab m1 m2 m3 m4, keep(train) mtitle(Homogenous ATE ATU ATT) se
+```
+
+# Thanks all !
+Next week Lifting Assumptions: Heteroskedasticity
