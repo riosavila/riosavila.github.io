@@ -29,6 +29,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="styles.css">
@@ -343,21 +408,355 @@ Fernando Rios-Avila
 </section>
 <section id="what-is-heteroskedasticity" class="slide level2">
 <h2>What is Heteroskedasticity?</h2>
-</section>
+<ul>
+<li><p>Mathematically: <span class="math display">\[Var(e|x=c_1)\neq Var(e|x=c_2)
+\]</span></p></li>
+<li><p>This means: the conditional variance of the errors is not constant across control characteristics.</p></li>
+</ul>
+
+<img data-src="6_Heteros_files/figure-revealjs/cell-2-output-1.png" class="r-stretch quarto-figure-center"></section>
 <section id="consequences" class="slide level2">
 <h2>Consequences</h2>
+<p>What happens when you have heteroskedastic errors?</p>
+<ul>
+<li><p>In terms of <span class="math inline">\(\beta's\)</span> and <span class="math inline">\(R^2\)</span> and <span class="math inline">\(R^2_{adj}\)</span>, nothing. Coefficients and Goodness of fit are still unbiased and consistent.</p></li>
+<li><p>But, Coefficients standard errors are based on the simplifying assumption of normality. Thus Variances will be bias!.</p>
+<ul>
+<li>If variances are biased, then all statistics will be wrong.</li>
+</ul></li>
+</ul>
 </section>
-<section id="plots-using-homoskedastic-errors-and-heterskedastic-errors" class="slide level2">
-<h2>Plots using homoskedastic errors, and heterskedastic errors</h2>
+<section id="section" class="slide level2 scrollable">
+<h2></h2>
+<h3 id="how-bad-can-it-be">How bad can it be?</h3>
+<p>Setup:</p>
+<p><span class="math inline">\(y = e\)</span> where <span class="math inline">\(e~N(0,\sigma_e^2h(x))\)</span></p>
+<p><span class="math inline">\(x = uniform(-1,1)\)</span></p>
+<div id="71a7843a" class="cell" data-execution_count="2">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">/*capture program drop sim_het</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co">program sim_het, eclass</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co">    clear</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co">    set obs 500 </span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co">    gen x = runiform(-1,1)</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="co">    gen u = rnormal()</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co">    ** Homoskedastic</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="co">    gen y_1 = u*2</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="co">    ** increasing first, decreasing later</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="co">    gen y_4 = u*sqrt(9*abs(x))</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="co">    replace x = x-2</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="co">    reg y_1 x</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="co">    matrix b=_b[x],_b[x]/_se[x]</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="co">    reg y_4 x</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="co">    matrix b=b,_b[x],_b[x]/_se[x]</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a><span class="co">    matrix coleq   b = h0 h0 h3 h3 </span></span>
+<span id="cb1-17"><a href="#cb1-17"></a><span class="co">    matrix colname b = b  t  b  t </span></span>
+<span id="cb1-18"><a href="#cb1-18"></a><span class="co">    ereturn post b</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a><span class="co">end</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a><span class="co">qui:simulate , reps(1000) dots(100):sim_het</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a><span class="co">save mdata/simulate.dta, replace*/</span></span>
+<span id="cb1-22"><a href="#cb1-22"></a><span class="kw">use</span> mdata/<span class="kw">simulate</span>.dta, <span class="kw">replace</span></span>
+<span id="cb1-23"><a href="#cb1-23"></a><span class="kw">two</span> (<span class="kw">kdensity</span> h0_b_t) (<span class="kw">kdensity</span> h3_b_t) <span class="co">///</span></span>
+<span id="cb1-24"><a href="#cb1-24"></a>    (<span class="kw">function</span> <span class="fu">y</span> = <span class="fu">normalden</span>(x), <span class="kw">range</span>(-4 4) lw(2) <span class="kw">color</span>(gs5%50)), <span class="co">///</span></span>
+<span id="cb1-25"><a href="#cb1-25"></a>    <span class="bn">legend</span>(<span class="kw">order</span>(3 <span class="st">"Normal"</span> 1 <span class="st">"With Homoskedasticty"</span> 2 <span class="st">"with Heteroskedasticity"</span>))</span>
+<span id="cb1-26"><a href="#cb1-26"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig6_1.png, <span class="kw">replace</span> height(1000)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+
+<img data-src="images/fig6_1.png" class="r-stretch quarto-figure-center"></section>
+<section>
+<section id="what-to-do-about-it" class="title-slide slide level1 center">
+<h1>What to do about it?</h1>
+
+</section>
+<section id="what-to-do-about-it-1" class="slide level2">
+<h2>What to do about it?</h2>
+<ul>
+<li><p>So, If errors are heteroskedastic, then all statistics (t-stats, F-stats, chi2’s) are wrong.</p></li>
+<li><p>But, there are solutions…many solutions</p>
+<ul>
+<li>GLS: Generalized Least Squares</li>
+<li>WLS: Weighted Least Squares</li>
+<li>FGLS: Feasible Generealized Least Squares</li>
+<li>WFLS: Weighted FGLS</li>
+<li>HC0-HC3: Heteroskedasticity consistent SE</li>
+</ul></li>
+<li><p>Some of them are more involved than others.</p></li>
+<li><p>But before trying to do that, lets first ask…do we have a problem?</p></li>
+</ul>
 </section>
 <section id="detecting-the-problem" class="slide level2">
 <h2>Detecting the Problem</h2>
-<h3 id="bp">BP</h3>
-<h3 id="white">White</h3>
-<h3 id="mwhite">MWhite</h3>
+<ul>
+<li>Consider the model:</li>
+</ul>
+<p><span class="math display">\[y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 +\beta_3 x_3 +e
+\]</span></p>
+<ul>
+<li>We usually start with the assumption that errors are homoskedastic <span class="math inline">\(Var(e|x's)=\sigma^2_c\)</span>.</li>
+<li>However, now we want to allow for the possibility of heteroskedasiticity. ie, that variance is some function of X.
+<ul>
+<li>We have to model is variance is a function that varies with <span class="math inline">\(x\)</span>:</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[Var(e|x)=f(x_1,x_2,\dots,x_k) \sim a_0+a_1x_1 + a_2 x_2 + \dots + a_k x_k+v\]</span></p>
 </section>
-<section id="solving-the-problem" class="slide level2">
-<h2>Solving the problem</h2>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<p><span class="math display">\[Var(e|x)=f(x_1,x_2,\dots,x_k) \sim a_0+a_1x_1 + a_2 x_2 + \dots + a_k x_k+v\]</span></p>
+<ul>
+<li>This expression says the onditional variance can vary with <span class="math inline">\(X's\)</span>.</li>
+<li>It could be as flexible as needed, but linear is usually enough.</li>
+</ul>
+<p>With this the Null hypothesis is: <span class="math display">\[H_0: a_1 = a_2 = \dots = a_k=0 \text{ vs } H_1: H_0 \text{ is false}
+\]</span></p>
+<p>Easy enough, but do we <strong>KNOW</strong> <span class="math inline">\(Var(e|x)\)</span> ? can we model the equation?</p>
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+<p><strong>We don’t!.</strong></p>
+<ul>
+<li><p>But we can use <span class="math inline">\(e^2\)</span> instead. This implies we using the assumption that <span class="math inline">\(e^2\)</span> is a good enough approximation for the condional variance <span class="math inline">\(Var(e|x)\)</span>.</p></li>
+<li><p>With this, the test for heteroskedasticty can be implemented using the following recipe.</p></li>
+</ul>
+<ol type="1">
+<li>Estimate <span class="math inline">\(y=x\beta+e\)</span> and obtain predicted model errors <span class="math inline">\(\hat e\)</span>.</li>
+<li>Model <span class="math inline">\(\hat e^2 = \color{green}{h(x)}+v\)</span>, as a proxy for the variance model.
+<ul>
+<li><span class="math inline">\(h(x)\)</span> could be estimated using some linear or nonlinear functional forms.</li>
+</ul></li>
+<li>Test if variance changes with respect to any explanatory variables.
+<ul>
+<li>In this case, you can assume the heteroskedastic model is homoskedastic.</li>
+</ul></li>
+</ol>
+<p><strong>Note:</strong> Depending on Model specification, and test used, there are various Heteroskedasticity <em>tests</em>.</p>
+</section>
+<section id="heteroskedasticity-tests" class="slide level2">
+<h2>Heteroskedasticity tests</h2>
+<p><span class="math display">\[\begin{aligned}
+\text{Model}: y &amp;= \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 + e \\
+\hat e &amp; = y - (\hat \beta_0 + \hat\beta_1 x_1 +\hat \beta_2 x_2 +\hat \beta_3 x_3)
+\end{aligned}
+\]</span></p>
+<h3 id="breush-pagan">Breush-Pagan:</h3>
+<p><span class="math display">\[\begin{aligned}
+\hat e^2 &amp; = \gamma_0 + \gamma_1 x_1 +\gamma_2 x_2 +\gamma_3 x_3 + v \\
+H_0 &amp;: \gamma_1=\gamma_2=\gamma_3=0 \\
+F &amp;= \frac{R^2_{\hat e^2}/k}{(1-R^2_{\hat e^2})/(n-k-1)} \\
+LM &amp;=N R^2_{\hat e^2} \sim \chi^2(k) \leftarrow BP-test
+\end{aligned}
+\]</span></p>
+<ul>
+<li>Easy and simple, but only considers “linear” Heteroskedasticity</li>
+</ul>
+</section>
+<section id="heteroskedasticity-tests-1" class="slide level2">
+<h2>Heteroskedasticity tests:</h2>
+<p><span class="math display">\[\begin{aligned}
+\text{Model}: y &amp;= \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 + e \\
+\hat e &amp; = y - (\hat \beta_0 + \hat\beta_1 x_1 +\hat \beta_2 x_2 +\hat \beta_3 x_3)
+\end{aligned}
+\]</span></p>
+<h3 id="white">White:</h3>
+<p><span class="math display">\[\begin{aligned}
+\hat e^2 &amp; = \gamma_0 + \sum \gamma_{1,k} x_k + \sum \gamma_{2,k} x_k^2 + \sum_k \sum_{j\neq k} \gamma_{3,j,k} x_j x_k + v \\
+H_0 &amp;: \text{ All } \gamma's =0 \\
+F &amp;= \frac{R^2_{\hat e^2}/q}{(1-R^2_{\hat e^2})/(n-q-1)} \\
+LM &amp;=N R^2_{\hat e^2} \sim \chi^2(q)
+\end{aligned}
+\]</span></p>
+<p><span class="math inline">\(q\)</span> is the total number of coefficients in the model (not counting the intercept.)</p>
+<ul>
+<li>Accounts for nonlinearities, but gets “messy” with more variables.</li>
+</ul>
+</section>
+<section id="heteroskedasticity-tests-2" class="slide level2">
+<h2>Heteroskedasticity tests:</h2>
+<p><span class="math display">\[\begin{aligned}
+\text{Model}: y &amp;= \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 + e \\
+\hat e &amp; = y - (\hat \beta_0 + \hat\beta_1 x_1 +\hat \beta_2 x_2 +\hat \beta_3 x_3)
+\end{aligned}
+\]</span></p>
+<h3 id="modified-white">Modified White:</h3>
+<p><span class="math display">\[\begin{aligned}
+\hat y &amp;= y - \hat e \\
+\hat e^2 &amp; = \gamma_0 + \gamma_1 \hat y + \gamma_2 \hat y^2 + \dots + v \\
+H_0 &amp;: \gamma_1 = \gamma_2 = \dots =0 \\
+F &amp;= \frac{R^2_{\hat e^2}/ h }{(1-R^2_{\hat e^2})/(n-h-1)} \\
+LM &amp;=N R^2_{\hat e^2} \sim \chi^2(h)
+\end{aligned}
+\]</span></p>
+<p><span class="math inline">\(h\)</span> is the total number of coefficients in the model (not counting the intercept.)</p>
+<ul>
+<li>Accounts for nonlinearities (because of how <span class="math inline">\(\hat y\)</span> is constructed), and is simpler to implement.</li>
+<li>But, nonlinearity is restricted.</li>
+</ul>
+</section>
+<section id="example" class="slide level2 scrollable">
+<h2>Example</h2>
+<p>Housing prices:</p>
+<p><span class="math display">\[\begin{aligned}
+price &amp;= \beta_0 + \beta_1 lotsize + \beta_2 sqft + \beta_3 bdrms + e_1 \\
+log(price) &amp;= \beta_0 + \beta_1 log(lotsize) + \beta_2 log(sqft) + \beta_3 bdrms + e_2 \\
+\end{aligned}
+\]</span></p>
+<div id="acbfc922" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1"></a>frause hprice1, <span class="kw">clear</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">reg</span> price lotsize sqrft bdrms </span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">predict</span> res, res</span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="kw">predict</span> price_hat</span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="kw">gen</span> res2=res^2</span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="kw">display</span> <span class="st">"BP-test"</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="kw">reg</span> res2  lotsize sqrft bdrms, notable</span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="kw">display</span> <span class="st">"nR^2:   "</span> <span class="fu">e</span>(<span class="kw">N</span>)*<span class="fu">e</span>(r2)</span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="kw">display</span> <span class="st">"p(chi2) "</span> %5.3f <span class="fu">chi2tail</span>(<span class="fu">e</span>(df_m),<span class="fu">e</span>(<span class="kw">N</span>)*<span class="fu">e</span>(r2))</span>
+<span id="cb2-10"><a href="#cb2-10"></a></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="kw">display</span> <span class="st">"White Test"</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="kw">reg</span> res2  c.(lotsize sqrft bdrms)##c.(lotsize sqrft bdrms), notable</span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="kw">display</span> <span class="st">"nR^2:   "</span> <span class="fu">e</span>(<span class="kw">N</span>)*<span class="fu">e</span>(r2)</span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="kw">display</span> <span class="st">"p(chi2) "</span> %5.3f <span class="fu">chi2tail</span>(<span class="fu">e</span>(df_m),<span class="fu">e</span>(<span class="kw">N</span>)*<span class="fu">e</span>(r2))</span>
+<span id="cb2-15"><a href="#cb2-15"></a></span>
+<span id="cb2-16"><a href="#cb2-16"></a><span class="kw">display</span> <span class="st">"MWhite Test"</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a><span class="kw">reg</span> res2  price_hat c.price_hat#c.price_hat, notable</span>
+<span id="cb2-18"><a href="#cb2-18"></a><span class="kw">display</span> <span class="st">"nR^2:   "</span> <span class="fu">e</span>(<span class="kw">N</span>)*<span class="fu">e</span>(r2)</span>
+<span id="cb2-19"><a href="#cb2-19"></a><span class="kw">display</span> <span class="st">"p(chi2) "</span> %5.3f <span class="fu">chi2tail</span>(<span class="fu">e</span>(df_m),<span class="fu">e</span>(<span class="kw">N</span>)*<span class="fu">e</span>(r2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Source |       SS           df       MS      Number of obs   =        88
+-------------+----------------------------------   F(3, 84)        =     57.46
+       Model |  617130.701         3  205710.234   Prob &gt; F        =    0.0000
+    Residual |  300723.805        84   3580.0453   R-squared       =    0.6724
+-------------+----------------------------------   Adj R-squared   =    0.6607
+       Total |  917854.506        87  10550.0518   Root MSE        =    59.833
+
+------------------------------------------------------------------------------
+       price | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     lotsize |   .0020677   .0006421     3.22   0.002     .0007908    .0033446
+       sqrft |   .1227782   .0132374     9.28   0.000     .0964541    .1491022
+       bdrms |   13.85252   9.010145     1.54   0.128    -4.065141    31.77018
+       _cons |  -21.77031   29.47504    -0.74   0.462    -80.38466    36.84405
+------------------------------------------------------------------------------
+(option xb assumed; fitted values)
+BP-test
+
+      Source |       SS           df       MS      Number of obs   =        88
+-------------+----------------------------------   F(3, 84)        =      5.34
+       Model |   701213780         3   233737927   Prob &gt; F        =    0.0020
+    Residual |  3.6775e+09        84  43780003.5   R-squared       =    0.1601
+-------------+----------------------------------   Adj R-squared   =    0.1301
+       Total |  4.3787e+09        87  50330276.7   Root MSE        =    6616.6
+
+nR^2: 14.092386
+p(chi2) 0.003
+White Test
+
+      Source |       SS           df       MS      Number of obs   =        88
+-------------+----------------------------------   F(9, 78)        =      5.39
+       Model |  1.6784e+09         9   186492378   Prob &gt; F        =    0.0000
+    Residual |  2.7003e+09        78    34619265   R-squared       =    0.3833
+-------------+----------------------------------   Adj R-squared   =    0.3122
+       Total |  4.3787e+09        87  50330276.7   Root MSE        =    5883.8
+
+nR^2: 33.731659
+p(chi2) 0.000
+MWhite Test
+
+      Source |       SS           df       MS      Number of obs   =        88
+-------------+----------------------------------   F(2, 85)        =      9.64
+       Model |   809489395         2   404744697   Prob &gt; F        =    0.0002
+    Residual |  3.5692e+09        85  41991113.9   R-squared       =    0.1849
+-------------+----------------------------------   Adj R-squared   =    0.1657
+       Total |  4.3787e+09        87  50330276.7   Root MSE        =    6480.1
+
+nR^2: 16.268416
+p(chi2) 0.000</code></pre>
+</div>
+</div>
+<div id="cbe2e295" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1"></a>frause hprice1, <span class="kw">clear</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">reg</span> lprice llotsize lsqrft bdrms </span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">predict</span> res, res</span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">predict</span> price_hat</span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="kw">gen</span> res2=res^2</span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="kw">display</span> <span class="st">"BP-test"</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="kw">reg</span> res2  llotsize lsqrft bdrms, notable</span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="kw">display</span> <span class="st">"nR^2:   "</span> <span class="fu">e</span>(<span class="kw">N</span>)*<span class="fu">e</span>(r2)</span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="kw">display</span> <span class="st">"p(chi2) "</span> %5.3f <span class="fu">chi2tail</span>(<span class="fu">e</span>(df_m),<span class="fu">e</span>(<span class="kw">N</span>)*<span class="fu">e</span>(r2))</span>
+<span id="cb4-10"><a href="#cb4-10"></a></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="kw">display</span> <span class="st">"White Test"</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="kw">reg</span> res2  c.(llotsize lsqrft bdrms)##c.(llotsize lsqrft bdrms), notable</span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="kw">display</span> <span class="st">"nR^2:   "</span> <span class="fu">e</span>(<span class="kw">N</span>)*<span class="fu">e</span>(r2)</span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="kw">display</span> <span class="st">"p(chi2) "</span> %5.3f <span class="fu">chi2tail</span>(<span class="fu">e</span>(df_m),<span class="fu">e</span>(<span class="kw">N</span>)*<span class="fu">e</span>(r2))</span>
+<span id="cb4-15"><a href="#cb4-15"></a></span>
+<span id="cb4-16"><a href="#cb4-16"></a><span class="kw">display</span> <span class="st">"MWhite Test"</span></span>
+<span id="cb4-17"><a href="#cb4-17"></a><span class="kw">reg</span> res2  price_hat c.price_hat#c.price_hat, notable</span>
+<span id="cb4-18"><a href="#cb4-18"></a><span class="kw">display</span> <span class="st">"nR^2:   "</span> <span class="fu">e</span>(<span class="kw">N</span>)*<span class="fu">e</span>(r2)</span>
+<span id="cb4-19"><a href="#cb4-19"></a><span class="kw">display</span> <span class="st">"p(chi2) "</span> %5.3f <span class="fu">chi2tail</span>(<span class="fu">e</span>(df_m),<span class="fu">e</span>(<span class="kw">N</span>)*<span class="fu">e</span>(r2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Source |       SS           df       MS      Number of obs   =        88
+-------------+----------------------------------   F(3, 84)        =     50.42
+       Model |  5.15504028         3  1.71834676   Prob &gt; F        =    0.0000
+    Residual |  2.86256324        84  .034078134   R-squared       =    0.6430
+-------------+----------------------------------   Adj R-squared   =    0.6302
+       Total |  8.01760352        87  .092156362   Root MSE        =     .1846
+
+------------------------------------------------------------------------------
+      lprice | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+    llotsize |   .1679667   .0382812     4.39   0.000     .0918404     .244093
+      lsqrft |   .7002324   .0928652     7.54   0.000     .5155597    .8849051
+       bdrms |   .0369584   .0275313     1.34   0.183    -.0177906    .0917074
+       _cons |  -1.297042   .6512836    -1.99   0.050    -2.592191    -.001893
+------------------------------------------------------------------------------
+(option xb assumed; fitted values)
+BP-test
+
+      Source |       SS           df       MS      Number of obs   =        88
+-------------+----------------------------------   F(3, 84)        =      1.41
+       Model |  .022620168         3  .007540056   Prob &gt; F        =    0.2451
+    Residual |  .448717194        84  .005341871   R-squared       =    0.0480
+-------------+----------------------------------   Adj R-squared   =    0.0140
+       Total |  .471337362        87  .005417671   Root MSE        =    .07309
+
+nR^2: 4.2232484
+p(chi2) 0.238
+White Test
+
+      Source |       SS           df       MS      Number of obs   =        88
+-------------+----------------------------------   F(9, 78)        =      1.05
+       Model |  .051147864         9  .005683096   Prob &gt; F        =    0.4053
+    Residual |  .420189497        78  .005387045   R-squared       =    0.1085
+-------------+----------------------------------   Adj R-squared   =    0.0057
+       Total |  .471337362        87  .005417671   Root MSE        =     .0734
+
+nR^2: 9.5494489
+p(chi2) 0.388
+MWhite Test
+
+      Source |       SS           df       MS      Number of obs   =        88
+-------------+----------------------------------   F(2, 85)        =      1.73
+       Model |  .018464046         2  .009232023   Prob &gt; F        =    0.1830
+    Residual |  .452873315        85  .005327921   R-squared       =    0.0392
+-------------+----------------------------------   Adj R-squared   =    0.0166
+       Total |  .471337362        87  .005417671   Root MSE        =    .07299
+
+nR^2: 3.4472889
+p(chi2) 0.178</code></pre>
+</div>
+</div>
+<p>Can you do this in <code>Stata</code>? Yes, <code>estat hettest</code>. But look into the options. There are many more options in that command.</p>
+</section></section>
+<section>
+<section id="section-3" class="title-slide slide level1 center" data-background-image="https://i.imgflip.com/7v1kuw.jpg" data-background-size="contain">
+<h1></h1>
+
+</section>
+<section id="what-do-you-do-when-you-have-heteroskedasticity" class="slide level2">
+<h2>What do you do when you have Heteroskedasticity</h2>
 </section>
 <section id="gls-weighted-least-squares" class="slide level2">
 <h2>GLS: weighted Least Squares</h2>
@@ -383,7 +782,7 @@ Fernando Rios-Avila
 <div class="footer footer-default">
 
 </div>
-</section>
+</section></section>
     </div>
   </div>
 

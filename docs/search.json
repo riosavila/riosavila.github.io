@@ -3805,14 +3805,14 @@
     "href": "rmethods/6_Heteros.html#what-is-heteroskedasticity",
     "title": "Multiple Regression Analysis",
     "section": "What is Heteroskedasticity?",
-    "text": "What is Heteroskedasticity?"
+    "text": "What is Heteroskedasticity?\n\nMathematically: \\[Var(e|x=c_1)\\neq Var(e|x=c_2)\n\\]\nThis means: the conditional variance of the errors is not constant across control characteristics."
   },
   {
     "objectID": "rmethods/6_Heteros.html#consequences",
     "href": "rmethods/6_Heteros.html#consequences",
     "title": "Multiple Regression Analysis",
     "section": "Consequences",
-    "text": "Consequences"
+    "text": "Consequences\nWhat happens when you have heteroskedastic errors?\n\nIn terms of \\(\\beta's\\) and \\(R^2\\) and \\(R^2_{adj}\\), nothing. Coefficients and Goodness of fit are still unbiased and consistent.\nBut, Coefficients standard errors are based on the simplifying assumption of normality. Thus Variances will be bias!.\n\nIf variances are biased, then all statistics will be wrong."
   },
   {
     "objectID": "rmethods/6_Heteros.html#plots-using-homoskedastic-errors-and-heterskedastic-errors",
@@ -3826,7 +3826,7 @@
     "href": "rmethods/6_Heteros.html#detecting-the-problem",
     "title": "Multiple Regression Analysis",
     "section": "Detecting the Problem",
-    "text": "Detecting the Problem\nBP\nWhite\nMWhite"
+    "text": "Detecting the Problem\n\nConsider the model:\n\n\\[y = \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 +\\beta_3 x_3 +e\n\\]\n\nWe usually start with the assumption that errors are homoskedastic \\(Var(e|x's)=\\sigma^2_c\\).\nHowever, now we want to allow for the possibility of heteroskedasiticity. ie, that variance is some function of X.\n\nWe have to model is variance is a function that varies with \\(x\\):\n\n\n\\[Var(e|x)=f(x_1,x_2,\\dots,x_k) \\sim a_0+a_1x_1 + a_2 x_2 + \\dots + a_k x_k+v\\]"
   },
   {
     "objectID": "rmethods/6_Heteros.html#solving-the-problem",
@@ -3883,5 +3883,75 @@
     "title": "Multiple Regression Analysis",
     "section": "LPM revised",
     "text": "LPM revised"
+  },
+  {
+    "objectID": "rmethods/6_Heteros.html#plots-using-homoskedastic-errors-and-heteroskedastic-errors",
+    "href": "rmethods/6_Heteros.html#plots-using-homoskedastic-errors-and-heteroskedastic-errors",
+    "title": "Multiple Regression Analysis",
+    "section": "Plots using homoskedastic errors, and heteroskedastic errors",
+    "text": "Plots using homoskedastic errors, and heteroskedastic errors"
+  },
+  {
+    "objectID": "rmethods/6_Heteros.html#section",
+    "href": "rmethods/6_Heteros.html#section",
+    "title": "Multiple Regression Analysis",
+    "section": "",
+    "text": "How bad can it be?\nSetup:\n\\(y = e\\) where \\(e~N(0,\\sigma_e^2h(x))\\)\n\\(x = uniform(-1,1)\\)\n\n\nCode\n/*capture program drop sim_het\nprogram sim_het, eclass\n    clear\n    set obs 500 \n    gen x = runiform(-1,1)\n    gen u = rnormal()\n    ** Homoskedastic\n    gen y_1 = u*2\n    ** increasing first, decreasing later\n    gen y_4 = u*sqrt(9*abs(x))\n    replace x = x-2\n    reg y_1 x\n    matrix b=_b[x],_b[x]/_se[x]\n    reg y_4 x\n    matrix b=b,_b[x],_b[x]/_se[x]\n    matrix coleq   b = h0 h0 h3 h3 \n    matrix colname b = b  t  b  t \n    ereturn post b\nend\nqui:simulate , reps(1000) dots(100):sim_het\nsave mdata/simulate.dta, replace*/\nuse mdata/simulate.dta, replace\ntwo (kdensity h0_b_t) (kdensity h3_b_t) ///\n    (function y = normalden(x), range(-4 4) lw(2) color(gs5%50)), ///\n    legend(order(3 \"Normal\" 1 \"With Homoskedasticty\" 2 \"with Heteroskedasticity\"))\ngraph export images/fig6_1.png, replace height(1000)"
+  },
+  {
+    "objectID": "rmethods/6_Heteros.html#what-to-do-about-it-1",
+    "href": "rmethods/6_Heteros.html#what-to-do-about-it-1",
+    "title": "Multiple Regression Analysis",
+    "section": "What to do about it?",
+    "text": "What to do about it?\n\nSo, If errors are heteroskedastic, then all statistics (t-stats, F-stats, chi2’s) are wrong.\nBut, there are solutions…many solutions\n\nGLS: Generalized Least Squares\nWLS: Weighted Least Squares\nFGLS: Feasible Generealized Least Squares\nWFLS: Weighted FGLS\nHC0-HC3: Heteroskedasticity consistent SE\n\nSome of them are more involved than others.\nBut before trying to do that, lets first ask…do we have a problem?"
+  },
+  {
+    "objectID": "rmethods/6_Heteros.html#section-1",
+    "href": "rmethods/6_Heteros.html#section-1",
+    "title": "Multiple Regression Analysis",
+    "section": "",
+    "text": "\\[Var(e|x)=f(x_1,x_2,\\dots,x_k) \\sim a_0+a_1x_1 + a_2 x_2 + \\dots + a_k x_k+v\\]\n\nThis expression says the onditional variance can vary with \\(X's\\).\nIt could be as flexible as needed, but linear is usually enough.\n\nWith this the Null hypothesis is: \\[H_0: a_1 = a_2 = \\dots = a_k=0 \\text{ vs } H_1: H_0 \\text{ is false}\n\\]\nEasy enough, but do we KNOW \\(Var(e|x)\\) ? can we model the equation?"
+  },
+  {
+    "objectID": "rmethods/6_Heteros.html#section-2",
+    "href": "rmethods/6_Heteros.html#section-2",
+    "title": "Multiple Regression Analysis",
+    "section": "",
+    "text": "We don’t!.\n\nBut we can use \\(e^2\\) instead. This implies we using the assumption that \\(e^2\\) is a good enough approximation for the condional variance \\(Var(e|x)\\).\nWith this, the test for heteroskedasticty can be implemented using the following recipe.\n\n\nEstimate \\(y=x\\beta+e\\) and obtain predicted model errors \\(\\hat e\\).\nModel \\(\\hat e^2 = \\color{green}{h(x)}+v\\), as a proxy for the variance model.\n\n\\(h(x)\\) could be estimated using some linear or nonlinear functional forms.\n\nTest if variance changes with respect to any explanatory variables.\n\nIn this case, you can assume the heteroskedastic model is homoskedastic.\n\n\nNote: Depending on Model specification, and test used, there are various Heteroskedasticity tests."
+  },
+  {
+    "objectID": "rmethods/6_Heteros.html#heteroskedasticity-tests",
+    "href": "rmethods/6_Heteros.html#heteroskedasticity-tests",
+    "title": "Multiple Regression Analysis",
+    "section": "Heteroskedasticity tests",
+    "text": "Heteroskedasticity tests\n\\[\\begin{aligned}\n\\text{Model}: y &= \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\beta_3 x_3 + e \\\\\n\\hat e & = y - (\\hat \\beta_0 + \\hat\\beta_1 x_1 +\\hat \\beta_2 x_2 +\\hat \\beta_3 x_3)\n\\end{aligned}\n\\]\nBreush-Pagan:\n\\[\\begin{aligned}\n\\hat e^2 & = \\gamma_0 + \\gamma_1 x_1 +\\gamma_2 x_2 +\\gamma_3 x_3 + v \\\\\nH_0 &: \\gamma_1=\\gamma_2=\\gamma_3=0 \\\\\nF &= \\frac{R^2_{\\hat e^2}/k}{(1-R^2_{\\hat e^2})/(n-k-1)} \\\\\nLM &=N R^2_{\\hat e^2} \\sim \\chi^2(k) \\leftarrow BP-test\n\\end{aligned}\n\\]\n\nEasy and simple, but only considers “linear” Heteroskedasticity"
+  },
+  {
+    "objectID": "rmethods/6_Heteros.html#heteroskedasticity-tests-1",
+    "href": "rmethods/6_Heteros.html#heteroskedasticity-tests-1",
+    "title": "Multiple Regression Analysis",
+    "section": "Heteroskedasticity tests:",
+    "text": "Heteroskedasticity tests:\n\\[\\begin{aligned}\n\\text{Model}: y &= \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\beta_3 x_3 + e \\\\\n\\hat e & = y - (\\hat \\beta_0 + \\hat\\beta_1 x_1 +\\hat \\beta_2 x_2 +\\hat \\beta_3 x_3)\n\\end{aligned}\n\\]\nWhite:\n\\[\\begin{aligned}\n\\hat e^2 & = \\gamma_0 + \\sum \\gamma_{1,k} x_k + \\sum \\gamma_{2,k} x_k^2 + \\sum_k \\sum_{j\\neq k} \\gamma_{3,j,k} x_j x_k + v \\\\\nH_0 &: \\text{ All } \\gamma's =0 \\\\\nF &= \\frac{R^2_{\\hat e^2}/q}{(1-R^2_{\\hat e^2})/(n-q-1)} \\\\\nLM &=N R^2_{\\hat e^2} \\sim \\chi^2(q)\n\\end{aligned}\n\\]\n\\(q\\) is the total number of coefficients in the model (not counting the intercept.)\n\nAccounts for nonlinearities, but gets “messy” with more variables."
+  },
+  {
+    "objectID": "rmethods/6_Heteros.html#heteroskedasticity-tests-2",
+    "href": "rmethods/6_Heteros.html#heteroskedasticity-tests-2",
+    "title": "Multiple Regression Analysis",
+    "section": "Heteroskedasticity tests:",
+    "text": "Heteroskedasticity tests:\n\\[\\begin{aligned}\n\\text{Model}: y &= \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\beta_3 x_3 + e \\\\\n\\hat e & = y - (\\hat \\beta_0 + \\hat\\beta_1 x_1 +\\hat \\beta_2 x_2 +\\hat \\beta_3 x_3)\n\\end{aligned}\n\\]\nModified White:\n\\[\\begin{aligned}\n\\hat y &= y - \\hat e \\\\\n\\hat e^2 & = \\gamma_0 + \\gamma_1 \\hat y + \\gamma_2 \\hat y^2 + \\dots + v \\\\\nH_0 &: \\gamma_1 = \\gamma_2 = \\dots =0 \\\\\nF &= \\frac{R^2_{\\hat e^2}/ h }{(1-R^2_{\\hat e^2})/(n-h-1)} \\\\\nLM &=N R^2_{\\hat e^2} \\sim \\chi^2(h)\n\\end{aligned}\n\\]\n\\(h\\) is the total number of coefficients in the model (not counting the intercept.)\n\nAccounts for nonlinearities (because of how \\(\\hat y\\) is constructed), and is simpler to implement.\nBut, nonlinearity is restricted."
+  },
+  {
+    "objectID": "rmethods/6_Heteros.html#example",
+    "href": "rmethods/6_Heteros.html#example",
+    "title": "Multiple Regression Analysis",
+    "section": "Example",
+    "text": "Example\nHousing prices:\n\\[\\begin{aligned}\nprice &= \\beta_0 + \\beta_1 lotsize + \\beta_2 sqft + \\beta_3 bdrms + e_1 \\\\\nlog(price) &= \\beta_0 + \\beta_1 log(lotsize) + \\beta_2 log(sqft) + \\beta_3 bdrms + e_2 \\\\\n\\end{aligned}\n\\]\n\nfrause hprice1, clear\nreg price lotsize sqrft bdrms \npredict res, res\npredict price_hat\ngen res2=res^2\ndisplay \"BP-test\"\nreg res2  lotsize sqrft bdrms, notable\ndisplay \"nR^2:   \" e(N)*e(r2)\ndisplay \"p(chi2) \" %5.3f chi2tail(e(df_m),e(N)*e(r2))\n\ndisplay \"White Test\"\nreg res2  c.(lotsize sqrft bdrms)##c.(lotsize sqrft bdrms), notable\ndisplay \"nR^2:   \" e(N)*e(r2)\ndisplay \"p(chi2) \" %5.3f chi2tail(e(df_m),e(N)*e(r2))\n\ndisplay \"MWhite Test\"\nreg res2  price_hat c.price_hat#c.price_hat, notable\ndisplay \"nR^2:   \" e(N)*e(r2)\ndisplay \"p(chi2) \" %5.3f chi2tail(e(df_m),e(N)*e(r2))\n\n\n      Source |       SS           df       MS      Number of obs   =        88\n-------------+----------------------------------   F(3, 84)        =     57.46\n       Model |  617130.701         3  205710.234   Prob &gt; F        =    0.0000\n    Residual |  300723.805        84   3580.0453   R-squared       =    0.6724\n-------------+----------------------------------   Adj R-squared   =    0.6607\n       Total |  917854.506        87  10550.0518   Root MSE        =    59.833\n\n------------------------------------------------------------------------------\n       price | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n     lotsize |   .0020677   .0006421     3.22   0.002     .0007908    .0033446\n       sqrft |   .1227782   .0132374     9.28   0.000     .0964541    .1491022\n       bdrms |   13.85252   9.010145     1.54   0.128    -4.065141    31.77018\n       _cons |  -21.77031   29.47504    -0.74   0.462    -80.38466    36.84405\n------------------------------------------------------------------------------\n(option xb assumed; fitted values)\nBP-test\n\n      Source |       SS           df       MS      Number of obs   =        88\n-------------+----------------------------------   F(3, 84)        =      5.34\n       Model |   701213780         3   233737927   Prob &gt; F        =    0.0020\n    Residual |  3.6775e+09        84  43780003.5   R-squared       =    0.1601\n-------------+----------------------------------   Adj R-squared   =    0.1301\n       Total |  4.3787e+09        87  50330276.7   Root MSE        =    6616.6\n\nnR^2: 14.092386\np(chi2) 0.003\nWhite Test\n\n      Source |       SS           df       MS      Number of obs   =        88\n-------------+----------------------------------   F(9, 78)        =      5.39\n       Model |  1.6784e+09         9   186492378   Prob &gt; F        =    0.0000\n    Residual |  2.7003e+09        78    34619265   R-squared       =    0.3833\n-------------+----------------------------------   Adj R-squared   =    0.3122\n       Total |  4.3787e+09        87  50330276.7   Root MSE        =    5883.8\n\nnR^2: 33.731659\np(chi2) 0.000\nMWhite Test\n\n      Source |       SS           df       MS      Number of obs   =        88\n-------------+----------------------------------   F(2, 85)        =      9.64\n       Model |   809489395         2   404744697   Prob &gt; F        =    0.0002\n    Residual |  3.5692e+09        85  41991113.9   R-squared       =    0.1849\n-------------+----------------------------------   Adj R-squared   =    0.1657\n       Total |  4.3787e+09        87  50330276.7   Root MSE        =    6480.1\n\nnR^2: 16.268416\np(chi2) 0.000\n\n\n\nfrause hprice1, clear\nreg lprice llotsize lsqrft bdrms \npredict res, res\npredict price_hat\ngen res2=res^2\ndisplay \"BP-test\"\nreg res2  llotsize lsqrft bdrms, notable\ndisplay \"nR^2:   \" e(N)*e(r2)\ndisplay \"p(chi2) \" %5.3f chi2tail(e(df_m),e(N)*e(r2))\n\ndisplay \"White Test\"\nreg res2  c.(llotsize lsqrft bdrms)##c.(llotsize lsqrft bdrms), notable\ndisplay \"nR^2:   \" e(N)*e(r2)\ndisplay \"p(chi2) \" %5.3f chi2tail(e(df_m),e(N)*e(r2))\n\ndisplay \"MWhite Test\"\nreg res2  price_hat c.price_hat#c.price_hat, notable\ndisplay \"nR^2:   \" e(N)*e(r2)\ndisplay \"p(chi2) \" %5.3f chi2tail(e(df_m),e(N)*e(r2))\n\n\n      Source |       SS           df       MS      Number of obs   =        88\n-------------+----------------------------------   F(3, 84)        =     50.42\n       Model |  5.15504028         3  1.71834676   Prob &gt; F        =    0.0000\n    Residual |  2.86256324        84  .034078134   R-squared       =    0.6430\n-------------+----------------------------------   Adj R-squared   =    0.6302\n       Total |  8.01760352        87  .092156362   Root MSE        =     .1846\n\n------------------------------------------------------------------------------\n      lprice | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n    llotsize |   .1679667   .0382812     4.39   0.000     .0918404     .244093\n      lsqrft |   .7002324   .0928652     7.54   0.000     .5155597    .8849051\n       bdrms |   .0369584   .0275313     1.34   0.183    -.0177906    .0917074\n       _cons |  -1.297042   .6512836    -1.99   0.050    -2.592191    -.001893\n------------------------------------------------------------------------------\n(option xb assumed; fitted values)\nBP-test\n\n      Source |       SS           df       MS      Number of obs   =        88\n-------------+----------------------------------   F(3, 84)        =      1.41\n       Model |  .022620168         3  .007540056   Prob &gt; F        =    0.2451\n    Residual |  .448717194        84  .005341871   R-squared       =    0.0480\n-------------+----------------------------------   Adj R-squared   =    0.0140\n       Total |  .471337362        87  .005417671   Root MSE        =    .07309\n\nnR^2: 4.2232484\np(chi2) 0.238\nWhite Test\n\n      Source |       SS           df       MS      Number of obs   =        88\n-------------+----------------------------------   F(9, 78)        =      1.05\n       Model |  .051147864         9  .005683096   Prob &gt; F        =    0.4053\n    Residual |  .420189497        78  .005387045   R-squared       =    0.1085\n-------------+----------------------------------   Adj R-squared   =    0.0057\n       Total |  .471337362        87  .005417671   Root MSE        =     .0734\n\nnR^2: 9.5494489\np(chi2) 0.388\nMWhite Test\n\n      Source |       SS           df       MS      Number of obs   =        88\n-------------+----------------------------------   F(2, 85)        =      1.73\n       Model |  .018464046         2  .009232023   Prob &gt; F        =    0.1830\n    Residual |  .452873315        85  .005327921   R-squared       =    0.0392\n-------------+----------------------------------   Adj R-squared   =    0.0166\n       Total |  .471337362        87  .005417671   Root MSE        =    .07299\n\nnR^2: 3.4472889\np(chi2) 0.178\n\n\nCan you do this in Stata? Yes, estat hettest. But look into the options. There are many more options in that command."
+  },
+  {
+    "objectID": "rmethods/6_Heteros.html#what-do-you-do-when-you-have-heteroskedasticity",
+    "href": "rmethods/6_Heteros.html#what-do-you-do-when-you-have-heteroskedasticity",
+    "title": "Multiple Regression Analysis",
+    "section": "What do you do when you have Heteroskedasticity",
+    "text": "What do you do when you have Heteroskedasticity"
   }
 ]

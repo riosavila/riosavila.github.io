@@ -16,19 +16,259 @@ format:
 
 ## What is Heteroskedasticity?
 
+- Mathematically:
+$$Var(e|x=c_1)\neq Var(e|x=c_2)
+$$
+
+- This means: the conditional variance of the errors is not constant across control characteristics.
+
+```{stata}
+*| echo: false
+*| fig-align: center
+
+frause wage1, clear
+gen lnw = log(wage)
+set scheme white2
+color_style tableau
+two (histogram lnw if female==1, pstyle(p1) w(0.1) color(%50) start(-1))  ///
+    (histogram lnw if female==0, pstyle(p2) w(0.1) color(%50) start(-1)), ///
+    legend(order(1 "Women" 2 "Men")) xtitle("log(wage)")
+```
+
 ## Consequences
 
-## Plots using homoskedastic errors, and heterskedastic errors
+What happens when you have heteroskedastic errors?
+
+- In terms of $\beta's$ and $R^2$ and $R^2_{adj}$, nothing. Coefficients and Goodness of fit are still unbiased and consistent.
+
+- But, Coefficients standard errors are based on the simplifying assumption of normality. Thus Variances will be bias!.
+
+  - If variances are biased, then all statistics will be wrong.
+
+## {.scrollable}
+
+### How bad can it be?
+
+Setup: 
+
+$y = e$ where $e~N(0,\sigma_e^2h(x))$
+
+$x = uniform(-1,1)$ 
+```{stata}
+*| echo: true
+*| code-fold: true
+*| output: false
+/*capture program drop sim_het
+program sim_het, eclass
+    clear
+    set obs 500 
+    gen x = runiform(-1,1)
+    gen u = rnormal()
+    ** Homoskedastic
+    gen y_1 = u*2
+    ** increasing first, decreasing later
+    gen y_4 = u*sqrt(9*abs(x))
+ 	replace x = x-2
+    reg y_1 x
+    matrix b=_b[x],_b[x]/_se[x]
+    reg y_4 x
+    matrix b=b,_b[x],_b[x]/_se[x]
+    matrix coleq   b = h0 h0 h3 h3 
+    matrix colname b = b  t  b  t 
+    ereturn post b
+end
+qui:simulate , reps(1000) dots(100):sim_het
+save mdata/simulate.dta, replace*/
+use mdata/simulate.dta, replace
+two (kdensity h0_b_t) (kdensity h3_b_t) ///
+    (function y = normalden(x), range(-4 4) lw(2) color(gs5%50)), ///
+    legend(order(3 "Normal" 1 "With Homoskedasticty" 2 "with Heteroskedasticity"))
+graph export images/fig6_1.png, replace height(1000)
+```
+
+![](images/fig6_1.png){fig-align="center"}
+
+# What to do about it?
+
+## What to do about it?
+
+- So, If errors are heteroskedastic, then all statistics (t-stats, F-stats, chi2's) are wrong. 
+- But, there are solutions...many solutions
+  - GLS: Generalized Least Squares
+  - WLS: Weighted Least Squares
+  - FGLS: Feasible Generealized Least Squares
+  - WFLS: Weighted FGLS
+  - HC0-HC3: Heteroskedasticity consistent SE
+- Some of them are more involved than others.
+
+- But before trying to do that, lets first ask...do we have a problem?
 
 ## Detecting the Problem
 
-### BP
+- Consider the model:
 
-### White
+$$y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 +\beta_3 x_3 +e
+$$
 
-### MWhite
+- We usually start with the assumption that errors are homoskedastic $Var(e|x's)=\sigma^2_c$. 
+- However, now we want to allow for the possibility of heteroskedasiticity. ie, that variance is some function of X.
+  - We have to model is variance is a function that varies with $x$:
 
-## Solving the problem
+$$Var(e|x)=f(x_1,x_2,\dots,x_k) \sim a_0+a_1x_1 + a_2 x_2 + \dots + a_k x_k+v$$
+
+##
+$$Var(e|x)=f(x_1,x_2,\dots,x_k) \sim a_0+a_1x_1 + a_2 x_2 + \dots + a_k x_k+v$$
+
+- This expression says the onditional variance can vary with $X's$. 
+- It could be as flexible as needed, but linear is usually enough.
+
+With this the Null hypothesis is: 
+$$H_0: a_1 = a_2 = \dots = a_k=0 \text{ vs } H_1: H_0 \text{ is false}
+$$
+
+Easy enough, but do we **KNOW** $Var(e|x)$ ? can we model the equation?
+
+## 
+
+**We don't!.**
+
+- But we can use $e^2$ instead. This implies we using the assumption that $e^2$ is a good enough approximation for the condional variance $Var(e|x)$.
+
+- With this, the test for heteroskedasticty can be implemented using the following recipe.
+
+1. Estimate $y=x\beta+e$ and obtain predicted model errors $\hat e$.
+2. Model $\hat e^2 = \color{green}{h(x)}+v$, as a proxy for the variance model.
+   - $h(x)$ could be estimated using some linear or nonlinear functional forms.
+3. Test if variance changes with respect to any explanatory variables. 
+   - In this case, you can assume the heteroskedastic model is homoskedastic. 
+
+**Note:** Depending on Model specification, and test used, there are various Heteroskedasticity *tests*.
+
+## Heteroskedasticity tests 
+$$\begin{aligned}
+\text{Model}: y &= \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 + e \\
+\hat e & = y - (\hat \beta_0 + \hat\beta_1 x_1 +\hat \beta_2 x_2 +\hat \beta_3 x_3)
+\end{aligned}
+$$
+
+### Breush-Pagan:
+$$\begin{aligned}
+\hat e^2 & = \gamma_0 + \gamma_1 x_1 +\gamma_2 x_2 +\gamma_3 x_3 + v \\
+H_0 &: \gamma_1=\gamma_2=\gamma_3=0 \\
+F &= \frac{R^2_{\hat e^2}/k}{(1-R^2_{\hat e^2})/(n-k-1)} \\
+LM &=N R^2_{\hat e^2} \sim \chi^2(k) \leftarrow BP-test
+\end{aligned}
+$$
+
+- Easy and simple, but only considers "linear" Heteroskedasticity
+  
+## Heteroskedasticity tests: 
+
+$$\begin{aligned}
+\text{Model}: y &= \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 + e \\
+\hat e & = y - (\hat \beta_0 + \hat\beta_1 x_1 +\hat \beta_2 x_2 +\hat \beta_3 x_3)
+\end{aligned}
+$$
+
+### White:
+
+$$\begin{aligned}
+\hat e^2 & = \gamma_0 + \sum \gamma_{1,k} x_k + \sum \gamma_{2,k} x_k^2 + \sum_k \sum_{j\neq k} \gamma_{3,j,k} x_j x_k + v \\
+H_0 &: \text{ All } \gamma's =0 \\
+F &= \frac{R^2_{\hat e^2}/q}{(1-R^2_{\hat e^2})/(n-q-1)} \\
+LM &=N R^2_{\hat e^2} \sim \chi^2(q) 
+\end{aligned}
+$$
+
+$q$ is the total number of coefficients in the model (not counting the intercept.)
+
+- Accounts for nonlinearities, but gets "messy" with more variables.
+  
+## Heteroskedasticity tests: 
+
+$$\begin{aligned}
+\text{Model}: y &= \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 + e \\
+\hat e & = y - (\hat \beta_0 + \hat\beta_1 x_1 +\hat \beta_2 x_2 +\hat \beta_3 x_3)
+\end{aligned}
+$$
+
+### Modified White:
+
+$$\begin{aligned}
+\hat y &= y - \hat e \\
+\hat e^2 & = \gamma_0 + \gamma_1 \hat y + \gamma_2 \hat y^2 + \dots + v \\
+H_0 &: \gamma_1 = \gamma_2 = \dots =0 \\
+F &= \frac{R^2_{\hat e^2}/ h }{(1-R^2_{\hat e^2})/(n-h-1)} \\
+LM &=N R^2_{\hat e^2} \sim \chi^2(h) 
+\end{aligned}
+$$
+
+$h$ is the total number of coefficients in the model (not counting the intercept.)
+
+- Accounts for nonlinearities (because of how $\hat y$ is constructed), and is simpler to implement.
+- But, nonlinearity is restricted.
+
+## Example {.scrollable}
+
+Housing prices:
+
+$$\begin{aligned}
+price &= \beta_0 + \beta_1 lotsize + \beta_2 sqft + \beta_3 bdrms + e_1 \\
+log(price) &= \beta_0 + \beta_1 log(lotsize) + \beta_2 log(sqft) + \beta_3 bdrms + e_2 \\
+\end{aligned}
+$$
+
+```{stata}
+*| code-fold: false
+frause hprice1, clear
+reg price lotsize sqrft bdrms 
+predict res, res
+predict price_hat
+gen res2=res^2
+display "BP-test"
+reg res2  lotsize sqrft bdrms, notable
+display "nR^2:   " e(N)*e(r2)
+display "p(chi2) " %5.3f chi2tail(e(df_m),e(N)*e(r2))
+
+display "White Test"
+reg res2  c.(lotsize sqrft bdrms)##c.(lotsize sqrft bdrms), notable
+display "nR^2:   " e(N)*e(r2)
+display "p(chi2) " %5.3f chi2tail(e(df_m),e(N)*e(r2))
+
+display "MWhite Test"
+reg res2  price_hat c.price_hat#c.price_hat, notable
+display "nR^2:   " e(N)*e(r2)
+display "p(chi2) " %5.3f chi2tail(e(df_m),e(N)*e(r2))
+```
+
+```{stata}
+*| code-fold: false
+frause hprice1, clear
+reg lprice llotsize lsqrft bdrms 
+predict res, res
+predict price_hat
+gen res2=res^2
+display "BP-test"
+reg res2  llotsize lsqrft bdrms, notable
+display "nR^2:   " e(N)*e(r2)
+display "p(chi2) " %5.3f chi2tail(e(df_m),e(N)*e(r2))
+
+display "White Test"
+reg res2  c.(llotsize lsqrft bdrms)##c.(llotsize lsqrft bdrms), notable
+display "nR^2:   " e(N)*e(r2)
+display "p(chi2) " %5.3f chi2tail(e(df_m),e(N)*e(r2))
+
+display "MWhite Test"
+reg res2  price_hat c.price_hat#c.price_hat, notable
+display "nR^2:   " e(N)*e(r2)
+display "p(chi2) " %5.3f chi2tail(e(df_m),e(N)*e(r2))
+```
+
+Can you do this in `Stata`? Yes, `estat hettest`. But look into the options. There are many more options in that command.
+
+# {background-image="https://i.imgflip.com/7v1kuw.jpg" background-size="contain"}
+
+## What do you do when you have Heteroskedasticity
 
 ## GLS: weighted Least Squares
 
