@@ -3882,7 +3882,7 @@
     "href": "rmethods/6_Heteros.html#lpm-revised",
     "title": "Multiple Regression Analysis",
     "section": "LPM revised",
-    "text": "LPM revised"
+    "text": "LPM revised\n\nWhat was wrong with LPM?\n\nFixed marginal effects (depends on functional form)\nMay predict p&gt;1 or p&lt;0\nIt is Heteroskedastic by construction\n\nBut now we know how to deal with this! GLS (why not FGLS) and Robust\nIn LPM: \\(Var(y|x)=p(x)(1-p(x)) = \\hat y (1-\\hat y)\\)\n\nWe can use this to transform or weight the data!\nOnly works if \\(0&lt;p(x)&lt;1\\)."
   },
   {
     "objectID": "rmethods/6_Heteros.html#plots-using-homoskedastic-errors-and-heteroskedastic-errors",
@@ -3951,7 +3951,266 @@
     "objectID": "rmethods/6_Heteros.html#what-do-you-do-when-you-have-heteroskedasticity",
     "href": "rmethods/6_Heteros.html#what-do-you-do-when-you-have-heteroskedasticity",
     "title": "Multiple Regression Analysis",
-    "section": "What do you do when you have Heteroskedasticity",
-    "text": "What do you do when you have Heteroskedasticity"
+    "section": "What do you do when you have Heteroskedasticity?",
+    "text": "What do you do when you have Heteroskedasticity?\nWe need to fix!\n\nRecall, the problem is that \\(Var(e|X)\\neq c\\)\nThis affects how standard errors are estimated (we required homoskedasticity). But what happens when Homoskedasticity doesnt hold?\n\nWe can “fix/change” the model, so its no longer heteroskedastic, and Standard Inference works. (FGLS, WLS)\nWe neec to account for heteroskedasticity when estimating the variance covariance model.\n\n\nSo lets learn to Fix it first"
+  },
+  {
+    "objectID": "rmethods/6_Heteros.html#how-do-we-fix-heteroskedasticity",
+    "href": "rmethods/6_Heteros.html#how-do-we-fix-heteroskedasticity",
+    "title": "Multiple Regression Analysis",
+    "section": "How do we Fix Heteroskedasticity?",
+    "text": "How do we Fix Heteroskedasticity?\n\nIn order to address the problem of heteroskedasticity, we require knowledge of why the model is heteroskedastic, or what is generating it.\n\n\\[Var(e|X)=h(x)\\sigma^2_e\n\\]\n\nWhere \\(h(x)\\) is the “source” of heteroskedasticity, which may be a known or estimated function of \\(x\\).\n\nWhich should be an strictly possitive function of \\(x's\\)."
+  },
+  {
+    "objectID": "rmethods/6_Heteros.html#section-4",
+    "href": "rmethods/6_Heteros.html#section-4",
+    "title": "Multiple Regression Analysis",
+    "section": "",
+    "text": "Knowledge is power\n\nIf you know \\(h(x)\\), correcting heteroskedasticity is “easy”. Consider the following:\n\n\\[\\begin{aligned}\ny &= b_0 + b_1 x_1 + b_2 x_2 + b_3 x_3 +e \\\\\nVar(e|x) &=x_1 \\sigma_e^2 || h(x)=x_1\n\\end{aligned}\n\\]\nYou can correct Heteroskedasticity in two ways:\n\nTransform model by dividing everything by \\(\\sqrt{h(x)}\\): \\[\\begin{aligned}\n\\frac{y}{\\sqrt{x_1}} &= b_0 \\frac{1}{\\sqrt{x_1}}+ b_1 \\sqrt{x_1} + b_2 \\frac{x_2}{\\sqrt{x_1}} + b_3 \\frac{x_3}{\\sqrt{x_1}} +\\frac{e}{\\sqrt{x_1}} \\\\\nVar\\left(\\frac{e}{\\sqrt{x_1}}|x\\right) &= \\frac{1}{x_1} x_1\\sigma_e^2=\\sigma_e^2\n\\end{aligned}\n\\]\n\nThe new error is Homoskedastic (but has no constant)!"
+  },
+  {
+    "objectID": "rmethods/6_Heteros.html#section-5",
+    "href": "rmethods/6_Heteros.html#section-5",
+    "title": "Multiple Regression Analysis",
+    "section": "",
+    "text": "Estimate the model using by \\(\\frac{1}{h(x)}\\) as weights: \\[\\begin{aligned}\n\\beta=\\min_\\beta \\sum \\frac{1}{h(x)} (y-(b_0 + b_1 x_1 + b_2 x_2 + b_3 x_3))^2\n\\end{aligned}\n\\]\n\n\nSame solution as before, and there is no need to “transform” data, or keep track of a constant.\nThis is often called WLS (weighted least squares) or GLS (Generalized Least Squares)."
+  },
+  {
+    "objectID": "rmethods/6_Heteros.html#section-6",
+    "href": "rmethods/6_Heteros.html#section-6",
+    "title": "Multiple Regression Analysis",
+    "section": "",
+    "text": "Interestingly: These approaches are more efficient than Standard OLS.\n\nUses more information (heteroskedasticity)\nMakes better use of information (More weight to better data) Standard errors are smaller.\n\nt-stats, F-stats, etc now are valid.\nCoefficients will NOT be the same as before.\n\\(R^2\\) is less useful\nHeteroskedasticty test on transformed data may required added work."
+  },
+  {
+    "objectID": "rmethods/6_Heteros.html#section-7",
+    "href": "rmethods/6_Heteros.html#section-7",
+    "title": "Multiple Regression Analysis",
+    "section": "",
+    "text": "FGLS: We do not know \\(h(x)\\), but we can guess\n\nIf \\(h(x)\\) is not known, we can use an auxiliary model to estimate it:\n\n\\[\\begin{aligned}\nVar(e|x) &= \\sigma^2 \\exp(\\delta_0 + \\delta_1 x_1 + \\delta_2 x_2 +\\dots) \\exp v \\\\\nlog(\\hat e^2) &= \\delta_0 + \\delta_1 x_1 + \\delta_2 x_2 +\\dots+ v \\\\\nlog(\\hat e^2) &= \\delta_0 + \\delta_1 \\hat y + \\delta_2 \\hat y^2 + \\dots+ v \\\\\nh(x) &= \\widehat{log(\\hat e^2)}\n\\end{aligned}\n\\]\n\nProceed as before (weighted or transformed)\nIts call Feasible GLS, because we need to estimate \\(h(x)\\)."
+  },
+  {
+    "objectID": "rmethods/6_Heteros.html#do-not-correct-but-account-for-it.",
+    "href": "rmethods/6_Heteros.html#do-not-correct-but-account-for-it.",
+    "title": "Multiple Regression Analysis",
+    "section": "Do not Correct, but account for it.",
+    "text": "Do not Correct, but account for it.\nGLS and FGLS\nRecall “Long” variance formula:\n\\[Var(\\beta)=\\color{brown}{(X'X)^{-1}}\\color{green}{X}'\\color{red}{Var(e|X)}\\color{green}{X}\\color{brown}{(X'X)^{-1}}\n\\]\n\nThe red part is a \\(N\\times N\\) VCOV matrix of ALL erros. It can be Simplified with what we know!\n\n\\[\\begin{aligned}\nVar(\\beta)=\\sigma^2_{\\tilde e} \\color{brown}{(X'X)^{-1}}\\color{green}{X}'\\color{red}{ \\Omega_h(x) }\\color{green}{X}\\color{brown}{(X'X)^{-1}} \\\\\n\\sigma^2_{\\tilde e} &= \\frac{1}{N-k-1} \\sum \\frac{\\hat e^2}{h(x)} \\\\\n\\Omega_h(x) [i,j] &= h(x_i) & \\text{ if } i=j \\\\\n& = 0 & \\text{ if } i\\neq j \\\\\n\\end{aligned}\n\\]\n\nSE are corrected, but coefficients remain the same!"
+  },
+  {
+    "objectID": "rmethods/6_Heteros.html#do-not-correct-account-for-it-gls-and-fgls",
+    "href": "rmethods/6_Heteros.html#do-not-correct-account-for-it-gls-and-fgls",
+    "title": "Multiple Regression Analysis",
+    "section": "Do not Correct, account for it: GLS and FGLS",
+    "text": "Do not Correct, account for it: GLS and FGLS\nRecall “Long” variance formula:\n\\[Var(\\beta)=\\color{brown}{(X'X)^{-1}}\\color{green}{X}'\\color{red}{Var(e|X)}\\color{green}{X}\\color{brown}{(X'X)^{-1}}\n\\]\n\nThe red part is a \\(N\\times N\\) VCOV matrix of ALL erros. It can be Simplified with what we know!\n\n\\[\\begin{aligned}\nVar_{gls/fgls}(\\beta)&=\\sigma^2_{\\tilde e} \\color{brown}{(X'X)^{-1}}\\color{green}{X}'\\color{red}{ \\Omega_h(x) }\\color{green}{X}\\color{brown}{(X'X)^{-1}} \\\\\n\\sigma^2_{\\tilde e} &= \\frac{1}{N-k-1} \\sum \\frac{\\hat e^2}{h(x)} \\\\\n\\Omega_h(x) [i,j] &= h(x_i) & \\text{ if } i=j \\\\\n& = 0 & \\text{ if } i\\neq j \\\\\n\\end{aligned}\n\\]\n\nSE are corrected, but coefficients remain the same!"
+  },
+  {
+    "objectID": "rmethods/6_Heteros.html#do-not-correct-account-for-it-white-sandwitch-formula",
+    "href": "rmethods/6_Heteros.html#do-not-correct-account-for-it-white-sandwitch-formula",
+    "title": "Multiple Regression Analysis",
+    "section": "Do not Correct, account for it: White Sandwitch Formula",
+    "text": "Do not Correct, account for it: White Sandwitch Formula\nWhat if the way \\(h(x)\\) was estimated was wrong."
+  },
+  {
+    "objectID": "rmethods/6_Heteros.html#do-not-correct-account-for-it-white-sandwich-formula",
+    "href": "rmethods/6_Heteros.html#do-not-correct-account-for-it-white-sandwich-formula",
+    "title": "Multiple Regression Analysis",
+    "section": "Do not Correct, account for it: White Sandwich Formula",
+    "text": "Do not Correct, account for it: White Sandwich Formula\n\nWhat if we do not want to even try guessing \\(h(x)\\)?\nyou can use Robust Standard errors!\n\nHeteroskedastic Consistent SE to Heterosedasticity of unknown form.\n\n\nLet me present to you, the Sandwitch Formula: \\[Var(\\beta)=c \\color{brown}{(X'X)^{-1}}\\color{green}{X}'\\color{red}{\\Omega}\\color{green}{X}\\color{brown}{(X'X)^{-1}}\n\\]\n\\[\\begin{aligned}\n\\Omega [i,j] &= \\hat e_i^2 & \\text{ if } i=j \\\\\n& = 0 & \\text{ if } i\\neq j \\\\\n\\end{aligned}\n\\]\n\nThe best approximation to conditional variance is equal to \\(\\hat e_i^2\\). (plus assuming no correlation)\nValid in large samples, but can be really bad in smaller ones.\nThere are other versions. See HC0 HC1 HC2 HC3."
+  },
+  {
+    "objectID": "rmethods/6_Heteros.html#what-if-did-hx-and-it-was-wrong",
+    "href": "rmethods/6_Heteros.html#what-if-did-hx-and-it-was-wrong",
+    "title": "Multiple Regression Analysis",
+    "section": "What if did \\(h(x)\\), and it was wrong",
+    "text": "What if did \\(h(x)\\), and it was wrong\n\nUsing FGLS will change coefficients a bit. If they change a lot, It could indicate other assumptions in the model are incorrect. (functional form or exogeneity)\nIn either case, you could always combine FGLS with Robust Standard Errors!"
+  },
+  {
+    "objectID": "rmethods/6_Heteros.html#example-1",
+    "href": "rmethods/6_Heteros.html#example-1",
+    "title": "Multiple Regression Analysis",
+    "section": "Example",
+    "text": "Example\n\nfrause smoke, clear\ngen age_40sq=(age-40)^2\n** Default\nqui:reg cigs lincome lcigpric educ age age_40sq restaurn\nest sto m1\npredict cig_hat\npredict cig_res,res\n** GLS: h(x)=lincome Weighted\nqui:reg cigs lincome lcigpric educ age age_40sq restaurn [aw=lincome]\nest sto m2\n** FGLS: h(x) = f(cigs_hat)\ngen lcres=log(cig_res^2)\nqui:reg lcres c.cig_hat##c.cig_hat##c.cig_hat \npredict aux\ngen hx=exp(aux)\nqui:reg cigs lincome lcigpric educ age age_40sq restaurn [aw=hx]\nest sto m3\nqui:reg cigs lincome lcigpric educ age age_40sq restaurn , robust\nest sto m4\nqui:reg cigs lincome lcigpric educ age age_40sq restaurn [aw=lincome], robust\nest sto m5\nqui:reg cigs lincome lcigpric educ age age_40sq restaurn [aw=hx], robust\nest sto m6\nset linesize 255\n\n\n\nCode\nesttab m1 m2 m3 m4 m5 m6, gaps mtitle(default GLS FGLS Rob GLS-Rob FGLS-Rob) ///\nnonum cell( b( fmt( 3) star ) se( par(( )) ) p( par([ ]) ) ) ///\nstar(* .1 ** 0.05 *** 0.01  )\n\n\n\n------------------------------------------------------------------------------------------------------------\n                  default             GLS            FGLS             Rob         GLS-Rob        FGLS-Rob   \n                   b/se/p          b/se/p          b/se/p          b/se/p          b/se/p          b/se/p   \n------------------------------------------------------------------------------------------------------------\nlincome             0.880           0.851           1.207           0.880           0.851           1.207   \n                  (0.728)         (0.783)         (0.937)         (0.596)         (0.637)         (0.897)   \n                  [0.227]         [0.277]         [0.198]         [0.140]         [0.182]         [0.179]   \n\nlcigpric           -0.751          -0.045          -0.947          -0.751          -0.045          -0.947   \n                  (5.773)         (5.840)         (6.095)         (6.035)         (6.051)         (7.412)   \n                  [0.897]         [0.994]         [0.877]         [0.901]         [0.994]         [0.898]   \n\neduc               -0.501***       -0.526***       -0.465**        -0.501***       -0.526***       -0.465** \n                  (0.167)         (0.168)         (0.200)         (0.162)         (0.166)         (0.223)   \n                  [0.003]         [0.002]         [0.021]         [0.002]         [0.002]         [0.037]   \n\nage                 0.049           0.049           0.033           0.049*          0.049*          0.033   \n                  (0.034)         (0.034)         (0.041)         (0.030)         (0.030)         (0.040)   \n                  [0.146]         [0.144]         [0.432]         [0.099]         [0.097]         [0.413]   \n\nage_40sq           -0.009***       -0.009***       -0.010***       -0.009***       -0.009***       -0.010***\n                  (0.002)         (0.002)         (0.003)         (0.001)         (0.001)         (0.002)   \n                  [0.000]         [0.000]         [0.001]         [0.000]         [0.000]         [0.000]   \n\nrestaurn           -2.825**        -2.878**        -2.417*         -2.825***       -2.878***       -2.417*  \n                  (1.112)         (1.115)         (1.451)         (1.008)         (1.023)         (1.385)   \n                  [0.011]         [0.010]         [0.096]         [0.005]         [0.005]         [0.081]   \n\n_cons              10.797           8.521           8.866          10.797           8.521           8.866   \n                 (24.145)        (24.604)        (26.340)        (25.401)        (25.536)        (32.622)   \n                  [0.655]         [0.729]         [0.736]         [0.671]         [0.739]         [0.786]   \n------------------------------------------------------------------------------------------------------------\nN                     807             807             807             807             807             807   \n------------------------------------------------------------------------------------------------------------"
+  },
+  {
+    "objectID": "rmethods/6_Heteros.html#lpm-example",
+    "href": "rmethods/6_Heteros.html#lpm-example",
+    "title": "Multiple Regression Analysis",
+    "section": "LPM Example",
+    "text": "LPM Example\n\nfrause gpa1, clear\n** LPM\ngen parcoll = (fathcoll | mothcoll)\nreg pc hsgpa act parcoll\npredict res_1, res\n\n\n      Source |       SS           df       MS      Number of obs   =       141\n-------------+----------------------------------   F(3, 137)       =      1.98\n       Model |  1.40186813         3  .467289377   Prob &gt; F        =    0.1201\n    Residual |  32.3569971       137  .236182461   R-squared       =    0.0415\n-------------+----------------------------------   Adj R-squared   =    0.0205\n       Total |  33.7588652       140  .241134752   Root MSE        =    .48599\n\n------------------------------------------------------------------------------\n          pc | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n       hsgpa |   .0653943   .1372576     0.48   0.635    -.2060231    .3368118\n         act |   .0005645   .0154967     0.04   0.971    -.0300792    .0312082\n     parcoll |   .2210541    .092957     2.38   0.019      .037238    .4048702\n       _cons |  -.0004322   .4905358    -0.00   0.999     -.970433    .9695686\n------------------------------------------------------------------------------\n\n\n\npredict pchat\ngen hx = pchat*(1-pchat)\nsum pchat hx\n\n(option xb assumed; fitted values)\n\n    Variable |        Obs        Mean    Std. dev.       Min        Max\n-------------+---------------------------------------------------------\n       pchat |        141    .3971631    .1000667   .1700624   .4974409\n          hx |        141    .2294822    .0309768   .1411412   .2499934\n\n\n\nreg pc hsgpa act parcoll [w=1/hx]\npredict res_2, res\n\n(analytic weights assumed)\n(sum of wgt is 628.1830743667746)\n\n      Source |       SS           df       MS      Number of obs   =       141\n-------------+----------------------------------   F(3, 137)       =      2.22\n       Model |  1.54663033         3  .515543445   Prob &gt; F        =    0.0882\n    Residual |  31.7573194       137  .231805251   R-squared       =    0.0464\n-------------+----------------------------------   Adj R-squared   =    0.0256\n       Total |  33.3039497       140  .237885355   Root MSE        =    .48146\n\n------------------------------------------------------------------------------\n          pc | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n       hsgpa |   .0327029   .1298817     0.25   0.802    -.2241292     .289535\n         act |    .004272   .0154527     0.28   0.783    -.0262847    .0348286\n     parcoll |   .2151862   .0862918     2.49   0.014       .04455    .3858224\n       _cons |   .0262099   .4766498     0.05   0.956    -.9163323    .9687521\n------------------------------------------------------------------------------\n\n\n\n** Testing for Heteroskedasticity\nreplace res_1 = res_1^2\nreplace res_2 = res_2^2/hx\ndisplay \"Default\"\nreg res_1 hsgpa act parcoll, notable\ndisplay \"Weighted\"\nreg res_2 hsgpa act parcoll, notable\n\n(141 real changes made)\n(141 real changes made)\nDefault\n\n      Source |       SS           df       MS      Number of obs   =       141\n-------------+----------------------------------   F(3, 137)       =      2.82\n       Model |  .133163365         3  .044387788   Prob &gt; F        =    0.0412\n    Residual |  2.15497574       137   .01572975   R-squared       =    0.0582\n-------------+----------------------------------   Adj R-squared   =    0.0376\n       Total |  2.28813911       140  .016343851   Root MSE        =    .12542\n\nWeighted\n\n      Source |       SS           df       MS      Number of obs   =       141\n-------------+----------------------------------   F(3, 137)       =      0.63\n       Model |  .874194807         3  .291398269   Prob &gt; F        =    0.5980\n    Residual |  63.5472068       137  .463848225   R-squared       =    0.0136\n-------------+----------------------------------   Adj R-squared   =   -0.0080\n       Total |  64.4214016       140  .460152868   Root MSE        =    .68106"
+  },
+  {
+    "objectID": "rmethods/6_Heteros.html#section-8",
+    "href": "rmethods/6_Heteros.html#section-8",
+    "title": "Multiple Regression Analysis",
+    "section": "",
+    "text": "Extra: Prediction and SE\nPrediction SE:\n\nIf you are using GLS, Formulas seen before apply with the following modification: \\(Var(e|X=x_0)=\\sigma^2_{\\tilde e} h(x_0)\\)\nIf you are using FGLS, its not that simple because of the two-step modeling\n\nFor Prediction with Logs\n\nYou need to take into account Heteroskedasticity\n\n\\[\\hat y_i = \\exp \\left( \\widehat{log y_i}+\\hat \\sigma_{\\tilde e}^2 \\hat h_i /2 \\right)\n\\]"
+  },
+  {
+    "objectID": "rmethods/7_spec.html#what-do-we-mean-with-model-miss-specification",
+    "href": "rmethods/7_spec.html#what-do-we-mean-with-model-miss-specification",
+    "title": "Multiple Regression Analysis",
+    "section": "What do we mean with model miss-specification",
+    "text": "What do we mean with model miss-specification\n\nThere are various kinds of model specification we will talk about.\n\nThere are important variables you did not include in your model: Endogeneity\nYou added all relevant variables…just not in the right way.\nYou added proxies for variables you had no access to (Question change)\nYou have all relevant data, but with errors.\nYou have some missing data"
+  },
+  {
+    "objectID": "rmethods/7_spec.html#functional-form-misspecification",
+    "href": "rmethods/7_spec.html#functional-form-misspecification",
+    "title": "Multiple Regression Analysis",
+    "section": "Functional Form Misspecification",
+    "text": "Functional Form Misspecification\n\nSimple linear functions work in almost ALL cases. They can be thought as first order Taylor expansions: \\[\\begin{aligned}\ny &= f(x) + e \\\\\nf(x) &\\simeq f(x_0)\n+\\frac{\\partial f(x)}{\\partial x}|_{x=x_0}\n(x-x_0)+R+e \\\\\nf(x) &\\simeq \\color{red}{ f(x_0)}\n\\color{red}{-\\frac{\\partial f(x)}{\\partial x}|_{x=x_0} x_0}\n+\\frac{\\partial f(x)}{\\partial x}|_{x=x_0} x+R+e \\\\\ny &= \\color{red}{\\beta_0}+\\beta_1 x + R+ e\n\\end{aligned}\n\\]\n\nSo, for “reasonable” values of X, or when analyzing average marginal effects \\(R\\) should be small enough to be ignored.\n\nIn other words, for Overall effects Simple linear model works reasonably well! (most of the time)"
+  },
+  {
+    "objectID": "rmethods/7_spec.html#section",
+    "href": "rmethods/7_spec.html#section",
+    "title": "Multiple Regression Analysis",
+    "section": "",
+    "text": "Simple linear functions work in almost ALL cases. They can be thought as first order Taylor expansions: \\[\\begin{aligned}\ny &= f(x) + e \\\\\nf(x) &\\simeq f(x_0)\n+\\frac{\\partial f(x)}{\\partial x}|_{x=x_0}\n(x-x_0)+R+e \\\\\nf(x) &\\simeq \\color{red}{ f(x_0)}\n\\color{red}{-\\frac{\\partial f(x)}{\\partial x}|_{x=x_0} x_0}\n+\\frac{\\partial f(x)}{\\partial x}|_{x=x_0} x+R+e \\\\\ny &= \\color{red}{\\beta_0}+\\beta_1 x + R+ e\n\\end{aligned}\n\\]\n\nSo, for “reasonable” values of X, or when analyzing average marginal effects \\(R\\) should be small enough to be ignored.\n\nIn other words, for Overall effects Simple linear model works reasonably well! (most of the time)"
+  },
+  {
+    "objectID": "rmethods/7_spec.html#reset-ramsay-test",
+    "href": "rmethods/7_spec.html#reset-ramsay-test",
+    "title": "Multiple Regression Analysis",
+    "section": "Reset Ramsay test",
+    "text": "Reset Ramsay test"
+  },
+  {
+    "objectID": "rmethods/7_spec.html#reset-ramsey-test",
+    "href": "rmethods/7_spec.html#reset-ramsey-test",
+    "title": "Multiple Regression Analysis",
+    "section": "Reset Ramsey test",
+    "text": "Reset Ramsey test\n\nIntuition: If the model is misspecified, perhaps we need to control for more non-linearities and interactions.\nNaive test: Add more controls (quadratics and interactions) (like White test, this will grow fast)\nReset - Ramsey test: Get predictions from original model, and add it as control\n\n\\[y = \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\dots + \\delta_1 \\hat y^2 + \\delta_2 \\hat y^3 +e\n\\]\n\\(H_0: \\delta_1 = \\delta_2 = 0\\): (everything is awesome)\n\\(H_1: H_0\\) is false: we need to fix the problem\n\nRRT does not tell you “How” to fix the problem.\n\nestat ovtest\n(bad name tho)"
+  },
+  {
+    "objectID": "rmethods/7_spec.html#davidson-mackinnon-test",
+    "href": "rmethods/7_spec.html#davidson-mackinnon-test",
+    "title": "Multiple Regression Analysis",
+    "section": "Davidson-MacKinnon test",
+    "text": "Davidson-MacKinnon test\nTwo non-tested models:\n\\[\\begin{aligned}\ny &= \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + e \\\\\ny &= \\gamma_0 + \\gamma_1 log(x_1) + \\gamma_2 log(x_2) + e \\\\\n\\end{aligned}\n\\]\n\nWhich one is more appropriate? eq1? or eq2? This are non-nested models, so its difficult to say.\n\nYou could nest them:\n\n\n\\[y = \\theta_0 + \\theta_1 x_1 + \\theta_2 x_2 + \\theta_3 log(x_1) + \\theta_4 log(x_2) + e\n\\]\nand test \\(\\theta_1=\\theta_2=0\\) or \\(\\theta_3=\\theta_4=0\\)."
+  },
+  {
+    "objectID": "rmethods/7_spec.html#section-1",
+    "href": "rmethods/7_spec.html#section-1",
+    "title": "Multiple Regression Analysis",
+    "section": "",
+    "text": "If you are interested in individuals (or alike people), you may need flexiblity!\nIgnoring functional form misspecification imposes unwanted assumptions (homogeneity), that could create further problems.\n\nSpecially if data is skewed\n\nBut how flexible is flexible enough?\n\nWe will only consider quadratic terms and interactions,\nbut there is a large literature on making very flexible estimations (non-paramatric analysis)\n\n\n\n\nCode\nclear\nset seed 10\nset obs 1000\ngen p = (2*_n-1)/(2*_N) \ngen x = invchi2(5, p)/2\ngen y = 1 + x + (x-2.5)^2 + rnormal()  \nreg y x\ndisplay \"Quadratic\"\nqui:reg y c.x##c.x\nmargins, dydx(x)\ndisplay \"Cubic\"\nqui:reg y c.x##c.x##c.x\nmargins, dydx(x)\n\n\nNumber of observations (_N) was 0, now 1,000.\n\n      Source |       SS           df       MS      Number of obs   =     1,000\n-------------+----------------------------------   F(1, 998)       =   1287.16\n       Model |  22189.0552         1  22189.0552   Prob &gt; F        =    0.0000\n    Residual |  17204.2788       998  17.2387563   R-squared       =    0.5633\n-------------+----------------------------------   Adj R-squared   =    0.5628\n       Total |  39393.3339       999  39.4327667   Root MSE        =     4.152\n\n------------------------------------------------------------------------------\n           y | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n           x |   2.983973   .0831722    35.88   0.000      2.82076    3.147185\n       _cons |  -1.467351   .2458875    -5.97   0.000    -1.949866   -.9848348\n------------------------------------------------------------------------------\nQuadratic\n\nAverage marginal effects                                 Number of obs = 1,000\nModel VCE: OLS\n\nExpression: Linear prediction, predict()\ndy/dx wrt:  x\n\n------------------------------------------------------------------------------\n             |            Delta-method\n             |      dy/dx   std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n           x |   1.033401   .0258934    39.91   0.000     .9825894    1.084213\n------------------------------------------------------------------------------\nCubic\n\nAverage marginal effects                                 Number of obs = 1,000\nModel VCE: OLS\n\nExpression: Linear prediction, predict()\ndy/dx wrt:  x\n\n------------------------------------------------------------------------------\n             |            Delta-method\n             |      dy/dx   std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n           x |   1.041387   .0292892    35.56   0.000     .9839117    1.098863\n------------------------------------------------------------------------------"
+  },
+  {
+    "objectID": "rmethods/7_spec.html#section-2",
+    "href": "rmethods/7_spec.html#section-2",
+    "title": "Multiple Regression Analysis",
+    "section": "",
+    "text": "or the “true” Davidson-MacKinnon test:\n\nFirst Obtain predictions from competing models: \\[\\begin{aligned}\n\\hat y &= \\hat\\beta_0 + \\hat\\beta_1 x_1 + \\hat\\beta_2 x_2 \\\\\n\\check y &= \\hat \\gamma_0 + \\hat\\gamma_1 log(x_1) + \\hat\\gamma_2 log(x_2) \\\\\n\\end{aligned}\n\\]\nThen add the predictions as added controls in the alternative model: \\[\\begin{aligned}\ny &= \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\theta_1 \\check y +e \\\\\ny &= \\gamma_0 + \\gamma_1 log(x_1) + \\gamma_2 log(x_2) + \\theta_1 \\hat y + e \\\\\n\\end{aligned}\n\\]\n\nUnfortunately, you may ended up with conflicting results."
+  },
+  {
+    "objectID": "rmethods/7_spec.html#a-retail-of-omitted-variable-bias",
+    "href": "rmethods/7_spec.html#a-retail-of-omitted-variable-bias",
+    "title": "Multiple Regression Analysis",
+    "section": "A retail of Omitted variable Bias",
+    "text": "A retail of Omitted variable Bias\n\nWe know this. If a variable that SHOULD be in the model is not added, it will generate an OMV, unless it was uncorrelated to the model error.\n\nLesson: add important variables!\n\nWhat if those variables are not available? how do you solve the problem?\n\nIV (we will talk about that later) or\nProxy Variable (a bandaid)"
+  },
+  {
+    "objectID": "rmethods/7_spec.html#section-3",
+    "href": "rmethods/7_spec.html#section-3",
+    "title": "Multiple Regression Analysis",
+    "section": "",
+    "text": "Using a Proxy will work only under the following condition:\n\nConditioning on the observed variable and proxy, the unobserved variable has to be uncorrelated to other variables in the model:\n\n\\[\\begin{aligned}\nE(x_3^*|x_1,x_2,x_3)&=\\alpha_0 + \\alpha_1 x_3 \\\\\nE(skill|exper,educ,ASVAB)&=\\alpha_0 + \\alpha_1 ASVAB\n\\end{aligned}\n\\]\nIf this happens, you can still estimate \\(\\beta_1 \\And \\beta_2\\), although the constant and slope of the proxy varible will be biased for the proxied variable.\n\\[\\begin{aligned}\ny &= \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\beta_3 x^*_3 + e \\ ; \\\n\\color{blue}{x^*_3 =  \\delta_0 + \\delta_1 x_3 + v} \\\\\ny &= \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\beta_3 (\\delta_0 + \\delta_1 x_3 + v) + e \\\\\n&= \\color{brown}{\\beta_0 +\\beta_3\\delta_0} \\color{black}{+ \\beta_1 x_1 + \\beta_2 x_2 + \\beta_3 \\delta_1 x_3 +} \\color{green}{\\beta_3 v + e} \\\\\n&=\\color{brown}{\\alpha_0} + \\beta_1 x_1 + \\beta_2 x_2 + \\alpha_1 x_3 + \\color{green}{u} \\\\\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "rmethods/7_spec.html#section-4",
+    "href": "rmethods/7_spec.html#section-4",
+    "title": "Multiple Regression Analysis",
+    "section": "",
+    "text": "What about Lags (of dep variable)?\n\nIncreses Data requirements (panel? pseudo panel?)\nFurther assumptions are required (Past exogenous of present)\nBut allows controlling for underlying factors or historical factors\n\n\n\nCode\nfrause crime2, clear\nqui:reg crmrte unem llawexpc if year == 87\nest sto m1\nqui:reg crmrte unem llawexpc lcrmrt_1 if year == 87\nest sto m2\nqui:reg ccrmrte unem llawexpc if year==87  \nest sto m3\nesttab m1 m2 m3, se star(* .1 ** 0.05 *** 0.01) b(3) ///\nmtitle(crimert crimert change_crrt)\n\n\n\n------------------------------------------------------------\n                      (1)             (2)             (3)   \n                  crimert         crimert     change_crrt   \n------------------------------------------------------------\nunem               -3.659           0.346          -0.125   \n                  (3.471)         (2.127)         (2.152)   \n\nllawexpc           16.452         -20.059*        -10.377   \n                 (18.531)        (11.842)        (11.487)   \n\nlcrmrt_1                          127.111***                \n                                 (14.399)                   \n\n_cons              10.655        -337.106***       79.288   \n                (134.223)        (89.507)        (83.200)   \n------------------------------------------------------------\nN                      46              46              46   \n------------------------------------------------------------\nStandard errors in parentheses\n* p&lt;.1, ** p&lt;0.05, *** p&lt;0.01\n\n\nNote: Skip 9-2c and 9-3"
+  },
+  {
+    "objectID": "rmethods/7_spec.html#a-re-tell-of-omitted-variable-bias",
+    "href": "rmethods/7_spec.html#a-re-tell-of-omitted-variable-bias",
+    "title": "Multiple Regression Analysis",
+    "section": "A re-tell of Omitted variable Bias",
+    "text": "A re-tell of Omitted variable Bias\n\nWe know this. If a variable that SHOULD be in the model is not added, it will generate an OMV, unless it was uncorrelated to the model error.\n\nLesson: add important variables!\n\nWhat if those variables are not available? how do you solve the problem?\n\nIV (we will talk about that later) or\nProxy Variable (a bandaid)"
+  },
+  {
+    "objectID": "rmethods/7_spec.html#section-5",
+    "href": "rmethods/7_spec.html#section-5",
+    "title": "Multiple Regression Analysis",
+    "section": "",
+    "text": "Code\nfrause oaxaca, clear\nqui:sum educ\ngen educ_error = educ + rnormal()*r(sd)\nsum educ educ_error\nqui:reg lnwage educ\nest sto m1\nqui:reg lnwage educ_error\nest sto m2\nesttab m1 m2, se\n\n\n(Excerpt from the Swiss Labor Market Survey 1998)\n\n    Variable |        Obs        Mean    Std. dev.       Min        Max\n-------------+---------------------------------------------------------\n        educ |      1,647    11.40134    2.374952          5       17.5\n  educ_error |      1,647    11.36352    3.400767   .6707422   26.90462\n\n--------------------------------------------\n                      (1)             (2)   \n                   lnwage          lnwage   \n--------------------------------------------\neduc               0.0800***                \n                (0.00539)                   \n\neduc_error                         0.0399***\n                                (0.00395)   \n\n_cons               2.434***        2.898***\n                 (0.0636)        (0.0475)   \n--------------------------------------------\nN                    1434            1434   \n--------------------------------------------\nStandard errors in parentheses\n* p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001"
+  },
+  {
+    "objectID": "rmethods/7_spec.html#proxies",
+    "href": "rmethods/7_spec.html#proxies",
+    "title": "Multiple Regression Analysis",
+    "section": "Proxies",
+    "text": "Proxies\nConsider: \\[log(wages) = \\beta_0 + \\color{blue}{\\beta_1} exper + \\color{blue}{\\beta_2} educ + \\beta_3 skill + e\n\\]\nWhere you are really interested in \\(\\beta_1 \\And \\beta_2\\).\n\nSince we dont have \\(skill\\), and omitting it will bias our coefficients, we can use a proxy \\(ASVAB\\).\n\n\\[log(wages) = \\beta_0 + \\color{blue}{\\beta_1} exper + \\color{blue}{\\beta_2} educ + \\gamma_3 ASVAB + e\n\\]\n\nand done?"
+  },
+  {
+    "objectID": "rmethods/7_spec.html#why-is-x-not-the-real-x",
+    "href": "rmethods/7_spec.html#why-is-x-not-the-real-x",
+    "title": "Multiple Regression Analysis",
+    "section": "Why is \\(X\\) not the real \\(X\\)?",
+    "text": "Why is \\(X\\) not the real \\(X\\)?\n\nOften we treat data as if it they were perfect measures of the true data. But is that the case?\n\nAge: Do you report age in years, months, days, hours, minutes, etc\nWeight and Height: Even if measured, how accurate it can be? and do they make mistakes?\nIncome: Do people report income accurately? or they Lie? why?\n\nDepending on the type of error, magnitude, and if the affected variable is dep or indep, it may have diffrent consequences for OLS.\nFor now we will concentrate on a specific kind of measurement error: Classical measurement error\n\n\\[\\begin{aligned}\ny_{obs} &= y_{true} + \\varepsilon \\\\\nE(\\varepsilon) &=0; cov(\\varepsilon,y_{true})=0; cov(\\varepsilon,X's)=0\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "rmethods/7_spec.html#error-in-y-dep-variable",
+    "href": "rmethods/7_spec.html#error-in-y-dep-variable",
+    "title": "Multiple Regression Analysis",
+    "section": "Error in \\(y\\) (dep variable)",
+    "text": "Error in \\(y\\) (dep variable)\n\nInstead of: \\(y^* = x\\beta + e\\)\nWe estimate \\(y^*+\\varepsilon = x\\beta + e \\rightarrow y^* = x\\beta + e-\\varepsilon\\)\nThis implies that \\(\\beta's\\) can still be unbiased when applying OLS.\nHowever variance will be larger than when using true data:\n\n\n\nCode\nqui: frause oaxaca, clear\nset seed 101\ngen lnwage2=lnwage + rnormal(2) \nqui:reg lnwage educ exper female\nest sto m1\nqui:reg lnwage2 educ exper female\nest sto m2\nesttab m1 m2, se\n\n\n(213 missing values generated)\n\n--------------------------------------------\n                      (1)             (2)   \n                   lnwage         lnwage2   \n--------------------------------------------\neduc               0.0858***       0.0902***\n                (0.00521)        (0.0120)   \n\nexper              0.0147***       0.0171***\n                (0.00126)       (0.00291)   \n\nfemale            -0.0949***      -0.0759   \n                 (0.0251)        (0.0580)   \n\n_cons               2.219***        4.132***\n                 (0.0687)         (0.159)   \n--------------------------------------------\nN                    1434            1434   \n--------------------------------------------\nStandard errors in parentheses\n* p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001"
+  },
+  {
+    "objectID": "rmethods/7_spec.html#error-in-x-indep-variable",
+    "href": "rmethods/7_spec.html#error-in-x-indep-variable",
+    "title": "Multiple Regression Analysis",
+    "section": "Error in \\(X\\) (indep variable)",
+    "text": "Error in \\(X\\) (indep variable)\n\nInstead of: \\(y = \\beta_0 + \\beta_1 x^* + e\\)\nWe estimate \\(y = \\gamma_0 + \\gamma_1 (x^* + \\varepsilon) + v\\)\nBy adding an error \\(\\varepsilon\\) that has a zero relationship with \\(y\\), the “average” coefficient \\(\\gamma_1\\) will be between the true \\(\\beta_1\\) and 0. \\[\\begin{aligned}\n\\gamma_1 &=\\frac{\\sum (y-\\bar y)(x^* + \\varepsilon - \\bar x)}{\\sum (x^* + \\varepsilon - \\bar x)^2} =\\frac{\\sum (y-\\bar y)(x^* - \\bar x)+ \\sum (y-\\bar y) \\varepsilon}{\\sum (x^* - \\bar x)^2 + \\sum \\varepsilon^2} \\\\\n&= \\frac{\\sum (y-\\bar y)(x^* - \\bar x)}{\\sum (x^* - \\bar x)^2 + \\sum \\varepsilon^2} \\frac{\\sum (x^* - \\bar x)^2}{\\sum (x^* - \\bar x)^2} \\\\\n& =\\beta_1 \\frac{\\sigma^2_x}{\\sigma^2_x + \\sigma^2_\\varepsilon}\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "rmethods/7_spec.html#missing-data-assume-sample-is-complete",
+    "href": "rmethods/7_spec.html#missing-data-assume-sample-is-complete",
+    "title": "Multiple Regression Analysis",
+    "section": "Missing Data (Assume Sample is complete)",
+    "text": "Missing Data (Assume Sample is complete)\n\nWhat is it? you dont have data! Your \\(N\\) falls.\n\nSome data for some observations are missing.\nWe may or may not know why they are missing\nand they maybe missing at random, or following unknown patterns.\n\nIf we are Missing data, and we do not know why, its a problem. We cant know if the sample represents the population, thus cannot be used for analysis."
+  },
+  {
+    "objectID": "rmethods/7_spec.html#section-6",
+    "href": "rmethods/7_spec.html#section-6",
+    "title": "Multiple Regression Analysis",
+    "section": "",
+    "text": "How to deal with it?\n\nif Missing completely at random (MCAR), analysis can be done as usual (no effects except smaller N)\nif Missing at random (MAR), the analysis can be done, often using standard methods:\n\nMissingness depends on observed factors (\\(X's\\)).\nIt is also known as exogenous sample selection.\nIntuitively, because all factors that determine selection are exogenous, you can identify who in the population is identified (Regression for men, women, high education, etc)\n\nIf Missing not at random (MNAR), you cant address the problem with standard analysis.\n\nSome methods such as Heckman selection or truncated regression, could be used. (advanced)\nOther wise, you can’t analyze the data (in a satisfactory manner)\nIntuitively, missingness is determined by unobserved factors, which also determines the outcome. (ie Analyze high wage population only)"
+  },
+  {
+    "objectID": "rmethods/7_spec.html#outliers-and-influencers",
+    "href": "rmethods/7_spec.html#outliers-and-influencers",
+    "title": "Multiple Regression Analysis",
+    "section": "Outliers and influencers",
+    "text": "Outliers and influencers\n\nNot all data is made equal, and not all data has the same weight when estimating regressions.\nObservations with high Influence are those with outliers based on the conditional distribution (\\(y|x\\)).\n\nWhile outliers are not necessarily bad for analysis, it is important to understand how sensitive your results are to excluding some observations.\n\nObservations with high leverage are those with unusual characteristics.(\\(X's\\))\nCombination of both may have strong impacts on the regression analysis."
+  },
+  {
+    "objectID": "rmethods/7_spec.html#section-7",
+    "href": "rmethods/7_spec.html#section-7",
+    "title": "Multiple Regression Analysis",
+    "section": "",
+    "text": "Leverage of an observation is determined by the following:\n\nDefine \\(H = X(X'X)^{-1}X'\\)\nLeverage \\(h_i = H[i,i]\\)\nHigh \\(h_i\\) denotes more influence in the model. (sensitive)\n\nInfluence is typically detected based on “studentized” residuals\n\n\\[r_i =  \\frac{\\hat e}{s_{-i}\\sqrt{1-h_i}}\n\\]"
+  },
+  {
+    "objectID": "rmethods/7_spec.html#example",
+    "href": "rmethods/7_spec.html#example",
+    "title": "Multiple Regression Analysis",
+    "section": "Example",
+    "text": "Example\n\n\nCode\nqui:{\nfrause oaxaca, clear\ndrop if lnwage==.\nreg lnwage educ exper tenure female age\npredict lev, lev\nsum lev, meanonly\nreplace lev=lev/r(mean)\npredict rst, rstud\n}\nset scheme white2\ncolor_style tableau\nscatter lev rst"
+  },
+  {
+    "objectID": "rmethods/7_spec.html#solutions",
+    "href": "rmethods/7_spec.html#solutions",
+    "title": "Multiple Regression Analysis",
+    "section": "Solutions",
+    "text": "Solutions\n\nThe problem with OLS is that it provides “too much weight” to outliers.\nThis is similar to the mean, which may not be very stable with extreme distributions.\n\nThere are at least two solutions to problems with outliers.\n\nRobust Regression (different from regression with robust Standard errors)\n\nThe idea is to penalize outliers, to reduce the impact on the estimated coefficients."
+  },
+  {
+    "objectID": "rmethods/7_spec.html#section-8",
+    "href": "rmethods/7_spec.html#section-8",
+    "title": "Multiple Regression Analysis",
+    "section": "",
+    "text": "Quantile (median) Regression\n\nModifies the objective function to be minized:\n\n\n\\[\\beta's=\\min_\\beta \\sum |y-x\\beta|\n\\]\n\nInstead of using the squared of errors, it uses the absolute value.\n\nby doing this, coefficients are not sensitive to outliers! (as the median is better than the mean to capture typical values)\nDrawbacks: Its slower than OLS, and it can be difficult to interpret\n\n\nrreg &lt;- Robust Regression\nqreg &lt;- Quantile Regression"
   }
 ]

@@ -577,7 +577,8 @@ reg lsalary years gamesyr bavg hrunsyr rbisy
 test bavg hrunsyr rbisy
 ```
 
-# Lets take one more Step: What if errors are not normal?
+# Lets take one more Step: What if errors are not normal? 
+There we go A6
 
 # {background-image="https://i.imgflip.com/6qwgsh.jpg" background-size="contain"}
 

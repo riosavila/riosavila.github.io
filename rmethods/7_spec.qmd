@@ -1,0 +1,366 @@
+---
+title: "Multiple Regression Analysis"
+subtitle: "Specification and Data Issues: A1 how could you!"
+author: Fernando Rios-Avila
+jupyter: nbstata
+format: 
+  revealjs: 
+    slide-number: true
+    width: 1600
+    height: 900
+    code-fold: true
+    echo: true
+    css: styles.css 
+    chalkboard: true
+---
+
+## What do we mean with model miss-specification
+
+- There are various kinds of model specification we will talk about.
+  - There are important variables you did not include in your model: Endogeneity
+  - You added all relevant variables...just not in the right way. 
+  - You added proxies for variables you had no access to (Question change)
+  - You have all relevant data, but with errors.
+  - You have some missing data
+
+# Functional Form Misspecification
+
+## 
+
+- Simple linear functions work in almost ALL cases. They can be thought as first order Taylor expansions:
+$$\begin{aligned}
+y &= f(x) + e \\
+f(x) &\simeq f(x_0) 
++\frac{\partial f(x)}{\partial x}|_{x=x_0}
+(x-x_0)+R+e \\
+f(x) &\simeq \color{red}{ f(x_0)}
+\color{red}{-\frac{\partial f(x)}{\partial x}|_{x=x_0} x_0}
++\frac{\partial f(x)}{\partial x}|_{x=x_0} x+R+e \\
+y &= \color{red}{\beta_0}+\beta_1 x + R+ e
+\end{aligned}
+$$
+
+So, for "reasonable" values of X, or when analyzing average marginal effects $R$ should be small enough to be ignored.
+
+- In other words, for Overall effects Simple linear model works reasonably well! (most of the time)
+    
+## {.scrollable}
+
+- If you are interested in individuals (or alike people), you may need flexiblity!
+  
+- Ignoring functional form misspecification imposes unwanted assumptions (homogeneity), that could create further problems.
+    - Specially if data is skewed
+
+- But how flexible is flexible enough?
+
+    - We will only consider quadratic terms and interactions,
+    - but there is a large literature on making very flexible estimations (non-paramatric analysis)
+
+```{stata}
+clear
+set seed 10
+set obs 1000
+gen p = (2*_n-1)/(2*_N) 
+gen x = invchi2(5, p)/2
+gen y = 1 + x + (x-2.5)^2 + rnormal()  
+reg y x
+display "Quadratic"
+qui:reg y c.x##c.x
+margins, dydx(x)
+display "Cubic"
+qui:reg y c.x##c.x##c.x
+margins, dydx(x)
+```
+
+## Reset Ramsey test
+
+- Intuition: If the model is misspecified, perhaps we need to control for more non-linearities and interactions.
+- Naive test: Add more controls (quadratics and interactions) (like White test, this will grow fast)
+- Reset - Ramsey test: Get predictions from original model, and add it as control
+
+$$y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \delta_1 \hat y^2 + \delta_2 \hat y^3 +e
+$$
+
+$H_0: \delta_1 = \delta_2 = 0$: (everything is awesome)
+
+$H_1: H_0$ is false: we need to fix the problem 
+
+- RRT does not tell you "How" to fix the problem.
+  
+```stata
+estat ovtest
+```
+(bad name tho)
+
+## Davidson-MacKinnon test
+
+Two non-tested models:
+
+$$\begin{aligned}
+y &= \beta_0 + \beta_1 x_1 + \beta_2 x_2 + e \\
+y &= \gamma_0 + \gamma_1 log(x_1) + \gamma_2 log(x_2) + e \\
+\end{aligned}
+$$
+
+- Which one is more appropriate? eq1? or eq2? This are non-nested models, so its difficult to say.
+  - You could nest them:
+
+$$y = \theta_0 + \theta_1 x_1 + \theta_2 x_2 + \theta_3 log(x_1) + \theta_4 log(x_2) + e 
+$$
+
+  and test $\theta_1=\theta_2=0$ or $\theta_3=\theta_4=0$.
+
+##
+
+- or the "true" Davidson-MacKinnon test:
+  - First Obtain predictions from competing models:
+$$\begin{aligned}
+\hat y &= \hat\beta_0 + \hat\beta_1 x_1 + \hat\beta_2 x_2 \\
+\check y &= \hat \gamma_0 + \hat\gamma_1 log(x_1) + \hat\gamma_2 log(x_2) \\
+\end{aligned}
+$$
+
+  - Then add the predictions as added controls in the alternative model:
+$$\begin{aligned}
+y &= \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \theta_1 \check y +e \\
+y &= \gamma_0 + \gamma_1 log(x_1) + \gamma_2 log(x_2) + \theta_1 \hat y + e \\
+\end{aligned}
+$$
+
+- Unfortunately, you may ended up with conflicting results.
+
+# Proxy Variables 
+For unobserved variables
+
+## A re-tell of Omitted variable Bias
+
+- We know this. If a variable that SHOULD be in the model is not added, it will generate an OMV, unless it was uncorrelated to the model error. 
+  - Lesson: add important variables!
+- What if those variables are not available? how do you solve the problem?
+  - IV (we will talk about that later) or
+  - Proxy Variable (a bandaid)
+
+## Proxies
+Consider:
+$$log(wages) = \beta_0 + \color{blue}{\beta_1} exper + \color{blue}{\beta_2} educ + \beta_3 skill + e
+$$
+
+Where you are really interested in $\beta_1 \And \beta_2$.
+
+- Since we dont have $skill$, and omitting it will bias our coefficients, we can use a proxy $ASVAB$.
+
+$$log(wages) = \beta_0 + \color{blue}{\beta_1} exper + \color{blue}{\beta_2} educ + \gamma_3 ASVAB + e
+$$
+
+- and done?
+
+##
+
+Using a Proxy will work only under the following condition:
+
+- Conditioning on the observed variable and proxy, the unobserved variable **has** to be uncorrelated to other variables in the model:
+  
+$$\begin{aligned}
+E(x_3^*|x_1,x_2,x_3)&=\alpha_0 + \alpha_1 x_3 \\
+E(skill|exper,educ,ASVAB)&=\alpha_0 + \alpha_1 ASVAB 
+\end{aligned}
+$$
+
+If this happens, you can still estimate $\beta_1 \And \beta_2$, although the constant and slope of the proxy varible will be biased for the proxied variable.
+
+$$\begin{aligned}
+y &= \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x^*_3 + e \ ; \ 
+\color{blue}{x^*_3 =  \delta_0 + \delta_1 x_3 + v} \\
+y &= \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 (\delta_0 + \delta_1 x_3 + v) + e \\
+ &= \color{brown}{\beta_0 +\beta_3\delta_0} \color{black}{+ \beta_1 x_1 + \beta_2 x_2 + \beta_3 \delta_1 x_3 +} \color{green}{\beta_3 v + e} \\
+ &=\color{brown}{\alpha_0} + \beta_1 x_1 + \beta_2 x_2 + \alpha_1 x_3 + \color{green}{u} \\
+\end{aligned}
+$$
+
+## {.scrollable}
+### What about Lags (of dep variable)?
+
+- Increses Data requirements (panel? pseudo panel?)
+- Further assumptions are required (Past exogenous of present)
+- But allows controlling for underlying factors or historical factors
+
+```{stata}
+frause crime2, clear
+qui:reg crmrte unem llawexpc if year == 87
+est sto m1
+qui:reg crmrte unem llawexpc lcrmrt_1 if year == 87
+est sto m2
+qui:reg ccrmrte unem llawexpc if year==87  
+est sto m3
+esttab m1 m2 m3, se star(* .1 ** 0.05 *** 0.01) b(3) ///
+mtitle(crimert crimert change_crrt)
+```
+
+Note: Skip 9-2c and 9-3
+
+# Measurement error
+
+## Why is $X$ not the real $X$?
+
+- Often we treat data as if it they were perfect measures of the true data. But is that the case? 
+  - Age: Do you report age in years, months, days, hours, minutes, etc
+  - Weight and Height: Even if measured, how accurate it can be? and do they make mistakes?
+  - Income: Do people report income accurately? or they Lie? why?
+
+- Depending on the type of error, magnitude, and if the affected variable is dep or indep, it may have diffrent consequences for OLS.
+
+- For now we will concentrate on a specific kind of measurement error: Classical measurement error
+
+$$\begin{aligned} 
+y_{obs} &= y_{true} + \varepsilon \\
+E(\varepsilon) &=0; cov(\varepsilon,y_{true})=0; cov(\varepsilon,X's)=0
+\end{aligned}
+$$
+
+## Error in $y$ (dep variable) {.scrollable}
+
+- Instead of: $y^* = x\beta + e$
+
+- We estimate $y^*+\varepsilon = x\beta + e \rightarrow y^* = x\beta + e-\varepsilon$
+
+- This implies that $\beta's$ can still be **unbiased** when applying OLS.
+
+- However **variance** will be larger than when using true data:
+
+```{stata}
+qui: frause oaxaca, clear
+set seed 101
+gen lnwage2=lnwage + rnormal(2) 
+qui:reg lnwage educ exper female
+est sto m1
+qui:reg lnwage2 educ exper female
+est sto m2
+esttab m1 m2, se
+```
+
+## Error in $X$ (indep variable) {.scrollable}
+
+- Instead of: $y = \beta_0 + \beta_1 x^* + e$
+- We estimate $y = \gamma_0 + \gamma_1 (x^* + \varepsilon) + v$
+  
+- By adding an error $\varepsilon$ that has a zero relationship with $y$, the "average" coefficient $\gamma_1$ will be between the true $\beta_1$ and 0.
+$$\begin{aligned}
+\gamma_1 &=\frac{\sum (y-\bar y)(x^* + \varepsilon - \bar x)}{\sum (x^* + \varepsilon - \bar x)^2} =\frac{\sum (y-\bar y)(x^* - \bar x)+ \sum (y-\bar y) \varepsilon}{\sum (x^* - \bar x)^2 + \sum \varepsilon^2} \\
+ &= \frac{\sum (y-\bar y)(x^* - \bar x)}{\sum (x^* - \bar x)^2 + \sum \varepsilon^2} \frac{\sum (x^* - \bar x)^2}{\sum (x^* - \bar x)^2} \\
+ & =\beta_1 \frac{\sigma^2_x}{\sigma^2_x + \sigma^2_\varepsilon}
+\end{aligned}
+$$
+
+## 
+
+```{stata}
+frause oaxaca, clear
+qui:sum educ
+gen educ_error = educ + rnormal()*r(sd)
+sum educ educ_error
+qui:reg lnwage educ
+est sto m1
+qui:reg lnwage educ_error
+est sto m2
+esttab m1 m2, se
+```
+
+# Missing Data, Nonrandom samples, and outliers
+
+## Missing Data (Assume Sample is complete)
+
+- What is it? you dont have data! Your $N$ falls.
+  - Some data for some observations are missing.
+  - We may or may not know why they are missing
+  - and they maybe missing at random, or following unknown patterns.
+
+- If we are Missing data, and we do not know why, its a problem. We cant know if the sample represents the population, thus cannot be used for analysis.
+
+##
+### How to deal with it?
+
+- if Missing **completely** at random (MCAR), analysis can be done as usual (no effects except smaller N)
+- if Missing **at** random (MAR), the analysis can be done, often using standard methods:
+  - Missingness depends on observed factors ($X's$).
+  - It is also known as exogenous sample selection.
+  - **Intuitively**, because all factors that determine selection are exogenous, you can identify who in the population is identified (Regression for men, women, high education, etc)
+- If Missing **not** at random (MNAR), you cant address the problem with standard analysis.
+  - Some methods such as Heckman selection or truncated regression, could be used. (advanced)
+  - Other wise, you can't analyze the data (in a satisfactory manner)
+  - **Intuitively**, missingness is determined by unobserved factors, which also determines the outcome. (ie Analyze high wage population only)
+
+## Outliers and influencers
+
+- Not all data is made equal, and not all data has the same weight when estimating regressions.
+
+- Observations with high Influence are those with outliers based on the conditional distribution ($y|x$).
+- 
+  - While outliers are not necessarily bad for analysis, it is important to understand how sensitive your results are to excluding some observations.
+
+- Observations with high **leverage** are those with unusual characteristics.($X's$)
+
+- Combination of both may have strong impacts on the regression analysis.
+
+##
+
+- Leverage of an observation is determined by the following:
+
+Define $H = X(X'X)^{-1}X'$
+
+Leverage $h_i = H[i,i]$
+
+High $h_i$ denotes more influence in the model. (sensitive)
+
+- Influence is typically detected based on "studentized" residuals
+  
+$$r_i =  \frac{\hat e}{s_{-i}\sqrt{1-h_i}}
+$$
+
+## Example
+
+```{stata}
+qui:{
+frause oaxaca, clear
+drop if lnwage==.
+reg lnwage educ exper tenure female age
+predict lev, lev
+sum lev, meanonly
+replace lev=lev/r(mean)
+predict rst, rstud
+}
+set scheme white2
+color_style tableau
+scatter lev rst
+```
+
+## Solutions
+
+- The problem with OLS is that it provides "too much weight" to outliers.
+
+- This is similar to the mean, which may not be very stable with extreme distributions. 
+
+There are at least two solutions to problems with outliers.
+
+- Robust Regression (different from regression with robust Standard errors)
+  - The idea is to penalize outliers, to reduce the impact on the estimated coefficients.
+
+## 
+
+- Quantile (median) Regression
+  - Modifies the objective function to be minized:
+  
+$$\beta's=\min_\beta \sum |y-x\beta|
+$$
+
+- Instead of using the squared of errors, it uses the absolute value. 
+  - by doing this, coefficients are not sensitive to outliers! (as the median is better than the mean to capture typical values)
+  - Drawbacks: Its slower than OLS, and it can be difficult to interpret
+  
+```stata{style="font-size: 1.3em"}
+rreg <- Robust Regression
+qreg <- Quantile Regression
+```
+
+# Done for now
+Next week Midterm!
+and after that Limited Dep Variables

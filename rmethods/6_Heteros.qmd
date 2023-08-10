@@ -1,6 +1,6 @@
 ---
 title: "Multiple Regression Analysis"
-subtitle: "Adding and Understanding features"
+subtitle: "When A5 Fails"
 author: Fernando Rios-Avila
 jupyter: nbstata
 format: 
@@ -16,11 +16,10 @@ format:
 
 ## What is Heteroskedasticity?
 
-- Mathematically:
-$$Var(e|x=c_1)\neq Var(e|x=c_2)
-$$
+-   Mathematically: $$Var(e|x=c_1)\neq Var(e|x=c_2)
+    $$
 
-- This means: the conditional variance of the errors is not constant across control characteristics.
+-   This means: the conditional variance of the errors is not constant across control characteristics.
 
 ```{stata}
 *| echo: false
@@ -39,21 +38,22 @@ two (histogram lnw if female==1, pstyle(p1) w(0.1) color(%50) start(-1))  ///
 
 What happens when you have heteroskedastic errors?
 
-- In terms of $\beta's$ and $R^2$ and $R^2_{adj}$, nothing. Coefficients and Goodness of fit are still unbiased and consistent.
+-   In terms of $\beta's$ and $R^2$ and $R^2_{adj}$, nothing. Coefficients and Goodness of fit are still unbiased and consistent.
 
-- But, Coefficients standard errors are based on the simplifying assumption of normality. Thus Variances will be bias!.
+-   But, Coefficients standard errors are based on the simplifying assumption of normality. Thus Variances will be bias!.
 
-  - If variances are biased, then all statistics will be wrong.
+    -   If variances are biased, then all statistics will be wrong.
 
-## {.scrollable}
+##  {.scrollable}
 
 ### How bad can it be?
 
-Setup: 
+Setup:
 
 $y = e$ where $e~N(0,\sigma_e^2h(x))$
 
-$x = uniform(-1,1)$ 
+$x = uniform(-1,1)$
+
 ```{stata}
 *| echo: true
 *| code-fold: true
@@ -92,38 +92,41 @@ graph export images/fig6_1.png, replace height(1000)
 
 ## What to do about it?
 
-- So, If errors are heteroskedastic, then all statistics (t-stats, F-stats, chi2's) are wrong. 
-- But, there are solutions...many solutions
-  - GLS: Generalized Least Squares
-  - WLS: Weighted Least Squares
-  - FGLS: Feasible Generealized Least Squares
-  - WFLS: Weighted FGLS
-  - HC0-HC3: Heteroskedasticity consistent SE
-- Some of them are more involved than others.
+-   So, If errors are heteroskedastic, then all statistics (t-stats, F-stats, chi2's) are wrong.
 
-- But before trying to do that, lets first ask...do we have a problem?
+-   But, there are solutions...many solutions
+
+    -   GLS: Generalized Least Squares
+    -   WLS: Weighted Least Squares
+    -   FGLS: Feasible Generealized Least Squares
+    -   WFLS: Weighted FGLS
+    -   HC0-HC3: Heteroskedasticity consistent SE
+
+-   Some of them are more involved than others.
+
+-   But before trying to do that, lets first ask...do we have a problem?
 
 ## Detecting the Problem
 
-- Consider the model:
+-   Consider the model:
 
 $$y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 +\beta_3 x_3 +e
 $$
 
-- We usually start with the assumption that errors are homoskedastic $Var(e|x's)=\sigma^2_c$. 
-- However, now we want to allow for the possibility of heteroskedasiticity. ie, that variance is some function of X.
-  - We have to model is variance is a function that varies with $x$:
+-   We usually start with the assumption that errors are homoskedastic $Var(e|x's)=\sigma^2_c$.
+-   However, now we want to allow for the possibility of heteroskedasiticity. ie, that variance is some function of X.
+    -   We have to model is variance is a function that varies with $x$:
 
 $$Var(e|x)=f(x_1,x_2,\dots,x_k) \sim a_0+a_1x_1 + a_2 x_2 + \dots + a_k x_k+v$$
 
-##
+## 
+
 $$Var(e|x)=f(x_1,x_2,\dots,x_k) \sim a_0+a_1x_1 + a_2 x_2 + \dots + a_k x_k+v$$
 
-- This expression says the onditional variance can vary with $X's$. 
-- It could be as flexible as needed, but linear is usually enough.
+-   This expression says the onditional variance can vary with $X's$.
+-   It could be as flexible as needed, but linear is usually enough.
 
-With this the Null hypothesis is: 
-$$H_0: a_1 = a_2 = \dots = a_k=0 \text{ vs } H_1: H_0 \text{ is false}
+With this the Null hypothesis is: $$H_0: a_1 = a_2 = \dots = a_k=0 \text{ vs } H_1: H_0 \text{ is false}
 $$
 
 Easy enough, but do we **KNOW** $Var(e|x)$ ? can we model the equation?
@@ -132,19 +135,20 @@ Easy enough, but do we **KNOW** $Var(e|x)$ ? can we model the equation?
 
 **We don't!.**
 
-- But we can use $e^2$ instead. This implies we using the assumption that $e^2$ is a good enough approximation for the condional variance $Var(e|x)$.
+-   But we can use $e^2$ instead. This implies we using the assumption that $e^2$ is a good enough approximation for the condional variance $Var(e|x)$.
 
-- With this, the test for heteroskedasticty can be implemented using the following recipe.
+-   With this, the test for heteroskedasticty can be implemented using the following recipe.
 
-1. Estimate $y=x\beta+e$ and obtain predicted model errors $\hat e$.
-2. Model $\hat e^2 = \color{green}{h(x)}+v$, as a proxy for the variance model.
-   - $h(x)$ could be estimated using some linear or nonlinear functional forms.
-3. Test if variance changes with respect to any explanatory variables. 
-   - In this case, you can assume the heteroskedastic model is homoskedastic. 
+1.  Estimate $y=x\beta+e$ and obtain predicted model errors $\hat e$.
+2.  Model $\hat e^2 = \color{green}{h(x)}+v$, as a proxy for the variance model.
+    -   $h(x)$ could be estimated using some linear or nonlinear functional forms.
+3.  Test if variance changes with respect to any explanatory variables.
+    -   In this case, you can assume the heteroskedastic model is homoskedastic.
 
 **Note:** Depending on Model specification, and test used, there are various Heteroskedasticity *tests*.
 
-## Heteroskedasticity tests 
+## Heteroskedasticity tests
+
 $$\begin{aligned}
 \text{Model}: y &= \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 + e \\
 \hat e & = y - (\hat \beta_0 + \hat\beta_1 x_1 +\hat \beta_2 x_2 +\hat \beta_3 x_3)
@@ -152,6 +156,7 @@ $$\begin{aligned}
 $$
 
 ### Breush-Pagan:
+
 $$\begin{aligned}
 \hat e^2 & = \gamma_0 + \gamma_1 x_1 +\gamma_2 x_2 +\gamma_3 x_3 + v \\
 H_0 &: \gamma_1=\gamma_2=\gamma_3=0 \\
@@ -160,9 +165,9 @@ LM &=N R^2_{\hat e^2} \sim \chi^2(k) \leftarrow BP-test
 \end{aligned}
 $$
 
-- Easy and simple, but only considers "linear" Heteroskedasticity
-  
-## Heteroskedasticity tests: 
+-   Easy and simple, but only considers "linear" Heteroskedasticity
+
+## Heteroskedasticity tests:
 
 $$\begin{aligned}
 \text{Model}: y &= \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 + e \\
@@ -182,9 +187,9 @@ $$
 
 $q$ is the total number of coefficients in the model (not counting the intercept.)
 
-- Accounts for nonlinearities, but gets "messy" with more variables.
-  
-## Heteroskedasticity tests: 
+-   Accounts for nonlinearities, but gets "messy" with more variables.
+
+## Heteroskedasticity tests:
 
 $$\begin{aligned}
 \text{Model}: y &= \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 + e \\
@@ -205,8 +210,8 @@ $$
 
 $h$ is the total number of coefficients in the model (not counting the intercept.)
 
-- Accounts for nonlinearities (because of how $\hat y$ is constructed), and is simpler to implement.
-- But, nonlinearity is restricted.
+-   Accounts for nonlinearities (because of how $\hat y$ is constructed), and is simpler to implement.
+-   But, nonlinearity is restricted.
 
 ## Example {.scrollable}
 
@@ -266,20 +271,252 @@ display "p(chi2) " %5.3f chi2tail(e(df_m),e(N)*e(r2))
 
 Can you do this in `Stata`? Yes, `estat hettest`. But look into the options. There are many more options in that command.
 
-# {background-image="https://i.imgflip.com/7v1kuw.jpg" background-size="contain"}
+#  {background-image="https://i.imgflip.com/7v1kuw.jpg" background-size="contain"}
 
-## What do you do when you have Heteroskedasticity
+## What do you do when you have Heteroskedasticity?
 
-## GLS: weighted Least Squares
+**We need to fix!**
 
-## GLS: Analytical
+-   Recall, the problem is that $Var(e|X)\neq c$
+-   This affects how standard errors are estimated (we required homoskedasticity). But what happens when Homoskedasticity doesnt hold?
+    1.  We can **"fix/change"** the model, so its no longer heteroskedastic, and Standard Inference works. (FGLS, WLS)
+    2.  We neec to account for heteroskedasticity when estimating the variance covariance model.
 
-## FGLS: Estimating Heteroskedasticity
+So lets learn to Fix it first
 
-## Robust Standard Errors: White Sandwitch Formula
+## How do we **Fix** Heteroskedasticity?
 
-## Inference: How things change
+-   In order to address the problem of heteroskedasticity, we require knowledge of why the model is heteroskedastic, or what is generating it.
 
-## Prediction and log(y)
+$$Var(e|X)=h(x)\sigma^2_e
+$$
+
+-   Where $h(x)$ is the "source" of heteroskedasticity, which may be a known or estimated function of $x$.
+    -   Which should be an strictly possitive function of $x's$.
+
+## 
+
+### Knowledge is power
+
+-   If you know $h(x)$, correcting heteroskedasticity is "easy". Consider the following:
+
+$$\begin{aligned}
+y &= b_0 + b_1 x_1 + b_2 x_2 + b_3 x_3 +e \\
+Var(e|x) &=x_1 \sigma_e^2 || h(x)=x_1
+\end{aligned}
+$$
+
+You can correct Heteroskedasticity in two ways:
+
+1.  Transform model by dividing everything by $\sqrt{h(x)}$: $$\begin{aligned}
+    \frac{y}{\sqrt{x_1}} &= b_0 \frac{1}{\sqrt{x_1}}+ b_1 \sqrt{x_1} + b_2 \frac{x_2}{\sqrt{x_1}} + b_3 \frac{x_3}{\sqrt{x_1}} +\frac{e}{\sqrt{x_1}} \\
+    Var\left(\frac{e}{\sqrt{x_1}}|x\right) &= \frac{1}{x_1} x_1\sigma_e^2=\sigma_e^2
+    \end{aligned}
+    $$
+
+The new error is Homoskedastic (but has no constant)!
+
+## 
+
+1.  Estimate the model using by $\frac{1}{h(x)}$ as weights: $$\begin{aligned}
+    \beta=\min_\beta \sum \frac{1}{h(x)} (y-(b_0 + b_1 x_1 + b_2 x_2 + b_3 x_3))^2
+    \end{aligned}
+    $$
+
+-   Same solution as before, and there is no need to "transform" data, or keep track of a constant.
+
+-   This is often called WLS (weighted least squares) or GLS (Generalized Least Squares).
+
+## 
+
+-   Interestingly: These approaches are more efficient than Standard OLS.
+    -   Uses more information (heteroskedasticity)
+    -   Makes better use of information (More weight to better data) Standard errors are smaller.
+-   t-stats, F-stats, etc now are valid.
+-   Coefficients will **NOT** be the same as before.
+-   $R^2$ is less useful
+-   Heteroskedasticty test on transformed data may required added work.
+
+## 
+
+### FGLS: We do not know $h(x)$, but we can guess
+
+-   If $h(x)$ is not known, we can use an auxiliary model to estimate it:
+
+$$\begin{aligned}
+Var(e|x) &= \sigma^2 \exp(\delta_0 + \delta_1 x_1 + \delta_2 x_2 +\dots) \exp v \\
+log(\hat e^2) &= \delta_0 + \delta_1 x_1 + \delta_2 x_2 +\dots+ v \\
+log(\hat e^2) &= \delta_0 + \delta_1 \hat y + \delta_2 \hat y^2 + \dots+ v \\
+h(x) &= \widehat{log(\hat e^2)}
+\end{aligned}
+$$
+
+-   Proceed as before (weighted or transformed)
+-   Its call Feasible GLS, because we need to estimate $h(x)$.
+
+## Do not Correct, account for it: GLS and FGLS
+
+Recall "Long" variance formula:
+
+$$Var(\beta)=\color{brown}{(X'X)^{-1}}\color{green}{X}'\color{red}{Var(e|X)}\color{green}{X}\color{brown}{(X'X)^{-1}}
+$$
+
+- The [red]{.redtxt} part is a $N\times N$ VCOV matrix of ALL erros. It can be Simplified with what we know!
+
+$$\begin{aligned}
+Var_{gls/fgls}(\beta)&=\sigma^2_{\tilde e} \color{brown}{(X'X)^{-1}}\color{green}{X}'\color{red}{ \Omega_h(x) }\color{green}{X}\color{brown}{(X'X)^{-1}} \\
+\sigma^2_{\tilde e} &= \frac{1}{N-k-1} \sum \frac{\hat e^2}{h(x)} \\
+\Omega_h(x) [i,j] &= h(x_i) & \text{ if } i=j \\
+& = 0 & \text{ if } i\neq j \\
+\end{aligned}
+$$
+
+- SE are corrected, but coefficients remain the same!
+
+## Do not Correct, account for it: White Sandwich Formula
+
+- What if we do not want to even try guessing $h(x)$?
+- you can use Robust Standard errors! 
+  - Heteroskedastic Consistent SE to Heterosedasticity of unknown form.
+
+Let me present to you, the Sandwitch Formula:
+$$Var(\beta)=c \color{brown}{(X'X)^{-1}}\color{green}{X}'\color{red}{\Omega}\color{green}{X}\color{brown}{(X'X)^{-1}}
+$$
+
+$$\begin{aligned}
+\Omega [i,j] &= \hat e_i^2 & \text{ if } i=j \\
+& = 0 & \text{ if } i\neq j \\
+\end{aligned}
+$$
+
+- The best approximation to conditional variance is equal to $\hat e_i^2$. (plus assuming no correlation)
+
+- Valid in large samples, but can be really bad in smaller ones. 
+
+- There are other versions. See HC0 HC1 HC2 HC3.
+
+## What if did $h(x)$, and it was wrong
+
+1. Using FGLS will change coefficients a bit. If they change a lot, It could indicate other assumptions in the model are incorrect. (functional form or exogeneity)
+2. In either case, you could always combine FGLS with Robust Standard Errors!
+
+## Statistical Inference
+
+- If applying GLS or FGLS via transformations or reweighting. All we did before is valid.
+- If using Robust standard errors (HC), t-stats are constructed as usual, but
+- F-stats formulas are no longer valid. 
+
+Instead...use the long formula
+
+$$\begin{aligned}
+H_0: & R_{q,k+1}\beta_{k+1,1}=c_{q,1} \\
+\Sigma_R &= R_{q,k+1} V^r_\beta R'_{q,k+1} \\
+F-stat &= \frac 1 q (R\beta-c)' \Sigma_R^{-1} (R\beta-c) 
+\end{aligned}
+$$
+
+
+
+##
+### Extra: Prediction and SE
+
+Prediction SE: 
+
+- If you are using GLS, Formulas seen before apply with the following modification:
+$Var(e|X=x_0)=\sigma^2_{\tilde e} h(x_0)$ 
+- If you are using FGLS, its not that simple because of the two-step modeling 
+
+For Prediction with Logs
+
+- You need to take into account Heteroskedasticity
+
+$$\hat y_i = \exp \left( \widehat{log y_i}+\hat \sigma_{\tilde e}^2 \hat h_i /2 \right)
+$$
+
+## Example {.scrollable}
+
+```{stata}
+*| code-fold: false
+*| output: false
+frause smoke, clear
+gen age_40sq=(age-40)^2
+** Default
+qui:reg cigs lincome lcigpric educ age age_40sq restaurn
+est sto m1
+predict cig_hat
+predict cig_res,res
+** GLS: h(x)=lincome Weighted
+qui:reg cigs lincome lcigpric educ age age_40sq restaurn [aw=lincome]
+est sto m2
+** FGLS: h(x) = f(cigs_hat)
+gen lcres=log(cig_res^2)
+qui:reg lcres c.cig_hat##c.cig_hat##c.cig_hat 
+predict aux
+gen hx=exp(aux)
+qui:reg cigs lincome lcigpric educ age age_40sq restaurn [aw=hx]
+est sto m3
+qui:reg cigs lincome lcigpric educ age age_40sq restaurn , robust
+est sto m4
+qui:reg cigs lincome lcigpric educ age age_40sq restaurn [aw=lincome], robust
+est sto m5
+qui:reg cigs lincome lcigpric educ age age_40sq restaurn [aw=hx], robust
+est sto m6
+set linesize 255
+```
+
+```{stata}
+esttab m1 m2 m3 m4 m5 m6, gaps mtitle(default GLS FGLS Rob GLS-Rob FGLS-Rob) ///
+nonum cell( b( fmt( 3) star ) se( par(( )) ) p( par([ ]) ) ) ///
+star(* .1 ** 0.05 *** 0.01  )
+```
 
 ## LPM revised
+
+- What was wrong with LPM?
+  - Fixed marginal effects (depends on functional form)
+  - May predict p>1 or p<0
+  - It is Heteroskedastic by construction
+- But now we know how to deal with this! GLS (why not FGLS) and Robust
+- In LPM: $Var(y|x)=p(x)(1-p(x)) = \hat y (1-\hat y)$
+  - We can use this to transform or weight the data!
+  - Only works if $0<p(x)<1$.
+
+## LPM Example {.scrollable}
+
+```{stata}
+*| code-fold: false
+frause gpa1, clear
+** LPM
+gen parcoll = (fathcoll | mothcoll)
+reg pc hsgpa act parcoll
+predict res_1, res
+```
+
+
+```{stata}
+*| code-fold: false
+predict pchat
+gen hx = pchat*(1-pchat)
+sum pchat hx
+```
+
+```{stata}
+*| code-fold: false
+reg pc hsgpa act parcoll [w=1/hx]
+predict res_2, res
+```
+
+
+```{stata}
+*| code-fold: false
+** Testing for Heteroskedasticity
+replace res_1 = res_1^2
+replace res_2 = res_2^2/hx
+display "Default"
+reg res_1 hsgpa act parcoll, notable
+display "Weighted"
+reg res_2 hsgpa act parcoll, notable
+```
+
+# The end...for now
+Next Week: Problems of Specification
