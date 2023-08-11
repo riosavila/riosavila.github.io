@@ -1,0 +1,303 @@
+---
+title: "Instrumental Variables and 2SLS"
+subtitle: "Time to save A4 (hopefully)"
+author: Fernando Rios-Avila
+jupyter: nbstata
+format: 
+  revealjs: 
+    slide-number: true
+    width: 1600
+    height: 900
+    code-fold: true
+    code-overflow: wrap
+    echo: true
+    css: styles.css 
+    chalkboard: true  
+---
+
+## The problem: Endogeneity
+
+- As I mentioned at the beginning, one of the most important assumptions required to analyze data and obtain correct estimations and draw inference was A4: **No endogeneity** or $E(e|X)=0$
+  - Endogeneity is a problem that occurs because the error is related to $X$.
+  - This is a proble,, because we can no longer assume the error is, in average, constant when analyzing changes in $X's$
+
+## 
+
+- Why did it happen?
+  - Usually because important variables are omitted
+    - Add them back, or at least proxies?
+  - Incorrect functional form
+    - Try making it more flexible?
+  - Data has measurement error
+    - Get better data?
+  - Sample is endogenous (other treatments are necessary)
+  - Reverse causality (you dont know which cause which)
+  - Simultenaity, similar to omitted variables. There is another factor that caused both the outcome and explanatory variable
+
+## A pair of Solutions
+
+- Today we will cover one approach that could help with many (not all) the situations that could cause endogeneity.
+- To apply this approach, however, we need:
+  - More data (more variables with specific properties)
+  - More information on how the "system" works.
+
+- These methods are:
+  - IV - Instrumental variable
+  - 2sls - Two-stage Least squares
+
+> NOTE: These two methods are almost interchangable. 
+> 
+> - IV refers to cases with 1 endogenous variable and 1 "instrument"
+> 
+> - 2sls refers to cases with 1+ endogenous variables and "instruments"
+
+## What is an "***Instrumental Variable***"
+
+- I have mentioned a few times the word "instrument" But what are they really?
+
+- Instruments: the heros/variables that will "save us" of endogeneity.
+
+- They have at least 2 properties:
+  
+  1. Instruments should be exogenous to the model 
+   
+    - This means that they do not appear in the theoretical specification, thus there is no **DIRECT** conection between the instrument $Z$ and the outcome $y$.
+
+    - Also that there is no correlation between the model error and $Z$.
+
+  2.  The instrument is relevant and related to $x$ (endogenous variable)
+   
+    - Preferably, you need a variable that is not only correlated with $X$ but determines changes in $X$.
+    - We also need this effect to be monotonic! 
+
+- In many instances we even want an instrument that is just as good as [conditionally] random. 
+
+## How Instruments work: The math
+
+The problem $corr(x_1,e) \neq 0$:
+$$\begin{aligned}
+y &= \beta_0 + \beta_1 x_1 + e || \tilde w = w-\bar w  \\
+\tilde \beta_1 &=\frac{\sum \tilde x_1 \tilde y}{\sum \tilde x_1^2}=
+\frac{\sum \tilde x_1 (\beta_1 \tilde x_1 + e)}{\sum \tilde x_1^2} \\
+& = \beta_1 + \frac{\sum \tilde x_1 e}{\sum \tilde x_1^2} 
+\end{aligned}
+$$
+
+How IV works $corr(z_1,e) \neq 0$:
+
+$$\begin{aligned}
+\hat \beta_1 &=\frac{\sum \tilde z_1 \tilde y}{\sum \tilde z_1 \tilde x_1}=
+\frac{\sum \tilde z_1 (\beta_1 \tilde x_1 + e)}{\sum \tilde z_1 \tilde x_1} \\
+& = \beta_1 + \frac{\sum \tilde z_1 e}{\sum \tilde z_1 \tilde x_1} 
+\end{aligned}
+$$
+
+## How Instruments work: The intuition
+
+- One way of thinking about how IV works is by realizing not ALL changes in $X_1$ are endogenous. Some **are** due to $e$, but some are due other factors.
+  - we just can't differentiate them
+  - If we could use (in the regression), only exogenous changes, (or omit endogenous ones), we could estimate our models correctly.
+  
+- What IV's do is to identify **Part** of the exogenous component (the one related to $Z$), and use only THAT variation to identify coefficients.
+  - This would do a reasonable work, as long as the instrument is relevant, and instrument exogenous. 
+
+## Example
+
+$$\begin{aligned}
+e &\sim chi(2)-2 ; z = chi(2)-2 ; x = chi(2)-2+z+e \\
+y &=1+x+e
+\end{aligned}
+$$
+
+```{stata}
+*| fig-align: center
+
+** Montecarlo Simulation
+clear
+set seed 10101
+set obs 1000
+qui:mata:
+k = 1000; n=1000
+b1=bc = b = J(k,2,0)
+for(i=1;i<=k;i++){
+    e = rchi2(n,1,2):-2
+    e1 = rchi2(n,1,2):-2
+    z = rchi2(n,1,2):-2,J(n,1,1)
+    x = rchi2(n,1,2):-2:+z[,1]:+e ,J(n,1,1)
+    x1 = rchi2(n,1,2):-2:+z[,1]:+e1,J(n,1,1)
+    y = 1:+x[,1]:+e
+    y1 = 1:+x[,1]:+e1
+    xx = cross(x,x)
+    b[i,] = (invsym(xx)*cross(x,y))'
+    bc[i,] = (invsym(cross(z,x))*cross(z,y))'
+    b1[i,] = (invsym(xx)*cross(x,y1))'
+}
+end
+getmata bb*=b
+getmata bc*=bc
+getmata b_*=b1
+set scheme white2
+color_style tableau
+two kdensity bb1 ||  kdensity bc1  || kdensity b_1, ///
+legend(order(1 "X Endogenous" 2 "IV" 3 "X Exogenous"))
+```
+
+## SE and Statistical Inference
+
+- SE have a different structure compared to OLS.
+- In the simplest case (one dep variable that is endogenous), and under the assumption of Homoskedasticity,  SE for $\beta_1$ are given by:
+
+$$\begin{aligned}Var_{iv}(\beta_1) = \frac{\hat\sigma^2_e}{SST_x R^2_{x|z}} \\
+\hat\sigma^2_e =\frac{ \sum (y-\hat\beta_0-\hat\beta_1 x)^2}{n-2}
+\end{aligned}
+$$
+
+- Once they are obtained t-stats can be used as usual
+
+## Examples of IV's
+
+:::: {.columns}
+
+::: {.column width="50%"}
+Education:
+
+- Fathers Education
+- Distance to School
+- \# Siblins
+ 
+:::
+
+::: {.column width="50%"}
+Veteran Status:
+
+- Vietnam Lottery Ticket
+
+Other:
+
+- Rain 
+- Shift-Share
+- Judge FE
+:::
+
+::::
+
+
+- IV SE will be necessarily larger than OLS, because there is less variation of $x$ used to identify $\beta$.
+- If $x$ is used as its own instrument, the estimator will be that of OLS.
+
+## Weak and endogenous instruments:
+
+- While instruments can be used to address Endogeneity problems, finding good instruments can be hard.
+  - They can be "weak-instruments"
+  - or not fully exogenous
+
+- If this happens, IV can be worse than endogeneity:
+
+$$\begin{aligned}
+plim \beta_{ols} &= \beta_1 + corr(x,u) \frac{\sigma_u}{\sigma_x} \\
+plim \beta_{iv}  &= \beta_1 + \frac{corr(z,u)}{corr(z,x)} \frac{\sigma_u}{\sigma_x} 
+\end{aligned}
+$$
+
+- we will talk about the "weak-instruments" later today.
+ 
+## 
+
+add code to simulate weak instruments
+```{stata}
+
+```
+
+## IV with MLR
+Adding controls...is easy!
+
+$$y = \beta_0 + \gamma_1 y_1 + X\beta + e ; z \text{ instrument for } y
+$$
+
+We still assume 1 endogenous variable ($y_1$) and one instrument ($z$)
+
+$$X =\begin{bmatrix} 1 & y_1 & x_1 & x_2 & x_3 \end{bmatrix} ; 
+Z =\begin{bmatrix} 1 & z & x_1 & x_2 & x_3 \end{bmatrix}
+$$
+
+then $\hat\beta_{iv}$ is given by
+
+$$\hat\beta_{iv} = (Z'X)^{-1}{Z'y}
+$$
+
+- Same assumptions needed, except that instrument strength is measured by the $corr(y_1-E[y_1|X], z-E[z|X] )$
+  - Multicollinearity problem can be a problem here
+  
+## IV and Treatment Effects
+
+One small note:
+
+- When analyzing the model of interest, we could also try to analyze the reduced form model:
+
+$$y = \beta_0 + \lambda z + X \beta + e$$
+
+- This model will not give you the effect of $y_1$ (endogenous variable), but can be just as interesting, specially when instrument and endogenous variables are dummies.
+
+  - In such case $\lambda$ will represent the "intention-to-treat" effect, rather than "treatment" effect.
+
+# 2SLS: Many Ys many Zs
+
+## 2SLS: Many Ys many Zs
+
+- There could be situations where you have not one, but many instruments.
+  - This may be rare, as even finding a single instrument can be hard
+- You may also have the situation where there is more than one endogenous variable!
+  - In such case, you need at least as many IVs as endogenous variables
+
+1. The same assumptions as before apply. IV's need to be exogenous, but relevant to explain the endogenous variables.
+
+2. Contrary to intuition, ALL instruments are used to analyze ALL exogenous variables
+
+## 2SLS: Estimation
+
+Consider the following:
+
+- $y$ is the variable of interest
+- $x1, x2$ set of exogenous variables 
+- $y1, y2$ set of endogenous variables
+- $z1,z2,z3$ set of instruments for $y1$ and $y2$
+
+$X's$ and $Z's$ are exogenous:
+
+##
+
+Model of interesed:
+$$y = a_0 + a_1 y_1 + a_2 y_2 + b_1 x_1 + b_2 x_2 +  b_3 x_3 + e
+$$
+
+First Stage 
+
+$$\begin{aligned}
+y_1 = \gamma^1_0 + \gamma^1_1 z_1+ \gamma^1_2 z_2+ \gamma^1_3 z_3+\lambda^1_1 x_1 + \lambda^1_2 x_2 +  \lambda^1_3 x_3  + v_1 \rightarrow \hat y_1 \\
+y_2 = \gamma^2_0 + \gamma^2_1 z_1+ \gamma^2_2 z_2+ \gamma^2_3 z_3+\lambda^2_1 x_1 + \lambda^2_2 x_2 +  \lambda^2_3 x_3  + v_2 \rightarrow \hat y_1
+\end{aligned}
+$$
+
+Second Stage:
+
+$$y = a_0 + a_1 \hat y_1 + a_2 \hat y_2 + b_1 x_1 + b_2 x_2 +  b_3 x_3 + e
+$$
+
+This last model should work, because $\hat y_1$ and $\hat y_2$ are exogenous (if $Zs$ are).
+
+Standard Errors, however, need to be adjusted appropietly.
+
+##
+
+$$\begin{aligned}
+X = \begin{bmatrix} 1 & y_k & x  \end{bmatrix} \\
+Z  =\begin{bmatrix} 1 & z   & x \end{bmatrix} 
+\end{aligned}
+$$
+
+Then 
+$$
+\beta_{2sls} = [X'Z(Z'Z)^{-1}Z'X]^{-1}[X'Z(Z'Z)^{-1}Z'y]
+\beta_{2sls} = [\gamma'Z'X]^{-1}[\gamma'Z'y]
+\beta_{2sls} = [\hat X'X]^{-1}[\hat X'y]
+$$

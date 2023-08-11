@@ -24,4 +24,7 @@ Onward, intrepid scholars, to the boundless vistas of glory! And let the path ta
 
 ***F.G.R.P.A.T.***
 
-
+<audio controls autoplay>
+  <source src="bres/recording.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>

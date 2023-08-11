@@ -9,9 +9,10 @@ format:
     width: 1600
     height: 900
     code-fold: true
+    code-overflow: wrap
     echo: true
     css: styles.css 
-    chalkboard: true
+    chalkboard: true  
 ---
 
 ## What do we mean with model miss-specification
@@ -363,4 +364,4 @@ qreg <- Quantile Regression
 
 # Done for now
 Next week Midterm!
-and after that Limited Dep Variables
+and after that helping with A4

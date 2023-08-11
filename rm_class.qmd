@@ -2,13 +2,13 @@
 title: "Research Methods: Econometrics I"
 ---
 
-[**Introduction**](rmethods/1introduction.html): Once Upon a time, why Econometrics? **Chapter 1**
+[**Introduction**](rmethods/1_introduction.html): Once Upon a time, why Econometrics? **Chapter 1**
 
 ## Part I: Basic Tools
 
 #### 1. Chapter 2: 
 
-   The Simple Regression Model
+   [**The Simple Regression Model**]((rmethods/2_SRA.html))
 
 #### 2. Chapter 3: 
    
