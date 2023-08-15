@@ -15,6 +15,8 @@ format:
     chalkboard: true  
 ---
 
+# The problem 
+
 ## The problem: Endogeneity
 
 - As I mentioned at the beginning, one of the most important assumptions required to analyze data and obtain correct estimations and draw inference was A4: **No endogeneity** or $E(e|X)=0$
@@ -62,6 +64,7 @@ format:
   1. Instruments should be exogenous to the model 
    
     - This means that they do not appear in the theoretical specification, thus there is no **DIRECT** conection between the instrument $Z$ and the outcome $y$.
+      - Should only be connected through the endogenous variable.
 
     - Also that there is no correlation between the model error and $Z$.
 
@@ -185,6 +188,8 @@ Other:
 - IV SE will be necessarily larger than OLS, because there is less variation of $x$ used to identify $\beta$.
 - If $x$ is used as its own instrument, the estimator will be that of OLS.
 
+# Weak and Enogenous, and MLR
+
 ## Weak and endogenous instruments:
 
 - While instruments can be used to address Endogeneity problems, finding good instruments can be hard.
@@ -201,12 +206,6 @@ $$
 
 - we will talk about the "weak-instruments" later today.
  
-## 
-
-add code to simulate weak instruments
-```{stata}
-
-```
 
 ## IV with MLR
 Adding controls...is easy!
@@ -239,8 +238,6 @@ $$y = \beta_0 + \lambda z + X \beta + e$$
 - This model will not give you the effect of $y_1$ (endogenous variable), but can be just as interesting, specially when instrument and endogenous variables are dummies.
 
   - In such case $\lambda$ will represent the "intention-to-treat" effect, rather than "treatment" effect.
-
-# 2SLS: Many Ys many Zs
 
 ## 2SLS: Many Ys many Zs
 
@@ -285,19 +282,331 @@ $$
 
 This last model should work, because $\hat y_1$ and $\hat y_2$ are exogenous (if $Zs$ are).
 
-Standard Errors, however, need to be adjusted appropietly.
+Standard Errors, however, need to be adjusted appropietly. (all two-step estimators need this)
 
-##
+## Matrix Math
 
 $$\begin{aligned}
-X = \begin{bmatrix} 1 & y_k & x  \end{bmatrix} \\
-Z  =\begin{bmatrix} 1 & z   & x \end{bmatrix} 
+X &= \begin{bmatrix} 1 & y_k & x  \end{bmatrix} \\
+Z &=\begin{bmatrix} 1 & z   & x \end{bmatrix} 
 \end{aligned}
 $$
 
 Then 
+
+$$\begin{aligned}
+\beta_{2sls} &= [X'Z(Z'Z)^{-1}Z'X]^{-1}[X'Z(Z'Z)^{-1}Z'y] \\
+\beta_{2sls} &= [X'P_z X]^{-1}[X'P_z y] \\
+\beta_{2sls} &= [\hat X'X]^{-1}[\hat X'y]
+\end{aligned}
 $$
-\beta_{2sls} = [X'Z(Z'Z)^{-1}Z'X]^{-1}[X'Z(Z'Z)^{-1}Z'y]
-\beta_{2sls} = [\gamma'Z'X]^{-1}[\gamma'Z'y]
-\beta_{2sls} = [\hat X'X]^{-1}[\hat X'y]
+
+## Multicolinearity and 2sls
+
+- When Appplying 2sls, the problem of Multicolinearity could be stronger. 
+  - Because of *MCL*, Standard errors will increase (less individual variation.)
+  - Because of IV, only a fraction of the variation is used for the analysis.
+  - Botton line: Combined have conisderate results. 
+
+## Weak Instruments
+
+- Weak Instruments create problems when using IV's and 2SLS.
+  - A weak instrument is one that doesnt have much explanatory power on dep variable, once all other controls are taken into account.
+  - If the instrument is too weak, the bias it generates could larger than OLS.
+  - The distribution of coefficent is no longer normal, so its harder to make inference.
+  
+> How do we test for it?
+
+## 
+
+We usually test for weak instruments when analyzing the "first-stage" regression.
+
+$$y_2 = \gamma_0 + \gamma_1 z_1 + \gamma_2 z_2 + \gamma_3 x_1 + \gamma_4 x_2 + e
 $$
+
+- The null is: $H_0: \gamma_1 = \gamma_2 =0$, or the instruments are weak.
+
+- Based on Stock and Yogo (2005), the general recommendation is to get an F>10, to reject the Null.
+
+- However, new evidence and research suggest that F=10 is not large enough.
+  - One should either use F>104 (To keep the same t) (Lee McCrary Moreira Porter, 2020)
+  - or use an alternative t-critica (3.4 for an F=10)
+
+## Examples
+
+```{stata}
+*| fig-align: center
+/*
+* This code is only to show the process. Too long to run in quarto
+capture program drop simx 
+program simx, eclass
+clear
+local N `1'
+local F `2'
+local sig = sqrt(`N'/ `F')
+set obs `N'
+gen e = rnormal()
+gen z = rnormal() 
+gen x = 1 + z + (e+rnormal())*sqrt(.5)*`sig'
+*sqrt(10) 
+gen y = 1 + (e+rnormal())*sqrt(.5)
+reg x z, 
+matrix b=(_b[z]/_se[z])^2
+ivreg y (x=z), 
+matrix b=b,_b[x],_b[x]/_se[x]
+ereturn post b
+end
+
+tempfile f1 f2 f3 f4 f5
+parallel initialize 14
+parallel sim, reps(5000): simx 500 10
+gen F=10
+save `f1'
+parallel sim, reps(5000): simx 500 20
+gen F=20
+save `f2'
+parallel sim, reps(5000): simx 500 40
+gen F=40
+save `f3'
+parallel sim, reps(5000): simx 500 80
+gen F=80
+save `f4'
+parallel sim, reps(5000): simx 500 160
+gen F=160
+save `f5'
+
+clear 
+append using `f1'
+append using `f2'
+append using `f3'
+append using `f4'
+append using `f5'
+
+ren (*) (f_stat b_coef t_stat)
+*/
+use mdata/ivweak, clear
+set scheme white2
+color_style tableau
+
+joy_plot t_stat, over(F) xline(-1.96 1.96) xtitle(t-Stat) dadj(2)
+
+```
+
+## IV for Measurement errors: Two wrongs make one right
+
+- As described previously when independent variables have measurement errors (Classical), using the variable with errors will produced biased coefficients. 
+- If you have multiple variables with Mesurement error, however, its possible to use IV to correct the problem.
+  - This is done by using one variable as the instrument of the other.
+
+- FOr this strategy to work, we need the error to be classical. That is, Uncorrelated across each other, and unrelated to the model error.
+
+Consider the following:
+
+$$\begin{aligned}
+y &= \beta_0 + \beta_1 x_1 + e \\
+\check x_1 &= x_1 + u_1 \\
+\tilde x_1 &= x_1 + u_2 \\
+\end{aligned}
+$$
+
+##
+
+- If we use each model, independently, we will have biased coefficients
+- If we combined the, Biases will remain present (albeit lower)
+- If we use one as instrument of the other tho:
+
+$$
+\begin{aligned}
+\beta_{1,iv} &= \frac{cov(\check x_1, y)}{cov(\check x_1, \tilde x_1)} or \beta_{1,iv} = \frac{cov(\tilde x_1, y)}{cov(\check x_1, \tilde x_1)} \\
+& = \frac{cov(x_1 + u_1, \beta_0 + \beta_1 x_1 + e)}{cov(x_1 + u_2, x_1 + u_1)} \\
+& = \frac{\beta_1 cov(x_1,x_1) + cov(x_1, e) + \beta_1 cov(u_1, x_1) + cov(x_1,e)}{cov(x_1 , x_1 )} \\
+& = \beta_1
+\end{aligned}
+$$
+
+## Example
+
+```{stata}
+clear
+set obs 1000
+gen x = rnormal()
+gen y = 1 + x + rnormal() 
+gen x1 = x + rnormal()
+gen x2 = x + rnormal()
+qui: regress y x
+est sto m1
+qui: regress y x1
+est sto m2
+qui: regress y x2
+est sto m3
+gen x1_x2 = (x1 + x2)/2
+qui: regress y x1_x2
+est sto m3b
+qui:ivregress 2sls  y (x1=x2)
+est sto m4
+qui:ivregress 2sls  y (x2=x1)
+est sto m5
+esttab m1 m2 m3 m3b m4 m5, se
+```
+
+# Endogenous IVs and Too many IVs
+
+## Testing for Endogeneity and Overidentifying restrictions
+
+- In general, Instrumental variables are a great tool to deal with **A4** violations.
+  - but, it can be hard to find the perfect IV, and you may still have problems if its Weak. 
+
+- In that case, it may be useful to asnwer...Do you have an Endogeneity problem? (empirically rather than theoretically)
+
+Test:
+
+1. Estimate first stage, and save predicted residuals $\hat v$: 
+
+$$y_2 = \gamma_0 + \gamma_1 z_1 + \gamma_2 x_1 + \gamma_3 x_2 + v
+$$
+
+You expect residuals to be endogenous
+
+2. Estimate main model "adding" the residuals first stage
+
+$$y = \beta_0 + \beta_1 y_2 + \beta_2 x_1 + \beta_3 x_2 + \theta \hat v + e
+$$
+
+Test for $H_0: \theta=0$.
+
+## 
+
+- If the model was endogenous, Then $\theta$ will be different from zero, and $\beta's$ different from the case without controlling for it.
+- Otherwise, we reject presence of endogeneity.
+
+- This method has the added advantage:
+
+- For the simple and exactly identified case, 2sls and adding residuals provide the same solution, except for SE. (its called Control function approach)
+
+## overidentifying restrictions
+
+- Some times, you **may** have access to multiple potential instruments. 
+
+  - But what if this instruments give you different results? 
+  - If you expect/believe a single effect exists, then there may be a problem. (one of they may be endogenous)
+  
+- So how do we test if the instruments are exogenous?
+  - First you need more instruments than endogenous variables.
+  
+
+## 
+
+- S1. Estimate Structural Equation 
+  $$y=\beta_0 + \gamma y_2 + \beta_1 x_1 + e | y_2 \sim z_1, z_2
+  $$
+
+- S2. Auxiliary equation
+  $$
+  \hat e = \delta_0 + \delta_1 z_1 + \delta_2 z2 + \delta_3 x_1 + v
+  $$ 
+
+- S3. Test for Overall Fitness. $nR^2\sim \chi^2(q_{iv})$ with $q_{iv} = \# over IVs$
+
+## IV's as LATES
+
+NOTE
+
+:::{.callout-important}
+
+When describing this test, I mentioned that one would be typically worried if observing multiple coefficients when using different IV's.
+
+However, IV's can identify different effects, because different IV's may affect different people differently. 
+
+$Z1$ may affect, say, only men. $z_2$ only women, $z_3$ only highly educated, etc.
+
+When analyzing IV's will be important to undertand who would be affected by the instrument the most, because that may explain why effects vary.
+
+:::
+
+
+## Example {.scrollable}
+
+Ignoring Potential endogeneity
+
+```{stata}
+*| code-fold: false
+frause mroz, clear
+drop if lwage==.
+** But with Endogeneity
+reg lwage educ exper expersq
+```
+
+First Stage for different IVs
+
+```{stata}
+*| code-fold: false
+qui: reg educ fatheduc exper expersq
+predict r1 , res
+test fatheduc
+adde scalar fiv = r(F)
+adde scalar pfiv = r(p)
+est sto m1
+qui: reg educ motheduc exper expersq
+predict r2 , res
+test motheduc
+adde scalar fiv = r(F)
+adde scalar pfiv = r(p)
+est sto m2
+qui: reg educ fatheduc motheduc exper expersq
+predict r3 , res
+test motheduc fatheduc
+adde scalar fiv = r(F)
+adde scalar pfiv = r(p)
+est sto m3
+
+esttab m1 m2 m3 , scalar(fiv pfiv) sfmt(%5.2f %5.3f) order(fatheduc motheduc exper expersq) se ///
+star(* 0.1 ** 0.05 *** 0.01)
+```
+
+Using parents education as instruments
+
+```{stata}
+*| code-fold: false
+* SMALL requests Df adjustment
+qui:ivregress 2sls lwage (educ= fatheduc ) exper expersq, small
+est sto m1
+qui:ivregress 2sls lwage (educ= motheduc ) exper expersq, small
+est sto m2
+qui:ivregress 2sls lwage (educ= fatheduc motheduc) exper expersq, small
+est sto m3
+esttab m1 m2 m3 , se mtitle(IV:Father IV:Mother IV:Parents) ///
+star(* 0.1 ** 0.05 *** 0.01)
+```
+
+** Testing for endogeneity
+
+```{stata}
+*| code-fold: false
+* Instrumenting education
+qui:reg  lwage educ  exper expersq r1
+est sto m1
+qui:reg  lwage educ  exper expersq r2
+est sto m2
+qui:reg  lwage educ  exper expersq r3
+est sto m3
+
+esttab m1 m2 m3 , se mtitle(IV:Father IV:Mother IV:Parents) ///
+star(* 0.1 ** 0.05 *** 0.01)
+
+*see -estat endogenous- after ivregress 2sls
+```
+
+Overid Test
+
+```{stata}
+*| code-fold: false
+
+qui:ivregress 2sls lwage (educ= fatheduc motheduc) exper expersq, small
+predict resid, res
+estat overid 
+reg resid fatheduc motheduc exper expersq, notable robust
+```
+
+# Thats all for today!
+Next week: Limited Dep Variables 
+When data has kinks
