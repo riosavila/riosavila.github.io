@@ -1,0 +1,11 @@
+{
+  "hash": "820970a7a2fdfb74630ca1d422c9392d",
+  "result": {
+    "markdown": "---\ntitle: \"Stata-output\"\nformat: \n    html: default\n    pdf: default\n---\n\n# Analyzing Oaxaca dataset\n\n \nsmaller \n\n```{=html}\n<table border=\"0\" width=\"*\">\n<tr><td colspan=3><hr></td></tr>\n<tr><td>                    </td><td>         (1)              </td><td>       \n>   (2)              </td></tr>\n<tr><td colspan=3><hr></td></tr>\n<tr><td>years of education  </td><td>      0.0885<sup>***</sup></td><td>      0\n> .0794<sup>***</sup></td></tr>\n<tr><td>                    </td><td>   (0.00519)              </td><td>   (0.0\n> 0522)              </td></tr>\n<tr><td colspan=3>&nbsp;</td></tr>\n<tr><td>years of work       </td><td>      0.0153<sup>***</sup></td><td>     0.\n> 00399<sup>*</sup>  </td></tr>\n<tr><td>experience          </td><td>   (0.00126)              </td><td>   (0.0\n> 0188)              </td></tr>\n<tr><td colspan=3>&nbsp;</td></tr>\n<tr><td>years of job tenure </td><td>                          </td><td>     0.\n> 00407<sup>*</sup>  </td></tr>\n<tr><td>                    </td><td>                          </td><td>   (0.0\n> 0196)              </td></tr>\n<tr><td colspan=3>&nbsp;</td></tr>\n<tr><td>age of respondent   </td><td>                          </td><td>      0\n> .0114<sup>***</sup></td></tr>\n<tr><td>                    </td><td>                          </td><td>   (0.0\n> 0174)              </td></tr>\n<tr><td colspan=3>&nbsp;</td></tr>\n<tr><td>Constant            </td><td>       2.136<sup>***</sup></td><td>       \n> 1.915<sup>***</sup></td></tr>\n<tr><td>                    </td><td>    (0.0654)              </td><td>    (0.\n> 0727)              </td></tr>\n<tr><td colspan=3><hr></td></tr>\n<tr><td>Observations        </td><td>        1434              </td><td>       \n>  1434              </td></tr>\n<tr><td colspan=3><hr></td></tr>\n</table>\n\n```\n\n",
+    "supporting": [
+      "stata_basics_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

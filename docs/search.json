@@ -4253,14 +4253,14 @@
     "href": "rmethods/8_iv2sls.html",
     "title": "Instrumental Variables and 2SLS",
     "section": "",
-    "text": "As I mentioned at the beginning, one of the most important assumptions required to analyze data and obtain correct estimations and draw inference was A4: No endogeneity or \\(E(e|X)=0\\)\n\nEndogeneity is a problem that occurs because the error is related to \\(X\\).\nThis is a proble,, because we can no longer assume the error is, in average, constant when analyzing changes in \\(X's\\)"
+    "text": "As I mentioned at the beginning, one of the most important assumptions required to analyze data and obtain correct estimations and draw inference was A4: No endogeneity or \\(E(e|X)=0\\)\n\nEndogeneity is a problem that occurs because the error is related to \\(X\\).\nThis is a proble,, because we can no longer assume the error is, in average, constant when analyzing changes in \\(X's\\)\n\n\n\n\n\n\nWhy did it happen?\n\nUsually because important variables are omitted\n\nAdd them back, or at least proxies?\n\nIncorrect functional form\n\nTry making it more flexible?\n\nData has measurement error\n\nGet better data?\n\nSample is endogenous (other treatments are necessary)\nReverse causality (you dont know which cause which)\nSimultenaity, similar to omitted variables. There is another factor that caused both the outcome and explanatory variable\n\n\n\n\n\n\nToday we will cover one approach that could help with many (not all) the situations that could cause endogeneity.\nTo apply this approach, however, we need:\n\nMore data (more variables with specific properties)\nMore information on how the “system” works.\n\nThese methods are:\n\nIV - Instrumental variable\n2sls - Two-stage Least squares\n\n\n\nNOTE: These two methods are almost interchangable.\n\nIV refers to cases with 1 endogenous variable and 1 “instrument”\n2sls refers to cases with 1+ endogenous variables and “instruments”\n\n\n\n\n\n\nI have mentioned a few times the word “instrument” But what are they really?\nInstruments: the heros/variables that will “save us” of endogeneity.\nThey have at least 2 properties:\n\nInstruments should be exogenous to the model\n\n\nThis means that they do not appear in the theoretical specification, thus there is no DIRECT conection between the instrument \\(Z\\) and the outcome \\(y\\).\n\nShould only be connected through the endogenous variable.\n\nAlso that there is no correlation between the model error and \\(Z\\).\n\n\nThe instrument is relevant and related to \\(x\\) (endogenous variable)\n\n\nPreferably, you need a variable that is not only correlated with \\(X\\) but determines changes in \\(X\\).\nWe also need this effect to be monotonic!\n\nIn many instances we even want an instrument that is just as good as [conditionally] random.\n\n\n\n\nThe problem \\(corr(x_1,e) \\neq 0\\): \\[\\begin{aligned}\ny &= \\beta_0 + \\beta_1 x_1 + e || \\tilde w = w-\\bar w  \\\\\n\\tilde \\beta_1 &=\\frac{\\sum \\tilde x_1 \\tilde y}{\\sum \\tilde x_1^2}=\n\\frac{\\sum \\tilde x_1 (\\beta_1 \\tilde x_1 + e)}{\\sum \\tilde x_1^2} \\\\\n& = \\beta_1 + \\frac{\\sum \\tilde x_1 e}{\\sum \\tilde x_1^2}\n\\end{aligned}\n\\]\nHow IV works \\(corr(z_1,e) \\neq 0\\):\n\\[\\begin{aligned}\n\\hat \\beta_1 &=\\frac{\\sum \\tilde z_1 \\tilde y}{\\sum \\tilde z_1 \\tilde x_1}=\n\\frac{\\sum \\tilde z_1 (\\beta_1 \\tilde x_1 + e)}{\\sum \\tilde z_1 \\tilde x_1} \\\\\n& = \\beta_1 + \\frac{\\sum \\tilde z_1 e}{\\sum \\tilde z_1 \\tilde x_1}\n\\end{aligned}\n\\]\n\n\n\n\nOne way of thinking about how IV works is by realizing not ALL changes in \\(X_1\\) are endogenous. Some are due to \\(e\\), but some are due other factors.\n\nwe just can’t differentiate them\nIf we could use (in the regression), only exogenous changes, (or omit endogenous ones), we could estimate our models correctly.\n\nWhat IV’s do is to identify Part of the exogenous component (the one related to \\(Z\\)), and use only THAT variation to identify coefficients.\n\nThis would do a reasonable work, as long as the instrument is relevant, and instrument exogenous.\n\n\n\n\n\n\\[\\begin{aligned}\ne &\\sim chi(2)-2 ; z = chi(2)-2 ; x = chi(2)-2+z+e \\\\\ny &=1+x+e\n\\end{aligned}\n\\]\n\n** Montecarlo Simulation\nclear\nset seed 10101\nset obs 1000\nqui:mata:\nk = 1000; n=1000\nb1=bc = b = J(k,2,0)\nfor(i=1;i&lt;=k;i++){\n    e = rchi2(n,1,2):-2\n    e1 = rchi2(n,1,2):-2\n    z = rchi2(n,1,2):-2,J(n,1,1)\n    x = rchi2(n,1,2):-2:+z[,1]:+e ,J(n,1,1)\n    x1 = rchi2(n,1,2):-2:+z[,1]:+e1,J(n,1,1)\n    y = 1:+x[,1]:+e\n    y1 = 1:+x[,1]:+e1\n    xx = cross(x,x)\n    b[i,] = (invsym(xx)*cross(x,y))'\n    bc[i,] = (invsym(cross(z,x))*cross(z,y))'\n    b1[i,] = (invsym(xx)*cross(x,y1))'\n}\nend\ngetmata bb*=b\ngetmata bc*=bc\ngetmata b_*=b1\nset scheme white2\ncolor_style tableau\ntwo kdensity bb1 ||  kdensity bc1  || kdensity b_1, ///\nlegend(order(1 \"X Endogenous\" 2 \"IV\" 3 \"X Exogenous\"))\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSE have a different structure compared to OLS.\nIn the simplest case (one dep variable that is endogenous), and under the assumption of Homoskedasticity, SE for \\(\\beta_1\\) are given by:\n\n\\[\\begin{aligned}Var_{iv}(\\beta_1) = \\frac{\\hat\\sigma^2_e}{SST_x R^2_{x|z}} \\\\\n\\hat\\sigma^2_e =\\frac{ \\sum (y-\\hat\\beta_0-\\hat\\beta_1 x)^2}{n-2}\n\\end{aligned}\n\\]\n\nOnce they are obtained t-stats can be used as usual\n\n\n\n\n\n\nEducation:\n\nFathers Education\nDistance to School\n# Siblins\n\n\nVeteran Status:\n\nVietnam Lottery Ticket\n\nOther:\n\nRain\nShift-Share\nJudge FE\n\n\n\n\nIV SE will be necessarily larger than OLS, because there is less variation of \\(x\\) used to identify \\(\\beta\\).\nIf \\(x\\) is used as its own instrument, the estimator will be that of OLS."
   },
   {
     "objectID": "rmethods/8_iv2sls.html#the-problem-endogeneity",
     "href": "rmethods/8_iv2sls.html#the-problem-endogeneity",
     "title": "Instrumental Variables and 2SLS",
-    "section": "The problem: Endogeneity",
-    "text": "The problem: Endogeneity\n\nAs I mentioned at the beginning, one of the most important assumptions required to analyze data and obtain correct estimations and draw inference was A4: No endogeneity or \\(E(e|X)=0\\)\n\nEndogeneity is a problem that occurs because the error is related to \\(X\\).\nThis is a proble,, because we can no longer assume the error is, in average, constant when analyzing changes in \\(X's\\)"
+    "section": "",
+    "text": "As I mentioned at the beginning, one of the most important assumptions required to analyze data and obtain correct estimations and draw inference was A4: No endogeneity or \\(E(e|X)=0\\)\n\nEndogeneity is a problem that occurs because the error is related to \\(X\\).\nThis is a proble,, because we can no longer assume the error is, in average, constant when analyzing changes in \\(X's\\)"
   },
   {
     "objectID": "rmethods/8_iv2sls.html#the-solution",
@@ -4280,8 +4280,8 @@
     "objectID": "rmethods/8_iv2sls.html#a-pair-of-solutions",
     "href": "rmethods/8_iv2sls.html#a-pair-of-solutions",
     "title": "Instrumental Variables and 2SLS",
-    "section": "A pair of Solutions",
-    "text": "A pair of Solutions\n\nToday we will cover one approach that could help with many (not all) the situations that could cause endogeneity.\nTo apply this approach, however, we need:\n\nMore data (more variables with specific properties)\nMore information on how the “system” works.\n\nThese methods are:\n\nIV - Instrumental variable\n2sls - Two-stage Least squares\n\n\n\nNOTE: These two methods are almost interchangable.\n\nIV refers to cases with 1 endogenous variable and 1 “instrument”\n2sls refers to cases with 1+ endogenous variables and “instruments”"
+    "section": "",
+    "text": "Today we will cover one approach that could help with many (not all) the situations that could cause endogeneity.\nTo apply this approach, however, we need:\n\nMore data (more variables with specific properties)\nMore information on how the “system” works.\n\nThese methods are:\n\nIV - Instrumental variable\n2sls - Two-stage Least squares\n\n\n\nNOTE: These two methods are almost interchangable.\n\nIV refers to cases with 1 endogenous variable and 1 “instrument”\n2sls refers to cases with 1+ endogenous variables and “instruments”"
   },
   {
     "objectID": "rmethods/8_iv2sls.html#what-is-an-instrument",
@@ -4294,8 +4294,8 @@
     "objectID": "rmethods/8_iv2sls.html#what-is-an-instrumental-variable",
     "href": "rmethods/8_iv2sls.html#what-is-an-instrumental-variable",
     "title": "Instrumental Variables and 2SLS",
-    "section": "What is an “Instrumental Variable”",
-    "text": "What is an “Instrumental Variable”\n\nI have mentioned a few times the word “instrument” But what are they really?\nInstruments: the heros/variables that will “save us” of endogeneity.\nThey have at least 2 properties:\n\nInstruments should be exogenous to the model\n\n\nThis means that they do not appear in the theoretical specification, thus there is no DIRECT conection between the instrument \\(Z\\) and the outcome \\(y\\).\n\nShould only be connected through the endogenous variable.\n\nAlso that there is no correlation between the model error and \\(Z\\).\n\n\nThe instrument is relevant and related to \\(x\\) (endogenous variable)\n\n\nPreferably, you need a variable that is not only correlated with \\(X\\) but determines changes in \\(X\\).\nWe also need this effect to be monotonic!\n\nIn many instances we even want an instrument that is just as good as [conditionally] random."
+    "section": "",
+    "text": "I have mentioned a few times the word “instrument” But what are they really?\nInstruments: the heros/variables that will “save us” of endogeneity.\nThey have at least 2 properties:\n\nInstruments should be exogenous to the model\n\n\nThis means that they do not appear in the theoretical specification, thus there is no DIRECT conection between the instrument \\(Z\\) and the outcome \\(y\\).\n\nShould only be connected through the endogenous variable.\n\nAlso that there is no correlation between the model error and \\(Z\\).\n\n\nThe instrument is relevant and related to \\(x\\) (endogenous variable)\n\n\nPreferably, you need a variable that is not only correlated with \\(X\\) but determines changes in \\(X\\).\nWe also need this effect to be monotonic!\n\nIn many instances we even want an instrument that is just as good as [conditionally] random."
   },
   {
     "objectID": "rmethods/8_iv2sls.html#how-instruments-work",
@@ -4315,36 +4315,36 @@
     "objectID": "rmethods/8_iv2sls.html#how-instruments-work-the-math",
     "href": "rmethods/8_iv2sls.html#how-instruments-work-the-math",
     "title": "Instrumental Variables and 2SLS",
-    "section": "How Instruments work: The math",
-    "text": "How Instruments work: The math\nThe problem \\(corr(x_1,e) \\neq 0\\): \\[\\begin{aligned}\ny &= \\beta_0 + \\beta_1 x_1 + e || \\tilde w = w-\\bar w  \\\\\n\\tilde \\beta_1 &=\\frac{\\sum \\tilde x_1 \\tilde y}{\\sum \\tilde x_1^2}=\n\\frac{\\sum \\tilde x_1 (\\beta_1 \\tilde x_1 + e)}{\\sum \\tilde x_1^2} \\\\\n& = \\beta_1 + \\frac{\\sum \\tilde x_1 e}{\\sum \\tilde x_1^2}\n\\end{aligned}\n\\]\nHow IV works \\(corr(z_1,e) \\neq 0\\):\n\\[\\begin{aligned}\n\\hat \\beta_1 &=\\frac{\\sum \\tilde z_1 \\tilde y}{\\sum \\tilde z_1 \\tilde x_1}=\n\\frac{\\sum \\tilde z_1 (\\beta_1 \\tilde x_1 + e)}{\\sum \\tilde z_1 \\tilde x_1} \\\\\n& = \\beta_1 + \\frac{\\sum \\tilde z_1 e}{\\sum \\tilde z_1 \\tilde x_1}\n\\end{aligned}\n\\]"
+    "section": "",
+    "text": "The problem \\(corr(x_1,e) \\neq 0\\): \\[\\begin{aligned}\ny &= \\beta_0 + \\beta_1 x_1 + e || \\tilde w = w-\\bar w  \\\\\n\\tilde \\beta_1 &=\\frac{\\sum \\tilde x_1 \\tilde y}{\\sum \\tilde x_1^2}=\n\\frac{\\sum \\tilde x_1 (\\beta_1 \\tilde x_1 + e)}{\\sum \\tilde x_1^2} \\\\\n& = \\beta_1 + \\frac{\\sum \\tilde x_1 e}{\\sum \\tilde x_1^2}\n\\end{aligned}\n\\]\nHow IV works \\(corr(z_1,e) \\neq 0\\):\n\\[\\begin{aligned}\n\\hat \\beta_1 &=\\frac{\\sum \\tilde z_1 \\tilde y}{\\sum \\tilde z_1 \\tilde x_1}=\n\\frac{\\sum \\tilde z_1 (\\beta_1 \\tilde x_1 + e)}{\\sum \\tilde z_1 \\tilde x_1} \\\\\n& = \\beta_1 + \\frac{\\sum \\tilde z_1 e}{\\sum \\tilde z_1 \\tilde x_1}\n\\end{aligned}\n\\]"
   },
   {
     "objectID": "rmethods/8_iv2sls.html#how-instruments-work-the-intuition",
     "href": "rmethods/8_iv2sls.html#how-instruments-work-the-intuition",
     "title": "Instrumental Variables and 2SLS",
-    "section": "How Instruments work: The intuition",
-    "text": "How Instruments work: The intuition\n\nOne way of thinking about how IV works is by realizing not ALL changes in \\(X_1\\) are endogenous. Some are due to \\(e\\), but some are due other factors.\n\nwe just can’t differentiate them\nIf we could use (in the regression), only exogenous changes, (or omit endogenous ones), we could estimate our models correctly.\n\nWhat IV’s do is to identify Part of the exogenous component (the one related to \\(Z\\)), and use only THAT variation to identify coefficients.\n\nThis would do a reasonable work, as long as the instrument is relevant, and instrument exogenous."
+    "section": "",
+    "text": "One way of thinking about how IV works is by realizing not ALL changes in \\(X_1\\) are endogenous. Some are due to \\(e\\), but some are due other factors.\n\nwe just can’t differentiate them\nIf we could use (in the regression), only exogenous changes, (or omit endogenous ones), we could estimate our models correctly.\n\nWhat IV’s do is to identify Part of the exogenous component (the one related to \\(Z\\)), and use only THAT variation to identify coefficients.\n\nThis would do a reasonable work, as long as the instrument is relevant, and instrument exogenous."
   },
   {
     "objectID": "rmethods/8_iv2sls.html#example",
     "href": "rmethods/8_iv2sls.html#example",
     "title": "Instrumental Variables and 2SLS",
-    "section": "Example",
-    "text": "Example\n\\[\\begin{aligned}\ne &\\sim chi(2)-2 ; z = chi(2)-2 ; x = chi(2)-2+z+e \\\\\ny &=1+x+e\n\\end{aligned}\n\\]\n\n\nCode\n** Montecarlo Simulation\nclear\nset seed 10101\nset obs 1000\nqui:mata:\nk = 1000; n=1000\nb1=bc = b = J(k,2,0)\nfor(i=1;i&lt;=k;i++){\n    e = rchi2(n,1,2):-2\n    e1 = rchi2(n,1,2):-2\n    z = rchi2(n,1,2):-2,J(n,1,1)\n    x = rchi2(n,1,2):-2:+z[,1]:+e ,J(n,1,1)\n    x1 = rchi2(n,1,2):-2:+z[,1]:+e1,J(n,1,1)\n    y = 1:+x[,1]:+e\n    y1 = 1:+x[,1]:+e1\n    xx = cross(x,x)\n    b[i,] = (invsym(xx)*cross(x,y))'\n    bc[i,] = (invsym(cross(z,x))*cross(z,y))'\n    b1[i,] = (invsym(xx)*cross(x,y1))'\n}\nend\ngetmata bb*=b\ngetmata bc*=bc\ngetmata b_*=b1\nset scheme white2\ncolor_style tableau\ntwo kdensity bb1 ||  kdensity bc1  || kdensity b_1, ///\nlegend(order(1 \"X Endogenous\" 2 \"IV\" 3 \"X Exogenous\"))"
+    "section": "",
+    "text": "\\[\\begin{aligned}\ne &\\sim chi(2)-2 ; z = chi(2)-2 ; x = chi(2)-2+z+e \\\\\ny &=1+x+e\n\\end{aligned}\n\\]\n\n** Montecarlo Simulation\nclear\nset seed 10101\nset obs 1000\nqui:mata:\nk = 1000; n=1000\nb1=bc = b = J(k,2,0)\nfor(i=1;i&lt;=k;i++){\n    e = rchi2(n,1,2):-2\n    e1 = rchi2(n,1,2):-2\n    z = rchi2(n,1,2):-2,J(n,1,1)\n    x = rchi2(n,1,2):-2:+z[,1]:+e ,J(n,1,1)\n    x1 = rchi2(n,1,2):-2:+z[,1]:+e1,J(n,1,1)\n    y = 1:+x[,1]:+e\n    y1 = 1:+x[,1]:+e1\n    xx = cross(x,x)\n    b[i,] = (invsym(xx)*cross(x,y))'\n    bc[i,] = (invsym(cross(z,x))*cross(z,y))'\n    b1[i,] = (invsym(xx)*cross(x,y1))'\n}\nend\ngetmata bb*=b\ngetmata bc*=bc\ngetmata b_*=b1\nset scheme white2\ncolor_style tableau\ntwo kdensity bb1 ||  kdensity bc1  || kdensity b_1, ///\nlegend(order(1 \"X Endogenous\" 2 \"IV\" 3 \"X Exogenous\"))"
   },
   {
     "objectID": "rmethods/8_iv2sls.html#se-and-statistical-inference",
     "href": "rmethods/8_iv2sls.html#se-and-statistical-inference",
     "title": "Instrumental Variables and 2SLS",
-    "section": "SE and Statistical Inference",
-    "text": "SE and Statistical Inference\n\nSE have a different structure compared to OLS.\nIn the simplest case (one dep variable that is endogenous), and under the assumption of Homoskedasticity, SE for \\(\\beta_1\\) are given by:\n\n\\[\\begin{aligned}Var_{iv}(\\beta_1) = \\frac{\\hat\\sigma^2_e}{SST_x R^2_{x|z}} \\\\\n\\hat\\sigma^2_e =\\frac{ \\sum (y-\\hat\\beta_0-\\hat\\beta_1 x)^2}{n-2}\n\\end{aligned}\n\\]\n\nOnce they are obtained t-stats can be used as usual"
+    "section": "",
+    "text": "SE have a different structure compared to OLS.\nIn the simplest case (one dep variable that is endogenous), and under the assumption of Homoskedasticity, SE for \\(\\beta_1\\) are given by:\n\n\\[\\begin{aligned}Var_{iv}(\\beta_1) = \\frac{\\hat\\sigma^2_e}{SST_x R^2_{x|z}} \\\\\n\\hat\\sigma^2_e =\\frac{ \\sum (y-\\hat\\beta_0-\\hat\\beta_1 x)^2}{n-2}\n\\end{aligned}\n\\]\n\nOnce they are obtained t-stats can be used as usual"
   },
   {
     "objectID": "rmethods/8_iv2sls.html#examples-of-ivs",
     "href": "rmethods/8_iv2sls.html#examples-of-ivs",
     "title": "Instrumental Variables and 2SLS",
-    "section": "Examples of IV’s",
-    "text": "Examples of IV’s\n\n\nEducation:\n\nFathers Education\nDistance to School\n# Siblins\n\n\nVeteran Status:\n\nVietnam Lottery Ticket\n\nOther:\n\nRain\nShift-Share\nJudge FE\n\n\n\n\nIV SE will be necessarily larger than OLS, because there is less variation of \\(x\\) used to identify \\(\\beta\\).\nIf \\(x\\) is used as its own instrument, the estimator will be that of OLS."
+    "section": "",
+    "text": "Education:\n\nFathers Education\nDistance to School\n# Siblins\n\n\nVeteran Status:\n\nVietnam Lottery Ticket\n\nOther:\n\nRain\nShift-Share\nJudge FE\n\n\n\n\nIV SE will be necessarily larger than OLS, because there is less variation of \\(x\\) used to identify \\(\\beta\\).\nIf \\(x\\) is used as its own instrument, the estimator will be that of OLS."
   },
   {
     "objectID": "rmethods/8_iv2sls.html#weak-and-endogenous-instruments",
@@ -4428,7 +4428,7 @@
     "href": "rmethods/8_iv2sls.html#examples",
     "title": "Instrumental Variables and 2SLS",
     "section": "Examples",
-    "text": "Examples\n\n\nCode\n/*\n* This code is only to show the process. Too long to run in quarto\ncapture program drop simx \nprogram simx, eclass\nclear\nlocal N `1'\nlocal F `2'\nlocal sig = sqrt(`N'/ `F')\nset obs `N'\ngen e = rnormal()\ngen z = rnormal() \ngen x = 1 + z + (e+rnormal())*sqrt(.5)*`sig'\n*sqrt(10) \ngen y = 1 + (e+rnormal())*sqrt(.5)\nreg x z, \nmatrix b=(_b[z]/_se[z])^2\nivreg y (x=z), \nmatrix b=b,_b[x],_b[x]/_se[x]\nereturn post b\nend\n\ntempfile f1 f2 f3 f4 f5\nparallel initialize 14\nparallel sim, reps(5000): simx 500 10\ngen F=10\nsave `f1'\nparallel sim, reps(5000): simx 500 20\ngen F=20\nsave `f2'\nparallel sim, reps(5000): simx 500 40\ngen F=40\nsave `f3'\nparallel sim, reps(5000): simx 500 80\ngen F=80\nsave `f4'\nparallel sim, reps(5000): simx 500 160\ngen F=160\nsave `f5'\n\nclear \nappend using `f1'\nappend using `f2'\nappend using `f3'\nappend using `f4'\nappend using `f5'\n\nren (*) (f_stat b_coef t_stat)\n*/\nuse mdata/ivweak, clear\nset scheme white2\ncolor_style tableau\n\njoy_plot t_stat, over(F) xline(-1.96 1.96) xtitle(t-Stat) dadj(2)"
+    "text": "Examples\n\n/*\n* This code is only to show the process. Too long to run in quarto\ncapture program drop simx \nprogram simx, eclass\nclear\nlocal N `1'\nlocal F `2'\nlocal sig = sqrt(`N'/ `F')\nset obs `N'\ngen e = rnormal()\ngen z = rnormal() \ngen x = 1 + z + (e+rnormal())*sqrt(.5)*`sig'\n*sqrt(10) \ngen y = 1 + (e+rnormal())*sqrt(.5)\nreg x z, \nmatrix b=(_b[z]/_se[z])^2\nivreg y (x=z), \nmatrix b=b,_b[x],_b[x]/_se[x]\nereturn post b\nend\n\ntempfile f1 f2 f3 f4 f5\nparallel initialize 14\nparallel sim, reps(5000): simx 500 10\ngen F=10\nsave `f1'\nparallel sim, reps(5000): simx 500 20\ngen F=20\nsave `f2'\nparallel sim, reps(5000): simx 500 40\ngen F=40\nsave `f3'\nparallel sim, reps(5000): simx 500 80\ngen F=80\nsave `f4'\nparallel sim, reps(5000): simx 500 160\ngen F=160\nsave `f5'\n\nclear \nappend using `f1'\nappend using `f2'\nappend using `f3'\nappend using `f4'\nappend using `f5'\n\nren (*) (f_stat b_coef t_stat)\n*/\nuse mdata/ivweak, clear\nset scheme white2\ncolor_style tableau\n\njoy_plot t_stat, over(F) xline(-1.96 1.96) xtitle(t-Stat) dadj(2)"
   },
   {
     "objectID": "rmethods/8_iv2sls.html#iv-for-measurement-errors-two-wrongs-make-one-right",
@@ -4470,7 +4470,7 @@
     "href": "rmethods/8_iv2sls.html#example-1",
     "title": "Instrumental Variables and 2SLS",
     "section": "Example",
-    "text": "Example\n\n\nCode\nclear\nset obs 1000\ngen x = rnormal()\ngen y = 1 + x + rnormal() \ngen x1 = x + rnormal()\ngen x2 = x + rnormal()\nqui: regress y x\nest sto m1\nqui: regress y x1\nest sto m2\nqui: regress y x2\nest sto m3\ngen x1_x2 = (x1 + x2)/2\nqui: regress y x1_x2\nest sto m3b\nqui:ivregress 2sls  y (x1=x2)\nest sto m4\nqui:ivregress 2sls  y (x2=x1)\nest sto m5\nesttab m1 m2 m3 m3b m4 m5, se\n\n\nNumber of observations (_N) was 0, now 1,000.\n\n-------------------------------------------------------------------------------\n&gt; -----------------------------\n                      (1)             (2)             (3)             (4)      \n&gt;        (5)             (6)   \n                        y               y               y               y      \n&gt;          y               y   \n-------------------------------------------------------------------------------\n&gt; -----------------------------\nx                   1.006***                                                   \n&gt;                              \n                 (0.0320)                                                      \n&gt;                              \n\nx1                                  0.520***                                   \n&gt;      1.018***                \n                                 (0.0277)                                      \n&gt;   (0.0640)                   \n\nx2                                                  0.502***                   \n&gt;                      1.038***\n                                                 (0.0277)                      \n&gt;                   (0.0654)   \n\nx1_x2                                                               0.682***   \n&gt;                              \n                                                                 (0.0301)      \n&gt;                              \n\n_cons               1.010***        0.996***        0.988***        0.983***   \n&gt;      0.974***        0.956***\n                 (0.0313)        (0.0380)        (0.0384)        (0.0360)      \n&gt;   (0.0438)        (0.0451)   \n-------------------------------------------------------------------------------\n&gt; -----------------------------\nN                    1000            1000            1000            1000      \n&gt;       1000            1000   \n-------------------------------------------------------------------------------\n&gt; -----------------------------\nStandard errors in parentheses\n* p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001"
+    "text": "Example\n\nclear\nset obs 1000\ngen x = rnormal()\ngen y = 1 + x + rnormal() \ngen x1 = x + rnormal()\ngen x2 = x + rnormal()\nqui: regress y x\nest sto m1\nqui: regress y x1\nest sto m2\nqui: regress y x2\nest sto m3\ngen x1_x2 = (x1 + x2)/2\nqui: regress y x1_x2\nest sto m3b\nqui:ivregress 2sls  y (x1=x2)\nest sto m4\nqui:ivregress 2sls  y (x2=x1)\nest sto m5\nesttab m1 m2 m3 m3b m4 m5, se\n\nNumber of observations (_N) was 0, now 1,000.\n\n-------------------------------------------------------------------------------\n&gt; -----------------------------\n                      (1)             (2)             (3)             (4)      \n&gt;        (5)             (6)   \n                        y               y               y               y      \n&gt;          y               y   \n-------------------------------------------------------------------------------\n&gt; -----------------------------\nx                   1.006***                                                   \n&gt;                              \n                 (0.0320)                                                      \n&gt;                              \n\nx1                                  0.520***                                   \n&gt;      1.018***                \n                                 (0.0277)                                      \n&gt;   (0.0640)                   \n\nx2                                                  0.502***                   \n&gt;                      1.038***\n                                                 (0.0277)                      \n&gt;                   (0.0654)   \n\nx1_x2                                                               0.682***   \n&gt;                              \n                                                                 (0.0301)      \n&gt;                              \n\n_cons               1.010***        0.996***        0.988***        0.983***   \n&gt;      0.974***        0.956***\n                 (0.0313)        (0.0380)        (0.0384)        (0.0360)      \n&gt;   (0.0438)        (0.0451)   \n-------------------------------------------------------------------------------\n&gt; -----------------------------\nN                    1000            1000            1000            1000      \n&gt;       1000            1000   \n-------------------------------------------------------------------------------\n&gt; -----------------------------\nStandard errors in parentheses\n* p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001"
   },
   {
     "objectID": "rmethods/8_iv2sls.html#sls-many-ys-many-zs",
@@ -4491,7 +4491,7 @@
     "href": "rmethods/8_iv2sls.html#ivs-as-lates",
     "title": "Instrumental Variables and 2SLS",
     "section": "IV’s as LATES",
-    "text": "IV’s as LATES\nNOTE\n\n\n\n\n\n\nImportant\n\n\nWhen describing this test, I mentioned that one would be typically worried if observing multiple coefficients when using different IV’s.\nHowever, IV’s can identify different effects, because different IV’s may affect different people differently.\n\\(Z1\\) may affect, say, only men. \\(z_2\\) only women, \\(z_3\\) only highly educated, etc.\nWhen analyzing IV’s will be important to undertand who would be affected by the instrument the most, because that may explain why effects vary."
+    "text": "IV’s as LATES\nNOTE\n\n\n\n\n\n\nImportant\n\n\n\nWhen describing this test, I mentioned that one would be typically worried if observing multiple coefficients when using different IV’s.\nHowever, IV’s can identify different effects, because different IV’s may affect different people differently.\n\\(Z1\\) may affect, say, only men. \\(z_2\\) only women, \\(z_3\\) only highly educated, etc.\nWhen analyzing IV’s will be important to undertand who would be affected by the instrument the most, because that may explain why effects vary."
   },
   {
     "objectID": "rmethods/8_iv2sls.html#example-2",
@@ -4499,5 +4499,831 @@
     "title": "Instrumental Variables and 2SLS",
     "section": "Example",
     "text": "Example\nIgnoring Potential endogeneity\n\nfrause mroz, clear\ndrop if lwage==.\n** But with Endogeneity\nreg lwage educ exper expersq\n\n(325 observations deleted)\n\n      Source |       SS           df       MS      Number of obs   =       428\n-------------+----------------------------------   F(3, 424)       =     26.29\n       Model |  35.0222967         3  11.6740989   Prob &gt; F        =    0.0000\n    Residual |  188.305144       424  .444115906   R-squared       =    0.1568\n-------------+----------------------------------   Adj R-squared   =    0.1509\n       Total |  223.327441       427  .523015084   Root MSE        =    .66642\n\n------------------------------------------------------------------------------\n       lwage | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n        educ |   .1074896   .0141465     7.60   0.000     .0796837    .1352956\n       exper |   .0415665   .0131752     3.15   0.002     .0156697    .0674633\n     expersq |  -.0008112   .0003932    -2.06   0.040    -.0015841   -.0000382\n       _cons |  -.5220406   .1986321    -2.63   0.009    -.9124667   -.1316144\n------------------------------------------------------------------------------\n\n\nFirst Stage for different IVs\n\nqui: reg educ fatheduc exper expersq\npredict r1 , res\ntest fatheduc\nadde scalar fiv = r(F)\nadde scalar pfiv = r(p)\nest sto m1\nqui: reg educ motheduc exper expersq\npredict r2 , res\ntest motheduc\nadde scalar fiv = r(F)\nadde scalar pfiv = r(p)\nest sto m2\nqui: reg educ fatheduc motheduc exper expersq\npredict r3 , res\ntest motheduc fatheduc\nadde scalar fiv = r(F)\nadde scalar pfiv = r(p)\nest sto m3\n\nesttab m1 m2 m3 , scalar(fiv pfiv) sfmt(%5.2f %5.3f) order(fatheduc motheduc exper expersq) se ///\nstar(* 0.1 ** 0.05 *** 0.01)\n\n\n ( 1)  fatheduc = 0\n\n       F(  1,   424) =   87.74\n            Prob &gt; F =    0.0000\n\n ( 1)  motheduc = 0\n\n       F(  1,   424) =   73.95\n            Prob &gt; F =    0.0000\n\n ( 1)  motheduc = 0\n ( 2)  fatheduc = 0\n\n       F(  2,   423) =   55.40\n            Prob &gt; F =    0.0000\n\n------------------------------------------------------------\n                      (1)             (2)             (3)   \n                     educ            educ            educ   \n------------------------------------------------------------\nfatheduc            0.271***                        0.190***\n                 (0.0289)                        (0.0338)   \n\nmotheduc                            0.268***        0.158***\n                                 (0.0311)        (0.0359)   \n\nexper              0.0468          0.0489          0.0452   \n                 (0.0411)        (0.0417)        (0.0403)   \n\nexpersq          -0.00115        -0.00128        -0.00101   \n                (0.00123)       (0.00124)       (0.00120)   \n\n_cons               9.887***        9.775***        9.103***\n                  (0.396)         (0.424)         (0.427)   \n------------------------------------------------------------\nN                     428             428             428   \nfiv                 87.74           73.95           55.40   \npfiv                0.000           0.000           0.000   \n------------------------------------------------------------\nStandard errors in parentheses\n* p&lt;0.1, ** p&lt;0.05, *** p&lt;0.01\n\n\nUsing parents education as instruments\n\n* SMALL requests Df adjustment\nqui:ivregress 2sls lwage (educ= fatheduc ) exper expersq, small\nest sto m1\nqui:ivregress 2sls lwage (educ= motheduc ) exper expersq, small\nest sto m2\nqui:ivregress 2sls lwage (educ= fatheduc motheduc) exper expersq, small\nest sto m3\nesttab m1 m2 m3 , se mtitle(IV:Father IV:Mother IV:Parents) ///\nstar(* 0.1 ** 0.05 *** 0.01)\n\n\n------------------------------------------------------------\n                      (1)             (2)             (3)   \n                IV:Father       IV:Mother      IV:Parents   \n------------------------------------------------------------\neduc               0.0702**        0.0493          0.0614*  \n                 (0.0344)        (0.0374)        (0.0314)   \n\nexper              0.0437***       0.0449***       0.0442***\n                 (0.0134)        (0.0136)        (0.0134)   \n\nexpersq         -0.000882**     -0.000922**     -0.000899** \n               (0.000401)      (0.000406)      (0.000402)   \n\n_cons             -0.0611           0.198          0.0481   \n                  (0.436)         (0.473)         (0.400)   \n------------------------------------------------------------\nN                     428             428             428   \n------------------------------------------------------------\nStandard errors in parentheses\n* p&lt;0.1, ** p&lt;0.05, *** p&lt;0.01\n\n\n** Testing for endogeneity\n\n* Instrumenting education\nqui:reg  lwage educ  exper expersq r1\nest sto m1\nqui:reg  lwage educ  exper expersq r2\nest sto m2\nqui:reg  lwage educ  exper expersq r3\nest sto m3\n\nesttab m1 m2 m3 , se mtitle(IV:Father IV:Mother IV:Parents) ///\nstar(* 0.1 ** 0.05 *** 0.01)\n\n*see -estat endogenous- after ivregress 2sls\n\n\n------------------------------------------------------------\n                      (1)             (2)             (3)   \n                IV:Father       IV:Mother      IV:Parents   \n------------------------------------------------------------\neduc               0.0702**        0.0493          0.0614** \n                 (0.0341)        (0.0366)        (0.0310)   \n\nexper              0.0437***       0.0449***       0.0442***\n                 (0.0133)        (0.0133)        (0.0132)   \n\nexpersq         -0.000882**     -0.000922**     -0.000899** \n               (0.000397)      (0.000398)      (0.000396)   \n\nr1                 0.0450                                   \n                 (0.0375)                                   \n\nr2                                 0.0684*                  \n                                 (0.0397)                   \n\nr3                                                 0.0582*  \n                                                 (0.0348)   \n\n_cons             -0.0611           0.198          0.0481   \n                  (0.433)         (0.463)         (0.395)   \n------------------------------------------------------------\nN                     428             428             428   \n------------------------------------------------------------\nStandard errors in parentheses\n* p&lt;0.1, ** p&lt;0.05, *** p&lt;0.01\n\n\nOverid Test\n\nqui:ivregress 2sls lwage (educ= fatheduc motheduc) exper expersq, small\npredict resid, res\nestat overid \nreg resid fatheduc motheduc exper expersq, notable robust\n\n\n  Tests of overidentifying restrictions:\n\n  Sargan (score) chi2(1) =  .378071  (p = 0.5386)\n  Basmann chi2(1)        =  .373985  (p = 0.5408)\n\nLinear regression                               Number of obs     =        428\n                                                F(4, 423)         =       0.11\n                                                Prob &gt; F          =     0.9791\n                                                R-squared         =     0.0009\n                                                Root MSE          =     .67521"
+  },
+  {
+    "objectID": "quarto/stata_basics.html",
+    "href": "quarto/stata_basics.html",
+    "title": "Stata-output",
+    "section": "",
+    "text": "Analyzing Oaxaca dataset\nsmaller\n\n\n\n\n\n\n\n\n\n\n\n\n(1)\n&gt; (2)\n\n\n\n\n\nyears of education\n0.0885***\n0 &gt; .0794***\n\n\n\n(0.00519)\n(0.0 &gt; 0522)\n\n\n \n\n\nyears of work\n0.0153***\n0. &gt; 00399*\n\n\nexperience\n(0.00126)\n(0.0 &gt; 0188)\n\n\n \n\n\nyears of job tenure\n\n0. &gt; 00407*\n\n\n\n\n(0.0 &gt; 0196)\n\n\n \n\n\nage of respondent\n\n0 &gt; .0114***\n\n\n\n\n(0.0 &gt; 0174)\n\n\n \n\n\nConstant\n2.136***\n&gt; 1.915***\n\n\n\n(0.0654)\n(0. &gt; 0727)\n\n\n\n\n\nObservations\n1434\n&gt; 1434"
+  },
+  {
+    "objectID": "quarto/table1.html",
+    "href": "quarto/table1.html",
+    "title": "Econometrics MSC Levy",
+    "section": "",
+    "text": "Male\nFemale\n\n\n\n\nN\n759 (46.1%)\n888 (53.9%)\n\n\nlog hourly wages\n3.440 (0.479)\n3.267 (0.570)\n\n\nyears of education\n11.800 (2.444)\n11.060 (2.260)\n\n\nyears of work experience\n14.077 (11.180)\n12.138 (8.327)\n\n\nyears of job tenure\n9.003 (9.061)\n6.605 (6.727)\n\n\nage of respondent\n38.516 (11.341)\n39.884 (10.727)\n\n\nMarital Status\n\n\n\n\nSingle\n297 (39.1%)\n268 (30.2%)\n\n\nMarried\n397 (52.3%)\n465 (52.4%)\n\n\nDivorced\n65 (8.6%)\n155 (17.5%)"
+  },
+  {
+    "objectID": "quarto/regress.html",
+    "href": "quarto/regress.html",
+    "title": "Econometrics MSC Levy",
+    "section": "",
+    "text": "(1)\n(2)\n(3)\n(4)\n\n\n\n\nyears of education\n0.0885***\n0.0794***\n0.0554***\n0.0854***\n\n\n\n(0.00519)\n(0.00522)\n(0.00613)\n(0.00876)\n\n\nyears of work\n0.0153***\n0.00399*\n-0.00483*\n0.00874*\n\n\nexperience\n(0.00126)\n(0.00188)\n(0.00203)\n(0.00356)\n\n\nyears of job tenure\n\n0.00407*\n-0.000553\n0.00150\n\n\n\n\n(0.00196)\n(0.00212)\n(0.00368)\n\n\nage of respondent\n\n0.0114***\n0.0249***\n0.00576*\n\n\n\n\n(0.00174)\n(0.00224)\n(0.00275)\n\n\nConstant\n2.136***\n1.915***\n1.903***\n1.965***\n\n\n\n(0.0654)\n(0.0727)\n(0.0784)\n(0.126)\n\n\nObservations\n1434\n1434\n751\n683"
+  },
+  {
+    "objectID": "data_resources.html",
+    "href": "data_resources.html",
+    "title": "Data-Set Handbook",
+    "section": "",
+    "text": "Source: L.E. Papke (1995), “Participation in and Contributions to 401(k) Pension Plans: Evidence from Plan Data,” Journal of Human Resources 30, 311-325.\nProfessor Papke, of Michigan State University, kindly provided these data. She gathered them from the Internal Revenue Service’s Form 5500 tapes.\nUsed in Text: pages 62, 76, 133, 169, 212-213, 656-657\nNotes: This data set is used in a variety of ways in the text. One additional possibility is to investigate whether the coefficients from the regression of prate on mrate, log(totemp) differ by whether the plan is a sole plan. The Chow test (see Section 7.4), and the less restrictive version that allows different intercepts, can be used.\n\n\n\nSource: A. Abadie (2003), “Semiparametric Instrumental Variable Estimation of Treatment Response Models,” Journal of Econometrics 113, 231-263.\nProfessor Abadie, now at MIT, kindly provided these data. He obtained them from the 1991 Survey of Income and Program Participation (SIPP).\nUsed in Text: pages 160-161, 178, 217-218, 258-259, 276, 292, 528\nNotes: This data set can also be used to illustrate the binary response models, probit and logit, in Chapter 17, where, say, pira (an indicator for having an individual retirement account) is the dependent variable, and e401k [the 401(k) eligibility indicator] is the key explanatory variable."
+  },
+  {
+    "objectID": "data_resources.html#k",
+    "href": "data_resources.html#k",
+    "title": "Data-Set Handbook",
+    "section": "",
+    "text": "Source: L.E. Papke (1995), “Participation in and Contributions to 401(k) Pension Plans: Evidence from Plan Data,” Journal of Human Resources 30, 311-325.\nProfessor Papke, of Michigan State University, kindly provided these data. She gathered them from the Internal Revenue Service’s Form 5500 tapes.\nUsed in Text: pages 62, 76, 133, 169, 212-213, 656-657\nNotes: This data set is used in a variety of ways in the text. One additional possibility is to investigate whether the coefficients from the regression of prate on mrate, log(totemp) differ by whether the plan is a sole plan. The Chow test (see Section 7.4), and the less restrictive version that allows different intercepts, can be used."
+  },
+  {
+    "objectID": "data_resources.html#ksubs",
+    "href": "data_resources.html#ksubs",
+    "title": "Data-Set Handbook",
+    "section": "",
+    "text": "Source: A. Abadie (2003), “Semiparametric Instrumental Variable Estimation of Treatment Response Models,” Journal of Econometrics 113, 231-263.\nProfessor Abadie, now at MIT, kindly provided these data. He obtained them from the 1991 Survey of Income and Program Participation (SIPP).\nUsed in Text: pages 160-161, 178, 217-218, 258-259, 276, 292, 528\nNotes: This data set can also be used to illustrate the binary response models, probit and logit, in Chapter 17, where, say, pira (an indicator for having an individual retirement account) is the dependent variable, and e401k [the 401(k) eligibility indicator] is the key explanatory variable."
+  },
+  {
+    "objectID": "data_resources.html#admnrev",
+    "href": "data_resources.html#admnrev",
+    "title": "Data-Set Handbook",
+    "section": "ADMNREV",
+    "text": "ADMNREV\nSource: Data from the National Highway Traffic Safety Administration: “A Digest of State Alcohol-Highway Safety Related Legislation,” U.S. Department of Transportation, NHTSA. I used the third (1985), eighth (1990), and 13th (1995) editions.\nUsed in Text: not used\nNotes: This is not so much a data set as a summary of so-called “administrative per se” laws at the state level, for three different years. It could be supplemented with drunk-driving fatalities for a nice econometric analysis. In addition, the data for 2000 or later years can be added, forming the basis for a term project. Many other explanatory variables could be included. Unemployment rates, state-level tax rates on alcohol, and membership in MADD are just a few possibilities."
+  },
+  {
+    "objectID": "data_resources.html#affairs",
+    "href": "data_resources.html#affairs",
+    "title": "Data-Set Handbook",
+    "section": "AFFAIRS",
+    "text": "AFFAIRS\nSource: R.C. Fair (1978), “A Theory of Extramarital Affairs,” Journal of Political Economy 86, 45-61, 1978.\nI collected the data from Professor Fair’s web cite at the Yale University Department of Economics. He originally obtained the data from a survey by Psychology Today.\nUsed in Text: not used\nNotes: This is an interesting data set for problem sets starting in Chapter 7. Even though naffairs (number of extramarital affairs a woman reports) is a count variable, a linear model can be used to model its conditional mean as an approximation. Or, you could ask the students to estimate a linear probability model for the binary indicator affair, equal to one of the woman reports having any extramarital affairs. One possibility is to test whether putting the single marriage rating variable, ratemarr, is enough, against the alternative that a full set of dummy variables is needed; see pages 239-240 for a similar example. This is also a good data set to illustrate Poisson regression (using naffairs) in Section 17.3 or probit and logit (using affair) in Section 17.1."
+  },
+  {
+    "objectID": "data_resources.html#airfare",
+    "href": "data_resources.html#airfare",
+    "title": "Data-Set Handbook",
+    "section": "AIRFARE",
+    "text": "AIRFARE\nSource: Jiyoung Kwon, a former doctoral student in economics at MSU, kindly provided these data, which she obtained from the Domestic Airline Fares Consumer Report by the U.S. Department of Transportation.\nUsed in Text: pages 476, 488, 557, 557\nNotes: This data set nicely illustrates the different estimates obtained when applying pooled OLS, random effects, and fixed effects."
+  },
+  {
+    "objectID": "data_resources.html#alcohol",
+    "href": "data_resources.html#alcohol",
+    "title": "Data-Set Handbook",
+    "section": "ALCOHOL",
+    "text": "ALCOHOL\nSource: Terza, J.V. (2002), “Alcohol Abuse and Employment: A Second Look,” Journal of Applied Econometrics 17, 393-404.\nI obtained these data from the Journal of Applied Econometrics data archive at http://qed.econ.queensu.ca/jae/.\nUsed in Text: page 600"
+  },
+  {
+    "objectID": "data_resources.html#apple",
+    "href": "data_resources.html#apple",
+    "title": "Data-Set Handbook",
+    "section": "APPLE",
+    "text": "APPLE\nSource: These data were used in the doctoral dissertation of Jeffrey Blend, Department of Agricultural Economics, Michigan State University, 1998. The thesis was supervised by Professor Eileen van Ravensway. Drs. Blend and van Ravensway kindly provided the data, which were obtained from a telephone survey conducted by the Institute for Public Policy and Social Research at MSU.\nUsed in Text: pages 195, 217, 259-260, 598\nNotes: This data set is close to a true experimental data set because the price pairs facing a family were randomly determined. In other words, the family head was presented with prices for the eco-labeled and regular apples, and then asked how much of each kind of apple the family would buy at the given prices. As predicted by basic economics, the own price effect is negative (and strong) and the cross price effect is positive (and strong). While the main dependent variable, ecolbs, piles up at zero, estimating a linear model is still worthwhile. Interestingly, because the survey design induces a strong positive correlation between the prices of eco-labeled and regular apples, there is an omitted variable problem if either of the price variables is dropped from the demand equation. A good exam question is to show a simple regression of ecolbs on ecoprc and then a multiple regression on both prices, and ask students to decide whether the price variables must be positively or negatively correlated."
+  },
+  {
+    "objectID": "data_resources.html#approval",
+    "href": "data_resources.html#approval",
+    "title": "Data-Set Handbook",
+    "section": "APPROVAL",
+    "text": "APPROVAL\nSource: Harbridge, L., J. Krosnick, and J.M. Wooldridge (2016), “Presidential Approval and Gas Prices: Sociotropic or Pocketbook Influence?” In New Explorations in Political Psychology, ed. J. Krosnick. New York: Psychology Press (Taylor and Francis Group)\nProfessor Harbridge kindly provided the data, of which I have used a subset.\nUsed in Text: 365, 393, 424"
+  },
+  {
+    "objectID": "data_resources.html#athlet1",
+    "href": "data_resources.html#athlet1",
+    "title": "Data-Set Handbook",
+    "section": "ATHLET1",
+    "text": "ATHLET1\nSources:: Peterson’s Guide to Four Year Colleges, 1994 and 1995 (24th and 25th editions). Princeton University Press. Princeton, NJ.\nThe Official 1995 College Basketball Records Book, 1994, NCAA.\n1995 Information Please Sports Almanac (6th edition). Houghton Mifflin. New York, NY.\nUsed in Text: page 661\nNotes: These data were collected by Patrick Tulloch, an MSU economics major, for a term project. The “athletic success” variables are for the year prior to the enrollment and academic data. Updating these data to get a longer stretch of years, and including appearances in the “Sweet 16” NCAA basketball tournaments, would make for a more convincing analysis. With the growing popularity of women’s sports, especially basketball, an analysis that includes success in women’s athletics would be interesting."
+  },
+  {
+    "objectID": "data_resources.html#athlet2",
+    "href": "data_resources.html#athlet2",
+    "title": "Data-Set Handbook",
+    "section": "ATHLET2",
+    "text": "ATHLET2\nSources:: Peterson’s Guide to Four Year Colleges, 1995 (25th edition). Princeton University Press.\n1995 Information Please Sports Almanac (6th edition). Houghton Mifflin. New York, NY\nUsed in Text: page 661\nNotes: These data were collected by Paul Anderson, an MSU economics major, for a term project. The score from football outcomes for natural rivals (Michigan-Michigan State, California-Stanford, Florida-Florida State, to name a few) is matched with application and academic data. The application and tuition data are for Fall 1994. Football records and scores are from 1993 football season. Extended these data to obtain a long stretch of panel data and other “natural” rivals could be very interesting."
+  },
+  {
+    "objectID": "data_resources.html#attend",
+    "href": "data_resources.html#attend",
+    "title": "Data-Set Handbook",
+    "section": "ATTEND",
+    "text": "ATTEND\nSource: These data were collected by Professors Ronald Fisher and Carl Liedholm during a term in which they both taught principles of microeconomics at Michigan State University. Professors Fisher and Liedholm kindly gave me permission to use a random subset of their data, and their research assistant at the time, Jeffrey Guilfoyle, who completed his Ph.D. in economics at MSU, provided helpful hints.\nUsed in Text: pages 110, 146, 193-194, 216\nNotes: The attendance figures were obtained by requiring students to slide their ID cards through a magnetic card reader, under the supervision of a teaching assistant. You might have the students use final, rather than the standardized variable, so that they can see the statistical significance of each variable remains exactly the same. The standardized variable is used only so that the coefficients measure effects in terms of standard deviations from the average score."
+  },
+  {
+    "objectID": "data_resources.html#audit",
+    "href": "data_resources.html#audit",
+    "title": "Data-Set Handbook",
+    "section": "AUDIT",
+    "text": "AUDIT\nSource: These data come from a 1988 Urban Institute audit study in the Washington, D.C. area. I obtained them from the article “The Urban Institute Audit Studies: Their Methods and Findings,” by James J. Heckman and Peter Siegelman. In Fix, M. and Struyk, R., eds., Clear and Convincing Evidence: Measurement of Discrimination in America. Washington, D.C.: Urban Institute Press, 1993, 187-258.\nUsed in Text: pages 732, 738, 741"
+  },
+  {
+    "objectID": "data_resources.html#barium",
+    "href": "data_resources.html#barium",
+    "title": "Data-Set Handbook",
+    "section": "BARIUM",
+    "text": "BARIUM\nSource: C.M. Krupp and P.S. Pollard (1999), “Market Responses to Antidumpting Laws: Some Evidence from the U.S. Chemical Industry,” Canadian Journal of Economics 29, 199-227.\nDr. Krupp kindly provided the data. They are monthly data covering February 1978 through December 1988.\nUsed in Text: pages 349-350, 359, 363, 407, 410-411, 422, 424, 631-632, 639\nNote: Rather than just having intercept shifts for the different regimes, one could conduct a full Chow test across the different regimes."
+  },
+  {
+    "objectID": "data_resources.html#beauty",
+    "href": "data_resources.html#beauty",
+    "title": "Data-Set Handbook",
+    "section": "BEAUTY",
+    "text": "BEAUTY\nSource: Hamermesh, D.S. and J.E. Biddle (1994), “Beauty and the Labor Market,” American Economic Review 84, 1174-1194.\nProfessor Hamermesh kindly provided me with the data. For manageability, I have included only a subset of the variables, which results in somewhat larger sample sizes than reported for the regressions in the Hamermesh and Biddle paper.\nUsed in Text: pages 231, 259"
+  },
+  {
+    "objectID": "data_resources.html#benefits",
+    "href": "data_resources.html#benefits",
+    "title": "Data-Set Handbook",
+    "section": "BENEFITS",
+    "text": "BENEFITS\nSource: I collected these data from the old Michigan Department of Education web site, which used to have an annual Michigan Schools Report. I used data on most elementary schools in the state of Michigan for 1993. I dropped some schools that had suspicious-looking data.\nUsed in Text: 218\nNotes: This is an elementary school-level version of MEAP93, which contains data for high schools."
+  },
+  {
+    "objectID": "data_resources.html#big9salary",
+    "href": "data_resources.html#big9salary",
+    "title": "Data-Set Handbook",
+    "section": "BIG9SALARY",
+    "text": "BIG9SALARY\nSource: O. Baser and E. Pema (2003), “The Return of Publications for Economics Faculty,” Economics Bulletin 1, 1-13.\nProfessors Baser and Pema kindly provided the data.\nUsed in Text: not used\nNotes: This is an unbalanced panel data set in the sense that as many as three years of data are available for each faculty member but where some have fewer than three years. It is not clear that something like a fixed effects or first differencing analysis makes sense: in effect, approaches that remove the heterogeneity control for too much by controlling for unobserved heterogeneity – which, in this case, includes faculty intelligence, talent, and motivation. Presumably, these factors enter into the publication index. It is hard to think we want to hold the main factors driving productivity fixed when trying to measure the effect of productivity on salary. Pooled OLS regression with “cluster robust” standard errors seems more natural.\nOn the other hand, if we want to measure the return to having a degree from a top 20 Ph.D. program then we would want to control for factors that cause selection into a top 20 program. Unfortunately, this variable does not change over time, and so FD and FE are not applicable. One could include the top 20 dummy variable in a correlated random effects analysis."
+  },
+  {
+    "objectID": "data_resources.html#bwght",
+    "href": "data_resources.html#bwght",
+    "title": "Data-Set Handbook",
+    "section": "BWGHT",
+    "text": "BWGHT\nSource: J. Mullahy (1997), “Instrumental-Variable Estimation of Count Data Models: Applications to Models of Cigarette Smoking Behavior,” Review of Economics and Statistics 79, 596-593.\nProfessor Mullahy kindly provided the data. He obtained them from the 1988 National Health Interview Survey.\nUsed in Text: pages 16, 58, 109, 145, 172, 178, 181-182, 251-252, 504"
+  },
+  {
+    "objectID": "data_resources.html#bwght2",
+    "href": "data_resources.html#bwght2",
+    "title": "Data-Set Handbook",
+    "section": "BWGHT2",
+    "text": "BWGHT2\nSource: Dr. Zhehui Luo, a professor of epidemiology and biostatistics at MSU, kindly provided these data. She obtained them from state files linking birth and infant death certificates, and from the National Center for Health Statistics natality and mortality data.\nUsed in Text: pages 178, 217\nNotes: There are many possibilities with this data set. In addition to number of prenatal visits, smoking and alcohol consumption (during pregnancy) are included as explanatory variables. These can be added to equations of the kind found in Exercise C6.10. In addition, the one- and five-minute APGAR scores are included. These are measures of the well being of infants just after birth. An interesting feature of the score is that it is bounded between zero and 10, making a linear model less than ideal. Still, a linear model would be informative, and you might ask students about predicted values less than zero or greater than 10."
+  },
+  {
+    "objectID": "data_resources.html#campus",
+    "href": "data_resources.html#campus",
+    "title": "Data-Set Handbook",
+    "section": "CAMPUS",
+    "text": "CAMPUS\nSource: These data were collected by Daniel Martin, a former MSU undergraduate, for a final project. They come from the FBI Uniform Crime Reports and are for the year 1992.\nUsed in Text: pages 128-129\nNotes: Colleges and universities are now required to provide much better, more detailed crime data. A very rich data set can now be obtained, even a panel data set for colleges across different years. Statistics on male/female ratios, fraction of men/women in fraternities or sororities, policy variables – such as a “safe house” for women on campus, as was started at MSU in 1994 – could be added as explanatory variables. The crime rate in the host town would be a good control."
+  },
+  {
+    "objectID": "data_resources.html#card",
+    "href": "data_resources.html#card",
+    "title": "Data-Set Handbook",
+    "section": "CARD",
+    "text": "CARD\nSource: D. Card (1995), “Using Geographic Variation in College Proximity to Estimate the Return to Schooling,” in Aspects of Labour Market Behavior: Essays in Honour of John Vanderkamp. Ed. L.N. Christophides, E.K. Grant, and R. Swidinsky, 201-222. Toronto: University of Toronto Press.\nProfessor Card kindly provided these data.\nUsed in Text: pages 507-508, 527\nNotes: Computer Exercise C15.3 is important for analyzing these data. There, it is shown that the instrumental variable, nearc4, is actually correlated with IQ, at least for the subset of men for which an IQ score is reported. However, the correlation between nearc4 and IQ, once the other explanatory variables are netted out, is arguably zero. (At least, it is not statistically different from zero.) In other words, nearc4 fails the exogeneity requirement in a simple linear model but it passes – at least using the crude test described above – if controls are added to the wage equation.\nFor a more advanced course, a nice extension of Card’s analysis is to allow the return to education to differ by race. A relatively simple extension is to include blackeduc as an additional explanatory variable; its natural instrument is blacknearc4."
+  },
+  {
+    "objectID": "data_resources.html#catholic",
+    "href": "data_resources.html#catholic",
+    "title": "Data-Set Handbook",
+    "section": "CATHOLIC",
+    "text": "CATHOLIC\nSource: Altonji, J.G., T.E. Elder, and C.R. Taber (2005), “An Evaluation of Instrumental Variable Strategies for Estimating the Effects of Catholic Schooling,” Journal of Human Resources 40, 791-821.\nProfessor Elder kindly provided a subset of the data, with some variables stripped away for confidentiality reasons.\nUsed in Text: pages 260-261, 530\n\nCEMENT\nSource: J. Shea (1993), “The Input-Output Approach to Instrument Selection,” Journal of Business and Economic Statistics 11, 145-156.\nProfessor Shea kindly provided these data.\nUsed in Text: pages 556\nNotes: Compared with Shea’s analysis, the producer price index (PPI) for fuels and power has been replaced with the PPI for petroleum. The data are monthly and have not been seasonally adjusted."
+  },
+  {
+    "objectID": "data_resources.html#census2000",
+    "href": "data_resources.html#census2000",
+    "title": "Data-Set Handbook",
+    "section": "CENSUS2000",
+    "text": "CENSUS2000\nSource: Obtained from the United States Census Bureau by Professor Alberto Abadie of the Harvard Kennedy School of Government.\nProfessor Abadie kindly provided the data.\nUsed in Text: pages 485"
+  },
+  {
+    "objectID": "data_resources.html#ceosal1",
+    "href": "data_resources.html#ceosal1",
+    "title": "Data-Set Handbook",
+    "section": "CEOSAL1",
+    "text": "CEOSAL1\nSource: I took a random sample of data reported in the May 6, 1991 issue of Businessweek.\nUsed in Text: pages 29, 32-33, 35, 154, 211, 252-253, 257, 662\nNotes: This kind of data collection is relatively easy for students just learning data analysis, and the findings can be interesting. A good term project is to have students collect a similar data set using a more recent issue of Businessweek, and to find additional variables that might explain differences in CEO compensation. My impression is that the public is still interested in CEO compensation.\nAn interesting question is whether the list of explanatory variables included in this data set now explain less of the variation in log(salary) than they used to."
+  },
+  {
+    "objectID": "data_resources.html#section",
+    "href": "data_resources.html#section",
+    "title": "Data-Set Handbook",
+    "section": "",
+    "text": "Source: L.E. Papke (1995), “Participation in and Contributions to 401(k) Pension Plans: Evidence from Plan Data,” Journal of Human Resources 30, 311-325.\nProfessor Papke, of Michigan State University, kindly provided these data. She gathered them from the Internal Revenue Service’s Form 5500 tapes.\nUsed in Text: pages 62, 76, 133, 169, 212-213, 656-657\nNotes: This data set is used in a variety of ways in the text. One additional possibility is to investigate whether the coefficients from the regression of prate on mrate, log(totemp) differ by whether the plan is a sole plan. The Chow test (see Section 7.4), and the less restrictive version that allows different intercepts, can be used."
+  },
+  {
+    "objectID": "data_resources.html#odds",
+    "href": "data_resources.html#odds",
+    "title": "Data-Set Handbook",
+    "section": "",
+    "text": "Source: L.E. Papke (1995), “Participation in and Contributions to 401(k) Pension Plans: Evidence from Plan Data,” Journal of Human Resources 30, 311-325.\nProfessor Papke, of Michigan State University, kindly provided these data. She gathered them from the Internal Revenue Service’s Form 5500 tapes.\nUsed in Text: pages 62, 76, 133, 169, 212-213, 656-657\nNotes: This data set is used in a variety of ways in the text. One additional possibility is to investigate whether the coefficients from the regression of prate on mrate, log(totemp) differ by whether the plan is a sole plan. The Chow test (see Section 7.4), and the less restrictive version that allows different intercepts, can be used.\n\n\n\nSource: A. Abadie (2003), “Semiparametric Instrumental Variable Estimation of Treatment Response Models,” Journal of Econometrics 113, 231-263.\nProfessor Abadie, now at MIT, kindly provided these data. He obtained them from the 1991 Survey of Income and Program Participation (SIPP).\nUsed in Text: pages 160-161, 178, 217-218, 258-259, 276, 292, 528\nNotes: This data set can also be used to illustrate the binary response models, probit and logit, in Chapter 17, where, say, pira (an indicator for having an individual retirement account) is the dependent variable, and e401k [the 401(k) eligibility indicator] is the key explanatory variable."
+  },
+  {
+    "objectID": "data_resources.html#voucher",
+    "href": "data_resources.html#voucher",
+    "title": "Data-Set Handbook",
+    "section": "VOUCHER",
+    "text": "VOUCHER\nSource: Rouse, C.E. (1998), “Private School Vouchers and Student Achievement: An Evaluation of the Milwaukee Parental Choice Program,” Quarterly Journal of Economics 113, 553-602.\nProfessor Rouse kindly provided the original data set from her paper.\nUsed in Text: pages 529-530\nNotes: This is a condensed version of the data set used by Professor Rouse. The original data set had missing information on many variables, including pre-program and post-program test scores. I did not impute any missing data and have dropped observations that were unusable without filling in missing data. There are 990 students in the current data set but pre-program test scores are available for only 328 of them.\nThis is a good example of where eligibility for a program is randomized but participation need not be. In addition, even if we look at just the effect of eligibility (captured in the variable selectyrs) on the math test score (mnce), we need to confront the fact that attrition (students leaving the district) can bias the results. Controlling for the pre-policy test score, mnce90, can help – but at the cost of losing two-thirds of the observations. A simple regression of mnce on selectyrs followed by a multiple regression that adds mnce90 as a control is informative.\nThe selectyrs dummy variables can be used as instrumental variables for the choiceyrs variable to try to estimate the effect of actually participating in the program (rather than estimating the so-called intention-to-treat effect). Computer Exercise C15.11 steps through the details."
+  },
+  {
+    "objectID": "data_resources.html#wage1",
+    "href": "data_resources.html#wage1",
+    "title": "Data-Set Handbook",
+    "section": "WAGE1",
+    "text": "WAGE1\nSource: These are data from the 1976 Current Population Survey, collected by Henry Farber when he and I were colleagues at MIT in 1988.\nUsed in Text: pages 6, 30-31, 33, 73, 86, 123, 178, 189, 214, 222, 224, 227, 228-229, 232-233, 235, 257, 265-266, 316, 644\nNotes: Barry Murphy, of the University of Portsmouth in the UK, has pointed out that for several observations the values for exper and tenure are in logical conflict. In particular, for some workers the number of years with current employer (tenure) is greater than overall work experience (exper). At least some of these conflicts are due to the definition of exper as “potential” work experience, but probably not all. Nevertheless, I am using the data set as it was supplied to me."
+  },
+  {
+    "objectID": "data_resources.html#wage2",
+    "href": "data_resources.html#wage2",
+    "title": "Data-Set Handbook",
+    "section": "WAGE2",
+    "text": "WAGE2\nSource: M. Blackburn and D. Neumark (1992), “Unobserved Ability, Efficiency Wages, and Interindustry Wage Differentials,” Quarterly Journal of Economics 107, 1421-1436.\nProfessor Neumark kindly provided the data, of which I used just the data for 1980.\nUsed in Text: pages 63, 104-105, 110, 160, 212, 215, 256, 301-302, 328, 502, 515, 526, 528-529, 644\nNotes: As with WAGE1, there are some clear inconsistencies among the variables tenure, exper, and age. I have not been able to track down the source of the inconsistency, and so any changes would be effectively arbitrary. Instead, I am using the data as provided by the authors of the above QJE article."
+  },
+  {
+    "objectID": "data_resources.html#wagepan",
+    "href": "data_resources.html#wagepan",
+    "title": "Data-Set Handbook",
+    "section": "WAGEPAN",
+    "text": "WAGEPAN\nSource: F. Vella and M. Verbeek (1998), “Whose Wages Do Unions Raise? A Dynamic Model of Unionism and Wage Rate Determination for Young Men,” Journal of Applied Econometrics 13, 163-183.\nI obtained the data from the Journal of Applied Econometrics data archive at http://qed.econ.queensu.ca/jae/. The JAE data archive is generally a nice resource for undergraduates looking to replicate or extend a published study.\nUsed in Text: pages 457, 465, 472"
+  },
+  {
+    "objectID": "data_resources.html#wageprc",
+    "href": "data_resources.html#wageprc",
+    "title": "Data-Set Handbook",
+    "section": "WAGEPRC",
+    "text": "WAGEPRC\nSource: Economic Report of the President, various years.\nUsed in Text: pages 388, 421, 638\nNotes: These monthly data run from January 1964 through October 1987. The consumer price index averages to 100 in 1967. An updated set of data can be obtained electronically from http://www.gpo.gov/fdsys/browse/collection.action?collectionCode=ERP."
+  },
+  {
+    "objectID": "data_resources.html#wine",
+    "href": "data_resources.html#wine",
+    "title": "Data-Set Handbook",
+    "section": "WINE",
+    "text": "WINE\nSource: These data were reported in a New York Times article, December 28, 1994.\nUsed in Text: not used\nNotes: The dependent variables deaths, heart, and liver each can be regressed on alcohol as nice simple regression examples. The conventional wisdom is that wine is good for the heart but not for the liver, something that is apparent in the regressions. Because the number of observations is small, this can be a good data set to illustrate calculation of the OLS estimates and statistics."
+  },
+  {
+    "objectID": "data_resources.html#ceosal2",
+    "href": "data_resources.html#ceosal2",
+    "title": "Data-Set Handbook",
+    "section": "CEOSAL2",
+    "text": "CEOSAL2\nSource: See CEOSAL1\nUsed in Text: pages 62, 110, 154, 207, 324, 662\nNotes: Compared with CEOSAL1, in this CEO data set more information about the CEO, rather than about the company, is included."
+  },
+  {
+    "objectID": "data_resources.html#charity",
+    "href": "data_resources.html#charity",
+    "title": "Data-Set Handbook",
+    "section": "CHARITY",
+    "text": "CHARITY\nSource: P.H. Franses and R. Paap (2001), Quantitative Models in Marketing Research. Cambridge: Cambridge University Press.\nProfessor Franses kindly provided the data.\nUsed in Text: pages 63, 111, 260, 599\nNotes: This data set can be used to illustrate probit and Tobit models, and to study the linear approximations to them."
+  },
+  {
+    "objectID": "data_resources.html#consump",
+    "href": "data_resources.html#consump",
+    "title": "Data-Set Handbook",
+    "section": "CONSUMP",
+    "text": "CONSUMP\nSource: I collected these data from the 1997 Economic Report of the President. Specifically, the data come from Tables B71, B15, B29, and B32.\nUsed in Text: pages 363-364, 391, 422, 548-549, 555, 640\nNotes: For a student interested in time series methods, updating this data set and using it in a manner similar to that in the text could be acceptable as a final project."
+  },
+  {
+    "objectID": "data_resources.html#corn",
+    "href": "data_resources.html#corn",
+    "title": "Data-Set Handbook",
+    "section": "CORN",
+    "text": "CORN\nSource: G.E. Battese, R.M. Harter, and W.A. Fuller (1988), “An Error-Components Model for Prediction of County Crop Areas Using Survey and Satellite Data,” Journal of the American Statistical Association 83, 28-36.\nThis small data set is reported in the article.\nUsed in Text: pages 745\nNotes: You could use these data to illustrate simple regression when the population intercept should be zero: no corn pixels should predict no corn planted. The same can be done with the soybean measures in the data set."
+  },
+  {
+    "objectID": "data_resources.html#countymurders",
+    "href": "data_resources.html#countymurders",
+    "title": "Data-Set Handbook",
+    "section": "COUNTYMURDERS",
+    "text": "COUNTYMURDERS\nSource: Compiled by J. Monroe Gamble for a Summer Research Opportunities Program (SROP) at Michigan State University, Summer 2014. Monroe obtained data from the U.S. Census Bureau, the FBI Uniform Crime Reports, and the Death Penalty Information Center.\nUsed in Text: pages 17, 64, 458, 490"
+  },
+  {
+    "objectID": "data_resources.html#cps78_85",
+    "href": "data_resources.html#cps78_85",
+    "title": "Data-Set Handbook",
+    "section": "CPS78_85",
+    "text": "CPS78_85\nSource: Professor Henry Farber, now at Princeton University, compiled these data from the 1978 and 1985 Current Population Surveys. Professor Farber kindly provided these data when we were colleagues at MIT.\nUsed in Text: pages 427, 429-430, 454\nNotes: Obtaining more recent data from the CPS allows one to track, over a long period of time, the changes in the return to education, the gender gap, black-white wage differentials, and the union wage premium."
+  },
+  {
+    "objectID": "data_resources.html#cps91",
+    "href": "data_resources.html#cps91",
+    "title": "Data-Set Handbook",
+    "section": "CPS91",
+    "text": "CPS91\nSource: Professor Daniel Hamermesh, at the University of Texas, compiled these data from the May 1991 Current Population Survey. Professor Hamermesh kindly provided these data.\nUsed in Text: page 599\nNotes: This is much bigger than the other CPS data sets even though the sample is restricted to married women. (CPS91 contains many more observations than MROZ, too.) In addition to the usual human capital variables for the women in the sample, we have information on the husband. Therefore, we can estimate a labor supply function as in Chapter 16, although the validity of potential experience as an IV for log(wage) is questionable. (MROZ contains an actual experience variable.) Perhaps more convincing is to add hours to the wage offer equation, and instrument hours with indicators for young and old children. This data set also contains a union membership indicator.\nThe web site for the National Bureau of Economic Research makes it very easy now to download CPS data files in a variety of formats. Go to http://www.nber.org/data/cps_basic.html."
+  },
+  {
+    "objectID": "data_resources.html#crime1",
+    "href": "data_resources.html#crime1",
+    "title": "Data-Set Handbook",
+    "section": "CRIME1",
+    "text": "CRIME1\nSource: J. Grogger (1991), “Certainty vs. Severity of Punishment,” Economic Inquiry 29, 297-309.\nProfessor Grogger kindly provided a subset of the data he used in his article.\nUsed in Text: pages 78, 169, 174, 243, 268, 291, 295-296, 581-582, 597"
+  },
+  {
+    "objectID": "data_resources.html#crime2",
+    "href": "data_resources.html#crime2",
+    "title": "Data-Set Handbook",
+    "section": "CRIME2",
+    "text": "CRIME2\nSource: These data were collected by David Dicicco, a former MSU undergraduate, for a final project. They came from various issues of the County and City Data Book, and are for the years 1982 and 1985. Unfortunately, I do not have the list of cities.\nUsed in Text: pages 303-304, 439-440\nNotes: Very rich crime data sets, at the county, or even city, level, can be collected using the FBI’s Uniform Crime Reports. These data can be matched up with demographic and economic data, at least for census years. The County and City Data Book contains a variety of statistics, but the years do not always match up. These data sets can be used investigate issues such as the effects of casinos on city or county crime rates."
+  },
+  {
+    "objectID": "data_resources.html#crime3",
+    "href": "data_resources.html#crime3",
+    "title": "Data-Set Handbook",
+    "section": "CRIME3:",
+    "text": "CRIME3:\nSource: E. Eide (1994), Economics of Crime: Deterrence of the Rational Offender. Amsterdam: North Holland. The data come from Tables A3 and A6.\nUsed in Text: pages 443-444, 455\nNotes: These data are for the years 1972 and 1978 for 53 police districts in Norway. Much larger data sets for more years can be obtained for the United States, although a measure of the “clear-up” rate is needed."
+  },
+  {
+    "objectID": "data_resources.html#crime4",
+    "href": "data_resources.html#crime4",
+    "title": "Data-Set Handbook",
+    "section": "CRIME4",
+    "text": "CRIME4\nSource: From C. Cornwell and W. Trumball (1994), “Estimating the Economic Model of Crime with Panel Data,” Review of Economics and Statistics 76, 360-366.\nProfessor Cornwell kindly provided the data.\nUsed in Text: pages 449-450, 456, 486, 556\nNotes: Computer Exercise C16.7 shows that variables that might seem to be good instrumental variable candidates are not always so good, especially after applying a transformation such as differencing across time. You could have the students do an IV analysis for just, say, 1987."
+  },
+  {
+    "objectID": "data_resources.html#discrim",
+    "href": "data_resources.html#discrim",
+    "title": "Data-Set Handbook",
+    "section": "DISCRIM",
+    "text": "DISCRIM\nSource: K. Graddy (1997), “Do Fast-Food Chains Price Discriminate on the Race and Income Characteristics of an Area?” Journal of Business and Economic Statistics 15, 391-401.\nProfessor Graddy kindly provided the data set.\nUsed in Text: pages 111, 161, 663\nNotes: If you want to assign a common final project, this would be a good data set. There are many possible dependent variables, namely, prices of various fast-food items. The key variable is the fraction of the population that is black, along with controls for poverty, income, housing values, and so on. These data were also used in a famous study by David Card and Alan Krueger on estimation of minimum wage effects on employment. See the book by Card and Krueger, Myth and Measurement, 1997, Princeton University Press, for a detailed analysis."
+  },
+  {
+    "objectID": "data_resources.html#driving",
+    "href": "data_resources.html#driving",
+    "title": "Data-Set Handbook",
+    "section": "DRIVING",
+    "text": "DRIVING\nSource: Freeman, D.G. (2007), “Drunk Driving Legislation and Traffic Fatalities: New Evidence on BAC 08 Laws,” Contemporary Economic Policy 25, 293–308.\nProfessor Freeman kindly provided the data.\nUsed in Text: page 489; see also the general discussion on page 659\nNotes: Several more years of data are now available and may further shed light on the effectiveness of several traffic laws."
+  },
+  {
+    "objectID": "data_resources.html#earns",
+    "href": "data_resources.html#earns",
+    "title": "Data-Set Handbook",
+    "section": "EARNS",
+    "text": "EARNS\nSource: Economic Report of the President, 1989, Table B47. The data are for the non-farm business sector.\nUsed in Text: pages 382, 390\nNotes: These data could be usefully updated, but changes in reporting conventions in more recent ERPs may make that difficult."
+  },
+  {
+    "objectID": "data_resources.html#econmath",
+    "href": "data_resources.html#econmath",
+    "title": "Data-Set Handbook",
+    "section": "ECONMATH",
+    "text": "ECONMATH\nSource: Compiled by Professor Charles Ballard, Michigan State University Department of Economics.\nProfessor Ballard kindly provided the data.\nUsed in Text: 162, 177"
+  },
+  {
+    "objectID": "data_resources.html#elem94_95",
+    "href": "data_resources.html#elem94_95",
+    "title": "Data-Set Handbook",
+    "section": "ELEM94_95",
+    "text": "ELEM94_95\nSource: Culled from a panel data set used by Professor Leslie Papke in her paper “The Effects of Spending on Test Pass Rates: Evidence from Michigan” (2005), Journal of Public Economics 89, 821-839.\nUsed in Text: pages 161, 330-331\nNotes: Starting in 1995, the Michigan Department of Education stopped reporting average teacher benefits along with average salary. This data set includes both variables, at the school level, and can be used to study the salary-benefits tradeoff, as in Chapter 4. There are a few suspicious benefits/salary ratios, and so this data set makes a good illustration of the impact of outliers in Chapter 9."
+  },
+  {
+    "objectID": "data_resources.html#expendshares",
+    "href": "data_resources.html#expendshares",
+    "title": "Data-Set Handbook",
+    "section": "EXPENDSHARES",
+    "text": "EXPENDSHARES\nSource: Blundell, R., A. Duncan, and K. Pendakur (1998), “Semiparametric Estimation and Consumer Demand,” Journal of Applied Econometrics 13, 435-461.\nI obtained these data from the Journal of Applied Econometrics data archive at http://qed.econ.queensu.ca/jae/.\nUsed in Text: pages 557-558\nNotes: The dependent variables in this data set – the expenditure shares – are necessarily bounded between zero and one. The linear model is at best an approximation, but the usual IV estimator likely gives good estimates of the average partial effects."
+  },
+  {
+    "objectID": "data_resources.html#engin",
+    "href": "data_resources.html#engin",
+    "title": "Data-Set Handbook",
+    "section": "ENGIN",
+    "text": "ENGIN\nSource: Thada Chaisawangwong, a former graduate student at MSU, obtained these data for a term project in applied econometrics. They come from the Material Requirement Planning Survey carried out in Thailand during 1998.\nUsed in Text: not used\nNotes: This is a nice change of pace from wage data sets for the United States. These data are for engineers in Thailand, and represents a more homogeneous group than data sets that consist of people across a variety of occupations. Plus, the starting salary is also provided in the data set, so factors affecting wage growth – and not just wage levels at a given point in time – can be studied. This is a good data set for a common term project that tests basic understanding of multiple regression and the interpretation of models with a logarithm for a dependent variable."
+  },
+  {
+    "objectID": "data_resources.html#ezanders",
+    "href": "data_resources.html#ezanders",
+    "title": "Data-Set Handbook",
+    "section": "EZANDERS",
+    "text": "EZANDERS\nSource: L.E. Papke (1994), “Tax Policy and Urban Development: Evidence from the Indiana Enterprise Zone Program,” Journal of Public Economics 54, 37-49.\nProfessor Papke kindly provided these data.\nUsed in Text: page 363\nNotes: These are actually monthly unemployment claims for the Anderson enterprise zone. Papke used annualized data, across many zones and non-zones, in her original analysis."
+  },
+  {
+    "objectID": "data_resources.html#ezunem",
+    "href": "data_resources.html#ezunem",
+    "title": "Data-Set Handbook",
+    "section": "EZUNEM",
+    "text": "EZUNEM\nSource: See EZANDERS\nUsed in Text: pages 449, 486-487\nNotes: A very good project is to have students analyze enterprise, empowerment, renaissance, or opportunity zone policies in their home states. Many states now have such programs. Or, there are also national programs. A few years of panel data straddling periods of zone designation, at the city or zip code level, could make a nice study."
+  },
+  {
+    "objectID": "data_resources.html#fair",
+    "href": "data_resources.html#fair",
+    "title": "Data-Set Handbook",
+    "section": "FAIR",
+    "text": "FAIR\nSource: R.C. Fair (1996), “Econometrics and Presidential Elections,” Journal of Economic Perspectives 10, 89-102.\nThe data set is provided in the article.\nUsed in Text: pages 350-351, 420, 422\nNotes: An updated version of this data set, through the 2004 election, is available at Professor Fair’s web site at Yale University: http://fairmodel.econ.yale.edu/rayfair/pdf/2001b.htm. Students might want to try their own hands at predicting the most recent election outcome, but they should be restricted to no more than a handful of explanatory variables because of the small sample size."
+  },
+  {
+    "objectID": "data_resources.html#fertil1",
+    "href": "data_resources.html#fertil1",
+    "title": "Data-Set Handbook",
+    "section": "FERTIL1",
+    "text": "FERTIL1\nSource: W. Sander, “The Effect of Women’s Schooling on Fertility,” Economics Letters 40, 229-233.\nProfessor Sander kindly provided the data, which are a subset of what he used in his article. He compiled the data from various years of the National Opinion Resource Center’s General Social Survey.\nUsed in Text: pages 428-429, 453, 521, 597, 646\nNotes: (1) Much more recent data can be obtained from the National Opinion Research Center website, http://www.norc.org/GSS+Website/Download/. Very rich pooled cross sections can be constructed to study a variety of issues – not just changes in fertility over time.\n\nIt would be interesting to analyze a similar data set for a developing country, especially where efforts have been made to emphasize birth control. Some measure of access to birth control could be useful if it varied by region. Sometimes, one can find policy changes in the advertisement or availability of contraceptives."
+  },
+  {
+    "objectID": "data_resources.html#fertil2",
+    "href": "data_resources.html#fertil2",
+    "title": "Data-Set Handbook",
+    "section": "FERTIL2",
+    "text": "FERTIL2\nSource: These data were obtained by James Heakins, a former MSU undergraduate, for a term project. They come from Botswana’s 1988 Demographic and Health Survey.\nUsed in Text: page 526-527 Notes: Currently, this data set is used only in one computer exercise. Since the dependent variable of interest – number of living children or number of children every born – is a count variable, the Poisson regression model discussed in Chapter 17 can be used. However, some care is required to combine Poisson regression with an endogenous explanatory variable (educ). I refer you to Chapter 19 of my book Econometric Analysis of Cross Section and Panel Data. Even in the context of linear models, much can be done beyond Computer Exercise C15.2. At a minimum, the binary indicators for various religions can be added as controls. One might also interact the schooling variable, educ, with some of the exogenous explanatory variables."
+  },
+  {
+    "objectID": "data_resources.html#fertil3",
+    "href": "data_resources.html#fertil3",
+    "title": "Data-Set Handbook",
+    "section": "FERTIL3",
+    "text": "FERTIL3\nSource: L.A. Whittington, J. Alm, and H.E. Peters (1990), “Fertility and the Personal Exemption: Implicit Pronatalist Policy in the United States,” American Economic Review 80, 545-556.\nThe data are given in the article.\nUsed in Text: pages 346-347, 355, 362, 363, 363, 381, 384-385, 421, 634, 639-640"
+  },
+  {
+    "objectID": "data_resources.html#fish",
+    "href": "data_resources.html#fish",
+    "title": "Data-Set Handbook",
+    "section": "FISH",
+    "text": "FISH\nSource: K Graddy (1995), “Testing for Imperfect Competition at the Fulton Fish Market,” RAND Journal of Economics 26, 75-92.\nProfessor Graddy’s collaborator on a later paper, Professor Joshua Angrist at MIT, kindly provided me with these data.\nUsed in Text: pages 422-423, 556-557\nNotes: This is a nice example of how to go about finding exogenous variables to use as instrumental variables. Often, weather conditions can be assumed to affect supply while having a negligible effect on demand. If so, the weather variables are valid instrumental variables for price in the demand equation. It is a simple matter to test whether prices vary with weather conditions by estimating the reduced form for price."
+  },
+  {
+    "objectID": "data_resources.html#fringe",
+    "href": "data_resources.html#fringe",
+    "title": "Data-Set Handbook",
+    "section": "FRINGE",
+    "text": "FRINGE\nSource: F. Vella (1993), “A Simple Estimator for Simultaneous Models with Censored Endogenous Regressors,” International Economic Review 34, 441-457.\nProfessor Vella kindly provided the data.\nUsed in Text: page 596-597\nNotes: Currently, this data set is used in only one Computer Exercise – to illustrate the Tobit model. It can be used much earlier. First, one could just ignore the pileup at zero and use a linear model where any of the hourly benefit measures is the dependent variable. Another possibility is to use this data set for a problem set in Chapter 4, after students have read Example 4.10. That example, which uses teacher salary/benefit data at the school level, finds the expected tradeoff, although it appears to less than one-to-one. By contrast, if you do a similar analysis with FRINGE, you will not find a tradeoff. A positive coefficient on the benefit/salary ratio is not too surprising because we probably cannot control for enough factors, especially when looking across different occupations. The Michigan school-level data is more aggregated than one would like, but it does restrict attention to a more homogeneous group: high school teachers in Michigan."
+  },
+  {
+    "objectID": "data_resources.html#gpa1",
+    "href": "data_resources.html#gpa1",
+    "title": "Data-Set Handbook",
+    "section": "GPA1",
+    "text": "GPA1\nSource: Christopher Lemmon, a former MSU undergraduate, collected these data from a survey he took of MSU students in Fall 1994.\nUsed in Text: pages 72, 74, 77, 113. 127. 155. 162. 225. 256. 286. 291\nNotes: This is a nice example of how students can obtain an original data set by focusing locally and carefully composing a survey."
+  },
+  {
+    "objectID": "data_resources.html#gpa2",
+    "href": "data_resources.html#gpa2",
+    "title": "Data-Set Handbook",
+    "section": "GPA2",
+    "text": "GPA2\nSource: For confidentiality reasons, I cannot provide the source of these data. I can say that they come from a midsize research university that also supports men’s and women’s athletics at the Division I level.\nUsed in Text: pages 104, 178, 202-203, 204-205, 215, 252, 256-257"
+  },
+  {
+    "objectID": "data_resources.html#gpa3",
+    "href": "data_resources.html#gpa3",
+    "title": "Data-Set Handbook",
+    "section": "GPA3",
+    "text": "GPA3\nSource: See GPA2\nUsed in Text: pages 237-238, 266-267, 287-288, 444, 455"
+  },
+  {
+    "objectID": "data_resources.html#happiness",
+    "href": "data_resources.html#happiness",
+    "title": "Data-Set Handbook",
+    "section": "HAPPINESS",
+    "text": "HAPPINESS\nSource: Subset of data collected by Kevin Williams for a McNair Scholars project in Summer 2008 at Michigan State University. The data come from several waves of the General Social Survey, and is therefore a pooled cross sectional data set. Professor Williams, now at Yale University, kindly provided the data.\nUsed in Text: not used\nNotes: This data set can be used to estimate models of self-reported “happiness,” including studying whether the effects of certain variables – such as education, gender, race, and having children –changed in importance from the mid-1990s to the mid-2000s. For a similar example, see how FERTIL1 is used in Example 13.1 in the text."
+  },
+  {
+    "objectID": "data_resources.html#hprice1",
+    "href": "data_resources.html#hprice1",
+    "title": "Data-Set Handbook",
+    "section": "HPRICE1",
+    "text": "HPRICE1\nSource: Collected from the real estate pages of the Boston Globe during 1990. These homes sold in the Boston, MA area.\nUsed in Text: pages 109-110, 148-149, 155-156, 160, 205, 216, 226-227, 270-271, 273, 290, 297-298\nNotes: Typically, it is very easy to obtain data on selling prices and characteristics of homes, using publicly available databases. It is interesting to match the information on houses with other information – such as local crime rates, quality of the local schools, pollution levels, and so on – and estimate the effects of such variables on housing prices."
+  },
+  {
+    "objectID": "data_resources.html#hprice2",
+    "href": "data_resources.html#hprice2",
+    "title": "Data-Set Handbook",
+    "section": "HPRICE2",
+    "text": "HPRICE2\nSource: D. Harrison and D.L. Rubinfeld (1978), “Hedonic Housing Prices and the Demand for Clean Air,” by Harrison, D. and D.L.Rubinfeld, Journal of Environmental Economics and Management 5, 81-102.\nDiego Garcia, a former Ph.D. student in economics at MIT, kindly provided these data, which he obtained from the book Regression Diagnostics: Identifying Influential Data and Sources: of Collinearity, by D.A. Belsey, E. Kuh, and R. Welsch, 1990. New York: Wiley.\nUsed in Text: pages 106, 130, 185, 186-187, 190-191\nNotes: The census contains rich information on variables such as median housing prices, median income levels, average family size, and so on, for fairly small geographical areas. If such data can be merged with pollution data, one can update the Harrison and Rubinfeld study. Presumably, this has been done in academic journals."
+  },
+  {
+    "objectID": "data_resources.html#hseinv",
+    "href": "data_resources.html#hseinv",
+    "title": "Data-Set Handbook",
+    "section": "HSEINV",
+    "text": "HSEINV\nSource: D. McFadden (1994), “Demographics, the Housing Market, and the Welfare of the Elderly,” in D.A. Wise (ed.), Studies in the Economics of Aging. Chicago: University of Chicago Press, 225-285.\nThe data are contained in the article.\nUsed in Text: pages 354-355, 358, 390, 609-610, 638, 783"
+  },
+  {
+    "objectID": "data_resources.html#htv",
+    "href": "data_resources.html#htv",
+    "title": "Data-Set Handbook",
+    "section": "HTV",
+    "text": "HTV\nSource: J.J. Heckman, J.L. Tobias, and E. Vytlacil (2003), “Simple Estimators for Treatment Parameters in a Latent-Variable Framework,” Review of Economics and Statistics 85, 748-755.\nProfessor Tobias kindly provided the data, which were obtained from the 1991 National Longitudinal Survey of Youth. All people in the sample are males age 26 to 34. For confidentiality reasons, I have included only a subset of the variables used by the authors.\nUsed in Text: pages 529, 599-600\nNotes: Because an ability measure is included in this data set, it can be used as another illustration of including proxy variables in regression models. See Chapter 9. Also, one can try the IV procedure with the ability measure included as an exogenous explanatory variable."
+  },
+  {
+    "objectID": "data_resources.html#infmrt",
+    "href": "data_resources.html#infmrt",
+    "title": "Data-Set Handbook",
+    "section": "INFMRT",
+    "text": "INFMRT\nSource: Statistical Abstract of the United States, 1990 and 1994. (For example, the infant mortality rates come from Table 113 in 1990 and Table 123 in 1994.)\nUsed in Text: pages 320-321, 328\nNotes: An interesting exercise is to add the percentage of the population on AFDC (afdcper) to the infant mortality equation. Pooled OLS and first differencing can give very different estimates. Adding the years 1998 and 2002 and applying fixed effects seems natural. Intervening years can be added, too, although variation in the key variables from year to year might be minimal."
+  },
+  {
+    "objectID": "data_resources.html#injury",
+    "href": "data_resources.html#injury",
+    "title": "Data-Set Handbook",
+    "section": "INJURY",
+    "text": "INJURY\nSource: B.D. Meyer, W.K. Viscusi, and D.L. Durbin (1995), “Workers’ Compensation and Injury Duration: Evidence from a Natural Experiment,” American Economic Review 85, 322-340.\nProfessor Meyer kindly provided the data.\nUsed in Text: pages 435-436, 453\nNotes: This data set also can be used to illustrate the Chow test in Chapter 7. In particular, students can test whether the regression functions differ between Kentucky and Michigan. Or, allowing for different intercepts for the two states, do the slopes differ? A good lesson from this example is that a small R-squared is compatible with the ability to estimate the effects of a policy. Of course, for the Michigan data, which has a smaller sample size, the estimated effect is much less precise (but of virtually identical magnitude)."
+  },
+  {
+    "objectID": "data_resources.html#intdef",
+    "href": "data_resources.html#intdef",
+    "title": "Data-Set Handbook",
+    "section": "INTDEF",
+    "text": "INTDEF\nSource: Economic Report of the President, 2004, Tables B64, B73, and B79.\nUsed in Text: pages 345, 363, 415, 527"
+  },
+  {
+    "objectID": "data_resources.html#intqrt",
+    "href": "data_resources.html#intqrt",
+    "title": "Data-Set Handbook",
+    "section": "INTQRT",
+    "text": "INTQRT\nSource: From Salomon Brothers, Analytical Record of Yields and Yield Spreads, 1990. The folks at Salomon Brothers kindly provided the Record at no charge when I was an assistant professor at MIT.\nUsed in Text: pages 388-389, 612, 617, 620, 621, 639, 640\nNotes: A nice feature of the Salomon Brothers data is that the interest rates are not averaged over a month or quarter – they are end-of-month or end-of-quarter rates. Asset pricing theories apply to such “point-sampled” data, and not to averages over a period. Most other sources report monthly or quarterly averages. This is a good data set to update and test whether current data are more or less supportive of basic asset pricing theories."
+  },
+  {
+    "objectID": "data_resources.html#inven",
+    "href": "data_resources.html#inven",
+    "title": "Data-Set Handbook",
+    "section": "INVEN",
+    "text": "INVEN\nSource: Economic Report of the President, 1997, Tables B4, B20, B61, and B71.\nUsed in Text: pages 391, 421-422, 423, 614, 783"
+  },
+  {
+    "objectID": "data_resources.html#jtrain",
+    "href": "data_resources.html#jtrain",
+    "title": "Data-Set Handbook",
+    "section": "JTRAIN",
+    "text": "JTRAIN\nSource: H. Holzer, R. Block, M. Cheatham, and J. Knott (1993), “Are Training Subsidies Effective? The Michigan Experience,” Industrial and Labor Relations Review 46, 625-636.\nThe authors kindly provided the data.\nUsed in Text: pages 133-134, 156, 226, 244-245, 328, 444-446, 456, 464-465, 469, 486, 521-522, 730-731, 740-741, 742"
+  },
+  {
+    "objectID": "data_resources.html#jtrain2",
+    "href": "data_resources.html#jtrain2",
+    "title": "Data-Set Handbook",
+    "section": "JTRAIN2",
+    "text": "JTRAIN2\nSource: R.J. Lalonde (1986), “Evaluating the Econometric Evaluations of Training Programs with Experimental Data,” American Economic Review 76, 604-620.\nProfessor Jeff Biddle, at MSU, kindly passed the data set along to me. He obtained it from Professor Lalonde.\nUsed in Text: pages 16, 329-330\nNotes: Professor Lalonde obtained the data from the National Supported Work Demonstration job-training program conducted by the Manpower Demonstration Research Corporation in the mid 1970s. Training status was randomly assigned, so this is essentially experimental data. Computer Exercise C17.8 looks only at the effects of training on subsequent unemployment probabilities. For illustrating the more advanced methods in Chapter 17, a good exercise would be to have the students estimate a Tobit of re78 on train, and obtain estimates of the expected values for those with and without training. These can be compared with the sample averages."
+  },
+  {
+    "objectID": "data_resources.html#jtrain3",
+    "href": "data_resources.html#jtrain3",
+    "title": "Data-Set Handbook",
+    "section": "JTRAIN3",
+    "text": "JTRAIN3\nSource: R.H. Dehejia and S. Wahba (1999), “Causal Effects in Nonexperimental Studies: Reevaluating the Evaluation of Training Programs,” Journal of the American Statistical Association 94, 1053-1062.\nProfessor Sergio Firpo, at Insper Institute of Education and Research in São Paulo, has used this data set in his work. He kindly provided it to me. This data set is a subset of that originally used by Lalonde in the study cited for JTRAIN2.\nUsed in Text: pages 329-330, 457"
+  },
+  {
+    "objectID": "data_resources.html#jtrain98",
+    "href": "data_resources.html#jtrain98",
+    "title": "Data-Set Handbook",
+    "section": "JTRAIN98",
+    "text": "JTRAIN98\nSource: This is a data set I created many years ago intended as an update to the files JTRAIN2 and JTRAIN3. While the data were partly generated by me, the data attributes are similar to data sets used to evaluate job training programs.\nUsed in Text: 101-102, 248, 601\nNotes: The response variables, earn98 and unem98, both have discreteness: the former is a corner solutions (takes on the value zero and then a range of strictly positive values) and the latter is binary. One could use these in an exercise using methods in Chapter 17. unem98 can be used in a probit or logit model, earn98 in a Tobit model, or in Poisson regression (without assuming, of course, that the Poisson distribution is correct)."
+  },
+  {
+    "objectID": "data_resources.html#kielmc",
+    "href": "data_resources.html#kielmc",
+    "title": "Data-Set Handbook",
+    "section": "KIELMC",
+    "text": "KIELMC\nSource: K.A. Kiel and K.T. McClain (1995), “House Prices During Siting Decision Stages: The Case of an Incinerator from Rumor through Operation,” Journal of Environmental Economics and Management 28, 241-255.\nProfessors Kiel and McClain kindly provided the data, of which I used only a subset.\nUsed in Text: pages 214, 431-434, 452, 454"
+  },
+  {
+    "objectID": "data_resources.html#labsup",
+    "href": "data_resources.html#labsup",
+    "title": "Data-Set Handbook",
+    "section": "LABSUP",
+    "text": "LABSUP\nSource: The subset of data for black or Hispanic women used in J.A. Angrist and W.E. Evans (1998), “\nUsed in Text: pages 530-531\nNotes: This example can promote an interesting discussion of instrument validity, and in particular, how a variable that is beyond our control – for example, whether the first two children have the same gender – can, nevertheless, affect subsequent economic choices. Students are asked to think about such issues in Computer Exercise C13 in Chapter 15. A more egregious version of this mistake would be to treat a variable such as age as a suitable instrument because it is beyond our control: clearly age has a direct effect on many economic outcomes that would play the role of the dependent variable."
+  },
+  {
+    "objectID": "data_resources.html#lawsch85",
+    "href": "data_resources.html#lawsch85",
+    "title": "Data-Set Handbook",
+    "section": "LAWSCH85",
+    "text": "LAWSCH85\nSource: Collected by Kelly Barnett, an MSU economics student, for use in a term project. The data come from two sources: The Official Guide to U.S. Law Schools, 1986, Law School Admission Services, and The Gourman Report: A Ranking of Graduate and Professional Programs in American and International Universities, 1995, Washington, D.C.\nUsed in Text: pages 105, 108, 159-160, 231-232\nNotes: More recent versions of both cited documents are available. One could try a similar analysis for, say, MBA programs or Ph.D. programs in economics. Quality of placements may be a good dependent variable, and measures of business school or graduate program quality could be included among the explanatory variables. Of course, one would want to control for factors describing the incoming class so as to isolate the effect of the program itself."
+  },
+  {
+    "objectID": "data_resources.html#loanapp",
+    "href": "data_resources.html#loanapp",
+    "title": "Data-Set Handbook",
+    "section": "LOANAPP",
+    "text": "LOANAPP\nSource: W.C. Hunter and M.B. Walker (1996), “The Cultural Affinity Hypothesis and Mortgage Lending Decisions,” Journal of Real Estate Finance and Economics 13, 57-70.\nProfessor Walker kindly provided the data.\nUsed in Text: pages 257-258, 291, 329, 596\nNotes: These data were originally used in a famous study by researchers at the Boston Federal Reserve Bank. See A. Munnell, G.M.B. Tootell, L.E. Browne, and J. McEneaney (1996), “Mortgage Lending in Boston: Interpreting HMDA Data,” American Economic Review 86, 25-53."
+  },
+  {
+    "objectID": "data_resources.html#lowbrth",
+    "href": "data_resources.html#lowbrth",
+    "title": "Data-Set Handbook",
+    "section": "LOWBRTH",
+    "text": "LOWBRTH\nSource: Source: Statistical Abstract of the United States, 1990, 1993, and 1994.\nUsed in Text: not used\nNotes: This data set can be used very much like INFMRT. It contains two years of state-level panel data. In fact, it is a superset of INFMRT. The key is that it contains information on low birth weights, as well as infant mortality. It also contains state identifies, so that several years of more recent data could be added for a term project. Putting in the variable afcdprc and its square leads to some interesting findings for pooled OLS and fixed effects (first differencing). After differencing, you can even try using the change in the AFDC payments variable as an instrumental variable for the change in afdcprc."
+  },
+  {
+    "objectID": "data_resources.html#mathpnl",
+    "href": "data_resources.html#mathpnl",
+    "title": "Data-Set Handbook",
+    "section": "MATHPNL",
+    "text": "MATHPNL\nSource: Dr. Leslie Papke, an economics professor at MSU, collected these data from Michigan Department of Education web site, www.michigan.gov/mde. These are district-level data, which Professor Papke kindly provided. She has used building-level data in “The Effects of Spending on Test Pass Rates: Evidence from Michigan” (2005), Journal of Public Economics 89, 821-839.\nUsed in Text: pages 456, 487-488"
+  },
+  {
+    "objectID": "data_resources.html#meap00",
+    "href": "data_resources.html#meap00",
+    "title": "Data-Set Handbook",
+    "section": "MEAP00",
+    "text": "MEAP00\nSource: Michigan Department of Education, www.michigan.gov/mde\nUsed in Text: pages 218, 292"
+  },
+  {
+    "objectID": "data_resources.html#meap01",
+    "href": "data_resources.html#meap01",
+    "title": "Data-Set Handbook",
+    "section": "MEAP01",
+    "text": "MEAP01\nSource: Michigan Department of Education, www.michigan.gov/mde\nUsed in Text: page 16\nNotes: This is another good data set to compare simple and multiple regression estimates. The expenditure variable (in logs, say) and the poverty measure (lunch) are negatively correlated in this data set. A simple regression of math4 on lexppp gives a negative coefficient. Controlling for lunch makes the spending coefficient positive and significant."
+  },
+  {
+    "objectID": "data_resources.html#meap93",
+    "href": "data_resources.html#meap93",
+    "title": "Data-Set Handbook",
+    "section": "MEAP93",
+    "text": "MEAP93\nSource: I collected these data from the old Michigan Department of Education web site. See MATHPNL for the current web site. I used data on most high schools in the state of Michigan for 1993. I dropped some high schools that had suspicious-looking data.\nUsed in Text: pages 44-45, 63, 110-111, 125-126, 149-150, 158, 212, 325, 329, 329, 660\nNotes: Many states have data, at either the district or building level, on student performance and spending. A good exercise in data collection and cleaning is to have students find such data for a particular state, and to put it into a form that can be used for econometric analysis."
+  },
+  {
+    "objectID": "data_resources.html#meapsingle",
+    "href": "data_resources.html#meapsingle",
+    "title": "Data-Set Handbook",
+    "section": "MEAPSINGLE",
+    "text": "MEAPSINGLE\nSource: Collected by Professor Leslie Papke, an economics professor at MSU, from the Michigan Department of Education web site, www.michigan.gov/mde, and the U.S. Census Bureau. Professor Papke kindly provided the data.\nUsed in Text: 110-111, 158-159, 213"
+  },
+  {
+    "objectID": "data_resources.html#minwage",
+    "href": "data_resources.html#minwage",
+    "title": "Data-Set Handbook",
+    "section": "MINWAGE",
+    "text": "MINWAGE\nSource: P. Wolfson and D. Belman (2004), “The Minimum Wage: Consequences for Prices and Quantities in Low-Wage Labor Markets,” Journal of Business & Economic Statistics 22, 296-311.\nProfessor Belman kindly provided the data.\nUsed in Text: pages 365, 393, 424, 641\nNotes: The sectors corresponding to the different numbers in the data file are provided in the Wolfson and Bellman and article."
+  },
+  {
+    "objectID": "data_resources.html#mlb1",
+    "href": "data_resources.html#mlb1",
+    "title": "Data-Set Handbook",
+    "section": "MLB1",
+    "text": "MLB1\nSource: Collected by G. Mark Holmes, a former MSU undergraduate, for a term project. The salary data were obtained from the New York Times, April 11, 1993. The baseball statistics are from The Baseball Encyclopedia, 9th edition, and the city population figures are from the Statistical Abstract of the United States.\nUsed in Text: pages 140-143, 160, 229, 235-236, 256-257\nNotes: The baseball statistics are career statistics through the 1992 season. Players whose race or ethnicity could not be easily determined were not included. It should not be too difficult to obtain the city population and racial composition numbers for Montreal and Toronto for 1993. Of course, the data can be pretty easily obtained for more recent players."
+  },
+  {
+    "objectID": "data_resources.html#mroz",
+    "href": "data_resources.html#mroz",
+    "title": "Data-Set Handbook",
+    "section": "MROZ",
+    "text": "MROZ\nSource: T.A. Mroz (1987), “The Sensitivity of an Empirical Model of Married Women’s Hours of Work to Economic and Statistical Assumptions,” Econometrica 55, 765-799.\nProfessor Ernst R. Berndt, of MIT, kindly provided the data, which he obtained from Professor Mroz.\nUsed in Text: pages 240, 253, 285, 501, 511, 516, 518, 543-544, 555, 568-569, 575-576, 591-592, 597"
+  },
+  {
+    "objectID": "data_resources.html#murder",
+    "href": "data_resources.html#murder",
+    "title": "Data-Set Handbook",
+    "section": "MURDER",
+    "text": "MURDER\nSource: From the Statistical Abstract of the United States, 1995 (Tables 310 and 357), 1992 (Table 289). The execution data originally come from the U.S. Bureau of Justice Statistics, Capital Punishment Annual.\nUsed in Text: pages 457, 487, 527-528\nNotes: The data set COUNTYMURDERS includes information on executions and murder rates at the county level, and provides more variation."
+  },
+  {
+    "objectID": "data_resources.html#nbasal",
+    "href": "data_resources.html#nbasal",
+    "title": "Data-Set Handbook",
+    "section": "NBASAL",
+    "text": "NBASAL\nSource: Collected by Christopher Torrente, a former MSU undergraduate, for a term project. He obtained the salary data and the career statistics from The Complete Handbook of Pro Basketball, 1995, edited by Zander Hollander. New York: Signet. The demographic information (marital status, number of children, and so on) was obtained from the teams’ 1994-1995 media guides.\nUsed in Text: pages 216-217, 258\nNotes: A panel version of this data set could be useful for further isolating productivity effects of marital status. One would need to obtain information on enough different players in at least two years, where some players who were not married in the initial year are married in later years. Fixed effects (or first differencing, for two years) is the natural estimation method."
+  },
+  {
+    "objectID": "data_resources.html#ncaa_rpi",
+    "href": "data_resources.html#ncaa_rpi",
+    "title": "Data-Set Handbook",
+    "section": "NCAA_RPI",
+    "text": "NCAA_RPI\nSource: Data on NCAA men’s basketball teams, collected by Weizhao Sun for a senior seminar project in sports economics at Michigan State University, Spring 2017. He used various sources, including www.espn.com and www.teamrankings.com/ncaa-basketball/rpi-ranking/rpi-rating-by-team.\nUsed in Text: not used\nNotes: This is a nice example of how multiple regression analysis can be used to determine whether rankings compiled by experts – the so-called pre-season RPI in this case – provide additional information beyond what we can obtain from widely available data bases. A simple and interesting question is whether, once the previous year’s post-season RPI is controlled for, does the pre-season RPI – which is supposed to add information on recruiting and player development – help to predict performance (such as win percentage or making it to the NCAA men’s basketball tournament). For the binary outcome that indicates making it to the NCAA tournament, a probit or logit model can be used for courses that introduce more advanced methods. There are some other interesting variables, such as coaching experience, that can be included, too."
+  },
+  {
+    "objectID": "data_resources.html#nyse",
+    "href": "data_resources.html#nyse",
+    "title": "Data-Set Handbook",
+    "section": "NYSE",
+    "text": "NYSE\nSource: These are Wednesday closing prices of value-weighted NYSE average, available in many publications. I do not recall the particular source I used when I collected these data at MIT. Probably the easiest way to get similar data is to go to the NYSE web site, www.nyse.com.\nUsed in Text: pages 352-353, 368, 393, 398, 399, 595"
+  },
+  {
+    "objectID": "data_resources.html#okun",
+    "href": "data_resources.html#okun",
+    "title": "Data-Set Handbook",
+    "section": "OKUN",
+    "text": "OKUN\nSource: Economic Report of the President, 2007, Tables B4 and B42.\nUsed in Text: 392, 423-424"
+  },
+  {
+    "objectID": "data_resources.html#openness",
+    "href": "data_resources.html#openness",
+    "title": "Data-Set Handbook",
+    "section": "OPENNESS",
+    "text": "OPENNESS\nSource: D. Romer (1993), “Openness and Inflation: Theory and Evidence,” Quarterly Journal of Economics 108, 869-903.\nThe data are included in the article.\nUsed in Text: pages 544-545, 555"
+  },
+  {
+    "objectID": "data_resources.html#pension",
+    "href": "data_resources.html#pension",
+    "title": "Data-Set Handbook",
+    "section": "PENSION",
+    "text": "PENSION\nSource: L.E. Papke (2004), “Individual Financial Decisions in Retirement Saving: The Role of Participant-Direction,” Journal of Public Economics 88, 39-61.\nProfessor Papke kindly provided the data. She collected them from the National Longitudinal Survey of Mature Women, 1991.\nUsed in Text: page 488"
+  },
+  {
+    "objectID": "data_resources.html#phillips",
+    "href": "data_resources.html#phillips",
+    "title": "Data-Set Handbook",
+    "section": "PHILLIPS",
+    "text": "PHILLIPS\nSource: Economic Report of the President, 2004, Tables B42 and B64.\nUsed in Text: pages 344-345, 364-365, 375, 390-391, 392, 392, 403, 404, 412, 423, 528, 613, 625, 628, 639, 770"
+  },
+  {
+    "objectID": "data_resources.html#pntsprd",
+    "href": "data_resources.html#pntsprd",
+    "title": "Data-Set Handbook",
+    "section": "PNTSPRD",
+    "text": "PNTSPRD\nSource: Collected by Scott Resnick, a former MSU undergraduate, from various newspaper sources.\nUsed in Text: pages 271, 560, 623\nNotes: The data are for the 1994-1995 men’s college basketball seasons. The spread is for the day before the game was played. One might collect more recent data and determine whether the spread has become a less accurate predictor of the actual outcome in more recent years. In other words, in the simple regression of the actual score differential on the spread, is the variance larger in more recent years. (We should fully expect the slope coefficient not to be statistically different from one.)"
+  },
+  {
+    "objectID": "data_resources.html#prison",
+    "href": "data_resources.html#prison",
+    "title": "Data-Set Handbook",
+    "section": "PRISON",
+    "text": "PRISON\nSource: S.D. Levitt (1996), “The Effect of Prison Population Size on Crime Rates: Evidence from Prison Overcrowding Legislation,” Quarterly Journal of Economics 111, 319-351.\nProfessor Levitt kindly provided me with the data, of which I used a subset.\nUsed in Text: pages 551"
+  },
+  {
+    "objectID": "data_resources.html#prminwge",
+    "href": "data_resources.html#prminwge",
+    "title": "Data-Set Handbook",
+    "section": "PRMINWGE",
+    "text": "PRMINWGE\nSource: A.J. Castillo-Freeman and R.B. Freeman (1992), “When the Minimum Wage Really Bites: The Effect of the U.S.-Level Minimum Wage on Puerto Rico,” in Immigration and the Work Force, edited by G.J. Borjas and R.B. Freeman, 177-211. Chicago: University of Chicago Press.\nThe data are reported in the article.\nUsed in Text: pages 345-346, 356-357, 400, 405\nNotes: Given the ongoing debate on the employment effects of the minimum wage, this would be a great data set to try to update. The coverage rates are the most difficult variables to construct."
+  },
+  {
+    "objectID": "data_resources.html#recid",
+    "href": "data_resources.html#recid",
+    "title": "Data-Set Handbook",
+    "section": "RECID",
+    "text": "RECID\nSource: C.-F. Chung, P. Schmidt, and A.D. Witte (1991), “Survival Analysis: A Survey,” Journal of Quantitative Criminology 7, 59-98.\nProfessor Chung kindly provided the data.\nUsed in Text: pages 584-585, 597"
+  },
+  {
+    "objectID": "data_resources.html#rdchem",
+    "href": "data_resources.html#rdchem",
+    "title": "Data-Set Handbook",
+    "section": "RDCHEM",
+    "text": "RDCHEM\nSource: From Businessweek R&D Scoreboard, October 25, 1991.\nUsed in Text: pages 63, 135-136, 154-155, 198, 211, 317-318, 328-329\nNotes: It would be interesting to collect more recent data and see whether the R&D/firm size relationship has changed over time."
+  },
+  {
+    "objectID": "data_resources.html#rdtelec",
+    "href": "data_resources.html#rdtelec",
+    "title": "Data-Set Handbook",
+    "section": "RDTELEC",
+    "text": "RDTELEC\nSource: See RDCHEM\nUsed in Text: not used\nNotes: According to these data, the R&D/firm size relationship is different in the telecommunications industry than in the chemical industry: there is pretty strong evidence that R&D intensity decreases with firm size in telecommunications. Of course, that was in 1991. The data could easily be updated, and a panel data set could be constructed for more advanced courses."
+  },
+  {
+    "objectID": "data_resources.html#rental",
+    "href": "data_resources.html#rental",
+    "title": "Data-Set Handbook",
+    "section": "RENTAL",
+    "text": "RENTAL\nSource: David Harvey, a former MSU undergraduate, collected the data for 64 “college towns” from the 1980 and 1990 United States censuses.\nUsed in Text: pages 155, 444, 454-455, 486\nNotes: These data can be used in a somewhat crude simultaneous equations analysis, either focusing on one year or pooling the two years. (In the latter case, in an advanced class, you might have students compute the standard errors robust to serial correlation across the two time periods.) The demand equation would have ltothsg as a function of lrent, lavginc, and lpop. The supply equation would have ltothsg as a function of lrent, pctst, and lpop. Thus, in estimating the demand function, pctstu is used as an IV for lrent. Clearly one can quibble with excluding pctstu from the demand equation, but the estimated demand function gives a negative price effect.\nGetting information for 2000 and 2010, and adding many more college towns, would make for a much better analysis. Information on number of spaces in on-campus dormitories would be a big improvement, too."
+  },
+  {
+    "objectID": "data_resources.html#return",
+    "href": "data_resources.html#return",
+    "title": "Data-Set Handbook",
+    "section": "RETURN",
+    "text": "RETURN\nSource: Collected by Stephanie Balys, a former MSU undergraduate, from the New York Stock Exchange and Compustat.\nUsed in Text: page 157\nNotes: More can be done with this data set. Recently, I discovered that lsp90 does appear to predict return (and the log of the 1990 stock price works better than sp90). I am a little suspicious, but you could use the negative coefficient on lsp90 to illustrate “reversion to the mean.”"
+  },
+  {
+    "objectID": "data_resources.html#saving",
+    "href": "data_resources.html#saving",
+    "title": "Data-Set Handbook",
+    "section": "SAVING",
+    "text": "SAVING\nSource: Unknown\nUsed in Text: not used\nNotes: I remember entering this data set in the late 1980s, and I am pretty sure it came directly from an introductory econometrics text. But so far my search has been fruitless. If anyone runs across this data set, I would appreciate knowing about it."
+  },
+  {
+    "objectID": "data_resources.html#school93_98",
+    "href": "data_resources.html#school93_98",
+    "title": "Data-Set Handbook",
+    "section": "SCHOOL93_98",
+    "text": "SCHOOL93_98\nSource: L.E. Papke (2005), “The Effects of Spending on Test Pass Rates: Evidence from Michigan,” Journal of Public Economics 89, 821-839.\nUsed in Text: page 491\nNotes: This is closer to the data actually used in the Papke paper as it is at the school (building) level. It is unbalanced because data on scores and some of the spending and other variables is missing for some schools. While the usual RE and FE methods can be applied directly, obtaining the correlated random effects version of the Hausman test is more advance. Computer Exercise 17 in Chapter 14 walks the reader through it."
+  },
+  {
+    "objectID": "data_resources.html#sleep75",
+    "href": "data_resources.html#sleep75",
+    "title": "Data-Set Handbook",
+    "section": "SLEEP75",
+    "text": "SLEEP75\nSource: J.E. Biddle and D.S. Hamermesh (1990), “Sleep and the Allocation of Time,” Journal of Political Economy 98, 922-943.\nProfessor Biddle kindly provided the data.\nUsed in Text: pages 62, 105, 156-157, 251, 257, 290\nNotes: In their article, Biddle and Hamermesh include an hourly wage measure in the sleep equation. An econometric problem that arises is that the hourly wage is missing for those who do not work. Plus, the wage offer may be endogenous (even if it were always observed). Biddle and Hamermesh employ extensions of the sample selection methods in Section 17.5. See their article for details."
+  },
+  {
+    "objectID": "data_resources.html#slp75_81",
+    "href": "data_resources.html#slp75_81",
+    "title": "Data-Set Handbook",
+    "section": "SLP75_81",
+    "text": "SLP75_81\nSource: See SLEEP75\nUsed in Text: pages 442-443"
+  },
+  {
+    "objectID": "data_resources.html#smoke",
+    "href": "data_resources.html#smoke",
+    "title": "Data-Set Handbook",
+    "section": "SMOKE",
+    "text": "SMOKE\nSource: J. Mullahy (1997), “Instrumental-Variable Estimation of Count Data Models: Applications to Models of Cigarette Smoking Behavior,” Review of Economics and Statistics 79, 596-593.\nProfessor Mullahy kindly provided the data.\nUsed in Text: pages 177, 280-281, 288, 291-292, 555, 598-599\nNotes: If you want to do a “fancy” IV version of Computer Exercise C16.1, you could estimate a reduced form count model for cigs using the Poisson regression methods in Section 17.3, and then use the fitted values as an IV for cigs. Presumably, this would be for a fairly advanced class."
+  },
+  {
+    "objectID": "data_resources.html#traffic1",
+    "href": "data_resources.html#traffic1",
+    "title": "Data-Set Handbook",
+    "section": "TRAFFIC1",
+    "text": "TRAFFIC1\nSource: I collected these data from two sources, the 1992 Statistical Abstract of the United States (Tables 1009, 1012) and A Digest of State Alcohol-Highway Safety Related Legislation, 1985 and 1990, published by the U.S. National Highway Traffic Safety Administration.\nUsed in Text: pages 444, 446\nNotes: In addition to adding recent years, this data set could really use state-level tax rates on alcohol. Other important law changes include defining driving under the influence as having a blood alcohol level of .08 or more, which many states have adopted since the 1980s. The trend really picked up in the 1990s and continued through the 2000s. The data set DRIVING is more complete and more recent, but it is also more complicated."
+  },
+  {
+    "objectID": "data_resources.html#traffic2",
+    "href": "data_resources.html#traffic2",
+    "title": "Data-Set Handbook",
+    "section": "TRAFFIC2",
+    "text": "TRAFFIC2\nSource: P.S. McCarthy (1994), “Relaxed Speed Limits and Highway Safety: New Evidence from California,” Economics Letters 46, 173-179.\nProfessor McCarthy kindly provided the data.\nUsed in Text: pages 364, 392, 422, 641, 659\nNotes: Many states have changed maximum speed limits and imposed seat belt laws over the past 25 years. Data similar to those in TRAFFIC2 should be fairly easy to obtain for a particular state. One should combine this information with changes in a state’s blood alcohol limit and the passage of per se and open container laws."
+  },
+  {
+    "objectID": "data_resources.html#twoyear",
+    "href": "data_resources.html#twoyear",
+    "title": "Data-Set Handbook",
+    "section": "TWOYEAR",
+    "text": "TWOYEAR\nSource: T.J. Kane and C.E. Rouse (1995), “Labor-Market Returns to Two- and Four-Year Colleges,” American Economic Review 85, 600-614.\nWith Professor Rouse’s kind assistance, I obtained the data from her web site at Princeton University.\nUsed in Text: pages 137-139, 160, 254, 329\nNotes: As possible extensions, students can explore whether the returns to two-year or four-year colleges depend on race or gender. This is partly done in Problem 7.9 but where college is aggregated into one number. Also, should experience appear as a quadratic in the wage specification?"
+  },
+  {
+    "objectID": "data_resources.html#volat",
+    "href": "data_resources.html#volat",
+    "title": "Data-Set Handbook",
+    "section": "VOLAT",
+    "text": "VOLAT\nSource: J.D. Hamilton and L. Gang (1996), “Stock Market Volatility and the Business Cycle,” Journal of Applied Econometrics 11, 573-593.\nI obtained these data from the Journal of Applied Econometrics data archive at http://qed.econ.queensu.ca/jae/\nUsed in Text: pages 364, 637-640"
+  },
+  {
+    "objectID": "data_resources.html#vote1",
+    "href": "data_resources.html#vote1",
+    "title": "Data-Set Handbook",
+    "section": "VOTE1",
+    "text": "VOTE1\nSource: M. Barone and G. Ujifusa, The Almanac of American Politics, 1992. Washington, DC: National Journal.\nUsed in Text: pages 31, 36, 159-160, 215-216, 290, 663"
+  },
+  {
+    "objectID": "data_resources.html#vote2",
+    "href": "data_resources.html#vote2",
+    "title": "Data-Set Handbook",
+    "section": "VOTE2",
+    "text": "VOTE2\nSource: See VOTE1\nUsed in Text: pages 324-325, 444, 455-456, 663\nNotes: These are panel data, at the Congressional district level, collected for the 1988 and 1990 U.S. House of Representative elections. Of course, much more recent data are available, possibly even in electronic form."
   }
 ]

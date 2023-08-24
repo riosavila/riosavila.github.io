@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Econometrics MSC Levy - Data-Set Handbook</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Econometrics MSC Levy</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./adv_class.html" rel="" target="">
+ <span class="menu-text">Adv Methods and Causal Effects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./rm_class.html" rel="" target="">
+ <span class="menu-text">Research Methods: Econometrics I</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./resources.html" rel="" target="">
+ <span class="menu-text">Resources</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#odds" id="toc-odds" class="nav-link active" data-scroll-target="#odds">Odds</a>
+  <ul class="collapse">
+  <li><a href="#k" id="toc-k" class="nav-link" data-scroll-target="#k">401K</a></li>
+  <li><a href="#ksubs" id="toc-ksubs" class="nav-link" data-scroll-target="#ksubs">401KSUBS</a></li>
+  </ul></li>
+  <li><a href="#a" id="toc-a" class="nav-link" data-scroll-target="#a">A</a>
+  <ul class="collapse">
+  <li><a href="#admnrev" id="toc-admnrev" class="nav-link" data-scroll-target="#admnrev">ADMNREV</a></li>
+  <li><a href="#affairs" id="toc-affairs" class="nav-link" data-scroll-target="#affairs">AFFAIRS</a></li>
+  <li><a href="#airfare" id="toc-airfare" class="nav-link" data-scroll-target="#airfare">AIRFARE</a></li>
+  <li><a href="#alcohol" id="toc-alcohol" class="nav-link" data-scroll-target="#alcohol">ALCOHOL</a></li>
+  <li><a href="#apple" id="toc-apple" class="nav-link" data-scroll-target="#apple">APPLE</a></li>
+  <li><a href="#approval" id="toc-approval" class="nav-link" data-scroll-target="#approval">APPROVAL</a></li>
+  <li><a href="#athlet1" id="toc-athlet1" class="nav-link" data-scroll-target="#athlet1">ATHLET1</a></li>
+  <li><a href="#athlet2" id="toc-athlet2" class="nav-link" data-scroll-target="#athlet2">ATHLET2</a></li>
+  <li><a href="#attend" id="toc-attend" class="nav-link" data-scroll-target="#attend">ATTEND</a></li>
+  <li><a href="#audit" id="toc-audit" class="nav-link" data-scroll-target="#audit">AUDIT</a></li>
+  </ul></li>
+  <li><a href="#b" id="toc-b" class="nav-link" data-scroll-target="#b">B</a>
+  <ul class="collapse">
+  <li><a href="#barium" id="toc-barium" class="nav-link" data-scroll-target="#barium">BARIUM</a></li>
+  <li><a href="#beauty" id="toc-beauty" class="nav-link" data-scroll-target="#beauty">BEAUTY</a></li>
+  <li><a href="#benefits" id="toc-benefits" class="nav-link" data-scroll-target="#benefits">BENEFITS</a></li>
+  <li><a href="#big9salary" id="toc-big9salary" class="nav-link" data-scroll-target="#big9salary">BIG9SALARY</a></li>
+  <li><a href="#bwght" id="toc-bwght" class="nav-link" data-scroll-target="#bwght">BWGHT</a></li>
+  <li><a href="#bwght2" id="toc-bwght2" class="nav-link" data-scroll-target="#bwght2">BWGHT2</a></li>
+  </ul></li>
+  <li><a href="#c" id="toc-c" class="nav-link" data-scroll-target="#c">C</a>
+  <ul class="collapse">
+  <li><a href="#campus" id="toc-campus" class="nav-link" data-scroll-target="#campus">CAMPUS</a></li>
+  <li><a href="#card" id="toc-card" class="nav-link" data-scroll-target="#card">CARD</a></li>
+  <li><a href="#catholic" id="toc-catholic" class="nav-link" data-scroll-target="#catholic">CATHOLIC</a>
+  <ul class="collapse">
+  <li><a href="#cement" id="toc-cement" class="nav-link" data-scroll-target="#cement">CEMENT</a></li>
+  </ul></li>
+  <li><a href="#census2000" id="toc-census2000" class="nav-link" data-scroll-target="#census2000">CENSUS2000</a></li>
+  <li><a href="#ceosal1" id="toc-ceosal1" class="nav-link" data-scroll-target="#ceosal1">CEOSAL1</a></li>
+  <li><a href="#ceosal2" id="toc-ceosal2" class="nav-link" data-scroll-target="#ceosal2">CEOSAL2</a></li>
+  <li><a href="#charity" id="toc-charity" class="nav-link" data-scroll-target="#charity">CHARITY</a></li>
+  <li><a href="#consump" id="toc-consump" class="nav-link" data-scroll-target="#consump">CONSUMP</a></li>
+  <li><a href="#corn" id="toc-corn" class="nav-link" data-scroll-target="#corn">CORN</a></li>
+  <li><a href="#countymurders" id="toc-countymurders" class="nav-link" data-scroll-target="#countymurders">COUNTYMURDERS</a></li>
+  <li><a href="#cps78_85" id="toc-cps78_85" class="nav-link" data-scroll-target="#cps78_85">CPS78_85</a></li>
+  <li><a href="#cps91" id="toc-cps91" class="nav-link" data-scroll-target="#cps91">CPS91</a></li>
+  <li><a href="#crime1" id="toc-crime1" class="nav-link" data-scroll-target="#crime1">CRIME1</a></li>
+  <li><a href="#crime2" id="toc-crime2" class="nav-link" data-scroll-target="#crime2">CRIME2</a></li>
+  <li><a href="#crime3" id="toc-crime3" class="nav-link" data-scroll-target="#crime3">CRIME3:</a></li>
+  <li><a href="#crime4" id="toc-crime4" class="nav-link" data-scroll-target="#crime4">CRIME4</a></li>
+  </ul></li>
+  <li><a href="#d" id="toc-d" class="nav-link" data-scroll-target="#d">D</a>
+  <ul class="collapse">
+  <li><a href="#discrim" id="toc-discrim" class="nav-link" data-scroll-target="#discrim">DISCRIM</a></li>
+  <li><a href="#driving" id="toc-driving" class="nav-link" data-scroll-target="#driving">DRIVING</a></li>
+  </ul></li>
+  <li><a href="#e" id="toc-e" class="nav-link" data-scroll-target="#e">E</a>
+  <ul class="collapse">
+  <li><a href="#earns" id="toc-earns" class="nav-link" data-scroll-target="#earns">EARNS</a></li>
+  <li><a href="#econmath" id="toc-econmath" class="nav-link" data-scroll-target="#econmath">ECONMATH</a></li>
+  <li><a href="#elem94_95" id="toc-elem94_95" class="nav-link" data-scroll-target="#elem94_95">ELEM94_95</a></li>
+  <li><a href="#expendshares" id="toc-expendshares" class="nav-link" data-scroll-target="#expendshares">EXPENDSHARES</a></li>
+  <li><a href="#engin" id="toc-engin" class="nav-link" data-scroll-target="#engin">ENGIN</a></li>
+  <li><a href="#ezanders" id="toc-ezanders" class="nav-link" data-scroll-target="#ezanders">EZANDERS</a></li>
+  <li><a href="#ezunem" id="toc-ezunem" class="nav-link" data-scroll-target="#ezunem">EZUNEM</a></li>
+  </ul></li>
+  <li><a href="#f" id="toc-f" class="nav-link" data-scroll-target="#f">F</a>
+  <ul class="collapse">
+  <li><a href="#fair" id="toc-fair" class="nav-link" data-scroll-target="#fair">FAIR</a></li>
+  <li><a href="#fertil1" id="toc-fertil1" class="nav-link" data-scroll-target="#fertil1">FERTIL1</a></li>
+  <li><a href="#fertil2" id="toc-fertil2" class="nav-link" data-scroll-target="#fertil2">FERTIL2</a></li>
+  <li><a href="#fertil3" id="toc-fertil3" class="nav-link" data-scroll-target="#fertil3">FERTIL3</a></li>
+  <li><a href="#fish" id="toc-fish" class="nav-link" data-scroll-target="#fish">FISH</a></li>
+  <li><a href="#fringe" id="toc-fringe" class="nav-link" data-scroll-target="#fringe">FRINGE</a></li>
+  </ul></li>
+  <li><a href="#g" id="toc-g" class="nav-link" data-scroll-target="#g">G</a>
+  <ul class="collapse">
+  <li><a href="#gpa1" id="toc-gpa1" class="nav-link" data-scroll-target="#gpa1">GPA1</a></li>
+  <li><a href="#gpa2" id="toc-gpa2" class="nav-link" data-scroll-target="#gpa2">GPA2</a></li>
+  <li><a href="#gpa3" id="toc-gpa3" class="nav-link" data-scroll-target="#gpa3">GPA3</a></li>
+  </ul></li>
+  <li><a href="#h" id="toc-h" class="nav-link" data-scroll-target="#h">H</a>
+  <ul class="collapse">
+  <li><a href="#happiness" id="toc-happiness" class="nav-link" data-scroll-target="#happiness">HAPPINESS</a></li>
+  <li><a href="#hprice1" id="toc-hprice1" class="nav-link" data-scroll-target="#hprice1">HPRICE1</a></li>
+  <li><a href="#hprice2" id="toc-hprice2" class="nav-link" data-scroll-target="#hprice2">HPRICE2</a></li>
+  <li><a href="#hseinv" id="toc-hseinv" class="nav-link" data-scroll-target="#hseinv">HSEINV</a></li>
+  <li><a href="#htv" id="toc-htv" class="nav-link" data-scroll-target="#htv">HTV</a></li>
+  </ul></li>
+  <li><a href="#i" id="toc-i" class="nav-link" data-scroll-target="#i">I</a>
+  <ul class="collapse">
+  <li><a href="#infmrt" id="toc-infmrt" class="nav-link" data-scroll-target="#infmrt">INFMRT</a></li>
+  <li><a href="#injury" id="toc-injury" class="nav-link" data-scroll-target="#injury">INJURY</a></li>
+  <li><a href="#intdef" id="toc-intdef" class="nav-link" data-scroll-target="#intdef">INTDEF</a></li>
+  <li><a href="#intqrt" id="toc-intqrt" class="nav-link" data-scroll-target="#intqrt">INTQRT</a></li>
+  <li><a href="#inven" id="toc-inven" class="nav-link" data-scroll-target="#inven">INVEN</a></li>
+  </ul></li>
+  <li><a href="#j" id="toc-j" class="nav-link" data-scroll-target="#j">J</a>
+  <ul class="collapse">
+  <li><a href="#jtrain" id="toc-jtrain" class="nav-link" data-scroll-target="#jtrain">JTRAIN</a></li>
+  <li><a href="#jtrain2" id="toc-jtrain2" class="nav-link" data-scroll-target="#jtrain2">JTRAIN2</a></li>
+  <li><a href="#jtrain3" id="toc-jtrain3" class="nav-link" data-scroll-target="#jtrain3">JTRAIN3</a></li>
+  <li><a href="#jtrain98" id="toc-jtrain98" class="nav-link" data-scroll-target="#jtrain98">JTRAIN98</a></li>
+  </ul></li>
+  <li><a href="#k-1" id="toc-k-1" class="nav-link" data-scroll-target="#k-1">K</a>
+  <ul class="collapse">
+  <li><a href="#kielmc" id="toc-kielmc" class="nav-link" data-scroll-target="#kielmc">KIELMC</a></li>
+  </ul></li>
+  <li><a href="#l" id="toc-l" class="nav-link" data-scroll-target="#l">L</a>
+  <ul class="collapse">
+  <li><a href="#labsup" id="toc-labsup" class="nav-link" data-scroll-target="#labsup">LABSUP</a></li>
+  <li><a href="#lawsch85" id="toc-lawsch85" class="nav-link" data-scroll-target="#lawsch85">LAWSCH85</a></li>
+  <li><a href="#loanapp" id="toc-loanapp" class="nav-link" data-scroll-target="#loanapp">LOANAPP</a></li>
+  <li><a href="#lowbrth" id="toc-lowbrth" class="nav-link" data-scroll-target="#lowbrth">LOWBRTH</a></li>
+  </ul></li>
+  <li><a href="#m" id="toc-m" class="nav-link" data-scroll-target="#m">M</a>
+  <ul class="collapse">
+  <li><a href="#mathpnl" id="toc-mathpnl" class="nav-link" data-scroll-target="#mathpnl">MATHPNL</a></li>
+  <li><a href="#meap00" id="toc-meap00" class="nav-link" data-scroll-target="#meap00">MEAP00</a></li>
+  <li><a href="#meap01" id="toc-meap01" class="nav-link" data-scroll-target="#meap01">MEAP01</a></li>
+  <li><a href="#meap93" id="toc-meap93" class="nav-link" data-scroll-target="#meap93">MEAP93</a></li>
+  <li><a href="#meapsingle" id="toc-meapsingle" class="nav-link" data-scroll-target="#meapsingle">MEAPSINGLE</a></li>
+  <li><a href="#minwage" id="toc-minwage" class="nav-link" data-scroll-target="#minwage">MINWAGE</a></li>
+  <li><a href="#mlb1" id="toc-mlb1" class="nav-link" data-scroll-target="#mlb1">MLB1</a></li>
+  <li><a href="#mroz" id="toc-mroz" class="nav-link" data-scroll-target="#mroz">MROZ</a></li>
+  <li><a href="#murder" id="toc-murder" class="nav-link" data-scroll-target="#murder">MURDER</a></li>
+  </ul></li>
+  <li><a href="#n" id="toc-n" class="nav-link" data-scroll-target="#n">N</a>
+  <ul class="collapse">
+  <li><a href="#nbasal" id="toc-nbasal" class="nav-link" data-scroll-target="#nbasal">NBASAL</a></li>
+  <li><a href="#ncaa_rpi" id="toc-ncaa_rpi" class="nav-link" data-scroll-target="#ncaa_rpi">NCAA_RPI</a></li>
+  <li><a href="#nyse" id="toc-nyse" class="nav-link" data-scroll-target="#nyse">NYSE</a></li>
+  </ul></li>
+  <li><a href="#o" id="toc-o" class="nav-link" data-scroll-target="#o">O</a>
+  <ul class="collapse">
+  <li><a href="#okun" id="toc-okun" class="nav-link" data-scroll-target="#okun">OKUN</a></li>
+  <li><a href="#openness" id="toc-openness" class="nav-link" data-scroll-target="#openness">OPENNESS</a></li>
+  </ul></li>
+  <li><a href="#p" id="toc-p" class="nav-link" data-scroll-target="#p">P</a>
+  <ul class="collapse">
+  <li><a href="#pension" id="toc-pension" class="nav-link" data-scroll-target="#pension">PENSION</a></li>
+  <li><a href="#phillips" id="toc-phillips" class="nav-link" data-scroll-target="#phillips">PHILLIPS</a></li>
+  <li><a href="#pntsprd" id="toc-pntsprd" class="nav-link" data-scroll-target="#pntsprd">PNTSPRD</a></li>
+  <li><a href="#prison" id="toc-prison" class="nav-link" data-scroll-target="#prison">PRISON</a></li>
+  <li><a href="#prminwge" id="toc-prminwge" class="nav-link" data-scroll-target="#prminwge">PRMINWGE</a></li>
+  </ul></li>
+  <li><a href="#r" id="toc-r" class="nav-link" data-scroll-target="#r">R</a>
+  <ul class="collapse">
+  <li><a href="#recid" id="toc-recid" class="nav-link" data-scroll-target="#recid">RECID</a></li>
+  <li><a href="#rdchem" id="toc-rdchem" class="nav-link" data-scroll-target="#rdchem">RDCHEM</a></li>
+  <li><a href="#rdtelec" id="toc-rdtelec" class="nav-link" data-scroll-target="#rdtelec">RDTELEC</a></li>
+  <li><a href="#rental" id="toc-rental" class="nav-link" data-scroll-target="#rental">RENTAL</a></li>
+  <li><a href="#return" id="toc-return" class="nav-link" data-scroll-target="#return">RETURN</a></li>
+  </ul></li>
+  <li><a href="#s" id="toc-s" class="nav-link" data-scroll-target="#s">S</a>
+  <ul class="collapse">
+  <li><a href="#saving" id="toc-saving" class="nav-link" data-scroll-target="#saving">SAVING</a></li>
+  <li><a href="#school93_98" id="toc-school93_98" class="nav-link" data-scroll-target="#school93_98">SCHOOL93_98</a></li>
+  <li><a href="#sleep75" id="toc-sleep75" class="nav-link" data-scroll-target="#sleep75">SLEEP75</a></li>
+  <li><a href="#slp75_81" id="toc-slp75_81" class="nav-link" data-scroll-target="#slp75_81">SLP75_81</a></li>
+  <li><a href="#smoke" id="toc-smoke" class="nav-link" data-scroll-target="#smoke">SMOKE</a></li>
+  </ul></li>
+  <li><a href="#t" id="toc-t" class="nav-link" data-scroll-target="#t">T</a>
+  <ul class="collapse">
+  <li><a href="#traffic1" id="toc-traffic1" class="nav-link" data-scroll-target="#traffic1">TRAFFIC1</a></li>
+  <li><a href="#traffic2" id="toc-traffic2" class="nav-link" data-scroll-target="#traffic2">TRAFFIC2</a></li>
+  <li><a href="#twoyear" id="toc-twoyear" class="nav-link" data-scroll-target="#twoyear">TWOYEAR</a></li>
+  </ul></li>
+  <li><a href="#v" id="toc-v" class="nav-link" data-scroll-target="#v">V</a>
+  <ul class="collapse">
+  <li><a href="#volat" id="toc-volat" class="nav-link" data-scroll-target="#volat">VOLAT</a></li>
+  <li><a href="#vote1" id="toc-vote1" class="nav-link" data-scroll-target="#vote1">VOTE1</a></li>
+  <li><a href="#vote2" id="toc-vote2" class="nav-link" data-scroll-target="#vote2">VOTE2</a></li>
+  <li><a href="#voucher" id="toc-voucher" class="nav-link" data-scroll-target="#voucher">VOUCHER</a></li>
+  </ul></li>
+  <li><a href="#w" id="toc-w" class="nav-link" data-scroll-target="#w">W</a>
+  <ul class="collapse">
+  <li><a href="#wage1" id="toc-wage1" class="nav-link" data-scroll-target="#wage1">WAGE1</a></li>
+  <li><a href="#wage2" id="toc-wage2" class="nav-link" data-scroll-target="#wage2">WAGE2</a></li>
+  <li><a href="#wagepan" id="toc-wagepan" class="nav-link" data-scroll-target="#wagepan">WAGEPAN</a></li>
+  <li><a href="#wageprc" id="toc-wageprc" class="nav-link" data-scroll-target="#wageprc">WAGEPRC</a></li>
+  <li><a href="#wine" id="toc-wine" class="nav-link" data-scroll-target="#wine">WINE</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Data-Set Handbook</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+<section id="odds" class="level1">
+<h1>Odds</h1>
+<section id="k" class="level2">
+<h2 class="anchored" data-anchor-id="k">401K</h2>
+<p><strong>Source</strong>: L.E. Papke (1995), “Participation in and Contributions to 401(k) Pension Plans: Evidence from Plan Data,” Journal of Human Resources 30, 311-325.</p>
+<p>Professor Papke, of Michigan State University, kindly provided these data. She gathered them from the Internal Revenue Service’s Form 5500 tapes.</p>
+<p>Used in Text: pages 62, 76, 133, 169, 212-213, 656-657</p>
+<p><strong>Notes</strong>: This data set is used in a variety of ways in the text. One additional possibility is to investigate whether the coefficients from the regression of prate on mrate, log(totemp) differ by whether the plan is a sole plan. The Chow test (see Section 7.4), and the less restrictive version that allows different intercepts, can be used.</p>
+</section>
+<section id="ksubs" class="level2">
+<h2 class="anchored" data-anchor-id="ksubs">401KSUBS</h2>
+<p><strong>Source</strong>: A. Abadie (2003), “Semiparametric Instrumental Variable Estimation of Treatment Response Models,” Journal of Econometrics 113, 231-263.</p>
+<p>Professor Abadie, now at MIT, kindly provided these data. He obtained them from the 1991 Survey of Income and Program Participation (SIPP).</p>
+<p>Used in Text: pages 160-161, 178, 217-218, 258-259, 276, 292, 528</p>
+<p><strong>Notes</strong>: This data set can also be used to illustrate the binary response models, probit and logit, in Chapter 17, where, say, pira (an indicator for having an individual retirement account) is the dependent variable, and e401k [the 401(k) eligibility indicator] is the key explanatory variable.</p>
+</section>
+</section>
+<section id="a" class="level1">
+<h1>A</h1>
+<section id="admnrev" class="level2">
+<h2 class="anchored" data-anchor-id="admnrev">ADMNREV</h2>
+<p><strong>Source</strong>: Data from the National Highway Traffic Safety Administration: “A Digest of State Alcohol-Highway Safety Related Legislation,” U.S. Department of Transportation, NHTSA. I used the third (1985), eighth (1990), and 13th (1995) editions.</p>
+<p>Used in Text: not used</p>
+<p><strong>Notes</strong>: This is not so much a data set as a summary of so-called “administrative per se” laws at the state level, for three different years. It could be supplemented with drunk-driving fatalities for a nice econometric analysis. In addition, the data for 2000 or later years can be added, forming the basis for a term project. Many other explanatory variables could be included. Unemployment rates, state-level tax rates on alcohol, and membership in MADD are just a few possibilities.</p>
+</section>
+<section id="affairs" class="level2">
+<h2 class="anchored" data-anchor-id="affairs">AFFAIRS</h2>
+<p><strong>Source</strong>: R.C. Fair (1978), “A Theory of Extramarital Affairs,” Journal of Political Economy 86, 45-61, 1978.</p>
+<p>I collected the data from Professor Fair’s web cite at the Yale University Department of Economics. He originally obtained the data from a survey by Psychology Today.</p>
+<p>Used in Text: not used</p>
+<p><strong>Notes</strong>: This is an interesting data set for problem sets starting in Chapter 7. Even though naffairs (number of extramarital affairs a woman reports) is a count variable, a linear model can be used to model its conditional mean as an approximation. Or, you could ask the students to estimate a linear probability model for the binary indicator affair, equal to one of the woman reports having any extramarital affairs. One possibility is to test whether putting the single marriage rating variable, ratemarr, is enough, against the alternative that a full set of dummy variables is needed; see pages 239-240 for a similar example. This is also a good data set to illustrate Poisson regression (using naffairs) in Section 17.3 or probit and logit (using affair) in Section 17.1.</p>
+</section>
+<section id="airfare" class="level2">
+<h2 class="anchored" data-anchor-id="airfare">AIRFARE</h2>
+<p><strong>Source</strong>: Jiyoung Kwon, a former doctoral student in economics at MSU, kindly provided these data, which she obtained from the Domestic Airline Fares Consumer Report by the U.S. Department of Transportation.</p>
+<p>Used in Text: pages 476, 488, 557, 557</p>
+<p><strong>Notes</strong>: This data set nicely illustrates the different estimates obtained when applying pooled OLS, random effects, and fixed effects.</p>
+</section>
+<section id="alcohol" class="level2">
+<h2 class="anchored" data-anchor-id="alcohol">ALCOHOL</h2>
+<p><strong>Source</strong>: Terza, J.V. (2002), “Alcohol Abuse and Employment: A Second Look,” Journal of Applied Econometrics 17, 393-404.</p>
+<p>I obtained these data from the Journal of Applied Econometrics data archive at http://qed.econ.queensu.ca/jae/.</p>
+<p>Used in Text: page 600</p>
+</section>
+<section id="apple" class="level2">
+<h2 class="anchored" data-anchor-id="apple">APPLE</h2>
+<p><strong>Source</strong>: These data were used in the doctoral dissertation of Jeffrey Blend, Department of Agricultural Economics, Michigan State University, 1998. The thesis was supervised by Professor Eileen van Ravensway. Drs. Blend and van Ravensway kindly provided the data, which were obtained from a telephone survey conducted by the Institute for Public Policy and Social Research at MSU.</p>
+<p>Used in Text: pages 195, 217, 259-260, 598</p>
+<p><strong>Notes</strong>: This data set is close to a true experimental data set because the price pairs facing a family were randomly determined. In other words, the family head was presented with prices for the eco-labeled and regular apples, and then asked how much of each kind of apple the family would buy at the given prices. As predicted by basic economics, the own price effect is negative (and strong) and the cross price effect is positive (and strong). While the main dependent variable, ecolbs, piles up at zero, estimating a linear model is still worthwhile. Interestingly, because the survey design induces a strong positive correlation between the prices of eco-labeled and regular apples, there is an omitted variable problem if either of the price variables is dropped from the demand equation. A good exam question is to show a simple regression of ecolbs on ecoprc and then a multiple regression on both prices, and ask students to decide whether the price variables must be positively or negatively correlated.</p>
+</section>
+<section id="approval" class="level2">
+<h2 class="anchored" data-anchor-id="approval">APPROVAL</h2>
+<p><strong>Source</strong>: Harbridge, L., J. Krosnick, and J.M. Wooldridge (2016), “Presidential Approval and Gas Prices: Sociotropic or Pocketbook Influence?” In New Explorations in Political Psychology, ed.&nbsp;J. Krosnick. New York: Psychology Press (Taylor and Francis Group)</p>
+<p>Professor Harbridge kindly provided the data, of which I have used a subset.</p>
+<p>Used in Text: 365, 393, 424</p>
+</section>
+<section id="athlet1" class="level2">
+<h2 class="anchored" data-anchor-id="athlet1">ATHLET1</h2>
+<p><strong>Sources</strong>:: Peterson’s Guide to Four Year Colleges, 1994 and 1995 (24th and 25th editions). Princeton University Press. Princeton, NJ.</p>
+<p>The Official 1995 College Basketball Records Book, 1994, NCAA.</p>
+<p>1995 Information Please Sports Almanac (6th edition). Houghton Mifflin. New York, NY.</p>
+<p>Used in Text: page 661</p>
+<p><strong>Notes</strong>: These data were collected by Patrick Tulloch, an MSU economics major, for a term project. The “athletic success” variables are for the year prior to the enrollment and academic data. Updating these data to get a longer stretch of years, and including appearances in the “Sweet 16” NCAA basketball tournaments, would make for a more convincing analysis. With the growing popularity of women’s sports, especially basketball, an analysis that includes success in women’s athletics would be interesting.</p>
+</section>
+<section id="athlet2" class="level2">
+<h2 class="anchored" data-anchor-id="athlet2">ATHLET2</h2>
+<p><strong>Sources</strong>:: Peterson’s Guide to Four Year Colleges, 1995 (25th edition). Princeton University Press.</p>
+<p>1995 Information Please Sports Almanac (6th edition). Houghton Mifflin. New York, NY</p>
+<p>Used in Text: page 661</p>
+<p><strong>Notes</strong>: These data were collected by Paul Anderson, an MSU economics major, for a term project. The score from football outcomes for natural rivals (Michigan-Michigan State, California-Stanford, Florida-Florida State, to name a few) is matched with application and academic data. The application and tuition data are for Fall 1994. Football records and scores are from 1993 football season. Extended these data to obtain a long stretch of panel data and other “natural” rivals could be very interesting.</p>
+</section>
+<section id="attend" class="level2">
+<h2 class="anchored" data-anchor-id="attend">ATTEND</h2>
+<p><strong>Source</strong>: These data were collected by Professors Ronald Fisher and Carl Liedholm during a term in which they both taught principles of microeconomics at Michigan State University. Professors Fisher and Liedholm kindly gave me permission to use a random subset of their data, and their research assistant at the time, Jeffrey Guilfoyle, who completed his Ph.D.&nbsp;in economics at MSU, provided helpful hints.</p>
+<p>Used in Text: pages 110, 146, 193-194, 216</p>
+<p><strong>Notes</strong>: The attendance figures were obtained by requiring students to slide their ID cards through a magnetic card reader, under the supervision of a teaching assistant. You might have the students use final, rather than the standardized variable, so that they can see the statistical significance of each variable remains exactly the same. The standardized variable is used only so that the coefficients measure effects in terms of standard deviations from the average score.</p>
+</section>
+<section id="audit" class="level2">
+<h2 class="anchored" data-anchor-id="audit">AUDIT</h2>
+<p><strong>Source</strong>: These data come from a 1988 Urban Institute audit study in the Washington, D.C. area. I obtained them from the article “The Urban Institute Audit Studies: Their Methods and Findings,” by James J. Heckman and Peter Siegelman. In Fix, M. and Struyk, R., eds., Clear and Convincing Evidence: Measurement of Discrimination in America. Washington, D.C.: Urban Institute Press, 1993, 187-258.</p>
+<p>Used in Text: pages 732, 738, 741</p>
+</section>
+</section>
+<section id="b" class="level1">
+<h1>B</h1>
+<section id="barium" class="level2">
+<h2 class="anchored" data-anchor-id="barium">BARIUM</h2>
+<p><strong>Source</strong>: C.M. Krupp and P.S. Pollard (1999), “Market Responses to Antidumpting Laws: Some Evidence from the U.S. Chemical Industry,” Canadian Journal of Economics 29, 199-227.</p>
+<p>Dr.&nbsp;Krupp kindly provided the data. They are monthly data covering February 1978 through December 1988.</p>
+<p>Used in Text: pages 349-350, 359, 363, 407, 410-411, 422, 424, 631-632, 639</p>
+<p><strong>Note</strong>: Rather than just having intercept shifts for the different regimes, one could conduct a full Chow test across the different regimes.</p>
+</section>
+<section id="beauty" class="level2">
+<h2 class="anchored" data-anchor-id="beauty">BEAUTY</h2>
+<p><strong>Source</strong>: Hamermesh, D.S. and J.E. Biddle (1994), “Beauty and the Labor Market,” American Economic Review 84, 1174-1194.</p>
+<p>Professor Hamermesh kindly provided me with the data. For manageability, I have included only a subset of the variables, which results in somewhat larger sample sizes than reported for the regressions in the Hamermesh and Biddle paper.</p>
+<p>Used in Text: pages 231, 259</p>
+</section>
+<section id="benefits" class="level2">
+<h2 class="anchored" data-anchor-id="benefits">BENEFITS</h2>
+<p><strong>Source</strong>: I collected these data from the old Michigan Department of Education web site, which used to have an annual Michigan Schools Report. I used data on most elementary schools in the state of Michigan for 1993. I dropped some schools that had suspicious-looking data.</p>
+<p>Used in Text: 218</p>
+<p><strong>Notes</strong>: This is an elementary school-level version of MEAP93, which contains data for high schools.</p>
+</section>
+<section id="big9salary" class="level2">
+<h2 class="anchored" data-anchor-id="big9salary">BIG9SALARY</h2>
+<p><strong>Source</strong>: O. Baser and E. Pema (2003), “The Return of Publications for Economics Faculty,” Economics Bulletin 1, 1-13.</p>
+<p>Professors Baser and Pema kindly provided the data.</p>
+<p>Used in Text: not used</p>
+<p><strong>Notes</strong>: This is an unbalanced panel data set in the sense that as many as three years of data are available for each faculty member but where some have fewer than three years. It is not clear that something like a fixed effects or first differencing analysis makes sense: in effect, approaches that remove the heterogeneity control for too much by controlling for unobserved heterogeneity – which, in this case, includes faculty intelligence, talent, and motivation. Presumably, these factors enter into the publication index. It is hard to think we want to hold the main factors driving productivity fixed when trying to measure the effect of productivity on salary. Pooled OLS regression with “cluster robust” standard errors seems more natural.</p>
+<p>On the other hand, if we want to measure the return to having a degree from a top 20 Ph.D.&nbsp;program then we would want to control for factors that cause selection into a top 20 program. Unfortunately, this variable does not change over time, and so FD and FE are not applicable. One could include the top 20 dummy variable in a correlated random effects analysis.</p>
+</section>
+<section id="bwght" class="level2">
+<h2 class="anchored" data-anchor-id="bwght">BWGHT</h2>
+<p><strong>Source</strong>: J. Mullahy (1997), “Instrumental-Variable Estimation of Count Data Models: Applications to Models of Cigarette Smoking Behavior,” Review of Economics and Statistics 79, 596-593.</p>
+<p>Professor Mullahy kindly provided the data. He obtained them from the 1988 National Health Interview Survey.</p>
+<p>Used in Text: pages 16, 58, 109, 145, 172, 178, 181-182, 251-252, 504</p>
+</section>
+<section id="bwght2" class="level2">
+<h2 class="anchored" data-anchor-id="bwght2">BWGHT2</h2>
+<p><strong>Source</strong>: Dr.&nbsp;Zhehui Luo, a professor of epidemiology and biostatistics at MSU, kindly provided these data. She obtained them from state files linking birth and infant death certificates, and from the National Center for Health Statistics natality and mortality data.</p>
+<p>Used in Text: pages 178, 217</p>
+<p><strong>Notes</strong>: There are many possibilities with this data set. In addition to number of prenatal visits, smoking and alcohol consumption (during pregnancy) are included as explanatory variables. These can be added to equations of the kind found in Exercise C6.10. In addition, the one- and five-minute APGAR scores are included. These are measures of the well being of infants just after birth. An interesting feature of the score is that it is bounded between zero and 10, making a linear model less than ideal. Still, a linear model would be informative, and you might ask students about predicted values less than zero or greater than 10.</p>
+</section>
+</section>
+<section id="c" class="level1">
+<h1>C</h1>
+<section id="campus" class="level2">
+<h2 class="anchored" data-anchor-id="campus">CAMPUS</h2>
+<p><strong>Source</strong>: These data were collected by Daniel Martin, a former MSU undergraduate, for a final project. They come from the FBI Uniform Crime Reports and are for the year 1992.</p>
+<p>Used in Text: pages 128-129</p>
+<p><strong>Notes</strong>: Colleges and universities are now required to provide much better, more detailed crime data. A very rich data set can now be obtained, even a panel data set for colleges across different years. Statistics on male/female ratios, fraction of men/women in fraternities or sororities, policy variables – such as a “safe house” for women on campus, as was started at MSU in 1994 – could be added as explanatory variables. The crime rate in the host town would be a good control.</p>
+</section>
+<section id="card" class="level2">
+<h2 class="anchored" data-anchor-id="card">CARD</h2>
+<p><strong>Source</strong>: D. Card (1995), “Using Geographic Variation in College Proximity to Estimate the Return to Schooling,” in Aspects of Labour Market Behavior: Essays in Honour of John Vanderkamp. Ed. L.N. Christophides, E.K. Grant, and R. Swidinsky, 201-222. Toronto: University of Toronto Press.</p>
+<p>Professor Card kindly provided these data.</p>
+<p>Used in Text: pages 507-508, 527</p>
+<p><strong>Notes</strong>: Computer Exercise C15.3 is important for analyzing these data. There, it is shown that the instrumental variable, nearc4, is actually correlated with IQ, at least for the subset of men for which an IQ score is reported. However, the correlation between nearc4 and IQ, once the other explanatory variables are netted out, is arguably zero. (At least, it is not statistically different from zero.) In other words, nearc4 fails the exogeneity requirement in a simple linear model but it passes – at least using the crude test described above – if controls are added to the wage equation.</p>
+<p>For a more advanced course, a nice extension of Card’s analysis is to allow the return to education to differ by race. A relatively simple extension is to include blackeduc as an additional explanatory variable; its natural instrument is blacknearc4.</p>
+</section>
+<section id="catholic" class="level2">
+<h2 class="anchored" data-anchor-id="catholic">CATHOLIC</h2>
+<p><strong>Source</strong>: Altonji, J.G., T.E. Elder, and C.R. Taber (2005), “An Evaluation of Instrumental Variable Strategies for Estimating the Effects of Catholic Schooling,” Journal of Human Resources 40, 791-821.</p>
+<p>Professor Elder kindly provided a subset of the data, with some variables stripped away for confidentiality reasons.</p>
+<p>Used in Text: pages 260-261, 530</p>
+<section id="cement" class="level3">
+<h3 class="anchored" data-anchor-id="cement">CEMENT</h3>
+<p><strong>Source</strong>: J. Shea (1993), “The Input-Output Approach to Instrument Selection,” Journal of Business and Economic Statistics 11, 145-156.</p>
+<p>Professor Shea kindly provided these data.</p>
+<p>Used in Text: pages 556</p>
+<p><strong>Notes</strong>: Compared with Shea’s analysis, the producer price index (PPI) for fuels and power has been replaced with the PPI for petroleum. The data are monthly and have not been seasonally adjusted.</p>
+</section>
+</section>
+<section id="census2000" class="level2">
+<h2 class="anchored" data-anchor-id="census2000">CENSUS2000</h2>
+<p><strong>Source</strong>: Obtained from the United States Census Bureau by Professor Alberto Abadie of the Harvard Kennedy School of Government.</p>
+<p>Professor Abadie kindly provided the data.</p>
+<p>Used in Text: pages 485</p>
+</section>
+<section id="ceosal1" class="level2">
+<h2 class="anchored" data-anchor-id="ceosal1">CEOSAL1</h2>
+<p><strong>Source</strong>: I took a random sample of data reported in the May 6, 1991 issue of Businessweek.</p>
+<p>Used in Text: pages 29, 32-33, 35, 154, 211, 252-253, 257, 662</p>
+<p><strong>Notes</strong>: This kind of data collection is relatively easy for students just learning data analysis, and the findings can be interesting. A good term project is to have students collect a similar data set using a more recent issue of Businessweek, and to find additional variables that might explain differences in CEO compensation. My impression is that the public is still interested in CEO compensation.</p>
+<p>An interesting question is whether the list of explanatory variables included in this data set now explain less of the variation in log(salary) than they used to.</p>
+</section>
+<section id="ceosal2" class="level2">
+<h2 class="anchored" data-anchor-id="ceosal2">CEOSAL2</h2>
+<p><strong>Source</strong>: See CEOSAL1</p>
+<p>Used in Text: pages 62, 110, 154, 207, 324, 662</p>
+<p><strong>Notes</strong>: Compared with CEOSAL1, in this CEO data set more information about the CEO, rather than about the company, is included.</p>
+</section>
+<section id="charity" class="level2">
+<h2 class="anchored" data-anchor-id="charity">CHARITY</h2>
+<p><strong>Source</strong>: P.H. Franses and R. Paap (2001), Quantitative Models in Marketing Research. Cambridge: Cambridge University Press.</p>
+<p>Professor Franses kindly provided the data.</p>
+<p>Used in Text: pages 63, 111, 260, 599</p>
+<p><strong>Notes</strong>: This data set can be used to illustrate probit and Tobit models, and to study the linear approximations to them.</p>
+</section>
+<section id="consump" class="level2">
+<h2 class="anchored" data-anchor-id="consump">CONSUMP</h2>
+<p><strong>Source</strong>: I collected these data from the 1997 Economic Report of the President. Specifically, the data come from Tables B71, B15, B29, and B32.</p>
+<p>Used in Text: pages 363-364, 391, 422, 548-549, 555, 640</p>
+<p><strong>Notes</strong>: For a student interested in time series methods, updating this data set and using it in a manner similar to that in the text could be acceptable as a final project.</p>
+</section>
+<section id="corn" class="level2">
+<h2 class="anchored" data-anchor-id="corn">CORN</h2>
+<p><strong>Source</strong>: G.E. Battese, R.M. Harter, and W.A. Fuller (1988), “An Error-Components Model for Prediction of County Crop Areas Using Survey and Satellite Data,” Journal of the American Statistical Association 83, 28-36.</p>
+<p>This small data set is reported in the article.</p>
+<p>Used in Text: pages 745</p>
+<p><strong>Notes</strong>: You could use these data to illustrate simple regression when the population intercept should be zero: no corn pixels should predict no corn planted. The same can be done with the soybean measures in the data set.</p>
+</section>
+<section id="countymurders" class="level2">
+<h2 class="anchored" data-anchor-id="countymurders">COUNTYMURDERS</h2>
+<p><strong>Source</strong>: Compiled by J. Monroe Gamble for a Summer Research Opportunities Program (SROP) at Michigan State University, Summer 2014. Monroe obtained data from the U.S. Census Bureau, the FBI Uniform Crime Reports, and the Death Penalty Information Center.</p>
+<p>Used in Text: pages 17, 64, 458, 490</p>
+</section>
+<section id="cps78_85" class="level2">
+<h2 class="anchored" data-anchor-id="cps78_85">CPS78_85</h2>
+<p><strong>Source</strong>: Professor Henry Farber, now at Princeton University, compiled these data from the 1978 and 1985 Current Population Surveys. Professor Farber kindly provided these data when we were colleagues at MIT.</p>
+<p>Used in Text: pages 427, 429-430, 454</p>
+<p><strong>Notes</strong>: Obtaining more recent data from the CPS allows one to track, over a long period of time, the changes in the return to education, the gender gap, black-white wage differentials, and the union wage premium.</p>
+</section>
+<section id="cps91" class="level2">
+<h2 class="anchored" data-anchor-id="cps91">CPS91</h2>
+<p><strong>Source</strong>: Professor Daniel Hamermesh, at the University of Texas, compiled these data from the May 1991 Current Population Survey. Professor Hamermesh kindly provided these data.</p>
+<p>Used in Text: page 599</p>
+<p><strong>Notes</strong>: This is much bigger than the other CPS data sets even though the sample is restricted to married women. (CPS91 contains many more observations than MROZ, too.) In addition to the usual human capital variables for the women in the sample, we have information on the husband. Therefore, we can estimate a labor supply function as in Chapter 16, although the validity of potential experience as an IV for log(wage) is questionable. (MROZ contains an actual experience variable.) Perhaps more convincing is to add hours to the wage offer equation, and instrument hours with indicators for young and old children. This data set also contains a union membership indicator.</p>
+<p>The web site for the National Bureau of Economic Research makes it very easy now to download CPS data files in a variety of formats. Go to http://www.nber.org/data/cps_basic.html.</p>
+</section>
+<section id="crime1" class="level2">
+<h2 class="anchored" data-anchor-id="crime1">CRIME1</h2>
+<p><strong>Source</strong>: J. Grogger (1991), “Certainty vs.&nbsp;Severity of Punishment,” Economic Inquiry 29, 297-309.</p>
+<p>Professor Grogger kindly provided a subset of the data he used in his article.</p>
+<p>Used in Text: pages 78, 169, 174, 243, 268, 291, 295-296, 581-582, 597</p>
+</section>
+<section id="crime2" class="level2">
+<h2 class="anchored" data-anchor-id="crime2">CRIME2</h2>
+<p><strong>Source</strong>: These data were collected by David Dicicco, a former MSU undergraduate, for a final project. They came from various issues of the County and City Data Book, and are for the years 1982 and 1985. Unfortunately, I do not have the list of cities.</p>
+<p>Used in Text: pages 303-304, 439-440</p>
+<p><strong>Notes</strong>: Very rich crime data sets, at the county, or even city, level, can be collected using the FBI’s Uniform Crime Reports. These data can be matched up with demographic and economic data, at least for census years. The County and City Data Book contains a variety of statistics, but the years do not always match up. These data sets can be used investigate issues such as the effects of casinos on city or county crime rates.</p>
+</section>
+<section id="crime3" class="level2">
+<h2 class="anchored" data-anchor-id="crime3">CRIME3:</h2>
+<p><strong>Source</strong>: E. Eide (1994), Economics of Crime: Deterrence of the Rational Offender. Amsterdam: North Holland. The data come from Tables A3 and A6.</p>
+<p>Used in Text: pages 443-444, 455</p>
+<p><strong>Notes</strong>: These data are for the years 1972 and 1978 for 53 police districts in Norway. Much larger data sets for more years can be obtained for the United States, although a measure of the “clear-up” rate is needed.</p>
+</section>
+<section id="crime4" class="level2">
+<h2 class="anchored" data-anchor-id="crime4">CRIME4</h2>
+<p><strong>Source</strong>: From C. Cornwell and W. Trumball (1994), “Estimating the Economic Model of Crime with Panel Data,” Review of Economics and Statistics 76, 360-366.</p>
+<p>Professor Cornwell kindly provided the data.</p>
+<p>Used in Text: pages 449-450, 456, 486, 556</p>
+<p><strong>Notes</strong>: Computer Exercise C16.7 shows that variables that might seem to be good instrumental variable candidates are not always so good, especially after applying a transformation such as differencing across time. You could have the students do an IV analysis for just, say, 1987.</p>
+</section>
+</section>
+<section id="d" class="level1">
+<h1>D</h1>
+<section id="discrim" class="level2">
+<h2 class="anchored" data-anchor-id="discrim">DISCRIM</h2>
+<p><strong>Source</strong>: K. Graddy (1997), “Do Fast-Food Chains Price Discriminate on the Race and Income Characteristics of an Area?” Journal of Business and Economic Statistics 15, 391-401.</p>
+<p>Professor Graddy kindly provided the data set.</p>
+<p>Used in Text: pages 111, 161, 663</p>
+<p><strong>Notes</strong>: If you want to assign a common final project, this would be a good data set. There are many possible dependent variables, namely, prices of various fast-food items. The key variable is the fraction of the population that is black, along with controls for poverty, income, housing values, and so on. These data were also used in a famous study by David Card and Alan Krueger on estimation of minimum wage effects on employment. See the book by Card and Krueger, Myth and Measurement, 1997, Princeton University Press, for a detailed analysis.</p>
+</section>
+<section id="driving" class="level2">
+<h2 class="anchored" data-anchor-id="driving">DRIVING</h2>
+<p><strong>Source</strong>: Freeman, D.G. (2007), “Drunk Driving Legislation and Traffic Fatalities: New Evidence on BAC 08 Laws,” Contemporary Economic Policy 25, 293–308.</p>
+<p>Professor Freeman kindly provided the data.</p>
+<p>Used in Text: page 489; see also the general discussion on page 659</p>
+<p><strong>Notes</strong>: Several more years of data are now available and may further shed light on the effectiveness of several traffic laws.</p>
+</section>
+</section>
+<section id="e" class="level1">
+<h1>E</h1>
+<section id="earns" class="level2">
+<h2 class="anchored" data-anchor-id="earns">EARNS</h2>
+<p><strong>Source</strong>: Economic Report of the President, 1989, Table B47. The data are for the non-farm business sector.</p>
+<p>Used in Text: pages 382, 390</p>
+<p><strong>Notes</strong>: These data could be usefully updated, but changes in reporting conventions in more recent ERPs may make that difficult.</p>
+</section>
+<section id="econmath" class="level2">
+<h2 class="anchored" data-anchor-id="econmath">ECONMATH</h2>
+<p><strong>Source</strong>: Compiled by Professor Charles Ballard, Michigan State University Department of Economics.</p>
+<p>Professor Ballard kindly provided the data.</p>
+<p>Used in Text: 162, 177</p>
+</section>
+<section id="elem94_95" class="level2">
+<h2 class="anchored" data-anchor-id="elem94_95">ELEM94_95</h2>
+<p><strong>Source</strong>: Culled from a panel data set used by Professor Leslie Papke in her paper “The Effects of Spending on Test Pass Rates: Evidence from Michigan” (2005), Journal of Public Economics 89, 821-839.</p>
+<p>Used in Text: pages 161, 330-331</p>
+<p><strong>Notes</strong>: Starting in 1995, the Michigan Department of Education stopped reporting average teacher benefits along with average salary. This data set includes both variables, at the school level, and can be used to study the salary-benefits tradeoff, as in Chapter 4. There are a few suspicious benefits/salary ratios, and so this data set makes a good illustration of the impact of outliers in Chapter 9.</p>
+</section>
+<section id="expendshares" class="level2">
+<h2 class="anchored" data-anchor-id="expendshares">EXPENDSHARES</h2>
+<p><strong>Source</strong>: Blundell, R., A. Duncan, and K. Pendakur (1998), “Semiparametric Estimation and Consumer Demand,” Journal of Applied Econometrics 13, 435-461.</p>
+<p>I obtained these data from the Journal of Applied Econometrics data archive at http://qed.econ.queensu.ca/jae/.</p>
+<p>Used in Text: pages 557-558</p>
+<p><strong>Notes</strong>: The dependent variables in this data set – the expenditure shares – are necessarily bounded between zero and one. The linear model is at best an approximation, but the usual IV estimator likely gives good estimates of the average partial effects.</p>
+</section>
+<section id="engin" class="level2">
+<h2 class="anchored" data-anchor-id="engin">ENGIN</h2>
+<p><strong>Source</strong>: Thada Chaisawangwong, a former graduate student at MSU, obtained these data for a term project in applied econometrics. They come from the Material Requirement Planning Survey carried out in Thailand during 1998.</p>
+<p>Used in Text: not used</p>
+<p><strong>Notes</strong>: This is a nice change of pace from wage data sets for the United States. These data are for engineers in Thailand, and represents a more homogeneous group than data sets that consist of people across a variety of occupations. Plus, the starting salary is also provided in the data set, so factors affecting wage growth – and not just wage levels at a given point in time – can be studied. This is a good data set for a common term project that tests basic understanding of multiple regression and the interpretation of models with a logarithm for a dependent variable.</p>
+</section>
+<section id="ezanders" class="level2">
+<h2 class="anchored" data-anchor-id="ezanders">EZANDERS</h2>
+<p><strong>Source</strong>: L.E. Papke (1994), “Tax Policy and Urban Development: Evidence from the Indiana Enterprise Zone Program,” Journal of Public Economics 54, 37-49.</p>
+<p>Professor Papke kindly provided these data.</p>
+<p>Used in Text: page 363</p>
+<p><strong>Notes</strong>: These are actually monthly unemployment claims for the Anderson enterprise zone. Papke used annualized data, across many zones and non-zones, in her original analysis.</p>
+</section>
+<section id="ezunem" class="level2">
+<h2 class="anchored" data-anchor-id="ezunem">EZUNEM</h2>
+<p><strong>Source</strong>: See EZANDERS</p>
+<p>Used in Text: pages 449, 486-487</p>
+<p><strong>Notes</strong>: A very good project is to have students analyze enterprise, empowerment, renaissance, or opportunity zone policies in their home states. Many states now have such programs. Or, there are also national programs. A few years of panel data straddling periods of zone designation, at the city or zip code level, could make a nice study.</p>
+</section>
+</section>
+<section id="f" class="level1">
+<h1>F</h1>
+<section id="fair" class="level2">
+<h2 class="anchored" data-anchor-id="fair">FAIR</h2>
+<p><strong>Source</strong>: R.C. Fair (1996), “Econometrics and Presidential Elections,” Journal of Economic Perspectives 10, 89-102.</p>
+<p>The data set is provided in the article.</p>
+<p>Used in Text: pages 350-351, 420, 422</p>
+<p><strong>Notes</strong>: An updated version of this data set, through the 2004 election, is available at Professor Fair’s web site at Yale University: http://fairmodel.econ.yale.edu/rayfair/pdf/2001b.htm. Students might want to try their own hands at predicting the most recent election outcome, but they should be restricted to no more than a handful of explanatory variables because of the small sample size.</p>
+</section>
+<section id="fertil1" class="level2">
+<h2 class="anchored" data-anchor-id="fertil1">FERTIL1</h2>
+<p><strong>Source</strong>: W. Sander, “The Effect of Women’s Schooling on Fertility,” Economics Letters 40, 229-233.</p>
+<p>Professor Sander kindly provided the data, which are a subset of what he used in his article. He compiled the data from various years of the National Opinion Resource Center’s General Social Survey.</p>
+<p>Used in Text: pages 428-429, 453, 521, 597, 646</p>
+<p><strong>Notes</strong>: (1) Much more recent data can be obtained from the National Opinion Research Center website, http://www.norc.org/GSS+Website/Download/. Very rich pooled cross sections can be constructed to study a variety of issues – not just changes in fertility over time.</p>
+<ol start="2" type="1">
+<li>It would be interesting to analyze a similar data set for a developing country, especially where efforts have been made to emphasize birth control. Some measure of access to birth control could be useful if it varied by region. Sometimes, one can find policy changes in the advertisement or availability of contraceptives.</li>
+</ol>
+</section>
+<section id="fertil2" class="level2">
+<h2 class="anchored" data-anchor-id="fertil2">FERTIL2</h2>
+<p><strong>Source</strong>: These data were obtained by James Heakins, a former MSU undergraduate, for a term project. They come from Botswana’s 1988 Demographic and Health Survey.</p>
+<p>Used in Text: page 526-527 <strong>Notes</strong>: Currently, this data set is used only in one computer exercise. Since the dependent variable of interest – number of living children or number of children every born – is a count variable, the Poisson regression model discussed in Chapter 17 can be used. However, some care is required to combine Poisson regression with an endogenous explanatory variable (educ). I refer you to Chapter 19 of my book Econometric Analysis of Cross Section and Panel Data. Even in the context of linear models, much can be done beyond Computer Exercise C15.2. At a minimum, the binary indicators for various religions can be added as controls. One might also interact the schooling variable, educ, with some of the exogenous explanatory variables.</p>
+</section>
+<section id="fertil3" class="level2">
+<h2 class="anchored" data-anchor-id="fertil3">FERTIL3</h2>
+<p><strong>Source</strong>: L.A. Whittington, J. Alm, and H.E. Peters (1990), “Fertility and the Personal Exemption: Implicit Pronatalist Policy in the United States,” American Economic Review 80, 545-556.</p>
+<p>The data are given in the article.</p>
+<p>Used in Text: pages 346-347, 355, 362, 363, 363, 381, 384-385, 421, 634, 639-640</p>
+</section>
+<section id="fish" class="level2">
+<h2 class="anchored" data-anchor-id="fish">FISH</h2>
+<p><strong>Source</strong>: K Graddy (1995), “Testing for Imperfect Competition at the Fulton Fish Market,” RAND Journal of Economics 26, 75-92.</p>
+<p>Professor Graddy’s collaborator on a later paper, Professor Joshua Angrist at MIT, kindly provided me with these data.</p>
+<p>Used in Text: pages 422-423, 556-557</p>
+<p><strong>Notes</strong>: This is a nice example of how to go about finding exogenous variables to use as instrumental variables. Often, weather conditions can be assumed to affect supply while having a negligible effect on demand. If so, the weather variables are valid instrumental variables for price in the demand equation. It is a simple matter to test whether prices vary with weather conditions by estimating the reduced form for price.</p>
+</section>
+<section id="fringe" class="level2">
+<h2 class="anchored" data-anchor-id="fringe">FRINGE</h2>
+<p><strong>Source</strong>: F. Vella (1993), “A Simple Estimator for Simultaneous Models with Censored Endogenous Regressors,” International Economic Review 34, 441-457.</p>
+<p>Professor Vella kindly provided the data.</p>
+<p>Used in Text: page 596-597</p>
+<p><strong>Notes</strong>: Currently, this data set is used in only one Computer Exercise – to illustrate the Tobit model. It can be used much earlier. First, one could just ignore the pileup at zero and use a linear model where any of the hourly benefit measures is the dependent variable. Another possibility is to use this data set for a problem set in Chapter 4, after students have read Example 4.10. That example, which uses teacher salary/benefit data at the school level, finds the expected tradeoff, although it appears to less than one-to-one. By contrast, if you do a similar analysis with FRINGE, you will not find a tradeoff. A positive coefficient on the benefit/salary ratio is not too surprising because we probably cannot control for enough factors, especially when looking across different occupations. The Michigan school-level data is more aggregated than one would like, but it does restrict attention to a more homogeneous group: high school teachers in Michigan.</p>
+</section>
+</section>
+<section id="g" class="level1">
+<h1>G</h1>
+<section id="gpa1" class="level2">
+<h2 class="anchored" data-anchor-id="gpa1">GPA1</h2>
+<p><strong>Source</strong>: Christopher Lemmon, a former MSU undergraduate, collected these data from a survey he took of MSU students in Fall 1994.</p>
+<p>Used in Text: pages 72, 74, 77, 113. 127. 155. 162. 225. 256. 286. 291</p>
+<p><strong>Notes</strong>: This is a nice example of how students can obtain an original data set by focusing locally and carefully composing a survey.</p>
+</section>
+<section id="gpa2" class="level2">
+<h2 class="anchored" data-anchor-id="gpa2">GPA2</h2>
+<p><strong>Source</strong>: For confidentiality reasons, I cannot provide the source of these data. I can say that they come from a midsize research university that also supports men’s and women’s athletics at the Division I level.</p>
+<p>Used in Text: pages 104, 178, 202-203, 204-205, 215, 252, 256-257</p>
+</section>
+<section id="gpa3" class="level2">
+<h2 class="anchored" data-anchor-id="gpa3">GPA3</h2>
+<p><strong>Source</strong>: See GPA2</p>
+<p>Used in Text: pages 237-238, 266-267, 287-288, 444, 455</p>
+</section>
+</section>
+<section id="h" class="level1">
+<h1>H</h1>
+<section id="happiness" class="level2">
+<h2 class="anchored" data-anchor-id="happiness">HAPPINESS</h2>
+<p><strong>Source</strong>: Subset of data collected by Kevin Williams for a McNair Scholars project in Summer 2008 at Michigan State University. The data come from several waves of the General Social Survey, and is therefore a pooled cross sectional data set. Professor Williams, now at Yale University, kindly provided the data.</p>
+<p>Used in Text: not used</p>
+<p><strong>Notes</strong>: This data set can be used to estimate models of self-reported “happiness,” including studying whether the effects of certain variables – such as education, gender, race, and having children –changed in importance from the mid-1990s to the mid-2000s. For a similar example, see how FERTIL1 is used in Example 13.1 in the text.</p>
+</section>
+<section id="hprice1" class="level2">
+<h2 class="anchored" data-anchor-id="hprice1">HPRICE1</h2>
+<p><strong>Source</strong>: Collected from the real estate pages of the Boston Globe during 1990. These homes sold in the Boston, MA area.</p>
+<p>Used in Text: pages 109-110, 148-149, 155-156, 160, 205, 216, 226-227, 270-271, 273, 290, 297-298</p>
+<p><strong>Notes</strong>: Typically, it is very easy to obtain data on selling prices and characteristics of homes, using publicly available databases. It is interesting to match the information on houses with other information – such as local crime rates, quality of the local schools, pollution levels, and so on – and estimate the effects of such variables on housing prices.</p>
+</section>
+<section id="hprice2" class="level2">
+<h2 class="anchored" data-anchor-id="hprice2">HPRICE2</h2>
+<p><strong>Source</strong>: D. Harrison and D.L. Rubinfeld (1978), “Hedonic Housing Prices and the Demand for Clean Air,” by Harrison, D. and D.L.Rubinfeld, Journal of Environmental Economics and Management 5, 81-102.</p>
+<p>Diego Garcia, a former Ph.D.&nbsp;student in economics at MIT, kindly provided these data, which he obtained from the book Regression Diagnostics: Identifying Influential Data and <strong>Sources</strong>: of Collinearity, by D.A. Belsey, E. Kuh, and R. Welsch, 1990. New York: Wiley.</p>
+<p>Used in Text: pages 106, 130, 185, 186-187, 190-191</p>
+<p><strong>Notes</strong>: The census contains rich information on variables such as median housing prices, median income levels, average family size, and so on, for fairly small geographical areas. If such data can be merged with pollution data, one can update the Harrison and Rubinfeld study. Presumably, this has been done in academic journals.</p>
+</section>
+<section id="hseinv" class="level2">
+<h2 class="anchored" data-anchor-id="hseinv">HSEINV</h2>
+<p><strong>Source</strong>: D. McFadden (1994), “Demographics, the Housing Market, and the Welfare of the Elderly,” in D.A. Wise (ed.), Studies in the Economics of Aging. Chicago: University of Chicago Press, 225-285.</p>
+<p>The data are contained in the article.</p>
+<p>Used in Text: pages 354-355, 358, 390, 609-610, 638, 783</p>
+</section>
+<section id="htv" class="level2">
+<h2 class="anchored" data-anchor-id="htv">HTV</h2>
+<p><strong>Source</strong>: J.J. Heckman, J.L. Tobias, and E. Vytlacil (2003), “Simple Estimators for Treatment Parameters in a Latent-Variable Framework,” Review of Economics and Statistics 85, 748-755.</p>
+<p>Professor Tobias kindly provided the data, which were obtained from the 1991 National Longitudinal Survey of Youth. All people in the sample are males age 26 to 34. For confidentiality reasons, I have included only a subset of the variables used by the authors.</p>
+<p>Used in Text: pages 529, 599-600</p>
+<p><strong>Notes</strong>: Because an ability measure is included in this data set, it can be used as another illustration of including proxy variables in regression models. See Chapter 9. Also, one can try the IV procedure with the ability measure included as an exogenous explanatory variable.</p>
+</section>
+</section>
+<section id="i" class="level1">
+<h1>I</h1>
+<section id="infmrt" class="level2">
+<h2 class="anchored" data-anchor-id="infmrt">INFMRT</h2>
+<p><strong>Source</strong>: Statistical Abstract of the United States, 1990 and 1994. (For example, the infant mortality rates come from Table 113 in 1990 and Table 123 in 1994.)</p>
+<p>Used in Text: pages 320-321, 328</p>
+<p><strong>Notes</strong>: An interesting exercise is to add the percentage of the population on AFDC (afdcper) to the infant mortality equation. Pooled OLS and first differencing can give very different estimates. Adding the years 1998 and 2002 and applying fixed effects seems natural. Intervening years can be added, too, although variation in the key variables from year to year might be minimal.</p>
+</section>
+<section id="injury" class="level2">
+<h2 class="anchored" data-anchor-id="injury">INJURY</h2>
+<p><strong>Source</strong>: B.D. Meyer, W.K. Viscusi, and D.L. Durbin (1995), “Workers’ Compensation and Injury Duration: Evidence from a Natural Experiment,” American Economic Review 85, 322-340.</p>
+<p>Professor Meyer kindly provided the data.</p>
+<p>Used in Text: pages 435-436, 453</p>
+<p><strong>Notes</strong>: This data set also can be used to illustrate the Chow test in Chapter 7. In particular, students can test whether the regression functions differ between Kentucky and Michigan. Or, allowing for different intercepts for the two states, do the slopes differ? A good lesson from this example is that a small R-squared is compatible with the ability to estimate the effects of a policy. Of course, for the Michigan data, which has a smaller sample size, the estimated effect is much less precise (but of virtually identical magnitude).</p>
+</section>
+<section id="intdef" class="level2">
+<h2 class="anchored" data-anchor-id="intdef">INTDEF</h2>
+<p><strong>Source</strong>: Economic Report of the President, 2004, Tables B64, B73, and B79.</p>
+<p>Used in Text: pages 345, 363, 415, 527</p>
+</section>
+<section id="intqrt" class="level2">
+<h2 class="anchored" data-anchor-id="intqrt">INTQRT</h2>
+<p><strong>Source</strong>: From Salomon Brothers, Analytical Record of Yields and Yield Spreads, 1990. The folks at Salomon Brothers kindly provided the Record at no charge when I was an assistant professor at MIT.</p>
+<p>Used in Text: pages 388-389, 612, 617, 620, 621, 639, 640</p>
+<p><strong>Notes</strong>: A nice feature of the Salomon Brothers data is that the interest rates are not averaged over a month or quarter – they are end-of-month or end-of-quarter rates. Asset pricing theories apply to such “point-sampled” data, and not to averages over a period. Most other sources report monthly or quarterly averages. This is a good data set to update and test whether current data are more or less supportive of basic asset pricing theories.</p>
+</section>
+<section id="inven" class="level2">
+<h2 class="anchored" data-anchor-id="inven">INVEN</h2>
+<p><strong>Source</strong>: Economic Report of the President, 1997, Tables B4, B20, B61, and B71.</p>
+<p>Used in Text: pages 391, 421-422, 423, 614, 783</p>
+</section>
+</section>
+<section id="j" class="level1">
+<h1>J</h1>
+<section id="jtrain" class="level2">
+<h2 class="anchored" data-anchor-id="jtrain">JTRAIN</h2>
+<p><strong>Source</strong>: H. Holzer, R. Block, M. Cheatham, and J. Knott (1993), “Are Training Subsidies Effective? The Michigan Experience,” Industrial and Labor Relations Review 46, 625-636.</p>
+<p>The authors kindly provided the data.</p>
+<p>Used in Text: pages 133-134, 156, 226, 244-245, 328, 444-446, 456, 464-465, 469, 486, 521-522, 730-731, 740-741, 742</p>
+</section>
+<section id="jtrain2" class="level2">
+<h2 class="anchored" data-anchor-id="jtrain2">JTRAIN2</h2>
+<p><strong>Source</strong>: R.J. Lalonde (1986), “Evaluating the Econometric Evaluations of Training Programs with Experimental Data,” American Economic Review 76, 604-620.</p>
+<p>Professor Jeff Biddle, at MSU, kindly passed the data set along to me. He obtained it from Professor Lalonde.</p>
+<p>Used in Text: pages 16, 329-330</p>
+<p><strong>Notes</strong>: Professor Lalonde obtained the data from the National Supported Work Demonstration job-training program conducted by the Manpower Demonstration Research Corporation in the mid 1970s. Training status was randomly assigned, so this is essentially experimental data. Computer Exercise C17.8 looks only at the effects of training on subsequent unemployment probabilities. For illustrating the more advanced methods in Chapter 17, a good exercise would be to have the students estimate a Tobit of re78 on train, and obtain estimates of the expected values for those with and without training. These can be compared with the sample averages.</p>
+</section>
+<section id="jtrain3" class="level2">
+<h2 class="anchored" data-anchor-id="jtrain3">JTRAIN3</h2>
+<p><strong>Source</strong>: R.H. Dehejia and S. Wahba (1999), “Causal Effects in Nonexperimental Studies: Reevaluating the Evaluation of Training Programs,” Journal of the American Statistical Association 94, 1053-1062.</p>
+<p>Professor Sergio Firpo, at Insper Institute of Education and Research in São Paulo, has used this data set in his work. He kindly provided it to me. This data set is a subset of that originally used by Lalonde in the study cited for JTRAIN2.</p>
+<p>Used in Text: pages 329-330, 457</p>
+</section>
+<section id="jtrain98" class="level2">
+<h2 class="anchored" data-anchor-id="jtrain98">JTRAIN98</h2>
+<p><strong>Source</strong>: This is a data set I created many years ago intended as an update to the files JTRAIN2 and JTRAIN3. While the data were partly generated by me, the data attributes are similar to data sets used to evaluate job training programs.</p>
+<p>Used in Text: 101-102, 248, 601</p>
+<p><strong>Notes</strong>: The response variables, earn98 and unem98, both have discreteness: the former is a corner solutions (takes on the value zero and then a range of strictly positive values) and the latter is binary. One could use these in an exercise using methods in Chapter 17. unem98 can be used in a probit or logit model, earn98 in a Tobit model, or in Poisson regression (without assuming, of course, that the Poisson distribution is correct).</p>
+</section>
+</section>
+<section id="k-1" class="level1">
+<h1>K</h1>
+<section id="kielmc" class="level2">
+<h2 class="anchored" data-anchor-id="kielmc">KIELMC</h2>
+<p><strong>Source</strong>: K.A. Kiel and K.T. McClain (1995), “House Prices During Siting Decision Stages: The Case of an Incinerator from Rumor through Operation,” Journal of Environmental Economics and Management 28, 241-255.</p>
+<p>Professors Kiel and McClain kindly provided the data, of which I used only a subset.</p>
+<p>Used in Text: pages 214, 431-434, 452, 454</p>
+</section>
+</section>
+<section id="l" class="level1">
+<h1>L</h1>
+<section id="labsup" class="level2">
+<h2 class="anchored" data-anchor-id="labsup">LABSUP</h2>
+<p><strong>Source</strong>: The subset of data for black or Hispanic women used in J.A. Angrist and W.E. Evans (1998), “</p>
+<p>Used in Text: pages 530-531</p>
+<p><strong>Notes</strong>: This example can promote an interesting discussion of instrument validity, and in particular, how a variable that is beyond our control – for example, whether the first two children have the same gender – can, nevertheless, affect subsequent economic choices. Students are asked to think about such issues in Computer Exercise C13 in Chapter 15. A more egregious version of this mistake would be to treat a variable such as age as a suitable instrument because it is beyond our control: clearly age has a direct effect on many economic outcomes that would play the role of the dependent variable.</p>
+</section>
+<section id="lawsch85" class="level2">
+<h2 class="anchored" data-anchor-id="lawsch85">LAWSCH85</h2>
+<p><strong>Source</strong>: Collected by Kelly Barnett, an MSU economics student, for use in a term project. The data come from two sources: The Official Guide to U.S. Law Schools, 1986, Law School Admission Services, and The Gourman Report: A Ranking of Graduate and Professional Programs in American and International Universities, 1995, Washington, D.C.</p>
+<p>Used in Text: pages 105, 108, 159-160, 231-232</p>
+<p><strong>Notes</strong>: More recent versions of both cited documents are available. One could try a similar analysis for, say, MBA programs or Ph.D.&nbsp;programs in economics. Quality of placements may be a good dependent variable, and measures of business school or graduate program quality could be included among the explanatory variables. Of course, one would want to control for factors describing the incoming class so as to isolate the effect of the program itself.</p>
+</section>
+<section id="loanapp" class="level2">
+<h2 class="anchored" data-anchor-id="loanapp">LOANAPP</h2>
+<p><strong>Source</strong>: W.C. Hunter and M.B. Walker (1996), “The Cultural Affinity Hypothesis and Mortgage Lending Decisions,” Journal of Real Estate Finance and Economics 13, 57-70.</p>
+<p>Professor Walker kindly provided the data.</p>
+<p>Used in Text: pages 257-258, 291, 329, 596</p>
+<p><strong>Notes</strong>: These data were originally used in a famous study by researchers at the Boston Federal Reserve Bank. See A. Munnell, G.M.B. Tootell, L.E. Browne, and J. McEneaney (1996), “Mortgage Lending in Boston: Interpreting HMDA Data,” American Economic Review 86, 25-53.</p>
+</section>
+<section id="lowbrth" class="level2">
+<h2 class="anchored" data-anchor-id="lowbrth">LOWBRTH</h2>
+<p><strong>Source</strong>: <strong>Source</strong>: Statistical Abstract of the United States, 1990, 1993, and 1994.</p>
+<p>Used in Text: not used</p>
+<p><strong>Notes</strong>: This data set can be used very much like INFMRT. It contains two years of state-level panel data. In fact, it is a superset of INFMRT. The key is that it contains information on low birth weights, as well as infant mortality. It also contains state identifies, so that several years of more recent data could be added for a term project. Putting in the variable afcdprc and its square leads to some interesting findings for pooled OLS and fixed effects (first differencing). After differencing, you can even try using the change in the AFDC payments variable as an instrumental variable for the change in afdcprc.</p>
+</section>
+</section>
+<section id="m" class="level1">
+<h1>M</h1>
+<section id="mathpnl" class="level2">
+<h2 class="anchored" data-anchor-id="mathpnl">MATHPNL</h2>
+<p><strong>Source</strong>: Dr.&nbsp;Leslie Papke, an economics professor at MSU, collected these data from Michigan Department of Education web site, www.michigan.gov/mde. These are district-level data, which Professor Papke kindly provided. She has used building-level data in “The Effects of Spending on Test Pass Rates: Evidence from Michigan” (2005), Journal of Public Economics 89, 821-839.</p>
+<p>Used in Text: pages 456, 487-488</p>
+</section>
+<section id="meap00" class="level2">
+<h2 class="anchored" data-anchor-id="meap00">MEAP00</h2>
+<p><strong>Source</strong>: Michigan Department of Education, www.michigan.gov/mde</p>
+<p>Used in Text: pages 218, 292</p>
+</section>
+<section id="meap01" class="level2">
+<h2 class="anchored" data-anchor-id="meap01">MEAP01</h2>
+<p><strong>Source</strong>: Michigan Department of Education, www.michigan.gov/mde</p>
+<p>Used in Text: page 16</p>
+<p><strong>Notes</strong>: This is another good data set to compare simple and multiple regression estimates. The expenditure variable (in logs, say) and the poverty measure (lunch) are negatively correlated in this data set. A simple regression of math4 on lexppp gives a negative coefficient. Controlling for lunch makes the spending coefficient positive and significant.</p>
+</section>
+<section id="meap93" class="level2">
+<h2 class="anchored" data-anchor-id="meap93">MEAP93</h2>
+<p><strong>Source</strong>: I collected these data from the old Michigan Department of Education web site. See MATHPNL for the current web site. I used data on most high schools in the state of Michigan for 1993. I dropped some high schools that had suspicious-looking data.</p>
+<p>Used in Text: pages 44-45, 63, 110-111, 125-126, 149-150, 158, 212, 325, 329, 329, 660</p>
+<p><strong>Notes</strong>: Many states have data, at either the district or building level, on student performance and spending. A good exercise in data collection and cleaning is to have students find such data for a particular state, and to put it into a form that can be used for econometric analysis.</p>
+</section>
+<section id="meapsingle" class="level2">
+<h2 class="anchored" data-anchor-id="meapsingle">MEAPSINGLE</h2>
+<p><strong>Source</strong>: Collected by Professor Leslie Papke, an economics professor at MSU, from the Michigan Department of Education web site, www.michigan.gov/mde, and the U.S. Census Bureau. Professor Papke kindly provided the data.</p>
+<p>Used in Text: 110-111, 158-159, 213</p>
+</section>
+<section id="minwage" class="level2">
+<h2 class="anchored" data-anchor-id="minwage">MINWAGE</h2>
+<p><strong>Source</strong>: P. Wolfson and D. Belman (2004), “The Minimum Wage: Consequences for Prices and Quantities in Low-Wage Labor Markets,” Journal of Business &amp; Economic Statistics 22, 296-311.</p>
+<p>Professor Belman kindly provided the data.</p>
+<p>Used in Text: pages 365, 393, 424, 641</p>
+<p><strong>Notes</strong>: The sectors corresponding to the different numbers in the data file are provided in the Wolfson and Bellman and article.</p>
+</section>
+<section id="mlb1" class="level2">
+<h2 class="anchored" data-anchor-id="mlb1">MLB1</h2>
+<p><strong>Source</strong>: Collected by G. Mark Holmes, a former MSU undergraduate, for a term project. The salary data were obtained from the New York Times, April 11, 1993. The baseball statistics are from The Baseball Encyclopedia, 9th edition, and the city population figures are from the Statistical Abstract of the United States.</p>
+<p>Used in Text: pages 140-143, 160, 229, 235-236, 256-257</p>
+<p><strong>Notes</strong>: The baseball statistics are career statistics through the 1992 season. Players whose race or ethnicity could not be easily determined were not included. It should not be too difficult to obtain the city population and racial composition numbers for Montreal and Toronto for 1993. Of course, the data can be pretty easily obtained for more recent players.</p>
+</section>
+<section id="mroz" class="level2">
+<h2 class="anchored" data-anchor-id="mroz">MROZ</h2>
+<p><strong>Source</strong>: T.A. Mroz (1987), “The Sensitivity of an Empirical Model of Married Women’s Hours of Work to Economic and Statistical Assumptions,” Econometrica 55, 765-799.</p>
+<p>Professor Ernst R. Berndt, of MIT, kindly provided the data, which he obtained from Professor Mroz.</p>
+<p>Used in Text: pages 240, 253, 285, 501, 511, 516, 518, 543-544, 555, 568-569, 575-576, 591-592, 597</p>
+</section>
+<section id="murder" class="level2">
+<h2 class="anchored" data-anchor-id="murder">MURDER</h2>
+<p><strong>Source</strong>: From the Statistical Abstract of the United States, 1995 (Tables 310 and 357), 1992 (Table 289). The execution data originally come from the U.S. Bureau of Justice Statistics, Capital Punishment Annual.</p>
+<p>Used in Text: pages 457, 487, 527-528</p>
+<p><strong>Notes</strong>: The data set COUNTYMURDERS includes information on executions and murder rates at the county level, and provides more variation.</p>
+</section>
+</section>
+<section id="n" class="level1">
+<h1>N</h1>
+<section id="nbasal" class="level2">
+<h2 class="anchored" data-anchor-id="nbasal">NBASAL</h2>
+<p><strong>Source</strong>: Collected by Christopher Torrente, a former MSU undergraduate, for a term project. He obtained the salary data and the career statistics from The Complete Handbook of Pro Basketball, 1995, edited by Zander Hollander. New York: Signet. The demographic information (marital status, number of children, and so on) was obtained from the teams’ 1994-1995 media guides.</p>
+<p>Used in Text: pages 216-217, 258</p>
+<p><strong>Notes</strong>: A panel version of this data set could be useful for further isolating productivity effects of marital status. One would need to obtain information on enough different players in at least two years, where some players who were not married in the initial year are married in later years. Fixed effects (or first differencing, for two years) is the natural estimation method.</p>
+</section>
+<section id="ncaa_rpi" class="level2">
+<h2 class="anchored" data-anchor-id="ncaa_rpi">NCAA_RPI</h2>
+<p><strong>Source</strong>: Data on NCAA men’s basketball teams, collected by Weizhao Sun for a senior seminar project in sports economics at Michigan State University, Spring 2017. He used various sources, including www.espn.com and www.teamrankings.com/ncaa-basketball/rpi-ranking/rpi-rating-by-team.</p>
+<p>Used in Text: not used</p>
+<p><strong>Notes</strong>: This is a nice example of how multiple regression analysis can be used to determine whether rankings compiled by experts – the so-called pre-season RPI in this case – provide additional information beyond what we can obtain from widely available data bases. A simple and interesting question is whether, once the previous year’s post-season RPI is controlled for, does the pre-season RPI – which is supposed to add information on recruiting and player development – help to predict performance (such as win percentage or making it to the NCAA men’s basketball tournament). For the binary outcome that indicates making it to the NCAA tournament, a probit or logit model can be used for courses that introduce more advanced methods. There are some other interesting variables, such as coaching experience, that can be included, too.</p>
+</section>
+<section id="nyse" class="level2">
+<h2 class="anchored" data-anchor-id="nyse">NYSE</h2>
+<p><strong>Source</strong>: These are Wednesday closing prices of value-weighted NYSE average, available in many publications. I do not recall the particular source I used when I collected these data at MIT. Probably the easiest way to get similar data is to go to the NYSE web site, www.nyse.com.</p>
+<p>Used in Text: pages 352-353, 368, 393, 398, 399, 595</p>
+</section>
+</section>
+<section id="o" class="level1">
+<h1>O</h1>
+<section id="okun" class="level2">
+<h2 class="anchored" data-anchor-id="okun">OKUN</h2>
+<p><strong>Source</strong>: Economic Report of the President, 2007, Tables B4 and B42.</p>
+<p>Used in Text: 392, 423-424</p>
+</section>
+<section id="openness" class="level2">
+<h2 class="anchored" data-anchor-id="openness">OPENNESS</h2>
+<p><strong>Source</strong>: D. Romer (1993), “Openness and Inflation: Theory and Evidence,” Quarterly Journal of Economics 108, 869-903.</p>
+<p>The data are included in the article.</p>
+<p>Used in Text: pages 544-545, 555</p>
+</section>
+</section>
+<section id="p" class="level1">
+<h1>P</h1>
+<section id="pension" class="level2">
+<h2 class="anchored" data-anchor-id="pension">PENSION</h2>
+<p><strong>Source</strong>: L.E. Papke (2004), “Individual Financial Decisions in Retirement Saving: The Role of Participant-Direction,” Journal of Public Economics 88, 39-61.</p>
+<p>Professor Papke kindly provided the data. She collected them from the National Longitudinal Survey of Mature Women, 1991.</p>
+<p>Used in Text: page 488</p>
+</section>
+<section id="phillips" class="level2">
+<h2 class="anchored" data-anchor-id="phillips">PHILLIPS</h2>
+<p><strong>Source</strong>: Economic Report of the President, 2004, Tables B42 and B64.</p>
+<p>Used in Text: pages 344-345, 364-365, 375, 390-391, 392, 392, 403, 404, 412, 423, 528, 613, 625, 628, 639, 770</p>
+</section>
+<section id="pntsprd" class="level2">
+<h2 class="anchored" data-anchor-id="pntsprd">PNTSPRD</h2>
+<p><strong>Source</strong>: Collected by Scott Resnick, a former MSU undergraduate, from various newspaper sources.</p>
+<p>Used in Text: pages 271, 560, 623</p>
+<p><strong>Notes</strong>: The data are for the 1994-1995 men’s college basketball seasons. The spread is for the day before the game was played. One might collect more recent data and determine whether the spread has become a less accurate predictor of the actual outcome in more recent years. In other words, in the simple regression of the actual score differential on the spread, is the variance larger in more recent years. (We should fully expect the slope coefficient not to be statistically different from one.)</p>
+</section>
+<section id="prison" class="level2">
+<h2 class="anchored" data-anchor-id="prison">PRISON</h2>
+<p><strong>Source</strong>: S.D. Levitt (1996), “The Effect of Prison Population Size on Crime Rates: Evidence from Prison Overcrowding Legislation,” Quarterly Journal of Economics 111, 319-351.</p>
+<p>Professor Levitt kindly provided me with the data, of which I used a subset.</p>
+<p>Used in Text: pages 551</p>
+</section>
+<section id="prminwge" class="level2">
+<h2 class="anchored" data-anchor-id="prminwge">PRMINWGE</h2>
+<p><strong>Source</strong>: A.J. Castillo-Freeman and R.B. Freeman (1992), “When the Minimum Wage Really Bites: The Effect of the U.S.-Level Minimum Wage on Puerto Rico,” in Immigration and the Work Force, edited by G.J. Borjas and R.B. Freeman, 177-211. Chicago: University of Chicago Press.</p>
+<p>The data are reported in the article.</p>
+<p>Used in Text: pages 345-346, 356-357, 400, 405</p>
+<p><strong>Notes</strong>: Given the ongoing debate on the employment effects of the minimum wage, this would be a great data set to try to update. The coverage rates are the most difficult variables to construct.</p>
+</section>
+</section>
+<section id="r" class="level1">
+<h1>R</h1>
+<section id="recid" class="level2">
+<h2 class="anchored" data-anchor-id="recid">RECID</h2>
+<p><strong>Source</strong>: C.-F. Chung, P. Schmidt, and A.D. Witte (1991), “Survival Analysis: A Survey,” Journal of Quantitative Criminology 7, 59-98.</p>
+<p>Professor Chung kindly provided the data.</p>
+<p>Used in Text: pages 584-585, 597</p>
+</section>
+<section id="rdchem" class="level2">
+<h2 class="anchored" data-anchor-id="rdchem">RDCHEM</h2>
+<p><strong>Source</strong>: From Businessweek R&amp;D Scoreboard, October 25, 1991.</p>
+<p>Used in Text: pages 63, 135-136, 154-155, 198, 211, 317-318, 328-329</p>
+<p><strong>Notes</strong>: It would be interesting to collect more recent data and see whether the R&amp;D/firm size relationship has changed over time.</p>
+</section>
+<section id="rdtelec" class="level2">
+<h2 class="anchored" data-anchor-id="rdtelec">RDTELEC</h2>
+<p><strong>Source</strong>: See RDCHEM</p>
+<p>Used in Text: not used</p>
+<p><strong>Notes</strong>: According to these data, the R&amp;D/firm size relationship is different in the telecommunications industry than in the chemical industry: there is pretty strong evidence that R&amp;D intensity decreases with firm size in telecommunications. Of course, that was in 1991. The data could easily be updated, and a panel data set could be constructed for more advanced courses.</p>
+</section>
+<section id="rental" class="level2">
+<h2 class="anchored" data-anchor-id="rental">RENTAL</h2>
+<p><strong>Source</strong>: David Harvey, a former MSU undergraduate, collected the data for 64 “college towns” from the 1980 and 1990 United States censuses.</p>
+<p>Used in Text: pages 155, 444, 454-455, 486</p>
+<p><strong>Notes</strong>: These data can be used in a somewhat crude simultaneous equations analysis, either focusing on one year or pooling the two years. (In the latter case, in an advanced class, you might have students compute the standard errors robust to serial correlation across the two time periods.) The demand equation would have ltothsg as a function of lrent, lavginc, and lpop. The supply equation would have ltothsg as a function of lrent, pctst, and lpop. Thus, in estimating the demand function, pctstu is used as an IV for lrent. Clearly one can quibble with excluding pctstu from the demand equation, but the estimated demand function gives a negative price effect.</p>
+<p>Getting information for 2000 and 2010, and adding many more college towns, would make for a much better analysis. Information on number of spaces in on-campus dormitories would be a big improvement, too.</p>
+</section>
+<section id="return" class="level2">
+<h2 class="anchored" data-anchor-id="return">RETURN</h2>
+<p><strong>Source</strong>: Collected by Stephanie Balys, a former MSU undergraduate, from the New York Stock Exchange and Compustat.</p>
+<p>Used in Text: page 157</p>
+<p><strong>Notes</strong>: More can be done with this data set. Recently, I discovered that lsp90 does appear to predict return (and the log of the 1990 stock price works better than sp90). I am a little suspicious, but you could use the negative coefficient on lsp90 to illustrate “reversion to the mean.”</p>
+</section>
+</section>
+<section id="s" class="level1">
+<h1>S</h1>
+<section id="saving" class="level2">
+<h2 class="anchored" data-anchor-id="saving">SAVING</h2>
+<p><strong>Source</strong>: Unknown</p>
+<p>Used in Text: not used</p>
+<p><strong>Notes</strong>: I remember entering this data set in the late 1980s, and I am pretty sure it came directly from an introductory econometrics text. But so far my search has been fruitless. If anyone runs across this data set, I would appreciate knowing about it.</p>
+</section>
+<section id="school93_98" class="level2">
+<h2 class="anchored" data-anchor-id="school93_98">SCHOOL93_98</h2>
+<p><strong>Source</strong>: L.E. Papke (2005), “The Effects of Spending on Test Pass Rates: Evidence from Michigan,” Journal of Public Economics 89, 821-839.</p>
+<p>Used in Text: page 491</p>
+<p><strong>Notes</strong>: This is closer to the data actually used in the Papke paper as it is at the school (building) level. It is unbalanced because data on scores and some of the spending and other variables is missing for some schools. While the usual RE and FE methods can be applied directly, obtaining the correlated random effects version of the Hausman test is more advance. Computer Exercise 17 in Chapter 14 walks the reader through it.</p>
+</section>
+<section id="sleep75" class="level2">
+<h2 class="anchored" data-anchor-id="sleep75">SLEEP75</h2>
+<p><strong>Source</strong>: J.E. Biddle and D.S. Hamermesh (1990), “Sleep and the Allocation of Time,” Journal of Political Economy 98, 922-943.</p>
+<p>Professor Biddle kindly provided the data.</p>
+<p>Used in Text: pages 62, 105, 156-157, 251, 257, 290</p>
+<p><strong>Notes</strong>: In their article, Biddle and Hamermesh include an hourly wage measure in the sleep equation. An econometric problem that arises is that the hourly wage is missing for those who do not work. Plus, the wage offer may be endogenous (even if it were always observed). Biddle and Hamermesh employ extensions of the sample selection methods in Section 17.5. See their article for details.</p>
+</section>
+<section id="slp75_81" class="level2">
+<h2 class="anchored" data-anchor-id="slp75_81">SLP75_81</h2>
+<p><strong>Source</strong>: See SLEEP75</p>
+<p>Used in Text: pages 442-443</p>
+</section>
+<section id="smoke" class="level2">
+<h2 class="anchored" data-anchor-id="smoke">SMOKE</h2>
+<p><strong>Source</strong>: J. Mullahy (1997), “Instrumental-Variable Estimation of Count Data Models: Applications to Models of Cigarette Smoking Behavior,” Review of Economics and Statistics 79, 596-593.</p>
+<p>Professor Mullahy kindly provided the data.</p>
+<p>Used in Text: pages 177, 280-281, 288, 291-292, 555, 598-599</p>
+<p><strong>Notes</strong>: If you want to do a “fancy” IV version of Computer Exercise C16.1, you could estimate a reduced form count model for cigs using the Poisson regression methods in Section 17.3, and then use the fitted values as an IV for cigs. Presumably, this would be for a fairly advanced class.</p>
+</section>
+</section>
+<section id="t" class="level1">
+<h1>T</h1>
+<section id="traffic1" class="level2">
+<h2 class="anchored" data-anchor-id="traffic1">TRAFFIC1</h2>
+<p><strong>Source</strong>: I collected these data from two sources, the 1992 Statistical Abstract of the United States (Tables 1009, 1012) and A Digest of State Alcohol-Highway Safety Related Legislation, 1985 and 1990, published by the U.S. National Highway Traffic Safety Administration.</p>
+<p>Used in Text: pages 444, 446</p>
+<p><strong>Notes</strong>: In addition to adding recent years, this data set could really use state-level tax rates on alcohol. Other important law changes include defining driving under the influence as having a blood alcohol level of .08 or more, which many states have adopted since the 1980s. The trend really picked up in the 1990s and continued through the 2000s. The data set DRIVING is more complete and more recent, but it is also more complicated.</p>
+</section>
+<section id="traffic2" class="level2">
+<h2 class="anchored" data-anchor-id="traffic2">TRAFFIC2</h2>
+<p><strong>Source</strong>: P.S. McCarthy (1994), “Relaxed Speed Limits and Highway Safety: New Evidence from California,” Economics Letters 46, 173-179.</p>
+<p>Professor McCarthy kindly provided the data.</p>
+<p>Used in Text: pages 364, 392, 422, 641, 659</p>
+<p><strong>Notes</strong>: Many states have changed maximum speed limits and imposed seat belt laws over the past 25 years. Data similar to those in TRAFFIC2 should be fairly easy to obtain for a particular state. One should combine this information with changes in a state’s blood alcohol limit and the passage of per se and open container laws.</p>
+</section>
+<section id="twoyear" class="level2">
+<h2 class="anchored" data-anchor-id="twoyear">TWOYEAR</h2>
+<p><strong>Source</strong>: T.J. Kane and C.E. Rouse (1995), “Labor-Market Returns to Two- and Four-Year Colleges,” American Economic Review 85, 600-614.</p>
+<p>With Professor Rouse’s kind assistance, I obtained the data from her web site at Princeton University.</p>
+<p>Used in Text: pages 137-139, 160, 254, 329</p>
+<p><strong>Notes</strong>: As possible extensions, students can explore whether the returns to two-year or four-year colleges depend on race or gender. This is partly done in Problem 7.9 but where college is aggregated into one number. Also, should experience appear as a quadratic in the wage specification?</p>
+</section>
+</section>
+<section id="v" class="level1">
+<h1>V</h1>
+<section id="volat" class="level2">
+<h2 class="anchored" data-anchor-id="volat">VOLAT</h2>
+<p><strong>Source</strong>: J.D. Hamilton and L. Gang (1996), “Stock Market Volatility and the Business Cycle,” Journal of Applied Econometrics 11, 573-593.</p>
+<p>I obtained these data from the Journal of Applied Econometrics data archive at http://qed.econ.queensu.ca/jae/</p>
+<p>Used in Text: pages 364, 637-640</p>
+</section>
+<section id="vote1" class="level2">
+<h2 class="anchored" data-anchor-id="vote1">VOTE1</h2>
+<p><strong>Source</strong>: M. Barone and G. Ujifusa, The Almanac of American Politics, 1992. Washington, DC: National Journal.</p>
+<p>Used in Text: pages 31, 36, 159-160, 215-216, 290, 663</p>
+</section>
+<section id="vote2" class="level2">
+<h2 class="anchored" data-anchor-id="vote2">VOTE2</h2>
+<p><strong>Source</strong>: See VOTE1</p>
+<p>Used in Text: pages 324-325, 444, 455-456, 663</p>
+<p><strong>Notes</strong>: These are panel data, at the Congressional district level, collected for the 1988 and 1990 U.S. House of Representative elections. Of course, much more recent data are available, possibly even in electronic form.</p>
+</section>
+<section id="voucher" class="level2">
+<h2 class="anchored" data-anchor-id="voucher">VOUCHER</h2>
+<p><strong>Source</strong>: Rouse, C.E. (1998), “Private School Vouchers and Student Achievement: An Evaluation of the Milwaukee Parental Choice Program,” Quarterly Journal of Economics 113, 553-602.</p>
+<p>Professor Rouse kindly provided the original data set from her paper.</p>
+<p>Used in Text: pages 529-530</p>
+<p><strong>Notes</strong>: This is a condensed version of the data set used by Professor Rouse. The original data set had missing information on many variables, including pre-program and post-program test scores. I did not impute any missing data and have dropped observations that were unusable without filling in missing data. There are 990 students in the current data set but pre-program test scores are available for only 328 of them.</p>
+<p>This is a good example of where eligibility for a program is randomized but participation need not be. In addition, even if we look at just the effect of eligibility (captured in the variable selectyrs) on the math test score (mnce), we need to confront the fact that attrition (students leaving the district) can bias the results. Controlling for the pre-policy test score, mnce90, can help – but at the cost of losing two-thirds of the observations. A simple regression of mnce on selectyrs followed by a multiple regression that adds mnce90 as a control is informative.</p>
+<p>The selectyrs dummy variables can be used as instrumental variables for the choiceyrs variable to try to estimate the effect of actually participating in the program (rather than estimating the so-called intention-to-treat effect). Computer Exercise C15.11 steps through the details.</p>
+</section>
+</section>
+<section id="w" class="level1">
+<h1>W</h1>
+<section id="wage1" class="level2">
+<h2 class="anchored" data-anchor-id="wage1">WAGE1</h2>
+<p><strong>Source</strong>: These are data from the 1976 Current Population Survey, collected by Henry Farber when he and I were colleagues at MIT in 1988.</p>
+<p>Used in Text: pages 6, 30-31, 33, 73, 86, 123, 178, 189, 214, 222, 224, 227, 228-229, 232-233, 235, 257, 265-266, 316, 644</p>
+<p><strong>Notes</strong>: Barry Murphy, of the University of Portsmouth in the UK, has pointed out that for several observations the values for exper and tenure are in logical conflict. In particular, for some workers the number of years with current employer (tenure) is greater than overall work experience (exper). At least some of these conflicts are due to the definition of exper as “potential” work experience, but probably not all. Nevertheless, I am using the data set as it was supplied to me.</p>
+</section>
+<section id="wage2" class="level2">
+<h2 class="anchored" data-anchor-id="wage2">WAGE2</h2>
+<p><strong>Source</strong>: M. Blackburn and D. Neumark (1992), “Unobserved Ability, Efficiency Wages, and Interindustry Wage Differentials,” Quarterly Journal of Economics 107, 1421-1436.</p>
+<p>Professor Neumark kindly provided the data, of which I used just the data for 1980.</p>
+<p>Used in Text: pages 63, 104-105, 110, 160, 212, 215, 256, 301-302, 328, 502, 515, 526, 528-529, 644</p>
+<p><strong>Notes</strong>: As with WAGE1, there are some clear inconsistencies among the variables tenure, exper, and age. I have not been able to track down the source of the inconsistency, and so any changes would be effectively arbitrary. Instead, I am using the data as provided by the authors of the above QJE article.</p>
+</section>
+<section id="wagepan" class="level2">
+<h2 class="anchored" data-anchor-id="wagepan">WAGEPAN</h2>
+<p><strong>Source</strong>: F. Vella and M. Verbeek (1998), “Whose Wages Do Unions Raise? A Dynamic Model of Unionism and Wage Rate Determination for Young Men,” Journal of Applied Econometrics 13, 163-183.</p>
+<p>I obtained the data from the Journal of Applied Econometrics data archive at http://qed.econ.queensu.ca/jae/. The JAE data archive is generally a nice resource for undergraduates looking to replicate or extend a published study.</p>
+<p>Used in Text: pages 457, 465, 472</p>
+</section>
+<section id="wageprc" class="level2">
+<h2 class="anchored" data-anchor-id="wageprc">WAGEPRC</h2>
+<p><strong>Source</strong>: Economic Report of the President, various years.</p>
+<p>Used in Text: pages 388, 421, 638</p>
+<p><strong>Notes</strong>: These monthly data run from January 1964 through October 1987. The consumer price index averages to 100 in 1967. An updated set of data can be obtained electronically from http://www.gpo.gov/fdsys/browse/collection.action?collectionCode=ERP.</p>
+</section>
+<section id="wine" class="level2">
+<h2 class="anchored" data-anchor-id="wine">WINE</h2>
+<p><strong>Source</strong>: These data were reported in a New York Times article, December 28, 1994.</p>
+<p>Used in Text: not used</p>
+<p><strong>Notes</strong>: The dependent variables deaths, heart, and liver each can be regressed on alcohol as nice simple regression examples. The conventional wisdom is that wine is good for the heart but not for the liver, something that is apparent in the regressions. Because the number of observations is small, this can be a good data set to illustrate calculation of the OLS estimates and statistics.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
+        }
+        return container.innerHTML
+      } else {
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

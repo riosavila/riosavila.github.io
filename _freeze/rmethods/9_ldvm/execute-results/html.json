@@ -1,0 +1,11 @@
+{
+  "hash": "64dae47a1b5eaba454749b829d60e420",
+  "result": {
+    "markdown": "---\ntitle: Limited Dependent Variable Models\nsubtitle: MLE-Mua ha ha ha\nauthor: Fernando Rios-Avila\nformat:\n  revealjs:\n    slide-number: true\n    width: 1600\n    height: 900\n    code-fold: true\n    code-overflow: wrap\n    echo: true\n    css: styles.css\n    chalkboard: true\n---\n\n",
+    "supporting": [
+      "9_ldvm_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

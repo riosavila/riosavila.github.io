@@ -1,0 +1,21 @@
+---
+title: "Stata-output"
+format: 
+    html: default
+    pdf: default
+---
+
+# Analyzing Oaxaca dataset
+
+ 
+smaller 
+
+```{stata}
+*| output: asis
+*| echo: false
+display "```{=html}"
+display_file regressx.htm
+ 
+```
+```
+ 
