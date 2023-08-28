@@ -5337,8 +5337,8 @@
     "objectID": "rmethods/9_ldvm.html#what-do-we-mean-limited",
     "href": "rmethods/9_ldvm.html#what-do-we-mean-limited",
     "title": "Limited Dependent Variable Models",
-    "section": "What do we mean Limited??",
-    "text": "What do we mean Limited??\n\n\nCode\nclear\nset obs 2000\ngen r1 = runiform()\ngen r2 = rchi2(5)/5 \ngen r3 = round(rchi2(3))*3\ngen r4 = rnormal()\nset scheme white2\ncolor_style tableau\nhistogram r1, name(m1, replace) \nhistogram r2, name(m2, replace)\nhistogram r3, name(m3, replace) width(1)  \nhistogram r4, name(m4, replace)\ngraph combine m1 m2 m3 m4\ngraph export images/fig9_1.png, width(1000) replace\n\n\n\nLimited Dependent variables"
+    "section": "",
+    "text": "clear\nset obs 2000\ngen r1 = runiform()\ngen r2 = rchi2(5)/5 \ngen r3 = round(rchi2(3))*3\ngen r4 = rnormal()\nset scheme white2\ncolor_style tableau\nhistogram r1, name(m1, replace) \nhistogram r2, name(m2, replace)\nhistogram r3, name(m3, replace) width(1)  \nhistogram r4, name(m4, replace)\ngraph combine m1 m2 m3 m4\ngraph export images/fig9_1.png, width(1000) replace\n\n\n\n\nLimited Dependent variables"
   },
   {
     "objectID": "rmethods/9_ldvm.html#section",
@@ -5408,7 +5408,7 @@
     "href": "rmethods/9_ldvm.html#section-5",
     "title": "Limited Dependent Variable Models",
     "section": "",
-    "text": "Code\n  clear\n  set obs 25\n  gen r = runiform()&lt;.7\n  mata: \n    r = st_data(.,\"r\")\n    ll = J(99,2,0)\n    for(i=1;i&lt;=99;i++){\n      theta = i/100\n      // Log Properties\n      ll[i,]= theta,exp(sum(log(theta:^(r:==1) :* (1-theta):^(r:==0))))\n    }\n  end\n  qui getmata ll*=ll , force\n  ren ll1 theta\n  ren ll2 likelihood\n  *scatter likelihood theta \n\n\nNumber of observations (_N) was 0, now 25."
+    "text": "clear\n  set obs 25\n  gen r = runiform()&lt;.7\n  mata: \n    r = st_data(.,\"r\")\n    ll = J(99,2,0)\n    for(i=1;i&lt;=99;i++){\n      theta = i/100\n      // Log Properties\n      ll[i,]= theta,exp(sum(log(theta:^(r:==1) :* (1-theta):^(r:==0))))\n    }\n  end\n  qui getmata ll*=ll , force\n  ren ll1 theta\n  ren ll2 likelihood\n  *scatter likelihood theta \n\nNumber of observations (_N) was 0, now 25."
   },
   {
     "objectID": "rmethods/9_ldvm.html#mle-how-does-this-work",
@@ -5423,5 +5423,12 @@
     "title": "Limited Dependent Variable Models",
     "section": "Likelihood function for Logit/probit",
     "text": "Likelihood function for Logit/probit\n\\[L_i = G(x\\beta)^{y=1}*(1-G(x\\beta))^{y=0}\n\\]\nUnder Independence:\n\\[L_D = L_1 \\times L_2 \\times \\dots L_N\n\\]\nThus we need to find the \\(\\beta's\\) that make \\(L_D\\) the largest."
+  },
+  {
+    "objectID": "rmethods/9_ldvm.html#testing",
+    "href": "rmethods/9_ldvm.html#testing",
+    "title": "Limited Dependent Variable Models",
+    "section": "Testing?",
+    "text": "Testing?\n\nYou have two options…\nAnd two sets of parameters"
   }
 ]
