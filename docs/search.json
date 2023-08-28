@@ -5337,8 +5337,8 @@
     "objectID": "rmethods/9_ldvm.html#what-do-we-mean-limited",
     "href": "rmethods/9_ldvm.html#what-do-we-mean-limited",
     "title": "Limited Dependent Variable Models",
-    "section": "",
-    "text": "clear\nset obs 2000\ngen r1 = runiform()\ngen r2 = rchi2(5)/5 \ngen r3 = round(rchi2(3))*3\ngen r4 = rnormal()\nset scheme white2\ncolor_style tableau\nhistogram r1, name(m1, replace) \nhistogram r2, name(m2, replace)\nhistogram r3, name(m3, replace) width(1)  \nhistogram r4, name(m4, replace)\ngraph combine m1 m2 m3 m4\ngraph export images/fig9_1.png, width(1000) replace\n\n\n\n\nLimited Dependent variables"
+    "section": "What do we mean Limited??",
+    "text": "What do we mean Limited??\n\n\nCode\nclear\nset obs 2000\ngen r1 = runiform()\ngen r2 = rchi2(5)/5 \ngen r3 = round(rchi2(3))*3\ngen r4 = rnormal()\nset scheme white2\ncolor_style tableau\nhistogram r1, name(m1, replace) \nhistogram r2, name(m2, replace)\nhistogram r3, name(m3, replace) width(1)  \nhistogram r4, name(m4, replace)\ngraph combine m1 m2 m3 m4\ngraph export images/fig9_1.png, width(1000) replace\n\n\n\nLimited Dependent variables"
   },
   {
     "objectID": "rmethods/9_ldvm.html#section",
@@ -5408,7 +5408,7 @@
     "href": "rmethods/9_ldvm.html#section-5",
     "title": "Limited Dependent Variable Models",
     "section": "",
-    "text": "clear\n  set obs 25\n  gen r = runiform()&lt;.7\n  mata: \n    r = st_data(.,\"r\")\n    ll = J(99,2,0)\n    for(i=1;i&lt;=99;i++){\n      theta = i/100\n      // Log Properties\n      ll[i,]= theta,exp(sum(log(theta:^(r:==1) :* (1-theta):^(r:==0))))\n    }\n  end\n  qui getmata ll*=ll , force\n  ren ll1 theta\n  ren ll2 likelihood\n  *scatter likelihood theta \n\nNumber of observations (_N) was 0, now 25."
+    "text": "Code\n  clear\n  set obs 25\n  gen r = runiform()&lt;.7\n  mata: \n    r = st_data(.,\"r\")\n    ll = J(99,2,0)\n    for(i=1;i&lt;=99;i++){\n      theta = i/100\n      // Log Properties\n      ll[i,]= theta,exp(sum(log(theta:^(r:==1) :* (1-theta):^(r:==0))))\n    }\n  end\n  qui getmata ll*=ll , force\n  ren ll1 theta\n  ren ll2 likelihood\n  *scatter likelihood theta \n\n\nNumber of observations (_N) was 0, now 25."
   },
   {
     "objectID": "rmethods/9_ldvm.html#mle-how-does-this-work",
@@ -5430,5 +5430,12 @@
     "title": "Limited Dependent Variable Models",
     "section": "Testing?",
     "text": "Testing?\n\nYou have two options…\nAnd two sets of parameters"
+  },
+  {
+    "objectID": "rmethods/Question 1.html",
+    "href": "rmethods/Question 1.html",
+    "title": "Econometrics MSC Levy",
+    "section": "",
+    "text": "Question 1\nconsider the following matrixes\n\\(A=\\begin{pmatrix} 1 & 2 & 3 \\\\ 3 & 3 & 8 \\end{pmatrix}\\)\n\\(B=\\begin{pmatrix} 3 & 1 & 6 \\\\ 2 & 1 & 2 \\end{pmatrix}\\)\n\\(C=\\begin{pmatrix} 5 & 1 & 6 \\\\ 1 & 1 & 2 \\\\ 4 & 2 & 6 \\end{pmatrix}\\)\nConsider the following Operations:\n\\(A + B\\)\n\\(A + B'\\)\n\\(A * B\\)\n\\(Det(C)\\)\n\\(C^{-1}\\)\n\\(A' * B\\)\n\\((A * B')^{-1}\\)\nIndicate if they are valid operations. if not, explain why If they are obtain the resulting matrices.\nQuestion 2\nConsider the following functions:\n\\(y=1+x^2-3x^3\\)\n\\(y=ln(3x^2+1)\\)\n\\(y=exp(x+x*z)\\)\nFor each one estimate: \\(\\frac{\\partial y}{∂ x}\\) and \\(\\frac{\\partial^2 y}{∂ x^2}\\)\nQuestion 3 Solve the following set of equations. If not, indicate why they cant be solved:\nEq1\n\\(\\begin{aligned} 2x+y &= 3 \\\\ 2x+2y &= -3 \\end{aligned}\\)\nEq 2\n\\(\\begin{aligned} 2x+ y + z &= 1 \\\\ 3x+ 2y - z &= 2 \\\\  x+ y - 2 z &= 3 \\\\ \\end{aligned}\\)\nEq 3\n\\(x^2 + x - 2 =0\\)\nQuestion 4: Maximization\n\nConsider the following set of functions:\n\n\\(\\begin{aligned} y &= A x^α z ^\\beta \\\\ C &= p_x x + P_z z \\end{aligned}\\)\nSet up the constrained maximization problem.\n\nconsider the following function:\n\n\\(y = f(z)\\)\nIf you were to maximize this function, what are the first order conditions?\nIf there is a unique solution, what are the conditions to verify it is the maximum.\nQuestion 5\nP1)\nConsider the following set of numbers\n\\(x = \\{10, 4, 5, 7, 3, 6, 9\\}\\)\nEstimate the mean, median, and variance of this data.\np2)\nSay that X is a continuous random variable that ranges from -10 to 10.\n\nWhat is the probability that X=1 (\\(P(x=1)\\))\nTrue or False \\(P(X&gt;1) + p(X&lt;1)=1\\)\nTrue or False \\(P(X&gt;1) + p(-1&lt;X&lt;2)\\) can be larger than 1.\n\nP3)\nSay that Z1 and Z2 are two random variables that follow a bernulli distribution. Assume that the following probabilities are true:\n\np(z1=0 & z2=0) = 0.1\np(z1=1 & z2=1) = 0.2\np(z1=0) = 0.5\np(z2=1) = 0.6\n\nWhat is the probability for:\n\nProbability Z1=1 conditional on z2=0\nunconditional probability of Z1=1\n\np4. Given two random variables x_1 and x_2, with means and variances \\(\\mu_1\\), \\(\\mu_2\\) and \\(\\sigma^2_1\\) and \\(\\sigma^2_2\\).\nif z = x_1 - x_2, what is the mean and variance of Z\nwhat is the covariance between z and x_1."
   }
 ]

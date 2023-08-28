@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Fernando Rios-Avila">
 
-<title>Econometrics MSC Levy - Advanced Panel Data</title>
+<title>Econometrics MSC Levy – question-1</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -68,6 +67,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -123,35 +124,79 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="11_advpanel.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></div>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Advanced Panel Data</h1>
-<p class="subtitle lead">More than one way to estimate a model</p>
-</div>
 
 
-
-<div class="quarto-title-meta">
-
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Fernando Rios-Avila </p>
-          </div>
-  </div>
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
+<p>Question 1</p>
+<p>consider the following matrixes</p>
+<p><span class="math inline">\(A=\begin{pmatrix} 1 &amp; 2 &amp; 3 \\ 3 &amp; 3 &amp; 8 \end{pmatrix}\)</span></p>
+<p><span class="math inline">\(B=\begin{pmatrix} 3 &amp; 1 &amp; 6 \\ 2 &amp; 1 &amp; 2 \end{pmatrix}\)</span></p>
+<p><span class="math inline">\(C=\begin{pmatrix} 5 &amp; 1 &amp; 6 \\ 1 &amp; 1 &amp; 2 \\ 4 &amp; 2 &amp; 6 \end{pmatrix}\)</span></p>
+<p>Consider the following Operations:</p>
+<p><span class="math inline">\(A + B\)</span></p>
+<p><span class="math inline">\(A + B'\)</span></p>
+<p><span class="math inline">\(A * B\)</span></p>
+<p><span class="math inline">\(Det(C)\)</span></p>
+<p><span class="math inline">\(C^{-1}\)</span></p>
+<p><span class="math inline">\(A' * B\)</span></p>
+<p><span class="math inline">\((A * B')^{-1}\)</span></p>
+<p>Indicate if they are valid operations. if not, explain why If they are obtain the resulting matrices.</p>
+<p>Question 2</p>
+<p>Consider the following functions:</p>
+<p><span class="math inline">\(y=1+x^2-3x^3\)</span></p>
+<p><span class="math inline">\(y=ln(3x^2+1)\)</span></p>
+<p><span class="math inline">\(y=exp(x+x*z)\)</span></p>
+<p>For each one estimate: <span class="math inline">\(\frac{\partial y}{∂ x}\)</span> and <span class="math inline">\(\frac{\partial^2 y}{∂ x^2}\)</span></p>
+<p>Question 3 Solve the following set of equations. If not, indicate why they cant be solved:</p>
+<p>Eq1</p>
+<p><span class="math inline">\(\begin{aligned} 2x+y &amp;= 3 \\ 2x+2y &amp;= -3 \end{aligned}\)</span></p>
+<p>Eq 2</p>
+<p><span class="math inline">\(\begin{aligned} 2x+ y + z &amp;= 1 \\ 3x+ 2y - z &amp;= 2 \\  x+ y - 2 z &amp;= 3 \\ \end{aligned}\)</span></p>
+<p>Eq 3</p>
+<p><span class="math inline">\(x^2 + x - 2 =0\)</span></p>
+<p>Question 4: Maximization</p>
+<ol type="1">
+<li>Consider the following set of functions:</li>
+</ol>
+<p><span class="math inline">\(\begin{aligned} y &amp;= A x^α z ^\beta \\ C &amp;= p_x x + P_z z \end{aligned}\)</span></p>
+<p>Set up the constrained maximization problem.</p>
+<ol start="2" type="1">
+<li>consider the following function:</li>
+</ol>
+<p><span class="math inline">\(y = f(z)\)</span></p>
+<p>If you were to maximize this function, what are the first order conditions?</p>
+<p>If there is a unique solution, what are the conditions to verify it is the maximum.</p>
+<p>Question 5</p>
+<p>P1)</p>
+<p>Consider the following set of numbers</p>
+<p><span class="math inline">\(x = \{10, 4, 5, 7, 3, 6, 9\}\)</span></p>
+<p>Estimate the mean, median, and variance of this data.</p>
+<p>p2)</p>
+<p>Say that X is a continuous random variable that ranges from -10 to 10.</p>
+<ul>
+<li>What is the probability that X=1 (<span class="math inline">\(P(x=1)\)</span>)</li>
+<li>True or False <span class="math inline">\(P(X&gt;1) + p(X&lt;1)=1\)</span></li>
+<li>True or False <span class="math inline">\(P(X&gt;1) + p(-1&lt;X&lt;2)\)</span> can be larger than 1.</li>
+</ul>
+<p>P3)</p>
+<p>Say that Z1 and Z2 are two random variables that follow a bernulli distribution. Assume that the following probabilities are true:</p>
+<ul>
+<li>p(z1=0 &amp; z2=0) = 0.1</li>
+<li>p(z1=1 &amp; z2=1) = 0.2</li>
+<li>p(z1=0) = 0.5</li>
+<li>p(z2=1) = 0.6</li>
+</ul>
+<p>What is the probability for:</p>
+<ul>
+<li>Probability Z1=1 conditional on z2=0</li>
+<li>unconditional probability of Z1=1</li>
+</ul>
+<p>p4. Given two random variables x_1 and x_2, with means and variances <span class="math inline">\(\mu_1\)</span>, <span class="math inline">\(\mu_2\)</span> and <span class="math inline">\(\sigma^2_1\)</span> and <span class="math inline">\(\sigma^2_2\)</span>.</p>
+<p>if z = x_1 - x_2, what is the mean and variance of Z</p>
+<p>what is the covariance between z and x_1.</p>
 
 
 

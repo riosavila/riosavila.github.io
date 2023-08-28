@@ -1,0 +1,11 @@
+{
+  "hash": "8daa03e8b2a007a793149a4bc5b2517a",
+  "result": {
+    "markdown": "---\ntitle: Pool Cross-section and Panel Data\nsubtitle: One year is no longer enough\nauthor: Fernando Rios-Avila\nformat:\n  revealjs:\n    slide-number: true\n    width: 1600\n    height: 900\n    code-fold: true\n    code-overflow: wrap\n    echo: true\n    css: styles.css\n    chalkboard: true\n---\n\n",
+    "supporting": [
+      "10_pooldata_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

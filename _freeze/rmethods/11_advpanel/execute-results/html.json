@@ -1,0 +1,11 @@
+{
+  "hash": "35a8b4be1589225b2ed75d2209e7efda",
+  "result": {
+    "markdown": "---\ntitle: Advanced Panel Data\nsubtitle: More than one way to estimate a model\nauthor: Fernando Rios-Avila\nformat:\n  revealjs:\n    slide-number: true\n    width: 1600\n    height: 900\n    code-fold: true\n    code-overflow: wrap\n    echo: true\n    css: styles.css\n    chalkboard: true\n---\n\n",
+    "supporting": [
+      "11_advpanel_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

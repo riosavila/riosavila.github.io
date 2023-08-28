@@ -1,0 +1,11 @@
+{
+  "hash": "0ff7328e5ffbc848374dd8eebc5d2d86",
+  "result": {
+    "markdown": "---\ntitle: Times Series Part-I\nsubtitle: Basic Regression Analysis\nauthor: Fernando Rios-Avila\nformat:\n  revealjs:\n    slide-number: true\n    width: 1600\n    height: 900\n    code-fold: true\n    code-overflow: wrap\n    echo: true\n    css: styles.css\n    chalkboard: true\n---\n\n",
+    "supporting": [
+      "12_timeseries_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

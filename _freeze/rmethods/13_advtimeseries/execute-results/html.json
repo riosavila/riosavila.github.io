@@ -1,0 +1,11 @@
+{
+  "hash": "0f455cf7ef6e302afcb437ef140de457",
+  "result": {
+    "markdown": "---\ntitle: Times Series Part-II\nsubtitle: Building Time Machines\nauthor: Fernando Rios-Avila\nformat:\n  revealjs:\n    slide-number: true\n    width: 1600\n    height: 900\n    code-fold: true\n    code-overflow: wrap\n    echo: true\n    css: styles.css\n    chalkboard: true\n---\n\n",
+    "supporting": [
+      "13_advtimeseries_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}
