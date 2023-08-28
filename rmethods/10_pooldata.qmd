@@ -1,0 +1,16 @@
+---
+title: "Pool Cross-section and Panel Data"
+subtitle: "One year is no longer enough"
+author: Fernando Rios-Avila
+jupyter: nbstata
+format: 
+  revealjs: 
+    slide-number: true
+    width: 1600
+    height: 900
+    code-fold: true
+    code-overflow: wrap
+    echo: true
+    css: styles.css 
+    chalkboard: true  
+---

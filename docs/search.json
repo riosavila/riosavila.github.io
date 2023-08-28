@@ -5325,5 +5325,103 @@
     "title": "Data-Set Handbook",
     "section": "VOTE2",
     "text": "VOTE2\nSource: See VOTE1\nUsed in Text: pages 324-325, 444, 455-456, 663\nNotes: These are panel data, at the Congressional district level, collected for the 1988 and 1990 U.S. House of Representative elections. Of course, much more recent data are available, possibly even in electronic form."
+  },
+  {
+    "objectID": "rmethods/9_ldvm.html",
+    "href": "rmethods/9_ldvm.html",
+    "title": "Limited Dependent Variable Models",
+    "section": "",
+    "text": "clear\nset obs 2000\ngen r1 = runiform()\ngen r2 = rchi2(5)/5 \ngen r3 = round(rchi2(3))*3\ngen r4 = rnormal()\nset scheme white2\ncolor_style tableau\nhistogram r1, name(m1, replace) \nhistogram r2, name(m2, replace)\nhistogram r3, name(m3, replace) width(1)  \nhistogram r4, name(m4, replace)\ngraph combine m1 m2 m3 m4\ngraph export images/fig9_1.png, width(1000) replace\n\n\n\n\nLimited Dependent variables"
+  },
+  {
+    "objectID": "rmethods/9_ldvm.html#what-do-we-mean-limited",
+    "href": "rmethods/9_ldvm.html#what-do-we-mean-limited",
+    "title": "Limited Dependent Variable Models",
+    "section": "What do we mean Limited??",
+    "text": "What do we mean Limited??\n\n\nCode\nclear\nset obs 2000\ngen r1 = runiform()\ngen r2 = rchi2(5)/5 \ngen r3 = round(rchi2(3))*3\ngen r4 = rnormal()\nset scheme white2\ncolor_style tableau\nhistogram r1, name(m1, replace) \nhistogram r2, name(m2, replace)\nhistogram r3, name(m3, replace) width(1)  \nhistogram r4, name(m4, replace)\ngraph combine m1 m2 m3 m4\ngraph export images/fig9_1.png, width(1000) replace\n\n\n\nLimited Dependent variables"
+  },
+  {
+    "objectID": "rmethods/9_ldvm.html#section",
+    "href": "rmethods/9_ldvm.html#section",
+    "title": "Limited Dependent Variable Models",
+    "section": "",
+    "text": "What do we mean Limited??\n\nWhen we think about “limited dependent variable” models, we refer to models when the distribution of the dep.variable is “limited”\n\nIn other words. The values it can take are restricted! (positive, or only integer), within a range, etc\n\nCan you still use LRM for them?\nWill anything change if you do?\nDo we care?"
+  },
+  {
+    "objectID": "rmethods/9_ldvm.html#no-we-dont-but..",
+    "href": "rmethods/9_ldvm.html#no-we-dont-but..",
+    "title": "Limited Dependent Variable Models",
+    "section": "No we dont, but..",
+    "text": "No we dont, but..\n\nWe dont really care. In fact we have already use LRM on that fashion:\n\nLPM: Dep variable was a Dummy\nWages: Always positive\n# Children: Countable\n\nBut, there are couple of things one should consider.\n\nModels of this kind are usually heteroskedastic by construction. (robust? Weighted?)\nPredictions could made no sense.\nThere are better models we could use to analyze the data\n\n\nBetter under some assumptions\n\nHowever, this models cannot be estimated using OLS (there is no “close form solution”)\nWe may need to learn a new method: Maximum Likelihood"
+  },
+  {
+    "objectID": "rmethods/9_ldvm.html#probits-and-logits",
+    "href": "rmethods/9_ldvm.html#probits-and-logits",
+    "title": "Limited Dependent Variable Models",
+    "section": "Probits and Logits",
+    "text": "Probits and Logits\n\nLPM are easy, fast, and good for most data analysis (exploration). But they have some limitations.\nMost limitations can be overcome with alternative models: Logit or Probit\nIn constrast with LPM (which aims to explain individual outcomes), Logit/probit aims to explain Conditional Probabilities:\n\n\\[p(y=1|x) = G(x\\beta)\\]\n\nwhere the function \\(G()\\) makes sure the predicted outcome is always between 0 and 1.\nCaveat: Because \\(G()\\) is nonlinear, this is a nonlinear model, and marginal effects are harder to estimate."
+  },
+  {
+    "objectID": "rmethods/9_ldvm.html#section-1",
+    "href": "rmethods/9_ldvm.html#section-1",
+    "title": "Limited Dependent Variable Models",
+    "section": "",
+    "text": "What to use for \\(G()\\)\n\nTwo leading options:\n\n\\[logit: G(x\\beta) = \\frac{\\exp{x\\beta}}{1+\\exp{x\\beta}}\\] \\[probit: G(x\\beta) = \\Phi(x\\beta)=\\int_{-\\infty}^{x\\beta}\\phi(z)dz\\]\n\nBut in practice Either will work. Then why the difference?"
+  },
+  {
+    "objectID": "rmethods/9_ldvm.html#probits-and-logits-latent-variables",
+    "href": "rmethods/9_ldvm.html#probits-and-logits-latent-variables",
+    "title": "Limited Dependent Variable Models",
+    "section": "Probits and Logits: Latent variables",
+    "text": "Probits and Logits: Latent variables\n\nIt all comes down to the Latent variable!\nAssumption:\n\nEverybody has a latent score on every “binary” decision: The value to a decision \\(y^*\\) \\[y^* = x\\beta + e \\]\nIf \\(y^*\\) is above certain threshold (\\(y*&gt;0\\)), you “do” something (\\(y=1\\)). If not you dont (\\(y=0\\)).\nLogits and Probits aim to estimate\n\nThus the choice between logit and probit comes down to assumptions on the distribution of \\(e\\).\n\n\\(e\\) is normal, then probit\n\\(e\\) is logistic, then logit"
+  },
+  {
+    "objectID": "rmethods/9_ldvm.html#section-2",
+    "href": "rmethods/9_ldvm.html#section-2",
+    "title": "Limited Dependent Variable Models",
+    "section": "",
+    "text": "Probits and Logits: Latent variables\n\nIt all comes down to the Latent variable!\nAssumption:\n\nEverybody has a latent score on every “binary” decision: The value to a decision \\(y^*\\) \\[y^* = x\\beta + e \\]\nIf \\(y^*\\) is above certain threshold (\\(y^*&gt;0\\)), you “do” something (\\(y=1\\)). If not you dont (\\(y=0\\)).\n\nThus the choice between logit and probit depends on the distribution of \\(e\\).\n\n\\(e\\) is normal, then probit\n\\(e\\) is logistic, then logit"
+  },
+  {
+    "objectID": "rmethods/9_ldvm.html#marginal-effects",
+    "href": "rmethods/9_ldvm.html#marginal-effects",
+    "title": "Limited Dependent Variable Models",
+    "section": "Marginal Effects?",
+    "text": "Marginal Effects?\n\nSame as before. The partial derivative!\n\n\\[\\begin{aligned}\np(y=1|x) &= G(\\beta_0 + \\beta_1 x_1 +\\beta_2 x_2 ) \\\\\n\\frac{\\partial p(y=1|x)}{\\partial x_1} = G'(x\\beta)\\beta_1=g(x\\beta)\\beta_1\n\\end{aligned}\n\\]\nHow do estimate the model?"
+  },
+  {
+    "objectID": "rmethods/9_ldvm.html#section-3",
+    "href": "rmethods/9_ldvm.html#section-3",
+    "title": "Limited Dependent Variable Models",
+    "section": "",
+    "text": "Some Math\nLatent Model:\n\\[ y^* = x\\beta + e \\]\nWe aim to measure the probablity of a positive latent.\n\\[\\begin{aligned}\nP(y^*&gt;0|x) & = P(x\\beta + e&gt;0|x) \\\\\n& = P( e&gt;- x\\beta|x) \\\\\n& = 1 - P( e &lt; - x\\beta|x) = 1-G( - x\\beta|x) \\\\\n& = G(x\\beta)\n\\end{aligned}\n\\]\nlast step valid only if \\(G()\\) is symetrical."
+  },
+  {
+    "objectID": "rmethods/9_ldvm.html#section-4",
+    "href": "rmethods/9_ldvm.html#section-4",
+    "title": "Limited Dependent Variable Models",
+    "section": "",
+    "text": "Marginal Effects?\n\nSame as before. The partial derivative!\n\n\\[\\begin{aligned}\np(y=1|x) &= G(\\beta_0 + \\beta_1 x_1 +\\beta_2 x_2 ) \\\\\n\\frac{\\partial p(y=1|x)}{\\partial x_1} = G'(x\\beta)\\beta_1=g(x\\beta)\\beta_1\n\\end{aligned}\n\\]\n\nBut if variables are dummies, we need to estimate true effect.\n\n\\[\\begin{aligned}\np(y=1|x) &= G(\\beta_0 + \\beta_1 x_1 +\\beta_2 D_2 ) \\\\\n\\frac{\\partial p(y=1|x)}{\\partial D_2} = G(\\beta_0 + \\beta_1 x_1 +\\beta_2 )-G(\\beta_0 + \\beta_1 x_1 )\n\\end{aligned}\n\\]\nand yes, you could also have interactions, polynomials, etc"
+  },
+  {
+    "objectID": "rmethods/9_ldvm.html#section-5",
+    "href": "rmethods/9_ldvm.html#section-5",
+    "title": "Limited Dependent Variable Models",
+    "section": "",
+    "text": "Code\n  clear\n  set obs 25\n  gen r = runiform()&lt;.7\n  mata: \n    r = st_data(.,\"r\")\n    ll = J(99,2,0)\n    for(i=1;i&lt;=99;i++){\n      theta = i/100\n      // Log Properties\n      ll[i,]= theta,exp(sum(log(theta:^(r:==1) :* (1-theta):^(r:==0))))\n    }\n  end\n  qui getmata ll*=ll , force\n  ren ll1 theta\n  ren ll2 likelihood\n  *scatter likelihood theta \n\n\nNumber of observations (_N) was 0, now 25."
+  },
+  {
+    "objectID": "rmethods/9_ldvm.html#mle-how-does-this-work",
+    "href": "rmethods/9_ldvm.html#mle-how-does-this-work",
+    "title": "Limited Dependent Variable Models",
+    "section": "MLE: How does this work?",
+    "text": "MLE: How does this work?\n\nMLE: Maximum Likelihood Estimator, is an alternative method to OLS that allows you to estimate parameters in nonlinear models.\nThe idea of the method is to “model” the conditional distribution of the data \\(F(y|x,\\theta)\\) or \\(f(y|x,\\theta)\\), assuming \\(X's\\) are given and modifying values of \\(\\theta\\) (distribution parameters).\n\\(LRM\\) could be estimated via MLE, but you will need More assumptions:\n\nThe error \\(e\\) is normal.\n\nThen “simply” find the parameters for the mean and variance that “maximizes” the probability that data Comes a given distribution.\nIn the case of Probit/logit, there is “only” one paramter we need to identify. The conditional probabilty \\(p(y=1|X)\\).\n\nExcept that we allow this to vary by \\(X\\)"
+  },
+  {
+    "objectID": "rmethods/9_ldvm.html#likelihood-function-for-logitprobit",
+    "href": "rmethods/9_ldvm.html#likelihood-function-for-logitprobit",
+    "title": "Limited Dependent Variable Models",
+    "section": "Likelihood function for Logit/probit",
+    "text": "Likelihood function for Logit/probit\n\\[L_i = G(x\\beta)^{y=1}*(1-G(x\\beta))^{y=0}\n\\]\nUnder Independence:\n\\[L_D = L_1 \\times L_2 \\times \\dots L_N\n\\]\nThus we need to find the \\(\\beta's\\) that make \\(L_D\\) the largest."
   }
 ]

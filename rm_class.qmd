@@ -8,7 +8,7 @@ title: "Research Methods: Econometrics I"
 
 #### 1. Chapter 2: 
 
-   [**The Simple Regression Model**]((rmethods/2_SRA.html))
+   **The Simple Regression Model**
 
 #### 2. Chapter 3: 
    
