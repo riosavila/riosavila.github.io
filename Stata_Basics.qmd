@@ -1,0 +1,328 @@
+---
+title: "Stata-Basics"
+format: html
+jupyter: nbstata
+execute: 
+  freeze: true
+  echo: false
+  error: true
+---
+
+# Get to know `Stata`
+
+![](images/paste-1.png)
+
+## Command Window
+
+-   You can use command window to type and excute commands directly into `Stata`.
+-   Great for interactive exploration and analysis...
+-   But highly recommended that Final analysis is "always" done in a "do-file"
+
+```{stata}
+*| echo: false
+%%echo
+display "Hola"
+display "2+2=" 2+2
+display "The probability that z >1.95 is " %5.3f 1-normal(1.95)
+```
+
+## Help
+
+-   99% of Stata commands come with Extensive help.
+-   If you do not know how to use a command, or about a test just "ask for help"
+
+``` stata
+help help
+```
+
+``` stata
+[R] help -- Display help in Stata
+-------------------------------------------------------------------------------
+Stata's help system
+    There are several kinds of help available to the Stata user. For more
+    information, see Advice on getting help.  The information below is
+    technical details about Stata's help command.
+-------------------------------------------------------------------------------
+Syntax
+        help [command_or_topic_name] [, nonew name(viewername)
+              marker(markername)]
+Menu
+    Help > Stata command...
+Description
+    The help command displays help information about the specified command or
+    topic.  help launches a new Viewer to display help for the specified
+    command or topic or displays help on the console in Stata for
+    Unix(console).  If help is not followed by a command or a topic name,
+    Stata displays advice for using the help system and documentation.
+```
+
+For estimation commands, and specialized tests, `help` even provides links to the manuals.
+
+The manuals have extensive detailed information on methods, formulas, references, and examples.
+
+![](images/paste-2.png)
+
+- Of course there is 1% that is "documented/undocumented" or truly undocumented. 
+
+- Most Community-contributed commands also have helpfiles, but are not always fully documented.
+
+- You could also ask for helps on "topics": `help sample selection`
+  
+## Installing Programs
+
+- `Stata`, for all practical purposes, is self-contained. 
+  - You do not need outside sources to analyze your data, estimate models, create tables, etc.
+- However, many users provide add-ons that may help to make your work "easier"
+  - Main Stata repository : Boston College Statistical Software Components (**SSC**) archive
+
+```stata
+** For using Wooldridge Book Datasets
+ssc install frause, replace 
+** For Easiy tables
+net install estout, replace from(https://raw.githubusercontent.com/benjann/estout/master/)
+** My own installer for extra utilities
+net install fra, replace from(https://friosavila.github.io/stpackages) 
+fra install fra_tools, replace
+```
+
+- If at any point there is code that produces an error, and there is no `help`, let me know.
+
+## Loading Data
+
+- `Stata` Files have format **dta**. 
+- Loading Stata-data into `Stata` is very easy. 
+  - Double-click (opens a new `Stata`)
+  - Drag and Drop into your `Stata` instance
+  - Load it from menu File>open 
+  - or using a do-file or command window
+
+- Other Formats required extra work.
+  - Use other software to "translate" it into Stata
+  - Menu: File>import> many choices
+  
+### Stata System-files
+
+```{stata}
+*| echo: false
+%%echo
+** Most Stata example files
+** Syntax:   sysuse  [filename], [clear]
+sysuse dir
+```
+
+### Other
+
+```stata
+** Web data from Stata
+webuse "data-file-address", clear
+** From other sites
+webuse set [webaddress]
+webuse data-file-address, clear 
+webuse set 
+** from frause and Wooldrige
+frause , dir
+frause wage1, clear
+** from anyadress
+use "filename-adress", clear
+use "https://friosavila.github.io/playingwithstata/data2/wage1.dta", clear
+```
+
+## Basic Data description
+
+::: {.panel-tabset}
+
+## sysuse
+
+```{stata}
+*| echo: false
+%%echo
+sysuse auto, clear
+des
+list in 1/3
+```
+
+## webuse
+
+```{stata}
+*| echo: false
+%%echo
+webuse smoking, clear
+des
+list cigs map age ht gradd1 in 1/3
+```
+
+
+## frause
+
+```{stata}
+*| echo: false
+%%echo
+frause smoking, clear
+des
+list in 1/3
+```
+
+:::
+
+## Summary Statistics
+
+- Summary Statistics are essential before starting basic analysis. `Stata` gives you many options. Although not all of them are easy to export.
+
+```{stata}
+%%echo
+frause oaxaca, clear
+*summarize [varlist] [if] [in] [weight] [, options]
+summarize if female==1, sep(0)
+```
+
+```{stata}
+%%echo
+*   tabstat varlist [if] [in] [weight] [, options]
+tabstat educ exper tenure age married, by(female)
+tabstat educ exper tenure , by(female) stats(p10 p50 p90)
+```
+
+
+```{stata}
+%%echo
+ssc install table1
+* see help table1
+table1, by(female) vars(lnwage contn %3.2f \ age contn %2.1f \ married bin)
+qui:table1, by(female) vars(lnwage contn %3.2f \ age contn %2.1f \ married bin) saving(m1.xls)
+```
+
+You can see the file [here](m1.xls)
+
+- There are other options from `Stata` as well. see `help dtable` and `help table`.
+
+- Or you could construct some yourself with the help of `estout` and `esttab`.
+
+- See [here](https://grodri.github.io/stata/tables) for a quick guide on tables.
+
+## Creating variables
+
+- Two main commands:
+  - `generate` (or `gen` for short): Creates new variables as a function of others in the data. One can apply system functions. Example:
+    -  `gen var1 = 1`
+    -  `gen var2 = _n`
+    -  `gen wage = exp(lnwage)`
+    -  `gen age_educ = age * educ`
+   -  `replace`: replaces values in an already existing variable. 
+      -  `replace wage = 0 if wage==.`
+      -  `replace age_educ = . if female==1`
+  -  `egen`: Advanced variable generating function. It applies a single function to a variable or list of variables to create a third one.
+     -  `egen wage_mean=mean(exp(lnwage)), by(female)`
+     -  `egen wage_p10=pctile(lnwage), by(female) p(10)`
+-  To *delete* a variable, you can use `drop varname/varlist` or `drop2 varname/varlist`
+   -  `drop` is the official. Stops if the variable does not exist.
+   -  `drop2` an addon. Will still work even if a variable name does not exist.  
+       Requires using full variable name. 
+
+
+```{stata}
+%%echo
+gen var1 = exp(lnwage)
+gen xar2 = exp(lnwage)+married
+drop x
+des var1 xar2
+```
+
+```{stata}
+%%echo
+gen xar2 = exp(lnwage)+married
+drop2 x 
+```
+
+## Variables Management
+
+- `Stata` is case sensitive. 
+  - You can create variables with names `one`, `One`, `OnE`, `ONE`, etc. 
+  - "file addresses" and commands are also case sensitive
+- In `Stata`, variable names ***cannot*** can only start with a letter or "_". Otherwise, it will give you an error.
+- Once variables are created, you could "label" them  
+    `label var variable_name "Description" `
+- You can name other components of a dataset as well. See `help label`    
+
+## Plots in Stata
+
+- `Stata` can create figures and plots for data exploration
+
+### Scatter plot
+
+```{stata}
+%%echo
+webuse dui, clear
+scatter citations fines
+```
+
+```{stata}
+%%echo
+two (scatter citations fines if csize==1)  ///
+    (scatter citations fines if csize==2), ///
+    legend(order(1 "Small" 2 "Medium"))
+```
+
+- The limitation. User written plotting commands do not interact well with Official plotting commands.
+
+## Saving your work
+
+- Command Window is effective to provide interactive analysis
+- At the end of your *session*, you can recover everything you did, clicking on the History Section, and save everythig, or just specific commands.
+- The best approach, however, is to  ***ALWAYS***   use a do-file.
+
+- **First of all**: Create a working directory. A folder in your computer that will hold your project, work, paper, homework, etc. (highly recommended)
+- **Create a dofile**: For simple projects a single file will suffice, but multiple may be needed for larger ones.
+- To start a dofile, simply type `doedit "filename"` in your command window.
+  - If file exists in your "working directory" (type `cd` to see where you "are"), it will open it.
+  - Otherwise, a new file will be created
+
+- `do-files` are the best approach to save your work, and keep track of your analysis.
+- General Suggestion: Allways add comments to it, to know what you are doing
+
+```{stata}
+*| echo: true
+*  You can always Start a command like this
+// Or like this
+/*
+But you can always add a large comment using "/*" to start
+and "*/" to end it
+*/
+
+/* You could also add comments at the end of a command */
+sysuse auto, clear  // Loading Auto Dataset, after "clearing" the one currently in memory
+
+// Or as I did before, break a long command in various lines using "///"
+// Comments after "///" are possible
+regress price     /// Dep variable
+        mpg       /// indep variable 
+        i.foreign, /// Foreign Dummy
+        robust     // Request Robust Standard errors.
+        
+** Last one has only two "/", because line ends there
+```
+
+## Estimation Commands
+
+- Most commands in `Stata` have the following syntax:
+
+```
+[by varlist:/prefix] command [varlist]  [if exp] [in range] [weight] [using filename] [,options]
+```
+
+- everything in `[]` are optional. 
+- `[by varlist:/prefix]`: `by` is used to execute the command by groups.  
+  `prefix` to request additional manipulation (advanced use)
+- `command`: The command itself that will process the data
+- `varlist`: For Estimation commands include the dependent (first) and independent variables (everything else)
+- `[if exp] [in range]`: To restrict  samples 
+- `[weight]`: Request the use of weights ie: `[fw = wgt_var]` or `[pw = wgt_var]`
+- `[using filename]`: Some commands allow you to use this to work with not-yet loaded datasets or files.
+- `[options]`: Options requesting specific behaivior, statistics, etc
+
+## Adv options for saving work.
+
+- Use `github`, as an additional data-repository
+- Combine `Stata`, `python` and `nbstat` to create `Jupyter notebooks`.
+- You can also use Quarto to create full dynamic reports.
+
+# Thank you!
