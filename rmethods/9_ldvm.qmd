@@ -174,6 +174,11 @@ $$
 
 Thus we need to find the $\beta's$ that make $L_D$ the largest.
 
+But because we like sums over products:
+
+$$LL_D = \sum_{i=1}^N log(L_i)
+$$
+
 ##
 
 ```{stata}
@@ -204,6 +209,298 @@ qui:scatter likelihood theta
 
 ## Testing?
 
-- You have two options...
-- And two sets of parameters
+- You can test two things:
+  - Test coefficients ($\beta$)
+  - Test marginal effects ($G'(x\beta)\beta$)
+- Both test will most likely agree with each other, but some contradictions may arise.
+### How? 
+- z-test and/or Wald test: Similar to t-test and Joint F-test we cover before. But, we now make the assumption of normality (not t-distribution)
+- Log-Likelihood test. Similar to F-test for restricted and unrestricted model:
 
+  - Estimate both Restricted and unrestricted model. And obtain their Log Likelihoods ($\mathcal{L}_ur$) and ($\mathcal{L}_r$).
+
+  $$LR = 2 (\mathcal{L}_ur-\mathcal{L}_r) \overset{a}\sim \chi^2_q$$
+
+## Stata - Example {.scrollable}
+
+```{stata}
+*| classes: larger
+frause mroz, clear
+* LPM with Robust Standard errors
+qui:reg inlf nwifeinc educ exper expersq age kidslt6 kidsge6, robust
+est sto m1
+qui:logit inlf nwifeinc educ exper expersq age kidslt6 kidsge6, 
+est sto m2a
+qui:margins, dydx(*) post
+est sto m2b
+probit inlf nwifeinc educ exper expersq age kidslt6 kidsge6, 
+est sto m3a
+qui:margins, dydx(*) post
+est sto m3b
+```
+
+```{stata}
+set linesize 255
+*| classes: larger
+display "Prob Models"
+esttab m1 m2a m2b m3a m3b, scalar(r2 ll) cell(b(fmt(%5.3f)) ///
+se(par([ ])) p( par(( )) ) )  gap  mtitle(LPM Logit Logit-mfx Probit Probit-mfx)
+```
+
+```{stata}
+*| classes: larger
+*| code-fold: false
+
+display "LR test"
+qui:probit inlf nwifeinc educ exper expersq age kidslt6 kidsge6 motheduc fatheduc, 
+est sto unrestricted
+qui:probit inlf nwifeinc educ exper expersq age kidslt6 kidsge6 , 
+est sto restricted
+lrtest unrestricted restricted
+```
+
+# Break? (5 mins!)
+
+## Censored and Truncated Data
+
+- Logits and Probits, are not the only models that require MLE for estimation. 
+  - Among Discrete data models, you also have ologit/oprobit for ordered responses. mlogit/mprobit for unordered ones. Extends on logit/probit.
+- There are other interesting cases:
+  - When Data is censored.
+  - When Data is truncated.
+
+## Three Cases
+
+:::{.panel-tabset}
+
+## Case 1
+
+- $y$ is "conditionally-normal" and is Fully Observed.
+- You can estimate the model using OLS or ML
+
+```{stata}
+*| fig-align: center
+
+qui:{
+  clear
+  set obs 999
+  gen p   = _n/(_N+1)
+  gen fob = invnormal(p)
+}
+qui:histogram fob
+```
+
+## Case 2
+
+- Data is observed for everyone, but is "censored" for some. `tobit`
+  - Either corner solution (how many hours you study) or Recoded: $y_{obs} = max(c,y^*)$
+
+```{stata}
+*| fig-align: center
+*| echo: false*| 
+qui: replace fob = -2 if fob<-2
+qui:histogram fob, xlabel(-4 (2) 4)
+```
+
+## Case 3
+
+- Below (or above) some threshold, you do not have information on $y$. `truncreg` 
+$$y_{obs} = y^* \text{ if } y^*>c$$
+
+```{stata}
+*| echo: false
+*| fig-align: center
+qui: replace fob = . if fob<=-2
+qui:histogram fob, xlabel(-4 (2) 4)
+```
+
+:::
+
+## Estimation: Censored and Corner Solution
+
+If data is censored or corner solution the estimation strategy is based on:
+
+$$\begin{aligned}
+L_i &= \frac{1}{\sigma} \phi\left( \frac{y-x\beta}{\sigma} \right) \text{ if } y>c \\
+    &= 1-\Phi\left(\frac{x\beta}{\sigma} \right) \text{ if } y\leq c \\
+\end{aligned}
+$$
+
+If data is truncated, we need to "adjust" the distribution of what is observed
+
+$$\begin{aligned}
+L_i &= \frac{1}{\Phi\left( x\beta/\sigma \right)} \frac{1}{\sigma} \phi\left( \frac{y-x\beta}{\sigma} \right) \text{ if } y>c \\  
+\end{aligned}
+$$
+
+We will put -truncated regression- on the side for now. But see [here](https://stats.oarc.ucla.edu/stata/output/truncated-regression/) for an example.
+
+## Interpretation: It depends!
+
+- What are you interested in analyzing? and what type of data you have?  
+
+:::{.panel-tabset}
+
+## Latent variable
+
+- Easiest Case. Just need to consider the coefficients (as in LRM)
+
+$$
+\begin{aligned}
+E(y^*|x) &= x\beta \\
+\frac{\partial E(y^*|x)}{\partial x } &= \beta_x
+\end{aligned}
+$$
+
+- The same applies if model was censored.
+
+## $P(y>0|x)$ 
+
+- Its an alternative approach to Probit models, where you are interest in analyzing why is data Not censored, or why is it above some threshold. (why people work)
+
+- Extensive margin effect.
+$$
+\begin{aligned}
+P(y>0|x) &= \Phi\left(\frac{x\beta}{\sigma}\right) \\
+\frac{\partial P(y>0|x)}{\partial x } &= \frac{\beta_x}{\sigma} \phi\left(\frac{x\beta}{\sigma}\right)
+\end{aligned}
+$$
+
+Note: Coefficients $\beta$ need to be Standardized.
+
+## $E(y|y>0,x)$ 
+
+- If corner solution, one may be interested in the effect of those with positive outcomes only. 
+
+- This is the intensive margin effect.
+$$
+\begin{aligned}
+E(y|y>0,x) &= x\beta + \sigma \frac{\phi(x\beta / \sigma )}{\Phi(x\beta / \sigma )} \\
+\frac{\partial E(y|y>0,x)}{\partial x } &= \beta_x
+\left[ 1-\frac{\phi(x\beta / \sigma )}{\Phi(x\beta / \sigma )} \left( \frac{x\beta }{\sigma }+ \frac{\phi(x\beta / \sigma )}{\Phi(x\beta / \sigma )}\right) \right]
+\end{aligned}
+$$
+
+## $E(y|x)$ 
+
+- In this case, one may be interested in estimating the expected effect on everyone.
+- Combines both Intensive and extensive margin effects. Comparable to OLS.
+
+$$
+\begin{aligned}
+E(y|x) &= p(y>0|x)*E(y|y>0,x) + (1-p(y>0|x))*0 \\
+\frac{\partial E(y|x)}{\partial x } &= \beta_x \Phi(x\beta)
+\end{aligned}
+$$
+
+:::
+
+## Example {.scrollable}
+
+```{stata}
+frause mroz, clear
+qui:tobit hours nwifeinc educ c.exper##c.exper   age kidslt6 kidsge6 , ll(0)
+qui:emargins, dydx(*) estore(m1)
+qui:emargins, dydx(*) predict(p(0,.)) estore(m2)
+qui:emargins, dydx(*) predict(e(0,.)) estore(m3)
+qui:emargins, dydx(*) predict(ystar(0,.)) estore(m4)
+esttab m1 m2 m3 m4, mtitle(Latent P(y>0) E(y|y>0) E(y) ) b(3) se
+```
+
+## Tobit has problems too
+
+> That simple equation, too much aggregation  
+>    Hayek (in [Fear the Boom and Bust](https://www.youtube.com/watch?v=d0nERTFo-Sk))
+
+- Tobit, when addressing corner solutions, aims to explain two different actions (Engagement and intensity) with the same model. However, this may not be appropriate all the time.
+  - HW-Examples?
+- When this happens, other models may be more appropritate like
+  - two part model: (literally model using two equations)
+  - Hurdle Model (`craggit` or `churdle`)
+- Also...Normality...
+
+## Censored Regression {.scrollable}
+
+- Applies to the same cases as Tobit model. But, it usually refers to Censoring at other points of the distribution (upper censoring? mixed censoring?) 
+- Furthermore, applies to cases with different censoring thresholds!
+  - Typical Example, Unemployment duration
+
+```{stata}
+qui:frause recid, clear
+gen lldur = ldurat             // Lower Limit
+gen uudur = ldurat if cens==0  // upper limit = . if censored.
+intreg lldur uudur workprg priors tserved felon alcohol drugs black married educ age
+```
+
+## Truncated {.scrollable}
+
+- If Data is simply not there, as shown before, one needs to adjust Estimates.
+- marginal effects decisions are similar to Tobit
+
+```{stata}
+*| code-fold: false
+frause mroz, clear
+qui:truncreg hours nwifeinc educ c.exper##c.exper   age kidslt6 kidsge6 , ll(0)
+emargins, dydx(*) estore(m1b)
+emargins, dydx(*) predict(e(0,.)) estore(m2b)
+esttab m1 m1b m3 m2b, mtitle(Lat-Tobit Lat-Trunc E(y>0)-Tobit E(y>0)-Trunc ) b(3) se
+```
+
+# Break?
+
+## Poisson
+
+- Some times, Data may be non-negative, and/or countable. OLS works well, but we could do better
+
+- With Count data, some data transformations (logs) are not possible, because of the zeroes. 
+
+- So instead of assuming $y|x \sim N(\mu_x,\sigma)$, one could assume $y|x \sim poisson(\mu_x)$
+
+$$P(y=k,\mu_x) = \frac{\mu_x^k e ^{-\mu_x}}{k!} \text{ with } \mu_x=\exp(x\beta)$$
+
+- For a Poisson:
+  - $E(y|x) = \exp{x\beta}$ and $Var(y|x) = \exp{x\beta}$
+
+- As hinted before, Count data is heteroskedastic. And Poisson assumes some structure to that.
+
+## 
+
+- Also convinient that Poisson models are very easy to interpret! (just like Log-lin models)  
+  After estimation:
+
+$$\frac{\Delta \% E(y|x)}{\Delta x} \simeq \beta_x \times 100 \text{ or } (\exp \beta_x-1)\times 100 $$
+
+- Other points.
+  - The variance imposed in Poisson is very restrictive. This is a problem for Variance estimation!  
+    Solution: use Robust Standard Errors!
+  - Like LRM, poisson is robust to errors when modeling the conditional mean.
+  - Poisson is a very good alternative for continuous data too (if using Robust SE)
+    - Wage models, trade models
+
+## Example{.scrollable}
+
+```{stata}
+*| code-fold: false
+frause crime1, clear
+qui: reg narr86 pcnv avgsen tottime ptime86 qemp86 inc86 black hispan born60
+est sto m1
+qui:poisson narr86 pcnv avgsen tottime ptime86 qemp86 inc86 black hispan born60, robust
+est sto m2
+qui:emargins, dydx(*) estore(m3)
+esttab m1 m2 m3, se b(3) mtitle(LRM Poisson Poisson-mfx) ///
+keep(pcnv ptime86  qemp86 inc86 black hispan) label varwidth(20) wrap
+```
+
+## Other Methods of interest
+
+- MLE opens the door to other methods that may be more approriate to analyze data
+- They may even be able to handle otherwise unsolvable data problems. 
+  - ologit, oprobit: Ordered qualitative variables
+  - mlogit, mprobit: Unordered Qualitative variables
+  - heckman: Endogenous Sample Selection
+  - fractional regression model: When the depvariable is an index
+  - etc etc
+- Worth knowing, but not for the exam!
+
+# Thats all. 
+Next class: Pool and Basic Panel data analysis

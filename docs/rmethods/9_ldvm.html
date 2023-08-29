@@ -388,9 +388,6 @@
       margin-right: 0; 
     }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -411,7 +408,7 @@ Fernando Rios-Avila
 </section>
 <section id="what-do-we-mean-limited" class="slide level2">
 <h2>What do we mean Limited??</h2>
-<div id="29ad14d1" class="cell" data-execution_count="1">
+<div id="921849e0" class="cell" data-execution_count="1">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">clear</span></span>
@@ -568,10 +565,13 @@ p(y=1|x) &amp;= G(\beta_0 + \beta_1 x_1 +\beta_2 D_2 ) \\
 <p><span class="math display">\[L_D = L_1 \times L_2 \times \dots L_N
 \]</span></p>
 <p>Thus we need to find the <span class="math inline">\(\beta's\)</span> that make <span class="math inline">\(L_D\)</span> the largest.</p>
+<p>But because we like sums over products:</p>
+<p><span class="math display">\[LL_D = \sum_{i=1}^N log(L_i)
+\]</span></p>
 </section>
 <section id="section-5" class="slide level2">
 <h2></h2>
-<div id="11dbd454" class="cell" data-execution_count="2">
+<div id="bade0e6f" class="cell" data-execution_count="2">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1"></a>  <span class="kw">clear</span></span>
@@ -601,9 +601,615 @@ p(y=1|x) &amp;= G(\beta_0 + \beta_1 x_1 +\beta_2 D_2 ) \\
 <section id="testing" class="slide level2">
 <h2>Testing?</h2>
 <ul>
-<li>You have two options…</li>
-<li>And two sets of parameters</li>
+<li><p>You can test two things:</p>
+<ul>
+<li>Test coefficients (<span class="math inline">\(\beta\)</span>)</li>
+<li>Test marginal effects (<span class="math inline">\(G'(x\beta)\beta\)</span>)</li>
+</ul></li>
+<li><p>Both test will most likely agree with each other, but some contradictions may arise. ### How?</p></li>
+<li><p>z-test and/or Wald test: Similar to t-test and Joint F-test we cover before. But, we now make the assumption of normality (not t-distribution)</p></li>
+<li><p>Log-Likelihood test. Similar to F-test for restricted and unrestricted model:</p>
+<ul>
+<li>Estimate both Restricted and unrestricted model. And obtain their Log Likelihoods (<span class="math inline">\(\mathcal{L}_ur\)</span>) and (<span class="math inline">\(\mathcal{L}_r\)</span>).</li>
 </ul>
+<p><span class="math display">\[LR = 2 (\mathcal{L}_ur-\mathcal{L}_r) \overset{a}\sim \chi^2_q\]</span></p></li>
+</ul>
+</section>
+<section id="stata---example" class="slide level2 scrollable">
+<h2>Stata - Example</h2>
+<div id="44b3e149" class="cell larger" data-execution_count="4">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1"></a>frause mroz, <span class="kw">clear</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>* LPM with Robust Standard errors</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">qui</span>:<span class="kw">reg</span> inlf nwifeinc educ exper expersq age kidslt6 kidsge6, <span class="kw">robust</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">est</span> sto m1</span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="kw">qui</span>:<span class="kw">logit</span> inlf nwifeinc educ exper expersq age kidslt6 kidsge6, </span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="kw">est</span> sto m2a</span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="kw">qui</span>:margins, <span class="kw">dydx</span>(*) <span class="kw">post</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="kw">est</span> sto m2b</span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="kw">probit</span> inlf nwifeinc educ exper expersq age kidslt6 kidsge6, </span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="kw">est</span> sto m3a</span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="kw">qui</span>:margins, <span class="kw">dydx</span>(*) <span class="kw">post</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="kw">est</span> sto m3b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Iteration 0:   log likelihood =  -514.8732  
+Iteration 1:   log likelihood = -402.06651  
+Iteration 2:   log likelihood = -401.30273  
+Iteration 3:   log likelihood = -401.30219  
+Iteration 4:   log likelihood = -401.30219  
+
+Probit regression                                       Number of obs =    753
+                                                        LR chi2(7)    = 227.14
+                                                        Prob &gt; chi2   = 0.0000
+Log likelihood = -401.30219                             Pseudo R2     = 0.2206
+
+------------------------------------------------------------------------------
+        inlf | Coefficient  Std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+    nwifeinc |  -.0120237   .0048398    -2.48   0.013    -.0215096   -.0025378
+        educ |   .1309047   .0252542     5.18   0.000     .0814074     .180402
+       exper |   .1233476   .0187164     6.59   0.000     .0866641    .1600311
+     expersq |  -.0018871      .0006    -3.15   0.002     -.003063   -.0007111
+         age |  -.0528527   .0084772    -6.23   0.000    -.0694678   -.0362376
+     kidslt6 |  -.8683285   .1185223    -7.33   0.000    -1.100628    -.636029
+     kidsge6 |    .036005   .0434768     0.83   0.408     -.049208    .1212179
+       _cons |   .2700768    .508593     0.53   0.595    -.7267473    1.266901
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<div id="f41acd4e" class="cell" data-execution_count="5">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">set</span> <span class="dv">linesize</span> 255</span>
+<span id="cb6-2"><a href="#cb6-2"></a>*| classes: larger</span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">display</span> <span class="st">"Prob Models"</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>esttab m1 m2a m2b m3a m3b, <span class="fu">scalar</span>(r2 ll) cell(b(fmt(%5.3f)) <span class="co">///</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>se(par([ ])) <span class="kw">p</span>( par(( )) ) )  gap  mtitle(LPM Logit Logit-<span class="kw">mfx</span> Probit Probit-<span class="kw">mfx</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Prob Models
+
+-----------------------------------------------------------------------------
+                      (1)          (2)          (3)          (4)          (5)
+                      LPM        Logit    Logit-mfx       Probit   Probit-mfx
+                   b/se/p       b/se/p       b/se/p       b/se/p       b/se/p
+-----------------------------------------------------------------------------
+main                                                                         
+nwifeinc           -0.003       -0.021       -0.004       -0.012       -0.004
+                  [0.002]      [0.008]      [0.001]      [0.005]      [0.001]
+                  (0.026)      (0.011)      (0.010)      (0.013)      (0.012)
+
+educ                0.038        0.221        0.039        0.131        0.039
+                  [0.007]      [0.043]      [0.007]      [0.025]      [0.007]
+                  (0.000)      (0.000)      (0.000)      (0.000)      (0.000)
+
+exper               0.039        0.206        0.037        0.123        0.037
+                  [0.006]      [0.032]      [0.005]      [0.019]      [0.005]
+                  (0.000)      (0.000)      (0.000)      (0.000)      (0.000)
+
+expersq            -0.001       -0.003       -0.001       -0.002       -0.001
+                  [0.000]      [0.001]      [0.000]      [0.001]      [0.000]
+                  (0.002)      (0.002)      (0.001)      (0.002)      (0.001)
+
+age                -0.016       -0.088       -0.016       -0.053       -0.016
+                  [0.002]      [0.015]      [0.002]      [0.008]      [0.002]
+                  (0.000)      (0.000)      (0.000)      (0.000)      (0.000)
+
+kidslt6            -0.262       -1.443       -0.258       -0.868       -0.261
+                  [0.032]      [0.204]      [0.032]      [0.119]      [0.032]
+                  (0.000)      (0.000)      (0.000)      (0.000)      (0.000)
+
+kidsge6             0.013        0.060        0.011        0.036        0.011
+                  [0.014]      [0.075]      [0.013]      [0.043]      [0.013]
+                  (0.337)      (0.422)      (0.421)      (0.408)      (0.407)
+
+_cons               0.586        0.425                     0.270             
+                  [0.152]      [0.860]                   [0.509]             
+                  (0.000)      (0.621)                   (0.595)             
+-----------------------------------------------------------------------------
+N                     753          753          753          753          753
+r2                  0.264                                                    
+ll                 -423.9       -401.8                    -401.3             
+-----------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<div id="68dd41d2" class="cell larger" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">display</span> <span class="st">"LR test"</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">qui</span>:<span class="kw">probit</span> inlf nwifeinc educ exper expersq age kidslt6 kidsge6 motheduc fatheduc, </span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="kw">est</span> sto unrestricted</span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="kw">qui</span>:<span class="kw">probit</span> inlf nwifeinc educ exper expersq age kidslt6 kidsge6 , </span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="kw">est</span> sto restricted</span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="kw">lrtest</span> unrestricted restricted</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>LR test
+
+Likelihood-ratio test
+Assumption: restricted nested within unrestricted
+
+ LR chi2(2) =   0.29
+Prob &gt; chi2 = 0.8668</code></pre>
+</div>
+</div>
+</section>
+<section>
+<section id="break-5-mins" class="title-slide slide level1 center">
+<h1>Break? (5 mins!)</h1>
+
+</section>
+<section id="censored-and-truncated-data" class="slide level2">
+<h2>Censored and Truncated Data</h2>
+<ul>
+<li>Logits and Probits, are not the only models that require MLE for estimation.
+<ul>
+<li>Among Discrete data models, you also have ologit/oprobit for ordered responses. mlogit/mprobit for unordered ones. Extends on logit/probit.</li>
+</ul></li>
+<li>There are other interesting cases:
+<ul>
+<li>When Data is censored.</li>
+<li>When Data is truncated.</li>
+</ul></li>
+</ul>
+</section>
+<section id="three-cases" class="slide level2">
+<h2>Three Cases</h2>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Case 1</a></li><li><a href="#tabset-1-2">Case 2</a></li><li><a href="#tabset-1-3">Case 3</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<ul>
+<li><span class="math inline">\(y\)</span> is “conditionally-normal” and is Fully Observed.</li>
+<li>You can estimate the model using OLS or ML</li>
+</ul>
+<div id="d2ab9034" class="cell" data-execution_count="7">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">qui</span>:{</span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="kw">clear</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="kw">set</span> <span class="kw">obs</span> 999</span>
+<span id="cb10-4"><a href="#cb10-4"></a>  <span class="kw">gen</span> <span class="kw">p</span>   = <span class="dt">_n</span>/(_N+1)</span>
+<span id="cb10-5"><a href="#cb10-5"></a>  <span class="kw">gen</span> fob = <span class="fu">invnormal</span>(<span class="kw">p</span>)</span>
+<span id="cb10-6"><a href="#cb10-6"></a>}</span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="kw">qui</span>:<span class="kw">histogram</span> fob</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="9_ldvm_files/figure-html/cell-8-output-1.png"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2">
+<ul>
+<li>Data is observed for everyone, but is “censored” for some. <code>tobit</code>
+<ul>
+<li>Either corner solution (how many hours you study) or Recoded: <span class="math inline">\(y_{obs} = max(c,y^*)\)</span></li>
+</ul></li>
+</ul>
+<div id="4a6f5f73" class="cell" data-execution_count="8">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">qui</span>: <span class="kw">replace</span> fob = -2 <span class="kw">if</span> fob&lt;-2</span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="kw">qui</span>:<span class="kw">histogram</span> fob, <span class="kw">xlabel</span>(-4 (2) 4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="9_ldvm_files/figure-html/cell-9-output-1.png"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-3">
+<ul>
+<li>Below (or above) some threshold, you do not have information on <span class="math inline">\(y\)</span>. <code>truncreg</code> <span class="math display">\[y_{obs} = y^* \text{ if } y^*&gt;c\]</span></li>
+</ul>
+<div id="66a5e3d7" class="cell" data-execution_count="9">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="9_ldvm_files/figure-html/cell-10-output-1.png"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="estimation-censored-and-corner-solution" class="slide level2">
+<h2>Estimation: Censored and Corner Solution</h2>
+<p>If data is censored or corner solution the estimation strategy is based on:</p>
+<p><span class="math display">\[\begin{aligned}
+L_i &amp;= \frac{1}{\sigma} \phi\left( \frac{y-x\beta}{\sigma} \right) \text{ if } y&gt;c \\
+    &amp;= 1-\Phi\left(\frac{x\beta}{\sigma} \right) \text{ if } y\leq c \\
+\end{aligned}
+\]</span></p>
+<p>If data is truncated, we need to “adjust” the distribution of what is observed</p>
+<p><span class="math display">\[\begin{aligned}
+L_i &amp;= \frac{1}{\Phi\left( x\beta/\sigma \right)} \frac{1}{\sigma} \phi\left( \frac{y-x\beta}{\sigma} \right) \text{ if } y&gt;c \\  
+\end{aligned}
+\]</span></p>
+<p>We will put -truncated regression- on the side for now. But see <a href="https://stats.oarc.ucla.edu/stata/output/truncated-regression/">here</a> for an example.</p>
+</section>
+<section id="interpretation-it-depends" class="slide level2">
+<h2>Interpretation: It depends!</h2>
+<ul>
+<li>What are you interested in analyzing? and what type of data you have?</li>
+</ul>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Latent variable</a></li><li><a href="#tabset-2-2"><span class="math inline">\(P(y&gt;0|x)\)</span></a></li><li><a href="#tabset-2-3"><span class="math inline">\(E(y|y&gt;0,x)\)</span></a></li><li><a href="#tabset-2-4"><span class="math inline">\(E(y|x)\)</span></a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
+<ul>
+<li>Easiest Case. Just need to consider the coefficients (as in LRM)</li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned}
+E(y^*|x) &amp;= x\beta \\
+\frac{\partial E(y^*|x)}{\partial x } &amp;= \beta_x
+\end{aligned}
+\]</span></p>
+<ul>
+<li>The same applies if model was censored.</li>
+</ul>
+</div>
+<div id="tabset-2-2">
+<ul>
+<li><p>Its an alternative approach to Probit models, where you are interest in analyzing why is data Not censored, or why is it above some threshold. (why people work)</p></li>
+<li><p>Extensive margin effect. <span class="math display">\[
+\begin{aligned}
+P(y&gt;0|x) &amp;= \Phi\left(\frac{x\beta}{\sigma}\right) \\
+\frac{\partial P(y&gt;0|x)}{\partial x } &amp;= \frac{\beta_x}{\sigma} \phi\left(\frac{x\beta}{\sigma}\right)
+\end{aligned}
+\]</span></p></li>
+</ul>
+<p>Note: Coefficients <span class="math inline">\(\beta\)</span> need to be Standardized.</p>
+</div>
+<div id="tabset-2-3">
+<ul>
+<li><p>If corner solution, one may be interested in the effect of those with positive outcomes only.</p></li>
+<li><p>This is the intensive margin effect. <span class="math display">\[
+\begin{aligned}
+E(y|y&gt;0,x) &amp;= x\beta + \sigma \frac{\phi(x\beta / \sigma )}{\Phi(x\beta / \sigma )} \\
+\frac{\partial E(y|y&gt;0,x)}{\partial x } &amp;= \beta_x
+\left[ 1-\frac{\phi(x\beta / \sigma )}{\Phi(x\beta / \sigma )} \left( \frac{x\beta }{\sigma }+ \frac{\phi(x\beta / \sigma )}{\Phi(x\beta / \sigma )}\right) \right]
+\end{aligned}
+\]</span></p></li>
+</ul>
+</div>
+<div id="tabset-2-4">
+<ul>
+<li>In this case, one may be interested in estimating the expected effect on everyone.</li>
+<li>Combines both Intensive and extensive margin effects. Comparable to OLS.</li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned}
+E(y|x) &amp;= p(y&gt;0|x)*E(y|y&gt;0,x) + (1-p(y&gt;0|x))*0 \\
+\frac{\partial E(y|x)}{\partial x } &amp;= \beta_x \Phi(x\beta)
+\end{aligned}
+\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="example" class="slide level2 scrollable">
+<h2>Example</h2>
+<div id="1c6ac94c" class="cell" data-execution_count="10">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1"></a>frause mroz, <span class="kw">clear</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="kw">qui</span>:<span class="kw">tobit</span> hours nwifeinc educ c.exper##c.exper   age kidslt6 kidsge6 , ll(0)</span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="kw">qui</span>:emargins, <span class="kw">dydx</span>(*) estore(m1)</span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="kw">qui</span>:emargins, <span class="kw">dydx</span>(*) <span class="kw">predict</span>(<span class="kw">p</span>(0,.)) estore(m2)</span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="kw">qui</span>:emargins, <span class="kw">dydx</span>(*) <span class="kw">predict</span>(<span class="fu">e</span>(0,.)) estore(m3)</span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="kw">qui</span>:emargins, <span class="kw">dydx</span>(*) <span class="kw">predict</span>(ystar(0,.)) estore(m4)</span>
+<span id="cb12-7"><a href="#cb12-7"></a>esttab m1 m2 m3 m4, mtitle(Latent P(<span class="fu">y</span>&gt;0) E(<span class="fu">y</span>|<span class="fu">y</span>&gt;0) E(<span class="fu">y</span>) ) b(3) se</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+----------------------------------------------------------------------------
+                      (1)             (2)             (3)             (4)   
+                   Latent          P(y&gt;0)        E(y|y&gt;0)            E(y)   
+----------------------------------------------------------------------------
+nwifeinc           -8.814*         -0.002*         -3.969*         -5.189*  
+                  (4.459)         (0.001)         (2.008)         (2.621)   
+
+educ               80.645***        0.022***       36.312***       47.473***
+                 (21.583)         (0.006)         (9.703)        (12.621)   
+
+exper              91.929***        0.026***       37.593***       48.793***
+                  (7.997)         (0.002)         (2.966)         (3.587)   
+
+age               -54.405***       -0.015***      -24.497***      -32.026***
+                  (7.418)         (0.002)         (3.362)         (4.292)   
+
+kidslt6          -894.020***       -0.246***     -402.551***     -526.278***
+                (111.878)         (0.028)        (50.749)        (64.706)   
+
+kidsge6           -16.218          -0.004          -7.303          -9.547   
+                 (38.641)         (0.011)        (17.404)        (22.752)   
+----------------------------------------------------------------------------
+N                     753             753             753             753   
+----------------------------------------------------------------------------
+Standard errors in parentheses
+* p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001</code></pre>
+</div>
+</div>
+</section>
+<section id="tobit-has-problems-too" class="slide level2">
+<h2>Tobit has problems too</h2>
+<blockquote>
+<p>That simple equation, too much aggregation<br>
+Hayek (in <a href="https://www.youtube.com/watch?v=d0nERTFo-Sk">Fear the Boom and Bust</a>)</p>
+</blockquote>
+<ul>
+<li>Tobit, when addressing corner solutions, aims to explain two different actions (Engagement and intensity) with the same model. However, this may not be appropriate all the time.
+<ul>
+<li>HW-Examples?</li>
+</ul></li>
+<li>When this happens, other models may be more appropritate like
+<ul>
+<li>two part model: (literally model using two equations)</li>
+<li>Hurdle Model (<code>craggit</code> or <code>churdle</code>)</li>
+</ul></li>
+<li>Also…Normality…</li>
+</ul>
+</section>
+<section id="censored-regression" class="slide level2 scrollable">
+<h2>Censored Regression</h2>
+<ul>
+<li>Applies to the same cases as Tobit model. But, it usually refers to Censoring at other points of the distribution (upper censoring? mixed censoring?)</li>
+<li>Furthermore, applies to cases with different censoring thresholds!
+<ul>
+<li>Typical Example, Unemployment duration</li>
+</ul></li>
+</ul>
+<div id="bda3b803" class="cell" data-execution_count="11">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">qui</span>:frause recid, <span class="kw">clear</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="kw">gen</span> lldur = ldurat             <span class="co">// Lower Limit</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="kw">gen</span> uudur = ldurat <span class="kw">if</span> cens==0  <span class="co">// upper limit = . if censored.</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="kw">intreg</span> lldur uudur workprg priors tserved felon alcohol drugs <span class="bn">black</span> married educ age</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>(893 missing values generated)
+
+Fitting constant-only model:
+
+Iteration 0:   log likelihood = -2188.8689  
+Iteration 1:   log likelihood = -1732.7406  
+Iteration 2:   log likelihood = -1680.7927  
+Iteration 3:   log likelihood =  -1680.427  
+Iteration 4:   log likelihood =  -1680.427  
+
+Fitting full model:
+
+Iteration 0:   log likelihood = -2116.9831  
+Iteration 1:   log likelihood = -1639.9495  
+Iteration 2:   log likelihood =  -1597.634  
+Iteration 3:   log likelihood = -1597.0592  
+Iteration 4:   log likelihood =  -1597.059  
+Iteration 5:   log likelihood =  -1597.059  
+
+Interval regression                                 Number of obs     =  1,445
+                                                           Uncensored =    552
+                                                        Left-censored =      0
+                                                       Right-censored =    893
+                                                       Interval-cens. =      0
+
+                                                    LR chi2(10)       = 166.74
+Log likelihood = -1597.059                          Prob &gt; chi2       = 0.0000
+
+------------------------------------------------------------------------------
+             | Coefficient  Std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     workprg |  -.0625715   .1200369    -0.52   0.602    -.2978396    .1726965
+      priors |  -.1372529   .0214587    -6.40   0.000    -.1793111   -.0951947
+     tserved |  -.0193305   .0029779    -6.49   0.000    -.0251672   -.0134939
+       felon |   .4439947   .1450865     3.06   0.002     .1596303     .728359
+     alcohol |  -.6349092   .1442166    -4.40   0.000    -.9175686   -.3522499
+       drugs |  -.2981602   .1327356    -2.25   0.025    -.5583171   -.0380033
+       black |  -.5427179   .1174428    -4.62   0.000    -.7729014   -.3125343
+     married |   .3406837   .1398431     2.44   0.015     .0665964    .6147711
+        educ |   .0229196   .0253974     0.90   0.367    -.0268584    .0726975
+         age |   .0039103   .0006062     6.45   0.000     .0027221    .0050984
+       _cons |   4.099386    .347535    11.80   0.000      3.41823    4.780542
+-------------+----------------------------------------------------------------
+    /lnsigma |   .5935864   .0344122    17.25   0.000     .5261398     .661033
+-------------+----------------------------------------------------------------
+       sigma |    1.81047   .0623022                      1.692387    1.936792
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="truncated" class="slide level2 scrollable">
+<h2>Truncated</h2>
+<ul>
+<li>If Data is simply not there, as shown before, one needs to adjust Estimates.</li>
+<li>marginal effects decisions are similar to Tobit</li>
+</ul>
+<div id="8a444cf7" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a href="#cb16-1"></a>frause mroz, <span class="kw">clear</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="kw">qui</span>:<span class="kw">truncreg</span> hours nwifeinc educ c.exper##c.exper   age kidslt6 kidsge6 , ll(0)</span>
+<span id="cb16-3"><a href="#cb16-3"></a>emargins, <span class="kw">dydx</span>(*) estore(m1b)</span>
+<span id="cb16-4"><a href="#cb16-4"></a>emargins, <span class="kw">dydx</span>(*) <span class="kw">predict</span>(<span class="fu">e</span>(0,.)) estore(m2b)</span>
+<span id="cb16-5"><a href="#cb16-5"></a>esttab m1 m1b m3 m2b, mtitle(Lat-Tobit Lat-Trunc E(<span class="fu">y</span>&gt;0)-Tobit E(<span class="fu">y</span>&gt;0)-Trunc ) b(3) se</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Average marginal effects                                   Number of obs = 428
+Model VCE: OIM
+
+Expression: Linear prediction, predict()
+dy/dx wrt:  nwifeinc educ exper age kidslt6 kidsge6
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |      dy/dx   std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+    nwifeinc |   .1534399   5.164279     0.03   0.976    -9.968361    10.27524
+        educ |  -29.85254   22.83935    -1.31   0.191    -74.61684    14.91176
+       exper |   48.00824   8.578316     5.60   0.000     31.19504    64.82143
+         age |  -27.44381   8.293458    -3.31   0.001    -43.69869   -11.18893
+     kidslt6 |  -484.7109   153.7881    -3.15   0.002      -786.13   -183.2918
+     kidsge6 |  -102.6574   43.54347    -2.36   0.018    -188.0011   -17.31379
+------------------------------------------------------------------------------
+
+Average marginal effects                                   Number of obs = 428
+Model VCE: OIM
+
+Expression: E(hours|hours&gt;0), predict(e(0,.))
+dy/dx wrt:  nwifeinc educ exper age kidslt6 kidsge6
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |      dy/dx   std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+    nwifeinc |   .1094149   3.682546     0.03   0.976    -7.108243    7.327072
+        educ |  -21.28723   16.25065    -1.31   0.190    -53.13793    10.56346
+       exper |   32.66986   5.277772     6.19   0.000     22.32562    43.01411
+         age |  -19.56962   5.823226    -3.36   0.001    -30.98293   -8.156303
+     kidslt6 |  -345.6374   107.9599    -3.20   0.001    -557.2349   -134.0399
+     kidsge6 |  -73.20291   30.80594    -2.38   0.017    -133.5814   -12.82438
+------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------
+                      (1)             (2)             (3)             (4)   
+                Lat-Tobit       Lat-Trunc    E(y&gt;0)-Tobit    E(y&gt;0)-Trunc   
+----------------------------------------------------------------------------
+nwifeinc           -8.814*          0.153          -3.969*          0.109   
+                  (4.459)         (5.164)         (2.008)         (3.683)   
+
+educ               80.645***      -29.853          36.312***      -21.287   
+                 (21.583)        (22.839)         (9.703)        (16.251)   
+
+exper              91.929***       48.008***       37.593***       32.670***
+                  (7.997)         (8.578)         (2.966)         (5.278)   
+
+age               -54.405***      -27.444***      -24.497***      -19.570***
+                  (7.418)         (8.293)         (3.362)         (5.823)   
+
+kidslt6          -894.020***     -484.711**      -402.551***     -345.637** 
+                (111.878)       (153.788)        (50.749)       (107.960)   
+
+kidsge6           -16.218        -102.657*         -7.303         -73.203*  
+                 (38.641)        (43.543)        (17.404)        (30.806)   
+----------------------------------------------------------------------------
+N                     753             428             753             428   
+----------------------------------------------------------------------------
+Standard errors in parentheses
+* p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001</code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="break" class="title-slide slide level1 center">
+<h1>Break?</h1>
+
+</section>
+<section id="poisson" class="slide level2">
+<h2>Poisson</h2>
+<ul>
+<li><p>Some times, Data may be non-negative, and/or countable. OLS works well, but we could do better</p></li>
+<li><p>With Count data, some data transformations (logs) are not possible, because of the zeroes.</p></li>
+<li><p>So instead of assuming <span class="math inline">\(y|x \sim N(\mu_x,\sigma)\)</span>, one could assume <span class="math inline">\(y|x \sim poisson(\mu_x)\)</span></p></li>
+</ul>
+<p><span class="math display">\[P(y=k,\mu_x) = \frac{\mu_x^k e ^{-\mu_x}}{k!} \text{ with } \mu_x=\exp(x\beta)\]</span></p>
+<ul>
+<li>For a Poisson:
+<ul>
+<li><span class="math inline">\(E(y|x) = \exp{x\beta}\)</span> and <span class="math inline">\(Var(y|x) = \exp{x\beta}\)</span></li>
+</ul></li>
+<li>As hinted before, Count data is heteroskedastic. And Poisson assumes some structure to that.</li>
+</ul>
+</section>
+<section id="section-6" class="slide level2">
+<h2></h2>
+<ul>
+<li>Also convinient that Poisson models are very easy to interpret! (just like Log-lin models)<br>
+After estimation:</li>
+</ul>
+<p><span class="math display">\[\frac{\Delta \% E(y|x)}{\Delta x} \simeq \beta_x \times 100 \text{ or } (\exp \beta_x-1)\times 100 \]</span></p>
+<ul>
+<li>Other points.
+<ul>
+<li>The variance imposed in Poisson is very restrictive. This is a problem for Variance estimation!<br>
+Solution: use Robust Standard Errors!</li>
+<li>Like LRM, poisson is robust to errors when modeling the conditional mean.</li>
+<li>Poisson is a very good alternative for continuous data too (if using Robust SE)
+<ul>
+<li>Wage models, trade models</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="example-1" class="slide level2 scrollable">
+<h2>Example</h2>
+<div id="b520c4c3" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a href="#cb18-1"></a>frause crime1, <span class="kw">clear</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="kw">qui</span>: <span class="kw">reg</span> narr86 pcnv avgsen tottime ptime86 qemp86 inc86 <span class="bn">black</span> hispan born60</span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="kw">est</span> sto m1</span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="kw">qui</span>:<span class="kw">poisson</span> narr86 pcnv avgsen tottime ptime86 qemp86 inc86 <span class="bn">black</span> hispan born60, <span class="kw">robust</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="kw">est</span> sto m2</span>
+<span id="cb18-6"><a href="#cb18-6"></a><span class="kw">qui</span>:emargins, <span class="kw">dydx</span>(*) estore(m3)</span>
+<span id="cb18-7"><a href="#cb18-7"></a>esttab m1 m2 m3, se b(3) mtitle(LRM Poisson Poisson-<span class="kw">mfx</span>) <span class="co">///</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a><span class="kw">keep</span>(pcnv ptime86  qemp86 inc86 <span class="bn">black</span> hispan) <span class="kw">label</span> varwidth(20) wrap</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+--------------------------------------------------------------------
+                              (1)             (2)             (3)   
+                              LRM         Poisson     Poisson-mfx   
+--------------------------------------------------------------------
+main                                                                
+proportion of prior        -0.132**        -0.402***       -0.162***
+convictions               (0.040)         (0.101)         (0.040)   
+
+mos. in prison             -0.041***       -0.099***       -0.040***
+during 1986               (0.009)         (0.022)         (0.009)   
+
+# quarters employed,       -0.051***       -0.038          -0.015   
+1986                      (0.014)         (0.034)         (0.014)   
+
+legal income, 1986,        -0.001***       -0.008***       -0.003***
+$100s                     (0.000)         (0.001)         (0.001)   
+
+=1 if black                 0.327***        0.661***        0.267***
+                          (0.045)         (0.099)         (0.042)   
+
+=1 if Hispanic              0.194***        0.500***        0.202***
+                          (0.040)         (0.092)         (0.038)   
+--------------------------------------------------------------------
+Observations                 2725            2725            2725   
+--------------------------------------------------------------------
+Standard errors in parentheses
+* p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001</code></pre>
+</div>
+</div>
+</section>
+<section id="other-methods-of-interest" class="slide level2">
+<h2>Other Methods of interest</h2>
+<ul>
+<li>MLE opens the door to other methods that may be more approriate to analyze data</li>
+<li>They may even be able to handle otherwise unsolvable data problems.
+<ul>
+<li>ologit, oprobit: Ordered qualitative variables</li>
+<li>mlogit, mprobit: Unordered Qualitative variables</li>
+<li>heckman: Endogenous Sample Selection</li>
+<li>fractional regression model: When the depvariable is an index</li>
+<li>etc etc</li>
+</ul></li>
+<li>Worth knowing, but not for the exam!</li>
+</ul>
+</section></section>
+<section id="thats-all." class="title-slide slide level1 center">
+<h1>Thats all.</h1>
+<p>Next class: Pool and Basic Panel data analysis</p>
 
 <div class="footer footer-default">
 
