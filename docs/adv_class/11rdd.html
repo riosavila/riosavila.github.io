@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.313">
+  <meta name="generator" content="quarto-1.4.251">
 
   <meta name="author" content="Fernando Rios-Avila">
   <title>Econometrics MSC Levy - Regression Discontinuity Design</title>
@@ -95,7 +95,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css" id="theme">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="styles.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -222,7 +222,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -653,7 +654,7 @@ E(y(1)|Z=c) &amp;-E(y(0)|Z=c)
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="resources/frdd1.png"></p>
-<p></p><figcaption>Treatment</figcaption><p></p>
+<figcaption>Treatment</figcaption>
 </figure>
 </div>
 </div>
@@ -661,7 +662,7 @@ E(y(1)|Z=c) &amp;-E(y(0)|Z=c)
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="resources/frdd2.png"></p>
-<p></p><figcaption>Outcome</figcaption><p></p>
+<figcaption>Outcome</figcaption>
 </figure>
 </div>
 </div>
@@ -924,7 +925,6 @@ t statistics in parentheses
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -1185,10 +1185,9 @@ t statistics in parentheses
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn) {
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -1198,8 +1197,17 @@ t statistics in parentheses
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
