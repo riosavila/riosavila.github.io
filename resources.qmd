@@ -10,7 +10,7 @@ to learn what they do, and how they work, it may not be a feasible practice in
 most real-world work, unless you decide to follow that path (Econometrics/applied Econometrics).
 
 For this purpose, the main software we will use in this class (as evidence from all the code 
-shared in the slides) its `Stata'. A self contained program that is yet flexible enough to add custom 
+shared in the slides) its `Stata`. A self contained program that is yet flexible enough to add custom 
 add on programs/commands. 
 
 Nevertheless, if you are new to `Stata`, there are quite few resources you may want to look into
