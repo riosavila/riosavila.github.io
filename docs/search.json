@@ -5052,5 +5052,19 @@
     "title": "Research Methods: Econometrics I",
     "section": "Part IV: Time Series",
     "text": "Part IV: Time Series\n\n11. Chapter 10 - 11\nBasics of Regression analysis with TSD\n\n\n12. Chapter 12 & 18\nAdvanced TSD Problems\n\n\nFinal TBD"
+  },
+  {
+    "objectID": "rmethods/homework_1.html",
+    "href": "rmethods/homework_1.html",
+    "title": "Homework 1",
+    "section": "",
+    "text": "Read Chapter 2 of -The Effect- by Nick Hungtington-Klein. here\nWrite a small research proposal that will answer answer the following:\n\nResearch question,\nIdentify your main dependent variable, and the variable(s) you want to analyze the causal effect of.\nDescribe relevant factors that may need to be considered for the analysis (Economic model).\nDescribe how those factors may relate to the outcome, and your variable(s) of interest.\nDescribe an ideal Experiment you may run to identify the effect. Is it a feasible experiment?\nIs there any data you could use to answer this question?"
+  },
+  {
+    "objectID": "rmethods/homework_1.html#note",
+    "href": "rmethods/homework_1.html#note",
+    "title": "Homework 1",
+    "section": "Note",
+    "text": "Note\nSearch among all datasets available in frause, and use the data from these datasets to decide what variables to analyze, and controls to use in your homework.\nExamples in the textbook can be useful as guides to consider here.\nYou are free to explore other sources. If so, include the data along with your homework.\nParticularly unique answers (based on completeness, detail, novelty) may receive extra points."
   }
 ]

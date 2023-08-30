@@ -1,0 +1,46 @@
+---
+title: "Homework 2"
+author: Fernando Rios-Avila
+format: 
+  html: 
+    code-fold: true
+    echo: true
+    css: styles.css 
+---
+
+
+### Part 1: Scaling, interactions, and and qualitative information
+
+Consider the Model specification you worked on in HW1.
+
+- Are there any variables you will change their Scale for better interpretation? Explain
+ 
+- Re-estimate your model, standardizing all your variables (including the dependent variable), and re-estimate the model. 
+  - To verify your transformation is correct, also use the option `beta` in `regress`.
+  - Include a summary statistics to table to help with interpretation.
+  - Are there any additional insights you learn with this model, compared to the un-scaled model?
+ 
+- Were there any qualitivative variables you used in your previous model? (dummies or other qualitative variables)
+  - If not, consider one of your continuous variables and discretize it with the following code:
+
+```stata
+** Assume var1 is the variable to be "discretized"
+qui:sum var1,d
+gen     dvar1 = 1 if var1<`r(p25)' & var1!=.
+replace dvar1 = 2 if inrange(var1,`r(p25)', `r(p75)') & var1!=.
+replace dvar1 = 3 if var1> `r(p75)' & var1!=.
+```
+- Re-estimate the model, and interpret the discrete variable (or the newly created one). 
+- Interact the one of your continuous variables with the discrete one. And interpret the results. Are the slopes across different groups the same? are they different? Can you explain why could they be different?
+  
+- Are there any two variables in your model that you think could affect how each-other influences the outcome?  
+  - Re-estimate the model, and interpret the results. How do average marginal effects compared to your baseline model? What can you say about the interaction?
+
+### Part 2: Heteroskedasticity
+
+- Based on your prefered model specification (state which one this is), discuss if you think your model could have heteroskedasticity.
+
+- Using at least two approaches, explore if your model shows any signs of heteroskedasticity.
+
+
+

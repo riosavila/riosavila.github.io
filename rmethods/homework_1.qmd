@@ -1,0 +1,59 @@
+---
+title: "Homework 1"
+author: Fernando Rios-Avila
+format: 
+  html: 
+    code-fold: true
+    echo: true
+    css: styles.css 
+---
+
+
+### Part 1: Research Question (30pts)
+
+Read Chapter 2 of -The Effect- by Nick Hungtington-Klein. [here](https://theeffectbook.net/ch-ResearchQuestions.html)
+
+Write a small research proposal that will answer answer the following:
+
+-   Research question,
+-   Identify your main dependent variable, and the variable(s) you want to analyze the *causal effect* of.
+-   Describe relevant factors that may need to be considered for the analysis (Economic model).
+-   Describe how those factors may relate to the outcome, and your variable(s) of interest.
+-   Describe an ideal *Experiment* you may run to identify the effect. Is it a feasible experiment?
+-   Is there any data you could use to answer this question?
+
+### Part 2: Modeling: Empirical analysis (70pts)
+
+1. Consider one examples described above. 
+   - Based on the data available (whichever dataset you decide to use), write down your model specification, describing what each variable measures.   
+   - Discuss if all the main assumptions of LRM holds in this case. If not, describe why not. Are there variables from your "economic model" cannot be control for? how would this affect the results?
+
+For the rest of the Homework, assume your model-specification is the correct one, and that there is no ommited variable bias.
+
+2. Estimate two models. One using only the main variable(s) of interest as controls, and one using your prefered model specification.
+   - Compare and discuss the results from both the models. How do the results compare? Are the findings as you expected based on *Part 1*? 
+   - Show Empirically that "partialling out" can also be used for estimating the effect of the main variables of interest. 
+
+3. Model-Specification
+   - Consider one of your control variables, but not main variables. What would you expect will happen if that variable is excluded from specification? Explain and show empirically.
+   - Do the same by adding Other (irrelevant) variables in the model. What happens when you do that? Explain
+  
+4. Model Testing 
+   - Propose an hypothesis for a linear combination of 2 (or more) coefficients. 
+   - Propose an hypothesis for 2 separete restrictions (or more). 
+  
+In both cases, state the hypothesis, implement the tests, and interpret. 
+
+The hypothesis do not need to be base on any theory, but if one is provided may gain extra credit.
+
+## Note
+
+Search among all datasets available in `frause`, and use the data from these datasets to decide what variables to analyze, and controls to use in your homework. 
+
+Examples in the textbook can be useful as guides to consider here.
+
+You are free to explore other sources. If so, include the data along with your homework.
+
+Particularly unique answers (based on completeness, detail, novelty) may receive extra points.
+
+

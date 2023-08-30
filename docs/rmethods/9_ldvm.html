@@ -388,6 +388,9 @@
       margin-right: 0; 
     }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -408,7 +411,7 @@ Fernando Rios-Avila
 </section>
 <section id="what-do-we-mean-limited" class="slide level2">
 <h2>What do we mean Limited??</h2>
-<div id="921849e0" class="cell" data-execution_count="1">
+<div id="617d7cc6" class="cell" data-execution_count="1">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">clear</span></span>
@@ -571,7 +574,7 @@ p(y=1|x) &amp;= G(\beta_0 + \beta_1 x_1 +\beta_2 D_2 ) \\
 </section>
 <section id="section-5" class="slide level2">
 <h2></h2>
-<div id="bade0e6f" class="cell" data-execution_count="2">
+<div id="c040d68b" class="cell" data-execution_count="2">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1"></a>  <span class="kw">clear</span></span>
@@ -597,7 +600,7 @@ p(y=1|x) &amp;= G(\beta_0 + \beta_1 x_1 +\beta_2 D_2 ) \\
 </div>
 </div>
 
-<img data-src="9_ldvm_files/figure-html/cell-4-output-1.png" class="r-stretch"></section>
+<img data-src="9_ldvm_files/figure-revealjs/cell-4-output-1.png" class="r-stretch"></section>
 <section id="testing" class="slide level2">
 <h2>Testing?</h2>
 <ul>
@@ -617,7 +620,7 @@ p(y=1|x) &amp;= G(\beta_0 + \beta_1 x_1 +\beta_2 D_2 ) \\
 </section>
 <section id="stata---example" class="slide level2 scrollable">
 <h2>Stata - Example</h2>
-<div id="44b3e149" class="cell larger" data-execution_count="4">
+<div id="247bea5d" class="cell larger" data-execution_count="4">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1"></a>frause mroz, <span class="kw">clear</span></span>
@@ -660,7 +663,7 @@ Log likelihood = -401.30219                             Pseudo R2     = 0.2206
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
-<div id="f41acd4e" class="cell" data-execution_count="5">
+<div id="716c5602" class="cell" data-execution_count="5">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">set</span> <span class="dv">linesize</span> 255</span>
@@ -716,7 +719,7 @@ ll                 -423.9       -401.8                    -401.3
 -----------------------------------------------------------------------------</code></pre>
 </div>
 </div>
-<div id="68dd41d2" class="cell larger" data-execution_count="6">
+<div id="5d04e7c6" class="cell larger" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">display</span> <span class="st">"LR test"</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a><span class="kw">qui</span>:<span class="kw">probit</span> inlf nwifeinc educ exper expersq age kidslt6 kidsge6 motheduc fatheduc, </span>
 <span id="cb8-3"><a href="#cb8-3"></a><span class="kw">est</span> sto unrestricted</span>
@@ -763,7 +766,7 @@ Prob &gt; chi2 = 0.8668</code></pre>
 <li><span class="math inline">\(y\)</span> is “conditionally-normal” and is Fully Observed.</li>
 <li>You can estimate the model using OLS or ML</li>
 </ul>
-<div id="d2ab9034" class="cell" data-execution_count="7">
+<div id="6d7ac9ef" class="cell" data-execution_count="7">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">qui</span>:{</span>
@@ -777,7 +780,7 @@ Prob &gt; chi2 = 0.8668</code></pre>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="9_ldvm_files/figure-html/cell-8-output-1.png"></p>
+<p><img data-src="9_ldvm_files/figure-revealjs/cell-8-output-1.png"></p>
 </figure>
 </div>
 </div>
@@ -790,7 +793,7 @@ Prob &gt; chi2 = 0.8668</code></pre>
 <li>Either corner solution (how many hours you study) or Recoded: <span class="math inline">\(y_{obs} = max(c,y^*)\)</span></li>
 </ul></li>
 </ul>
-<div id="4a6f5f73" class="cell" data-execution_count="8">
+<div id="8d4153e6" class="cell" data-execution_count="8">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">qui</span>: <span class="kw">replace</span> fob = -2 <span class="kw">if</span> fob&lt;-2</span>
@@ -799,7 +802,7 @@ Prob &gt; chi2 = 0.8668</code></pre>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="9_ldvm_files/figure-html/cell-9-output-1.png"></p>
+<p><img data-src="9_ldvm_files/figure-revealjs/cell-9-output-1.png"></p>
 </figure>
 </div>
 </div>
@@ -809,11 +812,11 @@ Prob &gt; chi2 = 0.8668</code></pre>
 <ul>
 <li>Below (or above) some threshold, you do not have information on <span class="math inline">\(y\)</span>. <code>truncreg</code> <span class="math display">\[y_{obs} = y^* \text{ if } y^*&gt;c\]</span></li>
 </ul>
-<div id="66a5e3d7" class="cell" data-execution_count="9">
+<div id="28e0b776" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="9_ldvm_files/figure-html/cell-10-output-1.png"></p>
+<p><img data-src="9_ldvm_files/figure-revealjs/cell-10-output-1.png"></p>
 </figure>
 </div>
 </div>
@@ -900,7 +903,7 @@ E(y|x) &amp;= p(y&gt;0|x)*E(y|y&gt;0,x) + (1-p(y&gt;0|x))*0 \\
 </section>
 <section id="example" class="slide level2 scrollable">
 <h2>Example</h2>
-<div id="1c6ac94c" class="cell" data-execution_count="10">
+<div id="53f5357b" class="cell" data-execution_count="10">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1"></a>frause mroz, <span class="kw">clear</span></span>
@@ -970,7 +973,7 @@ Hayek (in <a href="https://www.youtube.com/watch?v=d0nERTFo-Sk">Fear the Boom an
 <li>Typical Example, Unemployment duration</li>
 </ul></li>
 </ul>
-<div id="bda3b803" class="cell" data-execution_count="11">
+<div id="5e8ada0f" class="cell" data-execution_count="11">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">qui</span>:frause recid, <span class="kw">clear</span></span>
@@ -1035,7 +1038,7 @@ Log likelihood = -1597.059                          Prob &gt; chi2       = 0.000
 <li>If Data is simply not there, as shown before, one needs to adjust Estimates.</li>
 <li>marginal effects decisions are similar to Tobit</li>
 </ul>
-<div id="8a444cf7" class="cell" data-execution_count="12">
+<div id="a5d0dc5d" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a href="#cb16-1"></a>frause mroz, <span class="kw">clear</span></span>
 <span id="cb16-2"><a href="#cb16-2"></a><span class="kw">qui</span>:<span class="kw">truncreg</span> hours nwifeinc educ c.exper##c.exper   age kidslt6 kidsge6 , ll(0)</span>
 <span id="cb16-3"><a href="#cb16-3"></a>emargins, <span class="kw">dydx</span>(*) estore(m1b)</span>
@@ -1151,7 +1154,7 @@ Solution: use Robust Standard Errors!</li>
 </section>
 <section id="example-1" class="slide level2 scrollable">
 <h2>Example</h2>
-<div id="b520c4c3" class="cell" data-execution_count="13">
+<div id="e799eb41" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a href="#cb18-1"></a>frause crime1, <span class="kw">clear</span></span>
 <span id="cb18-2"><a href="#cb18-2"></a><span class="kw">qui</span>: <span class="kw">reg</span> narr86 pcnv avgsen tottime ptime86 qemp86 inc86 <span class="bn">black</span> hispan born60</span>
 <span id="cb18-3"><a href="#cb18-3"></a><span class="kw">est</span> sto m1</span>
