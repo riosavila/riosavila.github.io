@@ -29,7 +29,7 @@ in doing econometric analysis, but no longer have access to Stata. These are R, 
 
 ## `R`, `Julia`, `Python`
 
-These software are free, but usually require add-ons from different sources to estimate specialized models. They also have a step, or rather ***step-er*** (than `Stata`) learning curve. However, it is smart to learn other languages, at least to implement basic analysis. One resource you may find very convinient is the following:
+These software are free, but usually require add-ons from different sources to estimate specialized models. They also have a steep, or rather ***steep-er*** (than `Stata`) learning curve. However, it is smart to learn other languages, at least to implement basic analysis. One resource you may find very convinient is the following:
 
 - R, Python, Julia: <http://www.upfie.net/>
 
