@@ -8,39 +8,61 @@ format:
     css: styles.css 
 ---
 
+### Part 0: Modeling (10pts)
 
-### Part 1: Scaling, interactions, and and qualitative information
+- Similar to HW1, propose a concise research project. Specify the dependent variable of interest, along with control variables.
+- The model specification must include both  continuous and discrete variables in your model.
+- Describe your economic model and its corresponding econometric model, accompanied by a succinct description of your anticipated findings.
 
-Consider the Model specification you worked on in HW1.
+### Part 1: Scaling, Interactions, and Qualitative Information
 
-- Are there any variables you will change their Scale for better interpretation? Explain
+- Estimate your baseline model, and provide a summary statistics table to facilitate interpretation.
+
+- Are there any variables in your models that might require adjustments in scaling to enhance interpretation? Explain.
  
-- Re-estimate your model, standardizing all your variables (including the dependent variable), and re-estimate the model. 
-  - To verify your transformation is correct, also use the option `beta` in `regress`.
-  - Include a summary statistics to table to help with interpretation.
-  - Are there any additional insights you learn with this model, compared to the un-scaled model?
- 
-- Were there any qualitivative variables you used in your previous model? (dummies or other qualitative variables)
-  - If not, consider one of your continuous variables and discretize it with the following code:
+- Reevaluate your model by standardizing all variables, including the dependent variable, and then re-estimate the model. 
+- Validate your results using the `beta` option in the `regress` command.
+- Are there any supplementary insights derived from this model, compared to the unscaled model?
 
-```stata
-** Assume var1 is the variable to be "discretized"
-qui:sum var1,d
-gen     dvar1 = 1 if var1<`r(p25)' & var1!=.
-replace dvar1 = 2 if inrange(var1,`r(p25)', `r(p75)') & var1!=.
-replace dvar1 = 3 if var1> `r(p75)' & var1!=.
-```
-- Re-estimate the model, and interpret the discrete variable (or the newly created one). 
-- Interact the one of your continuous variables with the discrete one. And interpret the results. Are the slopes across different groups the same? are they different? Can you explain why could they be different?
+- Interpret your outcomes. 
+ 
+- Introduce an interaction between one of your continuous variables and one of your discrete variables. Subsequently, provide an interpretation of the outcomes. Are the slopes across different groups different? Can you provide reasoning for potential differences?
   
-- Are there any two variables in your model that you think could affect how each-other influences the outcome?  
-  - Re-estimate the model, and interpret the results. How do average marginal effects compared to your baseline model? What can you say about the interaction?
+- Do you suspect the existence of a mutual influence between any two variables in your model?  (interactions)
+  - Re-estimate the model and interpret the results. How do the average marginal effects compare to your baseline model? What can be inferred about the interaction?
 
 ### Part 2: Heteroskedasticity
 
-- Based on your prefered model specification (state which one this is), discuss if you think your model could have heteroskedasticity.
+- Based on your preferred model specification, discuss on whether your model could potentially exhibit heteroskedasticity.
 
-- Using at least two approaches, explore if your model shows any signs of heteroskedasticity.
+- Investigate any signs of heteroskedasticity within your model. Present a graph and a statistical test to support your evaluation.
 
+- Re-estimate your model using robust standard errors and Weighted Least Squares, even if no heteroskedasticity is found. 
 
+- Interpret your findings. How do they contrast with the baseline model?
 
+### Part 3: Other Model Diagnostics
+
+- With reference to your baseline model specification, discuss the likelihood of your model suffering from misspecification.
+
+- Test your hypothesis by providing supporting tests to validate your assessment.
+
+- In case of model misspecification, re-estimate your model using a different functional form. 
+ 
+- Provide an interpretation of the outcomes, comparing them against the baseline model. 
+
+- One potential problem with linear regressions is their susceptibility to outliers. Use quantile regression to estimate the model and interpret the results. Do you believe this suggests the presence of outlier-related issues in your data?
+
+### Part 4:
+
+- Write a conclusion concerning your research question and your findings. 
+
+## Note
+
+Explore all datasets available in `frause` and utilize the data from these datasets to determine the variables for analysis and the controls to incorporate into your homework. 
+
+The examples within the textbook can serve as valuable guidelines for your considerations here.
+
+You have the freedom to explore other sources. If you do so, please include the data alongside your homework submission.
+
+Exceptionally unique responses (distinguished by their thoroughness, detail, innovation, and presentation) may merit extra points.

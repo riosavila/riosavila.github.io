@@ -14,3 +14,16 @@ format:
     css: styles.css 
     chalkboard: true  
 ---
+
+## Pooling Data together: Cross-section and Panel Data
+
+-   Pooling Repeated Crossection is a common practice in applied research.
+-   N grows. So does power.
+-   It can be used for fun stuff like Chow test.
+
+- Main use: DD vs DDD models. 
+
+- Panel Data: N large T=2
+
+FE vs FD
+

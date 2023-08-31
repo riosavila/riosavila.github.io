@@ -22,7 +22,7 @@ Write a small research proposal that will answer answer the following:
 -   Describe an ideal *Experiment* you may run to identify the effect. Is it a feasible experiment?
 -   Is there any data you could use to answer this question?
 
-### Part 2: Modeling: Empirical analysis (70pts)
+### Part 2: Modeling: Empirical analysis (60pts)
 
 1. Consider one examples described above. 
    - Based on the data available (whichever dataset you decide to use), write down your model specification, describing what each variable measures.   
@@ -45,6 +45,10 @@ For the rest of the Homework, assume your model-specification is the correct one
 In both cases, state the hypothesis, implement the tests, and interpret. 
 
 The hypothesis do not need to be base on any theory, but if one is provided may gain extra credit.
+
+### Part 3:
+
+- Based on your overall results, write a conclusion about your research question and findings. 
 
 ## Note
 
