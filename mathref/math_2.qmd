@@ -1,0 +1,211 @@
+---
+title: "Math Refresher: Basic Linear Algebra"
+format: html
+---
+
+## Vectors
+
+A vector is a list of numbers.  We can think of a vector as a point in space, or as an arrow pointing from the origin to that point.  For example, the vector
+
+$$\vec{v} = \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}$$
+ is a vector in $\mathbb{R}^3$ (three-dimensional space) that points from the origin to the point $(1, 2, 3)$.
+
+We can add vectors together by adding their corresponding elements.  For example, 
+
+$$\begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix} + \begin{bmatrix} 4 \\ 5 \\ 6 \end{bmatrix} = \begin{bmatrix} 5 \\ 7 \\ 9 \end{bmatrix}$$
+
+We can also multiply a vector by a scalar (a single number) by multiplying each element of the vector by that number.  For example, 
+
+$$2 \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix} = \begin{bmatrix} 2 \\ 4 \\ 6 \end{bmatrix}
+$$
+
+## Matrices
+
+A matrix is a two-dimensional array of numbers.  We can think of a matrix as a list of vectors.  For example, the matrix: 
+
+$$A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{bmatrix} =
+\begin{bmatrix} 1 \\ 4  \end{bmatrix},
+\begin{bmatrix} 2 \\ 5  \end{bmatrix},
+\begin{bmatrix} 3 \\ 6  \end{bmatrix} $$
+
+is a matrix that concatenates 3 $\mathbb{R}^2$ vectors together. 
+
+Matrices can have different dimensions.  For example, the matrix:
+
+$$B = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix}$$
+
+is a **square** matrix that concatenates 3 $\mathbb{R}^3$ vectors together.
+
+## Matrix Dimensions
+
+Matrices are often denoted by their dimensions.  For example, the matrix $A$ above is a $2 \times 3$ matrix, because it has 2 rows and 3 columns.  The matrix $B$ above is a $3 \times 3$ matrix, because it has 3 rows and 3 columns.
+
+In general, we can denote a matrix $M$ with $r$ rows and $c$ columns as an $r \times c$ matrix. For Notation, I will usually refer to this like $M_{r \times c}$. In this case we have $A_{2 \times 3}$ and $B_{3 \times 3}$.
+
+We can denote the element in the $i$th row and $j$th column of $M$ as $M_{ij}$.  For example, the element in the 2nd row and 3rd column of $B$ is $B_{23} = 6$.
+
+## Special Matrices
+
+There are a few special matrices that we will use often.  The **zero matrix** is a matrix where all of the elements are 0.  For example, the zero matrix with 2 rows and 3 columns is:
+
+$$Zero=\begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}$$
+
+A **square matrix** is a matrix where the number of rows is equal to the number of columns.  For example, $B$ is a square matrix.
+
+The **identity matrix** is a square matrix where all of the elements are 0, except for the elements along the diagonal, which are 1.  For example, the identity matrix with 3 rows and 3 columns is:
+
+$$I_{3}=\begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}$$
+
+For simplicitly, we will use the subscript to denote the size of the identity matrix.  For example, $I_{3}$ is a 3x3 identity matrix, and $I_{5}$ is a 5x5 identity matrix.
+
+A $1\times c$ matrix is called a **row vector**.  Wheras a $r \times 1$ matrix is called a **column vector**.  
+
+A **diagonal matrix** is a square matrix where all of the elements off the diagonal are 0.  For example, the following matrix is a diagonal matrix:
+
+$$\begin{bmatrix} 1 & 0 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 3 \end{bmatrix}$$
+
+The identify matrix is a special case of a diagonal matrix.
+
+## Matrix Operations
+
+We can add matrices together by adding their corresponding elements.  For example,
+
+$$\begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{bmatrix} + \begin{bmatrix} 7 & 8 & 9 \\ 10 & 11 & 12 \end{bmatrix} = \begin{bmatrix} 8 & 10 & 12 \\ 14 & 16 & 18 \end{bmatrix}$$
+
+However, both matrices must have the same dimensions.  For example, we cannot add the following matrices together:
+
+$$\begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{bmatrix}_{2\times 3} + \begin{bmatrix} 7 & 8 \\ 10 & 11 \end{bmatrix}_{2\times 2}$$
+
+## Matrix Scalar Multiplication
+
+We can multiply a matrix by a scalar by multiplying each element of the matrix by that scalar.  For example,
+
+$$ a \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{bmatrix} = \begin{bmatrix} 2a & 4a & 6a \\ 8a & 10a & 12a \end{bmatrix}$$
+
+## Matrix Multiplication
+
+We can multiple two matrices together by taking the dot product of each row of the first matrix with each column of the second matrix.  For example:
+
+$$\begin{aligned}
+\begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{bmatrix}_{2\times 3} \begin{bmatrix} 7 & 8 \\ 10 & 11 \\ 13 & 14 \end{bmatrix}_{3\times 2} &= \begin{bmatrix} 1*7 + 2*10 + 3*13 & 1*8 + 2*11 + 3*14 \\ 4*7 + 5*10 + 6*13 & 4*8 + 5*11 + 6*14 \end{bmatrix}_{2\times 2} \\
+&= \begin{bmatrix} 66 & 82 \\ 156 & 199 \end{bmatrix}
+\end{aligned}
+$$
+
+A good way of remembering this is to follow the flow:  $\rightarrow  \times \downarrow$.
+
+Note that the number of columns in the first matrix must be equal to the number of rows in the second matrix.  For example, we cannot multiply the following matrices together:
+
+$$\begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{pmatrix}_{2\times 3} \begin{pmatrix} 7 & 8 \\ 10 & 11 \end{pmatrix}_{2\times 2}$$
+
+In general, given two matrixes $A_{a\times b}$ and $B_{c\times d}$, we can multiply them together if and only if $b=c$.  The resulting matrix will be $AB_{a\times d}$.
+
+Some properties of matrix multiplication:
+
+* Matrix multiplication is **not commutative**.  That is, $AB \neq BA$ in general.
+* Matrix multiplication is **associative**.  That is, $A(BC) = (AB)C$.
+* Any matrix multiplied by $I$ is equal to itself.  That is, $AI = IA = A$.
+
+## Transpose
+
+The transpose of a matrix is a matrix where the rows and columns are swapped.  For example, if the matrix $A$ is defined as:
+
+$$A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{bmatrix}$$
+
+then the transpose of $A$, denoted $A^T$, is:
+
+$$A^T = \begin{bmatrix} 1 & 4 \\ 2 & 5 \\ 3 & 6 \end{bmatrix}$$
+
+Note that if $A_{a\times b}$, then $A^T_{b\times a}$.
+
+Some properties of the transpose:
+
+* $(A^T)^T = A$
+* $(AB)^T = B^TA^T$
+* $(A+B)^T = A^T + B^T$
+* $(aA)^T = aA^T$
+* $(A^T)^{-1} = (A^{-1})^T$
+
+## Inverse
+
+The inverse of a square matrix is a matrix that, when multiplied by the original matrix ($A A^{-1} = I$), results in the identity matrix.  For example, if the matrix $A$ is defined as:
+
+$$A = \begin{bmatrix} 1 & 2 \\ 4   & 6 \end{bmatrix}$$
+
+then the inverse of $A$, denoted $A^{-1}$, is:
+
+$$A^{-1} = \begin{bmatrix} -3 & 1 \\ 2 & -.5 \end{bmatrix}$$
+
+For a $2 \times 2$ matrix, the inverse is defined as:
+
+$$\begin{bmatrix} a & b \\ c & d \end{bmatrix}^{-1} = \frac{1}{ad-bc} \begin{bmatrix} d & -b \\ -c & a \end{bmatrix}$$
+
+If a matrix has determinant 0, then it is not invertible.
+
+Some properties of the inverse:
+
+* $(A^{-1})^{-1} = A$
+* $(AB)^{-1} = B^{-1}A^{-1}$
+* $(A^T)^{-1} = (A^{-1})^T$
+* $(aA)^{-1} = \frac{1}{a}A^{-1}$
+
+## Determinant
+
+The determinant of a square matrix is a scalar value that is a function of the elements of the matrix.  The determinant of a $2 \times 2$ matrix is defined as:
+
+$$\begin{vmatrix} a & b \\ c & d \end{vmatrix} = ad - bc$$
+
+The determinant of a $3 \times 3$ matrix is defined as:
+
+$$\begin{vmatrix} a & b & c \\ d & e & f \\ g & h & i \end{vmatrix} = aei+dhc+gbf-ceg-fha-ibd$$
+
+## Rank and linear independence
+
+The rank of a matrix is the number of linearly independent rows or columns in the matrix.  In a rectangular matrix, the rank cannot be larger than the smaller of the rows or columns.
+
+If we consider each column, or rows, of a matrix as a vector, then the rank of the matrix is the number of linearly independent vectors in the matrix. If a set of vectors are not linearly independent, then one of the vectors can be expressed as a linear combination of the other vectors.  For example, the following vectors are not linearly independent:
+
+$$a_1 \vec x_1 + a_2 \vec x_2 + a_3 \vec x_3 = 0$$
+
+## Eigenvalues and eigenvectors
+
+The eigenvalues and eigenvectors of a matrix are scalars and vectors that satisfy the following equation:
+
+$$A \vec x = \lambda \vec x$$
+
+where $A$ is a square matrix, $\vec x$ is the an eigen a vector, and $\lambda$ is a scalar.  In other words, multiplying a vector by a matrix is the same as multiplying the vector by a scalar.
+
+The eigenvalues of a matrix are the values of $\lambda$ that satisfy this equation.  The eigenvectors of a matrix are the vectors $\vec x$ that satisfy this equation.
+
+The eigenvalues and eigenvectors of a matrix can be found by solving the following equation:
+
+$$det(A - \lambda I) = 0$$
+
+where $I$ is the identity matrix.
+
+If the matrix A is of dimension $n \times n$, then there are $n$ eigenvalues and $n$ eigenvectors.
+
+## System of linear equations
+
+A system of linear equations is a set of equations that can be expressed in the form:
+
+$$\begin{aligned}
+a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n &= b_1 \\
+a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n &= b_2 \\
+\vdots \\
+a_{n1}x_1 + a_{n2}x_2 + \cdots + a_{nn}x_n &= b_n \\
+\end{aligned}$$
+
+where $a_{ij}$ and $b_i$ are constants, and $x_i$ are variables.
+
+This system of equations can be written in matrix form as:
+
+$$A_{n\times n}   X_{n\times 1} =   b_{n\times 1}$$
+
+if the system has a unique solution, then the matrix $A$ is invertible, and the solution is given by:
+
+$$X = A^{-1}b$$
+
+Thus if there is no solution, then $A$ is not invertible. If the determinant of $A$ is 0, then $A$ is not invertible.
+
+
