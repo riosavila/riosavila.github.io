@@ -1,6 +1,8 @@
 ---
 title: "Math Refresher: Basic Calculus"
-format: html
+format: 
+    html: default
+    pdf: default
 ---
 
 ## Introduction

@@ -1,0 +1,12 @@
+---
+title: "Homework 3"
+author: Fernando Rios-Avila
+format: 
+  html: 
+    code-fold: true
+    echo: true
+    css: styles.css 
+  pdf: default  
+---
+
+Not here yet

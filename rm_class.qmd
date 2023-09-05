@@ -2,71 +2,79 @@
 title: "Research Methods: Econometrics I"
 ---
 
-[**Introduction**](rmethods/1_introduction.html): Once Upon a time, why Econometrics? **Chapter 1**
+## Syllabus
+
+Class syllabus is [here](rmethods/Syllabus.qmd).
+
+## Introduction 
+
+#### **Chapter 1**
+
+[**Once Upon a time, why Econometrics?**](rmethods/1_introduction.qmd):  
 
 ## Part I: Basic Tools
 
 #### 1. Chapter 2: 
 
-   **The Simple Regression Model**
+   [**The Simple Regression Model**](rmethods/2_SRA.qmd)
 
 #### 2. Chapter 3: 
    
-   Multiple Regression Analysis: Estimation
+   [**Multiple Regression Analysis: Estimation**](rmethods\3_MLRM.qmd)
 
 #### 3. Chapter 4 - 5
    
-   MRA: Inference and Asymptotics
+   [**MRA: Inference and Asymptotics**](rmethods/4_MLRM_IA.qmd)
 
-#### HomeWork 1: here
+#### [HomeWork 1](rmethods/homework_1.qmd)
 
 ## Part II: Addressing Problems with MRA
 
 #### 4. Chapter 6 - 7
 
-   MRA: Scaling, functional forms, Goodness of Fit, and Qualitative Information
+   [**MRA: Scaling, functional forms, Goodness of Fit, and Qualitative Information**](rmethods/5_FXMRA.qmd)
 
 #### 5. Chapter 8
 
-   Heteroskedasticity
+   [**Heteroskedasticity**](rmethods/6_Heteros.qmd)
 
 #### 6. Chapter 9
 
-   Further Problems: Functional form, Missing variables, measurement errors, missing data
+   [**Further Problems: Functional form, Missing variables, measurement errors, missing data**](rmethods/7_spec.qmd)
 
-#### HomeWork 2: here
+#### [HomeWork 2](rmethods/homework_2.qmd)
 
 ### MIDTERM!
 
 #### 7. Chapter 15
 
-   Instrumental Variables and 2SLS
+   [**Instrumental Variables and 2SLS**](rmethods/8_iv2sls.qmd)
 
 #### 8. Chapter 17
 
-   Limited Dep Variables
+   [**Limited Dep Variables**](rmethods/9_ldvm.qmd)
 
 ## Part III: Panel Data Methods
 
 #### 9. Chapter 13
 
-   Pool Cross Section and Panel Data    
+   [**Pool Cross Section and Panel Data**](rmethods/10_pooldata.qmd)
 
 #### 10. Chapter 14
 
-   Advanced Panel Data Methods
+   [**Advanced Panel Data Methods**](rmethods/11_advpanel.qmd)
 
-#### Homework 3: Here
+#### [HomeWork 3](rmethods/homework_3.qmd)
 
 ## Part IV: Time Series
 
 #### 11. Chapter 10 - 11     
 
-   Basics of Regression analysis with TSD
+   [**Basics of Regression analysis with TSD**](rmethods/12_timeseries.qmd)
 
 #### 12. Chapter 12 & 18
 
-   Advanced TSD Problems
+   [**Advanced TSD Problems**](rmethods/13_advtimeseries.qmd)
 
 ### Final TBD
 

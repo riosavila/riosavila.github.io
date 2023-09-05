@@ -2,10 +2,11 @@
 title: "Homework 1"
 author: Fernando Rios-Avila
 format: 
-  html: 
-    code-fold: true
-    echo: true
-    css: styles.css 
+   html: 
+      code-fold: true
+      echo: true
+      css: styles.css 
+   pdf: default  
 ---
 
 

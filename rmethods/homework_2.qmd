@@ -6,6 +6,7 @@ format:
     code-fold: true
     echo: true
     css: styles.css 
+  pdf: default  
 ---
 
 ### Part 0: Modeling (10pts)

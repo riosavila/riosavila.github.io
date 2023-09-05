@@ -1,6 +1,8 @@
 ---
 title: "Math Refresher: Basic Statistics and Probability"
-format: html
+format: 
+    html: default
+    pdf: default
 ---
 
 ## Random Variables
@@ -105,7 +107,7 @@ The variance of a random variable $X$ is:
 
 $$Var(X) = E[(X-E(X))^2] $$ 
 
-$$Var(X) = \sum_{x} (X-E(X))^2 P(x) $$ \or
+$$Var(X) = \sum_{x} (X-E(X))^2 P(x) $$ or
 
 $$Var(X) = \int_{x} (X-E(X))^2 f(x) dx $$ 
 

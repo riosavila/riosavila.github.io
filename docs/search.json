@@ -98,6 +98,13 @@
     "text": "asd\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOz\n\nlbs\n\nKgs\n\nGr\n\n\n\n\n\nmale\n3.123\n\n0.195\n\n0.089\n\n88.605\n\n\n\n\n(1.071)\n[2.916]\n(0.067)\n[2.916]\n(0.030)\n[2.916]\n(30.389)\n[2.916]\n\n\nwhite\n5.404\n\n0.338\n\n0.153\n\n153.346\n\n\n\n\n(1.392)\n[3.882]\n(0.087)\n[3.882]\n(0.039)\n[3.882]\n(39.497)\n[3.882]\n\n\ncigs\n-0.480\n\n-0.030\n\n-0.014\n\n-13.628\n\n\n\n\n(0.091)\n[-5.288]\n(0.006)\n[-5.288]\n(0.003)\n[-5.288]\n(2.577)\n[-5.288]\n\n\nlfaminc\n1.053\n\n0.066\n\n0.030\n\n29.867\n\n\n\n\n(0.632)\n[1.664]\n(0.040)\n[1.664]\n(0.018)\n[1.664]\n(17.946)\n[1.664]\n\n\n_cons\n110.603\n\n6.913\n\n3.138\n\n3138.351\n\n\n\n\n(2.071)\n[53.410]\n(0.129)\n[53.410]\n(0.059)\n[53.410]\n(58.760)\n[53.410]\n\n\nN\n1388\n\n1388\n\n1388\n\n1388\n\n\n\nR2\n0.046\n\n0.046\n\n0.046\n\n0.046"
   },
   {
+    "objectID": "rmethods/Question 1.html",
+    "href": "rmethods/Question 1.html",
+    "title": "Econometrics MSC Levy",
+    "section": "",
+    "text": "Question 1\nconsider the following matrixes\n\\(A=\\begin{pmatrix} 1 & 2 & 3 \\\\ 3 & 3 & 8 \\end{pmatrix}\\)\n\\(B=\\begin{pmatrix} 3 & 1 & 6 \\\\ 2 & 1 & 2 \\end{pmatrix}\\)\n\\(C=\\begin{pmatrix} 5 & 1 & 6 \\\\ 1 & 1 & 2 \\\\ 4 & 2 & 6 \\end{pmatrix}\\)\nConsider the following Operations:\n\\(A + B\\)\n\\(A + B'\\)\n\\(A * B\\)\n\\(Det(C)\\)\n\\(C^{-1}\\)\n\\(A' * B\\)\n\\((A * B')^{-1}\\)\nIndicate if they are valid operations. if not, explain why If they are obtain the resulting matrices.\nQuestion 2\nConsider the following functions:\n\\(y=1+x^2-3x^3\\)\n\\(y=ln(3x^2+1)\\)\n\\(y=exp(x+x*z)\\)\nFor each one estimate: \\(\\frac{\\partial y}{∂ x}\\) and \\(\\frac{\\partial^2 y}{∂ x^2}\\)\nQuestion 3 Solve the following set of equations. If not, indicate why they cant be solved:\nEq1\n\\(\\begin{aligned} 2x+y &= 3 \\\\ 2x+2y &= -3 \\end{aligned}\\)\nEq 2\n\\(\\begin{aligned} 2x+ y + z &= 1 \\\\ 3x+ 2y - z &= 2 \\\\  x+ y - 2 z &= 3 \\\\ \\end{aligned}\\)\nEq 3\n\\(x^2 + x - 2 =0\\)\nQuestion 4: Maximization\n\nConsider the following set of functions:\n\n\\(\\begin{aligned} y &= A x^α z ^\\beta \\\\ C &= p_x x + P_z z \\end{aligned}\\)\nSet up the constrained maximization problem.\n\nconsider the following function:\n\n\\(y = f(z)\\)\nIf you were to maximize this function, what are the first order conditions?\nIf there is a unique solution, what are the conditions to verify it is the maximum.\nQuestion 5\nP1)\nConsider the following set of numbers\n\\(x = \\{10, 4, 5, 7, 3, 6, 9\\}\\)\nEstimate the mean, median, and variance of this data.\np2)\nSay that X is a continuous random variable that ranges from -10 to 10.\n\nWhat is the probability that X=1 (\\(P(x=1)\\))\nTrue or False \\(P(X&gt;1) + p(X&lt;1)=1\\)\nTrue or False \\(P(X&gt;1) + p(-1&lt;X&lt;2)\\) can be larger than 1.\n\nP3)\nSay that Z1 and Z2 are two random variables that follow a bernulli distribution. Assume that the following probabilities are true:\n\np(z1=0 & z2=0) = 0.1\np(z1=1 & z2=1) = 0.2\np(z1=0) = 0.5\np(z2=1) = 0.6\n\nWhat is the probability for:\n\nProbability Z1=1 conditional on z2=0\nunconditional probability of Z1=1\n\np4. Given two random variables x_1 and x_2, with means and variances \\(\\mu_1\\), \\(\\mu_2\\) and \\(\\sigma^2_1\\) and \\(\\sigma^2_2\\).\nif z = x_1 - x_2, what is the mean and variance of Z\nwhat is the covariance between z and x_1."
+  },
+  {
     "objectID": "rmethods/homework_2.html",
     "href": "rmethods/homework_2.html",
     "title": "Homework 2",
@@ -1005,7 +1012,7 @@
     "href": "mathref/math_3.html#mean-and-variance",
     "title": "Math Refresher: Basic Statistics and Probability",
     "section": "Mean, and variance",
-    "text": "Mean, and variance\nThe mean of a random variable \\(X\\) is:\n\\[E(X) = \\sum_{x} xP(x)\\] or \\[E(X) = \\int_{-\\infty}^{\\infty} xf(x) dx\\]\nWhich is a weighted sum of all possible values of \\(X\\), and where the weights are the probabilities (or densities) of each value. It can also be written or referred as:\n\\[E(X), \\mu_x , \\bar x\\]\nThis measure is also called the expected value of \\(X\\), and proviveds a measure of the “center” of the distribution of \\(X\\). It can be very sensitive to outliers.\nThe variance of a random variable \\(X\\) is:\n\\[Var(X) = E[(X-E(X))^2] \\]\n\\[Var(X) = \\sum_{x} (X-E(X))^2 P(x) \\] \n\\[Var(X) = \\int_{x} (X-E(X))^2 f(x) dx \\]\nWhich is the expected value of the squared difference between \\(X\\) and its mean. It provides a measure of average the “spread” of the distribution of \\(X\\).\nIt could also be defined as follows:\n\\[\\sigma^2_x = Var(x) = E(X^2) - [E(X)]^2\\]\nThere are other measures that can be used to characterize a distribution, such as the median, the mode, the skewness, and the kurtosis. They are defined as follows:\n\nThe median is the value of \\(X\\) such that \\(P(X \\leq x) = 0.5\\).\nThe mode is the value of \\(X\\) that maximizes \\(P(X=x)\\).\nThe skewness is a measure of the asymmetry of the distribution of \\(X\\). It is defined as:\n\n\\[\\frac{E[(X-E(X))^3]}{[Var(X)]^{3/2}}\\]\n\nThe kurtosis is a measure of the “peakedness” of the distribution of \\(X\\). It is defined as:\n\n\\[\\frac{E[(X-E(X))^4]}{[Var(X)]^{2}}\\]\n\nThe quantiles of a distribution are values that divide the distribution into equal parts. For example, the 0.25 quantile is the value of \\(X\\) such that \\(P(X \\leq x) = 0.25\\).\n\nFor a normal distribution, the mean, median, and mode are all equal. The skewness is 0, and the kurtosis is 3."
+    "text": "Mean, and variance\nThe mean of a random variable \\(X\\) is:\n\\[E(X) = \\sum_{x} xP(x)\\] or \\[E(X) = \\int_{-\\infty}^{\\infty} xf(x) dx\\]\nWhich is a weighted sum of all possible values of \\(X\\), and where the weights are the probabilities (or densities) of each value. It can also be written or referred as:\n\\[E(X), \\mu_x , \\bar x\\]\nThis measure is also called the expected value of \\(X\\), and proviveds a measure of the “center” of the distribution of \\(X\\). It can be very sensitive to outliers.\nThe variance of a random variable \\(X\\) is:\n\\[Var(X) = E[(X-E(X))^2] \\]\n\\[Var(X) = \\sum_{x} (X-E(X))^2 P(x) \\] or\n\\[Var(X) = \\int_{x} (X-E(X))^2 f(x) dx \\]\nWhich is the expected value of the squared difference between \\(X\\) and its mean. It provides a measure of average the “spread” of the distribution of \\(X\\).\nIt could also be defined as follows:\n\\[\\sigma^2_x = Var(x) = E(X^2) - [E(X)]^2\\]\nThere are other measures that can be used to characterize a distribution, such as the median, the mode, the skewness, and the kurtosis. They are defined as follows:\n\nThe median is the value of \\(X\\) such that \\(P(X \\leq x) = 0.5\\).\nThe mode is the value of \\(X\\) that maximizes \\(P(X=x)\\).\nThe skewness is a measure of the asymmetry of the distribution of \\(X\\). It is defined as:\n\n\\[\\frac{E[(X-E(X))^3]}{[Var(X)]^{3/2}}\\]\n\nThe kurtosis is a measure of the “peakedness” of the distribution of \\(X\\). It is defined as:\n\n\\[\\frac{E[(X-E(X))^4]}{[Var(X)]^{2}}\\]\n\nThe quantiles of a distribution are values that divide the distribution into equal parts. For example, the 0.25 quantile is the value of \\(X\\) such that \\(P(X \\leq x) = 0.25\\).\n\nFor a normal distribution, the mean, median, and mode are all equal. The skewness is 0, and the kurtosis is 3."
   },
   {
     "objectID": "mathref/math_3.html#covariance-and-correlation",
@@ -5278,39 +5285,109 @@
     "text": "Note\nSearch among all datasets available in frause, and use the data from these datasets to decide what variables to analyze, and controls to use in your homework.\nExamples in the textbook can be useful as guides to consider here.\nYou are free to explore other sources. If so, include the data along with your homework.\nParticularly unique answers (based on completeness, detail, novelty) may receive extra points."
   },
   {
-    "objectID": "rmethods/Question 1.html",
-    "href": "rmethods/Question 1.html",
-    "title": "Econometrics MSC Levy",
+    "objectID": "rmethods/homework_3.html",
+    "href": "rmethods/homework_3.html",
+    "title": "Homework 3",
     "section": "",
-    "text": "Question 1\nconsider the following matrixes\n\\(A=\\begin{pmatrix} 1 & 2 & 3 \\\\ 3 & 3 & 8 \\end{pmatrix}\\)\n\\(B=\\begin{pmatrix} 3 & 1 & 6 \\\\ 2 & 1 & 2 \\end{pmatrix}\\)\n\\(C=\\begin{pmatrix} 5 & 1 & 6 \\\\ 1 & 1 & 2 \\\\ 4 & 2 & 6 \\end{pmatrix}\\)\nConsider the following Operations:\n\\(A + B\\)\n\\(A + B'\\)\n\\(A * B\\)\n\\(Det(C)\\)\n\\(C^{-1}\\)\n\\(A' * B\\)\n\\((A * B')^{-1}\\)\nIndicate if they are valid operations. if not, explain why If they are obtain the resulting matrices.\nQuestion 2\nConsider the following functions:\n\\(y=1+x^2-3x^3\\)\n\\(y=ln(3x^2+1)\\)\n\\(y=exp(x+x*z)\\)\nFor each one estimate: \\(\\frac{\\partial y}{∂ x}\\) and \\(\\frac{\\partial^2 y}{∂ x^2}\\)\nQuestion 3 Solve the following set of equations. If not, indicate why they cant be solved:\nEq1\n\\(\\begin{aligned} 2x+y &= 3 \\\\ 2x+2y &= -3 \\end{aligned}\\)\nEq 2\n\\(\\begin{aligned} 2x+ y + z &= 1 \\\\ 3x+ 2y - z &= 2 \\\\  x+ y - 2 z &= 3 \\\\ \\end{aligned}\\)\nEq 3\n\\(x^2 + x - 2 =0\\)\nQuestion 4: Maximization\n\nConsider the following set of functions:\n\n\\(\\begin{aligned} y &= A x^α z ^\\beta \\\\ C &= p_x x + P_z z \\end{aligned}\\)\nSet up the constrained maximization problem.\n\nconsider the following function:\n\n\\(y = f(z)\\)\nIf you were to maximize this function, what are the first order conditions?\nIf there is a unique solution, what are the conditions to verify it is the maximum.\nQuestion 5\nP1)\nConsider the following set of numbers\n\\(x = \\{10, 4, 5, 7, 3, 6, 9\\}\\)\nEstimate the mean, median, and variance of this data.\np2)\nSay that X is a continuous random variable that ranges from -10 to 10.\n\nWhat is the probability that X=1 (\\(P(x=1)\\))\nTrue or False \\(P(X&gt;1) + p(X&lt;1)=1\\)\nTrue or False \\(P(X&gt;1) + p(-1&lt;X&lt;2)\\) can be larger than 1.\n\nP3)\nSay that Z1 and Z2 are two random variables that follow a bernulli distribution. Assume that the following probabilities are true:\n\np(z1=0 & z2=0) = 0.1\np(z1=1 & z2=1) = 0.2\np(z1=0) = 0.5\np(z2=1) = 0.6\n\nWhat is the probability for:\n\nProbability Z1=1 conditional on z2=0\nunconditional probability of Z1=1\n\np4. Given two random variables x_1 and x_2, with means and variances \\(\\mu_1\\), \\(\\mu_2\\) and \\(\\sigma^2_1\\) and \\(\\sigma^2_2\\).\nif z = x_1 - x_2, what is the mean and variance of Z\nwhat is the covariance between z and x_1."
+    "text": "Not here yet"
+  },
+  {
+    "objectID": "rmethods/Syllabus.html",
+    "href": "rmethods/Syllabus.html",
+    "title": "ECON 529 - Research Methods I: Econometrics",
+    "section": "",
+    "text": "Instructor: Fernando Rios-Avila\nOffice: Room 307, Blithewood\nOffice Hours: Friday, 9:00 am to 10:00 am or by appointment\nPhone: 845-758-7719\nEmail: friosavi@levy.org\nTime and Location: Wednesday, 9:30 am to 12:50 pm"
+  },
+  {
+    "objectID": "rmethods/Syllabus.html#course-description",
+    "href": "rmethods/Syllabus.html#course-description",
+    "title": "ECON 529 - Research Methods I: Econometrics",
+    "section": "Course Description",
+    "text": "Course Description\nThe course aims to provide students with a foundation in applied econometrics that is required for the successful completion of the program. The emphasis of the course is on understanding the intuition behind model estimation, hypothesis testing, and economic interpretation of statistical results.\nWe begin by discussing the nature of econometrics and economic data. This is followed by a discussion of estimation and inference in univariate and multivariate regression models of cross-sectional data. We will review some of the consequences of heteroscedasticity, measurement errors, and endogeneity, among other issues of model specification and data measures. The second part of the course will cover advanced regression models such as limited dependent variables, panel data, and time series data.\nThe class is taught through a combination of lectures, discussion, homework, quizzes, and exams. Student involvement and participation in class are highly encouraged."
+  },
+  {
+    "objectID": "rmethods/Syllabus.html#required-text",
+    "href": "rmethods/Syllabus.html#required-text",
+    "title": "ECON 529 - Research Methods I: Econometrics",
+    "section": "Required Text",
+    "text": "Required Text\nIntroductory Econometrics: A Modern Approach\nby Jeffrey M. Wooldridge\n\nWhile any edition will do, exercises and exam material will be taken from the 7th edition.\n\nSuggested:\nUsing R for Introductory Econometrics (recommended)\nby Florian Heiss\n\nThis book introduces the free programming language and software package R with a focus on the implementation of standard tools and methods used in econometrics. It builds on the textbook “Introductory Econometrics: A Modern Approach” by Jeffrey M. Wooldridge. The book can be accessed online here.\nThe author also provides textbooks using the same structure, introducing Julia and python."
+  },
+  {
+    "objectID": "rmethods/Syllabus.html#course-website",
+    "href": "rmethods/Syllabus.html#course-website",
+    "title": "ECON 529 - Research Methods I: Econometrics",
+    "section": "Course website",
+    "text": "Course website\nWe will be using Github pages to provide all lectures and homework. It is your responsibility to access the site or communicate with me if any questions should arise.\nThis is where assignments, readings, and other information will be posted."
+  },
+  {
+    "objectID": "rmethods/Syllabus.html#grading",
+    "href": "rmethods/Syllabus.html#grading",
+    "title": "ECON 529 - Research Methods I: Econometrics",
+    "section": "Grading",
+    "text": "Grading\nGrading will be based on homework assignments, quizzes, and exams. Their grade distribution is as follows:\n\nHomework (55%): Three homework assignments will be given throughout the semester. Homework assignments are prepared for you to implement the methodologies covered in class, as well as encourage you to interpret the results. Each homework will consist of a small research project where you will be asked to answer a series of questions, as if you were writing a research paper.\nThe homework assignments will require using data and the statistical software Stata. You are free to use any of the data sets that come along with the textbook. They can be accessed using frause in Stata. It is encouraged that homework assignments are prepared and submitted in pairs.\nAll homework assignments will be posted on the course website. When submitting your homework, prepare a pdf, html, or doc file with your answers, and a do file with the code used to answer the questions. It is highly encouraged that you use markdown or quarto to prepare your homework, as it easily allows you to incorporate all necessary information to reproduce your results.\nMidterm and Final (40%): Two exams will be given. Each one is prepared to test you on concepts, interpretation, and intuition behind the econometric topics reviewed in class. The exams will be open book and open notes. You are allowed to use any printed material, including the textbook, your notes, and any other material you may find useful. You are not allowed to use any electronic devices, including computers, tablets, or phones, except for the use of a calculator.\nQuestions for the midterm and final will include three sections:\n\nMultiple-choice questions and concept questions.\nAnalytical section, equation solving, and derivations.\nEmpirical section, where you will be asked to interpret results from a regression analysis, as well as implement statistical tests.\n\nAnalytical and empirical sections will be taken from the problem sets and computational exercises in the textbook.\nQuizzes (5%): After each topic, there will be multiple-choice quizzes to test your knowledge of important concepts and ideas seen in class. There will also be open-ended questions or extra projects that will be provided during the semester. This includes 5 extra credit points.\nClass Participation: Class participation is highly encouraged. You are to participate in class discussions. You are also encouraged to ask questions and provide answers to questions asked in class. This counts for up to 5% of extra credit for your final grade."
+  },
+  {
+    "objectID": "rmethods/Syllabus.html#attendance",
+    "href": "rmethods/Syllabus.html#attendance",
+    "title": "ECON 529 - Research Methods I: Econometrics",
+    "section": "Attendance:",
+    "text": "Attendance:\nClass attendance, in-person or online, is highly recommended. Classes will not be recorded, but for exceptional cases, a link will be provided to attend the class online. Material for exams and homework will come from both class lectures as well as the book.\nThe only acceptable excuses for missing a test are medical reasons or family emergencies. If you have a legitimate excuse, a make-up exam will be issued soon after the date of the original exam. Any issues should be discussed with me before the actual exam takes place."
+  },
+  {
+    "objectID": "rmethods/Syllabus.html#course-software",
+    "href": "rmethods/Syllabus.html#course-software",
+    "title": "ECON 529 - Research Methods I: Econometrics",
+    "section": "Course Software",
+    "text": "Course Software\nThere are several statistical packages for analyzing data. In this course, we will be using the software Stata to cover all materials in class. Slides are self-replicable, thus you can copy and paste almost all code provided to replicate the results seen in class. The Institute will be providing you with licenses for Stata/BE for the length of the course.\nStata offers many free short webinars and video tutorials that may be useful if you never used Stata before, or even if you have some experience with it. Please see the resources page for more information.\nIf you decide to, you can use R, Julia, or Python to study and work on the course materials and homework. One of the recommended books has nice introductions and code that can help you get started with these software packages. The resources page has additional information on how to get started with these software packages.\nAs with many other skills, the best way to learn is to simply work with the packages, work on the book exercises, and ask any questions to me or your classmates when you find a problem you could not find a solution for."
+  },
+  {
+    "objectID": "rmethods/Syllabus.html#additional-information",
+    "href": "rmethods/Syllabus.html#additional-information",
+    "title": "ECON 529 - Research Methods I: Econometrics",
+    "section": "Additional Information:",
+    "text": "Additional Information:\nAll students are responsible for knowing Bard’s Policy on Academic Honesty as published in Bard College Student Handbook."
   },
   {
     "objectID": "rm_class.html",
     "href": "rm_class.html",
     "title": "Research Methods: Econometrics I",
     "section": "",
-    "text": "Introduction: Once Upon a time, why Econometrics? Chapter 1"
+    "text": "Class syllabus is here."
+  },
+  {
+    "objectID": "rm_class.html#syllabus",
+    "href": "rm_class.html#syllabus",
+    "title": "Research Methods: Econometrics I",
+    "section": "",
+    "text": "Class syllabus is here."
+  },
+  {
+    "objectID": "rm_class.html#introduction",
+    "href": "rm_class.html#introduction",
+    "title": "Research Methods: Econometrics I",
+    "section": "Introduction",
+    "text": "Introduction\n\nChapter 1\nOnce Upon a time, why Econometrics?:"
   },
   {
     "objectID": "rm_class.html#part-i-basic-tools",
     "href": "rm_class.html#part-i-basic-tools",
     "title": "Research Methods: Econometrics I",
     "section": "Part I: Basic Tools",
-    "text": "Part I: Basic Tools\n\n1. Chapter 2:\nThe Simple Regression Model\n\n\n2. Chapter 3:\nMultiple Regression Analysis: Estimation\n\n\n3. Chapter 4 - 5\nMRA: Inference and Asymptotics\n\n\nHomeWork 1: here"
+    "text": "Part I: Basic Tools\n\n1. Chapter 2:\nThe Simple Regression Model\n\n\n2. Chapter 3:\nMultiple Regression Analysis: Estimation\n\n\n3. Chapter 4 - 5\nMRA: Inference and Asymptotics\n\n\nHomeWork 1"
   },
   {
     "objectID": "rm_class.html#part-ii-addressing-problems-with-mra",
     "href": "rm_class.html#part-ii-addressing-problems-with-mra",
     "title": "Research Methods: Econometrics I",
     "section": "Part II: Addressing Problems with MRA",
-    "text": "Part II: Addressing Problems with MRA\n\n4. Chapter 6 - 7\nMRA: Scaling, functional forms, Goodness of Fit, and Qualitative Information\n\n\n5. Chapter 8\nHeteroskedasticity\n\n\n6. Chapter 9\nFurther Problems: Functional form, Missing variables, measurement errors, missing data\n\n\nHomeWork 2: here\n\n\nMIDTERM!\n\n7. Chapter 15\nInstrumental Variables and 2SLS\n\n\n8. Chapter 17\nLimited Dep Variables"
+    "text": "Part II: Addressing Problems with MRA\n\n4. Chapter 6 - 7\nMRA: Scaling, functional forms, Goodness of Fit, and Qualitative Information\n\n\n5. Chapter 8\nHeteroskedasticity\n\n\n6. Chapter 9\nFurther Problems: Functional form, Missing variables, measurement errors, missing data\n\n\nHomeWork 2\n\n\nMIDTERM!\n\n7. Chapter 15\nInstrumental Variables and 2SLS\n\n\n8. Chapter 17\nLimited Dep Variables"
   },
   {
     "objectID": "rm_class.html#part-iii-panel-data-methods",
     "href": "rm_class.html#part-iii-panel-data-methods",
     "title": "Research Methods: Econometrics I",
     "section": "Part III: Panel Data Methods",
-    "text": "Part III: Panel Data Methods\n\n9. Chapter 13\nPool Cross Section and Panel Data\n\n\n10. Chapter 14\nAdvanced Panel Data Methods\n\n\nHomework 3: Here"
+    "text": "Part III: Panel Data Methods\n\n9. Chapter 13\nPool Cross Section and Panel Data\n\n\n10. Chapter 14\nAdvanced Panel Data Methods\n\n\nHomeWork 3"
   },
   {
     "objectID": "rm_class.html#part-iv-time-series",
