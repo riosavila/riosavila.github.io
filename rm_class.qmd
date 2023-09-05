@@ -6,6 +6,12 @@ title: "Research Methods: Econometrics I"
 
 Class syllabus is [here](rmethods/Syllabus.qmd).
 
+## Zoom Link
+
+When there is need to attend a class online, and you have requested to attend online, use the following link:
+
+[Zoom class](https://bard.zoom.us/j/9468356150?pwd=SXR4cDJmMUZ2WlZZZ2dQbE1BN25qdz09)
+
 ## Introduction 
 
 #### **Chapter 1**
