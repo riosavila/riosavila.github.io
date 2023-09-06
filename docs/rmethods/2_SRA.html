@@ -437,7 +437,7 @@ Fernando Rios-Avila
 </section>
 <section id="simple-scatter-1" class="slide level2">
 <h2>Simple Scatter 1</h2>
-<div class="cell" data-execution_count="1">
+<div id="0ca6916a" class="cell" data-execution_count="1">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a>** To download <span class="ot">all</span> Wooldrige Files</span>
@@ -514,7 +514,7 @@ Fernando Rios-Avila
 <aside><ol class="aside-footnotes"><li id="fn1"><p>Simple Linear Regression Model</p></li></ol></aside></section>
 <section id="visualization" class="slide level2">
 <h2>Visualization</h2>
-<div class="cell" data-execution_count="2">
+<div id="716818ea" class="cell" data-execution_count="2">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">set</span> <span class="dv">seed</span> 10</span>
@@ -523,9 +523,9 @@ Fernando Rios-Avila
 <span id="cb2-4"><a href="#cb2-4"></a><span class="kw">gen</span> <span class="fu">y</span> = 1 + x + rnormal()</span>
 <span id="cb2-5"><a href="#cb2-5"></a>color_style tableau</span>
 <span id="cb2-6"><a href="#cb2-6"></a><span class="kw">two</span> (<span class="kw">scatter</span>  <span class="fu">y</span> x) <span class="co">///</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a>    (<span class="kw">function</span> <span class="fu">y</span> = 0.5 + 2*x, <span class="kw">range</span>(-1.8 2.4)) <span class="co">///</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a>    (<span class="kw">function</span> <span class="fu">y</span> = 2 + 0.5*x, <span class="kw">range</span>(-1.8 2.4)) <span class="co">///</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a>    (<span class="kw">function</span> <span class="fu">y</span> = 1 + 1*x, <span class="kw">range</span>(-1.8 2.4)) , <span class="co">///</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>    (<span class="kw">function</span> <span class="fu">y</span> = 0.5 + 2*x, <span class="kw">range</span>(-2 2)) <span class="co">///</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>    (<span class="kw">function</span> <span class="fu">y</span> = 2 + 0.5*x, <span class="kw">range</span>(-2 2)) <span class="co">///</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>    (<span class="kw">function</span> <span class="fu">y</span> = 1 + 1*x  , <span class="kw">range</span>(-2 2)) , <span class="co">///</span></span>
 <span id="cb2-10"><a href="#cb2-10"></a>    <span class="bn">legend</span>(<span class="kw">order</span>(2 <span class="st">"y=0.5+2x"</span> 3 <span class="st">"y=2+0.5x"</span> 4 <span class="st">"y=1+1x"</span>))</span>
 <span id="cb2-11"><a href="#cb2-11"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_1.png , <span class="kw">replace</span> <span class="kw">width</span>(1000)</span>
 <span id="cb2-12"><a href="#cb2-12"></a></span>
@@ -533,50 +533,92 @@ Fernando Rios-Avila
 <span id="cb2-14"><a href="#cb2-14"></a><span class="kw">gen</span> y2=2+0.5*x</span>
 <span id="cb2-15"><a href="#cb2-15"></a><span class="kw">gen</span> y3=+1+1*x</span>
 <span id="cb2-16"><a href="#cb2-16"></a></span>
-<span id="cb2-17"><a href="#cb2-17"></a><span class="kw">two</span> (<span class="kw">scatter</span> <span class="fu">y</span> x) <span class="co">///</span></span>
-<span id="cb2-18"><a href="#cb2-18"></a>    (<span class="kw">function</span> <span class="fu">y</span> = 0.5 + 2*x, <span class="kw">range</span>(-1.8 2.4)) <span class="co">///</span></span>
-<span id="cb2-19"><a href="#cb2-19"></a>    (rspike <span class="fu">y</span> y1 x), <span class="kw">ylabel</span>(-4/6) <span class="bn">ytitle</span>(<span class="fu">y</span>) <span class="co">///</span></span>
-<span id="cb2-20"><a href="#cb2-20"></a>    <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"Data"</span> 2 <span class="st">"Prediction "</span> 3 <span class="st">"Residual"</span>))</span>
-<span id="cb2-21"><a href="#cb2-21"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_2.png , <span class="kw">replace</span> <span class="kw">width</span>(1000) </span>
-<span id="cb2-22"><a href="#cb2-22"></a>    </span>
-<span id="cb2-23"><a href="#cb2-23"></a><span class="kw">two</span> (<span class="kw">scatter</span> <span class="fu">y</span> x) <span class="co">///</span></span>
-<span id="cb2-24"><a href="#cb2-24"></a>    (<span class="kw">function</span> <span class="fu">y</span> = 2 + 0.5*x, <span class="kw">range</span>(-1.8 2.4)) <span class="co">///</span></span>
-<span id="cb2-25"><a href="#cb2-25"></a>    (rspike <span class="fu">y</span> y2 x), <span class="kw">ylabel</span>(-4/6) <span class="bn">ytitle</span>(<span class="fu">y</span>) <span class="co">///</span></span>
-<span id="cb2-26"><a href="#cb2-26"></a>    <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"Data"</span> 2 <span class="st">"Prediction "</span> 3 <span class="st">"Residual"</span>))</span>
-<span id="cb2-27"><a href="#cb2-27"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_3.png , <span class="kw">replace</span> <span class="kw">width</span>(1000) </span>
-<span id="cb2-28"><a href="#cb2-28"></a>    </span>
-<span id="cb2-29"><a href="#cb2-29"></a><span class="kw">two</span> (<span class="kw">scatter</span> <span class="fu">y</span> x) <span class="co">///</span></span>
-<span id="cb2-30"><a href="#cb2-30"></a>    (<span class="kw">function</span> <span class="fu">y</span> = 1 + 1*x, <span class="kw">range</span>(-1.8 2.4)) <span class="co">///</span></span>
-<span id="cb2-31"><a href="#cb2-31"></a>    (rspike <span class="fu">y</span> y3 x) , <span class="kw">ylabel</span>(-4/6) <span class="bn">ytitle</span>(<span class="fu">y</span>) <span class="co">///</span></span>
-<span id="cb2-32"><a href="#cb2-32"></a>    <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"Data"</span> 2 <span class="st">"Prediction "</span> 3 <span class="st">"Residual"</span>))</span>
-<span id="cb2-33"><a href="#cb2-33"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_4.png , <span class="kw">replace</span> <span class="kw">width</span>(1000)    </span>
-<span id="cb2-34"><a href="#cb2-34"></a></span>
-<span id="cb2-35"><a href="#cb2-35"></a><span class="kw">reg</span> <span class="fu">y</span> x</span>
-<span id="cb2-36"><a href="#cb2-36"></a><span class="kw">predict</span> <span class="fu">yh</span></span>
-<span id="cb2-37"><a href="#cb2-37"></a><span class="kw">two</span> (<span class="kw">scatter</span> <span class="fu">y</span> x) <span class="co">///</span></span>
-<span id="cb2-38"><a href="#cb2-38"></a>    (<span class="kw">function</span> <span class="fu">y</span> = _b[<span class="dt">_cons</span>] + _b[x]*x, <span class="kw">range</span>(-1.8 2.4)) <span class="co">///</span></span>
-<span id="cb2-39"><a href="#cb2-39"></a>    (rspike <span class="fu">y</span> <span class="fu">yh</span> x) , <span class="kw">ylabel</span>(-4/6) <span class="bn">ytitle</span>(<span class="fu">y</span>) <span class="co">///</span></span>
-<span id="cb2-40"><a href="#cb2-40"></a>    <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"Data"</span> 2 <span class="st">"Prediction "</span> 3 <span class="st">"Residual"</span>))    </span>
-<span id="cb2-41"><a href="#cb2-41"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_5.png , <span class="kw">replace</span> <span class="kw">width</span>(1000)    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-17"><a href="#cb2-17"></a></span>
+<span id="cb2-18"><a href="#cb2-18"></a><span class="kw">egen</span> u21 = <span class="kw">sum</span>((<span class="fu">y</span>-y1)^2)</span>
+<span id="cb2-19"><a href="#cb2-19"></a><span class="kw">egen</span> u22 = <span class="kw">sum</span>((<span class="fu">y</span>-y2)^2)</span>
+<span id="cb2-20"><a href="#cb2-20"></a><span class="kw">egen</span> u23 = <span class="kw">sum</span>((<span class="fu">y</span>-y3)^2)</span>
+<span id="cb2-21"><a href="#cb2-21"></a><span class="kw">reg</span> <span class="fu">y</span> x</span>
+<span id="cb2-22"><a href="#cb2-22"></a><span class="kw">egen</span> u24 = <span class="kw">sum</span>((<span class="fu">y</span>-_b[<span class="dt">_cons</span>] - _b[x]*x)^2)</span>
+<span id="cb2-23"><a href="#cb2-23"></a><span class="kw">label</span> <span class="kw">var</span> u21 <span class="st">"SSR-model 1"</span></span>
+<span id="cb2-24"><a href="#cb2-24"></a><span class="kw">label</span> <span class="kw">var</span> u22 <span class="st">"SSR-model 2"</span></span>
+<span id="cb2-25"><a href="#cb2-25"></a><span class="kw">label</span> <span class="kw">var</span> u23 <span class="st">"SSR-model 3"</span></span>
+<span id="cb2-26"><a href="#cb2-26"></a><span class="kw">label</span> <span class="kw">var</span> u24 <span class="st">"SSR-model 4"</span></span>
+<span id="cb2-27"><a href="#cb2-27"></a></span>
+<span id="cb2-28"><a href="#cb2-28"></a><span class="kw">two</span> (<span class="kw">scatter</span> <span class="fu">y</span> x) <span class="co">///</span></span>
+<span id="cb2-29"><a href="#cb2-29"></a>    (<span class="kw">function</span> <span class="fu">y</span> = 0.5 + 2*x, <span class="kw">range</span>(-2 2)) <span class="co">///</span></span>
+<span id="cb2-30"><a href="#cb2-30"></a>    (rspike <span class="fu">y</span> y1 x), <span class="kw">ylabel</span>(-4/6) <span class="bn">ytitle</span>(<span class="fu">y</span>) <span class="co">///</span></span>
+<span id="cb2-31"><a href="#cb2-31"></a>    <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"Data"</span> 2 <span class="st">"Prediction "</span> 3 <span class="st">"Residual"</span>))</span>
+<span id="cb2-32"><a href="#cb2-32"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_2.png , <span class="kw">replace</span> <span class="kw">width</span>(1000) </span>
+<span id="cb2-33"><a href="#cb2-33"></a>    </span>
+<span id="cb2-34"><a href="#cb2-34"></a><span class="kw">two</span> (<span class="kw">scatter</span> <span class="fu">y</span> x) <span class="co">///</span></span>
+<span id="cb2-35"><a href="#cb2-35"></a>    (<span class="kw">function</span> <span class="fu">y</span> = 2 + 0.5*x, <span class="kw">range</span>(-2 2)) <span class="co">///</span></span>
+<span id="cb2-36"><a href="#cb2-36"></a>    (rspike <span class="fu">y</span> y2 x), <span class="kw">ylabel</span>(-4/6) <span class="bn">ytitle</span>(<span class="fu">y</span>) <span class="co">///</span></span>
+<span id="cb2-37"><a href="#cb2-37"></a>    <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"Data"</span> 2 <span class="st">"Prediction "</span> 3 <span class="st">"Residual"</span>))</span>
+<span id="cb2-38"><a href="#cb2-38"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_3.png , <span class="kw">replace</span> <span class="kw">width</span>(1000) </span>
+<span id="cb2-39"><a href="#cb2-39"></a>    </span>
+<span id="cb2-40"><a href="#cb2-40"></a><span class="kw">two</span> (<span class="kw">scatter</span> <span class="fu">y</span> x) <span class="co">///</span></span>
+<span id="cb2-41"><a href="#cb2-41"></a>    (<span class="kw">function</span> <span class="fu">y</span> = 1 + 1*x, <span class="kw">range</span>(-2 2)) <span class="co">///</span></span>
+<span id="cb2-42"><a href="#cb2-42"></a>    (rspike <span class="fu">y</span> y3 x) , <span class="kw">ylabel</span>(-4/6) <span class="bn">ytitle</span>(<span class="fu">y</span>) <span class="co">///</span></span>
+<span id="cb2-43"><a href="#cb2-43"></a>    <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"Data"</span> 2 <span class="st">"Prediction "</span> 3 <span class="st">"Residual"</span>))</span>
+<span id="cb2-44"><a href="#cb2-44"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_4.png , <span class="kw">replace</span> <span class="kw">width</span>(1000)    </span>
+<span id="cb2-45"><a href="#cb2-45"></a></span>
+<span id="cb2-46"><a href="#cb2-46"></a><span class="kw">reg</span> <span class="fu">y</span> x</span>
+<span id="cb2-47"><a href="#cb2-47"></a><span class="kw">predict</span> <span class="fu">yh</span></span>
+<span id="cb2-48"><a href="#cb2-48"></a><span class="kw">two</span> (<span class="kw">scatter</span> <span class="fu">y</span> x) <span class="co">///</span></span>
+<span id="cb2-49"><a href="#cb2-49"></a>    (<span class="kw">function</span> <span class="fu">y</span> = _b[<span class="dt">_cons</span>] + _b[x]*x, <span class="kw">range</span>(-2 2)) <span class="co">///</span></span>
+<span id="cb2-50"><a href="#cb2-50"></a>    (rspike <span class="fu">y</span> <span class="fu">yh</span> x) , <span class="kw">ylabel</span>(-4/6) <span class="bn">ytitle</span>(<span class="fu">y</span>) <span class="co">///</span></span>
+<span id="cb2-51"><a href="#cb2-51"></a>    <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"Data"</span> 2 <span class="st">"Prediction "</span> 3 <span class="st">"Residual"</span>))    </span>
+<span id="cb2-52"><a href="#cb2-52"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_5.png , <span class="kw">replace</span> <span class="kw">width</span>(1000)    </span>
+<span id="cb2-53"><a href="#cb2-53"></a><span class="kw">clonevar</span> u24x=u24</span>
+<span id="cb2-54"><a href="#cb2-54"></a><span class="kw">graph</span> <span class="bn">bar</span> u24 u21 u22 u23 u24x , <span class="co">///</span></span>
+<span id="cb2-55"><a href="#cb2-55"></a>   <span class="bn">legend</span>(<span class="kw">order</span>( 2 <span class="st">"SSR-Model 1"</span> 3 <span class="st">"SSR-Model 2"</span> 4 <span class="st">"SSR-Model 3"</span> 5 <span class="st">"Sample Fit"</span>) <span class="co">///</span></span>
+<span id="cb2-56"><a href="#cb2-56"></a>   <span class="bn">ring</span>(0) pos(2)) <span class="bn">xsize</span>(5) <span class="bn">ysize</span>(8) <span class="kw">scale</span>(1.5) <span class="bn">bar</span>(1, <span class="kw">color</span>(gs0%0))</span>
+<span id="cb2-57"><a href="#cb2-57"></a>   </span>
+<span id="cb2-58"><a href="#cb2-58"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_5x.png , <span class="kw">replace</span> <span class="kw">width</span>(300)    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="panel-tabset">
 <ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Options</a></li><li><a href="#tabset-1-2">Opt1</a></li><li><a href="#tabset-1-3">Opt2</a></li><li><a href="#tabset-1-4">Opt3</a></li><li><a href="#tabset-1-5">Opt4</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1">
+<div class="column" style="width:60%;">
 <p><img data-src="images/fig2_1.png"></p>
 </div>
+<div class="column" style="width:35%;">
+<p><img data-src="images/fig2_5x.png"></p>
+</div>
+</div>
 <div id="tabset-1-2">
+<div class="column" style="width:60%;">
 <p><img data-src="images/fig2_2.png"></p>
 </div>
+<div class="column" style="width:35%;">
+<p><img data-src="images/fig2_5x.png"></p>
+</div>
+</div>
 <div id="tabset-1-3">
+<div class="column" style="width:60%;">
 <p><img data-src="images/fig2_3.png"></p>
 </div>
+<div class="column" style="width:35%;">
+<p><img data-src="images/fig2_5x.png"></p>
+</div>
+</div>
 <div id="tabset-1-4">
+<div class="column" style="width:60%;">
 <p><img data-src="images/fig2_4.png"></p>
 </div>
+<div class="column" style="width:35%;">
+<p><img data-src="images/fig2_5x.png"></p>
+</div>
+</div>
 <div id="tabset-1-5">
+<div class="column" style="width:60%;">
 <p><img data-src="images/fig2_5.png"></p>
+</div>
+<div class="column" style="width:35%;">
+<p><img data-src="images/fig2_5x.png"></p>
+</div>
 </div>
 </div>
 </div>
@@ -587,7 +629,8 @@ Fernando Rios-Avila
 \]</span></p>
 <p><span class="math display">\[{\hat\beta_0,\hat\beta_1} = \min_{\beta_0,\beta_1} = SSR =\sum_{i=1}^N u_i^2 = \sum_{i=1}^N (y-\beta_0 - \beta_1 x_i)^2 \\
 \]</span></p>
-<p>First Order Conditions: <span class="math display">\[
+<p>First Order Conditions:</p>
+<p><span class="math display">\[
 \begin{aligned}
 \frac{\partial SSR}{\partial \beta_0} &amp;= -2 \sum (y_i-\beta_0 - \beta_1 x_i) = -2 \sum u_i =0 \\
 \frac{\partial SSR}{\partial \beta_1} &amp;= -2 \sum x_i (y_i-\beta_0 - \beta_1 x_i) =- 2 \sum x_i u_i =0
@@ -597,8 +640,7 @@ Fernando Rios-Avila
 <section id="just-a-minimization-problem-1" class="slide level2">
 <h2>Just a Minimization Problem</h2>
 <p>Similar conditions as before (but now Mathematically):</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 \sum u_i &amp;=0 \rightarrow nE(e) = 0 \\
 \sum x_i u_i &amp;=0 \rightarrow nE(x*e) \rightarrow  n Cov(x,e) =0  
 \end{aligned}
@@ -638,7 +680,7 @@ Fernando Rios-Avila
 </section>
 <section id="visualization-1" class="slide level2">
 <h2>Visualization</h2>
-<div class="cell" data-execution_count="3">
+<div id="5ac49b48" class="cell" data-execution_count="3">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">gen</span> y0 = 0</span>
@@ -851,7 +893,7 @@ E(\hat \beta_1) &amp;= \beta_1
 </section>
 <section id="visualization-2" class="slide level2">
 <h2>Visualization</h2>
-<div class="cell" data-execution_count="4">
+<div id="dfd3cbdd" class="cell" data-execution_count="4">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">clear</span></span>
@@ -908,7 +950,7 @@ Var(\hat \beta_1 - \beta_1) &amp;= Var \left( \frac {\sum  \tilde x_i u_i }{\sum
 <section id="examples" class="slide level2 scrollable">
 <h2>Examples</h2>
 <p>Deriving OLS <span class="math inline">\(\beta's\)</span>:</p>
-<div class="cell" data-execution_count="5">
+<div id="35fc51f1" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1"></a>** Wage and Education: Example 2.7</span>
 <span id="cb5-2"><a href="#cb5-2"></a></span>
 <span id="cb5-3"><a href="#cb5-3"></a>frause wage1, <span class="kw">clear</span></span>
@@ -925,7 +967,7 @@ Var(\hat \beta_1 - \beta_1) &amp;= Var \left( \frac {\sum  \tilde x_i u_i }{\sum
 </div>
 </div>
 <p>SST = SSE + SSR</p>
-<div class="cell" data-execution_count="6">
+<div id="3766b183" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">mata</span>: <span class="fu">yh</span>  = b0:+b1*x</span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="kw">mata</span>: sst = <span class="kw">sum</span>( (<span class="fu">y</span>:-<span class="kw">mean</span>(<span class="fu">y</span>)):^2 )</span>
 <span id="cb7-3"><a href="#cb7-3"></a><span class="kw">mata</span>: sse = <span class="kw">sum</span>( (<span class="fu">yh</span>:-<span class="kw">mean</span>(<span class="fu">y</span>)):^2 )</span>
@@ -939,7 +981,7 @@ Var(\hat \beta_1 - \beta_1) &amp;= Var \left( \frac {\sum  \tilde x_i u_i }{\sum
 </div>
 </div>
 <p><span class="math inline">\(R^2\)</span>:</p>
-<div class="cell" data-execution_count="7">
+<div id="e5bc43c3" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">mata</span>: sse/sst , 1-ssr/sst</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                1            2
@@ -949,7 +991,7 @@ Var(\hat \beta_1 - \beta_1) &amp;= Var \left( \frac {\sum  \tilde x_i u_i }{\sum
 </div>
 </div>
 <p><span class="math inline">\(\hat\sigma_\beta\)</span></p>
-<div class="cell" data-execution_count="8">
+<div id="59272bfc" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">mata</span>: sig2_u = ssr / (<span class="bn">rows</span>(<span class="fu">y</span>)-2)</span>
 <span id="cb11-2"><a href="#cb11-2"></a><span class="kw">mata</span>: sst_x  = <span class="kw">sum</span>( (x:-<span class="kw">mean</span>(x)):^2 )</span>
 <span id="cb11-3"><a href="#cb11-3"></a><span class="kw">mata</span>: sig_b1 = <span class="fu">sqrt</span>( sig2_u / sst_x )</span>
@@ -963,7 +1005,7 @@ Var(\hat \beta_1 - \beta_1) &amp;= Var \left( \frac {\sum  \tilde x_i u_i }{\sum
 </div>
 </div>
 <p>Stata command:</p>
-<div class="cell" data-execution_count="9">
+<div id="68a9a10e" class="cell" data-execution_count="9">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">regress</span> wage educ</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -990,7 +1032,7 @@ Var(\hat \beta_1 - \beta_1) &amp;= Var \left( \frac {\sum  \tilde x_i u_i }{\sum
 <h2>Expanding on SLRM: Units of Measure</h2>
 <p>First thing you should always consider doing is obtaining some summary statistics.</p>
 <p>without that its difficult o understand the magnitud of the coefficients and their effects.</p>
-<div class="cell" data-execution_count="10">
+<div id="81832ae5" class="cell" data-execution_count="10">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a href="#cb15-1"></a>frause ceosal1, <span class="kw">clear</span></span>
@@ -1034,7 +1076,7 @@ roe             float   %9.0g                 return on equity, 88-90 avg
 </div>
 <p>Now, Changing scales has no effect on <span class="math inline">\(R^2\)</span>, nor the coefficient to Standard error ratio (<span class="math inline">\(t-stat\)</span>)</p>
 <p>It could allow for easier interpretation of the results.</p>
-<div class="cell" data-execution_count="11">
+<div id="ffc0a96d" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">gen</span> saldol=salary*1000</span>
 <span id="cb17-2"><a href="#cb17-2"></a><span class="kw">gen</span> roedec=roe / 100</span>
 <span id="cb17-3"><a href="#cb17-3"></a><span class="kw">qui</span>: <span class="kw">reg</span> salary roe</span>
@@ -1081,7 +1123,7 @@ log(y) &amp;= \beta_0 + \beta_1 log(x) + e \rightarrow &amp; \beta_1 =\frac{\% \
 <li><p>This allows us to estimate other interesting relationships with a the SRM. Specifically Semi-elasticities and Elasticities.</p></li>
 <li><p>This transformation compresses the distribution of a variable, potentially addressing problems of Heteroskedasticity (non-constant variance)</p></li>
 </ul>
-<div class="cell" data-execution_count="12">
+<div id="2dfcc88c" class="cell" data-execution_count="12">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb19-1"><a href="#cb19-1"></a>*** Example 2.10</span>
@@ -1103,7 +1145,7 @@ log(y) &amp;= \beta_0 + \beta_1 log(x) + e \rightarrow &amp; \beta_1 =\frac{\% \
 <p><img data-src="images/fig2_10.png" style="height:70.0%"></p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="cell" data-execution_count="13">
+<div id="295a4e7c" class="cell" data-execution_count="13">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw">set</span> <span class="dv">linesize</span> 255</span>
@@ -1166,7 +1208,7 @@ An additional year of education
 \end{aligned}
 \]</span></p>
 <p>In most Software, you need to either Create the new variable explicitly, or use internal code to make it for you:</p>
-<div class="cell" data-execution_count="14">
+<div id="f7cd2717" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><a href="#cb23-1"></a>frause wage1, <span class="kw">clear</span></span>
 <span id="cb23-2"><a href="#cb23-2"></a>** verify Coding</span>
 <span id="cb23-3"><a href="#cb23-3"></a><span class="kw">ssc</span> install fre, <span class="kw">replace</span></span>
@@ -1229,7 +1271,7 @@ y_i &amp;= \alpha_0 + \tau_{ate} D + u_i
 \end{aligned}
 \]</span></p>
 <p>But we expect <span class="math inline">\(u_i(1)-u_i(0)=0\)</span></p>
-<div class="cell" data-execution_count="15">
+<div id="bf1877c1" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb25-1"><a href="#cb25-1"></a>** Example 2.14</span>
 <span id="cb25-2"><a href="#cb25-2"></a>frause jtrain2, <span class="kw">clear</span></span>
 <span id="cb25-3"><a href="#cb25-3"></a>** Training was Randomly assigned</span>

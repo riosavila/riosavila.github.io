@@ -137,9 +137,9 @@ range x -2 2 20
 gen y = 1 + x + rnormal()
 color_style tableau
 two (scatter  y x) ///
-    (function y = 0.5 + 2*x, range(-2 2)) ///
-    (function y = 2 + 0.5*x, range(-2 2)) ///
-    (function y = 1 + 1*x  , range(-2 2)) , ///
+    (function y = 0.5 + 2*x, range(-1.8 2.4)) ///
+    (function y = 2 + 0.5*x, range(-1.8 2.4)) ///
+    (function y = 1 + 1*x, range(-1.8 2.4)) , ///
     legend(order(2 "y=0.5+2x" 3 "y=2+0.5x" 4 "y=1+1x"))
 graph export images/fig2_1.png , replace width(1000)
 
@@ -147,31 +147,20 @@ gen y1=.5+2*x
 gen y2=2+0.5*x
 gen y3=+1+1*x
 
-
-egen u21 = sum((y-y1)^2)
-egen u22 = sum((y-y2)^2)
-egen u23 = sum((y-y3)^2)
-reg y x
-egen u24 = sum((y-_b[_cons] - _b[x]*x)^2)
-label var u21 "SSR-model 1"
-label var u22 "SSR-model 2"
-label var u23 "SSR-model 3"
-label var u24 "SSR-model 4"
-
 two (scatter y x) ///
-    (function y = 0.5 + 2*x, range(-2 2)) ///
+    (function y = 0.5 + 2*x, range(-1.8 2.4)) ///
     (rspike y y1 x), ylabel(-4/6) ytitle(y) ///
     legend(order(1 "Data" 2 "Prediction " 3 "Residual"))
 graph export images/fig2_2.png , replace width(1000) 
     
 two (scatter y x) ///
-    (function y = 2 + 0.5*x, range(-2 2)) ///
+    (function y = 2 + 0.5*x, range(-1.8 2.4)) ///
     (rspike y y2 x), ylabel(-4/6) ytitle(y) ///
     legend(order(1 "Data" 2 "Prediction " 3 "Residual"))
 graph export images/fig2_3.png , replace width(1000) 
     
 two (scatter y x) ///
-    (function y = 1 + 1*x, range(-2 2)) ///
+    (function y = 1 + 1*x, range(-1.8 2.4)) ///
     (rspike y y3 x) , ylabel(-4/6) ytitle(y) ///
     legend(order(1 "Data" 2 "Prediction " 3 "Residual"))
 graph export images/fig2_4.png , replace width(1000)    
@@ -179,70 +168,32 @@ graph export images/fig2_4.png , replace width(1000)
 reg y x
 predict yh
 two (scatter y x) ///
-    (function y = _b[_cons] + _b[x]*x, range(-2 2)) ///
+    (function y = _b[_cons] + _b[x]*x, range(-1.8 2.4)) ///
     (rspike y yh x) , ylabel(-4/6) ytitle(y) ///
     legend(order(1 "Data" 2 "Prediction " 3 "Residual"))    
 graph export images/fig2_5.png , replace width(1000)    
-clonevar u24x=u24
-graph bar u24 u21 u22 u23 u24x , ///
-   legend(order( 2 "SSR-Model 1" 3 "SSR-Model 2" 4 "SSR-Model 3" 5 "Sample Fit") ///
-   ring(0) pos(2)) xsize(5) ysize(8) scale(1.5) bar(1, color(gs0%0))
-   
-graph export images/fig2_5x.png , replace width(300)    
 ```
 
-:::{.panel-tabset}
-
+::: panel-tabset
 ## Options
 
-::: {.column width="60%"}
 ![](images/fig2_1.png)
-:::
-
-::: {.column width="35%"}
-![](images/fig2_5x.png)
-:::
-
 
 ## Opt1
 
-::: {.column width="60%"}
 ![](images/fig2_2.png)
-:::
-
-::: {.column width="35%"}
-![](images/fig2_5x.png)
-:::
 
 ## Opt2
 
-::: {.column width="60%"}
 ![](images/fig2_3.png)
-:::
-
-::: {.column width="35%"}
-![](images/fig2_5x.png)
-:::
 
 ## Opt3
 
-::: {.column width="60%"}
 ![](images/fig2_4.png)
-:::
-
-::: {.column width="35%"}
-![](images/fig2_5x.png)
-:::
 
 ## Opt4
 
-::: {.column width="60%"}
 ![](images/fig2_5.png)
-:::
-
-::: {.column width="35%"}
-![](images/fig2_5x.png)
-:::
 :::
 
 ## Just a Minimization Problem

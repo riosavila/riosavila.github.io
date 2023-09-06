@@ -32,7 +32,8 @@ When there is need to attend a class online, and you have requested to attend on
    
    [**MRA: Inference and Asymptotics**](rmethods/4_MLRM_IA.qmd)
 
-#### [HomeWork 1](rmethods/homework_1.qmd)
+#### [HomeWork 1](rmethods/homework_1.qmd) [Github](https://classroom.github.com/a/6LB49BSx) 
+
 
 ## Part II: Addressing Problems with MRA
 
@@ -48,7 +49,7 @@ When there is need to attend a class online, and you have requested to attend on
 
    [**Further Problems: Functional form, Missing variables, measurement errors, missing data**](rmethods/7_spec.qmd)
 
-#### [HomeWork 2](rmethods/homework_2.qmd)
+#### [HomeWork 2](rmethods/homework_2.qmd) [Github](https://classroom.github.com/a/adM46duw)
 
 ### MIDTERM!
 

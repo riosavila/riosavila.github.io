@@ -4484,21 +4484,21 @@
     "href": "rmethods/2_SRA.html#visualization",
     "title": "Simple Regression Model",
     "section": "Visualization",
-    "text": "Visualization\n\n\nCode\nset seed 10\nclear\nrange x -2 2 20\ngen y = 1 + x + rnormal()\ncolor_style tableau\ntwo (scatter  y x) ///\n    (function y = 0.5 + 2*x, range(-1.8 2.4)) ///\n    (function y = 2 + 0.5*x, range(-1.8 2.4)) ///\n    (function y = 1 + 1*x, range(-1.8 2.4)) , ///\n    legend(order(2 \"y=0.5+2x\" 3 \"y=2+0.5x\" 4 \"y=1+1x\"))\ngraph export images/fig2_1.png , replace width(1000)\n\ngen y1=.5+2*x\ngen y2=2+0.5*x\ngen y3=+1+1*x\n\ntwo (scatter y x) ///\n    (function y = 0.5 + 2*x, range(-1.8 2.4)) ///\n    (rspike y y1 x), ylabel(-4/6) ytitle(y) ///\n    legend(order(1 \"Data\" 2 \"Prediction \" 3 \"Residual\"))\ngraph export images/fig2_2.png , replace width(1000) \n    \ntwo (scatter y x) ///\n    (function y = 2 + 0.5*x, range(-1.8 2.4)) ///\n    (rspike y y2 x), ylabel(-4/6) ytitle(y) ///\n    legend(order(1 \"Data\" 2 \"Prediction \" 3 \"Residual\"))\ngraph export images/fig2_3.png , replace width(1000) \n    \ntwo (scatter y x) ///\n    (function y = 1 + 1*x, range(-1.8 2.4)) ///\n    (rspike y y3 x) , ylabel(-4/6) ytitle(y) ///\n    legend(order(1 \"Data\" 2 \"Prediction \" 3 \"Residual\"))\ngraph export images/fig2_4.png , replace width(1000)    \n\nreg y x\npredict yh\ntwo (scatter y x) ///\n    (function y = _b[_cons] + _b[x]*x, range(-1.8 2.4)) ///\n    (rspike y yh x) , ylabel(-4/6) ytitle(y) ///\n    legend(order(1 \"Data\" 2 \"Prediction \" 3 \"Residual\"))    \ngraph export images/fig2_5.png , replace width(1000)    \n\n\n\nOptionsOpt1Opt2Opt3Opt4"
+    "text": "Visualization\n\n\nCode\nset seed 10\nclear\nrange x -2 2 20\ngen y = 1 + x + rnormal()\ncolor_style tableau\ntwo (scatter  y x) ///\n    (function y = 0.5 + 2*x, range(-2 2)) ///\n    (function y = 2 + 0.5*x, range(-2 2)) ///\n    (function y = 1 + 1*x  , range(-2 2)) , ///\n    legend(order(2 \"y=0.5+2x\" 3 \"y=2+0.5x\" 4 \"y=1+1x\"))\ngraph export images/fig2_1.png , replace width(1000)\n\ngen y1=.5+2*x\ngen y2=2+0.5*x\ngen y3=+1+1*x\n\n\negen u21 = sum((y-y1)^2)\negen u22 = sum((y-y2)^2)\negen u23 = sum((y-y3)^2)\nreg y x\negen u24 = sum((y-_b[_cons] - _b[x]*x)^2)\nlabel var u21 \"SSR-model 1\"\nlabel var u22 \"SSR-model 2\"\nlabel var u23 \"SSR-model 3\"\nlabel var u24 \"SSR-model 4\"\n\ntwo (scatter y x) ///\n    (function y = 0.5 + 2*x, range(-2 2)) ///\n    (rspike y y1 x), ylabel(-4/6) ytitle(y) ///\n    legend(order(1 \"Data\" 2 \"Prediction \" 3 \"Residual\"))\ngraph export images/fig2_2.png , replace width(1000) \n    \ntwo (scatter y x) ///\n    (function y = 2 + 0.5*x, range(-2 2)) ///\n    (rspike y y2 x), ylabel(-4/6) ytitle(y) ///\n    legend(order(1 \"Data\" 2 \"Prediction \" 3 \"Residual\"))\ngraph export images/fig2_3.png , replace width(1000) \n    \ntwo (scatter y x) ///\n    (function y = 1 + 1*x, range(-2 2)) ///\n    (rspike y y3 x) , ylabel(-4/6) ytitle(y) ///\n    legend(order(1 \"Data\" 2 \"Prediction \" 3 \"Residual\"))\ngraph export images/fig2_4.png , replace width(1000)    \n\nreg y x\npredict yh\ntwo (scatter y x) ///\n    (function y = _b[_cons] + _b[x]*x, range(-2 2)) ///\n    (rspike y yh x) , ylabel(-4/6) ytitle(y) ///\n    legend(order(1 \"Data\" 2 \"Prediction \" 3 \"Residual\"))    \ngraph export images/fig2_5.png , replace width(1000)    \nclonevar u24x=u24\ngraph bar u24 u21 u22 u23 u24x , ///\n   legend(order( 2 \"SSR-Model 1\" 3 \"SSR-Model 2\" 4 \"SSR-Model 3\" 5 \"Sample Fit\") ///\n   ring(0) pos(2)) xsize(5) ysize(8) scale(1.5) bar(1, color(gs0%0))\n   \ngraph export images/fig2_5x.png , replace width(300)    \n\n\n\nOptionsOpt1Opt2Opt3Opt4"
   },
   {
     "objectID": "rmethods/2_SRA.html#just-a-minimization-problem",
     "href": "rmethods/2_SRA.html#just-a-minimization-problem",
     "title": "Simple Regression Model",
     "section": "Just a Minimization Problem",
-    "text": "Just a Minimization Problem\n\\[y_i =\\beta_0 + \\beta_1 x_i + u_i \\rightarrow u_i = y_i - \\beta_0 - \\beta_1 x_i\n\\]\n\\[{\\hat\\beta_0,\\hat\\beta_1} = \\min_{\\beta_0,\\beta_1} = SSR =\\sum_{i=1}^N u_i^2 = \\sum_{i=1}^N (y-\\beta_0 - \\beta_1 x_i)^2 \\\\\n\\]\nFirst Order Conditions: \\[\n\\begin{aligned}\n\\frac{\\partial SSR}{\\partial \\beta_0} &= -2 \\sum (y_i-\\beta_0 - \\beta_1 x_i) = -2 \\sum u_i =0 \\\\\n\\frac{\\partial SSR}{\\partial \\beta_1} &= -2 \\sum x_i (y_i-\\beta_0 - \\beta_1 x_i) =- 2 \\sum x_i u_i =0\n\\end{aligned}\n\\]"
+    "text": "Just a Minimization Problem\n\\[y_i =\\beta_0 + \\beta_1 x_i + u_i \\rightarrow u_i = y_i - \\beta_0 - \\beta_1 x_i\n\\]\n\\[{\\hat\\beta_0,\\hat\\beta_1} = \\min_{\\beta_0,\\beta_1} = SSR =\\sum_{i=1}^N u_i^2 = \\sum_{i=1}^N (y-\\beta_0 - \\beta_1 x_i)^2 \\\\\n\\]\nFirst Order Conditions:\n\\[\n\\begin{aligned}\n\\frac{\\partial SSR}{\\partial \\beta_0} &= -2 \\sum (y_i-\\beta_0 - \\beta_1 x_i) = -2 \\sum u_i =0 \\\\\n\\frac{\\partial SSR}{\\partial \\beta_1} &= -2 \\sum x_i (y_i-\\beta_0 - \\beta_1 x_i) =- 2 \\sum x_i u_i =0\n\\end{aligned}\n\\]"
   },
   {
     "objectID": "rmethods/2_SRA.html#just-a-minimization-problem-1",
     "href": "rmethods/2_SRA.html#just-a-minimization-problem-1",
     "title": "Simple Regression Model",
     "section": "Just a Minimization Problem",
-    "text": "Just a Minimization Problem\nSimilar conditions as before (but now Mathematically):\n\\[\n\\begin{aligned}\n\\sum u_i &=0 \\rightarrow nE(e) = 0 \\\\\n\\sum x_i u_i &=0 \\rightarrow nE(x*e) \\rightarrow  n Cov(x,e) =0  \n\\end{aligned}\n\\]\nAnd the First Order Conditions simply provide a system of \\(k+1\\) equations with \\(k+1\\) unknowns.\n\\[\\begin{aligned}\n\\hat\\beta_0 &= \\bar y - \\beta_1 \\bar x \\\\\n\\hat\\beta_1 &= \\frac{\\sum (x_i-\\bar x)(y_i-\\bar y)}{\\sum (x_i-\\bar x)^2}\n= \\frac{\\hat \\rho \\hat \\sigma_x \\hat \\sigma_y}{\\hat \\sigma_x^2}\n= \\frac{\\hat \\rho \\hat \\sigma_y}{\\hat \\sigma_y}\n\\end{aligned}\n\\]"
+    "text": "Just a Minimization Problem\nSimilar conditions as before (but now Mathematically):\n\\[\\begin{aligned}\n\\sum u_i &=0 \\rightarrow nE(e) = 0 \\\\\n\\sum x_i u_i &=0 \\rightarrow nE(x*e) \\rightarrow  n Cov(x,e) =0  \n\\end{aligned}\n\\]\nAnd the First Order Conditions simply provide a system of \\(k+1\\) equations with \\(k+1\\) unknowns.\n\\[\\begin{aligned}\n\\hat\\beta_0 &= \\bar y - \\beta_1 \\bar x \\\\\n\\hat\\beta_1 &= \\frac{\\sum (x_i-\\bar x)(y_i-\\bar y)}{\\sum (x_i-\\bar x)^2}\n= \\frac{\\hat \\rho \\hat \\sigma_x \\hat \\sigma_y}{\\hat \\sigma_x^2}\n= \\frac{\\hat \\rho \\hat \\sigma_y}{\\hat \\sigma_y}\n\\end{aligned}\n\\]"
   },
   {
     "objectID": "rmethods/2_SRA.html#interpretation",
@@ -5402,5 +5402,61 @@
     "title": "Research Methods: Econometrics I",
     "section": "Zoom Link",
     "text": "Zoom Link\nWhen there is need to attend a class online, and you have requested to attend online, use the following link:\nZoom class"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html",
+    "href": "rmethods/2_SRA.html",
+    "title": "Simple Regression Model",
+    "section": "",
+    "text": "As we saw in the previous slides, one of the important steps when doing empirical analysis is to develop a model that describes reality.\nThis model is quite abstract, as it rarely provides guidance regarding on How should you build your econometric model.\nIn this chapter, we introduce the first (boring) tool to solve this problem. The simple Regression model or SRL"
+  },
+  {
+    "objectID": "rmethods/1_introduction.html",
+    "href": "rmethods/1_introduction.html",
+    "title": "Introduction",
+    "section": "",
+    "text": "Econometrics is an amalgamation of Statistics and Economics, that typically analysis nonexperimental data.\n\nStatistics: Because we make use of numerous properties and mathematical properties to obtain derive Statitics related to our data\nEconomics: Because we aknowledge that we use data that comes from Agents interactions, and as such as subject to erros.\n\nWe use both tools to analyze data from the world around us.\n\nYour Economic intuition to make sense and explain relationships that you find, and mathematics/statistics to obtain estimates that are statistically sound."
+  },
+  {
+    "objectID": "rmethods/1_introduction.html#next-single-linear-regression",
+    "href": "rmethods/1_introduction.html#next-single-linear-regression",
+    "title": "Introduction",
+    "section": "next: Single Linear Regression",
+    "text": "next: Single Linear Regression"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#opt1",
+    "href": "rmethods/2_SRA.html#opt1",
+    "title": "Simple Regression Model",
+    "section": "Opt1",
+    "text": "Opt1"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#opt2",
+    "href": "rmethods/2_SRA.html#opt2",
+    "title": "Simple Regression Model",
+    "section": "Opt2",
+    "text": "Opt2"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#opt3",
+    "href": "rmethods/2_SRA.html#opt3",
+    "title": "Simple Regression Model",
+    "section": "Opt3",
+    "text": "Opt3"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#opt4",
+    "href": "rmethods/2_SRA.html#opt4",
+    "title": "Simple Regression Model",
+    "section": "Opt4",
+    "text": "Opt4"
+  },
+  {
+    "objectID": "rmethods/2_SRA.html#options",
+    "href": "rmethods/2_SRA.html#options",
+    "title": "Simple Regression Model",
+    "section": "Options",
+    "text": "Options"
   }
 ]
