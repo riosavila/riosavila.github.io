@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Fernando Rios-Avila">
+
+<title>Econometrics MSC Levy - Simple Regression Model</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Econometrics MSC Levy</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../adv_class.html" rel="" target="">
+ <span class="menu-text">Adv Methods and Causal Effects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../rm_class.html" rel="" target="">
+ <span class="menu-text">Research Methods: Econometrics I</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-math-refresher" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Math Refresher</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-math-refresher">    
+        <li>
+    <a class="dropdown-item" href="../../mathref/math_1.html" rel="" target="">
+ <span class="dropdown-text">Math Refresher: Basic Calculus</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../mathref/math_2.html" rel="" target="">
+ <span class="dropdown-text">Math Refresher: Basic Linear Algebra</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../mathref/math_3.html" rel="" target="">
+ <span class="dropdown-text">Math Refresher: Basic Statistics and Probability</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../resources.html" rel="" target="">
+ <span class="menu-text">Resources</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-simple-regression-model" id="toc-the-simple-regression-model" class="nav-link active" data-scroll-target="#the-simple-regression-model">The Simple Regression Model</a></li>
+  <li><a href="#what-is-a-simple-regression-model-srm" id="toc-what-is-a-simple-regression-model-srm" class="nav-link" data-scroll-target="#what-is-a-simple-regression-model-srm">What is a Simple Regression Model (SRM) ?</a></li>
+  <li><a href="#from-abstract-to-concrete" id="toc-from-abstract-to-concrete" class="nav-link" data-scroll-target="#from-abstract-to-concrete">From Abstract to Concrete</a></li>
+  <li><a href="#simple-scatter-1" id="toc-simple-scatter-1" class="nav-link" data-scroll-target="#simple-scatter-1">Simple Scatter 1</a></li>
+  <li><a href="#simple-scatter-2" id="toc-simple-scatter-2" class="nav-link" data-scroll-target="#simple-scatter-2">Simple Scatter 2</a></li>
+  <li><a href="#even-more-concrete" id="toc-even-more-concrete" class="nav-link" data-scroll-target="#even-more-concrete">Even more Concrete</a></li>
+  <li><a href="#what-can-we-learn-from-it" id="toc-what-can-we-learn-from-it" class="nav-link" data-scroll-target="#what-can-we-learn-from-it">What can we learn from it?</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  <li><a href="#deriving-coefficients-ordinary-least-squares---ols" id="toc-deriving-coefficients-ordinary-least-squares---ols" class="nav-link" data-scroll-target="#deriving-coefficients-ordinary-least-squares---ols">Deriving Coefficients: Ordinary Least Squares - OLS</a></li>
+  <li><a href="#visualization" id="toc-visualization" class="nav-link" data-scroll-target="#visualization">Visualization</a></li>
+  <li><a href="#just-a-minimization-problem" id="toc-just-a-minimization-problem" class="nav-link" data-scroll-target="#just-a-minimization-problem">Just a Minimization Problem</a></li>
+  <li><a href="#just-a-minimization-problem-1" id="toc-just-a-minimization-problem-1" class="nav-link" data-scroll-target="#just-a-minimization-problem-1">Just a Minimization Problem</a></li>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">Interpretation?</a></li>
+  <li><a href="#visualization-1" id="toc-visualization-1" class="nav-link" data-scroll-target="#visualization-1">Visualization</a></li>
+  <li><a href="#properties-of-the-estimator" id="toc-properties-of-the-estimator" class="nav-link" data-scroll-target="#properties-of-the-estimator">Properties of the Estimator</a></li>
+  <li><a href="#properties-of-the-estimator-1" id="toc-properties-of-the-estimator-1" class="nav-link" data-scroll-target="#properties-of-the-estimator-1">Properties of the Estimator</a></li>
+  <li><a href="#some-discussion" id="toc-some-discussion" class="nav-link" data-scroll-target="#some-discussion">Some Discussion</a></li>
+  <li><a href="#assumptions-for-unbiased-estimations" id="toc-assumptions-for-unbiased-estimations" class="nav-link" data-scroll-target="#assumptions-for-unbiased-estimations">Assumptions: For unbiased estimations</a>
+  <ul class="collapse">
+  <li><a href="#assumption-1" id="toc-assumption-1" class="nav-link" data-scroll-target="#assumption-1">Assumption 1:</a></li>
+  <li><a href="#assumption-2" id="toc-assumption-2" class="nav-link" data-scroll-target="#assumption-2">Assumption 2:</a></li>
+  <li><a href="#assumption-3" id="toc-assumption-3" class="nav-link" data-scroll-target="#assumption-3">Assumption 3:</a></li>
+  <li><a href="#assumption-4" id="toc-assumption-4" class="nav-link" data-scroll-target="#assumption-4">Assumption 4:</a></li>
+  <li><a href="#unbiased-coefficients" id="toc-unbiased-coefficients" class="nav-link" data-scroll-target="#unbiased-coefficients">Unbiased Coefficients:</a></li>
+  <li><a href="#variance-of-ols-estimators" id="toc-variance-of-ols-estimators" class="nav-link" data-scroll-target="#variance-of-ols-estimators">Variance of OLS Estimators</a></li>
+  <li><a href="#assumption-5" id="toc-assumption-5" class="nav-link" data-scroll-target="#assumption-5">Assumption 5:</a></li>
+  <li><a href="#visualization-2" id="toc-visualization-2" class="nav-link" data-scroll-target="#visualization-2">Visualization</a></li>
+  <li><a href="#sampling-variance-of-ols" id="toc-sampling-variance-of-ols" class="nav-link" data-scroll-target="#sampling-variance-of-ols">Sampling Variance of OLS</a></li>
+  <li><a href="#last-piece-of-the-puzze-sigma2_u" id="toc-last-piece-of-the-puzze-sigma2_u" class="nav-link" data-scroll-target="#last-piece-of-the-puzze-sigma2_u">Last Piece of the Puzze <span class="math inline">\(\sigma^2_u\)</span></a></li>
+  </ul></li>
+  <li><a href="#another-break" id="toc-another-break" class="nav-link" data-scroll-target="#another-break">Another Break?</a>
+  <ul class="collapse">
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
+  <li><a href="#expanding-on-slrm-units-of-measure" id="toc-expanding-on-slrm-units-of-measure" class="nav-link" data-scroll-target="#expanding-on-slrm-units-of-measure">Expanding on SLRM: Units of Measure</a></li>
+  <li><a href="#expanding-on-slrm-nonlinearities" id="toc-expanding-on-slrm-nonlinearities" class="nav-link" data-scroll-target="#expanding-on-slrm-nonlinearities">Expanding on SLRM: Nonlinearities</a></li>
+  <li><a href="#expanding-on-slrm-using-dummies" id="toc-expanding-on-slrm-using-dummies" class="nav-link" data-scroll-target="#expanding-on-slrm-using-dummies">Expanding on SLRM: Using Dummies</a></li>
+  </ul></li>
+  <li><a href="#thats-all-for-today" id="toc-thats-all-for-today" class="nav-link" data-scroll-target="#thats-all-for-today">Thats all for today</a>
+  <ul class="collapse">
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="2_SRA.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Simple Regression Model</h1>
+<p class="subtitle lead">The first tool of Many</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Fernando Rios-Avila </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+<section id="the-simple-regression-model" class="level2">
+<h2 class="anchored" data-anchor-id="the-simple-regression-model">The Simple Regression Model</h2>
+<ul>
+<li><p>As we saw in the previous slides, one of the important steps when doing empirical analysis is to develop a model that describes reality.</p></li>
+<li><p>This model is quite abstract, as it rarely provides guidance regarding on How should you build your econometric model.</p></li>
+<li><p>In this chapter, we introduce the first (boring) tool to solve this problem. The simple Regression model or SRL</p></li>
+</ul>
+</section>
+<section id="what-is-a-simple-regression-model-srm" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-a-simple-regression-model-srm">What is a Simple Regression Model (SRM) ?</h2>
+<ul>
+<li><p>A Simple regression model is known as such because it aims to capture the relationship between <strong>two</strong> variables.</p></li>
+<li><p>It does not mean it ignores other factors, but rather, bundles them together as part of a <strong>Bag of Holding</strong> or error. In its most flexible setup, a simple regression model can be written as:</p></li>
+</ul>
+<p><span class="math display">\[y = f(x,u)
+\]</span></p>
+<p>This model simply says that there is some relationship between:</p>
+<ul>
+<li><p><span class="math inline">\(y\)</span>, your outcome, dependent, explained, response, variable</p></li>
+<li><p>and <span class="math inline">\(x\)</span>, your independent, explanatory, regression, variable</p></li>
+</ul>
+<p>whereas everything else not considered is assumed to be part of the unobserved <span class="math inline">\(u\)</span>.</p>
+</section>
+<section id="from-abstract-to-concrete" class="level2">
+<h2 class="anchored" data-anchor-id="from-abstract-to-concrete">From Abstract to Concrete</h2>
+<ul>
+<li><p>A good reason why one should start thinking about the model as shown earlier is to acknowledge that we <strong>Do not know</strong> the functional form between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>.</p></li>
+<li><p>Further, we don’t even know how <span class="math inline">\(u\)</span> interacts with <span class="math inline">\(x\)</span>.</p></li>
+</ul>
+<p>This brings us to the first step one should do (almost always) when analyzing data…Create a plot to see if there is any relationship in the data</p>
+</section>
+<section id="simple-scatter-1" class="level2">
+<h2 class="anchored" data-anchor-id="simple-scatter-1">Simple Scatter 1</h2>
+<div id="8b411a1b" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>** To download <span class="ot">all</span> Wooldrige Files</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>: <span class="kw">ssc</span> install frause, <span class="kw">replace</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>** <span class="kw">for</span> some additional <span class="kw">color</span> schemes</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>: <span class="kw">ssc</span> install color_style</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="dv">scheme</span> white2</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>color_style tableau</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>** Loads file wage1</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>frause wage1, <span class="kw">clear</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="kw">scatter</span> wage educ</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<style>div.jp-Notebook .datagrid-container {min-height: 448px; }</style>
+</div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="2_SRA_files/figure-html/cell-2-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>We observe a positive relationship between Wages and years of education</li>
+<li>This relationship does not seem to be linear</li>
+</ul>
+</section>
+<section id="simple-scatter-2" class="level2">
+<h2 class="anchored" data-anchor-id="simple-scatter-2">Simple Scatter 2</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/paste-3.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="even-more-concrete" class="level2">
+<h2 class="anchored" data-anchor-id="even-more-concrete">Even more Concrete</h2>
+<ul>
+<li>This first “model” provides little guidance for the modeling itself.</li>
+<li>The Simple Linear Regression Model corrects for that, establishing a specific relationship between the variables of interest and the error: <span class="math display">\[y = \beta_0 + \beta_1 x + u\]</span></li>
+</ul>
+<p>This model has a lot packed in.</p>
+<ul>
+<li>It imposes a relationship between <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> (linear)</li>
+<li>And addresses the fact that there could be other factors not considered <span class="math inline">\(u\)</span>. Impossing the assumption they are additive errors.</li>
+</ul>
+<p>It also assumes the population relationships: <span class="math display">\[E(y|x) = \beta_0 + \beta_1 x\]</span></p>
+</section>
+<section id="what-can-we-learn-from-it" class="level2">
+<h2 class="anchored" data-anchor-id="what-can-we-learn-from-it">What can we learn from it?</h2>
+<p><span class="math display">\[E(y|x) = \beta_0 + \beta_1 x\]</span></p>
+<p>This is your Population Regresson function. To interpret it, we need to assume <span class="math inline">\(u\)</span> is fixed (<em>ceteris paribus</em>). This implies that <span class="math display">\[E(u|x)=c=0\]</span></p>
+<p>Which says that the errors are <strong>mean independent</strong> of <span class="math inline">\(x\)</span>. Thus, for all practical purposes, when <span class="math inline">\(x\)</span> changes, we will assume <span class="math inline">\(u\)</span> is as good as fixed.</p>
+<p>Under these conditions, we can interpret the coefficients:</p>
+<ul>
+<li><span class="math inline">\(\beta_0\)</span> is the constant, or expected outcome when <span class="math inline">\(x=0\)</span>.</li>
+<li><span class="math inline">\(\beta_1\)</span> is the slope of <span class="math inline">\(x\)</span>, or the expected change in <span class="math inline">\(y\)</span> when <span class="math inline">\(x\)</span> changes in 1 unit:</li>
+</ul>
+<p><span class="math display">\[\Delta y = \beta_1 \Delta x \rightarrow \frac{\Delta y}{\Delta x} = \beta_1
+\]</span></p>
+</section>
+<section id="example" class="level2">
+<h2 class="anchored" data-anchor-id="example">Example</h2>
+<ul>
+<li>Soybean and Yield Fertilizer:</li>
+</ul>
+<p><span class="math display">\[yield = \beta_0 + \beta_1 fertilizer + u\]</span></p>
+<p><span class="math inline">\(\beta_1\)</span> Effect of Fertilizer (an additional dosage) on Soybean Yield</p>
+<ul>
+<li>Simple wage equation</li>
+</ul>
+<p><span class="math display">\[wage = \beta_0 + \beta_1 educ + u
+\]</span></p>
+<p><span class="math inline">\(\beta_1\)</span> Change in wages given an additional year of education.</p>
+</section>
+<section id="deriving-coefficients-ordinary-least-squares---ols" class="level2">
+<h2 class="anchored" data-anchor-id="deriving-coefficients-ordinary-least-squares---ols">Deriving Coefficients: Ordinary Least Squares - OLS</h2>
+<ul>
+<li><p>There are an infinite number of candiates for <span class="math inline">\(\beta_0 \&amp; \beta_1\)</span>.</p></li>
+<li><p>OLS, is <strong>one</strong> of the multiple methods that allows us to estimate the coefficients of a SLRM<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p></li>
+<li><p>The goal is to Choose parameters <span class="math inline">\(\beta={\beta_0,\beta_1}\)</span> that “minimizes” the Squared of the residuals.</p>
+<ul>
+<li>In other words, OLS aims to maximize Explantion power by minimizing errors.</li>
+</ul></li>
+</ul>
+</section>
+<section id="visualization" class="level2">
+<h2 class="anchored" data-anchor-id="visualization">Visualization</h2>
+<div id="56456af6" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="dv">seed</span> 10</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">clear</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">range</span> x -2 2 20</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> <span class="fu">y</span> = 1 + x + rnormal()</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>color_style tableau</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> (<span class="kw">scatter</span>  <span class="fu">y</span> x) <span class="co">///</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">function</span> <span class="fu">y</span> = 0.5 + 2*x, <span class="kw">range</span>(-1.8 2.4)) <span class="co">///</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">function</span> <span class="fu">y</span> = 2 + 0.5*x, <span class="kw">range</span>(-1.8 2.4)) <span class="co">///</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">function</span> <span class="fu">y</span> = 1 + 1*x, <span class="kw">range</span>(-1.8 2.4)) , <span class="co">///</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="bn">legend</span>(<span class="kw">order</span>(2 <span class="st">"y=0.5+2x"</span> 3 <span class="st">"y=2+0.5x"</span> 4 <span class="st">"y=1+1x"</span>))</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_1.png , <span class="kw">replace</span> <span class="kw">width</span>(1000)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> y1=.5+2*x</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> y2=2+0.5*x</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> y3=+1+1*x</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> (<span class="kw">scatter</span> <span class="fu">y</span> x) <span class="co">///</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">function</span> <span class="fu">y</span> = 0.5 + 2*x, <span class="kw">range</span>(-1.8 2.4)) <span class="co">///</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    (rspike <span class="fu">y</span> y1 x), <span class="kw">ylabel</span>(-4/6) <span class="bn">ytitle</span>(<span class="fu">y</span>) <span class="co">///</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"Data"</span> 2 <span class="st">"Prediction "</span> 3 <span class="st">"Residual"</span>))</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_2.png , <span class="kw">replace</span> <span class="kw">width</span>(1000) </span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> (<span class="kw">scatter</span> <span class="fu">y</span> x) <span class="co">///</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">function</span> <span class="fu">y</span> = 2 + 0.5*x, <span class="kw">range</span>(-1.8 2.4)) <span class="co">///</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    (rspike <span class="fu">y</span> y2 x), <span class="kw">ylabel</span>(-4/6) <span class="bn">ytitle</span>(<span class="fu">y</span>) <span class="co">///</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"Data"</span> 2 <span class="st">"Prediction "</span> 3 <span class="st">"Residual"</span>))</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_3.png , <span class="kw">replace</span> <span class="kw">width</span>(1000) </span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> (<span class="kw">scatter</span> <span class="fu">y</span> x) <span class="co">///</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">function</span> <span class="fu">y</span> = 1 + 1*x, <span class="kw">range</span>(-1.8 2.4)) <span class="co">///</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    (rspike <span class="fu">y</span> y3 x) , <span class="kw">ylabel</span>(-4/6) <span class="bn">ytitle</span>(<span class="fu">y</span>) <span class="co">///</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"Data"</span> 2 <span class="st">"Prediction "</span> 3 <span class="st">"Residual"</span>))</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_4.png , <span class="kw">replace</span> <span class="kw">width</span>(1000)    </span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> <span class="fu">y</span> x</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="kw">predict</span> <span class="fu">yh</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> (<span class="kw">scatter</span> <span class="fu">y</span> x) <span class="co">///</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">function</span> <span class="fu">y</span> = _b[<span class="dt">_cons</span>] + _b[x]*x, <span class="kw">range</span>(-1.8 2.4)) <span class="co">///</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    (rspike <span class="fu">y</span> <span class="fu">yh</span> x) , <span class="kw">ylabel</span>(-4/6) <span class="bn">ytitle</span>(<span class="fu">y</span>) <span class="co">///</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"Data"</span> 2 <span class="st">"Prediction "</span> 3 <span class="st">"Residual"</span>))    </span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_5.png , <span class="kw">replace</span> <span class="kw">width</span>(1000)    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Options</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Opt1</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Opt2</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">Opt3</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-5" role="tab" aria-controls="tabset-1-5" aria-selected="false">Opt4</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p><img src="images/fig2_1.png" class="img-fluid"></p>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p><img src="images/fig2_2.png" class="img-fluid"></p>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<p><img src="images/fig2_3.png" class="img-fluid"></p>
+</div>
+<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
+<p><img src="images/fig2_4.png" class="img-fluid"></p>
+</div>
+<div id="tabset-1-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-5-tab">
+<p><img src="images/fig2_5.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="just-a-minimization-problem" class="level2">
+<h2 class="anchored" data-anchor-id="just-a-minimization-problem">Just a Minimization Problem</h2>
+<p><span class="math display">\[y_i =\beta_0 + \beta_1 x_i + u_i \rightarrow u_i = y_i - \beta_0 - \beta_1 x_i
+\]</span></p>
+<p><span class="math display">\[{\hat\beta_0,\hat\beta_1} = \min_{\beta_0,\beta_1} = SSR =\sum_{i=1}^N u_i^2 = \sum_{i=1}^N (y-\beta_0 - \beta_1 x_i)^2 \\
+\]</span></p>
+<p>First Order Conditions:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{\partial SSR}{\partial \beta_0} &amp;= -2 \sum (y_i-\beta_0 - \beta_1 x_i) = -2 \sum u_i =0 \\
+\frac{\partial SSR}{\partial \beta_1} &amp;= -2 \sum x_i (y_i-\beta_0 - \beta_1 x_i) =- 2 \sum x_i u_i =0
+\end{aligned}
+\]</span></p>
+</section>
+<section id="just-a-minimization-problem-1" class="level2">
+<h2 class="anchored" data-anchor-id="just-a-minimization-problem-1">Just a Minimization Problem</h2>
+<p>Similar conditions as before (but now Mathematically):</p>
+<p><span class="math display">\[\begin{aligned}
+\sum u_i &amp;=0 \rightarrow nE(e) = 0 \\
+\sum x_i u_i &amp;=0 \rightarrow nE(x*e) \rightarrow  n Cov(x,e) =0  
+\end{aligned}
+\]</span></p>
+<p>And the First Order Conditions simply provide a system of <span class="math inline">\(k+1\)</span> equations with <span class="math inline">\(k+1\)</span> unknowns.</p>
+<p><span class="math display">\[\begin{aligned}
+\hat\beta_0 &amp;= \bar y - \beta_1 \bar x \\
+\hat\beta_1 &amp;= \frac{\sum (x_i-\bar x)(y_i-\bar y)}{\sum (x_i-\bar x)^2}
+= \frac{\hat \rho \hat \sigma_x \hat \sigma_y}{\hat \sigma_x^2}
+= \frac{\hat \rho \hat \sigma_y}{\hat \sigma_y}
+\end{aligned}
+\]</span></p>
+</section>
+<section id="interpretation" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation">Interpretation?</h2>
+<p><span class="math display">\[\hat\beta_0 = \bar y - \hat \beta_1 \bar x\]</span></p>
+<ul>
+<li><span class="math inline">\(\beta_0\)</span> is usually estimated as a “residual”, thus is often of little of no interest.
+<ul>
+<li>Expected outcome when <span class="math inline">\(X=0\)</span></li>
+</ul></li>
+</ul>
+<p><span class="math display">\[
+\hat\beta_1 = \frac {cov(x,y)}{var(x)}= \hat \rho\frac{ \hat \sigma_x \hat \sigma_y}{\hat \sigma_x^2}
+= \hat \rho\frac{ \hat \sigma_y}{\hat \sigma_x}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\beta_1\)</span> is a slope, which is directly related to the correlation between <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span>.
+<ul>
+<li>It can only be estimated if <span class="math inline">\(\sigma_x\)</span>&gt;&gt;0</li>
+</ul></li>
+</ul>
+<p>Also, this <span class="math inline">\(\hat y = \hat \beta_0 + \hat \beta_1 x\)</span> becomes your sample regression function</p>
+<ul>
+<li>where <span class="math inline">\(\hat y\)</span> is the fitted value of <span class="math inline">\(y\)</span> (proyection or prediction), given some value of <span class="math inline">\(x\)</span>.</li>
+</ul>
+</section>
+<section id="visualization-1" class="level2">
+<h2 class="anchored" data-anchor-id="visualization-1">Visualization</h2>
+<div id="6f23d7b3" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> y0 = 0</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> (<span class="kw">scatter</span> <span class="fu">y</span> x) <span class="co">///</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">function</span> <span class="fu">y</span> = _b[<span class="dt">_cons</span>] + _b[x]*x, <span class="kw">range</span>(-2.1 2.1)) <span class="co">///</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    (rspike <span class="fu">y</span> y0 x, <span class="kw">color</span>(gs9%50) lw(1)) <span class="co">///</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    , <span class="kw">ylabel</span>(-4/6) <span class="bn">ytitle</span>(<span class="fu">y</span>) <span class="kw">yline</span>(0) <span class="co">///</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="bn">title</span>(<span class="st">"Data"</span>)   <span class="bn">legend</span>(<span class="kw">off</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_6.png, <span class="kw">replace</span> <span class="kw">width</span>(1000)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> (<span class="kw">scatter</span> <span class="fu">y</span> x) <span class="co">///</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">function</span> <span class="fu">y</span> = _b[<span class="dt">_cons</span>] + _b[x]*x, <span class="kw">range</span>(-2.1 2.1)) <span class="co">///</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    (rspike <span class="fu">yh</span> y0 x, <span class="kw">color</span>(gs9%50) lw(1)) <span class="co">///</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    , <span class="kw">ylabel</span>(-4/6) <span class="bn">ytitle</span>(<span class="fu">y</span>) <span class="kw">yline</span>(0) <span class="co">///</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="bn">title</span>(<span class="st">"Prediction"</span>) <span class="bn">legend</span>(<span class="kw">off</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_7.png, <span class="kw">replace</span> <span class="kw">width</span>(1000) </span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> (<span class="kw">scatter</span> <span class="fu">y</span> x) <span class="co">///</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">function</span> <span class="fu">y</span> = _b[<span class="dt">_cons</span>] + _b[x]*x, <span class="kw">range</span>(-2.1 2.1)) <span class="co">///</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    (rspike <span class="fu">y</span> <span class="fu">yh</span> x, <span class="kw">color</span>(gs9%50) lw(1)) <span class="co">///</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    , <span class="kw">ylabel</span>(-4/6) <span class="bn">ytitle</span>(<span class="fu">y</span>) <span class="kw">yline</span>(0) <span class="co">///</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="bn">title</span>(<span class="st">"Residual"</span>)   <span class="bn">legend</span>(<span class="kw">off</span>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_8.png, <span class="kw">replace</span> <span class="kw">width</span>(1000) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Data</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Prediction</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false">Residuals</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p><img src="images/fig2_6.png" class="img-fluid"></p>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<p><img src="images/fig2_7.png" class="img-fluid"></p>
+</div>
+<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
+<p><img src="images/fig2_8.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="properties-of-the-estimator" class="level2">
+<h2 class="anchored" data-anchor-id="properties-of-the-estimator">Properties of the Estimator</h2>
+<ol type="1">
+<li>Based on F.O.C., we know the following:</li>
+</ol>
+<p><span class="math display">\[
+\sum_i^n \hat u_i = 0 \ \&amp; \ \sum_i^n x_i \hat u_i = 0
+\]</span></p>
+<p>In average <span class="math inline">\(u_i\)</span> is zero, and uncorrelated with <span class="math inline">\(x\)</span>, and <span class="math inline">\(\bar y , \bar x\)</span> <strong>is</strong> on the regression line</p>
+<ol start="2" type="1">
+<li>By construction <span class="math inline">\(y_i = \hat y_i + \hat u_i\)</span>, so that</li>
+</ol>
+<p><span class="math display">\[
+\begin{aligned}
+    \sum_{i=1}^n(y_i-\bar y)^2 &amp;=
+    \sum_{i=1}^n(y_i-\hat y)^2  +
+    \sum_{i=1}^n(\hat y-\bar y)^2  \\
+    SST &amp;= SSE + SSR
+\end{aligned}
+\]</span></p>
+</section>
+<section id="properties-of-the-estimator-1" class="level2">
+<h2 class="anchored" data-anchor-id="properties-of-the-estimator-1">Properties of the Estimator</h2>
+<ol start="4" type="1">
+<li>Goodness of FIT is defined as</li>
+</ol>
+<p><span class="math display">\[R^2= 1-\frac {SSR} {SST}=\frac {SSE} {SST}\]</span></p>
+<ul>
+<li>How much of the Data variation (SST) is explained by the model (SSE), or</li>
+<li>1-amount not explained by the model</li>
+</ul>
+</section>
+<section id="some-discussion" class="level2">
+<h2 class="anchored" data-anchor-id="some-discussion">Some Discussion</h2>
+<p>We now know how to estimate coefficients given some data, but we need to ask the questions:</p>
+<ul>
+<li><p>How do we know if the estimated coefficients are indeed appropriate for the population parameters?</p></li>
+<li><p>How can we know the precision (or lack there off) of the estimates</p></li>
+<li><p>Remember, <span class="math inline">\(\hat \beta's\)</span> depend on the sample. Different Samples will lead to different estimates. Thus <span class="math inline">\(\hat \beta's\)</span> are random.</p></li>
+<li><p>In repeated sampling scenarios, we could empirically obtain the distribution of the estimated parameters, and verify if estimations are unbiased.</p></li>
+<li><p>However, we can also do that based on analytical solutions. Lets see those assumptions</p></li>
+</ul>
+</section>
+<section id="assumptions-for-unbiased-estimations" class="level1">
+<h1>Assumptions: For unbiased estimations</h1>
+<p>An estimator is said to be unbiased if <span class="math inline">\(E(\hat\beta)=\beta\)</span></p>
+<section id="assumption-1" class="level2">
+<h2 class="anchored" data-anchor-id="assumption-1">Assumption 1:</h2>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Linear in Parameters
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We need to assume the population model is linear in parameters:</p>
+<p><span class="math display">\[y_i = \beta_0 + \beta_1 x_i + u_i\]</span></p>
+</div>
+</div>
+<p>In other words, we need to assume that the model we chose is a good representation of what the true population model is.</p>
+<ul>
+<li><p>Additive error, with a linear relationship between <span class="math inline">\(x_i\)</span> on <span class="math inline">\(y_i\)</span>.</p></li>
+<li><p>We can make it more flexible using some transformations of <span class="math inline">\(x_i\)</span>.</p></li>
+</ul>
+</section>
+<section id="assumption-2" class="level2">
+<h2 class="anchored" data-anchor-id="assumption-2">Assumption 2:</h2>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Random Sampling
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The data we are using is collected from a Random sample of the population, for which the linear model is valid.</p>
+</div>
+</div>
+<ul>
+<li>Data should be representative from the population (for whom the Linear model Holds)</li>
+<li>The Data Sampling should not depend the data collected, specially the dependent variable.</li>
+<li>Also helps to ensure units “unobservables” <span class="math inline">\(u's\)</span> are independent from each other.</li>
+</ul>
+</section>
+<section id="assumption-3" class="level2">
+<h2 class="anchored" data-anchor-id="assumption-3">Assumption 3:</h2>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+There is variation in the explanatory variable
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math display">\[\sum_{i=1}^n (x_i - \bar x)^2 &gt;0
+\]</span></p>
+</div>
+</div>
+<p>If there is no variation in the data, there are no slopes to estmate, and a solution cannot be found to the linear model.</p>
+</section>
+<section id="assumption-4" class="level2">
+<h2 class="anchored" data-anchor-id="assumption-4">Assumption 4:</h2>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Zero Conditional Mean
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math display">\[E(u_i)= E(u_i|x_i) = 0
+\]</span></p>
+</div>
+</div>
+<ul>
+<li><p>We expect unobserved factors <span class="math inline">\(u_i\)</span> to have a zero average effect on the outcome. This helps identify the constant <span class="math inline">\(\beta_0\)</span>.</p></li>
+<li><p>We also expect that the expected value of <span class="math inline">\(u_i\)</span> to be zero for any value of <span class="math inline">\(x\)</span>.</p></li>
+</ul>
+</section>
+<section id="unbiased-coefficients" class="level2">
+<h2 class="anchored" data-anchor-id="unbiased-coefficients">Unbiased Coefficients:</h2>
+<p>If Assumptions 1-4 Hold, then OLS allows you to estimate the coefficents of the linear Regression model.</p>
+<p><span class="math display">\[\hat \beta_1 = \frac {\sum \tilde x_i \tilde y_i}{\sum \tilde x_i^2} , \tilde x_i=x_i - \bar x
+\]</span></p>
+<p><span class="math display">\[\begin{aligned}
+\hat \beta_1 &amp;= \frac {\sum \tilde x_i (\beta_1 \tilde x_i +e)}{\sum \tilde x_i^2} = \beta_1 \frac {\sum  \tilde x_i^2 }{\sum \tilde x_i^2} + \frac {\sum  \tilde x_i u_i }{\sum \tilde x_i^2}  \\  
+E(\hat \beta_1) &amp;= \beta_1
+\end{aligned}
+\]</span></p>
+<p>While coefficients can be different for each sample, In average, they will be the same as the true parameters.</p>
+</section>
+<section id="variance-of-ols-estimators" class="level2">
+<h2 class="anchored" data-anchor-id="variance-of-ols-estimators">Variance of OLS Estimators</h2>
+<p>How precise are the estimates?</p>
+<p><span class="math display">\[\hat \beta_1 = \beta_1 + \frac {\sum  \tilde x_i u_i }{\sum \tilde x_i^2}
+\]</span></p>
+<ul>
+<li><p>If we assume <span class="math inline">\(x's\)</span> are assume fixed, the distribution from <span class="math inline">\(\beta's\)</span> will depend only on the variation of the error <span class="math inline">\(u_i\)</span>.</p></li>
+<li><p>Thus we need to impose an additional assumption on this errors, to estimate the variance of <span class="math inline">\(\beta's\)</span>. (at least for convinience)</p></li>
+</ul>
+</section>
+<section id="assumption-5" class="level2">
+<h2 class="anchored" data-anchor-id="assumption-5">Assumption 5:</h2>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Errors are Homoskedastic
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math display">\[E(u_i^2)= E(u_i ^2 | x_i) = \sigma_u ^2
+\]</span></p>
+</div>
+</div>
+<ul>
+<li>This simplifying assumption states that the “distribution” of the errors is constant, regardless of <span class="math inline">\(x\)</span>.</li>
+</ul>
+</section>
+<section id="visualization-2" class="level2">
+<h2 class="anchored" data-anchor-id="visualization-2">Visualization</h2>
+<div id="d8de744e" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">clear</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="dv">scheme</span> white2</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="kw">obs</span> 1000</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> x = runiform(-2 , 2)    </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> u = rnormal()</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> y1 = x + u</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> y2 = x + u*<span class="fu">abs</span>(x)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> y3 = x + u*(2-<span class="fu">abs</span>(x))</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> y4 = x + u*(<span class="fu">sin</span>(2*x))</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> <span class="kw">scatter</span> y1 x, <span class="bn">name</span>(m1, <span class="kw">replace</span>)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="kw">scatter</span> y2 x, <span class="bn">name</span>(m2, <span class="kw">replace</span>)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="kw">scatter</span> y3 x, <span class="bn">name</span>(m3, <span class="kw">replace</span>)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="kw">scatter</span> y4 x, <span class="bn">name</span>(m4, <span class="kw">replace</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="kw">graph</span> <span class="bn">combine</span> m1 m2 m3 m4</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_9.png, <span class="kw">replace</span> <span class="kw">width</span>(1000)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="images/fig2_9.png" class="img-fluid"></p>
+</section>
+<section id="sampling-variance-of-ols" class="level2">
+<h2 class="anchored" data-anchor-id="sampling-variance-of-ols">Sampling Variance of OLS</h2>
+<p>We Start with:</p>
+<p><span class="math display">\[
+\hat \beta_1 - \beta_1 = \frac {\sum  \tilde x_i u_i }{\sum \tilde x_i^2}
+\]</span></p>
+<p>And apply the Variance operator:</p>
+<p><span class="math display">\[\begin{aligned}
+Var(\hat \beta_1 - \beta_1) &amp;= Var \left( \frac {\sum  \tilde x_i u_i }{\sum \tilde x_i^2} \right)=
+            \frac{\tilde x_1 Var(u_i)}{(\sum x_i^2)^2}+\frac{\tilde x_2^2 Var(u_i)}{(\sum x_i^2)^2}+...+\frac{\tilde x_n^2 Var(u_i)}{(\sum x_i^2)^2} \\
+            &amp;= \frac {\sum  \tilde x_i^2 Var( u_i) }{(\sum \tilde x_i^2)^2} =\frac {\sum  \tilde x_i^2 \sigma_u^2 }{(\sum \tilde x_i^2)^2} \\
+            &amp;= \sigma_u^2 \frac {\sum  \tilde x_i^2 }{(\sum \tilde x_i^2)^2} = \frac{\sigma_u^2}{\sum \tilde x_i^2}
+\end{aligned}
+\]</span></p>
+</section>
+<section id="last-piece-of-the-puzze-sigma2_u" class="level2">
+<h2 class="anchored" data-anchor-id="last-piece-of-the-puzze-sigma2_u">Last Piece of the Puzze <span class="math inline">\(\sigma^2_u\)</span></h2>
+<p>To estimate <span class="math inline">\(Var(\beta's)\)</span> we also need <span class="math inline">\(\sigma^2_u\)</span>. But <span class="math inline">\(u\)</span> is not observed, since we only observe <span class="math inline">\(\hat u\)</span>.</p>
+<p><span class="math display">\[\hat u_i = u_i + (\beta_0 - \hat \beta_0) + (\beta_1 - \hat \beta_1)*x_i
+\]</span></p>
+<p>And since to estimate <span class="math inline">\(\hat u_i\)</span> we need to estimate <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>, we “lose” degrees of freedom that will require adjustment.</p>
+<p>So, we use the following:</p>
+<p><span class="math display">\[\hat \sigma^2_u = \frac {1}{N-2} \sum_{i=1}^N \hat u_i^2
+\]</span></p>
+</section>
+</section>
+<section id="another-break" class="level1">
+<h1>Another Break?</h1>
+<section id="examples" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="examples">Examples</h2>
+<p>Deriving OLS <span class="math inline">\(\beta's\)</span>:</p>
+<div id="46d6f9ab" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>** Wage and Education: Example 2.7</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>frause wage1, <span class="kw">clear</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: <span class="fu">y</span> = st_data(.,<span class="st">"wage"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: x = st_data(.,<span class="st">"educ"</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: b1 = <span class="kw">sum</span>( (x :- <span class="kw">mean</span>(x)) :* (<span class="fu">y</span> :- <span class="kw">mean</span>(<span class="fu">y</span>)) ) / <span class="kw">sum</span>( (x :- <span class="kw">mean</span>(x)):^2 ) </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: b0 = <span class="kw">mean</span>(<span class="fu">y</span>)-<span class="kw">mean</span>(x)*b1</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: b1, b0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 1             2
+    +-----------------------------+
+  1 |  .5413592547   -.904851612  |
+    +-----------------------------+</code></pre>
+</div>
+</div>
+<p>SST = SSE + SSR</p>
+<div id="78cc9d6d" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: <span class="fu">yh</span>  = b0:+b1*x</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: sst = <span class="kw">sum</span>( (<span class="fu">y</span>:-<span class="kw">mean</span>(<span class="fu">y</span>)):^2 )</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: sse = <span class="kw">sum</span>( (<span class="fu">yh</span>:-<span class="kw">mean</span>(<span class="fu">y</span>)):^2 )</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: ssr = <span class="kw">sum</span>( (<span class="fu">y</span>:-<span class="fu">yh</span>):^2 )</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: sst, sse, ssr, sse + ssr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 1             2             3             4
+    +---------------------------------------------------------+
+  1 |  7160.414291   1179.732036   5980.682255   7160.414291  |
+    +---------------------------------------------------------+</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(R^2\)</span>:</p>
+<div id="cf9ad331" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: sse/sst , 1-ssr/sst</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                1            2
+    +---------------------------+
+  1 |  .164757511   .164757511  |
+    +---------------------------+</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(\hat\sigma_\beta\)</span></p>
+<div id="2f7ded63" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: sig2_u = ssr / (<span class="bn">rows</span>(<span class="fu">y</span>)-2)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: sst_x  = <span class="kw">sum</span>( (x:-<span class="kw">mean</span>(x)):^2 )</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: sig_b1 = <span class="fu">sqrt</span>( sig2_u / sst_x )</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: sig_b0 = <span class="fu">sqrt</span>( sig2_u * <span class="kw">mean</span>(x:^2) / sst_x ) </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: sig_b1 , sig_b0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 1             2
+    +-----------------------------+
+  1 |  .0532480368   .6849678211  |
+    +-----------------------------+</code></pre>
+</div>
+</div>
+<p>Stata command:</p>
+<div id="31f33606" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">regress</span> wage educ</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Source |       SS           df       MS      Number of obs   =       526
+-------------+----------------------------------   F(1, 524)       =    103.36
+       Model |  1179.73204         1  1179.73204   Prob &gt; F        =    0.0000
+    Residual |  5980.68225       524  11.4135158   R-squared       =    0.1648
+-------------+----------------------------------   Adj R-squared   =    0.1632
+       Total |  7160.41429       525  13.6388844   Root MSE        =    3.3784
+
+------------------------------------------------------------------------------
+        wage | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        educ |   .5413593    .053248    10.17   0.000     .4367534    .6459651
+       _cons |  -.9048516   .6849678    -1.32   0.187    -2.250472    .4407687
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="expanding-on-slrm-units-of-measure" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="expanding-on-slrm-units-of-measure">Expanding on SLRM: Units of Measure</h2>
+<p>First thing you should always consider doing is obtaining some summary statistics.</p>
+<p>without that its difficult o understand the magnitud of the coefficients and their effects.</p>
+<div id="3925e451" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>frause ceosal1, <span class="kw">clear</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">display</span> <span class="st">"***Variables Description***"</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="kw">des</span> salary roe</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="kw">display</span> <span class="st">"***Summary Statistics***"</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="kw">sum</span> salary roe</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="kw">display</span> <span class="st">"***Simple Regression***"</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> salary roe</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>***Variables Description***
+
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
+-------------------------------------------------------------------------------
+salary          int     %9.0g                 1990 salary, thousands $
+roe             float   %9.0g                 return on equity, 88-90 avg
+***Summary Statistics***
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+      salary |        209     1281.12    1372.345        223      14822
+         roe |        209    17.18421    8.518509         .5       56.3
+***Simple Regression***
+
+      Source |       SS           df       MS      Number of obs   =       209
+-------------+----------------------------------   F(1, 207)       =      2.77
+       Model |  5166419.04         1  5166419.04   Prob &gt; F        =    0.0978
+    Residual |   386566563       207  1867471.32   R-squared       =    0.0132
+-------------+----------------------------------   Adj R-squared   =    0.0084
+       Total |   391732982       208  1883331.64   Root MSE        =    1366.6
+
+------------------------------------------------------------------------------
+      salary | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         roe |   18.50119   11.12325     1.66   0.098    -3.428196    40.43057
+       _cons |   963.1913   213.2403     4.52   0.000     542.7902    1383.592
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>Now, Changing scales has no effect on <span class="math inline">\(R^2\)</span>, nor the coefficient to Standard error ratio (<span class="math inline">\(t-stat\)</span>)</p>
+<p>It could allow for easier interpretation of the results.</p>
+<div id="659e7716" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> saldol=salary*1000</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> roedec=roe / 100</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>: <span class="kw">reg</span> salary roe</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="kw">est</span> sto m1</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>: <span class="kw">reg</span> saldol roe</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="kw">est</span> sto m2</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>: <span class="kw">reg</span> salary roedec</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="kw">est</span> sto m3</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>esttab m1 m2 m3, se r2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+------------------------------------------------------------
+                      (1)             (2)             (3)   
+                   salary          saldol          salary   
+------------------------------------------------------------
+roe                 18.50         18501.2                   
+                  (11.12)       (11123.3)                   
+
+roedec                                             1850.1   
+                                                 (1112.3)   
+
+_cons               963.2***     963191.3***        963.2***
+                  (213.2)      (213240.3)         (213.2)   
+------------------------------------------------------------
+N                     209             209             209   
+R-sq                0.013           0.013           0.013   
+------------------------------------------------------------
+Standard errors in parentheses
+* p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001</code></pre>
+</div>
+</div>
+</section>
+<section id="expanding-on-slrm-nonlinearities" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="expanding-on-slrm-nonlinearities">Expanding on SLRM: Nonlinearities</h2>
+<p>It is possible to incorporate some nonlinearities by using “log” transformations:</p>
+<p><span class="math display">\[
+\begin{aligned}
+log(y) &amp;= \beta_0 + \beta_1 x + e \rightarrow &amp; 100\beta_1 \simeq \frac{\% \Delta y}{\Delta x} \\
+y &amp;= \beta_0 + \beta_1 log(x) + e \rightarrow &amp; \frac {\beta_1}{100} \simeq \frac{\Delta y}{\% \Delta x} \\
+log(y) &amp;= \beta_0 + \beta_1 log(x) + e \rightarrow &amp; \beta_1 =\frac{\% \Delta y}{\% \Delta x}
+\end{aligned}
+\]</span></p>
+<ul>
+<li><p>This allows us to estimate other interesting relationships with a the SRM. Specifically Semi-elasticities and Elasticities.</p></li>
+<li><p>This transformation compresses the distribution of a variable, potentially addressing problems of Heteroskedasticity (non-constant variance)</p></li>
+</ul>
+<div id="15692c85" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>*** Example 2.10</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>frause wage1, <span class="kw">clear</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> lnwage = <span class="fu">log</span>(wage)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> lneduc = <span class="fu">log</span>(educ)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> <span class="kw">scatter</span> wage educ     || <span class="kw">lfit</span> wage educ    , <span class="co">///</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="bn">name</span>(m1, <span class="kw">replace</span>) <span class="bn">title</span>(lin-lin) <span class="bn">legend</span>(<span class="kw">off</span>)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> <span class="kw">scatter</span> lnwage educ   || <span class="kw">lfit</span> lnwage educ  , <span class="co">///</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="bn">name</span>(m2, <span class="kw">replace</span>) <span class="bn">title</span>(<span class="fu">log</span>-lin) <span class="bn">legend</span>(<span class="kw">off</span>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> <span class="kw">scatter</span> wage lneduc   || <span class="kw">lfit</span> wage lneduc  , <span class="co">///</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    <span class="bn">name</span>(m3, <span class="kw">replace</span>) <span class="bn">title</span>(lin-<span class="fu">log</span>) <span class="bn">legend</span>(<span class="kw">off</span>)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> <span class="kw">scatter</span> lnwage lneduc || <span class="kw">lfit</span> lnwage lneduc, <span class="co">///</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    <span class="bn">name</span>(m4, <span class="kw">replace</span>) <span class="bn">title</span>(<span class="fu">log</span>-<span class="fu">log</span>) <span class="bn">legend</span>(<span class="kw">off</span>)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="kw">graph</span> <span class="bn">combine</span> m1 m2 m3 m4, </span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_10.png, <span class="kw">width</span>(1000) <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="images/fig2_10.png" style="height:70.0%"></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div id="d3e14ac1" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="dv">linesize</span> 255</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>: <span class="kw">reg</span> wage educ</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="kw">est</span> sto m1</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>: <span class="kw">reg</span> lnwage educ</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="kw">est</span> sto m2</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>: <span class="kw">reg</span> wage lneduc</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="kw">est</span> sto m3</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>: <span class="kw">reg</span> lnwage lneduc</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="kw">est</span> sto m4</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>esttab m1 m2 m3 m4, se r2 nonumber  <span class="kw">compress</span> nostar nogaps</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+--------------------------------------------------
+                wage    lnwage      wage    lnwage
+--------------------------------------------------
+educ           0.541    0.0827                    
+            (0.0532) (0.00757)                    
+lneduc                             5.330     0.825
+                                 (0.608)  (0.0864)
+_cons         -0.905     0.584    -7.460    -0.445
+             (0.685)  (0.0973)   (1.532)   (0.218)
+--------------------------------------------------
+N                526       526       524       524
+R-sq           0.165     0.186     0.128     0.149
+--------------------------------------------------
+Standard errors in parentheses</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<pre><code>
+An additional year of education
+
+1. Increases hourly wages in 54cnts
+
+2. Increases hourly wages in 8.3%
+
+3. A 1% increase in years of education (about 1.5months) increases wages in 5.3cnts
+
+4. A 1% increase in years of education would increase wages in 0.82%.</code></pre>
+</div>
+</div>
+</section>
+<section id="expanding-on-slrm-using-dummies" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="expanding-on-slrm-using-dummies">Expanding on SLRM: Using Dummies</h2>
+<ul>
+<li><p>A SLRM can also be done using <strong>Dummy</strong> variables. (Those that take only two values: 0 or 1)</p></li>
+<li><p>This type of modeling may be observed when evaluating programs (Were you treated?(Tr=1) or not (Tr=0))</p></li>
+<li><p>And can be used to Easily compare means across two groups:</p></li>
+</ul>
+<p><span class="math display">\[wage = \beta_0 + \beta_1 female + e
+\]</span></p>
+<p>In this particular case, both <span class="math inline">\(\beta_0 \&amp; \beta_1\)</span> have clear interpretation:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\beta_0 &amp;= E(wage|female=0) \\
+\beta_1 &amp;= E(wage|female=1) - E(wage|female=0)
+\end{aligned}
+\]</span></p>
+<p>In most Software, you need to either Create the new variable explicitly, or use internal code to make it for you:</p>
+<div id="53e6b36e" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>frause wage1, <span class="kw">clear</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>** verify Coding</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="kw">ssc</span> install fre, <span class="kw">replace</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>fre female</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>** create your own</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> is_male = female==0</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>** Regression <span class="kw">using</span> Newly created <span class="kw">variable</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> wage is_male</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>** Regression <span class="kw">using</span> Stata <span class="st">"factor notation"</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> wage i.female</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>checking fre consistency and verifying not already installed...
+all files already exist and are up to date.
+
+female -- =1 if female
+-----------------------------------------------------------
+              |      Freq.    Percent      Valid       Cum.
+--------------+--------------------------------------------
+Valid   0     |        274      52.09      52.09      52.09
+        1     |        252      47.91      47.91     100.00
+        Total |        526     100.00     100.00           
+-----------------------------------------------------------
+
+      Source |       SS           df       MS      Number of obs   =       526
+-------------+----------------------------------   F(1, 524)       =     68.54
+       Model |  828.220467         1  828.220467   Prob &gt; F        =    0.0000
+    Residual |  6332.19382       524  12.0843394   R-squared       =    0.1157
+-------------+----------------------------------   Adj R-squared   =    0.1140
+       Total |  7160.41429       525  13.6388844   Root MSE        =    3.4763
+
+------------------------------------------------------------------------------
+        wage | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     is_male |    2.51183   .3034092     8.28   0.000     1.915782    3.107878
+       _cons |   4.587659   .2189834    20.95   0.000     4.157466    5.017852
+------------------------------------------------------------------------------
+
+      Source |       SS           df       MS      Number of obs   =       526
+-------------+----------------------------------   F(1, 524)       =     68.54
+       Model |  828.220467         1  828.220467   Prob &gt; F        =    0.0000
+    Residual |  6332.19382       524  12.0843394   R-squared       =    0.1157
+-------------+----------------------------------   Adj R-squared   =    0.1140
+       Total |  7160.41429       525  13.6388844   Root MSE        =    3.4763
+
+------------------------------------------------------------------------------
+        wage | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+    1.female |   -2.51183   .3034092    -8.28   0.000    -3.107878   -1.915782
+       _cons |   7.099489   .2100082    33.81   0.000     6.686928     7.51205
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>if the Dummy is a treatment, and Assumption 4 Holds, then you can use this to estimate Average Treatment Effects (ATE) aka Average Casual Effects. (Usually requires randomization)</p>
+<p><span class="math display">\[
+\begin{aligned}
+y_i &amp;= y_i(0)(1-D) + y_i(1)D  \\
+y_i &amp;= y_i(0) + (y_i(1)-y_i(0))*D \\
+y_i &amp;= \bar y_0 + u_i(0) + (\bar y_1 - \bar y_0)*D + (u_i(1)-u_i(0))*D \\
+y_i &amp;= \alpha_0 + \tau_{ate} D + u_i
+\end{aligned}
+\]</span></p>
+<p>But we expect <span class="math inline">\(u_i(1)-u_i(0)=0\)</span></p>
+<div id="97511e5d" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>** Example 2.14</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>frause jtrain2, <span class="kw">clear</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>** Training was Randomly assigned</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> re78 i.train</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Source |       SS           df       MS      Number of obs   =       445
+-------------+----------------------------------   F(1, 443)       =      8.04
+       Model |  348.013451         1  348.013451   Prob &gt; F        =    0.0048
+    Residual |  19177.6432       443  43.2903909   R-squared       =    0.0178
+-------------+----------------------------------   Adj R-squared   =    0.0156
+       Total |  19525.6566       444  43.9767041   Root MSE        =    6.5795
+
+------------------------------------------------------------------------------
+        re78 | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     1.train |   1.794343   .6328536     2.84   0.005     .5505748    3.038111
+       _cons |   4.554802    .408046    11.16   0.000     3.752856    5.356749
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="thats-all-for-today" class="level1">
+<h1>Thats all for today</h1>
+<section id="section" class="level2" data-background-image="images/paste-7.png" data-background-size="contain">
+<h2 data-background-image="images/paste-7.png" data-background-size="contain" class="anchored" data-anchor-id="section"></h2>
+
+
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Simple Linear Regression Model<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</aside></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
+        }
+        return container.innerHTML
+      } else {
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
