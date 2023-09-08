@@ -1,0 +1,10 @@
+{
+  "hash": "87c0c7722cf6631346fce1d2752ef76e",
+  "result": {
+    "markdown": "---\ntitle: 'Chapter 2: The Simple Regression Model'\nformat:\n  html: default\n  ipynb: default\nexecute:\n  echo: true\n---\n\n## Example 2.3: CEO Salary and Return on Equity\n\nModel:\n\n$$salary = \\beta_0 + \\beta_1 roe + u$$\n\n:::{.callout}\n\n::: {#dc525bb7 .cell execution_count=1}\n``` {.stata .cell-code}\nfrause ceosal1, clear\nreg salary roe    \n```\n\n::: {.cell-output .cell-output-stdout}\n```\n\n      Source |       SS           df       MS      Number of obs   =       209\n-------------+----------------------------------   F(1, 207)       =      2.77\n       Model |  5166419.04         1  5166419.04   Prob > F        =    0.0978\n    Residual |   386566563       207  1867471.32   R-squared       =    0.0132\n-------------+----------------------------------   Adj R-squared   =    0.0084\n       Total |   391732982       208  1883331.64   Root MSE        =    1366.6\n\n------------------------------------------------------------------------------\n      salary | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         roe |   18.50119   11.12325     1.66   0.098    -3.428196    40.43057\n       _cons |   963.1913   213.2403     4.52   0.000     542.7902    1383.592\n------------------------------------------------------------------------------\n```\n:::\n:::\n\n\n:::\n\n---\njupyter:\n  kernelspec:\n    display_name: Stata (nbstata)\n    language: stata\n    name: nbstata\n---\n",
+    "supporting": [
+      "chapter2_files\\figure-ipynb"
+    ],
+    "filters": []
+  }
+}

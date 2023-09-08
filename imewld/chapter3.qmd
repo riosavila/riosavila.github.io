@@ -1,0 +1,93 @@
+---
+title: "Chapter 3: Multiple Regression Analysis: Estimation"
+jupyter: nbstata
+format: 
+    html: default
+    ipynb: default
+execute: 
+  echo: true
+---
+
+## Example 3.1: Determinants of College GPA
+
+Model:
+
+$$colGPA = \beta_0 + \beta_1hsGPA + \beta_2ACT + u$$
+
+```{stata}
+frause gpa1, clear
+regress colgpa hsgpa act
+regress colgpa act
+```
+
+## Example 3.2: Hourly Wage Equation
+
+Model:
+
+$$log(wage)=\beta_0 + \beta_1educ + \beta_2exper + \beta_3tenure + u$$
+
+```{stata}
+frause wage1, clear
+gen logwage = log(wage)
+reg logwage educ exper tenure
+```
+
+## Partialling Out Interpretation of Multiple Regression
+
+Model:
+
+$$log(wage)=\beta_0 + \beta_1educ + \beta_2exper + \beta_3tenure + u$$
+
+We could estimate the same models with the followin:
+
+$$educ=\gamma_0 + \gamma_1exper + \gamma_2tenure + v$$
+
+$$log(wage)=\beta_0 + \beta_1 \hat v + u$$
+
+```{stata}
+qui:reg logwage exper tenure
+predict logwage_res, resid
+qui:reg educ exper tenure
+predict educ_res, resid
+reg logwage_res educ_res
+```
+
+## Example 3.4 : Determinants of College GPA
+
+See example 3.1
+
+## Example 3.5 : Explaining Arrest Records
+
+```{stata}
+frause crime1, clear
+regress narr86 pcnv  ptime86 qemp86
+```
+
+```{stata}
+regress narr86 pcnv avgsen ptime86 qemp86
+```
+
+## Variance Inflation Factors
+
+```{stata}
+qui:regress narr86 pcnv avgsen ptime86 qemp86
+estat vif
+```
+
+```{stata}
+qui:regress pcnv avgsen ptime86 qemp86
+display "VIF for pcnv:   " 1/(1-e(r2))
+qui:regress avgsen ptime86 qemp86 pcnv
+display "VIF for avgsen: " 1/(1-e(r2))
+```
+
+## Example 3.7 : Evaluating a Job Training Program
+
+```{stata}
+frause jtrain98, clear
+regress earn98 train
+```
+
+```{stata}
+regress earn98 train earn96 educ age married  
+```

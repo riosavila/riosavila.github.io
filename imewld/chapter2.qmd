@@ -1,0 +1,122 @@
+---
+title: "Chapter 2: The Simple Regression Model"
+jupyter: nbstata
+format: 
+    html: default
+    ipynb: default
+execute: 
+  echo: true
+---
+
+## Example 2.3: CEO Salary and Return on Equity
+
+Model:
+
+$$salary = \beta_0 + \beta_1 roe + u$$
+
+:::{.callout}
+```{stata}
+frause ceosal1, clear
+regress salary roe    
+
+display "Prediction: " _b[_cons] " +" _b[roe] "*30" "=" _b[_cons] + _b[roe] *30
+```
+:::
+
+## Example 2.4: Wage and Education
+
+:::{.callout}
+```{stata}
+frause wage1, clear
+regress wage educ
+```
+:::
+
+## Example 2.5: Voting Outcomes and Campaign Expenditures
+
+:::{.callout}
+```{stata}
+frause vote1, clear
+regress votea sharea
+```
+:::
+
+## Example 2.6: CEO Salary and Return on Equity
+
+:::{.callout}
+```{stata}
+frause ceosal1, clear
+qui:regress salary roe  
+predict salaryhat, xb
+predict uhat , resid
+
+list roe salary salaryhat uhat  in 1/10
+```
+:::
+
+## Example 2.7: Wage and Education
+
+:::{.callout}
+```{stata}
+frause wage1, clear
+qui:regress wage educ
+sum wage educ
+display "b0+b1*E(educ)= " _b[_cons] + _b[educ]*r(mean)
+```
+:::
+
+## Example 2.8: CEO Salary and Return on Equity
+
+```{stata}
+frause ceosal1, clear
+gen one=1
+mata:y = st_data(., "salary")
+mata:x = st_data(., "one roe")
+mata:b = invsym(x'*x)*x'*y
+mata:yhat = x*b
+mata:uhat = y - yhat
+mata:sst = sum((y :- mean(y)):^2)
+mata:sse = sum((yhat :- mean(y)):^2)
+mata:ssr = sum((y :- yhat):^2)
+mata:rsq = 1 - ssr/sst;rsq
+mata:rsq = sse/sst;rsq
+```
+
+## Example 2.10: a log wage model
+
+Model
+
+$$log(wage) = \beta_0 + \beta_1 educ + u$$
+
+:::{.callout}
+```{stata}
+frause wage1, clear
+gen logwage = log(wage)
+regress logwage educ
+```
+:::
+
+## Example 2.11: CEO Salary and Firms Sales
+
+Model:
+
+$$log(salary) = \beta_0 + \beta_1 log(sales) + u$$
+
+:::{.callout}
+```{stata}
+frause ceosal1, clear
+gen logsalary = log(salary)
+gen logsales = log(sales)
+reg logsalary logsales
+```
+:::
+
+## Example 2.14: Evaluating a Job Training Program
+
+:::{.callout}
+```{stata}
+frause jtrain2, clear
+reg re78 train
+```
+:::
+

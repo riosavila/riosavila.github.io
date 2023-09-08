@@ -1,0 +1,43 @@
+---
+title: "Chapter 4: Multiple Regression Analysis: Inference"
+jupyter: nbstata
+format: 
+    html: default
+    ipynb: default
+execute: 
+  echo: true
+---
+
+## Testing hypotheses about single linear combinations of the parameters
+
+Model:
+
+$$log(wage)=\beta_0 +\beta_1 jc + \beta_2 univ + \beta_3 exper + u$$
+
+Hypothesis
+
+$$H_0: \beta_1 = \beta_2 \rightarrow \beta_1 - \beta_2 = 0$$
+$$H_1: \beta_1 < \beta_2 \rightarrow \beta_1 - \beta_2 < 0$$
+
+```{stata}
+frause twoyear, clear
+reg lwage jc univ exper
+```
+
+```{stata}  
+test jc = univ
+```
+
+Manual transformation:
+
+$$\theta = \beta_1 - \beta_2 \rightarrow \beta_1 = \theta + \beta_2 $$
+
+$$log(wage)=\beta_0 +(\theta + \beta_2) jc + \beta_2 univ + \beta_3 exper + u$$
+$$log(wage)=\beta_0 +\theta jc + \beta_2 (univ+jc) + \beta_3 exper + u$$
+
+```{stata}
+gen univjc = univ + jc
+reg lwage jc univjc exper
+```
+
+ 
