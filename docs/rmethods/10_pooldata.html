@@ -29,6 +29,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="styles.css">
@@ -323,6 +388,9 @@
       margin-right: 0; 
     }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -341,8 +409,430 @@ Fernando Rios-Avila
 </div>
 
 </section>
-<section class="slide level2">
+<section id="pooling-data-together-cross-section-and-panel-data" class="slide level2">
+<h2>Pooling Data together: Cross-section and Panel Data</h2>
+<ul>
+<li><p>Up to this point, we have cover the analysis of cross-section data.</p>
+<ul>
+<li>Many individuals at a single point in time.</li>
+</ul></li>
+<li><p>Towards the end of the semester, We will also cover the analysis of time series data.</p>
+<ul>
+<li>A single individual across time.</li>
+</ul></li>
+<li><p>Today, we will cover the analysis of panel data and repeated crossection: Many individuals across time.</p></li>
+<li><p>This type of data, also known as longitudinal data, has advantages over crossection, as it provides more information that helps dealing with the unknown of <span class="math inline">\(e\)</span>.</p></li>
+<li><p>And its often the only way to answer certain questions.</p></li>
+</ul>
+</section>
+<section id="pooling-independent-crossections" class="slide level2">
+<h2>Pooling independent crossections</h2>
+<ul>
+<li>We first consider the case of independent crossections.
+<ul>
+<li>We have access to surveys that may be collected regularly. (Household budget surveys)</li>
+<li>We assume that individuals across this surveys are independent from each other (no panel structure).</li>
+</ul></li>
+<li>This scenario is typically used for increasing sample-sizes and thus power of analysis (<em>larger N smaller SE</em>)</li>
+<li>Only minor considerations are needed when analyzing this type of data.
+<ul>
+<li>We need to account for the fact Data comes from different years. This can be done by including year dummies.</li>
+<li>May need to Standardize variables to make them comparable across years. (inflation adjustments, etc.)</li>
+</ul></li>
+</ul>
+</section>
+<section id="example" class="slide level2 scrollable">
+<h2>Example</h2>
+<p>Lets use the data <code>fertil1</code> to estimate the changes in fertility rates across time. This data comes from the <em>General Social Survey</em>.</p>
+<div id="9c08f318" class="cell" data-execution_count="1">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a>frause fertil1, <span class="kw">clear</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">regress</span> kids educ age agesq <span class="bn">black</span> east northcen west farm othrural town smcity i.<span class="fu">year</span>, <span class="kw">robust</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<style>div.jp-Notebook .datagrid-container {min-height: 448px; }</style>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Linear regression                               Number of obs     =      1,129
+                                                F(17, 1111)       =      10.19
+                                                Prob &gt; F          =     0.0000
+                                                R-squared         =     0.1295
+                                                Root MSE          =     1.5548
 
+------------------------------------------------------------------------------
+             |               Robust
+        kids | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        educ |  -.1284268    .021146    -6.07   0.000    -.1699175   -.0869362
+         age |   .5321346   .1389371     3.83   0.000     .2595258    .8047433
+       agesq |   -.005804   .0015791    -3.68   0.000    -.0089024   -.0027056
+       black |   1.075658   .2013188     5.34   0.000     .6806496    1.470666
+        east |    .217324    .127466     1.70   0.088    -.0327773    .4674252
+    northcen |    .363114   .1167013     3.11   0.002     .1341342    .5920939
+        west |   .1976032   .1626813     1.21   0.225     -.121594    .5168003
+        farm |  -.0525575   .1460837    -0.36   0.719    -.3391886    .2340736
+    othrural |  -.1628537   .1808546    -0.90   0.368    -.5177087    .1920014
+        town |   .0843532   .1284759     0.66   0.512    -.1677295    .3364359
+      smcity |   .2118791   .1539645     1.38   0.169    -.0902149    .5139731
+             |
+        year |
+         74  |   .2681825   .1875121     1.43   0.153    -.0997353    .6361003
+         76  |  -.0973795   .1999339    -0.49   0.626    -.4896701    .2949112
+         78  |  -.0686665   .1977154    -0.35   0.728    -.4566042    .3192713
+         80  |  -.0713053   .1936553    -0.37   0.713    -.4512767    .3086661
+         82  |  -.5224842   .1879305    -2.78   0.006    -.8912228   -.1537456
+         84  |  -.5451661   .1859289    -2.93   0.003    -.9099776   -.1803547
+             |
+       _cons |  -7.742457   3.070656    -2.52   0.012     -13.7674   -1.717518
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<ul>
+<li>This allow us to see how fertility rates have changed across time.</li>
+<li>One could even interact the year dummies with other variables to see how the effect of other variables have changed across time.</li>
+</ul>
+<div id="733837d4" class="cell" data-execution_count="2">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a>frause cps78_85, <span class="kw">clear</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">regress</span> lwage i.year##c.(educ i.female) exper expersq <span class="kw">union</span>, <span class="kw">robust</span> cformat(%5.4f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Linear regression                               Number of obs     =      1,084
+                                                F(8, 1075)        =     110.48
+                                                Prob &gt; F          =     0.0000
+                                                R-squared         =     0.4262
+                                                Root MSE          =      .4127
+
+------------------------------------------------------------------------------
+             |               Robust
+       lwage | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     85.year |     0.1178     0.1239     0.95   0.342      -0.1253      0.3609
+        educ |     0.0747     0.0060    12.40   0.000       0.0629      0.0865
+    1.female |    -0.3167     0.0347    -9.12   0.000      -0.3848     -0.2486
+             |
+ year#c.educ |
+         85  |     0.0185     0.0095     1.94   0.053      -0.0002      0.0371
+             |
+ year#female |
+       85 1  |     0.0851     0.0518     1.64   0.101      -0.0165      0.1866
+             |
+       exper |     0.0296     0.0037     8.10   0.000       0.0224      0.0368
+     expersq |    -0.0004     0.0001    -5.11   0.000      -0.0006     -0.0002
+       union |     0.2021     0.0293     6.89   0.000       0.1446      0.2597
+       _cons |     0.4589     0.0855     5.37   0.000       0.2911      0.6267
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="good-old-friend-chow-test" class="slide level2">
+<h2>Good old Friend: Chow test</h2>
+<ul>
+<li>The Chow test can be used to test whether the coefficients of a regression model are the same across two groups.
+<ul>
+<li>we have seen this test back when we were discussing dummy variables.</li>
+</ul></li>
+<li>We can also use this test to check if coefficients of a regression model are the same across two time periods. (Has the wage structure changed across time?)
+<ul>
+<li>This is the case of interest here.</li>
+</ul></li>
+<li>Not much changes with before. Although it can be a bit more tedious to code.</li>
+</ul>
+</section>
+<section id="example-1" class="slide level2 scrollable">
+<h2>Example</h2>
+<div id="cb8d8b6e" class="cell" data-execution_count="3">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1"></a>frause cps78_85, <span class="kw">clear</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">regress</span> lwage i.year##c.(educ i.female exper expersq i.<span class="kw">union</span>), <span class="kw">robust</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Linear regression                               Number of obs     =      1,084
+                                                F(11, 1072)       =      82.83
+                                                Prob &gt; F          =     0.0000
+                                                R-squared         =     0.4276
+                                                Root MSE          =     .41278
+
+------------------------------------------------------------------------------
+             |               Robust
+       lwage | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     85.year |   .1219978   .1521927     0.80   0.423    -.1766315    .4206271
+        educ |   .0768148   .0063312    12.13   0.000     .0643918    .0892378
+    1.female |  -.3155108   .0348402    -9.06   0.000    -.3838737    -.247148
+       exper |   .0249177   .0042985     5.80   0.000     .0164833    .0333522
+     expersq |  -.0002844   .0000918    -3.10   0.002    -.0004645   -.0001043
+     1.union |   .2039824   .0381315     5.35   0.000     .1291616    .2788033
+             |
+ year#c.educ |
+         85  |    .013927   .0103252     1.35   0.178    -.0063329    .0341869
+             |
+ year#female |
+       85 1  |   .0846136   .0524618     1.61   0.107    -.0183258     .187553
+             |
+year#c.exper |
+         85  |   .0095289   .0073767     1.29   0.197    -.0049454    .0240033
+             |
+        year#|
+   c.expersq |
+         85  |  -.0002399   .0001592    -1.51   0.132    -.0005522    .0000724
+             |
+  year#union |
+       85 1  |  -.0018095   .0594387    -0.03   0.976    -.1184389      .11482
+             |
+       _cons |    .458257     .09386     4.88   0.000     .2740868    .6424271
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<div id="092406f2" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">test</span> 85.year#c.educ 85.year#1.female 85.year#c.exper   85.year#c.expersq 85.year#1.<span class="kw">union</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ ( 1)  85.year#c.educ = 0
+ ( 2)  85.year#1.female = 0
+ ( 3)  85.year#c.exper = 0
+ ( 4)  85.year#c.expersq = 0
+ ( 5)  85.year#1.union = 0
+
+       F(  5,  1072) =    1.65
+            Prob &gt; F =    0.1443</code></pre>
+</div>
+</div>
+</section>
+<section id="using-pool-crossection-for-causal-inference" class="slide level2">
+<h2>Using Pool Crossection for Causal Inference</h2>
+<ul>
+<li><p>One advantage of pooling crossection data is that it could to be used to estimate causal effects using a method known as Differences in Differences (DnD)</p></li>
+<li><p>Consider the following case:</p>
+<ul>
+<li>There was a project regarding the construction of an incinerator in a city. You are asked to evaluate what the impact of this was on the prices of houses around the area.</li>
+<li>You have access to data for two years: 1978 and 1981.</li>
+<li>In 1978, there was no information about the project. In 1981, the project was announced, but it only began operations in 1985.</li>
+</ul></li>
+</ul>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+<ul>
+<li>we could start estimating the project using the simple model: <span class="math display">\[rprice = \beta_0 + \beta_1 nearinc + e\]</span></li>
+</ul>
+<p>using only 1981 data. But this would not be a good idea. Why?</p>
+<div id="1b08b27e" class="cell larger" data-execution_count="5">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1"></a>frause kielmc, <span class="kw">clear</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">regress</span> rprice nearinc <span class="kw">if</span> <span class="fu">year</span> == 1981, <span class="kw">robust</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Linear regression                               Number of obs     =        142
+                                                F(1, 140)         =      24.35
+                                                Prob &gt; F          =     0.0000
+                                                R-squared         =     0.1653
+                                                Root MSE          =      31238
+
+------------------------------------------------------------------------------
+             |               Robust
+      rprice | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     nearinc |  -30688.27   6219.265    -4.93   0.000     -42984.1   -18392.45
+       _cons |   101307.5   2951.195    34.33   0.000     95472.84    107142.2
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<ul>
+<li>We could also estimate the model using only 1971 data. What would this be showing us?</li>
+</ul>
+<div id="80ab8111" class="cell larger" data-execution_count="6">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">regress</span> rprice nearinc <span class="kw">if</span> <span class="fu">year</span> == 1978, <span class="kw">robust</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Linear regression                               Number of obs     =        179
+                                                F(1, 177)         =       9.87
+                                                Prob &gt; F          =     0.0020
+                                                R-squared         =     0.0817
+                                                Root MSE          =      29432
+
+------------------------------------------------------------------------------
+             |               Robust
+      rprice | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     nearinc |  -18824.37   5992.564    -3.14   0.002    -30650.44   -6998.302
+       _cons |   82517.23   1881.165    43.86   0.000     78804.83    86229.63
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+<ul>
+<li>So, using 1981 data we capture the Total price difference between houses near and far from the incinerator.
+<ul>
+<li>This captures both the announcement effect of the project, but also other factors (where would an incinerator be built?).</li>
+</ul></li>
+<li>Using 1978 data we capture the price difference between houses near and far from the incinerator in the absence of the project.
+<ul>
+<li>This captures the effect of other factors that may be correlated with the incinerator project.</li>
+</ul></li>
+<li>Use both to see the impact!</li>
+</ul>
+<p><span class="math display">\[Effect = -30688.27-(-18824.37)= -11863.9\]</span></p>
+<ul>
+<li>This is in essence a DnD model</li>
+</ul>
+</section>
+<section id="difference-in-differences" class="slide level2">
+<h2>Difference in Differences</h2>
+<table>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Control</th>
+<th>Treatment</th>
+<th>Treat-Control</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Pre-</td>
+<td><span class="math inline">\(\bar y_{00}\)</span></td>
+<td><span class="math inline">\(\bar y_{10}\)</span></td>
+<td><span class="math inline">\(\bar y_{10}\)</span>-<span class="math inline">\(\bar y_{00}\)</span></td>
+</tr>
+<tr class="even">
+<td>Post-</td>
+<td><span class="math inline">\(\bar y_{01}\)</span></td>
+<td><span class="math inline">\(\bar y_{11}\)</span></td>
+<td><span class="math inline">\(\bar y_{10}\)</span>-<span class="math inline">\(\bar y_{00}\)</span></td>
+</tr>
+<tr class="odd">
+<td>Post-pre</td>
+<td><span class="math inline">\(\bar y_{01}\)</span>-<span class="math inline">\(\bar y_{00}\)</span></td>
+<td><span class="math inline">\(\bar y_{11}\)</span>-<span class="math inline">\(\bar y_{10}\)</span></td>
+<td>DD</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Post-Pre:
+<ul>
+<li>Trend changes for the control</li>
+<li>Trend changes for the treated: A mix of the impact of the treatment and the trend change.</li>
+</ul></li>
+<li>Treat-Control:
+<ul>
+<li>Baseline difference when looking at Pre-period</li>
+<li>Total Price differentials when looking at Post-period: Mix of the impact of the treatment and the baseline difference.</li>
+</ul></li>
+<li>Take the Double Difference and you get the <strong>treatment effect</strong>.</li>
+</ul>
+</section>
+<section id="difference-in-differences-regression" class="slide level2 scrollable">
+<h2>Difference in Differences: Regression</h2>
+<ul>
+<li>This could also be achieved using a regression model:</li>
+</ul>
+<p><span class="math display">\[ y = \beta_0 + \beta_1 post + \beta_2 treat + \beta_3 post*treat + e\]</span></p>
+<p>Where <span class="math inline">\(\beta_3\)</span> is the treatment effect. (only for 2x2 DD)</p>
+<div id="df7df551" class="cell" data-execution_count="7">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">regress</span> rprice nearinc##y81, <span class="kw">robust</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Linear regression                               Number of obs     =        321
+                                                F(3, 317)         =      17.75
+                                                Prob &gt; F          =     0.0000
+                                                R-squared         =     0.1739
+                                                Root MSE          =      30243
+
+------------------------------------------------------------------------------
+             |               Robust
+      rprice | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+   1.nearinc |  -18824.37    5996.47    -3.14   0.002    -30622.28   -7026.461
+       1.y81 |   18790.29   3498.376     5.37   0.000     11907.32    25673.26
+             |
+ nearinc#y81 |
+        1 1  |   -11863.9   8635.585    -1.37   0.170    -28854.21    5126.401
+             |
+       _cons |   82517.23   1882.391    43.84   0.000     78813.67    86220.79
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="difference-in-differences-regression-controls" class="slide level2">
+<h2>Difference in Differences: Regression + controls</h2>
+<ul>
+<li>One advantage of DD is that it can control for those unobserved factors that may be correlated with outcome.
+<ul>
+<li>Without controls, however, estimates may not have enough precision.</li>
+</ul></li>
+<li>But, we could add controls!</li>
+</ul>
+<p><span class="math display">\[ y = \beta_0 + X \gamma + \beta_1 post + \beta_2 treat + \beta_3 post*treat + e\]</span></p>
+<p>But its not as easy as it may seem! (just adding regressions is not a good approach)</p>
+<p>This method requires other assumptions! (<span class="math inline">\(\gamma\)</span> is fixed), which may be very strong.</p>
+<blockquote>
+<p><span class="redtxt"><strong>Note:</strong></span> For DD to work, you need to assume the two groups follow the same path in the absence of the treatment. (Parallel trends assumption)</p>
+<p>Otherwise, you are just using trend differences!</p>
+</blockquote>
+</section>
+<section id="diff-in-diff-in-diff" class="slide level2">
+<h2>Diff in Diff in Diff</h2>
+<p>An Alternative approach is to use a triple difference model.</p>
+<p>Setup:</p>
+<ul>
+<li>You still have two groups: Control and Treatment (which are easily identifiable)</li>
+<li>You have two time periods: Pre and Post (which are also easily identifiable)</li>
+<li>You have a different sample, where you can identify controls and treatment, as well as the pre- and post- periods. This sample was not treated!</li>
+</ul>
+<p>Estimation:</p>
+<ul>
+<li>Estimate the DD for the Original Sample, and the new untreated sample.</li>
+<li>Obtaining the difference between these two estimates will give you the triple difference.</li>
+</ul>
+<p>Example: Smoking ban analysis based on age. (DD) But using both treated and untreated States (DDD)</p>
+</section>
+<section id="general-framework-and-pseudo-panels" class="slide level2">
+<h2>General Framework and Pseudo Panels</h2>
+<ul>
+<li><p>One general Structure for Policy analysis is the use of Pseudo Panels structure.</p>
+<ul>
+<li>Pseudo panels are a way to use repeated crossection data, but controlling for some unobserved heterogeneity across specific groups. (the pseudo panels)</li>
+</ul></li>
+<li><p>For Pseudo-panels, we need to identify a group that could be followed across time.</p>
+<ul>
+<li>This cannot be a group of individuals (repeated crosection).</li>
+<li>But we could use groups of states, cohorts (year of birth), etc.</li>
+</ul></li>
+<li><p>In this case, the data would look like this: <span class="math display">\[y_{igt} = \lambda_t + \alpha_g + \beta x_{gt} + z_{igt}\gamma +  e_{igt}\]</span></p></li>
+<li><p>Where <span class="math inline">\(g\)</span> is the group, <span class="math inline">\(t\)</span> is the time, and <span class="math inline">\(i\)</span> is the individual.</p></li>
+<li><p>And <span class="math inline">\(\beta\)</span> is the coefficient of interest. (impact of the Policy <span class="math inline">\(x_{gt}\)</span>).</p>
+<ul>
+<li>This may ony work if we assume <span class="math inline">\(\beta\)</span> is constant across time and groups.</li>
+<li></li>
+</ul></li>
+</ul>
 
 <div class="footer footer-default">
 

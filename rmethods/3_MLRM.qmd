@@ -196,7 +196,7 @@ Under A1-A5 I can make use the above to make interpretations
 1.  $\hat \beta_0$ has no effect on "changes" of $y$. Only its levels.
 2.  $\hat \beta_1$ indicates how much $\Delta y_i$ will be if $\Delta x_{1i}$ increases in 1 unit, if both $\Delta x_{2i}$ and $\Delta e_i$ remain constant (*Ceteris Paribus*)
 
-$\Delta e_i=0$ by assumption, and $\Delta x_{2i}=0$ becuse we are explicilty controlling for it (We impute this based on extrapolations)
+$\Delta e_i=0$ by assumption, and $\Delta x_{2i}=0$ because we are explicitly controlling for it (We impute this based on extrapolations)
 
 You could also analyze the effect of $\Delta x_{1i}$ and $\Delta x_{2i}$ Simultaneously!
 
@@ -217,7 +217,7 @@ display "\$log(wage) = `b0' + `b1' educ + `b2' exper + `b3' tenure$"
 
 -   $\beta_0$ has no effect on changes, but level.
     -   If someone has no education, experience or tenure, log(wages) will be 0.284. Why not wages? and Does it make sense to assume 0 education, experience and tenure?
--   $\beta_1$: An additional year of education increases wages in 0.092log points or about 9.2%, if Experience and tenure do nor change (ceteris paribus).
+-   $\beta_1$: An additional year of education increases wages in 0.092log points or about 9.2%, if Experience and tenure do not change (*ceteris paribus*).
 
 **Notes:**
 
@@ -305,7 +305,7 @@ $$\begin{aligned}
 1 &: \hat \beta = \beta + (X'X)^{-1} X'e \\
 2 &:\hat \beta - \beta = (X'X)^{-1} X'e \\
 3 &: Var(\hat \beta - \beta) = Var((X'X)^{-1} X'e) \\
-4 &: Var(\hat \beta - \beta) = (X'X)^{-1} X' Var(e) X' (X'X)^{-1}  \\
+4 &: Var(\hat \beta - \beta) = (X'X)^{-1} X' Var(e) X (X'X)^{-1}  \\
 \end{aligned}
 $$
 
@@ -316,7 +316,7 @@ $Var(e)$ considers variance and covariance of each $e_i$ and its combinations.
 By assumption A2, $cov(e_i,e_j)=0$. And by assumption A5 $Var(e_i)=Var(e_j)$.
 
 $$\begin{aligned}
-Var(\hat \beta - \beta) &= (X'X)^{-1} X' \sigma_e^2 I X' (X'X)^{-1} \\
+Var(\hat \beta - \beta) &= (X'X)^{-1} X' \sigma_e^2 I X (X'X)^{-1} \\
 Var(\hat \beta - \beta) &= \sigma_e^2 (X'X)^{-1} \\
 Var(\hat \beta_j - \beta_j) &= \frac{\sigma_e^2}{SST_j (1-R^2_j)} 
 \end{aligned}

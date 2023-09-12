@@ -17,13 +17,196 @@ format:
 
 ## Pooling Data together: Cross-section and Panel Data
 
--   Pooling Repeated Crossection is a common practice in applied research.
--   N grows. So does power.
--   It can be used for fun stuff like Chow test.
+- Up to this point, we have cover the analysis of cross-section data. 
+  - Many individuals at a single point in time.
+- Towards the end of the semester, We will also cover the analysis of time series data.
+  - A single individual across time.
+- Today, we will cover the analysis of panel data and repeated crossection: Many individuals across time.
+  
+- This type of data, also known as longitudinal data, has advantages over crossection, as it provides more information that helps dealing with the unknown of $e$.
 
-- Main use: DD vs DDD models. 
+- And its often the only way to answer certain questions.
+  
+## Pooling independent crossections
 
-- Panel Data: N large T=2
+- We first consider the case of independent crossections. 
+  - We have access to surveys that may be collected regularly. (Household budget surveys)
+  - We assume that individuals across this surveys are independent from each other (no panel structure).
+- This scenario is typically used for increasing sample-sizes and thus power of analysis (*larger N smaller SE*)
+- Only minor considerations are needed when analyzing this type of data.
+  - We need to account for the fact Data comes from different years. This can be done by including year dummies.
+  - May need to Standardize variables to make them comparable across years. (inflation adjustments, etc.)
 
-FE vs FD
+## Example {.scrollable}
 
+Lets use the data `fertil1` to estimate the changes in fertility rates across time. This data comes from the *General Social Survey*.
+
+```{stata}
+frause fertil1, clear
+regress kids educ age agesq black east northcen west farm othrural town smcity i.year, robust  
+```
+
+- This allow us to see how fertility rates have changed across time.
+- One could even interact the year dummies with other variables to see how the effect of other variables have changed across time.
+
+```{stata}
+frause cps78_85, clear
+regress lwage i.year##c.(educ i.female) exper expersq union, robust cformat(%5.4f)
+```
+
+## Good old Friend: Chow test
+
+- The Chow test can be used to test whether the coefficients of a regression model are the same across two groups. 
+  - we have seen this test back when we were discussing dummy variables.
+- We can also use this test to check if coefficients of a regression model are the same across two time periods. (Has the wage structure changed across time?)
+  - This is the case of interest here.
+- Not much changes with before. Although it can be a bit more tedious to code.
+
+## Example {.scrollable}
+
+```{stata}
+frause cps78_85, clear
+regress lwage i.year##c.(educ i.female exper expersq i.union), robust
+```
+
+```{stata}
+*| code-fold: false
+test 85.year#c.educ 85.year#1.female 85.year#c.exper   85.year#c.expersq 85.year#1.union
+```
+
+## Using Pool Crossection for Causal Inference
+
+- One advantage of pooling crossection data is that it could to be used to estimate causal effects using a method known as Differences in Differences (DnD)
+
+- Consider the following case:
+  - There was a project regarding the construction of an incinerator in a city. You are asked to evaluate what the impact of this was on the prices of houses around the area. 
+  - You have access to data for two years: 1978 and 1981.
+  - In 1978, there was no information about the project. In 1981, the project was announced, but it only began operations in 1985.
+
+##
+
+- we could start estimating the project using the simple model:
+$$rprice = \beta_0 + \beta_1 nearinc + e$$
+
+using only 1981 data. But this would not be a good idea. Why?
+
+```{stata}
+*| classes: larger
+frause kielmc, clear
+regress rprice nearinc if year == 1981, robust
+```
+
+## 
+
+- We could also estimate the model using only 1971 data.
+  What would this be showing us?
+
+```{stata}
+*| classes: larger
+regress rprice nearinc if year == 1978, robust
+```
+
+##
+
+- So, using 1981 data we capture the Total price difference between houses near and far from the incinerator. 
+  - This captures both the announcement effect of the project, but also other factors (where would an incinerator be built?).
+- Using 1978 data we capture the price difference between houses near and far from the incinerator in the absence of the project. 
+  - This captures the effect of other factors that may be correlated with the incinerator project.
+- Use both to see the impact!
+
+$$Effect = -30688.27-(-18824.37)= -11863.9$$
+
+- This is in essence a DnD model
+
+## Difference in Differences
+
+
+|  | Control| Treatment | Treat-Control |
+|---|---|---|---|
+| Pre-            | $\bar y_{00}$ | $\bar y_{10}$| $\bar y_{10}$-$\bar y_{00}$ |
+| Post-           | $\bar y_{01}$ | $\bar y_{11}$ | $\bar y_{10}$-$\bar y_{00}$ |
+| Post-pre        | $\bar y_{01}$-$\bar y_{00}$ | $\bar y_{11}$-$\bar y_{10}$ | DD  |
+  
+- Post-Pre: 
+  - Trend changes for the control
+  - Trend changes for the treated: A mix of the impact of the treatment and the trend change.
+- Treat-Control: 
+  - Baseline difference when looking at Pre-period
+  - Total Price differentials when looking at Post-period: Mix of the impact of the treatment and the baseline difference.
+
+- Take the Double Difference and you get the **treatment effect**.
+
+## Difference in Differences: Regression {.scrollable}
+
+- This could also be achieved using a regression model:
+
+$$ y = \beta_0 + \beta_1 post + \beta_2 treat + \beta_3 post*treat + e$$
+
+Where $\beta_3$ is the treatment effect. (only for 2x2 DD)
+
+```{stata}
+regress rprice nearinc##y81, robust
+```
+
+## Difference in Differences: Regression + controls 
+
+- One advantage of DD is that it can control for those unobserved factors that may be correlated with outcome. 
+  - Without controls, however, estimates may not have enough precision.
+- But, we could add controls!
+
+$$ y = \beta_0 + X \gamma + \beta_1 post + \beta_2 treat + \beta_3 post*treat + e$$
+
+But its not as easy as it may seem! (just adding regressions is not a good approach)
+
+This method requires other assumptions! ($\gamma$ is fixed), which may be very strong.
+
+
+>[**Note:**]{.redtxt} For DD to work, you need to assume the two groups follow the same path in the absence of the treatment. (Parallel trends assumption)
+>
+>Otherwise, you are just using trend differences!
+
+## Diff in Diff in Diff
+
+An Alternative approach is to use a triple difference model.
+
+Setup:
+
+- You still have two groups: Control and Treatment (which are easily identifiable)
+- You have two time periods: Pre and Post (which are also easily identifiable)
+- You have a different sample, where you can identify controls and treatment, as well as the pre- and post- periods. This sample was not treated!
+
+Estimation: 
+
+- Estimate the DD for the Original Sample, and the new untreated sample. 
+- Obtaining the difference between these two estimates will give you the triple difference.
+
+Example: Smoking ban analysis based on age. (DD) But using both treated and untreated States (DDD)
+
+## General Framework and Pseudo Panels
+
+- One general Structure for Policy analysis is the use of Pseudo Panels structure.
+  - Pseudo panels are a way to use repeated crossection data, but controlling for some unobserved heterogeneity across specific groups. (the pseudo panels)
+- For Pseudo-panels, we need to identify a group that could be followed across time. 
+  - This cannot be a group of individuals (repeated crosection). 
+  - But we could use groups of states, cohorts (year of birth), etc.
+- In this case, the data would look like this:
+$$y_{igt} = \lambda_t + \alpha_g + \beta x_{gt} + z_{igt}\gamma +  e_{igt}$$
+
+- Where $g$ is the group, $t$ is the time, and $i$ is the individual.
+- And $\beta$ is the coefficient of interest. (impact of the Policy $x_{gt}$).
+  - This may ony work if we assume $\beta$ is constant across time and groups.
+
+## Alternative
+
+- We could also use a more general model:
+$$y_{igt} = \lambda_{gt}+ \beta x_{gt} + z_{igt}\gamma +  e_{igt}$$
+
+- where $\lambda_{gt}$ is a group-time fixed effect. 
+  - Nevertheless, while more flexible, this also imposes other types of assumptions, and might even be unfeasible if we have a large number of groups and time periods.
+
+- Still, we require $\beta$ to be homogenous. If that is not the case, you may still suffer from contamination bias.
+
+# Panel data
+Baby steps: 2 period panel data
+
+## 
