@@ -1,0 +1,44 @@
+---
+title: "Quiz 1"
+format: html
+---
+
+Name: __________________________________________________________________
+
+1. Household Budget surveys are an example of:
+
+- [ ] panel data
+- [ ] experimental data
+- [ ] time series data
+- [ ] cross-sectional data
+
+2. A dependent variable is also known as a(n) _____.
+
+- [ ] explanatory variable
+- [ ] control variable
+- [ ] predictor variable
+- [ ] response variable
+
+3. The Zero conditional mean assumption means
+
+- [ ] $E(u│x)=0$
+- [ ] $E(\hat u | x)=0$
+- [ ] $E(u^2│x)=0$
+- [ ] $E(\hat u ^2│x)=0$
+
+4. The explained sum of squares (SSE) for the regression function, $y=\beta_0 + \beta_1 x + u$, is defined as _____.
+   
+- [ ] $\sum(\hat y_i - \bar{y})^2$
+- [ ] $\sum(y_i - \hat y_i )^2$
+- [ ] $\sum \hat u$
+- [ ] $\sum \hat u^2$
+
+5. The error term in a regression equation is said to exhibit homoskedasticty if _____.
+
+- [ ] it has zero conditional mean
+- [ ] it has the same variance for all values of the explanatory variable
+- [ ] it has the same value for all values of the explanatory variable
+- [ ] if the error term has a value of one given any value of the explanatory variable
+
+6. Bonus: Why do we care about the Zero Conditional mean assumption?
+
