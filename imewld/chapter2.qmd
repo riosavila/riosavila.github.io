@@ -3,7 +3,6 @@ title: "Chapter 2: The Simple Regression Model"
 jupyter: nbstata
 format: 
     html: default
-    ipynb: default
 execute: 
   echo: true
 ---

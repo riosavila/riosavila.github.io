@@ -3,7 +3,6 @@ title: "Chapter 3: Multiple Regression Analysis: Estimation"
 jupyter: nbstata
 format: 
     html: default
-    ipynb: default
 execute: 
   echo: true
 ---

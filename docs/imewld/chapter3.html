@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Econometrics MSC Levy - Chapter 2: The Simple Regression Model</title>
+<title>Econometrics MSC Levy - Chapter 3: Multiple Regression Analysis: Estimation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,24 +57,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -104,7 +104,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -114,7 +114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Econometrics MSC Levy</span>
     </a>
   </div>
@@ -125,15 +125,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html" rel="" target="">
+    <a class="nav-link" href="../index.html" rel="" target="">
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../adv_class.html" rel="" target="">
+    <a class="nav-link" href="../adv_class.html" rel="" target="">
  <span class="menu-text">Adv Methods and Causal Effects</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../rm_class.html" rel="" target="">
+    <a class="nav-link" href="../rm_class.html" rel="" target="">
  <span class="menu-text">Research Methods: Econometrics I</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -142,25 +142,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-math-refresher">    
         <li>
-    <a class="dropdown-item" href="../../mathref/math_1.html" rel="" target="">
+    <a class="dropdown-item" href="../mathref/math_1.html" rel="" target="">
  <span class="dropdown-text">Math Refresher: Basic Calculus</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../mathref/math_2.html" rel="" target="">
+    <a class="dropdown-item" href="../mathref/math_2.html" rel="" target="">
  <span class="dropdown-text">Math Refresher: Basic Linear Algebra</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../mathref/math_3.html" rel="" target="">
+    <a class="dropdown-item" href="../mathref/math_3.html" rel="" target="">
  <span class="dropdown-text">Math Refresher: Basic Statistics and Probability</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="../../resources.html" rel="" target="">
+    <a class="nav-link" href="../resources.html" rel="" target="">
  <span class="menu-text">Resources</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html" rel="" target="">
+    <a class="nav-link" href="../about.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -180,7 +180,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#example-2.3-ceo-salary-and-return-on-equity" id="toc-example-2.3-ceo-salary-and-return-on-equity" class="nav-link active" data-scroll-target="#example-2.3-ceo-salary-and-return-on-equity">Example 2.3: CEO Salary and Return on Equity</a></li>
+  <li><a href="#example-3.1-determinants-of-college-gpa" id="toc-example-3.1-determinants-of-college-gpa" class="nav-link active" data-scroll-target="#example-3.1-determinants-of-college-gpa">Example 3.1: Determinants of College GPA</a></li>
+  <li><a href="#example-3.2-hourly-wage-equation" id="toc-example-3.2-hourly-wage-equation" class="nav-link" data-scroll-target="#example-3.2-hourly-wage-equation">Example 3.2: Hourly Wage Equation</a></li>
+  <li><a href="#partialling-out-interpretation-of-multiple-regression" id="toc-partialling-out-interpretation-of-multiple-regression" class="nav-link" data-scroll-target="#partialling-out-interpretation-of-multiple-regression">Partialling Out Interpretation of Multiple Regression</a></li>
+  <li><a href="#example-3.4-determinants-of-college-gpa" id="toc-example-3.4-determinants-of-college-gpa" class="nav-link" data-scroll-target="#example-3.4-determinants-of-college-gpa">Example 3.4 : Determinants of College GPA</a></li>
+  <li><a href="#example-3.5-explaining-arrest-records" id="toc-example-3.5-explaining-arrest-records" class="nav-link" data-scroll-target="#example-3.5-explaining-arrest-records">Example 3.5 : Explaining Arrest Records</a></li>
+  <li><a href="#variance-inflation-factors" id="toc-variance-inflation-factors" class="nav-link" data-scroll-target="#variance-inflation-factors">Variance Inflation Factors</a></li>
+  <li><a href="#example-3.7-evaluating-a-job-training-program" id="toc-example-3.7-evaluating-a-job-training-program" class="nav-link" data-scroll-target="#example-3.7-evaluating-a-job-training-program">Example 3.7 : Evaluating a Job Training Program</a></li>
   </ul>
 </nav>
     </div>
@@ -189,7 +195,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Chapter 2: The Simple Regression Model</h1>
+<h1 class="title">Chapter 3: Multiple Regression Analysis: Estimation</h1>
 </div>
 
 
@@ -205,28 +211,230 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="example-2.3-ceo-salary-and-return-on-equity" class="level2">
-<h2 class="anchored" data-anchor-id="example-2.3-ceo-salary-and-return-on-equity">Example 2.3: CEO Salary and Return on Equity</h2>
+<section id="example-3.1-determinants-of-college-gpa" class="level2">
+<h2 class="anchored" data-anchor-id="example-3.1-determinants-of-college-gpa">Example 3.1: Determinants of College GPA</h2>
 <p>Model:</p>
-<p><span class="math display">\[salary = \beta_0 + \beta_1 roe + u\]</span></p>
-<blockquote class="blockquote">
-<p><strong>None</strong></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>frause ceosal1, <span class="kw">clear</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> salary roe    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<pre><code>      Source |       SS           df       MS      Number of obs   =       209
--------------+----------------------------------   F(1, 207)       =      2.77
-       Model |  5166419.04         1  5166419.04   Prob &gt; F        =    0.0978
-    Residual |   386566563       207  1867471.32   R-squared       =    0.0132
--------------+----------------------------------   Adj R-squared   =    0.0084
-       Total |   391732982       208  1883331.64   Root MSE        =    1366.6
+<p><span class="math display">\[colGPA = \beta_0 + \beta_1hsGPA + \beta_2ACT + u\]</span></p>
+<div id="f149b0cb" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>frause gpa1, <span class="kw">clear</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">regress</span> colgpa hsgpa act</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">regress</span> colgpa act</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Source |       SS           df       MS      Number of obs   =       141
+-------------+----------------------------------   F(2, 138)       =     14.78
+       Model |  3.42365506         2  1.71182753   Prob &gt; F        =    0.0000
+    Residual |  15.9824444       138  .115814814   R-squared       =    0.1764
+-------------+----------------------------------   Adj R-squared   =    0.1645
+       Total |  19.4060994       140  .138614996   Root MSE        =    .34032
 
 ------------------------------------------------------------------------------
-      salary | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+      colgpa | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
 -------------+----------------------------------------------------------------
-         roe |   18.50119   11.12325     1.66   0.098    -3.428196    40.43057
-       _cons |   963.1913   213.2403     4.52   0.000     542.7902    1383.592
+       hsgpa |   .4534559   .0958129     4.73   0.000     .2640047    .6429071
+         act |    .009426   .0107772     0.87   0.383    -.0118838    .0307358
+       _cons |   1.286328   .3408221     3.77   0.000      .612419    1.960237
+------------------------------------------------------------------------------
+
+      Source |       SS           df       MS      Number of obs   =       141
+-------------+----------------------------------   F(1, 139)       =      6.21
+       Model |  .829558811         1  .829558811   Prob &gt; F        =    0.0139
+    Residual |  18.5765406       139  .133644177   R-squared       =    0.0427
+-------------+----------------------------------   Adj R-squared   =    0.0359
+       Total |  19.4060994       140  .138614996   Root MSE        =    .36557
+
+------------------------------------------------------------------------------
+      colgpa | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         act |    .027064   .0108628     2.49   0.014     .0055862    .0485417
+       _cons |   2.402979   .2642027     9.10   0.000     1.880604    2.925355
 ------------------------------------------------------------------------------</code></pre>
-</blockquote>
+</div>
+</div>
+</section>
+<section id="example-3.2-hourly-wage-equation" class="level2">
+<h2 class="anchored" data-anchor-id="example-3.2-hourly-wage-equation">Example 3.2: Hourly Wage Equation</h2>
+<p>Model:</p>
+<p><span class="math display">\[log(wage)=\beta_0 + \beta_1educ + \beta_2exper + \beta_3tenure + u\]</span></p>
+<div id="19673b20" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>frause wage1, <span class="kw">clear</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> logwage = <span class="fu">log</span>(wage)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> logwage educ exper tenure</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Source |       SS           df       MS      Number of obs   =       526
+-------------+----------------------------------   F(3, 522)       =     80.39
+       Model |  46.8741776         3  15.6247259   Prob &gt; F        =    0.0000
+    Residual |  101.455574       522  .194359337   R-squared       =    0.3160
+-------------+----------------------------------   Adj R-squared   =    0.3121
+       Total |  148.329751       525   .28253286   Root MSE        =    .44086
+
+------------------------------------------------------------------------------
+     logwage | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        educ |    .092029   .0073299    12.56   0.000     .0776292    .1064288
+       exper |   .0041211   .0017233     2.39   0.017     .0007357    .0075065
+      tenure |   .0220672   .0030936     7.13   0.000     .0159897    .0281448
+       _cons |   .2843595   .1041904     2.73   0.007     .0796756    .4890435
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="partialling-out-interpretation-of-multiple-regression" class="level2">
+<h2 class="anchored" data-anchor-id="partialling-out-interpretation-of-multiple-regression">Partialling Out Interpretation of Multiple Regression</h2>
+<p>Model:</p>
+<p><span class="math display">\[log(wage)=\beta_0 + \beta_1educ + \beta_2exper + \beta_3tenure + u\]</span></p>
+<p>We could estimate the same models with the followin:</p>
+<p><span class="math display">\[educ=\gamma_0 + \gamma_1exper + \gamma_2tenure + v\]</span></p>
+<p><span class="math display">\[log(wage)=\beta_0 + \beta_1 \hat v + u\]</span></p>
+<div id="542d0e6c" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:<span class="kw">reg</span> logwage exper tenure</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">predict</span> logwage_res, <span class="kw">resid</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:<span class="kw">reg</span> educ exper tenure</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">predict</span> educ_res, <span class="kw">resid</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> logwage_res educ_res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Source |       SS           df       MS      Number of obs   =       526
+-------------+----------------------------------   F(1, 524)       =    158.24
+       Model |  30.6376772         1  30.6376772   Prob &gt; F        =    0.0000
+    Residual |  101.455574       524  .193617507   R-squared       =    0.2319
+-------------+----------------------------------   Adj R-squared   =    0.2305
+       Total |  132.093251       525  .251606192   Root MSE        =    .44002
+
+------------------------------------------------------------------------------
+ logwage_res | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+    educ_res |    .092029   .0073159    12.58   0.000     .0776568    .1064011
+       _cons |  -6.25e-10   .0191858    -0.00   1.000    -.0376905    .0376905
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="example-3.4-determinants-of-college-gpa" class="level2">
+<h2 class="anchored" data-anchor-id="example-3.4-determinants-of-college-gpa">Example 3.4 : Determinants of College GPA</h2>
+<p>See example 3.1</p>
+</section>
+<section id="example-3.5-explaining-arrest-records" class="level2">
+<h2 class="anchored" data-anchor-id="example-3.5-explaining-arrest-records">Example 3.5 : Explaining Arrest Records</h2>
+<div id="aaefcf21" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>frause crime1, <span class="kw">clear</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">regress</span> narr86 pcnv  ptime86 qemp86</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Source |       SS           df       MS      Number of obs   =     2,725
+-------------+----------------------------------   F(3, 2721)      =     39.10
+       Model |  83.0741941         3   27.691398   Prob &gt; F        =    0.0000
+    Residual |  1927.27296     2,721  .708295833   R-squared       =    0.0413
+-------------+----------------------------------   Adj R-squared   =    0.0403
+       Total |  2010.34716     2,724  .738012906   Root MSE        =     .8416
+
+------------------------------------------------------------------------------
+      narr86 | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        pcnv |  -.1499274   .0408653    -3.67   0.000    -.2300576   -.0697973
+     ptime86 |  -.0344199    .008591    -4.01   0.000    -.0512655   -.0175744
+      qemp86 |   -.104113   .0103877   -10.02   0.000    -.1244816   -.0837445
+       _cons |   .7117715   .0330066    21.56   0.000      .647051     .776492
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<div id="e35f67a1" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">regress</span> narr86 pcnv avgsen ptime86 qemp86</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Source |       SS           df       MS      Number of obs   =     2,725
+-------------+----------------------------------   F(4, 2720)      =     29.96
+       Model |  84.8242895         4  21.2060724   Prob &gt; F        =    0.0000
+    Residual |  1925.52287     2,720  .707912819   R-squared       =    0.0422
+-------------+----------------------------------   Adj R-squared   =    0.0408
+       Total |  2010.34716     2,724  .738012906   Root MSE        =    .84138
+
+------------------------------------------------------------------------------
+      narr86 | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        pcnv |  -.1508319   .0408583    -3.69   0.000    -.2309484   -.0707154
+      avgsen |   .0074431   .0047338     1.57   0.116    -.0018392    .0167254
+     ptime86 |  -.0373908   .0087941    -4.25   0.000    -.0546345   -.0201471
+      qemp86 |   -.103341   .0103965    -9.94   0.000    -.1237268   -.0829552
+       _cons |   .7067565   .0331515    21.32   0.000     .6417519     .771761
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="variance-inflation-factors" class="level2">
+<h2 class="anchored" data-anchor-id="variance-inflation-factors">Variance Inflation Factors</h2>
+<div id="a2e578d8" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:<span class="kw">regress</span> narr86 pcnv avgsen ptime86 qemp86</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">estat</span> <span class="kw">vif</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Variable |       VIF       1/VIF  
+-------------+----------------------
+     ptime86 |      1.13    0.883693
+      qemp86 |      1.08    0.927081
+      avgsen |      1.06    0.942363
+        pcnv |      1.00    0.996771
+-------------+----------------------
+    Mean VIF |      1.07</code></pre>
+</div>
+</div>
+<div id="2758f452" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:<span class="kw">regress</span> pcnv avgsen ptime86 qemp86</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">display</span> <span class="st">"VIF for pcnv:   "</span> 1/(1-<span class="fu">e</span>(r2))</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:<span class="kw">regress</span> avgsen ptime86 qemp86 pcnv</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="kw">display</span> <span class="st">"VIF for avgsen: "</span> 1/(1-<span class="fu">e</span>(r2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>VIF for pcnv: 1.003239
+VIF for avgsen: 1.0611622</code></pre>
+</div>
+</div>
+</section>
+<section id="example-3.7-evaluating-a-job-training-program" class="level2">
+<h2 class="anchored" data-anchor-id="example-3.7-evaluating-a-job-training-program">Example 3.7 : Evaluating a Job Training Program</h2>
+<div id="6a5f5844" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>frause jtrain98, <span class="kw">clear</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">regress</span> earn98 train</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Source |       SS           df       MS      Number of obs   =     1,130
+-------------+----------------------------------   F(1, 1128)      =     17.91
+       Model |  1054.41369         1  1054.41369   Prob &gt; F        =    0.0000
+    Residual |  66408.4778     1,128   58.872764   R-squared       =    0.0156
+-------------+----------------------------------   Adj R-squared   =    0.0148
+       Total |  67462.8915     1,129   59.754554   Root MSE        =    7.6729
+
+------------------------------------------------------------------------------
+      earn98 | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       train |  -2.050053   .4844142    -4.23   0.000    -3.000507   -1.099599
+       _cons |    10.6099    .279429    37.97   0.000     10.06164    11.15816
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<div id="0c1413cb" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">regress</span> earn98 train earn96 educ age married  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Source |       SS           df       MS      Number of obs   =     1,130
+-------------+----------------------------------   F(5, 1124)      =    152.99
+       Model |  27320.1797         5  5464.03593   Prob &gt; F        =    0.0000
+    Residual |  40142.7118     1,124  35.7141564   R-squared       =    0.4050
+-------------+----------------------------------   Adj R-squared   =    0.4023
+       Total |  67462.8915     1,129   59.754554   Root MSE        =    5.9761
+
+------------------------------------------------------------------------------
+      earn98 | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       train |   2.410547   .4352625     5.54   0.000     1.556528    3.264565
+      earn96 |   .3725384   .0186262    20.00   0.000     .3359923    .4090845
+        educ |   .3628329    .064047     5.67   0.000     .2371678    .4884979
+         age |   -.181046    .018875    -9.59   0.000    -.2180803   -.1440118
+     married |   2.481719   .4262625     5.82   0.000      1.64536    3.318079
+       _cons |   4.667042   1.145283     4.08   0.000     2.419908    6.914176
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
 
 
 </section>
