@@ -1,9 +1,12 @@
 ---
-title: "Quiz 1"
-format: html
+format: 
+    html: default
+    pdf: default
 ---
 
-Name: __________________________________________________________________
+## Quiz 1
+
+Name: ________________________________________________________
 
 1. Household Budget surveys are an example of:
 

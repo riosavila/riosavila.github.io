@@ -5969,5 +5969,19 @@
     "title": "Pool Cross-section and Panel Data",
     "section": "General Framework and Pseudo Panels",
     "text": "General Framework and Pseudo Panels\n\nOne general Structure for Policy analysis is the use of Pseudo Panels structure.\n\nPseudo panels are a way to use repeated crossection data, but controlling for some unobserved heterogeneity across specific groups. (the pseudo panels)\n\nFor Pseudo-panels, we need to identify a group that could be followed across time.\n\nThis cannot be a group of individuals (repeated crosection).\nBut we could use groups of states, cohorts (year of birth), etc.\n\nIn this case, the data would look like this: \\[y_{igt} = \\lambda_t + \\alpha_g + \\beta x_{gt} + z_{igt}\\gamma +  e_{igt}\\]\nWhere \\(g\\) is the group, \\(t\\) is the time, and \\(i\\) is the individual.\nAnd \\(\\beta\\) is the coefficient of interest. (impact of the Policy \\(x_{gt}\\)).\n\nThis may ony work if we assume \\(\\beta\\) is constant across time and groups."
+  },
+  {
+    "objectID": "quizes/quiz_1.html",
+    "href": "quizes/quiz_1.html",
+    "title": "Econometrics MSC Levy",
+    "section": "",
+    "text": "Name: ________________________________________________________\n\nHousehold Budget surveys are an example of:\n\n\npanel data\nexperimental data\ntime series data\ncross-sectional data\n\n\nA dependent variable is also known as a(n) _____.\n\n\nexplanatory variable\ncontrol variable\npredictor variable\nresponse variable\n\n\nThe Zero conditional mean assumption means\n\n\n\\(E(u│x)=0\\)\n\\(E(\\hat u | x)=0\\)\n\\(E(u^2│x)=0\\)\n\\(E(\\hat u ^2│x)=0\\)\n\n\nThe explained sum of squares (SSE) for the regression function, \\(y=\\beta_0 + \\beta_1 x + u\\), is defined as _____.\n\n\n\\(\\sum(\\hat y_i - \\bar{y})^2\\)\n\\(\\sum(y_i - \\hat y_i )^2\\)\n\\(\\sum \\hat u\\)\n\\(\\sum \\hat u^2\\)\n\n\nThe error term in a regression equation is said to exhibit homoskedasticty if _____.\n\n\nit has zero conditional mean\nit has the same variance for all values of the explanatory variable\nit has the same value for all values of the explanatory variable\nif the error term has a value of one given any value of the explanatory variable\n\n\nBonus: Why do we care about the Zero Conditional mean assumption?"
+  },
+  {
+    "objectID": "quizes/quiz_1.html#quiz-1",
+    "href": "quizes/quiz_1.html#quiz-1",
+    "title": "Econometrics MSC Levy",
+    "section": "",
+    "text": "Name: ________________________________________________________\n\nHousehold Budget surveys are an example of:\n\n\npanel data\nexperimental data\ntime series data\ncross-sectional data\n\n\nA dependent variable is also known as a(n) _____.\n\n\nexplanatory variable\ncontrol variable\npredictor variable\nresponse variable\n\n\nThe Zero conditional mean assumption means\n\n\n\\(E(u│x)=0\\)\n\\(E(\\hat u | x)=0\\)\n\\(E(u^2│x)=0\\)\n\\(E(\\hat u ^2│x)=0\\)\n\n\nThe explained sum of squares (SSE) for the regression function, \\(y=\\beta_0 + \\beta_1 x + u\\), is defined as _____.\n\n\n\\(\\sum(\\hat y_i - \\bar{y})^2\\)\n\\(\\sum(y_i - \\hat y_i )^2\\)\n\\(\\sum \\hat u\\)\n\\(\\sum \\hat u^2\\)\n\n\nThe error term in a regression equation is said to exhibit homoskedasticty if _____.\n\n\nit has zero conditional mean\nit has the same variance for all values of the explanatory variable\nit has the same value for all values of the explanatory variable\nif the error term has a value of one given any value of the explanatory variable\n\n\nBonus: Why do we care about the Zero Conditional mean assumption?"
   }
 ]
