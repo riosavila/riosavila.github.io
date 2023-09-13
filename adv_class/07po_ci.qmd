@@ -11,9 +11,10 @@ format:
     echo: true
     css: styles.css  
     theme: serif
-
   pdf: default  
 jupyter: nbstata
+execute:
+  freeze: true 
 ---
 
 ## Introduction: What if?

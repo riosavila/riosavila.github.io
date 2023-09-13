@@ -13,8 +13,10 @@ website:
         text: Home
       - href: adv_class.qmd
         text: "Adv Methods and Causal Effects"
-      - href: rm_class.qmd
+      - href: rmethods/index.qmd
         text: "Research Methods: Econometrics I"
+      - href: rm2_return.qmd
+        text: "Research Methods II: Applied Methods"  
       - text: "Math Refresher"
         menu:
           - href: mathref/math_1.qmd

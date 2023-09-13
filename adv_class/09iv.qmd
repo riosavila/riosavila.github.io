@@ -13,6 +13,8 @@ format:
     theme: serif
     mermaid:
       theme: forest
+execute:
+  freeze: true       
 ---
 
 ## Recap: PO's and RCT's

@@ -5,7 +5,8 @@ author: Fernando Rios-Avila
 format:
   revealjs: 
     theme: dark
-editor: visual    
+execute:
+  freeze: true    
 ---
 
 ## Introduction {.smaller}

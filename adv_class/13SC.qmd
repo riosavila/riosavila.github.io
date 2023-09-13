@@ -13,6 +13,8 @@ format:
     theme: simple
   pdf: default  
 jupyter: nbstata  
+execute:
+  freeze: true 
 ---
 
 ## Introduction

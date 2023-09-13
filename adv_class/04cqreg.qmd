@@ -11,6 +11,8 @@ format:
     echo: true
     css: styles.css  
   pdf: default     
+execute:
+  freeze: true   
 ---
 
 ## Introduction {.scrollable}

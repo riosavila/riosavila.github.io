@@ -11,8 +11,9 @@ format:
     echo: true
     css: styles.css  
     theme: serif
-
   pdf: default 
+execute:
+  freeze: true   
 ---
 
 ## Re-Cap: Potential outcome Model {.scrollable}

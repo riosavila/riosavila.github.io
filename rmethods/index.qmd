@@ -1,0 +1,87 @@
+---
+title: "Research Methods: Econometrics I"
+---
+
+## Syllabus
+
+Class syllabus is [here](Syllabus.qmd).
+
+## Zoom Link
+
+When there is need to attend a class online, and you have requested to attend online, use the following link:
+
+[Zoom class](https://bard.zoom.us/j/9468356150?pwd=SXR4cDJmMUZ2WlZZZ2dQbE1BN25qdz09)
+
+## Introduction 
+
+#### **Chapter 1**
+
+[**Once Upon a time, why Econometrics?**](1_introduction.qmd):  
+
+## Part I: Basic Tools
+
+#### 1. Chapter 2: 
+
+   [**The Simple Regression Model**](2_SRA.qmd)
+
+#### 2. Chapter 3: 
+   
+   [**Multiple Regression Analysis: Estimation**](3_MLRM.qmd)
+
+#### 3. Chapter 4 - 5
+   
+   [**MRA: Inference and Asymptotics**](4_MLRM_IA.qmd)
+
+#### [HomeWork 1](homework_1.qmd) [Github](https://classroom.github.com/a/6LB49BSx) 
+
+
+## Part II: Addressing Problems with MRA
+
+#### 4. Chapter 6 - 7
+
+   [**MRA: Scaling, functional forms, Goodness of Fit, and Qualitative Information**](5_FXMRA.qmd)
+
+#### 5. Chapter 8
+
+   [**Heteroskedasticity**](6_Heteros.qmd)
+
+#### 6. Chapter 9
+
+   [**Further Problems: Functional form, Missing variables, measurement errors, missing data**](7_spec.qmd)
+
+#### [HomeWork 2](homework_2.qmd) [Github](https://classroom.github.com/a/adM46duw)
+
+### MIDTERM!
+
+#### 7. Chapter 15
+
+   [**Instrumental Variables and 2SLS**](8_iv2sls.qmd)
+
+#### 8. Chapter 17
+
+   [**Limited Dep Variables**](9_ldvm.qmd)
+
+## Part III: Panel Data Methods
+
+#### 9. Chapter 13
+
+   [**Pool Cross Section and Panel Data**](10_pooldata.qmd)
+
+#### 10. Chapter 14
+
+   [**Advanced Panel Data Methods**](11_advpanel.qmd)
+
+#### [HomeWork 3](homework_3.qmd)
+
+## Part IV: Time Series
+
+#### 11. Chapter 10 - 11     
+
+   [**Basics of Regression analysis with TSD**](12_timeseries.qmd)
+
+#### 12. Chapter 12 & 18
+
+   [**Advanced TSD Problems**](13_advtimeseries.qmd)
+
+### Final TBD
+
