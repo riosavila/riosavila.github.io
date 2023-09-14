@@ -32,7 +32,8 @@ When there is need to attend a class online, and you have requested to attend on
    
    [**MRA: Inference and Asymptotics**](4_MLRM_IA.qmd)
 
-#### [HomeWork 1](homework_1.qmd) [Github](https://classroom.github.com/a/6LB49BSx) 
+#### [HomeWork 1](homework_1.qmd) Also [Github](https://classroom.github.com/a/6LB49BSx) link
+#### Due Date September 27
 
 
 ## Part II: Addressing Problems with MRA
@@ -49,9 +50,10 @@ When there is need to attend a class online, and you have requested to attend on
 
    [**Further Problems: Functional form, Missing variables, measurement errors, missing data**](7_spec.qmd)
 
-#### [HomeWork 2](homework_2.qmd) [Github](https://classroom.github.com/a/adM46duw)
+#### [HomeWork 2](homework_2.qmd) Also [Github](https://classroom.github.com/a/adM46duw) link
+#### Due Date October 18
 
-### MIDTERM!
+### MIDTERM! Due Date October 18
 
 #### 7. Chapter 15
 
@@ -71,7 +73,8 @@ When there is need to attend a class online, and you have requested to attend on
 
    [**Advanced Panel Data Methods**](11_advpanel.qmd)
 
-#### [HomeWork 3](homework_3.qmd)
+#### [HomeWork 3](homework_3.qmd) 
+#### Due Date November 22
 
 ## Part IV: Time Series
 
