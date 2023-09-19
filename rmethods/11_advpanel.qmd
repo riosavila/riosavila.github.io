@@ -14,3 +14,314 @@ format:
     css: styles.css 
     chalkboard: true  
 ---
+
+## The old way (last class)
+
+- Last class we introduce the basic panel data model:
+
+$$y_{it} = \alpha + \beta x_{it} + \alpha_i + \delta_t + \epsilon_{it}$$
+
+- This model could be estimated using First Differences approach. 
+
+$$\Delta y_{it} = \beta \Delta x_{it} + \delta_t + \Delta \epsilon_{it}$$
+
+  - It elimitates the $\alpha_i$, and constrains how $\delta_t$ is estimated.
+  - It allows you to related how changes in $x_{it}$ are related to changes in $y_{it}$.
+    - Thus Fixed variables across time cannot be identified.
+
+- It requires strong assumptions of strict exogeneity and no serial correlation.
+
+## The new way (This class)
+
+- Today we are going to describe the use of three other methods:
+
+  - Fixed Effects (FE)
+  - Random Effects (RE)
+  - Correlated Random effects (CRE) $\simeq$ FE+RE 
+  
+- This method require their own methods, but could be used in more flexible scenarios.
+
+- What do we mean Fixed effects? Random Effects? Correlated Random Effects?
+  - All this will be estimation methods that relate to the same model. 
+  - However, in all cases, we assume the unobserved are fixed factors across time. We simply identify them differently.
+
+## Fixed Effects Estimation
+
+Lets consider the following model:
+$$y_{it} = \beta_1 x_{it} + \beta_2 z_{it} + \alpha_i + \epsilon_{it}$$
+
+which doesnt include a time-fixed effect, nor time-invariante factors.
+
+- This could be estiamted simply adding dummies for each individual in the data set. (too many dummies). Instead consider the following
+
+- Now, for each person, lets estimate the average characteristics $\bar w = \frac{1}{T} \sum_{t=1}^T w_{it}$. We could apply this to the model above an dobtain:
+
+$$\bar y_{i} = \beta_1 \bar x_{i} + \beta_2 \bar z_{i} + \alpha_i + \bar \epsilon_{i}$$
+
+- This no longer change across time. 
+  
+- It is a model interesting on itself. It captures Between Effects. 
+
+## 
+
+- Now, lets substract this from the original model:
+
+$$y_{it}-\bar y_{i} = \beta_1 (x_{it}- \bar x_{i}) + \beta_2 (z_{it}- \bar z_{i}) + e_{it} - \bar \epsilon_{i}$$
+$$\tilde y_{it} = \beta_1 \tilde  x_{it} + \beta_2 \tilde  z_{it} + \tilde \epsilon_{it}$$
+
+- What we have just done is apply the within transformation. The model above now captures the relationship between $X's$ and $Y's$ using only changes within each individual.
+  - This "ignores" variation across individuals.
+- This within transformation eliminates all time-invariant factors, including $\alpha_i$.
+
+Also of interest:
+  * This model could now be estimated using OLS
+  * Its an application of the FWL theorem. (we partial out the time-invariant factors)
+  * If done by OLS, you need to correct the Degrees of freedom. (NT-**N**-k)
+
+## Expanding the model: Time fixed effects
+
+- Now, lets consider the following model:
+
+$$y_{it} = \beta_1 x_{it} + \beta_2 z_{it} + \alpha_i + \delta_t + \epsilon_{it}$$
+
+- We could apply the same transformation as before, but now we need to consider the $\delta_t$.
+  - Typically, the number of time periods is small, and we could control for them using dummies. (need to be explicit about it)
+  - Altenativelly, One may need to use a Douple Demeaning approach. 
+
+$$\tilde y_{it} = y_{it} - \bar y_i - \bar y_t + \bar y$$
+
+where $\bar y_t$ is the average across individuals, and $\bar y$ is the overall average of $y_{it}$.
+
+- This will work as intended if the panel is balanced.  
+
+## When Panel is not balanced:
+
+- If panel is not balanced, you need to `demean` data using interative methods. 
+  
+- Lets assume that $\bar y=0$. We would need to demean the data many times as follows:
+
+$$ \overline{ty}_{it} = y_{it} - \bar y_i - \bar y_t $$
+$$ \overline{tty}_{it} = \overline{ty}_{it} - \overline{ty}_i - \overline{ty}_t $$
+$$ \overline{ttty}_{it} = \overline{tty}_{it} - \overline{tty}_i - \overline{tty}_t $$
+
+So on and so forth, until there is no more variation in the transformed data.
+
+- i.e. $\overline{t \dots ty}_i = \overline{t\dots t y}_t=0$
+
+**NOTE**: There are more efficient ways to do this.
+
+## FE vs FD: Balance Panel
+
+- FE and FD both aim to estimate the model by "eliminating" individual effects $\alpha_i$.
+- With $T=2$, both will give you the same results.
+- With $T\geq 3$, you may need to choose based on assumptions on the error
+  - if $e_{it}$ is serially uncorrelated, then FE is more efficient. Otherwise, FD may be better (if correlation is strong)
+- Otherwise, typical suggestionis to try both, and evaluate the results.
+- In general, there are few arguments to choose between FD and FE. 
+  - Empirically, People use FE, because its the default in most software.
+
+## FE vs FD: Unbalanced Panel
+
+- Unbalance panel data occures when different units are observed over different time periods.
+  - Some periods may or may not overlap, some may skip periods, etc
+  - It may be more important understanding why one observes this kind of missing data problem. 
+- If this is the case FD may be more difficult to use, because it requires data with regular time gaps. (Observations with missing data may be dropped)
+- With FE, you make most use of available data. Only those with "singletons" (units observed only once) are dropped.
+
+## Random Effects Models 
+
+- Even if not done by hand, FE estimation is very computationally intensive and inneficient, because it requires estimating a large set of coefficients for indivuals. 
+  - This, however, its important if we believe that $\alpha_i$ are correlated with $x_{it}$.
+
+- If $\alpha_i$ were uncorrelated with $x_{it}$, then we could use a more efficient Approach: Random Effects model.
+  - $Corr(\alpha_i, x_{it})=0$ can be a very hard assumption to make.
+
+- If this is the case, we could estimate the model using OLS or Pool-OLS. Both would be consistent. 
+  - However, the standard errors would be biased, because of the correlation across errors. 
+
+$$Corr(e_{it}+a_i,e{is}+a_i)=\frac{\sigma^2_a}{\sigma^2_a+\sigma^2_e}$$ 
+
+## Random Effects Models: SE estimation
+
+- There are two ways to estimate the standard errors in a Random Effects model:
+  - One could be to apply "clustered-robust" standard errors, using the individual as the cluster.
+    - Its a genereric solution to Clustering...Specially appropriate if we do not know how Clustering happens. (but we know
+  - The second One is apply `GLS`. Since we know the "theoretical" correlation across errors, we could use this to transform the data, and estimate SE.
+
+## 
+
+First, define: 
+
+$$\theta = 1- \left[ \frac{\sigma^2_e}{\sigma^2_e+T \sigma^2_a}\right]^{1/2}$$
+
+- All variables in the model (inclulding the constant) should be transformed using a quasi-differentiation as follows:
+
+$$\tilde w_{it} = w_{it} - \theta \bar w_i$$
+
+- This transformation will eliminate the correlation across errors, and allow us to estimate the model using OLS.
+$$y_{it}-\theta \bar y_i = \beta_0 (1-\theta) + b_1 (x_{it} - \theta \bar x_i) + b_2 (z_{it} - \theta \bar x_i) + v_{it} - \theta \bar v_i$$
+  
+## 
+### Last pieces of the puzzle:
+
+1. Estimate the main model using pool OLS. $y_{it}=\beta_0 + \beta_1 x_{it} + v_{it}$
+
+2. Estimate $\sigma^2_a$ as: $\hat \sigma^2_a = \frac{\sum_{i=1}^N \sum_{t=1}^{T-1}\sum_{s=t+1}^{T} \hat v_{it} \hat v_{is}}{NT(T-1)/2 - (k+1)}$
+
+3. Estimate $\sigma^2_e$ as: $\hat \sigma_e^2 = \hat\sigma^2_v - \hat \sigma^2_a$
+
+- Biggest Advantage of RE model is that you can now obtain effects for Time-invariant variables. 
+
+- It is also more efficient, because you do not need to estimate individual effects, just capture the distribution of $\alpha_i$.
+
+## Example {.scrollable}
+
+In `Stata`, you could estimate the panel models using the `xtreg` command. 
+
+This command has options for Fixed Effects, Between Effects and Random Effects. 
+
+```{stata}
+frause wagepan, clear
+** Good idea to Set the data as panel data
+xtset nr year
+```
+
+```{stata}
+** Pool OLS
+qui: reg lwage educ black hisp exper expersq married union,
+est sto m1
+** pool OLS with Clustered SE
+qui: reg lwage educ black hisp exper expersq married union, cluster(nr)
+est sto m2
+** Random Effects: Default
+qui:xtreg lwage educ black hisp exper expersq married union, re
+est sto m3
+** Fixed Effects
+qui:xtreg lwage educ black hisp exper expersq married union, fe
+est sto m4
+esttab m1 m2 m3 m4, se b(4) noomit nonumber mtitle(OLS OLS_CL RE FE)
+```
+
+## Pool OLS vs RE vs FE
+
+- We now know how to analyze panel data using three Stretegies: Pool OLS, Fixed Effects and,  Random Effects.
+
+  1. FE is usually prefered to RE, because is more consistent by relaxing the assumption of no correlation between $a_i$ and $x_{it}$ (explicit control). Its less efficient.
+  2. RE may be prefer to FE if the correlation between $a_i$ and $x_{it}$ is small. Its more efficient, and allows to estimate effects for **time-invariant variables**.
+  3. RE and POLS will be consistent under the same assumptions. However, RE will remove some of the serial correlation, and may have less bias than OLS (even if $a_i$ and $x_{it})$ are correlated.
+
+- Choosing between RE and POLs is rarely considered. (RE would be the default in most cases)
+- However, Choosing between FE vs RE is common: Hausman Test
+
+## Hausman Test {.scrollable}
+
+- Hausman test is used to determine which model to use between two estimators.
+  1. You assume FE is consistent (but not efficient).
+  2. You estimate the model using RE. If RE estimates are close to FE, then RE is consistent and efficient (preferred)
+  3. Othewise, we suspect RE are inconsistent, and we use FE.
+- For most applied work, however, FE is generally prefered to RE
+
+```{stata}
+** Hausman Test
+*** Consistent model FE
+qui:xtreg lwage educ black hisp exper expersq married union, fe
+est sto fe
+*** Efficient under H0
+qui:xtreg lwage educ black hisp exper expersq married union, re
+est sto re
+hausman fe re
+```
+
+## Correlated Random Effects
+
+- The CRE model is an alternative approach that combines some of the features of RE and FE estimators.
+$$y_{it} = \beta_1 x_{it} + \beta_2 z_{i} + \alpha_i + \epsilon_{it}$$
+
+- One way to look at the "individual" fixed effect is to model it as a function of fixed effects:
+
+$$\alpha_i = \alpha + \gamma_1 \bar x_{i} + \gamma_2 z_{i} + r_i$$
+
+- In this case, we assume the fixed unobserved effect $\alpha_i$ could be written as a function of avg observed characteristics, and fixed factors.
+
+- And we assume that $r_i$ would be uncorrelated with $x_{it}$ , $\bar x_i$ and $z_{i}$.
+
+##
+
+- If we combine this with the main regression we have:
+
+$$y_{it} = \beta_1 x_{it} + \beta_2 z_{i} + \alpha + \gamma_1 \bar x_{i} + \gamma_2 z_{i} + r_i + \epsilon_{it}$$
+$$y_{it} = \alpha + \beta_1 x_{it} + \beta_2 z_{i} + \gamma_1 \bar x_{i} + \underbrace{\nu_{it}}_{ r_i + \epsilon_{it}}$$
+
+- Which we could now estimate using Pool OLS or RE. There is no more need to worry about correlation between $r_i$ and $x_{it}$.
+
+- Differences and Advantages:
+  - We must include individual level average characteristics.
+  - We can now estimate effects for time-invariant variables.
+  - We can test for FE vs RE models.
+
+## Correlated Random Effects: FE vs RE
+
+- CRE estimates for Time varying variables are identical to FE. 
+  $$\hat \beta_{cre}=\hat \beta_{fe}$$
+
+- CRE estimates shows clearly why RE are more efficient (RE imposes $\gamma=0$)
+
+- Thus, we can test for FE vs RE using the following test:
+
+$$H_0: \gamma = 0 \text{ or } RE $$
+$$H_a: \gamma \neq 0 \text{ or } FE $$
+
+## Example {.scrollable}
+
+```{stata}
+foreach i of varlist exper expersq married union {
+  bysort nr: egen mn_`i'=mean(`i')
+}
+xtreg lwage educ black hisp exper expersq married union mn_*, re
+est sto m2
+** FE vs RE
+test mn_exper mn_expersq mn_married mn_union
+```
+
+Comparing across models:
+
+```{stata}
+qui:xtreg lwage educ black hisp exper expersq married union, fe
+est sto m1
+qui:xtreg lwage educ black hisp exper expersq married union, re
+est sto m3
+esttab m1 m2 m3, se b(4) noomit nonumber mtitle(FE CRE RE)
+```
+
+## CRE Implementation {.scrollable}
+
+- As shown above, in `Stata`, you could estimate the CRE panel models using the `xtreg` with RE option. 
+  - You just need to be careful when estimating the averages of all variables in the model. 
+  - This is particularly relevant for unbalance panel data.
+  - In those cases, you could use `cre` (from fra install)  
+
+- You could also extend this to using Multiple fixed effects (time and individual), but some equivalences are lost.
+    
+```{stata}
+fra install cre
+cre , abs(nr): xtreg lwage educ black hisp exper expersq married union, re 
+```
+
+## Final words
+
+- All estimation methodologies presented here could also be used in other contexts.
+- Examples:
+  - Geronimus and Korenman (1992): Analysis of data siblings outcome accounting for family fixed effects.
+  - Ashenfelder and Kruger (1994): Return to education using Twins Data.
+
+- One may also use the principles of Panel data with linked data in high dimensional data sets. 
+  - Education data and School FE
+  - Health data and Hospital FE
+  - Wages and Firm FE
+  - etc.
+
+- In this cases, one may need to also considering explicit clustering in addition to "fixed effects".
+
+# That's all folks!
+Next week: Switching gears to Time Series Analysis
+- When the present, the past and the future matter

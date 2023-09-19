@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.251">
+  <meta name="generator" content="quarto-1.3.433">
 
   <meta name="author" content="Fernando Rios-Avila">
   <title>Econometrics MSC Levy - Pool Cross-section and Panel Data</title>
@@ -224,8 +224,7 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    padding-bottom: 0.5rem;
-    margin-bottom: 0;
+    margin-bottom: 0.5rem;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -388,9 +387,6 @@
       margin-right: 0; 
     }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -444,15 +440,12 @@ Fernando Rios-Avila
 <section id="example" class="slide level2 scrollable">
 <h2>Example</h2>
 <p>Lets use the data <code>fertil1</code> to estimate the changes in fertility rates across time. This data comes from the <em>General Social Survey</em>.</p>
-<div id="e6603a7a" class="cell" data-execution_count="1">
+<div class="cell" data-execution_count="1">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a>frause fertil1, <span class="kw">clear</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="kw">regress</span> kids educ age agesq <span class="bn">black</span> east northcen west farm othrural town smcity i.<span class="fu">year</span>, <span class="kw">robust</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display">
-<style>div.jp-Notebook .datagrid-container {min-height: 448px; }</style>
-</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Linear regression                               Number of obs     =      1,129
@@ -493,7 +486,7 @@ Linear regression                               Number of obs     =      1,129
 <li>This allow us to see how fertility rates have changed across time.</li>
 <li>One could even interact the year dummies with other variables to see how the effect of other variables have changed across time.</li>
 </ul>
-<div id="b0d3c315" class="cell" data-execution_count="2">
+<div class="cell" data-execution_count="2">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a>frause cps78_85, <span class="kw">clear</span></span>
@@ -545,7 +538,7 @@ Linear regression                               Number of obs     =      1,084
 </section>
 <section id="example-1" class="slide level2 scrollable">
 <h2>Example</h2>
-<div id="5cca938f" class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="3">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1"></a>frause cps78_85, <span class="kw">clear</span></span>
@@ -590,7 +583,7 @@ year#c.exper |
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
-<div id="a49f97f6" class="cell" data-execution_count="4">
+<div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">test</span> 85.year#c.educ 85.year#1.female 85.year#c.exper   85.year#c.expersq 85.year#1.<span class="kw">union</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -623,7 +616,7 @@ year#c.exper |
 <li>we could start estimating the project using the simple model: <span class="math display">\[rprice = \beta_0 + \beta_1 nearinc + e\]</span></li>
 </ul>
 <p>using only 1981 data. But this would not be a good idea. Why?</p>
-<div id="6c5fd087" class="cell larger" data-execution_count="5">
+<div class="cell larger" data-execution_count="5">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1"></a>frause kielmc, <span class="kw">clear</span></span>
@@ -652,7 +645,7 @@ Linear regression                               Number of obs     =        142
 <ul>
 <li>We could also estimate the model using only 1971 data. What would this be showing us?</li>
 </ul>
-<div id="3a74a9ac" class="cell larger" data-execution_count="6">
+<div class="cell larger" data-execution_count="6">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">regress</span> rprice nearinc <span class="kw">if</span> <span class="fu">year</span> == 1978, <span class="kw">robust</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -752,7 +745,7 @@ Linear regression                               Number of obs     =        179
 </ul>
 <p><span class="math display">\[ y = \beta_0 + \beta_1 post + \beta_2 treat + \beta_3 post*treat + e\]</span></p>
 <p>Where <span class="math inline">\(\beta_3\)</span> is the treatment effect. (only for 2x2 DD)</p>
-<div id="9039458f" class="cell" data-execution_count="7">
+<div class="cell" data-execution_count="7">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">regress</span> rprice nearinc##y81, <span class="kw">robust</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -885,7 +878,7 @@ Linear regression                               Number of obs     =        321
 <ol type="1">
 <li>You can choose to “ignore” individual effects.</li>
 </ol>
-<p><span class="math display">\[y_{it} = \beta_0 + \beta_1 x_{it} + \beta_2 w_{i} + \delta t + (v_{it} = e_i + e_{it})\]</span></p>
+<p><span class="math display">\[y_{it} = \beta_0 + \beta_1 x_{it} + \beta_2 w_{i} + \delta t + \underbrace{e_i + e_{it}}_{v_{it}}\]</span></p>
 <ul>
 <li>Requires <span class="math inline">\(e_i\)</span> to be uncorrelated with <span class="math inline">\(x_{it}\)</span> (otherwise is biased), and Standard Errors will need to be clustered at the individual level.</li>
 </ul>
@@ -913,53 +906,172 @@ y_{i0} &amp;= \beta_0 + \beta_1 x_{i0} + e_i + e_{i0} \\
 </section>
 <section id="example-2" class="slide level2 scrollable">
 <h2>Example</h2>
-<div id="15c87a13" class="cell" data-execution_count="8">
+<div class="cell" data-execution_count="8">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a href="#cb15-1"></a>** This <span class="kw">data</span> is <span class="kw">in</span> <span class="kw">wide</span> <span class="kw">format</span></span>
 <span id="cb15-2"><a href="#cb15-2"></a>frause slp75_81, <span class="kw">clear</span></span>
 <span id="cb15-3"><a href="#cb15-3"></a>** Lets <span class="kw">reshape</span> it so its <span class="kw">in</span> standard <span class="kw">long</span> <span class="kw">format</span></span>
-<span id="cb15-4"><a href="#cb15-4"></a><span class="kw">gen</span> id = <span class="dt">_n</span></span>
-<span id="cb15-5"><a href="#cb15-5"></a><span class="kw">reshape</span> <span class="kw">long</span> educ gdhlth marr slpnap totwrk yngkid, i(id) j(<span class="fu">year</span>)</span>
-<span id="cb15-6"><a href="#cb15-6"></a><span class="kw">gen</span> time = <span class="fu">year</span>==81</span>
-<span id="cb15-7"><a href="#cb15-7"></a>xtset id time</span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="kw">qui</span>:<span class="kw">gen</span> id = <span class="dt">_n</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="kw">qui</span>:<span class="kw">reshape</span> <span class="kw">long</span> educ gdhlth marr slpnap totwrk yngkid, i(id) j(<span class="fu">year</span>)</span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="kw">qui</span>:<span class="kw">gen</span> dtime = <span class="fu">year</span>==81</span>
+<span id="cb15-7"><a href="#cb15-7"></a><span class="kw">qui</span>:xtset id dtime</span>
 <span id="cb15-8"><a href="#cb15-8"></a>** Regression <span class="kw">as</span> Pool Crossection</span>
-<span id="cb15-9"><a href="#cb15-9"></a><span class="kw">qui</span>: <span class="kw">reg</span> slpnap time totwrk educ marr yngkid gdhlth male, <span class="kw">cluster</span>(id)</span>
-<span id="cb15-10"><a href="#cb15-10"></a><span class="kw">est</span> sto m1</span>
-<span id="cb15-11"><a href="#cb15-11"></a>** <span class="kw">using</span> FE</span>
-<span id="cb15-12"><a href="#cb15-12"></a><span class="kw">qui</span>: <span class="kw">areg</span> slpnap time totwrk educ marr yngkid gdhlth male, absorb(id) <span class="kw">cluster</span>(id)</span>
-<span id="cb15-13"><a href="#cb15-13"></a><span class="kw">est</span> sto m2</span>
-<span id="cb15-14"><a href="#cb15-14"></a>** <span class="kw">using</span> FD</span>
-<span id="cb15-15"><a href="#cb15-15"></a><span class="kw">qui</span>: <span class="kw">reg</span> <span class="kw">d</span>.slpnap <span class="kw">d</span>.time <span class="kw">d</span>.totwrk <span class="kw">d</span>.educ <span class="kw">d</span>.marr <span class="kw">d</span>.yngkid <span class="kw">d</span>.gdhlth <span class="kw">d</span>.male, <span class="kw">robust</span></span>
-<span id="cb15-16"><a href="#cb15-16"></a><span class="kw">est</span> sto m3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-9"><a href="#cb15-9"></a><span class="kw">qui</span>: <span class="kw">reg</span> slpnap dtime totwrk educ marr yngkid gdhlth male,  </span>
+<span id="cb15-10"><a href="#cb15-10"></a><span class="kw">local</span> cname:<span class="ot">colnames</span> <span class="fu">e</span>(b)</span>
+<span id="cb15-11"><a href="#cb15-11"></a><span class="kw">display</span> <span class="st">"`cname'"</span></span>
+<span id="cb15-12"><a href="#cb15-12"></a><span class="kw">est</span> sto m1</span>
+<span id="cb15-13"><a href="#cb15-13"></a>** <span class="kw">using</span> FE</span>
+<span id="cb15-14"><a href="#cb15-14"></a><span class="kw">qui</span>: <span class="kw">areg</span> slpnap dtime totwrk educ marr yngkid gdhlth male, absorb(id)  </span>
+<span id="cb15-15"><a href="#cb15-15"></a><span class="kw">est</span> sto m2</span>
+<span id="cb15-16"><a href="#cb15-16"></a>** <span class="kw">using</span> FD</span>
+<span id="cb15-17"><a href="#cb15-17"></a><span class="kw">qui</span>: <span class="kw">reg</span> <span class="kw">d</span>.slpnap <span class="kw">d</span>.dtime <span class="kw">d</span>.totwrk <span class="kw">d</span>.educ <span class="kw">d</span>.marr <span class="kw">d</span>.yngkid <span class="kw">d</span>.gdhlth <span class="kw">d</span>.male, </span>
+<span id="cb15-18"><a href="#cb15-18"></a><span class="fu">matrix</span> b = <span class="fu">e</span>(b)</span>
+<span id="cb15-19"><a href="#cb15-19"></a><span class="fu">matrix</span> <span class="kw">V</span> = <span class="fu">e</span>(<span class="kw">V</span>)</span>
+<span id="cb15-20"><a href="#cb15-20"></a><span class="fu">matrix</span> colname b = <span class="ot">`cname'</span></span>
+<span id="cb15-21"><a href="#cb15-21"></a><span class="fu">matrix</span> colname <span class="kw">V</span> = <span class="ot">`cname'</span></span>
+<span id="cb15-22"><a href="#cb15-22"></a><span class="fu">matrix</span> rowname <span class="kw">V</span> = <span class="ot">`cname'</span></span>
+<span id="cb15-23"><a href="#cb15-23"></a>adde <span class="kw">repost</span> b=b <span class="kw">V</span>=<span class="kw">V</span>, <span class="kw">rename</span></span>
+<span id="cb15-24"><a href="#cb15-24"></a><span class="kw">est</span> sto m3</span>
+<span id="cb15-25"><a href="#cb15-25"></a>esttab m1 m2 m3, se r2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>(j = 75 81)
+<pre><code>dtime totwrk educ marr yngkid gdhlth male _cons
 
-Data                               Wide   -&gt;   Long
------------------------------------------------------------------------------
-Number of observations              239   -&gt;   478         
-Number of variables                  21   -&gt;   16          
-j variable (2 values)                     -&gt;   year
-xij variables:
-                          educ75 educ81   -&gt;   educ
-                      gdhlth75 gdhlth81   -&gt;   gdhlth
-                          marr75 marr81   -&gt;   marr
-                      slpnap75 slpnap81   -&gt;   slpnap
-                      totwrk75 totwrk81   -&gt;   totwrk
-                      yngkid75 yngkid81   -&gt;   yngkid
------------------------------------------------------------------------------
+------------------------------------------------------------
+                      (1)             (2)             (3)   
+                   slpnap          slpnap        D.slpnap   
+------------------------------------------------------------
+dtime              -79.28          -92.63*              0   
+                  (48.04)         (45.87)             (.)   
 
-Panel variable: id (strongly balanced)
- Time variable: time, 0 to 1
-         Delta: 1 unit</code></pre>
+totwrk             -0.156***       -0.227***       -0.227***
+                 (0.0254)        (0.0361)        (0.0361)   
+
+educ               -21.09**       -0.0245         -0.0245   
+                  (8.057)         (48.76)         (48.76)   
+
+marr               -51.38           104.2           104.2   
+                  (54.07)         (92.86)         (92.86)   
+
+yngkid              69.78           94.67           94.67   
+                  (77.50)         (87.65)         (87.65)   
+
+gdhlth              27.03           87.58           87.58   
+                  (59.63)         (76.60)         (76.60)   
+
+male                45.53               0               0   
+                  (50.93)             (.)             (.)   
+
+_cons              3965.5***       3696.6***       -92.63*  
+                  (122.0)         (664.5)         (45.87)   
+------------------------------------------------------------
+N                     478             478             239   
+R-sq                0.099           0.682           0.150   
+------------------------------------------------------------
+Standard errors in parentheses
+* p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001</code></pre>
 </div>
 </div>
+</section>
+<section id="nx2-did-with-panel" class="slide level2">
+<h2>Nx2 DID with Panel</h2>
+<ul>
+<li><p>Using panel data also allows you to analyze policies using canonical DID approach (2x2).</p>
+<ul>
+<li>It simplifies the process because one of the differences can be estiamated right away.</li>
+</ul></li>
+<li><p>Consider the Standard DID Model: <span class="math display">\[y_{it} = a_0 + a_1 post + \color{red}{a_2 treat} + \color{green}{a_3 post \times treat}+ e_{it} \]</span></p></li>
+<li><p>With panel data, you can extend this allowing for “multiple groups”, and controling for whether Received treatment or not:</p></li>
+</ul>
+<p><span class="math display">\[y_{it} = a_0 + a_1 dtime + \color{red}{a_i} + \color{green}{a_3 treated} + e_{it} \]</span> <span class="math display">\[\Delta y_{i} =  a_1 + \color{green}{a_3 treated} + \Delta e_{i} \]</span></p>
+<ul>
+<li>Most effective way to control for unobserved individual effects!</li>
+</ul>
+</section>
+<section id="section-5" class="slide level2">
+<h2></h2>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Beware of the TWFE</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>warning</strong> you may be tempted to say, with more time-periods, just add more dummies. But that would be wrong!</p>
+<p>Look for all the new literature on DID with Multiple periods and treatment timing</p>
+</div>
+</div>
+</div>
+</section>
+<section id="panel-data-with-more-than-2-periods" class="slide level2">
+<h2>Panel Data with more than 2 periods</h2>
+<ul>
+<li><p>So far we have covered the case when you observe individuals for two periods only. What if you observe them for more than two periods?</p></li>
+<li><p>The model is pretty much the same.</p>
+<ul>
+<li>You will mostly need to add an additional time dummy.</li>
+<li>You also have multiple approaches that would allow you to estimate the model.</li>
+<li>Adding Dummies still work.</li>
+<li>And Difference in Differences still work.</li>
+<li>You can also choose Randome-effect model (next class)</li>
+</ul></li>
+</ul>
+</section>
+<section id="differencing" class="slide level2">
+<h2>Differencing</h2>
+<ul>
+<li>Consider the following model:</li>
+</ul>
+<p><span class="math display">\[y_{it} = \beta_0 + \beta_1 x_{it} +a_i + \delta_2 T_2 + \delta_3 T_3 + e_{it}\]</span></p>
+<ul>
+<li>Where <span class="math inline">\(T_2\)</span> and <span class="math inline">\(T_3\)</span> are time dummies for the second and third periods. If apply a first differences transformation, we get:</li>
+</ul>
+<p><span class="math display">\[\Delta y_{it} = \beta_1 \Delta x_{it} + \delta_2 + \delta_3 T_3 + \Delta e_{it}\]</span></p>
+</section>
+<section id="section-6" class="slide level2">
+<h2></h2>
+<ul>
+<li>Mechanically, its the same as before. However, Analytically, this imposes stronger assumptions</li>
+</ul>
+<p><span class="math display">\[Corr(\Delta x_{it}, \Delta e_{it}) =Corr(x_{it}-x_{it-1}, e_{it}-e_{it-1}) = 0\]</span></p>
+<ul>
+<li><p>This is a stronger assumption than <span class="math inline">\(Corr(x_{it}, e_{it}) = 0\)</span>. It implies that <span class="math inline">\(x_{it}\)</span> has to be strictly exogenous to errors <span class="math inline">\(e_{it}\)</span>, regardless of timing.</p></li>
+<li><p>One may want to also consider using Other Standard error corrections.</p></li>
+</ul>
+</section>
+<section id="fd-is-to-be-used-with-caution" class="slide level2">
+<h2>FD is to be used with caution</h2>
+<ul>
+<li>FD is an easy estiamtion with panel data. However, it should be used with caution
+<ul>
+<li>It depends much more on the strict exogeneity assumption. (may create biases)</li>
+<li>If one adds Lagged Dep variables as controls, further problems may arise.</li>
+<li>Issues with measurement error are magnified when using First Differences as well. (and can be difficult to adress)</li>
+</ul></li>
+<li>But, there are still other methods that could be used to estimate panel data models with multiple periods:
+<ul>
+<li>FE (dummy inclusion approach)</li>
+<li>Random Effects (next class)</li>
+<li>Correlated Random Effects (next class)</li>
+</ul></li>
+</ul>
+</section></section>
+<section id="section-7" class="title-slide slide level1 center" data-background-image="https://i.imgflip.com/7zjmz3.jpg" data-background-size="contain">
+<h1></h1>
+
+</section>
+
+<section id="thats-all-for-today" class="title-slide slide level1 center">
+<h1>Thats all for today</h1>
+<p>Next class…Advance Panel Data Methods</p>
 
 <div class="footer footer-default">
 
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
@@ -987,6 +1099,7 @@ Panel variable: id (strongly balanced)
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
+'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -1248,9 +1361,10 @@ Panel variable: id (strongly balanced)
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      function tippyHover(el, contentFn) {
         const config = {
           allowHTML: true,
+          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -1260,17 +1374,8 @@ Panel variable: id (strongly balanced)
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start',
+          placement: 'bottom-start'
         };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
