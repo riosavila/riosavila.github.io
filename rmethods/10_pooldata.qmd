@@ -219,6 +219,8 @@ Baby steps: 2 period panel data
 - The main advantage of panel data (even two periods version) is that it allows us to control for unobserved heterogeneity across individuals.
   - But only if you want to assume fixed effects are constant across time.
 
+- Main caveat. For the methods we will see next, you cannot esitmate the effect of variables that are time fixed (or have little if any variation across time).
+- 
 ## 
 
 - So how does this reflects in the model specification?
@@ -243,7 +245,7 @@ For time use, we assume we control with a single dummy.
 
 1. You can choose to "ignore" individual effects. 
 
-$$y_{it} = \beta_0 + \beta_1 x_{it} + \beta_2 w_{i} + \delta t + (v_{it} = e_i + e_{it})$$
+$$y_{it} = \beta_0 + \beta_1 x_{it} + \beta_2 w_{i} + \delta t + \underbrace{e_i + e_{it}}_{v_{it}}$$
 
    - Requires $e_i$ to be uncorrelated with $x_{it}$ (otherwise is biased), and Standard Errors will need to be clustered at the individual level.
 
@@ -271,18 +273,100 @@ $$
 ** This data is in wide format
 frause slp75_81, clear
 ** Lets reshape it so its in standard long format
-gen id = _n
-reshape long educ gdhlth marr slpnap totwrk yngkid, i(id) j(year)
-gen time = year==81
-xtset id time
+qui:gen id = _n
+qui:reshape long educ gdhlth marr slpnap totwrk yngkid, i(id) j(year)
+qui:gen dtime = year==81
+qui:xtset id dtime
 ** Regression as Pool Crossection
-qui: reg slpnap time totwrk educ marr yngkid gdhlth male, cluster(id)
+qui: reg slpnap dtime totwrk educ marr yngkid gdhlth male,  
+local cname:colnames e(b)
+display "`cname'"
 est sto m1
 ** using FE
-qui: areg slpnap time totwrk educ marr yngkid gdhlth male, absorb(id) cluster(id)
+qui: areg slpnap dtime totwrk educ marr yngkid gdhlth male, absorb(id)  
 est sto m2
 ** using FD
-qui: reg d.slpnap d.time d.totwrk d.educ d.marr d.yngkid d.gdhlth d.male, robust
+qui: reg d.slpnap d.dtime d.totwrk d.educ d.marr d.yngkid d.gdhlth d.male, 
+matrix b = e(b)
+matrix V = e(V)
+matrix colname b = `cname'
+matrix colname V = `cname'
+matrix rowname V = `cname'
+adde repost b=b V=V, rename
 est sto m3
-
+esttab m1 m2 m3, se r2
 ```
+
+## Nx2 DID with Panel 
+
+- Using panel data also allows you to analyze policies using canonical DID approach (2x2).
+  - It simplifies the process because one of the differences can be estiamated right away.
+- Consider the Standard DID Model:
+$$y_{it} = a_0 + a_1 post + \color{red}{a_2 treat} + \color{green}{a_3 post \times treat}+ e_{it} $$
+
+- With panel data, you can extend this allowing for "multiple groups", and controling for whether Received treatment or not: 
+
+$$y_{it} = a_0 + a_1 dtime + \color{red}{a_i} + \color{green}{a_3 treated} + e_{it} $$
+$$\Delta y_{i} =  a_1 + \color{green}{a_3 treated} + \Delta e_{i} $$
+
+- Most effective way to control for unobserved individual effects!
+  
+##
+
+:::{.callout-warning}
+
+## Beware of the TWFE
+
+**warning** you may be tempted to say, with more time-periods, just add more dummies. But that would be wrong!
+
+Look for all the new literature on DID with Multiple periods and treatment timing
+
+:::
+
+## Panel Data with more than 2 periods
+
+- So far we have covered the case when you observe individuals for two periods only. What if you observe them for more than two periods?
+
+- The model is pretty much the same.
+  - You will mostly need to add an additional time dummy.
+  - You also have multiple approaches that would allow you to estimate the model.
+  - Adding Dummies still work.
+  - And Difference in Differences still work.
+  - You can also choose Randome-effect model (next class)
+
+## Differencing
+
+- Consider the following model:
+
+$$y_{it} = \beta_0 + \beta_1 x_{it} +a_i + \delta_2 T_2 + \delta_3 T_3 + e_{it}$$
+
+- Where $T_2$ and $T_3$ are time dummies for the second and third periods. If apply a first differences transformation, we get:
+
+$$\Delta y_{it} = \beta_1 \Delta x_{it} + \delta_2 + \delta_3 T_3 + \Delta e_{it}$$
+
+## 
+
+- Mechanically, its the same as before. However,analytically, this imposes stronger assumptions
+
+$$Corr(\Delta x_{it}, \Delta e_{it}) =Corr(x_{it}-x_{it-1}, e_{it}-e_{it-1}) = 0$$
+
+- This is a stronger assumption than $Corr(x_{it}, e_{it}) = 0$. It implies that $x_{it}$ has to be strictly exogenous to errors $e_{it}$, regardless of timing.
+
+- One may want to also consider using Other Standard error corrections.
+
+## FD is to be used with caution
+
+- FD is an easy estimation with panel data. However, it should be used with caution
+  - It depends much more on the strict exogeneity assumption. (may create biases)
+  - If one adds Lagged Dep variables as controls, further problems may arise. 
+  - Issues with measurement error are magnified when using First Differences as well. (and can be difficult to address)
+
+- But, there are still other methods that could be used to estimate panel data models with multiple periods:
+  - FE (dummy inclusion approach)
+  - Random Effects (next class)
+  - Correlated Random Effects (next class)
+
+# {background-image="https://i.imgflip.com/7zjmz3.jpg" background-size="contain"}
+
+# Thats all for today 
+Next class...Advance Panel Data Methods
