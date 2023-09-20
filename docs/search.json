@@ -4596,7 +4596,7 @@
     "href": "resources.html#stata",
     "title": "Resources",
     "section": "Stata",
-    "text": "Stata\n\nStata Free-Webinars: https://www.stata.com/training/webinar/\nStata Video-Tutorials: https://www.stata.com/links/video-tutorials/\nGeneral Learning resources: https://www.stata.com/links/resources-for-learning-stata/\nExcellent Stata tutorial for beginners: https://grodri.github.io/stata/index\nOur own Tutorial! Stata Basics\n\nBut of course, Stata is not free. There are other resources you may want to explore, if you are interested in doing econometric analysis, but no longer have access to Stata. These are R, Python and Julia."
+    "text": "Stata\n\nStata Free-Webinars: https://www.stata.com/training/webinar/\nStata Past Recorded Webinars: https://www.stata.com/training/webinar_series/past-webinar-recordings/\nStata Video-Tutorials: https://www.stata.com/links/video-tutorials/\nGeneral Learning resources: https://www.stata.com/links/resources-for-learning-stata/\nExcellent Stata tutorial for beginners: https://grodri.github.io/stata/index\nOur own Tutorial! Stata Basics\n\nBut of course, Stata is not free. There are other resources you may want to explore, if you are interested in doing econometric analysis, but no longer have access to Stata. These are R, Python and Julia."
   },
   {
     "objectID": "resources.html#r-julia-python",

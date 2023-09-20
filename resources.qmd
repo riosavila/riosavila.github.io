@@ -19,6 +19,7 @@ using this software
 ## `Stata`
 
 - Stata Free-Webinars: <https://www.stata.com/training/webinar/>
+- Stata Past Recorded Webinars: <https://www.stata.com/training/webinar_series/past-webinar-recordings/>
 - Stata Video-Tutorials: <https://www.stata.com/links/video-tutorials/>
 - General Learning resources: <https://www.stata.com/links/resources-for-learning-stata/>
 - Excellent Stata tutorial for beginners: <https://grodri.github.io/stata/index>
