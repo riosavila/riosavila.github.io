@@ -1,0 +1,41 @@
+---
+format: 
+    html: default
+    pdf: default
+    docx: default
+---
+
+## Quiz 2
+
+Name: ________________________________________________________
+
+1.  Consider the following regression equation: $y=\beta_0+\beta_1 x_1+\beta_2 x_2+u$. What does $\beta_1$ imply?
+	
+- [ ] It measures the ceteris paribus effect of  $x_1$ on $x_2$  .
+- [ ] It measures the ceteris paribus effect of  $y$ on $x_1$
+- [ ] It measures the ceteris paribus effect of  $x_1$ on $y$
+- [ ] It measures the ceteris paribus effect of  $x_1$ on $u$
+
+2. In econometrics, the general partialling out result is usually called the _____.
+
+- [ ] Gauss-Markov assumption
+- [ ] Best linear unbiased estimator
+- [ ] Frisch-Waugh-Lovell theorem
+- [ ] Gauss-Markov theorem
+
+3. If an independent variable in a multiple linear regression model is an exact linear combination of other independent variables, the model suffers from the problem of _____.
+   
+- [ ] perfect collinearity
+- [ ] homoskedasticity
+- [ ] heteroskedasticty
+- [ ] omitted variable bias
+
+4. The term “linear” in a multiple linear regression model means that the equation is linear in parameters, not in terms of variables.
+
+- [ ] True
+- [ ] False
+
+5.  The coefficient of determination (R2) decreases when an independent variable is added to a multiple regression model.
+
+- [ ] True
+- [ ] False

@@ -388,9 +388,6 @@
       margin-right: 0; 
     }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -433,7 +430,7 @@ Fernando Rios-Avila
 </section>
 <section id="example" class="slide level2 smaller">
 <h2>Example:</h2>
-<div id="7e8d3d55" class="cell" data-execution_count="1">
+<div id="97a6476f" class="cell" data-execution_count="1">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">set</span> <span class="dv">linesize</span> 255</span>
@@ -698,7 +695,7 @@ y &amp;= b_0 + b_1 young + b_2 old + b_3 x + e &amp; || Base = Adult
 </section>
 <section id="example-1" class="slide level2 scrollable">
 <h2>Example</h2>
-<div id="dec9fba2" class="cell" data-execution_count="3">
+<div id="a19245cc" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1"></a>frause beauty, <span class="kw">clear</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a>** Union also a dummy. </span>
 <span id="cb5-3"><a href="#cb5-3"></a>** looks <span class="kw">as</span> Continous</span>
@@ -825,7 +822,7 @@ x_1^* &amp;= - \frac{b_1}{2b_2} x_1
 </section>
 <section id="example-2" class="slide level2 scrollable">
 <h2>Example</h2>
-<div id="49dcf32c" class="cell" data-execution_count="4">
+<div id="9c3aa1e8" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1"></a>frause hprice2, <span class="kw">clear</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="kw">gen</span> rooms2=rooms*rooms</span>
 <span id="cb7-3"><a href="#cb7-3"></a><span class="kw">qui</span>:<span class="kw">reg</span> lprice lnox dist rooms </span>
@@ -867,7 +864,7 @@ Standard errors in parentheses
 </ul></li>
 </ul>
 <p>Turn point: 4.55</p>
-<div id="d9299651" class="cell" data-execution_count="6">
+<div id="e58a6bdc" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Variable |       Min        p1        p5       p10       p25       p50       p75       p90       p99       Max
@@ -879,7 +876,7 @@ Standard errors in parentheses
 <ul>
 <li>Does it make a difference how we estimate the model?</li>
 </ul>
-<div id="6e51796c" class="cell" data-execution_count="7">
+<div id="fb3e2f39" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">qui</span>:<span class="kw">reg</span> lprice lnox dist rooms rooms2</span>
 <span id="cb10-2"><a href="#cb10-2"></a>margins, <span class="kw">dydx</span>(rooms)</span>
 <span id="cb10-3"><a href="#cb10-3"></a><span class="kw">qui</span>:<span class="kw">reg</span> lprice lnox dist c.rooms c.rooms#c.rooms</span>
@@ -1045,7 +1042,7 @@ F_{M2} = \frac{(SSR_{M2}-SSR_0-SSR_1)/k}{(SSR_0+SSR_1)/(n - 2(k+1))}
 </section>
 <section id="example-3" class="slide level2 scrollable">
 <h2>Example</h2>
-<div id="1cf3d161" class="cell" data-execution_count="8">
+<div id="39150549" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1"></a> frause gpa3, <span class="kw">clear</span></span>
 <span id="cb14-2"><a href="#cb14-2"></a><span class="kw">drop</span> <span class="kw">if</span> cumgpa==0</span>
 <span id="cb14-3"><a href="#cb14-3"></a><span class="kw">replace</span> sat = sat /100</span>
@@ -1097,7 +1094,7 @@ Standard errors in parentheses
 * p&lt;.1, ** p&lt;0.05, *** p&lt;0.01</code></pre>
 </div>
 </div>
-<div id="5422b499" class="cell" data-execution_count="9">
+<div id="e42ed156" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">test</span> 1.female#c.sat 1.female#c.hsperc 1.female#c.tothrs</span>
 <span id="cb16-2"><a href="#cb16-2"></a><span class="kw">test</span> 1.female 1.female#c.sat 1.female#c.hsperc 1.female#c.tothrs</span>
 <span id="cb16-3"><a href="#cb16-3"></a>margins female, <span class="kw">dydx</span>(sat hsperc tothrs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1250,7 +1247,7 @@ E(y|x_1,x_2) &amp;=E(e^{a_0 + a_1 x_1 + a_2 x_2}) \times E(e^ \varepsilon ) \\
 <section id="section-7" class="slide level2 scrollable">
 <h2></h2>
 <h3 id="example-4">Example</h3>
-<div id="00b5e028" class="cell" data-execution_count="10">
+<div id="9c68ee6e" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb19-1"><a href="#cb19-1"></a>frause oaxaca, <span class="kw">clear</span></span>
 <span id="cb19-2"><a href="#cb19-2"></a><span class="kw">drop</span> <span class="kw">if</span> lnwage==.</span>
 <span id="cb19-3"><a href="#cb19-3"></a><span class="kw">gen</span> wage = <span class="fu">exp</span>(lnwage)</span>
@@ -1321,6 +1318,7 @@ E(D|Xs) &amp;= P(D=1|Xs) \\
 <span id="cb21-3"><a href="#cb21-3"></a>model_display</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <p>E(inlf|X) = 0.707 - 0.018 age + 0.040 educ + 0.023 exper + 0.013 kidsge6 - 0.272 kidslt6 - 0.003 nwifeinc</p>
+<p>N = 753 R^2 = 0.254</p>
 </section>
 <section id="section-8" class="slide level2">
 <h2></h2>
@@ -1356,6 +1354,7 @@ E(D|Xs) &amp;= P(D=1|Xs) \\
 <span id="cb22-3"><a href="#cb22-3"></a>model_display</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <p>E(children|X) = -1.997 + 0.175 age - 0.090 educ</p>
+<p>N = 4361 R^2 = 0.560</p>
 <ul>
 <li>1 year of education decreases # of children in .09.</li>
 <li>1 year of education decreases Fertility .09 children per women.</li>
@@ -1379,7 +1378,7 @@ E(D|Xs) &amp;= P(D=1|Xs) \\
 <li>Granted, you could also use “margins”</li>
 </ul></li>
 </ul>
-<div id="e2d6d823" class="cell" data-execution_count="13">
+<div id="d41b64a2" class="cell" data-execution_count="13">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><a href="#cb23-1"></a>frause gpa2, <span class="kw">clear</span></span>
@@ -1433,7 +1432,7 @@ At: sat    = 1200
 <ul>
 <li><p>When modeling <span class="math inline">\(y = b_0 + \delta \ trt + b_1 x_1 + b_2 x_2 + e\)</span> the treatment effect <span class="math inline">\(\delta\)</span> was estimated under homogeneity assumption (only intercept shift)</p></li>
 <li><p>This assumption can be relaxed by estimating separate models or using interactions.</p></li>
-<li><p>Effects can be estimated manually (separate models), margins (for ATE’s) or using shifts!</p></li>
+<li><p>Effects can be estimated manually (separate models), margins or using shifts!</p></li>
 </ul>
 <p>Using Separate models: <span class="math display">\[\begin{aligned}
 y &amp;= b^0_0 +  b^0_1 x_1 + b^0_2 x_2 + e^0 \text{ if trt=0} \\
@@ -1453,7 +1452,7 @@ y  &amp;= b_0 + \delta_{att} trt + b_1 x_1 + g_1 trt (x_1- E(x_1|trt=1)) + e \\
 y  &amp;= b_0 + \delta_{atu} trt + b_1 x_1 + g_1 trt (x_1- E(x_1|trt=0)) + e \\
 \end{aligned}
 \]</span></p>
-<div id="1cff8729" class="cell" data-execution_count="14">
+<div id="58be300b" class="cell" data-execution_count="14">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb25-1"><a href="#cb25-1"></a>frause jtrain98, <span class="kw">clear</span></span>

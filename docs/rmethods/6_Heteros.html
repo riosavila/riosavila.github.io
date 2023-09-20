@@ -388,9 +388,6 @@
       margin-right: 0; 
     }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -416,13 +413,8 @@ Fernando Rios-Avila
 \]</span></p></li>
 <li><p>This means: the conditional variance of the errors is not constant across control characteristics.</p></li>
 </ul>
-<div id="19deb677" class="cell" data-execution_count="1">
-<div class="cell-output cell-output-display">
-<style>div.jp-Notebook .datagrid-container {min-height: 448px; }</style>
-</div>
 
-</div>
-<img data-src="6_Heteros_files/figure-revealjs/cell-2-output-2.png" class="r-stretch quarto-figure-center"></section>
+<img data-src="6_Heteros_files/figure-revealjs/cell-2-output-1.png" class="r-stretch quarto-figure-center"></section>
 <section id="consequences" class="slide level2">
 <h2>Consequences</h2>
 <p>What happens when you have heteroskedastic errors?</p>
@@ -440,7 +432,7 @@ Fernando Rios-Avila
 <p>Setup:</p>
 <p><span class="math inline">\(y = e\)</span> where <span class="math inline">\(e~N(0,\sigma_e^2h(x))\)</span></p>
 <p><span class="math inline">\(x = uniform(-1,1)\)</span></p>
-<div id="009b192c" class="cell" data-execution_count="2">
+<div id="cd93d453" class="cell" data-execution_count="2">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">/*capture program drop sim_het</span></span>
@@ -610,7 +602,7 @@ price &amp;= \beta_0 + \beta_1 lotsize + \beta_2 sqft + \beta_3 bdrms + e_1 \\
 log(price) &amp;= \beta_0 + \beta_1 log(lotsize) + \beta_2 log(sqft) + \beta_3 bdrms + e_2 \\
 \end{aligned}
 \]</span></p>
-<div id="0c96638a" class="cell" data-execution_count="3">
+<div id="ca5ff7e9" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1"></a>frause hprice1, <span class="kw">clear</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="kw">reg</span> price lotsize sqrft bdrms </span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="kw">predict</span> res, res</span>
@@ -683,7 +675,7 @@ nR^2: 16.268416
 p(chi2) 0.000</code></pre>
 </div>
 </div>
-<div id="93428ccf" class="cell" data-execution_count="4">
+<div id="6db0ed23" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1"></a>frause hprice1, <span class="kw">clear</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="kw">reg</span> lprice llotsize lsqrft bdrms </span>
 <span id="cb4-3"><a href="#cb4-3"></a><span class="kw">predict</span> res, res</span>
@@ -904,6 +896,21 @@ Var_{gls/fgls}(\beta)&amp;=\sigma^2_{\tilde e} \color{brown}{(X'X)^{-1}}\color{g
 <li>In either case, you could always combine FGLS with Robust Standard Errors!</li>
 </ol>
 </section>
+<section id="statistical-inference" class="slide level2">
+<h2>Statistical Inference</h2>
+<ul>
+<li>If applying GLS or FGLS via transformations or reweighting. All we did before is valid.</li>
+<li>If using Robust standard errors (HC), t-stats are constructed as usual, but</li>
+<li>F-stats formulas are no longer valid.</li>
+</ul>
+<p>Instead…use the long formula</p>
+<p><span class="math display">\[\begin{aligned}
+H_0: &amp; R_{q,k+1}\beta_{k+1,1}=c_{q,1} \\
+\Sigma_R &amp;= R_{q,k+1} V^r_\beta R'_{q,k+1} \\
+F-stat &amp;= \frac 1 q (R\beta-c)' \Sigma_R^{-1} (R\beta-c)
+\end{aligned}
+\]</span></p>
+</section>
 <section id="section-8" class="slide level2">
 <h2></h2>
 <h3 id="extra-prediction-and-se">Extra: Prediction and SE</h3>
@@ -921,7 +928,7 @@ Var_{gls/fgls}(\beta)&amp;=\sigma^2_{\tilde e} \color{brown}{(X'X)^{-1}}\color{g
 </section>
 <section id="example-1" class="slide level2 scrollable">
 <h2>Example</h2>
-<div id="a1a58001" class="cell" data-execution_count="5">
+<div id="6fc486f8" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1"></a>frause smoke, <span class="kw">clear</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="kw">gen</span> age_40sq=(age-40)^2</span>
 <span id="cb6-3"><a href="#cb6-3"></a>** Default</span>
@@ -947,7 +954,7 @@ Var_{gls/fgls}(\beta)&amp;=\sigma^2_{\tilde e} \color{brown}{(X'X)^{-1}}\color{g
 <span id="cb6-23"><a href="#cb6-23"></a><span class="kw">est</span> sto m6</span>
 <span id="cb6-24"><a href="#cb6-24"></a><span class="kw">set</span> <span class="dv">linesize</span> 255</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="003a5314" class="cell" data-execution_count="6">
+<div id="4589965e" class="cell" data-execution_count="6">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1"></a>esttab m1 m2 m3 m4 m5 m6, gaps mtitle(<span class="kw">default</span> GLS FGLS Rob GLS-Rob FGLS-Rob) <span class="co">///</span></span>
@@ -1012,7 +1019,7 @@ N                     807             807             807             807       
 </section>
 <section id="lpm-example" class="slide level2 scrollable">
 <h2>LPM Example</h2>
-<div id="0113d60b" class="cell" data-execution_count="7">
+<div id="632f61a4" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1"></a>frause gpa1, <span class="kw">clear</span></span>
 <span id="cb9-2"><a href="#cb9-2"></a>** LPM</span>
 <span id="cb9-3"><a href="#cb9-3"></a><span class="kw">gen</span> parcoll = (fathcoll | mothcoll)</span>
@@ -1037,7 +1044,7 @@ N                     807             807             807             807       
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
-<div id="f7d67a81" class="cell" data-execution_count="8">
+<div id="298edc14" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">predict</span> pchat</span>
 <span id="cb11-2"><a href="#cb11-2"></a><span class="kw">gen</span> hx = pchat*(1-pchat)</span>
 <span id="cb11-3"><a href="#cb11-3"></a><span class="kw">sum</span> pchat hx</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1050,7 +1057,7 @@ N                     807             807             807             807       
           hx |        141    .2294822    .0309768   .1411412   .2499934</code></pre>
 </div>
 </div>
-<div id="66f8b1dc" class="cell" data-execution_count="9">
+<div id="ac5a612d" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">reg</span> <span class="fu">pc</span> hsgpa act parcoll [<span class="fu">w</span>=1/hx]</span>
 <span id="cb13-2"><a href="#cb13-2"></a><span class="kw">predict</span> res_2, res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1074,7 +1081,7 @@ N                     807             807             807             807       
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
-<div id="4f87a531" class="cell" data-execution_count="10">
+<div id="d73512d1" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a href="#cb15-1"></a>** Testing <span class="kw">for</span> Heteroskedasticity</span>
 <span id="cb15-2"><a href="#cb15-2"></a><span class="kw">replace</span> res_1 = res_1^2</span>
 <span id="cb15-3"><a href="#cb15-3"></a><span class="kw">replace</span> res_2 = res_2^2/hx</span>

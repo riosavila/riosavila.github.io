@@ -386,9 +386,6 @@
       margin-right: 0; 
     }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -438,7 +435,7 @@ Fernando Rios-Avila
 <li><p>Unless you know something about the distribution of <span class="math inline">\(\beta's\)</span>, it would be hard to make any inferences from the estimates. Why?</p></li>
 <li><p>Because not all distributions are made equal!</p></li>
 </ul>
-<div id="bbcd5d20" class="cell" data-execution_count="1">
+<div id="6ef3d549" class="cell" data-execution_count="1">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">clear</span></span>
@@ -617,7 +614,7 @@ H_0: &amp; \beta_k=\beta^{hyp}_k \text{ vs } H_1: \beta_k \neq \beta^{hyp}_k \\
 </section>
 <section id="section-7" class="slide level2">
 <h2></h2>
-<div id="4b5487f7" class="cell" data-execution_count="2">
+<div id="e2560158" class="cell" data-execution_count="2">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">clear</span></span>
@@ -655,7 +652,7 @@ H_0: &amp; \beta_k=\beta^{hyp}_k \text{ vs } H_1: \beta_k \neq \beta^{hyp}_k \\
 </section>
 <section id="section-8" class="slide level2">
 <h2></h2>
-<div id="62afc2e4" class="cell" data-execution_count="3">
+<div id="47011317" class="cell" data-execution_count="3">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">clear</span></span>
@@ -676,7 +673,7 @@ H_0: &amp; \beta_k=\beta^{hyp}_k \text{ vs } H_1: \beta_k \neq \beta^{hyp}_k \\
 <img data-src="images/f4_3.png" class="r-stretch quarto-figure-center"></section>
 <section id="example-determinants-of-college-gpa" class="slide level2 scrollable">
 <h2>Example: Determinants of College GPA</h2>
-<div id="92448eb0" class="cell" data-execution_count="4">
+<div id="77f0237d" class="cell" data-execution_count="4">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1"></a>frause gpa1, <span class="kw">clear</span></span>
@@ -743,7 +740,7 @@ H_0: &amp; \beta_k=\beta^{hyp}_k \text{ vs } H_1: \beta_k \neq \beta^{hyp}_k \\
 </ul></li>
 <li>Each GPA point in highschool translates into half a point in College GPA. vs Is less than .5</li>
 </ul>
-<div id="edb7c32a" class="cell" data-execution_count="6">
+<div id="6b17b292" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">test</span> hsgpa = 0.5</span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="kw">lincom</span> hsgpa - 0.5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -791,7 +788,7 @@ H_0: &amp; \beta_k=\beta^{hyp}_k \text{ vs } H_1: \beta_k \neq \beta^{hyp}_k \\
 </section>
 <section id="section-11" class="slide level2">
 <h2></h2>
-<div id="270743be" class="cell" data-execution_count="7">
+<div id="597716de" class="cell" data-execution_count="7">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">clear</span></span>
@@ -847,7 +844,7 @@ H_0: &amp; \beta_k=\beta^{hyp}_k \text{ vs } H_1: \beta_k \neq \beta^{hyp}_k \\
 </section>
 <section id="section-13" class="slide level2">
 <h2></h2>
-<div id="d42f51a9" class="cell" data-execution_count="8">
+<div id="63348776" class="cell" data-execution_count="8">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">clear</span></span>
@@ -994,7 +991,7 @@ F-stat = \frac 1 q (R\beta-c)' \Sigma_R^{-1} (R\beta-c)
 </section>
 <section id="example" class="slide level2 scrollable">
 <h2>Example</h2>
-<div id="9f995736" class="cell" data-execution_count="9">
+<div id="0a5025f0" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1"></a>frause hprice1, <span class="kw">clear</span></span>
 <span id="cb12-2"><a href="#cb12-2"></a><span class="kw">reg</span> lprice lasses bdrms llotsize lsqrft</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1017,7 +1014,7 @@ F-stat = \frac 1 q (R\beta-c)' \Sigma_R^{-1} (R\beta-c)
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
-<div id="0d523328" class="cell" data-execution_count="10">
+<div id="ffe209a6" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">test</span> (lasses=1)</span>
 <span id="cb14-2"><a href="#cb14-2"></a><span class="kw">test</span> (lasses=1) (bdrms=llotsize=lsqrft=0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1036,7 +1033,7 @@ F-stat = \frac 1 q (R\beta-c)' \Sigma_R^{-1} (R\beta-c)
             Prob &gt; F =    0.6162</code></pre>
 </div>
 </div>
-<div id="a0f13fe5" class="cell" data-execution_count="11">
+<div id="690f3a8e" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a href="#cb16-1"></a>frause mlb1, <span class="kw">clear</span></span>
 <span id="cb16-2"><a href="#cb16-2"></a><span class="kw">reg</span> lsalary years gamesyr bavg hrunsyr rbisy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1060,7 +1057,7 @@ F-stat = \frac 1 q (R\beta-c)' \Sigma_R^{-1} (R\beta-c)
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
-<div id="03e6bc1a" class="cell" data-execution_count="12">
+<div id="c93a132b" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">test</span> bavg hrunsyr rbisy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1075,7 +1072,7 @@ F-stat = \frac 1 q (R\beta-c)' \Sigma_R^{-1} (R\beta-c)
 </section></section>
 <section id="lets-take-one-more-step-what-if-errors-are-not-normal" class="title-slide slide level1 center">
 <h1>Lets take one more Step: What if errors are not normal?</h1>
-
+<p>There we go A6</p>
 </section>
 
 <section>
@@ -1175,7 +1172,7 @@ F-stat = \frac 1 q (R\beta-c)' \Sigma_R^{-1} (R\beta-c)
 </section>
 <section id="example-1" class="slide level2 scrollable">
 <h2>Example:</h2>
-<div id="160757a9" class="cell larger" data-execution_count="14">
+<div id="4796594b" class="cell larger" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb20-1"><a href="#cb20-1"></a>frause crime1, <span class="kw">clear</span></span>
 <span id="cb20-2"><a href="#cb20-2"></a><span class="kw">qui</span>: <span class="kw">reg</span> narr86 pcnv avgsen tottime ptime86 qemp86</span>
 <span id="cb20-3"><a href="#cb20-3"></a>** H0: avgsen=0 and tottime=0</span>
@@ -1189,7 +1186,7 @@ F-stat = \frac 1 q (R\beta-c)' \Sigma_R^{-1} (R\beta-c)
             Prob &gt; F =    0.1310</code></pre>
 </div>
 </div>
-<div id="d8520de6" class="cell larger" data-execution_count="15">
+<div id="ccd4a61e" class="cell larger" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw">qui</span>: <span class="kw">reg</span> narr86 pcnv                ptime86 qemp86</span>
 <span id="cb22-2"><a href="#cb22-2"></a>* Predict residuals <span class="kw">of</span> constrained <span class="kw">model</span></span>
 <span id="cb22-3"><a href="#cb22-3"></a><span class="kw">predict</span> u_tilde , res</span>

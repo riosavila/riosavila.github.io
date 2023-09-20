@@ -388,9 +388,6 @@
       margin-right: 0; 
     }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -444,15 +441,12 @@ Fernando Rios-Avila
 <section id="example" class="slide level2 scrollable">
 <h2>Example</h2>
 <p>Lets use the data <code>fertil1</code> to estimate the changes in fertility rates across time. This data comes from the <em>General Social Survey</em>.</p>
-<div id="e6603a7a" class="cell" data-execution_count="1">
+<div id="1335db22" class="cell" data-execution_count="1">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a>frause fertil1, <span class="kw">clear</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="kw">regress</span> kids educ age agesq <span class="bn">black</span> east northcen west farm othrural town smcity i.<span class="fu">year</span>, <span class="kw">robust</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display">
-<style>div.jp-Notebook .datagrid-container {min-height: 448px; }</style>
-</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Linear regression                               Number of obs     =      1,129
@@ -493,7 +487,7 @@ Linear regression                               Number of obs     =      1,129
 <li>This allow us to see how fertility rates have changed across time.</li>
 <li>One could even interact the year dummies with other variables to see how the effect of other variables have changed across time.</li>
 </ul>
-<div id="b0d3c315" class="cell" data-execution_count="2">
+<div id="e05cb01c" class="cell" data-execution_count="2">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a>frause cps78_85, <span class="kw">clear</span></span>
@@ -545,7 +539,7 @@ Linear regression                               Number of obs     =      1,084
 </section>
 <section id="example-1" class="slide level2 scrollable">
 <h2>Example</h2>
-<div id="5cca938f" class="cell" data-execution_count="3">
+<div id="63213b1f" class="cell" data-execution_count="3">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1"></a>frause cps78_85, <span class="kw">clear</span></span>
@@ -590,7 +584,7 @@ year#c.exper |
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
-<div id="a49f97f6" class="cell" data-execution_count="4">
+<div id="df2051d5" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">test</span> 85.year#c.educ 85.year#1.female 85.year#c.exper   85.year#c.expersq 85.year#1.<span class="kw">union</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -623,7 +617,7 @@ year#c.exper |
 <li>we could start estimating the project using the simple model: <span class="math display">\[rprice = \beta_0 + \beta_1 nearinc + e\]</span></li>
 </ul>
 <p>using only 1981 data. But this would not be a good idea. Why?</p>
-<div id="6c5fd087" class="cell larger" data-execution_count="5">
+<div id="2034afea" class="cell larger" data-execution_count="5">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1"></a>frause kielmc, <span class="kw">clear</span></span>
@@ -652,7 +646,7 @@ Linear regression                               Number of obs     =        142
 <ul>
 <li>We could also estimate the model using only 1971 data. What would this be showing us?</li>
 </ul>
-<div id="3a74a9ac" class="cell larger" data-execution_count="6">
+<div id="330d42b9" class="cell larger" data-execution_count="6">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">regress</span> rprice nearinc <span class="kw">if</span> <span class="fu">year</span> == 1978, <span class="kw">robust</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -752,7 +746,7 @@ Linear regression                               Number of obs     =        179
 </ul>
 <p><span class="math display">\[ y = \beta_0 + \beta_1 post + \beta_2 treat + \beta_3 post*treat + e\]</span></p>
 <p>Where <span class="math inline">\(\beta_3\)</span> is the treatment effect. (only for 2x2 DD)</p>
-<div id="9039458f" class="cell" data-execution_count="7">
+<div id="5302dc1a" class="cell" data-execution_count="7">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">regress</span> rprice nearinc##y81, <span class="kw">robust</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -913,7 +907,7 @@ y_{i0} &amp;= \beta_0 + \beta_1 x_{i0} + e_i + e_{i0} \\
 </section>
 <section id="example-2" class="slide level2 scrollable">
 <h2>Example</h2>
-<div id="15c87a13" class="cell" data-execution_count="8">
+<div id="1181345a" class="cell" data-execution_count="8">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a href="#cb15-1"></a>** This <span class="kw">data</span> is <span class="kw">in</span> <span class="kw">wide</span> <span class="kw">format</span></span>

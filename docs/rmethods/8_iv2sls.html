@@ -388,9 +388,6 @@
       margin-right: 0; 
     }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -534,7 +531,7 @@ e &amp;\sim chi(2)-2 ; z = chi(2)-2 ; x = chi(2)-2+z+e \\
 y &amp;=1+x+e
 \end{aligned}
 \]</span></p>
-<div class="cell" data-execution_count="1">
+<div id="b75cc315" class="cell" data-execution_count="1">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a>** Montecarlo Simulation</span>
@@ -566,15 +563,12 @@ y &amp;=1+x+e
 <span id="cb1-27"><a href="#cb1-27"></a><span class="kw">two</span> <span class="kw">kdensity</span> bb1 ||  <span class="kw">kdensity</span> bc1  || <span class="kw">kdensity</span> b_1, <span class="co">///</span></span>
 <span id="cb1-28"><a href="#cb1-28"></a><span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"X Endogenous"</span> 2 <span class="st">"IV"</span> 3 <span class="st">"X Exogenous"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display">
-<style>div.jp-Notebook .datagrid-container {min-height: 448px; }</style>
-</div>
 <div class="cell-output cell-output-stdout">
 <pre><code></code></pre>
 </div>
 
 </div>
-<img data-src="8_iv2sls_files/figure-revealjs/cell-2-output-3.png" class="r-stretch quarto-figure-center"></section>
+<img data-src="8_iv2sls_files/figure-revealjs/cell-2-output-2.png" class="r-stretch quarto-figure-center"></section>
 <section id="se-and-statistical-inference" class="slide level2">
 <h2>SE and Statistical Inference</h2>
 <ul>
@@ -775,7 +769,7 @@ Z &amp;=\begin{bmatrix} 1 &amp; z   &amp; x \end{bmatrix}
 </section>
 <section id="examples" class="slide level2">
 <h2>Examples</h2>
-<div class="cell" data-execution_count="2">
+<div id="d3bacea4" class="cell" data-execution_count="2">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">/*</span></span>
@@ -871,7 +865,7 @@ y &amp;= \beta_0 + \beta_1 x_1 + e \\
 </section>
 <section id="example-1" class="slide level2">
 <h2>Example</h2>
-<div class="cell" data-execution_count="3">
+<div id="ff991edb" class="cell" data-execution_count="3">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">clear</span></span>
@@ -1026,7 +1020,7 @@ Standard errors in parentheses
 <section id="example-2" class="slide level2 scrollable">
 <h2>Example</h2>
 <p>Ignoring Potential endogeneity</p>
-<div class="cell" data-execution_count="4">
+<div id="a934604b" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1"></a>frause mroz, <span class="kw">clear</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="kw">drop</span> <span class="kw">if</span> lwage==.</span>
 <span id="cb6-3"><a href="#cb6-3"></a>** But with Endogeneity</span>
@@ -1052,7 +1046,7 @@ Standard errors in parentheses
 </div>
 </div>
 <p>First Stage for different IVs</p>
-<div class="cell" data-execution_count="5">
+<div id="1ae44238" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">qui</span>: <span class="kw">reg</span> educ fatheduc exper expersq</span>
 <span id="cb8-2"><a href="#cb8-2"></a><span class="kw">predict</span> r1 , res</span>
 <span id="cb8-3"><a href="#cb8-3"></a><span class="kw">test</span> fatheduc</span>
@@ -1120,7 +1114,7 @@ Standard errors in parentheses
 </div>
 </div>
 <p>Using parents education as instruments</p>
-<div class="cell" data-execution_count="6">
+<div id="48091f1b" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1"></a>* SMALL requests Df adjustment</span>
 <span id="cb10-2"><a href="#cb10-2"></a><span class="kw">qui</span>:ivregress 2sls lwage (educ= fatheduc ) exper expersq, small</span>
 <span id="cb10-3"><a href="#cb10-3"></a><span class="kw">est</span> sto m1</span>
@@ -1155,7 +1149,7 @@ Standard errors in parentheses
 </div>
 </div>
 <p>** Testing for endogeneity</p>
-<div class="cell" data-execution_count="7">
+<div id="b828e959" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1"></a>* Instrumenting education</span>
 <span id="cb12-2"><a href="#cb12-2"></a><span class="kw">qui</span>:<span class="kw">reg</span>  lwage educ  exper expersq r1</span>
 <span id="cb12-3"><a href="#cb12-3"></a><span class="kw">est</span> sto m1</span>
@@ -1202,7 +1196,7 @@ Standard errors in parentheses
 </div>
 </div>
 <p>Overid Test</p>
-<div class="cell" data-execution_count="8">
+<div id="74ae3a68" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">qui</span>:ivregress 2sls lwage (educ= fatheduc motheduc) exper expersq, small</span>
 <span id="cb14-2"><a href="#cb14-2"></a><span class="kw">predict</span> <span class="kw">resid</span>, res</span>
 <span id="cb14-3"><a href="#cb14-3"></a><span class="kw">estat</span> overid </span>
