@@ -648,7 +648,7 @@
     "href": "rmethods/4_MLRM_IA.html#confidence-intervals",
     "title": "Multiple Regression Analysis: Inference and Asymptotics",
     "section": "Confidence Intervals",
-    "text": "Confidence Intervals\n\nThis is the third approach to assess how precise or significant an estimate is. You provide a Range of possible values, given the level of coverage, and SE.\n\n\\[CI(\\beta_i) = [\\hat \\beta_i - t_{n-k-1}(1-\\alpha),\\hat \\beta_i + t_{n-k-1}(1-\\alpha)]\n\\]\n\nInterpretation:\n\nIf we were to draw M samples, the true beta would be in this interval \\(1-\\alpha\\%\\) of the time.\n\nIt allows you to see what other “hypothesis” would be consistent with the evidence of the estimate (you wouldnt be able to reject the Null)"
+    "text": "Confidence Intervals\n\nThis is the third approach to assess how precise or significant an estimate is. You provide a Range of possible values, given the level of coverage, and SE.\n\n\\[CI(\\beta_i) = [\\hat \\beta_i - \\hat \\sigma_{\\beta_i} t_{n-k-1}(1-\\alpha),\\hat \\beta_i +\\hat \\sigma_{\\beta_i} t_{n-k-1}(1-\\alpha)]\n\\]\n\nInterpretation:\n\nIf we were to draw M samples, the true beta would be in this interval \\(1-\\alpha\\%\\) of the time.\n\nIt allows you to see what other “hypothesis” would be consistent with the evidence of the estimate (you wouldnt be able to reject the Null)"
   },
   {
     "objectID": "rmethods/4_MLRM_IA.html#section-13",
@@ -5885,5 +5885,12 @@
     "title": "Multiple Regression Analysis",
     "section": "Statistical Inference",
     "text": "Statistical Inference\n\nIf applying GLS or FGLS via transformations or reweighting. All we did before is valid.\nIf using Robust standard errors (HC), t-stats are constructed as usual, but\nF-stats formulas are no longer valid.\n\nInstead…use the long formula\n\\[\\begin{aligned}\nH_0: & R_{q,k+1}\\beta_{k+1,1}=c_{q,1} \\\\\n\\Sigma_R &= R_{q,k+1} V^r_\\beta R'_{q,k+1} \\\\\nF-stat &= \\frac 1 q (R\\beta-c)' \\Sigma_R^{-1} (R\\beta-c)\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "rmethods/4_MLRM_IA.html#ci-vs-t-critical-and-p-values",
+    "href": "rmethods/4_MLRM_IA.html#ci-vs-t-critical-and-p-values",
+    "title": "Multiple Regression Analysis: Inference and Asymptotics",
+    "section": "CI vs T-critical and P values",
+    "text": "CI vs T-critical and P values\n\nt-stat and p-values are calculated based on standardized coefficients (ratio of coefficient and SE)\nCI are calculated based on the actual coefficient and SE.\n\nIf the p-value of a t-statistic is exactly 0.05, then the 95% CI will not include 0 (at the limit), and the t-critical (\\(\\alpha=5\\%\\)) will be the same as the t-statistic.\nIn other words. If you use the same \\(\\alpha\\), your conclusions would be the same regardless of using t-stat, p-value or CI."
   }
 ]

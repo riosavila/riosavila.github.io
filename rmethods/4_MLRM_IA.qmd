@@ -386,12 +386,21 @@ graph export images/f4_4.png, replace width(1200)
 
 - This is the third approach to assess how precise or significant an estimate is. You provide a Range of possible values, given the level of coverage, and SE.
 
-$$CI(\beta_i) = [\hat \beta_i - t_{n-k-1}(1-\alpha),\hat \beta_i + t_{n-k-1}(1-\alpha)]
+$$CI(\beta_i) = [\hat \beta_i - \hat \sigma_{\beta_i} t_{n-k-1}(1-\alpha),\hat \beta_i +\hat \sigma_{\beta_i} t_{n-k-1}(1-\alpha)]
 $$
 
 - Interpretation:
   - If we were to draw M samples, the true beta would be in this interval $1-\alpha\%$ of the time.
 - It allows you to see what other "hypothesis" would be consistent with the evidence of the estimate (you wouldnt be able to reject the Null)
+
+## CI vs T-critical and P values
+
+1. t-stat and p-values are calculated based on standardized coefficients (ratio of coefficient and SE)
+2. CI are calculated based on the actual coefficient and SE.
+
+If the p-value of a t-statistic is exactly 0.05, then the 95% CI will not include 0 (at the limit), and the t-critical ($\alpha=5\%$) will be the same as the t-statistic.
+
+In other words. If you use the same $\alpha$, your conclusions would be the same regardless of using t-stat, p-value or CI. 
 
 ##
 
