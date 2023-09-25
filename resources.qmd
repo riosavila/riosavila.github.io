@@ -57,6 +57,13 @@ I also have a small example using `Quarto` with `Stata` [here](https://friosavil
 
 Try it on, and let me know if you have any problems.
 
+## Other Resources: Data
+
+If you are looking for small and easy to work datasets for your projects, you may want to check the following:
+
+- `frause`: Its a repository I created to load data from the web into `Stata`. Contains all datasets used in Intro to Ecometrics book by Wooldridge.
+  
+- `datasciencedojo`: This is a nice website that provides access to raw data that could be used for your projects. See their [webpage](https://code.datasciencedojo.com/datasciencedojo/datasets).
 
 
 
