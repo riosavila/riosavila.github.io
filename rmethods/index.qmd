@@ -50,7 +50,7 @@ When there is need to attend a class online, and you have requested to attend on
 
    [**Further Problems: Functional form, Missing variables, measurement errors, missing data**](7_spec.qmd)
 
-#### [HomeWork 2](homework_2.qmd) Also [Github](https://classroom.github.com/a/adM46duw) link
+#### [HomeWork 2](homework_2.qmd) Also [Github](https://classroom.github.com/a/j8sU9O_n) link
 #### Due Date October 18
 
 ### MIDTERM! Due Date October 18
