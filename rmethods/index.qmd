@@ -86,5 +86,8 @@ When there is need to attend a class online, and you have requested to attend on
 
    [**Advanced TSD Problems**](13_advtimeseries.qmd)
 
-### Final TBD
+### Final 
+#### Possible Date December 13
+
+
 
