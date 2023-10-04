@@ -411,8 +411,7 @@ Fernando Rios-Avila
 <section id="what-is-heteroskedasticity" class="slide level2">
 <h2>What is Heteroskedasticity?</h2>
 <ul>
-<li><p>Mathematically: <span class="math display">\[Var(e|x=c_1)\neq Var(e|x=c_2)
-\]</span></p></li>
+<li><p>Mathematically: <span class="math display">\[Var(e|x=c_1)\neq Var(e|x=c_2)\]</span></p></li>
 <li><p>This means: the conditional variance of the errors is not constant across control characteristics.</p></li>
 </ul>
 <div class="cell" data-execution_count="1">
@@ -421,7 +420,7 @@ Fernando Rios-Avila
 </div>
 
 </div>
-<img data-src="6_Heteros_files/figure-revealjs/cell-2-output-2.png" class="r-stretch quarto-figure-center"></section>
+<img data-src="6_Heteros_files/figure-html/cell-2-output-2.png" class="r-stretch quarto-figure-center"></section>
 <section id="consequences" class="slide level2">
 <h2>Consequences</h2>
 <p>What happens when you have heteroskedastic errors?</p>
@@ -437,7 +436,7 @@ Fernando Rios-Avila
 <h2></h2>
 <h3 id="how-bad-can-it-be">How bad can it be?</h3>
 <p>Setup:</p>
-<p><span class="math inline">\(y = e\)</span> where <span class="math inline">\(e~N(0,\sigma_e^2h(x))\)</span></p>
+<p><span class="math inline">\(y = e\)</span> where <span class="math inline">\(e \sim N(0,\sigma_e^2h(x))\)</span></p>
 <p><span class="math inline">\(x = uniform(-1,1)\)</span></p>
 <div class="cell" data-execution_count="2">
 <details>
@@ -504,7 +503,7 @@ Fernando Rios-Avila
 <li>We usually start with the assumption that errors are homoskedastic <span class="math inline">\(Var(e|x's)=\sigma^2_c\)</span>.</li>
 <li>However, now we want to allow for the possibility of heteroskedasiticity. ie, that variance is some function of X.
 <ul>
-<li>We have to model is variance is a function that varies with <span class="math inline">\(x\)</span>:</li>
+<li>We have to test if the conditional variance is a function that varies with <span class="math inline">\(x\)</span>:</li>
 </ul></li>
 </ul>
 <p><span class="math display">\[Var(e|x)=f(x_1,x_2,\dots,x_k) \sim a_0+a_1x_1 + a_2 x_2 + \dots + a_k x_k+v\]</span></p>
@@ -513,7 +512,7 @@ Fernando Rios-Avila
 <h2></h2>
 <p><span class="math display">\[Var(e|x)=f(x_1,x_2,\dots,x_k) \sim a_0+a_1x_1 + a_2 x_2 + \dots + a_k x_k+v\]</span></p>
 <ul>
-<li>This expression says the onditional variance can vary with <span class="math inline">\(X's\)</span>.</li>
+<li>This expression says the conditional variance can vary with <span class="math inline">\(X's\)</span>.</li>
 <li>It could be as flexible as needed, but linear is usually enough.</li>
 </ul>
 <p>With this the Null hypothesis is: <span class="math display">\[H_0: a_1 = a_2 = \dots = a_k=0 \text{ vs } H_1: H_0 \text{ is false}
@@ -524,7 +523,7 @@ Fernando Rios-Avila
 <h2></h2>
 <p><strong>We don’t!.</strong></p>
 <ul>
-<li><p>But we can use <span class="math inline">\(e^2\)</span> instead. This implies we using the assumption that <span class="math inline">\(e^2\)</span> is a good enough approximation for the condional variance <span class="math inline">\(Var(e|x)\)</span>.</p></li>
+<li><p>But we can use <span class="math inline">\(\hat e^2\)</span> instead. The assumption is that <span class="math inline">\(\hat e^2\)</span> is a good enough approximation for the condional variance <span class="math inline">\(Var(e|x)\)</span>.</p></li>
 <li><p>With this, the test for heteroskedasticty can be implemented using the following recipe.</p></li>
 </ul>
 <ol type="1">
@@ -533,21 +532,21 @@ Fernando Rios-Avila
 <ul>
 <li><span class="math inline">\(h(x)\)</span> could be estimated using some linear or nonlinear functional forms.</li>
 </ul></li>
-<li>Test if variance changes with respect to any explanatory variables.
+<li>Test if conditional variance changes with respect to any explanatory variables.
 <ul>
-<li>In this case, you can assume the heteroskedastic model is homoskedastic.</li>
+<li>The null is H0: Errors are Homoskedastic. Rejection the error suggests you have Heteroskedasticity.</li>
+<li><strong>Note:</strong> Depending on Model specification, and test used, there are various Heteroskedasticity <em>tests</em>.</li>
 </ul></li>
 </ol>
-<p><strong>Note:</strong> Depending on Model specification, and test used, there are various Heteroskedasticity <em>tests</em>.</p>
 </section>
 <section id="heteroskedasticity-tests" class="slide level2">
-<h2>Heteroskedasticity tests</h2>
+<h2>Heteroskedasticity tests:</h2>
 <p><span class="math display">\[\begin{aligned}
 \text{Model}: y &amp;= \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 + e \\
 \hat e &amp; = y - (\hat \beta_0 + \hat\beta_1 x_1 +\hat \beta_2 x_2 +\hat \beta_3 x_3)
 \end{aligned}
 \]</span></p>
-<h3 id="breush-pagan">Breush-Pagan:</h3>
+<h3 id="breusch-pagan-test">Breusch-Pagan test:</h3>
 <p><span class="math display">\[\begin{aligned}
 \hat e^2 &amp; = \gamma_0 + \gamma_1 x_1 +\gamma_2 x_2 +\gamma_3 x_3 + v \\
 H_0 &amp;: \gamma_1=\gamma_2=\gamma_3=0 \\
@@ -845,9 +844,11 @@ Var\left(\frac{e}{\sqrt{x_1}}|x\right) &amp;= \frac{1}{x_1} x_1\sigma_e^2=\sigma
 </ul>
 <p><span class="math display">\[\begin{aligned}
 Var(e|x) &amp;= \sigma^2 \exp(\delta_0 + \delta_1 x_1 + \delta_2 x_2 +\dots) \exp v \\
+\hat e^2 &amp;= \sigma^2 \exp(\delta_0 + \delta_1 x_1 + \delta_2 x_2 +\dots) \exp v \\
 log(\hat e^2) &amp;= \delta_0 + \delta_1 x_1 + \delta_2 x_2 +\dots+ v \\
 log(\hat e^2) &amp;= \delta_0 + \delta_1 \hat y + \delta_2 \hat y^2 + \dots+ v \\
-h(x) &amp;= \widehat{log(\hat e^2)}
+\widehat{\log h(x)} &amp;= \hat \delta_0 + \hat \delta_1 x_1 + \hat \delta_2 x_2 + \dots = x \hat \delta \\
+\hat h(x) &amp;= \exp (x \hat \delta) \text{ or } \hat h(x)=e^{x \hat \delta}
 \end{aligned}
 \]</span></p>
 <ul>
@@ -944,20 +945,20 @@ F-stat &amp;= \frac 1 q (R\beta-c)' \Sigma_R^{-1} (R\beta-c)
 <span id="cb6-6"><a href="#cb6-6"></a><span class="kw">predict</span> cig_hat</span>
 <span id="cb6-7"><a href="#cb6-7"></a><span class="kw">predict</span> cig_res,res</span>
 <span id="cb6-8"><a href="#cb6-8"></a>** GLS: <span class="kw">h</span>(x)=lincome Weighted</span>
-<span id="cb6-9"><a href="#cb6-9"></a><span class="kw">qui</span>:<span class="kw">reg</span> cigs lincome lcigpric educ age age_40sq restaurn [aw=lincome]</span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="kw">qui</span>:<span class="kw">reg</span> cigs lincome lcigpric educ age age_40sq restaurn [aw=1/lincome]</span>
 <span id="cb6-10"><a href="#cb6-10"></a><span class="kw">est</span> sto m2</span>
 <span id="cb6-11"><a href="#cb6-11"></a>** FGLS: <span class="kw">h</span>(x) = f(cigs_hat)</span>
 <span id="cb6-12"><a href="#cb6-12"></a><span class="kw">gen</span> lcres=<span class="fu">log</span>(cig_res^2)</span>
 <span id="cb6-13"><a href="#cb6-13"></a><span class="kw">qui</span>:<span class="kw">reg</span> lcres c.cig_hat##c.cig_hat##c.cig_hat </span>
 <span id="cb6-14"><a href="#cb6-14"></a><span class="kw">predict</span> aux</span>
 <span id="cb6-15"><a href="#cb6-15"></a><span class="kw">gen</span> hx=<span class="fu">exp</span>(aux)</span>
-<span id="cb6-16"><a href="#cb6-16"></a><span class="kw">qui</span>:<span class="kw">reg</span> cigs lincome lcigpric educ age age_40sq restaurn [aw=hx]</span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="kw">qui</span>:<span class="kw">reg</span> cigs lincome lcigpric educ age age_40sq restaurn [aw=1/hx]</span>
 <span id="cb6-17"><a href="#cb6-17"></a><span class="kw">est</span> sto m3</span>
 <span id="cb6-18"><a href="#cb6-18"></a><span class="kw">qui</span>:<span class="kw">reg</span> cigs lincome lcigpric educ age age_40sq restaurn , <span class="kw">robust</span></span>
 <span id="cb6-19"><a href="#cb6-19"></a><span class="kw">est</span> sto m4</span>
-<span id="cb6-20"><a href="#cb6-20"></a><span class="kw">qui</span>:<span class="kw">reg</span> cigs lincome lcigpric educ age age_40sq restaurn [aw=lincome], <span class="kw">robust</span></span>
+<span id="cb6-20"><a href="#cb6-20"></a><span class="kw">qui</span>:<span class="kw">reg</span> cigs lincome lcigpric educ age age_40sq restaurn [aw=1/lincome], <span class="kw">robust</span></span>
 <span id="cb6-21"><a href="#cb6-21"></a><span class="kw">est</span> sto m5</span>
-<span id="cb6-22"><a href="#cb6-22"></a><span class="kw">qui</span>:<span class="kw">reg</span> cigs lincome lcigpric educ age age_40sq restaurn [aw=hx], <span class="kw">robust</span></span>
+<span id="cb6-22"><a href="#cb6-22"></a><span class="kw">qui</span>:<span class="kw">reg</span> cigs lincome lcigpric educ age age_40sq restaurn [aw=1/hx], <span class="kw">robust</span></span>
 <span id="cb6-23"><a href="#cb6-23"></a><span class="kw">est</span> sto m6</span>
 <span id="cb6-24"><a href="#cb6-24"></a><span class="kw">set</span> <span class="dv">linesize</span> 255</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -974,33 +975,33 @@ F-stat &amp;= \frac 1 q (R\beta-c)' \Sigma_R^{-1} (R\beta-c)
                   default             GLS            FGLS             Rob         GLS-Rob        FGLS-Rob   
                    b/se/p          b/se/p          b/se/p          b/se/p          b/se/p          b/se/p   
 ------------------------------------------------------------------------------------------------------------
-lincome             0.880           0.851           1.207           0.880           0.851           1.207   
-                  (0.728)         (0.783)         (0.937)         (0.596)         (0.637)         (0.897)   
-                  [0.227]         [0.277]         [0.198]         [0.140]         [0.182]         [0.179]   
+lincome             0.880           0.926           1.005**         0.880           0.926*          1.005   
+                  (0.728)         (0.672)         (0.422)         (0.596)         (0.559)         (0.651)   
+                  [0.227]         [0.169]         [0.017]         [0.140]         [0.098]         [0.123]   
 
-lcigpric           -0.751          -0.045          -0.947          -0.751          -0.045          -0.947   
-                  (5.773)         (5.840)         (6.095)         (6.035)         (6.051)         (7.412)   
-                  [0.897]         [0.994]         [0.877]         [0.901]         [0.994]         [0.898]   
+lcigpric           -0.751          -1.525          -4.572          -0.751          -1.525          -4.572   
+                  (5.773)         (5.696)         (4.260)         (6.035)         (6.067)         (9.651)   
+                  [0.897]         [0.789]         [0.284]         [0.901]         [0.802]         [0.636]   
 
-educ               -0.501***       -0.526***       -0.465**        -0.501***       -0.526***       -0.465** 
-                  (0.167)         (0.168)         (0.200)         (0.162)         (0.166)         (0.223)   
-                  [0.003]         [0.002]         [0.021]         [0.002]         [0.002]         [0.037]   
+educ               -0.501***       -0.477***       -0.610***       -0.501***       -0.477***       -0.610***
+                  (0.167)         (0.166)         (0.115)         (0.162)         (0.159)         (0.115)   
+                  [0.003]         [0.004]         [0.000]         [0.002]         [0.003]         [0.000]   
 
-age                 0.049           0.049           0.033           0.049*          0.049*          0.033   
-                  (0.034)         (0.034)         (0.041)         (0.030)         (0.030)         (0.040)   
-                  [0.146]         [0.144]         [0.432]         [0.099]         [0.097]         [0.413]   
+age                 0.049           0.048           0.041           0.049*          0.048           0.041   
+                  (0.034)         (0.033)         (0.026)         (0.030)         (0.029)         (0.032)   
+                  [0.146]         [0.147]         [0.108]         [0.099]         [0.101]         [0.197]   
 
-age_40sq           -0.009***       -0.009***       -0.010***       -0.009***       -0.009***       -0.010***
-                  (0.002)         (0.002)         (0.003)         (0.001)         (0.001)         (0.002)   
-                  [0.000]         [0.000]         [0.001]         [0.000]         [0.000]         [0.000]   
+age_40sq           -0.009***       -0.009***       -0.007***       -0.009***       -0.009***       -0.007***
+                  (0.002)         (0.002)         (0.001)         (0.001)         (0.001)         (0.002)   
+                  [0.000]         [0.000]         [0.000]         [0.000]         [0.000]         [0.001]   
 
-restaurn           -2.825**        -2.878**        -2.417*         -2.825***       -2.878***       -2.417*  
-                  (1.112)         (1.115)         (1.451)         (1.008)         (1.023)         (1.385)   
-                  [0.011]         [0.010]         [0.096]         [0.005]         [0.005]         [0.081]   
+restaurn           -2.825**        -2.776**        -3.383***       -2.825***       -2.776***       -3.383***
+                  (1.112)         (1.108)         (0.722)         (1.008)         (0.992)         (0.696)   
+                  [0.011]         [0.012]         [0.000]         [0.005]         [0.005]         [0.000]   
 
-_cons              10.797           8.521           8.866          10.797           8.521           8.866   
-                 (24.145)        (24.604)        (26.340)        (25.401)        (25.536)        (32.622)   
-                  [0.655]         [0.729]         [0.736]         [0.671]         [0.739]         [0.786]   
+_cons              10.797          13.184          25.712          10.797          13.184          25.712   
+                 (24.145)        (23.656)        (17.120)        (25.401)        (25.478)        (41.539)   
+                  [0.655]         [0.577]         [0.134]         [0.671]         [0.605]         [0.536]   
 ------------------------------------------------------------------------------------------------------------
 N                     807             807             807             807             807             807   
 ------------------------------------------------------------------------------------------------------------</code></pre>

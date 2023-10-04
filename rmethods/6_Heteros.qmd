@@ -16,8 +16,8 @@ format:
 
 ## What is Heteroskedasticity?
 
--   Mathematically: $$Var(e|x=c_1)\neq Var(e|x=c_2)
-    $$
+-   Mathematically: 
+$$Var(e|x=c_1)\neq Var(e|x=c_2)$$
 
 -   This means: the conditional variance of the errors is not constant across control characteristics.
 
@@ -346,9 +346,11 @@ The new error is Homoskedastic (but has no constant)!
 
 $$\begin{aligned}
 Var(e|x) &= \sigma^2 \exp(\delta_0 + \delta_1 x_1 + \delta_2 x_2 +\dots) \exp v \\
+\hat e^2 &= \sigma^2 \exp(\delta_0 + \delta_1 x_1 + \delta_2 x_2 +\dots) \exp v \\
 log(\hat e^2) &= \delta_0 + \delta_1 x_1 + \delta_2 x_2 +\dots+ v \\
 log(\hat e^2) &= \delta_0 + \delta_1 \hat y + \delta_2 \hat y^2 + \dots+ v \\
-h(x) &= \widehat{log(\hat e^2)}
+\widehat{\log h(x)} &= \hat \delta_0 + \hat \delta_1 x_1 + \hat \delta_2 x_2 + \dots = x \hat \delta \\
+\hat h(x) &= \exp (x \hat \delta) \text{ or } \hat h(x)=e^{x \hat \delta}
 \end{aligned}
 $$
 
@@ -447,20 +449,20 @@ est sto m1
 predict cig_hat
 predict cig_res,res
 ** GLS: h(x)=lincome Weighted
-qui:reg cigs lincome lcigpric educ age age_40sq restaurn [aw=lincome]
+qui:reg cigs lincome lcigpric educ age age_40sq restaurn [aw=1/lincome]
 est sto m2
 ** FGLS: h(x) = f(cigs_hat)
 gen lcres=log(cig_res^2)
 qui:reg lcres c.cig_hat##c.cig_hat##c.cig_hat 
 predict aux
 gen hx=exp(aux)
-qui:reg cigs lincome lcigpric educ age age_40sq restaurn [aw=hx]
+qui:reg cigs lincome lcigpric educ age age_40sq restaurn [aw=1/hx]
 est sto m3
 qui:reg cigs lincome lcigpric educ age age_40sq restaurn , robust
 est sto m4
-qui:reg cigs lincome lcigpric educ age age_40sq restaurn [aw=lincome], robust
+qui:reg cigs lincome lcigpric educ age age_40sq restaurn [aw=1/lincome], robust
 est sto m5
-qui:reg cigs lincome lcigpric educ age age_40sq restaurn [aw=hx], robust
+qui:reg cigs lincome lcigpric educ age age_40sq restaurn [aw=1/hx], robust
 est sto m6
 set linesize 255
 ```
