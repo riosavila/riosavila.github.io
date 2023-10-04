@@ -50,7 +50,7 @@ What happens when you have heteroskedastic errors?
 
 Setup:
 
-$y = e$ where $e~N(0,\sigma_e^2h(x))$
+$y = e$ where $e \sim N(0,\sigma_e^2h(x))$
 
 $x = uniform(-1,1)$
 
@@ -115,7 +115,7 @@ $$
 
 -   We usually start with the assumption that errors are homoskedastic $Var(e|x's)=\sigma^2_c$.
 -   However, now we want to allow for the possibility of heteroskedasiticity. ie, that variance is some function of X.
-    -   We have to model is variance is a function that varies with $x$:
+    * We have to test if the conditional variance is a function that varies with $x$:
 
 $$Var(e|x)=f(x_1,x_2,\dots,x_k) \sim a_0+a_1x_1 + a_2 x_2 + \dots + a_k x_k+v$$
 
@@ -123,10 +123,11 @@ $$Var(e|x)=f(x_1,x_2,\dots,x_k) \sim a_0+a_1x_1 + a_2 x_2 + \dots + a_k x_k+v$$
 
 $$Var(e|x)=f(x_1,x_2,\dots,x_k) \sim a_0+a_1x_1 + a_2 x_2 + \dots + a_k x_k+v$$
 
--   This expression says the onditional variance can vary with $X's$.
+-   This expression says the conditional variance can vary with $X's$.
 -   It could be as flexible as needed, but linear is usually enough.
 
-With this the Null hypothesis is: $$H_0: a_1 = a_2 = \dots = a_k=0 \text{ vs } H_1: H_0 \text{ is false}
+With this the Null hypothesis is: 
+$$H_0: a_1 = a_2 = \dots = a_k=0 \text{ vs } H_1: H_0 \text{ is false}
 $$
 
 Easy enough, but do we **KNOW** $Var(e|x)$ ? can we model the equation?
@@ -135,19 +136,19 @@ Easy enough, but do we **KNOW** $Var(e|x)$ ? can we model the equation?
 
 **We don't!.**
 
--   But we can use $e^2$ instead. This implies we using the assumption that $e^2$ is a good enough approximation for the condional variance $Var(e|x)$.
+-   But we can use $\hat e^2$ instead. The assumption is that $\hat e^2$ is a good enough approximation for the condional variance $Var(e|x)$.
 
 -   With this, the test for heteroskedasticty can be implemented using the following recipe.
 
 1.  Estimate $y=x\beta+e$ and obtain predicted model errors $\hat e$.
 2.  Model $\hat e^2 = \color{green}{h(x)}+v$, as a proxy for the variance model.
     -   $h(x)$ could be estimated using some linear or nonlinear functional forms.
-3.  Test if variance changes with respect to any explanatory variables.
-    -   In this case, you can assume the heteroskedastic model is homoskedastic.
-
+3.  Test if conditional variance changes with respect to any explanatory variables.
+    - The null is H0: Errors are Homoskedastic. Rejection the error suggests you have Heteroskedasticity.
+    - 
 **Note:** Depending on Model specification, and test used, there are various Heteroskedasticity *tests*.
 
-## Heteroskedasticity tests
+## Heteroskedasticity tests:
 
 $$\begin{aligned}
 \text{Model}: y &= \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 + e \\
@@ -155,7 +156,7 @@ $$\begin{aligned}
 \end{aligned}
 $$
 
-### Breush-Pagan:
+### Breusch-Pagan test:
 
 $$\begin{aligned}
 \hat e^2 & = \gamma_0 + \gamma_1 x_1 +\gamma_2 x_2 +\gamma_3 x_3 + v \\
