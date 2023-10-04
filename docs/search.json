@@ -5583,7 +5583,7 @@
     "href": "rmethods/index.html#part-ii-addressing-problems-with-mra",
     "title": "Research Methods: Econometrics I",
     "section": "Part II: Addressing Problems with MRA",
-    "text": "Part II: Addressing Problems with MRA\n\n4. Chapter 6 - 7\nMRA: Scaling, functional forms, Goodness of Fit, and Qualitative Information\n\n\n5. Chapter 8\nHeteroskedasticity\n\n\n6. Chapter 9\nFurther Problems: Functional form, Missing variables, measurement errors, missing data\n\n\nHomeWork 2 Also Github link\n\n\nDue Date October 18\n\n\nMIDTERM! Due Date October 18\n\n7. Chapter 15\nInstrumental Variables and 2SLS\n\n\n8. Chapter 17\nLimited Dep Variables"
+    "text": "Part II: Addressing Problems with MRA\n\n4. Chapter 6 - 7\nMRA: Scaling, functional forms, Goodness of Fit, and Qualitative Information\n\n\n5. Chapter 8\nHeteroskedasticity\n\n\n6. Chapter 9\nFurther Problems: Functional form, Missing variables, measurement errors, missing data\n\n\nHomeWork 2 Also Github link\n\n\nDue Date October 25 !!\n\n\nReview Class: Wednesday October 18\n\n\nMIDTERM! October 20: 9:30 - 12:50\n\n7. Chapter 15\nInstrumental Variables and 2SLS\n\n\n8. Chapter 17\nLimited Dep Variables"
   },
   {
     "objectID": "rmethods/index.html#part-iii-panel-data-methods",
@@ -6060,5 +6060,12 @@
     "title": "Multiple Regression Analysis",
     "section": "",
     "text": "Mathematically: \\[Var(e|x=c_1)\\neq Var(e|x=c_2)\\]\nThis means: the conditional variance of the errors is not constant across control characteristics."
+  },
+  {
+    "objectID": "rmethods/Midterm.html",
+    "href": "rmethods/Midterm.html",
+    "title": "Econometrics MSC Levy",
+    "section": "",
+    "text": "Midterm\n\nExplain how to implement a Chow test using two separate regressions. and why you cannot use it if the underlying model is heteroskedastic."
   }
 ]
