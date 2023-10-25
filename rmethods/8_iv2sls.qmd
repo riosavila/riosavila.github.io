@@ -57,14 +57,14 @@ format:
 
 - I have mentioned a few times the word "instrument" But what are they really?
 
-- Instruments: the heros/variables that will "save us" of endogeneity.
+  - Instruments: the heros/variables that will "save us" of endogeneity.
 
 - They have at least 2 properties:
   
   1. Instruments should be exogenous to the model 
    
-    - This means that they do not appear in the theoretical specification, thus there is no **DIRECT** conection between the instrument $Z$ and the outcome $y$.
-      - Should only be connected through the endogenous variable.
+    - Does not appear in the specification, thus $Z$ has no **DIRECT** effect on the outcome $y$.
+      - Effect exists only through the endogenous variable.
 
     - Also that there is no correlation between the model error and $Z$.
 
@@ -116,6 +116,7 @@ $$
 *| fig-align: center
 
 ** Montecarlo Simulation
+set linesize 255
 clear
 set seed 10101
 set obs 1000

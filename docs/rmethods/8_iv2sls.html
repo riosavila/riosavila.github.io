@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.251">
+  <meta name="generator" content="quarto-1.3.450">
 
   <meta name="author" content="Fernando Rios-Avila">
   <title>Econometrics MSC Levy - Instrumental Variables and 2SLS</title>
@@ -224,8 +224,7 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    padding-bottom: 0.5rem;
-    margin-bottom: 0;
+    margin-bottom: 0.5rem;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -470,16 +469,18 @@ Fernando Rios-Avila
 <section id="what-is-an-instrumental-variable" class="slide level2">
 <h2>What is an “<strong><em>Instrumental Variable</em></strong>”</h2>
 <ul>
-<li><p>I have mentioned a few times the word “instrument” But what are they really?</p></li>
-<li><p>Instruments: the heros/variables that will “save us” of endogeneity.</p></li>
+<li><p>I have mentioned a few times the word “instrument” But what are they really?</p>
+<ul>
+<li>Instruments: the heros/variables that will “save us” of endogeneity.</li>
+</ul></li>
 <li><p>They have at least 2 properties:</p>
 <ol type="1">
 <li>Instruments should be exogenous to the model</li>
 </ol>
 <ul>
-<li>This means that they do not appear in the theoretical specification, thus there is no <strong>DIRECT</strong> conection between the instrument <span class="math inline">\(Z\)</span> and the outcome <span class="math inline">\(y\)</span>.
+<li>Does not appear in the specification, thus <span class="math inline">\(Z\)</span> has no <strong>DIRECT</strong> effect on the outcome <span class="math inline">\(y\)</span>.
 <ul>
-<li>Should only be connected through the endogenous variable.</li>
+<li>Effect exists only through the endogenous variable.</li>
 </ul></li>
 <li>Also that there is no correlation between the model error and <span class="math inline">\(Z\)</span>.</li>
 </ul>
@@ -531,37 +532,38 @@ e &amp;\sim chi(2)-2 ; z = chi(2)-2 ; x = chi(2)-2+z+e \\
 y &amp;=1+x+e
 \end{aligned}
 \]</span></p>
-<div id="b75cc315" class="cell" data-execution_count="1">
+<div class="cell" data-execution_count="1">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a>** Montecarlo Simulation</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">clear</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">set</span> <span class="dv">seed</span> 10101</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">set</span> <span class="kw">obs</span> 1000</span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">qui</span>:<span class="kw">mata</span>:</span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="kw">k</span> = 1000; n=1000</span>
-<span id="cb1-7"><a href="#cb1-7"></a>b1=bc = b = <span class="fu">J</span>(<span class="kw">k</span>,2,0)</span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="kw">for</span>(i=1;i&lt;=<span class="kw">k</span>;i++){</span>
-<span id="cb1-9"><a href="#cb1-9"></a>    <span class="fu">e</span> = rchi2(n,1,2):-2</span>
-<span id="cb1-10"><a href="#cb1-10"></a>    e1 = rchi2(n,1,2):-2</span>
-<span id="cb1-11"><a href="#cb1-11"></a>    z = rchi2(n,1,2):-2,<span class="fu">J</span>(n,1,1)</span>
-<span id="cb1-12"><a href="#cb1-12"></a>    x = rchi2(n,1,2):-2:+z[,1]:+<span class="fu">e</span> ,<span class="fu">J</span>(n,1,1)</span>
-<span id="cb1-13"><a href="#cb1-13"></a>    x1 = rchi2(n,1,2):-2:+z[,1]:+e1,<span class="fu">J</span>(n,1,1)</span>
-<span id="cb1-14"><a href="#cb1-14"></a>    <span class="fu">y</span> = 1:+x[,1]:+<span class="fu">e</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a>    y1 = 1:+x[,1]:+e1</span>
-<span id="cb1-16"><a href="#cb1-16"></a>    xx = <span class="kw">cross</span>(x,x)</span>
-<span id="cb1-17"><a href="#cb1-17"></a>    b[i,] = (<span class="fu">invsym</span>(xx)*<span class="kw">cross</span>(x,<span class="fu">y</span>))'</span>
-<span id="cb1-18"><a href="#cb1-18"></a>    bc[i,] = (<span class="fu">invsym</span>(<span class="kw">cross</span>(z,x))*<span class="kw">cross</span>(z,<span class="fu">y</span>))'</span>
-<span id="cb1-19"><a href="#cb1-19"></a>    b1[i,] = (<span class="fu">invsym</span>(xx)*<span class="kw">cross</span>(x,y1))'</span>
-<span id="cb1-20"><a href="#cb1-20"></a>}</span>
-<span id="cb1-21"><a href="#cb1-21"></a><span class="kw">end</span></span>
-<span id="cb1-22"><a href="#cb1-22"></a>getmata bb*=b</span>
-<span id="cb1-23"><a href="#cb1-23"></a>getmata bc*=bc</span>
-<span id="cb1-24"><a href="#cb1-24"></a>getmata b_*=b1</span>
-<span id="cb1-25"><a href="#cb1-25"></a><span class="kw">set</span> <span class="dv">scheme</span> white2</span>
-<span id="cb1-26"><a href="#cb1-26"></a>color_style tableau</span>
-<span id="cb1-27"><a href="#cb1-27"></a><span class="kw">two</span> <span class="kw">kdensity</span> bb1 ||  <span class="kw">kdensity</span> bc1  || <span class="kw">kdensity</span> b_1, <span class="co">///</span></span>
-<span id="cb1-28"><a href="#cb1-28"></a><span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"X Endogenous"</span> 2 <span class="st">"IV"</span> 3 <span class="st">"X Exogenous"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">set</span> <span class="dv">linesize</span> 255</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">clear</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">set</span> <span class="dv">seed</span> 10101</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">set</span> <span class="kw">obs</span> 1000</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="kw">qui</span>:<span class="kw">mata</span>:</span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="kw">k</span> = 1000; n=1000</span>
+<span id="cb1-8"><a href="#cb1-8"></a>b1=bc = b = <span class="fu">J</span>(<span class="kw">k</span>,2,0)</span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="kw">for</span>(i=1;i&lt;=<span class="kw">k</span>;i++){</span>
+<span id="cb1-10"><a href="#cb1-10"></a>    <span class="fu">e</span> = rchi2(n,1,2):-2</span>
+<span id="cb1-11"><a href="#cb1-11"></a>    e1 = rchi2(n,1,2):-2</span>
+<span id="cb1-12"><a href="#cb1-12"></a>    z = rchi2(n,1,2):-2,<span class="fu">J</span>(n,1,1)</span>
+<span id="cb1-13"><a href="#cb1-13"></a>    x = rchi2(n,1,2):-2:+z[,1]:+<span class="fu">e</span> ,<span class="fu">J</span>(n,1,1)</span>
+<span id="cb1-14"><a href="#cb1-14"></a>    x1 = rchi2(n,1,2):-2:+z[,1]:+e1,<span class="fu">J</span>(n,1,1)</span>
+<span id="cb1-15"><a href="#cb1-15"></a>    <span class="fu">y</span> = 1:+x[,1]:+<span class="fu">e</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>    y1 = 1:+x[,1]:+e1</span>
+<span id="cb1-17"><a href="#cb1-17"></a>    xx = <span class="kw">cross</span>(x,x)</span>
+<span id="cb1-18"><a href="#cb1-18"></a>    b[i,] = (<span class="fu">invsym</span>(xx)*<span class="kw">cross</span>(x,<span class="fu">y</span>))'</span>
+<span id="cb1-19"><a href="#cb1-19"></a>    bc[i,] = (<span class="fu">invsym</span>(<span class="kw">cross</span>(z,x))*<span class="kw">cross</span>(z,<span class="fu">y</span>))'</span>
+<span id="cb1-20"><a href="#cb1-20"></a>    b1[i,] = (<span class="fu">invsym</span>(xx)*<span class="kw">cross</span>(x,y1))'</span>
+<span id="cb1-21"><a href="#cb1-21"></a>}</span>
+<span id="cb1-22"><a href="#cb1-22"></a><span class="kw">end</span></span>
+<span id="cb1-23"><a href="#cb1-23"></a>getmata bb*=b</span>
+<span id="cb1-24"><a href="#cb1-24"></a>getmata bc*=bc</span>
+<span id="cb1-25"><a href="#cb1-25"></a>getmata b_*=b1</span>
+<span id="cb1-26"><a href="#cb1-26"></a><span class="kw">set</span> <span class="dv">scheme</span> white2</span>
+<span id="cb1-27"><a href="#cb1-27"></a>color_style tableau</span>
+<span id="cb1-28"><a href="#cb1-28"></a><span class="kw">two</span> <span class="kw">kdensity</span> bb1 ||  <span class="kw">kdensity</span> bc1  || <span class="kw">kdensity</span> b_1, <span class="co">///</span></span>
+<span id="cb1-29"><a href="#cb1-29"></a><span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"X Endogenous"</span> 2 <span class="st">"IV"</span> 3 <span class="st">"X Exogenous"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code></code></pre>
@@ -769,7 +771,7 @@ Z &amp;=\begin{bmatrix} 1 &amp; z   &amp; x \end{bmatrix}
 </section>
 <section id="examples" class="slide level2">
 <h2>Examples</h2>
-<div id="d3bacea4" class="cell" data-execution_count="2">
+<div class="cell" data-execution_count="2">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">/*</span></span>
@@ -865,7 +867,7 @@ y &amp;= \beta_0 + \beta_1 x_1 + e \\
 </section>
 <section id="example-1" class="slide level2">
 <h2>Example</h2>
-<div id="ff991edb" class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="3">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">clear</span></span>
@@ -892,44 +894,27 @@ y &amp;= \beta_0 + \beta_1 x_1 + e \\
 <div class="cell-output cell-output-stdout">
 <pre><code>Number of observations (_N) was 0, now 1,000.
 
--------------------------------------------------------------------------------
-&gt; -----------------------------
-                      (1)             (2)             (3)             (4)      
-&gt;        (5)             (6)   
-                        y               y               y               y      
-&gt;          y               y   
--------------------------------------------------------------------------------
-&gt; -----------------------------
-x                   1.006***                                                   
-&gt;                              
-                 (0.0320)                                                      
-&gt;                              
+------------------------------------------------------------------------------------------------------------
+                      (1)             (2)             (3)             (4)             (5)             (6)   
+                        y               y               y               y               y               y   
+------------------------------------------------------------------------------------------------------------
+x                   1.006***                                                                                
+                 (0.0320)                                                                                   
 
-x1                                  0.520***                                   
-&gt;      1.018***                
-                                 (0.0277)                                      
-&gt;   (0.0640)                   
+x1                                  0.520***                                        1.018***                
+                                 (0.0277)                                        (0.0640)                   
 
-x2                                                  0.502***                   
-&gt;                      1.038***
-                                                 (0.0277)                      
-&gt;                   (0.0654)   
+x2                                                  0.502***                                        1.038***
+                                                 (0.0277)                                        (0.0654)   
 
-x1_x2                                                               0.682***   
-&gt;                              
-                                                                 (0.0301)      
-&gt;                              
+x1_x2                                                               0.682***                                
+                                                                 (0.0301)                                   
 
-_cons               1.010***        0.996***        0.988***        0.983***   
-&gt;      0.974***        0.956***
-                 (0.0313)        (0.0380)        (0.0384)        (0.0360)      
-&gt;   (0.0438)        (0.0451)   
--------------------------------------------------------------------------------
-&gt; -----------------------------
-N                    1000            1000            1000            1000      
-&gt;       1000            1000   
--------------------------------------------------------------------------------
-&gt; -----------------------------
+_cons               1.010***        0.996***        0.988***        0.983***        0.974***        0.956***
+                 (0.0313)        (0.0380)        (0.0384)        (0.0360)        (0.0438)        (0.0451)   
+------------------------------------------------------------------------------------------------------------
+N                    1000            1000            1000            1000            1000            1000   
+------------------------------------------------------------------------------------------------------------
 Standard errors in parentheses
 * p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001</code></pre>
 </div>
@@ -1006,7 +991,7 @@ Standard errors in parentheses
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong></strong></p>
+<p><strong>Important</strong></p>
 </div>
 <div class="callout-content">
 <p>When describing this test, I mentioned that one would be typically worried if observing multiple coefficients when using different IV’s.</p>
@@ -1020,7 +1005,7 @@ Standard errors in parentheses
 <section id="example-2" class="slide level2 scrollable">
 <h2>Example</h2>
 <p>Ignoring Potential endogeneity</p>
-<div id="a934604b" class="cell" data-execution_count="4">
+<div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1"></a>frause mroz, <span class="kw">clear</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="kw">drop</span> <span class="kw">if</span> lwage==.</span>
 <span id="cb6-3"><a href="#cb6-3"></a>** But with Endogeneity</span>
@@ -1046,7 +1031,7 @@ Standard errors in parentheses
 </div>
 </div>
 <p>First Stage for different IVs</p>
-<div id="1ae44238" class="cell" data-execution_count="5">
+<div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">qui</span>: <span class="kw">reg</span> educ fatheduc exper expersq</span>
 <span id="cb8-2"><a href="#cb8-2"></a><span class="kw">predict</span> r1 , res</span>
 <span id="cb8-3"><a href="#cb8-3"></a><span class="kw">test</span> fatheduc</span>
@@ -1114,7 +1099,7 @@ Standard errors in parentheses
 </div>
 </div>
 <p>Using parents education as instruments</p>
-<div id="48091f1b" class="cell" data-execution_count="6">
+<div class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1"></a>* SMALL requests Df adjustment</span>
 <span id="cb10-2"><a href="#cb10-2"></a><span class="kw">qui</span>:ivregress 2sls lwage (educ= fatheduc ) exper expersq, small</span>
 <span id="cb10-3"><a href="#cb10-3"></a><span class="kw">est</span> sto m1</span>
@@ -1149,7 +1134,7 @@ Standard errors in parentheses
 </div>
 </div>
 <p>** Testing for endogeneity</p>
-<div id="b828e959" class="cell" data-execution_count="7">
+<div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1"></a>* Instrumenting education</span>
 <span id="cb12-2"><a href="#cb12-2"></a><span class="kw">qui</span>:<span class="kw">reg</span>  lwage educ  exper expersq r1</span>
 <span id="cb12-3"><a href="#cb12-3"></a><span class="kw">est</span> sto m1</span>
@@ -1196,7 +1181,7 @@ Standard errors in parentheses
 </div>
 </div>
 <p>Overid Test</p>
-<div id="74ae3a68" class="cell" data-execution_count="8">
+<div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">qui</span>:ivregress 2sls lwage (educ= fatheduc motheduc) exper expersq, small</span>
 <span id="cb14-2"><a href="#cb14-2"></a><span class="kw">predict</span> <span class="kw">resid</span>, res</span>
 <span id="cb14-3"><a href="#cb14-3"></a><span class="kw">estat</span> overid </span>
@@ -1252,6 +1237,7 @@ Linear regression                               Number of obs     =        428
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
+'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -1513,9 +1499,10 @@ Linear regression                               Number of obs     =        428
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      function tippyHover(el, contentFn) {
         const config = {
           allowHTML: true,
+          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -1525,17 +1512,8 @@ Linear regression                               Number of obs     =        428
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start',
+          placement: 'bottom-start'
         };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
