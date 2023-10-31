@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.251">
+  <meta name="generator" content="quarto-1.4.455">
 
   <meta name="author" content="Fernando Rios-Avila">
   <title>Econometrics MSC Levy - Times Series Part-I</title>
@@ -344,10 +344,176 @@ Fernando Rios-Avila
 <section class="slide level2">
 
 
+<img data-src="images/paste-8.png" class="r-stretch"></section>
+<section id="the-nature-of-time-series-data" class="slide level2">
+<h2>The nature of time series data</h2>
+<ul>
+<li><p>Time series “works” different from Repeated crossection.</p>
+<ul>
+<li><p>You do not have access to a random sample. (Window of time if fixed)</p></li>
+<li><p>You have access to a single “random” time line</p></li>
+</ul></li>
+<li><p>And in time series, one needs to be quite aware that Data has Baggage…What you see today is the product of everything that happens in the far past.</p></li>
+<li><p>This is what we call Past Dependent, or simple serial correlation.</p>
+<ul>
+<li>And is why we need to be careful when we use time series data.</li>
+</ul></li>
+</ul>
+</section>
+<section id="the-nature-of-time-series-data-1" class="slide level2">
+<h2>The nature of time series data</h2>
+<ul>
+<li><p>Data cannot not be arbitrarily reordered. (Past affect future)</p>
+<ul>
+<li>Typical features: serial correlation/nonindependence of observations</li>
+</ul></li>
+<li><p>Randomness of the data comes from the uncertainty of shocks that affects a variable over time, not from sampling.</p></li>
+<li><p>Your “Sample” is one realized path that you observe in a narrow window of time.</p></li>
+<li><p>Because observations are no longer independent, we will need to worry about correlation across time.</p></li>
+<li><p>In fact, because data may be strongly correlated across time (say your age), it may generate some problems when applying OLS.</p>
+<ul>
+<li>Highly correlated data (high innertia) will have common “trends” that do not necessarity reflect the causal relationship between variables.</li>
+</ul></li>
+<li><p>So, we must learn “new” tools to deal with this problem.</p></li>
+</ul>
+</section>
+<section>
+<section id="basic-ts-models" class="title-slide slide level1 center">
+<h1>Basic TS models</h1>
+
+</section>
+<section id="static-model" class="slide level2">
+<h2>1: Static model</h2>
+<ul>
+<li>The static model is the simplest model for analyzing time series data. (like SLRM)</li>
+<li>A Static model aims to find correlations between contemporaneous variables.
+<ul>
+<li>Implicity, this <strong>assumes</strong> there are no dynamic interactions among variables</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[GDP_t = a_0 + a_1 educ_t + a_2 Invest_t + a_3 Unemp_t + u_t\]</span></p>
+<p>Education, investment and Unemployment rate are assumed to affect GDP contemporaneously. But Lags of Leads of the data has no effect on GDP.</p>
+<ul>
+<li>These models are not useful for Forecasting, and Only produces reasonable estimates under very strong assumptions (we will see this later).</li>
+</ul>
+</section>
+<section id="finite-distributed-lag-model-fdl" class="slide level2">
+<h2>2: Finite Distributed Lag model (FDL)</h2>
+<ul>
+<li>The FDL model is a simple extension of the static model that allows for dynamic interactions of independent variables.
+<ul>
+<li><strong><em>Finite</em></strong> Because we choose How far back (lags) to add to the model</li>
+<li><strong><em>Distributed</em></strong> Because each lag will have a different effect on the dependent variable.</li>
+</ul></li>
+<li>Simple Example: <span class="math display">\[fr_t = a_0 + a_1 te_t +e_t\]</span> <span class="math display">\[fr_t = a_0 + a_1 te_t + a_2 te_{t-1}+ a_3 te_{t-2}+e_t\]</span></li>
+</ul>
+<p><span class="math inline">\(fr_t\)</span>: Fertility Rate; <span class="math inline">\(te_t\)</span>: Tax exemption</p>
+<p>This is an FDL model with 2 lags.</p>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+<ul>
+<li>More Generality, FDL of order <strong>q</strong> is defined as:</li>
+</ul>
+<p><span class="math display">\[y_t = a_0 + \sum_{k=0}^q \delta_k z_{t-k} + e_t\]</span></p>
+<ul>
+<li>You can choose Lags using F-statistic, but also considering the “loss” of Degrees of freedom.
+<ul>
+<li>More lags, less data to estimate the coefficients, more coefficients to estimate</li>
+<li>Coefficients may suffer from High Collinearity</li>
+<li>Allow us to draw inference on Duration of effects.</li>
+</ul></li>
+<li>Two Types of Effects:
+<ul>
+<li>Transitory effects <span class="math inline">\(\frac{\partial y_t}{\partial z_{t-q}}=\delta_q\)</span></li>
+<li>Permanent effect <span class="math inline">\(\frac{\partial y_t}{\partial z}=\sum \frac{\partial y_t}{\partial z_{t-q}}=\sum \delta_k\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<h3 id="what-do-you-expect-to-see">What do you expect to see?</h3>
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<figure>
+<p><img data-src="images/paste-11.png"></p>
+<figcaption>Transitory</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<figure>
+<p><img data-src="images/paste-12.png"></p>
+<figcaption>Permanent</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><strong>Transitory</strong> effects measure the short-term effect on outcome (Only of the additional unit)</li>
+<li><strong>Permanent</strong> effects measure the long-term effect on outcome (adding up Transitory effects)</li>
+</ul>
+</section>
+<section id="infinite-distributed-lag-model-idl" class="slide level2">
+<h2>3: Infinite Distributed Lag model (IDL)</h2>
+<ul>
+<li>This is a more advanced model that allows for the effects of independent variables to last forever, but how?
+<ul>
+<li>A model with infinite number of lags cannot be estimated…unless some restrictions are imposed.</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[ \text{Wrong: } y_t = a_0 + \sum_{k=0}^{\infty} \delta_k z_{t-k} + e_t\]</span> <span class="math display">\[ \text{Better: } y_t = a_0 + \sum_{k=0}^{\infty} \gamma \delta^k z_{t-k} + e_t\]</span></p>
+<ul>
+<li>So we went from pretending to estimate an infinite number of coefficients <span class="math inline">\(\delta_k\)</span> to estimating only two parameters <span class="math inline">\(\gamma\)</span> and <span class="math inline">\(\delta\)</span>.
+<ul>
+<li>This is called the <strong>Geometric Distributed Lag</strong> model.</li>
+</ul></li>
+</ul>
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+<ul>
+<li>GDL requires an additional “Trick”:</li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+y_t &amp;= a_0 + \gamma z_t + \gamma \rho z_{t-1} + \dots + e_t \\
+y_{t-1} &amp;= a_0 + \gamma z_{t-1} + \gamma \rho z_{t-2} + \dots + e_{t-1}
+\end{aligned}
+\]</span></p>
+<ul>
+<li>Subtracting the second equation (times <span class="math inline">\(\rho\)</span> ) from the first one, we get:</li>
+</ul>
+<p><span class="math display">\[y_t =  \rho y_{t-1} + a_0 (1-\rho) + \gamma z_t  + v_{t}\]</span></p>
+<p>Which requires really strong assumptions!</p>
+<ul>
+<li>The short and Long effects are:</li>
+</ul>
+<p><span class="math display">\[\text{Short}\frac{\partial y_t}{\partial z_{t-k}}=\gamma \rho^k \text{ and }
+\text{Long}\frac{\partial y_t}{\partial z}=\frac{\gamma}{1-\rho}\]</span></p>
+</section>
+<section id="rational-distributed-lag-model-rdl" class="slide level2">
+<h2>4: Rational Distributed Lag model (RDL)</h2>
+<ul>
+<li><p>Because IDL imposes strong assumptions on coefficients, we can relax them by allowing for lags. This is called the RDL model. <span class="math display">\[y_t = a_0 + \gamma_0 z_t + \gamma_1 z_t  +\delta y_{t-1} + e_t- \rho e_{t-1}\]</span></p></li>
+<li><p>Which has the following short and long effects:</p></li>
+</ul>
+<p><span class="math display">\[\text{ Short:}\frac{\partial y_t}{\partial z_t} = \gamma_0  \]</span> <span class="math display">\[\text{ Short:}\frac{\partial y_t}{\partial z_{t-k}} = \rho^{k-1}(\rho \gamma_0 + \gamma_1) \]</span> <span class="math display">\[\text{ Long:}\frac{\partial y_t}{\partial z} = \frac{\gamma_0 + \gamma_1}{1-\rho}\]</span></p>
+</section></section>
+<section>
+<section id="assumptions" class="title-slide slide level1 center">
+<h1>Assumptions</h1>
+<p>At least for M1 and M2</p>
+</section>
+<section id="assumptions-1" class="slide level2">
+<h2>Assumptions</h2>
+<ol type="1">
+<li>Linear in Parameters</li>
+</ol>
+
 <div class="footer footer-default">
 
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
