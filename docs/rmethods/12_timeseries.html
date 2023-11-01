@@ -504,11 +504,27 @@ y_{t-1} &amp;= a_0 + \gamma z_{t-1} + \gamma \rho z_{t-2} + \dots + e_{t-1}
 <h1>Assumptions</h1>
 <p>At least for M1 and M2</p>
 </section>
-<section id="assumptions-1" class="slide level2">
-<h2>Assumptions</h2>
+<section id="assumptions-m1-and-m2" class="slide level2">
+<h2>Assumptions: M1 and M2</h2>
 <ol type="1">
-<li>Linear in Parameters</li>
+<li><p>Linear in Parameters: Same old, same old, <span class="math inline">\(y_t = \beta_0 + \beta_1 x_{1t} + \dots + \beta_k x_{kt} + u_t\)</span></p></li>
+<li><p>No Perfect Collinearity: Also Same old, same old</p></li>
 </ol>
+</section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+<h3 id="the-stronger-ones">The Stronger ones</h3>
+<p><span class="math display">\[X=\begin{pmatrix}
+x_{11} &amp; x_{12} &amp; \dots &amp; x_{1k} \\
+x_{21} &amp; x_{22} &amp; \dots &amp; x_{2k} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+x_{T1} &amp; x_{T2} &amp; \dots &amp; x_{Tk}
+\end{pmatrix}\]</span></p>
+<ol start="3" type="1">
+<li>Zero Conditional Mean</li>
+</ol>
+<p><span class="math display">\[E(u_t|X)=0\]</span></p>
+<p>So that <span class="math inline">\(X\)</span> is strictly Exogenous (across all possible times)</p>
 
 <div class="footer footer-default">
 

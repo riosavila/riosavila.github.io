@@ -6143,6 +6143,20 @@
     "href": "rmethods/12_timeseries.html#assumptions-1",
     "title": "Times Series Part-I",
     "section": "Assumptions",
-    "text": "Assumptions\n\nLinear in Parameters"
+    "text": "Assumptions\n\nLinear in Parameters: Same old, same old: \\(y_t = \\beta_0 + \\beta_1 x_{1t} + \\dots + \\beta_k x_{kt} + u_t\\)"
+  },
+  {
+    "objectID": "rmethods/12_timeseries.html#assumptions-m1-and-m2",
+    "href": "rmethods/12_timeseries.html#assumptions-m1-and-m2",
+    "title": "Times Series Part-I",
+    "section": "Assumptions: M1 and M2",
+    "text": "Assumptions: M1 and M2\n\nLinear in Parameters: Same old, same old, \\(y_t = \\beta_0 + \\beta_1 x_{1t} + \\dots + \\beta_k x_{kt} + u_t\\)\nNo Perfect Collinearity: Also Same old, same old"
+  },
+  {
+    "objectID": "rmethods/12_timeseries.html#section-3",
+    "href": "rmethods/12_timeseries.html#section-3",
+    "title": "Times Series Part-I",
+    "section": "",
+    "text": "The Stronger ones\n\\[X=\\begin{pmatrix}\nx_{11} & x_{12} & \\dots & x_{1k} \\\\\nx_{21} & x_{22} & \\dots & x_{2k} \\\\\n\\vdots & \\vdots & \\ddots & \\vdots \\\\\nx_{T1} & x_{T2} & \\dots & x_{Tk}\n\\end{pmatrix}\\]\n\nZero Conditional Mean\n\n\\[E(u_t|X)=0\\]\nSo that \\(X\\) is strictly Exogenous (across all possible times)"
   }
 ]

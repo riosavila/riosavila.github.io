@@ -149,7 +149,24 @@ $$\text{ Long:}\frac{\partial y_t}{\partial z} = \frac{\gamma_0 + \gamma_1}{1-\r
 # Assumptions
 At least for M1 and M2
 
-## Assumptions
+## Assumptions: M1 and M2
 
-1. Linear in Parameters
+1. Linear in Parameters: Same old, same old, $y_t = \beta_0 + \beta_1 x_{1t} + \dots + \beta_k x_{kt} + u_t$
 
+2. No Perfect Collinearity: Also Same old, same old 
+
+## 
+### The Stronger ones
+
+$$X=\begin{pmatrix}
+x_{11} & x_{12} & \dots & x_{1k} \\
+x_{21} & x_{22} & \dots & x_{2k} \\
+\vdots & \vdots & \ddots & \vdots \\
+x_{T1} & x_{T2} & \dots & x_{Tk} 
+\end{pmatrix}$$
+
+3. Zero Conditional Mean
+
+$$E(u_t|X)=0$$
+
+So that $X$ is strictly Exogenous (across all possible times)
