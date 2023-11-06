@@ -74,8 +74,8 @@ When there is need to attend a class online, and you have requested to attend on
 
    [**Advanced Panel Data Methods**](11_advpanel.qmd)
 
-#### [HomeWork 3](homework_3.qmd) 
-#### Due Date November 22
+#### [HomeWork 3] [Github](https://classroom.github.com/a/C03cUzue)
+#### Due Date November 29 at 1pm
 
 ## Part IV: Time Series
 

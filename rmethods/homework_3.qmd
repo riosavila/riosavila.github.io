@@ -15,7 +15,10 @@ Consider the dataset `labsup` (available using `frause`). This dataset has infor
 
 To do this, estimate a model of the form:
 
-$$hours=b_0 + b_1 kids + b_2 educ + b_3 age + b_4 age^2 + b_5 hispanic + b_6 black+ b_7 nonmomi + u$${#eq-eq1}
+$$\begin{aligned}
+hours &=b_0 + b_1 kids + b_2 educ + b_3 age + b_4 age^2 \\
+ &+ b_5 hispanic + b_6 black+ b_7 nonmomi + u
+\end{aligned}$${#eq-eq1}
 
 (see variable description in the datafile)
 
@@ -52,7 +55,10 @@ See datafile for variable description.
 
 Q3-1. (10pts) Estimate a model of the form:
 
-$$totfatrte = b_0 + b_1 \mathbb{1}(seatbealt=1) + b_2 \mathbb{1}(seatbealt=2) + b_3 minage + b_3 zerotol + b_4 unem + b_5 perc14_24 + b_6 vehicmiles + e$${#eq-eq2}
+$$\begin{aligned}
+totfatrte &= b_0 + b_1 \mathbb{1}(seatbealt=1) + b_2 \mathbb{1}(seatbealt=2) + b_3 minage  \\
+& + b_4 zerotol + b_5 unem + b_6 perc14\_24 + b_7 vehicmiles + e
+\end{aligned}$${#eq-eq2}
 
 And interpret the results. is there any effect that seems unexpected? Explain why this may be the case. 
 

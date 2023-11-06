@@ -149,8 +149,18 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="homework_3.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#part-i-instrumental-variables-40pts" id="toc-part-i-instrumental-variables-40pts" class="nav-link active" data-scroll-target="#part-i-instrumental-variables-40pts">Part I: Instrumental Variables (40pts)</a>
+  <ul class="collapse">
+  <li><a href="#part-ii-mle-and-nonlinear-models-30pts" id="toc-part-ii-mle-and-nonlinear-models-30pts" class="nav-link" data-scroll-target="#part-ii-mle-and-nonlinear-models-30pts">Part II: MLE and Nonlinear models (30pts)</a></li>
+  <li><a href="#part-iii-panel-data-30pts" id="toc-part-iii-panel-data-30pts" class="nav-link" data-scroll-target="#part-iii-panel-data-30pts">Part III: Panel data (30pts)</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="homework_3.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -179,10 +189,14 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Part I: Instrumental Variables (40pts)</p>
+<section id="part-i-instrumental-variables-40pts" class="level1">
+<h1>Part I: Instrumental Variables (40pts)</h1>
 <p>Consider the dataset <code>labsup</code> (available using <code>frause</code>). This dataset has information on the number of hours worked per week, hourly wage, and years of education for a sample balck and hispanic women. The goal is to determine the effect of an additional child has on the number of hours worked per week.</p>
 <p>To do this, estimate a model of the form:</p>
-<p><span id="eq-eq1"><span class="math display">\[hours=b_0 + b_1 kids + b_2 educ + b_3 age + b_4 age^2 + b_5 hispanic + b_6 black+ b_7 nonmomi + u \tag{1}\]</span></span></p>
+<p><span id="eq-eq1"><span class="math display">\[\begin{aligned}
+hours &amp;=b_0 + b_1 kids + b_2 educ + b_3 age + b_4 age^2 \\
+&amp;+ b_5 hispanic + b_6 black+ b_7 nonmomi + u
+\end{aligned} \tag{1}\]</span></span></p>
 <p>(see variable description in the datafile)</p>
 <p>Q1-1. (10pts) Estimate the model using OLS. What is the effect of an additional child on the number of hours worked per week? Is this effect statistically significant? What about the rest of the variables?</p>
 <p>Q1-2. (10pts) It is believed that Number of childrens may be correlated with the model error (endogenous). Explain why this may be the case. (You can consult the <a href="https://www.jstor.org/stable/116844">original</a> paper)</p>
@@ -192,8 +206,8 @@ ul.task-list li input[type="checkbox"] {
 <li>How does the effect of kids on Hours worked change when using the different IV’s. Are there any differences?</li>
 <li>Based on all specifications, is there any evidence that the number of children is endogenous?</li>
 </ol>
-<p>extra (5pts): Should be worry about overidentification here? why? Test for it.</p>
-<p>Part II: MLE and Nonlinear models (30pts)</p>
+<section id="part-ii-mle-and-nonlinear-models-30pts" class="level2">
+<h2 class="anchored" data-anchor-id="part-ii-mle-and-nonlinear-models-30pts">Part II: MLE and Nonlinear models (30pts)</h2>
 <p>Consider the dataset <code>smoke</code> (available using <code>frause</code>). This dataset has information on few demographic characteristics, cigarate prices, income, as well as number of cigarates smoked per day.</p>
 <p>In this case, “Cigarates smoked per day” is a kind of limited dependent variable, because not everyone will smoke, and the number of cigarates people smoke is an integer. Under this considerations estimate the following:</p>
 <p>Q2-1. (10pts) Estimate a Linear probability model (LPM) and probit model, analyzing the probability of smoking as function of demographics, log of income and log of prices. Analyze the results and compare the two models (magnitudes of the effects). What would you say the impact of restaurant smoking bans is on the probability of smoking?</p>
@@ -202,11 +216,16 @@ ul.task-list li input[type="checkbox"] {
 <p>Note: For the Tobit model, you can use the <code>tobit, ll(0)</code>, and will need to use margins, <code>margins, dydx(*) ystar(0,.)</code> to get the marginal effects that are comparable across models.</p>
 </blockquote>
 <p>Q2-3. (10pts) You are also asked to use the Tobit results to analyze the probability of smoking. To do this, you will need to use the marginal effects from the Tobit model <code>margins, dydx(*) pr(0,.)</code>. Compare the results of this exercise with the results from the LPM and probit models. Would you reach the same conclusions? if not, what are the implications for the tobit assumptions of a tobit model?</p>
-<p>Part III: Panel data (30pts)</p>
+</section>
+<section id="part-iii-panel-data-30pts" class="level2">
+<h2 class="anchored" data-anchor-id="part-iii-panel-data-30pts">Part III: Panel data (30pts)</h2>
 <p>Consider the dataset <code>driving</code> (available using <code>frause</code>). This dataset has information at the state level, from 1980 to 2004, on statistics regarding traffic accidents, fatalities, and laws.</p>
 <p>See datafile for variable description.</p>
 <p>Q3-1. (10pts) Estimate a model of the form:</p>
-<p><span id="eq-eq2"><span class="math display">\[totfatrte = b_0 + b_1 \mathbb{1}(seatbealt=1) + b_2 \mathbb{1}(seatbealt=2) + b_3 minage + b_3 zerotol + b_4 unem + b_5 perc14_24 + b_6 vehicmiles + e \tag{2}\]</span></span></p>
+<p><span id="eq-eq2"><span class="math display">\[\begin{aligned}
+totfatrte &amp;= b_0 + b_1 \mathbb{1}(seatbealt=1) + b_2 \mathbb{1}(seatbealt=2) + b_3 minage  \\
+&amp; + b_4 zerotol + b_5 unem + b_6 perc14\_24 + b_7 vehicmiles + e
+\end{aligned} \tag{2}\]</span></span></p>
 <p>And interpret the results. is there any effect that seems unexpected? Explain why this may be the case.</p>
 <p>Q3-2. (5pts) One of the reasons one may be finding unexpected results is because of unobserved heterogeneity across states. Can you explain what kind of factors are there that could be related to both accidents and the laws? (think about the political process of passing laws)</p>
 <p>Q3-3. (10pts) To control for unobserved heterogeneity, estimate three models:</p>
@@ -217,6 +236,8 @@ ul.task-list li input[type="checkbox"] {
 <p>Q3-4. (5pts) Using the results from the Correlated Random effect model, test for which of the models is more appropriate, between Random Effects and Fixed effects. What do you conclude?</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
