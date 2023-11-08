@@ -6136,7 +6136,7 @@
     "href": "rmethods/12_timeseries.html#rational-distributed-lag-model-rdl",
     "title": "Times Series Part-I",
     "section": "4: Rational Distributed Lag model (RDL)",
-    "text": "4: Rational Distributed Lag model (RDL)\n\nBecause IDL imposes strong assumptions on coefficients, we can relax them by allowing for lags. This is called the RDL model. \\[y_t = a_0 + \\gamma_0 z_t + \\gamma_1 z_t  +\\delta y_{t-1} + e_t- \\rho e_{t-1}\\]\nWhich has the following short and long effects:\n\n\\[\\text{ Short:}\\frac{\\partial y_t}{\\partial z_t} = \\gamma_0  \\] \\[\\text{ Short:}\\frac{\\partial y_t}{\\partial z_{t-k}} = \\rho^{k-1}(\\rho \\gamma_0 + \\gamma_1) \\] \\[\\text{ Long:}\\frac{\\partial y_t}{\\partial z} = \\frac{\\gamma_0 + \\gamma_1}{1-\\rho}\\]"
+    "text": "4: Rational Distributed Lag model (RDL)\n\nBecause IDL imposes strong assumptions on coefficients, we can relax them by allowing for lags. This is called the RDL model. \\[y_t = a_0 + \\gamma_0 z_t + \\gamma_1 z_t  +\\delta y_{t-1} + e_t- \\rho e_{t-1}\\]\nWhich has the following short and long effects:\n\n\\[\\text{ Short:}\\frac{\\partial y_t}{\\partial z_t} = \\gamma_0  \\] \\[\\text{ Short:}\\frac{\\partial y_t}{\\partial z_{t-k}} = \\rho^{k-1}(\\rho \\gamma_0 + \\gamma_1) \\] \\[\\text{ Long:}\\frac{\\partial y_t}{\\partial z} = \\frac{\\gamma_0 + \\gamma_1}{1-\\rho}\n\\]"
   },
   {
     "objectID": "rmethods/12_timeseries.html#assumptions-1",
@@ -6150,14 +6150,14 @@
     "href": "rmethods/12_timeseries.html#assumptions-m1-and-m2",
     "title": "Times Series Part-I",
     "section": "Assumptions: M1 and M2",
-    "text": "Assumptions: M1 and M2\n\nLinear in Parameters: Same old, same old, \\(y_t = \\beta_0 + \\beta_1 x_{1t} + \\dots + \\beta_k x_{kt} + u_t\\)\nNo Perfect Collinearity: Also Same old, same old"
+    "text": "Assumptions: M1 and M2\nA1. Linear in Parameters: Same old, same old, \\(y_t = \\beta_0 + \\beta_1 x_{1t} + \\dots + \\beta_k x_{kt} + u_t\\)\nA2. No Perfect Collinearity: Also Same old, same old"
   },
   {
     "objectID": "rmethods/12_timeseries.html#section-3",
     "href": "rmethods/12_timeseries.html#section-3",
     "title": "Times Series Part-I",
     "section": "",
-    "text": "The Stronger ones\n\\[X=\\begin{pmatrix}\nx_{11} & x_{12} & \\dots & x_{1k} \\\\\nx_{21} & x_{22} & \\dots & x_{2k} \\\\\n\\vdots & \\vdots & \\ddots & \\vdots \\\\\nx_{T1} & x_{T2} & \\dots & x_{Tk}\n\\end{pmatrix}\\]\n\nZero Conditional Mean\n\n\\[E(u_t|X)=0\\]\nSo that \\(X\\) is strictly Exogenous (across all possible times)"
+    "text": "The Stronger ones\n\\[X=\\begin{pmatrix}\nx_{11} & x_{12} & \\dots & x_{1k} \\\\\nx_{21} & x_{22} & \\dots & x_{2k} \\\\\n\\vdots & \\vdots & \\ddots & \\vdots \\\\\nx_{T1} & x_{T2} & \\dots & x_{Tk}\n\\end{pmatrix}\n\\]\nA3. Zero Conditional Mean\n\\[E(u_t|X)=0\n\\]\nSo that \\(X\\) is strictly Exogenous (across all possible times).\nNot only \\(x_t\\) should not be affected by \\(u_t\\), but neither should \\(x_{t-1}\\) nor \\(x_{t+1}\\)\nA1-A3 will guarantee that OLS is unbiased."
   },
   {
     "objectID": "rmethods/8_iv2sls.html",
@@ -6186,5 +6186,54 @@
     "title": "Homework 3",
     "section": "",
     "text": "Consider the dataset driving (available using frause). This dataset has information at the state level, from 1980 to 2004, on statistics regarding traffic accidents, fatalities, and laws.\nSee datafile for variable description.\nQ3-1. (10pts) Estimate a model of the form:\n\\[\\begin{aligned}\ntotfatrte &= b_0 + b_1 \\mathbb{1}(seatbealt=1) + b_2 \\mathbb{1}(seatbealt=2) + b_3 minage  \\\\\n& + b_4 zerotol + b_5 unem + b_6 perc14\\_24 + b_7 vehicmiles + e\n\\end{aligned} \\tag{2}\\]\nAnd interpret the results. is there any effect that seems unexpected? Explain why this may be the case.\nQ3-2. (5pts) One of the reasons one may be finding unexpected results is because of unobserved heterogeneity across states. Can you explain what kind of factors are there that could be related to both accidents and the laws? (think about the political process of passing laws)\nQ3-3. (10pts) To control for unobserved heterogeneity, estimate three models:\n- Random effect model\n- Fixed effect model\n- Correlated Random effect model\nHow do the results from the Random effect model and Fixed effect model compare to each other? what about compared to Equation 2?\nQ3-4. (5pts) Using the results from the Correlated Random effect model, test for which of the models is more appropriate, between Random Effects and Fixed effects. What do you conclude?"
+  },
+  {
+    "objectID": "rmethods/12_timeseries.html#what-about-std-errors",
+    "href": "rmethods/12_timeseries.html#what-about-std-errors",
+    "title": "Times Series Part-I",
+    "section": "What about Std Errors?",
+    "text": "What about Std Errors?\nA4: Strong Homoskedasticity\n\\[Var(u_t|X)=\\sigma^2\n\\]\nA5: No Serial Correlation (Correlation across time of the errors)\n\\[Corr(u_t,u_s|X)=0 \\text{ for all } t\\neq s\n\\]\nAlso difficult to fulfill, because unobserved may have inertia, and depend on past values."
+  },
+  {
+    "objectID": "rmethods/12_timeseries.html#section-4",
+    "href": "rmethods/12_timeseries.html#section-4",
+    "title": "Times Series Part-I",
+    "section": "",
+    "text": "Nevertheless, A1-A5: Standard errors can be estimated using the usual formula:\n\\[\\begin{aligned}\n\\hat{Var}(\\hat{\\beta}) &= \\hat{\\sigma}^2(X'X)^{-1} \\\\\n\\hat{Var}(\\hat{\\beta_k}) &= \\frac{\\hat{\\sigma}^2}{SST_k(1-R^2_k)} \\\\\n\\hat \\sigma^2 &= \\frac{1}{T-k-1}\\sum_{t=1}^T \\hat{u}_t^2\n\\end{aligned}\n\\]\nWhich are BLUE! (Best Linear Unbiased Estimators)\nA6: Normality, The \\(\\beta\\)’s are normally distributed, and F-tests and t-tests are valid."
+  },
+  {
+    "objectID": "rmethods/12_timeseries.html#section-5",
+    "href": "rmethods/12_timeseries.html#section-5",
+    "title": "Times Series Part-I",
+    "section": "",
+    "text": "A6: Normality"
+  },
+  {
+    "objectID": "rmethods/12_timeseries.html#example-the-effet-of-inflation-and-deficit-on-interest-rates",
+    "href": "rmethods/12_timeseries.html#example-the-effet-of-inflation-and-deficit-on-interest-rates",
+    "title": "Times Series Part-I",
+    "section": "Example: The effet of inflation and Deficit on Interest rates",
+    "text": "Example: The effet of inflation and Deficit on Interest rates\nModel: \\(i_t = \\beta_0 + \\beta_1 inf_t + \\beta_2 def_t + u_t\\)\nA1: \\(\\checkmark\\) (but questionable)\nA2: \\(\\checkmark\\) (almost never a problem)\nA3: NO! Deficits and inflation today may affect adjustments in the future (\\(u_{t+1}\\)), Similarly, \\(u_t\\) may have to be adjusted in the future using Deficits and inflation.\nA4: Perhaps? Usually there is a direct relationship between deficit and uncertainty, which will generate heteroskedasticity.\nA5: NO! There could be many things in \\(u_t\\) that are correlated across time. (taxes?)\nA6: NO…the errors are almost never normal\n\nfrause intdef, clear\nreg i3 inf def\n\n\n\n\n\n      Source |       SS           df       MS      Number of obs   =        56\n-------------+----------------------------------   F(2, 53)        =     40.09\n       Model |  272.420338         2  136.210169   Prob &gt; F        =    0.0000\n    Residual |  180.054275        53  3.39725047   R-squared       =    0.6021\n-------------+----------------------------------   Adj R-squared   =    0.5871\n       Total |  452.474612        55  8.22681113   Root MSE        =    1.8432\n\n------------------------------------------------------------------------------\n          i3 | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         inf |   .6058659   .0821348     7.38   0.000     .4411243    .7706074\n         def |   .5130579   .1183841     4.33   0.000     .2756095    .7505062\n       _cons |   1.733266    .431967     4.01   0.000     .8668497    2.599682\n------------------------------------------------------------------------------"
+  },
+  {
+    "objectID": "rmethods/12_timeseries.html#event-studies",
+    "href": "rmethods/12_timeseries.html#event-studies",
+    "title": "Times Series Part-I",
+    "section": "1: Event Studies",
+    "text": "1: Event Studies\n\nWe can use Dummies to represent Transitory shocks (events) on the outcome\n\nDummies for the impact of Covid (if we assume effect was transitory), 0 for all periods except for months we were at home.\n\nOr use Dummies to capture permanent changes in the outcome\n\nDummies for ChatGPT. 0 before the introduction, 1 after\n\nPossible to use Lags of Dummies to see the dynamics of the impact.\n\nWith Time series may not be as useful, because its easy to mix event effects with trends.\n\n\n\\[FRate_t = 98.7 + 0.08 PersonalExemption_t - 24.24 WW2 - 31.6 Pill_t+ e_t\\]\n\n\\(Pill_t\\), \\(WW2_t\\) are dummies for the introduction of the pill (permanent) and WW2 (transitory) effects on Fertility rate."
+  },
+  {
+    "objectID": "rmethods/12_timeseries.html#logs-and-growth-models",
+    "href": "rmethods/12_timeseries.html#logs-and-growth-models",
+    "title": "Times Series Part-I",
+    "section": "2: Logs and Growth models",
+    "text": "2: Logs and Growth models"
+  },
+  {
+    "objectID": "rmethods/12_timeseries.html#trends-and-seasonality",
+    "href": "rmethods/12_timeseries.html#trends-and-seasonality",
+    "title": "Times Series Part-I",
+    "section": "3: Trends and Seasonality",
+    "text": "3: Trends and Seasonality"
   }
 ]
