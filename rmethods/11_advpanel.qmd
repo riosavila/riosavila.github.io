@@ -12,7 +12,6 @@ format:
     code-overflow: wrap
     echo: true
     css: styles.css 
-    chalkboard: true  
 ---
 
 ## The old way (last class)
