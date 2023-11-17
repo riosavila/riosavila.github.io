@@ -87,3 +87,39 @@ As with many other skills, the best way to learn is to simply work with the pack
 ## Additional Information:
 
 All students are responsible for knowing Bard’s Policy on Academic Honesty as published in Bard College Student Handbook.
+
+## Syllabus:
+
+1. Introduction: What is Econometrics?
+
+Part I: Basic tools
+
+2. The Simple Regression Model
+
+3. Multiple Regression Analysis: Estimation
+   
+4. MRA: Inference and Asymptotics
+
+Part II: Addressing Problems with MRA
+
+5. MRA: Scaling, functional forms, Goodness of Fit, and Qualitative Information
+
+6. Heteroskedasticity
+
+7. Further Problems: Functional form, Missing variables, measurement errors, missing data
+
+8. Instrumental Variables and 2SLS
+
+9. Limited Dep Variables
+
+Part III: Panel Data Methods
+
+10. Pool Cross Section and Panel Data 
+
+11. Advanced Panel Data Methods
+
+Part IV: Time Series
+
+12. Basics of Regression analysis with time series data
+
+13. Advanced TSD Problems
