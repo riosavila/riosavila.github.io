@@ -274,8 +274,25 @@ $$log(invpc_t) = -0.55 + 1.24 log(price) + u_t$$
 
 - If we estimate this model, we find a very strong relationship, perhaps because of common trends. Adding a trend, however, may change the results.
 
-$$log(invpc_t) = -0.55 + 1.24 log(price) +  u_t$$
+$$log(invpc_t) = -0.913 -.381 log(price) + 0.0098 t +  u_t$$
 
-Talk similarly about Seasonality (seasonal Dummies)
+## 3: Trends and Seasonality
 
-Talk about R2 and Demean R2
+- Seasonality can also be considered as a trend. 
+
+- Seasonality is the presence of regular patterns in the data that repeat over fixed periods of time.
+
+- To account for them, one must use Dummies for each regular period (month, quarter, year, etc.)
+
+  - same principles of dummy variable trap still apply.
+
+## 3: Trends and Seasonality: R2
+
+- The $R^2$ of a model that has trends or seasonality will be higher than usual.
+
+- This is because the model is being "explained" the trend/seasonality, not the model specification
+
+- To correct for this, one can start by demeaning-deseasonalizing the data, before estimating the model. And the $R^2$ could be estimated from that data.
+
+# Done!
+Next class, advanced models for time series data.

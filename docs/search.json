@@ -6220,20 +6220,34 @@
     "href": "rmethods/12_timeseries.html#event-studies",
     "title": "Times Series Part-I",
     "section": "1: Event Studies",
-    "text": "1: Event Studies\n\nWe can use Dummies to represent Transitory shocks (events) on the outcome\n\nDummies for the impact of Covid (if we assume effect was transitory), 0 for all periods except for months we were at home.\n\nOr use Dummies to capture permanent changes in the outcome\n\nDummies for ChatGPT. 0 before the introduction, 1 after\n\nPossible to use Lags of Dummies to see the dynamics of the impact.\n\nWith Time series may not be as useful, because its easy to mix event effects with trends.\n\n\n\\[FRate_t = 98.7 + 0.08 PersonalExemption_t - 24.24 WW2 - 31.6 Pill_t+ e_t\\]\n\n\\(Pill_t\\), \\(WW2_t\\) are dummies for the introduction of the pill (permanent) and WW2 (transitory) effects on Fertility rate."
+    "text": "1: Event Studies\n\nWe can use Dummies to represent Transitory shocks (events) on the outcome\n\nDummies for the impact of Covid (if we assume effect was transitory), 0 for all periods except for months we were at home.\n\nOr use Dummies to capture permanent changes in the outcome\n\nDummies for ChatGPT. 0 before the introduction, 1 after\n\nPossible to use Lags of Dummies to see the dynamics of the impact.\n\nWith Time series may not be as useful, because its easy to mix event effects with trends.\n\n\n\\[FRate_t = 98.7 + 0.08 PE_t - 24.24 WW2 - 31.6 Pill_t+ e_t\\]\n\n\\(Pill_t\\), \\(WW2_t\\) are dummies for the introduction of the pill (permanent) and WW2 (transitory) effects on Fertility rate."
   },
   {
     "objectID": "rmethods/12_timeseries.html#logs-and-growth-models",
     "href": "rmethods/12_timeseries.html#logs-and-growth-models",
     "title": "Times Series Part-I",
     "section": "2: Logs and Growth models",
-    "text": "2: Logs and Growth models"
+    "text": "2: Logs and Growth models\n\nVery Similar to what was done in Cross Sectional Models.\nUsing Logs of the Dep variable changes the interpretation of the coefficients.\n\n\\[\\Delta log(x)\\simeq \\%\\Delta x\\]\n\nBecause of that, you can use “log-models” and a trend to estimate the growth rates.\n\nreg log_gdp year\nThe coefficient of year should give you the average growth rate of GDP.\n\nBut the model can also be used in levels to identify trends."
   },
   {
     "objectID": "rmethods/12_timeseries.html#trends-and-seasonality",
     "href": "rmethods/12_timeseries.html#trends-and-seasonality",
     "title": "Times Series Part-I",
     "section": "3: Trends and Seasonality",
-    "text": "3: Trends and Seasonality"
+    "text": "3: Trends and Seasonality\n\nTrends are very common in time series data.\n\nBecause of the “inertia” of the data, its very common to see variables sharing common trends even if they are completely unrelated. (GDP and age)\n\nIgnoring this may cause problems, as one may identify spurious relationships.\nConsider the following model (investment on housing, and housing prices):\n\n\\[log(invpc_t) = -0.55 + 1.24 log(price) + u_t\\]\n\nIf we estimate this model, we find a very strong relationship, perhaps because of common trends. Adding a trend, however, may change the results.\n\n\\[log(invpc_t) = -0.913 -.381 log(price) + 0.0098 t +  u_t\\]"
+  },
+  {
+    "objectID": "rmethods/12_timeseries.html#trends-and-seasonality-1",
+    "href": "rmethods/12_timeseries.html#trends-and-seasonality-1",
+    "title": "Times Series Part-I",
+    "section": "3: Trends and Seasonality",
+    "text": "3: Trends and Seasonality\n\nSeasonality can also be considered as a trend.\nSeasonality is the presence of regular patterns in the data that repeat over fixed periods of time.\nTo account for them, one must use Dummies for each regular period (month, quarter, year, etc.)\n\nsame principles of dummy variable trap still apply."
+  },
+  {
+    "objectID": "rmethods/12_timeseries.html#trends-and-seasonality-r2",
+    "href": "rmethods/12_timeseries.html#trends-and-seasonality-r2",
+    "title": "Times Series Part-I",
+    "section": "3: Trends and Seasonality: R2",
+    "text": "3: Trends and Seasonality: R2\n\nThe \\(R^2\\) of a model that has trends or seasonality will be higher than usual.\nThis is because the model is being “explained” the trend/seasonality, not the model specification\nTo correct for this, one can start by demeaning-deseasonalizing the data, before estimating the model. And the \\(R^2\\) could be estimated from that data."
   }
 ]
