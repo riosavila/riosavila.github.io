@@ -240,7 +240,7 @@ reg i3 inf def
 - Or use Dummies to capture permanent changes in the outcome
   - Dummies for ChatGPT. 0 before the introduction, 1 after
 - Possible to use Lags of Dummies to see the dynamics of the impact.
-  - With Time series may not be as useful, because its easy to mix event effects with trends. 
+  - With Time series may not be as useful, because its easy to mix event effects with trends, although one could also directly control for trends. 
 
 $$FRate_t = 98.7 + 0.08 PE_t - 24.24 WW2 - 31.6 Pill_t+ e_t$$
 
@@ -262,20 +262,69 @@ The coefficient of `year` should give you the average growth rate of GDP.
 
 - But the model can also be used in levels to identify trends.
 
-## 3: Trends and Seasonality
+## 3: Trends and Seasonality{.scrollable}
 
 - Trends are very common in time series data.
   - Because of the "inertia" of the data, its very common to see variables sharing common trends even if they are completely unrelated. (GDP and age)
-- Ignoring this may cause problems, as one may identify spurious relationships.
+- Ignoring this may cause problems, as one may identify spurious relationships. (things that look to have significant effects, even tho they are not related)
   
 - Consider the following model (investment on housing, and housing prices):
 
-$$log(invpc_t) = -0.55 + 1.24 log(price) + u_t$$
+```{stata}
+*| classes: larger
+*| echo: true
+qui:frause hseinv,clear
+reg  linvpc lprice
+```
 
 - If we estimate this model, we find a very strong relationship, perhaps because of common trends. Adding a trend, however, may change the results.
 
-$$log(invpc_t) = -0.55 + 1.24 log(price) +  u_t$$
+$$E(log(invpc_t)|x) = -20.04 -0.38 log(price) + 0.009 year $$
 
-Talk similarly about Seasonality (seasonal Dummies)
 
-Talk about R2 and Demean R2
+```{stata}
+*| classes: larger
+*| echo: true
+
+reg linvpc lprice  year
+```
+
+## 3: Trends and Seasonality {.scrollable}
+
+- Just as time series are characterized by trends, they are also characterized by seasonality.
+  - Seasonality is the presence of regular patterns in the data that repeat over fixed periods of time.
+  - Seasonality is a form of "deterministic" variation, because it is predictable.
+- For example, If you look at Public expenditure, you will see that its higher the last year that a president is in office. (election year)
+- Similarly, you will see higher expenditure in December, because of Christmas.
+- As with trends, this may cause spurious relations, thus, its recommended to control for seasonality adding dummies.
+  - quarter, month, day of the week, year after election, etc.
+
+- As simple as adding dummies for each month, or quarter, etc.
+
+## 4: $R^2$ and Spurious Regressions
+
+- One of the consequences of spurious regressions is that the $R^2$ will be inflated. (caputred by the common trend or seasonality
+- Even if we add trends or seaonalities, the default $R^2$ will be too large. (Because it still describes ALL variation)
+
+- A better approach to understand the true explanatory power of the model is to use an **$R^2$** that adjusts for trends and seasonality.
+
+$$y_t = \beta_0 + \beta_1 x_{1t} + \beta_2 x_{2t} + \theta \times t + \sum \gamma_k \times D_k + u_t$$
+
+Where $D_k$ are dummies for seasonality, and $\theta \times t$ is a trend. 
+
+## 4: $R^2$ and Spurious Regressions
+
+- To estimate the adjusted $R^2$ it may be better to use de-trended and de-seasonalized data.
+
+$$\tilde w_t = w_t - E(w_t| t , D_1, D_2, \dots, D_k) \forall w \in {y, x_1, x_2}$$
+
+- Estimate model
+
+$$\tilde y_t = \beta_1 \tilde x_{1t} + \beta_2 \tilde x_{2t} + u_t$$
+
+- Calculate the $R^2$ using the "correct" $SST$ and $SSE$ using the demeaned data.
+
+$$aR^2 = 1-\frac{\sum \hat u^2_t}{\sum \tilde y^2_t}$$
+
+# Thats all for today!
+Next week, Advanced Time series

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-html/tabby.min.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.251">
+  <meta name="generator" content="quarto-1.4.455">
 
   <meta name="author" content="Fernando Rios-Avila">
   <title>Econometrics MSC Levy - Times Series Part-II</title>
@@ -29,6 +29,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="styles.css">
@@ -323,6 +388,9 @@
       margin-right: 0; 
     }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+  
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -341,13 +409,522 @@ Fernando Rios-Avila
 </div>
 
 </section>
-<section class="slide level2">
+<section id="defending-the-sacred-time-line" class="slide level2">
+<h2>Defending the Sacred time line</h2>
 
+<img data-src="images/paste-13.png" class="r-stretch"></section>
+<section id="last-week" class="slide level2">
+<h2>Last week</h2>
+<ul>
+<li>What we learned last week a few methodologies for analyzing time series data.
+<ul>
+<li>Static model, dynamic models, use of trends and seasonality, etc.</li>
+</ul></li>
+<li>All those models, however, were based on very strong assumptions.
+<ul>
+<li>Strict Exogeneity, strict Homoskedasticity, and no serial correlation are difficult to defend.</li>
+<li>Statistical inference validity depends on normality assumption of the error.</li>
+</ul></li>
+<li>Can we relax this assumptions?
+<ul>
+<li>Yes, but we need to impose additional assumtions to the data</li>
+</ul></li>
+</ul>
+</section>
+<section id="this-week" class="slide level2">
+<h2>This week</h2>
+<ul>
+<li><p>One way to relax the assumption of Strict Exogeneiety is assume time series are stationary and weakly dependent.</p>
+<ul>
+<li>With this assumptions, LLN and CLT will hold for TS model.</li>
+</ul></li>
+<li><p>What do these two assumptions mean? (stationary and weakly dependent?)</p></li>
+<li><p>Namely, these assumptions impose restrictions on how data SHOULD behaive, so we can learn something from the data.</p>
+<ul>
+<li>This means that what we observe in the data are based on data that has stable patterns. Otherwise, if they are unpredictable, we cannot learn anything. (This is the idea of stationarity)</li>
+<li>At the same time, data cannot depend on its own past <strong>too much</strong>. So if we look at two periods that are farther apart, its like they are independent for most practical purposes.</li>
+</ul></li>
+</ul>
+</section>
+<section id="can-you-recognized-this-type-of-data" class="slide level2">
+<h2>Can you recognized this type of data?</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a>*| echo: false</span>
+<span id="cb1-2"><a href="#cb1-2"></a>*| output: false</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">set</span> <span class="kw">obs</span> 250</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">set</span> <span class="dv">seed</span> 1321</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">gen</span> t = <span class="dt">_n</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="kw">tsset</span> t</span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="kw">gen</span> y1 =0</span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="kw">gen</span> y2 =0</span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="kw">gen</span> <span class="fu">r</span> = rnormal()</span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="kw">set</span> <span class="dv">scheme</span> white2</span>
+<span id="cb1-11"><a href="#cb1-11"></a>color_style tableau</span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="kw">replace</span> y1 =<span class="ot">l</span>.y1 + <span class="fu">r</span> <span class="kw">if</span> t&gt;1</span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="kw">replace</span> y2 =0.8*<span class="ot">l</span>.y2 + <span class="fu">r</span> <span class="kw">if</span> t&gt;1</span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="kw">scatter</span> y1 t, <span class="bn">title</span>(<span class="st">"Non-Stationary"</span>) <span class="bn">xtitle</span>(<span class="st">"time"</span>) <span class="bn">name</span>(fig1, <span class="kw">replace</span>) <span class="kw">connect</span>(<span class="ot">l</span>)</span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="kw">scatter</span> y2 t, <span class="bn">title</span>(<span class="st">"Stationary"</span>) <span class="bn">xtitle</span>(<span class="st">"time"</span>) <span class="bn">name</span>(fig2, <span class="kw">replace</span>) <span class="kw">connect</span>(<span class="ot">l</span>)</span>
+<span id="cb1-16"><a href="#cb1-16"></a><span class="kw">graph</span> <span class="bn">combine</span> fig1 fig2, <span class="bn">ysize</span>(6) <span class="bn">xsize</span>(12) <span class="bn">ycommon</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig13_1.png, <span class="kw">replace</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a></span>
+<span id="cb1-19"><a href="#cb1-19"></a></span>
+<span id="cb1-20"><a href="#cb1-20"></a><span class="kw">two</span> <span class="kw">kdensity</span> y1 <span class="kw">if</span> t&lt;=125 ||  <span class="kw">kdensity</span> y1 <span class="kw">if</span> t&gt;125, <span class="bn">title</span>(<span class="st">"Non-Stationary"</span>) <span class="bn">name</span>(fig1, <span class="kw">replace</span>) <span class="bn">legend</span>(<span class="kw">off</span>)</span>
+<span id="cb1-21"><a href="#cb1-21"></a><span class="kw">two</span> <span class="kw">kdensity</span> y2 <span class="kw">if</span> t&lt;=125 ||  <span class="kw">kdensity</span> y2 <span class="kw">if</span> t&gt;125, <span class="bn">title</span>(<span class="st">"Stationary"</span>) <span class="bn">name</span>(fig2, <span class="kw">replace</span>) <span class="bn">legend</span>(<span class="kw">off</span>)</span>
+<span id="cb1-22"><a href="#cb1-22"></a><span class="kw">graph</span> <span class="bn">combine</span> fig1 fig2, <span class="bn">ysize</span>(6) <span class="bn">xsize</span>(12) </span>
+<span id="cb1-23"><a href="#cb1-23"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig13_2.png, <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Trends</a></li><li><a href="#tabset-1-2">Density</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<p><img data-src="images/fig13_1.png"></p>
+</div>
+<div id="tabset-1-2">
+<p><img data-src="images/fig13_2.png"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="stationary-process" class="slide level2">
+<h2>Stationary Process</h2>
+<ul>
+<li>A Stationary process is one where the characteristics of the distribution remains Stable across time.
+<ul>
+<li>So we can learn something about it</li>
+</ul></li>
+</ul>
+<p>For example consider the series <span class="math inline">\(x=[x_1,x_2,\dots,x_T]\)</span>, where <span class="math inline">\(T\)</span> can be vary large (infinite)</p>
+<ul>
+<li>If the series is stationary, then:</li>
+</ul>
+<p><span class="math display">\[f(x_t, x_{t+k}) = f(x_s, x_{s+k}) \forall s, k\]</span></p>
+<ul>
+<li><p>In other words, the distribution across time does not change. (is stable, thus stationary)</p></li>
+<li><p>Otherwise, if the distribution function changes constantly, we cannot learn about it, thus making sense of regressions would be even more difficult.</p></li>
+</ul>
+</section>
+<section id="testing-for-stationarity" class="slide level2">
+<h2>Testing for Stationarity</h2>
+<ul>
+<li><p>Testing for stationarity is not easy. (how do you test for stability of densities?)</p></li>
+<li><p>Instead, from an empirical point of view, we focus on the first 2 moments of the distribution: mean, variance and covariance.</p></li>
+</ul>
+<p>Thus:</p>
+<p>A series <span class="math inline">\(x=[x_1,x_2,\dots,x_T]\)</span> is stationary if:</p>
+<ol type="1">
+<li><span class="math inline">\(E(x_t)=E(x_s)=\mu_x\)</span>. Constant mean</li>
+<li><span class="math inline">\(E(x_t^2)&lt;\infty\)</span>. Finite variance</li>
+<li><span class="math inline">\(Var(x_t)=Var(x_s)=\sigma_x^2\)</span>. Constant variance</li>
+<li><span class="math inline">\(cov(x_t,x_{t+k})=cov(x_s,x_{s+k})\)</span>. Constant covariance</li>
+</ol>
+<p>The Series repeats itself.</p>
+</section>
+<section id="weakly-dependent-series" class="slide level2">
+<h2>Weakly Dependent Series</h2>
+<ul>
+<li><p>Dependence should be understood as a measure of how much a series depends on its own past.</p>
+<ul>
+<li>Weakly dependent series are those that depend on its own past, but not too much.</li>
+</ul></li>
+<li><p>From the technical point of view:</p>
+<ul>
+<li>If <span class="math inline">\(x_t\)</span> is weakly dependent, then <span class="math inline">\(\lim_{k\rightarrow \infty} corr(x_t,x_{t+k})=0\)</span> sufficiently fast.</li>
+</ul></li>
+<li><p>If this happens, LLN and CLT will hold for TS data.</p></li>
+<li><p>Why?</p>
+<ul>
+<li>Omiting <span class="math inline">\(x_{t+1}\)</span> would typically generate an Omitted Variable Bias.</li>
+<li>If data are weakly dependent, however, we won’t suffer from OMB</li>
+<li>This is because omitting <span class="math inline">\(x_{t+1}\)</span> is like omitting a unrelated variable.</li>
+</ul></li>
+</ul>
+<blockquote>
+<p>NOTE: Weakly dependent variables can be non-stationary. (we call them stationary around a trend)</p>
+</blockquote>
+</section>
+<section id="visualizing-weakly-dependent-vs-strongly-dependent" class="slide level2">
+<h2>Visualizing weakly dependent vs strongly dependent</h2>
+
+<img data-src="images/paste-14.png" class="r-stretch"></section>
+<section id="example-of-weakly-dependent-series" class="slide level2">
+<h2>Example of Weakly Dependent Series</h2>
+<ul>
+<li>AR(1) process: <span class="math inline">\(x_t = \rho x_{t-1} + \epsilon_t\)</span>
+<ul>
+<li>Mean in constant (not depent on time)</li>
+<li>Variance is constant (not depent on time)</li>
+<li>Covariance does not depend on time (just on lag)</li>
+<li>If <span class="math inline">\(|\rho|&lt;1\)</span>, then <span class="math inline">\(x_t\)</span> is weakly dependent.</li>
+</ul></li>
+<li>MA(1) process: <span class="math inline">\(x_t = \epsilon_t + \theta \epsilon_{t-1}\)</span>
+<ul>
+<li>Constant mean and variance.</li>
+<li>Covariance does not depend on time.</li>
+<li>Covariance bettween <span class="math inline">\(x_t\)</span> and <span class="math inline">\(x_{t+k}\)</span> is zero for <span class="math inline">\(k&gt;1\)</span>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="special-case-ar1-with-rho1" class="slide level2">
+<h2>Special Case AR(1) with <span class="math inline">\(\rho=1\)</span></h2>
+<ul>
+<li>If <span class="math inline">\(\rho=1\)</span>, we have a random walk process <span class="math inline">\(x_t = x_{t-1} + \epsilon_t\)</span></li>
+<li>This is a process that holds grudges (it remembers its past)</li>
+</ul>
+<p><span class="math display">\[x_t = x_{t=0}+e_1+e_2+\dots+e_t\]</span></p>
+<ul>
+<li>This process has constant mean (<span class="math inline">\(x_0\)</span>), but variance and covariance are not constant. With a correlation that dissapears slowly.</li>
+</ul>
+<p><span class="math display">\[Var(x_t) = t\sigma^2 \text{ and } cov(x_t,x_{t+h}) = t\sigma^2\]</span></p>
+<p><span class="math display">\[corr(x_t,x_{t+h}) = \frac{t \sigma^2}{\sqrt{t(t+h)}\sigma^2}=\sqrt{\frac{t}{t+h}}\]</span></p>
+<p><strong>Economics</strong>: With weakly dependent data, policies are transitory, with persistent data effects are longlasting.</p>
+</section>
+<section id="special-case-non-stationary-weakly-dependent" class="slide level2">
+<h2>Special Case: non-stationary weakly dependent</h2>
+<ul>
+<li>There are few cases where a series is weakly dependent but non-stationary.</li>
+</ul>
+<p><span class="math display">\[x_t = \rho x_{t-1} + \delta t + \epsilon_t\]</span></p>
+<ul>
+<li><span class="math inline">\(E(x_t)\)</span> is not constant, but this series is still weakly dependent if <span class="math inline">\(|\rho|&lt;1\)</span>.</li>
+<li>If the data is detrended, however, it becomes stationary.</li>
+</ul>
+</section>
+<section id="example-stationary-around-a-trend" class="slide level2">
+<h2>Example: Stationary around a trend</h2>
+<p><span class="math inline">\(x_t = 0.5*x_{t-1}+0.1 t + u_t\)</span></p>
+
+<img data-src="images/paste-15.png" class="r-stretch"></section>
+<section id="example-random-walks-look-with-a-drift" class="slide level2">
+<h2>Example: Random Walks look with a drift</h2>
+<p><span class="math display">\[x_t = x_{t-1} + 0.1 + \epsilon_t\]</span></p>
+<p><img data-src="images/paste-16.png"> ## How do things change: Assumptions</p>
+<p><strong>A1.</strong> Linear in Parameters (same as before), but all variables are stationary and weakly dependent.</p>
+<p><strong>A2.</strong> No Perfect Colinearity</p>
+<p><strong>A3.</strong> Zero Conditional Mean: <span class="math inline">\(E(u_t|x_t)=0\)</span> Contemporaneous exogeneity!</p>
+<p>Omitting lags of <span class="math inline">\(x_t\)</span> is not a problem, because they are weakly “independent” of <span class="math inline">\(x_t\)</span>.</p>
+<p><strong>A1-A3</strong> OLS is consistent.</p>
+<p><strong>Why does this matter??</strong></p>
+<ul>
+<li>Because, under Strict exogeneity, we cannot allow for Lags of the outcome to be included in the model.</li>
+<li>Under weak exogeneity, lags can be included.</li>
+</ul>
+</section>
+<section id="how-do-things-change-assumptions" class="slide level2">
+<h2>How do things change: Assumptions</h2>
+<p><strong>A4.</strong> Homoskedasticity: <span class="math inline">\(Var(u_t|x_t)=\sigma^2\)</span> (also we just need contemporaenous homoskedasticity)</p>
+<p><strong>A5.</strong> No Serial Correlation: <span class="math inline">\(cov(u_t,u_s|x_t)=0\)</span> for <span class="math inline">\(t\neq s\)</span></p>
+<p>These two assumptions that make “life” easier for estimating standard errors because:</p>
+<ul>
+<li>Under <strong>A1-A5</strong>, OLS estimators are asymptotically normal, and all Standard Statistics are applicable</li>
+</ul>
+</section>
+<section id="order-of-integration" class="slide level2">
+<h2>Order of Integration</h2>
+<ul>
+<li><p>As you may expect, many interesiting time series are not stationary. However, we may want to use for analysis</p>
+<ul>
+<li>to do so, we need to understand their taxonomy (in TS) so we can make them stationary.</li>
+</ul></li>
+<li><p>A series is said to be integrated of order <span class="math inline">\(d\)</span>, denoted <span class="math inline">\(I(d)\)</span>, if it can be made stationary by taking <span class="math inline">\(d\)</span> differences.</p></li>
+<li><p>A weakly dependent series is an <span class="math inline">\(I(0)\)</span> process. (is already stationary)</p></li>
+<li><p>A random walk is an <span class="math inline">\(I(1)\)</span> process. It could be made stationary by taking first differences.</p></li>
+</ul>
+<p><span class="math display">\[x_t = x_{t-1} + \epsilon_t \rightarrow \Delta x_t = \epsilon_t\]</span></p>
+<ul>
+<li>A series that is <span class="math inline">\(I(2)\)</span> would required two differences to be made stationary.</li>
+</ul>
+<p><span class="math display">\[x_t =2x_{t-1} - x_{t-2} + \epsilon_t \rightarrow \Delta^2 x_t = \epsilon_t\]</span></p>
+</section>
+<section id="unit-roots-and-spurious-regressions" class="slide level2">
+<h2>Unit roots and Spurious Regressions</h2>
+<ul>
+<li><p>If a series is <span class="math inline">\(I(1)\)</span>, it is said to have a unit root. an <span class="math inline">\(I(2)\)</span> series has two unit roots, etc.</p></li>
+<li><p>Data that are <span class="math inline">\(I(1)\)</span> tend to look like data with Trends</p>
+<ul>
+<li>If we analyze this data, we may find spurious relationships. t-stats may be high, as well as <span class="math inline">\(R^2\)</span>.</li>
+<li>This may lead to incorrect conclusions (unless other stronger assumptions are made)</li>
+<li>In this cases, using trends will not help.</li>
+</ul></li>
+</ul>
+</section>
+<section id="spurious-regressions-example" class="slide level2">
+<h2>Spurious Regressions: Example</h2>
+<p><span class="math inline">\(x_t = x_{t-1} + v_t\)</span> &amp; <span class="math inline">\(y_t = y_{t-1} + u_t\)</span></p>
+
+<img data-src="images/fig13_4.png" class="r-stretch"></section>
+<section>
+<section id="how-to-decide-if-a-series-is-i1-or-has-a-unit-root" class="title-slide slide level1 center">
+<h1>How to decide if a series is <span class="math inline">\(I(1)\)</span> or has a unit root?</h1>
+
+</section>
+<section id="naive-approach.-look-into-rho" class="slide level2">
+<h2>Naive Approach. Look into <span class="math inline">\(\rho\)</span></h2>
+<ul>
+<li>Naive approach: Look at auto correlation:
+<ul>
+<li>if <span class="math inline">\(corr(x_t,x_{t-1})&gt;0.9\)</span> then <span class="math inline">\(x_t\)</span> is highly persistent, and probably <span class="math inline">\(I(1)\)</span></li>
+<li>Differentiate data and look at auto correlation again.</li>
+</ul></li>
+</ul>
+</section>
+<section id="formal-approach-dickey-fuller-test-for-unit-root" class="slide level2">
+<h2>Formal Approach: Dickey-Fuller Test for Unit Root</h2>
+<p>Model: <span class="math inline">\(y_t = \alpha + \rho y_{t-1} + e_t\)</span> AModel: <span class="math inline">\(\Delta y_t = \alpha + \theta y_{t-1} + e_t\)</span></p>
+<ul>
+<li><span class="math inline">\(H_0: \rho=1\)</span> (has a unit root) vs <span class="math inline">\(H_1: \rho&lt;1\)</span> (is stationary)</li>
+<li><span class="math inline">\(H_0: \theta=0\)</span> (has a unit root) vs <span class="math inline">\(H_1: \theta&lt;0\)</span> (is stationary)</li>
+</ul>
+<p>Its a one tail test, however, the statistic of interest does not follow a t-distribution, but a DF distribution</p>
+<table>
+<thead>
+<tr class="header">
+<th>SL</th>
+<th>1%</th>
+<th>2.5%</th>
+<th>5%</th>
+<th>10%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>DF</td>
+<td>-3.43</td>
+<td>-3.12</td>
+<td>-2.86</td>
+<td>-2.57</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="augmented-dickey-fuller-test" class="slide level2">
+<h2>Augmented Dickey-Fuller Test</h2>
+<p>Allowing for serial correlation, and uses same critial values as before:</p>
+<p>Model: <span class="math inline">\(\Delta y_t = \alpha + \theta y_{t-1} + \lambda_1 \Delta y_{t-1} + \dots + \lambda_k \Delta y_{t-k} + e_t\)</span></p>
+<p>Same as before. But in practice the additional lags should be choosen based on information criteria.</p>
+</section>
+<section id="adf-with-a-trend" class="slide level2">
+<h2>ADF with a trend</h2>
+<p>Model: <span class="math inline">\(\Delta y_t = \alpha + \delta t +\theta y_{t-1} + \lambda_1 \Delta y_{t-1} + \dots + \lambda_k \Delta y_{t-k} + e_t\)</span></p>
+<ul>
+<li><p>This allows for even more flexibility, or if you believe data is stationary around a trend.</p></li>
+<li><p>Main difference… critical values are even larger:</p></li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>SL</th>
+<th>1%</th>
+<th>2.5%</th>
+<th>5%</th>
+<th>10%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>DF</td>
+<td>-3.96</td>
+<td>-3.66</td>
+<td>-3.41</td>
+<td>-3.12</td>
+</tr>
+</tbody>
+</table>
+<p>As before, If you find evidence of unit root, Differentiate and test again.</p>
+</section>
+<section id="example" class="slide level2 scrollable">
+<h2>Example</h2>
+<div id="dba7ab34" class="cell larger" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">qui</span>:frause fertil3, <span class="kw">clear</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>** Setup <span class="kw">as</span> time series</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">tsset</span> <span class="fu">year</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Time variable: year, 1913 to 1984
+        Delta: 1 unit</code></pre>
+</div>
+</div>
+<p>The model: <span class="math inline">\(gfr = \alpha + \delta_0 pe_t + \delta_1 pe_{t-1} + \delta_2 pe_{t-2}+ e_t\)</span></p>
+<div id="cbc4a45a" class="cell larger" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">reg</span> gfr pe <span class="ot">l</span>.pe l2.pe  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Source |       SS           df       MS      Number of obs   =        70
+-------------+----------------------------------   F(3, 66)        =      0.14
+       Model |  159.461148         3   53.153716   Prob &gt; F        =    0.9383
+    Residual |  25832.9717        66  391.408663   R-squared       =    0.0061
+-------------+----------------------------------   Adj R-squared   =   -0.0390
+       Total |  25992.4329        69  376.701926   Root MSE        =    19.784
+
+------------------------------------------------------------------------------
+         gfr | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+          pe |
+         --. |  -.0158445    .140256    -0.11   0.910    -.2958747    .2641856
+         L1. |  -.0213365   .2152292    -0.10   0.921    -.4510555    .4083826
+         L2. |   .0539005   .1381132     0.39   0.698    -.2218513    .3296524
+             |
+       _cons |   93.15791   4.499654    20.70   0.000     84.17406    102.1418
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>Are <span class="math inline">\(gfr\)</span> and <span class="math inline">\(pe\)</span> Stationary?</p>
+<p>Naive approach: Look at auto correlation:</p>
+<div id="0889bb9a" class="cell larger" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1"></a>** Naive apprach</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="fu">corr</span> pe <span class="ot">l</span>.pe gfr <span class="ot">l</span>.gfr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>(obs=71)
+
+             |                 L.                L.
+             |       pe       pe      gfr      gfr
+-------------+------------------------------------
+          pe |
+         --. |   1.0000
+         L1. |   0.9636   1.0000
+         gfr |
+         --. |   0.0086   0.0188   1.0000
+         L1. |  -0.0300  -0.0296   0.9765   1.0000
+</code></pre>
+</div>
+</div>
+<p>Formal Approach: Dickey-Fuller Test for Unit Root</p>
+<div id="7a0a1dc9" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">reg</span> <span class="kw">d</span>.pe <span class="ot">l</span>.pe, nohead</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">reg</span> <span class="kw">d</span>.gfr <span class="ot">l</span>.gfr, nohead</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>------------------------------------------------------------------------------
+        D.pe | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+          pe |
+         L1. |  -.0521147   .0316692    -1.65   0.104    -.1152931    .0110637
+             |
+       _cons |   6.426196   3.808601     1.69   0.096    -1.171754    14.02415
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+       D.gfr | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         gfr |
+         L1. |  -.0222798   .0260053    -0.86   0.395     -.074159    .0295994
+             |
+       _cons |   1.304937   2.548821     0.51   0.610    -3.779822    6.389695
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>Same conclusions. Are their differences stationary?</p>
+<div id="16a5d700" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">gen</span> dpe = <span class="kw">d</span>.pe </span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="kw">gen</span> dgfr = <span class="kw">d</span>.gfr</span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="kw">reg</span> <span class="kw">d</span>.dpe <span class="ot">l</span>.dpe, nohead</span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="kw">reg</span> <span class="kw">d</span>.dgfr <span class="ot">l</span>.dgfr, nohead</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>(1 missing value generated)
+(1 missing value generated)
+------------------------------------------------------------------------------
+       D.dpe | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         dpe |
+         L1. |  -.7666022   .1181882    -6.49   0.000    -1.002443   -.5307613
+             |
+       _cons |   .8901863   2.103074     0.42   0.673    -3.306432    5.086804
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+      D.dgfr | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        dgfr |
+         L1. |   -.713481   .1158143    -6.16   0.000    -.9445848   -.4823772
+             |
+       _cons |  -.6332004   .5027213    -1.26   0.212    -1.636365    .3699644
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>Now it should be better to use model in differences for analysi:</p>
+<div id="ef9e8558" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">reg</span> dgfr dpe <span class="ot">l</span>.dpe l2.dpe  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Source |       SS           df       MS      Number of obs   =        69
+-------------+----------------------------------   F(3, 65)        =      6.56
+       Model |  293.259859         3  97.7532864   Prob &gt; F        =    0.0006
+    Residual |  968.199959        65   14.895384   R-squared       =    0.2325
+-------------+----------------------------------   Adj R-squared   =    0.1971
+       Total |  1261.45982        68  18.5508797   Root MSE        =    3.8595
+
+------------------------------------------------------------------------------
+        dgfr | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         dpe |
+         --. |  -.0362021   .0267737    -1.35   0.181     -.089673    .0172687
+         L1. |  -.0139706   .0275539    -0.51   0.614    -.0689997    .0410584
+         L2. |   .1099896   .0268797     4.09   0.000     .0563071    .1636721
+             |
+       _cons |  -.9636787   .4677599    -2.06   0.043     -1.89786   -.0294976
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="the-problem-of-serial-correlation" class="slide level2">
+<h2>The Problem of Serial Correlation</h2>
+<ul>
+<li>Up to this point, we have assumed that the error term is uncorrelated across time. (no serial correlation)</li>
+<li>As with RC analysis, violation of this assumption does not lead to biased estimators of the coefficients (under usual situations), but it does lead to biased standard errors.</li>
+<li>Why? If errors are correlated across time, (say possitively) then the variance of the OLS estimator is biased downwards.</li>
+</ul>
+<p><span class="math display">\[Var(u_t+u_{t+h})=2\sigma^2 + \color{red}{2\rho_{t,t+h}} \sigma^2\]</span></p>
+</section>
+<section id="serial-correlation-and-lags" class="slide level2">
+<h2>Serial Correlation and Lags</h2>
+<ul>
+<li>If one has a model with Lags, then serial correlation is likely to happen.</li>
+</ul>
+<p><span class="math display">\[y_t = \beta_0 + \beta_1 y_{t-1} + u_t\]</span></p>
+<ul>
+<li><p>This model simply assumes that <span class="math inline">\(y_{t-1}\)</span> should be uncorrelated with <span class="math inline">\(u_t\)</span>. But, it may be that <span class="math inline">\(y_{t-2}\)</span> is correlated with <span class="math inline">\(u_t\)</span>.</p></li>
+<li><p>If that is the case then <span class="math inline">\(Corr(u_t, u_{t-1})\neq 0\)</span> because it may be picking up that correlation.</p></li>
+<li><p>On the other hand, if <span class="math inline">\(u_t\)</span> is serially correlated, then <span class="math inline">\(y_{t-1}\)</span> is correlated with <span class="math inline">\(u_t\)</span>, causing OLS to be inconsistent.</p>
+<ul>
+<li>This, however, may also indicate that one needs to consider a different model:</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[y_t = \alpha_0 + \alpha_1 y_{t-1} + \alpha_2 y_{t-2} + e_t\]</span></p>
+<ul>
+<li>Where <span class="math inline">\(e_t\)</span> is not serially correlated, not correlated with <span class="math inline">\(y_{t-1}\)</span>, nor <span class="math inline">\(y_{t-2}\)</span>.</li>
+</ul>
+</section>
+<section id="test-for-serial-correlation" class="slide level2">
+<h2>Test for Serial Correlation</h2>
+<h3 id="strickly-exogenous-regressors">Strickly Exogenous Regressors</h3>
+<p>Model: <span class="math inline">\(y_t = \beta_0 + \beta_1 x_{1,t} + \dots + \beta_k x_{k,t} + u_t\)</span> and: <span class="math inline">\(u_t=\rho u_{t-1}+e_t\)</span></p>
+<p>If there is no serial correlation, then we simply need to test if <span class="math inline">\(\rho=0\)</span>, using a t-statistic.</p>
+<h3 id="durbin-watson-test">Durbin Watson Test</h3>
+<p>Under Classical assumptions, one could also use the DW statistic:</p>
+<p><span class="math display">\[DW = \frac{\sum_{t=2}^T (u_t-u_{t-1})^2}{\sum_{t=1}^T u_t^2}\]</span></p>
+<p>where <span class="math inline">\(DW\simeq 2(1-\hat{\rho})\)</span>.</p>
+<ul>
+<li>if there is no serial correlation, then <span class="math inline">\(DW\simeq 2\)</span>.</li>
+<li>If there is possitive serial correlation, then <span class="math inline">\(DW&lt;2\)</span>.</li>
+<li>A less practical test, but valid in small samples</li>
+</ul>
 
 <div class="footer footer-default">
 
 </div>
-</section>
+</section></section>
     </div>
   </div>
 

@@ -6220,20 +6220,265 @@
     "href": "rmethods/12_timeseries.html#event-studies",
     "title": "Times Series Part-I",
     "section": "1: Event Studies",
-    "text": "1: Event Studies\n\nWe can use Dummies to represent Transitory shocks (events) on the outcome\n\nDummies for the impact of Covid (if we assume effect was transitory), 0 for all periods except for months we were at home.\n\nOr use Dummies to capture permanent changes in the outcome\n\nDummies for ChatGPT. 0 before the introduction, 1 after\n\nPossible to use Lags of Dummies to see the dynamics of the impact.\n\nWith Time series may not be as useful, because its easy to mix event effects with trends.\n\n\n\\[FRate_t = 98.7 + 0.08 PersonalExemption_t - 24.24 WW2 - 31.6 Pill_t+ e_t\\]\n\n\\(Pill_t\\), \\(WW2_t\\) are dummies for the introduction of the pill (permanent) and WW2 (transitory) effects on Fertility rate."
+    "text": "1: Event Studies\n\nWe can use Dummies to represent Transitory shocks (events) on the outcome\n\nDummies for the impact of Covid (if we assume effect was transitory), 0 for all periods except for months we were at home.\n\nOr use Dummies to capture permanent changes in the outcome\n\nDummies for ChatGPT. 0 before the introduction, 1 after\n\nPossible to use Lags of Dummies to see the dynamics of the impact.\n\nWith Time series may not be as useful, because its easy to mix event effects with trends, although one could also directly control for trends.\n\n\n\\[FRate_t = 98.7 + 0.08 PE_t - 24.24 WW2 - 31.6 Pill_t+ e_t\\]\n\n\\(Pill_t\\), \\(WW2_t\\) are dummies for the introduction of the pill (permanent) and WW2 (transitory) effects on Fertility rate."
   },
   {
     "objectID": "rmethods/12_timeseries.html#logs-and-growth-models",
     "href": "rmethods/12_timeseries.html#logs-and-growth-models",
     "title": "Times Series Part-I",
     "section": "2: Logs and Growth models",
-    "text": "2: Logs and Growth models"
+    "text": "2: Logs and Growth models\n\nVery Similar to what was done in Cross Sectional Models.\nUsing Logs of the Dep variable changes the interpretation of the coefficients.\n\n\\[\\Delta log(x)\\simeq \\%\\Delta x\\]\n\nBecause of that, you can use “log-models” and a trend to estimate the growth rates.\n\nreg log_gdp year\nThe coefficient of year should give you the average growth rate of GDP.\n\nBut the model can also be used in levels to identify trends."
   },
   {
     "objectID": "rmethods/12_timeseries.html#trends-and-seasonality",
     "href": "rmethods/12_timeseries.html#trends-and-seasonality",
     "title": "Times Series Part-I",
     "section": "3: Trends and Seasonality",
-    "text": "3: Trends and Seasonality"
+    "text": "3: Trends and Seasonality\n\nTrends are very common in time series data.\n\nBecause of the “inertia” of the data, its very common to see variables sharing common trends even if they are completely unrelated. (GDP and age)\n\nIgnoring this may cause problems, as one may identify spurious relationships. (things that look to have significant effects, even tho they are not related)\nConsider the following model (investment on housing, and housing prices):\n\n\n\nCode\nqui:frause hseinv,clear\nreg  linvpc lprice\n\n\n\n      Source |       SS           df       MS      Number of obs   =        42\n-------------+----------------------------------   F(1, 40)        =     10.53\n       Model |  .254364468         1  .254364468   Prob &gt; F        =    0.0024\n    Residual |  .966255566        40  .024156389   R-squared       =    0.2084\n-------------+----------------------------------   Adj R-squared   =    0.1886\n       Total |  1.22062003        41   .02977122   Root MSE        =    .15542\n\n------------------------------------------------------------------------------\n      linvpc | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n      lprice |   1.240943   .3824192     3.24   0.002     .4680452    2.013841\n       _cons |  -.5502345   .0430266   -12.79   0.000    -.6371945   -.4632746\n------------------------------------------------------------------------------\n\n\n\nIf we estimate this model, we find a very strong relationship, perhaps because of common trends. Adding a trend, however, may change the results.\n\n\\[E(log(invpc_t)|x) = -20.04 -0.38 log(price) + 0.009 year \\]\n\n\nCode\nreg linvpc lprice  year\n\n\n\n      Source |       SS           df       MS      Number of obs   =        42\n-------------+----------------------------------   F(2, 39)        =     10.08\n       Model |  .415945108         2  .207972554   Prob &gt; F        =    0.0003\n    Residual |  .804674927        39   .02063269   R-squared       =    0.3408\n-------------+----------------------------------   Adj R-squared   =    0.3070\n       Total |  1.22062003        41   .02977122   Root MSE        =    .14364\n\n------------------------------------------------------------------------------\n      linvpc | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n      lprice |  -.3809612   .6788352    -0.56   0.578    -1.754035    .9921125\n        year |   .0098287   .0035122     2.80   0.008     .0027246    .0169328\n       _cons |  -20.03976   6.964526    -2.88   0.006    -34.12684   -5.952675\n------------------------------------------------------------------------------"
+  },
+  {
+    "objectID": "rmethods/12_timeseries.html#trends-and-seasonality-1",
+    "href": "rmethods/12_timeseries.html#trends-and-seasonality-1",
+    "title": "Times Series Part-I",
+    "section": "3: Trends and Seasonality",
+    "text": "3: Trends and Seasonality\n\nJust as time series are characterized by trends, they are also characterized by seasonality.\n\nSeasonality is the presence of regular patterns in the data that repeat over fixed periods of time.\nSeasonality is a form of “deterministic” variation, because it is predictable.\n\nFor example, If you look at Public expenditure, you will see that its higher the last year that a president is in office. (election year)\nSimilarly, you will see higher expenditure in December, because of Christmas.\nAs with trends, this may cause spurious relations, thus, its recommended to control for seasonality adding dummies.\n\nquarter, month, day of the week, year after election, etc.\n\nAs simple as adding dummies for each month, or quarter, etc."
+  },
+  {
+    "objectID": "rmethods/12_timeseries.html#r2-and-spurious-regressions",
+    "href": "rmethods/12_timeseries.html#r2-and-spurious-regressions",
+    "title": "Times Series Part-I",
+    "section": "4: \\(R^2\\) and Spurious Regressions",
+    "text": "4: \\(R^2\\) and Spurious Regressions\n\nOne of the consequences of spurious regressions is that the \\(R^2\\) will be inflated. (caputred by the common trend or seasonality\nEven if we add trends or seaonalities, the default \\(R^2\\) will be too large. (Because it still describes ALL variation)\nA better approach to understand the true explanatory power of the model is to use an \\(R^2\\) that adjusts for trends and seasonality.\n\n\\[y_t = \\beta_0 + \\beta_1 x_{1t} + \\beta_2 x_{2t} + \\theta \\times t + \\sum \\gamma_k \\times D_k + u_t\\]\nWhere \\(D_k\\) are dummies for seasonality, and \\(\\theta \\times t\\) is a trend."
+  },
+  {
+    "objectID": "rmethods/12_timeseries.html#r2-and-spurious-regressions-1",
+    "href": "rmethods/12_timeseries.html#r2-and-spurious-regressions-1",
+    "title": "Times Series Part-I",
+    "section": "4: \\(R^2\\) and Spurious Regressions",
+    "text": "4: \\(R^2\\) and Spurious Regressions\n\nTo estimate the adjusted \\(R^2\\) it may be better to use de-trended and de-seasonalized data.\n\n\\[\\tilde w_t = w_t - E(w_t| t , D_1, D_2, \\dots, D_k) \\forall w \\in {y, x_1, x_2}\\]\n\nEstimate model\n\n\\[\\tilde y_t = \\beta_1 \\tilde x_{1t} + \\beta_2 \\tilde x_{2t} + u_t\\]\n\nCalculate the \\(R^2\\) using the “correct” \\(SST\\) and \\(SSE\\) using the demeaned data.\n\n\\[aR^2 = 1-\\frac{\\sum \\hat u^2_t}{\\sum \\tilde y^2_t}\\]"
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#defending-the-sacred-time-line",
+    "href": "rmethods/13_advtimeseries.html#defending-the-sacred-time-line",
+    "title": "Times Series Part-II",
+    "section": "Defending the Sacred time line",
+    "text": "Defending the Sacred time line"
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#last-week",
+    "href": "rmethods/13_advtimeseries.html#last-week",
+    "title": "Times Series Part-II",
+    "section": "Last week",
+    "text": "Last week\n\nWhat we learned last week a few methodologies for analyzing time series data.\n\nStatic model, dynamic models, use of trends and seasonality, etc.\n\nAll those models, however, were based on very strong assumptions.\n\nStrict Exogeneity, strict Homoskedasticity, and no serial correlation are difficult to defend.\nStatistical inference validity depends on normality assumption of the error.\n\nCan we relax this assumptions?\n\nYes, but we need to impose additional assumtions to the data"
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#this-week",
+    "href": "rmethods/13_advtimeseries.html#this-week",
+    "title": "Times Series Part-II",
+    "section": "This week",
+    "text": "This week\n\nOne way to relax the assumption of Strict Exogeneiety is assume time series are stationary and weakly dependent.\n\nWith this assumptions, LLN and CLT will hold for TS model.\n\nWhat do these two assumptions mean? (stationary and weakly dependent?)\nNamely, these assumptions impose restrictions on how data SHOULD behaive, so we can learn something from the data.\n\nThis means that what we observe in the data are based on data that has stable patterns. Otherwise, if they are unpredictable, we cannot learn anything. (This is the idea of stationarity)\nAt the same time, data cannot depend on its own past too much. So if we look at two periods that are farther apart, its like they are independent for most practical purposes."
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#can-you-recognized-this-type-of-data",
+    "href": "rmethods/13_advtimeseries.html#can-you-recognized-this-type-of-data",
+    "title": "Times Series Part-II",
+    "section": "Can you recognized this type of data?",
+    "text": "Can you recognized this type of data?\n*| echo: false\n*| output: false\nset obs 250\nset seed 1321\ngen t = _n\ntsset t\ngen y1 =0\ngen y2 =0\ngen r = rnormal()\nset scheme white2\ncolor_style tableau\nreplace y1 =l.y1 + r if t&gt;1\nreplace y2 =0.8*l.y2 + r if t&gt;1\nscatter y1 t, title(\"Non-Stationary\") xtitle(\"time\") name(fig1, replace) connect(l)\nscatter y2 t, title(\"Stationary\") xtitle(\"time\") name(fig2, replace) connect(l)\ngraph combine fig1 fig2, ysize(6) xsize(12) ycommon\ngraph export images/fig13_1.png, replace\n\n\ntwo kdensity y1 if t&lt;=125 ||  kdensity y1 if t&gt;125, title(\"Non-Stationary\") name(fig1, replace) legend(off)\ntwo kdensity y2 if t&lt;=125 ||  kdensity y2 if t&gt;125, title(\"Stationary\") name(fig2, replace) legend(off)\ngraph combine fig1 fig2, ysize(6) xsize(12) \ngraph export images/fig13_2.png, replace\n\nTrendsDensity"
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#stationary-process",
+    "href": "rmethods/13_advtimeseries.html#stationary-process",
+    "title": "Times Series Part-II",
+    "section": "Stationary Process",
+    "text": "Stationary Process\n\nA Stationary process is one where the characteristics of the distribution remains Stable across time.\n\nSo we can learn something about it\n\n\nFor example consider the series \\(x=[x_1,x_2,\\dots,x_T]\\), where \\(T\\) can be vary large (infinite)\n\nIf the series is stationary, then:\n\n\\[f(x_t, x_{t+k}) = f(x_s, x_{s+k}) \\forall s, k\\]\n\nIn other words, the distribution across time does not change. (is stable, thus stationary)\nOtherwise, if the distribution function changes constantly, we cannot learn about it, thus making sense of regressions would be even more difficult."
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#testing-for-stationarity",
+    "href": "rmethods/13_advtimeseries.html#testing-for-stationarity",
+    "title": "Times Series Part-II",
+    "section": "Testing for Stationarity",
+    "text": "Testing for Stationarity\n\nTesting for stationarity is not easy. (how do you test for stability of densities?)\nInstead, from an empirical point of view, we focus on the first 2 moments of the distribution: mean, variance and covariance.\n\nThus:\nA series \\(x=[x_1,x_2,\\dots,x_T]\\) is stationary if:\n\n\\(E(x_t)=E(x_s)=\\mu_x\\). Constant mean\n\\(E(x_t^2)&lt;\\infty\\). Finite variance\n\\(Var(x_t)=Var(x_s)=\\sigma_x^2\\). Constant variance\n\\(cov(x_t,x_{t+k})=cov(x_s,x_{s+k})\\). Constant covariance\n\nThe Series repeats itself."
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#weakly-dependent-series",
+    "href": "rmethods/13_advtimeseries.html#weakly-dependent-series",
+    "title": "Times Series Part-II",
+    "section": "Weakly Dependent Series",
+    "text": "Weakly Dependent Series\n\nDependence should be understood as a measure of how much a series depends on its own past.\n\nWeakly dependent series are those that depend on its own past, but not too much.\n\nFrom the technical point of view:\n\nIf \\(x_t\\) is weakly dependent, then \\(\\lim_{k\\rightarrow \\infty} corr(x_t,x_{t+k})=0\\) sufficiently fast.\n\nIf this happens, LLN and CLT will hold for TS data.\nWhy?\n\nOmiting \\(x_{t+1}\\) would typically generate an Omitted Variable Bias.\nIf data are weakly dependent, however, we won’t suffer from OMB\nThis is because omitting \\(x_{t+1}\\) is like omitting a unrelated variable.\n\n\n\nNOTE: Weakly dependent variables can be non-stationary. (we call them stationary around a trend)"
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#visualizing-weakly-dependent-vs-strongly-dependent",
+    "href": "rmethods/13_advtimeseries.html#visualizing-weakly-dependent-vs-strongly-dependent",
+    "title": "Times Series Part-II",
+    "section": "Visualizing weakly dependent vs strongly dependent",
+    "text": "Visualizing weakly dependent vs strongly dependent"
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#example-of-weakly-dependent-series",
+    "href": "rmethods/13_advtimeseries.html#example-of-weakly-dependent-series",
+    "title": "Times Series Part-II",
+    "section": "Example of Weakly Dependent Series",
+    "text": "Example of Weakly Dependent Series\n\nAR(1) process: \\(x_t = \\rho x_{t-1} + \\epsilon_t\\)\n\nMean in constant (not depent on time)\nVariance is constant (not depent on time)\nCovariance does not depend on time (just on lag)\nIf \\(|\\rho|&lt;1\\), then \\(x_t\\) is weakly dependent.\n\nMA(1) process: \\(x_t = \\epsilon_t + \\theta \\epsilon_{t-1}\\)\n\nConstant mean and variance.\nCovariance does not depend on time.\nCovariance bettween \\(x_t\\) and \\(x_{t+k}\\) is zero for \\(k&gt;1\\)."
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#special-case-ar1-with-rho1",
+    "href": "rmethods/13_advtimeseries.html#special-case-ar1-with-rho1",
+    "title": "Times Series Part-II",
+    "section": "Special Case AR(1) with \\(\\rho=1\\)",
+    "text": "Special Case AR(1) with \\(\\rho=1\\)\n\nIf \\(\\rho=1\\), we have a random walk process \\(x_t = x_{t-1} + \\epsilon_t\\)\nThis is a process that holds grudges (it remembers its past)\n\n\\[x_t = x_{t=0}+e_1+e_2+\\dots+e_t\\]\n\nThis process has constant mean (\\(x_0\\)), but variance and covariance are not constant. With a correlation that dissapears slowly.\n\n\\[Var(x_t) = t\\sigma^2 \\text{ and } cov(x_t,x_{t+h}) = t\\sigma^2\\]\n\\[corr(x_t,x_{t+h}) = \\frac{t \\sigma^2}{\\sqrt{t(t+h)}\\sigma^2}=\\sqrt{\\frac{t}{t+h}}\\]\nEconomics: With weakly dependent data, policies are transitory, with persistent data effects are longlasting."
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#special-case-non-stationary-weakly-dependent",
+    "href": "rmethods/13_advtimeseries.html#special-case-non-stationary-weakly-dependent",
+    "title": "Times Series Part-II",
+    "section": "Special Case: non-stationary weakly dependent",
+    "text": "Special Case: non-stationary weakly dependent\n\nThere are few cases where a series is weakly dependent but non-stationary.\n\n\\[x_t = \\rho x_{t-1} + \\delta t + \\epsilon_t\\]\n\n\\(E(x_t)\\) is not constant, but this series is still weakly dependent if \\(|\\rho|&lt;1\\).\nIf the data is detrended, however, it becomes stationary."
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#example-stationary-around-a-trend",
+    "href": "rmethods/13_advtimeseries.html#example-stationary-around-a-trend",
+    "title": "Times Series Part-II",
+    "section": "Example: Stationary around a trend",
+    "text": "Example: Stationary around a trend\n\\(x_t = 0.5*x_{t-1}+0.1 t + u_t\\)"
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#how-do-things-change-assumptions",
+    "href": "rmethods/13_advtimeseries.html#how-do-things-change-assumptions",
+    "title": "Times Series Part-II",
+    "section": "How do things change: Assumptions",
+    "text": "How do things change: Assumptions\nA4. Homoskedasticity: \\(Var(u_t|x_t)=\\sigma^2\\) (also we just need contemporaenous homoskedasticity)\nA5. No Serial Correlation: \\(cov(u_t,u_s|x_t)=0\\) for \\(t\\neq s\\)\nThese two assumptions that make “life” easier for estimating standard errors because:\n\nUnder A1-A5, OLS estimators are asymptotically normal, and all Standard Statistics are applicable"
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#how-do-things-change-assumptions-1",
+    "href": "rmethods/13_advtimeseries.html#how-do-things-change-assumptions-1",
+    "title": "Times Series Part-II",
+    "section": "How do things change: Assumptions",
+    "text": "How do things change: Assumptions\nA4. Homoskedasticity: \\(Var(u_t|x_t)=\\sigma^2\\) (also we just need contemporaenous homoskedasticity)\nA5. No Serial Correlation: \\(cov(u_t,u_s|x_t)=0\\) for \\(t\\neq s\\)\nThese two assumptions that make “life” easier for estimating standard errors because:\n\nUnder A1-A5, OLS estimators are asymptotically normal, and all Standard Statistics are applicable"
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#random-walks-look-may-look-like-trends",
+    "href": "rmethods/13_advtimeseries.html#random-walks-look-may-look-like-trends",
+    "title": "Times Series Part-II",
+    "section": "Random Walks look may look like trends",
+    "text": "Random Walks look may look like trends\n\\[x_t = x_{t-1} + 0.1 + \\epsilon_t\\]"
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#order-of-integration-and-unit-roots",
+    "href": "rmethods/13_advtimeseries.html#order-of-integration-and-unit-roots",
+    "title": "Times Series Part-II",
+    "section": "Order of Integration and unit roots",
+    "text": "Order of Integration and unit roots\n\nAs you may expect, many interesiting time series are not stationary. However, we may want to use for analysis\n\nto do so, we need to understand their taxonomy (in TS) so we can make them stationary.\n\nA series is said to be integrated of order \\(d\\), denoted \\(I(d)\\), if it can be made stationary by taking \\(d\\) differences.\nA weakly dependent series is an \\(I(0)\\) process. (is already stationary)\nA random walk is an \\(I(1)\\) process. It could be made stationary by taking first differences.\n\n\\[x_t = x_{t-1} + \\epsilon_t \\rightarrow \\Delta x_t = \\epsilon_t\\]\n\nA series that is \\(I(2)\\) would required two differences to be made stationary.\n\n\\[x_t =2x_{t-1} - x_{t-2} + \\epsilon_t \\rightarrow \\Delta^2 x_t = \\epsilon_t\\]"
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#how-to-test-for-order-of-integration",
+    "href": "rmethods/13_advtimeseries.html#how-to-test-for-order-of-integration",
+    "title": "Times Series Part-II",
+    "section": "How to test for order of Integration",
+    "text": "How to test for order of Integration"
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#example-random-walks-look-with-a-drift",
+    "href": "rmethods/13_advtimeseries.html#example-random-walks-look-with-a-drift",
+    "title": "Times Series Part-II",
+    "section": "Example: Random Walks look with a drift",
+    "text": "Example: Random Walks look with a drift\n\\[x_t = x_{t-1} + 0.1 + \\epsilon_t\\]\n ## How do things change: Assumptions\nA1. Linear in Parameters (same as before), but all variables are stationary and weakly dependent.\nA2. No Perfect Colinearity\nA3. Zero Conditional Mean: \\(E(u_t|x_t)=0\\) Contemporaneous exogeneity!\nOmitting lags of \\(x_t\\) is not a problem, because they are weakly “independent” of \\(x_t\\).\nA1-A3 OLS is consistent.\nWhy does this matter??\n\nBecause, under Strict exogeneity, we cannot allow for Lags of the outcome to be included in the model.\nUnder weak exogeneity, lags can be included."
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#spurious-regressions",
+    "href": "rmethods/13_advtimeseries.html#spurious-regressions",
+    "title": "Times Series Part-II",
+    "section": "Spurious Regressions",
+    "text": "Spurious Regressions\n\nData that are \\(I(1)\\) tend to look like data with Trends\n\nIf we analyze this data, we may find spurious relationships. t-stats may be high, as well as \\(R^2\\).\nThis may lead to incorrect conclusions (unless other stronger assumptions are made)\nIn this cases, using trends will not help."
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#spurious-regressions-example",
+    "href": "rmethods/13_advtimeseries.html#spurious-regressions-example",
+    "title": "Times Series Part-II",
+    "section": "Spurious Regressions: Example",
+    "text": "Spurious Regressions: Example\n\\(x_t = x_{t-1} + v_t\\) & \\(y_t = y_{t-1} + u_t\\)"
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#order-of-integration",
+    "href": "rmethods/13_advtimeseries.html#order-of-integration",
+    "title": "Times Series Part-II",
+    "section": "Order of Integration",
+    "text": "Order of Integration\n\nAs you may expect, many interesiting time series are not stationary. However, we may want to use for analysis\n\nto do so, we need to understand their taxonomy (in TS) so we can make them stationary.\n\nA series is said to be integrated of order \\(d\\), denoted \\(I(d)\\), if it can be made stationary by taking \\(d\\) differences.\nA weakly dependent series is an \\(I(0)\\) process. (is already stationary)\nA random walk is an \\(I(1)\\) process. It could be made stationary by taking first differences.\n\n\\[x_t = x_{t-1} + \\epsilon_t \\rightarrow \\Delta x_t = \\epsilon_t\\]\n\nA series that is \\(I(2)\\) would required two differences to be made stationary.\n\n\\[x_t =2x_{t-1} - x_{t-2} + \\epsilon_t \\rightarrow \\Delta^2 x_t = \\epsilon_t\\]"
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#unit-roots-and-spurious-regressions",
+    "href": "rmethods/13_advtimeseries.html#unit-roots-and-spurious-regressions",
+    "title": "Times Series Part-II",
+    "section": "Unit roots and Spurious Regressions",
+    "text": "Unit roots and Spurious Regressions\n\nIf a series is \\(I(1)\\), it is said to have a unit root. an \\(I(2)\\) series has two unit roots, etc.\nData that are \\(I(1)\\) tend to look like data with Trends\n\nIf we analyze this data, we may find spurious relationships. t-stats may be high, as well as \\(R^2\\).\nThis may lead to incorrect conclusions (unless other stronger assumptions are made)\nIn this cases, using trends will not help."
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#how-to-decide-if-a-series-is-i1-or-has-a-unit-root",
+    "href": "rmethods/13_advtimeseries.html#how-to-decide-if-a-series-is-i1-or-has-a-unit-root",
+    "title": "Times Series Part-II",
+    "section": "How to decide if a series is \\(I(1)\\) or has a unit root?",
+    "text": "How to decide if a series is \\(I(1)\\) or has a unit root?\n\nNaive approach: Look at auto correlation:\n\nif \\(corr(x_t,x_{t-1})&gt;0.9\\) then \\(x_t\\) is highly persistent, and probably \\(I(1)\\)\nDifferentiate data and look at auto correlation again."
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#how-to-decide-if-a-series-is-i1-or-has-a-unit-root-1",
+    "href": "rmethods/13_advtimeseries.html#how-to-decide-if-a-series-is-i1-or-has-a-unit-root-1",
+    "title": "Times Series Part-II",
+    "section": "How to decide if a series is \\(I(1)\\) or has a unit root?",
+    "text": "How to decide if a series is \\(I(1)\\) or has a unit root?\n\nFormal Approach: Dickey-Fuller Test for Unit Root\n\nModel: \\(y_t = \\alpha + \\rho y_{t-1} + e_t\\) AModel: \\(\\Delta y_t = \\alpha + \\theta y_{t-1} + e_t\\)\n\n\\(H_0: \\rho=1\\) (has a unit root) vs \\(H_1: \\rho&lt;1\\) (is stationary)\n\\(H_0: \\theta=0\\) (has a unit root) vs \\(H_1: \\theta&lt;0\\) (is stationary)\n\nIts a one tail test, however, the statistic of interest does not follow a t-distribution, but a DF distribution\n\n\n\nSL\n1%\n2.5%\n5%\n10%\n\n\n\n\nDF\n-3.43\n-3.12\n-2.86\n-2.57"
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#naive-approach.-look-into-rho",
+    "href": "rmethods/13_advtimeseries.html#naive-approach.-look-into-rho",
+    "title": "Times Series Part-II",
+    "section": "Naive Approach. Look into \\(\\rho\\)",
+    "text": "Naive Approach. Look into \\(\\rho\\)\n\nNaive approach: Look at auto correlation:\n\nif \\(corr(x_t,x_{t-1})&gt;0.9\\) then \\(x_t\\) is highly persistent, and probably \\(I(1)\\)\nDifferentiate data and look at auto correlation again."
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#formal-approach-dickey-fuller-test-for-unit-root",
+    "href": "rmethods/13_advtimeseries.html#formal-approach-dickey-fuller-test-for-unit-root",
+    "title": "Times Series Part-II",
+    "section": "Formal Approach: Dickey-Fuller Test for Unit Root",
+    "text": "Formal Approach: Dickey-Fuller Test for Unit Root\nModel: \\(y_t = \\alpha + \\rho y_{t-1} + e_t\\) AModel: \\(\\Delta y_t = \\alpha + \\theta y_{t-1} + e_t\\)\n\n\\(H_0: \\rho=1\\) (has a unit root) vs \\(H_1: \\rho&lt;1\\) (is stationary)\n\\(H_0: \\theta=0\\) (has a unit root) vs \\(H_1: \\theta&lt;0\\) (is stationary)\n\nIts a one tail test, however, the statistic of interest does not follow a t-distribution, but a DF distribution\n\n\n\nSL\n1%\n2.5%\n5%\n10%\n\n\n\n\nDF\n-3.43\n-3.12\n-2.86\n-2.57"
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#augmented-dickey-fuller-test",
+    "href": "rmethods/13_advtimeseries.html#augmented-dickey-fuller-test",
+    "title": "Times Series Part-II",
+    "section": "Augmented Dickey-Fuller Test",
+    "text": "Augmented Dickey-Fuller Test\nAllowing for serial correlation, and uses same critial values as before:\nModel: \\(\\Delta y_t = \\alpha + \\theta y_{t-1} + \\lambda_1 \\Delta y_{t-1} + \\dots + \\lambda_k \\Delta y_{t-k} + e_t\\)\nSame as before. But in practice the additional lags should be choosen based on information criteria."
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#adf-with-a-trend",
+    "href": "rmethods/13_advtimeseries.html#adf-with-a-trend",
+    "title": "Times Series Part-II",
+    "section": "ADF with a trend",
+    "text": "ADF with a trend\nModel: \\(\\Delta y_t = \\alpha + \\delta t +\\theta y_{t-1} + \\lambda_1 \\Delta y_{t-1} + \\dots + \\lambda_k \\Delta y_{t-k} + e_t\\)\n\nThis allows for even more flexibility, or if you believe data is stationary around a trend.\nMain difference… critical values are even larger:\n\n\n\n\nSL\n1%\n2.5%\n5%\n10%\n\n\n\n\nDF\n-3.96\n-3.66\n-3.41\n-3.12\n\n\n\nAs before, If you find evidence of unit root, Differentiate and test again."
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#example",
+    "href": "rmethods/13_advtimeseries.html#example",
+    "title": "Times Series Part-II",
+    "section": "Example",
+    "text": "Example\n\n\nCode\nqui:frause fertil3, clear\n** Setup as time series\ntsset year\n\n\n\nTime variable: year, 1913 to 1984\n        Delta: 1 unit\n\n\nThe model: \\(gfr = \\alpha + \\delta_0 pe_t + \\delta_1 pe_{t-1} + \\delta_2 pe_{t-2}+ e_t\\)\n\n\nCode\nreg gfr pe l.pe l2.pe  \n\n\n\n      Source |       SS           df       MS      Number of obs   =        70\n-------------+----------------------------------   F(3, 66)        =      0.14\n       Model |  159.461148         3   53.153716   Prob &gt; F        =    0.9383\n    Residual |  25832.9717        66  391.408663   R-squared       =    0.0061\n-------------+----------------------------------   Adj R-squared   =   -0.0390\n       Total |  25992.4329        69  376.701926   Root MSE        =    19.784\n\n------------------------------------------------------------------------------\n         gfr | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n          pe |\n         --. |  -.0158445    .140256    -0.11   0.910    -.2958747    .2641856\n         L1. |  -.0213365   .2152292    -0.10   0.921    -.4510555    .4083826\n         L2. |   .0539005   .1381132     0.39   0.698    -.2218513    .3296524\n             |\n       _cons |   93.15791   4.499654    20.70   0.000     84.17406    102.1418\n------------------------------------------------------------------------------\n\n\nAre \\(gfr\\) and \\(pe\\) Stationary?\nNaive approach: Look at auto correlation:\n\n\nCode\n** Naive apprach\ncorr pe l.pe gfr l.gfr\n\n\n(obs=71)\n\n             |                 L.                L.\n             |       pe       pe      gfr      gfr\n-------------+------------------------------------\n          pe |\n         --. |   1.0000\n         L1. |   0.9636   1.0000\n         gfr |\n         --. |   0.0086   0.0188   1.0000\n         L1. |  -0.0300  -0.0296   0.9765   1.0000\n\n\n\nFormal Approach: Dickey-Fuller Test for Unit Root\n\n\nCode\nreg d.pe l.pe, nohead\nreg d.gfr l.gfr, nohead\n\n\n------------------------------------------------------------------------------\n        D.pe | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n          pe |\n         L1. |  -.0521147   .0316692    -1.65   0.104    -.1152931    .0110637\n             |\n       _cons |   6.426196   3.808601     1.69   0.096    -1.171754    14.02415\n------------------------------------------------------------------------------\n------------------------------------------------------------------------------\n       D.gfr | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         gfr |\n         L1. |  -.0222798   .0260053    -0.86   0.395     -.074159    .0295994\n             |\n       _cons |   1.304937   2.548821     0.51   0.610    -3.779822    6.389695\n------------------------------------------------------------------------------\n\n\nSame conclusions. Are their differences stationary?\n\n\nCode\ngen dpe = d.pe \ngen dgfr = d.gfr\nreg d.dpe l.dpe, nohead\nreg d.dgfr l.dgfr, nohead\n\n\n(1 missing value generated)\n(1 missing value generated)\n------------------------------------------------------------------------------\n       D.dpe | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         dpe |\n         L1. |  -.7666022   .1181882    -6.49   0.000    -1.002443   -.5307613\n             |\n       _cons |   .8901863   2.103074     0.42   0.673    -3.306432    5.086804\n------------------------------------------------------------------------------\n------------------------------------------------------------------------------\n      D.dgfr | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n        dgfr |\n         L1. |   -.713481   .1158143    -6.16   0.000    -.9445848   -.4823772\n             |\n       _cons |  -.6332004   .5027213    -1.26   0.212    -1.636365    .3699644\n------------------------------------------------------------------------------\n\n\nNow it should be better to use model in differences for analysi:\n\n\nCode\nreg dgfr dpe l.dpe l2.dpe  \n\n\n\n      Source |       SS           df       MS      Number of obs   =        69\n-------------+----------------------------------   F(3, 65)        =      6.56\n       Model |  293.259859         3  97.7532864   Prob &gt; F        =    0.0006\n    Residual |  968.199959        65   14.895384   R-squared       =    0.2325\n-------------+----------------------------------   Adj R-squared   =    0.1971\n       Total |  1261.45982        68  18.5508797   Root MSE        =    3.8595\n\n------------------------------------------------------------------------------\n        dgfr | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         dpe |\n         --. |  -.0362021   .0267737    -1.35   0.181     -.089673    .0172687\n         L1. |  -.0139706   .0275539    -0.51   0.614    -.0689997    .0410584\n         L2. |   .1099896   .0268797     4.09   0.000     .0563071    .1636721\n             |\n       _cons |  -.9636787   .4677599    -2.06   0.043     -1.89786   -.0294976\n------------------------------------------------------------------------------"
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#the-problem-of-serial-correlation",
+    "href": "rmethods/13_advtimeseries.html#the-problem-of-serial-correlation",
+    "title": "Times Series Part-II",
+    "section": "The Problem of Serial Correlation",
+    "text": "The Problem of Serial Correlation\n\nUp to this point, we have assumed that the error term is uncorrelated across time. (no serial correlation)\nAs with RC analysis, violation of this assumption does not lead to biased estimators of the coefficients (under usual situations), but it does lead to biased standard errors.\nWhy? If errors are correlated across time, (say possitively) then the variance of the OLS estimator is biased downwards.\n\n\\[Var(u_t+u_{t+h})=2\\sigma^2 + \\color{red}{2\\rho_{t,t+h}} \\sigma^2\\]"
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#serial-correlation-and-lags",
+    "href": "rmethods/13_advtimeseries.html#serial-correlation-and-lags",
+    "title": "Times Series Part-II",
+    "section": "Serial Correlation and Lags",
+    "text": "Serial Correlation and Lags\n\nIf one has a model with Lags, then serial correlation is likely to happen.\n\n\\[y_t = \\beta_0 + \\beta_1 y_{t-1} + u_t\\]\n\nThis model simply assumes that \\(y_{t-1}\\) should be uncorrelated with \\(u_t\\). But, it may be that \\(y_{t-2}\\) is correlated with \\(u_t\\).\nIf that is the case then \\(Corr(u_t, u_{t-1})\\neq 0\\) because it may be picking up that correlation.\nOn the other hand, if \\(u_t\\) is serially correlated, then \\(y_{t-1}\\) is correlated with \\(u_t\\), causing OLS to be inconsistent.\n\nThis, however, may also indicate that one needs to consider a different model:\n\n\n\\[y_t = \\alpha_0 + \\alpha_1 y_{t-1} + \\alpha_2 y_{t-2} + e_t\\]\n\nWhere \\(e_t\\) is not serially correlated, not correlated with \\(y_{t-1}\\), nor \\(y_{t-2}\\)."
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#test-for-serial-correlation",
+    "href": "rmethods/13_advtimeseries.html#test-for-serial-correlation",
+    "title": "Times Series Part-II",
+    "section": "Test for Serial Correlation",
+    "text": "Test for Serial Correlation\nStrickly Exogenous Regressors\nModel: \\(y_t = \\beta_0 + \\beta_1 x_{1,t} + \\dots + \\beta_k x_{k,t} + u_t\\) and: \\(u_t=\\rho u_{t-1}+e_t\\)\nIf there is no serial correlation, then we simply need to test if \\(\\rho=0\\), using a t-statistic.\nDurbin Watson Test\nUnder Classical assumptions, one could also use the DW statistic:\n\\[DW = \\frac{\\sum_{t=2}^T (u_t-u_{t-1})^2}{\\sum_{t=1}^T u_t^2}\\]\nwhere \\(DW\\simeq 2(1-\\hat{\\rho})\\).\n\nif there is no serial correlation, then \\(DW\\simeq 2\\).\nIf there is possitive serial correlation, then \\(DW&lt;2\\).\nA less practical test, but valid in small samples"
   }
 ]

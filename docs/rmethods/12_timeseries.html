@@ -626,7 +626,7 @@ x_{T1} &amp; x_{T2} &amp; \dots &amp; x_{Tk}
 <p>A4: Perhaps? Usually there is a direct relationship between deficit and uncertainty, which will generate heteroskedasticity.</p>
 <p>A5: NO! There could be many things in <span class="math inline">\(u_t\)</span> that are correlated across time. (taxes?)</p>
 <p>A6: NO…the errors are almost never normal</p>
-<div id="f8fa8f07" class="cell larger" data-execution_count="1">
+<div id="3cba7351" class="cell larger" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a>frause intdef, <span class="kw">clear</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="kw">reg</span> i3 inf def</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -669,24 +669,141 @@ x_{T1} &amp; x_{T2} &amp; \dots &amp; x_{Tk}
 </ul></li>
 <li>Possible to use Lags of Dummies to see the dynamics of the impact.
 <ul>
-<li>With Time series may not be as useful, because its easy to mix event effects with trends.</li>
+<li>With Time series may not be as useful, because its easy to mix event effects with trends, although one could also directly control for trends.</li>
 </ul></li>
 </ul>
-<p><span class="math display">\[FRate_t = 98.7 + 0.08 PersonalExemption_t - 24.24 WW2 - 31.6 Pill_t+ e_t\]</span></p>
+<p><span class="math display">\[FRate_t = 98.7 + 0.08 PE_t - 24.24 WW2 - 31.6 Pill_t+ e_t\]</span></p>
 <ul>
 <li><span class="math inline">\(Pill_t\)</span>, <span class="math inline">\(WW2_t\)</span> are dummies for the introduction of the pill (permanent) and WW2 (transitory) effects on Fertility rate.</li>
 </ul>
 </section>
 <section id="logs-and-growth-models" class="slide level2">
 <h2>2: Logs and Growth models</h2>
+<ul>
+<li><p>Very Similar to what was done in Cross Sectional Models.</p></li>
+<li><p>Using Logs of the Dep variable changes the interpretation of the coefficients.</p></li>
+</ul>
+<p><span class="math display">\[\Delta log(x)\simeq \%\Delta x\]</span></p>
+<ul>
+<li>Because of that, you can use “log-models” and a trend to estimate the growth rates.</li>
+</ul>
+<p><code>reg log_gdp year</code></p>
+<p>The coefficient of <code>year</code> should give you the average growth rate of GDP.</p>
+<ul>
+<li>But the model can also be used in levels to identify trends.</li>
+</ul>
 </section>
-<section id="trends-and-seasonality" class="slide level2">
+<section id="trends-and-seasonality" class="slide level2 scrollable">
 <h2>3: Trends and Seasonality</h2>
+<ul>
+<li><p>Trends are very common in time series data.</p>
+<ul>
+<li>Because of the “inertia” of the data, its very common to see variables sharing common trends even if they are completely unrelated. (GDP and age)</li>
+</ul></li>
+<li><p>Ignoring this may cause problems, as one may identify spurious relationships. (things that look to have significant effects, even tho they are not related)</p></li>
+<li><p>Consider the following model (investment on housing, and housing prices):</p></li>
+</ul>
+<div id="136614d6" class="cell larger" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">qui</span>:frause hseinv,<span class="kw">clear</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">reg</span>  linvpc lprice</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Source |       SS           df       MS      Number of obs   =        42
+-------------+----------------------------------   F(1, 40)        =     10.53
+       Model |  .254364468         1  .254364468   Prob &gt; F        =    0.0024
+    Residual |  .966255566        40  .024156389   R-squared       =    0.2084
+-------------+----------------------------------   Adj R-squared   =    0.1886
+       Total |  1.22062003        41   .02977122   Root MSE        =    .15542
+
+------------------------------------------------------------------------------
+      linvpc | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      lprice |   1.240943   .3824192     3.24   0.002     .4680452    2.013841
+       _cons |  -.5502345   .0430266   -12.79   0.000    -.6371945   -.4632746
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<ul>
+<li>If we estimate this model, we find a very strong relationship, perhaps because of common trends. Adding a trend, however, may change the results.</li>
+</ul>
+<p><span class="math display">\[E(log(invpc_t)|x) = -20.04 -0.38 log(price) + 0.009 year \]</span></p>
+<div id="378c7668" class="cell larger" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">reg</span> linvpc lprice  <span class="fu">year</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Source |       SS           df       MS      Number of obs   =        42
+-------------+----------------------------------   F(2, 39)        =     10.08
+       Model |  .415945108         2  .207972554   Prob &gt; F        =    0.0003
+    Residual |  .804674927        39   .02063269   R-squared       =    0.3408
+-------------+----------------------------------   Adj R-squared   =    0.3070
+       Total |  1.22062003        41   .02977122   Root MSE        =    .14364
+
+------------------------------------------------------------------------------
+      linvpc | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      lprice |  -.3809612   .6788352    -0.56   0.578    -1.754035    .9921125
+        year |   .0098287   .0035122     2.80   0.008     .0027246    .0169328
+       _cons |  -20.03976   6.964526    -2.88   0.006    -34.12684   -5.952675
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="trends-and-seasonality-1" class="slide level2 scrollable">
+<h2>3: Trends and Seasonality</h2>
+<ul>
+<li>Just as time series are characterized by trends, they are also characterized by seasonality.
+<ul>
+<li>Seasonality is the presence of regular patterns in the data that repeat over fixed periods of time.</li>
+<li>Seasonality is a form of “deterministic” variation, because it is predictable.</li>
+</ul></li>
+<li>For example, If you look at Public expenditure, you will see that its higher the last year that a president is in office. (election year)</li>
+<li>Similarly, you will see higher expenditure in December, because of Christmas.</li>
+<li>As with trends, this may cause spurious relations, thus, its recommended to control for seasonality adding dummies.
+<ul>
+<li>quarter, month, day of the week, year after election, etc.</li>
+</ul></li>
+<li>As simple as adding dummies for each month, or quarter, etc.</li>
+</ul>
+</section>
+<section id="r2-and-spurious-regressions" class="slide level2">
+<h2>4: <span class="math inline">\(R^2\)</span> and Spurious Regressions</h2>
+<ul>
+<li><p>One of the consequences of spurious regressions is that the <span class="math inline">\(R^2\)</span> will be inflated. (caputred by the common trend or seasonality</p></li>
+<li><p>Even if we add trends or seaonalities, the default <span class="math inline">\(R^2\)</span> will be too large. (Because it still describes ALL variation)</p></li>
+<li><p>A better approach to understand the true explanatory power of the model is to use an <strong><span class="math inline">\(R^2\)</span></strong> that adjusts for trends and seasonality.</p></li>
+</ul>
+<p><span class="math display">\[y_t = \beta_0 + \beta_1 x_{1t} + \beta_2 x_{2t} + \theta \times t + \sum \gamma_k \times D_k + u_t\]</span></p>
+<p>Where <span class="math inline">\(D_k\)</span> are dummies for seasonality, and <span class="math inline">\(\theta \times t\)</span> is a trend.</p>
+</section>
+<section id="r2-and-spurious-regressions-1" class="slide level2">
+<h2>4: <span class="math inline">\(R^2\)</span> and Spurious Regressions</h2>
+<ul>
+<li>To estimate the adjusted <span class="math inline">\(R^2\)</span> it may be better to use de-trended and de-seasonalized data.</li>
+</ul>
+<p><span class="math display">\[\tilde w_t = w_t - E(w_t| t , D_1, D_2, \dots, D_k) \forall w \in {y, x_1, x_2}\]</span></p>
+<ul>
+<li>Estimate model</li>
+</ul>
+<p><span class="math display">\[\tilde y_t = \beta_1 \tilde x_{1t} + \beta_2 \tilde x_{2t} + u_t\]</span></p>
+<ul>
+<li>Calculate the <span class="math inline">\(R^2\)</span> using the “correct” <span class="math inline">\(SST\)</span> and <span class="math inline">\(SSE\)</span> using the demeaned data.</li>
+</ul>
+<p><span class="math display">\[aR^2 = 1-\frac{\sum \hat u^2_t}{\sum \tilde y^2_t}\]</span></p>
+</section></section>
+<section id="thats-all-for-today" class="title-slide slide level1 center">
+<h1>Thats all for today!</h1>
+<p>Next week, Advanced Time series</p>
 
 <div class="footer footer-default">
 
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
