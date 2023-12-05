@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.455">
+  <meta name="generator" content="quarto-1.4.512">
 
   <meta name="author" content="Fernando Rios-Avila">
   <title>Econometrics MSC Levy - Times Series Part-II</title>
@@ -560,6 +560,7 @@ Fernando Rios-Avila
 <li>Covariance does not depend on time.</li>
 <li>Covariance bettween <span class="math inline">\(x_t\)</span> and <span class="math inline">\(x_{t+k}\)</span> is zero for <span class="math inline">\(k&gt;1\)</span>.</li>
 </ul></li>
+<li>ARMA(1,1) <span class="math inline">\(x_t = \rho x_{t-1} + \epsilon_t + \theta \epsilon_{t-1}\)</span></li>
 </ul>
 </section>
 <section id="special-case-ar1-with-rho1" class="slide level2">
@@ -595,7 +596,10 @@ Fernando Rios-Avila
 <section id="example-random-walks-look-with-a-drift" class="slide level2">
 <h2>Example: Random Walks look with a drift</h2>
 <p><span class="math display">\[x_t = x_{t-1} + 0.1 + \epsilon_t\]</span></p>
-<p><img data-src="images/paste-16.png"> ## How do things change: Assumptions</p>
+
+<img data-src="images/paste-16.png" class="r-stretch"></section>
+<section id="how-do-things-change-assumptions" class="slide level2">
+<h2>How do things change: Assumptions</h2>
 <p><strong>A1.</strong> Linear in Parameters (same as before), but all variables are stationary and weakly dependent.</p>
 <p><strong>A2.</strong> No Perfect Colinearity</p>
 <p><strong>A3.</strong> Zero Conditional Mean: <span class="math inline">\(E(u_t|x_t)=0\)</span> Contemporaneous exogeneity!</p>
@@ -607,7 +611,7 @@ Fernando Rios-Avila
 <li>Under weak exogeneity, lags can be included.</li>
 </ul>
 </section>
-<section id="how-do-things-change-assumptions" class="slide level2">
+<section id="how-do-things-change-assumptions-1" class="slide level2">
 <h2>How do things change: Assumptions</h2>
 <p><strong>A4.</strong> Homoskedasticity: <span class="math inline">\(Var(u_t|x_t)=\sigma^2\)</span> (also we just need contemporaenous homoskedasticity)</p>
 <p><strong>A5.</strong> No Serial Correlation: <span class="math inline">\(cov(u_t,u_s|x_t)=0\)</span> for <span class="math inline">\(t\neq s\)</span></p>
@@ -619,7 +623,7 @@ Fernando Rios-Avila
 <section id="order-of-integration" class="slide level2">
 <h2>Order of Integration</h2>
 <ul>
-<li><p>As you may expect, many interesiting time series are not stationary. However, we may want to use for analysis</p>
+<li><p>As you may expect, many interesting time series are not stationary. However, we may want to use for analysis</p>
 <ul>
 <li>to do so, we need to understand their taxonomy (in TS) so we can make them stationary.</li>
 </ul></li>
@@ -653,7 +657,7 @@ Fernando Rios-Avila
 <section>
 <section id="how-to-decide-if-a-series-is-i1-or-has-a-unit-root" class="title-slide slide level1 center">
 <h1>How to decide if a series is <span class="math inline">\(I(1)\)</span> or has a unit root?</h1>
-
+<p>or if its not stationary</p>
 </section>
 <section id="naive-approach.-look-into-rho" class="slide level2">
 <h2>Naive Approach. Look into <span class="math inline">\(\rho\)</span></h2>
@@ -731,7 +735,7 @@ Fernando Rios-Avila
 </section>
 <section id="example" class="slide level2 scrollable">
 <h2>Example</h2>
-<div id="dba7ab34" class="cell larger" data-execution_count="2">
+<div id="b1751dc6" class="cell larger" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">qui</span>:frause fertil3, <span class="kw">clear</span></span>
@@ -745,7 +749,7 @@ Time variable: year, 1913 to 1984
 </div>
 </div>
 <p>The model: <span class="math inline">\(gfr = \alpha + \delta_0 pe_t + \delta_1 pe_{t-1} + \delta_2 pe_{t-2}+ e_t\)</span></p>
-<div id="cbc4a45a" class="cell larger" data-execution_count="3">
+<div id="cd2f216a" class="cell larger" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">reg</span> gfr pe <span class="ot">l</span>.pe l2.pe  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -773,7 +777,7 @@ Time variable: year, 1913 to 1984
 </div>
 <p>Are <span class="math inline">\(gfr\)</span> and <span class="math inline">\(pe\)</span> Stationary?</p>
 <p>Naive approach: Look at auto correlation:</p>
-<div id="0889bb9a" class="cell larger" data-execution_count="4">
+<div id="85ff964b" class="cell larger" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1"></a>** Naive apprach</span>
@@ -795,7 +799,7 @@ Time variable: year, 1913 to 1984
 </div>
 </div>
 <p>Formal Approach: Dickey-Fuller Test for Unit Root</p>
-<div id="7a0a1dc9" class="cell" data-execution_count="5">
+<div id="67b00f40" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">reg</span> <span class="kw">d</span>.pe <span class="ot">l</span>.pe, nohead</span>
@@ -821,7 +825,7 @@ Time variable: year, 1913 to 1984
 </div>
 </div>
 <p>Same conclusions. Are their differences stationary?</p>
-<div id="16a5d700" class="cell" data-execution_count="6">
+<div id="c55cf22b" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">gen</span> dpe = <span class="kw">d</span>.pe </span>
@@ -851,7 +855,7 @@ Time variable: year, 1913 to 1984
 </div>
 </div>
 <p>Now it should be better to use model in differences for analysi:</p>
-<div id="ef9e8558" class="cell" data-execution_count="7">
+<div id="0e7625ee" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">reg</span> dgfr dpe <span class="ot">l</span>.dpe l2.dpe  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -908,7 +912,7 @@ Time variable: year, 1913 to 1984
 </section>
 <section id="test-for-serial-correlation" class="slide level2">
 <h2>Test for Serial Correlation</h2>
-<h3 id="strickly-exogenous-regressors">Strickly Exogenous Regressors</h3>
+<h3 id="strictly-exogenous-regressors">Strictly Exogenous Regressors</h3>
 <p>Model: <span class="math inline">\(y_t = \beta_0 + \beta_1 x_{1,t} + \dots + \beta_k x_{k,t} + u_t\)</span> and: <span class="math inline">\(u_t=\rho u_{t-1}+e_t\)</span></p>
 <p>If there is no serial correlation, then we simply need to test if <span class="math inline">\(\rho=0\)</span>, using a t-statistic.</p>
 <h3 id="durbin-watson-test">Durbin Watson Test</h3>
@@ -920,11 +924,255 @@ Time variable: year, 1913 to 1984
 <li>If there is possitive serial correlation, then <span class="math inline">\(DW&lt;2\)</span>.</li>
 <li>A less practical test, but valid in small samples</li>
 </ul>
+</section>
+<section id="test-for-serial-correlation-1" class="slide level2">
+<h2>Test for Serial Correlation</h2>
+<h3 id="weakly-exogenous-regressors">Weakly Exogenous Regressors</h3>
+<p>Model: <span class="math inline">\(y_t = \beta_0 + \beta_1 x_{1,t} + \dots + \beta_k x_{k,t} + u_t\)</span> and: <span class="math inline">\(u_t=\rho u_{t-1}+\gamma_1 x_{1,t} + \dots + \gamma_k x_{k,t}+e_t\)</span></p>
+<p><span class="math inline">\(H0: \rho=0\)</span> vs <span class="math inline">\(H1: \rho\neq 0\)</span></p>
+<h3 id="testing-for-higher-order-correlation">Testing for higher order correlation</h3>
+<p>and: <span class="math inline">\(u_t=\rho_1 u_{t-1}+\rho_2 u_{t-2}+\gamma_1 x_{1,t} + \dots + \gamma_k x_{k,t}+e_t\)</span></p>
+<p><span class="math inline">\(H0: \rho_1=0 \&amp; \rho_2=0\)</span> vs <span class="math inline">\(H1: \text{one is not equal to }0\)</span></p>
+<p>This test is called the Breusch-Godfrey test.</p>
+</section>
+<section id="correcting-for-serial-correlation" class="slide level2">
+<h2>Correcting for Serial Correlation:</h2>
+<p>There are two ways to correct for Serial Correlation:</p>
+<ul>
+<li>Prais-Winsten and Cochrane-Orcutt regression (Feasible GLS)
+<ul>
+<li>Requires variables to be strictly exogenous regressors (no lagged dependent variables)</li>
+</ul></li>
+<li>Newey-West Standard Errors (this is the equivalent to Robust)
+<ul>
+<li>General setup.</li>
+</ul></li>
+</ul>
+</section>
+<section id="prais-winsten-and-cochrane-orcutt-regression" class="slide level2">
+<h2>Prais-Winsten and Cochrane-Orcutt regression</h2>
+<p>Consider the model:</p>
+<p><span class="math display">\[y_t = \beta_0 + \beta_1 x_{1,t} + \beta_2 x_{2,t} + u_t\]</span></p>
+<p>where <span class="math inline">\(u_t=\rho u_{t-1}+e_{t}\)</span></p>
+<p>This model has serial correlation, which will affect the standard errors of the OLS estimator.</p>
+<ul>
+<li>if we know (or estimate) <span class="math inline">\(\rho\)</span>, we can transform the data and eliminate the serial correlation</li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+y_t &amp;= \beta_0 + \beta_1 x_{1,t} + \beta_2 x_{2,t} + u_t \\\
+\rho y_{t-1} &amp;= \rho \beta_0 + \rho \beta_1 x_{1,t-1} + \rho \beta_2 x_{2,t-1} + \rho  u_{t-1} \\\
+\tilde y_t &amp;= \beta_0 (1-\rho) + \beta_1 \tilde x_{1,t} + \beta_2 \tilde x_{2,t} +  e_t
+\end{aligned}
+\]</span></p>
+<ul>
+<li><p>From here, we can obtain the errors <span class="math inline">\(e_t\)</span> and <span class="math inline">\(u_t\)</span>, re estimate <span class="math inline">\(\rho\)</span>, and re estimate the model, until <span class="math inline">\(\rho\)</span> no longer changes.</p></li>
+<li><p>This is called the Cochrane-Orcutt procedure.</p></li>
+</ul>
+</section>
+<section id="prais-winsten-and-cochrane-orcutt-regression-1" class="slide level2 scrollable">
+<h2>Prais-Winsten and Cochrane-Orcutt regression</h2>
+<ul>
+<li>The Prais-Winsten procedures is also similar to the Cochrane-Orcutt procedure, but you do not “loose” the first observation.</li>
+<li>Specifically, the first observation is estimated as:</li>
+</ul>
+<p><span class="math display">\[(1-\rho^2)^{1/2} y_1 =(1-\rho^2)^{1/2}\beta_0 + (1-\rho^2)^{1/2}\beta_1 x_{1,1} + (1-\rho^2)^{1/2}\beta_2 x_{2,1} + (1-\rho^2)^{1/2} u_1\]</span></p>
+<ul>
+<li>Other features:
+<ul>
+<li>PW can be more efficient than CO, because of the “saved observation”</li>
+<li>Both can be used when serial correlation is of higher order, but only CO can be used if order is 3 or higher</li>
+<li>Both methods are iterative</li>
+</ul></li>
+</ul>
+<div id="2c679d9b" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1"></a>frause phillips, <span class="kw">clear</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="kw">tsset</span> <span class="fu">year</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="kw">reg</span> inf unem</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Time variable: year, 1948 to 2003
+        Delta: 1 unit
+
+      Source |       SS           df       MS      Number of obs   =        56
+-------------+----------------------------------   F(1, 54)        =      3.58
+       Model |   31.599858         1   31.599858   Prob &gt; F        =    0.0639
+    Residual |  476.815691        54   8.8299202   R-squared       =    0.0622
+-------------+----------------------------------   Adj R-squared   =    0.0448
+       Total |  508.415549        55  9.24391907   Root MSE        =    2.9715
+
+------------------------------------------------------------------------------
+         inf | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        unem |   .5023782   .2655624     1.89   0.064    -.0300424    1.034799
+       _cons |   1.053566   1.547957     0.68   0.499    -2.049901    4.157033
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<div id="8ce4a2d3" class="cell" data-execution_count="9">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">prais</span> inf unem, <span class="kw">corc</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="kw">prais</span> inf unem, </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Iteration 0:   rho = 0.0000
+Iteration 1:   rho = 0.5721
+Iteration 2:   rho = 0.7204
+Iteration 3:   rho = 0.7683
+Iteration 4:   rho = 0.7793
+Iteration 5:   rho = 0.7815
+Iteration 6:   rho = 0.7819
+Iteration 7:   rho = 0.7820
+Iteration 8:   rho = 0.7820
+Iteration 9:   rho = 0.7820
+Iteration 10:  rho = 0.7820
+
+Cochrane–Orcutt AR(1) regression with iterated estimates
+
+      Source |       SS           df       MS      Number of obs   =        55
+-------------+----------------------------------   F(1, 53)        =      5.09
+       Model |  23.3857044         1  23.3857044   Prob &gt; F        =    0.0282
+    Residual |  243.353574        53  4.59157686   R-squared       =    0.0877
+-------------+----------------------------------   Adj R-squared   =    0.0705
+       Total |  266.739278        54  4.93961626   Root MSE        =    2.1428
+
+------------------------------------------------------------------------------
+         inf | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        unem |  -.6639584   .2942027    -2.26   0.028    -1.254054   -.0738626
+       _cons |   7.287078   2.163178     3.37   0.001     2.948291    11.62586
+-------------+----------------------------------------------------------------
+         rho |   .7820093
+------------------------------------------------------------------------------
+Durbin–Watson statistic (original)    = 0.801482
+Durbin–Watson statistic (transformed) = 1.600203
+
+Iteration 0:   rho = 0.0000
+Iteration 1:   rho = 0.5721
+Iteration 2:   rho = 0.7350
+Iteration 3:   rho = 0.7792
+Iteration 4:   rho = 0.7871
+Iteration 5:   rho = 0.7883
+Iteration 6:   rho = 0.7885
+Iteration 7:   rho = 0.7885
+Iteration 8:   rho = 0.7885
+Iteration 9:   rho = 0.7885
+
+Prais–Winsten AR(1) regression with iterated estimates
+
+      Source |       SS           df       MS      Number of obs   =        56
+-------------+----------------------------------   F(1, 54)        =      8.39
+       Model |   38.377534         1   38.377534   Prob &gt; F        =    0.0054
+    Residual |  246.917431        54  4.57254502   R-squared       =    0.1345
+-------------+----------------------------------   Adj R-squared   =    0.1185
+       Total |  285.294965        55  5.18718118   Root MSE        =    2.1384
+
+------------------------------------------------------------------------------
+         inf | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        unem |  -.7139659   .2897858    -2.46   0.017    -1.294951   -.1329804
+       _cons |   7.999443   2.048343     3.91   0.000     3.892762    12.10612
+-------------+----------------------------------------------------------------
+         rho |   .7885234
+------------------------------------------------------------------------------
+Durbin–Watson statistic (original)    = 0.801482
+Durbin–Watson statistic (transformed) = 1.913928</code></pre>
+</div>
+</div>
+</section>
+<section id="newey-west-standard-errors" class="slide level2 scrollable">
+<h2>Newey-West Standard Errors</h2>
+<ul>
+<li><p>The Newey-West standard errors are similar to the robust standard errors, but they take into account the serial correlation of the error term.</p></li>
+<li><p>The idea is to estimate an inflation factor that corrects Standard errors for serial correlation.</p></li>
+</ul>
+<p><span class="math inline">\(\hat v = \sum_{t=1}^T \hat a_t^2 + 2 \sum_{h=1}^g \left[1-\frac{h}{g+1}\right] \left( \sum_{t=h+1}^{T} \hat a_t \hat a_{t-h}\right)\)</span></p>
+<p>with <span class="math inline">\(\hat a_t = \hat r_t \hat u_t\)</span></p>
+<ul>
+<li><p>Then <span class="math inline">\(SE_c (\beta) = \sqrt{\hat v} \left(\frac{SE(\beta)}{\sigma}\right)^2\)</span></p></li>
+<li><p>In other words, this kind of corrects for the fact that the error term is correlated across time.</p></li>
+</ul>
+<div id="38f6a616" class="cell" data-execution_count="10">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">newey</span> inf unem, lag(0)</span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="kw">newey</span> inf unem, lag(1)</span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="kw">newey</span> inf unem, lag(2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Regression with Newey–West standard errors      Number of obs     =         56
+Maximum lag = 0                                 F(  1,        54) =       4.11
+                                                Prob &gt; F          =     0.0477
+
+------------------------------------------------------------------------------
+             |             Newey–West
+         inf | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        unem |   .5023782   .2479249     2.03   0.048     .0053187    .9994378
+       _cons |   1.053566   1.379772     0.76   0.448    -1.712711    3.819842
+------------------------------------------------------------------------------
+
+Regression with Newey–West standard errors      Number of obs     =         56
+Maximum lag = 1                                 F(  1,        54) =       3.25
+                                                Prob &gt; F          =     0.0769
+
+------------------------------------------------------------------------------
+             |             Newey–West
+         inf | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        unem |   .5023782    .278577     1.80   0.077    -.0561351    1.060892
+       _cons |   1.053566   1.464589     0.72   0.475    -1.882759     3.98989
+------------------------------------------------------------------------------
+
+Regression with Newey–West standard errors      Number of obs     =         56
+Maximum lag = 2                                 F(  1,        54) =       3.13
+                                                Prob &gt; F          =     0.0827
+
+------------------------------------------------------------------------------
+             |             Newey–West
+         inf | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        unem |   .5023782   .2841794     1.77   0.083    -.0673673    1.072124
+       _cons |   1.053566   1.424115     0.74   0.463    -1.801613    3.908744
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="advanced-topics-of-interest" class="slide level2">
+<h2>Advanced Topics of interest</h2>
+<ul>
+<li>Cointegration
+<ul>
+<li>Up to this point I said that we want variables to be I(0) to make regressions (stationary)</li>
+<li>However, there are cases where we want to regress variables that are I(1) (non-stationary)</li>
+<li>If they are cointegrated, then we can regress them, because they share a long term relationship.</li>
+</ul></li>
+<li>Error Correction Models
+<ul>
+<li>If variables are cointegrated, then we can use ECM to estimate the long term relationship, and the short term dynamics.</li>
+<li>Useful to see how fast deviations from long term relationship are corrected.</li>
+</ul></li>
+<li>Forcasting
+<ul>
+<li>ARIMA models, and VAR models (Vector Autoregressions) can be used for forcasting.</li>
+<li>Forcating implies making predictions about the future, based on the past, accounting for the errors propagation.</li>
+<li>Variable selection, temporal causation (Granger Causality), and other techniques are used for this.</li>
+</ul></li>
+</ul>
+</section></section>
+<section id="and-we-are-done" class="title-slide slide level1 center">
+<h1>And we are done!</h1>
 
 <div class="footer footer-default">
 
 </div>
-</section></section>
+</section>
     </div>
   </div>
 

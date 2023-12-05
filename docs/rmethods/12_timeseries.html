@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.455">
+  <meta name="generator" content="quarto-1.4.512">
 
   <meta name="author" content="Fernando Rios-Avila">
   <title>Econometrics MSC Levy - Times Series Part-I</title>
@@ -626,7 +626,7 @@ x_{T1} &amp; x_{T2} &amp; \dots &amp; x_{Tk}
 <p>A4: Perhaps? Usually there is a direct relationship between deficit and uncertainty, which will generate heteroskedasticity.</p>
 <p>A5: NO! There could be many things in <span class="math inline">\(u_t\)</span> that are correlated across time. (taxes?)</p>
 <p>A6: NO…the errors are almost never normal</p>
-<div id="3cba7351" class="cell larger" data-execution_count="1">
+<div id="d64d1a1a" class="cell larger" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a>frause intdef, <span class="kw">clear</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="kw">reg</span> i3 inf def</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -703,7 +703,7 @@ x_{T1} &amp; x_{T2} &amp; \dots &amp; x_{Tk}
 <li><p>Ignoring this may cause problems, as one may identify spurious relationships. (things that look to have significant effects, even tho they are not related)</p></li>
 <li><p>Consider the following model (investment on housing, and housing prices):</p></li>
 </ul>
-<div id="136614d6" class="cell larger" data-execution_count="2">
+<div id="b1e4df04" class="cell larger" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">qui</span>:frause hseinv,<span class="kw">clear</span></span>
@@ -730,7 +730,7 @@ x_{T1} &amp; x_{T2} &amp; \dots &amp; x_{Tk}
 <li>If we estimate this model, we find a very strong relationship, perhaps because of common trends. Adding a trend, however, may change the results.</li>
 </ul>
 <p><span class="math display">\[E(log(invpc_t)|x) = -20.04 -0.38 log(price) + 0.009 year \]</span></p>
-<div id="378c7668" class="cell larger" data-execution_count="3">
+<div id="6422cb75" class="cell larger" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">reg</span> linvpc lprice  <span class="fu">year</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

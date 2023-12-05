@@ -150,6 +150,9 @@ The Series repeats itself.
     - Covariance does not depend on time. 
     - Covariance bettween $x_t$ and $x_{t+k}$ is zero for $k>1$.
 
+- ARMA(1,1) $x_t = \rho x_{t-1} + \epsilon_t + \theta \epsilon_{t-1}$
+    
+
 ## Special Case AR(1) with $\rho=1$
 
 -   If $\rho=1$, we have a random walk process $x_t = x_{t-1} + \epsilon_t$
@@ -185,6 +188,9 @@ $x_t = 0.5*x_{t-1}+0.1 t + u_t$
 $$x_t = x_{t-1} + 0.1 + \epsilon_t$$
 
 ![](images/paste-16.png)
+
+
+
 ## How do things change: Assumptions
 
 **A1.** Linear in Parameters (same as before), but all variables are stationary and weakly dependent.
@@ -216,7 +222,7 @@ These two assumptions that make "life" easier for estimating standard errors bec
 
 ## Order of Integration
 
-- As you may expect, many interesiting time series are not stationary. However, we may want to use for analysis
+- As you may expect, many interesting time series are not stationary. However, we may want to use for analysis
   - to do so, we need to understand their taxonomy (in TS) so we can make them stationary.
   
 -  A series is said to be integrated of order $d$, denoted $I(d)$, if it can be made stationary by taking $d$ differences.
@@ -255,7 +261,8 @@ graph export images/fig13_4.png, replace
 
 ![](images/fig13_4.png)
 
-# How to decide if a series is $I(1)$ or has a unit root?
+# How to decide if a series is $I(1)$ or has a unit root? 
+or if its not stationary
 
 ## Naive Approach. Look into $\rho$
 
@@ -410,11 +417,94 @@ $H0: \rho_1=0 \& \rho_2=0$ vs $H1: \text{one is not equal to }0$
 
 This test is called the Breusch-Godfrey test.
 
-## Correcting for Serial Correlation: Strictly Exogenous Regressors
+## Correcting for Serial Correlation: 
 
-This is an application of GLS and FGLS
+There are two ways to correct for Serial Correlation:
 
-Comment on HAC
+- Prais-Winsten and Cochrane-Orcutt regression (Feasible GLS)
+  - Requires variables to be strictly exogenous regressors (no lagged dependent variables)
+- Newey-West Standard Errors (this is the equivalent to Robust)
+  - General setup.
 
-Differentiation may also help
+## Prais-Winsten and Cochrane-Orcutt regression
 
+Consider the model:
+
+$$y_t = \beta_0 + \beta_1 x_{1,t} + \beta_2 x_{2,t} + u_t$$
+
+where $u_t=\rho u_{t-1}+e_{t}$
+
+This model has serial correlation, which will affect the standard errors of the OLS estimator.
+
+- if we know (or estimate) $\rho$, we can transform the data and eliminate the serial correlation
+
+$$\begin{aligned}
+y_t &= \beta_0 + \beta_1 x_{1,t} + \beta_2 x_{2,t} + u_t \\\
+\rho y_{t-1} &= \rho \beta_0 + \rho \beta_1 x_{1,t-1} + \rho \beta_2 x_{2,t-1} + \rho  u_{t-1} \\\
+\tilde y_t &= \beta_0 (1-\rho) + \beta_1 \tilde x_{1,t} + \beta_2 \tilde x_{2,t} +  e_t
+\end{aligned}
+$$
+
+- From here, we can obtain the errors $e_t$ and $u_t$, re estimate $\rho$, and re estimate the model, until $\rho$ no longer changes. 
+
+- This is called the Cochrane-Orcutt procedure.
+ 
+## Prais-Winsten and Cochrane-Orcutt regression {.scrollable}
+
+- The Prais-Winsten procedures is also similar to the Cochrane-Orcutt procedure, but you do not "loose" the first observation.
+- Specifically, the first observation is estimated as:
+
+$$(1-\rho^2)^{1/2} y_1 =(1-\rho^2)^{1/2}\beta_0 + (1-\rho^2)^{1/2}\beta_1 x_{1,1} + (1-\rho^2)^{1/2}\beta_2 x_{2,1} + (1-\rho^2)^{1/2} u_1$$
+
+- Other features:
+  - PW can be more efficient than CO, because of the "saved observation"
+  - Both can be used when serial correlation is of higher order, but only CO can be used if order is 3 or higher
+  - Both methods are iterative
+
+```{stata}
+frause phillips, clear
+tsset year
+reg inf unem
+```
+
+```{stata}
+prais inf unem, corc
+
+prais inf unem, 
+```
+
+## Newey-West Standard Errors {.scrollable}
+
+- The Newey-West standard errors are similar to the robust standard errors, but they take into account the serial correlation of the error term.
+
+- The idea is to estimate an inflation factor that corrects Standard errors for serial correlation.
+
+$\hat v = \sum_{t=1}^T \hat a_t^2 + 2 \sum_{h=1}^g \left[1-\frac{h}{g+1}\right] \left( \sum_{t=h+1}^{T} \hat a_t \hat a_{t-h}\right)$
+
+with $\hat a_t = \hat r_t \hat u_t$
+
+- Then $SE_c (\beta) = \sqrt{\hat v} \left(\frac{SE(\beta)}{\sigma}\right)^2$
+  
+- In other words, this kind of corrects for the fact that the error term is correlated across time.
+
+```{stata}
+newey inf unem, lag(0)
+newey inf unem, lag(1)
+newey inf unem, lag(2)
+```
+
+## Advanced Topics of interest
+
+- Cointegration 
+  - Up to this point I said that we want variables to be I(0) to make regressions (stationary)
+  - However, there are cases where we want to regress variables that are I(1) (non-stationary)
+  - If they are cointegrated, then we can regress them, because they share a long term relationship.
+- Error Correction Models
+  - If variables are cointegrated, then we can use ECM to estimate the long term relationship, and the short term dynamics.
+  - Useful to see how fast deviations from long term relationship are corrected.
+- Forcasting
+  - ARIMA models, and VAR models (Vector Autoregressions) can be used for forcasting.
+  - Forcating implies making predictions about the future, based on the past, accounting for the errors propagation.
+  - Variable selection, temporal causation (Granger Causality), and other techniques are used for this.
+  
+# And we are done! 
