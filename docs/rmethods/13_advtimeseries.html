@@ -735,7 +735,7 @@ Fernando Rios-Avila
 </section>
 <section id="example" class="slide level2 scrollable">
 <h2>Example</h2>
-<div id="b1751dc6" class="cell larger" data-execution_count="2">
+<div id="d83c69c3" class="cell larger" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">qui</span>:frause fertil3, <span class="kw">clear</span></span>
@@ -749,7 +749,7 @@ Time variable: year, 1913 to 1984
 </div>
 </div>
 <p>The model: <span class="math inline">\(gfr = \alpha + \delta_0 pe_t + \delta_1 pe_{t-1} + \delta_2 pe_{t-2}+ e_t\)</span></p>
-<div id="cd2f216a" class="cell larger" data-execution_count="3">
+<div id="dfa05c6e" class="cell larger" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">reg</span> gfr pe <span class="ot">l</span>.pe l2.pe  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -777,7 +777,7 @@ Time variable: year, 1913 to 1984
 </div>
 <p>Are <span class="math inline">\(gfr\)</span> and <span class="math inline">\(pe\)</span> Stationary?</p>
 <p>Naive approach: Look at auto correlation:</p>
-<div id="85ff964b" class="cell larger" data-execution_count="4">
+<div id="973830f7" class="cell larger" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1"></a>** Naive apprach</span>
@@ -799,7 +799,7 @@ Time variable: year, 1913 to 1984
 </div>
 </div>
 <p>Formal Approach: Dickey-Fuller Test for Unit Root</p>
-<div id="67b00f40" class="cell" data-execution_count="5">
+<div id="db8f0ef4" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">reg</span> <span class="kw">d</span>.pe <span class="ot">l</span>.pe, nohead</span>
@@ -825,7 +825,7 @@ Time variable: year, 1913 to 1984
 </div>
 </div>
 <p>Same conclusions. Are their differences stationary?</p>
-<div id="c55cf22b" class="cell" data-execution_count="6">
+<div id="aab4f80c" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">gen</span> dpe = <span class="kw">d</span>.pe </span>
@@ -855,7 +855,7 @@ Time variable: year, 1913 to 1984
 </div>
 </div>
 <p>Now it should be better to use model in differences for analysi:</p>
-<div id="0e7625ee" class="cell" data-execution_count="7">
+<div id="ff10894b" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">reg</span> dgfr dpe <span class="ot">l</span>.dpe l2.dpe  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -984,7 +984,7 @@ y_t &amp;= \beta_0 + \beta_1 x_{1,t} + \beta_2 x_{2,t} + u_t \\\
 <li>Both methods are iterative</li>
 </ul></li>
 </ul>
-<div id="2c679d9b" class="cell" data-execution_count="8">
+<div id="301fce98" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1"></a>frause phillips, <span class="kw">clear</span></span>
@@ -1011,7 +1011,7 @@ Time variable: year, 1948 to 2003
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
-<div id="8ce4a2d3" class="cell" data-execution_count="9">
+<div id="807662a6" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">prais</span> inf unem, <span class="kw">corc</span></span>
@@ -1097,7 +1097,7 @@ Durbin–Watson statistic (transformed) = 1.913928</code></pre>
 <li><p>Then <span class="math inline">\(SE_c (\beta) = \sqrt{\hat v} \left(\frac{SE(\beta)}{\sigma}\right)^2\)</span></p></li>
 <li><p>In other words, this kind of corrects for the fact that the error term is correlated across time.</p></li>
 </ul>
-<div id="38f6a616" class="cell" data-execution_count="10">
+<div id="ad699ad3" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">newey</span> inf unem, lag(0)</span>
@@ -1144,20 +1144,71 @@ Maximum lag = 2                                 F(  1,        54) =       3.13
 </div>
 </div>
 </section>
-<section id="advanced-topics-of-interest" class="slide level2">
-<h2>Advanced Topics of interest</h2>
+<section id="cointegration" class="slide level2">
+<h2>Cointegration</h2>
 <ul>
-<li>Cointegration
+<li><p>As previously mentioned, most interesting time series are not stationary.</p></li>
+<li><p>And, when using non-stationary data, we may find spurious relationships. But what if the relation is not spurious?</p></li>
+<li><p>Consider the following model:</p>
+<p><span class="math inline">\(y_t = \beta_0 + \beta_1 x_{1,t} + \beta_2 x_{2,t} + u_t\)</span></p></li>
+<li><p>If <span class="math inline">\(y_t\)</span> and <span class="math inline">\(x_{1,t}\)</span> are <span class="math inline">\(I(1)\)</span>, then the model is likely to be spurious (common trends). However, it may be possible that there is a causal relationship between these variables.</p></li>
+<li><p>If they indeed have a causal relationship, then they are said to be cointegrated.</p></li>
+</ul>
+</section>
+<section id="cointegration-1" class="slide level2">
+<h2>Cointegration</h2>
 <ul>
-<li>Up to this point I said that we want variables to be I(0) to make regressions (stationary)</li>
-<li>However, there are cases where we want to regress variables that are I(1) (non-stationary)</li>
-<li>If they are cointegrated, then we can regress them, because they share a long term relationship.</li>
-</ul></li>
-<li>Error Correction Models
+<li>But how do we know if two variables are cointegrated?</li>
+</ul>
+<p><strong>s1:</strong> Check if all variables are <span class="math inline">\(I(1)\)</span>. If they are, then you can check for cointegration.</p>
+<p><strong>s2:</strong> Estimate the model, and obtain the residuals <span class="math inline">\(\hat u_t\)</span>.</p>
+<p><strong>s3:</strong> Test if <span class="math inline">\(\hat u_t\)</span> is <span class="math inline">\(I(0)\)</span>.</p>
 <ul>
-<li>If variables are cointegrated, then we can use ECM to estimate the long term relationship, and the short term dynamics.</li>
-<li>Useful to see how fast deviations from long term relationship are corrected.</li>
-</ul></li>
+<li><p>If that is the case, then the variables are cointegrated (Share a long term relationship)</p></li>
+<li><p>If not, the relationship is spurious</p></li>
+<li><p>How do we test if <span class="math inline">\(\hat u_t\)</span> is <span class="math inline">\(I(0)\)</span>? <span class="math inline">\(\rightarrow\)</span> Unit Root test!</p></li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>SL</th>
+<th>1%</th>
+<th>2.5%</th>
+<th>5%</th>
+<th>10%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>No Trend</td>
+<td>-3.9</td>
+<td>-3.59</td>
+<td>-3.34</td>
+<td>-3.04</td>
+</tr>
+<tr class="even">
+<td>With Trend</td>
+<td>-4.32</td>
+<td>-4.03</td>
+<td>-3.78</td>
+<td>-3.50</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="error-correction-models" class="slide level2">
+<h2>Error Correction Models</h2>
+<ul>
+<li>If two variables are cointegrated, then they share a long term relationship.</li>
+<li>However, you may also be interested in the short term dynamics of the relationship.</li>
+<li>To do this, you can use an Error Correction Model (ECM)</li>
+</ul>
+<p><span class="math inline">\(\Delta y_t = \beta_0 + \beta_1 \Delta x_{1,t} + \beta_2 \Delta x_{2,t} + \gamma \hat u_{t-1}+ e_t\)</span></p>
+<p>Where <span class="math inline">\(\gamma\)</span> is the short term correction term.</p>
+</section>
+<section id="other-topics-of-interest" class="slide level2">
+<h2>Other topics of interest</h2>
+<ul>
 <li>Forcasting
 <ul>
 <li>ARIMA models, and VAR models (Vector Autoregressions) can be used for forcasting.</li>

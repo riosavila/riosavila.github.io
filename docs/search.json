@@ -6522,5 +6522,33 @@
     "title": "Times Series Part-II",
     "section": "Advanced Topics of interest",
     "text": "Advanced Topics of interest\n\nCointegration\n\nUp to this point I said that we want variables to be I(0) to make regressions (stationary)\nHowever, there are cases where we want to regress variables that are I(1) (non-stationary)\nIf they are cointegrated, then we can regress them, because they share a long term relationship.\n\nError Correction Models\n\nIf variables are cointegrated, then we can use ECM to estimate the long term relationship, and the short term dynamics.\nUseful to see how fast deviations from long term relationship are corrected.\n\nForcasting\n\nARIMA models, and VAR models (Vector Autoregressions) can be used for forcasting.\nForcating implies making predictions about the future, based on the past, accounting for the errors propagation.\nVariable selection, temporal causation (Granger Causality), and other techniques are used for this."
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#cointegration",
+    "href": "rmethods/13_advtimeseries.html#cointegration",
+    "title": "Times Series Part-II",
+    "section": "Cointegration",
+    "text": "Cointegration\n\nAs previously mentioned, most interesting time series are not stationary.\nAnd, when using non-stationary data, we may find spurious relationships. But what if the relation is not spurious?\nConsider the following model:\n\\(y_t = \\beta_0 + \\beta_1 x_{1,t} + \\beta_2 x_{2,t} + u_t\\)\nIf \\(y_t\\) and \\(x_{1,t}\\) are \\(I(1)\\), then the model is likely to be spurious (common trends). However, it may be possible that there is a causal relationship between these variables.\nIf they indeed have a causal relationship, then they are said to be cointegrated."
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#cointegration-1",
+    "href": "rmethods/13_advtimeseries.html#cointegration-1",
+    "title": "Times Series Part-II",
+    "section": "Cointegration",
+    "text": "Cointegration\n\nBut how do we know if two variables are cointegrated?\n\ns1: Check if all variables are \\(I(1)\\). If they are, then you can check for cointegration.\ns2: Estimate the model, and obtain the residuals \\(\\hat u_t\\).\ns3: Test if \\(\\hat u_t\\) is \\(I(0)\\).\n\nIf that is the case, then the variables are cointegrated (Share a long term relationship)\nIf not, the relationship is spurious\nHow do we test if \\(\\hat u_t\\) is \\(I(0)\\)? \\(\\rightarrow\\) Unit Root test!\n\n\n\n\nSL\n1%\n2.5%\n5%\n10%\n\n\n\n\nNo Trend\n-3.9\n-3.59\n-3.34\n-3.04\n\n\nWith Trend\n-4.32\n-4.03\n-3.78\n-3.50"
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#other-topics-of-interest",
+    "href": "rmethods/13_advtimeseries.html#other-topics-of-interest",
+    "title": "Times Series Part-II",
+    "section": "Other topics of interest",
+    "text": "Other topics of interest\n\nForcasting\n\nARIMA models, and VAR models (Vector Autoregressions) can be used for forcasting.\nForcating implies making predictions about the future, based on the past, accounting for the errors propagation.\nVariable selection, temporal causation (Granger Causality), and other techniques are used for this."
+  },
+  {
+    "objectID": "rmethods/13_advtimeseries.html#error-correction-models",
+    "href": "rmethods/13_advtimeseries.html#error-correction-models",
+    "title": "Times Series Part-II",
+    "section": "Error Correction Models",
+    "text": "Error Correction Models\n\nIf two variables are cointegrated, then they share a long term relationship.\nHowever, you may also be interested in the short term dynamics of the relationship.\nTo do this, you can use an Error Correction Model (ECM)\n\n\\(\\Delta y_t = \\beta_0 + \\beta_1 \\Delta x_{1,t} + \\beta_2 \\Delta x_{2,t} + \\gamma \\hat u_{t-1}+ e_t\\)\nWhere \\(\\gamma\\) is the short term correction term."
   }
 ]

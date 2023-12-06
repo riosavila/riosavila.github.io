@@ -493,15 +493,52 @@ newey inf unem, lag(1)
 newey inf unem, lag(2)
 ```
 
-## Advanced Topics of interest
+## Cointegration
 
-- Cointegration 
-  - Up to this point I said that we want variables to be I(0) to make regressions (stationary)
-  - However, there are cases where we want to regress variables that are I(1) (non-stationary)
-  - If they are cointegrated, then we can regress them, because they share a long term relationship.
-- Error Correction Models
-  - If variables are cointegrated, then we can use ECM to estimate the long term relationship, and the short term dynamics.
-  - Useful to see how fast deviations from long term relationship are corrected.
+- As previously mentioned, most interesting time series are not stationary. 
+- And, when using non-stationary data, we may find spurious relationships. But what if the relation is not spurious?
+
+- Consider the following model: 
+
+  $y_t = \beta_0 + \beta_1 x_{1,t} + \beta_2 x_{2,t} + u_t$
+
+- If $y_t$ and $x_{1,t}$ are $I(1)$, then the model is likely to be spurious (common trends). However, it may be possible that there is a causal relationship between these variables.
+
+- If they indeed have a causal relationship, then they are said to be cointegrated.
+
+## Cointegration 
+
+- But how do we know if two variables are cointegrated?
+
+**s1:** Check if all variables are $I(1)$. If they are, then you can check for cointegration.
+
+**s2:** Estimate the model, and obtain the residuals $\hat u_t$. 
+
+**s3:** Test if $\hat u_t$ is $I(0)$. 
+
+  - If that is the case, then the variables are cointegrated (Share a long term relationship)
+  - If not, the relationship is spurious
+
+- How do we test if $\hat u_t$ is $I(0)$? $\rightarrow$ Unit Root test! 
+
+| SL 	| 1% 	| 2.5% 	| 5% 	| 10% |
+|----	|----	|----	|----	|----	|
+| No Trend 	|  -3.9 	| -3.59   | -3.34| -3.04|
+| With Trend 	|  -4.32 	| -4.03 	| -3.78 | -3.50|
+
+## Error Correction Models
+
+- If two variables are cointegrated, then they share a long term relationship.
+- However, you may also be interested in the short term dynamics of the relationship.
+- To do this, you can use an Error Correction Model (ECM)
+
+$\Delta y_t = \beta_0 + \beta_1 \Delta x_{1,t} + \beta_2 \Delta x_{2,t} + \gamma \hat u_{t-1}+ e_t$
+
+Where $\gamma$ is the short term correction term. 
+
+## Other topics of interest
+
+ 
 - Forcasting
   - ARIMA models, and VAR models (Vector Autoregressions) can be used for forcasting.
   - Forcating implies making predictions about the future, based on the past, accounting for the errors propagation.
