@@ -44,7 +44,7 @@ format:
 
 ## Can you recognized this type of data?
 
-```stata
+```{stata}
 *| echo: false
 *| output: false
 set obs 250

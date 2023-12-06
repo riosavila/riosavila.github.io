@@ -6283,7 +6283,7 @@
     "href": "rmethods/13_advtimeseries.html#can-you-recognized-this-type-of-data",
     "title": "Times Series Part-II",
     "section": "Can you recognized this type of data?",
-    "text": "Can you recognized this type of data?\n*| echo: false\n*| output: false\nset obs 250\nset seed 1321\ngen t = _n\ntsset t\ngen y1 =0\ngen y2 =0\ngen r = rnormal()\nset scheme white2\ncolor_style tableau\nreplace y1 =l.y1 + r if t&gt;1\nreplace y2 =0.8*l.y2 + r if t&gt;1\nscatter y1 t, title(\"Non-Stationary\") xtitle(\"time\") name(fig1, replace) connect(l)\nscatter y2 t, title(\"Stationary\") xtitle(\"time\") name(fig2, replace) connect(l)\ngraph combine fig1 fig2, ysize(6) xsize(12) ycommon\ngraph export images/fig13_1.png, replace\n\n\ntwo kdensity y1 if t&lt;=125 ||  kdensity y1 if t&gt;125, title(\"Non-Stationary\") name(fig1, replace) legend(off)\ntwo kdensity y2 if t&lt;=125 ||  kdensity y2 if t&gt;125, title(\"Stationary\") name(fig2, replace) legend(off)\ngraph combine fig1 fig2, ysize(6) xsize(12) \ngraph export images/fig13_2.png, replace\n\nTrendsDensity"
+    "text": "Can you recognized this type of data?\n\nTrendsDensity"
   },
   {
     "objectID": "rmethods/13_advtimeseries.html#stationary-process",
