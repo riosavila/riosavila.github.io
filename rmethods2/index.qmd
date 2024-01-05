@@ -1,0 +1,48 @@
+---
+title: "Research Methods II"
+subtitle: "Micro-path"
+author: Fernando Rios-Avila
+format: 
+  html:
+    code-fold: true
+    echo: true
+    css: styles.css 
+---
+
+## Syllabus
+
+If you are reading this, you are probably enrolled in the course. This page will contain information about the course, including the syllabus, assignments, and other relevant information.
+
+As the course progresses, I will add links to the syllabus, assignments, and other relevant information.
+
+## Sessions
+
+**Session 1:** 
+
+Slides: [html](session_1.qmd) and [pdf](session_1.pdf)
+
+Readings: [link]
+
+**Session 2:** 
+
+Slides: [html](session_2.qmd) and [pdf](session_2.pdf)
+
+**Session 3:** 
+
+Slides: [html](session_3.qmd) and [pdf](session_3.pdf)
+
+**Session 4:** 
+
+Slides: [html](session_4.qmd) and [pdf](session_4.pdf)
+
+**Session 5:** 
+
+Slides: [html](session_5.qmd) and [pdf](session_5.pdf)
+
+**Session 6:** 
+
+Slides: [html](session_6.qmd) and [pdf](session_6.pdf)
+
+**Session 7:** 
+
+Slides: [html](session_7.qmd) and [pdf](session_7.pdf)

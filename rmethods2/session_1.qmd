@@ -1,0 +1,37 @@
+---
+title: "Research Methods II"
+subtitle: "Session 1: Surveys, IO and SAM"
+author: Fernando Rios-Avila
+format: 
+  revealjs: 
+    slide-number: true
+    width: 1600
+    height: 900
+    code-fold: true
+    echo: true
+    css: styles.css 
+---
+
+## Why are we here?
+
+- If you are reading this, you are probably interested in the Microeconometrics path of Research methods II.
+
+- This course assumes you are familiar with the basics of econometrics and statistics. 
+  - We will not cover questions from Research methods I. You probably know the answers to those questions already!
+
+- This course will focus on tools that are commonly used in empirical research in economics:
+
+  - We will emphasize the use of Household Surveys (with the issues it entails) 
+
+  - And focus on applied econometrics using cross-sectional data, for distributional analysis and policy simulation.
+
+- Thus, we will do much more use of empirical tools and software than we did in Research methods I.
+
+-  We will have 7 Sessions, 2 homeworks, and 1 exam.
+  
+# Surveys: What are they?
+
+# IO-Tables
+
+# SAM
+

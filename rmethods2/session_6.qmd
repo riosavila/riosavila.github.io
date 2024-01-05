@@ -1,0 +1,18 @@
+---
+title: "Research Methods II"
+subtitle: "Imputation: Statistical Matching"
+author: Fernando Rios-Avila
+format: 
+  revealjs: 
+    slide-number: true
+    width: 1600
+    height: 900
+    code-fold: true
+    echo: true
+    css: styles.css 
+---
+
+# Missing Data vs MISSING DATA
+
+
+
