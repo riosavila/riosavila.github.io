@@ -10,6 +10,7 @@ format:
     code-fold: true
     echo: true
     css: styles.css 
+jupyter: nbstata    
 ---
 
 ## Why are we here?
@@ -27,11 +28,293 @@ format:
 
 - Thus, we will do much more use of empirical tools and software than we did in Research methods I.
 
--  We will have 7 Sessions, 2 homeworks, and 1 exam.
+-  We will have 7 Sessions, 2 homeworks and a final project.
   
 # Surveys: What are they?
 
+## What is a Survey?
+
+- A Survey is a source of data that aims to collect information from a population of interest, to underestand some characteristics, behaviors, or opinions of that population as a whole.
+  - The population of interest can be individuals, households, firms, etc.
+- They can be useful to identify and analyze policy questions.
+- However, they are secondary data, and thus have limitations in terms of the questions that can be answered with them.
+  - You cannot answer questions that require data that was not collected. 
+  - They can also be limited to Interivewee recall, or willingness to answer.
+  - Or how accessible the population of interest is.
+
+## Example of Surveys
+
+- Current Population Survey (CPS)
+  - Monthly survey of 60,000 households in the US.
+- American Community Survey (ACS)
+  - Annual survey of 3.5 million households in the US.
+- American Time Use Survey (ATUS)
+  - Annual survey of 6,000 individuals in the US.
+- Enterprise Surveys - WB (ES)
+  - Survey of firms in developing countries. Different years of Collection
+
+## What makes a good survey?
+
+- A Good survey is one that allows you to obtain estimates of statistics of interest for the population with "Tolaraable" levels of Accuracy.
+
+- To do this, you need to have a good sampling design (representation and "independence of the population") and a good questionnaire design (questions that are clear and easy to answer).
+
+- A good survey needs to be representative of the population of interest. To do this appropriately, data will be collected based on a **frame** that will be used to select the sample.
+
+## Types of Data Seletion
+
+::: {.panel-tabset}
+
+## Simple 
+
+- Each observation in the "frame" has the same probability of being selected in the sample.
+
+- It may be difficult to implement in practice, because of cost and logistics. (distance)
+
+- It could also have problems of representativeness for small groups. (rare events)
+
+## Clustered
+
+- Using some criteria, location for example, the population is divided into clusters. 
+- For the sample selection, certain clusters are selected at random, and "some" observations within each selected.
+- This is more feasible in practice, because takes advantage of the "clustering" of the population.
+- However, one may need to account for possible "common shocks" that people within the same cluster may have.
+
+## Stratified
+
+- Some times, statistics are required to accurately represent certain groups of the population. (by region, race, income level, etc)
+- In such cases, data can be collected in a way that ensures that the sample has enough observations for each group of interest.
+  - It would be as collecting multiple samples, one for each group of interest.
+- Within each Strata, it would also be possible to use a simple or clustered sampling design.
+  
+:::
+  
+## What to be aware of?
+
+- The sampling design is important to ensure that the sample is representative of the population of interest.
+- However, there are limitations:
+  - Not every-one selected will respond to the survey. (Is it random? )
+  - Rarey one assumes equal probability of selection. (Different sampling weights)
+  - Use of Stratatification and Clustering may require special treatment.
+
+- Something else: Panel data
+  - Because of attrition, it can be difficult to analyze if representativeity is required.
+  - However, it can be useful to analyze dynamics.
+
+## Descriptive Statistics
+
+- Once you have your data, you can start analyzing it by simply applying your survey weights.
+  - Point estimates are straightforward to obtain.
+- However, when considering the estimation of precision of the estimates (Variance and Standard Errors), there are two approaches that are important to consider:
+  
+- **Finite Population Approach**: 
+  - Associated with data description
+  - Assumes that the population is finite, and thus Selection probabilities are not independent.
+- **Superpopulation Approach**: 
+  - Associated with data modeling.
+  - Population is infinite. Selection probabilties are independent.
+
+- For practical purposes, the difference between the two approaches is not that important. 
+  - With large enough samples, he "finite sample correction" is negligible.
+  
+## Basic Summary Statistics:
+
+- $n$ is sample size. $N$ is population size.
+- $a_i$ an indicator of belonging to the sample. $\sum a_i=n$
+- Assume $y_i$ is the outcome of interest, Say income.
+$$\texttt{mean: }\hat{\mu}_y=\bar{y} = \frac{1}{n}\sum_{i=1}^N a_i y_i = \frac{1}{n}\sum_{j=1}^n y_j$$
+$$\texttt{Variance: }\hat \sigma^2_y = \frac{1}{n-1} \sum_{i=1}^N a_i (y_i - \hat{\bar{y}} )^2$$
+$$\texttt{V of mean: }\widehat{V}(\bar{y}) = \frac{\sigma^2_y }{n} * fpc$$
+
+Where $fpc = \frac{N-n}{N-1}$ is the finite population correction.
+
+## Accounting for Weights
+
+- The previous formulas did not account for weights.
+
+- Weights are factors used to "reweight/expand" the sample to make it representative of the population.
+- They can are typically related to the inverse of the probability of selection.
+- Simply said, a weight $w_i=\frac{1}{n*\pi_i}$ is a measure of how many observations in the population are represented by observation $i$ in the sample.
+
+But how do we account for weights in the formulas?
+
+## Summary Statistics with Weights
+
+Population:
+$$\hat N = \sum_{i=1}^n w_i$$
+
+Normalized weights 
+$$v_i = \frac{n w_i}{ \sum w_i} \rightarrow E(v_i) = 1$$ 
+
+Mean:
+$$\hat{\mu}_y=\bar{y} = \frac{1}{\hat N}\sum_{i=1}^n w_i y_i = \frac{1}{n}\sum v_i y_i$$
+
+## Variance with Weights
+
+Variances are a bit more complicated. Normally you would consider:
+
+$$Var(\bar y) = \frac{1}{n} \hat \sigma^2_y =\frac{1}{n} \frac{1}{n-1} \sum_{i=1}^n v_i (y_i - \bar y)^2$$
+
+However, with survey weights you need to consider something else:
+$$Var(\bar y) = \frac{1}{n} \sum_{i=1}^n v_i^2 (y_i - \bar y)^2$$
+
+Which is similar to "robust" Standard errors in OLS.
+
+> What about Clusters and Strata? 
+
+## How to account for weights in Stata?{.scrollable}
+
+Lets use data from the National Health and Nutrition Examination Survey (NHANES) to illustrate how to account for weights in Stata.
+
+```{stata}
+*| classes: larger
+*| code-fold: false
+ frause oaxaca, clear
+** Create Weights <- This will be provided
+sum wt, meanonly
+replace wt = round(wt/r(min))
+gen wage = exp(lnwage)
+```
+
+Summary Statistics:
+```{stata}
+*| classes: larger
+*| code-fold: false
+** unweighted
+sum wage,d
+** weighted
+sum wage [aw=wt],d
+```
+
+Accounting for weights for summary Statistics
+
+```{stata}
+*| classes: larger
+*| code-fold: false
+** unweighted
+mean wage 
+** weighted
+mean wage [pw=wt]
+mean wage [pw=wt], over(female)
+```
+ 
+Tables and cross tables
+
+```{stata}
+*| classes: larger
+*| code-fold: false
+** unweighted
+tab educ female
+
+tab educ female [w=wt]
+```
+
+Better approach: `svyset`
+
+```{stata}
+*| classes: larger
+*| code-fold: false
+webuse nhanes2f, clear
+svyset psuid /// Cluster
+       [pweight=finalwgt], /// Survey Weight as Inverse of Prob of Selection
+       strata(stratid)     // Strata Identifier
+mean zinc      
+mean zinc [pw=finalwgt]
+svy: mean zinc      
+```
+
+## Testing Significance across 2 groups 
+
+Consider two groups with the following characteristics:
+
+| Group | N   | mean | Var|
+|-------|-----|------|----|
+| 1     | 100  |  45  |  32.56 |
+| 2     | 150  |  55  |  21.97 |
+
+- Is the difference in means statistically significant?
+
+- Test $H_0: \mu_1 = \mu_2$ vs $H_1: \mu_1 \neq \mu_2$ 
+
+$$t = \frac{\mu_2 - \mu_1}{\sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}}
+=\frac{10}{\sqrt{\frac{32.56}{100}+\frac{21.97}{150}}}=\frac{10}{.47207} = 14.55453
+$$
+
+
+- If $t$ is large enough, we can reject the null hypothesis.
+
+- But this does not work if you have weights...
+
+## Testing Significance across 2 groups {.scrollable}
+
+- But you can use OLS to test the difference in means with weights!
+  - Make sure you use "robust" standard errors, or "pw" option.
+
+```{stata}
+*| classes: larger
+*| code-fold: false
+ frause oaxaca, clear
+** Create Weights <- This will be provided
+sum wt, meanonly
+replace wt = round(wt/r(min))
+gen wage = exp(lnwage)
+reg wage i.female [pw=wt],
+```
+
+- you can also use `svy: regress` for complex designs. 
+
+see [here](https://stats.oarc.ucla.edu/stata/faq/how-can-i-do-a-t-test-with-survey-data/) for additional examples
+
 # IO-Tables
+
+## IO-Tables
+
+IO tables stand for Input-Output tables. They are a way to represent the production structure of an economy.
+
+To some extend, IO tables provide a Static representation of the Economy
+
+- Consider a Economy with K=3 sectors: Agriculture, Manufacturing and Services, with a Final consumer agent (households) 
+- All the production of each sector, then, is used for consumption or inputs for other sectors.
+
+$$X_{i} = X_{i1} + X_{i2} + X_{i3} + Y_{i}$$
+
+- Where $X_{ij}$ is the production of sector $i$ used as input for sector $j$ and $Y_i$ is used for final consumption by households.
+
+## 
+
+This can be represented as a set of equations:
+$$
+\begin{aligned}
+X_{11} + X_{12} + X_{13} + Y_{1}  &= X_{1} \\
+X_{21} + X_{22} + X_{23} + Y_{2} &= X_{2} \\
+X_{31} + X_{32} + X_{33} + Y_{3} &= X_{3} 
+\end{aligned} 
+$$
+
+where we could also add a "production" equation for the final consumer:
+
+$$L_{1} + L_{2} + L_{3} = L = Y_{1} + Y_{2} + Y_{3}$$
+
+## Leontief Production Function
+
+- The Leontief Production function is a simple way to represent the production structure of an economy. 
+
+- Total production by sector $i$ is given by:
+
+$$X_{i} = X_{1i} +  X_{2i} +  X_{3i} + L_{i}$$
+
+which assumes the production functions are linear. (at least in the very short term)
+
+This can be rewritten as:
+
+$$X_{i} = X_{i} a_{1i} +  X_{i} a_{2i} +  X_{i} a_{3i} + X_{i} l_{i}$$
+
+## 
+
+From the "production" side, the IO table can be represented as a matrix:
+
+  
+
 
 # SAM
 

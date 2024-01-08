@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-html/tabby.min.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.533">
+  <meta name="generator" content="quarto-1.4.537">
 
   <meta name="author" content="Fernando Rios-Avila">
   <title>Econometrics MSC Levy - Research Methods II</title>
@@ -29,6 +29,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="styles.css">
@@ -321,6 +386,9 @@
       margin-right: 0; 
     }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+  
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -353,29 +421,489 @@ Fernando Rios-Avila
 <li><p>And focus on applied econometrics using cross-sectional data, for distributional analysis and policy simulation.</p></li>
 </ul></li>
 <li><p>Thus, we will do much more use of empirical tools and software than we did in Research methods I.</p></li>
-<li><p>We will have 7 Sessions, 2 homeworks, and 1 exam.</p></li>
+<li><p>We will have 7 Sessions, 2 homeworks and a final project.</p></li>
 </ul>
 </section>
+<section>
 <section id="surveys-what-are-they" class="title-slide slide level1 center">
 <h1>Surveys: What are they?</h1>
 
 </section>
+<section id="what-is-a-survey" class="slide level2">
+<h2>What is a Survey?</h2>
+<ul>
+<li>A Survey is a source of data that aims to collect information from a population of interest, to underestand some characteristics, behaviors, or opinions of that population as a whole.
+<ul>
+<li>The population of interest can be individuals, households, firms, etc.</li>
+</ul></li>
+<li>They can be useful to identify and analyze policy questions.</li>
+<li>However, they are secondary data, and thus have limitations in terms of the questions that can be answered with them.
+<ul>
+<li>You cannot answer questions that require data that was not collected.</li>
+<li>They can also be limited to Interivewee recall, or willingness to answer.</li>
+<li>Or how accessible the population of interest is.</li>
+</ul></li>
+</ul>
+</section>
+<section id="example-of-surveys" class="slide level2">
+<h2>Example of Surveys</h2>
+<ul>
+<li>Current Population Survey (CPS)
+<ul>
+<li>Monthly survey of 60,000 households in the US.</li>
+</ul></li>
+<li>American Community Survey (ACS)
+<ul>
+<li>Annual survey of 3.5 million households in the US.</li>
+</ul></li>
+<li>American Time Use Survey (ATUS)
+<ul>
+<li>Annual survey of 6,000 individuals in the US.</li>
+</ul></li>
+<li>Enterprise Surveys - WB (ES)
+<ul>
+<li>Survey of firms in developing countries. Different years of Collection</li>
+</ul></li>
+</ul>
+</section>
+<section id="what-makes-a-good-survey" class="slide level2">
+<h2>What makes a good survey?</h2>
+<ul>
+<li><p>A Good survey is one that allows you to obtain estimates of statistics of interest for the population with “Tolaraable” levels of Accuracy.</p></li>
+<li><p>To do this, you need to have a good sampling design (representation and “independence of the population”) and a good questionnaire design (questions that are clear and easy to answer).</p></li>
+<li><p>A good survey needs to be representative of the population of interest. To do this appropriately, data will be collected based on a <strong>frame</strong> that will be used to select the sample.</p></li>
+</ul>
+</section>
+<section id="types-of-data-seletion" class="slide level2">
+<h2>Types of Data Seletion</h2>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Simple</a></li><li><a href="#tabset-1-2">Clustered</a></li><li><a href="#tabset-1-3">Stratified</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<ul>
+<li><p>Each observation in the “frame” has the same probability of being selected in the sample.</p></li>
+<li><p>It may be difficult to implement in practice, because of cost and logistics. (distance)</p></li>
+<li><p>It could also have problems of representativeness for small groups. (rare events)</p></li>
+</ul>
+</div>
+<div id="tabset-1-2">
+<ul>
+<li>Using some criteria, location for example, the population is divided into clusters.</li>
+<li>For the sample selection, certain clusters are selected at random, and “some” observations within each selected.</li>
+<li>This is more feasible in practice, because takes advantage of the “clustering” of the population.</li>
+<li>However, one may need to account for possible “common shocks” that people within the same cluster may have.</li>
+</ul>
+</div>
+<div id="tabset-1-3">
+<ul>
+<li>Some times, statistics are required to accurately represent certain groups of the population. (by region, race, income level, etc)</li>
+<li>In such cases, data can be collected in a way that ensures that the sample has enough observations for each group of interest.
+<ul>
+<li>It would be as collecting multiple samples, one for each group of interest.</li>
+</ul></li>
+<li>Within each Strata, it would also be possible to use a simple or clustered sampling design.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="what-to-be-aware-of" class="slide level2">
+<h2>What to be aware of?</h2>
+<ul>
+<li>The sampling design is important to ensure that the sample is representative of the population of interest.</li>
+<li>However, there are limitations:
+<ul>
+<li>Not every-one selected will respond to the survey. (Is it random? )</li>
+<li>Rarey one assumes equal probability of selection. (Different sampling weights)</li>
+<li>Use of Stratatification and Clustering may require special treatment.</li>
+</ul></li>
+<li>Something else: Panel data
+<ul>
+<li>Because of attrition, it can be difficult to analyze if representativeity is required.</li>
+<li>However, it can be useful to analyze dynamics.</li>
+</ul></li>
+</ul>
+</section>
+<section id="descriptive-statistics" class="slide level2">
+<h2>Descriptive Statistics</h2>
+<ul>
+<li><p>Once you have your data, you can start analyzing it by simply applying your survey weights.</p>
+<ul>
+<li>Point estimates are straightforward to obtain.</li>
+</ul></li>
+<li><p>However, when considering the estimation of precision of the estimates (Variance and Standard Errors), there are two approaches that are important to consider:</p></li>
+<li><p><strong>Finite Population Approach</strong>:</p>
+<ul>
+<li>Associated with data description</li>
+<li>Assumes that the population is finite, and thus Selection probabilities are not independent.</li>
+</ul></li>
+<li><p><strong>Superpopulation Approach</strong>:</p>
+<ul>
+<li>Associated with data modeling.</li>
+<li>Population is infinite. Selection probabilties are independent.</li>
+</ul></li>
+<li><p>For practical purposes, the difference between the two approaches is not that important.</p>
+<ul>
+<li>With large enough samples, he “finite sample correction” is negligible.</li>
+</ul></li>
+</ul>
+</section>
+<section id="basic-summary-statistics" class="slide level2">
+<h2>Basic Summary Statistics:</h2>
+<ul>
+<li><span class="math inline">\(n\)</span> is sample size. <span class="math inline">\(N\)</span> is population size.</li>
+<li><span class="math inline">\(a_i\)</span> an indicator of belonging to the sample. <span class="math inline">\(\sum a_i=n\)</span></li>
+<li>Assume <span class="math inline">\(y_i\)</span> is the outcome of interest, Say income. <span class="math display">\[\texttt{mean: }\hat{\mu}_y=\bar{y} = \frac{1}{n}\sum_{i=1}^N a_i y_i = \frac{1}{n}\sum_{j=1}^n y_j\]</span> <span class="math display">\[\texttt{Variance: }\hat \sigma^2_y = \frac{1}{n-1} \sum_{i=1}^N a_i (y_i - \hat{\bar{y}} )^2\]</span> <span class="math display">\[\texttt{V of mean: }\widehat{V}(\bar{y}) = \frac{\sigma^2_y }{n} * fpc\]</span></li>
+</ul>
+<p>Where <span class="math inline">\(fpc = \frac{N-n}{N-1}\)</span> is the finite population correction.</p>
+</section>
+<section id="accounting-for-weights" class="slide level2">
+<h2>Accounting for Weights</h2>
+<ul>
+<li><p>The previous formulas did not account for weights.</p></li>
+<li><p>Weights are factors used to “reweight/expand” the sample to make it representative of the population.</p></li>
+<li><p>They can are typically related to the inverse of the probability of selection.</p></li>
+<li><p>Simply said, a weight <span class="math inline">\(w_i=\frac{1}{n*\pi_i}\)</span> is a measure of how many observations in the population are represented by observation <span class="math inline">\(i\)</span> in the sample.</p></li>
+</ul>
+<p>But how do we account for weights in the formulas?</p>
+</section>
+<section id="summary-statistics-with-weights" class="slide level2">
+<h2>Summary Statistics with Weights</h2>
+<p>Population: <span class="math display">\[\hat N = \sum_{i=1}^n w_i\]</span></p>
+<p>Normalized weights <span class="math display">\[v_i = \frac{n w_i}{ \sum w_i} \rightarrow E(v_i) = 1\]</span></p>
+<p>Mean: <span class="math display">\[\hat{\mu}_y=\bar{y} = \frac{1}{\hat N}\sum_{i=1}^n w_i y_i = \frac{1}{n}\sum v_i y_i\]</span></p>
+</section>
+<section id="variance-with-weights" class="slide level2">
+<h2>Variance with Weights</h2>
+<p>Variances are a bit more complicated. Normally you would consider:</p>
+<p><span class="math display">\[Var(\bar y) = \frac{1}{n} \hat \sigma^2_y =\frac{1}{n} \frac{1}{n-1} \sum_{i=1}^n v_i (y_i - \bar y)^2\]</span></p>
+<p>However, with survey weights you need to consider something else: <span class="math display">\[Var(\bar y) = \frac{1}{n} \sum_{i=1}^n v_i^2 (y_i - \bar y)^2\]</span></p>
+<p>Which is similar to “robust” Standard errors in OLS.</p>
+<blockquote>
+<p>What about Clusters and Strata?</p>
+</blockquote>
+</section>
+<section id="how-to-account-for-weights-in-stata" class="slide level2 scrollable">
+<h2>How to account for weights in Stata?</h2>
+<p>Lets use data from the National Health and Nutrition Examination Survey (NHANES) to illustrate how to account for weights in Stata.</p>
+<div id="1481a182" class="cell larger" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a></a> frause oaxaca, <span class="kw">clear</span></span>
+<span id="cb1-2"><a></a>** Create Weights &lt;- This will <span class="kw">be</span> provided</span>
+<span id="cb1-3"><a></a><span class="kw">sum</span> wt, <span class="kw">meanonly</span></span>
+<span id="cb1-4"><a></a><span class="kw">replace</span> wt = <span class="fu">round</span>(wt/<span class="fu">r</span>(<span class="fu">min</span>))</span>
+<span id="cb1-5"><a></a><span class="kw">gen</span> wage = <span class="fu">exp</span>(lnwage)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<style>div.jp-Notebook .datagrid-container {min-height: 448px; }</style>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Excerpt from the Swiss Labor Market Survey 1998)
+(1,647 real changes made)
+(213 missing values generated)</code></pre>
+</div>
+</div>
+<p>Summary Statistics:</p>
+<div id="b3c0efb5" class="cell larger" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a>** unweighted</span>
+<span id="cb3-2"><a></a><span class="kw">sum</span> wage,<span class="kw">d</span></span>
+<span id="cb3-3"><a></a>** weighted</span>
+<span id="cb3-4"><a></a><span class="kw">sum</span> wage [aw=wt],<span class="kw">d</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+                            wage
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%     3.907204       1.661434
+ 5%      11.8007       1.873127
+10%      17.4216       2.197802       Obs               1,434
+25%     23.19902       2.442003       Sum of wgt.       1,434
 
+50%     30.08896                      Mean           32.39167
+                        Largest       Std. dev.      16.12498
+75%      38.5662       137.3627
+90%     49.95005       152.6252       Variance       260.0151
+95%     58.71271       164.8352       Skewness       2.486954
+99%     85.47008       192.3077       Kurtosis       18.23702
+
+                            wage
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%     3.453689       1.661434
+ 5%     7.370678       1.873127
+10%     15.83933       2.197802       Obs               1,434
+25%     21.72247       2.442003       Sum of wgt.       2,686
+
+50%     29.48271                      Mean            31.5322
+                        Largest       Std. dev.      16.32811
+75%     38.46154       137.3627
+90%     49.95005       152.6252       Variance       266.6071
+95%     58.11497       164.8352       Skewness       2.081806
+99%     85.47008       192.3077       Kurtosis       14.68647</code></pre>
+</div>
+</div>
+<p>Accounting for weights for summary Statistics</p>
+<div id="e5f41ace" class="cell larger" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a></a>** unweighted</span>
+<span id="cb5-2"><a></a><span class="kw">mean</span> wage </span>
+<span id="cb5-3"><a></a>** weighted</span>
+<span id="cb5-4"><a></a><span class="kw">mean</span> wage [pw=wt]</span>
+<span id="cb5-5"><a></a><span class="kw">mean</span> wage [pw=wt], <span class="bn">over</span>(female)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Mean estimation                          Number of obs = 1,434
+
+--------------------------------------------------------------
+             |       Mean   Std. err.     [95% conf. interval]
+-------------+------------------------------------------------
+        wage |   32.39167   .4258186      31.55637    33.22696
+--------------------------------------------------------------
+
+Mean estimation                          Number of obs = 1,434
+
+--------------------------------------------------------------
+             |       Mean   Std. err.     [95% conf. interval]
+-------------+------------------------------------------------
+        wage |    31.5322   .4765835      30.59733    32.46708
+--------------------------------------------------------------
+
+Mean estimation                           Number of obs = 1,434
+
+---------------------------------------------------------------
+              |       Mean   Std. err.     [95% conf. interval]
+--------------+------------------------------------------------
+c.wage@female |
+           0  |   33.87649   .6152059      32.66969    35.08329
+           1  |   28.76133    .722173       27.3447    30.17796
+---------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>Tables and cross tables</p>
+<div id="7050c19d" class="cell larger" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a></a>** unweighted</span>
+<span id="cb7-2"><a></a><span class="kw">tab</span> educ female</span>
+<span id="cb7-3"><a></a></span>
+<span id="cb7-4"><a></a><span class="kw">tab</span> educ female [<span class="fu">w</span>=wt]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+           |   sex of respondent
+  years of |      (1=female)
+ education |         0          1 |     Total
+-----------+----------------------+----------
+         5 |         6         23 |        29 
+         9 |        47         93 |       140 
+      9.75 |         8         26 |        34 
+        10 |        10         42 |        52 
+      10.5 |       376        447 |       823 
+      11.5 |         7         14 |        21 
+        12 |       111         87 |       198 
+      12.5 |        56         80 |       136 
+        15 |        60         13 |        73 
+      17.5 |        78         63 |       141 
+-----------+----------------------+----------
+     Total |       759        888 |     1,647 
+
+           |   sex of respondent
+  years of |      (1=female)
+ education |         0          1 |     Total
+-----------+----------------------+----------
+         5 |        17         45 |        62 
+         9 |       104        181 |       285 
+      9.75 |        14         52 |        66 
+        10 |        22         80 |       102 
+      10.5 |       725        833 |     1,558 
+      11.5 |        19         27 |        46 
+        12 |       201        148 |       349 
+      12.5 |       108        157 |       265 
+        15 |       111         21 |       132 
+      17.5 |       149        111 |       260 
+-----------+----------------------+----------
+     Total |     1,470      1,655 |     3,125 </code></pre>
+</div>
+</div>
+<p>Better approach: <code>svyset</code></p>
+<div id="979310d8" class="cell larger" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a></a><span class="kw">webuse</span> nhanes2f, <span class="kw">clear</span></span>
+<span id="cb9-2"><a></a><span class="kw">svyset</span> psuid <span class="co">/// Cluster</span></span>
+<span id="cb9-3"><a></a>       [<span class="kw">pweight</span>=finalwgt], <span class="co">/// Survey Weight as Inverse of Prob of Selection</span></span>
+<span id="cb9-4"><a></a>       <span class="kw">strata</span>(stratid)     <span class="co">// Strata Identifier</span></span>
+<span id="cb9-5"><a></a><span class="kw">mean</span> zinc      </span>
+<span id="cb9-6"><a></a><span class="kw">mean</span> zinc [pw=finalwgt]</span>
+<span id="cb9-7"><a></a><span class="kw">svy</span>: <span class="kw">mean</span> zinc      </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Sampling weights: finalwgt
+             VCE: linearized
+     Single unit: missing
+        Strata 1: stratid
+ Sampling unit 1: psuid
+           FPC 1: &lt;zero&gt;
+
+Mean estimation                          Number of obs = 9,189
+
+--------------------------------------------------------------
+             |       Mean   Std. err.     [95% conf. interval]
+-------------+------------------------------------------------
+        zinc |   86.51518   .1510744      86.21904    86.81132
+--------------------------------------------------------------
+
+Mean estimation                          Number of obs = 9,189
+
+--------------------------------------------------------------
+             |       Mean   Std. err.     [95% conf. interval]
+-------------+------------------------------------------------
+        zinc |   87.18207   .1828747      86.82359    87.54054
+--------------------------------------------------------------
+(running mean on estimation sample)
+
+Survey: Mean estimation
+
+Number of strata = 31            Number of obs   =       9,189
+Number of PSUs   = 62            Population size = 104,176,071
+                                 Design df       =          31
+
+--------------------------------------------------------------
+             |             Linearized
+             |       Mean   std. err.     [95% conf. interval]
+-------------+------------------------------------------------
+        zinc |   87.18207   .4944827      86.17356    88.19057
+--------------------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="testing-significance-across-2-groups" class="slide level2">
+<h2>Testing Significance across 2 groups</h2>
+<p>Consider two groups with the following characteristics:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Group</th>
+<th>N</th>
+<th>mean</th>
+<th>Var</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>100</td>
+<td>45</td>
+<td>32.56</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>150</td>
+<td>55</td>
+<td>21.97</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>Is the difference in means statistically significant?</p></li>
+<li><p>Test <span class="math inline">\(H_0: \mu_1 = \mu_2\)</span> vs <span class="math inline">\(H_1: \mu_1 \neq \mu_2\)</span></p></li>
+</ul>
+<p><span class="math display">\[t = \frac{\mu_2 - \mu_1}{\sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}}
+=\frac{10}{\sqrt{\frac{32.56}{100}+\frac{21.97}{150}}}=\frac{10}{.47207} = 14.55453
+\]</span></p>
+<ul>
+<li><p>If <span class="math inline">\(t\)</span> is large enough, we can reject the null hypothesis.</p></li>
+<li><p>But this does not work if you have weights…</p></li>
+</ul>
+</section>
+<section id="testing-significance-across-2-groups-1" class="slide level2 scrollable">
+<h2>Testing Significance across 2 groups</h2>
+<ul>
+<li>But you can use OLS to test the difference in means with weights!
+<ul>
+<li>Make sure you use “robust” standard errors, or “pw” option.</li>
+</ul></li>
+</ul>
+<div id="647d46e3" class="cell larger" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a></a> frause oaxaca, <span class="kw">clear</span></span>
+<span id="cb11-2"><a></a>** Create Weights &lt;- This will <span class="kw">be</span> provided</span>
+<span id="cb11-3"><a></a><span class="kw">sum</span> wt, <span class="kw">meanonly</span></span>
+<span id="cb11-4"><a></a><span class="kw">replace</span> wt = <span class="fu">round</span>(wt/<span class="fu">r</span>(<span class="fu">min</span>))</span>
+<span id="cb11-5"><a></a><span class="kw">gen</span> wage = <span class="fu">exp</span>(lnwage)</span>
+<span id="cb11-6"><a></a><span class="kw">reg</span> wage i.female [pw=wt],</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Excerpt from the Swiss Labor Market Survey 1998)
+(1,647 real changes made)
+(213 missing values generated)
+(sum of wgt is 2,686)
+
+Linear regression                               Number of obs     =      1,434
+                                                F(1, 1432)        =      29.05
+                                                Prob &gt; F          =     0.0000
+                                                R-squared         =     0.0244
+                                                Root MSE          =     16.133
+
+------------------------------------------------------------------------------
+             |               Robust
+        wage | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+    1.female |  -5.115156   .9490209    -5.39   0.000    -6.976776   -3.253536
+       _cons |   33.87649   .6154206    55.05   0.000     32.66927    35.08371
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<ul>
+<li>you can also use <code>svy: regress</code> for complex designs.</li>
+</ul>
+<p>see <a href="https://stats.oarc.ucla.edu/stata/faq/how-can-i-do-a-t-test-with-survey-data/">here</a> for additional examples</p>
+</section></section>
+<section>
 <section id="io-tables" class="title-slide slide level1 center">
 <h1>IO-Tables</h1>
 
 </section>
-
+<section id="io-tables-1" class="slide level2">
+<h2>IO-Tables</h2>
+<p>IO tables stand for Input-Output tables. They are a way to represent the production structure of an economy.</p>
+<p>To some extend, IO tables provide a Static representation of the Economy</p>
+<ul>
+<li>Consider a Economy with K=3 sectors: Agriculture, Manufacturing and Services, with a Final consumer agent (households)</li>
+<li>All the production of each sector, then, is used for consumption or inputs for other sectors.</li>
+</ul>
+<p><span class="math display">\[X_{i} = X_{i1} + X_{i2} + X_{i3} + Y_{i}\]</span></p>
+<ul>
+<li>Where <span class="math inline">\(X_{ij}\)</span> is the production of sector <span class="math inline">\(i\)</span> used as input for sector <span class="math inline">\(j\)</span> and <span class="math inline">\(Y_i\)</span> is used for final consumption by households.</li>
+</ul>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+<p>This can be represented as a set of equations: <span class="math display">\[
+\begin{aligned}
+X_{11} + X_{12} + X_{13} + Y_{1}  &amp;= X_{1} \\
+X_{21} + X_{22} + X_{23} + Y_{2} &amp;= X_{2} \\
+X_{31} + X_{32} + X_{33} + Y_{3} &amp;= X_{3}
+\end{aligned}
+\]</span></p>
+<p>where we could also add a “production” equation for the final consumer:</p>
+<p><span class="math display">\[L_{1} + L_{2} + L_{3} = L = Y_{1} + Y_{2} + Y_{3}\]</span></p>
+</section>
+<section id="leontief-production-function" class="slide level2">
+<h2>Leontief Production Function</h2>
+<ul>
+<li><p>The Leontief Production function is a simple way to represent the production structure of an economy.</p></li>
+<li><p>Total production by sector <span class="math inline">\(i\)</span> is given by:</p></li>
+</ul>
+<p><span class="math display">\[X_{i} = X_{1i} +  X_{2i} +  X_{3i} + L_{i}\]</span></p>
+<p>which assumes the production functions are linear. (at least in the very short term)</p>
+<p>This can be rewritten as:</p>
+<p><span class="math display">\[X_{i} = X_{i} a_{1i} +  X_{i} a_{2i} +  X_{i} a_{3i} + X_{i} l_{i}\]</span></p>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<p>From the “production” side, the IO table can be represented as a matrix:</p>
+</section></section>
 <section id="sam" class="title-slide slide level1 center">
 <h1>SAM</h1>
 
-
-</section>
-    <div class="quarto-auto-generated-content">
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
-</div></div>
+</div>
+</section>
+    </div>
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>

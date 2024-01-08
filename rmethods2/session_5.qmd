@@ -1,6 +1,6 @@
 ---
 title: "Research Methods II"
-subtitle: "Session 2"
+subtitle: "Significance and Missing Data"
 author: Fernando Rios-Avila
 format: 
   revealjs: 
@@ -12,4 +12,7 @@ format:
     css: styles.css 
 ---
 
-## 
+# Statistical Significance
+
+# Missing/incomplete Data
+

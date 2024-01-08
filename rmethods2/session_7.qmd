@@ -1,6 +1,6 @@
 ---
 title: "Research Methods II"
-subtitle: "Session 2"
+subtitle: "Simulations and Monte Carlo Methods"
 author: Fernando Rios-Avila
 format: 
   revealjs: 

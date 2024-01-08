@@ -6584,7 +6584,7 @@
     "href": "rmethods2/session_1.html#why-are-we-here",
     "title": "Research Methods II",
     "section": "Why are we here?",
-    "text": "Why are we here?\n\nIf you are reading this, you are probably interested in the Microeconometrics path of Research methods II.\nThis course assumes you are familiar with the basics of econometrics and statistics.\n\nWe will not cover questions from Research methods I. You probably know the answers to those questions already!\n\nThis course will focus on tools that are commonly used in empirical research in economics:\n\nWe will emphasize the use of Household Surveys (with the issues it entails)\nAnd focus on applied econometrics using cross-sectional data, for distributional analysis and policy simulation.\n\nThus, we will do much more use of empirical tools and software than we did in Research methods I.\nWe will have 7 Sessions, 2 homeworks, and 1 exam."
+    "text": "Why are we here?\n\nIf you are reading this, you are probably interested in the Microeconometrics path of Research methods II.\nThis course assumes you are familiar with the basics of econometrics and statistics.\n\nWe will not cover questions from Research methods I. You probably know the answers to those questions already!\n\nThis course will focus on tools that are commonly used in empirical research in economics:\n\nWe will emphasize the use of Household Surveys (with the issues it entails)\nAnd focus on applied econometrics using cross-sectional data, for distributional analysis and policy simulation.\n\nThus, we will do much more use of empirical tools and software than we did in Research methods I.\nWe will have 7 Sessions, 2 homeworks and a final project."
   },
   {
     "objectID": "rmethods2/index.html",
@@ -6634,5 +6634,124 @@
     "title": "Research Methods II",
     "section": "",
     "text": "Missing Data vs MISSING DATA"
+  },
+  {
+    "objectID": "rmethods2/session_1.html#what-is-a-survey",
+    "href": "rmethods2/session_1.html#what-is-a-survey",
+    "title": "Research Methods II",
+    "section": "What is a Survey?",
+    "text": "What is a Survey?\n\nA Survey is a source of data that aims to collect information from a population of interest, to underestand some characteristics, behaviors, or opinions of that population as a whole.\n\nThe population of interest can be individuals, households, firms, etc.\n\nThey can be useful to identify and analyze policy questions.\nHowever, they are secondary data, and thus have limitations in terms of the questions that can be answered with them.\n\nYou cannot answer questions that require data that was not collected.\nThey can also be limited to Interivewee recall, or willingness to answer.\nOr how accessible the population of interest is."
+  },
+  {
+    "objectID": "rmethods2/session_1.html#example-of-surveys",
+    "href": "rmethods2/session_1.html#example-of-surveys",
+    "title": "Research Methods II",
+    "section": "Example of Surveys",
+    "text": "Example of Surveys\n\nCurrent Population Survey (CPS)\n\nMonthly survey of 60,000 households in the US.\n\nAmerican Community Survey (ACS)\n\nAnnual survey of 3.5 million households in the US.\n\nAmerican Time Use Survey (ATUS)\n\nAnnual survey of 6,000 individuals in the US.\n\nEnterprise Surveys - WB (ES)\n\nSurvey of firms in developing countries. Different years of Collection"
+  },
+  {
+    "objectID": "rmethods2/session_1.html#what-makes-a-good-survey",
+    "href": "rmethods2/session_1.html#what-makes-a-good-survey",
+    "title": "Research Methods II",
+    "section": "What makes a good survey?",
+    "text": "What makes a good survey?\n\nA Good survey is one that allows you to obtain estimates of statistics of interest for the population with “Tolaraable” levels of Accuracy.\nTo do this, you need to have a good sampling design (representation and “independence of the population”) and a good questionnaire design (questions that are clear and easy to answer).\nA good survey needs to be representative of the population of interest. To do this appropriately, data will be collected based on a frame that will be used to select the sample."
+  },
+  {
+    "objectID": "rmethods2/session_1.html#types-of-data-seletion",
+    "href": "rmethods2/session_1.html#types-of-data-seletion",
+    "title": "Research Methods II",
+    "section": "Types of Data Seletion",
+    "text": "Types of Data Seletion\n\nSimpleClusteredStratified\n\n\n\nEach observation in the “frame” has the same probability of being selected in the sample.\nIt may be difficult to implement in practice, because of cost and logistics. (distance)\nIt could also have problems of representativeness for small groups. (rare events)\n\n\n\n\nUsing some criteria, location for example, the population is divided into clusters.\nFor the sample selection, certain clusters are selected at random, and “some” observations within each selected.\nThis is more feasible in practice, because takes advantage of the “clustering” of the population.\nHowever, one may need to account for possible “common shocks” that people within the same cluster may have.\n\n\n\n\nSome times, statistics are required to accurately represent certain groups of the population. (by region, race, income level, etc)\nIn such cases, data can be collected in a way that ensures that the sample has enough observations for each group of interest.\n\nIt would be as collecting multiple samples, one for each group of interest.\n\nWithin each Strata, it would also be possible to use a simple or clustered sampling design."
+  },
+  {
+    "objectID": "rmethods2/session_1.html#what-to-be-aware-of",
+    "href": "rmethods2/session_1.html#what-to-be-aware-of",
+    "title": "Research Methods II",
+    "section": "What to be aware of?",
+    "text": "What to be aware of?\n\nThe sampling design is important to ensure that the sample is representative of the population of interest.\nHowever, there are limitations:\n\nNot every-one selected will respond to the survey. (Is it random? )\nRarey one assumes equal probability of selection. (Different sampling weights)\nUse of Stratatification and Clustering may require special treatment.\n\nSomething else: Panel data\n\nBecause of attrition, it can be difficult to analyze if representativeity is required.\nHowever, it can be useful to analyze dynamics."
+  },
+  {
+    "objectID": "rmethods2/session_1.html#descriptive-statistics",
+    "href": "rmethods2/session_1.html#descriptive-statistics",
+    "title": "Research Methods II",
+    "section": "Descriptive Statistics",
+    "text": "Descriptive Statistics\n\nOnce you have your data, you can start analyzing it by simply applying your survey weights.\n\nPoint estimates are straightforward to obtain.\n\nHowever, when considering the estimation of precision of the estimates (Variance and Standard Errors), there are two approaches that are important to consider:\nFinite Population Approach:\n\nAssociated with data description\nAssumes that the population is finite, and thus Selection probabilities are not independent.\n\nSuperpopulation Approach:\n\nAssociated with data modeling.\nPopulation is infinite. Selection probabilties are independent.\n\nFor practical purposes, the difference between the two approaches is not that important.\n\nWith large enough samples, he “finite sample correction” is negligible."
+  },
+  {
+    "objectID": "rmethods2/session_1.html#basic-summary-statistics",
+    "href": "rmethods2/session_1.html#basic-summary-statistics",
+    "title": "Research Methods II",
+    "section": "Basic Summary Statistics:",
+    "text": "Basic Summary Statistics:\n\n\\(n\\) is sample size. \\(N\\) is population size.\n\\(a_i\\) an indicator of belonging to the sample. \\(\\sum a_i=n\\)\nAssume \\(y_i\\) is the outcome of interest, Say income. \\[\\texttt{mean: }\\hat{\\mu}_y=\\bar{y} = \\frac{1}{n}\\sum_{i=1}^N a_i y_i = \\frac{1}{n}\\sum_{j=1}^n y_j\\] \\[\\texttt{Variance: }\\hat \\sigma^2_y = \\frac{1}{n-1} \\sum_{i=1}^N a_i (y_i - \\hat{\\bar{y}} )^2\\] \\[\\texttt{V of mean: }\\widehat{V}(\\bar{y}) = \\frac{\\sigma^2_y }{n} * fpc\\]\n\nWhere \\(fpc = \\frac{N-n}{N-1}\\) is the finite population correction."
+  },
+  {
+    "objectID": "rmethods2/session_1.html#accounting-for-weights",
+    "href": "rmethods2/session_1.html#accounting-for-weights",
+    "title": "Research Methods II",
+    "section": "Accounting for Weights",
+    "text": "Accounting for Weights\n\nThe previous formulas did not account for weights.\nWeights are factors used to “reweight/expand” the sample to make it representative of the population.\nThey can are typically related to the inverse of the probability of selection.\nSimply said, a weight \\(w_i=\\frac{1}{n*\\pi_i}\\) is a measure of how many observations in the population are represented by observation \\(i\\) in the sample.\n\nBut how do we account for weights in the formulas?"
+  },
+  {
+    "objectID": "rmethods2/session_1.html#summary-statistics-with-weights",
+    "href": "rmethods2/session_1.html#summary-statistics-with-weights",
+    "title": "Research Methods II",
+    "section": "Summary Statistics with Weights",
+    "text": "Summary Statistics with Weights\nPopulation: \\[\\hat N = \\sum_{i=1}^n w_i\\]\nNormalized weights \\[v_i = \\frac{n w_i}{ \\sum w_i} \\rightarrow E(v_i) = 1\\]\nMean: \\[\\hat{\\mu}_y=\\bar{y} = \\frac{1}{\\hat N}\\sum_{i=1}^n w_i y_i = \\frac{1}{n}\\sum v_i y_i\\]"
+  },
+  {
+    "objectID": "rmethods2/session_1.html#variance-with-weights",
+    "href": "rmethods2/session_1.html#variance-with-weights",
+    "title": "Research Methods II",
+    "section": "Variance with Weights",
+    "text": "Variance with Weights\nVariances are a bit more complicated. Normally you would consider:\n\\[Var(\\bar y) = \\frac{1}{n} \\hat \\sigma^2_y =\\frac{1}{n} \\frac{1}{n-1} \\sum_{i=1}^n v_i (y_i - \\bar y)^2\\]\nHowever, with survey weights you need to consider something else: \\[Var(\\bar y) = \\frac{1}{n} \\sum_{i=1}^n v_i^2 (y_i - \\bar y)^2\\]\nWhich is similar to “robust” Standard errors in OLS.\n\nWhat about Clusters and Strata?"
+  },
+  {
+    "objectID": "rmethods2/session_1.html#how-to-account-for-weights-in-stata",
+    "href": "rmethods2/session_1.html#how-to-account-for-weights-in-stata",
+    "title": "Research Methods II",
+    "section": "How to account for weights in Stata?",
+    "text": "How to account for weights in Stata?\nLets use data from the National Health and Nutrition Examination Survey (NHANES) to illustrate how to account for weights in Stata.\n\n frause oaxaca, clear\n** Create Weights &lt;- This will be provided\nsum wt, meanonly\nreplace wt = round(wt/r(min))\ngen wage = exp(lnwage)\n\n\n\n\n(Excerpt from the Swiss Labor Market Survey 1998)\n(1,647 real changes made)\n(213 missing values generated)\n\n\nSummary Statistics:\n\n** unweighted\nsum wage,d\n** weighted\nsum wage [aw=wt],d\n\n\n                            wage\n-------------------------------------------------------------\n      Percentiles      Smallest\n 1%     3.907204       1.661434\n 5%      11.8007       1.873127\n10%      17.4216       2.197802       Obs               1,434\n25%     23.19902       2.442003       Sum of wgt.       1,434\n\n50%     30.08896                      Mean           32.39167\n                        Largest       Std. dev.      16.12498\n75%      38.5662       137.3627\n90%     49.95005       152.6252       Variance       260.0151\n95%     58.71271       164.8352       Skewness       2.486954\n99%     85.47008       192.3077       Kurtosis       18.23702\n\n                            wage\n-------------------------------------------------------------\n      Percentiles      Smallest\n 1%     3.453689       1.661434\n 5%     7.370678       1.873127\n10%     15.83933       2.197802       Obs               1,434\n25%     21.72247       2.442003       Sum of wgt.       2,686\n\n50%     29.48271                      Mean            31.5322\n                        Largest       Std. dev.      16.32811\n75%     38.46154       137.3627\n90%     49.95005       152.6252       Variance       266.6071\n95%     58.11497       164.8352       Skewness       2.081806\n99%     85.47008       192.3077       Kurtosis       14.68647\n\n\nAccounting for weights for summary Statistics\n\n** unweighted\nmean wage \n** weighted\nmean wage [pw=wt]\nmean wage [pw=wt], over(female)\n\n\nMean estimation                          Number of obs = 1,434\n\n--------------------------------------------------------------\n             |       Mean   Std. err.     [95% conf. interval]\n-------------+------------------------------------------------\n        wage |   32.39167   .4258186      31.55637    33.22696\n--------------------------------------------------------------\n\nMean estimation                          Number of obs = 1,434\n\n--------------------------------------------------------------\n             |       Mean   Std. err.     [95% conf. interval]\n-------------+------------------------------------------------\n        wage |    31.5322   .4765835      30.59733    32.46708\n--------------------------------------------------------------\n\nMean estimation                           Number of obs = 1,434\n\n---------------------------------------------------------------\n              |       Mean   Std. err.     [95% conf. interval]\n--------------+------------------------------------------------\nc.wage@female |\n           0  |   33.87649   .6152059      32.66969    35.08329\n           1  |   28.76133    .722173       27.3447    30.17796\n---------------------------------------------------------------\n\n\nTables and cross tables\n\n** unweighted\ntab educ female\n\ntab educ female [w=wt]\n\n\n           |   sex of respondent\n  years of |      (1=female)\n education |         0          1 |     Total\n-----------+----------------------+----------\n         5 |         6         23 |        29 \n         9 |        47         93 |       140 \n      9.75 |         8         26 |        34 \n        10 |        10         42 |        52 \n      10.5 |       376        447 |       823 \n      11.5 |         7         14 |        21 \n        12 |       111         87 |       198 \n      12.5 |        56         80 |       136 \n        15 |        60         13 |        73 \n      17.5 |        78         63 |       141 \n-----------+----------------------+----------\n     Total |       759        888 |     1,647 \n\n           |   sex of respondent\n  years of |      (1=female)\n education |         0          1 |     Total\n-----------+----------------------+----------\n         5 |        17         45 |        62 \n         9 |       104        181 |       285 \n      9.75 |        14         52 |        66 \n        10 |        22         80 |       102 \n      10.5 |       725        833 |     1,558 \n      11.5 |        19         27 |        46 \n        12 |       201        148 |       349 \n      12.5 |       108        157 |       265 \n        15 |       111         21 |       132 \n      17.5 |       149        111 |       260 \n-----------+----------------------+----------\n     Total |     1,470      1,655 |     3,125 \n\n\nBetter approach: svyset\n\nwebuse nhanes2f, clear\nsvyset psuid /// Cluster\n       [pweight=finalwgt], /// Survey Weight as Inverse of Prob of Selection\n       strata(stratid)     // Strata Identifier\nmean zinc      \nmean zinc [pw=finalwgt]\nsvy: mean zinc      \n\n\nSampling weights: finalwgt\n             VCE: linearized\n     Single unit: missing\n        Strata 1: stratid\n Sampling unit 1: psuid\n           FPC 1: &lt;zero&gt;\n\nMean estimation                          Number of obs = 9,189\n\n--------------------------------------------------------------\n             |       Mean   Std. err.     [95% conf. interval]\n-------------+------------------------------------------------\n        zinc |   86.51518   .1510744      86.21904    86.81132\n--------------------------------------------------------------\n\nMean estimation                          Number of obs = 9,189\n\n--------------------------------------------------------------\n             |       Mean   Std. err.     [95% conf. interval]\n-------------+------------------------------------------------\n        zinc |   87.18207   .1828747      86.82359    87.54054\n--------------------------------------------------------------\n(running mean on estimation sample)\n\nSurvey: Mean estimation\n\nNumber of strata = 31            Number of obs   =       9,189\nNumber of PSUs   = 62            Population size = 104,176,071\n                                 Design df       =          31\n\n--------------------------------------------------------------\n             |             Linearized\n             |       Mean   std. err.     [95% conf. interval]\n-------------+------------------------------------------------\n        zinc |   87.18207   .4944827      86.17356    88.19057\n--------------------------------------------------------------"
+  },
+  {
+    "objectID": "rmethods2/session_1.html#testing-significance-across-2-groups",
+    "href": "rmethods2/session_1.html#testing-significance-across-2-groups",
+    "title": "Research Methods II",
+    "section": "Testing Significance across 2 groups",
+    "text": "Testing Significance across 2 groups\nConsider two groups with the following characteristics:\n\n\n\nGroup\nN\nmean\nVar\n\n\n\n\n1\n100\n45\n32.56\n\n\n2\n150\n55\n21.97\n\n\n\n\nIs the difference in means statistically significant?\nTest \\(H_0: \\mu_1 = \\mu_2\\) vs \\(H_1: \\mu_1 \\neq \\mu_2\\)\n\n\\[t = \\frac{\\mu_2 - \\mu_1}{\\sqrt{\\frac{\\sigma_1^2}{n_1} + \\frac{\\sigma_2^2}{n_2}}}\n=\\frac{10}{\\sqrt{\\frac{32.56}{100}+\\frac{21.97}{150}}}=\\frac{10}{.47207} = 14.55453\n\\]\n\nIf \\(t\\) is large enough, we can reject the null hypothesis.\nBut this does not work if you have weights…"
+  },
+  {
+    "objectID": "rmethods2/session_1.html#testing-significance-across-2-groups-1",
+    "href": "rmethods2/session_1.html#testing-significance-across-2-groups-1",
+    "title": "Research Methods II",
+    "section": "Testing Significance across 2 groups",
+    "text": "Testing Significance across 2 groups\n\nBut you can use OLS to test the difference in means with weights!\n\nMake sure you use “robust” standard errors, or “pw” option.\n\n\n\n frause oaxaca, clear\n** Create Weights &lt;- This will be provided\nsum wt, meanonly\nreplace wt = round(wt/r(min))\ngen wage = exp(lnwage)\nreg wage i.female [pw=wt],\n\n(Excerpt from the Swiss Labor Market Survey 1998)\n(1,647 real changes made)\n(213 missing values generated)\n(sum of wgt is 2,686)\n\nLinear regression                               Number of obs     =      1,434\n                                                F(1, 1432)        =      29.05\n                                                Prob &gt; F          =     0.0000\n                                                R-squared         =     0.0244\n                                                Root MSE          =     16.133\n\n------------------------------------------------------------------------------\n             |               Robust\n        wage | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n    1.female |  -5.115156   .9490209    -5.39   0.000    -6.976776   -3.253536\n       _cons |   33.87649   .6154206    55.05   0.000     32.66927    35.08371\n------------------------------------------------------------------------------\n\n\n\nyou can also use svy: regress for complex designs.\n\nsee here for additional examples"
+  },
+  {
+    "objectID": "rmethods2/session_1.html#io-tables-1",
+    "href": "rmethods2/session_1.html#io-tables-1",
+    "title": "Research Methods II",
+    "section": "IO-Tables",
+    "text": "IO-Tables\nIO tables stand for Input-Output tables. They are a way to represent the production structure of an economy.\nTo some extend, IO tables provide a Static representation of the Economy\n\nConsider a Economy with K=3 sectors: Agriculture, Manufacturing and Services, with a Final consumer agent (households)\nAll the production of each sector, then, is used for consumption or inputs for other sectors.\n\n\\[X_{i} = X_{i1} + X_{i2} + X_{i3} + Y_{i}\\]\n\nWhere \\(X_{ij}\\) is the production of sector \\(i\\) used as input for sector \\(j\\) and \\(Y_i\\) is used for final consumption by households."
+  },
+  {
+    "objectID": "rmethods2/session_1.html#leontief-production-function",
+    "href": "rmethods2/session_1.html#leontief-production-function",
+    "title": "Research Methods II",
+    "section": "Leontief Production Function",
+    "text": "Leontief Production Function\n\nThe Leontief Production function is a simple way to represent the production structure of an economy.\nTotal production by sector \\(i\\) is given by:\n\n\\[X_{i} = X_{1i} +  X_{2i} +  X_{3i} + L_{i}\\]\nwhich assumes the production functions are linear. (at least in the very short term)\nThis can be rewritten as:\n\\[X_{i} = X_{i} a_{1i} +  X_{i} a_{2i} +  X_{i} a_{3i} + X_{i} l_{i}\\]"
+  },
+  {
+    "objectID": "rmethods2/session_1.html#section",
+    "href": "rmethods2/session_1.html#section",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "This can be represented as a set of equations: \\[\n\\begin{aligned}\nX_{11} + X_{12} + X_{13} + Y_{1}  &= X_{1} \\\\\nX_{21} + X_{22} + X_{23} + Y_{2} &= X_{2} \\\\\nX_{31} + X_{32} + X_{33} + Y_{3} &= X_{3}\n\\end{aligned}\n\\]\nwhere we could also add a “production” equation for the final consumer:\n\\[L_{1} + L_{2} + L_{3} = L = Y_{1} + Y_{2} + Y_{3}\\]"
+  },
+  {
+    "objectID": "rmethods2/session_1.html#section-1",
+    "href": "rmethods2/session_1.html#section-1",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "From the “production” side, the IO table can be represented as a matrix:"
   }
 ]

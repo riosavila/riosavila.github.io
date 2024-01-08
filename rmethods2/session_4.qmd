@@ -1,6 +1,6 @@
 ---
 title: "Research Methods II"
-subtitle: "Analyzing Inequality I"
+subtitle: "Analyzing Gaps"
 author: Fernando Rios-Avila
 format: 
   revealjs: 
@@ -12,7 +12,7 @@ format:
     css: styles.css 
 ---
 
-# How to Measure Inequality
+# Oaxaca-Blinder Decomposition: Standard Framework
 
-# How to Decompose Inequality
+# OB Decomposition: Extensions
 
