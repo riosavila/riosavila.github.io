@@ -1,6 +1,6 @@
 ---
 title: "Research Methods II"
-subtitle: "Analyzing Inequality I"
+subtitle: "Session 3: Measuring Inequality"
 author: Fernando Rios-Avila
 format: 
   revealjs: 
@@ -12,7 +12,32 @@ format:
     css: styles.css 
 ---
 
-# How to Measure Inequality
+# Measuring Inequality
+
+## What is Inequality?
+
+## How do you measure
+
+plots
+
+Lorenz curve
+
+Gini coefficient, Theil index, Atkinson index
+
+Quantiles
+
+How do you measure changes in inequality?
+RIF
+
+Var, log Var and CV
 
 # How to Decompose Inequality
+
+## Decompose by groups
+
+GINI and Theil
+
+## Decompose by sources
+
+GINI and Variance
 

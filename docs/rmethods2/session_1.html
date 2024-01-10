@@ -586,7 +586,7 @@ Fernando Rios-Avila
 <section id="how-to-account-for-weights-in-stata" class="slide level2 scrollable">
 <h2>How to account for weights in Stata?</h2>
 <p>Lets use data from the National Health and Nutrition Examination Survey (NHANES) to illustrate how to account for weights in Stata.</p>
-<div id="1481a182" class="cell larger" data-execution_count="1">
+<div id="0a8630a9" class="cell larger" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a></a> frause oaxaca, <span class="kw">clear</span></span>
 <span id="cb1-2"><a></a>** Create Weights &lt;- This will <span class="kw">be</span> provided</span>
 <span id="cb1-3"><a></a><span class="kw">sum</span> wt, <span class="kw">meanonly</span></span>
@@ -602,7 +602,7 @@ Fernando Rios-Avila
 </div>
 </div>
 <p>Summary Statistics:</p>
-<div id="b3c0efb5" class="cell larger" data-execution_count="2">
+<div id="cd195a83" class="cell larger" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a>** unweighted</span>
 <span id="cb3-2"><a></a><span class="kw">sum</span> wage,<span class="kw">d</span></span>
 <span id="cb3-3"><a></a>** weighted</span>
@@ -641,7 +641,7 @@ Fernando Rios-Avila
 </div>
 </div>
 <p>Accounting for weights for summary Statistics</p>
-<div id="e5f41ace" class="cell larger" data-execution_count="3">
+<div id="001e43d1" class="cell larger" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a></a>** unweighted</span>
 <span id="cb5-2"><a></a><span class="kw">mean</span> wage </span>
 <span id="cb5-3"><a></a>** weighted</span>
@@ -677,7 +677,7 @@ c.wage@female |
 </div>
 </div>
 <p>Tables and cross tables</p>
-<div id="7050c19d" class="cell larger" data-execution_count="4">
+<div id="eae292b6" class="cell larger" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a></a>** unweighted</span>
 <span id="cb7-2"><a></a><span class="kw">tab</span> educ female</span>
 <span id="cb7-3"><a></a></span>
@@ -720,7 +720,7 @@ c.wage@female |
 </div>
 </div>
 <p>Better approach: <code>svyset</code></p>
-<div id="979310d8" class="cell larger" data-execution_count="5">
+<div id="bc71605f" class="cell larger" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a></a><span class="kw">webuse</span> nhanes2f, <span class="kw">clear</span></span>
 <span id="cb9-2"><a></a><span class="kw">svyset</span> psuid <span class="co">/// Cluster</span></span>
 <span id="cb9-3"><a></a>       [<span class="kw">pweight</span>=finalwgt], <span class="co">/// Survey Weight as Inverse of Prob of Selection</span></span>
@@ -816,7 +816,7 @@ Number of PSUs   = 62            Population size = 104,176,071
 <li>Make sure you use “robust” standard errors, or “pw” option.</li>
 </ul></li>
 </ul>
-<div id="647d46e3" class="cell larger" data-execution_count="6">
+<div id="f9e0e5b5" class="cell larger" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a></a> frause oaxaca, <span class="kw">clear</span></span>
 <span id="cb11-2"><a></a>** Create Weights &lt;- This will <span class="kw">be</span> provided</span>
 <span id="cb11-3"><a></a><span class="kw">sum</span> wt, <span class="kw">meanonly</span></span>
@@ -856,53 +856,610 @@ Linear regression                               Number of obs     =      1,434
 </section>
 <section id="io-tables-1" class="slide level2">
 <h2>IO-Tables</h2>
-<p>IO tables stand for Input-Output tables. They are a way to represent the production structure of an economy.</p>
-<p>To some extend, IO tables provide a Static representation of the Economy</p>
 <ul>
-<li>Consider a Economy with K=3 sectors: Agriculture, Manufacturing and Services, with a Final consumer agent (households)</li>
-<li>All the production of each sector, then, is used for consumption or inputs for other sectors.</li>
-</ul>
-<p><span class="math display">\[X_{i} = X_{i1} + X_{i2} + X_{i3} + Y_{i}\]</span></p>
-<ul>
-<li>Where <span class="math inline">\(X_{ij}\)</span> is the production of sector <span class="math inline">\(i\)</span> used as input for sector <span class="math inline">\(j\)</span> and <span class="math inline">\(Y_i\)</span> is used for final consumption by households.</li>
+<li><p>IO tables stand for Input-Output tables. They are a way to represent the production structure of an economy.</p></li>
+<li><p>They provide a Static representation of the Economy</p></li>
+<li><p>Each Row represents the production of a sector, and each column represents the use of that production by other sectors as Inputs.</p></li>
+<li><p>The information it contains represent a snapshot of the economy at a given point in time.</p></li>
+<li><p>It can be used to simulate changes in production, labor demand, and total production in the economy, under specific assumptions (production function)</p></li>
 </ul>
 </section>
 <section id="section" class="slide level2">
 <h2></h2>
-<p>This can be represented as a set of equations: <span class="math display">\[
-\begin{aligned}
-X_{11} + X_{12} + X_{13} + Y_{1}  &amp;= X_{1} \\
-X_{21} + X_{22} + X_{23} + Y_{2} &amp;= X_{2} \\
-X_{31} + X_{32} + X_{33} + Y_{3} &amp;= X_{3}
-\end{aligned}
-\]</span></p>
-<p>where we could also add a “production” equation for the final consumer:</p>
-<p><span class="math display">\[L_{1} + L_{2} + L_{3} = L = Y_{1} + Y_{2} + Y_{3}\]</span></p>
-</section>
-<section id="leontief-production-function" class="slide level2">
-<h2>Leontief Production Function</h2>
 <ul>
-<li><p>The Leontief Production function is a simple way to represent the production structure of an economy.</p></li>
-<li><p>Total production by sector <span class="math inline">\(i\)</span> is given by:</p></li>
+<li><p>Consider a Economy with K=3 sectors: Agriculture, Manufacturing and Services, with a Final consumer agent (households)</p></li>
+<li><p>Each sector (i) produces a good (<span class="math inline">\(X_i\)</span>), which is sold to other sectors or the final consumer.</p></li>
+<li><p><span class="math inline">\(X_{ij}\)</span> is the quantity of goods sector <span class="math inline">\(i\)</span> sells to sector <span class="math inline">\(j\)</span>, and <span class="math inline">\(y_i\)</span> the final consumption by households.</p></li>
+<li><p><span class="math inline">\(X_{ji}\)</span> is also the quantity of goods sector <span class="math inline">\(i\)</span> uses from sector <span class="math inline">\(j\)</span> as inputs.</p></li>
+<li><p><span class="math inline">\(L_i\)</span> is the amount of labor used by sector <span class="math inline">\(i\)</span>.</p></li>
+<li><p>In a simple Economy, (value) Total labor demand is equal to total Household income. <span class="math inline">\(L_a + L_m + L_s = L = y_a + y_m + y_s\)</span></p></li>
 </ul>
-<p><span class="math display">\[X_{i} = X_{1i} +  X_{2i} +  X_{3i} + L_{i}\]</span></p>
-<p>which assumes the production functions are linear. (at least in the very short term)</p>
-<p>This can be rewritten as:</p>
-<p><span class="math display">\[X_{i} = X_{i} a_{1i} +  X_{i} a_{2i} +  X_{i} a_{3i} + X_{i} l_{i}\]</span></p>
 </section>
 <section id="section-1" class="slide level2">
 <h2></h2>
-<p>From the “production” side, the IO table can be represented as a matrix:</p>
+<p>This simple Economy can be represented as follows: <span class="math display">\[
+\begin{aligned}
+X_{11} &amp;+ X_{12} &amp;+ X_{13} &amp;+ Y_{1}  &amp;= X_{1} \\
+X_{21} &amp;+ X_{22} &amp;+ X_{23} &amp;+ Y_{2} &amp;= X_{2} \\
+X_{31} &amp;+ X_{32} &amp;+ X_{33} &amp;+ Y_{3} &amp;= X_{3} \\
+L_1 &amp;+ L_2 &amp;+ L_3 &amp;\ \ &amp;= L
+\end{aligned}
+\]</span></p>
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+<p>From the consumption/inputs Side, we could also write the equations as:</p>
+<p><span class="math display">\[
+\begin{aligned}
+X_{11} &amp;+ X_{21} &amp;+ X_{31} &amp;+ L_{1}  &amp;= X_{1} \\
+X_{12} &amp;+ X_{22} &amp;+ X_{32} &amp;+ L_{2} &amp;= X_{2} \\
+X_{13} &amp;+ X_{23} &amp;+ X_{33} &amp;+ L_{3} &amp;= X_{3} \\
+Y_1 &amp;+ Y_2 &amp;+ Y_3 &amp;  &amp;= Y
+\end{aligned}
+\]</span></p>
+<p>And from here we can get the technical coefficients: <span class="math display">\[
+\begin{aligned}
+a_{11} X_1 &amp;+ a_{21} X_1 &amp;+ a_{31} X_1 &amp;+ \lambda_{1} X_1 &amp;= X_1 \\
+a_{12} X_2 &amp;+ a_{22} X_2 &amp;+ a_{32} X_2 &amp;+ \lambda_{2} X_2 &amp;= X_2 \\
+a_{13} X_3 &amp;+ a_{23} X_3 &amp;+ a_{33} X_3 &amp;+ \lambda_{3} X_3 &amp;= X_3 \\
+\delta_1 Y &amp;+ \delta_2 Y &amp; + \delta_3 Y &amp;  &amp;= Y
+\end{aligned}
+\]</span></p>
+<p>Where <span class="math inline">\(a_{ij} = \frac{X_{ij}}{X_j}\)</span> and <span class="math inline">\(\lambda_i = \frac{L_i}{X_i}\)</span></p>
+<p><span class="math display">\[a_{1i}+a_{2i}+a_{3i}+\lambda_i = 1 \ \&amp; \ \delta_1+\delta_2+\delta_3 =1\]</span></p>
+</section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+<p>With this, we can write the IO table</p>
+<p><span class="math display">\[
+\begin{aligned}
+a_{11} X_1 &amp;+ a_{12} X_2 &amp;+ a_{13} X_3  &amp;+ \delta_1 Y &amp;= X_{1} \\
+a_{21} X_1 &amp;+ a_{22} X_2 &amp;+ a_{23} X_3  &amp;+ \delta_2 Y &amp;= X_{2} \\
+a_{31} X_1 &amp;+ a_{32} X_2 &amp;+ a_{33} X_3  &amp;+ \delta_3 Y &amp;= X_{3} \\
+\lambda_1 X_1 &amp;+ \lambda_2 X_2 &amp;+ \lambda_3 X_3 &amp;\ \ &amp;= L
+\end{aligned}
+\]</span></p>
+<p>Or into Matrix Form <span class="math display">\[
+\begin{pmatrix}
+a_{11} &amp; a_{12} &amp; a_{13}  \\
+a_{21} &amp; a_{22} &amp; a_{23} \\
+a_{31} &amp; a_{32} &amp; a_{33} \\
+\lambda_1 &amp; \lambda_2 &amp; \lambda_3
+\end{pmatrix}
+\begin{pmatrix}
+X_1 \\ X_2 \\ X_3
+\end{pmatrix} +
+\begin{pmatrix}
+Y_1 \\ Y_2 \\ Y_3 \\ 0
+\end{pmatrix}=
+\begin{pmatrix}
+X_1 \\ X_2 \\ X_3 \\ L
+\end{pmatrix}
+\]</span></p>
+</section>
+<section id="section-4" class="slide level2">
+<h2></h2>
+<p>Solve for Production sectors:</p>
+<p><span class="math display">\[
+\begin{pmatrix}
+a_{11} &amp; a_{12} &amp; a_{13}  \\
+a_{21} &amp; a_{22} &amp; a_{23} \\
+a_{31} &amp; a_{32} &amp; a_{33}
+\end{pmatrix}
+\begin{pmatrix}
+X_1 \\ X_2 \\ X_3
+\end{pmatrix} +
+\begin{pmatrix}
+Y_1 \\ Y_2 \\ Y_3
+\end{pmatrix}=
+\begin{pmatrix}
+X_1 \\ X_2 \\ X_3
+\end{pmatrix}
+\]</span></p>
+<p><span class="math display">\[
+\begin{pmatrix}
+Y_1 \\ Y_2 \\ Y_3
+\end{pmatrix}=I \begin{pmatrix} X_1 \\ X_2 \\ X_3 \end{pmatrix} -
+A \begin{pmatrix} X_1 \\ X_2 \\ X_3 \end{pmatrix} = (I-A) \begin{pmatrix} X_1 \\ X_2 \\ X_3 \end{pmatrix}
+\]</span></p>
+<p>Finally:</p>
+<p><span class="math display">\[
+\begin{pmatrix} X_1 \\ X_2 \\ X_3 \end{pmatrix} = (I-A)^{-1} \begin{pmatrix} Y_1 \\ Y_2 \\ Y_3 \end{pmatrix}
+\rightarrow
+\begin{pmatrix} \Delta X_1 \\ \Delta X_2 \\ \Delta X_3 \end{pmatrix} = (I-A)^{-1}
+\begin{pmatrix} \Delta Y_1 \\ \Delta Y_2 \\ \Delta Y_3 \end{pmatrix}
+\]</span></p>
+</section>
+<section id="example" class="slide level2 scrollable">
+<h2>Example</h2>
+<ul>
+<li>Consider the following IO table for a simple economy with 3 sectors and a final consumer.</li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 21%">
+<col style="width: 18%">
+<col style="width: 21%">
+<col style="width: 14%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Sector</th>
+<th style="text-align: center;">Agriculture</th>
+<th style="text-align: center;">Manufacturing</th>
+<th style="text-align: center;">Services</th>
+<th style="text-align: center;">Final Consumer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Agriculture</td>
+<td style="text-align: center;">102</td>
+<td style="text-align: center;">103</td>
+<td style="text-align: center;">153</td>
+<td style="text-align: center;">129</td>
+</tr>
+<tr class="even">
+<td>Manufacturing</td>
+<td style="text-align: center;">133</td>
+<td style="text-align: center;">124</td>
+<td style="text-align: center;">77</td>
+<td style="text-align: center;">99</td>
+</tr>
+<tr class="odd">
+<td>Services</td>
+<td style="text-align: center;">71</td>
+<td style="text-align: center;">92</td>
+<td style="text-align: center;">51</td>
+<td style="text-align: center;">165</td>
+</tr>
+<tr class="even">
+<td>Households</td>
+<td style="text-align: center;">181</td>
+<td style="text-align: center;">114</td>
+<td style="text-align: center;">98</td>
+<td style="text-align: center;">0</td>
+</tr>
+</tbody>
+</table>
+<p>S1: What is the total production of each sector?</p>
+<ul>
+<li><span class="math inline">\(X_1 = 102 + 103 + 153 + 129 = 487\)</span></li>
+<li><span class="math inline">\(X_2 = 133 + 124 + 77 + 99 = 433\)</span></li>
+<li><span class="math inline">\(X_3 = 71 + 92 + 51 + 165 = 379\)</span></li>
+</ul>
+<p>S2: What are the technical coefficients?</p>
+<table>
+<colgroup>
+<col style="width: 20%">
+<col style="width: 24%">
+<col style="width: 20%">
+<col style="width: 13%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Sector</th>
+<th style="text-align: center;">Agriculture</th>
+<th style="text-align: center;">Manufacturing</th>
+<th style="text-align: center;">Services</th>
+<th style="text-align: center;">Final Consumer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Agriculture</td>
+<td style="text-align: center;"><span class="math inline">\(a_{11}\)</span> = 0.209</td>
+<td style="text-align: center;">0.238</td>
+<td style="text-align: center;">0.404</td>
+<td style="text-align: center;">0.328</td>
+</tr>
+<tr class="even">
+<td>Manufacturing</td>
+<td style="text-align: center;">0.273</td>
+<td style="text-align: center;">0.286</td>
+<td style="text-align: center;">0.203</td>
+<td style="text-align: center;">0.252</td>
+</tr>
+<tr class="odd">
+<td>Services</td>
+<td style="text-align: center;">0.146</td>
+<td style="text-align: center;">0.212</td>
+<td style="text-align: center;">0.135</td>
+<td style="text-align: center;">0.420</td>
+</tr>
+<tr class="even">
+<td>Households</td>
+<td style="text-align: center;">0.372</td>
+<td style="text-align: center;">0.263</td>
+<td style="text-align: center;">0.259</td>
+<td style="text-align: center;">0.000</td>
+</tr>
+</tbody>
+</table>
+<p>This captures a snapshot of an economy. And could use to simulate changes in production and labor demand.</p>
+<p>S3. How much would production change if the final consumer demand for Agriculture increases in 20%?</p>
+<p><span class="math display">\[\Delta X = (I-A)^-1
+\begin{pmatrix} 0.2 * 129 \\ 0 \\ 0 \end{pmatrix} =
+\begin{pmatrix} 45.54 \\ 21.08 \\ 12.84 \end{pmatrix}
+\]</span></p>
+<p>S4: How much would labor demand change if the final consumer demand for Agriculture increases in 20%? <span class="math display">\[\Delta L_i = \lambda_i * \Delta X_i\]</span></p>
+<p><span class="math inline">\(\Delta L_1 = 0.372 * 45.54 = 16.95 ; \Delta L_2 =  0.263 * 21.08 = 5.544 ; \Delta L_3 =  0.259 * 12.84 = 3.326\)</span></p>
+</section>
+<section id="example---stata" class="slide level2 scrollable">
+<h2>Example - <code>Stata</code></h2>
+<p><code>mata</code>: Input Data</p>
+<div id="9d9636ef" class="cell larger" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a></a><span class="kw">mata</span>: x  = (102, 103, 153 \ 133, 124, 77 \ 71, 92, 51)</span>
+<span id="cb13-2"><a></a><span class="kw">mata</span>: <span class="fu">y</span>  = (129 \ 99 \ 165)</span>
+<span id="cb13-3"><a></a><span class="kw">mata</span>: hh = ( 181 , 114 , 98)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Estimate Total Production</p>
+<div id="010a4d1b" class="cell larger" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a></a><span class="kw">mata</span>: tp = colsum(x):+hh ; tp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         1     2     3
+    +-------------------+
+  1 |  487   433   379  |
+    +-------------------+</code></pre>
+</div>
+</div>
+<p>Estimate Technical Coefficients</p>
+<div id="aeec2d00" class="cell larger" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a></a><span class="co">// Technical Coefficients</span></span>
+<span id="cb16-2"><a></a><span class="kw">mata</span>:ai = x:/tp ; ai</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 1             2             3
+    +-------------------------------------------+
+  1 |  .2094455852   .2378752887   .4036939314  |
+  2 |   .273100616   .2863741339   .2031662269  |
+  3 |  .1457905544   .2124711316   .1345646438  |
+    +-------------------------------------------+</code></pre>
+</div>
+</div>
+<p>Estimate Change in Demand: 20% increase in Agriculture</p>
+<div id="08028c6e" class="cell larger" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a></a><span class="co">// Technical Coefficients</span></span>
+<span id="cb18-2"><a></a><span class="kw">mata</span>:dy = <span class="fu">y</span> :* (.2 \ 0 \ 0); dy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          1
+    +--------+
+  1 |  25.8  |
+  2 |     0  |
+  3 |     0  |
+    +--------+</code></pre>
+</div>
+</div>
+<p>Estimate Change in Production</p>
+<div id="50de442f" class="cell larger" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb20-1"><a></a><span class="co">// Change in Production</span></span>
+<span id="cb20-2"><a></a><span class="kw">mata</span>:dx = <span class="kw">qrinv</span>(<span class="fu">I</span>(3)-ai)*dy; dx</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 1
+    +---------------+
+  1 |  45.54130481  |
+  2 |  21.08637814  |
+  3 |  12.84872246  |
+    +---------------+</code></pre>
+</div>
+</div>
+<p>Estimate Change in Labor Demand</p>
+<div id="2f799ffa" class="cell larger" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb22-1"><a></a><span class="kw">mata</span>:dl = (hh:/tp)':*dx; dl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 1
+    +---------------+
+  1 |   16.9260291  |
+  2 |  5.551609949  |
+  3 |  3.322360954  |
+    +---------------+</code></pre>
+</div>
+</div>
 </section></section>
-<section id="sam" class="title-slide slide level1 center">
-<h1>SAM</h1>
+<section>
+<section id="sam-social-accounting-matrix" class="title-slide slide level1 center">
+<h1>SAM: Social Accounting Matrix</h1>
+
+</section>
+<section id="sam-social-accounting-matrix-1" class="slide level2">
+<h2>SAM: Social Accounting Matrix</h2>
+<ul>
+<li><p>SAM can be thought as an upgraded version of IO-tables.</p></li>
+<li><p>They are a way to organize information about the production structure of an economy, but also the distribution of resources.</p>
+<ul>
+<li>This it will not only register production of goods and services, but also transfers of resources between sectors and agents.</li>
+</ul></li>
+<li><p>You can also use it as basis for a plausible model of the economy.</p>
+<ul>
+<li>Prediction of changes in production, income and distribution.</li>
+</ul></li>
+</ul>
+</section>
+<section id="example-1" class="slide level2">
+<h2>Example</h2>
+<table>
+<caption>Closed Economy No GoV SAM</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">Production</th>
+<th style="text-align: center;">Consumption</th>
+<th style="text-align: center;">Accumulation</th>
+<th style="text-align: center;">Totals</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Production</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(C\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(I\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(C+I\)</span></td>
+</tr>
+<tr class="even">
+<td>Consumption</td>
+<td style="text-align: center;"><span class="math inline">\(Y\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(Y\)</span></td>
+</tr>
+<tr class="odd">
+<td>Accumulation</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(S\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(S\)</span></td>
+</tr>
+<tr class="even">
+<td>Totals</td>
+<td style="text-align: center;"><span class="math inline">\(Y\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(C+S\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(I\)</span></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Goods/services are Transfered from left to Top-right</li>
+<li>Monetary Transfers are from Top-right to left</li>
+</ul>
+</section>
+<section id="example-2" class="slide level2">
+<h2>Example 2</h2>
+<table style="width:100%;">
+<caption>Open Economy with GoV SAM</caption>
+<colgroup>
+<col style="width: 16%">
+<col style="width: 10%">
+<col style="width: 17%">
+<col style="width: 13%">
+<col style="width: 7%">
+<col style="width: 13%">
+<col style="width: 22%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">S1</th>
+<th style="text-align: center;">S2</th>
+<th style="text-align: center;">S3</th>
+<th style="text-align: center;">S4</th>
+<th style="text-align: center;">S5</th>
+<th style="text-align: center;">Totals</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>S1: Prod</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(C\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(G\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(I\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(E\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(C+G+I+E\)</span></td>
+</tr>
+<tr class="even">
+<td>S2: HH</td>
+<td style="text-align: center;"><span class="math inline">\(Y\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(Y\)</span></td>
+</tr>
+<tr class="odd">
+<td>S3: Gov</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(Tx\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(Tx\)</span></td>
+</tr>
+<tr class="even">
+<td>S4: K acc</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(S_h\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(S_g\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(S_f\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(S_h+S_g+S_f\)</span></td>
+</tr>
+<tr class="odd">
+<td>S5: RofW</td>
+<td style="text-align: center;"><span class="math inline">\(M\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(M\)</span></td>
+</tr>
+<tr class="even">
+<td>Totals</td>
+<td style="text-align: center;"><span class="math inline">\(Y+M\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(C+S_h+Tx\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(G+S_g\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(I\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(E+S_f\)</span></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<p>Here <span class="math inline">\(S1\)</span> and <span class="math inline">\(S2\)</span> is what we had in the IO table. Thus, we could further expand the SAM to include more sectors and agents.</p>
+</section>
+<section id="example-3" class="slide level2">
+<h2>Example 3</h2>
+<table style="width:100%;">
+<caption>MoreDetailed SAM</caption>
+<colgroup>
+<col style="width: 16%">
+<col style="width: 12%">
+<col style="width: 8%">
+<col style="width: 10%">
+<col style="width: 11%">
+<col style="width: 10%">
+<col style="width: 8%">
+<col style="width: 10%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">S1</th>
+<th style="text-align: center;">S2</th>
+<th style="text-align: center;">S3</th>
+<th style="text-align: center;">S4</th>
+<th style="text-align: center;">S5</th>
+<th style="text-align: center;">S6</th>
+<th style="text-align: center;">S7</th>
+<th style="text-align: center;">S8</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>S1: Act</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(Gds\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td>S2: Commod</td>
+<td style="text-align: center;"><span class="math inline">\(IntGds\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(C\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(G\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(I\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(E\)</span></td>
+</tr>
+<tr class="odd">
+<td>S3: Factors</td>
+<td style="text-align: center;"><span class="math inline">\(VA\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(FE\)</span></td>
+</tr>
+<tr class="even">
+<td>S4: Enter</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(Prof\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(ETr\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td>S5: HH</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(Wage\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(DProf\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(Tr\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(REM\)</span></td>
+</tr>
+<tr class="even">
+<td>S6: Gov</td>
+<td style="text-align: center;"><span class="math inline">\(ITx\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(FTx\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(ETx\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(DTx\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(Tarf\)</span></td>
+</tr>
+<tr class="odd">
+<td>S7: K acc</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(RetY\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(S_h\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(S_g\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(KTrM\)</span></td>
+</tr>
+<tr class="even">
+<td>S8: RofW</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(M\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(FM\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(REMA\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(TrA\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(KtrA\)</span></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="other-extensions" class="slide level2">
+<h2>Other Extensions</h2>
+<ul>
+<li>SAM also allow you to do further extensions to include more agents (heterogenous)
+<ul>
+<li>Green-Industry</li>
+<li>Informal Sector</li>
+<li>Households by income level</li>
+<li>etc.</li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="thats-all-folks" class="title-slide slide level1 center">
+<h1>Thats all folks!</h1>
+
+</section>
+<section id="what-to-get-from-today" class="slide level2">
+<h2>What to get from today?</h2>
+<ul>
+<li>How to use weights in Stata to account for survey design, and how to obtain summary statistics.</li>
+<li>How to test differences in means across groups.</li>
+<li>How to use IO tables to simulate changes in production and labor demand.</li>
+<li>Understand how SAM can be used to represent an Economy</li>
+</ul>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 

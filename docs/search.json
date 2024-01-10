@@ -6731,7 +6731,7 @@
     "href": "rmethods2/session_1.html#io-tables-1",
     "title": "Research Methods II",
     "section": "IO-Tables",
-    "text": "IO-Tables\nIO tables stand for Input-Output tables. They are a way to represent the production structure of an economy.\nTo some extend, IO tables provide a Static representation of the Economy\n\nConsider a Economy with K=3 sectors: Agriculture, Manufacturing and Services, with a Final consumer agent (households)\nAll the production of each sector, then, is used for consumption or inputs for other sectors.\n\n\\[X_{i} = X_{i1} + X_{i2} + X_{i3} + Y_{i}\\]\n\nWhere \\(X_{ij}\\) is the production of sector \\(i\\) used as input for sector \\(j\\) and \\(Y_i\\) is used for final consumption by households."
+    "text": "IO-Tables\n\nIO tables stand for Input-Output tables. They are a way to represent the production structure of an economy.\nThey provide a Static representation of the Economy\nEach Row represents the production of a sector, and each column represents the use of that production by other sectors as Inputs.\nThe information it contains represent a snapshot of the economy at a given point in time.\nIt can be used to simulate changes in production, labor demand, and total production in the economy, under specific assumptions (production function)"
   },
   {
     "objectID": "rmethods2/session_1.html#leontief-production-function",
@@ -6745,13 +6745,370 @@
     "href": "rmethods2/session_1.html#section",
     "title": "Research Methods II",
     "section": "",
-    "text": "This can be represented as a set of equations: \\[\n\\begin{aligned}\nX_{11} + X_{12} + X_{13} + Y_{1}  &= X_{1} \\\\\nX_{21} + X_{22} + X_{23} + Y_{2} &= X_{2} \\\\\nX_{31} + X_{32} + X_{33} + Y_{3} &= X_{3}\n\\end{aligned}\n\\]\nwhere we could also add a “production” equation for the final consumer:\n\\[L_{1} + L_{2} + L_{3} = L = Y_{1} + Y_{2} + Y_{3}\\]"
+    "text": "Consider a Economy with K=3 sectors: Agriculture, Manufacturing and Services, with a Final consumer agent (households)\nEach sector (i) produces a good (\\(X_i\\)), which is sold to other sectors or the final consumer.\n\\(X_{ij}\\) is the quantity of goods sector \\(i\\) sells to sector \\(j\\), and \\(y_i\\) the final consumption by households.\n\\(X_{ji}\\) is also the quantity of goods sector \\(i\\) uses from sector \\(j\\) as inputs.\n\\(L_i\\) is the amount of labor used by sector \\(i\\).\nIn a simple Economy, (value) Total labor demand is equal to total Household income. \\(L_a + L_m + L_s = L = y_a + y_m + y_s\\)"
   },
   {
     "objectID": "rmethods2/session_1.html#section-1",
     "href": "rmethods2/session_1.html#section-1",
     "title": "Research Methods II",
     "section": "",
-    "text": "From the “production” side, the IO table can be represented as a matrix:"
+    "text": "This simple Economy can be represented as follows: \\[\n\\begin{aligned}\nX_{11} &+ X_{12} &+ X_{13} &+ Y_{1}  &= X_{1} \\\\\nX_{21} &+ X_{22} &+ X_{23} &+ Y_{2} &= X_{2} \\\\\nX_{31} &+ X_{32} &+ X_{33} &+ Y_{3} &= X_{3} \\\\\nL_1 &+ L_2 &+ L_3 &\\ \\ &= L\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "rmethods2/session_1.html#section-2",
+    "href": "rmethods2/session_1.html#section-2",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "From the consumption/inputs Side, we could also write the equations as:\n\\[\n\\begin{aligned}\nX_{11} &+ X_{21} &+ X_{31} &+ L_{1}  &= X_{1} \\\\\nX_{12} &+ X_{22} &+ X_{32} &+ L_{2} &= X_{2} \\\\\nX_{13} &+ X_{23} &+ X_{33} &+ L_{3} &= X_{3} \\\\\nY_1 &+ Y_2 &+ Y_3 &  &= Y\n\\end{aligned}\n\\]\nAnd from here we can get the technical coefficients: \\[\n\\begin{aligned}\na_{11} X_1 &+ a_{21} X_1 &+ a_{31} X_1 &+ \\lambda_{1} X_1 &= X_1 \\\\\na_{12} X_2 &+ a_{22} X_2 &+ a_{32} X_2 &+ \\lambda_{2} X_2 &= X_2 \\\\\na_{13} X_3 &+ a_{23} X_3 &+ a_{33} X_3 &+ \\lambda_{3} X_3 &= X_3 \\\\\n\\delta_1 Y &+ \\delta_2 Y & + \\delta_3 Y &  &= Y\n\\end{aligned}\n\\]\nWhere \\(a_{ij} = \\frac{X_{ij}}{X_j}\\) and \\(\\lambda_i = \\frac{L_i}{X_i}\\)\n\\[a_{1i}+a_{2i}+a_{3i}+\\lambda_i = 1 \\ \\& \\ \\delta_1+\\delta_2+\\delta_3 =1\\]"
+  },
+  {
+    "objectID": "rmethods2/session_1.html#section-4",
+    "href": "rmethods2/session_1.html#section-4",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "Solve for Production sectors:\n\\[\n\\begin{pmatrix}\na_{11} & a_{12} & a_{13}  \\\\\na_{21} & a_{22} & a_{23} \\\\\na_{31} & a_{32} & a_{33}\n\\end{pmatrix}\n\\begin{pmatrix}\nX_1 \\\\ X_2 \\\\ X_3\n\\end{pmatrix} +\n\\begin{pmatrix}\nY_1 \\\\ Y_2 \\\\ Y_3\n\\end{pmatrix}=\n\\begin{pmatrix}\nX_1 \\\\ X_2 \\\\ X_3\n\\end{pmatrix}\n\\]\n\\[\n\\begin{pmatrix}\nY_1 \\\\ Y_2 \\\\ Y_3\n\\end{pmatrix}=I \\begin{pmatrix} X_1 \\\\ X_2 \\\\ X_3 \\end{pmatrix} -\nA \\begin{pmatrix} X_1 \\\\ X_2 \\\\ X_3 \\end{pmatrix} = (I-A) \\begin{pmatrix} X_1 \\\\ X_2 \\\\ X_3 \\end{pmatrix}\n\\]\nFinally:\n\\[\n\\begin{pmatrix} X_1 \\\\ X_2 \\\\ X_3 \\end{pmatrix} = (I-A)^{-1} \\begin{pmatrix} Y_1 \\\\ Y_2 \\\\ Y_3 \\end{pmatrix}\n\\rightarrow\n\\begin{pmatrix} \\Delta X_1 \\\\ \\Delta X_2 \\\\ \\Delta X_3 \\end{pmatrix} = (I-A)^{-1}\n\\begin{pmatrix} \\Delta Y_1 \\\\ \\Delta Y_2 \\\\ \\Delta Y_3 \\end{pmatrix}\n\\]"
+  },
+  {
+    "objectID": "rmethods2/session_1.html#section-3",
+    "href": "rmethods2/session_1.html#section-3",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "With this, we can write the IO table\n\\[\n\\begin{aligned}\na_{11} X_1 &+ a_{12} X_2 &+ a_{13} X_3  &+ \\delta_1 Y &= X_{1} \\\\\na_{21} X_1 &+ a_{22} X_2 &+ a_{23} X_3  &+ \\delta_2 Y &= X_{2} \\\\\na_{31} X_1 &+ a_{32} X_2 &+ a_{33} X_3  &+ \\delta_3 Y &= X_{3} \\\\\n\\lambda_1 X_1 &+ \\lambda_2 X_2 &+ \\lambda_3 X_3 &\\ \\ &= L\n\\end{aligned}\n\\]\nOr into Matrix Form \\[\n\\begin{pmatrix}\na_{11} & a_{12} & a_{13}  \\\\\na_{21} & a_{22} & a_{23} \\\\\na_{31} & a_{32} & a_{33} \\\\\n\\lambda_1 & \\lambda_2 & \\lambda_3\n\\end{pmatrix}\n\\begin{pmatrix}\nX_1 \\\\ X_2 \\\\ X_3\n\\end{pmatrix} +\n\\begin{pmatrix}\nY_1 \\\\ Y_2 \\\\ Y_3 \\\\ 0\n\\end{pmatrix}=\n\\begin{pmatrix}\nX_1 \\\\ X_2 \\\\ X_3 \\\\ L\n\\end{pmatrix}\n\\]"
+  },
+  {
+    "objectID": "rmethods2/session_1.html#example",
+    "href": "rmethods2/session_1.html#example",
+    "title": "Research Methods II",
+    "section": "Example",
+    "text": "Example\n\nConsider the following IO table for a simple economy with 3 sectors and a final consumer.\n\n\n\n\n\n\n\n\n\n\n\nSector\nAgriculture\nManufacturing\nServices\nFinal Consumer\n\n\n\n\nAgriculture\n102\n103\n153\n129\n\n\nManufacturing\n133\n124\n77\n99\n\n\nServices\n71\n92\n51\n165\n\n\nHouseholds\n181\n114\n98\n0\n\n\n\nS1: What is the total production of each sector?\n\n\\(X_1 = 102 + 103 + 153 + 129 = 487\\)\n\\(X_2 = 133 + 124 + 77 + 99 = 433\\)\n\\(X_3 = 71 + 92 + 51 + 165 = 379\\)\n\nS2: What are the technical coefficients?\n\n\n\n\n\n\n\n\n\n\nSector\nAgriculture\nManufacturing\nServices\nFinal Consumer\n\n\n\n\nAgriculture\n\\(a_{11}\\) = 0.209\n0.238\n0.404\n0.328\n\n\nManufacturing\n0.273\n0.286\n0.203\n0.252\n\n\nServices\n0.146\n0.212\n0.135\n0.420\n\n\nHouseholds\n0.372\n0.263\n0.259\n0.000\n\n\n\nThis captures a snapshot of an economy. And could use to simulate changes in production and labor demand.\nS3. How much would production change if the final consumer demand for Agriculture increases in 20%?\n\\[\\Delta X = (I-A)^-1\n\\begin{pmatrix} 0.2 * 129 \\\\ 0 \\\\ 0 \\end{pmatrix} =\n\\begin{pmatrix} 45.54 \\\\ 21.08 \\\\ 12.84 \\end{pmatrix}\n\\]\nS4: How much would labor demand change if the final consumer demand for Agriculture increases in 20%? \\[\\Delta L_i = \\lambda_i * \\Delta X_i\\]\n\\(\\Delta L_1 = 0.372 * 45.54 = 16.95 ; \\Delta L_2 =  0.263 * 21.08 = 5.544 ; \\Delta L_3 =  0.259 * 12.84 = 3.326\\)"
+  },
+  {
+    "objectID": "rmethods2/session_1.html#example---stata",
+    "href": "rmethods2/session_1.html#example---stata",
+    "title": "Research Methods II",
+    "section": "Example - Stata",
+    "text": "Example - Stata\nmata: Input Data\n\nmata: x  = (102, 103, 153 \\ 133, 124, 77 \\ 71, 92, 51)\nmata: y  = (129 \\ 99 \\ 165)\nmata: hh = ( 181 , 114 , 98)\n\nEstimate Total Production\n\nmata: tp = colsum(x):+hh ; tp\n\n         1     2     3\n    +-------------------+\n  1 |  487   433   379  |\n    +-------------------+\n\n\nEstimate Technical Coefficients\n\n// Technical Coefficients\nmata:ai = x:/tp ; ai\n\n                 1             2             3\n    +-------------------------------------------+\n  1 |  .2094455852   .2378752887   .4036939314  |\n  2 |   .273100616   .2863741339   .2031662269  |\n  3 |  .1457905544   .2124711316   .1345646438  |\n    +-------------------------------------------+\n\n\nEstimate Change in Demand: 20% increase in Agriculture\n\n// Technical Coefficients\nmata:dy = y :* (.2 \\ 0 \\ 0); dy\n\n          1\n    +--------+\n  1 |  25.8  |\n  2 |     0  |\n  3 |     0  |\n    +--------+\n\n\nEstimate Change in Production\n\n// Change in Production\nmata:dx = qrinv(I(3)-ai)*dy; dx\n\n                 1\n    +---------------+\n  1 |  45.54130481  |\n  2 |  21.08637814  |\n  3 |  12.84872246  |\n    +---------------+\n\n\nEstimate Change in Labor Demand\n\nmata:dl = (hh:/tp)':*dx; dl\n\n                 1\n    +---------------+\n  1 |   16.9260291  |\n  2 |  5.551609949  |\n  3 |  3.322360954  |\n    +---------------+"
+  },
+  {
+    "objectID": "rmethods2/session_1.html#sam-social-accounting-matrix-1",
+    "href": "rmethods2/session_1.html#sam-social-accounting-matrix-1",
+    "title": "Research Methods II",
+    "section": "SAM: Social Accounting Matrix",
+    "text": "SAM: Social Accounting Matrix\n\nSAM can be thought as an upgraded version of IO-tables.\nThey are a way to organize information about the production structure of an economy, but also the distribution of resources.\n\nThis it will not only register production of goods and services, but also transfers of resources between sectors and agents.\n\nYou can also use it as basis for a plausible model of the economy.\n\nPrediction of changes in production, income and distribution."
+  },
+  {
+    "objectID": "rmethods2/session_1.html#example-1",
+    "href": "rmethods2/session_1.html#example-1",
+    "title": "Research Methods II",
+    "section": "Example",
+    "text": "Example\n\nClosed Economy No GoV SAM\n\n\n\nProduction\nConsumption\nAccumulation\nTotals\n\n\n\n\nProduction\n\n\\(C\\)\n\\(I\\)\n\\(C+I\\)\n\n\nConsumption\n\\(Y\\)\n\n\n\\(Y\\)\n\n\nAccumulation\n\n\\(S\\)\n\n\\(S\\)\n\n\nTotals\n\\(Y\\)\n\\(C+S\\)\n\\(I\\)\n\n\n\n\n\nGoods/services are Transfered from left to Top-right\nMonetary Transfers are from Top-right to left"
+  },
+  {
+    "objectID": "rmethods2/session_1.html#example-2",
+    "href": "rmethods2/session_1.html#example-2",
+    "title": "Research Methods II",
+    "section": "Example 2",
+    "text": "Example 2\n\nOpen Economy with GoV SAM\n\n\n\n\n\n\n\n\n\n\n\n\nS1\nS2\nS3\nS4\nS5\nTotals\n\n\n\n\nS1: Prod\n\n\\(C\\)\n\\(G\\)\n\\(I\\)\n\\(E\\)\n\\(C+G+I+E\\)\n\n\nS2: HH\n\\(Y\\)\n\n\n\n\n\\(Y\\)\n\n\nS3: Gov\n\n\\(Tx\\)\n\n\n\n\\(Tx\\)\n\n\nS4: K acc\n\n\\(S_h\\)\n\\(S_g\\)\n\n\\(S_f\\)\n\\(S_h+S_g+S_f\\)\n\n\nS5: RofW\n\\(M\\)\n\n\n\n\n\\(M\\)\n\n\nTotals\n\\(Y+M\\)\n\\(C+S_h+Tx\\)\n\\(G+S_g\\)\n\\(I\\)\n\\(E+S_f\\)\n\n\n\n\nHere \\(S1\\) and \\(S2\\) is what we had in the IO table. Thus, we could further expand the SAM to include more sectors and agents."
+  },
+  {
+    "objectID": "rmethods2/session_1.html#example-3",
+    "href": "rmethods2/session_1.html#example-3",
+    "title": "Research Methods II",
+    "section": "Example 3",
+    "text": "Example 3\n\nMoreDetailed SAM\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nS1\nS2\nS3\nS4\nS5\nS6\nS7\nS8\n\n\n\n\nS1: Act\n\n\\(Gds\\)\n\n\n\n\n\n\n\n\nS2: Commod\n\\(IntGds\\)\n\n\n\n\\(C\\)\n\\(G\\)\n\\(I\\)\n\\(E\\)\n\n\nS3: Factors\n\\(VA\\)\n\n\n\n\n\n\n\\(FE\\)\n\n\nS4: Enter\n\n\n\\(Prof\\)\n\n\n\\(ETr\\)\n\n\n\n\nS5: HH\n\n\n\\(Wage\\)\n\\(DProf\\)\n\n\\(Tr\\)\n\n\\(REM\\)\n\n\nS6: Gov\n\\(ITx\\)\n\n\\(FTx\\)\n\\(ETx\\)\n\\(DTx\\)\n\n\n\\(Tarf\\)\n\n\nS7: K acc\n\n\n\n\\(RetY\\)\n\\(S_h\\)\n\\(S_g\\)\n\n\\(KTrM\\)\n\n\nS8: RofW\n\n\\(M\\)\n\\(FM\\)\n\n\\(REMA\\)\n\\(TrA\\)\n\\(KtrA\\)"
+  },
+  {
+    "objectID": "rmethods2/session_1.html#other-extensions",
+    "href": "rmethods2/session_1.html#other-extensions",
+    "title": "Research Methods II",
+    "section": "Other Extensions",
+    "text": "Other Extensions\n\nSAM also allow you to do further extensions to include more agents (heterogenous)\n\nGreen-Industry\nInformal Sector\nHouseholds by income level\netc."
+  },
+  {
+    "objectID": "rmethods2/session_1.html#what-to-get-from-today",
+    "href": "rmethods2/session_1.html#what-to-get-from-today",
+    "title": "Research Methods II",
+    "section": "What to get from today?",
+    "text": "What to get from today?\n\nHow to use weights in Stata to account for survey design, and how to obtain summary statistics.\nHow to test differences in means across groups.\nHow to use IO tables to simulate changes in production and labor demand.\nUnderstand how SAM can be used to represent an Economy"
+  },
+  {
+    "objectID": "rmethods2/session_2.html#introduction-to-maximum-likelihood-estimation",
+    "href": "rmethods2/session_2.html#introduction-to-maximum-likelihood-estimation",
+    "title": "Research Methods II",
+    "section": "Introduction to Maximum Likelihood Estimation",
+    "text": "Introduction to Maximum Likelihood Estimation\n\nThis is something we have seen before.\nMLE is a method to estimate parameters of a model.\n\nIt can be used to estimate paramaters of linear and nonlinear models\n\nThe idea is to find the values of the parameters that maximize the likelihood function.\n\nBut what does it mean?\n\n\n\nThe likelihood function is the probability of observing the data given the parameters of the model.\n\nSo, MLE tries to maximize that probability, under the assumption that we know the distribution of the data.\nIn other words, we try to identify distributions! (not only conditional mean functions)"
+  },
+  {
+    "objectID": "rmethods2/session_2.html#example",
+    "href": "rmethods2/session_2.html#example",
+    "title": "Research Methods II",
+    "section": "Example",
+    "text": "Example"
+  },
+  {
+    "objectID": "rmethods2/session_2.html#data",
+    "href": "rmethods2/session_2.html#data",
+    "title": "Research Methods II",
+    "section": "Data",
+    "text": "Data"
+  },
+  {
+    "objectID": "rmethods2/session_2.html#mle-estimation",
+    "href": "rmethods2/session_2.html#mle-estimation",
+    "title": "Research Methods II",
+    "section": "MLE estimation",
+    "text": "MLE estimation\n\nTo identify the parameters of the model, we need to impose assumptions about the distribution of the data.\nFor simplicitly, lets make the assumption that the data is normally distributed.\nThe likelihood function for a single observation is:\n\n\\[L_i(\\mu,\\sigma) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{ -\\frac{1}{2}\\left(\\frac{y_i-\\mu}{\\sigma}\\right)^2 }\\]\n\nAnd under independent observations assumptions, the Likelihood function for the sample is:\n\n\\[LL(\\mu,\\sigma) = \\prod_{i=1}^n L_i(\\mu,\\sigma)\\]"
+  },
+  {
+    "objectID": "rmethods2/session_2.html#graphical-representation-of-the-likelihood-function",
+    "href": "rmethods2/session_2.html#graphical-representation-of-the-likelihood-function",
+    "title": "Research Methods II",
+    "section": "Graphical representation of the likelihood function",
+    "text": "Graphical representation of the likelihood function\n\n\n\n. mata\n------------------------------------------------- mata (type end to exit) -----\n: my = rangen(-3.6,2.5,50)\n\n: sy = rangen(1.5,3,50)\n\n: msy=my#J(50,1,1),J(50,1,1)#sy\n\n: y = st_data(.,\"y\")\n\n: ll = J(rows(msy),1,0)\n\n: for(i=1;i&lt;=rows(msy);i++){\n&gt;     ll[i]=sum(lnnormalden(y,msy[i,1],msy[i,2]))\n&gt; }\n\n: fdt = msy, ll\n\n: end\n-------------------------------------------------------------------------------\n\n. \n\n    Variable |        Obs        Mean    Std. dev.       Min        Max\n-------------+---------------------------------------------------------\n        fdt3 |      2,500   -2483.886    452.6902   -5016.05  -2024.095"
+  },
+  {
+    "objectID": "rmethods2/session_2.html#graphical-representation-of-the-likelihood-function-1",
+    "href": "rmethods2/session_2.html#graphical-representation-of-the-likelihood-function-1",
+    "title": "Research Methods II",
+    "section": "Graphical representation of the likelihood function",
+    "text": "Graphical representation of the likelihood function"
+  },
+  {
+    "objectID": "rmethods2/session_2.html#graphical-representation",
+    "href": "rmethods2/session_2.html#graphical-representation",
+    "title": "Research Methods II",
+    "section": "Graphical representation",
+    "text": "Graphical representation"
+  },
+  {
+    "objectID": "rmethods2/session_2.html#how-good-we-did",
+    "href": "rmethods2/session_2.html#how-good-we-did",
+    "title": "Research Methods II",
+    "section": "How Good we did?",
+    "text": "How Good we did?"
+  },
+  {
+    "objectID": "rmethods2/session_2.html#section",
+    "href": "rmethods2/session_2.html#section",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "Under that assumption, the likelihood function for a single observation is:\n\n\\[L_i(\\beta,\\sigma) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{ -\\frac{1}{2}\\left(\\frac{y_i-x_i'\\beta}{\\sigma}\\right)^2 }\\]\n\nWhich can be used to construct the MLE estimator for OLS.\nPlot-twist: The MLE estimator for OLS is the same as the OLS estimator."
+  },
+  {
+    "objectID": "rmethods2/session_2.html#limited-dependent-variables-1",
+    "href": "rmethods2/session_2.html#limited-dependent-variables-1",
+    "title": "Research Methods II",
+    "section": "Limited Dependent Variables",
+    "text": "Limited Dependent Variables\n\nLimited dependent variables are variables that are limited in their range of values.\n\nFor example, binary variables, or variables that are bounded between 0 and 1.\nOr variables that are bounded between 0 and some positive number.\nOr variables bounded to take only positive values.\netc\n\nVery Special Case: Endogenous Sample Selection\n\nLooks unbounded, but you only observe a subset of the population."
+  },
+  {
+    "objectID": "rmethods2/session_2.html#probitlogit",
+    "href": "rmethods2/session_2.html#probitlogit",
+    "title": "Research Methods II",
+    "section": "Probit/Logit",
+    "text": "Probit/Logit\n\n\nLOGIT\n\\[G(Z) = \\frac{e^{Z}}{1+e^{Z}} = \\Lambda(Z)\\]\n\nProbit\n\\[G(Z) = \\int_{-\\infty}^z \\phi(v) dv = \\Phi(Z)\\]\n\n\n\nBoth make sure that \\(0\\leq G(Z) \\leq 1\\), which doesnt happen with LPM (\\(G(Z)=Z\\))\nAnd with this, we can use MLE to estimate the parameters of the model.\n\n\\[LL(\\beta) = \\prod_{i=1}^n G(x_i'\\beta)^{y_i} (1-G(x_i'\\beta))^{1-y_i}\\]"
+  },
+  {
+    "objectID": "rmethods2/session_2.html#binary-data-lpmprobitlogit",
+    "href": "rmethods2/session_2.html#binary-data-lpmprobitlogit",
+    "title": "Research Methods II",
+    "section": "Binary Data: LPM/Probit/logit",
+    "text": "Binary Data: LPM/Probit/logit\n\nProbit and logit are two models that are used to model binary dependent variables. (Dummies)\n\nYou can also use OLS (LPM), but has drawbacks\nYou also need to make sure your Dependent Variable is binary!\n\nWhen your Dep variable is binary, your goal is determine the probability of observing a 1 (success) of something to happen given a set of covariates.\n\n\\[P(y_i=1|x_i) = G(x_i'\\beta)\\]\nThe choice of \\(G\\) is what makes the difference between LPM, a probit and logit."
+  },
+  {
+    "objectID": "rmethods2/session_2.html#section-1",
+    "href": "rmethods2/session_2.html#section-1",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "One could also think of the probit and logit as a transformation of a latent variable \\(Y^*\\).\n\\[Y^*_i = x_i'\\beta + \\epsilon_i\\]\n\nThe latent variable is not observed. However, when \\(Y^*_i&gt;0\\), we observe \\(Y_i=1\\).\n\nHere the probabilty of observing a \\(Y_i=1\\) is:\n\\[\\begin{aligned}\nP(y_i=1|x_i) &= P(y^*_i&gt;0|x_i) = P(x_i'\\beta + \\epsilon_i&gt;0|x_i) \\\\\n  &= P( \\epsilon_i&gt;-x_i'\\beta |x_i) = 1-P( \\epsilon_i&lt;-x_i'\\beta |x_i) \\\\\n  &= 1-G(-x_i'\\beta)\n\\end{aligned}\n\\]\nAnd if \\(G'\\) is symetrical (logit/probit/lpm):\n\\[P(y_i=1|x_i) = G(x_i'\\beta)\\]"
+  },
+  {
+    "objectID": "rmethods2/session_2.html#marginal-effects-and-testing",
+    "href": "rmethods2/session_2.html#marginal-effects-and-testing",
+    "title": "Research Methods II",
+    "section": "Marginal Effects and testing",
+    "text": "Marginal Effects and testing\n\nLPM estimates can be interpreted Directly as the change in P(y=1|X)\nFor Logit and probit, we need to compute the marginal effects.\n\n\\[P(y_i=1|x_i) = G(x_i'\\beta)\\]\n\\[\\frac{\\partial P(y_i=1|x_i)}{\\partial x_{ij}} = g(x_i'\\beta)\\beta_j\\]\n\nFor testing,\n\nYou can use the t-test (or z-test for logit/probit) for coefficients or marginal effects\nOr use LR test for joint significance of a set of coefficients.\n\n\n\\[LR = 1- 2 (LL_ur - LL_r) \\sim \\chi^2_q\\]"
+  },
+  {
+    "objectID": "rmethods2/session_2.html#example-stata",
+    "href": "rmethods2/session_2.html#example-stata",
+    "title": "Research Methods II",
+    "section": "Example Stata",
+    "text": "Example Stata\nLoad the data\n\nwebuse nhanes2d, clear\ndes highbp height weight age female\nsum   highbp height weight age female i.race [w=finalwgt]\n\n\nVariable      Storage   Display    Value\n    name         type    format    label      Variable label\n-------------------------------------------------------------------------------\nhighbp          byte    %8.0g               * High blood pressure\nheight          float   %9.0g                 Height (cm)\nweight          float   %9.0g                 Weight (kg)\nage             byte    %9.0g                 Age (years)\nfemale          byte    %8.0g      female     Female\n\n    Variable |     Obs      Weight        Mean   Std. dev.       Min        Max\n-------------+-----------------------------------------------------------------\n      highbp |  10,351   117157513    .3685423   .4824328          0          1\n      height |  10,351   117157513    168.4599   9.699111      135.5        200\n      weight |  10,351   117157513    71.90064   15.43281      30.84     175.88\n         age |  10,351   117157513    42.25264   15.50249         20         74\n      female |  10,351   117157513    .5206498   .4995975          0          1\n-------------+-----------------------------------------------------------------\n             |\n        race |\n      White  |  10,351   117157513    .8791545   .3259634          0          1\n      Black  |  10,351   117157513    .0955059   .2939267          0          1\n      Other  |  10,351   117157513    .0253396   .1571621          0          1\n\n\nEstimate mode: LPM using weights\n\nreg highbp height weight age female i.race [pw=finalwgt]\n* or svy: reg highbp height weight age female i.race \n\n(sum of wgt is 117,157,513)\n\nLinear regression                               Number of obs     =     10,351\n                                                F(6, 10344)       =     531.97\n                                                Prob &gt; F          =     0.0000\n                                                R-squared         =     0.2110\n                                                Root MSE          =     .42864\n\n------------------------------------------------------------------------------\n             |               Robust\n      highbp | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n      height |   -.006271   .0008179    -7.67   0.000    -.0078742   -.0046677\n      weight |   .0097675    .000369    26.47   0.000     .0090441    .0104909\n         age |   .0096675   .0002984    32.40   0.000     .0090826    .0102524\n      female |  -.0794025   .0142293    -5.58   0.000    -.1072948   -.0515103\n             |\n        race |\n      Black  |   .0647166   .0170488     3.80   0.000     .0312977    .0981355\n      Other  |   .0869917   .0381158     2.28   0.022     .0122775     .161706\n             |\n       _cons |    .347133   .1403729     2.47   0.013     .0719749     .622291\n------------------------------------------------------------------------------\n\n\nEstimate mode: Logit using weights\n\nlogit highbp height weight age female i.race [pw=finalwgt]\n* or svy: reg highbp height weight age female i.race \n\n\nIteration 0:  Log pseudolikelihood =  -77110184  \nIteration 1:  Log pseudolikelihood =  -63830529  \nIteration 2:  Log pseudolikelihood =  -63604963  \nIteration 3:  Log pseudolikelihood =  -63604252  \nIteration 4:  Log pseudolikelihood =  -63604252  \n\nLogistic regression                                    Number of obs =  10,351\n                                                       Wald chi2(6)  = 1473.91\n                                                       Prob &gt; chi2   =  0.0000\nLog pseudolikelihood = -63604252                       Pseudo R2     =  0.1752\n\n------------------------------------------------------------------------------\n             |               Robust\n      highbp | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n      height |  -.0328739   .0045382    -7.24   0.000    -.0417687   -.0239791\n      weight |   .0514503   .0022181    23.20   0.000     .0471028    .0557977\n         age |   .0496323   .0017152    28.94   0.000     .0462706     .052994\n      female |  -.4472131   .0777753    -5.75   0.000    -.5996498   -.2947764\n             |\n        race |\n      Black  |    .351346   .0915423     3.84   0.000     .1719264    .5307656\n      Other  |   .4929785   .1961652     2.51   0.012     .1085017    .8774552\n             |\n       _cons |  -.7501284   .7683899    -0.98   0.329    -2.256145    .7558881\n------------------------------------------------------------------------------\n\n\nJoint significance test\n\ntest 2.race 3.race\n\n\n ( 1)  [highbp]2.race = 0\n ( 2)  [highbp]3.race = 0\n\n           chi2(  2) =   20.25\n         Prob &gt; chi2 =    0.0000\n\n\nMarginal Effects: You need to use margins command\n\nmargins, dydx(*)\n\n\nAverage marginal effects                                Number of obs = 10,351\nModel VCE: Robust\n\nExpression: Pr(highbp), predict()\ndy/dx wrt:  height weight age female 2.race 3.race\n\n------------------------------------------------------------------------------\n             |            Delta-method\n             |      dy/dx   std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n      height |  -.0059971   .0008145    -7.36   0.000    -.0075936   -.0044007\n      weight |    .009386   .0003507    26.76   0.000     .0086985    .0100734\n         age |   .0090543   .0002562    35.34   0.000     .0085522    .0095564\n      female |  -.0815842   .0141075    -5.78   0.000    -.1092344   -.0539339\n             |\n        race |\n      Black  |   .0654291   .0173285     3.78   0.000     .0314659    .0993923\n      Other  |   .0925816     .03772     2.45   0.014     .0186517    .1665115\n------------------------------------------------------------------------------\nNote: dy/dx for factor levels is the discrete change from the base level.\n\n\nPredicted Probabilities\n\npredict pr_hat\nhistogram pr_hat  \ngraph export s2fig2.png, replace width(1000)\n\nFrom here, we could also predict HighBP\n\ngen dpr_hat = pr_hat&gt;.5\ntab dpr_hat highbp [w=finalwgt]\n\n\n           |  High blood pressure\n   dpr_hat |         0          1 |     Total\n-----------+----------------------+----------\n         0 |  61819680   20494538 |  82314218 \n         1 |  12160331   22682964 |  34843295 \n-----------+----------------------+----------\n     Total |  73980011   43177502 | 117157513"
+  },
+  {
+    "objectID": "rmethods2/session_2.html#tobit-1",
+    "href": "rmethods2/session_2.html#tobit-1",
+    "title": "Research Methods II",
+    "section": "Tobit",
+    "text": "Tobit\n\nTobit models are to analyze data with censored information.\nCensored data means that the data is there… but you dont know the exact value.\nFor example, if you have data on income, but you only know that some people earn less than 10K, but you dont know how much less.\nThe fact that you can see the data, even if you do not know the exact value, helps you to estimate the parameters of the model."
+  },
+  {
+    "objectID": "rmethods2/session_2.html#visualizing-the-problem",
+    "href": "rmethods2/session_2.html#visualizing-the-problem",
+    "title": "Research Methods II",
+    "section": "Visualizing the problem",
+    "text": "Visualizing the problem"
+  },
+  {
+    "objectID": "rmethods2/session_2.html#visualizing-the-problem-1",
+    "href": "rmethods2/session_2.html#visualizing-the-problem-1",
+    "title": "Research Methods II",
+    "section": "Visualizing the problem",
+    "text": "Visualizing the problem"
+  },
+  {
+    "objectID": "rmethods2/session_2.html#tobit-model",
+    "href": "rmethods2/session_2.html#tobit-model",
+    "title": "Research Methods II",
+    "section": "Tobit Model",
+    "text": "Tobit Model\n\nThe idea of the Tobit model is “model” not only why \\(y\\) changes when \\(X\\) changes, but also why y is censored.\n\nAlthough you do that with the same parameters, under normality assumptions.\n\nWhen the data is censored, the likelihood function is similar to a probit model, when the data is not censored, the likelihood function is similar to a linear model:\n\n\\[\\begin{aligned}\nL_i(\\beta,\\sigma) &= \\Phi\\left(\\frac{y^c-x_i'\\beta}{\\sigma}\\right) \\text{if } y_i = y^c \\\\\nL_i(\\beta,\\sigma) &= \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{ -\\frac{1}{2}\\left(\\frac{y_i-x_i'\\beta}{\\sigma}\\right)^2 } \\text{if } y_i &gt; y^c\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "rmethods2/session_2.html#estimation",
+    "href": "rmethods2/session_2.html#estimation",
+    "title": "Research Methods II",
+    "section": "Estimation",
+    "text": "Estimation"
+  },
+  {
+    "objectID": "rmethods2/session_2.html#estimation-stata",
+    "href": "rmethods2/session_2.html#estimation-stata",
+    "title": "Research Methods II",
+    "section": "Estimation Stata",
+    "text": "Estimation Stata\nIn Stata, you can estimate a Tobit model using the tobit command.\ntobit y x1 x2 x3, ll(#)\n\ny: dependent variable\nx1 x2 x3: independent variable\nll(#): is the value of the censoring point."
+  },
+  {
+    "objectID": "rmethods2/session_2.html#visualizing-the-solution",
+    "href": "rmethods2/session_2.html#visualizing-the-solution",
+    "title": "Research Methods II",
+    "section": "Visualizing the solution",
+    "text": "Visualizing the solution"
+  },
+  {
+    "objectID": "rmethods2/session_2.html#latent-variable",
+    "href": "rmethods2/session_2.html#latent-variable",
+    "title": "Research Methods II",
+    "section": "Latent Variable",
+    "text": "Latent Variable\n\nThe easiest to interpret is the latent variable.\nFor example, say that you are interested in the effect of education on wages, but wages are censored at 10.\nIn this case the coefficients of the Tobit model are the same as the coefficients of the linear model.\n\ntobit y x, ll(0)\n\nuse margins if you have interactions or polynomial terms."
+  },
+  {
+    "objectID": "rmethods2/session_2.html#data-is-corner-solution",
+    "href": "rmethods2/session_2.html#data-is-corner-solution",
+    "title": "Research Methods II",
+    "section": "Data is Corner Solution:",
+    "text": "Data is Corner Solution:\n\nIf data is corner solution, then you need to decide what to interpret.\n\nFor example, say you are interested in the effect of education hours of work\nHours of work cannot fall below 0.\nBut you know education has a positive effect (on something)\n\nWould you be interested in the effect on the probability of working?\nThe effect on hours of work for those who work?\nThe overall average effect on hours of work? (some will enter the labor force, some will work more hours)"
+  },
+  {
+    "objectID": "rmethods2/session_2.html#probability-of-working",
+    "href": "rmethods2/session_2.html#probability-of-working",
+    "title": "Research Methods II",
+    "section": "Probability of Working",
+    "text": "Probability of Working\n\\[P(y_i&gt;0|x_i) = \\Phi\\left(\\frac{x_i'\\beta}{\\sigma}\\right)\\]\nmargins, dydx(x) predict(pr(0,.))\n\npredict(pr(0,.)) says you are interested in the probability that data was not censored…or in this case that was not a corner solution"
+  },
+  {
+    "objectID": "rmethods2/session_2.html#eyy0x",
+    "href": "rmethods2/session_2.html#eyy0x",
+    "title": "Research Methods II",
+    "section": "E(Y|Y>0,X)",
+    "text": "E(Y|Y&gt;0,X)\n\\[\\begin{aligned}\ny_i &= x_i'\\beta + \\epsilon_i \\ || E(|y&gt;0,X) \\\\\nE(y_i|y_i&gt;0,x_i) &= x_i'\\beta + \\sigma\\lambda\\left(\\frac{x_i'\\beta}{\\sigma}\\right) \\\\\n\\lambda(z) &= \\frac{\\phi(z)}{\\Phi(z)}\n\\end{aligned}\n\\]\nThis is the expected value of the latent variable, conditional on the latent variable being positive.\nmargins, dydx(x) predict(e(0,.))\n\npredict(e(0,.)) says you are interested in the expected change only for those who currently work."
+  },
+  {
+    "objectID": "rmethods2/session_2.html#eyx",
+    "href": "rmethods2/session_2.html#eyx",
+    "title": "Research Methods II",
+    "section": "E(Y|X)",
+    "text": "E(Y|X)\n\\[\\begin{aligned}\nE(y_i|x_i) &= E(y_i|y_i&gt;0,x_i) * P(y_i&gt;0|x_i) + 0 * (1-P(y_i&gt;0|x_i)) \\\\\nE(y_i|x_i) &= \\Phi\\left(\\frac{x_i'\\beta}{\\sigma}\\right)\n\\left( x_i'\\beta + \\sigma\\lambda\\left(\\frac{x_i'\\beta}{\\sigma}\\right)\\right) \\\\\nE(y_i|x_i) &= \\Phi\\left(\\frac{x_i'\\beta}{\\sigma}\\right) x_i'\\beta + \\sigma \\phi\\left(\\frac{x_i'\\beta}{\\sigma}\\right)\n\\end{aligned}\n\\]\nmargins, dydx(x) predict(ystar(0,.))\n\npredict(ystar(0,.)) says you are interested in the average effect considering those who work and those who do not work."
+  },
+  {
+    "objectID": "rmethods2/session_2.html#visualizing-the-solution-1",
+    "href": "rmethods2/session_2.html#visualizing-the-solution-1",
+    "title": "Research Methods II",
+    "section": "Visualizing the solution",
+    "text": "Visualizing the solution"
+  },
+  {
+    "objectID": "rmethods2/session_2.html#the-problem",
+    "href": "rmethods2/session_2.html#the-problem",
+    "title": "Research Methods II",
+    "section": "The problem",
+    "text": "The problem\n\nFirst: Samples already represent a selection of the population.\n\nhowever, because the selection is random, all assumptions of OLS are satisfied. (if they are true for the population.)\n\nSecond: Some times selection may not be random, but based on observed (and control) characteristics\n\nNot a problem either. Since you could at least say something for those you observe. (if you have the right variables)\nThis was exogenous sample selection."
+  },
+  {
+    "objectID": "rmethods2/session_2.html#exogenous-sample-selection",
+    "href": "rmethods2/session_2.html#exogenous-sample-selection",
+    "title": "Research Methods II",
+    "section": "Exogenous Sample Selection",
+    "text": "Exogenous Sample Selection\n\nFirst: Samples already represent a selection of the population.\n\nhowever, because the selection is random, all assumptions of OLS are satisfied. (if they are true for the population.)\n\nSecond: Some times selection may not be random, but based on observed (and control) characteristics\n\nNot a problem either. Since you could at least say something for those you observe. (if you have the right variables)\nThis was exogenous sample selection.\n\n\nie: You want to estimate the effect of education on wages, but you only have data for highly educated people."
+  },
+  {
+    "objectID": "rmethods2/session_2.html#endogenous-sample-selection",
+    "href": "rmethods2/session_2.html#endogenous-sample-selection",
+    "title": "Research Methods II",
+    "section": "Endogenous Sample Selection",
+    "text": "Endogenous Sample Selection\n\nThird: Selection may be based on unobserved characteristics.\n\nThis is a problem. The reason why we do not observe data is for unknown reasons (part of the error).\nBecause we cannot control for it, it will bias our estimates. (like omitted variable bias)\nThis is endogenous sample selection.\n\n\nie: - You want to estimate the effect of education on wages, but you only have data for those who work. - Those who work do so because they may have been offer higher wages for unknown reasons. (high skill? high motivation? )"
+  },
+  {
+    "objectID": "rmethods2/session_2.html#heckman-selection-model",
+    "href": "rmethods2/session_2.html#heckman-selection-model",
+    "title": "Research Methods II",
+    "section": "Heckman Selection Model",
+    "text": "Heckman Selection Model\n\nThe Heckman selection model is an estimation method that allows you to correct a specific kind of endogenous sample selection.\nConsider the following model:\n\n\\[y_i = x_i'\\beta + \\epsilon_i\\]\n\nIn absence of selection, we can assume standard assumtions and estimate the model using OLS.\nHowever, if we have endogenous selection, usually means that we have a second equation that determines the selection.\n\n\\[s_i^* = z_i'\\gamma + \\eta_i\\]"
+  },
+  {
+    "objectID": "rmethods2/session_2.html#section-2",
+    "href": "rmethods2/session_2.html#section-2",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "*| echo: false\n*| output: false\nclear\nset obs 1000\ngen x = rnormal()\ngen e = rnormal()\ngen y = 1 + x + e\ngen dpe = (x+.7*e+ rnormal()*.5)&gt;.5\ngen dp1 = normal(x)&lt;runiform()\n\ntwo (scatter y x, pstyle(p1)  msize(2) mlcolor(%0)  color(%30)) (lfit y x, pstyle(p1) lw(1)) ///\n    (scatter y x if dp1, pstyle(p2) msize(2) mlcolor(%0) color(%30)) (lfit y x if dp1, pstyle(p2) lw(1)), ///\n    legend(order(1 \"Full\" 3 \"EX Subsample\") pos(6) col(2)) ///\n  xtitle(\"\")\n\ngraph export s2fig7.png, replace width(1000)"
+  },
+  {
+    "objectID": "rmethods2/session_2.html#section-3",
+    "href": "rmethods2/session_2.html#section-3",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "*| echo: false\n*| output: false\ntwo (scatter y x, pstyle(p1)  msize(2) mlcolor(%0)  color(%30)) (lfit y x, pstyle(p1) lw(1)) ///\n    (scatter y x if dpe, pstyle(p2) msize(2) mlcolor(%0) color(%30)) (lfit y x if dpe, pstyle(p2) lw(1)), ///\n    legend(order(1 \"Full\" 3 \"End Subsample\") pos(6) col(2)) ///\n  xtitle(\"\")\n\ngraph export s2fig8.png, replace width(1000)"
+  },
+  {
+    "objectID": "rmethods2/session_2.html#section-4",
+    "href": "rmethods2/session_2.html#section-4",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "The Full model:\n\\[\\begin{aligned}\ny_i &= x_i'\\beta + \\epsilon_i \\text{ if } s_i^*&gt;0 \\\\\ns_i^* &= z_i'\\gamma + \\eta_i \\\\\n\\epsilon &\\sim N(0,\\sigma_\\epsilon) \\\\\n\\eta &\\sim N(0,1) \\\\\ncorr(\\epsilon,\\eta) &= \\rho\n\\end{aligned}\n\\]\n\n\\(x_i\\) and \\(z_i\\) are not necessarily the same. But they are exogenous to the error terms.\nThe selection equation depends on observable \\(z_i\\) and unobservable \\(\\eta_i\\) factors.\nThe unobserable factors are correlated with the error term of the main equation.\nThe problem: if \\(\\rho\\neq 0\\) then \\(E(\\epsilon|s_i^*&gt;0,x_i) \\neq 0\\)."
+  },
+  {
+    "objectID": "rmethods2/session_2.html#solution",
+    "href": "rmethods2/session_2.html#solution",
+    "title": "Research Methods II",
+    "section": "Solution",
+    "text": "Solution\n\nThe solution is to “control” for the unobserved factors that are correlated with \\(\\epsilon\\).\n\n\\[\\begin{aligned}\ny_i &= x_i'\\beta + \\epsilon_i \\ || \\ E( * |x_i,s_i^*&gt;0) \\\\\nE(y_i|x_i,s_i^*&gt;0) &= x_i'\\beta + E(\\epsilon_i|x,z,\\eta, s_i^*&gt;0) \\\\\n&= x_i'\\beta + E(\\epsilon_i|\\eta,s_i^*&gt;0) \\\\\n  &= x_i'\\beta + \\rho \\frac{\\phi(z_i'\\gamma)}{\\Phi(z_i'\\gamma)} \\\\\n  &= x_i'\\beta + \\rho \\lambda (z_i'\\gamma) \\\\\n\\end{aligned}\n\\]\nThus the new model is:\n\\[y_i  = x_i'\\beta + \\rho \\lambda (z_i'\\gamma) + \\varepsilon_i\\]\nwhere \\(\\gamma\\) is estimated using a probit model."
+  },
+  {
+    "objectID": "rmethods2/session_2.html#implementation",
+    "href": "rmethods2/session_2.html#implementation",
+    "title": "Research Methods II",
+    "section": "Implementation",
+    "text": "Implementation\n\nTwo options:\n\nEstimate both outcome and selection equation jointly using MLE.\n\n\nRequires careful setup of the likelihood function.\nImposes the assumption of joint normality of the error terms.\n\n\nEstimate it using a two-step procedure.(Heckit)\n\n\nEstimate the selection equation using probit. \\(z_i'\\gamma\\)\nEstimate the outcome equation using OLS, inclusing inverse mills ratio. \\(\\lambda (z_i'\\gamma)\\)\nStd Errs need to be corrected\n\nConsideration: In contrast with IV, Heckman does not require an instrument, but having one is highly recommended."
+  },
+  {
+    "objectID": "rmethods2/session_2.html#example-stata-1",
+    "href": "rmethods2/session_2.html#example-stata-1",
+    "title": "Research Methods II",
+    "section": "Example Stata",
+    "text": "Example Stata\nLets start by loading some data\n\nwebuse womenwk, clear\ndescribe\n\n\nContains data from https://www.stata-press.com/data/r18/womenwk.dta\n Observations:         2,000                  \n    Variables:             6                  3 Mar 2022 07:43\n-------------------------------------------------------------------------------\nVariable      Storage   Display    Value\n    name         type    format    label      Variable label\n-------------------------------------------------------------------------------\ncounty          byte    %9.0g                 County of residence\nage             byte    %8.0g                 Age in years\neducation       byte    %8.0g                 Years of schooling\nmarried         byte    %8.0g                 1 if married spouse present\nchildren        byte    %8.0g                 # of children under 12 years old\nwage            float   %9.0g                 Hourly wage; missing, if not\n                                                working\n-------------------------------------------------------------------------------\nSorted by: \n\n\nIn Stata, we can use command heckman to estimate the Heckman selection model, but lets start by doing this manually\n\ngen works = (wage!=.)\n** Selection model\nprobit works married children educ age\npredict zg, xb\n\n\nIteration 0:  Log likelihood = -1266.2225  \nIteration 1:  Log likelihood = -1031.4962  \nIteration 2:  Log likelihood = -1027.0625  \nIteration 3:  Log likelihood = -1027.0616  \nIteration 4:  Log likelihood = -1027.0616  \n\nProbit regression                                       Number of obs =  2,000\n                                                        LR chi2(4)    = 478.32\n                                                        Prob &gt; chi2   = 0.0000\nLog likelihood = -1027.0616                             Pseudo R2     = 0.1889\n\n------------------------------------------------------------------------------\n       works | Coefficient  Std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n     married |   .4308575    .074208     5.81   0.000     .2854125    .5763025\n    children |   .4473249   .0287417    15.56   0.000     .3909922    .5036576\n   education |   .0583645   .0109742     5.32   0.000     .0368555    .0798735\n         age |   .0347211   .0042293     8.21   0.000     .0264318    .0430105\n       _cons |  -2.467365   .1925635   -12.81   0.000    -2.844782   -2.089948\n------------------------------------------------------------------------------\n\n\nThis selection equation can be interpreted the usual way\nThe outcome model:\n\ngen mill = normalden(zg)/normal(zg)\nreg  wage educ age mill\nest sto hkit\n\n\n      Source |       SS           df       MS      Number of obs   =     1,343\n-------------+----------------------------------   F(3, 1339)      =    173.01\n       Model |  14904.6806         3  4968.22688   Prob &gt; F        =    0.0000\n    Residual |   38450.214     1,339  28.7156191   R-squared       =    0.2793\n-------------+----------------------------------   Adj R-squared   =    0.2777\n       Total |  53354.8946     1,342  39.7577456   Root MSE        =    5.3587\n\n------------------------------------------------------------------------------\n        wage | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n   education |   .9825259   .0504982    19.46   0.000     .8834616     1.08159\n         age |   .2118695   .0206636    10.25   0.000      .171333     .252406\n        mill |   4.001616   .5771027     6.93   0.000     2.869492    5.133739\n       _cons |   .7340391   1.166214     0.63   0.529    -1.553766    3.021844\n------------------------------------------------------------------------------\n\n\nLets compare the outcome with Stata’s Heckman\n\nset linesize 255\nreg wag educ age\nest sto ols\nheckman wage educ age, select(works = married children educ age) twostep\nest sto hecktwo\nheckman wage educ age, select(works = married children educ age) \nest sto heckmle\n\n\nesttab ols hkit hecktwo heckmle, se(%9.3f) b(%9.3f) star(* 0.10 ** 0.05 *** 0.01) nogaps mtitle(OLS Heckit Hkm-two Hkm-mle) nonum\n\n\n----------------------------------------------------------------------------\n                      OLS          Heckit         Hkm-two         Hkm-mle   \n----------------------------------------------------------------------------\nmain                                                                        \neducation           0.897***        0.983***        0.983***        0.990***\n                  (0.050)         (0.050)         (0.054)         (0.053)   \nage                 0.147***        0.212***        0.212***        0.213***\n                  (0.019)         (0.021)         (0.022)         (0.021)   \nmill                                4.002***                                \n                                  (0.577)                                   \n_cons               6.085***        0.734           0.734           0.486   \n                  (0.890)         (1.166)         (1.248)         (1.077)   \n----------------------------------------------------------------------------\nworks                                                                       \nmarried                                             0.431***        0.445***\n                                                  (0.074)         (0.067)   \nchildren                                            0.447***        0.439***\n                                                  (0.029)         (0.028)   \neducation                                           0.058***        0.056***\n                                                  (0.011)         (0.011)   \nage                                                 0.035***        0.037***\n                                                  (0.004)         (0.004)   \n_cons                                              -2.467***       -2.491***\n                                                  (0.193)         (0.189)   \n----------------------------------------------------------------------------\n/mills                                                                      \nlambda                                              4.002***                \n                                                  (0.607)                   \n----------------------------------------------------------------------------\n/                                                                           \nathrho                                                              0.874***\n                                                                  (0.101)   \nlnsigma                                                             1.793***\n                                                                  (0.028)   \n----------------------------------------------------------------------------\nN                    1343            1343            2000            2000   \n----------------------------------------------------------------------------\nStandard errors in parentheses\n* p&lt;0.10, ** p&lt;0.05, *** p&lt;0.01"
+  },
+  {
+    "objectID": "rmethods2/session_2.html#interpretation",
+    "href": "rmethods2/session_2.html#interpretation",
+    "title": "Research Methods II",
+    "section": "Interpretation",
+    "text": "Interpretation\n\nIt depends…\nbut the most likely scenario is to interpret the outcomes for everyone (thus just look at coefficients of the outcome equation)\nBut you can also obtain effects for those who work, or the average effect.\nThe Mills ratio can be interpreted as the direction of the selection.\n\nIf positive, then those who work are those who earn more\nIf negative, then those who work are those who earn less"
+  },
+  {
+    "objectID": "rmethods2/session_2.html#extra-example",
+    "href": "rmethods2/session_2.html#extra-example",
+    "title": "Research Methods II",
+    "section": "Extra example",
+    "text": "Extra example\n\nfrause oaxaca, clear\nreg lnwage educ exper tenure \nest sto ols\nheckman lnwage educ exper tenure  , select(lfp =educ age   married divorced kids6 kids714) \nest sto hk_mle\nheckman lnwage educ exper tenure  , select(lfp =educ age   married divorced kids6 kids714) two\nest sto hk_two\n\n\nesttab ols hk_mle hk_two, se(%9.3f) b(%9.3f) star(* 0.10 ** 0.05 *** 0.01) nogaps mtitle(OLS Heckit Hkm-two) nonum  \n\n\n------------------------------------------------------------\n                      OLS          Heckit         Hkm-two   \n------------------------------------------------------------\nmain                                                        \neduc                0.087***        0.091***        0.094***\n                  (0.005)         (0.005)         (0.006)   \nexper               0.011***        0.011***        0.010***\n                  (0.002)         (0.002)         (0.002)   \ntenure              0.008***        0.008***        0.007***\n                  (0.002)         (0.002)         (0.002)   \n_cons               2.140***        2.079***        2.024***\n                  (0.065)         (0.067)         (0.072)   \n------------------------------------------------------------\nlfp                                                         \neduc                                0.168***        0.183***\n                                  (0.025)         (0.025)   \nage                                -0.028***       -0.029***\n                                  (0.006)         (0.006)   \nmarried                            -0.853***       -0.832***\n                                  (0.191)         (0.185)   \ndivorced                           -0.324          -0.239   \n                                  (0.229)         (0.222)   \nkids6                              -0.590***       -0.573***\n                                  (0.069)         (0.070)   \nkids714                            -0.318***       -0.307***\n                                  (0.057)         (0.058)   \n_cons                               1.454***        1.313***\n                                  (0.336)         (0.355)   \n------------------------------------------------------------\n/                                                           \nathrho                              0.343***                \n                                  (0.082)                   \nlnsigma                            -0.750***                \n                                  (0.020)                   \n------------------------------------------------------------\n/mills                                                      \nlambda                                              0.293***\n                                                  (0.066)   \n------------------------------------------------------------\nN                    1434            1647            1647   \n------------------------------------------------------------\nStandard errors in parentheses\n* p&lt;0.10, ** p&lt;0.05, *** p&lt;0.01"
   }
 ]
