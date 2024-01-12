@@ -7110,5 +7110,229 @@
     "title": "Research Methods II",
     "section": "Extra example",
     "text": "Extra example\n\nfrause oaxaca, clear\nreg lnwage educ exper tenure \nest sto ols\nheckman lnwage educ exper tenure  , select(lfp =educ age   married divorced kids6 kids714) \nest sto hk_mle\nheckman lnwage educ exper tenure  , select(lfp =educ age   married divorced kids6 kids714) two\nest sto hk_two\n\n\nesttab ols hk_mle hk_two, se(%9.3f) b(%9.3f) star(* 0.10 ** 0.05 *** 0.01) nogaps mtitle(OLS Heckit Hkm-two) nonum  \n\n\n------------------------------------------------------------\n                      OLS          Heckit         Hkm-two   \n------------------------------------------------------------\nmain                                                        \neduc                0.087***        0.091***        0.094***\n                  (0.005)         (0.005)         (0.006)   \nexper               0.011***        0.011***        0.010***\n                  (0.002)         (0.002)         (0.002)   \ntenure              0.008***        0.008***        0.007***\n                  (0.002)         (0.002)         (0.002)   \n_cons               2.140***        2.079***        2.024***\n                  (0.065)         (0.067)         (0.072)   \n------------------------------------------------------------\nlfp                                                         \neduc                                0.168***        0.183***\n                                  (0.025)         (0.025)   \nage                                -0.028***       -0.029***\n                                  (0.006)         (0.006)   \nmarried                            -0.853***       -0.832***\n                                  (0.191)         (0.185)   \ndivorced                           -0.324          -0.239   \n                                  (0.229)         (0.222)   \nkids6                              -0.590***       -0.573***\n                                  (0.069)         (0.070)   \nkids714                            -0.318***       -0.307***\n                                  (0.057)         (0.058)   \n_cons                               1.454***        1.313***\n                                  (0.336)         (0.355)   \n------------------------------------------------------------\n/                                                           \nathrho                              0.343***                \n                                  (0.082)                   \nlnsigma                            -0.750***                \n                                  (0.020)                   \n------------------------------------------------------------\n/mills                                                      \nlambda                                              0.293***\n                                                  (0.066)   \n------------------------------------------------------------\nN                    1434            1647            1647   \n------------------------------------------------------------\nStandard errors in parentheses\n* p&lt;0.10, ** p&lt;0.05, *** p&lt;0.01"
+  },
+  {
+    "objectID": "rmethods2/session_3.html#what-is-inequality",
+    "href": "rmethods2/session_3.html#what-is-inequality",
+    "title": "Research Methods II",
+    "section": "What is Inequality?",
+    "text": "What is Inequality?\n\nEconomic inequality refers to how economic variables are distributed among individuals in a group, among groups in a population, or among countries.\nInequality of What?\n\ninequality of opportunities, for example access to employment or education\ninequality of outcomes, for example material dimensions of human well-being, such as the level of income, educational attainment, health status and so on.\n\nFor now we will focus on income inequality."
+  },
+  {
+    "objectID": "rmethods2/session_3.html#how-do-you-analyze-measure-inequality",
+    "href": "rmethods2/session_3.html#how-do-you-analyze-measure-inequality",
+    "title": "Research Methods II",
+    "section": "How do you analyze (measure) inequality?",
+    "text": "How do you analyze (measure) inequality?\n\nThere are various approaches that have been used for the analysis of Inequality\n\nIntuitive approach\n\nUnaxiomatic approach used to describe inequality.\n\nNormative approach-Social welfare\n\nUses explicit concepts of welfare functions to quantify inequality\n\nInformation theory\n\nQuantifies inequality treating it as a problem of comparing income distribution probabilities.\n\nAxiomatic approach\n\nUses a series of axioms to create measures of inequality"
+  },
+  {
+    "objectID": "rmethods2/session_3.html#preliminaries",
+    "href": "rmethods2/session_3.html#preliminaries",
+    "title": "Research Methods II",
+    "section": "Preliminaries",
+    "text": "Preliminaries\n\nRegardless of the approach, there are some basic steps required to measure inequality\n\nDefine the population of interest\nDefine the measure of interest\nAdjust for prices (if necessary)\nAdjust for individual heterogeneity (needs) (if necessary)"
+  },
+  {
+    "objectID": "rmethods2/session_3.html#mathematical-preliminaries",
+    "href": "rmethods2/session_3.html#mathematical-preliminaries",
+    "title": "Research Methods II",
+    "section": "Mathematical Preliminaries",
+    "text": "Mathematical Preliminaries\n\nLet \\(y_i\\) be the income of individual \\(i\\) in the population. Assume that \\(y_i&gt;&gt;0\\).\nAssume that \\(y_i\\) can be characterized by a probability distribution function \\(f(y)\\).\n\n\\[\\begin{aligned}\ny_i &\\sim f(y) \\rightarrow \\int_{-\\infty}^{z} f(y) dy = F(z) \\\\\nF(0)&=0 \\ \\& \\ F(\\infty)=1 \\\\\nF(Q_y(p)) &=p \\rightarrow Q_y(p) = F^{-1}(p)\n\\end{aligned}\n\\]\nThe \\(p_{th}\\) quantile of \\(y_i\\) is the value \\(Q_y(p)\\) such that \\(p\\) percent of the population has income below \\(Q_y(p)\\)."
+  },
+  {
+    "objectID": "rmethods2/session_3.html#mathematical-preliminaries-1",
+    "href": "rmethods2/session_3.html#mathematical-preliminaries-1",
+    "title": "Research Methods II",
+    "section": "Mathematical Preliminaries",
+    "text": "Mathematical Preliminaries\nMean of Standard of Living:\n\\[\\mu_y = E(y) = \\int_{-\\infty}^{\\infty} y f(y) dy=\\int_0^1Q(p)dp\n\\]\nFinally, the inequality measure can be written as:\n\\[I(y)=I(\\mu_y, f(.)) = I(\\mu_y, F(.))\n\\]"
+  },
+  {
+    "objectID": "rmethods2/session_3.html#section",
+    "href": "rmethods2/session_3.html#section",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "Density/HistogramPlots\n\n\n\nDensity functions and histograms are used to visualize the distribution of income in the population.\nThey could be used to detect multimodality, skewness, etc\nAnd could be used to compare distributions across groups.\nStata Commands\nhistogram varname [weight] [if]\nkdensity varname [weight] [if]\n\n\n\n\n\nCode\nset scheme white2\nset linesize 255\ncolor_style tableau\nqui:frause oaxaca, clear\nsum wt, meanonly\ngen int wt2 = round(wt/r(min))\nqui:two histogram lnwage [fw=wt2] ///\n    || kdensity lnwage [w=wt2], ///\n    ysize(5) xsize(9) xtitle(\"Log Wages\") ///\n    legend(order(1 \"Histogram\" 2 \"Kernel Density\") pos(6) col(2))"
+  },
+  {
+    "objectID": "rmethods2/session_3.html#decompose-by-groups",
+    "href": "rmethods2/session_3.html#decompose-by-groups",
+    "title": "Research Methods II",
+    "section": "Decompose by groups",
+    "text": "Decompose by groups\n\nThere is a second type of decomposition one may be interested in.\n\nHow much of the inequality is explained by inequality within groups, and between groups.\n\nFor example, consider two cases:\n\nTwo (eq size) groups that have access to the same level of income, but within each group, all resources are held by one individual.\nTwo (eq size) groups, one has 80% of the income, and the other 20%, but within groups income is equally distributed.\n\nIt is possible to understand the source of inequality by decomposing it by groups.\n\nEntropy Indices (and Atkinson) are well suited for this type of decomposition. (see help ineqdeco)\nGINI is not as straight forward but possible."
+  },
+  {
+    "objectID": "rmethods2/session_3.html#decompose-by-sources",
+    "href": "rmethods2/session_3.html#decompose-by-sources",
+    "title": "Research Methods II",
+    "section": "Decompose by sources",
+    "text": "Decompose by sources\n\nSome inequality indices are well suited to decompose inequality by sources.\n\nVariance Decomposition (Sorrocks 1998)\nGini Decomposition by source (Lerman and Yitzhaki 1985)\n\nThe idea is assess inequality (or concentration) of each source of income, and then combine them to obtain their contribution to overall inequality."
+  },
+  {
+    "objectID": "rmethods2/session_3.html#visualization-tools",
+    "href": "rmethods2/session_3.html#visualization-tools",
+    "title": "Research Methods II",
+    "section": "Visualization tools",
+    "text": "Visualization tools\n\nThere are several tools that can be used to visualize income distribution:\n\nDensity Function/Histogram\nPen_parade/Cumulative Distribution Function\nLorenz Curve"
+  },
+  {
+    "objectID": "rmethods2/session_3.html#penparadecdf",
+    "href": "rmethods2/session_3.html#penparadecdf",
+    "title": "Research Methods II",
+    "section": "PenParade/CDF",
+    "text": "PenParade/CDF\n\nA different approach to visualize the distribution.\nThe Pen Parade plots the values of the variable of interest in ascending order.\n\ny-axis: Q(p); x-axis: p\n\nThe CDF plots the cumulative distribution of the variable of interest.\n\ny-axis: p; x-axis: Q(p)\n\nThey give you a sense of the distribution, and easy comparison across high and low values."
+  },
+  {
+    "objectID": "rmethods2/session_3.html#code",
+    "href": "rmethods2/session_3.html#code",
+    "title": "Research Methods II",
+    "section": "Code",
+    "text": "Code\nAssume data is sorted by income\n\n\nx-axis: Cum share of population\n\\[P_j = \\frac{\\sum_{i=1}^j w_i}{\\sum_{i=1}^n w_i}\\]\n\ny-axis: Cum share of income\n\\[LC_j = \\frac{\\sum_{i=1}^j y_i w_i}{\\sum_{i=1}^n y_iw_i}\\]\nfrause oaxaca, clear\ngen wage = exp(lnwage)\nsort wage wt  // sort by income and weight \n// Estimate Totals for non missing data\negen twage = sum(wage * wt) if wage!=.\negen tpop  = sum(wt)        if wage!=.\n// get cumulative shares\ngen lc_i = sum( (wage*wt/twage) )*100 if wage!=.\ngen p_i  = sum( (wt/tpop) )*100      if wage!=."
+  },
+  {
+    "objectID": "rmethods2/session_3.html#plot",
+    "href": "rmethods2/session_3.html#plot",
+    "title": "Research Methods II",
+    "section": "plot",
+    "text": "plot"
+  },
+  {
+    "objectID": "rmethods2/session_3.html#section-2",
+    "href": "rmethods2/session_3.html#section-2",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "Lorenz CurveCodePlotAlternative:\n\n\n\nPerhaps the most popular tool to visualize income distribution.\nThis curve plots the cumulative share of income vs the cumulative share of population.\n\nHow much of total income is held by the bottom X% of the population ?\n\n“Easy” to read:\n\nThe closest it is to the 45 degree line, the more equal the distribution.\n\nNot easy to implement with negative and zero incomes.\nComparison across groups may be ambiguous.\nits always increasing at an increasing rate respect to X%\n\n\n\nAssume data is sorted by income\n\n\nx-axis: Cum share of population\n\\[P_j = \\frac{\\sum_{i=1}^j w_i}{\\sum_{i=1}^n w_i}\\]\n\ny-axis: Cum share of income\n\\[LC_j = \\frac{\\sum_{i=1}^j y_i w_i}{\\sum_{i=1}^n y_iw_i}\\]\n\n\n\nfrause oaxaca, clear\ngen wage = exp(lnwage)\nsort wage wt  // sort by income and weight \n// Estimate Totals for non missing data\negen twage = sum(wage * wt) if wage!=.\negen tpop  = sum(wt)        if wage!=.\n// get cumulative shares\ngen lc_i = sum( (wage*wt/twage) )*100 if wage!=.\ngen p_i  = sum( (wt/tpop) )*100      if wage!=.\n\n\n\n\n\nCode\ntwo (line lc_i p_i) /// Lorenz Curve\n    ( function x, range(0 100) ) , /// 45 degree line\n    aspect(1) ysize(5) xsize(8) ///\n    xtitle(\"Cumulative Share of Population\") ///\n    ytitle(\"Cumulative Share of Income\") ///\n    legend(off)\n\n\n\n\n\nLorenz Curve\n\n\n\n\n\n\nssc install glcurve // installs command for Generalized Lorenz Curve\nglcurve wage [aw = wt], /// provides variable and weight\n    lorenz // Request ploting the Lorenz Curve"
+  },
+  {
+    "objectID": "rmethods2/session_3.html#section-1",
+    "href": "rmethods2/session_3.html#section-1",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "PenParade/CDFplot\n\n\n\nA different approach to visualize the distribution.\nThe Pen Parade plots the values of the variable of interest in ascending order.\n\ny-axis: Q(p); x-axis: p\n\nThe CDF plots the cumulative distribution of the variable of interest.\n\ny-axis: p; x-axis: Q(p)\n\nThey give you a sense of the distribution, and easy comparison across high and low values.\n\n\n\n\nCode\nqui:pctile qlnwage = lnwage [w=wt], nq(100)\nqui:gen  qwage = exp(qlnwage)\nqui:gen p = _n if _n&lt;100\nscatter qwage p, connect(l) name(m1, replace) ysize(5) xsize(8)\nscatter p qwage, connect(l) name(m2, replace) ysize(5) xsize(8)\n\n\n\n\n\n\nPen-Parade\n\n\n\n\n\nCum Distribution Function\n\n\n\n\n\nDistribution plots"
+  },
+  {
+    "objectID": "rmethods2/session_3.html#section-3",
+    "href": "rmethods2/session_3.html#section-3",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "sgini wage \n\n\nGini coefficient for wage\n\n-----------------------\n    Variable |      v=2\n-------------+---------\n        wage |   0.2460\n-----------------------\n\n\n\nineqdeco wage [pw=wt]\n\n \nPercentile ratios\n\n----------------------------------------------------------\n  All obs |    p90/p10     p90/p50     p10/p50     p75/p25\n----------+-----------------------------------------------\n          |      3.154       1.694       0.537       1.771\n----------------------------------------------------------\n  \nGeneralized Entropy indices GE(a), where a = income difference\n sensitivity parameter, and Gini coefficient\n\n----------------------------------------------------------------------\n  All obs |     GE(-1)       GE(0)       GE(1)       GE(2)        Gini\n----------+-----------------------------------------------------------\n          |    0.23199     0.14240     0.12282     0.13398     0.26273\n----------------------------------------------------------------------\n   \nAtkinson indices, A(e), where e &gt; 0 is the inequality aversion parameter\n\n----------------------------------------------\n  All obs |     A(0.5)        A(1)        A(2)\n----------+-----------------------------------\n          |    0.06292     0.13273     0.31693\n----------------------------------------------"
+  },
+  {
+    "objectID": "rmethods2/session_3.html#lorenz-curve",
+    "href": "rmethods2/session_3.html#lorenz-curve",
+    "title": "Research Methods II",
+    "section": "Lorenz Curve",
+    "text": "Lorenz Curve\n\nPerhaps the most popular tool to visualize income distribution.\nThis curve plots the cumulative share of income vs the cumulative share of population.\n\nHow much of total income is held by the bottom X% of the population ?\n\n“Easy” to read:\n\nThe closest it is to the 45 degree line, the more equal the distribution.\n\nNot easy to implement with negative and zero incomes.\nComparison across groups may be umambiguous."
+  },
+  {
+    "objectID": "rmethods2/session_3.html#inequality-measures",
+    "href": "rmethods2/session_3.html#inequality-measures",
+    "title": "Research Methods II",
+    "section": "Inequality Measures",
+    "text": "Inequality Measures\nThere are several measures of inequality. The most popular are:\n\nInterquantile Range (IQR) (or normalizations) \\[IQR(\\#1,\\#2) = Q(\\#2) - Q(\\#1)\n\\]\nInterquantile Share Ratio (Palma ratio (10/40)) \\[ISR(\\#1,\\#2) = \\frac{1-LC(\\#2)}{LC(\\#1)}\n\\]\nCoefficient of Variation (CV) \\[CV = \\frac{\\sigma_y}{\\mu_y}\n\\]"
+  },
+  {
+    "objectID": "rmethods2/session_3.html#inequality-measures-1",
+    "href": "rmethods2/session_3.html#inequality-measures-1",
+    "title": "Research Methods II",
+    "section": "Inequality Measures",
+    "text": "Inequality Measures\n\nLorenz Curve:\n\n\\[LC(p) = \\frac{\\int_0^p Q_y(u)du}{\\int_0^1 Q_y(u)du}\n= \\frac{1}{\\mu_y} \\int_0^p Q_y(u)du\n\\]\n\nProperties\n\n\\[\\frac{\\partial LC(p)}{\\partial p} = \\frac{Q_y(p)}{\\mu_y} \\geq 0\\]\n\\[\\frac{\\partial^2 LC(p)}{\\partial p^2} = \\frac{1}{\\mu_y f(y)} \\geq 0\\]"
+  },
+  {
+    "objectID": "rmethods2/session_3.html#inequality-measures-gini-coefficient",
+    "href": "rmethods2/session_3.html#inequality-measures-gini-coefficient",
+    "title": "Research Methods II",
+    "section": "Inequality Measures: Gini Coefficient",
+    "text": "Inequality Measures: Gini Coefficient\n\nThe Gini coefficient is the most popular measure of inequality.\nIt is defined as (2x) the area between the Lorenz Curve and the 45 degree line.\n\n\\[Gini(y) = 2 \\int_0^1 (p-LC(p)) dp\\]\n\nwhere \\(p-LC(p)\\) is the “loss” of income the Bottom \\(p\\) percent of the population experiences.\nIt is bounded between 0 (perfect Equality) and 1 (complete Inequality).\nWhen Lorenz do not cross, Gini provides unambiguous ranking of inequality.\n\n\\[Gini(y) = \\frac{2}{\\mu_y} Cov(y_p,p)\\]"
+  },
+  {
+    "objectID": "rmethods2/session_3.html#implementation",
+    "href": "rmethods2/session_3.html#implementation",
+    "title": "Research Methods II",
+    "section": "Implementation",
+    "text": "Implementation\n\nStata has plenty of commands that can be used to estimate Gini\n\nsearch gini for few examples\n\nI suggest 3 commands:\n\nfastgini (ssc install fastgini)\nineqdeco (ssc install ineqdeco)\nsgini (ssc install sgini)\nrif (ssc install rif)"
+  },
+  {
+    "objectID": "rmethods2/session_3.html#section-4",
+    "href": "rmethods2/session_3.html#section-4",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "Variance Decomposition\nSetup: \\[\\begin{aligned}\nY &= y_1 + y_2 + \\cdots + y_n  \\\\\nI_V(Y) &= V(Y) = Cov(Y,Y) \\\\\n&= Cov(Y,y_1) + Cov(Y,y_2) + \\cdots \\\\\n\\end{aligned}\n\\]\nCovariance, however could be rewritten as: \\(Cov(Y,y_k)=\\rho_k \\sigma_Y \\sigma_{y_k}\\), thus\n\\[\\begin{aligned}\nV(y) = \\sigma^2_Y &= \\rho_1 \\sigma_Y \\sigma_{y_1} + \\rho_2 \\sigma_Y \\sigma_{y_2} + \\cdots \\\\\n\\sigma_Y&=   \\rho_1 \\sigma_{y_1} + \\rho_2 \\sigma_{y_2} + \\cdots  \\\\\n\\end{aligned}\n\\]\nFinally, if we divide all by \\(\\mu_y\\) and multiply by \\(\\mu_{yk}/\\mu_{yk}\\), we get:\n\\[\\begin{aligned}\n\\frac{\\sigma_Y}{\\mu_y} = CV(y) &=   \\rho_1 \\frac{1}{\\mu_{y}} \\frac{\\mu_{y1}}{\\mu_{y1}}\\sigma_{y_1} + \\rho_2 \\frac{1}{\\mu_{y}} \\frac{\\mu_{y2}}{\\mu_{y2}}  \\sigma_{y_2} + \\cdots  \\\\\n&= \\rho_1 sh_1 CV(y_1) + \\rho_2 sh_2 CV(y_2) + \\cdots  \\\\\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "rmethods2/session_3.html#other-inequality-measures",
+    "href": "rmethods2/session_3.html#other-inequality-measures",
+    "title": "Research Methods II",
+    "section": "Other Inequality Measures",
+    "text": "Other Inequality Measures\n\nThere are other approaches that can be used to measure inequality.\n\nNormative approach-Social welfare: Uses explicit concepts of welfare functions to quantify inequality\n\n\n\\[I_A(y,\\varepsilon) = 1 - \\left( \\frac{1}{N} \\sum_{i=1}^N \\left(\\frac{y_i}{\\mu_y}\\right)^{1-\\varepsilon} \\right)^\\frac{1}{1-\\varepsilon}\n\\]\nwhere is a measure of inequality aversion.\n\nInformation theory: Quantifies inequality treating it as a problem of comparing income distribution probabilities. How far are we from Full Entropy\n\n\\[I_{GE}(Y,\\alpha)=\\frac{1}{\\alpha(1-\\alpha)}\\left[\\frac{1}{N} \\sum \\left(\\frac{y_i}{\\mu_y}\\right)^\\alpha -1\\right]\n\\]\n\nAxiomatic approach\n\nUses a series of axioms to create measures of inequality"
+  },
+  {
+    "objectID": "rmethods2/session_3.html#significance-test",
+    "href": "rmethods2/session_3.html#significance-test",
+    "title": "Research Methods II",
+    "section": "Significance test",
+    "text": "Significance test\n\nAs discussed in Session 1, we can use a t-test to compare means.\n\nThis requires estimating the standard error of the mean, use mean command, or regress\n\nSimilarly, it may be as important to test whether two distributions (or inequality measures) are different.\n\nThis requires estimating the standard error of the inequality measure.\nThis is not as straightforward as the mean.\n\nEasiest methods:\n\nBootstrap: requires bootstrap weights for survey data.\nInfluence function: requires deriving the influence function of the inequality measure."
+  },
+  {
+    "objectID": "rmethods2/session_3.html#bootstrap",
+    "href": "rmethods2/session_3.html#bootstrap",
+    "title": "Research Methods II",
+    "section": "Bootstrap",
+    "text": "Bootstrap\n\nBootstrap its a non-parametric method to estimate the standard error of a statistic. Its based on Resampling and re-estimating data.\n\nbootstrap gini=r(coeff): sgini wage\n\n\n\nwarning: sgini does not set e(sample), so no observations will be excluded from the resampling because of missing values or other reasons. To exclude observations, press Break, save the data, drop any observations that are to be excluded, and rerun\n         bootstrap.\n\nBootstrap results                                        Number of obs = 1,647\n                                                         Replications  =    50\n\n      Command: sgini wage\n         gini: r(coeff)\n\n------------------------------------------------------------------------------\n             |   Observed   Bootstrap                         Normal-based\n             | coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n        gini |   .2460329   .0063639    38.66   0.000     .2335599    .2585059\n------------------------------------------------------------------------------\n\n\n\nRIF (Recentered Influence Function) is a method that uses the moment conditions to estimate the standard error of a statistic.\n\nrifhdreg wage , rif(gini)\n\n\n\nLinear regression                               Number of obs     =      1,434\n                                                F(0, 1433)        =       0.00\n                                                Prob &gt; F          =          .\n                                                R-squared         =     0.0000\n                                                Root MSE          =     .24613\n\n------------------------------------------------------------------------------\n             |               Robust\n        wage | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n       _cons |   .2460329   .0064995    37.85   0.000     .2332833    .2587825\n------------------------------------------------------------------------------\nDistributional Statistic: gini\nSample Mean    RIF gini :  .24603\n\n\n\nBetter yet, because you can use regressions (RIF-regressions), you can use weights, and test for differences in inequality across groups.\n\nrifhdreg wage ibn.female [pw=wt], rif(gini) over(female) noconstant\n\n\n\nLinear regression                               Number of obs     =      1,434\n                                                F(2, 1432)        =     640.56\n                                                Prob &gt; F          =     0.0000\n                                                R-squared         =     0.5056\n                                                Root MSE          =     .25631\n\n------------------------------------------------------------------------------\n             |               Robust\n        wage | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n      female |\n          0  |   .2377884   .0084103    28.27   0.000     .2212907    .2542862\n          1  |   .2820059   .0128488    21.95   0.000     .2568015    .3072103\n------------------------------------------------------------------------------\nDistributional Statistic: gini\nSample Mean    RIF gini :  .25805\n\n\nrifhdreg wage i.female [pw=wt], rif(gini) over(female)\n\n\n\nLinear regression                               Number of obs     =      1,434\n                                                F(1, 1432)        =       8.29\n                                                Prob &gt; F          =     0.0040\n                                                R-squared         =     0.0073\n                                                Root MSE          =     .25631\n\n------------------------------------------------------------------------------\n             |               Robust\n        wage | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n    1.female |   .0442175   .0153565     2.88   0.004     .0140938    .0743412\n       _cons |   .2377884   .0084103    28.27   0.000     .2212907    .2542862\n------------------------------------------------------------------------------\nDistributional Statistic: gini\nSample Mean    RIF gini :  .25805"
+  },
+  {
+    "objectID": "rmethods2/session_3.html#introduction",
+    "href": "rmethods2/session_3.html#introduction",
+    "title": "Research Methods II",
+    "section": "Introduction",
+    "text": "Introduction\n\nSome times, we may be interested in determining what factors, and what extent, explain inequality.\n\nBut what do we mean by “explain”?\n\nThere are several approaches to decompose inequality.\n\nby sources: Explain how inequality is related to source of income\nby groups: How much of the inequality is explained by inequality within groups, and between groups.\n\nWe could also consider how inequality gaps are related to characteristics or returns to such characteristics."
+  },
+  {
+    "objectID": "rmethods2/session_3.html#example-stata",
+    "href": "rmethods2/session_3.html#example-stata",
+    "title": "Research Methods II",
+    "section": "Example Stata",
+    "text": "Example Stata\nssc install ineqfac\n\nfrause limew1972.dta, clear\n\nineqfac basemi inchomewealth incnonhomewealth govtr_n pubcon tx_n valhp [aw=hhwgt]\n\n \nInequality decomposition by factor components (Shorrocks' method)\n-------------------------------------------------------------------------------\nFactor              |  100*s_f     S_f   100*m_f/m  rho_f   CV_f CV_f/CV(Total)\n--------------------+----------------------------------------------------------\nbasemi              |   29.115    0.284   44.434   0.711   0.900    0.922\ninchomewealth       |    1.872    0.018    4.302   0.318   1.335    1.367\nincnonhomewealth    |   43.136    0.421    7.905   0.754   7.065    7.235\ngovtr_n             |   -0.979   -0.010    5.868  -0.107   1.528    1.565\npubcon              |    2.091    0.020    8.303   0.238   1.035    1.060\ntx_n                |   15.629    0.153   11.462   0.754   1.767    1.809\nvalhp               |    9.136    0.089   17.726   0.502   1.003    1.027\n--------------------+----------------------------------------------------------\nTotal               |  100.000    0.977  100.000   1.000   0.977    1.000\n-------------------------------------------------------------------------------\nNote: s_f is the proportionate contribution of factor f\n to inequality of Total, where ...\n s_f = rho_f*sd(f)/sd(Total) \n     = rho_f*[m(factor_f)/m(totvar)]*[CV(factor_f)/CV(totvar)].\n S_f = s_f*CV(Total). rho_f = corr(f,Total). \n m_f = mean(f). sd(f) = std.dev. of f. CV_f = sd(f)/m_f."
+  },
+  {
+    "objectID": "rmethods2/session_3.html#section-5",
+    "href": "rmethods2/session_3.html#section-5",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "Gini Decomposition by source\n\nThe Gini index could also be decomposed by source of income.\n\n\\[\\begin{aligned}\nGini(y) &= \\frac{2}{\\mu_y} Cov(y,F(y)) = \\frac{2}{\\mu_y} Cov\\left(\\sum y_k,F(y)\\right) =\\frac{2}{\\mu_y} \\sum Cov\\left( y_k,F(y)\\right)\n\\end{aligned}\n\\]\n\nSo Gini is the sum of the covariance of each source of income with \\(F(y)\\)\n\n\\[\\begin{aligned}\nGini(y) &= \\sum \\frac{2}{\\mu_y} \\times Cov( y_k,F(y)) \\times \\frac{\\mu_{yk}}{\\mu_{yk}} \\times \\frac{Cov( y_k,F(y_k))}{Cov ( y_k,F(y_k))} \\\\\n&=\\sum \\frac{Cov ( y_k,F(y) )}{Cov ( y_k,F(y_k) )} \\times \\frac{2Cov( y_k,F(y_k)}{\\mu_{yk}} \\times \\frac{\\mu_{yk}}{\\mu_y}  \\\\\n&= \\sum R_k \\times G_k \\times sh_k\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "rmethods2/session_3.html#example-stata-1",
+    "href": "rmethods2/session_3.html#example-stata-1",
+    "title": "Research Methods II",
+    "section": "Example Stata",
+    "text": "Example Stata\nYou probably already have it installed\nssc install sgini\n\nsgini basemi inchomewealth incnonhomewealth govtr_n pubcon tx_n valhp [aw=hhwgt], source\n\n\nGini coefficient for basemi, inchomewealth, incnonhomewealth, govtr_n, pubcon, tx_n, valhp\n\nNote: inchomewealth has 690 negative observations (used in calculations).\nNote: incnonhomewealth has 10359 negative observations (used in calculations).\n-----------------------\n    Variable |      v=2\n-------------+---------\n      basemi |   0.4787\ninchomewea~h |   0.6161\nincnonhome~h |   0.9503\n     govtr_n |   0.7099\n      pubcon |   0.4913\n        tx_n |   0.6036\n       valhp |   0.5021\n-----------------------\n\nDecomposition by source:\n  TOTAL =  basemi +  inchomewealth +  incnonhomewealth +  govtr_n +  pubcon +  tx_n +  valhp\n\n\nParameter: v=2\n--------------------------------------------------------------------------------\n             |    Share   Coeff.    Corr.    Conc.  Contri.  %Contri. Elasticity\n    Variable |        s        g        r    c=g*r    s*g*r   s*g*r/G  s*g*r/G-s\n-------------+------------------------------------------------------------------\n      basemi |   0.4443   0.4787   0.8870   0.4246   0.1887   0.4868    0.0425\ninchomewea~h |   0.0430   0.6161   0.4617   0.2845   0.0122   0.0316   -0.0114\nincnonhome~h |   0.0790   0.9503   0.7724   0.7340   0.0580   0.1497    0.0707\n     govtr_n |   0.0587   0.7099  -0.2298  -0.1631  -0.0096  -0.0247   -0.0834\n      pubcon |   0.0830   0.4913   0.4593   0.2257   0.0187   0.0483   -0.0347\n        tx_n |   0.1146   0.6036   0.8776   0.5297   0.0607   0.1567    0.0420\n       valhp |   0.1773   0.5021   0.6601   0.3314   0.0587   0.1516   -0.0257\n-------------+------------------------------------------------------------------\n       TOTAL |   1.0000   0.3876   1.0000   0.3876   0.3876   1.0000    0.0000\n--------------------------------------------------------------------------------"
+  },
+  {
+    "objectID": "rmethods2/session_3.html#section-6",
+    "href": "rmethods2/session_3.html#section-6",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "Gini Decomposition by source\n\\[\\begin{aligned}\nGini(y)&= \\sum R_k \\times G_k \\times sh_k\n\\end{aligned}\n\\]\n\n\\(R_k\\) = Gini Correlation; \\(G_k\\) = Gini of source \\(k\\); \\(sh_k\\) = share of source \\(k\\) in total income.\n\\(R_k\\timex G_k\\) is the Concentration Index of \\(Y_k\\)"
+  },
+  {
+    "objectID": "rmethods2/session_3.html#section-7",
+    "href": "rmethods2/session_3.html#section-7",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "GINI Decomposition by groups\n\nDecomposition of the GINI coefficient by groups Milanovic and Yitzhaki (2002)\nThe method: To decompose the GINI by groups, one can use the following:\n\n\\[\\begin{aligned}\nGini(y) &= \\sum_{k=1}^K s_k O_k Gini(y_k) + Gini_{bw}\n\\end{aligned}\n\\]\n\nwhere \\(s_i\\) is the share of group \\(i\\) in total income, \\(Gini(y_k)\\) is the Gini of group \\(k\\), \\(O_k\\) is a measure of overlapping across groups, and \\(Gini_{bw}\\) is the Gini between groups.\n\n\\[Gini_{bw} = \\frac{2}{\\mu_y} Cov(\\mu_i,\\bar F_i)\\]"
+  },
+  {
+    "objectID": "rmethods2/session_3.html#section-8",
+    "href": "rmethods2/session_3.html#section-8",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "Overlapping\n\nOverlapping \\(O_k\\) measures to what extend the distribution of income in group \\(k\\) overlaps with the distribution of income in other groups.\nIf there is no overlapping, then \\(O_k=p_i\\) (the population share of group k).\nOtherwise, this adjustment factors ensures that the sum of the Gini of each group is equal to the Gini of the total population + Between Gini."
+  },
+  {
+    "objectID": "rmethods2/session_3.html#example-stata-2",
+    "href": "rmethods2/session_3.html#example-stata-2",
+    "title": "Research Methods II",
+    "section": "Example Stata",
+    "text": "Example Stata\nssc install anogi (Tom Masterson is one of the authors) ssc install moremata (needed for anogi)\n\nanogi limew [aw= hhwgt ], by(educl) detail\n\n\nAnalysis of Gini\n\n--------------------------------------------------\n                          |      Coef.          %\n--------------------------+-----------------------\nOverall Gini              |   .3875623     100.00\n                          |\nG_wo = sum s_i*G_i*O_i    |   .3405469      87.87\nG_b                       |   .0470154      12.13\n                          |\nIG   = sum s_i*G_i        |   .3657639      94.38\nIGO  = sum s_i*G_i(O_i-1) |   -.025217      -6.51\nBGp  = G_bp               |   .1317698      34.00\nBGO  = G_b - G_bp         |  -.0847544     -21.87\n--------------------------+-----------------------\nMean of limew             |    20403.6\nN. of obs                 |      44872\nN. of subgroups           |          4\n--------------------------------------------------\n\n\nDetailed statistics for subgroups\n\n-------------------------------------------------------------------------------------------\n             |         N          p       mean          s          G          O          F \n-------------+-----------------------------------------------------------------------------\n           1 |  18244.58   .4065916   15466.07   .3081992   .3844549   .9986868   .3963075 \n           2 |  14552.19   .3243045   21019.76   .3340981    .338758   .9239628   .5363091 \n           3 |  5609.305   .1250068   22705.72   .1391112   .3640736   .9435821   .5546081 \n           4 |  6465.924   .1440971   30951.73   .2185916   .3817625   .8370495   .6634934 \n-------------------------------------------------------------------------------------------"
   }
 ]
