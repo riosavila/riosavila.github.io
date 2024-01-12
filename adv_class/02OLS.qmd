@@ -5,7 +5,7 @@ author: Fernando Rios-Avila
 format:
   revealjs: 
     slide-number: true
-    width: 1500
+    width: 1600
     height: 900
     code-fold: true
     echo: true
@@ -17,7 +17,7 @@ execute:
 
 ## Introduction {.scrollable}
 
--   Linear Regression (usually estimated via OLS) is the most basic, and still most useful, tool for analyzing data.
+-   Linear Regression is the most basic, and still most useful, tool for analyzing data.
 
 -   The goal is to find what the relationship between the outcome $y$ and explanatory variables $X's$ is.
 
@@ -27,29 +27,28 @@ $$
 y = h(X,\varepsilon)
 $$
 
-Here, $X$ represents a set of observed covariates and $\varepsilon$ the set of unobserved characteristics, and for now, we assume that there is no pre-define relationship between these components.
+Here, $X$ represents a set of observed covariates and $\varepsilon$ the set of unobserved characteristics, with no no pre-defined relationship between these components.
 
 -   For now, we will make standard exogeneity assumptions for the identification of the model
 
 ## Estimation {.scrollable}
 
--   The functional form, however, is unknowable. However, under the ***small*** assumption that $X$ and $\varepsilon$ are unrelated, if we would have access to the population data, we could instead consider the Conditional Expectation function (CEF):
+-   The functional form is unknowable. However, under the ***small*** assumption of Exogeneity of $X$, we could instead consider the Conditional Expectation function (CEF):
 
 $$
-E(y_i|X_i=x) = \int t f_y(t|X_i=x)dx
+E(y_i|X_i=x) = \int y f_{y|x}(y)dy
 $$
 
--   Notice that this implies a fully **non-parametric** estimation of the Linear function (because it does not impose any functional form).
+-   This implies a fully **non-parametric** estimation of the Linear function.
 
--   With this, we can "decompose" the outcome $y$ into two components, one that depends on observation characteristics (CEF) and one that depends on the error $\varepsilon$.
+-   With this, the outcome $y$ can be decomposed into factors determined by observed characteristics (CEF) and on the error $\varepsilon$.
 
 $$
 y = E(y|X) + \varepsilon
 $$
 
--   This has the nice property that the error is unrelated to any functional form of $X$, while providing a summary of the relationship between $X$ and $y$.
 
-##  {.scrollable}
+##   
 
 -   The CEF is a convenient abstract, but to estimate it, we require assumptions. (Recall the assumptions for unbiased OLS?)
 
@@ -69,12 +68,8 @@ $$
 Where the loss function $L(x)=x^2$. (Square loss function)
 
 -   This implies the following condition:
+$E[X_i (y_i-X_i'b)]=0 \rightarrow \beta = E[X_i'X_i]^{-1}E[X_i'y_i]$
 
-$$
-E[X_i (y_i-X_i'b)]=0 \rightarrow \beta = E[X_i'X_i]^{-1}E[X_i'y_i]
-$$
-
--   This population terms must be substituted by the sample equivalent: $E(X_i) =\frac{1}{N} \sum_i^NX_i$
 
 ## Mata: OLS Estimator {.scrollable}
 
@@ -100,22 +95,38 @@ mata:
 end  
 ```
 
-## Inference - Distribution of $\beta's$ {.scrollable}
+## Inference - Distribution of $\beta's$  
 
-so: 
-$$
-\begin{aligned}
+Given the model and OLS estimator:
+
+$$\begin{aligned}
 y &= X\beta + \varepsilon \\
-\sqrt N (\hat\beta - \beta) &=\frac{1}{N}\Big[\sum (X_iX_i')\Big]^{-1} \frac{1}{\sqrt N} \sum(X_i\varepsilon_i)
+\hat \beta &= (X'X)^{-1}X'y
 \end{aligned}
 $$
 
--   Here $\varepsilon$ is the true population error. $\hat\beta$ is unbiased if the second term has an expectation of Zero. (the error is independent from $X$).
+If we substitute $y$ in the second equation, we get:
 
--   Asymptotically, the first term is assumed fixed $E(X_i X_i')$. And, because $E(X_i\varepsilon)=0$, and $\frac{1}{\sqrt N} \sum(X_i\varepsilon)$ is normalized, by CLT we have that:
+$$\begin{aligned}
+\hat \beta &= (X'X)^{-1}X'( X\beta + \varepsilon) \\
+\hat \beta &= \beta + (X'X)^{-1}X'\varepsilon) \\
+\hat \beta - \beta &=  (X'X)^{-1}X'\varepsilon) \\
+\end{aligned}
+$$
+
+##
+
+Finally:
+$$
+\sqrt N (\hat\beta - \beta) = {\sqrt N}\Big[\frac{1}{N}\sum (X_iX_i')\Big]^{-1} \frac{1}{N}\sum(X_i\varepsilon_i)
+$$
+
+- Here $\varepsilon$ is the true population error. $\hat\beta$ is unbiased if the second term has an expectation of Zero. (the error is independent from $X$).
+
+-  The first term is assumed fixed $E(X_i X_i')$. And, because $E(X_i\varepsilon)=0$, and $\frac{1}{\sqrt N} \sum(X_i\varepsilon)$ is normalized, by CLT we have that:
 
 $$
-\sqrt N (\hat\beta-\beta)\sim N(0,E(X_iX_i')^{-1} \ E(X_iX_i'\varepsilon ^2) \ E(X_iX_i')^{-1})
+\sqrt N (\hat\beta-\beta)\sim N(0,E(X_iX_i')^{-1} \ E(X_iX_i'\varepsilon_i ^2) \ E(X_iX_i')^{-1})
 $$
 
 -   From here, the main question is : How do we estimate $E(X_iX'\varepsilon_i^2)$?
@@ -146,10 +157,9 @@ In other words, the variance of $\hat\beta$ allows for arbitrary relationship am
 
 ## Homoskedasticity and independent samples {.scrollable}
 
-The easiest route is to assume homoskedastic errors $\sigma^2 = \sigma_i^2 \ \forall i \in 1,...,N$ . (the error is spread equally around the mean)
+With homoskedastic errors $\sigma^2 = \sigma_i^2 \ \forall i \in 1,...,N$ . 
 
-With independent samples $\sigma_{ij}=0 \ \forall \ i\neq j$ . (A persons unobserved is completely independent from anybody else)
-
+With independent samples $\sigma_{ij}=0 \ \forall \ i\neq j$ . 
 $$
 \Omega_00=
 \left( 
@@ -165,13 +175,13 @@ $$
 Thus 
 $$
 \begin{aligned}
-Var(\hat\beta)_{00} &=(X'X)^{-1} X'I(N)\sigma^2 X (X'X)^{-1} \\
-&=\sigma^2 (X'X)^{-1} \\
+Var(\hat\beta)_{00} &=(X'X)^{-1} X'I(N)\sigma^2 X (X'X)^{-1} =\sigma^2 (X'X)^{-1} \\
 \sigma^2 &= E(\varepsilon^2)
 \end{aligned}
 $$
 
 ```{stata}
+*| classes: larger
 mata: e=err = y:-x*b
 mata: var_b_000 = mean(err:^2) * invsym(x'x)
 mata: b,sqrt(diagonal(var_b_000))
@@ -187,6 +197,8 @@ $$
 Where we account for the fact true errors are not observed, but rather residuals are estimated, adjusting the degrees of freedom.
 
 ```{stata}
+*| classes: larger
+
 mata:
     N = rows(y); k = cols(x)
     var_b_00 = sum(err:^2)/(N-k) * invsym(x'x)
@@ -208,18 +220,20 @@ But to estimate this, we need an approximation for $\sigma^2_i = E(\varepsilon_i
 
 $$
 \begin{aligned}
-Var(\hat\beta)_{0} &= (X'X)^{-1} (X\hat e)'(\hat eX) (X'X)^{-1} \\
+Var(\hat\beta)_{0} &= (X'X)^{-1} (X \cdot \hat e)'(X \cdot  \hat e) (X'X)^{-1} \\
  &=(X'X)^{-1} \sum(X_iX_i'\hat e^2) (X'X)^{-1}
 \end{aligned}
 $$ 
 
-Which imposes **NO** penalty to the fact that we are using residuals not errors. If we account for that however, we obtain what is known as HC1, SE, the standard in `stata`. (when you type `robust`) 
+Which imposes **NO** penalty to the fact that we are using residuals not errors. If we account for that however, we obtain what is known as HC1, SE, the standard in `Stata`. (when you type `robust`) 
 
 $$
 Var(\hat\beta)_{1}=\frac{N}{N-K-1}Var(\hat\beta)_{0}
 $$
 
 ```{stata}
+*| classes: larger
+
 mata:
     ixx = invsym(x'x)
     var_b_0 = ixx * (x:*e)'(x:*e) * ixx
@@ -257,6 +271,8 @@ HC2 and HC3 Standard errors are better than HC1 SE, specially when Samples are s
 ## Coding Robust SE
 
 ```{stata}
+*| classes: larger
+
 mata:
     // h = diagonal(X invsym(X'x) X') Wrong Way, too many calculations
     h = rowsum(x*invsym(x'x):*x)
@@ -279,29 +295,48 @@ regress y x1 x2 x3, vce(hc2)
 regress y x1 x2 x3, vce(hc3)
 ```
 
+## GLS and Weighted Least Squares
+
+- GLS is a generalization of OLS, that could be used to address heteroskedasticity. 
+- There are two ways to do this: 
+    1.  Transform/weight the data to make it homoskedastic (WLS)
+    2.  Modify the variance covariance matrix of the errors (GLS)
+
+- Call $\hat h(x)$ the predicted error variance. The GLS estimator for $V_{gls}(\beta)$ is given by:
+
+$$V_{gls}(\beta)=(X'X)^{-1} \sum(X_iX_i'\hat h(x)) (X'X)^{-1}
+$$
+
+- That way, Heteroskedasticity is addressed, but without changing the model estimates $\beta's$
+  
 ## Lifting Even more Assumptions: Correlation {.scrollable}
 
--   One assumption we barely consider last semester was the possibility that errors could be correlated within groups. (except for time series and serial correlation)
+-   One assumption we barely consider last semester was the possibility that errors could be correlated across observations. (except for time series and serial correlation)
 
 -   For example, families may share similar unobserved factors, So would people interviewed from the same classroom, cohort, city, etc. There could be many dimensions to consider possible correlations!
 
 -   In that situation, we may be missmeasuring the magnitude of the errors (probably downward), because the $\Omega$ is no longer diagonal: $\sigma_{ij} \neq 0$ for some $i\neq j$.
 
     -   But, estimate all parameters in an NxN matrix is unfeasible. We need assumptions!
+  
+##
+### New Assumptions
 
 -   Say we have $G$ groups $g=(1…G)$ . We can rewrite the expression for $\hat\beta$ as follows:
 
 $$
 \begin{aligned}
-\hat\beta-\beta &= (X'X)^{-1}\sum_{g=1}^G X'_g \varepsilon_g \\\
+\hat\beta-\beta &= (X'X)^{-1}\sum_{g=1}^G X'_g \varepsilon_g \\
 &=(X'X)^{-1}\sum_{g=1}^G s_g
 \end{aligned}
 $$
 
 -   We can assume that individuals are correlated within groups $E(s_g's_g) =\Sigma_g$ , but they are uncorrelated across groups $E(s_g s_g')=0 \ \forall \ g \neq g'$ .
+  
 -   These groups are typically known as "**clusters**"
 
-## Addressing Correlation {.scrollable}
+##
+### Addressing Correlation {.scrollable}
 
 -   The idea of correcting for clusters is pretty simple. We just need to come up with an estimator for $\Sigma_g$ for every cluster, so that:
 
@@ -316,7 +351,7 @@ $$
 
 -   As with the EW - HC standard errors, there are many ways to estimate Clustered Standard errors. See MacKinnon et al (2023) for reference. We will refer only to the simpler ones CV0 and CV1.
 
-> Still How?
+##
 
 -   Recall we approximate $\sigma^2_i$ with $\varepsilon_i^2$. Then we can approximate $\sigma_{ij}$ with $\varepsilon_j \varepsilon_i$. More specifically:
 
@@ -340,6 +375,7 @@ $$
 -   Similar to HC. CV0 does not correct for degrees of freedom. CV1, however, accounts for Degrees of freedom in the model, and clusters.
 
 ```{stata}
+sort isco
 mata:
     // 1st Sort Data (easier in Stata rather than Mata) and reload
     y   = st_data(.,"lnwage")
@@ -366,9 +402,67 @@ or compare it to
 reg lnwage educ exper female, cluster(isco)
 ```
 
+## Visualizing the difference {.scrollable}
+
+```{stata}
+clear
+set scheme white2
+color_style tableau
+set seed 1
+set obs 50
+gen r1=runiformint(1,4)
+gen r2=runiformint(1,4)
+gen id=_n
+sort r1  r2
+qui:mata:
+r1=st_data(.,"r1")
+r2=st_data(.,"r2")
+rr1=J(rows(r1)*rows(r2),4,0)
+k=0
+for(i=1;i<=50;i++){
+    for(j=1;j<=50;j++){
+        if ((r1[i]==r1[j]) | (r2[i]==r2[j])) {
+            k++
+            rr1[k,]=(51-i,j,(r1[i]==r1[j]),(r2[i]==r2[j]) )         
+        }
+    }   
+}
+rr1=rr1[1..k,]
+end
+getmata rr1*=rr1, replace force
+
+two (scatter rr11 rr12 if rr13==1,  ms(s) msize(2.1))  ///
+    (scatter rr11 rr12 if 51-rr11 == rr12, ms(s) msize(2.1) color(gs1)  ) ///
+    , aspect(1) legend(off)  xtitle("") ytitle("") yscale(off) xscale(off) xsize(6) ysize(6) 
+```
+
+## Visualizing Multi-way Clustering {.scrollable}
+
+::: {.panel-tabset}
+
+## First Cluster
+```{stata}
+two (scatter rr11 rr12 if rr13==1,  ms(s) msize(2.1))  ///
+    , aspect(1) legend(off)  xtitle("") ytitle("") yscale(off) xscale(off) name(m1, replace) 
+```
+
+## Second Cluster
+```{stata}
+two (scatter rr11 rr12 if rr14==1,  ms(s) msize(2.1))  ///
+    , aspect(1) legend(off)  xtitle("") ytitle("") yscale(off) xscale(off) name(m2, replace)    
+```
+
+## Combining Clusters
+```{stata}
+two (scatter rr11 rr12 if rr14==1 | rr13==1,  ms(s) msize(2.1))  ///
+    , aspect(1) legend(off)  xtitle("") ytitle("") yscale(off) xscale(off) name(m3, replace)
+```    
+:::
+
+
 ## Beware of over-clustering {.scrollable}
 
-While clustering helps address a problem of "intragroup" correlation, it can/should be done with care. It is important to be aware about some unintended problems of using Correlation.
+While clustering helps address a problem of "intragroup" correlation, it can/should be done with care. It is important to be aware about some unintended problems of over-clustering.
 
 1.  CV0 and CV1 work well when you have a large number of Clusters. How many? MHE(2009) says...42 (this is like having large enough samples for Asymptotic variance). If \# clusters are small, you would do better with other approaches (including CV2 and CV3).
 
@@ -383,6 +477,8 @@ While clustering helps address a problem of "intragroup" correlation, it can/sho
 3.  You may also consider that clustering does not work well when sample sizes within cluster are to diverse (micro vs macro clusters)
 
 4.  And there is the case where clustering is required among multiple dimensions (see `vcemway`). Where the unobserved correlation could be present in different dimensions.
+
+##
 
 So what to cluster and how?
 
@@ -400,7 +496,7 @@ So what to cluster and how?
 
 ## If you can't Sandwich 🥪, you can re-Sample {.scrollable}
 
--   The discussion above refereed to the estimation of SE using $Math$. In other words, it was based on the asymptotic properties of the data. Which may not work in small samples.
+-   The discussion above refered to the estimation of SE using $Math$. In other words, it was based on the asymptotic properties of the data. Which may not work in small samples.
 
 -   An alternative, often used by practitioners, is using re-sampling methods to obtain approximations to the coefficient distributions of interest.
 
@@ -414,7 +510,7 @@ First ask yourself, how does Asymptotic theory work (and econometrics)? 😱
 
 If I were to summarize most of the methodologies (ok all) we used last semester, and this one, the properties that have been derived and proofed are based on the assumption that we "could" always get more data (frequentist approach).
 
-There is population (or supper population) from where we can get samples of data.
+There is population (or super population) from where we can get samples of data (and never repeat data).
 
 1.  We get a sample ($y,X$) (of size N)
 
@@ -426,9 +522,10 @@ There is population (or supper population) from where we can get samples of data
 
 Done.
 
-The distributions you get from the above exercise should be the same as what your estimation method produces. (if not, there there is something wrong with the estimation method)
+The distributions you get from the above exercise should be the same as what your estimation method produces. (in average) (if not, there there is something wrong with the estimation method)
 
-## But we only get 1 Sample! {.scrollable}
+##
+### But we only get 1 Sample! {.scrollable}
 
 The truth is we do not have access to multiple samples. Getting more data, is in fact, very expensive. So what to do ?
 
@@ -438,7 +535,8 @@ The truth is we do not have access to multiple samples. Getting more data, is in
 
 -   or-resample? and do Bootstrap!
 
-**Basic idea of Bootstrapping**
+##
+### Basic idea of Bootstrapping
 
 -   In the ideal scenario, you get multiple samples from your population, Estimate parameters, and done.
 
@@ -450,7 +548,8 @@ The truth is we do not have access to multiple samples. Getting more data, is in
 
     -   Summarize those parameters...and done, you get $Var(\hat\beta)$ for 🆓. (or is it?)
 
-## Bootstrapping {.scrollable}
+##
+### Bootstrapping {.scrollable}
 
 -   👢Bootstrapping is a methodology that allows you to obtain empirical estimations of standard errors making use of the data in hand, and without even knowing about Asymptotic theory (other than how to get means and variances).
 
@@ -458,7 +557,8 @@ The truth is we do not have access to multiple samples. Getting more data, is in
 
 -   And of course, it comes in different flavors.
 
-## Bootstrap Types: {.scrollable}
+##
+### Standard Bootstrap: {.scrollable}
 
 -   **Non-parametric Bootstrap**: You draw subsamples from the main sample. Each observation has the same pr of being selected.
 
@@ -466,7 +566,10 @@ The truth is we do not have access to multiple samples. Getting more data, is in
 
     -   Works in almost all cases, but you may have situations when some covariates are rare.
 
-    -   Can be extended to allow "clusters" using "block bootstrapping". Works best if re-sampling "follows" the same sampling structure as your sample.
+    -   Can allow for "clusters" using "block bootstrapping". 
+
+##
+### Standard Bootstrap: {.scrollable}
 
 -   **Parametric Bootstrap:** You estimate your model, make assumptions of your model error.
 
@@ -474,28 +577,42 @@ The truth is we do not have access to multiple samples. Getting more data, is in
 
     -   It will not work well if the assumptions of the error modeling are wrong.
 
+##
+### Standard Bootstrap: {.scrollable}
+
 -   **Residual bootstrap:** Estimate your model, obtain residuals. Re-sample residuals
 
     -   Again, implement it on your own. $y^s = x\hat b+\tilde e$ for $\tilde e \sim {\hat e_1 , ... , \hat e_N}$
     -   It depends even more on the assumptions of the error modeling.
 
-##  {.scrollable}
+##  
+### Wild Bootstrap
+
+Then there are the more advanced (but faster) Bootstrap methods: WildBootstrap
 
 -   **UWild bootstrap**: Estimate your model, obtain residuals, and re-sample residual weights.
 
     -   Again...on your own: $y^s = x\hat b +\hat e * v$ , where $v \sim ff()$ where $ff()$ is a "good" distribution function. $E(v)=0 \ \& \ Var(v)=1$
+    -   Re-estimate the model and obtain $\hat \beta's$. Repeat and summarize.
 
     -   Actually quite flexible, and works well under heteroskedasticity!
 
     -   It can also allow clustered standard errors. The error $v$ no longer changes by individual, but by group. It also works well with weights.
 
+##
+### Wild Bootstrap: {.scrollable}
+
 -   **UWild bootstrap-2** : Estimate your model, obtain Influence functions 😱 , and re-sample residual weights.
 
     -   This is an extension to the previous option. But with advantages
-        -   you do not need to -reestimate- the model. Just look into how the the mean of IF's change.
+        -   you do not need to *re-estimate* the model. Just look into how the the mean of IF's change.
 
         -   it can be applied to linear and nonlinear model (if you know how to build the IF's)
+  
     -   Works well with clustered and weights.
+
+##
+### Wild Bootstrap: {.scrollable}
 
 -   **CWild bootstrap:** Similar UWild Bootstrap, Obtain Influence functions under the Null (imposing restrictions), and use that to test the NULL.
 
@@ -503,22 +620,23 @@ The truth is we do not have access to multiple samples. Getting more data, is in
 
     -   Works pretty well with small samples and small \# clusters. Probably the way to go if you really care about Standard errors.
 
+
 ## How to Bootstrap? in `Stata`
 
-I have a few notes on Bootstrapping here [Bootstrapping in Stata](https://friosavila.github.io/playingwithstata/main_bootstrap.html). But let me give you the highlights for the most general case.
+I have a few notes on Bootstrapping here [Bootstrapping in Stata](https://friosavila.github.io/stata_do/stata_do2.html). But let me give you the highlights for the most general case.
 
 1.  Most (if not all commands) in `Stata` allow you to obtain bootstrap standard errors, by default. see:`help [cmd]`
 
     they usually have the following syntax:
 
-    ```stata 
+    ```stata{.larger}
     [cmd] y x1 x2 x3, vce(bootstrap, options)
     regress lnwage educ exper female, vce(bootstrap, reps(100))
     ```
 
-2.  However, you can also Bootstrap that commands that do not have their own `bootstrap` option.
+2.  However, you can also Bootstrap that commands that do not have their own `bootstrap` option.  
 
-    ```stata 
+    ```stata{.larger} 
     bootstrap:[cmd] y x1 x2 x3, 
     bootstrap, reps(100):regress lnwage educ exper female
     bootstrap, reps(100) cluster(isco):regress lnwage educ exper female
@@ -529,6 +647,7 @@ I have a few notes on Bootstrapping here [Bootstrapping in Stata](https://friosa
 3.  This last command may allow you to bootstrap multiple models at the same time, although it does require a bit of programming. (and a do file)
 
 ```{stata}
+frause oaxaca, clear
 gen tchild = kids6 + kids714
 capture program drop bs_wages_children
 program bs_wages_children, eclass // eclass is for things like equations
@@ -549,6 +668,22 @@ bootstrap: bs_wages_children
      
 
 Why does it matter? because you may want to test coefficients individually, or across models. This is only possible if the FULL system is estimated jointly
+
+##
+### What about Wild Bootstrap? 
+
+- Wildbootstrap is available using `boottest` (`ssc install bootest`)
+
+- And in `Stata18+`, you have `wildbootstrap` (although is meant for clustered SE)
+
+```{stata}
+frause oaxaca, clear
+regress lnwage educ exper female, robust
+boottest educ, nograph
+boottest exper, nograph
+boottest female, nograph
+```
+
 
 ## Final words on Bootstrap: {.scrollable}
 
@@ -580,7 +715,7 @@ So choose your 🔫weapon wisely!
 
 ##  {.scrollable}
 
--   The **Delta method** uses the linear approximations to approximate the distribution of otherwise not known distributions.
+-   The **Delta method** uses the linear approximations to *approximate* the otherwise not known distributions.
 
 -   Further, It relies on the fact that linear transformations a normal distribution, is on itself normal. For example:
 
@@ -615,6 +750,51 @@ g(\hat \theta, \hat \gamma)-g(\theta,\gamma) &\simeq N(0,\nabla g ' \Sigma \nabl
 \end{aligned}  
 $$
 
+Although you need to get the partial derivatives of $g(\theta,\gamma)$
+
+## 
+### Example
+
+- Say that you obtain the mean standard error for averages wages for men and women, along with the correlation between the two. 
+
+- however, you are insterested in estimating the wage ratio, and its variance. How do you do this?
+
+$$R = \frac{ \mu_f}{\mu_m}$$
+
+- Need to obtain the Gradients $g$
+
+$$g = \begin{bmatrix}
+    \frac{ \partial R}{\partial \mu_f} \\
+    \frac{ \partial R}{\partial \mu_m}
+    \end{bmatrix} =
+\begin{bmatrix}    
+\frac{1}{\mu_m} \\  -\frac{\mu_f}{\mu_m^2}
+\end{bmatrix}
+$$
+
+Then the variance of $R$ is:
+
+$$Var(R) = g' \Sigma_\mu g$$
+
+##
+### Example in `Stata` {.scrollable}
+
+```{stata}
+*| classes: larger
+frause oaxaca, clear
+gen wage = exp(lnwage)
+mean wage, over(female)
+mata:
+  mu = st_matrix("e(b)")
+  vcv = st_matrix("e(V)")
+  dg = 1/mu[2] \ -mu[1]/mu[2]^2
+  var_r = dg'*vcv*dg
+  sqrt(var_r)
+end
+nlcom _b[ c.wage@0.female]/_b[ c.wage@1.female] 
+```
+
+
 ## So why do we care: {.scrollable}
 
 Two reasons:
@@ -643,7 +823,7 @@ $$
 
 ## What happens when K is too big?  {.scrollable}
 
-::: incremental
+
 -   How many variables (max) can you use in a model?
 
     -   $$max \ k = rank(X'X)$$
@@ -663,15 +843,13 @@ $$
     -   You select only a few of the variables, based on theory, and contribution to the model
 
 -   What if you can't choose?
-:::
+ 
 
 ## ML: We let the 💻Choose for you {.scrollable}
 
 > Before we start. The methodology we will discuss are usually meant to get models with "good" predictive power, and some times better interpretability, not so much stat-inference (although its possible)
 
-When you do not know how to choose, you could try select a subset of variables from your model such that you maximize the predictive power of the model.
-
-This should go beyond IN sample predictive power, but instead maximize Out of sample predictive power.
+When you do not know how to choose, you could try select a subset of variables from your model such that you maximize **out-of-sample** predictive power
 
 This is typically achieved using the following:
 
@@ -695,7 +873,12 @@ $$
 
 -   This has the restrictions of mentioned before ($k < N$). In addition to letting coefficents vary "too much"
 
--   An alternative is to use **Ridge** regression, which instead Minimizes the following:
+-   An alternative is to Impose additional restrictions so that coefficients do not vary as much. This is known as **Regularization**.
+-   
+##
+### Ridge Regression
+
+- One such approach is **Ridge** regression, which minimizes the following:
 
 $$
 rSS = \sum_i(y_i - X_i \beta)^2+ \lambda \sum_{k=1}^K\beta_k^2
@@ -715,6 +898,7 @@ $$
 $$
 
 ``` {stata}
+set linesize 255
 frause oaxaca, clear
 keep if lnwage!=.
 gen male = 1-female
@@ -749,9 +933,6 @@ eSS = \sum_i(y_i - X_i \beta)^2+ \lambda_L \sum_{k=1}^K |\beta_k| +
 \lambda_r \sum_{k=1}^K \beta_k^2
 $$
 
--   Lasso has the advantage of forcing some coefficients exactly to zero, when $\lambda$ is sufficiently large.
-
--   Elastic net tries to use the benefits from both approaches.
 
 ## Lasso vs Ridge
 
@@ -772,6 +953,7 @@ if interested, look into `Stata` introduction to `Lasso` regression. `help Lasso
 ## Brief Example:
 
 ```{stata}
+qui {
 frause oaxaca, clear
 keep if lnwage!=.
 qui:reg lnwage i.age
@@ -782,6 +964,7 @@ qui:lasso linear lnwage i.age, selection(cv, alllambdas)
 predict p_lasso
 qui:elasticnet linear lnwage i.age, selection(cv, alllambdas)   
 predict p_elastic
+}
 ```
 
 ![](resources/image-1604739776.png){fig-align="center"}

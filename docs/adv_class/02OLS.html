@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.455">
+  <meta name="generator" content="quarto-1.4.537">
 
   <meta name="author" content="Fernando Rios-Avila">
   <title>Econometrics MSC Levy - Linear Regression Model</title>
@@ -410,14 +410,14 @@ Fernando Rios-Avila
 <section id="introduction" class="slide level2 scrollable">
 <h2>Introduction</h2>
 <ul>
-<li><p>Linear Regression (usually estimated via OLS) is the most basic, and still most useful, tool for analyzing data.</p></li>
+<li><p>Linear Regression is the most basic, and still most useful, tool for analyzing data.</p></li>
 <li><p>The goal is to find what the relationship between the outcome <span class="math inline">\(y\)</span> and explanatory variables <span class="math inline">\(X's\)</span> is.</p></li>
 <li><p>Say that we start with a very simple “<strong><em>model</em></strong>” that states tries to describe the population function as the following:</p></li>
 </ul>
 <p><span class="math display">\[
 y = h(X,\varepsilon)
 \]</span></p>
-<p>Here, <span class="math inline">\(X\)</span> represents a set of observed covariates and <span class="math inline">\(\varepsilon\)</span> the set of unobserved characteristics, and for now, we assume that there is no pre-define relationship between these components.</p>
+<p>Here, <span class="math inline">\(X\)</span> represents a set of observed covariates and <span class="math inline">\(\varepsilon\)</span> the set of unobserved characteristics, with no no pre-defined relationship between these components.</p>
 <ul>
 <li>For now, we will make standard exogeneity assumptions for the identification of the model</li>
 </ul>
@@ -425,23 +425,20 @@ y = h(X,\varepsilon)
 <section id="estimation" class="slide level2 scrollable">
 <h2>Estimation</h2>
 <ul>
-<li>The functional form, however, is unknowable. However, under the <strong><em>small</em></strong> assumption that <span class="math inline">\(X\)</span> and <span class="math inline">\(\varepsilon\)</span> are unrelated, if we would have access to the population data, we could instead consider the Conditional Expectation function (CEF):</li>
+<li>The functional form is unknowable. However, under the <strong><em>small</em></strong> assumption of Exogeneity of <span class="math inline">\(X\)</span>, we could instead consider the Conditional Expectation function (CEF):</li>
 </ul>
 <p><span class="math display">\[
-E(y_i|X_i=x) = \int t f_y(t|X_i=x)dx
+E(y_i|X_i=x) = \int y f_{y|x}(y)dy
 \]</span></p>
 <ul>
-<li><p>Notice that this implies a fully <strong>non-parametric</strong> estimation of the Linear function (because it does not impose any functional form).</p></li>
-<li><p>With this, we can “decompose” the outcome <span class="math inline">\(y\)</span> into two components, one that depends on observation characteristics (CEF) and one that depends on the error <span class="math inline">\(\varepsilon\)</span>.</p></li>
+<li><p>This implies a fully <strong>non-parametric</strong> estimation of the Linear function.</p></li>
+<li><p>With this, the outcome <span class="math inline">\(y\)</span> can be decomposed into factors determined by observed characteristics (CEF) and on the error <span class="math inline">\(\varepsilon\)</span>.</p></li>
 </ul>
 <p><span class="math display">\[
 y = E(y|X) + \varepsilon
 \]</span></p>
-<ul>
-<li>This has the nice property that the error is unrelated to any functional form of <span class="math inline">\(X\)</span>, while providing a summary of the relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(y\)</span>.</li>
-</ul>
 </section>
-<section id="section" class="slide level2 scrollable">
+<section id="section" class="slide level2">
 <h2></h2>
 <ul>
 <li><p>The CEF is a convenient abstract, but to estimate it, we require assumptions. (Recall the assumptions for unbiased OLS?)</p></li>
@@ -459,13 +456,7 @@ E(y_i|X_i=x) = \beta_0 + \beta_1 x_1 +\beta_2 x_2 + ... +
 \]</span></p>
 <p>Where the loss function <span class="math inline">\(L(x)=x^2\)</span>. (Square loss function)</p>
 <ul>
-<li>This implies the following condition:</li>
-</ul>
-<p><span class="math display">\[
-E[X_i (y_i-X_i'b)]=0 \rightarrow \beta = E[X_i'X_i]^{-1}E[X_i'y_i]
-\]</span></p>
-<ul>
-<li>This population terms must be substituted by the sample equivalent: <span class="math inline">\(E(X_i) =\frac{1}{N} \sum_i^NX_i\)</span></li>
+<li>This implies the following condition: <span class="math inline">\(E[X_i (y_i-X_i'b)]=0 \rightarrow \beta = E[X_i'X_i]^{-1}E[X_i'y_i]\)</span></li>
 </ul>
 </section>
 <section id="mata-ols-estimator" class="slide level2 scrollable">
@@ -476,20 +467,20 @@ E[X_i (y_i-X_i'b)]=0 \rightarrow \beta = E[X_i'X_i]^{-1}E[X_i'y_i]
 \left(\frac{1}{N} \sum_i X_i'X_i \right)^{-1}
 \frac{1}{N} \sum_i X_i'y_i=(X'X)^{-1}X'y
 \]</span></p>
-<div id="cc16d076" class="cell" data-execution_count="1">
+<div id="e156dace" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a>frause oaxaca, <span class="kw">clear</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">keep</span> <span class="kw">if</span> lnwage !=.</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">mata</span>:</span>
-<span id="cb1-4"><a href="#cb1-4"></a>  <span class="fu">y</span> = st_data(.,<span class="st">"lnwage"</span>)</span>
-<span id="cb1-5"><a href="#cb1-5"></a>  n = <span class="bn">rows</span>(<span class="fu">y</span>)</span>
-<span id="cb1-6"><a href="#cb1-6"></a>  x = st_data(.,<span class="st">"female age educ"</span>),<span class="fu">J</span>(n,1,1)</span>
-<span id="cb1-7"><a href="#cb1-7"></a>  exx = <span class="kw">cross</span>(x,x)/n</span>
-<span id="cb1-8"><a href="#cb1-8"></a>  exy = <span class="kw">cross</span>(x,<span class="fu">y</span>)/n</span>
-<span id="cb1-9"><a href="#cb1-9"></a>  b   = <span class="fu">invsym</span>(exx)*exy</span>
-<span id="cb1-10"><a href="#cb1-10"></a>  b</span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="kw">end</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a></a>frause oaxaca, <span class="kw">clear</span></span>
+<span id="cb1-2"><a></a><span class="kw">keep</span> <span class="kw">if</span> lnwage !=.</span>
+<span id="cb1-3"><a></a><span class="kw">mata</span>:</span>
+<span id="cb1-4"><a></a>  <span class="fu">y</span> = st_data(.,<span class="st">"lnwage"</span>)</span>
+<span id="cb1-5"><a></a>  n = <span class="bn">rows</span>(<span class="fu">y</span>)</span>
+<span id="cb1-6"><a></a>  x = st_data(.,<span class="st">"female age educ"</span>),<span class="fu">J</span>(n,1,1)</span>
+<span id="cb1-7"><a></a>  exx = <span class="kw">cross</span>(x,x)/n</span>
+<span id="cb1-8"><a></a>  exy = <span class="kw">cross</span>(x,<span class="fu">y</span>)/n</span>
+<span id="cb1-9"><a></a>  b   = <span class="fu">invsym</span>(exx)*exy</span>
+<span id="cb1-10"><a></a>  b</span>
+<span id="cb1-11"><a></a><span class="kw">end</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <style>div.jp-Notebook .datagrid-container {min-height: 448px; }</style>
@@ -528,20 +519,33 @@ E[X_i (y_i-X_i'b)]=0 \rightarrow \beta = E[X_i'X_i]^{-1}E[X_i'y_i]
 </div>
 </div>
 </section>
-<section id="inference---distribution-of-betas" class="slide level2 scrollable">
+<section id="inference---distribution-of-betas" class="slide level2">
 <h2>Inference - Distribution of <span class="math inline">\(\beta's\)</span></h2>
-<p>so: <span class="math display">\[
-\begin{aligned}
+<p>Given the model and OLS estimator:</p>
+<p><span class="math display">\[\begin{aligned}
 y &amp;= X\beta + \varepsilon \\
-\sqrt N (\hat\beta - \beta) &amp;=\frac{1}{N}\Big[\sum (X_iX_i')\Big]^{-1} \frac{1}{\sqrt N} \sum(X_i\varepsilon_i)
+\hat \beta &amp;= (X'X)^{-1}X'y
 \end{aligned}
+\]</span></p>
+<p>If we substitute <span class="math inline">\(y\)</span> in the second equation, we get:</p>
+<p><span class="math display">\[\begin{aligned}
+\hat \beta &amp;= (X'X)^{-1}X'( X\beta + \varepsilon) \\
+\hat \beta &amp;= \beta + (X'X)^{-1}X'\varepsilon) \\
+\hat \beta - \beta &amp;=  (X'X)^{-1}X'\varepsilon) \\
+\end{aligned}
+\]</span></p>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<p>Finally: <span class="math display">\[
+\sqrt N (\hat\beta - \beta) = {\sqrt N}\Big[\frac{1}{N}\sum (X_iX_i')\Big]^{-1} \frac{1}{N}\sum(X_i\varepsilon_i)
 \]</span></p>
 <ul>
 <li><p>Here <span class="math inline">\(\varepsilon\)</span> is the true population error. <span class="math inline">\(\hat\beta\)</span> is unbiased if the second term has an expectation of Zero. (the error is independent from <span class="math inline">\(X\)</span>).</p></li>
-<li><p>Asymptotically, the first term is assumed fixed <span class="math inline">\(E(X_i X_i')\)</span>. And, because <span class="math inline">\(E(X_i\varepsilon)=0\)</span>, and <span class="math inline">\(\frac{1}{\sqrt N} \sum(X_i\varepsilon)\)</span> is normalized, by CLT we have that:</p></li>
+<li><p>The first term is assumed fixed <span class="math inline">\(E(X_i X_i')\)</span>. And, because <span class="math inline">\(E(X_i\varepsilon)=0\)</span>, and <span class="math inline">\(\frac{1}{\sqrt N} \sum(X_i\varepsilon)\)</span> is normalized, by CLT we have that:</p></li>
 </ul>
 <p><span class="math display">\[
-\sqrt N (\hat\beta-\beta)\sim N(0,E(X_iX_i')^{-1} \ E(X_iX_i'\varepsilon ^2) \ E(X_iX_i')^{-1})
+\sqrt N (\hat\beta-\beta)\sim N(0,E(X_iX_i')^{-1} \ E(X_iX_i'\varepsilon_i ^2) \ E(X_iX_i')^{-1})
 \]</span></p>
 <ul>
 <li>From here, the main question is : How do we estimate <span class="math inline">\(E(X_iX'\varepsilon_i^2)\)</span>?</li>
@@ -571,9 +575,8 @@ Var(\hat\beta)=(X'X)^{-1} X'\Omega X (X'X)^{-1}
 </section>
 <section id="homoskedasticity-and-independent-samples" class="slide level2 scrollable">
 <h2>Homoskedasticity and independent samples</h2>
-<p>The easiest route is to assume homoskedastic errors <span class="math inline">\(\sigma^2 = \sigma_i^2 \ \forall i \in 1,...,N\)</span> . (the error is spread equally around the mean)</p>
-<p>With independent samples <span class="math inline">\(\sigma_{ij}=0 \ \forall \ i\neq j\)</span> . (A persons unobserved is completely independent from anybody else)</p>
-<p><span class="math display">\[
+<p>With homoskedastic errors <span class="math inline">\(\sigma^2 = \sigma_i^2 \ \forall i \in 1,...,N\)</span> .</p>
+<p>With independent samples <span class="math inline">\(\sigma_{ij}=0 \ \forall \ i\neq j\)</span> . <span class="math display">\[
 \Omega_00=
 \left(
 \begin{matrix}
@@ -586,17 +589,16 @@ Var(\hat\beta)=(X'X)^{-1} X'\Omega X (X'X)^{-1}
 \]</span></p>
 <p>Thus <span class="math display">\[
 \begin{aligned}
-Var(\hat\beta)_{00} &amp;=(X'X)^{-1} X'I(N)\sigma^2 X (X'X)^{-1} \\
-&amp;=\sigma^2 (X'X)^{-1} \\
+Var(\hat\beta)_{00} &amp;=(X'X)^{-1} X'I(N)\sigma^2 X (X'X)^{-1} =\sigma^2 (X'X)^{-1} \\
 \sigma^2 &amp;= E(\varepsilon^2)
 \end{aligned}
 \]</span></p>
-<div id="62fb88da" class="cell" data-execution_count="2">
+<div id="98f33594" class="cell larger" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">mata</span>: <span class="fu">e</span>=err = <span class="fu">y</span>:-x*b</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">mata</span>: var_b_000 = <span class="kw">mean</span>(err:^2) * <span class="fu">invsym</span>(x'x)</span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">mata</span>: b,<span class="fu">sqrt</span>(diagonal(var_b_000))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a><span class="kw">mata</span>: <span class="fu">e</span>=err = <span class="fu">y</span>:-x*b</span>
+<span id="cb3-2"><a></a><span class="kw">mata</span>: var_b_000 = <span class="kw">mean</span>(err:^2) * <span class="fu">invsym</span>(x'x)</span>
+<span id="cb3-3"><a></a><span class="kw">mata</span>: b,<span class="fu">sqrt</span>(diagonal(var_b_000))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>                 1             2
@@ -609,20 +611,20 @@ Var(\hat\beta)_{00} &amp;=(X'X)^{-1} X'I(N)\sigma^2 X (X'X)^{-1} \\
 </div>
 </div>
 </section>
-<section id="section-1" class="slide level2">
+<section id="section-2" class="slide level2">
 <h2></h2>
 <p>But, <span class="math inline">\(\sigma^2\)</span> is not known, so we have to use <span class="math inline">\(\hat\sigma^2\)</span> instead, which depends on the sample residuals: <span class="math display">\[
 \hat\sigma^2 = \frac{1}{N-k-1}\sum \hat e^2
 \]</span></p>
 <p>Where we account for the fact true errors are not observed, but rather residuals are estimated, adjusting the degrees of freedom.</p>
-<div id="4887d771" class="cell" data-execution_count="3">
+<div id="59dce4a3" class="cell larger" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">mata</span>:</span>
-<span id="cb5-2"><a href="#cb5-2"></a>    <span class="kw">N</span> = <span class="bn">rows</span>(<span class="fu">y</span>); <span class="kw">k</span> = <span class="bn">cols</span>(x)</span>
-<span id="cb5-3"><a href="#cb5-3"></a>    var_b_00 = <span class="kw">sum</span>(err:^2)/(<span class="kw">N</span>-<span class="kw">k</span>) * <span class="fu">invsym</span>(x'x)</span>
-<span id="cb5-4"><a href="#cb5-4"></a>    b,<span class="fu">sqrt</span>(diagonal(var_b_00))</span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a></a><span class="kw">mata</span>:</span>
+<span id="cb5-2"><a></a>    <span class="kw">N</span> = <span class="bn">rows</span>(<span class="fu">y</span>); <span class="kw">k</span> = <span class="bn">cols</span>(x)</span>
+<span id="cb5-3"><a></a>    var_b_00 = <span class="kw">sum</span>(err:^2)/(<span class="kw">N</span>-<span class="kw">k</span>) * <span class="fu">invsym</span>(x'x)</span>
+<span id="cb5-4"><a></a>    b,<span class="fu">sqrt</span>(diagonal(var_b_00))</span>
+<span id="cb5-5"><a></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -662,23 +664,23 @@ Var(\hat\beta)_{00} &amp;=(X'X)^{-1} X'I(N)\sigma^2 X (X'X)^{-1} \\
 </ul>
 <p><span class="math display">\[
 \begin{aligned}
-Var(\hat\beta)_{0} &amp;= (X'X)^{-1} (X\hat e)'(\hat eX) (X'X)^{-1} \\
+Var(\hat\beta)_{0} &amp;= (X'X)^{-1} (X \cdot \hat e)'(X \cdot  \hat e) (X'X)^{-1} \\
 &amp;=(X'X)^{-1} \sum(X_iX_i'\hat e^2) (X'X)^{-1}
 \end{aligned}
 \]</span></p>
-<p>Which imposes <strong>NO</strong> penalty to the fact that we are using residuals not errors. If we account for that however, we obtain what is known as HC1, SE, the standard in <code>stata</code>. (when you type <code>robust</code>)</p>
+<p>Which imposes <strong>NO</strong> penalty to the fact that we are using residuals not errors. If we account for that however, we obtain what is known as HC1, SE, the standard in <code>Stata</code>. (when you type <code>robust</code>)</p>
 <p><span class="math display">\[
 Var(\hat\beta)_{1}=\frac{N}{N-K-1}Var(\hat\beta)_{0}
 \]</span></p>
-<div id="d240dcdc" class="cell" data-execution_count="4">
+<div id="0529312f" class="cell larger" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">mata</span>:</span>
-<span id="cb7-2"><a href="#cb7-2"></a>    ixx = <span class="fu">invsym</span>(x'x)</span>
-<span id="cb7-3"><a href="#cb7-3"></a>    var_b_0 = ixx * (x:*<span class="fu">e</span>)'(x:*<span class="fu">e</span>) * ixx</span>
-<span id="cb7-4"><a href="#cb7-4"></a>    var_b_1 = <span class="kw">N</span>/(<span class="kw">N</span>-<span class="kw">k</span>)*var_b_0</span>
-<span id="cb7-5"><a href="#cb7-5"></a>    b,<span class="fu">sqrt</span>(diagonal(var_b_0)),<span class="fu">sqrt</span>(diagonal(var_b_1))</span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a></a><span class="kw">mata</span>:</span>
+<span id="cb7-2"><a></a>    ixx = <span class="fu">invsym</span>(x'x)</span>
+<span id="cb7-3"><a></a>    var_b_0 = ixx * (x:*<span class="fu">e</span>)'(x:*<span class="fu">e</span>) * ixx</span>
+<span id="cb7-4"><a></a>    var_b_1 = <span class="kw">N</span>/(<span class="kw">N</span>-<span class="kw">k</span>)*var_b_0</span>
+<span id="cb7-5"><a></a>    b,<span class="fu">sqrt</span>(diagonal(var_b_0)),<span class="fu">sqrt</span>(diagonal(var_b_1))</span>
+<span id="cb7-6"><a></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -729,27 +731,26 @@ HC3: \psi_i =   \hat e^2 \frac{1}{(1-h_{ii})^2}
 </section>
 <section id="coding-robust-se" class="slide level2">
 <h2>Coding Robust SE</h2>
-<div id="39867f45" class="cell" data-execution_count="5">
+<div id="ce2c9df6" class="cell larger" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">mata</span>:</span>
-<span id="cb9-2"><a href="#cb9-2"></a>    <span class="co">// h = diagonal(X invsym(X'x) X') Wrong Way, too many calculations</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a>    <span class="kw">h</span> = rowsum(x*<span class="fu">invsym</span>(x'x):*x)</span>
-<span id="cb9-4"><a href="#cb9-4"></a>    psi0 = <span class="fu">e</span>:^2           ;   psi1 = <span class="fu">e</span>:^2*<span class="kw">N</span>/(<span class="kw">N</span>-<span class="kw">k</span>)</span>
-<span id="cb9-5"><a href="#cb9-5"></a>    psi2 = <span class="fu">e</span>:^2:/(1:-<span class="kw">h</span>)   ;   psi3 = <span class="fu">e</span>:^2:/((1:-<span class="kw">h</span>):^2)</span>
-<span id="cb9-6"><a href="#cb9-6"></a>    var_b_0 = ixx * <span class="kw">cross</span>(x,psi0,x) * ixx</span>
-<span id="cb9-7"><a href="#cb9-7"></a>    var_b_1 = ixx * <span class="kw">cross</span>(x,psi1,x) * ixx</span>
-<span id="cb9-8"><a href="#cb9-8"></a>    var_b_2 = ixx * <span class="kw">cross</span>(x,psi2,x) * ixx</span>
-<span id="cb9-9"><a href="#cb9-9"></a>    var_b_3 = ixx * <span class="kw">cross</span>(x,psi3,x) * ixx</span>
-<span id="cb9-10"><a href="#cb9-10"></a>    b,<span class="fu">sqrt</span>(diagonal(var_b_0)),<span class="fu">sqrt</span>(diagonal(var_b_1)),</span>
-<span id="cb9-11"><a href="#cb9-11"></a>    <span class="fu">sqrt</span>(diagonal(var_b_2)),<span class="fu">sqrt</span>(diagonal(var_b_3))</span>
-<span id="cb9-12"><a href="#cb9-12"></a><span class="kw">end</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a></a><span class="kw">mata</span>:</span>
+<span id="cb9-2"><a></a>    <span class="co">// h = diagonal(X invsym(X'x) X') Wrong Way, too many calculations</span></span>
+<span id="cb9-3"><a></a>    <span class="kw">h</span> = rowsum(x*<span class="fu">invsym</span>(x'x):*x)</span>
+<span id="cb9-4"><a></a>    psi0 = <span class="fu">e</span>:^2           ;   psi1 = <span class="fu">e</span>:^2*<span class="kw">N</span>/(<span class="kw">N</span>-<span class="kw">k</span>)</span>
+<span id="cb9-5"><a></a>    psi2 = <span class="fu">e</span>:^2:/(1:-<span class="kw">h</span>)   ;   psi3 = <span class="fu">e</span>:^2:/((1:-<span class="kw">h</span>):^2)</span>
+<span id="cb9-6"><a></a>    var_b_0 = ixx * <span class="kw">cross</span>(x,psi0,x) * ixx</span>
+<span id="cb9-7"><a></a>    var_b_1 = ixx * <span class="kw">cross</span>(x,psi1,x) * ixx</span>
+<span id="cb9-8"><a></a>    var_b_2 = ixx * <span class="kw">cross</span>(x,psi2,x) * ixx</span>
+<span id="cb9-9"><a></a>    var_b_3 = ixx * <span class="kw">cross</span>(x,psi3,x) * ixx</span>
+<span id="cb9-10"><a></a>    b,<span class="fu">sqrt</span>(diagonal(var_b_0)),<span class="fu">sqrt</span>(diagonal(var_b_1)),</span>
+<span id="cb9-11"><a></a>    <span class="fu">sqrt</span>(diagonal(var_b_2)),<span class="fu">sqrt</span>(diagonal(var_b_3))</span>
+<span id="cb9-12"><a></a><span class="kw">end</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 . mata:
 ------------------------------------------------- mata (type end to exit) -----
-:     // h = diagonal(X invsym(X'x) X') Wrong Way, too many calculations
 :     h = rowsum(x*invsym(x'x):*x)
 
 :     psi0 = e:^2 ; psi1 = e:^2*N/(N-k)
@@ -781,34 +782,58 @@ HC3: \psi_i =   \hat e^2 \frac{1}{(1-h_{ii})^2}
 </div>
 </div>
 <p>Or in <code>Stata</code>:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">regress</span> <span class="fu">y</span> x1 <span class="kw">x2</span> x3, <span class="kw">vce</span>(<span class="kw">robust</span>)</span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="kw">regress</span> <span class="fu">y</span> x1 <span class="kw">x2</span> x3, <span class="kw">vce</span>(hc2)</span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="kw">regress</span> <span class="fu">y</span> x1 <span class="kw">x2</span> x3, <span class="kw">vce</span>(hc3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a></a><span class="kw">regress</span> <span class="fu">y</span> x1 <span class="kw">x2</span> x3, <span class="kw">vce</span>(<span class="kw">robust</span>)</span>
+<span id="cb11-2"><a></a><span class="kw">regress</span> <span class="fu">y</span> x1 <span class="kw">x2</span> x3, <span class="kw">vce</span>(hc2)</span>
+<span id="cb11-3"><a></a><span class="kw">regress</span> <span class="fu">y</span> x1 <span class="kw">x2</span> x3, <span class="kw">vce</span>(hc3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="gls-and-weighted-least-squares" class="slide level2">
+<h2>GLS and Weighted Least Squares</h2>
+<ul>
+<li>GLS is a generalization of OLS, that could be used to address heteroskedasticity.</li>
+<li>There are two ways to do this:
+<ol type="1">
+<li>Transform/weight the data to make it homoskedastic (WLS)</li>
+<li>Modify the variance covariance matrix of the errors (GLS)</li>
+</ol></li>
+<li>Call <span class="math inline">\(\hat h(x)\)</span> the predicted error variance. The GLS estimator for <span class="math inline">\(V_{gls}(\beta)\)</span> is given by:</li>
+</ul>
+<p><span class="math display">\[V_{gls}(\beta)=(X'X)^{-1} \sum(X_iX_i'\hat h(x)) (X'X)^{-1}
+\]</span></p>
+<ul>
+<li>That way, Heteroskedasticity is addressed, but without changing the model estimates <span class="math inline">\(\beta's\)</span></li>
+</ul>
 </section>
 <section id="lifting-even-more-assumptions-correlation" class="slide level2 scrollable">
 <h2>Lifting Even more Assumptions: Correlation</h2>
 <ul>
-<li><p>One assumption we barely consider last semester was the possibility that errors could be correlated within groups. (except for time series and serial correlation)</p></li>
+<li><p>One assumption we barely consider last semester was the possibility that errors could be correlated across observations. (except for time series and serial correlation)</p></li>
 <li><p>For example, families may share similar unobserved factors, So would people interviewed from the same classroom, cohort, city, etc. There could be many dimensions to consider possible correlations!</p></li>
 <li><p>In that situation, we may be missmeasuring the magnitude of the errors (probably downward), because the <span class="math inline">\(\Omega\)</span> is no longer diagonal: <span class="math inline">\(\sigma_{ij} \neq 0\)</span> for some <span class="math inline">\(i\neq j\)</span>.</p>
 <ul>
 <li>But, estimate all parameters in an NxN matrix is unfeasible. We need assumptions!</li>
 </ul></li>
-<li><p>Say we have <span class="math inline">\(G\)</span> groups <span class="math inline">\(g=(1…G)\)</span> . We can rewrite the expression for <span class="math inline">\(\hat\beta\)</span> as follows:</p></li>
+</ul>
+</section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+<h3 id="new-assumptions">New Assumptions</h3>
+<ul>
+<li>Say we have <span class="math inline">\(G\)</span> groups <span class="math inline">\(g=(1…G)\)</span> . We can rewrite the expression for <span class="math inline">\(\hat\beta\)</span> as follows:</li>
 </ul>
 <p><span class="math display">\[
 \begin{aligned}
-\hat\beta-\beta &amp;= (X'X)^{-1}\sum_{g=1}^G X'_g \varepsilon_g \\\
+\hat\beta-\beta &amp;= (X'X)^{-1}\sum_{g=1}^G X'_g \varepsilon_g \\
 &amp;=(X'X)^{-1}\sum_{g=1}^G s_g
 \end{aligned}
 \]</span></p>
 <ul>
-<li>We can assume that individuals are correlated within groups <span class="math inline">\(E(s_g's_g) =\Sigma_g\)</span> , but they are uncorrelated across groups <span class="math inline">\(E(s_g s_g')=0 \ \forall \ g \neq g'\)</span> .</li>
-<li>These groups are typically known as “<strong>clusters</strong>”</li>
+<li><p>We can assume that individuals are correlated within groups <span class="math inline">\(E(s_g's_g) =\Sigma_g\)</span> , but they are uncorrelated across groups <span class="math inline">\(E(s_g s_g')=0 \ \forall \ g \neq g'\)</span> .</p></li>
+<li><p>These groups are typically known as “<strong>clusters</strong>”</p></li>
 </ul>
 </section>
-<section id="addressing-correlation" class="slide level2 scrollable">
-<h2>Addressing Correlation</h2>
+<section id="section-4" class="slide level2">
+<h2></h2>
+<h3 class="scrollable" id="addressing-correlation">Addressing Correlation</h3>
 <ul>
 <li>The idea of correcting for clusters is pretty simple. We just need to come up with an estimator for <span class="math inline">\(\Sigma_g\)</span> for every cluster, so that:</li>
 </ul>
@@ -822,9 +847,9 @@ Var(\hat\beta) &amp;= (X'X)^{-1} \left( \sum_{g=1}^N \Sigma_g \right) (X'X)^{-1}
 <li><p>Here <span class="math inline">\(\Omega_g\)</span> should be an approximation of the variance covariance matrix among the errors of ALL individuals that belong to the same cluster. But how do we approximate it?</p></li>
 <li><p>As with the EW - HC standard errors, there are many ways to estimate Clustered Standard errors. See MacKinnon et al (2023) for reference. We will refer only to the simpler ones CV0 and CV1.</p></li>
 </ul>
-<blockquote>
-<p>Still How?</p>
-</blockquote>
+</section>
+<section id="section-5" class="slide level2">
+<h2></h2>
 <ul>
 <li>Recall we approximate <span class="math inline">\(\sigma^2_i\)</span> with <span class="math inline">\(\varepsilon_i^2\)</span>. Then we can approximate <span class="math inline">\(\sigma_{ij}\)</span> with <span class="math inline">\(\varepsilon_j \varepsilon_i\)</span>. More specifically:</li>
 </ul>
@@ -835,7 +860,7 @@ Var(\hat\beta) &amp;= (X'X)^{-1} \left( \sum_{g=1}^N \Sigma_g \right) (X'X)^{-1}
 <li>Change <span class="math inline">\(\varepsilon\)</span> with <span class="math inline">\(\hat\varepsilon\)</span>, do that for every group, and done! (almost).</li>
 </ul>
 </section>
-<section id="section-2" class="slide level2 scrollable">
+<section id="section-6" class="slide level2 scrollable">
 <h2></h2>
 <ul>
 <li>As mentioned earlier, there are many CCSE (clustered consistent SE).</li>
@@ -849,33 +874,33 @@ CV_1 &amp;= \frac{G(N-1)}{(G-1)(N-k-1)}(X'X)^{-1} \sum_{g=1}^G \hat \Sigma_g (X'
 <ul>
 <li>Similar to HC. CV0 does not correct for degrees of freedom. CV1, however, accounts for Degrees of freedom in the model, and clusters.</li>
 </ul>
-<div id="af9553ac" class="cell" data-execution_count="6">
+<div id="6380097f" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">mata</span>:</span>
-<span id="cb12-2"><a href="#cb12-2"></a>    <span class="co">// 1st Sort Data (easier in Stata rather than Mata) and reload</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a>    <span class="fu">y</span>   = st_data(.,<span class="st">"lnwage"</span>)</span>
-<span id="cb12-4"><a href="#cb12-4"></a>    x   = st_data(.,<span class="st">"educ exper female"</span>),<span class="fu">J</span>(1434,1,1) </span>
-<span id="cb12-5"><a href="#cb12-5"></a>    cvar= st_data(.,<span class="st">"isco"</span>)</span>
-<span id="cb12-6"><a href="#cb12-6"></a>    ixx = <span class="fu">invsym</span>(<span class="kw">cross</span>(x,x)); xy = <span class="kw">cross</span>(x,<span class="fu">y</span>)</span>
-<span id="cb12-7"><a href="#cb12-7"></a>    b   = ixx * xy</span>
-<span id="cb12-8"><a href="#cb12-8"></a>    <span class="fu">e</span>   = <span class="fu">y</span>:-x*b</span>
-<span id="cb12-9"><a href="#cb12-9"></a>    <span class="co">// Set the panel info</span></span>
-<span id="cb12-10"><a href="#cb12-10"></a>    info = <span class="kw">panelsetup</span>(cvar,1); g=<span class="bn">rows</span>(info); n=<span class="bn">rows</span>(<span class="fu">y</span>)</span>
-<span id="cb12-11"><a href="#cb12-11"></a>    <span class="co">// get X_g'e for all groups: </span></span>
-<span id="cb12-12"><a href="#cb12-12"></a>    s_xg_e = panelsum(x:*<span class="fu">e</span>,info)</span>
-<span id="cb12-13"><a href="#cb12-13"></a>    <span class="co">// Sum Sigma_g</span></span>
-<span id="cb12-14"><a href="#cb12-14"></a>    sigma_g = s_xg_e's_xg_e</span>
-<span id="cb12-15"><a href="#cb12-15"></a>    cv0 = ixx*sigma_g*ixx</span>
-<span id="cb12-16"><a href="#cb12-16"></a>    cv1 =g/(g-1)*(n-1)/(n-<span class="kw">k</span>)*ixx*sigma_g*ixx</span>
-<span id="cb12-17"><a href="#cb12-17"></a>    b,<span class="fu">sqrt</span>(diagonal(cv0)),<span class="fu">sqrt</span>(diagonal(cv1))</span>
-<span id="cb12-18"><a href="#cb12-18"></a><span class="kw">end</span>    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a></a><span class="kw">sort</span> isco</span>
+<span id="cb12-2"><a></a><span class="kw">mata</span>:</span>
+<span id="cb12-3"><a></a>    <span class="co">// 1st Sort Data (easier in Stata rather than Mata) and reload</span></span>
+<span id="cb12-4"><a></a>    <span class="fu">y</span>   = st_data(.,<span class="st">"lnwage"</span>)</span>
+<span id="cb12-5"><a></a>    x   = st_data(.,<span class="st">"educ exper female"</span>),<span class="fu">J</span>(1434,1,1) </span>
+<span id="cb12-6"><a></a>    cvar= st_data(.,<span class="st">"isco"</span>)</span>
+<span id="cb12-7"><a></a>    ixx = <span class="fu">invsym</span>(<span class="kw">cross</span>(x,x)); xy = <span class="kw">cross</span>(x,<span class="fu">y</span>)</span>
+<span id="cb12-8"><a></a>    b   = ixx * xy</span>
+<span id="cb12-9"><a></a>    <span class="fu">e</span>   = <span class="fu">y</span>:-x*b</span>
+<span id="cb12-10"><a></a>    <span class="co">// Set the panel info</span></span>
+<span id="cb12-11"><a></a>    info = <span class="kw">panelsetup</span>(cvar,1); g=<span class="bn">rows</span>(info); n=<span class="bn">rows</span>(<span class="fu">y</span>)</span>
+<span id="cb12-12"><a></a>    <span class="co">// get X_g'e for all groups: </span></span>
+<span id="cb12-13"><a></a>    s_xg_e = panelsum(x:*<span class="fu">e</span>,info)</span>
+<span id="cb12-14"><a></a>    <span class="co">// Sum Sigma_g</span></span>
+<span id="cb12-15"><a></a>    sigma_g = s_xg_e's_xg_e</span>
+<span id="cb12-16"><a></a>    cv0 = ixx*sigma_g*ixx</span>
+<span id="cb12-17"><a></a>    cv1 =g/(g-1)*(n-1)/(n-<span class="kw">k</span>)*ixx*sigma_g*ixx</span>
+<span id="cb12-18"><a></a>    b,<span class="fu">sqrt</span>(diagonal(cv0)),<span class="fu">sqrt</span>(diagonal(cv1))</span>
+<span id="cb12-19"><a></a><span class="kw">end</span>    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 . mata:
 ------------------------------------------------- mata (type end to exit) -----
-:     // 1st Sort Data (easier in Stata rather than Mata) and reload
 :     y = st_data(.,"lnwage")
 
 :     x = st_data(.,"educ exper female"),J(1434,1,1)
@@ -888,13 +913,10 @@ CV_1 &amp;= \frac{G(N-1)}{(G-1)(N-k-1)}(X'X)^{-1} \sum_{g=1}^G \hat \Sigma_g (X'
 
 :     e = y:-x*b
 
-:     // Set the panel info
 :     info = panelsetup(cvar,1); g=rows(info); n=rows(y)
 
-:     // get X_g'e for all groups:
 :     s_xg_e = panelsum(x:*e,info)
 
-:     // Sum Sigma_g
 :     sigma_g = s_xg_e's_xg_e
 
 :     cv0 = ixx*sigma_g*ixx
@@ -917,10 +939,10 @@ CV_1 &amp;= \frac{G(N-1)}{(G-1)(N-k-1)}(X'X)^{-1} \sum_{g=1}^G \hat \Sigma_g (X'
 </div>
 </div>
 <p>or compare it to</p>
-<div id="233c569c" class="cell" data-execution_count="7">
+<div id="90800f91" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">reg</span> lnwage educ exper female, <span class="kw">cluster</span>(isco)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a></a><span class="kw">reg</span> lnwage educ exper female, <span class="kw">cluster</span>(isco)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -943,9 +965,106 @@ Linear regression                               Number of obs     =      1,434
 </div>
 </div>
 </section>
+<section id="visualizing-the-difference" class="slide level2 scrollable">
+<h2>Visualizing the difference</h2>
+<div id="ba0c62ce" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a></a><span class="kw">clear</span></span>
+<span id="cb16-2"><a></a><span class="kw">set</span> <span class="dv">scheme</span> white2</span>
+<span id="cb16-3"><a></a>color_style tableau</span>
+<span id="cb16-4"><a></a><span class="kw">set</span> <span class="dv">seed</span> 1</span>
+<span id="cb16-5"><a></a><span class="kw">set</span> <span class="kw">obs</span> 50</span>
+<span id="cb16-6"><a></a><span class="kw">gen</span> r1=runiformint(1,4)</span>
+<span id="cb16-7"><a></a><span class="kw">gen</span> r2=runiformint(1,4)</span>
+<span id="cb16-8"><a></a><span class="kw">gen</span> id=<span class="dt">_n</span></span>
+<span id="cb16-9"><a></a><span class="kw">sort</span> r1  r2</span>
+<span id="cb16-10"><a></a><span class="kw">qui</span>:<span class="kw">mata</span>:</span>
+<span id="cb16-11"><a></a>r1=st_data(.,<span class="st">"r1"</span>)</span>
+<span id="cb16-12"><a></a>r2=st_data(.,<span class="st">"r2"</span>)</span>
+<span id="cb16-13"><a></a>rr1=<span class="fu">J</span>(<span class="bn">rows</span>(r1)*<span class="bn">rows</span>(r2),4,0)</span>
+<span id="cb16-14"><a></a><span class="kw">k</span>=0</span>
+<span id="cb16-15"><a></a><span class="kw">for</span>(i=1;i&lt;=50;i++){</span>
+<span id="cb16-16"><a></a>    <span class="kw">for</span>(j=1;j&lt;=50;j++){</span>
+<span id="cb16-17"><a></a>        <span class="kw">if</span> ((r1[i]==r1[j]) | (r2[i]==r2[j])) {</span>
+<span id="cb16-18"><a></a>            <span class="kw">k</span>++</span>
+<span id="cb16-19"><a></a>            rr1[<span class="kw">k</span>,]=(51-i,j,(r1[i]==r1[j]),(r2[i]==r2[j]) )         </span>
+<span id="cb16-20"><a></a>        }</span>
+<span id="cb16-21"><a></a>    }   </span>
+<span id="cb16-22"><a></a>}</span>
+<span id="cb16-23"><a></a>rr1=rr1[1..<span class="kw">k</span>,]</span>
+<span id="cb16-24"><a></a><span class="kw">end</span></span>
+<span id="cb16-25"><a></a>getmata rr1*=rr1, <span class="kw">replace</span> <span class="kw">force</span></span>
+<span id="cb16-26"><a></a></span>
+<span id="cb16-27"><a></a><span class="kw">two</span> (<span class="kw">scatter</span> rr11 rr12 <span class="kw">if</span> rr13==1,  ms(<span class="fu">s</span>) msize(2.1))  <span class="co">///</span></span>
+<span id="cb16-28"><a></a>    (<span class="kw">scatter</span> rr11 rr12 <span class="kw">if</span> 51-rr11 == rr12, ms(<span class="fu">s</span>) msize(2.1) <span class="kw">color</span>(gs1)  ) <span class="co">///</span></span>
+<span id="cb16-29"><a></a>    , aspect(1) <span class="bn">legend</span>(<span class="kw">off</span>)  <span class="bn">xtitle</span>(<span class="st">""</span>) <span class="bn">ytitle</span>(<span class="st">""</span>) <span class="bn">yscale</span>(<span class="kw">off</span>) <span class="bn">xscale</span>(<span class="kw">off</span>) <span class="bn">xsize</span>(6) <span class="bn">ysize</span>(6) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code></code></pre>
+</div>
+
+</div>
+<img data-src="02OLS_files/figure-revealjs/cell-9-output-2.png" class="r-stretch"></section>
+<section id="visualizing-multi-way-clustering" class="slide level2 scrollable">
+<h2>Visualizing Multi-way Clustering</h2>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">First Cluster</a></li><li><a href="#tabset-1-2">Second Cluster</a></li><li><a href="#tabset-1-3">Combining Clusters</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<div id="089a0072" class="cell" data-execution_count="9">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a></a><span class="kw">two</span> (<span class="kw">scatter</span> rr11 rr12 <span class="kw">if</span> rr13==1,  ms(<span class="fu">s</span>) msize(2.1))  <span class="co">///</span></span>
+<span id="cb18-2"><a></a>    , aspect(1) <span class="bn">legend</span>(<span class="kw">off</span>)  <span class="bn">xtitle</span>(<span class="st">""</span>) <span class="bn">ytitle</span>(<span class="st">""</span>) <span class="bn">yscale</span>(<span class="kw">off</span>) <span class="bn">xscale</span>(<span class="kw">off</span>) <span class="bn">name</span>(m1, <span class="kw">replace</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="02OLS_files/figure-revealjs/cell-10-output-1.png"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2">
+<div id="c3432930" class="cell" data-execution_count="10">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb19-1"><a></a><span class="kw">two</span> (<span class="kw">scatter</span> rr11 rr12 <span class="kw">if</span> rr14==1,  ms(<span class="fu">s</span>) msize(2.1))  <span class="co">///</span></span>
+<span id="cb19-2"><a></a>    , aspect(1) <span class="bn">legend</span>(<span class="kw">off</span>)  <span class="bn">xtitle</span>(<span class="st">""</span>) <span class="bn">ytitle</span>(<span class="st">""</span>) <span class="bn">yscale</span>(<span class="kw">off</span>) <span class="bn">xscale</span>(<span class="kw">off</span>) <span class="bn">name</span>(m2, <span class="kw">replace</span>)    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="02OLS_files/figure-revealjs/cell-11-output-1.png"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-3">
+<div id="b892a392" class="cell" data-execution_count="11">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb20-1"><a></a><span class="kw">two</span> (<span class="kw">scatter</span> rr11 rr12 <span class="kw">if</span> rr14==1 | rr13==1,  ms(<span class="fu">s</span>) msize(2.1))  <span class="co">///</span></span>
+<span id="cb20-2"><a></a>    , aspect(1) <span class="bn">legend</span>(<span class="kw">off</span>)  <span class="bn">xtitle</span>(<span class="st">""</span>) <span class="bn">ytitle</span>(<span class="st">""</span>) <span class="bn">yscale</span>(<span class="kw">off</span>) <span class="bn">xscale</span>(<span class="kw">off</span>) <span class="bn">name</span>(m3, <span class="kw">replace</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="02OLS_files/figure-revealjs/cell-12-output-1.png"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 <section id="beware-of-over-clustering" class="slide level2 scrollable">
 <h2>Beware of over-clustering</h2>
-<p>While clustering helps address a problem of “intragroup” correlation, it can/should be done with care. It is important to be aware about some unintended problems of using Correlation.</p>
+<p>While clustering helps address a problem of “intragroup” correlation, it can/should be done with care. It is important to be aware about some unintended problems of over-clustering.</p>
 <ol type="1">
 <li><p>CV0 and CV1 work well when you have a large number of Clusters. How many? MHE(2009) says…42 (this is like having large enough samples for Asymptotic variance). If # clusters are small, you would do better with other approaches (including CV2 and CV3).</p></li>
 <li><p>When you cluster your standard errors, you will “most-likely” generate larger standard errors in your model. Standard recommendation (MHE) is to cluster at the level that makes sense (based on data) and produces largest SE (to be conservative).</p></li>
@@ -955,12 +1074,15 @@ Linear regression                               Number of obs     =      1,434
 <h2>Role of clusters</h2>
 
 <img data-src="resources/clse.png" class="r-stretch quarto-figure-center"><p class="caption">Standard Errors</p></section>
-<section id="section-3" class="slide level2 scrollable">
+<section id="section-7" class="slide level2 scrollable">
 <h2></h2>
 <ol start="3" type="1">
 <li><p>You may also consider that clustering does not work well when sample sizes within cluster are to diverse (micro vs macro clusters)</p></li>
 <li><p>And there is the case where clustering is required among multiple dimensions (see <code>vcemway</code>). Where the unobserved correlation could be present in different dimensions.</p></li>
 </ol>
+</section>
+<section id="section-8" class="slide level2">
+<h2></h2>
 <p>So what to cluster and how?</p>
 <ul>
 <li><p>Mackinnon et al (2023) provides a guide on how and when to cluster your standard errors. (some are quite advanced)</p></li>
@@ -980,7 +1102,7 @@ Linear regression                               Number of obs     =      1,434
 <section id="if-you-cant-sandwich-you-can-re-sample" class="slide level2 scrollable">
 <h2>If you can’t Sandwich 🥪, you can re-Sample</h2>
 <ul>
-<li><p>The discussion above refereed to the estimation of SE using <span class="math inline">\(Math\)</span>. In other words, it was based on the asymptotic properties of the data. Which may not work in small samples.</p></li>
+<li><p>The discussion above refered to the estimation of SE using <span class="math inline">\(Math\)</span>. In other words, it was based on the asymptotic properties of the data. Which may not work in small samples.</p></li>
 <li><p>An alternative, often used by practitioners, is using re-sampling methods to obtain approximations to the coefficient distributions of interest.</p></li>
 </ul>
 <p>But… How does it work?🤔</p>
@@ -992,7 +1114,7 @@ Linear regression                               Number of obs     =      1,434
 <section id="a-brief-reviewagain" class="slide level2 scrollable">
 <h2>A Brief Review…again 😇</h2>
 <p>If I were to summarize most of the methodologies (ok all) we used last semester, and this one, the properties that have been derived and proofed are based on the assumption that we “could” always get more data (frequentist approach).</p>
-<p>There is population (or supper population) from where we can get samples of data.</p>
+<p>There is population (or super population) from where we can get samples of data (and never repeat data).</p>
 <ol type="1">
 <li><p>We get a sample (<span class="math inline">\(y,X\)</span>) (of size N)</p></li>
 <li><p>Estimate our model : <code>method</code>(<span class="math inline">\(y,X\)</span>)<span class="math inline">\(\rightarrow\)</span> <span class="math inline">\(\beta's\)</span></p></li>
@@ -1000,17 +1122,21 @@ Linear regression                               Number of obs     =      1,434
 <li><p>Collect all <span class="math inline">\(\beta's\)</span> and summarize. (Mean and Standard deviations)</p></li>
 </ol>
 <p>Done.</p>
-<p>The distributions you get from the above exercise should be the same as what your estimation method produces. (if not, there there is something wrong with the estimation method)</p>
+<p>The distributions you get from the above exercise should be the same as what your estimation method produces. (in average) (if not, there there is something wrong with the estimation method)</p>
 </section>
-<section id="but-we-only-get-1-sample" class="slide level2 scrollable">
-<h2>But we only get 1 Sample!</h2>
+<section id="section-9" class="slide level2">
+<h2></h2>
+<h3 class="scrollable" id="but-we-only-get-1-sample">But we only get 1 Sample!</h3>
 <p>The truth is we do not have access to multiple samples. Getting more data, is in fact, very expensive. So what to do ?</p>
 <ul>
 <li><p>Rely on Asymptotic theory</p></li>
 <li><p>learn Bayesian Econometrics 🥺</p></li>
 <li><p>or-resample? and do Bootstrap!</p></li>
 </ul>
-<p><strong>Basic idea of Bootstrapping</strong></p>
+</section>
+<section id="section-10" class="slide level2">
+<h2></h2>
+<h3 id="basic-idea-of-bootstrapping">Basic idea of Bootstrapping</h3>
 <ul>
 <li><p>In the ideal scenario, you get multiple samples from your population, Estimate parameters, and done.</p></li>
 <li><p>If not possible you do the next best thing. You get your sample (assume is your mini-population),</p>
@@ -1021,8 +1147,9 @@ Linear regression                               Number of obs     =      1,434
 </ul></li>
 </ul>
 </section>
-<section id="bootstrapping" class="slide level2 scrollable">
-<h2>Bootstrapping</h2>
+<section id="section-11" class="slide level2">
+<h2></h2>
+<h3 class="scrollable" id="bootstrapping">Bootstrapping</h3>
 <ul>
 <li>👢Bootstrapping is a methodology that allows you to obtain empirical estimations of standard errors making use of the data in hand, and without even knowing about Asymptotic theory (other than how to get means and variances).</li>
 </ul>
@@ -1031,20 +1158,33 @@ Linear regression                               Number of obs     =      1,434
 <li>And of course, it comes in different flavors.</li>
 </ul>
 </section>
-<section id="bootstrap-types" class="slide level2 scrollable">
-<h2>Bootstrap Types:</h2>
+<section id="section-12" class="slide level2">
+<h2></h2>
+<h3 class="scrollable" id="standard-bootstrap">Standard Bootstrap:</h3>
 <ul>
 <li><p><strong>Non-parametric Bootstrap</strong>: You draw subsamples from the main sample. Each observation has the same pr of being selected.</p>
 <ul>
 <li><p>Easiest to implement ( <code>see bootstrap:</code>)</p></li>
 <li><p>Works in almost all cases, but you may have situations when some covariates are rare.</p></li>
-<li><p>Can be extended to allow “clusters” using “block bootstrapping”. Works best if re-sampling “follows” the same sampling structure as your sample.</p></li>
+<li><p>Can allow for “clusters” using “block bootstrapping”.</p></li>
 </ul></li>
+</ul>
+</section>
+<section id="section-13" class="slide level2">
+<h2></h2>
+<h3 class="scrollable" id="standard-bootstrap-1">Standard Bootstrap:</h3>
+<ul>
 <li><p><strong>Parametric Bootstrap:</strong> You estimate your model, make assumptions of your model error.</p>
 <ul>
 <li><p>You need to implement it on your own. <span class="math inline">\(y^s=x\hat b+\tilde e\)</span> for <span class="math inline">\(\tilde e \sim f(\hat \theta)\)</span></p></li>
 <li><p>It will not work well if the assumptions of the error modeling are wrong.</p></li>
 </ul></li>
+</ul>
+</section>
+<section id="section-14" class="slide level2">
+<h2></h2>
+<h3 class="scrollable" id="standard-bootstrap-2">Standard Bootstrap:</h3>
+<ul>
 <li><p><strong>Residual bootstrap:</strong> Estimate your model, obtain residuals. Re-sample residuals</p>
 <ul>
 <li>Again, implement it on your own. <span class="math inline">\(y^s = x\hat b+\tilde e\)</span> for <span class="math inline">\(\tilde e \sim {\hat e_1 , ... , \hat e_N}\)</span></li>
@@ -1052,24 +1192,39 @@ Linear regression                               Number of obs     =      1,434
 </ul></li>
 </ul>
 </section>
-<section id="section-4" class="slide level2 scrollable">
+<section id="section-15" class="slide level2">
 <h2></h2>
+<h3 id="wild-bootstrap">Wild Bootstrap</h3>
+<p>Then there are the more advanced (but faster) Bootstrap methods: WildBootstrap</p>
 <ul>
 <li><p><strong>UWild bootstrap</strong>: Estimate your model, obtain residuals, and re-sample residual weights.</p>
 <ul>
 <li><p>Again…on your own: <span class="math inline">\(y^s = x\hat b +\hat e * v\)</span> , where <span class="math inline">\(v \sim ff()\)</span> where <span class="math inline">\(ff()\)</span> is a “good” distribution function. <span class="math inline">\(E(v)=0 \ \&amp; \ Var(v)=1\)</span></p></li>
+<li><p>Re-estimate the model and obtain <span class="math inline">\(\hat \beta's\)</span>. Repeat and summarize.</p></li>
 <li><p>Actually quite flexible, and works well under heteroskedasticity!</p></li>
 <li><p>It can also allow clustered standard errors. The error <span class="math inline">\(v\)</span> no longer changes by individual, but by group. It also works well with weights.</p></li>
 </ul></li>
+</ul>
+</section>
+<section id="section-16" class="slide level2">
+<h2></h2>
+<h3 class="scrollable" id="wild-bootstrap-1">Wild Bootstrap:</h3>
+<ul>
 <li><p><strong>UWild bootstrap-2</strong> : Estimate your model, obtain Influence functions 😱 , and re-sample residual weights.</p>
 <ul>
 <li>This is an extension to the previous option. But with advantages
 <ul>
-<li><p>you do not need to -reestimate- the model. Just look into how the the mean of IF’s change.</p></li>
+<li><p>you do not need to <em>re-estimate</em> the model. Just look into how the the mean of IF’s change.</p></li>
 <li><p>it can be applied to linear and nonlinear model (if you know how to build the IF’s)</p></li>
 </ul></li>
 <li>Works well with clustered and weights.</li>
 </ul></li>
+</ul>
+</section>
+<section id="section-17" class="slide level2">
+<h2></h2>
+<h3 class="scrollable" id="wild-bootstrap-2">Wild Bootstrap:</h3>
+<ul>
 <li><p><strong>CWild bootstrap:</strong> Similar UWild Bootstrap, Obtain Influence functions under the Null (imposing restrictions), and use that to test the NULL.</p>
 <ul>
 <li><p>No, you do not need to do it on your own. <code>see bootest</code> in <code>Stata</code>.</p></li>
@@ -1079,45 +1234,47 @@ Linear regression                               Number of obs     =      1,434
 </section>
 <section id="how-to-bootstrap-in-stata" class="slide level2">
 <h2>How to Bootstrap? in <code>Stata</code></h2>
-<p>I have a few notes on Bootstrapping here <a href="https://friosavila.github.io/playingwithstata/main_bootstrap.html">Bootstrapping in Stata</a>. But let me give you the highlights for the most general case.</p>
+<p>I have a few notes on Bootstrapping here <a href="https://friosavila.github.io/stata_do/stata_do2.html">Bootstrapping in Stata</a>. But let me give you the highlights for the most general case.</p>
 <ol type="1">
 <li><p>Most (if not all commands) in <code>Stata</code> allow you to obtain bootstrap standard errors, by default. see:<code>help [cmd]</code></p>
 <p>they usually have the following syntax:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a href="#cb16-1"></a>[cmd] <span class="fu">y</span> x1 <span class="kw">x2</span> x3, <span class="kw">vce</span>(<span class="kw">bootstrap</span>, options)</span>
-<span id="cb16-2"><a href="#cb16-2"></a><span class="kw">regress</span> lnwage educ exper female, <span class="kw">vce</span>(<span class="kw">bootstrap</span>, reps(100))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource stata larger number-lines code-with-copy"><code class="sourceCode stata"><span id="cb21-1"><a></a>[cmd] <span class="fu">y</span> x1 <span class="kw">x2</span> x3, <span class="kw">vce</span>(<span class="kw">bootstrap</span>, options)</span>
+<span id="cb21-2"><a></a><span class="kw">regress</span> lnwage educ exper female, <span class="kw">vce</span>(<span class="kw">bootstrap</span>, reps(100))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>However, you can also Bootstrap that commands that do not have their own <code>bootstrap</code> option.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">bootstrap</span>:[cmd] <span class="fu">y</span> x1 <span class="kw">x2</span> x3, </span>
-<span id="cb17-2"><a href="#cb17-2"></a><span class="kw">bootstrap</span>, reps(100):<span class="kw">regress</span> lnwage educ exper female</span>
-<span id="cb17-3"><a href="#cb17-3"></a><span class="kw">bootstrap</span>, reps(100) <span class="kw">cluster</span>(isco):<span class="kw">regress</span> lnwage educ exper female</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource stata larger number-lines code-with-copy"><code class="sourceCode stata"><span id="cb22-1"><a></a><span class="kw">bootstrap</span>:[cmd] <span class="fu">y</span> x1 <span class="kw">x2</span> x3, </span>
+<span id="cb22-2"><a></a><span class="kw">bootstrap</span>, reps(100):<span class="kw">regress</span> lnwage educ exper female</span>
+<span id="cb22-3"><a></a><span class="kw">bootstrap</span>, reps(100) <span class="kw">cluster</span>(isco):<span class="kw">regress</span> lnwage educ exper female</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ol>
 </section>
-<section id="section-5" class="slide level2 scrollable">
+<section id="section-18" class="slide level2 scrollable">
 <h2></h2>
 <ol start="3" type="1">
 <li>This last command may allow you to bootstrap multiple models at the same time, although it does require a bit of programming. (and a do file)</li>
 </ol>
-<div id="66007309" class="cell" data-execution_count="8">
+<div id="eb19a517" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">gen</span> tchild = kids6 + kids714</span>
-<span id="cb18-2"><a href="#cb18-2"></a><span class="kw">capture</span> <span class="kw">program</span> <span class="kw">drop</span> bs_wages_children</span>
-<span id="cb18-3"><a href="#cb18-3"></a><span class="kw">program</span> bs_wages_children, <span class="kw">eclass</span> <span class="co">// eclass is for things like equations</span></span>
-<span id="cb18-4"><a href="#cb18-4"></a>    ** Estimate first <span class="kw">model</span></span>
-<span id="cb18-5"><a href="#cb18-5"></a>    <span class="kw">reg</span> lnwage educ exper female</span>
-<span id="cb18-6"><a href="#cb18-6"></a>    <span class="fu">matrix</span> b1 = <span class="fu">e</span>(b)</span>
-<span id="cb18-7"><a href="#cb18-7"></a>    <span class="fu">matrix</span> <span class="ot">coleq</span> b1 = lnwage</span>
-<span id="cb18-8"><a href="#cb18-8"></a>    ** Estimate second <span class="kw">model</span></span>
-<span id="cb18-9"><a href="#cb18-9"></a>    <span class="kw">reg</span> tchild educ exper female</span>
-<span id="cb18-10"><a href="#cb18-10"></a>    <span class="fu">matrix</span> b2 = <span class="fu">e</span>(b)</span>
-<span id="cb18-11"><a href="#cb18-11"></a>    <span class="fu">matrix</span> <span class="ot">coleq</span> b2 = tchild</span>
-<span id="cb18-12"><a href="#cb18-12"></a>    ** Put things together and <span class="kw">post</span></span>
-<span id="cb18-13"><a href="#cb18-13"></a>    <span class="fu">matrix</span> b = b1 , b2</span>
-<span id="cb18-14"><a href="#cb18-14"></a>    <span class="kw">ereturn</span> <span class="kw">post</span> b</span>
-<span id="cb18-15"><a href="#cb18-15"></a><span class="kw">end</span></span>
-<span id="cb18-16"><a href="#cb18-16"></a><span class="kw">bootstrap</span>: bs_wages_children</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><a></a>frause oaxaca, <span class="kw">clear</span></span>
+<span id="cb23-2"><a></a><span class="kw">gen</span> tchild = kids6 + kids714</span>
+<span id="cb23-3"><a></a><span class="kw">capture</span> <span class="kw">program</span> <span class="kw">drop</span> bs_wages_children</span>
+<span id="cb23-4"><a></a><span class="kw">program</span> bs_wages_children, <span class="kw">eclass</span> <span class="co">// eclass is for things like equations</span></span>
+<span id="cb23-5"><a></a>    ** Estimate first <span class="kw">model</span></span>
+<span id="cb23-6"><a></a>    <span class="kw">reg</span> lnwage educ exper female</span>
+<span id="cb23-7"><a></a>    <span class="fu">matrix</span> b1 = <span class="fu">e</span>(b)</span>
+<span id="cb23-8"><a></a>    <span class="fu">matrix</span> <span class="ot">coleq</span> b1 = lnwage</span>
+<span id="cb23-9"><a></a>    ** Estimate second <span class="kw">model</span></span>
+<span id="cb23-10"><a></a>    <span class="kw">reg</span> tchild educ exper female</span>
+<span id="cb23-11"><a></a>    <span class="fu">matrix</span> b2 = <span class="fu">e</span>(b)</span>
+<span id="cb23-12"><a></a>    <span class="fu">matrix</span> <span class="ot">coleq</span> b2 = tchild</span>
+<span id="cb23-13"><a></a>    ** Put things together and <span class="kw">post</span></span>
+<span id="cb23-14"><a></a>    <span class="fu">matrix</span> b = b1 , b2</span>
+<span id="cb23-15"><a></a>    <span class="kw">ereturn</span> <span class="kw">post</span> b</span>
+<span id="cb23-16"><a></a><span class="kw">end</span></span>
+<span id="cb23-17"><a></a><span class="kw">bootstrap</span>: bs_wages_children</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>
+<pre><code>(Excerpt from the Swiss Labor Market Survey 1998)
+
 (running bs_wages_children on estimation sample)
 
 warning: bs_wages_children does not set e(sample), so no observations will be
@@ -1125,11 +1282,10 @@ warning: bs_wages_children does not set e(sample), so no observations will be
          reasons. To exclude observations, press Break, save the data, drop
          any observations that are to be excluded, and rerun bootstrap.
 
-Bootstrap replications (50)
-----+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5 
-..................................................    50
+Bootstrap replications (50): .........10.........20.........30.........40......
+&gt; ...50 done
 
-Bootstrap results                                        Number of obs = 1,434
+Bootstrap results                                        Number of obs = 1,647
                                                          Replications  =    50
 
 ------------------------------------------------------------------------------
@@ -1137,20 +1293,84 @@ Bootstrap results                                        Number of obs = 1,434
              | coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
 -------------+----------------------------------------------------------------
 lnwage       |
-        educ |   .0858252   .0058256    14.73   0.000     .0744072    .0972431
-       exper |   .0147343   .0011288    13.05   0.000      .012522    .0169466
-      female |  -.0949227   .0283363    -3.35   0.001     -.150461   -.0393845
-       _cons |    2.21885   .0826592    26.84   0.000     2.056841    2.380859
+        educ |   .0858252   .0062606    13.71   0.000     .0735547    .0980957
+       exper |   .0147343    .001283    11.48   0.000     .0122196     .017249
+      female |  -.0949227   .0305222    -3.11   0.002    -.1547452   -.0351003
+       _cons |    2.21885   .0855954    25.92   0.000     2.051086    2.386614
 -------------+----------------------------------------------------------------
 tchild       |
-        educ |   .0177854   .0091641     1.94   0.052     -.000176    .0357468
-       exper |  -.0047747   .0017288    -2.76   0.006     -.008163   -.0013864
-      female |  -.1306332   .0457432    -2.86   0.004    -.2202883   -.0409781
-       _cons |   .4163459   .1156959     3.60   0.000     .1895861    .6431058
+        educ |   .0177854   .0087606     2.03   0.042      .000615    .0349558
+       exper |  -.0047747   .0017462    -2.73   0.006    -.0081972   -.0013522
+      female |  -.1306332   .0395711    -3.30   0.001    -.2081911   -.0530753
+       _cons |   .4163459   .1201824     3.46   0.001     .1807927    .6518991
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
 <p>Why does it matter? because you may want to test coefficients individually, or across models. This is only possible if the FULL system is estimated jointly</p>
+</section>
+<section id="section-19" class="slide level2">
+<h2></h2>
+<h3 id="what-about-wild-bootstrap">What about Wild Bootstrap?</h3>
+<ul>
+<li><p>Wildbootstrap is available using <code>boottest</code> (<code>ssc install bootest</code>)</p></li>
+<li><p>And in <code>Stata18+</code>, you have <code>wildbootstrap</code> (although is meant for clustered SE)</p></li>
+</ul>
+<div id="333ba92b" class="cell" data-execution_count="13">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb25-1"><a></a>frause oaxaca, <span class="kw">clear</span></span>
+<span id="cb25-2"><a></a><span class="kw">regress</span> lnwage educ exper female, <span class="kw">robust</span></span>
+<span id="cb25-3"><a></a>boottest educ, nograph</span>
+<span id="cb25-4"><a></a>boottest exper, nograph</span>
+<span id="cb25-5"><a></a>boottest female, nograph</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Excerpt from the Swiss Labor Market Survey 1998)
+
+Linear regression                               Number of obs     =      1,434
+                                                F(3, 1430)        =      97.11
+                                                Prob &gt; F          =     0.0000
+                                                R-squared         =     0.2217
+                                                Root MSE          =     .46897
+
+------------------------------------------------------------------------------
+             |               Robust
+      lnwage | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        educ |   .0858252   .0060342    14.22   0.000     .0739883     .097662
+       exper |   .0147343    .001354    10.88   0.000     .0120783    .0173903
+      female |  -.0949227   .0254309    -3.73   0.000    -.1448086   -.0450369
+       _cons |    2.21885   .0830438    26.72   0.000     2.055949    2.381751
+------------------------------------------------------------------------------
+
+Wild bootstrap-t, null imposed, 999 replications, Wald test, Rademacher weights
+&gt; :
+  educ
+
+                         t(1430) =    14.2231
+                        Prob&gt;|t| =     0.0000
+
+95% confidence set for null hypothesis expression: [.07399, .09766]
+
+Wild bootstrap-t, null imposed, 999 replications, Wald test, Rademacher weights
+&gt; :
+  exper
+
+                         t(1430) =    10.8822
+                        Prob&gt;|t| =     0.0000
+
+95% confidence set for null hypothesis expression: [.01208, .01739]
+
+Wild bootstrap-t, null imposed, 999 replications, Wald test, Rademacher weights
+&gt; :
+  female
+
+                         t(1430) =    -3.7326
+                        Prob&gt;|t| =     0.0000
+
+95% confidence set for null hypothesis expression: [−.1433, −.04703]</code></pre>
+</div>
+</div>
 </section>
 <section id="final-words-on-bootstrap" class="slide level2 scrollable">
 <h2>Final words on Bootstrap:</h2>
@@ -1184,10 +1404,10 @@ tchild       |
 </ul>
 </div>
 </section>
-<section id="section-6" class="slide level2 scrollable">
+<section id="section-20" class="slide level2 scrollable">
 <h2></h2>
 <ul>
-<li><p>The <strong>Delta method</strong> uses the linear approximations to approximate the distribution of otherwise not known distributions.</p></li>
+<li><p>The <strong>Delta method</strong> uses the linear approximations to <em>approximate</em> the otherwise not known distributions.</p></li>
 <li><p>Further, It relies on the fact that linear transformations a normal distribution, is on itself normal. For example:</p></li>
 </ul>
 <p><span class="math display">\[
@@ -1207,7 +1427,7 @@ Var(g(\hat \theta)) \simeq  Var \left(g(\theta)+ g'(\hat\theta) (\hat \theta-\th
 <h2>Delta Method: Visualization</h2>
 
 <img data-src="resources/dm.png" class="r-stretch"></section>
-<section id="section-7" class="slide level2">
+<section id="section-21" class="slide level2">
 <h2></h2>
 <p>It can go multivariate as well:<br>
 <span class="math display">\[
@@ -1218,6 +1438,89 @@ g(\hat \theta, \hat \gamma)-g(\theta,\gamma) &amp;\simeq N(0,\nabla g ' \Sigma \
   \end{matrix}]
 \end{aligned}  
 \]</span></p>
+<p>Although you need to get the partial derivatives of <span class="math inline">\(g(\theta,\gamma)\)</span></p>
+</section>
+<section id="section-22" class="slide level2">
+<h2></h2>
+<h3 id="example">Example</h3>
+<ul>
+<li><p>Say that you obtain the mean standard error for averages wages for men and women, along with the correlation between the two.</p></li>
+<li><p>however, you are insterested in estimating the wage ratio, and its variance. How do you do this?</p></li>
+</ul>
+<p><span class="math display">\[R = \frac{ \mu_f}{\mu_m}\]</span></p>
+<ul>
+<li>Need to obtain the Gradients <span class="math inline">\(g\)</span></li>
+</ul>
+<p><span class="math display">\[g = \begin{bmatrix}
+    \frac{ \partial R}{\partial \mu_f} \\
+    \frac{ \partial R}{\partial \mu_m}
+    \end{bmatrix} =
+\begin{bmatrix}    
+\frac{1}{\mu_m} \\  -\frac{\mu_f}{\mu_m^2}
+\end{bmatrix}
+\]</span></p>
+<p>Then the variance of <span class="math inline">\(R\)</span> is:</p>
+<p><span class="math display">\[Var(R) = g' \Sigma_\mu g\]</span></p>
+</section>
+<section id="section-23" class="slide level2">
+<h2></h2>
+<h3 class="scrollable" id="example-in-stata">Example in <code>Stata</code></h3>
+<div id="ff846bd4" class="cell larger" data-execution_count="14">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb27-1"><a></a>frause oaxaca, <span class="kw">clear</span></span>
+<span id="cb27-2"><a></a><span class="kw">gen</span> wage = <span class="fu">exp</span>(lnwage)</span>
+<span id="cb27-3"><a></a><span class="kw">mean</span> wage, <span class="bn">over</span>(female)</span>
+<span id="cb27-4"><a></a><span class="kw">mata</span>:</span>
+<span id="cb27-5"><a></a>  mu = st_matrix(<span class="st">"e(b)"</span>)</span>
+<span id="cb27-6"><a></a>  vcv = st_matrix(<span class="st">"e(V)"</span>)</span>
+<span id="cb27-7"><a></a>  dg = 1/mu[2] \ -mu[1]/mu[2]^2</span>
+<span id="cb27-8"><a></a>  var_r = dg'*vcv*dg</span>
+<span id="cb27-9"><a></a>  <span class="fu">sqrt</span>(var_r)</span>
+<span id="cb27-10"><a></a><span class="kw">end</span></span>
+<span id="cb27-11"><a></a><span class="kw">nlcom</span> _b[ c.wage@0.female]/_b[ c.wage@1.female] </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Excerpt from the Swiss Labor Market Survey 1998)
+(213 missing values generated)
+
+Mean estimation                           Number of obs = 1,434
+
+---------------------------------------------------------------
+              |       Mean   Std. err.     [95% conf. interval]
+--------------+------------------------------------------------
+c.wage@female |
+           0  |   34.33619   .5175882      33.32088    35.35151
+           1  |   30.25354   .6805642      28.91853    31.58855
+---------------------------------------------------------------
+
+. mata:
+------------------------------------------------- mata (type end to exit) -----
+:   mu = st_matrix("e(b)")
+
+:   vcv = st_matrix("e(V)")
+
+:   dg = 1/mu[2] \ -mu[1]/mu[2]^2
+
+:   var_r = dg'*vcv*dg
+
+:   sqrt(var_r)
+  .0307332119
+
+: end
+-------------------------------------------------------------------------------
+
+. 
+
+       _nl_1: _b[ c.wage@0.female]/_b[ c.wage@1.female]
+
+------------------------------------------------------------------------------
+        Mean | Coefficient  Std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       _nl_1 |   1.134948   .0307332    36.93   0.000     1.074712    1.195184
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
 </section>
 <section id="so-why-do-we-care" class="slide level2 scrollable">
 <h2>So why do we care:</h2>
@@ -1244,37 +1547,34 @@ Var(R\beta)  = \nabla (R\beta)' Var(\beta) R \nabla (R\beta)'= R' Var(\beta) R
 <section id="linear-model-selection-and-regularization" class="title-slide slide level1 center">
 <h1>Linear Model Selection and Regularization</h1>
 
-<img data-src="https://www.atakanekiz.com/en/technical/understanding-lasso-and-ridge-regression/featured.jpg" class="quarto-figure-center r-stretch"></section>
+<img data-src="https://www.atakanekiz.com/en/technical/understanding-lasso-and-ridge-regression/featured.jpg" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="what-happens-when-k-is-too-big" class="slide level2 scrollable">
 <h2>What happens when K is too big?</h2>
-<div>
 <ul>
-<li class="fragment"><p>How many variables (max) can you use in a model?</p>
+<li><p>How many variables (max) can you use in a model?</p>
 <ul>
-<li class="fragment"><span class="math display">\[max \ k = rank(X'X)\]</span></li>
+<li><span class="math display">\[max \ k = rank(X'X)\]</span></li>
 </ul></li>
-<li class="fragment"><p>What happens when you add too many variables in a model?</p>
+<li><p>What happens when you add too many variables in a model?</p>
 <ul>
-<li class="fragment"><p>Increase Multicolinearity and coefficient variance (too much noise)</p></li>
-<li class="fragment"><p>R2 overly large (without explaining much)</p></li>
-<li class="fragment"><p>Far more difficult to interpret (too many factors)</p></li>
-<li class="fragment"><p>May introduce endogeneity (when it wasnt a problem before)</p></li>
+<li><p>Increase Multicolinearity and coefficient variance (too much noise)</p></li>
+<li><p>R2 overly large (without explaining much)</p></li>
+<li><p>Far more difficult to interpret (too many factors)</p></li>
+<li><p>May introduce endogeneity (when it wasnt a problem before)</p></li>
 </ul></li>
-<li class="fragment"><p>How can you solve the problem?</p>
+<li><p>How can you solve the problem?</p>
 <ul>
-<li class="fragment">You select only a few of the variables, based on theory, and contribution to the model</li>
+<li>You select only a few of the variables, based on theory, and contribution to the model</li>
 </ul></li>
-<li class="fragment"><p>What if you can’t choose?</p></li>
+<li><p>What if you can’t choose?</p></li>
 </ul>
-</div>
 </section>
 <section id="ml-we-let-the-choose-for-you" class="slide level2 scrollable">
 <h2>ML: We let the 💻Choose for you</h2>
 <blockquote>
 <p>Before we start. The methodology we will discuss are usually meant to get models with “good” predictive power, and some times better interpretability, not so much stat-inference (although its possible)</p>
 </blockquote>
-<p>When you do not know how to choose, you could try select a subset of variables from your model such that you maximize the predictive power of the model.</p>
-<p>This should go beyond IN sample predictive power, but instead maximize Out of sample predictive power.</p>
+<p>When you do not know how to choose, you could try select a subset of variables from your model such that you maximize <strong>out-of-sample</strong> predictive power</p>
 <p>This is typically achieved using the following:</p>
 <p><span class="math display">\[
 AR^2 = 1-\frac{SSR}{SST}\frac{n-1}{n-k-1} \\
@@ -1294,7 +1594,10 @@ SSR = \sum_i(y_i - X_i \beta)^2
 \]</span></p>
 <ul>
 <li><p>This has the restrictions of mentioned before (<span class="math inline">\(k &lt; N\)</span>). In addition to letting coefficents vary “too much”</p></li>
-<li><p>An alternative is to use <strong>Ridge</strong> regression, which instead Minimizes the following:</p></li>
+<li><p>An alternative is to Impose additional restrictions so that coefficients do not vary as much. This is known as <strong>Regularization</strong>.</p></li>
+<li><h2 id="section-24"></h2>
+<h3 id="ridge-regression">Ridge Regression</h3></li>
+<li><p>One such approach is <strong>Ridge</strong> regression, which minimizes the following:</p></li>
 </ul>
 <p><span class="math display">\[
 rSS = \sum_i(y_i - X_i \beta)^2+ \lambda \sum_{k=1}^K\beta_k^2
@@ -1304,7 +1607,7 @@ rSS = \sum_i(y_i - X_i \beta)^2+ \lambda \sum_{k=1}^K\beta_k^2
 <li><p>If <span class="math inline">\(\lambda = 0\)</span> you get Standard OLS, and if <span class="math inline">\(\lambda \rightarrow \infty\)</span> , you get a situation where all betas (but the constant) are zero. For intermediate values, you may have better models than OLS, because you can balance Bias (when <span class="math inline">\(\beta's\)</span> are zero) with increase variance (when all <span class="math inline">\(\beta's\)</span> vary as they “please”)</p></li>
 </ul>
 </section>
-<section id="section-8" class="slide level2 scrollable">
+<section id="section-25" class="slide level2 scrollable">
 <h2></h2>
 <ul>
 <li>We usually start with Ridge, because is relatively Easy to implement, since it has a close form Solution:</li>
@@ -1312,31 +1615,32 @@ rSS = \sum_i(y_i - X_i \beta)^2+ \lambda \sum_{k=1}^K\beta_k^2
 <p><span class="math display">\[
 \beta = (X'X + \lambda I)^{-1}{X'y}
 \]</span></p>
-<div id="07dc9971" class="cell" data-execution_count="9">
+<div id="4e95cbc0" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb20-1"><a href="#cb20-1"></a>frause oaxaca, <span class="kw">clear</span></span>
-<span id="cb20-2"><a href="#cb20-2"></a><span class="kw">keep</span> <span class="kw">if</span> lnwage!=.</span>
-<span id="cb20-3"><a href="#cb20-3"></a><span class="kw">gen</span> male = 1-female</span>
-<span id="cb20-4"><a href="#cb20-4"></a><span class="kw">mata</span>:</span>
-<span id="cb20-5"><a href="#cb20-5"></a>    <span class="fu">y</span> = st_data(.,<span class="st">"lnwage"</span>)</span>
-<span id="cb20-6"><a href="#cb20-6"></a>    x = st_data(.,<span class="st">"educ exper female male"</span>),<span class="fu">J</span>(1434,1,1)</span>
-<span id="cb20-7"><a href="#cb20-7"></a>    i0 = <span class="fu">I</span>(5);i0[5,5]=0</span>
-<span id="cb20-8"><a href="#cb20-8"></a>    xx = (<span class="kw">cross</span>(x,x)) ; xy = (<span class="kw">cross</span>(x,<span class="fu">y</span>))</span>
-<span id="cb20-9"><a href="#cb20-9"></a>    bb0 = <span class="fu">invsym</span>(xx)*xy </span>
-<span id="cb20-10"><a href="#cb20-10"></a>    bb1 = <span class="fu">invsym</span>(xx:+i0*1)*xy </span>
-<span id="cb20-11"><a href="#cb20-11"></a>    bb10 = <span class="fu">invsym</span>(xx:+i0*10)*xy </span>
-<span id="cb20-12"><a href="#cb20-12"></a>    bb100 = <span class="fu">invsym</span>(xx:+i0*100)*xy </span>
-<span id="cb20-13"><a href="#cb20-13"></a>    bb1000 = <span class="fu">invsym</span>(xx:+i0*1000)*xy </span>
-<span id="cb20-14"><a href="#cb20-14"></a>    bb0,bb1,bb10,bb100,bb1000</span>
-<span id="cb20-15"><a href="#cb20-15"></a><span class="kw">end</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb29-1"><a></a><span class="kw">set</span> <span class="dv">linesize</span> 255</span>
+<span id="cb29-2"><a></a>frause oaxaca, <span class="kw">clear</span></span>
+<span id="cb29-3"><a></a><span class="kw">keep</span> <span class="kw">if</span> lnwage!=.</span>
+<span id="cb29-4"><a></a><span class="kw">gen</span> male = 1-female</span>
+<span id="cb29-5"><a></a><span class="kw">mata</span>:</span>
+<span id="cb29-6"><a></a>    <span class="fu">y</span> = st_data(.,<span class="st">"lnwage"</span>)</span>
+<span id="cb29-7"><a></a>    x = st_data(.,<span class="st">"educ exper female male"</span>),<span class="fu">J</span>(1434,1,1)</span>
+<span id="cb29-8"><a></a>    i0 = <span class="fu">I</span>(5);i0[5,5]=0</span>
+<span id="cb29-9"><a></a>    xx = (<span class="kw">cross</span>(x,x)) ; xy = (<span class="kw">cross</span>(x,<span class="fu">y</span>))</span>
+<span id="cb29-10"><a></a>    bb0 = <span class="fu">invsym</span>(xx)*xy </span>
+<span id="cb29-11"><a></a>    bb1 = <span class="fu">invsym</span>(xx:+i0*1)*xy </span>
+<span id="cb29-12"><a></a>    bb10 = <span class="fu">invsym</span>(xx:+i0*10)*xy </span>
+<span id="cb29-13"><a></a>    bb100 = <span class="fu">invsym</span>(xx:+i0*100)*xy </span>
+<span id="cb29-14"><a></a>    bb1000 = <span class="fu">invsym</span>(xx:+i0*1000)*xy </span>
+<span id="cb29-15"><a></a>    bb0,bb1,bb10,bb100,bb1000</span>
+<span id="cb29-16"><a></a><span class="kw">end</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Excerpt from the Swiss Labor Market Survey 1998)
 (213 observations deleted)
 
 . mata:
-------------------------------------------------- mata (type end to exit) -----
+------------------------------------------------- mata (type end to exit) -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 :     y = st_data(.,"lnwage")
 
 :     x = st_data(.,"educ exper female male"),J(1434,1,1)
@@ -1356,25 +1660,17 @@ rSS = \sum_i(y_i - X_i \beta)^2+ \lambda \sum_{k=1}^K\beta_k^2
 :     bb1000 = invsym(xx:+i0*1000)*xy
 
 :     bb0,bb1,bb10,bb100,bb1000
-                  1              2              3              4
-    +-------------------------------------------------------------
-  1 |   .0858251775    .0858183338    .0857563567    .0851046501
-  2 |   .0147342796    .0147345813    .0147372042    .0147554544
-  3 |  -.0949227416    -.047396817   -.0468240416    -.041806663
-  4 |             0     .047396817    .0468240416     .041806663
-  5 |   2.218849962    2.171466638    2.172174327    2.179690914
-    +-------------------------------------------------------------
-                  5
-     ----------------+
-  1     .0778292498  |
-  2     .0146298058  |
-  3    -.0208062854  |
-  4     .0208062854  |
-  5     2.266275433  |
-     ----------------+
+                  1              2              3              4              5
+    +----------------------------------------------------------------------------+
+  1 |   .0858251775    .0858183338    .0857563567    .0851046501    .0778292498  |
+  2 |   .0147342796    .0147345813    .0147372042    .0147554544    .0146298058  |
+  3 |  -.0949227416    -.047396817   -.0468240416    -.041806663   -.0208062854  |
+  4 |             0     .047396817    .0468240416     .041806663    .0208062854  |
+  5 |   2.218849962    2.171466638    2.172174327    2.179690914    2.266275433  |
+    +----------------------------------------------------------------------------+
 
 : end
--------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 . </code></pre>
 </div>
@@ -1396,10 +1692,6 @@ LSS = \sum_i(y_i - X_i \beta)^2+ \lambda \sum_{k=1}^K |\beta_k|
 eSS = \sum_i(y_i - X_i \beta)^2+ \lambda_L \sum_{k=1}^K |\beta_k| +
 \lambda_r \sum_{k=1}^K \beta_k^2
 \]</span></p>
-<ul>
-<li><p>Lasso has the advantage of forcing some coefficients exactly to zero, when <span class="math inline">\(\lambda\)</span> is sufficiently large.</p></li>
-<li><p>Elastic net tries to use the benefits from both approaches.</p></li>
-</ul>
 </section>
 <section id="lasso-vs-ridge" class="slide level2">
 <h2>Lasso vs Ridge</h2>
@@ -1418,31 +1710,25 @@ eSS = \sum_i(y_i - X_i \beta)^2+ \lambda_L \sum_{k=1}^K |\beta_k| +
 </section>
 <section id="brief-example" class="slide level2">
 <h2>Brief Example:</h2>
-<div id="744fbaf1" class="cell" data-execution_count="10">
+<div id="39140dff" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb22-1"><a href="#cb22-1"></a>frause oaxaca, <span class="kw">clear</span></span>
-<span id="cb22-2"><a href="#cb22-2"></a><span class="kw">keep</span> <span class="kw">if</span> lnwage!=.</span>
-<span id="cb22-3"><a href="#cb22-3"></a><span class="kw">qui</span>:<span class="kw">reg</span> lnwage i.age</span>
-<span id="cb22-4"><a href="#cb22-4"></a><span class="kw">predict</span> p_ols</span>
-<span id="cb22-5"><a href="#cb22-5"></a><span class="kw">qui</span>:elasticnet linear lnwage i.age, selection(cv, alllambdas)  <span class="kw">alpha</span>(0)</span>
-<span id="cb22-6"><a href="#cb22-6"></a><span class="kw">predict</span> p_ridge</span>
-<span id="cb22-7"><a href="#cb22-7"></a><span class="kw">qui</span>:lasso linear lnwage i.age, selection(cv, alllambdas)  </span>
-<span id="cb22-8"><a href="#cb22-8"></a><span class="kw">predict</span> p_lasso</span>
-<span id="cb22-9"><a href="#cb22-9"></a><span class="kw">qui</span>:elasticnet linear lnwage i.age, selection(cv, alllambdas)   </span>
-<span id="cb22-10"><a href="#cb22-10"></a><span class="kw">predict</span> p_elastic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb31-1"><a></a><span class="kw">qui</span> {</span>
+<span id="cb31-2"><a></a>frause oaxaca, <span class="kw">clear</span></span>
+<span id="cb31-3"><a></a><span class="kw">keep</span> <span class="kw">if</span> lnwage!=.</span>
+<span id="cb31-4"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> lnwage i.age</span>
+<span id="cb31-5"><a></a><span class="kw">predict</span> p_ols</span>
+<span id="cb31-6"><a></a><span class="kw">qui</span>:elasticnet linear lnwage i.age, selection(cv, alllambdas)  <span class="kw">alpha</span>(0)</span>
+<span id="cb31-7"><a></a><span class="kw">predict</span> p_ridge</span>
+<span id="cb31-8"><a></a><span class="kw">qui</span>:lasso linear lnwage i.age, selection(cv, alllambdas)  </span>
+<span id="cb31-9"><a></a><span class="kw">predict</span> p_lasso</span>
+<span id="cb31-10"><a></a><span class="kw">qui</span>:elasticnet linear lnwage i.age, selection(cv, alllambdas)   </span>
+<span id="cb31-11"><a></a><span class="kw">predict</span> p_elastic</span>
+<span id="cb31-12"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>(Excerpt from the Swiss Labor Market Survey 1998)
-(213 observations deleted)
-(option xb assumed; fitted values)
-(options xb penalized assumed; linear prediction with penalized coefficients)
-(options xb penalized assumed; linear prediction with penalized coefficients)
-(options xb penalized assumed; linear prediction with penalized coefficients)</code></pre>
-</div>
 </div>
 
-<img data-src="resources/image-1604739776.png" class="quarto-figure-center r-stretch"></section>
+<img data-src="resources/image-1604739776.png" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="shrinking-coefficients" class="slide level2">
 <h2>Shrinking Coefficients</h2>
 
@@ -1450,8 +1736,10 @@ eSS = \sum_i(y_i - X_i \beta)^2+ \lambda_L \sum_{k=1}^K |\beta_k| +
 <section id="next-non-semi-parametric-models" class="title-slide slide level1 center">
 <h1>Next: Non &amp; Semi Parametric models</h1>
 
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 </section>
     </div>
@@ -1630,7 +1918,7 @@ eSS = \sum_i(y_i - X_i \beta)^2+ \lambda_L \sum_{k=1}^K |\beta_k| +
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1500,
+        width: 1600,
 
         height: 900,
 

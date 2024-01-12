@@ -2832,21 +2832,21 @@
     "href": "adv_class/02OLS.html#introduction",
     "title": "Linear Regression Model",
     "section": "Introduction",
-    "text": "Introduction\n\nLinear Regression (usually estimated via OLS) is the most basic, and still most useful, tool for analyzing data.\nThe goal is to find what the relationship between the outcome \\(y\\) and explanatory variables \\(X's\\) is.\nSay that we start with a very simple “model” that states tries to describe the population function as the following:\n\n\\[\ny = h(X,\\varepsilon)\n\\]\nHere, \\(X\\) represents a set of observed covariates and \\(\\varepsilon\\) the set of unobserved characteristics, and for now, we assume that there is no pre-define relationship between these components.\n\nFor now, we will make standard exogeneity assumptions for the identification of the model"
+    "text": "Introduction\n\nLinear Regression is the most basic, and still most useful, tool for analyzing data.\nThe goal is to find what the relationship between the outcome \\(y\\) and explanatory variables \\(X's\\) is.\nSay that we start with a very simple “model” that states tries to describe the population function as the following:\n\n\\[\ny = h(X,\\varepsilon)\n\\]\nHere, \\(X\\) represents a set of observed covariates and \\(\\varepsilon\\) the set of unobserved characteristics, with no no pre-defined relationship between these components.\n\nFor now, we will make standard exogeneity assumptions for the identification of the model"
   },
   {
     "objectID": "adv_class/02OLS.html#estimation",
     "href": "adv_class/02OLS.html#estimation",
     "title": "Linear Regression Model",
     "section": "Estimation",
-    "text": "Estimation\n\nThe functional form, however, is unknowable. However, under the small assumption that \\(X\\) and \\(\\varepsilon\\) are unrelated, if we would have access to the population data, we could instead consider the Conditional Expectation function (CEF):\n\n\\[\nE(y_i|X_i=x) = \\int t f_y(t|X_i=x)dx\n\\]\n\nNotice that this implies a fully non-parametric estimation of the Linear function (because it does not impose any functional form).\nWith this, we can “decompose” the outcome \\(y\\) into two components, one that depends on observation characteristics (CEF) and one that depends on the error \\(\\varepsilon\\).\n\n\\[\ny = E(y|X) + \\varepsilon\n\\]\n\nThis has the nice property that the error is unrelated to any functional form of \\(X\\), while providing a summary of the relationship between \\(X\\) and \\(y\\)."
+    "text": "Estimation\n\nThe functional form is unknowable. However, under the small assumption of Exogeneity of \\(X\\), we could instead consider the Conditional Expectation function (CEF):\n\n\\[\nE(y_i|X_i=x) = \\int y f_{y|x}(y)dy\n\\]\n\nThis implies a fully non-parametric estimation of the Linear function.\nWith this, the outcome \\(y\\) can be decomposed into factors determined by observed characteristics (CEF) and on the error \\(\\varepsilon\\).\n\n\\[\ny = E(y|X) + \\varepsilon\n\\]"
   },
   {
     "objectID": "adv_class/02OLS.html#section",
     "href": "adv_class/02OLS.html#section",
     "title": "Linear Regression Model",
     "section": "",
-    "text": "The CEF is a convenient abstract, but to estimate it, we require assumptions. (Recall the assumptions for unbiased OLS?)\nNamely, we need to impose a linearity assumption, namely:\n\n\\[\nE(y_i|X_i=x) = \\beta_0 + \\beta_1 x_1 +\\beta_2 x_2 + ... +\n\\beta_k x_k = X_i'\\beta\n\\]\n\nAnd the solution for \\(\\beta\\) is given by:\n\n\\[\n\\beta = \\underset{b}{arg} \\ E(L(y_i-X'_i b))\n\\]\nWhere the loss function \\(L(x)=x^2\\). (Square loss function)\n\nThis implies the following condition:\n\n\\[\nE[X_i (y_i-X_i'b)]=0 \\rightarrow \\beta = E[X_i'X_i]^{-1}E[X_i'y_i]\n\\]\n\nThis population terms must be substituted by the sample equivalent: \\(E(X_i) =\\frac{1}{N} \\sum_i^NX_i\\)"
+    "text": "The CEF is a convenient abstract, but to estimate it, we require assumptions. (Recall the assumptions for unbiased OLS?)\nNamely, we need to impose a linearity assumption, namely:\n\n\\[\nE(y_i|X_i=x) = \\beta_0 + \\beta_1 x_1 +\\beta_2 x_2 + ... +\n\\beta_k x_k = X_i'\\beta\n\\]\n\nAnd the solution for \\(\\beta\\) is given by:\n\n\\[\n\\beta = \\underset{b}{arg} \\ E(L(y_i-X'_i b))\n\\]\nWhere the loss function \\(L(x)=x^2\\). (Square loss function)\n\nThis implies the following condition: \\(E[X_i (y_i-X_i'b)]=0 \\rightarrow \\beta = E[X_i'X_i]^{-1}E[X_i'y_i]\\)"
   },
   {
     "objectID": "adv_class/02OLS.html#mata-ols-estimator",
@@ -2860,7 +2860,7 @@
     "href": "adv_class/02OLS.html#inference---distribution-of-betas",
     "title": "Linear Regression Model",
     "section": "Inference - Distribution of \\(\\beta's\\)",
-    "text": "Inference - Distribution of \\(\\beta's\\)\nso: \\[\n\\begin{aligned}\ny &= X\\beta + \\varepsilon \\\\\n\\sqrt N (\\hat\\beta - \\beta) &=\\frac{1}{N}\\Big[\\sum (X_iX_i')\\Big]^{-1} \\frac{1}{\\sqrt N} \\sum(X_i\\varepsilon_i)\n\\end{aligned}\n\\]\n\nHere \\(\\varepsilon\\) is the true population error. \\(\\hat\\beta\\) is unbiased if the second term has an expectation of Zero. (the error is independent from \\(X\\)).\nAsymptotically, the first term is assumed fixed \\(E(X_i X_i')\\). And, because \\(E(X_i\\varepsilon)=0\\), and \\(\\frac{1}{\\sqrt N} \\sum(X_i\\varepsilon)\\) is normalized, by CLT we have that:\n\n\\[\n\\sqrt N (\\hat\\beta-\\beta)\\sim N(0,E(X_iX_i')^{-1} \\ E(X_iX_i'\\varepsilon ^2) \\ E(X_iX_i')^{-1})\n\\]\n\nFrom here, the main question is : How do we estimate \\(E(X_iX'\\varepsilon_i^2)\\)?"
+    "text": "Inference - Distribution of \\(\\beta's\\)\nGiven the model and OLS estimator:\n\\[\\begin{aligned}\ny &= X\\beta + \\varepsilon \\\\\n\\hat \\beta &= (X'X)^{-1}X'y\n\\end{aligned}\n\\]\nIf we substitute \\(y\\) in the second equation, we get:\n\\[\\begin{aligned}\n\\hat \\beta &= (X'X)^{-1}X'( X\\beta + \\varepsilon) \\\\\n\\hat \\beta &= \\beta + (X'X)^{-1}X'\\varepsilon) \\\\\n\\hat \\beta - \\beta &=  (X'X)^{-1}X'\\varepsilon) \\\\\n\\end{aligned}\n\\]"
   },
   {
     "objectID": "adv_class/02OLS.html#inference-estimating-se",
@@ -2874,21 +2874,21 @@
     "href": "adv_class/02OLS.html#homoskedasticity-and-independent-samples",
     "title": "Linear Regression Model",
     "section": "Homoskedasticity and independent samples",
-    "text": "Homoskedasticity and independent samples\nThe easiest route is to assume homoskedastic errors \\(\\sigma^2 = \\sigma_i^2 \\ \\forall i \\in 1,...,N\\) . (the error is spread equally around the mean)\nWith independent samples \\(\\sigma_{ij}=0 \\ \\forall \\ i\\neq j\\) . (A persons unobserved is completely independent from anybody else)\n\\[\n\\Omega_00=\n\\left(\n\\begin{matrix}\n\\sigma_1^2 & \\sigma_{12} &  ... & \\sigma_{1N}\\\\\n\\sigma_{21} & \\sigma_{2}^2 & ... & \\sigma_{2N} \\\\\n...&...&...&...\\\\\n\\sigma_{N1} & \\sigma_{N2} & ... & \\sigma_{NN}^2 \\\\\n\\end{matrix}\n\\right)=I(N)*\\sigma^2\n\\]\nThus \\[\n\\begin{aligned}\nVar(\\hat\\beta)_{00} &=(X'X)^{-1} X'I(N)\\sigma^2 X (X'X)^{-1} \\\\\n&=\\sigma^2 (X'X)^{-1} \\\\\n\\sigma^2 &= E(\\varepsilon^2)\n\\end{aligned}\n\\]\n\n\nCode\nmata: e=err = y:-x*b\nmata: var_b_000 = mean(err:^2) * invsym(x'x)\nmata: b,sqrt(diagonal(var_b_000))\n\n\n                 1             2\n    +-----------------------------+\n  1 |  -.145393595   .0243547399  |\n  2 |  .0161424301   .0010962465  |\n  3 |  .0719321873    .005029506  |\n  4 |  1.970020725   .0724744138  |\n    +-----------------------------+"
+    "text": "Homoskedasticity and independent samples\nWith homoskedastic errors \\(\\sigma^2 = \\sigma_i^2 \\ \\forall i \\in 1,...,N\\) .\nWith independent samples \\(\\sigma_{ij}=0 \\ \\forall \\ i\\neq j\\) . \\[\n\\Omega_00=\n\\left(\n\\begin{matrix}\n\\sigma_1^2 & \\sigma_{12} &  ... & \\sigma_{1N}\\\\\n\\sigma_{21} & \\sigma_{2}^2 & ... & \\sigma_{2N} \\\\\n...&...&...&...\\\\\n\\sigma_{N1} & \\sigma_{N2} & ... & \\sigma_{NN}^2 \\\\\n\\end{matrix}\n\\right)=I(N)*\\sigma^2\n\\]\nThus \\[\n\\begin{aligned}\nVar(\\hat\\beta)_{00} &=(X'X)^{-1} X'I(N)\\sigma^2 X (X'X)^{-1} =\\sigma^2 (X'X)^{-1} \\\\\n\\sigma^2 &= E(\\varepsilon^2)\n\\end{aligned}\n\\]\n\n\nCode\nmata: e=err = y:-x*b\nmata: var_b_000 = mean(err:^2) * invsym(x'x)\nmata: b,sqrt(diagonal(var_b_000))\n\n\n                 1             2\n    +-----------------------------+\n  1 |  -.145393595   .0243547399  |\n  2 |  .0161424301   .0010962465  |\n  3 |  .0719321873    .005029506  |\n  4 |  1.970020725   .0724744138  |\n    +-----------------------------+"
   },
   {
     "objectID": "adv_class/02OLS.html#section-1",
     "href": "adv_class/02OLS.html#section-1",
     "title": "Linear Regression Model",
     "section": "",
-    "text": "But, \\(\\sigma^2\\) is not known, so we have to use \\(\\hat\\sigma^2\\) instead, which depends on the sample residuals: \\[\n\\hat\\sigma^2 = \\frac{1}{N-k-1}\\sum \\hat e^2\n\\]\nWhere we account for the fact true errors are not observed, but rather residuals are estimated, adjusting the degrees of freedom.\n\n\nCode\nmata:\n    N = rows(y); k = cols(x)\n    var_b_00 = sum(err:^2)/(N-k) * invsym(x'x)\n    b,sqrt(diagonal(var_b_00))\nend\n\n\n\n. mata:\n------------------------------------------------- mata (type end to exit) -----\n:     N = rows(y); k = cols(x)\n\n:     var_b_00 = sum(err:^2)/(N-k) * invsym(x'x)\n\n:     b,sqrt(diagonal(var_b_00))\n                 1             2\n    +-----------------------------+\n  1 |  -.145393595   .0243887787  |\n  2 |  .0161424301   .0010977786  |\n  3 |  .0719321873   .0050365354  |\n  4 |  1.970020725   .0725757058  |\n    +-----------------------------+\n\n: end\n-------------------------------------------------------------------------------\n\n."
+    "text": "Finally: \\[\n\\sqrt N (\\hat\\beta - \\beta) = {\\sqrt N}\\Big[\\frac{1}{N}\\sum (X_iX_i')\\Big]^{-1} \\frac{1}{N}\\sum(X_i\\varepsilon_i)\n\\]\n\nHere \\(\\varepsilon\\) is the true population error. \\(\\hat\\beta\\) is unbiased if the second term has an expectation of Zero. (the error is independent from \\(X\\)).\nThe first term is assumed fixed \\(E(X_i X_i')\\). And, because \\(E(X_i\\varepsilon)=0\\), and \\(\\frac{1}{\\sqrt N} \\sum(X_i\\varepsilon)\\) is normalized, by CLT we have that:\n\n\\[\n\\sqrt N (\\hat\\beta-\\beta)\\sim N(0,E(X_iX_i')^{-1} \\ E(X_iX_i'\\varepsilon_i ^2) \\ E(X_iX_i')^{-1})\n\\]\n\nFrom here, the main question is : How do we estimate \\(E(X_iX'\\varepsilon_i^2)\\)?"
   },
   {
     "objectID": "adv_class/02OLS.html#lifting-assumptions-heteroscedasticity",
     "href": "adv_class/02OLS.html#lifting-assumptions-heteroscedasticity",
     "title": "Linear Regression Model",
     "section": "Lifting Assumptions: Heteroscedasticity",
-    "text": "Lifting Assumptions: Heteroscedasticity\n\nWe start by lifting this assumption, which implies the following:\n\n\\[\n\\sigma^2_i \\neq \\sigma^2_j \\  \\forall \\ i\\neq j\n\\]\nBut to estimate this, we need an approximation for \\(\\sigma^2_i = E(\\varepsilon_i^2) = \\varepsilon_i^2\\).\n\nWith this, we can obtain what is known as th White or Eicker-White or Heteroskedasiticy Robust Standard errors.\n\n\\[\n\\begin{aligned}\nVar(\\hat\\beta)_{0} &= (X'X)^{-1} (X\\hat e)'(\\hat eX) (X'X)^{-1} \\\\\n&=(X'X)^{-1} \\sum(X_iX_i'\\hat e^2) (X'X)^{-1}\n\\end{aligned}\n\\]\nWhich imposes NO penalty to the fact that we are using residuals not errors. If we account for that however, we obtain what is known as HC1, SE, the standard in stata. (when you type robust)\n\\[\nVar(\\hat\\beta)_{1}=\\frac{N}{N-K-1}Var(\\hat\\beta)_{0}\n\\]\n\n\nCode\nmata:\n    ixx = invsym(x'x)\n    var_b_0 = ixx * (x:*e)'(x:*e) * ixx\n    var_b_1 = N/(N-k)*var_b_0\n    b,sqrt(diagonal(var_b_0)),sqrt(diagonal(var_b_1))\nend\n\n\n\n. mata:\n------------------------------------------------- mata (type end to exit) -----\n:     ixx = invsym(x'x)\n\n:     var_b_0 = ixx * (x:*e)'(x:*e) * ixx\n\n:     var_b_1 = N/(N-k)*var_b_0\n\n:     b,sqrt(diagonal(var_b_0)),sqrt(diagonal(var_b_1))\n                 1             2             3\n    +-------------------------------------------+\n  1 |  -.145393595   .0243162137   .0243501986  |\n  2 |  .0161424301   .0013544849   .0013563779  |\n  3 |  .0719321873    .005690214   .0056981668  |\n  4 |  1.970020725   .0875757052   .0876981032  |\n    +-------------------------------------------+\n\n: end\n-------------------------------------------------------------------------------\n\n."
+    "text": "Lifting Assumptions: Heteroscedasticity\n\nWe start by lifting this assumption, which implies the following:\n\n\\[\n\\sigma^2_i \\neq \\sigma^2_j \\  \\forall \\ i\\neq j\n\\]\nBut to estimate this, we need an approximation for \\(\\sigma^2_i = E(\\varepsilon_i^2) = \\varepsilon_i^2\\).\n\nWith this, we can obtain what is known as th White or Eicker-White or Heteroskedasiticy Robust Standard errors.\n\n\\[\n\\begin{aligned}\nVar(\\hat\\beta)_{0} &= (X'X)^{-1} (X \\cdot \\hat e)'(X \\cdot  \\hat e) (X'X)^{-1} \\\\\n&=(X'X)^{-1} \\sum(X_iX_i'\\hat e^2) (X'X)^{-1}\n\\end{aligned}\n\\]\nWhich imposes NO penalty to the fact that we are using residuals not errors. If we account for that however, we obtain what is known as HC1, SE, the standard in Stata. (when you type robust)\n\\[\nVar(\\hat\\beta)_{1}=\\frac{N}{N-K-1}Var(\\hat\\beta)_{0}\n\\]\n\n\nCode\nmata:\n    ixx = invsym(x'x)\n    var_b_0 = ixx * (x:*e)'(x:*e) * ixx\n    var_b_1 = N/(N-k)*var_b_0\n    b,sqrt(diagonal(var_b_0)),sqrt(diagonal(var_b_1))\nend\n\n\n\n. mata:\n------------------------------------------------- mata (type end to exit) -----\n:     ixx = invsym(x'x)\n\n:     var_b_0 = ixx * (x:*e)'(x:*e) * ixx\n\n:     var_b_1 = N/(N-k)*var_b_0\n\n:     b,sqrt(diagonal(var_b_0)),sqrt(diagonal(var_b_1))\n                 1             2             3\n    +-------------------------------------------+\n  1 |  -.145393595   .0243162137   .0243501986  |\n  2 |  .0161424301   .0013544849   .0013563779  |\n  3 |  .0719321873    .005690214   .0056981668  |\n  4 |  1.970020725   .0875757052   .0876981032  |\n    +-------------------------------------------+\n\n: end\n-------------------------------------------------------------------------------\n\n."
   },
   {
     "objectID": "adv_class/02OLS.html#but-error-is-not-the-same-as-residual",
@@ -2902,14 +2902,14 @@
     "href": "adv_class/02OLS.html#coding-robust-se",
     "title": "Linear Regression Model",
     "section": "Coding Robust SE",
-    "text": "Coding Robust SE\n\n\nCode\nmata:\n    // h = diagonal(X invsym(X'x) X') Wrong Way, too many calculations\n    h = rowsum(x*invsym(x'x):*x)\n    psi0 = e:^2           ;   psi1 = e:^2*N/(N-k)\n    psi2 = e:^2:/(1:-h)   ;   psi3 = e:^2:/((1:-h):^2)\n    var_b_0 = ixx * cross(x,psi0,x) * ixx\n    var_b_1 = ixx * cross(x,psi1,x) * ixx\n    var_b_2 = ixx * cross(x,psi2,x) * ixx\n    var_b_3 = ixx * cross(x,psi3,x) * ixx\n    b,sqrt(diagonal(var_b_0)),sqrt(diagonal(var_b_1)),\n    sqrt(diagonal(var_b_2)),sqrt(diagonal(var_b_3))\nend  \n\n\n\n. mata:\n------------------------------------------------- mata (type end to exit) -----\n:     // h = diagonal(X invsym(X'x) X') Wrong Way, too many calculations\n:     h = rowsum(x*invsym(x'x):*x)\n\n:     psi0 = e:^2 ; psi1 = e:^2*N/(N-k)\n\n:     psi2 = e:^2:/(1:-h) ; psi3 = e:^2:/((1:-h):^2)\n\n:     var_b_0 = ixx * cross(x,psi0,x) * ixx\n\n:     var_b_1 = ixx * cross(x,psi1,x) * ixx\n\n:     var_b_2 = ixx * cross(x,psi2,x) * ixx\n\n:     var_b_3 = ixx * cross(x,psi3,x) * ixx\n\n:     b,sqrt(diagonal(var_b_0)),sqrt(diagonal(var_b_1)),\n&gt;     sqrt(diagonal(var_b_2)),sqrt(diagonal(var_b_3))\n                 1             2             3             4             5\n    +-----------------------------------------------------------------------+\n  1 |  -.145393595   .0243162137   .0243501986   .0243568124   .0243975204  |\n  2 |  .0161424301   .0013544849   .0013563779   .0013573922   .0013603079  |\n  3 |  .0719321873    .005690214   .0056981668   .0057079191    .005725691  |\n  4 |  1.970020725   .0875757052   .0876981032   .0878131672   .0880514838  |\n    +-----------------------------------------------------------------------+\n\n: end\n-------------------------------------------------------------------------------\n\n. \n\n\nOr in Stata:\nregress y x1 x2 x3, vce(robust)\nregress y x1 x2 x3, vce(hc2)\nregress y x1 x2 x3, vce(hc3)"
+    "text": "Coding Robust SE\n\n\nCode\nmata:\n    // h = diagonal(X invsym(X'x) X') Wrong Way, too many calculations\n    h = rowsum(x*invsym(x'x):*x)\n    psi0 = e:^2           ;   psi1 = e:^2*N/(N-k)\n    psi2 = e:^2:/(1:-h)   ;   psi3 = e:^2:/((1:-h):^2)\n    var_b_0 = ixx * cross(x,psi0,x) * ixx\n    var_b_1 = ixx * cross(x,psi1,x) * ixx\n    var_b_2 = ixx * cross(x,psi2,x) * ixx\n    var_b_3 = ixx * cross(x,psi3,x) * ixx\n    b,sqrt(diagonal(var_b_0)),sqrt(diagonal(var_b_1)),\n    sqrt(diagonal(var_b_2)),sqrt(diagonal(var_b_3))\nend  \n\n\n\n. mata:\n------------------------------------------------- mata (type end to exit) -----\n:     h = rowsum(x*invsym(x'x):*x)\n\n:     psi0 = e:^2 ; psi1 = e:^2*N/(N-k)\n\n:     psi2 = e:^2:/(1:-h) ; psi3 = e:^2:/((1:-h):^2)\n\n:     var_b_0 = ixx * cross(x,psi0,x) * ixx\n\n:     var_b_1 = ixx * cross(x,psi1,x) * ixx\n\n:     var_b_2 = ixx * cross(x,psi2,x) * ixx\n\n:     var_b_3 = ixx * cross(x,psi3,x) * ixx\n\n:     b,sqrt(diagonal(var_b_0)),sqrt(diagonal(var_b_1)),\n&gt;     sqrt(diagonal(var_b_2)),sqrt(diagonal(var_b_3))\n                 1             2             3             4             5\n    +-----------------------------------------------------------------------+\n  1 |  -.145393595   .0243162137   .0243501986   .0243568124   .0243975204  |\n  2 |  .0161424301   .0013544849   .0013563779   .0013573922   .0013603079  |\n  3 |  .0719321873    .005690214   .0056981668   .0057079191    .005725691  |\n  4 |  1.970020725   .0875757052   .0876981032   .0878131672   .0880514838  |\n    +-----------------------------------------------------------------------+\n\n: end\n-------------------------------------------------------------------------------\n\n. \n\n\nOr in Stata:\nregress y x1 x2 x3, vce(robust)\nregress y x1 x2 x3, vce(hc2)\nregress y x1 x2 x3, vce(hc3)"
   },
   {
     "objectID": "adv_class/02OLS.html#lifting-even-more-assumptions-correlation",
     "href": "adv_class/02OLS.html#lifting-even-more-assumptions-correlation",
     "title": "Linear Regression Model",
     "section": "Lifting Even more Assumptions: Correlation",
-    "text": "Lifting Even more Assumptions: Correlation\n\nOne assumption we barely consider last semester was the possibility that errors could be correlated within groups. (except for time series and serial correlation)\nFor example, families may share similar unobserved factors, So would people interviewed from the same classroom, cohort, city, etc. There could be many dimensions to consider possible correlations!\nIn that situation, we may be missmeasuring the magnitude of the errors (probably downward), because the \\(\\Omega\\) is no longer diagonal: \\(\\sigma_{ij} \\neq 0\\) for some \\(i\\neq j\\).\n\nBut, estimate all parameters in an NxN matrix is unfeasible. We need assumptions!\n\nSay we have \\(G\\) groups \\(g=(1…G)\\) . We can rewrite the expression for \\(\\hat\\beta\\) as follows:\n\n\\[\n\\begin{aligned}\n\\hat\\beta-\\beta &= (X'X)^{-1}\\sum_{g=1}^G X'_g \\varepsilon_g \\\\\\\n&=(X'X)^{-1}\\sum_{g=1}^G s_g\n\\end{aligned}\n\\]\n\nWe can assume that individuals are correlated within groups \\(E(s_g's_g) =\\Sigma_g\\) , but they are uncorrelated across groups \\(E(s_g s_g')=0 \\ \\forall \\ g \\neq g'\\) .\nThese groups are typically known as “clusters”"
+    "text": "Lifting Even more Assumptions: Correlation\n\nOne assumption we barely consider last semester was the possibility that errors could be correlated across observations. (except for time series and serial correlation)\nFor example, families may share similar unobserved factors, So would people interviewed from the same classroom, cohort, city, etc. There could be many dimensions to consider possible correlations!\nIn that situation, we may be missmeasuring the magnitude of the errors (probably downward), because the \\(\\Omega\\) is no longer diagonal: \\(\\sigma_{ij} \\neq 0\\) for some \\(i\\neq j\\).\n\nBut, estimate all parameters in an NxN matrix is unfeasible. We need assumptions!"
   },
   {
     "objectID": "adv_class/02OLS.html#addressing-correlation",
@@ -2923,14 +2923,14 @@
     "href": "adv_class/02OLS.html#section-2",
     "title": "Linear Regression Model",
     "section": "",
-    "text": "As mentioned earlier, there are many CCSE (clustered consistent SE).\n\n\\[\n\\begin{aligned}\nCV_0 &= (X'X)^{-1} \\sum_{g=1}^G \\hat \\Sigma_g (X'X)^{-1} \\\\\nCV_1 &= \\frac{G(N-1)}{(G-1)(N-k-1)}(X'X)^{-1} \\sum_{g=1}^G \\hat \\Sigma_g (X'X)^{-1}\n\\end{aligned}\n\\]\n\nSimilar to HC. CV0 does not correct for degrees of freedom. CV1, however, accounts for Degrees of freedom in the model, and clusters.\n\n\n\nCode\nmata:\n    // 1st Sort Data (easier in Stata rather than Mata) and reload\n    y   = st_data(.,\"lnwage\")\n    x   = st_data(.,\"educ exper female\"),J(1434,1,1) \n    cvar= st_data(.,\"isco\")\n    ixx = invsym(cross(x,x)); xy = cross(x,y)\n    b   = ixx * xy\n    e   = y:-x*b\n    // Set the panel info\n    info = panelsetup(cvar,1); g=rows(info); n=rows(y)\n    // get X_g'e for all groups: \n    s_xg_e = panelsum(x:*e,info)\n    // Sum Sigma_g\n    sigma_g = s_xg_e's_xg_e\n    cv0 = ixx*sigma_g*ixx\n    cv1 =g/(g-1)*(n-1)/(n-k)*ixx*sigma_g*ixx\n    b,sqrt(diagonal(cv0)),sqrt(diagonal(cv1))\nend    \n\n\n\n. mata:\n------------------------------------------------- mata (type end to exit) -----\n:     // 1st Sort Data (easier in Stata rather than Mata) and reload\n:     y = st_data(.,\"lnwage\")\n\n:     x = st_data(.,\"educ exper female\"),J(1434,1,1)\n\n:     cvar= st_data(.,\"isco\")\n\n:     ixx = invsym(cross(x,x)); xy = cross(x,y)\n\n:     b = ixx * xy\n\n:     e = y:-x*b\n\n:     // Set the panel info\n:     info = panelsetup(cvar,1); g=rows(info); n=rows(y)\n\n:     // get X_g'e for all groups:\n:     s_xg_e = panelsum(x:*e,info)\n\n:     // Sum Sigma_g\n:     sigma_g = s_xg_e's_xg_e\n\n:     cv0 = ixx*sigma_g*ixx\n\n:     cv1 =g/(g-1)*(n-1)/(n-k)*ixx*sigma_g*ixx\n\n:     b,sqrt(diagonal(cv0)),sqrt(diagonal(cv1))\n                  1              2              3\n    +----------------------------------------------+\n  1 |   .0858251775    .0140570765    .0149254126  |\n  2 |   .0147342796    .0014534593    .0015432426  |\n  3 |  -.0949227416    .0525121234    .0557559112  |\n  4 |   2.218849962    .1947497649    .2067798804  |\n    +----------------------------------------------+\n\n: end\n-------------------------------------------------------------------------------\n\n. \n\n\nor compare it to\n\n\nCode\nreg lnwage educ exper female, cluster(isco)\n\n\n\nLinear regression                               Number of obs     =      1,434\n                                                F(3, 8)           =      59.13\n                                                Prob &gt; F          =     0.0000\n                                                R-squared         =     0.2217\n                                                Root MSE          =     .46897\n\n                                   (Std. err. adjusted for 9 clusters in isco)\n------------------------------------------------------------------------------\n             |               Robust\n      lnwage | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n        educ |   .0858252   .0149254     5.75   0.000     .0514071    .1202432\n       exper |   .0147343   .0015432     9.55   0.000     .0111756     .018293\n      female |  -.0949227   .0557559    -1.70   0.127    -.2234961    .0336506\n       _cons |    2.21885   .2067799    10.73   0.000     1.742015    2.695685\n------------------------------------------------------------------------------"
+    "text": "But, \\(\\sigma^2\\) is not known, so we have to use \\(\\hat\\sigma^2\\) instead, which depends on the sample residuals: \\[\n\\hat\\sigma^2 = \\frac{1}{N-k-1}\\sum \\hat e^2\n\\]\nWhere we account for the fact true errors are not observed, but rather residuals are estimated, adjusting the degrees of freedom.\n\n\nCode\nmata:\n    N = rows(y); k = cols(x)\n    var_b_00 = sum(err:^2)/(N-k) * invsym(x'x)\n    b,sqrt(diagonal(var_b_00))\nend\n\n\n\n. mata:\n------------------------------------------------- mata (type end to exit) -----\n:     N = rows(y); k = cols(x)\n\n:     var_b_00 = sum(err:^2)/(N-k) * invsym(x'x)\n\n:     b,sqrt(diagonal(var_b_00))\n                 1             2\n    +-----------------------------+\n  1 |  -.145393595   .0243887787  |\n  2 |  .0161424301   .0010977786  |\n  3 |  .0719321873   .0050365354  |\n  4 |  1.970020725   .0725757058  |\n    +-----------------------------+\n\n: end\n-------------------------------------------------------------------------------\n\n."
   },
   {
     "objectID": "adv_class/02OLS.html#beware-of-over-clustering",
     "href": "adv_class/02OLS.html#beware-of-over-clustering",
     "title": "Linear Regression Model",
     "section": "Beware of over-clustering",
-    "text": "Beware of over-clustering\nWhile clustering helps address a problem of “intragroup” correlation, it can/should be done with care. It is important to be aware about some unintended problems of using Correlation.\n\nCV0 and CV1 work well when you have a large number of Clusters. How many? MHE(2009) says…42 (this is like having large enough samples for Asymptotic variance). If # clusters are small, you would do better with other approaches (including CV2 and CV3).\nWhen you cluster your standard errors, you will “most-likely” generate larger standard errors in your model. Standard recommendation (MHE) is to cluster at the level that makes sense (based on data) and produces largest SE (to be conservative)."
+    "text": "Beware of over-clustering\nWhile clustering helps address a problem of “intragroup” correlation, it can/should be done with care. It is important to be aware about some unintended problems of over-clustering.\n\nCV0 and CV1 work well when you have a large number of Clusters. How many? MHE(2009) says…42 (this is like having large enough samples for Asymptotic variance). If # clusters are small, you would do better with other approaches (including CV2 and CV3).\nWhen you cluster your standard errors, you will “most-likely” generate larger standard errors in your model. Standard recommendation (MHE) is to cluster at the level that makes sense (based on data) and produces largest SE (to be conservative)."
   },
   {
     "objectID": "adv_class/02OLS.html#role-of-clusters",
@@ -2944,21 +2944,21 @@
     "href": "adv_class/02OLS.html#section-3",
     "title": "Linear Regression Model",
     "section": "",
-    "text": "You may also consider that clustering does not work well when sample sizes within cluster are to diverse (micro vs macro clusters)\nAnd there is the case where clustering is required among multiple dimensions (see vcemway). Where the unobserved correlation could be present in different dimensions.\n\nSo what to cluster and how?\n\nMackinnon et al (2023) provides a guide on how and when to cluster your standard errors. (some are quite advanced)\nGeneral practice, At least use Robust SE (HC2 or HC3 if sample is small), but use clustered SE for robustness.\nYou may want to cluster SE based on some theoretical expectations. Choose -broader- groups for conservative analysis.\nIn treatment-causal effect analysis, you may want to cluster at the “treatment” level.\n\n\nBut…Beyond hc0/1 and CV0/1 there is not much out there for correcting Standard errors in nonlinear models."
+    "text": "New Assumptions\n\nSay we have \\(G\\) groups \\(g=(1…G)\\) . We can rewrite the expression for \\(\\hat\\beta\\) as follows:\n\n\\[\n\\begin{aligned}\n\\hat\\beta-\\beta &= (X'X)^{-1}\\sum_{g=1}^G X'_g \\varepsilon_g \\\\\n&=(X'X)^{-1}\\sum_{g=1}^G s_g\n\\end{aligned}\n\\]\n\nWe can assume that individuals are correlated within groups \\(E(s_g's_g) =\\Sigma_g\\) , but they are uncorrelated across groups \\(E(s_g s_g')=0 \\ \\forall \\ g \\neq g'\\) .\nThese groups are typically known as “clusters”"
   },
   {
     "objectID": "adv_class/02OLS.html#if-you-cant-sandwich-you-can-re-sample",
     "href": "adv_class/02OLS.html#if-you-cant-sandwich-you-can-re-sample",
     "title": "Linear Regression Model",
     "section": "If you can’t Sandwich 🥪, you can re-Sample",
-    "text": "If you can’t Sandwich 🥪, you can re-Sample\n\nThe discussion above refereed to the estimation of SE using \\(Math\\). In other words, it was based on the asymptotic properties of the data. Which may not work in small samples.\nAn alternative, often used by practitioners, is using re-sampling methods to obtain approximations to the coefficient distributions of interest.\n\nBut… How does it work?🤔\nFirst ask yourself, how does Asymptotic theory work (and econometrics)? 😱\n\nNote: I recommend reading the -simulation- chapter in The effect, and simulation methods chapter in CT."
+    "text": "If you can’t Sandwich 🥪, you can re-Sample\n\nThe discussion above refered to the estimation of SE using \\(Math\\). In other words, it was based on the asymptotic properties of the data. Which may not work in small samples.\nAn alternative, often used by practitioners, is using re-sampling methods to obtain approximations to the coefficient distributions of interest.\n\nBut… How does it work?🤔\nFirst ask yourself, how does Asymptotic theory work (and econometrics)? 😱\n\nNote: I recommend reading the -simulation- chapter in The effect, and simulation methods chapter in CT."
   },
   {
     "objectID": "adv_class/02OLS.html#a-brief-reviewagain",
     "href": "adv_class/02OLS.html#a-brief-reviewagain",
     "title": "Linear Regression Model",
     "section": "A Brief Review…again 😇",
-    "text": "A Brief Review…again 😇\nIf I were to summarize most of the methodologies (ok all) we used last semester, and this one, the properties that have been derived and proofed are based on the assumption that we “could” always get more data (frequentist approach).\nThere is population (or supper population) from where we can get samples of data.\n\nWe get a sample (\\(y,X\\)) (of size N)\nEstimate our model : method(\\(y,X\\))\\(\\rightarrow\\) \\(\\beta's\\)\nRepeat to infinitum\nCollect all \\(\\beta's\\) and summarize. (Mean and Standard deviations)\n\nDone.\nThe distributions you get from the above exercise should be the same as what your estimation method produces. (if not, there there is something wrong with the estimation method)"
+    "text": "A Brief Review…again 😇\nIf I were to summarize most of the methodologies (ok all) we used last semester, and this one, the properties that have been derived and proofed are based on the assumption that we “could” always get more data (frequentist approach).\nThere is population (or super population) from where we can get samples of data (and never repeat data).\n\nWe get a sample (\\(y,X\\)) (of size N)\nEstimate our model : method(\\(y,X\\))\\(\\rightarrow\\) \\(\\beta's\\)\nRepeat to infinitum\nCollect all \\(\\beta's\\) and summarize. (Mean and Standard deviations)\n\nDone.\nThe distributions you get from the above exercise should be the same as what your estimation method produces. (in average) (if not, there there is something wrong with the estimation method)"
   },
   {
     "objectID": "adv_class/02OLS.html#but-we-only-get-1-sample",
@@ -2986,7 +2986,7 @@
     "href": "adv_class/02OLS.html#section-4",
     "title": "Linear Regression Model",
     "section": "",
-    "text": "UWild bootstrap: Estimate your model, obtain residuals, and re-sample residual weights.\n\nAgain…on your own: \\(y^s = x\\hat b +\\hat e * v\\) , where \\(v \\sim ff()\\) where \\(ff()\\) is a “good” distribution function. \\(E(v)=0 \\ \\& \\ Var(v)=1\\)\nActually quite flexible, and works well under heteroskedasticity!\nIt can also allow clustered standard errors. The error \\(v\\) no longer changes by individual, but by group. It also works well with weights.\n\nUWild bootstrap-2 : Estimate your model, obtain Influence functions 😱 , and re-sample residual weights.\n\nThis is an extension to the previous option. But with advantages\n\nyou do not need to -reestimate- the model. Just look into how the the mean of IF’s change.\nit can be applied to linear and nonlinear model (if you know how to build the IF’s)\n\nWorks well with clustered and weights.\n\nCWild bootstrap: Similar UWild Bootstrap, Obtain Influence functions under the Null (imposing restrictions), and use that to test the NULL.\n\nNo, you do not need to do it on your own. see bootest in Stata.\nWorks pretty well with small samples and small # clusters. Probably the way to go if you really care about Standard errors."
+    "text": "Addressing Correlation\n\nThe idea of correcting for clusters is pretty simple. We just need to come up with an estimator for \\(\\Sigma_g\\) for every cluster, so that:\n\n\\[\n\\begin{aligned}\nVar(\\hat\\beta) &= (X'X)^{-1} \\left( \\sum_{g=1}^N \\Sigma_g \\right) (X'X)^{-1} \\\\\n\\Sigma_g &= E( X_g' \\Omega_g X_g)\n\\end{aligned}\n\\]\n\nHere \\(\\Omega_g\\) should be an approximation of the variance covariance matrix among the errors of ALL individuals that belong to the same cluster. But how do we approximate it?\nAs with the EW - HC standard errors, there are many ways to estimate Clustered Standard errors. See MacKinnon et al (2023) for reference. We will refer only to the simpler ones CV0 and CV1."
   },
   {
     "objectID": "adv_class/02OLS.html#how-to-bootstrap-in-stata",
@@ -3000,7 +3000,7 @@
     "href": "adv_class/02OLS.html#section-5",
     "title": "Linear Regression Model",
     "section": "",
-    "text": "This last command may allow you to bootstrap multiple models at the same time, although it does require a bit of programming. (and a do file)\n\n\n\nCode\ngen tchild = kids6 + kids714\ncapture program drop bs_wages_children\nprogram bs_wages_children, eclass // eclass is for things like equations\n    ** Estimate first model\n    reg lnwage educ exper female\n    matrix b1 = e(b)\n    matrix coleq b1 = lnwage\n    ** Estimate second model\n    reg tchild educ exper female\n    matrix b2 = e(b)\n    matrix coleq b2 = tchild\n    ** Put things together and post\n    matrix b = b1 , b2\n    ereturn post b\nend\nbootstrap: bs_wages_children\n\n\n\n(running bs_wages_children on estimation sample)\n\nwarning: bs_wages_children does not set e(sample), so no observations will be\n         excluded from the resampling because of missing values or other\n         reasons. To exclude observations, press Break, save the data, drop\n         any observations that are to be excluded, and rerun bootstrap.\n\nBootstrap replications (50)\n----+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5 \n..................................................    50\n\nBootstrap results                                        Number of obs = 1,434\n                                                         Replications  =    50\n\n------------------------------------------------------------------------------\n             |   Observed   Bootstrap                         Normal-based\n             | coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\nlnwage       |\n        educ |   .0858252   .0058256    14.73   0.000     .0744072    .0972431\n       exper |   .0147343   .0011288    13.05   0.000      .012522    .0169466\n      female |  -.0949227   .0283363    -3.35   0.001     -.150461   -.0393845\n       _cons |    2.21885   .0826592    26.84   0.000     2.056841    2.380859\n-------------+----------------------------------------------------------------\ntchild       |\n        educ |   .0177854   .0091641     1.94   0.052     -.000176    .0357468\n       exper |  -.0047747   .0017288    -2.76   0.006     -.008163   -.0013864\n      female |  -.1306332   .0457432    -2.86   0.004    -.2202883   -.0409781\n       _cons |   .4163459   .1156959     3.60   0.000     .1895861    .6431058\n------------------------------------------------------------------------------\n\n\nWhy does it matter? because you may want to test coefficients individually, or across models. This is only possible if the FULL system is estimated jointly"
+    "text": "Recall we approximate \\(\\sigma^2_i\\) with \\(\\varepsilon_i^2\\). Then we can approximate \\(\\sigma_{ij}\\) with \\(\\varepsilon_j \\varepsilon_i\\). More specifically:\n\n\\[\n\\Omega_g \\simeq \\varepsilon \\varepsilon' \\ or \\ \\Sigma_g = X'_g \\varepsilon \\varepsilon' X_g = (X'_g \\varepsilon) (\\varepsilon' X_g)\n\\]\n\nChange \\(\\varepsilon\\) with \\(\\hat\\varepsilon\\), do that for every group, and done! (almost)."
   },
   {
     "objectID": "adv_class/02OLS.html#final-words-on-bootstrap",
@@ -3021,7 +3021,7 @@
     "href": "adv_class/02OLS.html#section-6",
     "title": "Linear Regression Model",
     "section": "",
-    "text": "The Delta method uses the linear approximations to approximate the distribution of otherwise not known distributions.\nFurther, It relies on the fact that linear transformations a normal distribution, is on itself normal. For example:\n\n\\[\ng(\\hat \\theta) \\simeq g(\\theta) + g'(\\hat\\theta) (\\hat \\theta-\\theta)\n\\]\n\nThis states that the nonlinear function \\(g(\\theta)\\) can be “locally” approximated as a linear function in the neighborhood of \\(g(\\theta)\\).\nPredictions above or below are approximated using the slope of the function. \\(g'(\\theta)\\).\nSo, if we take the variance, we get:\n\n\\[\nVar(g(\\hat \\theta)) \\simeq  Var \\left(g(\\theta)+ g'(\\hat\\theta) (\\hat \\theta-\\theta)\\right)\n=g'(\\hat\\theta)^2 Var(\\theta)\n\\]"
+    "text": "As mentioned earlier, there are many CCSE (clustered consistent SE).\n\n\\[\n\\begin{aligned}\nCV_0 &= (X'X)^{-1} \\sum_{g=1}^G \\hat \\Sigma_g (X'X)^{-1} \\\\\nCV_1 &= \\frac{G(N-1)}{(G-1)(N-k-1)}(X'X)^{-1} \\sum_{g=1}^G \\hat \\Sigma_g (X'X)^{-1}\n\\end{aligned}\n\\]\n\nSimilar to HC. CV0 does not correct for degrees of freedom. CV1, however, accounts for Degrees of freedom in the model, and clusters.\n\n\n\nCode\nsort isco\nmata:\n    // 1st Sort Data (easier in Stata rather than Mata) and reload\n    y   = st_data(.,\"lnwage\")\n    x   = st_data(.,\"educ exper female\"),J(1434,1,1) \n    cvar= st_data(.,\"isco\")\n    ixx = invsym(cross(x,x)); xy = cross(x,y)\n    b   = ixx * xy\n    e   = y:-x*b\n    // Set the panel info\n    info = panelsetup(cvar,1); g=rows(info); n=rows(y)\n    // get X_g'e for all groups: \n    s_xg_e = panelsum(x:*e,info)\n    // Sum Sigma_g\n    sigma_g = s_xg_e's_xg_e\n    cv0 = ixx*sigma_g*ixx\n    cv1 =g/(g-1)*(n-1)/(n-k)*ixx*sigma_g*ixx\n    b,sqrt(diagonal(cv0)),sqrt(diagonal(cv1))\nend    \n\n\n\n. mata:\n------------------------------------------------- mata (type end to exit) -----\n:     y = st_data(.,\"lnwage\")\n\n:     x = st_data(.,\"educ exper female\"),J(1434,1,1)\n\n:     cvar= st_data(.,\"isco\")\n\n:     ixx = invsym(cross(x,x)); xy = cross(x,y)\n\n:     b = ixx * xy\n\n:     e = y:-x*b\n\n:     info = panelsetup(cvar,1); g=rows(info); n=rows(y)\n\n:     s_xg_e = panelsum(x:*e,info)\n\n:     sigma_g = s_xg_e's_xg_e\n\n:     cv0 = ixx*sigma_g*ixx\n\n:     cv1 =g/(g-1)*(n-1)/(n-k)*ixx*sigma_g*ixx\n\n:     b,sqrt(diagonal(cv0)),sqrt(diagonal(cv1))\n                  1              2              3\n    +----------------------------------------------+\n  1 |   .0858251775    .0140570765    .0149254126  |\n  2 |   .0147342796    .0014534593    .0015432426  |\n  3 |  -.0949227416    .0525121234    .0557559112  |\n  4 |   2.218849962    .1947497649    .2067798804  |\n    +----------------------------------------------+\n\n: end\n-------------------------------------------------------------------------------\n\n. \n\n\nor compare it to\n\n\nCode\nreg lnwage educ exper female, cluster(isco)\n\n\n\nLinear regression                               Number of obs     =      1,434\n                                                F(3, 8)           =      59.13\n                                                Prob &gt; F          =     0.0000\n                                                R-squared         =     0.2217\n                                                Root MSE          =     .46897\n\n                                   (Std. err. adjusted for 9 clusters in isco)\n------------------------------------------------------------------------------\n             |               Robust\n      lnwage | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n        educ |   .0858252   .0149254     5.75   0.000     .0514071    .1202432\n       exper |   .0147343   .0015432     9.55   0.000     .0111756     .018293\n      female |  -.0949227   .0557559    -1.70   0.127    -.2234961    .0336506\n       _cons |    2.21885   .2067799    10.73   0.000     1.742015    2.695685\n------------------------------------------------------------------------------"
   },
   {
     "objectID": "adv_class/02OLS.html#delta-method-visualization",
@@ -3035,7 +3035,7 @@
     "href": "adv_class/02OLS.html#section-7",
     "title": "Linear Regression Model",
     "section": "",
-    "text": "It can go multivariate as well:\n\\[\n\\begin{aligned}\ng(\\hat \\theta, \\hat \\gamma)-g(\\theta,\\gamma) &\\simeq N(0,\\nabla g ' \\Sigma \\nabla g) \\\\\n\\nabla g ' &=   [\\begin{matrix}\n    dg/d\\theta & dg/d\\gamma\n  \\end{matrix}]\n\\end{aligned}  \n\\]"
+    "text": "You may also consider that clustering does not work well when sample sizes within cluster are to diverse (micro vs macro clusters)\nAnd there is the case where clustering is required among multiple dimensions (see vcemway). Where the unobserved correlation could be present in different dimensions."
   },
   {
     "objectID": "adv_class/02OLS.html#so-why-do-we-care",
@@ -3049,35 +3049,35 @@
     "href": "adv_class/02OLS.html#what-happens-when-k-is-too-big",
     "title": "Linear Regression Model",
     "section": "What happens when K is too big?",
-    "text": "What happens when K is too big?\n\n\nHow many variables (max) can you use in a model?\n\n\\[max \\ k = rank(X'X)\\]\n\nWhat happens when you add too many variables in a model?\n\nIncrease Multicolinearity and coefficient variance (too much noise)\nR2 overly large (without explaining much)\nFar more difficult to interpret (too many factors)\nMay introduce endogeneity (when it wasnt a problem before)\n\nHow can you solve the problem?\n\nYou select only a few of the variables, based on theory, and contribution to the model\n\nWhat if you can’t choose?"
+    "text": "What happens when K is too big?\n\nHow many variables (max) can you use in a model?\n\n\\[max \\ k = rank(X'X)\\]\n\nWhat happens when you add too many variables in a model?\n\nIncrease Multicolinearity and coefficient variance (too much noise)\nR2 overly large (without explaining much)\nFar more difficult to interpret (too many factors)\nMay introduce endogeneity (when it wasnt a problem before)\n\nHow can you solve the problem?\n\nYou select only a few of the variables, based on theory, and contribution to the model\n\nWhat if you can’t choose?"
   },
   {
     "objectID": "adv_class/02OLS.html#ml-we-let-the-choose-for-you",
     "href": "adv_class/02OLS.html#ml-we-let-the-choose-for-you",
     "title": "Linear Regression Model",
     "section": "ML: We let the 💻Choose for you",
-    "text": "ML: We let the 💻Choose for you\n\nBefore we start. The methodology we will discuss are usually meant to get models with “good” predictive power, and some times better interpretability, not so much stat-inference (although its possible)\n\nWhen you do not know how to choose, you could try select a subset of variables from your model such that you maximize the predictive power of the model.\nThis should go beyond IN sample predictive power, but instead maximize Out of sample predictive power.\nThis is typically achieved using the following:\n\\[\nAR^2 = 1-\\frac{SSR}{SST}\\frac{n-1}{n-k-1} \\\\\nAIC = n^{-1}(SSR + 2k\\hat\\sigma^2) \\\\\nBIC = n^{-1}(SSR + ln(n) k\\hat\\sigma^2)\n\\]\nOr using a method known as cross-validation (Comparing predictive power using data not used for model estimation)\nHowever, we can always try to estimate a model with all variables!"
+    "text": "ML: We let the 💻Choose for you\n\nBefore we start. The methodology we will discuss are usually meant to get models with “good” predictive power, and some times better interpretability, not so much stat-inference (although its possible)\n\nWhen you do not know how to choose, you could try select a subset of variables from your model such that you maximize out-of-sample predictive power\nThis is typically achieved using the following:\n\\[\nAR^2 = 1-\\frac{SSR}{SST}\\frac{n-1}{n-k-1} \\\\\nAIC = n^{-1}(SSR + 2k\\hat\\sigma^2) \\\\\nBIC = n^{-1}(SSR + ln(n) k\\hat\\sigma^2)\n\\]\nOr using a method known as cross-validation (Comparing predictive power using data not used for model estimation)\nHowever, we can always try to estimate a model with all variables!"
   },
   {
     "objectID": "adv_class/02OLS.html#ridge-and-lasso-and-elasticnet",
     "href": "adv_class/02OLS.html#ridge-and-lasso-and-elasticnet",
     "title": "Linear Regression Model",
     "section": "Ridge and Lasso and ElasticNet",
-    "text": "Ridge and Lasso and ElasticNet\n\nRecall that when using OLS to obtain \\(\\beta's\\), we try to minimize the following:\n\n\\[\nSSR = \\sum_i(y_i - X_i \\beta)^2\n\\]\n\nThis has the restrictions of mentioned before (\\(k &lt; N\\)). In addition to letting coefficents vary “too much”\nAn alternative is to use Ridge regression, which instead Minimizes the following:\n\n\\[\nrSS = \\sum_i(y_i - X_i \\beta)^2+ \\lambda \\sum_{k=1}^K\\beta_k^2\n\\]\n\nThis essentially aims to find parameters that reduces SSR, but also “controls” for how large \\(\\beta's\\) can be, using a shrinkage penalty that depends on \\(\\lambda\\).\nIf \\(\\lambda = 0\\) you get Standard OLS, and if \\(\\lambda \\rightarrow \\infty\\) , you get a situation where all betas (but the constant) are zero. For intermediate values, you may have better models than OLS, because you can balance Bias (when \\(\\beta's\\) are zero) with increase variance (when all \\(\\beta's\\) vary as they “please”)"
+    "text": "Ridge and Lasso and ElasticNet\n\nRecall that when using OLS to obtain \\(\\beta's\\), we try to minimize the following:\n\n\\[\nSSR = \\sum_i(y_i - X_i \\beta)^2\n\\]\n\nThis has the restrictions of mentioned before (\\(k &lt; N\\)). In addition to letting coefficents vary “too much”\nAn alternative is to Impose additional restrictions so that coefficients do not vary as much. This is known as Regularization.\n\nRidge Regression\nOne such approach is Ridge regression, which minimizes the following:\n\n\\[\nrSS = \\sum_i(y_i - X_i \\beta)^2+ \\lambda \\sum_{k=1}^K\\beta_k^2\n\\]\n\nThis essentially aims to find parameters that reduces SSR, but also “controls” for how large \\(\\beta's\\) can be, using a shrinkage penalty that depends on \\(\\lambda\\).\nIf \\(\\lambda = 0\\) you get Standard OLS, and if \\(\\lambda \\rightarrow \\infty\\) , you get a situation where all betas (but the constant) are zero. For intermediate values, you may have better models than OLS, because you can balance Bias (when \\(\\beta's\\) are zero) with increase variance (when all \\(\\beta's\\) vary as they “please”)"
   },
   {
     "objectID": "adv_class/02OLS.html#section-8",
     "href": "adv_class/02OLS.html#section-8",
     "title": "Linear Regression Model",
     "section": "",
-    "text": "We usually start with Ridge, because is relatively Easy to implement, since it has a close form Solution:\n\n\\[\n\\beta = (X'X + \\lambda I)^{-1}{X'y}\n\\]\n\n\nCode\nfrause oaxaca, clear\nkeep if lnwage!=.\ngen male = 1-female\nmata:\n    y = st_data(.,\"lnwage\")\n    x = st_data(.,\"educ exper female male\"),J(1434,1,1)\n    i0 = I(5);i0[5,5]=0\n    xx = (cross(x,x)) ; xy = (cross(x,y))\n    bb0 = invsym(xx)*xy \n    bb1 = invsym(xx:+i0*1)*xy \n    bb10 = invsym(xx:+i0*10)*xy \n    bb100 = invsym(xx:+i0*100)*xy \n    bb1000 = invsym(xx:+i0*1000)*xy \n    bb0,bb1,bb10,bb100,bb1000\nend \n\n\n(Excerpt from the Swiss Labor Market Survey 1998)\n(213 observations deleted)\n\n. mata:\n------------------------------------------------- mata (type end to exit) -----\n:     y = st_data(.,\"lnwage\")\n\n:     x = st_data(.,\"educ exper female male\"),J(1434,1,1)\n\n:     i0 = I(5);i0[5,5]=0\n\n:     xx = (cross(x,x)) ; xy = (cross(x,y))\n\n:     bb0 = invsym(xx)*xy\n\n:     bb1 = invsym(xx:+i0*1)*xy\n\n:     bb10 = invsym(xx:+i0*10)*xy\n\n:     bb100 = invsym(xx:+i0*100)*xy\n\n:     bb1000 = invsym(xx:+i0*1000)*xy\n\n:     bb0,bb1,bb10,bb100,bb1000\n                  1              2              3              4\n    +-------------------------------------------------------------\n  1 |   .0858251775    .0858183338    .0857563567    .0851046501\n  2 |   .0147342796    .0147345813    .0147372042    .0147554544\n  3 |  -.0949227416    -.047396817   -.0468240416    -.041806663\n  4 |             0     .047396817    .0468240416     .041806663\n  5 |   2.218849962    2.171466638    2.172174327    2.179690914\n    +-------------------------------------------------------------\n                  5\n     ----------------+\n  1     .0778292498  |\n  2     .0146298058  |\n  3    -.0208062854  |\n  4     .0208062854  |\n  5     2.266275433  |\n     ----------------+\n\n: end\n-------------------------------------------------------------------------------\n\n."
+    "text": "So what to cluster and how?\n\nMackinnon et al (2023) provides a guide on how and when to cluster your standard errors. (some are quite advanced)\nGeneral practice, At least use Robust SE (HC2 or HC3 if sample is small), but use clustered SE for robustness.\nYou may want to cluster SE based on some theoretical expectations. Choose -broader- groups for conservative analysis.\nIn treatment-causal effect analysis, you may want to cluster at the “treatment” level.\n\n\nBut…Beyond hc0/1 and CV0/1 there is not much out there for correcting Standard errors in nonlinear models."
   },
   {
     "objectID": "adv_class/02OLS.html#lasso-and-elastic-net",
     "href": "adv_class/02OLS.html#lasso-and-elastic-net",
     "title": "Linear Regression Model",
     "section": "Lasso and Elastic Net",
-    "text": "Lasso and Elastic Net\n\nRidge is a relatively easy model to understand and estimate, since it has a close form solution. It has the slight disadvantage that you still estimate a coefficient for “every” variable (tho some are very small)\nAnother approach, that overcomes this advantage is known as Lasso.\n\n\\[\nLSS = \\sum_i(y_i - X_i \\beta)^2+ \\lambda \\sum_{k=1}^K |\\beta_k|\n\\]\n\nand the one known as Elastic net\n\n\\[\neSS = \\sum_i(y_i - X_i \\beta)^2+ \\lambda_L \\sum_{k=1}^K |\\beta_k| +\n\\lambda_r \\sum_{k=1}^K \\beta_k^2\n\\]\n\nLasso has the advantage of forcing some coefficients exactly to zero, when \\(\\lambda\\) is sufficiently large.\nElastic net tries to use the benefits from both approaches."
+    "text": "Lasso and Elastic Net\n\nRidge is a relatively easy model to understand and estimate, since it has a close form solution. It has the slight disadvantage that you still estimate a coefficient for “every” variable (tho some are very small)\nAnother approach, that overcomes this advantage is known as Lasso.\n\n\\[\nLSS = \\sum_i(y_i - X_i \\beta)^2+ \\lambda \\sum_{k=1}^K |\\beta_k|\n\\]\n\nand the one known as Elastic net\n\n\\[\neSS = \\sum_i(y_i - X_i \\beta)^2+ \\lambda_L \\sum_{k=1}^K |\\beta_k| +\n\\lambda_r \\sum_{k=1}^K \\beta_k^2\n\\]"
   },
   {
     "objectID": "adv_class/02OLS.html#lasso-vs-ridge",
@@ -3098,7 +3098,7 @@
     "href": "adv_class/02OLS.html#brief-example",
     "title": "Linear Regression Model",
     "section": "Brief Example:",
-    "text": "Brief Example:\n\n\nCode\nfrause oaxaca, clear\nkeep if lnwage!=.\nqui:reg lnwage i.age\npredict p_ols\nqui:elasticnet linear lnwage i.age, selection(cv, alllambdas)  alpha(0)\npredict p_ridge\nqui:lasso linear lnwage i.age, selection(cv, alllambdas)  \npredict p_lasso\nqui:elasticnet linear lnwage i.age, selection(cv, alllambdas)   \npredict p_elastic\n\n\n(Excerpt from the Swiss Labor Market Survey 1998)\n(213 observations deleted)\n(option xb assumed; fitted values)\n(options xb penalized assumed; linear prediction with penalized coefficients)\n(options xb penalized assumed; linear prediction with penalized coefficients)\n(options xb penalized assumed; linear prediction with penalized coefficients)"
+    "text": "Brief Example:\n\n\nCode\nqui {\nfrause oaxaca, clear\nkeep if lnwage!=.\nqui:reg lnwage i.age\npredict p_ols\nqui:elasticnet linear lnwage i.age, selection(cv, alllambdas)  alpha(0)\npredict p_ridge\nqui:lasso linear lnwage i.age, selection(cv, alllambdas)  \npredict p_lasso\nqui:elasticnet linear lnwage i.age, selection(cv, alllambdas)   \npredict p_elastic\n}"
   },
   {
     "objectID": "adv_class/02OLS.html#shrinking-coefficients",
@@ -3203,14 +3203,14 @@
     "href": "adv_class/03par_spar_npar.html#step1-estimation-of-density-functions",
     "title": "Semi- and Non- Parametric regression",
     "section": "Step1: Estimation of Density functions",
-    "text": "Step1: Estimation of Density functions\n\nThe first step towards learning non-parmetric analysis, is by learning to use the most basic task of all.\nEstimating distributions (PDFs) : why? in economics, and other social sciences, we care about distributions!\nDistribution of income, how many live under poverty, how much is concentrated among the rich, how skew the distribution is, what is the level of inequality, etc, etc\nThe parametric approach to estimating distribution, is by using some predefined functional form (say normal), and use the data to estimate the parameters that define that distribution:\n\n\\[\n\\hat f(x) = \\frac{1}{\\sqrt{2\\pi\\hat\\sigma^2}}exp \\left(-\\frac{1}{2}\\left(\\frac{x-\\hat \\mu}{\\hat \\sigma}\\right)^2 \\right)\n\\]"
+    "text": "Step1: Estimation of Density functions\n\nThe first step towards learning non-parmetric analysis, is learning to use the most basic task of all.\nEstimating distributions (PDFs) : why? in economics, and other social sciences, we care about distributions!\nDistribution of income, how many live under poverty, how much is concentrated among the rich, how skew the distribution is, what is the level of inequality, etc, etc\nThe parametric approach to estimating distribution, is by using some predefined functional form (say normal), and use the data to estimate the parameters that define that distribution:\n\n\\[\n\\hat f(x) = \\frac{1}{\\sqrt{2\\pi\\hat\\sigma^2}}exp \\left(-\\frac{1}{2}\\left(\\frac{x-\\hat \\mu}{\\hat \\sigma}\\right)^2 \\right)\n\\]"
   },
   {
     "objectID": "adv_class/03par_spar_npar.html#section",
     "href": "adv_class/03par_spar_npar.html#section",
     "title": "Semi- and Non- Parametric regression",
     "section": "",
-    "text": "Which can be done rather easy in Stata\n\nfrause oaxaca, clear\ndrop if lnwage==.\nsum lnwage\ngen f = normalden(lnwage, r(mean), r(sd))\nhistogram wages\n\nBut as you can see, it does not fit well."
+    "text": "So what about non-parametric?\n\nNon-parametric is on the other side of the spectrum. There are no “single” parameters to estimate, but rather it tries to be as flexible as possible, to identify all possible relationships in the data.\nIn terms of distributions, it may no longer assumes data distributes as normal, poisson, exponential, etc. Instead, it simply assumes it distributes, however it does. 🤔 But isnt that a problem?\nYes it can be.\n\nOn the one hand Parametric modeling is very “strict” regarding functional forms. (linear quadratic, logs, etc).\nOn the other, Non-parametric can be too flexible. Making the problem almost impossible to solve.\n\nHowever, the benefits of letting your data “speak” for itself, would allow you to avoid some problems with parametric models."
   },
   {
     "objectID": "adv_class/03par_spar_npar.html#histogram-and-kernel-density",
@@ -3231,7 +3231,7 @@
     "href": "adv_class/03par_spar_npar.html#kernel-density",
     "title": "Semi- and Non- Parametric regression",
     "section": "Kernel density",
-    "text": "Kernel density\nAn alternative that overcomes some of the limitations of the Histogram is known as the kernel density estimator. This is defined as:\n\\[\n\\hat f(x) = \\frac{1}{nh}\\sum_i K\\left(\\frac{X_i-x}{h}\\right)\n\\]\nwhere \\(K\\) is what is known as a kernel function.\nThis function is such that has the following properties:\n\\[\n\\int K(z)dz = 1 ; \\int zK(z)dz = 0 ; \\int z^2K(z)dz &lt; \\infty\n\\]\nIs a well behaved pdf on its own, that is symmetric, with defined second moment.\n\nas with the histogram estimator, the Kden is just an average of functions, that has the advantage of being smooth.\nAlthough it also depends strongly, on the choice of bandwidth."
+    "text": "Kernel density\nAn alternative to Histograms is known as the kernel density estimator.\n\\[\n\\hat f(x) = \\frac{1}{nh}\\sum_i K\\left(\\frac{X_i-x}{h}\\right)\n\\]\nwhere \\(K\\) is what is known as a kernel function."
   },
   {
     "objectID": "adv_class/03par_spar_npar.html#kernel-density-visualization",
@@ -3245,7 +3245,7 @@
     "href": "adv_class/03par_spar_npar.html#trade-off-bias-vs-variance",
     "title": "Semi- and Non- Parametric regression",
     "section": "Trade off: Bias vs variance",
-    "text": "Trade off: Bias vs variance\nWhile this estimators are “flexible” in the sense that we impose very simple assumptions for estimation, there is still one parameter that needs attention.\nThe bandwidth \\(h\\)\nThis does not (or cannot) be estimated, rather, needs to be calibrated to balance two problems in Non-parametric analysis. Bias vs Variance:\n\nwhen \\(h\\rightarrow 0\\) , the bias of your estimator goes to zero ( in average). Intuitively \\(\\hat f(x)\\) is constructed based on information that comes from \\(x\\) alone.\nBut the variance increases! Because things will vary for every \\(x\\).\nwhen \\(h \\rightarrow \\infty\\) , the bias increases, because you start using data that is very different to \\(x\\) to estimate \\(\\hat f(x)\\).\nBut variance decreases. Since the “function” is now very smooth (a line?)\n\nThus, special attention is needed to choose the right h, which minimizes the problems (bias and variance)."
+    "text": "Trade off: Bias vs variance\nWhile these estimators are “flexible”, there is one parameter that needs attention: The bandwidth \\(h\\)\nThis parameter needs to be calibrated to balance two problems in Non-parametric analysis. Bias vs Variance:\n\nwhen \\(h\\rightarrow 0\\) , the bias of your estimator goes to zero ( in average). Intuitively \\(\\hat f(x)\\) is constructed based on information that comes from \\(x\\) alone.\nBut the variance increases! Because things will vary for every \\(x\\).\nwhen \\(h \\rightarrow \\infty\\) , the bias increases, because you start using data that is very different to \\(x\\) to estimate \\(\\hat f(x)\\).\nBut variance decreases. Since the “function” is now very smooth (a line?)\n\nThus, special attention is needed to choose the right h, which minimizes the problems (bias and variance)."
   },
   {
     "objectID": "adv_class/03par_spar_npar.html#kdensity-bias-vs-variance",
@@ -3273,21 +3273,21 @@
     "href": "adv_class/03par_spar_npar.html#np---regression",
     "title": "Semi- and Non- Parametric regression",
     "section": "NP - Regression",
-    "text": "NP - Regression\n\nAs hinted from the beginning, the idea of non-parametric regressions is related to estimate a model that is as flexible as it can probably be.\nThis relates to the CEF, where we want to estimate a conditional mean for every combination of X’s. In other words, you aim to estimate models that are valid “locally”. A very difficult task.\n\nYou have a limited sample size\nYou may not see all possible X’s combinations\nand for some, you may have micro-samples (n=1) Can you really do something with this?\n\nYes, make your model flexible, but not overly flexible! but how?\n\nKernel regression ; Spline regression\nPolynomial regression; Smoothed Spline regression."
+    "text": "NP - Regression\n\nAs hinted from the beginning, the idea of non-parametric regressions is related to estimate a model that is as flexible as it can be.\nThis relates to the CEF, where we want to estimate a conditional mean for every combination of X’s. In other words, you aim to estimate models that are valid “locally”. A very difficult task.\n\nYou have a limited sample size\nYou may not see all possible X’s combinations\nand for some, you may have micro-samples (n=1) Can you really do something with this?\n\nYes, make your model flexible, but not overly flexible! but how?\n\nKernel regression ; Spline regression\nPolynomial regression; Smoothed Spline regression."
   },
   {
     "objectID": "adv_class/03par_spar_npar.html#univariate-case",
     "href": "adv_class/03par_spar_npar.html#univariate-case",
     "title": "Semi- and Non- Parametric regression",
     "section": "Univariate case",
-    "text": "Univariate case\n\nConsider a univariate case \\(y,X\\) where you only have 1 indep variable, which are related as follows:\n\n\\[\ny = m(x) + e\n\\]\nwhich imposes the simplifying assumption that error is additive.\n\nIn the parametric case:\n\n\\[\ny =b_0 + b_1 x + b_2 x^2 +b_3 x^3 +...+e\n\\]\n(this is, in fact, starting to become less parametric)\n\nBut in the full (unconstrained) model it would just be (simple conditional mean:\n\n\\[\nE(y|X) = \\hat m(x) = \\frac{\\sum y_i 1(x_i=x)}{\\sum 1(x_i=x)}\n\\]\nProblems? Impossible to do out out sample predictions, and if \\(n&lt;42\\) inference would be extremely unreliable."
+    "text": "Univariate case\n\nConsider a univariate case \\(y,X\\) where you only have 1 indep variable, which are related as follows:\n\n\\[\ny = m(x) + e\n\\]\nwhich imposes the simplifying assumption that error is additive.\n\nIn the parametric case, you could model this as a linear relationship:\n\n\\[\ny =b_0 + b_1 x + b_2 x^2 +b_3 x^3 +...+e\n\\]\n(this is, in fact, starting to become less parametric)"
   },
   {
     "objectID": "adv_class/03par_spar_npar.html#local-constant-regression",
     "href": "adv_class/03par_spar_npar.html#local-constant-regression",
     "title": "Semi- and Non- Parametric regression",
     "section": "Local Constant Regression",
-    "text": "Local Constant Regression\nWe can improve over the Unconstrained mean using the following connection:\n\n\\(1(x_i=x)\\) is a non smooth indicator that shows if an observation is included (counted towards the mean).\nIt can be substituted with \\(K_h(x_i,x)\\), which is the standardized kernel function. (ie \\(K_h(x_i,x) = \\frac{1}{h} K(\\frac{x_i-x}{h})\\)\nDepending on \\(h\\) , it gives the most weight the closer \\(x_i\\) is to \\(x\\).\nThis gives what is known as the Nadaraya-Watson or Local constant estimator:\n\n\\[\n\\hat m(x) = \\frac{\\sum y_i K_h(x_i,x)}{\\sum K_h(x_i,x)} = \\sum y_i w_i\n\\]\nWhich, on its core, is simply a weighted regression, with weights given by \\(\\frac{K_h(x_i,x)}{\\sum K_h(x_i,x)}\\)\n\nKernel Regressions “borrows” info from neighboring observations to obtain a smooth estimator."
+    "text": "Local Constant Regression\nWe can improve over the Unconstrained mean using the following connection:\n\n\\(1(x_i=x)\\) is a non-smooth indicator that shows if an observation is in-sample .\nWe can substitute this with a smooth indicator function\n\n\\[\nK_1(x_i,x) = \\frac{K\\left(\\frac{x_i-x}{h}\\right)}{K(0)}\n\\]\nObservations where $x_i=x$ will have a weight of 1, but depending on $h$, less weight is given the farther $x_i$ is to $x$.\n\nThis gives what is known as the Nadaraya-Watson or Local constant estimator:\n\\[\n\\hat m(x) = \\frac{\\sum y_i K_h(x_i,x)}{\\sum K_h(x_i,x)} = \\sum y_i w_i\n\\]\nWhich, on its core, is simply a weighted regression, with weights given by \\(\\frac{K_h(x_i,x)}{\\sum K_h(x_i,x)}\\)\n\nKernel Regressions “borrows” info from neighboring observations to obtain a smooth estimator."
   },
   {
     "objectID": "adv_class/03par_spar_npar.html#visuals",
@@ -3301,7 +3301,7 @@
     "href": "adv_class/03par_spar_npar.html#considerations",
     "title": "Semi- and Non- Parametric regression",
     "section": "Considerations",
-    "text": "Considerations\n\nLocal Constant estimator is simple to estimate with a single variable. And so with multiple variables:\n\n\\[\n\\hat m(x,z) = \\frac{\\sum y_i K_h(x_i,x) \\times K_h(z_i,z)}{\\sum K_h(x_i,x) \\times K_h(z_i,z)}\n\\]\nThe problem, however, lies on the curse of dimensionality. - More dimensions, less data per \\((x,z)\\) point, unless you “increase” bandwidths.\n\nAs Before, it all depends on the Bandwidth \\(h\\).It determines the “flexibility” of the model.\nThe local constant tends to have considerable bias (specially near limits of the distribution, or when \\(g\\) has too much curvature)"
+    "text": "Considerations\n\nLocal Constant estimator is simple to estimate with a single variable. Multiple variables is just as easy:\n\n\\[\n\\hat m(x,z) = \\frac{\\sum y_i K_h(x_i,x) \\times K_h(z_i,z)}{\\sum K_h(x_i,x) \\times K_h(z_i,z)}\n\\]\nThe problem, however, lies on the curse of dimensionality.\nMore dimensions, less data per \\((x,z)\\) point, unless you “increase” bandwidths.\n\nAs before, it all depends on the Bandwidth \\(h\\), which determines the “flexibility” of the model.\nThe local constant tends to have considerable bias (specially near limits of the distribution, or when \\(g\\) has too much curvature)"
   },
   {
     "objectID": "adv_class/03par_spar_npar.html#choosing-h",
@@ -3357,7 +3357,7 @@
     "href": "adv_class/03par_spar_npar.html#stata-example",
     "title": "Semi- and Non- Parametric regression",
     "section": "Stata Example",
-    "text": "Stata Example\nfrause oaxaca\nnpregress kernel lnwage age exper\n\nComputing mean function\n  \nMinimizing cross-validation function:\n  \nIteration 0:   Cross-validation criterion = -1.5904753  \nIteration 1:   Cross-validation criterion = -1.5906158  \nIteration 2:   Cross-validation criterion = -1.5907243  \nIteration 3:   Cross-validation criterion = -1.5911389  \nIteration 4:   Cross-validation criterion = -1.5911389  \nIteration 5:   Cross-validation criterion = -1.5911855  \nIteration 6:   Cross-validation criterion = -1.5912075  \n  \nComputing optimal derivative bandwidth\n  \nIteration 0:   Cross-validation criterion =  .01378252  \nIteration 1:   Cross-validation criterion =   .0019967  \nIteration 2:   Cross-validation criterion =  .00196967  \nIteration 3:   Cross-validation criterion =  .00196371  \n\nBandwidth\n------------------------------------\n             |      Mean     Effect \n-------------+----------------------\n         age |  2.843778   15.10978 \n       exper |  3.113587   16.54335 \n------------------------------------\n\nLocal-linear regression                    Number of obs      =          1,434\nKernel   : epanechnikov                    E(Kernel obs)      =          1,434\nBandwidth: cross-validation                R-squared          =         0.3099\n------------------------------------------------------------------------------\n      lnwage |   Estimate\n-------------+----------------------------------------------------------------\nMean         |\n      lnwage |   3.339269\n-------------+----------------------------------------------------------------\nEffect       |\n         age |   .0169326\n       exper |  -.0010196\n------------------------------------------------------------------------------\nNote: Effect estimates are averages of derivatives.\nNote: You may compute standard errors using vce(bootstrap) or reps()."
+    "text": "Stata Example\nfrause oaxaca\nnpregress kernel lnwage age exper\n\nComputing mean function\n  \nMinimizing cross-validation function:\nIteration 6:   Cross-validation criterion = -1.5912075  \n  \nComputing optimal derivative bandwidth\nIteration 3:   Cross-validation criterion =  .00196371  \n\nBandwidth\n------------------------------------\n             |      Mean     Effect \n-------------+----------------------\n         age |  2.843778   15.10978 \n       exper |  3.113587   16.54335 \n------------------------------------\n\nLocal-linear regression                    Number of obs      =          1,434\nKernel   : epanechnikov                    E(Kernel obs)      =          1,434\nBandwidth: cross-validation                R-squared          =         0.3099\n------------------------------------------------------------------------------\n      lnwage |   Estimate\n-------------+----------------------------------------------------------------\nMean         |\n      lnwage |   3.339269\n-------------+----------------------------------------------------------------\nEffect       |\n         age |   .0169326\n       exper |  -.0010196\n------------------------------------------------------------------------------\nNote: Effect estimates are averages of derivatives.\nNote: You may compute standard errors using vce(bootstrap) or reps()."
   },
   {
     "objectID": "adv_class/03par_spar_npar.html#other-types-of-non-parametric-models",
@@ -3371,7 +3371,7 @@
     "href": "adv_class/03par_spar_npar.html#non-parametric-series",
     "title": "Semi- and Non- Parametric regression",
     "section": "Non-parametric series",
-    "text": "Non-parametric series\nThis approach assumes that model flexibility can achieve by using “basis” functions in combination with Interactions, but using “global” regressions (OLS)\nBut what are “basis” functions? They are a collection of terms that approximates smooth functions arbitrarily well.\n\\[\n\\begin{aligned}\ny &= m(x,z)+e  \\\\\nm(x,z)  &= B(x)+ B(z)+B(x)*B(z)  \\\\\nB(x)  &= (x, x^2, x^3,...) \\\\\nB(x)  & = fracPoly \\\\\nB(x)  &= (x, max(0,x-c_1), max(0,x-c_2), ... \\\\\nB(x)  &= (x,x^2,max(0,x-c_1)^2, max(0,x-c_2)^2, ... \\\\\nB(x)  &= B-splines\n\\end{aligned}\n\\]\n\nPolynomials can be used, but there may be problems with high order polynomials. (Runge’s phenomenon,multiple-co-linearity). They are “global” estimators.\nFractional polynomials: More flexible than polynomials, without producing “waves” on the predictions\nNatural Splines, are better at capturing smooth transitions (depending on degree). Require choosing Knots appropriately.\nB-splines are similar to N-splines, but with better stat properties. Also require choosing knots\n\nExcept for correctly estimating the Bases functions (fracpoly and Bsplines are not straight forward), estimation requires simple OLS."
+    "text": "Non-parametric series\nThis approach assumes that model flexibility can achieve by using “basis” functions in combination with Interactions, but using “global” regressions (OLS)\nBut what are “basis” functions? They are a collection of terms that approximates smooth functions arbitrarily well.\n\\[\n\\begin{aligned}\ny &= m(x,z)+e  \\\\\nm(x,z)  &= B(x)+ B(z)+B(x)*B(z)  \\\\\nB(x)  &= (x, x^2, x^3,...) \\\\\nB(x)  & = fracPoly \\\\\nB(x)  &= (x, max(0,x-c_1), max(0,x-c_2), ... \\\\\nB(x)  &= (x,x^2,max(0,x-c_1)^2, max(0,x-c_2)^2, ... \\\\\nB(x)  &= B-splines\n\\end{aligned}\n\\]"
   },
   {
     "objectID": "adv_class/03par_spar_npar.html#np-series---tuning",
@@ -3392,21 +3392,21 @@
     "href": "adv_class/03par_spar_npar.html#np-series-implementation-marginal-effects",
     "title": "Semi- and Non- Parametric regression",
     "section": "NP series: Implementation marginal effects",
-    "text": "NP series: Implementation marginal effects\nAs always, it all depends on how are the models estimated.\n\nStata command npregress series allows you to estimate this type of models using polynomials, splines and B-splines. And also allows estimates marginal effects for you. (can be slow)\nfp estimates fractional polynomials, but does not estimate marginal effects for you.\nR is a bit more flexible in terms of tracking down functions as variables (~x+I(x*x)+ln(x)). So it may be “easy” to estimate those effects.\nIn Stata, you can use the package f_able to estimate those marginal effects, however. see here for details. and SSC for the latest update.\n\nfrause oaxaca, clear\ndrop agesq\nf_spline age = age, nk(1) degree(3)\nf_spline exper = exper, nk(1) degree(3)\nqui:regress lnwage c.(age*)##c.(exper*)\nf_able age? exper?, auto \nmargins, dydx(age exper) noestimcheck \n\n------------------------------------------------------------------------------\n             |            Delta-method\n             |      dy/dx   std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         age |   .0360234   .0033909    10.62   0.000     .0293775    .0426694\n       exper |   .0082594   .0050073     1.65   0.099    -.0015547    .0180735\n------------------------------------------------------------------------------"
+    "text": "NP series: Implementation marginal effects\nAs always, it all depends on how are the models estimated.\n\nStata command npregress series allows you to estimate this type of models using polynomials, splines and B-splines. And also allows estimates marginal effects for you. (can be slow)\nfp estimates fractional polynomials, but does not estimate marginal effects for you.\nIn Stata, you can use the package f_able to estimate those marginal effects, however. see here for details. and SSC for the latest update.\n\nfrause oaxaca, clear\ndrop agesq\nf_spline age = age, nk(1) degree(3)\nf_spline exper = exper, nk(1) degree(3)\nqui:regress lnwage c.(age*)##c.(exper*)\nf_able age? exper?, auto \nmargins, dydx(age exper) noestimcheck \n\n------------------------------------------------------------------------------\n             |            Delta-method\n             |      dy/dx   std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         age |   .0360234   .0033909    10.62   0.000     .0293775    .0426694\n       exper |   .0082594   .0050073     1.65   0.099    -.0015547    .0180735\n------------------------------------------------------------------------------"
   },
   {
     "objectID": "adv_class/03par_spar_npar.html#semiparametric-regressions",
     "href": "adv_class/03par_spar_npar.html#semiparametric-regressions",
     "title": "Semi- and Non- Parametric regression",
     "section": "Semiparametric Regressions",
-    "text": "Semiparametric Regressions\n\nFull non-parametric estimations are powerful to identify very flexible functional forms. To avoid overfitting, however, one must choose tuning parameters appropriately (\\(h\\) and \\(cutoffs\\) ).\nA disadvantage: Curse of dimensionality. More variables need more data to provide good results. But, the more data you have, the more difficult to estimate (computing time).\nIt also becomes extremly difficult to interpret. (too much flexibility)\nAn alternative, Use the best of both worlds: Semiparametric regression\n\nFlexiblity when needed with the structure of standard regressions, to avoid the downfalls of fully nonparametric models"
+    "text": "Semiparametric Regressions\n\nFull non-parametric estimations are powerful to identify very flexible functional forms. To avoid overfitting, however, one must choose tuning parameters appropriately (\\(h\\) and \\(cutoffs\\) ).\nA disadvantage: Curse of dimensionality. More variables need more data to provide good results. But, the more data you have, the more difficult to estimate (computing time).\nIt also becomes extremly difficult to interpret. (too much flexibility)\nAn alternative, Use the best of both worlds: Semiparametric regression\n\nFlexibility when needed with the structure of standard regressions, to avoid the downfalls of fully nonparametric models"
   },
   {
     "objectID": "adv_class/03par_spar_npar.html#partially-linear-model",
     "href": "adv_class/03par_spar_npar.html#partially-linear-model",
     "title": "Semi- and Non- Parametric regression",
     "section": "Partially Linear model",
-    "text": "Partially Linear model\n\\[\ny = x\\beta +g(z) +e\n\\]\nThis model assumes that only a smaller set of covariates need to be estimated non-parametrically in the model.\nEstimators:\n\nnpregress series: Use BasisF to estimate \\(g(z)\\) . Or other series regressions, fractional polynomial fp\nYatchew 1997: For a single z, sort variables by it, and estimate: \\(\\Delta y=\\Delta X\\beta+ \\Delta g(z) + \\Delta e\\). This works because \\(\\Delta g(z)\\rightarrow 0\\)\nEstimate \\(g(z)\\) regressing \\(y-x\\hat \\beta\\) on \\(z\\). See plreg\nRobinson 1988: Application of FWL. Estimate \\(y = g_y(z)+e_y\\) and \\(x = g_x(z)+e_x\\) and estimate \\(\\beta = (e_x ' e_x)^{-1} e_x ' e_y\\) . For \\(g(z)\\) same as before. See semipar.\nOther methods available see semi_stata"
+    "text": "Partially Linear model\n\\[\ny = x\\beta +g(z) +e\n\\]\nThis model assumes that only a smaller set of covariates need to be estimated non-parametrically in the model.\nEstimators:\n\nnpregress series: Use Basis to estimate \\(g(z)\\)\nYatchew 1997: For a single z, sort variables by it, and estimate: \\(\\Delta y=\\Delta X\\beta+ \\Delta g(z) + \\Delta e\\). This works because \\(\\Delta g(z)\\rightarrow 0\\)\nEstimate \\(g(z)\\) regressing \\(y-x\\hat \\beta\\) on \\(z\\). See plreg\nRobinson 1988: Application of FWL. Estimate \\(y = g_y(z)+e_y\\) and \\(x = g_x(z)+e_x\\) and estimate \\(\\beta = (e_x ' e_x)^{-1} e_x ' e_y\\) . For \\(g(z)\\) same as before. See semipar.\nOther methods available see semi_stata"
   },
   {
     "objectID": "adv_class/03par_spar_npar.html#generalized-additive-model",
@@ -3420,14 +3420,14 @@
     "href": "adv_class/03par_spar_npar.html#smooth-coefficient-model",
     "title": "Semi- and Non- Parametric regression",
     "section": "Smooth Coefficient model",
-    "text": "Smooth Coefficient model\n\\[\ny = g_0(z)+g_1(z)x + e\n\\]\nThis model assumes that \\(X's\\) have a locally linear effect on $y$, but that effect varies across values of \\(z\\), in a non-parametric way.\n\nfp or manual implementation of basis functions, with interaction. May allow for multiple variables in \\(z\\)\nOne can also use Local Kernel regressions. locally weighted regression where All X variables are considered fixed, or interacted with polynomials of Z. Choice of bandwidth problematic, but doable (LOOCV).\nvc_pack can estimate this models with a single z, as well as test it. Overall marginal effects still difficult to obtain."
+    "text": "Smooth Coefficient model\n\\[\ny = g_0(z)+g_1(z)x + e\n\\]\nThis model assumes that \\(X's\\) have a locally linear effect on \\(y\\), but that effect varies across values of \\(z\\), in a non-parametric way.\n\nfp or manual implementation of basis functions, with interaction. May allow for multiple variables in \\(z\\)\nOne can also use Local Kernel regressions. locally weighted regression where All X variables are considered fixed, or interacted with polynomials of Z. Choice of bandwidth problematic, but doable (LOOCV).\nvc_pack can estimate this models with a single z, as well as test it. Overall marginal effects still difficult to obtain."
   },
   {
     "objectID": "adv_class/03par_spar_npar.html#example",
     "href": "adv_class/03par_spar_npar.html#example",
     "title": "Semi- and Non- Parametric regression",
     "section": "Example",
-    "text": "Example\n\nfrause oaxaca\nnpregress kernel lnwage age exper\nmargins, dydx(*)\n\nvc_bw lnwage educ exper tenure female married divorced, vcoeff(age)\nvc_reg lnwage educ exper tenure female married divorced, vcoeff(age) k(20)\nssc install addplot\nvc_graph educ exper tenure female married divorced, rarea\naddplot grph1:, legend(off) title(Education)\naddplot grph2:, legend(off) title(Experience)\naddplot grph3:, legend(off) title(Tenure)\naddplot grph4:, legend(off) title(Female)\naddplot grph5:, legend(off) title(Married)\naddplot grph6:, legend(off) title(Divorced)\n\ngraph combine grph1 grph2 grph3 grph4 grph5 grph6"
+    "text": "Example\n\nfrause oaxaca\nvc_bw lnwage educ exper tenure female married divorced, vcoeff(age)\nvc_reg lnwage educ exper tenure female married divorced, vcoeff(age) k(20)\nssc install addplot\nvc_graph educ exper tenure female married divorced, rarea\naddplot grph1:, legend(off) title(Education)\naddplot grph2:, legend(off) title(Experience)\naddplot grph3:, legend(off) title(Tenure)\naddplot grph4:, legend(off) title(Female)\naddplot grph5:, legend(off) title(Married)\naddplot grph6:, legend(off) title(Divorced)\n\ngraph combine grph1 grph2 grph3 grph4 grph5 grph6"
   },
   {
     "objectID": "adv_class/03par_spar_npar.html#example-1",
@@ -6612,7 +6612,7 @@
     "href": "rmethods2/session_3.html",
     "title": "Research Methods II",
     "section": "",
-    "text": "How to Measure Inequality\n\n\nHow to Decompose Inequality"
+    "text": "Economic inequality refers to how economic variables are distributed among individuals in a group, among groups in a population, or among countries.\nInequality of What?\n\ninequality of opportunities, for example access to employment or education\ninequality of outcomes, for example material dimensions of human well-being, such as the level of income, educational attainment, health status and so on.\n\nFor now we will focus on income inequality.\n\n\n\n\n\nThere are various approaches that have been used for the analysis of Inequality\n\nIntuitive approach\n\nUnaxiomatic approach used to describe inequality.\n\nNormative approach-Social welfare\n\nUses explicit concepts of welfare functions to quantify inequality\n\nInformation theory\n\nQuantifies inequality treating it as a problem of comparing income distribution probabilities.\n\nAxiomatic approach\n\nUses a series of axioms to create measures of inequality\n\n\n\n\n\n\n\nRegardless of the approach, there are some basic steps required to measure inequality\n\nDefine the population of interest\nDefine the measure of interest\nAdjust for prices (if necessary)\nAdjust for individual heterogeneity (needs) (if necessary)\n\n\n\n\n\n\nLet \\(y_i\\) be the income of individual \\(i\\) in the population. Assume that \\(y_i&gt;&gt;0\\).\nAssume that \\(y_i\\) can be characterized by a probability distribution function \\(f(y)\\).\n\n\\[\\begin{aligned}\ny_i &\\sim f(y) \\rightarrow \\int_{-\\infty}^{z} f(y) dy = F(z) \\\\\nF(0)&=0 \\ \\& \\ F(\\infty)=1 \\\\\nF(Q_y(p)) &=p \\rightarrow Q_y(p) = F^{-1}(p)\n\\end{aligned}\n\\]\nThe \\(p_{th}\\) quantile of \\(y_i\\) is the value \\(Q_y(p)\\) such that \\(p\\) percent of the population has income below \\(Q_y(p)\\).\n\n\n\nMean of Standard of Living:\n\\[\\mu_y = E(y) = \\int_{-\\infty}^{\\infty} y f(y) dy=\\int_0^1Q(p)dp\n\\]\nFinally, the inequality measure can be written as:\n\\[I(y)=I(\\mu_y, f(.)) = I(\\mu_y, F(.))\n\\]\n\n\n\n\nThere are several tools that can be used to visualize income distribution:\n\nDensity Function/Histogram\nPen_parade/Cumulative Distribution Function\nLorenz Curve\n\n\n\n\n\n\nDensity/HistogramPlots\n\n\n\nDensity functions and histograms are used to visualize the distribution of income in the population.\nThey could be used to detect multimodality, skewness, etc\nAnd could be used to compare distributions across groups.\nStata Commands\nhistogram varname [weight] [if]\nkdensity varname [weight] [if]\n\n\n\n\n\nCode\nset scheme white2\nset linesize 255\ncolor_style tableau\nqui:frause oaxaca, clear\nsum wt, meanonly\ngen int wt2 = round(wt/r(min))\nqui:two histogram lnwage [fw=wt2] ///\n    || kdensity lnwage [w=wt2], ///\n    ysize(5) xsize(9) xtitle(\"Log Wages\") ///\n    legend(order(1 \"Histogram\" 2 \"Kernel Density\") pos(6) col(2)) \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPenParade/CDFplot\n\n\n\nA different approach to visualize the distribution.\nThe Pen Parade plots the values of the variable of interest in ascending order.\n\ny-axis: Q(p); x-axis: p\n\nThe CDF plots the cumulative distribution of the variable of interest.\n\ny-axis: p; x-axis: Q(p)\n\nThey give you a sense of the distribution, and easy comparison across high and low values.\n\n\n\nqui:pctile qlnwage = lnwage [w=wt], nq(100)\nqui:gen  qwage = exp(qlnwage)\nqui:gen p = _n if _n&lt;100\nscatter qwage p, connect(l) name(m1, replace) ysize(5) xsize(8)\nscatter p qwage, connect(l) name(m2, replace) ysize(5) xsize(8)\n\n\n\nCode\n\n\n\n\n\nPen-Parade\n\n\n\n\n\n\n\n\n\nCum Distribution Function\n\n\n\n\nDistribution plots\n\n\n\n\n\n\n\n\n\n\nLorenz CurveCodePlotAlternative:\n\n\n\nPerhaps the most popular tool to visualize income distribution.\nThis curve plots the cumulative share of income vs the cumulative share of population.\n\nHow much of total income is held by the bottom X% of the population ?\n\n“Easy” to read:\n\nThe closest it is to the 45 degree line, the more equal the distribution.\n\nNot easy to implement with negative and zero incomes.\nComparison across groups may be ambiguous.\nits always increasing at an increasing rate respect to X%\n\n\n\nAssume data is sorted by income\n\n\nx-axis: Cum share of population\n\\[P_j = \\frac{\\sum_{i=1}^j w_i}{\\sum_{i=1}^n w_i}\\]\n\ny-axis: Cum share of income\n\\[LC_j = \\frac{\\sum_{i=1}^j y_i w_i}{\\sum_{i=1}^n y_iw_i}\\]\n\n\n\nfrause oaxaca, clear\ngen wage = exp(lnwage)\nsort wage wt  // sort by income and weight \n// Estimate Totals for non missing data\negen twage = sum(wage * wt) if wage!=.\negen tpop  = sum(wt)        if wage!=.\n// get cumulative shares\ngen lc_i = sum( (wage*wt/twage) )*100 if wage!=.\ngen p_i  = sum( (wt/tpop) )*100      if wage!=.\n\n\n\n\n\nCode\ntwo (line lc_i p_i) /// Lorenz Curve\n    ( function x, range(0 100) ) , /// 45 degree line\n    aspect(1) ysize(5) xsize(8) ///\n    xtitle(\"Cumulative Share of Population\") ///\n    ytitle(\"Cumulative Share of Income\") ///\n    legend(off)\n\n\n\n\n\nLorenz Curve\n\n\n\n\n\n\nssc install glcurve // installs command for Generalized Lorenz Curve\nglcurve wage [aw = wt], /// provides variable and weight\n    lorenz // Request ploting the Lorenz Curve\n\n\n\n\n\n\nThere are several measures of inequality. The most popular are:\n\nInterquantile Range (IQR) (or normalizations) \\[IQR(\\#1,\\#2) = Q(\\#2) - Q(\\#1)\n\\]\nInterquantile Share Ratio (Palma ratio (10/40)) \\[ISR(\\#1,\\#2) = \\frac{1-LC(\\#2)}{LC(\\#1)}\n\\]\nCoefficient of Variation (CV) \\[CV = \\frac{\\sigma_y}{\\mu_y}\n\\]\n\n\n\n\n\nLorenz Curve:\n\n\\[LC(p) = \\frac{\\int_0^p Q_y(u)du}{\\int_0^1 Q_y(u)du}\n= \\frac{1}{\\mu_y} \\int_0^p Q_y(u)du\n\\]\n\nProperties\n\n\\[\\frac{\\partial LC(p)}{\\partial p} = \\frac{Q_y(p)}{\\mu_y} \\geq 0\\]\n\\[\\frac{\\partial^2 LC(p)}{\\partial p^2} = \\frac{1}{\\mu_y f(y)} \\geq 0\\]\n\n\n\n\nThe Gini coefficient is the most popular measure of inequality.\nIt is defined as (2x) the area between the Lorenz Curve and the 45 degree line.\n\n\\[Gini(y) = 2 \\int_0^1 (p-LC(p)) dp\\]\n\nwhere \\(p-LC(p)\\) is the “loss” of income the Bottom \\(p\\) percent of the population experiences.\nIt is bounded between 0 (perfect Equality) and 1 (complete Inequality).\nWhen Lorenz do not cross, Gini provides unambiguous ranking of inequality.\n\n\\[Gini(y) = \\frac{2}{\\mu_y} Cov(y_p,p)\\]\n\n\n\n\nStata has plenty of commands that can be used to estimate Gini\n\nsearch gini for few examples\n\nI suggest 3 commands:\n\nfastgini (ssc install fastgini)\nineqdeco (ssc install ineqdeco)\nsgini (ssc install sgini)\nrif (ssc install rif)\n\n\n\n\n\n\nsgini wage \n\n\nGini coefficient for wage\n\n-----------------------\n    Variable |      v=2\n-------------+---------\n        wage |   0.2460\n-----------------------\n\n\n\nineqdeco wage [pw=wt]\n\n \nPercentile ratios\n\n----------------------------------------------------------\n  All obs |    p90/p10     p90/p50     p10/p50     p75/p25\n----------+-----------------------------------------------\n          |      3.154       1.694       0.537       1.771\n----------------------------------------------------------\n  \nGeneralized Entropy indices GE(a), where a = income difference\n sensitivity parameter, and Gini coefficient\n\n----------------------------------------------------------------------\n  All obs |     GE(-1)       GE(0)       GE(1)       GE(2)        Gini\n----------+-----------------------------------------------------------\n          |    0.23199     0.14240     0.12282     0.13398     0.26273\n----------------------------------------------------------------------\n   \nAtkinson indices, A(e), where e &gt; 0 is the inequality aversion parameter\n\n----------------------------------------------\n  All obs |     A(0.5)        A(1)        A(2)\n----------+-----------------------------------\n          |    0.06292     0.13273     0.31693\n----------------------------------------------\n\n\n\n\n\n\nThere are other approaches that can be used to measure inequality.\n\nNormative approach-Social welfare: Uses explicit concepts of welfare functions to quantify inequality\n\n\n\\[I_A(y,\\varepsilon) = 1 - \\left( \\frac{1}{N} \\sum_{i=1}^N \\left(\\frac{y_i}{\\mu_y}\\right)^{1-\\varepsilon} \\right)^\\frac{1}{1-\\varepsilon}\n\\]\nwhere is a measure of inequality aversion.\n\nInformation theory: Quantifies inequality treating it as a problem of comparing income distribution probabilities. How far are we from Full Entropy\n\n\\[I_{GE}(Y,\\alpha)=\\frac{1}{\\alpha(1-\\alpha)}\\left[\\frac{1}{N} \\sum \\left(\\frac{y_i}{\\mu_y}\\right)^\\alpha -1\\right]\n\\]\n\nAxiomatic approach\n\nUses a series of axioms to create measures of inequality"
   },
   {
     "objectID": "rmethods2/session_2.html",
@@ -6626,7 +6626,7 @@
     "href": "rmethods2/session_4.html",
     "title": "Research Methods II",
     "section": "",
-    "text": "How to Measure Inequality\n\n\nHow to Decompose Inequality"
+    "text": "Oaxaca-Blinder Decomposition: Standard Framework\n\n\nOB Decomposition: Extensions"
   },
   {
     "objectID": "rmethods2/session_6.html",
@@ -7115,36 +7115,36 @@
     "objectID": "rmethods2/session_3.html#what-is-inequality",
     "href": "rmethods2/session_3.html#what-is-inequality",
     "title": "Research Methods II",
-    "section": "What is Inequality?",
-    "text": "What is Inequality?\n\nEconomic inequality refers to how economic variables are distributed among individuals in a group, among groups in a population, or among countries.\nInequality of What?\n\ninequality of opportunities, for example access to employment or education\ninequality of outcomes, for example material dimensions of human well-being, such as the level of income, educational attainment, health status and so on.\n\nFor now we will focus on income inequality."
+    "section": "",
+    "text": "Economic inequality refers to how economic variables are distributed among individuals in a group, among groups in a population, or among countries.\nInequality of What?\n\ninequality of opportunities, for example access to employment or education\ninequality of outcomes, for example material dimensions of human well-being, such as the level of income, educational attainment, health status and so on.\n\nFor now we will focus on income inequality."
   },
   {
     "objectID": "rmethods2/session_3.html#how-do-you-analyze-measure-inequality",
     "href": "rmethods2/session_3.html#how-do-you-analyze-measure-inequality",
     "title": "Research Methods II",
-    "section": "How do you analyze (measure) inequality?",
-    "text": "How do you analyze (measure) inequality?\n\nThere are various approaches that have been used for the analysis of Inequality\n\nIntuitive approach\n\nUnaxiomatic approach used to describe inequality.\n\nNormative approach-Social welfare\n\nUses explicit concepts of welfare functions to quantify inequality\n\nInformation theory\n\nQuantifies inequality treating it as a problem of comparing income distribution probabilities.\n\nAxiomatic approach\n\nUses a series of axioms to create measures of inequality"
+    "section": "",
+    "text": "There are various approaches that have been used for the analysis of Inequality\n\nIntuitive approach\n\nUnaxiomatic approach used to describe inequality.\n\nNormative approach-Social welfare\n\nUses explicit concepts of welfare functions to quantify inequality\n\nInformation theory\n\nQuantifies inequality treating it as a problem of comparing income distribution probabilities.\n\nAxiomatic approach\n\nUses a series of axioms to create measures of inequality"
   },
   {
     "objectID": "rmethods2/session_3.html#preliminaries",
     "href": "rmethods2/session_3.html#preliminaries",
     "title": "Research Methods II",
-    "section": "Preliminaries",
-    "text": "Preliminaries\n\nRegardless of the approach, there are some basic steps required to measure inequality\n\nDefine the population of interest\nDefine the measure of interest\nAdjust for prices (if necessary)\nAdjust for individual heterogeneity (needs) (if necessary)"
+    "section": "",
+    "text": "Regardless of the approach, there are some basic steps required to measure inequality\n\nDefine the population of interest\nDefine the measure of interest\nAdjust for prices (if necessary)\nAdjust for individual heterogeneity (needs) (if necessary)"
   },
   {
     "objectID": "rmethods2/session_3.html#mathematical-preliminaries",
     "href": "rmethods2/session_3.html#mathematical-preliminaries",
     "title": "Research Methods II",
-    "section": "Mathematical Preliminaries",
-    "text": "Mathematical Preliminaries\n\nLet \\(y_i\\) be the income of individual \\(i\\) in the population. Assume that \\(y_i&gt;&gt;0\\).\nAssume that \\(y_i\\) can be characterized by a probability distribution function \\(f(y)\\).\n\n\\[\\begin{aligned}\ny_i &\\sim f(y) \\rightarrow \\int_{-\\infty}^{z} f(y) dy = F(z) \\\\\nF(0)&=0 \\ \\& \\ F(\\infty)=1 \\\\\nF(Q_y(p)) &=p \\rightarrow Q_y(p) = F^{-1}(p)\n\\end{aligned}\n\\]\nThe \\(p_{th}\\) quantile of \\(y_i\\) is the value \\(Q_y(p)\\) such that \\(p\\) percent of the population has income below \\(Q_y(p)\\)."
+    "section": "",
+    "text": "Let \\(y_i\\) be the income of individual \\(i\\) in the population. Assume that \\(y_i&gt;&gt;0\\).\nAssume that \\(y_i\\) can be characterized by a probability distribution function \\(f(y)\\).\n\n\\[\\begin{aligned}\ny_i &\\sim f(y) \\rightarrow \\int_{-\\infty}^{z} f(y) dy = F(z) \\\\\nF(0)&=0 \\ \\& \\ F(\\infty)=1 \\\\\nF(Q_y(p)) &=p \\rightarrow Q_y(p) = F^{-1}(p)\n\\end{aligned}\n\\]\nThe \\(p_{th}\\) quantile of \\(y_i\\) is the value \\(Q_y(p)\\) such that \\(p\\) percent of the population has income below \\(Q_y(p)\\)."
   },
   {
     "objectID": "rmethods2/session_3.html#mathematical-preliminaries-1",
     "href": "rmethods2/session_3.html#mathematical-preliminaries-1",
     "title": "Research Methods II",
-    "section": "Mathematical Preliminaries",
-    "text": "Mathematical Preliminaries\nMean of Standard of Living:\n\\[\\mu_y = E(y) = \\int_{-\\infty}^{\\infty} y f(y) dy=\\int_0^1Q(p)dp\n\\]\nFinally, the inequality measure can be written as:\n\\[I(y)=I(\\mu_y, f(.)) = I(\\mu_y, F(.))\n\\]"
+    "section": "",
+    "text": "Mean of Standard of Living:\n\\[\\mu_y = E(y) = \\int_{-\\infty}^{\\infty} y f(y) dy=\\int_0^1Q(p)dp\n\\]\nFinally, the inequality measure can be written as:\n\\[I(y)=I(\\mu_y, f(.)) = I(\\mu_y, F(.))\n\\]"
   },
   {
     "objectID": "rmethods2/session_3.html#section",
@@ -7171,8 +7171,8 @@
     "objectID": "rmethods2/session_3.html#visualization-tools",
     "href": "rmethods2/session_3.html#visualization-tools",
     "title": "Research Methods II",
-    "section": "Visualization tools",
-    "text": "Visualization tools\n\nThere are several tools that can be used to visualize income distribution:\n\nDensity Function/Histogram\nPen_parade/Cumulative Distribution Function\nLorenz Curve"
+    "section": "",
+    "text": "There are several tools that can be used to visualize income distribution:\n\nDensity Function/Histogram\nPen_parade/Cumulative Distribution Function\nLorenz Curve"
   },
   {
     "objectID": "rmethods2/session_3.html#penparadecdf",
@@ -7207,7 +7207,7 @@
     "href": "rmethods2/session_3.html#section-1",
     "title": "Research Methods II",
     "section": "",
-    "text": "PenParade/CDFplot\n\n\n\nA different approach to visualize the distribution.\nThe Pen Parade plots the values of the variable of interest in ascending order.\n\ny-axis: Q(p); x-axis: p\n\nThe CDF plots the cumulative distribution of the variable of interest.\n\ny-axis: p; x-axis: Q(p)\n\nThey give you a sense of the distribution, and easy comparison across high and low values.\n\n\n\n\nCode\nqui:pctile qlnwage = lnwage [w=wt], nq(100)\nqui:gen  qwage = exp(qlnwage)\nqui:gen p = _n if _n&lt;100\nscatter qwage p, connect(l) name(m1, replace) ysize(5) xsize(8)\nscatter p qwage, connect(l) name(m2, replace) ysize(5) xsize(8)\n\n\n\n\n\n\nPen-Parade\n\n\n\n\n\nCum Distribution Function\n\n\n\n\n\nDistribution plots"
+    "text": "PenParade/CDFplot\n\n\n\nA different approach to visualize the distribution.\nThe Pen Parade plots the values of the variable of interest in ascending order.\n\ny-axis: Q(p); x-axis: p\n\nThe CDF plots the cumulative distribution of the variable of interest.\n\ny-axis: p; x-axis: Q(p)\n\nThey give you a sense of the distribution, and easy comparison across high and low values.\n\n\n\nqui:pctile qlnwage = lnwage [w=wt], nq(100)\nqui:gen  qwage = exp(qlnwage)\nqui:gen p = _n if _n&lt;100\nscatter qwage p, connect(l) name(m1, replace) ysize(5) xsize(8)\nscatter p qwage, connect(l) name(m2, replace) ysize(5) xsize(8)\n\n\n\nCode\n\n\n\n\n\nPen-Parade\n\n\n\n\n\n\n\n\n\nCum Distribution Function\n\n\n\n\nDistribution plots"
   },
   {
     "objectID": "rmethods2/session_3.html#section-3",
@@ -7227,29 +7227,29 @@
     "objectID": "rmethods2/session_3.html#inequality-measures",
     "href": "rmethods2/session_3.html#inequality-measures",
     "title": "Research Methods II",
-    "section": "Inequality Measures",
-    "text": "Inequality Measures\nThere are several measures of inequality. The most popular are:\n\nInterquantile Range (IQR) (or normalizations) \\[IQR(\\#1,\\#2) = Q(\\#2) - Q(\\#1)\n\\]\nInterquantile Share Ratio (Palma ratio (10/40)) \\[ISR(\\#1,\\#2) = \\frac{1-LC(\\#2)}{LC(\\#1)}\n\\]\nCoefficient of Variation (CV) \\[CV = \\frac{\\sigma_y}{\\mu_y}\n\\]"
+    "section": "",
+    "text": "There are several measures of inequality. The most popular are:\n\nInterquantile Range (IQR) (or normalizations) \\[IQR(\\#1,\\#2) = Q(\\#2) - Q(\\#1)\n\\]\nInterquantile Share Ratio (Palma ratio (10/40)) \\[ISR(\\#1,\\#2) = \\frac{1-LC(\\#2)}{LC(\\#1)}\n\\]\nCoefficient of Variation (CV) \\[CV = \\frac{\\sigma_y}{\\mu_y}\n\\]"
   },
   {
     "objectID": "rmethods2/session_3.html#inequality-measures-1",
     "href": "rmethods2/session_3.html#inequality-measures-1",
     "title": "Research Methods II",
-    "section": "Inequality Measures",
-    "text": "Inequality Measures\n\nLorenz Curve:\n\n\\[LC(p) = \\frac{\\int_0^p Q_y(u)du}{\\int_0^1 Q_y(u)du}\n= \\frac{1}{\\mu_y} \\int_0^p Q_y(u)du\n\\]\n\nProperties\n\n\\[\\frac{\\partial LC(p)}{\\partial p} = \\frac{Q_y(p)}{\\mu_y} \\geq 0\\]\n\\[\\frac{\\partial^2 LC(p)}{\\partial p^2} = \\frac{1}{\\mu_y f(y)} \\geq 0\\]"
+    "section": "",
+    "text": "Lorenz Curve:\n\n\\[LC(p) = \\frac{\\int_0^p Q_y(u)du}{\\int_0^1 Q_y(u)du}\n= \\frac{1}{\\mu_y} \\int_0^p Q_y(u)du\n\\]\n\nProperties\n\n\\[\\frac{\\partial LC(p)}{\\partial p} = \\frac{Q_y(p)}{\\mu_y} \\geq 0\\]\n\\[\\frac{\\partial^2 LC(p)}{\\partial p^2} = \\frac{1}{\\mu_y f(y)} \\geq 0\\]"
   },
   {
     "objectID": "rmethods2/session_3.html#inequality-measures-gini-coefficient",
     "href": "rmethods2/session_3.html#inequality-measures-gini-coefficient",
     "title": "Research Methods II",
-    "section": "Inequality Measures: Gini Coefficient",
-    "text": "Inequality Measures: Gini Coefficient\n\nThe Gini coefficient is the most popular measure of inequality.\nIt is defined as (2x) the area between the Lorenz Curve and the 45 degree line.\n\n\\[Gini(y) = 2 \\int_0^1 (p-LC(p)) dp\\]\n\nwhere \\(p-LC(p)\\) is the “loss” of income the Bottom \\(p\\) percent of the population experiences.\nIt is bounded between 0 (perfect Equality) and 1 (complete Inequality).\nWhen Lorenz do not cross, Gini provides unambiguous ranking of inequality.\n\n\\[Gini(y) = \\frac{2}{\\mu_y} Cov(y_p,p)\\]"
+    "section": "",
+    "text": "The Gini coefficient is the most popular measure of inequality.\nIt is defined as (2x) the area between the Lorenz Curve and the 45 degree line.\n\n\\[Gini(y) = 2 \\int_0^1 (p-LC(p)) dp\\]\n\nwhere \\(p-LC(p)\\) is the “loss” of income the Bottom \\(p\\) percent of the population experiences.\nIt is bounded between 0 (perfect Equality) and 1 (complete Inequality).\nWhen Lorenz do not cross, Gini provides unambiguous ranking of inequality.\n\n\\[Gini(y) = \\frac{2}{\\mu_y} Cov(y_p,p)\\]"
   },
   {
     "objectID": "rmethods2/session_3.html#implementation",
     "href": "rmethods2/session_3.html#implementation",
     "title": "Research Methods II",
-    "section": "Implementation",
-    "text": "Implementation\n\nStata has plenty of commands that can be used to estimate Gini\n\nsearch gini for few examples\n\nI suggest 3 commands:\n\nfastgini (ssc install fastgini)\nineqdeco (ssc install ineqdeco)\nsgini (ssc install sgini)\nrif (ssc install rif)"
+    "section": "",
+    "text": "Stata has plenty of commands that can be used to estimate Gini\n\nsearch gini for few examples\n\nI suggest 3 commands:\n\nfastgini (ssc install fastgini)\nineqdeco (ssc install ineqdeco)\nsgini (ssc install sgini)\nrif (ssc install rif)"
   },
   {
     "objectID": "rmethods2/session_3.html#section-4",
@@ -7262,8 +7262,8 @@
     "objectID": "rmethods2/session_3.html#other-inequality-measures",
     "href": "rmethods2/session_3.html#other-inequality-measures",
     "title": "Research Methods II",
-    "section": "Other Inequality Measures",
-    "text": "Other Inequality Measures\n\nThere are other approaches that can be used to measure inequality.\n\nNormative approach-Social welfare: Uses explicit concepts of welfare functions to quantify inequality\n\n\n\\[I_A(y,\\varepsilon) = 1 - \\left( \\frac{1}{N} \\sum_{i=1}^N \\left(\\frac{y_i}{\\mu_y}\\right)^{1-\\varepsilon} \\right)^\\frac{1}{1-\\varepsilon}\n\\]\nwhere is a measure of inequality aversion.\n\nInformation theory: Quantifies inequality treating it as a problem of comparing income distribution probabilities. How far are we from Full Entropy\n\n\\[I_{GE}(Y,\\alpha)=\\frac{1}{\\alpha(1-\\alpha)}\\left[\\frac{1}{N} \\sum \\left(\\frac{y_i}{\\mu_y}\\right)^\\alpha -1\\right]\n\\]\n\nAxiomatic approach\n\nUses a series of axioms to create measures of inequality"
+    "section": "",
+    "text": "There are other approaches that can be used to measure inequality.\n\nNormative approach-Social welfare: Uses explicit concepts of welfare functions to quantify inequality\n\n\n\\[I_A(y,\\varepsilon) = 1 - \\left( \\frac{1}{N} \\sum_{i=1}^N \\left(\\frac{y_i}{\\mu_y}\\right)^{1-\\varepsilon} \\right)^\\frac{1}{1-\\varepsilon}\n\\]\nwhere is a measure of inequality aversion.\n\nInformation theory: Quantifies inequality treating it as a problem of comparing income distribution probabilities. How far are we from Full Entropy\n\n\\[I_{GE}(Y,\\alpha)=\\frac{1}{\\alpha(1-\\alpha)}\\left[\\frac{1}{N} \\sum \\left(\\frac{y_i}{\\mu_y}\\right)^\\alpha -1\\right]\n\\]\n\nAxiomatic approach\n\nUses a series of axioms to create measures of inequality"
   },
   {
     "objectID": "rmethods2/session_3.html#significance-test",
@@ -7334,5 +7334,278 @@
     "title": "Research Methods II",
     "section": "Example Stata",
     "text": "Example Stata\nssc install anogi (Tom Masterson is one of the authors) ssc install moremata (needed for anogi)\n\nanogi limew [aw= hhwgt ], by(educl) detail\n\n\nAnalysis of Gini\n\n--------------------------------------------------\n                          |      Coef.          %\n--------------------------+-----------------------\nOverall Gini              |   .3875623     100.00\n                          |\nG_wo = sum s_i*G_i*O_i    |   .3405469      87.87\nG_b                       |   .0470154      12.13\n                          |\nIG   = sum s_i*G_i        |   .3657639      94.38\nIGO  = sum s_i*G_i(O_i-1) |   -.025217      -6.51\nBGp  = G_bp               |   .1317698      34.00\nBGO  = G_b - G_bp         |  -.0847544     -21.87\n--------------------------+-----------------------\nMean of limew             |    20403.6\nN. of obs                 |      44872\nN. of subgroups           |          4\n--------------------------------------------------\n\n\nDetailed statistics for subgroups\n\n-------------------------------------------------------------------------------------------\n             |         N          p       mean          s          G          O          F \n-------------+-----------------------------------------------------------------------------\n           1 |  18244.58   .4065916   15466.07   .3081992   .3844549   .9986868   .3963075 \n           2 |  14552.19   .3243045   21019.76   .3340981    .338758   .9239628   .5363091 \n           3 |  5609.305   .1250068   22705.72   .1391112   .3640736   .9435821   .5546081 \n           4 |  6465.924   .1440971   30951.73   .2185916   .3817625   .8370495   .6634934 \n-------------------------------------------------------------------------------------------"
+  },
+  {
+    "objectID": "rmethods2/session_5.html",
+    "href": "rmethods2/session_5.html",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "Statistical Significance\n\n\nMissing/incomplete Data"
+  },
+  {
+    "objectID": "adv_class/02OLS.html#gls-and-weighted-least-squares",
+    "href": "adv_class/02OLS.html#gls-and-weighted-least-squares",
+    "title": "Linear Regression Model",
+    "section": "GLS and Weighted Least Squares",
+    "text": "GLS and Weighted Least Squares\n\nGLS is a generalization of OLS, that could be used to address heteroskedasticity.\nThere are two ways to do this:\n\nTransform/weight the data to make it homoskedastic (WLS)\nModify the variance covariance matrix of the errors (GLS)\n\nCall \\(\\hat h(x)\\) the predicted error variance. The GLS estimator for \\(V_{gls}(\\beta)\\) is given by:\n\n\\[V_{gls}(\\beta)=(X'X)^{-1} \\sum(X_iX_i'\\hat h(x)) (X'X)^{-1}\n\\]\n\nThat way, Heteroskedasticity is addressed, but without changing the model estimates \\(\\beta's\\)"
+  },
+  {
+    "objectID": "adv_class/02OLS.html#visualizing-the-difference",
+    "href": "adv_class/02OLS.html#visualizing-the-difference",
+    "title": "Linear Regression Model",
+    "section": "Visualizing the difference",
+    "text": "Visualizing the difference\n\n\nCode\nclear\nset scheme white2\ncolor_style tableau\nset seed 1\nset obs 50\ngen r1=runiformint(1,4)\ngen r2=runiformint(1,4)\ngen id=_n\nsort r1  r2\nqui:mata:\nr1=st_data(.,\"r1\")\nr2=st_data(.,\"r2\")\nrr1=J(rows(r1)*rows(r2),4,0)\nk=0\nfor(i=1;i&lt;=50;i++){\n    for(j=1;j&lt;=50;j++){\n        if ((r1[i]==r1[j]) | (r2[i]==r2[j])) {\n            k++\n            rr1[k,]=(51-i,j,(r1[i]==r1[j]),(r2[i]==r2[j]) )         \n        }\n    }   \n}\nrr1=rr1[1..k,]\nend\ngetmata rr1*=rr1, replace force\n\ntwo (scatter rr11 rr12 if rr13==1,  ms(s) msize(2.1))  ///\n    (scatter rr11 rr12 if 51-rr11 == rr12, ms(s) msize(2.1) color(gs1)  ) ///\n    , aspect(1) legend(off)  xtitle(\"\") ytitle(\"\") yscale(off) xscale(off) xsize(6) ysize(6)"
+  },
+  {
+    "objectID": "adv_class/02OLS.html#visualizing-multi-way-clustering",
+    "href": "adv_class/02OLS.html#visualizing-multi-way-clustering",
+    "title": "Linear Regression Model",
+    "section": "Visualizing Multi-way Clustering",
+    "text": "Visualizing Multi-way Clustering\n\nFirst ClusterSecond ClusterCombining Clusters\n\n\n\n\nCode\ntwo (scatter rr11 rr12 if rr13==1,  ms(s) msize(2.1))  ///\n    , aspect(1) legend(off)  xtitle(\"\") ytitle(\"\") yscale(off) xscale(off) name(m1, replace) \n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\ntwo (scatter rr11 rr12 if rr14==1,  ms(s) msize(2.1))  ///\n    , aspect(1) legend(off)  xtitle(\"\") ytitle(\"\") yscale(off) xscale(off) name(m2, replace)    \n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\ntwo (scatter rr11 rr12 if rr14==1 | rr13==1,  ms(s) msize(2.1))  ///\n    , aspect(1) legend(off)  xtitle(\"\") ytitle(\"\") yscale(off) xscale(off) name(m3, replace)"
+  },
+  {
+    "objectID": "adv_class/02OLS.html#section-9",
+    "href": "adv_class/02OLS.html#section-9",
+    "title": "Linear Regression Model",
+    "section": "",
+    "text": "But we only get 1 Sample!\nThe truth is we do not have access to multiple samples. Getting more data, is in fact, very expensive. So what to do ?\n\nRely on Asymptotic theory\nlearn Bayesian Econometrics 🥺\nor-resample? and do Bootstrap!"
+  },
+  {
+    "objectID": "adv_class/02OLS.html#section-10",
+    "href": "adv_class/02OLS.html#section-10",
+    "title": "Linear Regression Model",
+    "section": "",
+    "text": "Basic idea of Bootstrapping\n\nIn the ideal scenario, you get multiple samples from your population, Estimate parameters, and done.\nIf not possible you do the next best thing. You get your sample (assume is your mini-population),\n\nDraw subsamples of same size (with replacement) (\\(y_i^s,X_i^s\\))\nestimate your model and obtain parameters \\(\\beta^s_i\\)\nSummarize those parameters…and done, you get \\(Var(\\hat\\beta)\\) for 🆓. (or is it?)"
+  },
+  {
+    "objectID": "adv_class/02OLS.html#section-11",
+    "href": "adv_class/02OLS.html#section-11",
+    "title": "Linear Regression Model",
+    "section": "",
+    "text": "Bootstrapping\n\n👢Bootstrapping is a methodology that allows you to obtain empirical estimations of standard errors making use of the data in hand, and without even knowing about Asymptotic theory (other than how to get means and variances).\n\n\nBootstrap Sample\nAnd of course, it comes in different flavors."
+  },
+  {
+    "objectID": "adv_class/02OLS.html#section-12",
+    "href": "adv_class/02OLS.html#section-12",
+    "title": "Linear Regression Model",
+    "section": "",
+    "text": "Standard Bootstrap:\n\nNon-parametric Bootstrap: You draw subsamples from the main sample. Each observation has the same pr of being selected.\n\nEasiest to implement ( see bootstrap:)\nWorks in almost all cases, but you may have situations when some covariates are rare.\nCan allow for “clusters” using “block bootstrapping”."
+  },
+  {
+    "objectID": "adv_class/02OLS.html#section-13",
+    "href": "adv_class/02OLS.html#section-13",
+    "title": "Linear Regression Model",
+    "section": "",
+    "text": "Standard Bootstrap:\n\nParametric Bootstrap: You estimate your model, make assumptions of your model error.\n\nYou need to implement it on your own. \\(y^s=x\\hat b+\\tilde e\\) for \\(\\tilde e \\sim f(\\hat \\theta)\\)\nIt will not work well if the assumptions of the error modeling are wrong."
+  },
+  {
+    "objectID": "adv_class/02OLS.html#section-14",
+    "href": "adv_class/02OLS.html#section-14",
+    "title": "Linear Regression Model",
+    "section": "",
+    "text": "Standard Bootstrap:\n\nResidual bootstrap: Estimate your model, obtain residuals. Re-sample residuals\n\nAgain, implement it on your own. \\(y^s = x\\hat b+\\tilde e\\) for \\(\\tilde e \\sim {\\hat e_1 , ... , \\hat e_N}\\)\nIt depends even more on the assumptions of the error modeling."
+  },
+  {
+    "objectID": "adv_class/02OLS.html#section-15",
+    "href": "adv_class/02OLS.html#section-15",
+    "title": "Linear Regression Model",
+    "section": "",
+    "text": "Wild Bootstrap\nThen there are the more advanced (but faster) Bootstrap methods: WildBootstrap\n\nUWild bootstrap: Estimate your model, obtain residuals, and re-sample residual weights.\n\nAgain…on your own: \\(y^s = x\\hat b +\\hat e * v\\) , where \\(v \\sim ff()\\) where \\(ff()\\) is a “good” distribution function. \\(E(v)=0 \\ \\& \\ Var(v)=1\\)\nRe-estimate the model and obtain \\(\\hat \\beta's\\). Repeat and summarize.\nActually quite flexible, and works well under heteroskedasticity!\nIt can also allow clustered standard errors. The error \\(v\\) no longer changes by individual, but by group. It also works well with weights."
+  },
+  {
+    "objectID": "adv_class/02OLS.html#section-16",
+    "href": "adv_class/02OLS.html#section-16",
+    "title": "Linear Regression Model",
+    "section": "",
+    "text": "Wild Bootstrap:\n\nUWild bootstrap-2 : Estimate your model, obtain Influence functions 😱 , and re-sample residual weights.\n\nThis is an extension to the previous option. But with advantages\n\nyou do not need to re-estimate the model. Just look into how the the mean of IF’s change.\nit can be applied to linear and nonlinear model (if you know how to build the IF’s)\n\nWorks well with clustered and weights."
+  },
+  {
+    "objectID": "adv_class/02OLS.html#section-17",
+    "href": "adv_class/02OLS.html#section-17",
+    "title": "Linear Regression Model",
+    "section": "",
+    "text": "Wild Bootstrap:\n\nCWild bootstrap: Similar UWild Bootstrap, Obtain Influence functions under the Null (imposing restrictions), and use that to test the NULL.\n\nNo, you do not need to do it on your own. see bootest in Stata.\nWorks pretty well with small samples and small # clusters. Probably the way to go if you really care about Standard errors."
+  },
+  {
+    "objectID": "adv_class/02OLS.html#section-18",
+    "href": "adv_class/02OLS.html#section-18",
+    "title": "Linear Regression Model",
+    "section": "",
+    "text": "This last command may allow you to bootstrap multiple models at the same time, although it does require a bit of programming. (and a do file)\n\n\n\nCode\nfrause oaxaca, clear\ngen tchild = kids6 + kids714\ncapture program drop bs_wages_children\nprogram bs_wages_children, eclass // eclass is for things like equations\n    ** Estimate first model\n    reg lnwage educ exper female\n    matrix b1 = e(b)\n    matrix coleq b1 = lnwage\n    ** Estimate second model\n    reg tchild educ exper female\n    matrix b2 = e(b)\n    matrix coleq b2 = tchild\n    ** Put things together and post\n    matrix b = b1 , b2\n    ereturn post b\nend\nbootstrap: bs_wages_children\n\n\n(Excerpt from the Swiss Labor Market Survey 1998)\n\n(running bs_wages_children on estimation sample)\n\nwarning: bs_wages_children does not set e(sample), so no observations will be\n         excluded from the resampling because of missing values or other\n         reasons. To exclude observations, press Break, save the data, drop\n         any observations that are to be excluded, and rerun bootstrap.\n\nBootstrap replications (50): .........10.........20.........30.........40......\n&gt; ...50 done\n\nBootstrap results                                        Number of obs = 1,647\n                                                         Replications  =    50\n\n------------------------------------------------------------------------------\n             |   Observed   Bootstrap                         Normal-based\n             | coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\nlnwage       |\n        educ |   .0858252   .0062606    13.71   0.000     .0735547    .0980957\n       exper |   .0147343    .001283    11.48   0.000     .0122196     .017249\n      female |  -.0949227   .0305222    -3.11   0.002    -.1547452   -.0351003\n       _cons |    2.21885   .0855954    25.92   0.000     2.051086    2.386614\n-------------+----------------------------------------------------------------\ntchild       |\n        educ |   .0177854   .0087606     2.03   0.042      .000615    .0349558\n       exper |  -.0047747   .0017462    -2.73   0.006    -.0081972   -.0013522\n      female |  -.1306332   .0395711    -3.30   0.001    -.2081911   -.0530753\n       _cons |   .4163459   .1201824     3.46   0.001     .1807927    .6518991\n------------------------------------------------------------------------------\n\n\nWhy does it matter? because you may want to test coefficients individually, or across models. This is only possible if the FULL system is estimated jointly"
+  },
+  {
+    "objectID": "adv_class/02OLS.html#section-19",
+    "href": "adv_class/02OLS.html#section-19",
+    "title": "Linear Regression Model",
+    "section": "",
+    "text": "What about Wild Bootstrap?\n\nWildbootstrap is available using boottest (ssc install bootest)\nAnd in Stata18+, you have wildbootstrap (although is meant for clustered SE)\n\n\n\nCode\nfrause oaxaca, clear\nregress lnwage educ exper female, robust\nboottest educ, nograph\nboottest exper, nograph\nboottest female, nograph\n\n\n(Excerpt from the Swiss Labor Market Survey 1998)\n\nLinear regression                               Number of obs     =      1,434\n                                                F(3, 1430)        =      97.11\n                                                Prob &gt; F          =     0.0000\n                                                R-squared         =     0.2217\n                                                Root MSE          =     .46897\n\n------------------------------------------------------------------------------\n             |               Robust\n      lnwage | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n        educ |   .0858252   .0060342    14.22   0.000     .0739883     .097662\n       exper |   .0147343    .001354    10.88   0.000     .0120783    .0173903\n      female |  -.0949227   .0254309    -3.73   0.000    -.1448086   -.0450369\n       _cons |    2.21885   .0830438    26.72   0.000     2.055949    2.381751\n------------------------------------------------------------------------------\n\nWild bootstrap-t, null imposed, 999 replications, Wald test, Rademacher weights\n&gt; :\n  educ\n\n                         t(1430) =    14.2231\n                        Prob&gt;|t| =     0.0000\n\n95% confidence set for null hypothesis expression: [.07399, .09766]\n\nWild bootstrap-t, null imposed, 999 replications, Wald test, Rademacher weights\n&gt; :\n  exper\n\n                         t(1430) =    10.8822\n                        Prob&gt;|t| =     0.0000\n\n95% confidence set for null hypothesis expression: [.01208, .01739]\n\nWild bootstrap-t, null imposed, 999 replications, Wald test, Rademacher weights\n&gt; :\n  female\n\n                         t(1430) =    -3.7326\n                        Prob&gt;|t| =     0.0000\n\n95% confidence set for null hypothesis expression: [−.1433, −.04703]"
+  },
+  {
+    "objectID": "adv_class/02OLS.html#section-20",
+    "href": "adv_class/02OLS.html#section-20",
+    "title": "Linear Regression Model",
+    "section": "",
+    "text": "The Delta method uses the linear approximations to approximate the otherwise not known distributions.\nFurther, It relies on the fact that linear transformations a normal distribution, is on itself normal. For example:\n\n\\[\ng(\\hat \\theta) \\simeq g(\\theta) + g'(\\hat\\theta) (\\hat \\theta-\\theta)\n\\]\n\nThis states that the nonlinear function \\(g(\\theta)\\) can be “locally” approximated as a linear function in the neighborhood of \\(g(\\theta)\\).\nPredictions above or below are approximated using the slope of the function. \\(g'(\\theta)\\).\nSo, if we take the variance, we get:\n\n\\[\nVar(g(\\hat \\theta)) \\simeq  Var \\left(g(\\theta)+ g'(\\hat\\theta) (\\hat \\theta-\\theta)\\right)\n=g'(\\hat\\theta)^2 Var(\\theta)\n\\]"
+  },
+  {
+    "objectID": "adv_class/02OLS.html#section-21",
+    "href": "adv_class/02OLS.html#section-21",
+    "title": "Linear Regression Model",
+    "section": "",
+    "text": "It can go multivariate as well:\n\\[\n\\begin{aligned}\ng(\\hat \\theta, \\hat \\gamma)-g(\\theta,\\gamma) &\\simeq N(0,\\nabla g ' \\Sigma \\nabla g) \\\\\n\\nabla g ' &=   [\\begin{matrix}\n    dg/d\\theta & dg/d\\gamma\n  \\end{matrix}]\n\\end{aligned}  \n\\]\nAlthough you need to get the partial derivatives of \\(g(\\theta,\\gamma)\\)"
+  },
+  {
+    "objectID": "adv_class/02OLS.html#section-22",
+    "href": "adv_class/02OLS.html#section-22",
+    "title": "Linear Regression Model",
+    "section": "",
+    "text": "Example\n\nSay that you obtain the mean standard error for averages wages for men and women, along with the correlation between the two.\nhowever, you are insterested in estimating the wage ratio, and its variance. How do you do this?\n\n\\[R = \\frac{ \\mu_f}{\\mu_m}\\]\n\nNeed to obtain the Gradients \\(g\\)\n\n\\[g = \\begin{bmatrix}\n    \\frac{ \\partial R}{\\partial \\mu_f} \\\\\n    \\frac{ \\partial R}{\\partial \\mu_m}\n    \\end{bmatrix} =\n\\begin{bmatrix}    \n\\frac{1}{\\mu_m} \\\\  -\\frac{\\mu_f}{\\mu_m^2}\n\\end{bmatrix}\n\\]\nThen the variance of \\(R\\) is:\n\\[Var(R) = g' \\Sigma_\\mu g\\]"
+  },
+  {
+    "objectID": "adv_class/02OLS.html#section-23",
+    "href": "adv_class/02OLS.html#section-23",
+    "title": "Linear Regression Model",
+    "section": "",
+    "text": "Example in Stata\n\n\nCode\nfrause oaxaca, clear\ngen wage = exp(lnwage)\nmean wage, over(female)\nmata:\n  mu = st_matrix(\"e(b)\")\n  vcv = st_matrix(\"e(V)\")\n  dg = 1/mu[2] \\ -mu[1]/mu[2]^2\n  var_r = dg'*vcv*dg\n  sqrt(var_r)\nend\nnlcom _b[ c.wage@0.female]/_b[ c.wage@1.female] \n\n\n(Excerpt from the Swiss Labor Market Survey 1998)\n(213 missing values generated)\n\nMean estimation                           Number of obs = 1,434\n\n---------------------------------------------------------------\n              |       Mean   Std. err.     [95% conf. interval]\n--------------+------------------------------------------------\nc.wage@female |\n           0  |   34.33619   .5175882      33.32088    35.35151\n           1  |   30.25354   .6805642      28.91853    31.58855\n---------------------------------------------------------------\n\n. mata:\n------------------------------------------------- mata (type end to exit) -----\n:   mu = st_matrix(\"e(b)\")\n\n:   vcv = st_matrix(\"e(V)\")\n\n:   dg = 1/mu[2] \\ -mu[1]/mu[2]^2\n\n:   var_r = dg'*vcv*dg\n\n:   sqrt(var_r)\n  .0307332119\n\n: end\n-------------------------------------------------------------------------------\n\n. \n\n       _nl_1: _b[ c.wage@0.female]/_b[ c.wage@1.female]\n\n------------------------------------------------------------------------------\n        Mean | Coefficient  Std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n       _nl_1 |   1.134948   .0307332    36.93   0.000     1.074712    1.195184\n------------------------------------------------------------------------------"
+  },
+  {
+    "objectID": "adv_class/02OLS.html#section-25",
+    "href": "adv_class/02OLS.html#section-25",
+    "title": "Linear Regression Model",
+    "section": "",
+    "text": "We usually start with Ridge, because is relatively Easy to implement, since it has a close form Solution:\n\n\\[\n\\beta = (X'X + \\lambda I)^{-1}{X'y}\n\\]\n\n\nCode\nset linesize 255\nfrause oaxaca, clear\nkeep if lnwage!=.\ngen male = 1-female\nmata:\n    y = st_data(.,\"lnwage\")\n    x = st_data(.,\"educ exper female male\"),J(1434,1,1)\n    i0 = I(5);i0[5,5]=0\n    xx = (cross(x,x)) ; xy = (cross(x,y))\n    bb0 = invsym(xx)*xy \n    bb1 = invsym(xx:+i0*1)*xy \n    bb10 = invsym(xx:+i0*10)*xy \n    bb100 = invsym(xx:+i0*100)*xy \n    bb1000 = invsym(xx:+i0*1000)*xy \n    bb0,bb1,bb10,bb100,bb1000\nend \n\n\n(Excerpt from the Swiss Labor Market Survey 1998)\n(213 observations deleted)\n\n. mata:\n------------------------------------------------- mata (type end to exit) -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n:     y = st_data(.,\"lnwage\")\n\n:     x = st_data(.,\"educ exper female male\"),J(1434,1,1)\n\n:     i0 = I(5);i0[5,5]=0\n\n:     xx = (cross(x,x)) ; xy = (cross(x,y))\n\n:     bb0 = invsym(xx)*xy\n\n:     bb1 = invsym(xx:+i0*1)*xy\n\n:     bb10 = invsym(xx:+i0*10)*xy\n\n:     bb100 = invsym(xx:+i0*100)*xy\n\n:     bb1000 = invsym(xx:+i0*1000)*xy\n\n:     bb0,bb1,bb10,bb100,bb1000\n                  1              2              3              4              5\n    +----------------------------------------------------------------------------+\n  1 |   .0858251775    .0858183338    .0857563567    .0851046501    .0778292498  |\n  2 |   .0147342796    .0147345813    .0147372042    .0147554544    .0146298058  |\n  3 |  -.0949227416    -.047396817   -.0468240416    -.041806663   -.0208062854  |\n  4 |             0     .047396817    .0468240416     .041806663    .0208062854  |\n  5 |   2.218849962    2.171466638    2.172174327    2.179690914    2.266275433  |\n    +----------------------------------------------------------------------------+\n\n: end\n---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n\n."
+  },
+  {
+    "objectID": "adv_class/03par_spar_npar.html#section-1",
+    "href": "adv_class/03par_spar_npar.html#section-1",
+    "title": "Semi- and Non- Parametric regression",
+    "section": "",
+    "text": "Ok but what about Semi-parametric!\n\nSemi-parametric models try to establish a mid point between parametric and non-parametric models, attempting to draw from the benefit of both.\n\nIt also helps that it has a smaller computational burden (we will see what do I mean with this).\n\nWhat about an example? Say we are trying to explain “wages” as a function of age and education. (assume exogeneity)"
+  },
+  {
+    "objectID": "adv_class/03par_spar_npar.html#section-2",
+    "href": "adv_class/03par_spar_npar.html#section-2",
+    "title": "Semi- and Non- Parametric regression",
+    "section": "",
+    "text": "\\[\\begin{aligned}\n\\text{Theoretical framework :}wage &= g(age, education, \\varepsilon) \\\\ \\\\\n\\text{Parametric model: }wage &= b_0 + b_1 age + b_2 education +\\varepsilon \\\\ \\\\\n\\text{Non-parametric model: }wage &= g(age,education) +\\varepsilon\n\\\\ \\\\\n\\text{Semi-parametric model: } wage &= b_0 + g_1(age) + g_2(education) +\\varepsilon \\\\\nwage &= g_0(age)+b1 education+\\varepsilon \\\\\nwage &= g_0(age)+g_1 (age)education+\\varepsilon\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "adv_class/03par_spar_npar.html#section-4",
+    "href": "adv_class/03par_spar_npar.html#section-4",
+    "title": "Semi- and Non- Parametric regression",
+    "section": "",
+    "text": "Which can be done rather easy in Stata\n\nfrause oaxaca, clear\ndrop if lnwage==.\nsum lnwage\ngen f = normalden(lnwage, r(mean), r(sd))\nhistogram wages\n\nBut as you can see, it does not fit well."
+  },
+  {
+    "objectID": "adv_class/03par_spar_npar.html#histogram",
+    "href": "adv_class/03par_spar_npar.html#histogram",
+    "title": "Semi- and Non- Parametric regression",
+    "section": "Histogram",
+    "text": "Histogram\nHistograms are a type of non-parametric estimator that imposes no functional form restrictions to estimate probability density functions (PDFs).\nConstruction histograms, is in fact, a fairly Straight forward task:\n\nYou select the width of bins, \\(h\\) , and starting value \\(x_0\\)\n\n\\[\\text{if } \\ x_i \\in [x_0 + m * h, x_0 + (m+1)h ) \\rightarrow\nbin(x_i)=m+1\n\\]\n\nAnd the Histogram estimator for density, is given by:\n\n\\[\\hat f (x) = \\frac{1}{nh} \\sum_i 1(bin(x)=bin(x_i))\n\\]\nSimple yet powerful, but sensitive to “h”"
+  },
+  {
+    "objectID": "adv_class/03par_spar_npar.html#section-5",
+    "href": "adv_class/03par_spar_npar.html#section-5",
+    "title": "Semi- and Non- Parametric regression",
+    "section": "",
+    "text": "Histograms with Varying h"
+  },
+  {
+    "objectID": "adv_class/03par_spar_npar.html#section-6",
+    "href": "adv_class/03par_spar_npar.html#section-6",
+    "title": "Semi- and Non- Parametric regression",
+    "section": "",
+    "text": "Kernel function\nA Kernel function is such that has the following properties:\n\\[\n\\int K(z)dz = 1 ; \\int zK(z)dz = 0 ; \\int z^2K(z)dz &lt; \\infty\n\\]\nIs a well behaved pdf on its own, that is symmetric, with defined second moment.\n\nas with the histogram estimator, the Kden is just an average of functions, that has the advantage of being smooth.\nAlthough it also depends strongly, on the choice of bandwidth."
+  },
+  {
+    "objectID": "adv_class/03par_spar_npar.html#section-7",
+    "href": "adv_class/03par_spar_npar.html#section-7",
+    "title": "Semi- and Non- Parametric regression",
+    "section": "",
+    "text": "Kernel density: Visualization"
+  },
+  {
+    "objectID": "adv_class/03par_spar_npar.html#section-8",
+    "href": "adv_class/03par_spar_npar.html#section-8",
+    "title": "Semi- and Non- Parametric regression",
+    "section": "",
+    "text": "Code in Stata\nhistogram var [if] [weight]\nkdensity var [if] [weight]\n\n\nCode\nfrause oaxaca, clear\nkeep if lnwage!=.\nmata:\n    y = st_data(.,\"lnwage\")\n    fden = J(rows(y),1,0)\n    for(i=1; i&lt;=rows(y); i++) {\n       fden[i] =mean(normalden(y, y[i], 0.08))\n    }\n    tg = fden,y\nend\ngetmata tg* = tg\n\n\n\n\n\n(Excerpt from the Swiss Labor Market Survey 1998)\n(213 observations deleted)\n\n. mata:\n------------------------------------------------- mata (type end to exit) -----\n:     y = st_data(.,\"lnwage\")\n\n:     fden = J(rows(y),1,0)\n\n:     for(i=1; i&lt;=rows(y); i++) {\n&gt;        fden[i] =mean(normalden(y, y[i], 0.08))\n&gt;     }\n\n:     tg = fden,y\n\n: end\n-------------------------------------------------------------------------------\n\n. \n\n\n\n\nCode\nscatter tg1 tg2, name(mx, replace)"
+  },
+  {
+    "objectID": "adv_class/03par_spar_npar.html#section-9",
+    "href": "adv_class/03par_spar_npar.html#section-9",
+    "title": "Semi- and Non- Parametric regression",
+    "section": "",
+    "text": "Other Considerations\n\nAs shown above, one needs to choose the bandwidth \\(h\\) carefully, balancing the bias-variance trade off. Common approach is to simply use rule-of-thumb approaches to select this parameter:\n\n\\[\nh = 1.059 \\sigma n ^ {-1/5} \\\\ h = 1.3643 * d * n ^ {-1/5} * min(\\sigma,iqr\\sigma)\n\\]\nBut other approaches may work better."
+  },
+  {
+    "objectID": "adv_class/03par_spar_npar.html#section-10",
+    "href": "adv_class/03par_spar_npar.html#section-10",
+    "title": "Semi- and Non- Parametric regression",
+    "section": "",
+    "text": "Other Considerations\n\nA second consideration is the choice of Kernel function! (see help kdensity -&gt; kernel)\n\nAlthough, except in few cases, the choice of bandwidth matters more than the kernel function.\n\nThis method works well when your data is smooth and continuous. But not so much for discrete data.\n\nNevertheless, it is still possible to use it with discrete data, and kernel weights!\n\nCan be “easily” extended to multiple dimensions \\(f(x,y,z,...)\\), including mixture of continuous and discrete data. You just multiple Kernels!\n\nBut, beware of Curse of dimensionality.\nBut still better than just Subsampling!"
+  },
+  {
+    "objectID": "adv_class/03par_spar_npar.html#section-11",
+    "href": "adv_class/03par_spar_npar.html#section-11",
+    "title": "Semi- and Non- Parametric regression",
+    "section": "",
+    "text": "But in the full (unconstrained) model it would just be the conditional mean:\n\n\\[\nE(y|X) = \\hat m(x) = \\frac{\\sum y_i 1(x_i=x)}{\\sum 1(x_i=x)}\n\\]\nProblems? Impossible to do out of sample predictions, and if \\(n&lt;42\\) inference would be extremely unreliable."
+  },
+  {
+    "objectID": "adv_class/03par_spar_npar.html#section-12",
+    "href": "adv_class/03par_spar_npar.html#section-12",
+    "title": "Semi- and Non- Parametric regression",
+    "section": "",
+    "text": "Local Constant Regression\nWe can improve over the Unconstrained mean using the following connection:\n\n\\(1(x_i=x)\\) is a non-smooth indicator that shows if an observation is in-sample .\nWe can substitute this with a smooth indicator function\n\n\\[\nK_w(x_i,x) = \\frac{K\\left(\\frac{x_i-x}{h}\\right)}{K(0)}\n\\]\nObservations where \\(x_i=x\\) will have a weight of 1, but depending on \\(h\\), less weight is given the farther \\(x_i\\) is to \\(x\\)."
+  },
+  {
+    "objectID": "adv_class/03par_spar_npar.html#section-13",
+    "href": "adv_class/03par_spar_npar.html#section-13",
+    "title": "Semi- and Non- Parametric regression",
+    "section": "",
+    "text": "This gives what is known as the Nadaraya-Watson or Local constant estimator:\n\\[\n\\hat m(x) = \\frac{\\sum y_i K_w(x_i,x)}{\\sum K_w(x_i,x)} = \\sum y_i w_i\n\\]\nWhich, on its core, is simply a weighted regression, with weights given by \\(\\frac{K_w(x_i,x)}{\\sum K_w(x_i,x)}\\)\nKernel Regressions “borrows” info from neighboring observations to obtain a smooth estimator."
+  },
+  {
+    "objectID": "adv_class/03par_spar_npar.html#section-14",
+    "href": "adv_class/03par_spar_npar.html#section-14",
+    "title": "Semi- and Non- Parametric regression",
+    "section": "",
+    "text": "Visuals"
+  },
+  {
+    "objectID": "adv_class/03par_spar_npar.html#section-15",
+    "href": "adv_class/03par_spar_npar.html#section-15",
+    "title": "Semi- and Non- Parametric regression",
+    "section": "",
+    "text": "Implementation\n\n\nCode\nwebuse motorcycle, clear\nscatter accel time \n\n\n(Motorcycle data from Fan & Gijbels (1996))\n\n\n\n\n\n\n\n\n\n\n\nCode\nmata:\n    y = st_data(.,\"accel\")\n    x = st_data(.,\"time\")\n    yh = J(133,12,0)\n    for(k=1;k&lt;=12;k=k++) {\n        for(i=1;i&lt;=133;i++){\n            h = k/2\n            yh[i,k]=mean(y, normalden(x, x[i], h))\n        }\n    }    \nend\ngetmata yh* = yh, replace\ncolor_style viridis\ntwo scatter accel time || line yh* time, xsize(7) ysize(5)\n\n\n\n. mata:\n------------------------------------------------- mata (type end to exit) -----\n:     y = st_data(.,\"accel\")\n\n:     x = st_data(.,\"time\")\n\n:     yh = J(133,12,0)\n\n:     for(k=1;k&lt;=12;k=k++) {\n&gt;         for(i=1;i&lt;=133;i++){\n&gt;             h = k/2\n&gt;             yh[i,k]=mean(y, normalden(x, x[i], h))\n&gt;         }\n&gt;     }\n\n: end\n-------------------------------------------------------------------------------\n\n."
+  },
+  {
+    "objectID": "adv_class/03par_spar_npar.html#section-16",
+    "href": "adv_class/03par_spar_npar.html#section-16",
+    "title": "Semi- and Non- Parametric regression",
+    "section": "",
+    "text": "Considerations\n\nLocal Constant estimator is simple to estimate with a single variable. Multiple variables is just as easy:\n\n\\[\n\\hat m(x,z) = \\frac{\\sum y_i K_h(x_i,x) \\times K_h(z_i,z)}{\\sum K_h(x_i,x) \\times K_h(z_i,z)}\n\\]\nThe problem, however, lies on the curse of dimensionality.\nMore dimensions, less data per \\((x,z)\\) point, unless you “increase” bandwidths.\n\nAs before, it all depends on the Bandwidth \\(h\\), which determines the “flexibility” of the model.\nThe local constant tends to have considerable bias (specially near limits of the distribution, or when \\(g\\) has too much curvature)"
+  },
+  {
+    "objectID": "adv_class/03par_spar_npar.html#section-17",
+    "href": "adv_class/03par_spar_npar.html#section-17",
+    "title": "Semi- and Non- Parametric regression",
+    "section": "",
+    "text": "Choosing h\nThe quality of the NPK regression depends strongly on the choice of \\(h\\). And as with density estimation, the choice translates into a tradeoff between bias and variance of the estimation.\nThere are various approaches to choose \\(h\\). Some which depend strongly on the dimensionality of the model.\nFor Example, Stata command lpoly estimates local constant models, using the following:\n\nBut that is not the only approach.\nAn alternative (used for regularization) is using Cross-Validaton. (a method to evaluate the predictive power of a model)"
+  },
+  {
+    "objectID": "adv_class/03par_spar_npar.html#section-18",
+    "href": "adv_class/03par_spar_npar.html#section-18",
+    "title": "Semi- and Non- Parametric regression",
+    "section": "",
+    "text": "Cross-validation in Stata\n\nfrause oaxaca, clear\nssc install cv_kfold\n\nqui:reg lnwage educ exper tenure female age\n\ncv_kfold\nk-fold Cross validation\nNumber of Folds     :          5\nNumber of Repetions :          1\nAvg Root Mean SE    :    0.45838\n\nqui:reg lnwage c.(educ exper tenure female age)\n               ##c.(educ exper tenure female age)\n\ncv_kfold\nk-fold Cross validation\nNumber of Folds     :          5\nNumber of Repetions :          1\nAvg Root Mean SE    :    0.42768\n\n. qui:reg lnwage c.(educ exper tenure female age)\n                 ##c.(educ exper tenure female age)\n                 ##c.(educ exper tenure female age)\n\n. cv_kfold\nk-fold Cross validation\nNumber of Folds     :          5\nNumber of Repetions :          1\nAvg Root Mean SE    :    0.43038\n\nssc install cv_regress\n* Does lOOCV for regression\ncv_regress\n\nLeave-One-Out Cross-Validation Results \n-----------------------------------------\n         Method          |    Value\n-------------------------+---------------\nRoot Mean Squared Errors |       0.4244\nLog Mean Squared Errors  |      -1.7144\nMean Absolute Errors     |       0.2895\nPseudo-R2                |      0.36344\n-----------------------------------------"
+  },
+  {
+    "objectID": "adv_class/03par_spar_npar.html#section-19",
+    "href": "adv_class/03par_spar_npar.html#section-19",
+    "title": "Semi- and Non- Parametric regression",
+    "section": "",
+    "text": "Polynomials can be used, but there may be problems with high order polynomials. (Runge’s phenomenon,multiple-co-linearity). They are “global” estimators.\nFractional polynomials: More flexible than polynomials, without producing “waves” on the predictions\nNatural Splines, are better at capturing smooth transitions (depending on degree). Require choosing Knots appropriately.\nB-splines are similar to N-splines, but with better stat properties. Also require choosing knots\n\nExcept for correctly estimating the Bases functions (fracpoly and Bsplines are not straight forward), estimation requires simple OLS."
   }
 ]
