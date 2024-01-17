@@ -7607,5 +7607,201 @@
     "title": "Semi- and Non- Parametric regression",
     "section": "",
     "text": "Polynomials can be used, but there may be problems with high order polynomials. (Runge’s phenomenon,multiple-co-linearity). They are “global” estimators.\nFractional polynomials: More flexible than polynomials, without producing “waves” on the predictions\nNatural Splines, are better at capturing smooth transitions (depending on degree). Require choosing Knots appropriately.\nB-splines are similar to N-splines, but with better stat properties. Also require choosing knots\n\nExcept for correctly estimating the Bases functions (fracpoly and Bsplines are not straight forward), estimation requires simple OLS."
+  },
+  {
+    "objectID": "rmethods2/session_4.html#introduction",
+    "href": "rmethods2/session_4.html#introduction",
+    "title": "Research Methods II",
+    "section": "Introduction",
+    "text": "Introduction\n\nWhat do we mean by decomposition?\n\n\nIn Economics, decomposition refers to the process breaking down an index or aggregate measure into factors that explain it.\nWe have done some of this last week with Decomposition by groups and sources.\nBut there are other types of decompositions that are useful in Economics.\n\n\\[\n\\begin{aligned}\ny &=A L^\\alpha K ^\\beta \\\\\n\\frac{\\Delta y}{y} &=\\frac{\\Delta A}{A} + \\alpha \\frac{\\Delta L}{L} + \\beta \\frac{\\Delta K}{K}\n\\end{aligned}\n\\]\n\nToday we will focus on a different kind of Decomposition: Decomposition of gaps."
+  },
+  {
+    "objectID": "rmethods2/session_4.html#section",
+    "href": "rmethods2/session_4.html#section",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "Introduction to Oaxaca-Blinder Decomposition\n\nThe most common type of decomposition of gaps is the Oaxaca-Blinder Decomposition.\nThe idea behind is as follows:\n\nThere are two groups you are interested in comparing.\nGroup A has a higher average value of a variable of interest than Group B.\n\nWhat explains the difference??\n\nThe Oaxaca-Blinder Decomposition allows you to answer this question.\n\nThe difference could be due to differences in the characteristics\nOr it could be due to differences in the returns to those characteristics."
+  },
+  {
+    "objectID": "rmethods2/session_4.html#section-1",
+    "href": "rmethods2/session_4.html#section-1",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "Introduction to Oaxaca-Blinder Decomposition\n\nIn 1973 Oaxaca and Blinder independently proposed a very similar method to decompose the differences in averages value of a variable of interest between two groups.\n\n\n“Male-Female Wage Differentials in Urban Labor Markets” Oaxaca (IER 1973)\n\n\n“Wage Discrimination: Reduced Form and Structural Estimates” Blinder (JHR 1973)\n\n\nWhich become the basis for what is known as the Oaxaca-Blinder Decomposition.\nHeavily used in Labor Economics, it can be helpful to explain what factors relate to: Union premiums, povery gaps, gender wage gaps, etc."
+  },
+  {
+    "objectID": "rmethods2/session_4.html#general-framework",
+    "href": "rmethods2/session_4.html#general-framework",
+    "title": "Research Methods II",
+    "section": "General Framework",
+    "text": "General Framework\n\nSuppose we have two groups: \\(A\\) and \\(B\\), with Data generating processes (DGP) that are defined as:\n\n\\[\\begin{aligned}\nY_a = G_a(X_a,\\epsilon_a) \\\\\nY_b = G_b(X_b,\\epsilon_b) \\\\\n\\end{aligned}\n\\]\n\nDifferences between two groups could be explain by:\n\nDifferences in observed characteristics \\(X_a\\) and \\(X_b\\)\nDifference in unobserved \\(\\epsilon_a\\) and \\(\\epsilon_b\\)\nDifferences in the Funcional forms \\(G_a\\) and \\(G_b\\)"
+  },
+  {
+    "objectID": "rmethods2/session_4.html#section-2",
+    "href": "rmethods2/session_4.html#section-2",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "General Framework\n\nSuppose we have two groups: \\(A\\) and \\(B\\), with Data generating processes (DGP) that are defined as:\n\n\\[\\begin{aligned}\nY_a = G_a(X_a,\\epsilon_a) \\\\\nY_b = G_b(X_b,\\epsilon_b) \\\\\n\\end{aligned}\n\\]\n\nDifferences between two groups could be explain by:\n\nDifferences in observed characteristics \\(X_a\\) and \\(X_b\\)\nDifferences in unobserved \\(\\epsilon_a\\) and \\(\\epsilon_b\\)\nDifferences in the Funcional forms \\(G_a\\) and \\(G_b\\)\n\nTo some extent, this suggests something akin to a counterfactual."
+  },
+  {
+    "objectID": "rmethods2/session_4.html#section-3",
+    "href": "rmethods2/session_4.html#section-3",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "Imposing Restrictions\nTo implement OB, we need to impose some restrictions on the model.\n1st Functional form: Linear in parameters \\[G_a(X_k,\\epsilon_k) = X_k \\beta_k + \\epsilon_k\n\\]\n2nd Errors are independent by group: \\[\\varepsilon_i \\perp D | X_i\n\\]\nThis makes it possible to have other problems in the model (like endogeneity) and still get aggregate consistent estimates. (but lets assume Zero Conditional Mean )\n3rd Homoskedastic (across groups)\n4th We only care about Differences in means"
+  },
+  {
+    "objectID": "rmethods2/session_4.html#section-4",
+    "href": "rmethods2/session_4.html#section-4",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "OB In Action\n\nSuppose the models are given by:\n\n\\[Y_k = X_k \\beta_k + \\epsilon_k\n\\]\n\nThen, the “average” outcome for each group is given by:\n\n\\[\\bar Y_k =\\bar X_k \\beta_k\n\\]\n\nThis is useful, because we could now use it for creating a counterfactual.\n\n\\(\\bar X_a \\beta_a\\) is the average wage of group A\n\\(\\bar X_b \\beta_a\\) is the average wage of group B if “paid like” group A.\n\nor Average Wages of Group A if they had the characteristics of Group B.\n\n\nWith this, we can now obtain the OB Decomposition."
+  },
+  {
+    "objectID": "rmethods2/session_4.html#section-5",
+    "href": "rmethods2/session_4.html#section-5",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "\\[\\begin{aligned}\n\\Delta \\bar Y &= \\bar Y_a - \\bar Y_b \\\\\n&= \\bar X_a \\beta_a - \\bar X_b \\beta_b \\\\\n\\end{aligned}\n\\]\n\nNow we need a Counterfactual: What if Group A were paid as of Group B? \\(\\bar X_a \\beta_b\\)\n\n\\[\\begin{aligned}\n\\Delta \\bar Y &= \\bar Y_a - \\bar Y_b + \\bar Y^c_a - \\bar Y^c_a\\\\\n&= \\color{blue}{\\bar X_a \\beta_a} - \\color{red}{\\bar X_b \\beta_b + \\bar X_a \\beta_b} - \\color{blue}{\\bar X_a \\beta_b} \\\\\n&= \\color{blue}{(\\bar X_a \\beta_a- \\bar X_a \\beta_b)}  + \\color{red}{ (\\bar X_a \\beta_b - \\bar X_b \\beta_b)} \\\\\n&= \\color{blue}{\\bar X_a (\\beta_a- \\beta_b)}  + \\color{red}{  (\\bar X_a - \\bar X_b) \\beta_b} \\\\\n&= \\color{blue}{\\bar X_a \\Delta \\beta}  + \\color{red}{  \\Delta \\bar X \\beta_b} \\\\\n\\end{aligned}\n\\]\nThus Differences in averages is decomposed into two parts:\n\nDiff in \\(X's\\) and (weighted by \\(\\beta_b\\))\nDiff in \\(\\beta's\\). (weighted by \\(\\bar X_a\\))"
+  },
+  {
+    "objectID": "rmethods2/session_4.html#section-7",
+    "href": "rmethods2/session_4.html#section-7",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "OB: From Aggregate to detailed\n\nThe previous decomposition is for Aggregates.\n\nThey are robust to endogeneity, (if endogeneity is the same across groups)\n\nIf the model is correctly specified, we can also decompose the differences in the detailed level.\n\n\\[\\begin{aligned}\n\\Delta X \\beta_b &= \\beta_{a0}-\\beta_{b0} + \\sum_{j=1}^k \\bar X_{aj}(\\beta_{aj} - \\beta_{bj}) \\\\\n\\bar X_a \\Delta \\beta &= \\sum_{j=1}^k (\\bar X_{aj} - \\bar X_{bj}) \\beta_{bj}\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "rmethods2/session_4.html#section-8",
+    "href": "rmethods2/session_4.html#section-8",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "Note:\n\nThe decomposition is not unique.\n\nDepends on the “counterfactual” we choose.\n\nThe decomposition is not causal, but may be indicative of potential causes.\nThe decomposition is not a test of discrimination.\n\nAs it does not assess why the differences in \\(\\beta\\) exist, nor what explains the differences in \\(\\bar X\\)."
+  },
+  {
+    "objectID": "rmethods2/session_4.html#section-9",
+    "href": "rmethods2/session_4.html#section-9",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "In a picture\n\nOption 1Option 2note\n\n\n\n\n\n\n\n\n\nNeither option is “correct” or “incorrect”.\nThey are just different ways of measuring the gaps.\nHowever, you may want to consider which one is more appropriate for your research question.\nOr consider other decomposition options\n\nSingle Ref group with 3-way Decomposition"
+  },
+  {
+    "objectID": "rmethods2/session_4.html#intro",
+    "href": "rmethods2/session_4.html#intro",
+    "title": "Test Slides",
+    "section": "Intro",
+    "text": "Intro\n\\usetikzlibrary{positioning}\n\\usetikzlibrary{shapes.geometric}\n\\begin{tikzpicture}\n        % axes\n        \\draw [thick, &lt;-&gt;] (0,5) -- (0,0) -- (10,0);\n        \\node [left] at (0,4.5) {W};\n        \\node [below right] at (9.5,0) {X};\n        % Group A Curve\n        \\draw [thick, blue] (0,1) -- (10,3);\n        \\node [right, blue] at (10.25,3) {Group A};\n        \\draw [dotted, black] (0,2) -- (6.67,2);\n        \\node [left, black] at (0,2) {$\\bar{y}_A$};\n        \\draw [blue] (5,0) -- (5,2);\n        \\node [below, black] at (5,0) {$\\bar{X}_A$};\n        % Group B Curve\n        \\draw [thick, blue] (0,1.5) -- (5,3);\n        \\draw [thick, blue] (6.67,3.5) -- (10,4.5);\n        \\node [right, blue] at (10.25,4.5) {Group B};\n        \\draw [dotted, black] (0,3.5) -- (6.67,3.5);\n        \\node [left, black] at (0,3.5) {$\\bar{y}_B$};\n        \\draw [blue] (6.67,0) -- (6.67,3.5);\n        \\node [below, black] at (6.67,0) {$\\bar{X}_B$};\n        % Decomposition\n        \\draw [dotted, black] (0,3) -- (5,3);\n        \\draw [thick, orange] (5,2) -- (5,3);\n        \\draw [thick, orange] (5,3) -- (6.67,3.5);\n        \\node [left,black] at (-0.5,3.25){$\\beta_B\\Delta\\bar{X}$};\n        \\node [left,black] at (-0.5,2.5){$\\Delta\\beta\\bar{X}_A$};\n\\end{tikzpicture}"
+  },
+  {
+    "objectID": "rmethods2/session_4.html#option-1",
+    "href": "rmethods2/session_4.html#option-1",
+    "title": "Research Methods II",
+    "section": "Option 1",
+    "text": "Option 1"
+  },
+  {
+    "objectID": "rmethods2/session_4.html#option-2",
+    "href": "rmethods2/session_4.html#option-2",
+    "title": "Research Methods II",
+    "section": "Option 2",
+    "text": "Option 2"
+  },
+  {
+    "objectID": "rmethods2/session_4.html#section-10",
+    "href": "rmethods2/session_4.html#section-10",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "3-way Decomposition\n\nOption 1Option 2note\n\n\n\n\n\n\n\n\n\nMathematically:\n\n\\[\\begin{aligned}\n\\Delta \\bar Y &= \\bar Y_a - \\bar Y_b \\\\\n&= \\bar X_a \\beta_a - \\bar X_b \\beta_b \\\\\n&= \\bar X_a \\Delta \\beta  +   \\Delta \\bar X \\beta_b +   \\Delta \\bar X \\beta_a - \\Delta \\bar X \\beta_a \\\\\n&= {\\bar X_a \\Delta \\beta}  + \\Delta \\bar X \\beta_a - \\Delta \\bar X \\Delta \\beta \\\\\n\\text{ or } \\\\\n&= \\bar X_a \\Delta \\beta  +   \\Delta \\bar X \\beta_b +   \\bar X_b \\Delta \\beta - \\bar X_b \\Delta \\beta  \\\\\n&= \\bar X_b \\Delta \\beta + \\Delta \\bar X \\beta_b + \\Delta X \\Delta \\beta\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "rmethods2/session_4.html#example",
+    "href": "rmethods2/session_4.html#example",
+    "title": "Research Methods II",
+    "section": "Example:",
+    "text": "Example:\n\n\nCode\nfrause oaxaca, clear\ndrop if lnwage == .\n\n\n\n\n\n(Excerpt from the Swiss Labor Market Survey 1998)\n(213 observations deleted)\n\n\nFirst things first:\n\nDefine your groups of interest: Men vs Women\nIdentify your model of interest: Simple Specification\nAnd obtain Summary Statistics\n\n\n\nCode\ntabstat lnwage educ exper age married , by(female)\n\n\n\nSummary statistics: Mean\nGroup variable: female (sex of respondent (1=female))\n\n  female |    lnwage      educ     exper       age   married\n---------+--------------------------------------------------\n       0 |  3.440222  11.81425  14.07684  38.43142  .5219707\n       1 |  3.266761  11.23206  12.13769  39.28697  .4128843\n---------+--------------------------------------------------\n   Total |  3.357604  11.53696  13.15324  38.83891  .4700139\n------------------------------------------------------------\n\n\n\n\nCode\ngen cns = 1\nqui:mean educ exper age married cns if female == 0\nmatrix x_men = e(b)\nqui:mean educ exper age married cns if female == 1\nmatrix x_women = e(b)\n\n\nSecond, estimate models of interest\n\n\nCode\nqui: reg lnwage educ exper age married if female==0\nest sto men\nmatrix b_men = e(b)\nqui: reg lnwage educ exper age married if female==1\nmatrix b_women = e(b)\nest sto women\nesttab men women, nogaps se mtitle(\"Men\" \"Women\")\n\n\n\n--------------------------------------------\n                      (1)             (2)   \n                      Men           Women   \n--------------------------------------------\neduc               0.0540***       0.0853***\n                (0.00595)       (0.00871)   \nexper            -0.00495*        0.00776*  \n                (0.00197)       (0.00346)   \nage                0.0216***      0.00808** \n                (0.00202)       (0.00271)   \nmarried             0.173***       -0.121** \n                 (0.0293)        (0.0421)   \n_cons               1.950***        1.947***\n                 (0.0757)         (0.124)   \n--------------------------------------------\nN                     751             683   \n--------------------------------------------\nStandard errors in parentheses\n* p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001\n\n\n\n\nCode\nmatrix DX = x_men - x_women \nmatrix DB = b_men - b_women\n\nmatrix DX_bw = DX * b_women'\nmatrix Xm_Db = x_men * DB'\n\nmatrix DX_bm = DX * b_men'\nmatrix Xw_Db = x_women * DB'\n\nmatrix dDX_bw = vecdiag(DX' * b_women)'\nmatrix dXm_Db = vecdiag(x_men' * DB)'\n\nmatrix dDX_bm = vecdiag(DX' * b_men)'\nmatrix dXw_Db = vecdiag(x_women' * DB)'\n\n** Total Gap Returns\nmatrix result = DX_bw + Xm_Db, DX_bw, Xm_Db, DX_bm, Xw_Db\nmatrix result =result\\ dDX_bw + dXm_Db, dDX_bw, dXm_Db, dDX_bm, dXw_Db\nmatrix colname result = DY  DX_bw Xm_Db DX_bm  Xw_Db\nmatrix coleq result = \"\" op1 op1 op2 op2\n\n\nmatrix list result, format(%9.4f)\n\n\n\nresult[6,5]\n                      op1:     op1:     op2:     op2:\n              DY    DX_bw    Xm_Db    DX_bm    Xw_Db\n     y1   0.1735   0.0446   0.1289   0.0222   0.1513\n   educ  -0.3192   0.0496  -0.3689   0.0315  -0.3507\n  exper  -0.1638   0.0150  -0.1789  -0.0096  -0.1542\n    age   0.5141  -0.0069   0.5210  -0.0185   0.5326\nmarried   0.1401  -0.0132   0.1533   0.0189   0.1213\n  _cons   0.0023   0.0000   0.0023   0.0000   0.0023\n\n\n\nNegative numbers “Contract” the gap,\nPositive, “Expand” the gap."
+  },
+  {
+    "objectID": "rmethods2/session_4.html#choosing-the-counterfactual",
+    "href": "rmethods2/session_4.html#choosing-the-counterfactual",
+    "title": "Research Methods II",
+    "section": "Choosing the Counterfactual",
+    "text": "Choosing the Counterfactual\n\nWhat should be a good counterfactual?\n\nThe one that is most relevant to your research question.\nThe one that is most likely to be true.\nThe one that is not affected by discrimination.\n\nWhile most of the time, decomposition results do not change much respect to the counterfactual, some times they do.\nWhat to do?"
+  },
+  {
+    "objectID": "rmethods2/session_4.html#the-oaxaca-way",
+    "href": "rmethods2/session_4.html#the-oaxaca-way",
+    "title": "Research Methods II",
+    "section": "The oaxaca way",
+    "text": "The oaxaca way\n\n\nCode\nssc install oaxaca\nqui:oaxaca lnwage educ exper age married, by(female) w(0)  \nest sto m1\nqui:oaxaca lnwage educ exper age married, by(female) w(1)  \nest sto m2\nesttab m1 m2, wide mtitle(bw_Xm Xm_bw)\n\n\nchecking oaxaca consistency and verifying not already installed...\nall files already exist and are up to date.\n\n----------------------------------------------------------------------\n                      (1)                          (2)                \n                    bw_Xm                        Xm_bw                \n----------------------------------------------------------------------\noverall                                                               \ngroup_1             3.440***     (196.70)        3.440***     (196.70)\ngroup_2             3.267***     (149.41)        3.267***     (149.41)\ndifference          0.173***       (6.20)        0.173***       (6.20)\nexplained          0.0446*         (2.50)       0.0222          (1.28)\nunexplained         0.129***       (4.63)        0.151***       (5.69)\n----------------------------------------------------------------------\nexplained                                                             \neduc               0.0496***       (4.15)       0.0315***       (4.09)\nexper              0.0150          (1.92)     -0.00960*        (-2.08)\nage              -0.00691         (-1.32)      -0.0185         (-1.46)\nmarried           -0.0132*        (-2.36)       0.0189***       (3.40)\n----------------------------------------------------------------------\nunexplained                                                           \neduc               -0.369**       (-2.96)       -0.351**       (-2.96)\nexper              -0.179**       (-3.17)       -0.154**       (-3.18)\nage                 0.521***       (4.00)        0.533***       (4.00)\nmarried             0.153***       (5.62)        0.121***       (5.54)\n_cons             0.00234          (0.02)      0.00234          (0.02)\n----------------------------------------------------------------------\nN                    1434                         1434                \n----------------------------------------------------------------------\nt statistics in parentheses\n* p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001"
+  },
+  {
+    "objectID": "rmethods2/session_4.html#section-11",
+    "href": "rmethods2/session_4.html#section-11",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "Choosing the Counterfactual\n\nDefault counterfactual is to use predict wages for group A, using Wage structure of group B.\nSome times it may make more sense choosing something in between:\n\n\\[\\beta_c = \\omega \\beta_a + (1-\\omega) \\beta_b\n\\]\nThis is the meaning of w() in Oaxaca\n\nSome times, you may want to use \\(\\beta's\\) from a pool model (omega option in Oaxaca)"
+  },
+  {
+    "objectID": "rmethods2/session_4.html#ob-cheat-sheet",
+    "href": "rmethods2/session_4.html#ob-cheat-sheet",
+    "title": "Research Methods II",
+    "section": "OB Cheat Sheet",
+    "text": "OB Cheat Sheet\n\nStata Implementation: oaxaca by Jann (2008)\nTypes of Decompositions\n\nTrifold Decomposition: oaxaca y x1 x2 x3 x4, by(group)\nStandard Decompositions: oaxaca y x1 x2 x3 x4, by(group) w(0)  [w(1) ]\nReimiers (1983) Decomposition: oaxaca y x1 x2 x3 x4, by(group) w(0.5)\nCotton(1983) Decomposition: oaxaca y x1 x2 x3 x4, by(group) w(#=Share)\nOaxaca Ransom (1988,1994) and Neumark (1988) Decomposition: oaxaca y x1 x2 x3 x4, by(group) omega\nCain (1986): oaxaca y x1 x2 x3 x4, by(group) pool"
+  },
+  {
+    "objectID": "rmethods2/session_4.html#beyond-microdata---a-note",
+    "href": "rmethods2/session_4.html#beyond-microdata---a-note",
+    "title": "Research Methods II",
+    "section": "Beyond Microdata - a note",
+    "text": "Beyond Microdata - a note\n\nThe principles of OB decomposition can also be applied to other types of data, including Macro Data.\nConsider: Between 1990 and 2000 poverty rates fell from 20 to 10%.\nWhat factors explain this change?\n\nComposition changes (Populations with lower poverty rates grew faster)\nPovery rates within groups (Poverty rates within groups fell)\n\n\n\\[\\begin{aligned}\nP_t - P_s &= \\sum_{j=1}^K w_{jt} P_{jt} - \\sum_{j=1}^K w_{js} P_{js} \\\\\n\\Delta P &= \\sum_{j=1}^K w_{jt} ( P_{jt} -  P_{js}) + \\sum_{j=1}^K (w_{jt}-w_{js}) P_{js}\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "rmethods2/session_4.html#ob-decomposition-extensions-1",
+    "href": "rmethods2/session_4.html#ob-decomposition-extensions-1",
+    "title": "Research Methods II",
+    "section": "OB Decomposition: Extensions",
+    "text": "OB Decomposition: Extensions\n\nOB Decompositions have two drawbacks\n\nIts meant to analyze differences in average differences\nIt uses differences in mean characteristics\nIts based on a linear model (OLS)\nStrong assumptions on error terms\n\nThere are various extensions (discussed in Firpo, Fortin, Lemieux (2010)) that can be used to address some of this limitations."
+  },
+  {
+    "objectID": "rmethods2/session_4.html#linearity-assumption",
+    "href": "rmethods2/session_4.html#linearity-assumption",
+    "title": "Research Methods II",
+    "section": "Linearity Assumption",
+    "text": "Linearity Assumption\n\nBarsky at al (2002) and Dinardo Fortin and Limeux (1996)\nA strong assumption behind OB is that the model is linear in parameters.\n\nThis is important because the decomposition assumes we can make good “extrapolations” of the model.\nThis is a problem of model misspecification. (what to do?)\n\nOne option is to improve model specification\n\nConsider using quadratic terms, interactions, with CENTERED variables.\n\nHowever if Detailed decomposition is not of interest, one could use Re-weighting to get Counterfactuals"
+  },
+  {
+    "objectID": "rmethods2/session_4.html#re-weighting",
+    "href": "rmethods2/session_4.html#re-weighting",
+    "title": "Research Methods II",
+    "section": "Re-weighting",
+    "text": "Re-weighting\n\nConsidered a more general model: \\(Y_k = G_k(X) + \\epsilon_k\\) and \\(E(Y|X,k) = G_k(X)\\)\nThe overall mean, in this case could be written as:\n\n\\[\\begin{aligned}\nE_k(Y)&=\\int y f_k(y) dy = \\iint (g_k(x) + \\epsilon) f_k(x,\\epsilon) dx d\\epsilon \\\\\n      &= \\int g_k(x) f_k(x) dx  \\\\\n      &= \\bar Y_{x=k, g=k}\n\\end{aligned}\n\\]\n\nNow lets define a counterfactual: \\(\\bar Y^c_{x=A, g=B} &= \\int g_B(x) f_A(x) dx\\)\n\nthis is defined as the average outcome of group A if they face the market of group B.\n\nThen, the nonlinear decomposition can be written as:\n\n\\[\\begin{aligned}\n\\Delta \\bar Y &= \\bar Y_{x=A, g=A} - \\bar Y_{x=B, g=B} \\\\\n&= \\bar Y_{x=A, g=A} - \\bar Y_{x=B, g=B} + \\bar Y^c_{x=A, g=B} - \\bar Y^c_{x=A, g=B} \\\\\n&= \\bar Y_{x=A, g=A} - \\bar Y^c_{x=A, g=B} + \\bar Y^c_{x=A, g=B} - \\bar Y_{x=B, g=B} \\\\\n&=                   \\Delta G + \\Delta X\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "rmethods2/session_4.html#section-12",
+    "href": "rmethods2/session_4.html#section-12",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "Re-weighting\n\nConsidered a more general model: \\(Y_k = G_k(X) + \\epsilon_k\\) and \\(E(Y|X,k) = G_k(X)\\)\nThe overall mean, in this case could be written as:\n\n\\[\\begin{aligned}\nE_k(Y)&=\\int y f_k(y) dy = \\iint (g_k(x) + \\epsilon) f_k(x,\\epsilon) dx d\\epsilon \\\\\n      &= \\int g_k(x) f_k(x) dx  \\\\\n      &= \\bar Y_{g=k, X=k}\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "rmethods2/session_4.html#section-13",
+    "href": "rmethods2/session_4.html#section-13",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "Now lets define a counterfactual: \\(\\bar Y^c_{x=A, g=B} = \\int g_B(x) f_A(x) dx\\)\n\nthis is defined as the average outcome of group A if they face the market of group B.\n\nThen, the nonlinear decomposition can be written as:\n\n\\[\\begin{aligned}\n\\Delta \\bar Y &= \\bar Y_{G=A, X=A} - \\bar Y_{G=B, X=B} \\\\\n&= \\bar Y_{G=A, X=A} - \\bar Y_{G=B, X=B} + \\bar Y^c_{G=A, X=B} - \\bar Y^c_{G=A, X=B} \\\\\n&= \\bar Y_{G=A, X=A} - \\bar Y^c_{G=A, X=B} + \\bar Y^c_{G=A, X=B} - \\bar Y_{G=B, X=B} \\\\\n&=                   \\Delta X + \\Delta G\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "rmethods2/session_4.html#section-14",
+    "href": "rmethods2/session_4.html#section-14",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "But how are the counterfactuals weights identified?\nThen the counterfactual can be written as:\n\\[\n\\begin{aligned}\n\\bar Y^c_{G=A, X=B} &= \\int g_A(x) f_B(x) dx  = \\int g_A(x) \\frac{f_B(x)}{f_A(x)} f_A(x) dx \\\\\n&= \\int g_A(x) \\frac{1-P_A(X)}{P_A(X)} f_A(x) dx \\\\\n&= \\int g_A(x) \\widehat{IPW}(X) f_A(x) dx \\\\\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "rmethods2/session_4.html#section-15",
+    "href": "rmethods2/session_4.html#section-15",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "Example\n\n\nCode\nfrause oaxaca, clear\ndrop if lnwage==.\nqui:logit female c.(educ exper age married)##c.(educ exper age married), nolog\npredict pr_b, pr\n\ngen ipw1 = (1-pr_b)/pr_b if female==1\ngen ipw2 = pr_b/(1-pr_b) if female==0\nqui:{\nmean lnwage educ exper age married if female==0\nest sto m1\nmean lnwage educ exper age married if female==0 [pw=ipw2] \nest sto m2a\nmean lnwage educ exper age married if female==1 [pw=ipw1]\nest sto m2b\nmean lnwage educ exper age married if female==1\nest sto m3\n \n}\nesttab m1 m2a m2b m3, nogaps se ///\nmtitle(Men Men_as_w Wmen_as_m Women)\n\n\n(Excerpt from the Swiss Labor Market Survey 1998)\n(213 observations deleted)\n(751 missing values generated)\n(683 missing values generated)\n\n----------------------------------------------------------------------------\n                      (1)             (2)             (3)             (4)   \n                      Men        Men_as_w       Wmen_as_m           Women   \n----------------------------------------------------------------------------\nlnwage              3.440***        3.475***        3.277***        3.267***\n                 (0.0175)        (0.0247)        (0.0280)        (0.0218)   \neduc                11.81***        11.35***        11.82***        11.23***\n                 (0.0895)         (0.112)         (0.154)        (0.0900)   \nexper               14.08***        12.26***        15.23***        12.14***\n                  (0.408)         (0.432)         (1.621)         (0.319)   \nage                 38.43***        39.46***        39.47***        39.29***\n                  (0.413)         (0.725)         (1.160)         (0.411)   \nmarried             0.522***        0.393***        0.523***        0.413***\n                 (0.0182)        (0.0252)        (0.0408)        (0.0189)   \n----------------------------------------------------------------------------\nN                     751             751             683             683   \n----------------------------------------------------------------------------\nStandard errors in parentheses\n* p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001\n\n\nDecomposition:\n(1,2,4): - \\(DX\\) = (1) vs (2)= 3.440-3.475=-0.035 - \\(DB\\) = (2) vs (4)= 3.475-3.267 =0.208 (1,3,4) - \\(DX\\) = (3) vs (4) = 3.277-3.267 = 0.010 - \\(DB\\) = (1) vs (3) = 3.440-3.277 = 0.163"
   }
 ]
