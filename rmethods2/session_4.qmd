@@ -472,16 +472,18 @@ rifhdreg wage female [pw=ipw2] , rif(gini) over(female)
 ```
 
 - Drawback: requires correction of SE, and accounting for RW error and Specification error
-- Doesnt easily allow for detailed Decompositions.
+- Doesn't easily allow for detailed Decompositions.
 
 ## Going Beyond the mean
 
 - One additional and useful extension of the OB Decomposition is to use it for analysis of statistics other than the mean.
-- This can be done by using the **recentered influence function** (RIF) (Firpo, Fortin, Lemieux (2009))
+- This can be done by using the **recentered influence function** (RIF) (Firpo, Fortin, Lemieux (2009,2018))
 
 - The idea: Use RIFs of the statistic of interest to decompose instead as dependent variable.
 
 - OB can then be applied as usual
+
+- Consider Double Decomposition to avoid Reweighting errors
 
 ## Example {.scrollable}
 

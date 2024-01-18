@@ -2678,28 +2678,28 @@
     "href": "adv_class/04cqreg.html#introduction",
     "title": "Conditional Quantile Regressions",
     "section": "Introduction",
-    "text": "Introduction\nQuestion: What are quantiles? and why do we care??\n\nQuantiles are statistics that have the purpose of providing a better characterization of distributions.\n\nThis is possible, because it provides you with more information than standard summary statistics (means and variance)\n\nHow so? In general, there are 3 ways you can use to know “everything” about a distribution.\n\nYou either have access to every single \\(y_i\\)\nOr you know the distribution function \\(f(y)\\) (or probability density function pdf)\nOr you know the cumulative distribution function \\(F(y)=\\int_\\infty^y f(t) dt = P(Y\\leq y)\\)\n\nHowever, there is an additional way. Quantile:\n\n\\[\nQ(\\theta) = F^{-1}(p)\n\\]\n\nWhich in principle, is nothing but the inverse cumulative density function."
+    "text": "Introduction\nQuestion: What are quantiles? and why do we care??\n\nQuantiles provide a better characterization of distributions.\n\nIt provides you with more information than standard summary statistics (means and variance)\n\nHow so? In general, there are 3 ways you can use to know “everything” about a distribution.\n\nYou either have access to every single \\(y_i\\)\nOr you know the distribution function \\(f(y)\\) (pdf)\nOr you know the cumulative distribution function \\(F(y)=\\int_\\infty^y f(t) dt = P(Y\\leq y)\\)\n\nHowever, there is an additional way. Quantile:\n\n\\[\nQ(\\theta) = F^{-1}(p)\n\\]"
   },
   {
     "objectID": "adv_class/04cqreg.html#section",
     "href": "adv_class/04cqreg.html#section",
     "title": "Conditional Quantile Regressions",
     "section": "",
-    "text": "\\(Q(\\theta) = F^{-1}(\\theta)\\)"
+    "text": "And are also very easy to estimate:\n\n\nSort data by \\(y\\) \\(\\rightarrow\\) Obtain weighted ranks \\(\\rightarrow\\) choose the lowest value so that \\(\\theta\\) % of the data is less of equal to that number\n\n\\[\nF^{-1} (tau) = inf(x: F(x)\\geq t)\n\\]\n\nThis “just” requires obtaining an approximation for \\(F(\\theta)\\), which can be approximated using nonparametric methods!\n\n\\[\\hat F(x) = \\frac{1}{N}\\sum (K_F(x,x_i,h)) =\n\\frac{1}{N}\\sum 1(x_i&lt;x)\n\\]\n\nthen we simply “invert” the function for whichever quantile we are interested in."
   },
   {
     "objectID": "adv_class/04cqreg.html#other-advantages-yes",
     "href": "adv_class/04cqreg.html#other-advantages-yes",
     "title": "Conditional Quantile Regressions",
     "section": "Other advantages? Yes!",
-    "text": "Other advantages? Yes!\n\nQuantiles are far more stable in the presence of outliers. Because of this, they are particularly useful as measures of central tendency (perhaps superior to the mean) (🤔?)\n\nSimple “test”. In the small town of Troy-NY one of the residents wins the 2B$ lottery. How much has welfare increase for the average resident?\n\nScaled IQR can be used as an alternative measure of dispersion.\n\n\\[\nse2 = \\frac{Q_{75}-Q_{25}}{1.34898}\n\\]\n\nThey are also “function-transformation” resistant: \\(exp(Q_{log(y)} (.10)) = Q_y(.10)\\)\nAnd are also very easy to estimate:\n\nSort data by y \\(\\rightarrow\\) Obtain weighted ranks \\(\\rightarrow\\) choose the lowest value so that \\(\\theta\\) % of the data is less of equal to that number\n\n\n\\[\nF^{-1} (tau) = inf(x: F(x)\\geq t)\n\\]\nThis “just” requires obtaining an approximation for \\(F(\\theta)\\), which can be approximated using nonparametric methods!\n\\[\\hat F(x) = \\frac{1}{N}\\sum (K_F(x,x_i,h)) =\n\\frac{1}{N}\\sum 1(x_i&lt;x)\n\\]\nthen we simply “invert” the function for whichever quantile we are interested in."
+    "text": "Other advantages? Yes!\n\nQuantiles are far more stable in the presence of outliers. Because of this, they are particularly useful as measures of central tendency (perhaps superior to the mean) (🤔?)\n\nSimple “test”. In the small town of Troy-NY one of the residents wins the 2B$ lottery. How much has welfare increase for the average resident?\n\nScaled IQR can be used as an alternative measure of dispersion.\n\n\\[\nse2 = \\frac{Q_{75}-Q_{25}}{1.34898}\n\\]\n\nThey are also “function-transformation” resistant: \\(exp(Q_{log(y)} (.10)) = Q_y(.10)\\)"
   },
   {
     "objectID": "adv_class/04cqreg.html#statistical-inference",
     "href": "adv_class/04cqreg.html#statistical-inference",
     "title": "Conditional Quantile Regressions",
     "section": "Statistical Inference",
-    "text": "Statistical Inference\nAs with the mean, sampling quantiles are measured with sampling error. Thus its important to recognize its sampling distribution.\nHowever, because of the nature of how quantiles are defined, their standard errors are not as intuitive to obtain, although they can be derived using the delta Method. We start from:\n\\[Q_y(\\tau) = F_y^{-1}(\\tau) \\rightarrow F_y(Q_y(\\tau)) = \\tau\n\\]\n\\[1 = f_y(Q_y(\\tau)) \\frac{dQ}{d\\tau} \\rightarrow \\frac{dQ}{d\\tau} =  \\frac{1}{f(Q_y(\\tau))}\n\\]\nSo we have:\n\\[\n\\begin{aligned}\n\\hat Q_y(\\tau) - Q_y(\\tau) \\simeq \\frac{1}{f(Q_y(\\tau)}(\\hat \\tau-\\tau) \\\\\nVar(\\hat Q_y(\\tau)) = \\frac{Var(\\hat \\tau - \\tau) }{f^2(Q_y(\\tau))} = \\frac{N^{-1} \\tau(1-\\tau)}{f^2(Q_y(\\tau))}\n\\end{aligned}\n\\]\nLets understand this elements"
+    "text": "Statistical Inference\n\nAs with the mean, sampling quantiles are measured with sampling error.\nHowever their standard errors are not as intuitive to obtain ( but can be derived using the delta Method)\n\n\\[Q_y(\\tau) = F_y^{-1}(\\tau) \\rightarrow F_y(Q_y(\\tau)) = \\tau \\ || \\ \\frac{\\partial}{\\partial \\tau}\n\\]\nThis gives us: \\[f_y(Q_y(\\tau)) \\frac{dQ}{d\\tau}  =1 \\rightarrow \\frac{dQ}{d\\tau} =  \\frac{1}{f(Q_y(\\tau))}\n\\]"
   },
   {
     "objectID": "adv_class/04cqreg.html#quantile-se",
@@ -2720,63 +2720,63 @@
     "href": "adv_class/04cqreg.html#from-q_y-to-q_yx",
     "title": "Conditional Quantile Regressions",
     "section": "From \\(Q_Y\\) to \\(Q_{Y|X}\\)",
-    "text": "From \\(Q_Y\\) to \\(Q_{Y|X}\\)\nThe previous approaches used to identify a particular quantile are not the only ones.\nJust like we can use OLS to estimate Means (Can you prove it?), we could also use a similar method to estimate the median. We only need to change the loss function \\(L()\\) from an \\(L^2\\) to a \\(|L|\\).\nConsider this:\n\\[\nmedian(Y) = min_\\mu \\frac{1}{N}\\sum |y-\\mu|=\\frac{2}{N}\\sum (y-u)(0.5-I([y-u]&lt;0)\n\\]"
+    "text": "From \\(Q_Y\\) to \\(Q_{Y|X}\\)\n\nThe approaches used earlier to identify a particular quantile are not the only ones.\nJust like we can use OLS to estimate Means, we could also use a similar method to estimate the median.\nWe only need to change the loss function \\(L()\\) from an \\(L^2\\) to a \\(|L|\\).\n\nConsider this:\n\\[\\begin{aligned}\nmedian(Y) &= min_\\mu \\frac{1}{N}\\sum |y-\\mu| \\\\\n&=\\frac{2}{N}\\sum (y-u)(0.5-I([y-u]&lt;0)\n\\end{aligned}\n\\]"
   },
   {
     "objectID": "adv_class/04cqreg.html#section-1",
     "href": "adv_class/04cqreg.html#section-1",
     "title": "Conditional Quantile Regressions",
     "section": "",
-    "text": "Q and Loss functions\nWhy does it matter?\n\nThe loss function for Quantiles does not penalize “errors” as much as \\(L^2\\) does. This is why its more robust to outliers (almost not affected by them). (the R2 will also need to be changed)\nHowever, the loss function is no longer differentiable (is discontinuous). So requires other methods to find the solution. Even tho it may not look like that:"
+    "text": "So we have:\n\\[\n\\begin{aligned}\n\\hat Q_y(\\tau) &\\simeq Q_y(\\tau) + \\frac{1}{f(Q_y(\\tau))}(\\hat \\tau-\\tau) \\\\\n\\hat Q_y(\\tau) - Q_y(\\tau) &\\simeq \\frac{1}{f(Q_y(\\tau)}(\\hat \\tau-\\tau) \\\\\nVar(\\hat Q_y(\\tau)) &= \\frac{Var(\\hat \\tau - \\tau) }{f^2(Q_y(\\tau))} = \\frac{N^{-1} \\tau(1-\\tau)}{f^2(Q_y(\\tau))}\n\\end{aligned}\n\\]\nLets understand this elements"
   },
   {
     "objectID": "adv_class/04cqreg.html#section-2",
     "href": "adv_class/04cqreg.html#section-2",
     "title": "Conditional Quantile Regressions",
     "section": "",
-    "text": "From B to XB\nKoenker and Bassett (1978) extended this last approximation in two ways:\n\nAllows for Covariates (\\(X's\\)) variation\nAllows to identify other quantiles in the distribution:\n\n\\[ \\beta(\\tau) = \\underset {b}{min} \\ N^{-1} \\sum \\rho_\\tau(y_i-X_i'b) \\\\\n\\rho_\\tau (u) = u (\\tau-I(u&lt;0))\n\\]\n\nThis implicitly states that you want to find a combination of \\(X's\\) such that \\(\\tau\\) proportion of \\(y_i\\) are lower than the \\(X_i'\\beta(\\tau)\\) .\n\nBut because we are using controls, we also need that, conditional on \\(x^c\\), \\(\\tau\\)% is lower than \\(x'^{c}\\beta\\)\n\n\n\\[Q_{Y|X}(\\tau) = \\beta_0(\\tau) + \\beta_1(\\tau)x_1 +...+ \\beta_k(\\tau)x_k\n\\]"
+    "text": "So we have:\n\\[\n\\begin{aligned}\n\\hat Q_y(\\tau) &\\simeq Q_y(\\tau) + \\frac{1}{f(Q_y(\\tau))}(\\hat \\tau-\\tau) \\\\\n\\hat Q_y(\\tau) - Q_y(\\tau) &\\simeq \\frac{1}{f(Q_y(\\tau)}(\\hat \\tau-\\tau) \\\\\nVar(\\hat Q_y(\\tau)) &= \\frac{Var(\\hat \\tau - \\tau) }{f^2(Q_y(\\tau))} = \\frac{N^{-1} \\tau(1-\\tau)}{f^2(Q_y(\\tau))}\n\\end{aligned}\n\\]\nLets understand this elements"
   },
   {
     "objectID": "adv_class/04cqreg.html#interpretation-why-is-it-so-different-from-ols",
     "href": "adv_class/04cqreg.html#interpretation-why-is-it-so-different-from-ols",
     "title": "Conditional Quantile Regressions",
     "section": "Interpretation: Why is it so different from OLS?",
-    "text": "Interpretation: Why is it so different from OLS?\n\nIn Rios-Avila and Maroto(2022?) we stress that OLS can be interpreted at different “levels”. So consider the following:\n\n\\[\ny_i = b_0 + b_1 x_1 + b_2 x_2  + e\n\\]\nIf there errors are exogenous, and there is no heteroskedasticty, you can “obtain” marginal effects at many levels:\n\\[\n\\begin{aligned}\nInd &: \\frac{dy_i}{dx_{1i}}=b_1 \\\\\nCond &: E(y_i|X=x)=b_0 + b_1 x_1 + b_2 x_2 \\\\\n&: \\frac{dE(y|x)}{dx_1} =b_1 \\\\\nUcond &: E(y_i) = b_0 + b_1 E(x_1) + b_2 E(x_2) \\\\\n&:  \\frac{dE(y)}{dE(x_1)} =b_1\n\\end{aligned}\n\\]\n\nSo in OLS, assuming a linear model in parameters, Nothing changes. The effect is the same! (although magnitude of the “experiment” changes)"
+    "text": "Interpretation: Why is it so different from OLS?\n\nIndividualConditionalUnconditionalConclusion\n\n\n\nIn Rios-Avila and Maroto(2022) we stress that OLS can be interpreted at different “levels”. Consider the following:\n\n\\[\ny_i = b_0 + b_1 x_1 + b_2 x_2  + e\n\\]\nIf the errors are exogenous, and there is no heteroskedasticty, you can “obtain” marginal effects at many levels\n\n\n\\[ Ind &: \\frac{dy_i}{dx_{1i}}=b_1\n\\]\nIf \\(x_1i\\) changes, and everything else is fixed, then \\(y_i\\) changes by \\(b_1\\) units for that individual.\n\n\n\\[\\begin{aligned}\nE(y_i|X=x)&=b_0 + b_1 x_1 + b_2 x_2 \\\\\n\\frac{dE(y|x)}{dx_1} &=b_1 \\\\\n\\end{aligned}\n\\]\nIf \\(x_1\\) changes for a group of individuals with the same characterisitcs, everything else is fixed, then everyone in that group will experience a change in \\(Y\\) by \\(b_1\\) units.\n\n\n\\[\\begin{aligned}\nE(y_i) &= b_0 + b_1 E(x_1) + b_2 E(x_2) \\\\\n\\frac{dE(y)}{dE(x_1)} &=b_1\n\\end{aligned}\n\\]\nIf \\(E(x_1)\\) changes for everyone, then the overall average change in \\(Y\\) is \\(b_1\\) units.\n\n\n\nSo in OLS, assuming a linear model in parameters, Nothing changes. The effect is the same! (although magnitude of the “experiment” changes)"
   },
   {
     "objectID": "adv_class/04cqreg.html#but-cqreg",
     "href": "adv_class/04cqreg.html#but-cqreg",
     "title": "Conditional Quantile Regressions",
     "section": "But CQreg?",
-    "text": "But CQreg?\nFor quantile regressions, things are not that simple.\n\nThere is no “individual” level quantile effect, because we do not observe individual ranks \\(\\tau\\) . If we could observe them, and we assume they are fixed, then one can obtain individual level effects.\nBecause \\(\\tau\\) is unobserved, all Qregression coefficients, should be interpreted as effects on Conditional Distributions (thus the name CQREG).\n\nIn other words, effects are just expected changes in some points in the distribution.\n\nYou cannot use it for unconditional effects either (not easily), because\n\n\\[\nE(Q_{Y|X}(\\tau)) \\neq Q_Y(\\tau)\n\\]\nand you cannot “simply” average the CQREG effects to get unconditional.\nBut what does it mean? This means that CQREG interpretation are percentile \\(\\tau\\) and covariate \\(X\\) specific. But that is not all:\n\nFixed rank. If you happen to be on the top of the distribution (and stay there), the quantile effect is given by the \\(\\beta(\\tau)\\)\nChanges in Conditional distributions: What we see are how distribution changes along characteristics\n\nSo this must be kept in mind, whenever one interpret results"
+    "text": "But CQreg?\nFor quantile regressions, things are not that simple.\n\nThere is no “individual” level quantile effect, because we do not observe individual ranks \\(\\tau\\).\n\nIf we could observe them, and we assume they are fixed, then one can obtain individual level effects.\n\nBecause \\(\\tau\\) is unobserved, all Qregression coefficients, should be interpreted as effects on Conditional Distributions (thus the name CQREG).\n\nIn other words, effects are just expected changes in some points in the distribution.\n\nYou cannot use it for unconditional effects either (not easily), because\n\n\\[\nE(Q_{Y|X}(\\tau)) \\neq Q_Y(\\tau)\n\\]\nand you cannot “simply” average the CQREG effects to get unconditional quantiles."
   },
   {
     "objectID": "adv_class/04cqreg.html#example-wages",
     "href": "adv_class/04cqreg.html#example-wages",
     "title": "Conditional Quantile Regressions",
     "section": "Example: Wages…",
-    "text": "Example: Wages…\nfrause oaxaca, clear\nqreg  lnwage educ exper tenure female, nolog q(10)\nest sto m1\nqreg  lnwage educ exper tenure female, nolog q(50)\nest sto m2\nqreg  lnwage educ exper tenure female, nolog q(90)\nest sto m3\n* ssc install estout\nesttab m1 m2 m3, nogaps mtitle(q10 q50 q90)\n------------------------------------------------------------\n                      (1)             (2)             (3)   \n                      q10             q50             q90   \n------------------------------------------------------------\neduc                0.103***       0.0694***       0.0639***\n                   (6.21)         (16.03)          (7.09)   \nexper              0.0200***      0.00758***      0.00402   \n                   (4.06)          (5.91)          (1.50)   \ntenure           0.000669         0.00657***      0.00774*  \n                   (0.11)          (4.19)          (2.37)   \nfemale             -0.151         -0.0689**       -0.0543   \n                  (-1.87)         (-3.29)         (-1.24)   \n_cons               1.462***        2.474***        2.984***\n                   (6.67)         (43.36)         (25.10)   \n------------------------------------------------------------\nN                    1434            1434            1434   \n------------------------------------------------------------\nt statistics in parentheses\n* p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001\n** Also\n** ssc install qregplot\nqregplot educ exper tenure female, cons q(5/95)"
+    "text": "Example: Wages…\n\nfrause oaxaca, clear\nqui:qreg  lnwage educ exper tenure female, nolog q(10)\nest sto m1\nqui:qreg  lnwage educ exper tenure female, nolog q(50)\nest sto m2\nqui:qreg  lnwage educ exper tenure female, nolog q(90)\nest sto m3\n* ssc install estout\nesttab m1 m2 m3, se nogaps mtitle(q10 q50 q90)\n\n(Excerpt from the Swiss Labor Market Survey 1998)\n\n------------------------------------------------------------\n                      (1)             (2)             (3)   \n                      q10             q50             q90   \n------------------------------------------------------------\neduc                0.103***       0.0694***       0.0639***\n                 (0.0166)       (0.00433)       (0.00902)   \nexper              0.0200***      0.00758***      0.00402   \n                (0.00493)       (0.00128)       (0.00267)   \ntenure           0.000669         0.00657***      0.00774*  \n                (0.00603)       (0.00157)       (0.00327)   \nfemale             -0.151         -0.0689**       -0.0543   \n                 (0.0806)        (0.0210)        (0.0437)   \n_cons               1.462***        2.474***        2.984***\n                  (0.219)        (0.0570)         (0.119)   \n------------------------------------------------------------\nN                    1434            1434            1434   \n------------------------------------------------------------\nStandard errors in parentheses\n* p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001"
   },
   {
     "objectID": "adv_class/04cqreg.html#example-wages-1",
     "href": "adv_class/04cqreg.html#example-wages-1",
     "title": "Conditional Quantile Regressions",
     "section": "Example: Wages…",
-    "text": "Example: Wages…"
+    "text": "Example: Wages…\nqregplot educ exper tenure female, cons q(5/95)"
   },
   {
     "objectID": "adv_class/04cqreg.html#random-coefficents",
     "href": "adv_class/04cqreg.html#random-coefficents",
     "title": "Conditional Quantile Regressions",
     "section": "Random coefficents",
-    "text": "Random coefficents\nOne approach to both understanding, and simulating QREG is by also understanding the intuition behind the data generating process.\n\\[\n\\begin{aligned}\ny = b_0(\\tau)+b_1(\\tau)x_1 + +b_2(\\tau)x_2+...+b_k(\\tau) x_k \\\\\n\\tau \\sim runiform(0,1)\n\\end{aligned}\n\\]\nwhere all coefficients are some function (preferably monotonically increasing or decreasing) of \\(\\tau\\) .\n\nWe want them to be monotonically increasing or decreasing because we want that \\[\nX B(\\tau_1 ) \\geq\nX B(\\tau_2 ) \\  if \\ \\tau_1 &gt; \\tau_2\\]\n\nThis specification suggest that the unobserved component \\(\\tau\\) is a random indicator a kind to luck. If you are lucky and get a high \\(\\tau\\) then you will have better outcomes than anyone of your peers.\nAlso notice that this setup assumes that \\(\\tau\\) is the only random factor, and should be uncorrelated with \\(X\\) (you do not make your luck!)\nCan you create data with these characteristics?"
+    "text": "Random coefficents\nOne approach to both understanding, and simulating QREG is by also understanding the intuition behind the data generating process.\n\\[\n\\begin{aligned}\ny &= b_0(\\tau)+b_1(\\tau)x_1 + +b_2(\\tau)x_2+...+b_k(\\tau) x_k \\\\\n\\tau &\\sim runiform(0,1)\n\\end{aligned}\n\\]\nwhere all coefficients are a function (preferably monotonically increasing or decreasing) of \\(\\tau\\) .\n\nWe want them to be monotonically increasing or decreasing because we want that \\[\nX \\beta(\\tau_1 ) \\geq\nX \\beta(\\tau_2 ) \\  \\text{ if } \\ \\tau_1 &gt; \\tau_2\n\\]"
   },
   {
     "objectID": "adv_class/04cqreg.html#svc-model-with-a-latent-running-variable",
     "href": "adv_class/04cqreg.html#svc-model-with-a-latent-running-variable",
     "title": "Conditional Quantile Regressions",
     "section": "SVC model with a latent running variable",
-    "text": "SVC model with a latent running variable\nAnother way you can think of Qreg is to align it to the -semiparametric- method we introduced ealier. SVC model.\nThe difference here is that the running variable is unknown. Given the outcome, and characteristics, however, we can identify something akin to the presence of a “latent” component. (but not really estimating it).\nThere are a few (recent) papers that focus on estimation and identification of these models. The general intuition is that the qreg model is identified by the following moment condition:\n\\[\nE\\Big( 1[x\\beta(\\tau) - y &gt; 0 ] - \\tau \\Big) = 0\n\\]\nbut substitute the indicator function with a smooth function. CDF\n\\[\nE\\Big( F(x\\beta(\\tau) - y) - \\tau \\Big) = 0\n\\]\nBeing differentiable, this problem is relatively easier to solve (given good initial values)"
+    "text": "SVC model with a latent running variable\n\nAnother way of thinking about Qreg is to align it to the semiparametric method we introduced ealier. SVC model.\nIn SVC, there is an observed running variable \\(z\\), and we focus on analyzing how the “local” effects of \\(X\\) on \\(Y\\) change as a function of \\(z\\).\nThe difference with Qreg is that the running variable is unknown \\(\\tau\\).\n\nGiven the outcome, and characteristics we can identify something like a “latent” component."
   },
   {
     "objectID": "adv_class/04cqreg.html#example-1",
@@ -2790,14 +2790,14 @@
     "href": "adv_class/04cqreg.html#scale-and-location-model",
     "title": "Conditional Quantile Regressions",
     "section": "Scale and Location Model",
-    "text": "Scale and Location Model\nAnother approach that can be used to understand Quantile regressions (and elaborate the interpretation) is to assume that the coefficients are in fact capturing two components:\n\\[y = Xb + Xg(\\tau)\n\\]\n\nLocation: which indicates what is the average relationship between X and Y. \\({b}\\)\nScale: which indicates how far one could be from the average effect, given a relative to its position \\(g(\\tau)\\)\n\nThe model Still assumes random coefficients\nEstimation of this model is not standard. But can be manually implemented:\n\nEstimate OLS and get residuals\nEstimate QREG using those residuals\n\nRequires additional care for the estimation of SE, or just bootstrap"
+    "text": "Scale and Location Model\nAnother approach that can be used to understand Quantile regressions (and elaborate the interpretation) is to assume that the coefficients are in fact capturing two components:\n\\[y = Xb + Xg(\\tau)\n\\]\n\nLocation: \\(Xb\\) which indicates what is the average/typical relationship between X and Y.\nScale: \\(Xg(\\tau)\\) which indicates how far one could be from the average effect, given a relative rank \\(\\tau\\)\n\nEstimation of this model is not standard. But can be manually implemented:\n\nEstimate OLS and get residuals\nEstimate QREG using those residuals\n\nRequires additional care for the estimation of SE"
   },
   {
     "objectID": "adv_class/04cqreg.html#scale-and-location-2-heteroskedasticity",
     "href": "adv_class/04cqreg.html#scale-and-location-2-heteroskedasticity",
     "title": "Conditional Quantile Regressions",
     "section": "Scale and Location 2: Heteroskedasticity",
-    "text": "Scale and Location 2: Heteroskedasticity\nA second approach that is useful to understand and interpret CQreg is to consider a parametric version of the LS model:\n\\[y = Xb + \\gamma (X) * e\n\\]\nWhere we assume \\(\\gamma(X)&gt;0\\) . which directly shows the relationship between a quantile regressions and heteroskedasticity in the error term. (typically model as \\(X\\gamma\\))\nBecause Heteroskedasticity is parametric, it constrains the relationship across all quantile coefficients:\n\\[y = X(b+\\gamma F^{-1}(\\tau)) \\rightarrow b(\\tau)=b+\\gamma(\\tau)\n\\]\nMaking it more efficient, albeit imposing constrains of the relationship.\nIt shows more clearly the nature of the overall inequality increasing or decreasing effect."
+    "text": "Scale and Location 2: Heteroskedasticity\nA second approach that is useful to understand and interpret CQreg is to consider a parametric version of the LS model:\n\\[y = Xb + \\gamma (X) * e \\text{ with } $\\gamma(X)&gt;&gt;0\\]\n\nThis shows the relationship between a quantile regressions and heteroskedasticity in the error term.\nIf we assume Heteroskedasticity is parametric (\\(\\gamma(x) = X \\gamma\\)), it constrains the relationship across all quantile coefficients:\n\n\\[y = X(b+\\gamma F^{-1}(\\tau)) \\rightarrow b(\\tau)=b+\\gamma\\times q(\\tau)\n\\]\n\nMaking it more efficient, albeit imposing constrains of the relationship."
   },
   {
     "objectID": "adv_class/04cqreg.html#visual-loc-vs-scale",
@@ -2818,14 +2818,14 @@
     "href": "adv_class/04cqreg.html#estimation-and-statistical-inference",
     "title": "Conditional Quantile Regressions",
     "section": "Estimation and Statistical Inference",
-    "text": "Estimation and Statistical Inference\nAs hinted previously, there are many approaches that can be used for the estimation of Conditional Quantile regressions.\n\nStata: qreg, sqreg, bsqreg, qreg2, qrprocess, mmqreg, smqreg, sivqr\n\nEach one with its own assumptions. For Standard errors, however, there are 3 options. Under the assumption of iid error. Non iid error (robust), and assuming clustered standard errors.\n\\[\n\\begin{aligned}\niid: \\Sigma_\\beta &=\\frac{\\tau(1-\\tau)}{f^2_y(F^{-1}(\\tau))}(X'X)^{-1} \\\\\nniid: \\Sigma_\\beta &= \\tau(1-\\tau) (X'f(0|x)X)^{-1} \\ (X'X) \\ (X'f(0|x)X)^{-1} \\\\\nalt: \\Sigma_\\beta &= (IF_\\beta \\ ' IF_\\beta) N^{-2}\n\\end{aligned}\n\\]\nOr simply Bootstrap"
+    "text": "Estimation and Statistical Inference\nAs hinted previously, there are many approaches that can be used for the estimation of Conditional Quantile regressions.\n\nOfficial: qreg, sqreg, bsqreg, iqreg\nCContributed: qreg2, qrprocess, mmqreg, smqreg, sivqr\nFor Standard errors, however, there are main 3 options. Under the assumption of iid error. Non iid error (robust), and assuming clustered standard errors.\n\n\\[\n\\begin{aligned}\niid: \\Sigma_\\beta &=\\frac{\\tau(1-\\tau)}{N f^2_y(F^{-1}(\\tau))}(X'X)^{-1} \\\\\nniid: \\Sigma_\\beta &= \\tau(1-\\tau) (X'f(0|x)X)^{-1} \\ (X'X) \\ (X'f(0|x)X)^{-1} \\\\\nalt: \\Sigma_\\beta &= (IF_\\beta \\ ' IF_\\beta) N^{-2}\n\\end{aligned}\n\\]\nOr simply Bootstrap"
   },
   {
     "objectID": "adv_class/04cqreg.html#problems-and-considerations",
     "href": "adv_class/04cqreg.html#problems-and-considerations",
     "title": "Conditional Quantile Regressions",
     "section": "Problems and Considerations",
-    "text": "Problems and Considerations\n\nUnless otherwise specified, quantile regressions are linear in variables (and parameters?)\nWith few exceptions, quantile regressions are quantile specific. Comparisons across quantiles require joint estimation (to construct VCV matrix)\nBecause they are “local” estimators, there is risk of crossing quantiles. (Violation of Monotonicity)\nNon-linear effects will be present if either the location or scale components are nonlinear.\nQuantile regressions are very sensitive to measurement errors in both dependent and independent variables\nThey can be difficult to interpret (see references)"
+    "text": "Problems and Considerations\n\nUnless otherwise specified, quantile regressions are linear in variables (and parameters?)\nWith few exceptions, quantile regressions are quantile specific. Comparisons across quantiles require joint estimation (to construct VCV matrix)\nBecause they are “local” estimators, there is risk of crossing quantiles. (Violation of Monotonicity)\nNon-linear effects will be present if either the location or scale components are nonlinear.\nQuantile regressions are very sensitive to measurement errors in both dependent and independent variables\nThey can be difficult to interpret (see references)\nImplementation of fixed effects is not straightforward"
   },
   {
     "objectID": "adv_class/02OLS.html#introduction",
@@ -3447,8 +3447,8 @@
     "objectID": "adv_class/05uqreg.html#eqyx-is-not-qy",
     "href": "adv_class/05uqreg.html#eqyx-is-not-qy",
     "title": "Unconditional Quantile Regressions (and RIF’s)",
-    "section": "E(q(y|X)) is not Q(y)",
-    "text": "E(q(y|X)) is not Q(y)\nOne common mistake one makes when analyzing QRegressions is to make interpretations as if the average effects on the \\(qth\\) conditional quantiles would be the same as the effect on the “overall” \\(qth\\) quantile.\nExcept for few cases (when Quantile regressions are not relevant), CQ effects do not translate directly into Changes into the unconditional quantile.\nHowever, as a policy maker, this would be the most relevant estimand you may be interested in :\n\nHow does improving education affect inequality?\nWould eliminating Unionization would increase wage inequality?\nIs there heterogeneity in consumption expenditure?\n\nHowever, going from Conditional to unconditional statistics (not only Q) is not always straight forward."
+    "section": "\\(E(q(y|X))\\) is not \\(Q(y)\\)",
+    "text": "\\(E(q(y|X))\\) is not \\(Q(y)\\)\n\nCommon mistake when analyzing QRegressions: Make interpretations as if the average effects on the \\(qth\\) conditional quantiles would be the same as the effect on the “overall” \\(qth\\) quantile.\nExcept for few cases (when Quantile regressions are not relevant), CQ effects do not translate directly into Changes into the unconditional quantile.\n\nHowever, as a policy maker, this would be the most relevant estimand you may be interested in :\n\nHow does improving education affect inequality?\nWould eliminating Unionization would increase wage inequality?\nIs there heterogeneity in consumption expenditure?\n\nHowever, going from Conditional to unconditional statistics (not only Q) is not always straight forward."
   },
   {
     "objectID": "adv_class/05uqreg.html#waitwhat-do-we-mean-unconditional",
@@ -3490,14 +3490,14 @@
     "href": "adv_class/05uqreg.html#againhow-are-unconditional-effects-estimated",
     "title": "Unconditional Quantile Regressions (and RIF’s)",
     "section": "Again…How are Unconditional effects Estimated?",
-    "text": "Again…How are Unconditional effects Estimated?\nIn an ideal scenario, you simple get the data under to regimes (before and after changes in \\(x\\)), and do the following:\n\\[\\Delta v = v(f'_y)-v(f_y)\n\\]\nThat is, just estimate the statistic in two scenarios (\\(f'\\) and \\(f\\)), and calculate the difference. (impossible!)\nBut there are (at least) three alternatives:\n\nUsing Reweighting approaches to “reshape” the data: \\(f(x)\\) (non-parametric)\nIdentify \\(f(y|x)\\) so one can simulate how \\(\\Delta X\\) affect y\nFocus on the statistic \\(v\\) and indirectly identify the effects of interest. (RIF!)"
+    "text": "Again…How are Unconditional effects Estimated?\nIn an ideal scenario, you simple get the data under two regimes (before and after changes in \\(x\\)), and do the following:\n\\[\\Delta v = v(f'_y)-v(f_y)\n\\]\nThat is, just estimate the statistic in two scenarios (\\(f'\\) and \\(f\\)), and calculate the difference. (impossible!)\nBut there are (at least) three alternatives:\n\nUsing Reweighting approaches to “reshape” the data: \\(f(x)\\) (non-parametric)\nIdentify \\(f(y|x)\\) so one can simulate how \\(\\Delta X\\) affect y\nFocus on the statistic \\(v\\) and indirectly identify the effects of interest. (RIF!)"
   },
   {
     "objectID": "adv_class/05uqreg.html#op1-re-weighting",
     "href": "adv_class/05uqreg.html#op1-re-weighting",
     "title": "Unconditional Quantile Regressions (and RIF’s)",
     "section": "Op1: Re-weighting",
-    "text": "Op1: Re-weighting\nConsider the following. there is a policy such that you plan to improve education in a country. Every single person will have at least 7 years of education, and will have free access to two additional years of education if they want to.\nIn other words, characteristics change from \\(f(x) \\rightarrow g(x)\\) . But you do not see this! \\[ v(g_y) = \\iint h(y,\\theta) f(y|x) \\color{red}{g(x)}dxdy \\]\nbut perhaps, we could see this:\n\\[\\hat v(g_y) = \\iint h(y,\\theta) f(y|x) \\color{red}{\\hat w(x)}f(x) dxdy\n\\]\nif we can come up with a set of weights \\(\\color{red}{\\hat w(x)}\\) such that \\(f(x)\\hat w(x)=g(x)\\)\n\\[\n\\hat w(x) = \\frac{\\hat g(x)}{\\hat f(x)}\n\\]"
+    "text": "Op1: Re-weighting\nConsider the following\n\nThere is a policy such that you plan to improve education in a country.\nEvery single person will have at least 7 years of education, and will have free access to two additional years of education if they want to.\nIn other words, characteristics change from \\(f(x) \\rightarrow g(x)\\) . But you do not see this!\n\n\\[ v(g_y) = \\iint h(y,\\theta) f(y|x) \\color{red}{g(x)}dxdy \\]"
   },
   {
     "objectID": "adv_class/05uqreg.html#op1-re-weighting-1",
@@ -3511,7 +3511,7 @@
     "href": "adv_class/05uqreg.html#example",
     "title": "Unconditional Quantile Regressions (and RIF’s)",
     "section": "Example",
-    "text": "Example\n. *** UQR\n. *** Reweighting\n. webuse dui, clear\n(Fictional data on monthly drunk driving citations)\n\n. ** Create Fake Sample\n. gen id = _n\n\n. expand 2\n(500 observations created)\n\n. bysort id:gen smp = _n ==2\n\n. ** Now you have two of ever person. So lets do some Policy\n. ** Fines increase lower fines more than higher ones, up to 12\n. replace fines = 0.1*(12-fines)+fines if smp==1\n(498 real changes made)\n\n. ** Estimate logit \n. logit smp c.fines##c.fines taxes i.csize college\n\nIteration 0:   log likelihood = -693.14718  \nIteration 1:   log likelihood = -680.74735  \nIteration 2:   log likelihood = -680.68931  \nIteration 3:   log likelihood = -680.68931  \n\nLogistic regression                                     Number of obs =  1,000\n                                                        LR chi2(6)    =  24.92\n                                                        Prob &gt; chi2   = 0.0004\nLog likelihood = -680.68931                             Pseudo R2     = 0.0180\n\n---------------------------------------------------------------------------------\n            smp | Coefficient  Std. err.      z    P&gt;|z|     [95% conf. interval]\n----------------+----------------------------------------------------------------\n          fines |   4.231032   1.762476     2.40   0.016     .7766421    7.685422\n                |\nc.fines#c.fines |  -.1923691   .0877831    -2.19   0.028    -.3644209   -.0203173\n                |\n          taxes |     .00044   .1407545     0.00   0.998    -.2754338    .2763139\n                |\n          csize |\n        Medium  |   .0549913    .161242     0.34   0.733    -.2610373    .3710198\n         Large  |   .0399068   .1526637     0.26   0.794    -.2593086    .3391222\n                |\n        college |  -.0218305   .1488361    -0.15   0.883    -.3135439    .2698829\n          _cons |  -22.99551   8.826624    -2.61   0.009    -40.29537   -5.695646\n---------------------------------------------------------------------------------\n\n. predict pr_smp\n(option pr assumed; Pr(smp))\n\n. gen wgt = pr_smp / (1-pr_smp) \n\n. replace wgt = 1 if smp==0\n(500 real changes made)\n\n.  xi:tabstat fines i.csize college  taxes [w=wgt],  by(smp)\ni.csize           _Icsize_1-3         (naturally coded; _Icsize_1 omitted)\n(analytic weights assumed)\n\nSummary statistics: Mean\nGroup variable: smp \n\n     smp |     fines  _Icsiz~2  _Icsiz~3   college     taxes\n---------+--------------------------------------------------\n       0 |    9.8952       .29      .358      .248      .704\n       1 |  10.24873  .2926133  .3584506  .2474627  .7045357\n---------+--------------------------------------------------\n   Total |  10.07894  .2913582  .3582342  .2477208  .7042784\n------------------------------------------------------------\n\ntwo (kdensity citations if smp==0 ) ///\n    (kdensity citations if smp==1 [w=wgt]) /// \n    , legend(order(1 \"Before Policy\" 2 \"After Policy\"))\n\ntabstat citations [w=wgt], by(smp) stats(p10 p25 p50 mean p75 p90  )\n(analytic weights assumed)\n\nSummary for variables: citations\nGroup variable: smp \n\n     smp |       p10       p25       p50      Mean       p75       p90\n---------+------------------------------------------------------------\n       0 |      11.5        15        20    22.018        27      34.5\n       1 |        11        15        19  20.69419        26        32\n---------+------------------------------------------------------------\n   Total |        11        15        20  21.32998        27        33\n----------------------------------------------------------------------\n    \nIncreasing fines, may reduce citations in about 1.3., but have almost no effect at the bottom of the distribution.\nWhat about Standard errors? Bootstrap! (logit and estimation, probably clustering at individual level)\nEasy to extend to other Statistics, but, can only provide results “within” support."
+    "text": "Example\nGoal: Evaluate the impact of an increase in Fines on # of citations. (using reweighting)\n\nwebuse dui, clear\n** Create Fake Sample\ngen id = _n\nexpand 2\nbysort id:gen smp = _n ==2\n** Now you have two of ever person. So lets do some Policy\n** Fines increase lower fines more than higher ones, up to 12\n** Here we have a simulation of a policy that increases fines\nreplace fines = 0.1*(12-fines)+fines if smp==1\n\n\n\n\n(Fictional data on monthly drunk driving citations)\n(500 observations created)\n(498 real changes made)\n\n\nEstimation of Logit (or Probit) to estimate \\(p(s|x)\\)\nAnd estimate IPW weights\n\n** Estimate logit \nqui:logit smp c.fines##c.fines taxes i.csize college\npredict pr_smp\ngen wgt = pr_smp / (1-pr_smp) \nreplace wgt = 1 if smp==1\n\n(option pr assumed; Pr(smp))\n(500 real changes made)\n\n\nHave the IPW weights helped simulate the policy?\n\nset scheme white2\ncolor_style tableau\nxi:tabstat fines i.csize college  taxes [w=wgt],  by(smp)\n\ni.csize           _Icsize_1-3         (naturally coded; _Icsize_1 omitted)\n(analytic weights assumed)\n\nSummary statistics: Mean\nGroup variable: smp \n\n     smp |     fines  _Icsiz~2  _Icsiz~3   college     taxes\n---------+--------------------------------------------------\n       0 |  10.10573  .2919004  .3571831  .2483835  .7047717\n       1 |  10.10568       .29      .358      .248      .704\n---------+--------------------------------------------------\n   Total |  10.10571  .2909501  .3575916  .2481917  .7043858\n------------------------------------------------------------\n\n\nI can now compare the distribution of fines before and after the policy\n\n\nCode\ntwo (kdensity citations if smp==0 ) ///\n    (kdensity citations if smp==0 [w=wgt]) /// \n    , legend(order(1 \"Before Policy\" 2 \"After Policy\"))\n\n\n(analytic weights assumed)\n(analytic weights assumed)\n(analytic weights assumed)\n\n\n\nSeems to be a contraction of # citations:\n\n\nCode\ndisplay \"Before Policy\"\ntabstat citations if smp ==0, stats(p10 p25 p50 mean p75 p90  )\ndisplay \"After Policy\"\ntabstat citations if smp ==0 [w=wgt],  stats(p10 p25 p50 mean p75 p90  )\n\n\nBefore Policy\n\n    Variable |       p10       p25       p50      Mean       p75       p90\n-------------+------------------------------------------------------------\n   citations |      11.5        15        20    22.018        27      34.5\n--------------------------------------------------------------------------\nAfter Policy\n(analytic weights assumed)\n\n    Variable |       p10       p25       p50      Mean       p75       p90\n-------------+------------------------------------------------------------\n   citations |        11        14        19  20.29751        25        32\n--------------------------------------------------------------------------\n\n\n\nIncreasing fines may reduce citations in about 1.3., but have almost no effect at the bottom of the distribution.\n\nWhat about Standard errors? Bootstrap! (logit and estimation, probably clustering at individual level)\nEasy to extend to other Statistics, but, can only provide results “within” support."
   },
   {
     "objectID": "adv_class/05uqreg.html#op2-model-conditional-distribution",
@@ -7803,5 +7803,397 @@
     "title": "Research Methods II",
     "section": "",
     "text": "Example\n\n\nCode\nfrause oaxaca, clear\ndrop if lnwage==.\nqui:logit female c.(educ exper age married)##c.(educ exper age married), nolog\npredict pr_b, pr\n\ngen ipw1 = (1-pr_b)/pr_b if female==1\ngen ipw2 = pr_b/(1-pr_b) if female==0\nqui:{\nmean lnwage educ exper age married if female==0\nest sto m1\nmean lnwage educ exper age married if female==0 [pw=ipw2] \nest sto m2a\nmean lnwage educ exper age married if female==1 [pw=ipw1]\nest sto m2b\nmean lnwage educ exper age married if female==1\nest sto m3\n \n}\nesttab m1 m2a m2b m3, nogaps se ///\nmtitle(Men Men_as_w Wmen_as_m Women)\n\n\n(Excerpt from the Swiss Labor Market Survey 1998)\n(213 observations deleted)\n(751 missing values generated)\n(683 missing values generated)\n\n----------------------------------------------------------------------------\n                      (1)             (2)             (3)             (4)   \n                      Men        Men_as_w       Wmen_as_m           Women   \n----------------------------------------------------------------------------\nlnwage              3.440***        3.475***        3.277***        3.267***\n                 (0.0175)        (0.0247)        (0.0280)        (0.0218)   \neduc                11.81***        11.35***        11.82***        11.23***\n                 (0.0895)         (0.112)         (0.154)        (0.0900)   \nexper               14.08***        12.26***        15.23***        12.14***\n                  (0.408)         (0.432)         (1.621)         (0.319)   \nage                 38.43***        39.46***        39.47***        39.29***\n                  (0.413)         (0.725)         (1.160)         (0.411)   \nmarried             0.522***        0.393***        0.523***        0.413***\n                 (0.0182)        (0.0252)        (0.0408)        (0.0189)   \n----------------------------------------------------------------------------\nN                     751             751             683             683   \n----------------------------------------------------------------------------\nStandard errors in parentheses\n* p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001\n\n\nDecomposition:\n(1,2,4): - \\(DX\\) = (1) vs (2)= 3.440-3.475=-0.035 - \\(DB\\) = (2) vs (4)= 3.475-3.267 =0.208 (1,3,4) - \\(DX\\) = (3) vs (4) = 3.277-3.267 = 0.010 - \\(DB\\) = (1) vs (3) = 3.440-3.277 = 0.163"
+  },
+  {
+    "objectID": "rmethods2/session_5.html#statistical-significance-1",
+    "href": "rmethods2/session_5.html#statistical-significance-1",
+    "title": "Research Methods II",
+    "section": "Statistical Significance",
+    "text": "Statistical Significance\n\nWhat is statistical significance?\n\nStatistical significance is a way of determining if an observed effect is due to chance.\n\nWe typically use statistical significance to determine if the results of a study are meaningful, using various criteria.\n\nIs the p-value less than 0.05?\nDoes the 95% confidence interval include zero?\nis the t-statistic greater than 1.96?\n\nBut what exactly does that tell us?"
+  },
+  {
+    "objectID": "rmethods2/session_5.html#back-to-the-basics",
+    "href": "rmethods2/session_5.html#back-to-the-basics",
+    "title": "Research Methods II",
+    "section": "Back to the basics",
+    "text": "Back to the basics\n\nAssume you are testing for the effectiveness of a medicine that treats the common cold.\n\nHow do you know if the treatment is effective? (i.e., Does reduce the duration of the cold?)\nWe make an hypothesis!\nThe null hypothesis is that there is no effect of the treatment. (H0: no effect)\nYou collect some data and find out that it reduces the duration of the cold by 1 days.\nIs this a significant effect?"
+  },
+  {
+    "objectID": "rmethods2/session_5.html#section-2",
+    "href": "rmethods2/session_5.html#section-2",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "Depends…\n\nThe sample size (how many people were in the study?)\n\nIf the sample size is 10,000, then a 1 day reduction in the duration of the cold may be significant.\nBut if the sample size is 10, then a 1 day reduction may be due to chance.\n\nThe effect size\n\nIf the effect size is 0.1 days, may not be significant.\nIf the effect size is 10 days, may be significant."
+  },
+  {
+    "objectID": "rmethods2/session_5.html#section-3",
+    "href": "rmethods2/session_5.html#section-3",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "Then what?\n\nStatistical significance is a way of determining if the observed effect is due to chance.\nTo do this, we required assumptions about the distribution under the Null Hypothesis.\n\nAssume that the data is normally distributed.\nAnd that there is a 4% chance you observe a value as extreme as the one you observed\n\nIn that case you would say, the effect is significant.\n\n\nJust couple of caveats:\n\nSignicance can be achieved by either measuring a “large” effect\nor by measuring a “small” effect with a large sample size. (very precisely)\n\nThus, finding no significance could mean the effect is noise or that the sample size is too small.\nRecall Hypothesis can be true or not. We only know if the data is consistent with the hypothesis or not."
+  },
+  {
+    "objectID": "rmethods2/session_5.html#section-4",
+    "href": "rmethods2/session_5.html#section-4",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "From Significance to Power\n\nThe power of a statistical test represents the probability of detecting an effect, given that the effect is real.\nFor example, say a drug has the effect of reducing the duration of the common cold by 1 day. But you do not know this\nInstead you make your hypothesis. How likely is that the effect is significant?\n\nYou find the effect is not significant at 10% level.\n\nWhat is happening?\n\nThe effect was true, yet we find no significance.\nThe power of the test was low. (sample size was too small)\n\nIn General, Setting high significance levels will reduce the power of the test."
+  },
+  {
+    "objectID": "rmethods2/session_5.html#multiple-hypothesis-testing",
+    "href": "rmethods2/session_5.html#multiple-hypothesis-testing",
+    "title": "Research Methods II",
+    "section": "Multiple Hypothesis Testing",
+    "text": "Multiple Hypothesis Testing"
+  },
+  {
+    "objectID": "rmethods2/session_5.html#section-5",
+    "href": "rmethods2/session_5.html#section-5",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "If At First You Don’t Succeed, Try, Try Again\n\nRQuestionTestingResults\n\n\n\n\n\n\n\n\n\n\n\n\nCartoon from xkcd, by Randall Munroe"
+  },
+  {
+    "objectID": "rmethods2/session_5.html#section-6",
+    "href": "rmethods2/session_5.html#section-6",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "Multiple Hypothesis Testing\n\nIn the previous example, the “SAME” hypothesis was tested multiple times.\nYet, it was still compared to the same significance level. Is this correct?\n\nConsider the following:\n\nYou collect 100 data points, from a normal distribution, with mean 0 and standard deviation 1.\nYou know there is only a 5% chance that the mean is greater (abs) than 0.196 (95% confidence interval)\n\nSo you run the same experiment 100 times - How many times do you expect to find a mean greater than 0.196? - What are the chances of finding a mean greater than 0.196 at least once?"
+  },
+  {
+    "objectID": "rmethods2/session_5.html#section-7",
+    "href": "rmethods2/session_5.html#section-7",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "A1: 5% of the time\nA2:\n\nPr of finding any “significant” effect in one experiment: \\(1 - 0.95 = 0.05\\)\nPr of finding any “significant” effect in two experiments: \\(1-0.95^2 = 0.0975\\)\nPr of finding no effect in 100 experiments: \\(1-0.95^{100} = 0.99408\\)\n\n\nSo if you run the experiment enough times, you are almost certain to find a “significant” effect.\n\nAlso, While a single experiment has a 5% chance of finding a “significant” effect (alpha = 0.05), the “alpha” for 2 experiments is 0.0975!"
+  },
+  {
+    "objectID": "rmethods2/session_5.html#section-9",
+    "href": "rmethods2/session_5.html#section-9",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "Controlling for Multiple Hypothesis Testing\n\nThere are various ways to control for multiple hypothesis testing.\nSIDAK = \\(\\alpha_{adj} = (1-\\alpha_{tg})^{1/n}\\)\nBONFERRONI = \\(\\alpha_{adj} = \\alpha_{tg}/n\\)\nHOLM = \\(\\alpha_{adj,i} = \\alpha_{tg}/(n-i+1)\\)\n\nWhere \\(\\alpha_{tg}\\) is the target \\(\\alpha\\) level (e.g., 0.05), and \\(n\\) is the number of tests, and \\(\\alpha_{i,adj}\\) is the adjusted \\(\\alpha\\) level.\n\nThere is also Uniform Confidence Intervals (see here)\n\n\nThere is a caveat. They are designed to control for Type I errors (False positives), but they increase the chances of Type II errors. (Less power)"
+  },
+  {
+    "objectID": "rmethods2/session_5.html#missing-data",
+    "href": "rmethods2/session_5.html#missing-data",
+    "title": "Research Methods II",
+    "section": "Missing Data",
+    "text": "Missing Data\n\nMissing data is a common problem in empirical research.\nDue to various reasons, some observations may be missing.\n\nRefusal to answer a question\nData entry errors/ommissions\nData loss\netc.\n\nThis can be a problem for various reasons:\n\nMissing data can produced biased and inconsistent estimates.\nIt may also reduce sample size, and thus power. (Potentially making estimation unfeasible)\n\nSo what can we do?"
+  },
+  {
+    "objectID": "rmethods2/session_5.html#types-of-missing-data",
+    "href": "rmethods2/session_5.html#types-of-missing-data",
+    "title": "Research Methods II",
+    "section": "Types of Missing Data",
+    "text": "Types of Missing Data\n\nMissing Completely at Random (MCAR)\n\nThe probability of missing data does not depend on any observed or unobserved data.\nThis is the best case scenario. (this is like sampling)\n\nMissing at Random (MAR)\n\nThe probability of missing data depends on observed data.\nSecond Best: Its possible to address the problem using various methods.\n\nMissing Not at Random (MNAR)\n\nThe probability of missing data depends on unobserved data.\nWorst case scenario: It is usually very difficult to address"
+  },
+  {
+    "objectID": "rmethods2/session_5.html#what-its-done-and-what-can-be-done",
+    "href": "rmethods2/session_5.html#what-its-done-and-what-can-be-done",
+    "title": "Research Methods II",
+    "section": "What its done, and what can be done",
+    "text": "What its done, and what can be done\n\nComplete Case Analysis (CCA)\n\nDrop observations with missing data.\nThis is the default in most statistical software.\nThis is a bad idea, unless the data is MCAR.\n\nImputation\n\nReplace missing values with a value.\nThis is a better idea, but it depends on the type of missing data.\nRequires modeling the missing data mechanism, and outcome model.\n\nReweighting\n\nWeight observations to account for missing data.\nRequires modeling the missing data mechanism"
+  },
+  {
+    "objectID": "rmethods2/session_5.html#reweighting",
+    "href": "rmethods2/session_5.html#reweighting",
+    "title": "Research Methods II",
+    "section": "Reweighting",
+    "text": "Reweighting\nConsider the following example: \\[\\begin{aligned}\n\\text{Pop}&: y = x\\beta+ \\epsilon \\\\\n\\text{Miss Mech }&: p(nmiss|x) = F(x\\gamma) \\\\\n\\text{Miss Reg }&: m\\times y = m\\times x \\beta + m\\times \\epsilon  \n\\end{aligned}\n\\]\n\nWhere \\(m\\) is an indicator of missingness, and \\(F\\) is the function of missing.\nDefine the Weights as \\(w = \\frac{1}{1-p(nmiss|x)}\\)\nThen, we could use WLS to estimate the model of interest:\n\n\\[w \\times m\\times y = w \\times  m\\times x \\beta + w \\times  m\\times \\epsilon\\]"
+  },
+  {
+    "objectID": "rmethods2/session_5.html#section-10",
+    "href": "rmethods2/session_5.html#section-10",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "We could “predict” missing values using the mean of the observed values:\n\n\\[\\hat{Z} = \\bar{Z} = \\frac{1}{n}\\sum_{i=1}^n Z_i\\]\n\nOr we could use the predicted values from the model:\n\n\\[\\hat{Z} = X\\hat{\\beta}\\]\nNeither is a good idea, even under MCAR. (Why?)\n\nWe are getting rid of ALL uncertainty (variance) in the missing values."
+  },
+  {
+    "objectID": "rmethods2/session_5.html#imputation-mean-and-predictive-mean",
+    "href": "rmethods2/session_5.html#imputation-mean-and-predictive-mean",
+    "title": "Research Methods II",
+    "section": "Imputation: Mean and Predictive Mean",
+    "text": "Imputation: Mean and Predictive Mean\n\nThe second approach is to impute the missing values. AKA Substitute the unobserved values with some prediction we can construct.\n\nConsider the case of a single variable \\(Z\\) with missing values, and assume we have a model for \\(Z\\):\n\\[Z = X\\beta + \\epsilon\n\\]"
+  },
+  {
+    "objectID": "rmethods2/session_5.html#example",
+    "href": "rmethods2/session_5.html#example",
+    "title": "Research Methods II",
+    "section": "Example",
+    "text": "Example\n\nCodeResults\n\n\nfrause oaxaca, clear\ndrop if lnwage ==.\n** Modeling Missing\nreg lnwage c.(educ exper tenure female age)## c.(educ exper tenure female age)  \npredict lxb\nqui:sum lxb \nreplace lxb = normal((lxb -r(mean))/r(sd))\ngen lnwage2 = lnwage if lxb &lt;runiform()\ngen dwage = lnwage2!=.\n** Modeling Missing data\nlogit dwage educ exper tenure female age\npredict prw, pr\ngen wgt = 1/prw\n** Estimating the model\nreg lnwage educ exper tenure female age\nreg lnwage2 educ exper tenure female age\nreg lnwage2 educ exper tenure female age [w=wgt]\n** Repeat the process 1000 times"
+  },
+  {
+    "objectID": "rmethods2/session_5.html#section-12",
+    "href": "rmethods2/session_5.html#section-12",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "Better Approach: Stochastic Imputation\n\nA better approach of imputation is to use a model to predict not only the “known” variation (Conditional mean), but also the “unknown” variation (Conditional variance).\nSo, we can use the model to predict the missing values, but we add some noise to the prediction.\n\n\\[\\tilde z = X\\hat{\\beta} + \\hat \\epsilon\\]\n\nWhere \\(\\hat \\epsilon\\) is a “random” residual obtain based on the model assumptions.\n\\(\\tilde z\\) is a stochastic imputation of \\(z\\)."
+  },
+  {
+    "objectID": "rmethods2/session_5.html#section-13",
+    "href": "rmethods2/session_5.html#section-13",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "Even Better: Account for the uncertainty in the model\n\nWe can also account for the uncertainty in the model by considering the uncertainty in the model parameters, and the error:\n\n\\[z = X\\beta + \\epsilon\n\\]\n\nUnder normality assumptions, we could estimate the model using MLE, and obtain the variance covariance matrix of the parameters.\n\n\\[\n\\begin{pmatrix}\n\\hat{\\beta} \\\\ \\hat{\\sigma}^2 \\end{pmatrix}\n\\sim N\\left(\\begin{bmatrix} \\beta \\\\\n\\sigma\n\\end{bmatrix}, \\begin{bmatrix}\nV_{\\beta} & 0 \\\\\n0 & V_{\\sigma}\n\\end{bmatrix}\\right)\n\\]\n\nSo, we can get \\(\\tilde \\beta\\) and \\(\\tilde \\sigma\\), from random draws from the distribution above, and then use them to impute the missing values."
+  },
+  {
+    "objectID": "rmethods2/session_5.html#section-14",
+    "href": "rmethods2/session_5.html#section-14",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "Even Better than before: Multiple Imputation\n\nThe previous methods assumed you only need one imputation to solve the Imputation problem.\nOne, however, may not be enough to account for the uncertainty in the imputation process.\nSo, we can repeat the imputation process multiple times, and obtain multiple imputed values for each missing data.\nWith multiple imputed values, we can estimate the model of interest multiple times, and then combine the results using Rubin’s rules."
+  },
+  {
+    "objectID": "rmethods2/session_5.html#section-15",
+    "href": "rmethods2/session_5.html#section-15",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "Call M the number of imputations, and \\(m\\) the imputation index.\n\n\\[\\beta_{MI} = \\frac{1}{M}\\sum_{m=1}^M \\beta_m\\]\n\\[V_{MI} = \\frac{1}{M}\\sum_{m=1}^M V_m + \\left(\\frac{M+1}{M}\\right)Var(\\beta_m)\\]\n\nWhere \\(V_m\\) is the VCV matrix of the parameters for each imputation, and \\(Var(\\beta_m)\\) is the variance of the parameters across imputations.\n\n\\[df = (M-1) \\left( 1 + \\frac{M}{M+1}\\frac{Var_m}{Var_B}\\right)^2\\]"
+  },
+  {
+    "objectID": "rmethods2/session_5.html#section-17",
+    "href": "rmethods2/session_5.html#section-17",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "Example: Stata\n\nfrause oaxaca, clear\ndrop if lnwage ==.\n\n** Modeling Missing\nforeach i in  educ exper tenure age {\n    gen m_`i' = `i' if runiform()&gt;.25\n}\n\n\n\n\n(Excerpt from the Swiss Labor Market Survey 1998)\n(213 observations deleted)\n(362 missing values generated)\n(311 missing values generated)\n(387 missing values generated)\n(348 missing values generated)\n\n\nSetting data for -mi- commands\n\nmi set wide\nmi register imputed m_*\nmi impute chain (reg) m_* = lnwage single female, add(10) \n\n\nConditional models:\n           m_exper: regress m_exper m_age m_educ m_tenure lnwage single\n                     female\n             m_age: regress m_age m_exper m_educ m_tenure lnwage single\n                     female\n            m_educ: regress m_educ m_exper m_age m_tenure lnwage single\n                     female\n          m_tenure: regress m_tenure m_exper m_age m_educ lnwage single\n                     female\n\nPerforming chained iterations ...\n\nMultivariate imputation                     Imputations =       10\nChained equations                                 added =       10\nImputed: m=1 through m=10                       updated =        0\n\nInitialization: monotone                     Iterations =      100\n                                                burn-in =       10\n\n            m_educ: linear regression\n           m_exper: linear regression\n          m_tenure: linear regression\n             m_age: linear regression\n\n------------------------------------------------------------------\n                   |               Observations per m             \n                   |----------------------------------------------\n          Variable |   Complete   Incomplete   Imputed |     Total\n-------------------+-----------------------------------+----------\n            m_educ |       1072          362       362 |      1434\n           m_exper |       1123          311       311 |      1434\n          m_tenure |       1047          387       387 |      1434\n             m_age |       1086          348       348 |      1434\n------------------------------------------------------------------\n(Complete + Incomplete = Total; Imputed is the minimum across m\n of the number of filled-in observations.)\n\n\nEstmating the model(s):\n\nmi estimate, post: regress lnwage m_* single female\nest sto m1\nregress lnwage educ exper tenure age single  female\n\n\nMultiple-imputation estimates                   Imputations       =         10\nLinear regression                               Number of obs     =      1,434\n                                                Average RVI       =     0.3607\n                                                Largest FMI       =     0.5511\n                                                Complete DF       =       1427\nDF adjustment:   Small sample                   DF:     min       =      31.27\n                                                        avg       =     293.52\n                                                        max       =   1,277.02\nModel F test:       Equal FMI                   F(   6,  403.1)   =      63.74\nWithin VCE type:          OLS                   Prob &gt; F          =     0.0000\n\n------------------------------------------------------------------------------\n      lnwage | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n      m_educ |   .0780927   .0062465    12.50   0.000     .0656678    .0905176\n     m_exper |   .0034867    .002416     1.44   0.154    -.0013503    .0083237\n    m_tenure |   .0023203    .002857     0.81   0.423    -.0035046    .0081451\n       m_age |   .0099868   .0023905     4.18   0.000     .0052212    .0147524\n      single |    -.09733   .0309067    -3.15   0.002    -.1580571    -.036603\n      female |  -.1226849   .0255255    -4.81   0.000    -.1727613   -.0726084\n       _cons |   2.102173   .1059333    19.84   0.000     1.889132    2.315213\n------------------------------------------------------------------------------\n\n      Source |       SS           df       MS      Number of obs   =     1,434\n-------------+----------------------------------   F(6, 1427)      =     86.35\n       Model |  107.645555         6  17.9409258   Prob &gt; F        =    0.0000\n    Residual |  296.474249     1,427  .207760511   R-squared       =    0.2664\n-------------+----------------------------------   Adj R-squared   =    0.2633\n       Total |  404.119804     1,433  .282009633   Root MSE        =    .45581\n\n------------------------------------------------------------------------------\n      lnwage | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n        educ |   .0753085    .005253    14.34   0.000     .0650041    .0856129\n       exper |   .0026545   .0018941     1.40   0.161     -.001061    .0063701\n      tenure |   .0022932   .0019725     1.16   0.245    -.0015761    .0061625\n         age |   .0111437   .0019397     5.75   0.000     .0073388    .0149486\n      single |  -.0918932   .0292993    -3.14   0.002    -.1493674   -.0344189\n      female |  -.1289592   .0253754    -5.08   0.000    -.1787363   -.0791822\n       _cons |   2.100201   .0816356    25.73   0.000     1.940063     2.26034\n------------------------------------------------------------------------------"
+  },
+  {
+    "objectID": "rmethods2/session_5.html#what-about-ldv-models",
+    "href": "rmethods2/session_5.html#what-about-ldv-models",
+    "title": "Research Methods II",
+    "section": "What about LDV models?",
+    "text": "What about LDV models?\n\nThe method sketched above (OLS) can also be extended to other models\nConsider Logit models\n\nS1: Estimate Logit model: \\(P(y=1|X) = F(X\\beta)\\)\nS2: Draw \\(\\beta\\) from the distribution, call it \\(\\tilde\\beta\\)\nS3: Draw \\(y\\) from a Bernoulli distribution: \\(y \\sim Bernoulli(F(X\\tilde\\beta))\\)\n\nSimilar procedures can be done for other models."
+  },
+  {
+    "objectID": "rmethods2/session_5.html#other-methods-hotdecking",
+    "href": "rmethods2/session_5.html#other-methods-hotdecking",
+    "title": "Research Methods II",
+    "section": "Other Methods: HotDecking",
+    "text": "Other Methods: HotDecking\n\nHotdecking is a method of imputation that uses the observed values of the data to impute the missing values.\nBecause it uses data from the empirical distribution (observed data), it produces “valid” imputations for any kind of data.\nThe idea is to find a pool of potential “donors” for the one with missing data. (similar observations)\nThen select one candidate and use its data to impute the missing values."
+  },
+  {
+    "objectID": "rmethods2/session_5.html#section-18",
+    "href": "rmethods2/session_5.html#section-18",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "Definition of a “donor”\n\nDonors are identified as observations with similar characteristics to the one with missing data. (close to the missing observation)\nFinding potential donors is easy when there is low dimensional data, but it becomes more difficult as the number of variables increases."
+  },
+  {
+    "objectID": "rmethods2/session_5.html#section-19",
+    "href": "rmethods2/session_5.html#section-19",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "With many variables, we often estimating some distance measure and/or data reduction to ID “close” observations:\n\nPropensity Score (based on logit/probit/regress).\n\n\\[D(X,X_0) = abs(G(X) - G(X_0))\\]\n\nMahalanobis distance (based on X covariance matrix)\n\n\\[D(X,X_0) = \\sqrt{(X-X_0)'\\Sigma^{-1}(X-X_0)}\\]\n\nAffinity score: based on some linear combination of variables.\n\n\\[D(X,X_0) = \\frac{1}{K}\\sum_{i=1}^K \\alpha_i f\\left(\\frac{X_i - X_{0i}}{h}\\right)\\]"
+  },
+  {
+    "objectID": "rmethods2/session_5.html#example-1",
+    "href": "rmethods2/session_5.html#example-1",
+    "title": "Research Methods II",
+    "section": "Example",
+    "text": "Example\nImputing data for wages in oaxaca.\n\nfrause oaxaca, clear\n** ID pool of donors based on age and gender\negen id_pool = group(age female)\n** Now, for each missing observation select a \"random\" donor\ngen misswage =missing(lnwage)\nbysort id_pool (misswage):egen smp = sum(misswage==0)\nbysort id_pool: gen draw = runiformint(1, smp)\nbysort id_pool: replace lnwage = lnwage[draw] if misswage==1\nsum lnwage if misswage==0\nsum lnwage if misswage==1 \nsum lnwage \n\n(Excerpt from the Swiss Labor Market Survey 1998)\n(213 real changes made)\n\n    Variable |        Obs        Mean    Std. dev.       Min        Max\n-------------+---------------------------------------------------------\n      lnwage |      1,434    3.357604    .5310458    .507681   5.259097\n\n    Variable |        Obs        Mean    Std. dev.       Min        Max\n-------------+---------------------------------------------------------\n      lnwage |        213    3.407758    .4412433   1.608438   5.259097\n\n    Variable |        Obs        Mean    Std. dev.       Min        Max\n-------------+---------------------------------------------------------\n      lnwage |      1,647     3.36409    .5204574    .507681   5.259097"
+  },
+  {
+    "objectID": "rmethods2/session_5.html#section-20",
+    "href": "rmethods2/session_5.html#section-20",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "Once distances are estimated, donor pools can be defined based on the distance measure.\n\nSay, all observations with distance less than 0.1.\n\nAnd the donor can be selected randomly from the pool. (or weighted by distance)\nThis approaches could be vary computationally intensive, because it requires estimating \\(N\\times N\\) distances.\nComplexity may be reduced by using data reduction techniques, such as PCA, FA or propensity scores"
+  },
+  {
+    "objectID": "rmethods2/session_5.html#section-21",
+    "href": "rmethods2/session_5.html#section-21",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "Example: Stata\nUsing single Score (Data reduction)\n\nfrause oaxaca, clear\ndrop if lnwage ==.\n// 25% of data is missing\ngen mlnwage = lnwage if runiform()&gt;.25\ngen misswage =missing(mlnwage)\nqui:logit misswage  educ age agesq female single married\npredict psc, xb\nqui:reg mlnwage  educ age agesq female single married\npredict lnwh, xb\nqui:pca educ age agesq female single married \nqui:predict pc1, score\n\n(Excerpt from the Swiss Labor Market Survey 1998)\n(213 observations deleted)\n(351 missing values generated)\n\n\nFor imputation, lets do something simple, Use data from the closet observation (with lower score) as donor.\n\nforeach i in psc lnwh pc1 {\n \n    drop2   lnwage_`i'\n    gen lnwage_`i' = mlnwage    \n    sort `i'\n    replace lnwage_`i'=lnwage_`i'[_n-1] if lnwage_`i'==. & lnwage_`i'[_n-1]!=.\n    *replace lnwage_`i'=lnwage_`i'[_n+1] if lnwage_`i'==. & lnwage_`i'[_n+1]!=.\n    qui:_regress lnwage_`i'  educ age agesq female single married\n    matrix b`i' = e(b)\n    matrix coleq b`i'=`i'\n    \n}\n\nvariable lnwage_psc not found\n(351 missing values generated)\n(351 real changes made)\nvariable lnwage_lnwh not found\n(351 missing values generated)\n(351 real changes made)\nvariable lnwage_pc1 not found\n(351 missing values generated)\n(351 real changes made)\n\n\nEstimate models 1000 times, and lets see results"
+  },
+  {
+    "objectID": "rmethods2/session_5.html#comparison-of-methods",
+    "href": "rmethods2/session_5.html#comparison-of-methods",
+    "title": "Research Methods II",
+    "section": "Comparison of methods",
+    "text": "Comparison of methods"
+  },
+  {
+    "objectID": "adv_class/04cqreg.html#section-3",
+    "href": "adv_class/04cqreg.html#section-3",
+    "title": "Conditional Quantile Regressions",
+    "section": "",
+    "text": "Quantile SE\n\\[\nVar(\\hat Q_y(\\tau)) = \\frac{Var(\\hat \\tau - \\tau) }{f^2(Q_y(\\tau))} = \\frac{1}{f^2(Q_y(\\tau))}\\frac{\\tau(1-\\tau)}{N}\n\\]\n\nThe variance of a quantile depends on the distribution of \\(\\tau\\). This follows a Bernoulli distribution: Is \\(y\\geq Q_y\\) or \\(y&lt;Q_y\\).\n\nLargest near the center of the distribution (50%-50%) but smaller (more precise) near the tails of the distribution.\n\nBut also depends on the density of the distribution.\n\nMore precise estimates when the density is high (center), but less precise near tails of the distribution.\nAnd, because \\(f()\\) is unknown, there is another source of variation.\n\nAnd as usual, it depends on the sample size (N)\nOf course, you also have the alternative method. Bootstrap!"
+  },
+  {
+    "objectID": "adv_class/04cqreg.html#technical-note",
+    "href": "adv_class/04cqreg.html#technical-note",
+    "title": "Conditional Quantile Regressions",
+    "section": "Technical Note",
+    "text": "Technical Note\n\nThere are many empirical ways to estimate quantiles, even when using the empirical distribution function.\nSo do not be suprised about small differences in the estimates.\nWhen using Smooth functions, the choice of the kernel is also important. (and bandwidth)"
+  },
+  {
+    "objectID": "adv_class/04cqreg.html#section-4",
+    "href": "adv_class/04cqreg.html#section-4",
+    "title": "Conditional Quantile Regressions",
+    "section": "",
+    "text": "Example\nUsing Bootstrap\n\nfrause wage2, clear\nbootstrap q10=r(r1) q25=r(r2) q50=r(r3) ///\n          q75=r(r4) q90=r(r5), reps(1000) nodots: ///\n          _pctile wage  , p(10 25 50 75 90)\n\n\n\n\n\nwarning: _pctile does not set e(sample), so no observations will be excluded\n         from the resampling because of missing values or other reasons. To\n         exclude observations, press Break, save the data, drop any\n         observations that are to be excluded, and rerun bootstrap.\n\nBootstrap results                                        Number of obs =   935\n                                                         Replications  = 1,000\n\n      Command: _pctile wage, p(10 25 50 75 90)\n          q10: r(r1)\n          q25: r(r2)\n          q50: r(r3)\n          q75: r(r4)\n          q90: r(r5)\n\n------------------------------------------------------------------------------\n             |   Observed   Bootstrap                         Normal-based\n             | coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         q10 |        500   9.149192    54.65   0.000     482.0679    517.9321\n         q25 |        668   14.21654    46.99   0.000     640.1361    695.8639\n         q50 |        905   15.19745    59.55   0.000     875.2135    934.7865\n         q75 |       1160   20.87954    55.56   0.000     1119.077    1200.923\n         q90 |       1444   32.84186    43.97   0.000     1379.631    1508.369\n------------------------------------------------------------------------------\n\n\nAnalytical SE\n\nsort wage\ngen w1 = _n\ngen w0 = _n-1\nby wage:gen p=0.5*(w1[_N]+w0[1])/935\nkdensity wage, at(wage) gen(fwage) nodraw\ngen se = sqrt(p*(1-p)/935)/fwage\ntabstat wage se if inlist(wage,500,668,905,1160,1444), by(wage)\n\n\nSummary statistics: Mean\nGroup variable: wage (monthly earnings)\n\n    wage |      wage        se\n---------+--------------------\n     500 |       500  13.27634\n     668 |       668  14.78419\n     905 |       905  14.69217\n    1160 |      1160   19.3574\n    1444 |      1444  29.32711\n---------+--------------------\n   Total |  730.7619  15.88035\n------------------------------"
+  },
+  {
+    "objectID": "adv_class/04cqreg.html#section-5",
+    "href": "adv_class/04cqreg.html#section-5",
+    "title": "Conditional Quantile Regressions",
+    "section": "",
+    "text": "Example\nUsing Bootstrap\n\nfrause wage2, clear\nbootstrap q10=r(r1) q25=r(r2) q50=r(r3) ///\n          q75=r(r4) q90=r(r5), reps(1000) nodots: ///\n          _pctile wage  , p(10 25 50 75 90)\n\n\n\n\n\nwarning: _pctile does not set e(sample), so no observations will be excluded\n         from the resampling because of missing values or other reasons. To\n         exclude observations, press Break, save the data, drop any\n         observations that are to be excluded, and rerun bootstrap.\n\nBootstrap results                                        Number of obs =   935\n                                                         Replications  = 1,000\n\n      Command: _pctile wage, p(10 25 50 75 90)\n          q10: r(r1)\n          q25: r(r2)\n          q50: r(r3)\n          q75: r(r4)\n          q90: r(r5)\n\n------------------------------------------------------------------------------\n             |   Observed   Bootstrap                         Normal-based\n             | coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         q10 |        500   9.149192    54.65   0.000     482.0679    517.9321\n         q25 |        668   14.21654    46.99   0.000     640.1361    695.8639\n         q50 |        905   15.19745    59.55   0.000     875.2135    934.7865\n         q75 |       1160   20.87954    55.56   0.000     1119.077    1200.923\n         q90 |       1444   32.84186    43.97   0.000     1379.631    1508.369\n------------------------------------------------------------------------------\n\n\nAnalytical SE\n\nsort wage\ngen w1 = _n\ngen w0 = _n-1\nby wage:gen p=0.5*(w1[_N]+w0[1])/935\nkdensity wage, at(wage) gen(fwage) nodraw\ngen se = sqrt(p*(1-p)/935)/fwage\ntabstat wage se if inlist(wage,500,668,905,1160,1444), by(wage)\n\n\nSummary statistics: Mean\nGroup variable: wage (monthly earnings)\n\n    wage |      wage        se\n---------+--------------------\n     500 |       500  13.27634\n     668 |       668  14.78419\n     905 |       905  14.69217\n    1160 |      1160   19.3574\n    1444 |      1444  29.32711\n---------+--------------------\n   Total |  730.7619  15.88035\n------------------------------"
+  },
+  {
+    "objectID": "adv_class/04cqreg.html#section-6",
+    "href": "adv_class/04cqreg.html#section-6",
+    "title": "Conditional Quantile Regressions",
+    "section": "",
+    "text": "Q and Loss functions\n\nWhy does it matter?Objective function\n\n\n\nThe loss function for Quantiles does not penalize “errors” as much as \\(L^2\\) does.\n\nThis is why its more robust to outliers (almost not affected by them).\n\nHowever, the loss function is no longer differentiable (is discontinuous). So requires other methods to find the solution. Even if it may not look like that:"
+  },
+  {
+    "objectID": "adv_class/04cqreg.html#section-7",
+    "href": "adv_class/04cqreg.html#section-7",
+    "title": "Conditional Quantile Regressions",
+    "section": "",
+    "text": "From \\(\\beta\\) to \\(X\\beta\\)\nKoenker and Bassett (1978) extended this approximation in two ways:\n\nAllowing for Covariates (\\(X's\\)) variation\nAllowing to identify other quantiles in the distribution:\n\n\\[ \\beta(\\tau) = \\underset {b}{min} \\ N^{-1} \\sum \\rho_\\tau(y_i-X_i'b) \\\\\n\\rho_\\tau (u) = u (\\tau-I(u&lt;0))\n\\]\n\nThis implicitly states that you want to find a combination of \\(X's\\) such that \\(\\tau\\) proportion of \\(y_i\\) are lower than the \\(X_i'\\beta(\\tau)\\), for every combination of \\(X's\\).\n\nOr as close as possible."
+  },
+  {
+    "objectID": "adv_class/04cqreg.html#section-8",
+    "href": "adv_class/04cqreg.html#section-8",
+    "title": "Conditional Quantile Regressions",
+    "section": "",
+    "text": "From \\(\\beta\\) to \\(X\\beta\\)\nKoenker and Bassett (1978) extended this approximation in two ways:\n\nAllowing for Covariates (\\(X's\\)) variation\nAllowing to identify other quantiles in the distribution:\n\n\\[ \\beta(\\tau) = \\underset {b}{min} \\ N^{-1} \\sum \\rho_\\tau(y_i-X_i'b) \\\\\n\\rho_\\tau (u) = u (\\tau-I(u&lt;0))\n\\]\n\nThis implicitly states that you want to find a combination of \\(X's\\) such that \\(\\tau\\) proportion of \\(y_i\\) are lower than the \\(X_i'\\beta(\\tau)\\), for every combination of \\(X's\\).\n\nOr as close as possible."
+  },
+  {
+    "objectID": "adv_class/04cqreg.html#section-10",
+    "href": "adv_class/04cqreg.html#section-10",
+    "title": "Conditional Quantile Regressions",
+    "section": "",
+    "text": "Visualizing Differences in Interpretation\n\nFixed RankVarying Rank"
+  },
+  {
+    "objectID": "adv_class/04cqreg.html#section-11",
+    "href": "adv_class/04cqreg.html#section-11",
+    "title": "Conditional Quantile Regressions",
+    "section": "",
+    "text": "In this specification the unobserved component \\(\\tau\\) is similar to luck. If you are lucky and get a high \\(\\tau\\) then you will have better outcomes than anyone of your peers.\nAlso notice: \\(\\tau\\) is the only random factor, and should be uncorrelated with \\(X\\) (you do not make your luck!)"
+  },
+  {
+    "objectID": "adv_class/04cqreg.html#qtheta-f-1theta",
+    "href": "adv_class/04cqreg.html#qtheta-f-1theta",
+    "title": "Conditional Quantile Regressions",
+    "section": "\\(Q(\\theta) = F^{-1}(\\theta)\\)",
+    "text": "\\(Q(\\theta) = F^{-1}(\\theta)\\)"
+  },
+  {
+    "objectID": "adv_class/04cqreg.html#section-9",
+    "href": "adv_class/04cqreg.html#section-9",
+    "title": "Conditional Quantile Regressions",
+    "section": "",
+    "text": "what does it mean?\n\nThis means that CQREG interpretation are percentile \\(\\tau\\) and covariate \\(X\\) specific.\n\nFixed rank. If you happen to be on the top of the distribution (and stay there), the quantile effect is given by the \\(\\beta(\\tau)\\)\nRank is not fixed: What we see is the effect of a change in \\(X\\) on the conditional distribution of \\(Y\\) (measured by the quantile)\n\n\nSo this must be kept in mind, whenever one interpret results"
+  },
+  {
+    "objectID": "adv_class/04cqreg.html#section-12",
+    "href": "adv_class/04cqreg.html#section-12",
+    "title": "Conditional Quantile Regressions",
+    "section": "",
+    "text": "There are a few (recent) papers that focus on estimation and identification of these models. The general intuition is that the qreg model is identified by the following moment condition:\n\n\\[\nE\\Big( 1[x\\beta(\\tau) - y &gt; 0 ] - \\tau \\Big) = 0\n\\]\nbut substitute the indicator function with a smooth function. CDF\n\\[\nE\\Big( F(x\\beta(\\tau) - y) - \\tau \\Big) = 0\n\\]\nBeing differentiable, this problem is relatively easier to solve (given good initial values)"
+  },
+  {
+    "objectID": "adv_class/04cqreg.html#example-with-sivqreg",
+    "href": "adv_class/04cqreg.html#example-with-sivqreg",
+    "title": "Conditional Quantile Regressions",
+    "section": "Example (with sivqreg)",
+    "text": "Example (with sivqreg)"
+  },
+  {
+    "objectID": "adv_class/04cqreg.html#section-13",
+    "href": "adv_class/04cqreg.html#section-13",
+    "title": "Conditional Quantile Regressions",
+    "section": "",
+    "text": "Example (with mmqreg)\n\n\nCode\nqui:frause oaxaca, clear\nqui:mmqreg lnwage educ exper tenure female, robust\nqregplot educ exper tenure female, cons q(5(5)95)"
+  },
+  {
+    "objectID": "adv_class/04cqreg.html#the-problem",
+    "href": "adv_class/04cqreg.html#the-problem",
+    "title": "Conditional Quantile Regressions",
+    "section": "The problem",
+    "text": "The problem\n\nThere are two problems related to Estimating Quantile Regressions with (multiple) Fixed Effects\n\nFirst: As with nonlinear models, Adding many fixed effects creates an incidental parameter problem.\nSecond: For Conditional Quantile Regressions, it can be difficult to interpret the role of fixed effects."
+  },
+  {
+    "objectID": "adv_class/04cqreg.html#simulating-some-data",
+    "href": "adv_class/04cqreg.html#simulating-some-data",
+    "title": "Conditional Quantile Regressions",
+    "section": "Simulating some data",
+    "text": "Simulating some data\n\nclear\nset obs 1000\ngen id = _n\ngen vi = rnormal()\ngen ui = rnormal()+vi\n\ngen toexp = 1+rpoisson(5)\nexpand toexp\ngen err = rnormal()\ngen x1 = rnormal()+vi+err\ngen x2 = rnormal()+vi+err\ngen y = 1+x1+x2+ui+rnormal()*exp(0.2*x1-0.2*x2+0.3*ui)\n\nNumber of observations (_N) was 0, now 1,000.\n(5,019 observations created)"
+  },
+  {
+    "objectID": "adv_class/04cqreg.html#benchmark",
+    "href": "adv_class/04cqreg.html#benchmark",
+    "title": "Conditional Quantile Regressions",
+    "section": "Benchmark",
+    "text": "Benchmark\nAssume you observe those fixed effects:\n\n\nCode\nset line 255\nqui:qreg y x1 x2 ui, q(10)\nest sto m10\nqui:qreg y x1 x2 ui, q(50)\nest sto m20\nqui:qreg y x1 x2 ui, q(90)\nest sto m30\nesttab m10 m20 m30, se nogaps mtitle(q10 q50 q90)\n\n\n\n------------------------------------------------------------\n                      (1)             (2)             (3)   \n                      q10             q50             q90   \n------------------------------------------------------------\nx1                  0.780***        0.988***        1.219***\n                 (0.0190)        (0.0139)        (0.0224)   \nx2                  1.219***        1.000***        0.763***\n                 (0.0189)        (0.0138)        (0.0223)   \nui                  0.654***        1.000***        1.352***\n                 (0.0180)        (0.0132)        (0.0212)   \n_cons              -0.458***        0.970***        2.420***\n                 (0.0236)        (0.0173)        (0.0279)   \n------------------------------------------------------------\nN                    6019            6019            6019   \n------------------------------------------------------------\nStandard errors in parentheses\n* p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001"
+  },
+  {
+    "objectID": "adv_class/04cqreg.html#ignoring-fixed-effects",
+    "href": "adv_class/04cqreg.html#ignoring-fixed-effects",
+    "title": "Conditional Quantile Regressions",
+    "section": "Ignoring Fixed Effects",
+    "text": "Ignoring Fixed Effects\n\n\nCode\nqui:qreg y x1 x2  , q(10)\nest sto m1\nqui:qreg y x1 x2  , q(50)\nest sto m2\nqui:qreg y x1 x2  , q(90)\nest sto m3\nesttab m1 m2 m3 m10 m20 m30, se nogaps mtitle(q10 q50 q90)\n\n\n\n------------------------------------------------------------------------------------------------------------\n                      (1)             (2)             (3)             (4)             (5)             (6)   \n                      q10             q50             q90             m10             m20             m30   \n------------------------------------------------------------------------------------------------------------\nx1                  0.981***        1.171***        1.470***        0.780***        0.988***        1.219***\n                 (0.0235)        (0.0217)        (0.0415)        (0.0190)        (0.0139)        (0.0224)   \nx2                  1.339***        1.260***        1.139***        1.219***        1.000***        0.763***\n                 (0.0234)        (0.0215)        (0.0412)        (0.0189)        (0.0138)        (0.0223)   \nui                                                                  0.654***        1.000***        1.352***\n                                                                 (0.0180)        (0.0132)        (0.0212)   \n_cons              -1.133***        0.813***        3.275***       -0.458***        0.970***        2.420***\n                 (0.0300)        (0.0276)        (0.0529)        (0.0236)        (0.0173)        (0.0279)   \n------------------------------------------------------------------------------------------------------------\nN                    6019            6019            6019            6019            6019            6019   \n------------------------------------------------------------------------------------------------------------\nStandard errors in parentheses\n* p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001"
+  },
+  {
+    "objectID": "adv_class/04cqreg.html#solution-1-correlated-random-effects",
+    "href": "adv_class/04cqreg.html#solution-1-correlated-random-effects",
+    "title": "Conditional Quantile Regressions",
+    "section": "Solution 1: Correlated Random Effects",
+    "text": "Solution 1: Correlated Random Effects\nIdea: Include “PAnel average” of all indep variables as regressors.\nThey should control (at least partially) for the unobserved effects.\n\\[Q_p(y|X) = X\\beta + \\alpha \\bar X + \\epsilon\\]\n\n\nCode\nbysort id: egen x1p = mean(x1)\nbysort id: egen x2p = mean(x2)\nqui:qreg y x1 x2 x1p x2p , q(10)\nest sto m1\nqui:qreg y x1 x2  x1p x2p , q(50)\nest sto m2\nqui:qreg y x1 x2  x1p x2p , q(90)\nest sto m3\nesttab m1 m2 m3 m10 m20 m30, se nogaps mtitle(q10 q50 q90)\n\n\n\n------------------------------------------------------------------------------------------------------------\n                      (1)             (2)             (3)             (4)             (5)             (6)   \n                      q10             q50             q90             m10             m20             m30   \n------------------------------------------------------------------------------------------------------------\nx1                  0.825***        0.972***        1.195***        0.780***        0.988***        1.219***\n                 (0.0250)        (0.0246)        (0.0460)        (0.0190)        (0.0139)        (0.0224)   \nx2                  1.176***        1.023***        0.774***        1.219***        1.000***        0.763***\n                 (0.0252)        (0.0248)        (0.0463)        (0.0189)        (0.0138)        (0.0223)   \nx1p                 0.310***        0.413***        0.663***                                                \n                 (0.0575)        (0.0565)         (0.106)                                                   \nx2p                 0.283***        0.406***        0.551***                                                \n                 (0.0564)        (0.0555)         (0.104)                                                   \nui                                                                  0.654***        1.000***        1.352***\n                                                                 (0.0180)        (0.0132)        (0.0212)   \n_cons              -0.951***        0.861***        3.146***       -0.458***        0.970***        2.420***\n                 (0.0278)        (0.0273)        (0.0511)        (0.0236)        (0.0173)        (0.0279)   \n------------------------------------------------------------------------------------------------------------\nN                    6019            6019            6019            6019            6019            6019   \n------------------------------------------------------------------------------------------------------------\nStandard errors in parentheses\n* p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001"
+  },
+  {
+    "objectID": "adv_class/04cqreg.html#solution-2-fe-are-fixed",
+    "href": "adv_class/04cqreg.html#solution-2-fe-are-fixed",
+    "title": "Conditional Quantile Regressions",
+    "section": "Solution 2: FE are Fixed",
+    "text": "Solution 2: FE are Fixed\n\nCanay (2011) proposes make the “simplifying” that “Fixed effects” are constant across quantiles.\nThus a two step procedure is proposed:\n\nFirst: Estimate the fixed effects using OLS\nSecond: Estimate the quantile regression using outcome after taking FE “off”\n\n\n\\[\\begin{aligned}\ny &= X\\beta + \\alpha_i + \\epsilon \\\\\nQ_\\tau(y - \\hat \\alpha_i |X) &= X\\beta(\\tau) +  \\epsilon_\\tau \\\\\n\\end{aligned}\n\\]\n\n\nCode\nqui:reghdfe y x1 x2, absorb(fe = id)\ngen y_fe = y - fe\nqui:qreg y_fe x1 x2   , q(10)\nest sto m1\nqui:qreg y_fe x1 x2   , q(50)\nest sto m2\nqui:qreg y_fe x1 x2 , q(90)\nest sto m3\nesttab m1 m2 m3 m10 m20 m30, se nogaps mtitle(q10 q50 q90)\n\n\n(4 missing values generated)\n\n------------------------------------------------------------------------------------------------------------\n                      (1)             (2)             (3)             (4)             (5)             (6)   \n                      q10             q50             q90             m10             m20             m30   \n------------------------------------------------------------------------------------------------------------\nx1                  0.727***        0.992***        1.277***        0.780***        0.988***        1.219***\n                 (0.0213)        (0.0120)        (0.0218)        (0.0190)        (0.0139)        (0.0224)   \nx2                  1.117***        1.004***        0.853***        1.219***        1.000***        0.763***\n                 (0.0212)        (0.0119)        (0.0216)        (0.0189)        (0.0138)        (0.0223)   \nui                                                                  0.654***        1.000***        1.352***\n                                                                 (0.0180)        (0.0132)        (0.0212)   \n_cons              -0.296***        1.021***        2.336***       -0.458***        0.970***        2.420***\n                 (0.0272)        (0.0153)        (0.0277)        (0.0236)        (0.0173)        (0.0279)   \n------------------------------------------------------------------------------------------------------------\nN                    6015            6015            6015            6019            6019            6019   \n------------------------------------------------------------------------------------------------------------\nStandard errors in parentheses\n* p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001"
+  },
+  {
+    "objectID": "adv_class/04cqreg.html#solution-3-modified-canay2011",
+    "href": "adv_class/04cqreg.html#solution-3-modified-canay2011",
+    "title": "Conditional Quantile Regressions",
+    "section": "Solution 3: Modified Canay(2011)",
+    "text": "Solution 3: Modified Canay(2011)\n\nSame as before, but rather than “removing” fixed effects, we control for them in the model:\n\n\\[\\begin{aligned}\ny &= X\\beta + \\alpha_i + \\epsilon \\\\\nQ_\\tau(y |X) &= X\\beta(\\tau) + \\gamma \\hat \\alpha_i + \\epsilon_\\tau \\\\\n\\end{aligned}\n\\]\n\n\nCode\nqui:qreg y x1 x2 fe  , q(10)\nest sto m1\nqui:qreg y x1 x2 fe  , q(50)\nest sto m2\nqui:qreg y x1 x2 fe, q(90)\nest sto m3\nesttab m1 m2 m3 m10 m20 m30, se nogaps mtitle(q10 q50 q90)\n\n\n\n------------------------------------------------------------------------------------------------------------\n                      (1)             (2)             (3)             (4)             (5)             (6)   \n                      q10             q50             q90             m10             m20             m30   \n------------------------------------------------------------------------------------------------------------\nx1                  0.800***        0.993***        1.171***        0.780***        0.988***        1.219***\n                 (0.0182)        (0.0137)        (0.0206)        (0.0190)        (0.0139)        (0.0224)   \nx2                  1.193***        1.006***        0.831***        1.219***        1.000***        0.763***\n                 (0.0181)        (0.0137)        (0.0205)        (0.0189)        (0.0138)        (0.0223)   \nfe                  0.691***        0.991***        1.279***                                                \n                 (0.0159)        (0.0120)        (0.0180)                                                   \nui                                                                  0.654***        1.000***        1.352***\n                                                                 (0.0180)        (0.0132)        (0.0212)   \n_cons              -0.334***        1.017***        2.354***       -0.458***        0.970***        2.420***\n                 (0.0227)        (0.0171)        (0.0257)        (0.0236)        (0.0173)        (0.0279)   \n------------------------------------------------------------------------------------------------------------\nN                    6015            6015            6015            6019            6019            6019   \n------------------------------------------------------------------------------------------------------------\nStandard errors in parentheses\n* p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001"
+  },
+  {
+    "objectID": "adv_class/04cqreg.html#solution-4-ls-model",
+    "href": "adv_class/04cqreg.html#solution-4-ls-model",
+    "title": "Conditional Quantile Regressions",
+    "section": "Solution 4: LS model",
+    "text": "Solution 4: LS model\n\nMachado and Silva (2019) propose a different approach. They suggest modeling the quantile regression using linear models for a scale and location model.\nThis simplifies the task of estimating multiple equations:\n\n\\[\\begin{aligned}\ny &= X\\beta + \\epsilon \\\\\n\\hat\\epsilon^2 &= X\\gamma + \\nu \\\\\nQ\\left( \\frac{\\hat\\epsilon}{X\\gamma}\\right) &= q(\\tau) \\\\\n\\beta(\\tau) &= \\beta + \\gamma \\times q(\\tau)\n\\end {aligned}\n\\]\n\nqui:mmqreg y x1 x2   , q(10)  abs(id) robust\nest sto m1\nqui:mmqreg y x1 x2   , q(50)  abs(id) robust\nest sto m2\nqui:mmqreg y x1 x2 , q(90) abs(id) robust\nest sto m3\nesttab m1 m2 m3 m10 m20 m30, se nogaps mtitle(q10 q50 q90)\n\n\n------------------------------------------------------------------------------------------------------------\n                      (1)             (2)             (3)             (4)             (5)             (6)   \n                      q10             q50             q90             m10             m20             m30   \n------------------------------------------------------------------------------------------------------------\nmain                                                                                                        \nx1                  0.780***        0.993***        1.214***        0.780***        0.988***        1.219***\n                 (0.0183)        (0.0147)        (0.0203)        (0.0190)        (0.0139)        (0.0224)   \nx2                  1.231***        0.992***        0.745***        1.219***        1.000***        0.763***\n                 (0.0197)        (0.0162)        (0.0233)        (0.0189)        (0.0138)        (0.0223)   \nui                                                                  0.654***        1.000***        1.352***\n                                                                 (0.0180)        (0.0132)        (0.0212)   \n_cons              -0.346***        1.017***        2.431***       -0.458***        0.970***        2.420***\n                 (0.0220)        (0.0207)        (0.0251)        (0.0236)        (0.0173)        (0.0279)   \n------------------------------------------------------------------------------------------------------------\nN                    6019            6019            6019            6019            6019            6019   \n------------------------------------------------------------------------------------------------------------\nStandard errors in parentheses\n* p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001"
+  },
+  {
+    "objectID": "adv_class/04cqreg.html#example-with-sivqr",
+    "href": "adv_class/04cqreg.html#example-with-sivqr",
+    "title": "Conditional Quantile Regressions",
+    "section": "Example (with sivqr)",
+    "text": "Example (with sivqr)"
+  },
+  {
+    "objectID": "adv_class/05uqreg.html#section",
+    "href": "adv_class/05uqreg.html#section",
+    "title": "Unconditional Quantile Regressions (and RIF’s)",
+    "section": "",
+    "text": "but perhaps, we could see this:\n\\[\\hat v(g_y) = \\iint h(y,\\theta) f(y|x) \\color{red}{\\hat w(x)}f(x) dxdy\n\\]\nif we can come up with a set of weights \\(\\color{red}{\\hat w(x)}\\) such that \\(f(x)\\hat w(x)=g(x)\\)\n\\[\n\\hat w(x) = \\frac{\\hat g(x)}{\\hat f(x)}\n\\]"
+  },
+  {
+    "objectID": "adv_class/05uqreg.html#section-1",
+    "href": "adv_class/05uqreg.html#section-1",
+    "title": "Unconditional Quantile Regressions (and RIF’s)",
+    "section": "",
+    "text": "Simple, yet hard. Estimation of multivariate densities can be a difficult task.\n\\[\nf(x) = h(x|s=0) ; g(x) = h(x|s=1)\n\\]\nThis makes things “easier”.\n\\[\n\\begin{aligned}\nh(x|s=k)  &= \\frac{h(x)p(s=k|x)}{p(s=k)} \\\\\n\\hat w(x)  \n         &= \\frac{h(x)p(s=1|x)}{h(x)p(s=0|x)}\\frac{p(s=0)}{p(s=1)} \\\\\n         &=\\frac{p(s|x)}{1-p(s|x)} \\frac{1-p(s)}{p(s)}\n\\end{aligned}\n\\]\nEasier to estimate conditional probabilities, (logit probit or other) than Densities"
+  },
+  {
+    "objectID": "adv_class/05uqreg.html#section-2",
+    "href": "adv_class/05uqreg.html#section-2",
+    "title": "Unconditional Quantile Regressions (and RIF’s)",
+    "section": "",
+    "text": "Recipe\n\nModel \\(Y=G(X,\\theta)\\)\nCreate a “policy” \\(X'=H(X)\\)\nPredict \\(Y'=G(X',\\theta)\\) and identify effect:\n\\[\\Delta V(Y) = V(Y')-V(Y)\\]\nRepeat many times, and summarize results."
   }
 ]
