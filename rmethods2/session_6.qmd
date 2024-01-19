@@ -278,5 +278,68 @@ $$
 
 ## Example
 
+```stata
+frause wage2, clear
+xtile smp = runiform()
+replace smp=smp==1
+gen wage_s = wage if smp==1
+**three Matching scores
+** Pmm
+reg wage_s hours iq kww educ exper tenure age married black south urban sibs 
+predict wageh
+** pscore
+logit smp hours iq kww educ exper tenure age married black south urban sibs 
+predict pscore, xb
+** pca
+pca hours iq kww educ exper tenure age married black south urban sibs , comp(1)
+predict pc1
+
+foreach i in wageh pscore pc1 {
+	qui:sum `i'
+	replace `i' = (`i'-r(mean))/r(sd)
+}
+
+bysort smp (wageh) :gen rnk1=_n
+bysort smp (pscore):gen rnk2=_n
+bysort smp (pc1)   :gen rnk3=_n
+
+* Imputation
+clonevar wage1 = wage_s
+clonevar wage2 = wage_s
+clonevar wage3 = wage_s
+
+gsort -smp rnk1
+replace wage1 = wage_s[rnk1] if smp==0
+
+gsort -smp rnk2
+replace wage2 = wage_s[rnk2] if smp==0
+
+gsort -smp rnk3
+replace wage3 = wage_s[rnk3] if smp==0
+```
+
+```
+Finding best match
+mata
+    h = 15000; k = 5000
+   x1 = runiform(h,5,0,1)
+   x2 = runiform(k,5,0,1)
+   v = variance((x1\x2))
+   cn = 0; cnt2=0
+   jx = J(h,2,0)
+   // go over each observation in "treated"
+   for(i=1;i<=h;i++){
+       // estimate distance to all observations in "control"
+       x1d = x2:-x1[i,]
+       // This is an added step for Mahalanobis distance
+       dis = rowsum(cross(x1d',v):*x1d)
+       // get the index for the closest observation (first)
+       ord = order(dis,1)[1]
+       // save it
+       jx[i,]=ord,dis[ord] 
+   }
+end
+```
+
 # Next Class: Micro Simulation
 just more imputations
