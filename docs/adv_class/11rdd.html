@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.455">
+  <meta name="generator" content="quarto-1.4.537">
 
   <meta name="author" content="Fernando Rios-Avila">
   <title>Econometrics MSC Levy - Regression Discontinuity Design</title>
@@ -504,27 +504,27 @@ Fernando Rios-Avila
 </section>
 <section id="sharp-rdd" class="slide level2">
 <h2>Sharp RDD</h2>
-<div id="fd40af2e" class="cell" data-execution_count="1">
+<div id="38183632" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">clear</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">set</span> <span class="dv">scheme</span> white2</span>
-<span id="cb1-3"><a href="#cb1-3"></a>color_style bay</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">set</span> <span class="dv">seed</span> 1</span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">qui</span>:<span class="kw">set</span> <span class="kw">obs</span> 100</span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="kw">gen</span> <span class="fu">e</span>=rnormal()</span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="kw">gen</span> z=runiform()+<span class="fu">e</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="kw">gen</span> t = z&gt;0</span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="kw">gen</span> <span class="fu">y</span> = 1 + z + <span class="fu">e</span> + rnormal() + (z&gt;0)</span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="kw">two</span> <span class="kw">line</span> t z, <span class="kw">sort</span> <span class="bn">title</span>(<span class="st">"Treatment"</span>) <span class="kw">ylabel</span>(0 <span class="st">"Not Treated"</span> 1 <span class="st">"Treated"</span>) <span class="bn">name</span>(m1, <span class="kw">replace</span>) <span class="bn">ytitle</span>(<span class="st">""</span>)</span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="kw">graph</span> <span class="kw">export</span> resources\rdd1.png,  <span class="kw">width</span>(1000) height(1000) <span class="kw">replace</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="kw">two</span> <span class="kw">scatter</span> <span class="fu">y</span> z, <span class="kw">sort</span> <span class="bn">title</span>(<span class="st">"Outcome"</span>) pstyle(p1) || <span class="kw">lfit</span> <span class="fu">y</span> z, lw(1) pstyle(p2) <span class="co">///</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a>    || <span class="kw">lfit</span> <span class="fu">y</span> z <span class="kw">if</span> z&lt;0, lw(0.5) || <span class="kw">lfit</span> <span class="fu">y</span> z <span class="kw">if</span> z&gt;0, lw(0.5) , <span class="bn">legend</span>(<span class="kw">off</span>) <span class="bn">name</span>(m2, <span class="kw">replace</span>)</span>
-<span id="cb1-14"><a href="#cb1-14"></a><span class="kw">graph</span> <span class="kw">export</span> resources\rdd2.png,  <span class="kw">width</span>(1000) height(1000)  <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a></a><span class="kw">clear</span></span>
+<span id="cb1-2"><a></a><span class="kw">set</span> <span class="dv">scheme</span> white2</span>
+<span id="cb1-3"><a></a>color_style bay</span>
+<span id="cb1-4"><a></a><span class="kw">set</span> <span class="dv">seed</span> 1</span>
+<span id="cb1-5"><a></a><span class="kw">qui</span>:<span class="kw">set</span> <span class="kw">obs</span> 100</span>
+<span id="cb1-6"><a></a><span class="kw">gen</span> <span class="fu">e</span>=rnormal()</span>
+<span id="cb1-7"><a></a><span class="kw">gen</span> z=runiform()+<span class="fu">e</span></span>
+<span id="cb1-8"><a></a><span class="kw">gen</span> t = z&gt;0</span>
+<span id="cb1-9"><a></a><span class="kw">gen</span> <span class="fu">y</span> = 1 + z + <span class="fu">e</span> + rnormal() + (z&gt;0)</span>
+<span id="cb1-10"><a></a><span class="kw">two</span> <span class="kw">line</span> t z, <span class="kw">sort</span> <span class="bn">title</span>(<span class="st">"Treatment"</span>) <span class="kw">ylabel</span>(0 <span class="st">"Not Treated"</span> 1 <span class="st">"Treated"</span>) <span class="bn">name</span>(m1, <span class="kw">replace</span>) <span class="bn">ytitle</span>(<span class="st">""</span>)</span>
+<span id="cb1-11"><a></a><span class="kw">graph</span> <span class="kw">export</span> resources\rdd1.png,  <span class="kw">width</span>(1000) height(1000) <span class="kw">replace</span></span>
+<span id="cb1-12"><a></a><span class="kw">two</span> <span class="kw">scatter</span> <span class="fu">y</span> z, <span class="kw">sort</span> <span class="bn">title</span>(<span class="st">"Outcome"</span>) pstyle(p1) || <span class="kw">lfit</span> <span class="fu">y</span> z, lw(1) pstyle(p2) <span class="co">///</span></span>
+<span id="cb1-13"><a></a>    || <span class="kw">lfit</span> <span class="fu">y</span> z <span class="kw">if</span> z&lt;0, lw(0.5) || <span class="kw">lfit</span> <span class="fu">y</span> z <span class="kw">if</span> z&gt;0, lw(0.5) , <span class="bn">legend</span>(<span class="kw">off</span>) <span class="bn">name</span>(m2, <span class="kw">replace</span>)</span>
+<span id="cb1-14"><a></a><span class="kw">graph</span> <span class="kw">export</span> resources\rdd2.png,  <span class="kw">width</span>(1000) height(1000)  <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img data-src="resources/rdd1.png"></p>
 </div>
@@ -558,61 +558,61 @@ E(y(1)|Z=c) &amp;-E(y(0)|Z=c)
 </section>
 <section id="example" class="slide level2">
 <h2>Example</h2>
-<div id="bbef2d55" class="cell" data-execution_count="2">
+<div id="73c73a4e" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1"></a> <span class="kw">qui</span>: {</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">clear</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">set</span> <span class="dv">seed</span> 1</span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="kw">set</span> <span class="kw">obs</span> 200</span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="kw">gen</span> <span class="fu">e</span>=rnormal()</span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="kw">gen</span> z=runiform()+<span class="fu">e</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="kw">sum</span> z</span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="kw">replace</span> z=(z-<span class="fu">r</span>(<span class="kw">mean</span>))/<span class="fu">r</span>(<span class="fu">sd</span>)</span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="kw">gen</span> t = z&gt;0</span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="kw">gen</span> <span class="fu">y</span> = 1 + 0.5*z + <span class="fu">e</span> + rnormal() + (z&gt;0)</span>
-<span id="cb2-11"><a href="#cb2-11"></a></span>
-<span id="cb2-12"><a href="#cb2-12"></a><span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> t z </span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="kw">predict</span> yh1</span>
-<span id="cb2-14"><a href="#cb2-14"></a><span class="kw">local</span> b1:<span class="kw">display</span> %3.2f _b[t]</span>
-<span id="cb2-15"><a href="#cb2-15"></a><span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> t c.z##c.z  </span>
-<span id="cb2-16"><a href="#cb2-16"></a><span class="kw">predict</span> yh2</span>
-<span id="cb2-17"><a href="#cb2-17"></a><span class="kw">local</span> b2:<span class="kw">display</span> %3.2f _b[t]</span>
-<span id="cb2-18"><a href="#cb2-18"></a><span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> t c.z##c.z##c.z</span>
-<span id="cb2-19"><a href="#cb2-19"></a><span class="kw">predict</span> yh3</span>
-<span id="cb2-20"><a href="#cb2-20"></a><span class="kw">local</span> b3:<span class="kw">display</span> %3.2f _b[t]</span>
-<span id="cb2-21"><a href="#cb2-21"></a><span class="kw">sort</span> z</span>
-<span id="cb2-22"><a href="#cb2-22"></a>}</span>
-<span id="cb2-23"><a href="#cb2-23"></a><span class="kw">two</span> (<span class="kw">scatter</span> <span class="fu">y</span> z, <span class="kw">sort</span> <span class="bn">title</span>(<span class="st">"Sharp RDD"</span>) pstyle(p1) <span class="kw">color</span>(%20)) <span class="co">///</span></span>
-<span id="cb2-24"><a href="#cb2-24"></a>    (<span class="kw">line</span> yh1 z <span class="kw">if</span> z&lt;0, pstyle(p2) lw(0.5)) (<span class="kw">line</span> yh1 z <span class="kw">if</span> z&gt;0, pstyle(p2) lw(0.5)) <span class="co">///</span></span>
-<span id="cb2-25"><a href="#cb2-25"></a>    (<span class="kw">line</span> yh2 z <span class="kw">if</span> z&lt;0, pstyle(p3) lw(0.5)) (<span class="kw">line</span> yh2 z <span class="kw">if</span> z&gt;0, pstyle(p3) lw(0.5)) <span class="co">///</span></span>
-<span id="cb2-26"><a href="#cb2-26"></a>    (<span class="kw">line</span> yh3 z <span class="kw">if</span> z&lt;0, pstyle(p4) lw(0.5)) (<span class="kw">line</span> yh3 z <span class="kw">if</span> z&gt;0, pstyle(p4) lw(0.5)) , <span class="co">///</span></span>
-<span id="cb2-27"><a href="#cb2-27"></a>    <span class="bn">legend</span>(<span class="kw">order</span>(2 <span class="st">"Linear ATT: `b1'"</span> 3 <span class="st">"Quadratic ATT: `b2'"</span> 4 <span class="st">"Cubic ATT: `b3'"</span>)) <span class="bn">name</span>(m1, <span class="kw">replace</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a></a> <span class="kw">qui</span>: {</span>
+<span id="cb2-2"><a></a><span class="kw">clear</span></span>
+<span id="cb2-3"><a></a><span class="kw">set</span> <span class="dv">seed</span> 1</span>
+<span id="cb2-4"><a></a><span class="kw">set</span> <span class="kw">obs</span> 200</span>
+<span id="cb2-5"><a></a><span class="kw">gen</span> <span class="fu">e</span>=rnormal()</span>
+<span id="cb2-6"><a></a><span class="kw">gen</span> z=runiform()+<span class="fu">e</span></span>
+<span id="cb2-7"><a></a><span class="kw">sum</span> z</span>
+<span id="cb2-8"><a></a><span class="kw">replace</span> z=(z-<span class="fu">r</span>(<span class="kw">mean</span>))/<span class="fu">r</span>(<span class="fu">sd</span>)</span>
+<span id="cb2-9"><a></a><span class="kw">gen</span> t = z&gt;0</span>
+<span id="cb2-10"><a></a><span class="kw">gen</span> <span class="fu">y</span> = 1 + 0.5*z + <span class="fu">e</span> + rnormal() + (z&gt;0)</span>
+<span id="cb2-11"><a></a></span>
+<span id="cb2-12"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> t z </span>
+<span id="cb2-13"><a></a><span class="kw">predict</span> yh1</span>
+<span id="cb2-14"><a></a><span class="kw">local</span> b1:<span class="kw">display</span> %3.2f _b[t]</span>
+<span id="cb2-15"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> t c.z##c.z  </span>
+<span id="cb2-16"><a></a><span class="kw">predict</span> yh2</span>
+<span id="cb2-17"><a></a><span class="kw">local</span> b2:<span class="kw">display</span> %3.2f _b[t]</span>
+<span id="cb2-18"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> t c.z##c.z##c.z</span>
+<span id="cb2-19"><a></a><span class="kw">predict</span> yh3</span>
+<span id="cb2-20"><a></a><span class="kw">local</span> b3:<span class="kw">display</span> %3.2f _b[t]</span>
+<span id="cb2-21"><a></a><span class="kw">sort</span> z</span>
+<span id="cb2-22"><a></a>}</span>
+<span id="cb2-23"><a></a><span class="kw">two</span> (<span class="kw">scatter</span> <span class="fu">y</span> z, <span class="kw">sort</span> <span class="bn">title</span>(<span class="st">"Sharp RDD"</span>) pstyle(p1) <span class="kw">color</span>(%20)) <span class="co">///</span></span>
+<span id="cb2-24"><a></a>    (<span class="kw">line</span> yh1 z <span class="kw">if</span> z&lt;0, pstyle(p2) lw(0.5)) (<span class="kw">line</span> yh1 z <span class="kw">if</span> z&gt;0, pstyle(p2) lw(0.5)) <span class="co">///</span></span>
+<span id="cb2-25"><a></a>    (<span class="kw">line</span> yh2 z <span class="kw">if</span> z&lt;0, pstyle(p3) lw(0.5)) (<span class="kw">line</span> yh2 z <span class="kw">if</span> z&gt;0, pstyle(p3) lw(0.5)) <span class="co">///</span></span>
+<span id="cb2-26"><a></a>    (<span class="kw">line</span> yh3 z <span class="kw">if</span> z&lt;0, pstyle(p4) lw(0.5)) (<span class="kw">line</span> yh3 z <span class="kw">if</span> z&gt;0, pstyle(p4) lw(0.5)) , <span class="co">///</span></span>
+<span id="cb2-27"><a></a>    <span class="bn">legend</span>(<span class="kw">order</span>(2 <span class="st">"Linear ATT: `b1'"</span> 3 <span class="st">"Quadratic ATT: `b2'"</span> 4 <span class="st">"Cubic ATT: `b3'"</span>)) <span class="bn">name</span>(m1, <span class="kw">replace</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
 <img data-src="11rdd_files/figure-revealjs/cell-3-output-1.png" class="r-stretch"></section>
 <section id="example-1" class="slide level2">
 <h2>Example</h2>
-<div id="0e43a2c3" class="cell" data-execution_count="3">
+<div id="9baed01e" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">qui</span>: {</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> t c.z#t </span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">predict</span> yh11</span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="kw">local</span> b1:<span class="kw">display</span> %3.2f _b[t]</span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> t (c.z##c.z)#t  </span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="kw">predict</span> yh21</span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="kw">local</span> b2:<span class="kw">display</span> %3.2f _b[t]</span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> t (c.z##c.z##c.z)#t</span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="kw">predict</span> yh31</span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="kw">local</span> b3:<span class="kw">display</span> %3.2f _b[t]</span>
-<span id="cb3-11"><a href="#cb3-11"></a>}</span>
-<span id="cb3-12"><a href="#cb3-12"></a><span class="kw">two</span> (<span class="kw">scatter</span> <span class="fu">y</span> z, <span class="kw">sort</span> <span class="bn">title</span>(<span class="st">"Sharp RDD"</span>) pstyle(p1) <span class="kw">color</span>(%20)) <span class="co">///</span></span>
-<span id="cb3-13"><a href="#cb3-13"></a>    (<span class="kw">line</span> yh11 z <span class="kw">if</span> z&lt;0, pstyle(p2) lw(0.5)) (<span class="kw">line</span> yh11 z <span class="kw">if</span> z&gt;0, pstyle(p2) lw(0.5)) <span class="co">///</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a>    (<span class="kw">line</span> yh21 z <span class="kw">if</span> z&lt;0, pstyle(p3) lw(0.5)) (<span class="kw">line</span> yh21 z <span class="kw">if</span> z&gt;0, pstyle(p3) lw(0.5)) <span class="co">///</span></span>
-<span id="cb3-15"><a href="#cb3-15"></a>    (<span class="kw">line</span> yh31 z <span class="kw">if</span> z&lt;0, pstyle(p4) lw(0.5)) (<span class="kw">line</span> yh31 z <span class="kw">if</span> z&gt;0, pstyle(p4) lw(0.5)) , <span class="co">///</span></span>
-<span id="cb3-16"><a href="#cb3-16"></a>    <span class="bn">legend</span>(<span class="kw">order</span>(2 <span class="st">"Linear ATT: `b1'"</span> 3 <span class="st">"Quadratic ATT: `b2'"</span> 4 <span class="st">"Cubic ATT: `b3'"</span>)) <span class="bn">name</span>(m2, <span class="kw">replace</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a><span class="kw">qui</span>: {</span>
+<span id="cb3-2"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> t c.z#t </span>
+<span id="cb3-3"><a></a><span class="kw">predict</span> yh11</span>
+<span id="cb3-4"><a></a><span class="kw">local</span> b1:<span class="kw">display</span> %3.2f _b[t]</span>
+<span id="cb3-5"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> t (c.z##c.z)#t  </span>
+<span id="cb3-6"><a></a><span class="kw">predict</span> yh21</span>
+<span id="cb3-7"><a></a><span class="kw">local</span> b2:<span class="kw">display</span> %3.2f _b[t]</span>
+<span id="cb3-8"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> t (c.z##c.z##c.z)#t</span>
+<span id="cb3-9"><a></a><span class="kw">predict</span> yh31</span>
+<span id="cb3-10"><a></a><span class="kw">local</span> b3:<span class="kw">display</span> %3.2f _b[t]</span>
+<span id="cb3-11"><a></a>}</span>
+<span id="cb3-12"><a></a><span class="kw">two</span> (<span class="kw">scatter</span> <span class="fu">y</span> z, <span class="kw">sort</span> <span class="bn">title</span>(<span class="st">"Sharp RDD"</span>) pstyle(p1) <span class="kw">color</span>(%20)) <span class="co">///</span></span>
+<span id="cb3-13"><a></a>    (<span class="kw">line</span> yh11 z <span class="kw">if</span> z&lt;0, pstyle(p2) lw(0.5)) (<span class="kw">line</span> yh11 z <span class="kw">if</span> z&gt;0, pstyle(p2) lw(0.5)) <span class="co">///</span></span>
+<span id="cb3-14"><a></a>    (<span class="kw">line</span> yh21 z <span class="kw">if</span> z&lt;0, pstyle(p3) lw(0.5)) (<span class="kw">line</span> yh21 z <span class="kw">if</span> z&gt;0, pstyle(p3) lw(0.5)) <span class="co">///</span></span>
+<span id="cb3-15"><a></a>    (<span class="kw">line</span> yh31 z <span class="kw">if</span> z&lt;0, pstyle(p4) lw(0.5)) (<span class="kw">line</span> yh31 z <span class="kw">if</span> z&gt;0, pstyle(p4) lw(0.5)) , <span class="co">///</span></span>
+<span id="cb3-16"><a></a>    <span class="bn">legend</span>(<span class="kw">order</span>(2 <span class="st">"Linear ATT: `b1'"</span> 3 <span class="st">"Quadratic ATT: `b2'"</span> 4 <span class="st">"Cubic ATT: `b3'"</span>)) <span class="bn">name</span>(m2, <span class="kw">replace</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
@@ -649,14 +649,17 @@ E(y(1)|Z=c) &amp;-E(y(0)|Z=c)
 <section id="example-2" class="slide level2 scrollable">
 <h2>Example</h2>
 <div class="quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-figure quarto-figure-center quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="resources/frdd1.png"></p>
 <figcaption>Treatment</figcaption>
 </figure>
 </div>
-<div class="quarto-figure quarto-figure-center quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="resources/frdd2.png"></p>
 <figcaption>Outcome</figcaption>
@@ -664,18 +667,19 @@ E(y(1)|Z=c) &amp;-E(y(0)|Z=c)
 </div>
 </div>
 </div>
+</div>
 <p>Effect:</p>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">qui</span>: <span class="kw">gen</span> dz = z&gt;0</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">qui</span>: <span class="kw">reg</span> <span class="fu">y</span> dz c.z##c.z#i.dz</span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">local</span> b1 = _b[dz]</span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">qui</span>: <span class="kw">reg</span> t dz c.z##c.z#i.dz</span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="kw">local</span> b2 = _b[dz]</span>
-<span id="cb4-6"><a href="#cb4-6"></a></span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="kw">display</span> <span class="st">"There is a "</span> %3.2f <span class="ot">`b1'</span> <span class="st">" effect on the outcome"</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a><span class="kw">display</span> <span class="st">"and a "</span> %3.2f <span class="ot">`b2'</span> <span class="st">" effect on the treatment"</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="kw">display</span> <span class="st">"which imply a LATE of "</span> %3.2f <span class="ot">`=`b1'</span>/<span class="ot">`b2'</span>'</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a></a><span class="kw">qui</span>: <span class="kw">gen</span> dz = z&gt;0</span>
+<span id="cb4-2"><a></a><span class="kw">qui</span>: <span class="kw">reg</span> <span class="fu">y</span> dz c.z##c.z#i.dz</span>
+<span id="cb4-3"><a></a><span class="kw">local</span> b1 = _b[dz]</span>
+<span id="cb4-4"><a></a><span class="kw">qui</span>: <span class="kw">reg</span> t dz c.z##c.z#i.dz</span>
+<span id="cb4-5"><a></a><span class="kw">local</span> b2 = _b[dz]</span>
+<span id="cb4-6"><a></a></span>
+<span id="cb4-7"><a></a><span class="kw">display</span> <span class="st">"There is a "</span> %3.2f <span class="ot">`b1'</span> <span class="st">" effect on the outcome"</span></span>
+<span id="cb4-8"><a></a><span class="kw">display</span> <span class="st">"and a "</span> %3.2f <span class="ot">`b2'</span> <span class="st">" effect on the treatment"</span></span>
+<span id="cb4-9"><a></a><span class="kw">display</span> <span class="st">"which imply a LATE of "</span> %3.2f <span class="ot">`=`b1'</span>/<span class="ot">`b2'</span>'</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <p>There is a 0.45 effect on the outcome and a 0.44 effect on the treatment which imply a LATE of 1.03</p>
 </section>
@@ -704,14 +708,14 @@ E(y(1)|Z=c) &amp;-E(y(0)|Z=c)
 <li>In Stata: ssc install <code>rddensity</code>. In r install.packages(c(‘rdd’,‘rddensity’))</li>
 </ul></li>
 </ul>
-<div id="c4027c69" class="cell" data-execution_count="6">
+<div id="1d034d97" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">set</span> <span class="dv">linesize</span> 100</span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">qui</span>:<span class="kw">ssc</span> install  lpdensity, <span class="kw">replace</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">qui</span>:<span class="kw">ssc</span> install  rddensity, <span class="kw">replace</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a>rddensity z, c(0) plot</span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="kw">graph</span> <span class="kw">export</span> resources\frdd3.png, <span class="kw">width</span>(1000) <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a></a><span class="kw">set</span> <span class="dv">linesize</span> 100</span>
+<span id="cb5-2"><a></a><span class="kw">qui</span>:<span class="kw">ssc</span> install  lpdensity, <span class="kw">replace</span></span>
+<span id="cb5-3"><a></a><span class="kw">qui</span>:<span class="kw">ssc</span> install  rddensity, <span class="kw">replace</span></span>
+<span id="cb5-4"><a></a>rddensity z, c(0) plot</span>
+<span id="cb5-5"><a></a><span class="kw">graph</span> <span class="kw">export</span> resources\frdd3.png, <span class="kw">width</span>(1000) <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 
@@ -739,22 +743,22 @@ E(y(1)|Z=c) &amp;-E(y(0)|Z=c)
 <section id="example-3" class="slide level2">
 <h2>Example</h2>
 <p>Impact of Scores on Scholarship recipiency</p>
-<div id="a22f9449" class="cell" data-execution_count="7">
+<div id="197a7116" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">use</span> resources\fuzzy, <span class="kw">clear</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>color_style bay</span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">qui</span>:rdplot <span class="kw">d</span> x1, graph_options(<span class="bn">legend</span>( pos(6)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a></a><span class="kw">use</span> resources\fuzzy, <span class="kw">clear</span></span>
+<span id="cb6-2"><a></a>color_style bay</span>
+<span id="cb6-3"><a></a><span class="kw">qui</span>:rdplot <span class="kw">d</span> x1, graph_options(<span class="bn">legend</span>( pos(6)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
 <img data-src="11rdd_files/figure-revealjs/cell-8-output-1.png" class="r-stretch"></section>
 <section id="manipulation-test" class="slide level2">
 <h2>Manipulation test</h2>
-<div id="2c2a5a9b" class="cell" data-execution_count="8">
+<div id="78a285e1" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">qui</span>:rddensity x1, plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a></a><span class="kw">qui</span>:rddensity x1, plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
@@ -762,21 +766,21 @@ E(y(1)|Z=c) &amp;-E(y(0)|Z=c)
 <section id="intention-to-treat" class="slide level2">
 <h2>Intention to treat</h2>
 <p>Impact on Enrollment</p>
-<div id="4f60584f" class="cell" data-execution_count="9">
+<div id="47a91a29" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">qui</span>:rdplot <span class="fu">y</span> x1, graph_options(<span class="bn">legend</span>( pos(6)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a></a><span class="kw">qui</span>:rdplot <span class="fu">y</span> x1, graph_options(<span class="bn">legend</span>( pos(6)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
 <img data-src="11rdd_files/figure-revealjs/cell-10-output-1.png" class="r-stretch"></section>
 <section id="estimation-of-the-effect" class="slide level2">
 <h2>Estimation of the effect:</h2>
-<div id="8232ca8d" class="cell" data-execution_count="10">
+<div id="ebb382d2" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">gen</span> dx1 = x1&gt;0</span>
-<span id="cb9-2"><a href="#cb9-2"></a>ivregress 2sls <span class="fu">y</span> (<span class="kw">d</span> = dx1) c.x1##c.x1#dx1 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a></a><span class="kw">gen</span> dx1 = x1&gt;0</span>
+<span id="cb9-2"><a></a>ivregress 2sls <span class="fu">y</span> (<span class="kw">d</span> = dx1) c.x1##c.x1#dx1 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -801,52 +805,52 @@ dx1#c.x1#c.x1 |
               |
         _cons |   .5103635    .010876    46.93   0.000     .4890469    .5316801
 -------------------------------------------------------------------------------
-Instrumented: d
- Instruments: 0b.dx1#c.x1 1.dx1#c.x1 0b.dx1#c.x1#c.x1 1.dx1#c.x1#c.x1 dx1</code></pre>
+Endogenous: d
+Exogenous:  0b.dx1#c.x1 1.dx1#c.x1 0b.dx1#c.x1#c.x1 1.dx1#c.x1#c.x1 dx1</code></pre>
 </div>
 </div>
 </section>
 <section id="some-sensitivity" class="slide level2">
 <h2>Some Sensitivity</h2>
-<div id="7a8ddb3f" class="cell" data-execution_count="11">
+<div id="10ad477e" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">qui</span>:{   </span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="fu">matrix</span> b1 = 0,0</span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="kw">forvalues</span> i = 1/15 {</span>
-<span id="cb11-4"><a href="#cb11-4"></a>    ivregress 2sls <span class="fu">y</span> (<span class="kw">d</span> = dx1) c.x1#dx1  <span class="kw">if</span> <span class="fu">abs</span>(x1)&lt;<span class="ot">`i'</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a>    <span class="fu">matrix</span> b1=b1\[_b[<span class="kw">d</span>],_se[<span class="kw">d</span>]]</span>
-<span id="cb11-6"><a href="#cb11-6"></a>}</span>
-<span id="cb11-7"><a href="#cb11-7"></a></span>
-<span id="cb11-8"><a href="#cb11-8"></a><span class="fu">matrix</span> b2 = 0,0</span>
-<span id="cb11-9"><a href="#cb11-9"></a><span class="kw">forvalues</span> i = 1/15 {</span>
-<span id="cb11-10"><a href="#cb11-10"></a>    ivregress 2sls <span class="fu">y</span> (<span class="kw">d</span> = dx1) c.x1##c.x1#dx1  <span class="kw">if</span> <span class="fu">abs</span>(x1)&lt;<span class="ot">`i'</span></span>
-<span id="cb11-11"><a href="#cb11-11"></a>    <span class="fu">matrix</span> b2=b2\[_b[<span class="kw">d</span>],_se[<span class="kw">d</span>]]</span>
-<span id="cb11-12"><a href="#cb11-12"></a>}</span>
-<span id="cb11-13"><a href="#cb11-13"></a></span>
-<span id="cb11-14"><a href="#cb11-14"></a><span class="fu">matrix</span> b3 = 0,0</span>
-<span id="cb11-15"><a href="#cb11-15"></a><span class="kw">forvalues</span> i = 1/15 {</span>
-<span id="cb11-16"><a href="#cb11-16"></a>    ivregress 2sls <span class="fu">y</span> (<span class="kw">d</span> = dx1) c.x1##c.x1##c.x1#dx1  <span class="kw">if</span> <span class="fu">abs</span>(x1)&lt;<span class="ot">`i'</span></span>
-<span id="cb11-17"><a href="#cb11-17"></a>    <span class="fu">matrix</span> b3=b3\[_b[<span class="kw">d</span>],_se[<span class="kw">d</span>]]</span>
-<span id="cb11-18"><a href="#cb11-18"></a>}</span>
-<span id="cb11-19"><a href="#cb11-19"></a></span>
-<span id="cb11-20"><a href="#cb11-20"></a>lbsvmat b1</span>
-<span id="cb11-21"><a href="#cb11-21"></a>lbsvmat b2</span>
-<span id="cb11-22"><a href="#cb11-22"></a>lbsvmat b3</span>
-<span id="cb11-23"><a href="#cb11-23"></a><span class="kw">forvalues</span> i = 1/3 {</span>
-<span id="cb11-24"><a href="#cb11-24"></a>  <span class="kw">gen</span> ll<span class="ot">`i'</span>=b<span class="ot">`i'</span>1-b<span class="ot">`i'</span>2*1.96</span>
-<span id="cb11-25"><a href="#cb11-25"></a>  <span class="kw">gen</span> ul<span class="ot">`i'</span>=b<span class="ot">`i'</span>1+b<span class="ot">`i'</span>2*1.96</span>
-<span id="cb11-26"><a href="#cb11-26"></a>}</span>
-<span id="cb11-27"><a href="#cb11-27"></a><span class="kw">gen</span> z = <span class="dt">_n</span>-1 <span class="kw">if</span> b11!=.</span>
-<span id="cb11-28"><a href="#cb11-28"></a><span class="kw">replace</span> z=. <span class="kw">in</span> 1</span>
-<span id="cb11-29"><a href="#cb11-29"></a></span>
-<span id="cb11-30"><a href="#cb11-30"></a>}</span>
-<span id="cb11-31"><a href="#cb11-31"></a><span class="kw">gen</span> z1 = z + 0.25</span>
-<span id="cb11-32"><a href="#cb11-32"></a><span class="kw">gen</span> z2 = z + 0.5</span>
-<span id="cb11-33"><a href="#cb11-33"></a><span class="kw">two</span> (rspike ll1 ul1 z, lw(1) pstyle(p1) <span class="kw">color</span>(%50) ) (<span class="kw">scatter</span> b11 z, pstyle(p1) ) <span class="co">///</span></span>
-<span id="cb11-34"><a href="#cb11-34"></a>    (rspike ll2 ul2 z1, lw(1) pstyle(p2) <span class="kw">color</span>(%50) ) (<span class="kw">scatter</span> b21 z1, pstyle(p2) ) <span class="co">///</span></span>
-<span id="cb11-35"><a href="#cb11-35"></a>    (rspike ll3 ul3 z2, lw(1) pstyle(p3) <span class="kw">color</span>(%50) ) (<span class="kw">scatter</span> b31 z2, pstyle(p3) ), <span class="co">///</span></span>
-<span id="cb11-36"><a href="#cb11-36"></a>    <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"Linear"</span> 3 <span class="st">"Quadratic"</span> 5 <span class="st">"Cubic"</span>)) <span class="bn">xtitle</span>(<span class="st">"Bandwidth"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a></a><span class="kw">qui</span>:{   </span>
+<span id="cb11-2"><a></a><span class="fu">matrix</span> b1 = 0,0</span>
+<span id="cb11-3"><a></a><span class="kw">forvalues</span> i = 1/15 {</span>
+<span id="cb11-4"><a></a>    ivregress 2sls <span class="fu">y</span> (<span class="kw">d</span> = dx1) c.x1#dx1  <span class="kw">if</span> <span class="fu">abs</span>(x1)&lt;<span class="ot">`i'</span></span>
+<span id="cb11-5"><a></a>    <span class="fu">matrix</span> b1=b1\[_b[<span class="kw">d</span>],_se[<span class="kw">d</span>]]</span>
+<span id="cb11-6"><a></a>}</span>
+<span id="cb11-7"><a></a></span>
+<span id="cb11-8"><a></a><span class="fu">matrix</span> b2 = 0,0</span>
+<span id="cb11-9"><a></a><span class="kw">forvalues</span> i = 1/15 {</span>
+<span id="cb11-10"><a></a>    ivregress 2sls <span class="fu">y</span> (<span class="kw">d</span> = dx1) c.x1##c.x1#dx1  <span class="kw">if</span> <span class="fu">abs</span>(x1)&lt;<span class="ot">`i'</span></span>
+<span id="cb11-11"><a></a>    <span class="fu">matrix</span> b2=b2\[_b[<span class="kw">d</span>],_se[<span class="kw">d</span>]]</span>
+<span id="cb11-12"><a></a>}</span>
+<span id="cb11-13"><a></a></span>
+<span id="cb11-14"><a></a><span class="fu">matrix</span> b3 = 0,0</span>
+<span id="cb11-15"><a></a><span class="kw">forvalues</span> i = 1/15 {</span>
+<span id="cb11-16"><a></a>    ivregress 2sls <span class="fu">y</span> (<span class="kw">d</span> = dx1) c.x1##c.x1##c.x1#dx1  <span class="kw">if</span> <span class="fu">abs</span>(x1)&lt;<span class="ot">`i'</span></span>
+<span id="cb11-17"><a></a>    <span class="fu">matrix</span> b3=b3\[_b[<span class="kw">d</span>],_se[<span class="kw">d</span>]]</span>
+<span id="cb11-18"><a></a>}</span>
+<span id="cb11-19"><a></a></span>
+<span id="cb11-20"><a></a>lbsvmat b1</span>
+<span id="cb11-21"><a></a>lbsvmat b2</span>
+<span id="cb11-22"><a></a>lbsvmat b3</span>
+<span id="cb11-23"><a></a><span class="kw">forvalues</span> i = 1/3 {</span>
+<span id="cb11-24"><a></a>  <span class="kw">gen</span> ll<span class="ot">`i'</span>=b<span class="ot">`i'</span>1-b<span class="ot">`i'</span>2*1.96</span>
+<span id="cb11-25"><a></a>  <span class="kw">gen</span> ul<span class="ot">`i'</span>=b<span class="ot">`i'</span>1+b<span class="ot">`i'</span>2*1.96</span>
+<span id="cb11-26"><a></a>}</span>
+<span id="cb11-27"><a></a><span class="kw">gen</span> z = <span class="dt">_n</span>-1 <span class="kw">if</span> b11!=.</span>
+<span id="cb11-28"><a></a><span class="kw">replace</span> z=. <span class="kw">in</span> 1</span>
+<span id="cb11-29"><a></a></span>
+<span id="cb11-30"><a></a>}</span>
+<span id="cb11-31"><a></a><span class="kw">gen</span> z1 = z + 0.25</span>
+<span id="cb11-32"><a></a><span class="kw">gen</span> z2 = z + 0.5</span>
+<span id="cb11-33"><a></a><span class="kw">two</span> (rspike ll1 ul1 z, lw(1) pstyle(p1) <span class="kw">color</span>(%50) ) (<span class="kw">scatter</span> b11 z, pstyle(p1) ) <span class="co">///</span></span>
+<span id="cb11-34"><a></a>    (rspike ll2 ul2 z1, lw(1) pstyle(p2) <span class="kw">color</span>(%50) ) (<span class="kw">scatter</span> b21 z1, pstyle(p2) ) <span class="co">///</span></span>
+<span id="cb11-35"><a></a>    (rspike ll3 ul3 z2, lw(1) pstyle(p3) <span class="kw">color</span>(%50) ) (<span class="kw">scatter</span> b31 z2, pstyle(p3) ), <span class="co">///</span></span>
+<span id="cb11-36"><a></a>    <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"Linear"</span> 3 <span class="st">"Quadratic"</span> 5 <span class="st">"Cubic"</span>)) <span class="bn">xtitle</span>(<span class="st">"Bandwidth"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>(23,117 missing values generated)
@@ -857,20 +861,20 @@ Instrumented: d
 <img data-src="11rdd_files/figure-revealjs/cell-12-output-2.png" class="r-stretch"></section>
 <section id="flasification-test" class="slide level2">
 <h2>Flasification test</h2>
-<div id="a5a53919" class="cell" data-execution_count="12">
+<div id="a409faf1" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">qui</span> {</span>
-<span id="cb13-2"><a href="#cb13-2"></a>ivregress 2sls icfes_female (<span class="kw">d</span> = dx1) c.x1#dx1    <span class="kw">if</span> <span class="fu">abs</span>(x1)&lt;20</span>
-<span id="cb13-3"><a href="#cb13-3"></a><span class="kw">est</span> sto m1</span>
-<span id="cb13-4"><a href="#cb13-4"></a>ivregress 2sls icfes_age (<span class="kw">d</span> = dx1) c.x1#dx1       <span class="kw">if</span> <span class="fu">abs</span>(x1)&lt;20</span>
-<span id="cb13-5"><a href="#cb13-5"></a><span class="kw">est</span> sto m2</span>
-<span id="cb13-6"><a href="#cb13-6"></a>ivregress 2sls icfes_urm (<span class="kw">d</span> = dx1) c.x1#dx1       <span class="kw">if</span> <span class="fu">abs</span>(x1)&lt;20</span>
-<span id="cb13-7"><a href="#cb13-7"></a><span class="kw">est</span> sto m3</span>
-<span id="cb13-8"><a href="#cb13-8"></a>ivregress 2sls icfes_famsize (<span class="kw">d</span> = dx1) c.x1#dx1       <span class="kw">if</span> <span class="fu">abs</span>(x1)&lt;20</span>
-<span id="cb13-9"><a href="#cb13-9"></a><span class="kw">est</span> sto m4</span>
-<span id="cb13-10"><a href="#cb13-10"></a>}</span>
-<span id="cb13-11"><a href="#cb13-11"></a>esttab m1 m2 m3 m4, <span class="kw">keep</span>(<span class="kw">d</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a></a><span class="kw">qui</span> {</span>
+<span id="cb13-2"><a></a>ivregress 2sls icfes_female (<span class="kw">d</span> = dx1) c.x1#dx1    <span class="kw">if</span> <span class="fu">abs</span>(x1)&lt;20</span>
+<span id="cb13-3"><a></a><span class="kw">est</span> sto m1</span>
+<span id="cb13-4"><a></a>ivregress 2sls icfes_age (<span class="kw">d</span> = dx1) c.x1#dx1       <span class="kw">if</span> <span class="fu">abs</span>(x1)&lt;20</span>
+<span id="cb13-5"><a></a><span class="kw">est</span> sto m2</span>
+<span id="cb13-6"><a></a>ivregress 2sls icfes_urm (<span class="kw">d</span> = dx1) c.x1#dx1       <span class="kw">if</span> <span class="fu">abs</span>(x1)&lt;20</span>
+<span id="cb13-7"><a></a><span class="kw">est</span> sto m3</span>
+<span id="cb13-8"><a></a>ivregress 2sls icfes_famsize (<span class="kw">d</span> = dx1) c.x1#dx1       <span class="kw">if</span> <span class="fu">abs</span>(x1)&lt;20</span>
+<span id="cb13-9"><a></a><span class="kw">est</span> sto m4</span>
+<span id="cb13-10"><a></a>}</span>
+<span id="cb13-11"><a></a>esttab m1 m2 m3 m4, <span class="kw">keep</span>(<span class="kw">d</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -891,8 +895,10 @@ t statistics in parentheses
 <section id="next-differences-in-differences" class="title-slide slide level1 center">
 <h1>Next Differences in Differences</h1>
 
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 </section>
     </div>

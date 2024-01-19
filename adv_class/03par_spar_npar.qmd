@@ -176,8 +176,7 @@ getmata tg* = tg
 ```{stata}
 scatter tg1 tg2, name(mx, replace)
 ```
-
-![](resources/kden_1.png)
+ 
 
 ## Trade off: Bias vs variance {.scrollable}
 

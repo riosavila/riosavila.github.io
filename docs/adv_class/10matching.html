@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.455">
+  <meta name="generator" content="quarto-1.4.537">
 
   <meta name="author" content="Fernando Rios-Avila">
   <title>Econometrics MSC Levy - Matching and Re-weighting</title>
@@ -491,14 +491,14 @@ ATE &amp;= \int ATE(X) dFx
 <section id="subclassification-or-stratification" class="slide level2 scrollable">
 <h2>Subclassification or stratification</h2>
 <p>Consider the following dataset:</p>
-<div id="959c7ea9" class="cell" data-execution_count="1">
+<div id="0f5b299d" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a>frause titanic, <span class="kw">clear</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>expand freq</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">drop</span> <span class="kw">if</span> freq==0</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">gen</span> class1=<span class="kw">class</span>==1</span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">tab</span> survived class1 , nofreq col</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a></a>frause titanic, <span class="kw">clear</span></span>
+<span id="cb1-2"><a></a>expand freq</span>
+<span id="cb1-3"><a></a><span class="kw">drop</span> <span class="kw">if</span> freq==0</span>
+<span id="cb1-4"><a></a><span class="kw">gen</span> class1=<span class="kw">class</span>==1</span>
+<span id="cb1-5"><a></a><span class="kw">tab</span> survived class1 , nofreq col</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <style>div.jp-Notebook .datagrid-container {min-height: 448px; }</style>
@@ -520,11 +520,11 @@ ATE &amp;= \int ATE(X) dFx
 </div>
 <p>If we assume full Independence assumption we would believe that being in first class increased chance of survival in 35.4%. but is that the case?</p>
 <p>What if the composition of individuals differs across classes (women and children)</p>
-<div id="b7fc45c1" class="cell" data-execution_count="2">
+<div id="3d53880b" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">tab</span> age class1, nofreq col</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">tab</span> sex class1, nofreq col</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a><span class="kw">tab</span> age class1, nofreq col</span>
+<span id="cb3-2"><a></a><span class="kw">tab</span> sex class1, nofreq col</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -550,12 +550,12 @@ ATE &amp;= \int ATE(X) dFx
 <section id="section" class="slide level2 scrollable">
 <h2></h2>
 <p>A better approach would be to look into the survival probabilities stratifying the data:</p>
-<div id="98e23efb" class="cell" data-execution_count="3">
+<div id="f946f686" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">gen</span> surv=survived==2</span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">bysort</span> age sex class1:<span class="kw">egen</span> sr_mean=<span class="kw">mean</span>(survived==2)</span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">table</span> (age sex) (class1), stat(<span class="kw">mean</span> surv) <span class="kw">nototal</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a></a><span class="kw">gen</span> surv=survived==2</span>
+<span id="cb5-2"><a></a><span class="kw">bysort</span> age sex class1:<span class="kw">egen</span> sr_mean=<span class="kw">mean</span>(survived==2)</span>
+<span id="cb5-3"><a></a><span class="kw">table</span> (age sex) (class1), stat(<span class="kw">mean</span> surv) <span class="kw">nototal</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -576,15 +576,15 @@ Age          |
 </div>
 </div>
 <p>So even within each group, the survival probability is larger in first class. What about Average?</p>
-<div id="27951b31" class="cell" data-execution_count="4">
+<div id="f77d3794" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">bysort</span> age sex:<span class="kw">egen</span> sr_mean_class1=<span class="fu">max</span>(sr_mean*(class1==1))</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">bysort</span> age sex:<span class="kw">egen</span> sr_mean_class0=<span class="fu">max</span>(sr_mean*(class1==0))</span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">gen</span> teff = sr_mean_class1-sr_mean_class0</span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="kw">sum</span> teff <span class="kw">if</span> class1==1 <span class="co">// ATT</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="kw">sum</span> teff <span class="kw">if</span> class1==0 <span class="co">// ATU</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="kw">sum</span> teff  <span class="co">// ATE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a></a><span class="kw">bysort</span> age sex:<span class="kw">egen</span> sr_mean_class1=<span class="fu">max</span>(sr_mean*(class1==1))</span>
+<span id="cb7-2"><a></a><span class="kw">bysort</span> age sex:<span class="kw">egen</span> sr_mean_class0=<span class="fu">max</span>(sr_mean*(class1==0))</span>
+<span id="cb7-3"><a></a><span class="kw">gen</span> teff = sr_mean_class1-sr_mean_class0</span>
+<span id="cb7-4"><a></a><span class="kw">sum</span> teff <span class="kw">if</span> class1==1 <span class="co">// ATT</span></span>
+<span id="cb7-5"><a></a><span class="kw">sum</span> teff <span class="kw">if</span> class1==0 <span class="co">// ATU</span></span>
+<span id="cb7-6"><a></a><span class="kw">sum</span> teff  <span class="co">// ATE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -631,12 +631,12 @@ Age          |
 <li>for ATU: <span class="math inline">\(0&lt;P(D|X)\)</span></li>
 </ul>
 <p>For example:</p>
-<div id="2c8264e1" class="cell" data-execution_count="5">
+<div id="507546f0" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1"></a>frause hhprice, <span class="kw">clear</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">keep</span> price rooms type_h</span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="kw">tab</span> rooms type_h</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a></a>frause hhprice, <span class="kw">clear</span></span>
+<span id="cb9-2"><a></a><span class="kw">keep</span> price rooms type_h</span>
+<span id="cb9-3"><a></a><span class="kw">tab</span> rooms type_h</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -661,14 +661,14 @@ Age          |
 <h2>Curse of dimensionality</h2>
 <p>There is a second problem in terms of stratification. How would we deal with Multiple dimensions? Would it be possible to find “twins” for every observation?</p>
 <p>The answer is, probably no. Too many groups to track, to many micro cells to make use of:</p>
-<div id="3773398a" class="cell" data-execution_count="6">
+<div id="f372f71d" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1"></a>frause oaxaca, <span class="kw">clear</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="kw">drop</span> <span class="kw">if</span> lnwage==.</span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="kw">egen</span> <span class="kw">strata</span>=<span class="fu">group</span>(educ isco)</span>
-<span id="cb11-4"><a href="#cb11-4"></a><span class="kw">bysort</span> <span class="kw">strata</span>:<span class="kw">egen</span> flag=<span class="kw">mean</span>(female)</span>
-<span id="cb11-5"><a href="#cb11-5"></a><span class="ot">list</span> educ isco female <span class="kw">if</span> (flag==0 | flag==1) &amp; educ == 10, sep(0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a></a>frause oaxaca, <span class="kw">clear</span></span>
+<span id="cb11-2"><a></a><span class="kw">drop</span> <span class="kw">if</span> lnwage==.</span>
+<span id="cb11-3"><a></a><span class="kw">egen</span> <span class="kw">strata</span>=<span class="fu">group</span>(educ isco)</span>
+<span id="cb11-4"><a></a><span class="kw">bysort</span> <span class="kw">strata</span>:<span class="kw">egen</span> flag=<span class="kw">mean</span>(female)</span>
+<span id="cb11-5"><a></a><span class="ot">list</span> educ isco female <span class="kw">if</span> (flag==0 | flag==1) &amp; educ == 10, sep(0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Excerpt from the Swiss Labor Market Survey 1998)
@@ -786,15 +786,15 @@ Maha =d(x_i,x_j) &amp;=\sqrt{(x_i-x_j)'S^{-1}(x_i-x_j)}
 <section id="example" class="slide level2 scrollable">
 <h2>Example</h2>
 <p>This file contains information on experimental and observed data for the analysis of training on earnings program:</p>
-<div id="4131e358" class="cell" data-execution_count="7">
+<div id="32d4928d" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">use</span> https:<span class="co">//friosavila.github.io/playingwithstata/drdid/lalonde.dta, clear</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="kw">keep</span> <span class="kw">if</span> <span class="fu">year</span>==1978 </span>
-<span id="cb13-3"><a href="#cb13-3"></a><span class="kw">drop</span> <span class="kw">if</span> dwincl==0</span>
-<span id="cb13-4"><a href="#cb13-4"></a><span class="kw">label</span> <span class="kw">define</span> <span class="kw">sample</span> 1 <span class="st">"exper"</span>  2 <span class="st">"CPS"</span> 3 <span class="st">"PSID"</span></span>
-<span id="cb13-5"><a href="#cb13-5"></a><span class="kw">label</span> <span class="kw">values</span> <span class="kw">sample</span> <span class="kw">sample</span></span>
-<span id="cb13-6"><a href="#cb13-6"></a><span class="kw">tab</span> <span class="kw">sample</span> treated,<span class="fu">m</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a></a><span class="kw">use</span> https:<span class="co">//friosavila.github.io/playingwithstata/drdid/lalonde.dta, clear</span></span>
+<span id="cb13-2"><a></a><span class="kw">keep</span> <span class="kw">if</span> <span class="fu">year</span>==1978 </span>
+<span id="cb13-3"><a></a><span class="kw">drop</span> <span class="kw">if</span> dwincl==0</span>
+<span id="cb13-4"><a></a><span class="kw">label</span> <span class="kw">define</span> <span class="kw">sample</span> 1 <span class="st">"exper"</span>  2 <span class="st">"CPS"</span> 3 <span class="st">"PSID"</span></span>
+<span id="cb13-5"><a></a><span class="kw">label</span> <span class="kw">values</span> <span class="kw">sample</span> <span class="kw">sample</span></span>
+<span id="cb13-6"><a></a><span class="kw">tab</span> <span class="kw">sample</span> treated,<span class="fu">m</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>(19,204 observations deleted)
@@ -811,12 +811,12 @@ Maha =d(x_i,x_j) &amp;=\sqrt{(x_i-x_j)'S^{-1}(x_i-x_j)}
 </div>
 </div>
 <p>First Experimental design - RCT</p>
-<div id="f0455d00" class="cell" data-execution_count="8">
+<div id="3c32a635" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">reg</span> re treated</span>
-<span id="cb15-2"><a href="#cb15-2"></a><span class="kw">tabstat</span> age educ <span class="bn">black</span> married nodegree , <span class="kw">by</span>(treated)</span>
-<span id="cb15-3"><a href="#cb15-3"></a><span class="kw">logit</span> treated age educ <span class="bn">black</span> hisp married nodegree </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a></a><span class="kw">reg</span> re treated</span>
+<span id="cb15-2"><a></a><span class="kw">tabstat</span> age educ <span class="bn">black</span> married nodegree , <span class="kw">by</span>(treated)</span>
+<span id="cb15-3"><a></a><span class="kw">logit</span> treated age educ <span class="bn">black</span> hisp married nodegree </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -845,10 +845,10 @@ Group variable: treated
    Total |  25.37079  10.19551  .8337079  .1685393  .7820225
 ------------------------------------------------------------
 
-Iteration 0:   log likelihood =     -302.1  
-Iteration 1:   log likelihood = -294.72908  
-Iteration 2:   log likelihood = -294.71464  
-Iteration 3:   log likelihood = -294.71464  
+Iteration 0:  Log likelihood =     -302.1  
+Iteration 1:  Log likelihood = -294.72908  
+Iteration 2:  Log likelihood = -294.71464  
+Iteration 3:  Log likelihood = -294.71464  
 
 Logistic regression                                     Number of obs =    445
                                                         LR chi2(6)    =  14.77
@@ -872,13 +872,13 @@ Log likelihood = -294.71464                             Pseudo R2     = 0.0244
 <section id="section-1" class="slide level2 scrollable">
 <h2></h2>
 <p>Then using PScore Matching CPS</p>
-<div id="3987e44b" class="cell" data-execution_count="9">
+<div id="00fcfccb" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">keep</span> <span class="kw">if</span> treated == 1 | <span class="kw">sample</span> ==2</span>
-<span id="cb17-2"><a href="#cb17-2"></a><span class="kw">replace</span> treated=0 <span class="kw">if</span> treated==.</span>
-<span id="cb17-3"><a href="#cb17-3"></a><span class="kw">reg</span> re treated</span>
-<span id="cb17-4"><a href="#cb17-4"></a><span class="kw">tabstat</span> age educ <span class="bn">black</span> hisp married nodegree , <span class="kw">by</span>(treated)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb17-1"><a></a><span class="kw">keep</span> <span class="kw">if</span> treated == 1 | <span class="kw">sample</span> ==2</span>
+<span id="cb17-2"><a></a><span class="kw">replace</span> treated=0 <span class="kw">if</span> treated==.</span>
+<span id="cb17-3"><a></a><span class="kw">reg</span> re treated</span>
+<span id="cb17-4"><a></a><span class="kw">tabstat</span> age educ <span class="bn">black</span> hisp married nodegree , <span class="kw">by</span>(treated)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>(2,750 observations deleted)
@@ -914,14 +914,14 @@ Group variable: treated
 <section id="section-2" class="slide level2 scrollable">
 <h2></h2>
 <p>We need to do trimming</p>
-<div id="376afb58" class="cell" data-execution_count="10">
+<div id="07c268c0" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">bysort</span> educ <span class="bn">black</span> hisp married:<span class="kw">egen</span> n11=<span class="kw">sum</span>(treated==1)</span>
-<span id="cb19-2"><a href="#cb19-2"></a><span class="kw">bysort</span> age  <span class="bn">black</span> hisp married:<span class="kw">egen</span> n22=<span class="kw">sum</span>(treated==1)</span>
-<span id="cb19-3"><a href="#cb19-3"></a><span class="kw">drop</span> <span class="kw">if</span> n11==0 | n22 ==0</span>
-<span id="cb19-4"><a href="#cb19-4"></a><span class="kw">tabstat</span> age educ <span class="bn">black</span> hisp married nodegree , <span class="kw">by</span>(treated)</span>
-<span id="cb19-5"><a href="#cb19-5"></a><span class="kw">reg</span> re treated</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb19-1"><a></a><span class="kw">bysort</span> educ <span class="bn">black</span> hisp married:<span class="kw">egen</span> n11=<span class="kw">sum</span>(treated==1)</span>
+<span id="cb19-2"><a></a><span class="kw">bysort</span> age  <span class="bn">black</span> hisp married:<span class="kw">egen</span> n22=<span class="kw">sum</span>(treated==1)</span>
+<span id="cb19-3"><a></a><span class="kw">drop</span> <span class="kw">if</span> n11==0 | n22 ==0</span>
+<span id="cb19-4"><a></a><span class="kw">tabstat</span> age educ <span class="bn">black</span> hisp married nodegree , <span class="kw">by</span>(treated)</span>
+<span id="cb19-5"><a></a><span class="kw">reg</span> re treated</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>(13,536 observations deleted)
@@ -956,17 +956,17 @@ Group variable: treated
 <section id="section-3" class="slide level2 scrollable">
 <h2></h2>
 <p>Lets do some matching</p>
-<div id="4f8f37ce" class="cell" data-execution_count="11">
+<div id="a8c2f7a3" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb21-1"><a href="#cb21-1"></a>teffects nnmatch (re age educ <span class="bn">black</span>   married nodegree  ) (treated)</span>
-<span id="cb21-2"><a href="#cb21-2"></a>tebalance <span class="kw">summarize</span></span>
-<span id="cb21-3"><a href="#cb21-3"></a>teffects nnmatch (re age educ <span class="bn">black</span>   married nodegree  ) (treated), nn(2)</span>
-<span id="cb21-4"><a href="#cb21-4"></a>tebalance <span class="kw">summarize</span></span>
-<span id="cb21-5"><a href="#cb21-5"></a>teffects psmatch (re) (treated age educ <span class="bn">black</span>   married nodegree  )</span>
-<span id="cb21-6"><a href="#cb21-6"></a>tebalance <span class="kw">summarize</span></span>
-<span id="cb21-7"><a href="#cb21-7"></a>teffects psmatch (re) (treated age educ <span class="bn">black</span>   married nodegree  ) ,  nn(2)</span>
-<span id="cb21-8"><a href="#cb21-8"></a>tebalance <span class="kw">summarize</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb21-1"><a></a>teffects nnmatch (re age educ <span class="bn">black</span>   married nodegree  ) (treated)</span>
+<span id="cb21-2"><a></a>tebalance <span class="kw">summarize</span></span>
+<span id="cb21-3"><a></a>teffects nnmatch (re age educ <span class="bn">black</span>   married nodegree  ) (treated), nn(2)</span>
+<span id="cb21-4"><a></a>tebalance <span class="kw">summarize</span></span>
+<span id="cb21-5"><a></a>teffects psmatch (re) (treated age educ <span class="bn">black</span>   married nodegree  )</span>
+<span id="cb21-6"><a></a>tebalance <span class="kw">summarize</span></span>
+<span id="cb21-7"><a></a>teffects psmatch (re) (treated age educ <span class="bn">black</span>   married nodegree  ) ,  nn(2)</span>
+<span id="cb21-8"><a></a>tebalance <span class="kw">summarize</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1111,18 +1111,18 @@ Control obs   =        2,456        2,641
 <section id="section-4" class="slide level2 scrollable">
 <h2></h2>
 <p>A missing variable? Earnings in previous year. May capture information of Need to do treatment (selection)</p>
-<div id="709a2a8c" class="cell" data-execution_count="12">
+<div id="37c47c26" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><a href="#cb23-1"></a><span class="kw">tabstat</span> age educ <span class="bn">black</span> hisp married nodegree re74, <span class="kw">by</span>(treated)</span>
-<span id="cb23-2"><a href="#cb23-2"></a><span class="kw">gen</span> dre = re-re74</span>
-<span id="cb23-3"><a href="#cb23-3"></a>teffects nnmatch (dre age educ <span class="bn">black</span>   married nodegree  ) (treated)</span>
-<span id="cb23-4"><a href="#cb23-4"></a></span>
-<span id="cb23-5"><a href="#cb23-5"></a>teffects nnmatch (dre age educ <span class="bn">black</span>   married nodegree  ) (treated), nn(2)</span>
-<span id="cb23-6"><a href="#cb23-6"></a></span>
-<span id="cb23-7"><a href="#cb23-7"></a>teffects psmatch (dre) (treated age educ <span class="bn">black</span>   married nodegree  )</span>
-<span id="cb23-8"><a href="#cb23-8"></a></span>
-<span id="cb23-9"><a href="#cb23-9"></a>teffects psmatch (dre) (treated age educ <span class="bn">black</span>   married nodegree  ) ,  nn(2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><a></a><span class="kw">tabstat</span> age educ <span class="bn">black</span> hisp married nodegree re74, <span class="kw">by</span>(treated)</span>
+<span id="cb23-2"><a></a><span class="kw">gen</span> dre = re-re74</span>
+<span id="cb23-3"><a></a>teffects nnmatch (dre age educ <span class="bn">black</span>   married nodegree  ) (treated)</span>
+<span id="cb23-4"><a></a></span>
+<span id="cb23-5"><a></a>teffects nnmatch (dre age educ <span class="bn">black</span>   married nodegree  ) (treated), nn(2)</span>
+<span id="cb23-6"><a></a></span>
+<span id="cb23-7"><a></a>teffects psmatch (dre) (treated age educ <span class="bn">black</span>   married nodegree  )</span>
+<span id="cb23-8"><a></a></span>
+<span id="cb23-9"><a></a>teffects psmatch (dre) (treated age educ <span class="bn">black</span>   married nodegree  ) ,  nn(2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1216,9 +1216,9 @@ ATE          |
 <p><span class="math display">\[
 p(D=1|X)=F(X\beta)
 \]</span> S2: Estimate IPW</p>
-<p>For ATT: <span class="math inline">\(W(D=1,x)=1 \ \&amp; \ W(D=0,X)=\frac{\hat p(x)}{1-\hat p(x)}\)</span></p>
-<p>For ATU: <span class="math inline">\(W(D=0,x)=1 \ \&amp; \ W(D=1,X)=\frac{1-\hat p(x)}{\hat p(x)}\)</span></p>
-<p>For ATE: <span class="math inline">\(W(D=0,x)=\frac{1}{1-\hat p(x)} \ \&amp; \ W(D=1,X)=\frac{1}{\hat p(x)}\)</span></p>
+<p>For ATT: <span class="math inline">\(W(D=1,x)=1 \ \&amp;  \ W(D=0,X)=\frac{\hat p(x)}{1-\hat p(x)}\)</span></p>
+<p>For ATU: <span class="math inline">\(W(D=0,x)=1 \ \&amp;  \ W(D=1,X)=\frac{1-\hat p(x)}{\hat p(x)}\)</span></p>
+<p>For ATE: <span class="math inline">\(W(D=0,x)=\frac{1}{1-\hat p(x)} \ \&amp;  \ W(D=1,X)=\frac{1}{\hat p(x)}\)</span></p>
 <p>s3: Estimate Treatment effect:</p>
 <p><span class="math display">\[
 TE = \sum_{i \in D=1} w_i^s(1) Y_i - \sum_{i \in D=0} w_i^s(0) Y_i
@@ -1237,87 +1237,89 @@ ATE &amp;= \frac{1}{N}\sum(X'\hat\beta_w^1-X'\hat\beta_w^0)
 </section>
 <section id="comparing-to-matching" class="slide level2 scrollable">
 <h2>Comparing to Matching</h2>
-<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb25-1"><a href="#cb25-1"></a>teffects ipw (re) (treated age educ <span class="bn">black</span>   married nodegree) , iter(3) <span class="kw">nolog</span></span>
-<span id="cb25-2"><a href="#cb25-2"></a>teffects ipwra (re age educ <span class="bn">black</span>   married nodegree) (treated age educ <span class="bn">black</span> married nodegree), iter(3) <span class="kw">nolog</span></span>
-<span id="cb25-3"><a href="#cb25-3"></a>teffects ipw (dre) (treated age educ <span class="bn">black</span>   married nodegree), iter(3) <span class="kw">nolog</span></span>
-<span id="cb25-4"><a href="#cb25-4"></a>teffects ipwra (dre age educ <span class="bn">black</span>   married nodegree) (treated age educ <span class="bn">black</span>   married nodegree), iter(3) <span class="kw">nolog</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb26-1"><a href="#cb26-1"></a></span>
-<span id="cb26-2"><a href="#cb26-2"></a>Treatment-<span class="kw">effects</span> estimation                    Number <span class="kw">of</span> <span class="kw">obs</span>     =      2,641</span>
-<span id="cb26-3"><a href="#cb26-3"></a>Estimator      : inverse-probability weights</span>
-<span id="cb26-4"><a href="#cb26-4"></a>Outcome <span class="kw">model</span>  : weighted <span class="kw">mean</span></span>
-<span id="cb26-5"><a href="#cb26-5"></a>Treatment <span class="kw">model</span>: <span class="kw">logit</span></span>
-<span id="cb26-6"><a href="#cb26-6"></a>------------------------------------------------------------------------------</span>
-<span id="cb26-7"><a href="#cb26-7"></a>             |               Robust</span>
-<span id="cb26-8"><a href="#cb26-8"></a>          re | Coefficient  <span class="fu">std</span>. err.      z    P&gt;|z|     [95% conf. interval]</span>
-<span id="cb26-9"><a href="#cb26-9"></a>-------------+----------------------------------------------------------------</span>
-<span id="cb26-10"><a href="#cb26-10"></a>ATE          |</span>
-<span id="cb26-11"><a href="#cb26-11"></a>     treated |</span>
-<span id="cb26-12"><a href="#cb26-12"></a>   (1 vs 0)  |  -4833.352   1088.667    -4.44   0.000    -6967.101   -2699.603</span>
-<span id="cb26-13"><a href="#cb26-13"></a>-------------+----------------------------------------------------------------</span>
-<span id="cb26-14"><a href="#cb26-14"></a>POmean       |</span>
-<span id="cb26-15"><a href="#cb26-15"></a>     treated |</span>
-<span id="cb26-16"><a href="#cb26-16"></a>          0  |   11979.19   179.1903    66.85   0.000     11627.99     12330.4</span>
-<span id="cb26-17"><a href="#cb26-17"></a>------------------------------------------------------------------------------</span>
-<span id="cb26-18"><a href="#cb26-18"></a></span>
-<span id="cb26-19"><a href="#cb26-19"></a>Treatment-<span class="kw">effects</span> estimation                    Number <span class="kw">of</span> <span class="kw">obs</span>     =      2,641</span>
-<span id="cb26-20"><a href="#cb26-20"></a>Estimator      : IPW regression adjustment</span>
-<span id="cb26-21"><a href="#cb26-21"></a>Outcome <span class="kw">model</span>  : linear</span>
-<span id="cb26-22"><a href="#cb26-22"></a>Treatment <span class="kw">model</span>: <span class="kw">logit</span></span>
-<span id="cb26-23"><a href="#cb26-23"></a>------------------------------------------------------------------------------</span>
-<span id="cb26-24"><a href="#cb26-24"></a>             |               Robust</span>
-<span id="cb26-25"><a href="#cb26-25"></a>          re | Coefficient  <span class="fu">std</span>. err.      z    P&gt;|z|     [95% conf. interval]</span>
-<span id="cb26-26"><a href="#cb26-26"></a>-------------+----------------------------------------------------------------</span>
-<span id="cb26-27"><a href="#cb26-27"></a>ATE          |</span>
-<span id="cb26-28"><a href="#cb26-28"></a>     treated |</span>
-<span id="cb26-29"><a href="#cb26-29"></a>   (1 vs 0)  |   -4835.38   1012.598    -4.78   0.000    -6820.036   -2850.724</span>
-<span id="cb26-30"><a href="#cb26-30"></a>-------------+----------------------------------------------------------------</span>
-<span id="cb26-31"><a href="#cb26-31"></a>POmean       |</span>
-<span id="cb26-32"><a href="#cb26-32"></a>     treated |</span>
-<span id="cb26-33"><a href="#cb26-33"></a>          0  |   11976.52   179.0958    66.87   0.000     11625.49    12327.54</span>
-<span id="cb26-34"><a href="#cb26-34"></a>------------------------------------------------------------------------------</span>
-<span id="cb26-35"><a href="#cb26-35"></a>Warning: Convergence <span class="kw">not</span> achieved.</span>
-<span id="cb26-36"><a href="#cb26-36"></a></span>
-<span id="cb26-37"><a href="#cb26-37"></a>Treatment-<span class="kw">effects</span> estimation                    Number <span class="kw">of</span> <span class="kw">obs</span>     =      2,641</span>
-<span id="cb26-38"><a href="#cb26-38"></a>Estimator      : inverse-probability weights</span>
-<span id="cb26-39"><a href="#cb26-39"></a>Outcome <span class="kw">model</span>  : weighted <span class="kw">mean</span></span>
-<span id="cb26-40"><a href="#cb26-40"></a>Treatment <span class="kw">model</span>: <span class="kw">logit</span></span>
-<span id="cb26-41"><a href="#cb26-41"></a>------------------------------------------------------------------------------</span>
-<span id="cb26-42"><a href="#cb26-42"></a>             |               Robust</span>
-<span id="cb26-43"><a href="#cb26-43"></a>         dre | Coefficient  <span class="fu">std</span>. err.      z    P&gt;|z|     [95% conf. interval]</span>
-<span id="cb26-44"><a href="#cb26-44"></a>-------------+----------------------------------------------------------------</span>
-<span id="cb26-45"><a href="#cb26-45"></a>ATE          |</span>
-<span id="cb26-46"><a href="#cb26-46"></a>     treated |</span>
-<span id="cb26-47"><a href="#cb26-47"></a>   (1 vs 0)  |    1475.71   1792.427     0.82   0.410    -2037.382    4988.802</span>
-<span id="cb26-48"><a href="#cb26-48"></a>-------------+----------------------------------------------------------------</span>
-<span id="cb26-49"><a href="#cb26-49"></a>POmean       |</span>
-<span id="cb26-50"><a href="#cb26-50"></a>     treated |</span>
-<span id="cb26-51"><a href="#cb26-51"></a>          0  |   2746.475   161.2845    17.03   0.000     2430.363    3062.587</span>
-<span id="cb26-52"><a href="#cb26-52"></a>------------------------------------------------------------------------------</span>
-<span id="cb26-53"><a href="#cb26-53"></a>Warning: Convergence <span class="kw">not</span> achieved.</span>
-<span id="cb26-54"><a href="#cb26-54"></a></span>
-<span id="cb26-55"><a href="#cb26-55"></a>Treatment-<span class="kw">effects</span> estimation                    Number <span class="kw">of</span> <span class="kw">obs</span>     =      2,641</span>
-<span id="cb26-56"><a href="#cb26-56"></a>Estimator      : IPW regression adjustment</span>
-<span id="cb26-57"><a href="#cb26-57"></a>Outcome <span class="kw">model</span>  : linear</span>
-<span id="cb26-58"><a href="#cb26-58"></a>Treatment <span class="kw">model</span>: <span class="kw">logit</span></span>
-<span id="cb26-59"><a href="#cb26-59"></a>------------------------------------------------------------------------------</span>
-<span id="cb26-60"><a href="#cb26-60"></a>             |               Robust</span>
-<span id="cb26-61"><a href="#cb26-61"></a>         dre | Coefficient  <span class="fu">std</span>. err.      z    P&gt;|z|     [95% conf. interval]</span>
-<span id="cb26-62"><a href="#cb26-62"></a>-------------+----------------------------------------------------------------</span>
-<span id="cb26-63"><a href="#cb26-63"></a>ATE          |</span>
-<span id="cb26-64"><a href="#cb26-64"></a>     treated |</span>
-<span id="cb26-65"><a href="#cb26-65"></a>   (1 vs 0)  |   1286.605   1516.493     0.85   0.396    -1685.666    4258.875</span>
-<span id="cb26-66"><a href="#cb26-66"></a>-------------+----------------------------------------------------------------</span>
-<span id="cb26-67"><a href="#cb26-67"></a>POmean       |</span>
-<span id="cb26-68"><a href="#cb26-68"></a>     treated |</span>
-<span id="cb26-69"><a href="#cb26-69"></a>          0  |   2754.756   161.4406    17.06   0.000     2438.338    3071.173</span>
-<span id="cb26-70"><a href="#cb26-70"></a>------------------------------------------------------------------------------</span>
-<span id="cb26-71"><a href="#cb26-71"></a>Warning: Convergence <span class="kw">not</span> achieved.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb25-1"><a></a>teffects ipw (re) (treated age educ <span class="bn">black</span>   married nodegree) , iter(3) <span class="kw">nolog</span></span>
+<span id="cb25-2"><a></a>teffects ipwra (re age educ <span class="bn">black</span>   married nodegree) (treated age educ <span class="bn">black</span> married nodegree), iter(3) <span class="kw">nolog</span></span>
+<span id="cb25-3"><a></a>teffects ipw (dre) (treated age educ <span class="bn">black</span>   married nodegree), iter(3) <span class="kw">nolog</span></span>
+<span id="cb25-4"><a></a>teffects ipwra (dre age educ <span class="bn">black</span>   married nodegree) (treated age educ <span class="bn">black</span>   married nodegree), iter(3) <span class="kw">nolog</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb26-1"><a></a></span>
+<span id="cb26-2"><a></a>Treatment-<span class="kw">effects</span> estimation                    Number <span class="kw">of</span> <span class="kw">obs</span>     =      2,641</span>
+<span id="cb26-3"><a></a>Estimator      : inverse-probability weights</span>
+<span id="cb26-4"><a></a>Outcome <span class="kw">model</span>  : weighted <span class="kw">mean</span></span>
+<span id="cb26-5"><a></a>Treatment <span class="kw">model</span>: <span class="kw">logit</span></span>
+<span id="cb26-6"><a></a>------------------------------------------------------------------------------</span>
+<span id="cb26-7"><a></a>             |               Robust</span>
+<span id="cb26-8"><a></a>          re | Coefficient  <span class="fu">std</span>. err.      z    P&gt;|z|     [95% conf. interval]</span>
+<span id="cb26-9"><a></a>-------------+----------------------------------------------------------------</span>
+<span id="cb26-10"><a></a>ATE          |</span>
+<span id="cb26-11"><a></a>     treated |</span>
+<span id="cb26-12"><a></a>   (1 vs 0)  |  -4833.352   1088.667    -4.44   0.000    -6967.101   -2699.603</span>
+<span id="cb26-13"><a></a>-------------+----------------------------------------------------------------</span>
+<span id="cb26-14"><a></a>POmean       |</span>
+<span id="cb26-15"><a></a>     treated |</span>
+<span id="cb26-16"><a></a>          0  |   11979.19   179.1903    66.85   0.000     11627.99     12330.4</span>
+<span id="cb26-17"><a></a>------------------------------------------------------------------------------</span>
+<span id="cb26-18"><a></a></span>
+<span id="cb26-19"><a></a>Treatment-<span class="kw">effects</span> estimation                    Number <span class="kw">of</span> <span class="kw">obs</span>     =      2,641</span>
+<span id="cb26-20"><a></a>Estimator      : IPW regression adjustment</span>
+<span id="cb26-21"><a></a>Outcome <span class="kw">model</span>  : linear</span>
+<span id="cb26-22"><a></a>Treatment <span class="kw">model</span>: <span class="kw">logit</span></span>
+<span id="cb26-23"><a></a>------------------------------------------------------------------------------</span>
+<span id="cb26-24"><a></a>             |               Robust</span>
+<span id="cb26-25"><a></a>          re | Coefficient  <span class="fu">std</span>. err.      z    P&gt;|z|     [95% conf. interval]</span>
+<span id="cb26-26"><a></a>-------------+----------------------------------------------------------------</span>
+<span id="cb26-27"><a></a>ATE          |</span>
+<span id="cb26-28"><a></a>     treated |</span>
+<span id="cb26-29"><a></a>   (1 vs 0)  |   -4835.38   1012.598    -4.78   0.000    -6820.036   -2850.724</span>
+<span id="cb26-30"><a></a>-------------+----------------------------------------------------------------</span>
+<span id="cb26-31"><a></a>POmean       |</span>
+<span id="cb26-32"><a></a>     treated |</span>
+<span id="cb26-33"><a></a>          0  |   11976.52   179.0958    66.87   0.000     11625.49    12327.54</span>
+<span id="cb26-34"><a></a>------------------------------------------------------------------------------</span>
+<span id="cb26-35"><a></a>Warning: Convergence <span class="kw">not</span> achieved.</span>
+<span id="cb26-36"><a></a></span>
+<span id="cb26-37"><a></a>Treatment-<span class="kw">effects</span> estimation                    Number <span class="kw">of</span> <span class="kw">obs</span>     =      2,641</span>
+<span id="cb26-38"><a></a>Estimator      : inverse-probability weights</span>
+<span id="cb26-39"><a></a>Outcome <span class="kw">model</span>  : weighted <span class="kw">mean</span></span>
+<span id="cb26-40"><a></a>Treatment <span class="kw">model</span>: <span class="kw">logit</span></span>
+<span id="cb26-41"><a></a>------------------------------------------------------------------------------</span>
+<span id="cb26-42"><a></a>             |               Robust</span>
+<span id="cb26-43"><a></a>         dre | Coefficient  <span class="fu">std</span>. err.      z    P&gt;|z|     [95% conf. interval]</span>
+<span id="cb26-44"><a></a>-------------+----------------------------------------------------------------</span>
+<span id="cb26-45"><a></a>ATE          |</span>
+<span id="cb26-46"><a></a>     treated |</span>
+<span id="cb26-47"><a></a>   (1 vs 0)  |    1475.71   1792.427     0.82   0.410    -2037.382    4988.802</span>
+<span id="cb26-48"><a></a>-------------+----------------------------------------------------------------</span>
+<span id="cb26-49"><a></a>POmean       |</span>
+<span id="cb26-50"><a></a>     treated |</span>
+<span id="cb26-51"><a></a>          0  |   2746.475   161.2845    17.03   0.000     2430.363    3062.587</span>
+<span id="cb26-52"><a></a>------------------------------------------------------------------------------</span>
+<span id="cb26-53"><a></a>Warning: Convergence <span class="kw">not</span> achieved.</span>
+<span id="cb26-54"><a></a></span>
+<span id="cb26-55"><a></a>Treatment-<span class="kw">effects</span> estimation                    Number <span class="kw">of</span> <span class="kw">obs</span>     =      2,641</span>
+<span id="cb26-56"><a></a>Estimator      : IPW regression adjustment</span>
+<span id="cb26-57"><a></a>Outcome <span class="kw">model</span>  : linear</span>
+<span id="cb26-58"><a></a>Treatment <span class="kw">model</span>: <span class="kw">logit</span></span>
+<span id="cb26-59"><a></a>------------------------------------------------------------------------------</span>
+<span id="cb26-60"><a></a>             |               Robust</span>
+<span id="cb26-61"><a></a>         dre | Coefficient  <span class="fu">std</span>. err.      z    P&gt;|z|     [95% conf. interval]</span>
+<span id="cb26-62"><a></a>-------------+----------------------------------------------------------------</span>
+<span id="cb26-63"><a></a>ATE          |</span>
+<span id="cb26-64"><a></a>     treated |</span>
+<span id="cb26-65"><a></a>   (1 vs 0)  |   1286.605   1516.493     0.85   0.396    -1685.666    4258.875</span>
+<span id="cb26-66"><a></a>-------------+----------------------------------------------------------------</span>
+<span id="cb26-67"><a></a>POmean       |</span>
+<span id="cb26-68"><a></a>     treated |</span>
+<span id="cb26-69"><a></a>          0  |   2754.756   161.4406    17.06   0.000     2438.338    3071.173</span>
+<span id="cb26-70"><a></a>------------------------------------------------------------------------------</span>
+<span id="cb26-71"><a></a>Warning: Convergence <span class="kw">not</span> achieved.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section></section>
 <section id="next-regression-discontinuity" class="title-slide slide level1 center">
 <h1>Next: Regression Discontinuity</h1>
 
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 </section>
     </div>

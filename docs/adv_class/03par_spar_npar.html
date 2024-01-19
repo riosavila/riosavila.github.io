@@ -539,7 +539,7 @@ bin(x_i)=m+1
 <h3 id="code-in-stata">Code in <code>Stata</code></h3>
 <p><code>histogram var [if] [weight]</code></p>
 <p><code>kdensity var [if] [weight]</code></p>
-<div id="0489a562" class="cell larger" data-execution_count="1">
+<div id="954bfd07" class="cell larger" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a></a>frause oaxaca, <span class="kw">clear</span></span>
@@ -579,21 +579,14 @@ bin(x_i)=m+1
 . </code></pre>
 </div>
 </div>
-<div id="bea3d2ce" class="cell" data-execution_count="2">
+<div id="73d13de0" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a></a><span class="kw">scatter</span> tg1 tg2, <span class="bn">name</span>(mx, <span class="kw">replace</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="03par_spar_npar_files/figure-revealjs/cell-3-output-1.png"></p>
-</figure>
+
 </div>
-</div>
-</div>
-<p><img data-src="resources/kden_1.png"></p>
-</section>
+<img data-src="03par_spar_npar_files/figure-revealjs/cell-3-output-1.png" class="r-stretch"></section>
 <section id="trade-off-bias-vs-variance" class="slide level2 scrollable">
 <h2>Trade off: Bias vs variance</h2>
 <p>While these estimators are “flexible”, there is one parameter that needs attention: The <strong>bandwidth</strong> <span class="math inline">\(h\)</span></p>
@@ -723,7 +716,7 @@ K_w(x_i,x) = \frac{K\left(\frac{x_i-x}{h}\right)}{K(0)}
 <section id="section-15" class="slide level2 scrollable">
 <h2></h2>
 <h3 id="implementation">Implementation</h3>
-<div id="d8c07cb9" class="cell" data-execution_count="3">
+<div id="9663bf62" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a></a><span class="kw">webuse</span> motorcycle, <span class="kw">clear</span></span>
@@ -740,7 +733,7 @@ K_w(x_i,x) = \frac{K\left(\frac{x_i-x}{h}\right)}{K(0)}
 </div>
 </div>
 </div>
-<div id="b1caddc6" class="cell" data-execution_count="4">
+<div id="6c6a2d89" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a></a><span class="kw">mata</span>:</span>

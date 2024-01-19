@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.455">
+  <meta name="generator" content="quarto-1.4.537">
 
   <meta name="author" content="Fernando Rios-Avila">
   <title>Econometrics MSC Levy - Panel data and Fixed Effects (Many FE)</title>
@@ -580,24 +580,24 @@ w_{it} = \gamma^w_i+\gamma^w_t+rw_{it}
 </section>
 <section id="stata-example" class="slide level2 scrollable">
 <h2>Stata Example</h2>
-<div id="c67f1b16" class="cell" data-execution_count="1">
+<div id="623c0163" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <style>div.jp-Notebook .datagrid-container {min-height: 448px; }</style>
 </div>
 </div>
-<div id="dc4df10a" class="cell" data-execution_count="2">
+<div id="d567722b" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a>#delimit;</span>
-<span id="cb1-2"><a href="#cb1-2"></a>frause school93_98, <span class="kw">clear</span>;</span>
-<span id="cb1-3"><a href="#cb1-3"></a>xtset schid <span class="fu">year</span>;</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">qui</span>:<span class="kw">reg</span> math4 lunch lenrol lrexpp                     ; <span class="kw">est</span> sto m1;</span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">qui</span>:<span class="kw">xtreg</span> math4 lunch lenrol lrexpp                   ; <span class="kw">est</span> sto m2;</span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="kw">qui</span>:<span class="kw">xtreg</span> math4 lunch lenrol lrexpp, <span class="kw">fe</span>               ; <span class="kw">est</span> sto m3;</span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="kw">qui</span>:reghdfe math4 lunch lenrol lrexpp, <span class="fu">abs</span>(schid)     ; <span class="kw">est</span> sto m4;</span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="kw">qui</span>:reghdfe math4 lunch lenrol lrexpp, <span class="fu">abs</span>(schid <span class="fu">year</span>); <span class="kw">est</span> sto m5;</span>
-<span id="cb1-9"><a href="#cb1-9"></a>esttab m1 m2 m3 m4 m5, mtitle(ols re <span class="kw">fe</span> refe1 refe2) <span class="kw">compress</span> se b(3);</span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="kw">hausman</span> m3 m2;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a></a>#delimit;</span>
+<span id="cb1-2"><a></a>frause school93_98, <span class="kw">clear</span>;</span>
+<span id="cb1-3"><a></a>xtset schid <span class="fu">year</span>;</span>
+<span id="cb1-4"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> math4 lunch lenrol lrexpp                     ; <span class="kw">est</span> sto m1;</span>
+<span id="cb1-5"><a></a><span class="kw">qui</span>:<span class="kw">xtreg</span> math4 lunch lenrol lrexpp                   ; <span class="kw">est</span> sto m2;</span>
+<span id="cb1-6"><a></a><span class="kw">qui</span>:<span class="kw">xtreg</span> math4 lunch lenrol lrexpp, <span class="kw">fe</span>               ; <span class="kw">est</span> sto m3;</span>
+<span id="cb1-7"><a></a><span class="kw">qui</span>:reghdfe math4 lunch lenrol lrexpp, <span class="fu">abs</span>(schid)     ; <span class="kw">est</span> sto m4;</span>
+<span id="cb1-8"><a></a><span class="kw">qui</span>:reghdfe math4 lunch lenrol lrexpp, <span class="fu">abs</span>(schid <span class="fu">year</span>); <span class="kw">est</span> sto m5;</span>
+<span id="cb1-9"><a></a>esttab m1 m2 m3 m4 m5, mtitle(ols re <span class="kw">fe</span> refe1 refe2) <span class="kw">compress</span> se b(3);</span>
+<span id="cb1-10"><a></a><span class="kw">hausman</span> m3 m2;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -655,7 +655,7 @@ Prob &gt; chi2 = 0.0000</code></pre>
 <li>Because <span class="math inline">\(a_i\)</span> is constant over time, it may be reasonable assuming its correlated with individual average characteristics: <span id="eq-m1"><span class="math display">\[a_i = a + \bar X_i \gamma + r_i
 \qquad(1)\]</span></span></li>
 </ol>
-<p>By construction, <span class="math inline">\(r_i\)</span> and <span class="math inline">\(X_{it} \&amp; \bar X_i\)</span> will be uncorrelated. So lets just add that to the main model</p>
+<p>By construction, <span class="math inline">\(r_i\)</span> and <span class="math inline">\(X_{it} \&amp;  \bar X_i\)</span> will be uncorrelated. So lets just add that to the main model</p>
 </section>
 <section id="cre" class="slide level2">
 <h2>CRE</h2>
@@ -676,14 +676,14 @@ y_i = \beta X_{it} +  \theta Z_{i} + \bar X_i \gamma + r_i + e_{it}
 </section>
 <section id="cre-in-stata" class="slide level2 scrollable">
 <h2>cre in Stata</h2>
-<div id="b2c27e66" class="cell" data-execution_count="3">
+<div id="4005f1d7" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a>#delimit <span class="kw">cr</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>frause school93_98, <span class="kw">clear</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>reghdfe math4 lunch lenrol lrexpp, <span class="fu">abs</span>(schid <span class="fu">year</span>) <span class="kw">cluster</span>(schid)</span>
-<span id="cb3-4"><a href="#cb3-4"></a>** Experimental</span>
-<span id="cb3-5"><a href="#cb3-5"></a>cre, <span class="fu">abs</span>(schid <span class="fu">year</span>): <span class="kw">reg</span> math4 lunch lenrol lrexpp, <span class="kw">cluster</span>(schid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a>#delimit <span class="kw">cr</span></span>
+<span id="cb3-2"><a></a>frause school93_98, <span class="kw">clear</span></span>
+<span id="cb3-3"><a></a>reghdfe math4 lunch lenrol lrexpp, <span class="fu">abs</span>(schid <span class="fu">year</span>) <span class="kw">cluster</span>(schid)</span>
+<span id="cb3-4"><a></a>** Experimental</span>
+<span id="cb3-5"><a></a>cre, <span class="fu">abs</span>(schid <span class="fu">year</span>): <span class="kw">reg</span> math4 lunch lenrol lrexpp, <span class="kw">cluster</span>(schid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>(dropped 41 singleton observations)
@@ -695,7 +695,7 @@ Statistics robust to heteroskedasticity           Prob &gt; F        =     0.051
                                                   R-squared       =     0.7548
                                                   Adj R-squared   =     0.6985
                                                   Within R-sq.    =     0.0014
-Number of clusters (schid)   =      1,735         Root MSE        =    11.5747
+Number of clusters (schid)   =      1,735         Root MSE        =    11.5739
 
                               (Std. err. adjusted for 1,735 clusters in schid)
 ------------------------------------------------------------------------------
@@ -713,7 +713,7 @@ Absorbed degrees of freedom:
  Absorbed FE | Categories  - Redundant  = Num. Coefs |
 -------------+---------------------------------------|
        schid |      1735        1735           0    *|
-        year |         6           0           6     |
+        year |         6           1           5     |
 -----------------------------------------------------+
 * = FE nested within cluster; treated as redundant for DoF computation
 
@@ -847,8 +847,10 @@ y_{ij}=\lambda(0.5(S_{1j}+S_{2j}) + b_j S_{1j} + \gamma X_j + v_j+ e_{ij}
 <section id="next-class-friday-instrumental-variables" class="title-slide slide level1 center">
 <h1>Next Class (Friday) Instrumental Variables!</h1>
 
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 </section>
     </div>

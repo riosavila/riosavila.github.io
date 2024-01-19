@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="13sc_files/libs/clipboard/clipboard.min.js"></script>
-<script src="13sc_files/libs/quarto-html/tabby.min.js"></script>
-<script src="13sc_files/libs/quarto-html/popper.min.js"></script>
-<script src="13sc_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="13sc_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="13sc_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="13sc_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="13sc_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.455">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.4.537">
 
   <meta name="author" content="Fernando Rios-Avila">
-  <title>Synthetic Control</title>
+  <title>Econometrics MSC Levy - Synthetic Control</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="13sc_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="13sc_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -95,12 +95,12 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="13sc_files/libs/revealjs/dist/theme/quarto.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="styles.css">
-  <link href="13sc_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="13sc_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="13sc_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="13sc_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -559,14 +559,14 @@ w_2 \\ w_3 \\ ... \\ w_k
 </section>
 <section id="small-example" class="slide level2">
 <h2>Small Example</h2>
-<div id="c0e0c3cc" class="cell" data-execution_count="1">
+<div id="75d7288b" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">qui</span>:frause smoking, <span class="kw">clear</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>color_style tableau</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">bysort</span> <span class="fu">year</span>:<span class="kw">egen</span> mean_cig=<span class="kw">mean</span>(cigsale) <span class="kw">if</span> state!=3</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">two</span> (<span class="kw">line</span> cigsale <span class="fu">year</span> <span class="kw">if</span> state ==3) (<span class="kw">line</span> mean_cig <span class="fu">year</span> <span class="kw">if</span> state==1), <span class="co">///</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>    <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"California"</span> 2 <span class="st">"Avg Other States"</span>) pos(6) col(2)) <span class="bn">xline</span>(1988)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a></a><span class="kw">qui</span>:frause smoking, <span class="kw">clear</span></span>
+<span id="cb1-2"><a></a>color_style tableau</span>
+<span id="cb1-3"><a></a><span class="kw">bysort</span> <span class="fu">year</span>:<span class="kw">egen</span> mean_cig=<span class="kw">mean</span>(cigsale) <span class="kw">if</span> state!=3</span>
+<span id="cb1-4"><a></a><span class="kw">two</span> (<span class="kw">line</span> cigsale <span class="fu">year</span> <span class="kw">if</span> state ==3) (<span class="kw">line</span> mean_cig <span class="fu">year</span> <span class="kw">if</span> state==1), <span class="co">///</span></span>
+<span id="cb1-5"><a></a>    <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"California"</span> 2 <span class="st">"Avg Other States"</span>) pos(6) col(2)) <span class="bn">xline</span>(1988)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <style>div.jp-Notebook .datagrid-container {min-height: 448px; }</style>
@@ -576,15 +576,15 @@ w_2 \\ w_3 \\ ... \\ w_k
 </div>
 
 </div>
-<img data-src="13sc_files/figure-revealjs/cell-2-output-3.png" class="r-stretch"></section>
+<img data-src="13SC_files/figure-revealjs/cell-2-output-3.png" class="r-stretch"></section>
 <section id="section-6" class="slide level2">
 <h2></h2>
-<div id="01024dc2" class="cell" data-execution_count="2">
+<div id="740d514a" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">drop</span> mean_cig</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">qui</span>:<span class="kw">reshape</span> <span class="kw">wide</span> cigsale lnincome beer age15to24 retprice , i(<span class="fu">year</span>) j(state)</span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">ren</span> cigsale1 mcigsale</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a><span class="kw">drop</span> mean_cig</span>
+<span id="cb3-2"><a></a><span class="kw">qui</span>:<span class="kw">reshape</span> <span class="kw">wide</span> cigsale lnincome beer age15to24 retprice , i(<span class="fu">year</span>) j(state)</span>
+<span id="cb3-3"><a></a><span class="kw">ren</span> cigsale1 mcigsale</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <ul>
@@ -599,16 +599,16 @@ w_2 \\ w_3 \\ ... \\ w_k
 </section>
 <section id="section-7" class="slide level2">
 <h2></h2>
-<div id="3acc8580" class="cell" data-execution_count="3">
+<div id="20e21251" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">qui</span>:<span class="kw">reg</span> mcigsale cigsale* <span class="kw">if</span> <span class="fu">year</span>&lt;=1988, <span class="kw">nocons</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">predict</span> mcigh1</span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">qui</span>: lasso linear  mcigsale cig* <span class="kw">if</span> <span class="fu">year</span>&lt;=1988, <span class="kw">nocons</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">predict</span> mcigh2</span>
-<span id="cb4-5"><a href="#cb4-5"></a> <span class="kw">two</span> (<span class="kw">line</span> mcigsale <span class="fu">year</span>, lw(0.5)  ) <span class="co">///</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a>  (<span class="kw">line</span> mcigh1 mcigh2   <span class="fu">year</span>, lw(0.5)  ) , <span class="co">///</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a>  <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"California"</span> 2 <span class="st">"OLS Synthetic"</span> 3 <span class="st">"LASSO Synthetic"</span>)) <span class="bn">xline</span>(1988)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> mcigsale cigsale* <span class="kw">if</span> <span class="fu">year</span>&lt;=1988, <span class="kw">nocons</span></span>
+<span id="cb4-2"><a></a><span class="kw">predict</span> mcigh1</span>
+<span id="cb4-3"><a></a><span class="kw">qui</span>: lasso linear  mcigsale cig* <span class="kw">if</span> <span class="fu">year</span>&lt;=1988, <span class="kw">nocons</span></span>
+<span id="cb4-4"><a></a><span class="kw">predict</span> mcigh2</span>
+<span id="cb4-5"><a></a> <span class="kw">two</span> (<span class="kw">line</span> mcigsale <span class="fu">year</span>, lw(0.5)  ) <span class="co">///</span></span>
+<span id="cb4-6"><a></a>  (<span class="kw">line</span> mcigh1 mcigh2   <span class="fu">year</span>, lw(0.5)  ) , <span class="co">///</span></span>
+<span id="cb4-7"><a></a>  <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"California"</span> 2 <span class="st">"OLS Synthetic"</span> 3 <span class="st">"LASSO Synthetic"</span>)) <span class="bn">xline</span>(1988)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>(option xb assumed; fitted values)
@@ -616,7 +616,7 @@ w_2 \\ w_3 \\ ... \\ w_k
 </div>
 
 </div>
-<img data-src="13sc_files/figure-revealjs/cell-4-output-2.png" class="r-stretch"><ul>
+<img data-src="13SC_files/figure-revealjs/cell-4-output-2.png" class="r-stretch"><ul>
 <li>OLS Not appropriate (specially if N&lt;K)</li>
 <li>Lasso Better, because of regularization, but not great.</li>
 <li>We are not controlling for other factors either (controls)</li>
@@ -640,28 +640,28 @@ w_2 \\ w_3 \\ ... \\ w_k
 </section>
 <section id="section-8" class="slide level2">
 <h2></h2>
-<div id="c48284b4" class="cell" data-execution_count="4">
+<div id="78155c98" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">qui</span>:frause smoking, <span class="kw">clear</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">ren</span> (cigsale lnincome beer age15to24 retprice) <span class="co">///</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a>      (var1    var2     var3 var4      var5)</span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="kw">qui</span>: <span class="kw">reshape</span> <span class="kw">long</span> <span class="kw">var</span>, i(state <span class="fu">year</span>)    j(<span class="kw">new</span>)</span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="kw">qui</span>: <span class="kw">reshape</span> <span class="kw">wide</span> <span class="kw">var</span>, i(<span class="fu">year</span> <span class="kw">new</span>)  j(state)</span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="kw">label</span> <span class="kw">define</span> <span class="kw">new</span> 1 <span class="st">"cigsale"</span> <span class="co">///</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a>                 2 <span class="st">"lnincome"</span> <span class="co">///</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a>                 3 <span class="st">"beer"</span> <span class="co">///</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a>                 4 <span class="st">"age15to24"</span> <span class="co">/// </span></span>
-<span id="cb6-10"><a href="#cb6-10"></a>                 5 <span class="st">"retprice"</span>, modify</span>
-<span id="cb6-11"><a href="#cb6-11"></a><span class="kw">label</span> <span class="kw">values</span> <span class="kw">new</span> <span class="kw">new</span>    </span>
-<span id="cb6-12"><a href="#cb6-12"></a><span class="kw">ren</span> var3 cal_out</span>
-<span id="cb6-13"><a href="#cb6-13"></a><span class="kw">qui</span>:<span class="kw">reg</span> cal_out <span class="kw">var</span>* <span class="kw">if</span> <span class="fu">year</span>&lt;=1988, <span class="kw">nocons</span></span>
-<span id="cb6-14"><a href="#cb6-14"></a><span class="kw">predict</span> mcigh1</span>
-<span id="cb6-15"><a href="#cb6-15"></a><span class="kw">qui</span>: lasso linear   cal_out <span class="kw">var</span>* <span class="kw">if</span> <span class="fu">year</span>&lt;=1988, <span class="kw">nocons</span></span>
-<span id="cb6-16"><a href="#cb6-16"></a><span class="kw">predict</span> mcigh2</span>
-<span id="cb6-17"><a href="#cb6-17"></a> <span class="kw">two</span> (<span class="kw">line</span> cal_out <span class="fu">year</span> <span class="kw">if</span> <span class="kw">new</span>==1, lw(0.5)  ) <span class="co">///</span></span>
-<span id="cb6-18"><a href="#cb6-18"></a>  (<span class="kw">line</span> mcigh1 mcigh2   <span class="fu">year</span> <span class="kw">if</span> <span class="kw">new</span>==1, lw(0.5)  ) , <span class="co">///</span></span>
-<span id="cb6-19"><a href="#cb6-19"></a>  <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"California"</span> 2 <span class="st">"OLS Synthetic"</span> 3 <span class="st">"LASSO Synthetic"</span>)) <span class="bn">xline</span>(1988)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a></a><span class="kw">qui</span>:frause smoking, <span class="kw">clear</span></span>
+<span id="cb6-2"><a></a><span class="kw">ren</span> (cigsale lnincome beer age15to24 retprice) <span class="co">///</span></span>
+<span id="cb6-3"><a></a>      (var1    var2     var3 var4      var5)</span>
+<span id="cb6-4"><a></a><span class="kw">qui</span>: <span class="kw">reshape</span> <span class="kw">long</span> <span class="kw">var</span>, i(state <span class="fu">year</span>)    j(<span class="kw">new</span>)</span>
+<span id="cb6-5"><a></a><span class="kw">qui</span>: <span class="kw">reshape</span> <span class="kw">wide</span> <span class="kw">var</span>, i(<span class="fu">year</span> <span class="kw">new</span>)  j(state)</span>
+<span id="cb6-6"><a></a><span class="kw">label</span> <span class="kw">define</span> <span class="kw">new</span> 1 <span class="st">"cigsale"</span> <span class="co">///</span></span>
+<span id="cb6-7"><a></a>                 2 <span class="st">"lnincome"</span> <span class="co">///</span></span>
+<span id="cb6-8"><a></a>                 3 <span class="st">"beer"</span> <span class="co">///</span></span>
+<span id="cb6-9"><a></a>                 4 <span class="st">"age15to24"</span> <span class="co">/// </span></span>
+<span id="cb6-10"><a></a>                 5 <span class="st">"retprice"</span>, modify</span>
+<span id="cb6-11"><a></a><span class="kw">label</span> <span class="kw">values</span> <span class="kw">new</span> <span class="kw">new</span>    </span>
+<span id="cb6-12"><a></a><span class="kw">ren</span> var3 cal_out</span>
+<span id="cb6-13"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> cal_out <span class="kw">var</span>* <span class="kw">if</span> <span class="fu">year</span>&lt;=1988, <span class="kw">nocons</span></span>
+<span id="cb6-14"><a></a><span class="kw">predict</span> mcigh1</span>
+<span id="cb6-15"><a></a><span class="kw">qui</span>: lasso linear   cal_out <span class="kw">var</span>* <span class="kw">if</span> <span class="fu">year</span>&lt;=1988, <span class="kw">nocons</span></span>
+<span id="cb6-16"><a></a><span class="kw">predict</span> mcigh2</span>
+<span id="cb6-17"><a></a> <span class="kw">two</span> (<span class="kw">line</span> cal_out <span class="fu">year</span> <span class="kw">if</span> <span class="kw">new</span>==1, lw(0.5)  ) <span class="co">///</span></span>
+<span id="cb6-18"><a></a>  (<span class="kw">line</span> mcigh1 mcigh2   <span class="fu">year</span> <span class="kw">if</span> <span class="kw">new</span>==1, lw(0.5)  ) , <span class="co">///</span></span>
+<span id="cb6-19"><a></a>  <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"California"</span> 2 <span class="st">"OLS Synthetic"</span> 3 <span class="st">"LASSO Synthetic"</span>)) <span class="bn">xline</span>(1988)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>(option xb assumed; fitted values)
@@ -670,7 +670,7 @@ w_2 \\ w_3 \\ ... \\ w_k
 </div>
 
 </div>
-<img data-src="13sc_files/figure-revealjs/cell-5-output-2.png" class="r-stretch"></section>
+<img data-src="13SC_files/figure-revealjs/cell-5-output-2.png" class="r-stretch"></section>
 <section id="what-else-to-keep-in-mind" class="slide level2">
 <h2>What else to keep in mind</h2>
 <ul>
@@ -732,93 +732,93 @@ w_2 \\ w_3 \\ ... \\ w_k
 </section>
 <section id="lets-continue-the-example" class="slide level2">
 <h2>Lets continue the example:</h2>
-<div id="68c2b781" class="cell" data-execution_count="5">
+<div id="298becd1" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">qui</span>:frause smoking, <span class="kw">clear</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>xtset state <span class="fu">year</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="kw">tempfile</span> sc3</span>
-<span id="cb8-4"><a href="#cb8-4"></a>** For California</span>
-<span id="cb8-5"><a href="#cb8-5"></a>synth cigsale cigsale(1970) cigsale(1975) cigsale(1980) cigsale(1985) cigsale(1988), trunit(3) trperiod(1989) <span class="kw">keep</span>(<span class="ot">`sc3'</span>) <span class="kw">replace</span></span>
-<span id="cb8-6"><a href="#cb8-6"></a>** Same Specification <span class="kw">for</span> All other States excluding California</span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="kw">forvalues</span> i =1/39{</span>
-<span id="cb8-8"><a href="#cb8-8"></a>    <span class="kw">if</span> <span class="ot">`i'</span>!=3 {</span>
-<span id="cb8-9"><a href="#cb8-9"></a>        <span class="kw">local</span> pool</span>
-<span id="cb8-10"><a href="#cb8-10"></a>        <span class="kw">foreach</span> j <span class="kw">of</span> <span class="kw">local</span> stl {</span>
-<span id="cb8-11"><a href="#cb8-11"></a>            <span class="kw">if</span> <span class="ot">`j'</span>!=3 &amp; <span class="ot">`j'</span>!=<span class="ot">`i'</span> <span class="kw">local</span> pool <span class="ot">`pool'</span> <span class="ot">`j'</span></span>
-<span id="cb8-12"><a href="#cb8-12"></a>        }</span>
-<span id="cb8-13"><a href="#cb8-13"></a>        <span class="kw">tempfile</span> sc<span class="ot">`i'</span></span>
-<span id="cb8-14"><a href="#cb8-14"></a>        synth cigsale cigsale(1970) cigsale(1975) cigsale(1980) cigsale(1985) cigsale(1988), <span class="co">///</span></span>
-<span id="cb8-15"><a href="#cb8-15"></a>        trunit(<span class="ot">`i'</span>) trperiod(1989) <span class="kw">keep</span>(<span class="ot">`sc`i'</span>') <span class="kw">replace</span> counit(<span class="ot">`pool'</span>)</span>
-<span id="cb8-16"><a href="#cb8-16"></a>    }</span>
-<span id="cb8-17"><a href="#cb8-17"></a>}</span>
-<span id="cb8-18"><a href="#cb8-18"></a>** Some <span class="kw">data</span> cleaning and prepration</span>
-<span id="cb8-19"><a href="#cb8-19"></a><span class="kw">forvalues</span> i =1/39{</span>
-<span id="cb8-20"><a href="#cb8-20"></a>    <span class="kw">use</span> <span class="ot">`sc`i'</span>' , <span class="kw">clear</span></span>
-<span id="cb8-21"><a href="#cb8-21"></a>    <span class="kw">gen</span> tef<span class="ot">`i'</span> = _Y_treated - _Y_synthetic</span>
-<span id="cb8-22"><a href="#cb8-22"></a>    <span class="kw">egen</span> sef<span class="ot">`i'</span>a =<span class="kw">mean</span>( (_Y_treated - _Y_synthetic)^2) <span class="kw">if</span> _time&lt;=1988</span>
-<span id="cb8-23"><a href="#cb8-23"></a>    <span class="kw">egen</span> sef<span class="ot">`i'</span>b =<span class="kw">mean</span>( (_Y_treated - _Y_synthetic)^2) <span class="kw">if</span> _time&gt;1988</span>
-<span id="cb8-24"><a href="#cb8-24"></a>  <span class="kw">replace</span> sef<span class="ot">`i'</span>a=<span class="fu">sqrt</span>(sef<span class="ot">`i'</span>a[1])</span>
-<span id="cb8-25"><a href="#cb8-25"></a>    <span class="kw">replace</span> sef<span class="ot">`i'</span>b=<span class="fu">sqrt</span>(sef<span class="ot">`i'</span>b[_N])</span>
-<span id="cb8-26"><a href="#cb8-26"></a>    <span class="kw">drop</span> <span class="kw">if</span> _time==.</span>
-<span id="cb8-27"><a href="#cb8-27"></a>    <span class="kw">keep</span> tef<span class="ot">`i'</span> sef<span class="ot">`i'</span>* _time</span>
-<span id="cb8-28"><a href="#cb8-28"></a>    <span class="kw">save</span> <span class="ot">`sc`i'</span>', <span class="kw">replace</span></span>
-<span id="cb8-29"><a href="#cb8-29"></a>}</span>
-<span id="cb8-30"><a href="#cb8-30"></a>**</span>
-<span id="cb8-31"><a href="#cb8-31"></a>** Merging <span class="ot">all</span> together, and getting ready to plot</span>
-<span id="cb8-32"><a href="#cb8-32"></a>** </span>
-<span id="cb8-33"><a href="#cb8-33"></a></span>
-<span id="cb8-34"><a href="#cb8-34"></a><span class="kw">use</span> <span class="ot">`sc1'</span>, <span class="kw">clear</span></span>
-<span id="cb8-35"><a href="#cb8-35"></a><span class="kw">forvalues</span> i = 2/39 {</span>
-<span id="cb8-36"><a href="#cb8-36"></a>    <span class="kw">merge</span> 1:1 _time <span class="kw">using</span> <span class="ot">`sc`i'</span>', nogen</span>
-<span id="cb8-37"><a href="#cb8-37"></a>}</span>
-<span id="cb8-38"><a href="#cb8-38"></a><span class="kw">global</span> toplot</span>
-<span id="cb8-39"><a href="#cb8-39"></a><span class="kw">global</span> toplot2</span>
-<span id="cb8-40"><a href="#cb8-40"></a></span>
-<span id="cb8-41"><a href="#cb8-41"></a><span class="kw">forvalues</span> i = 1/39 {</span>
-<span id="cb8-42"><a href="#cb8-42"></a>    <span class="kw">global</span> toplot <span class="ot">$toplot</span> (<span class="kw">line</span> tef<span class="ot">`i'</span> _time, <span class="kw">color</span>(gs11) )</span>
-<span id="cb8-43"><a href="#cb8-43"></a>  <span class="kw">if</span> (sef<span class="ot">`i'</span>a[1])&lt;(2*sef3a[1]) {</span>
-<span id="cb8-44"><a href="#cb8-44"></a>        <span class="kw">global</span> toplot2 <span class="ot">$toplot2</span> (<span class="kw">line</span> tef<span class="ot">`i'</span> _time, <span class="kw">color</span>(gs11) )</span>
-<span id="cb8-45"><a href="#cb8-45"></a>    }</span>
-<span id="cb8-46"><a href="#cb8-46"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a></a><span class="kw">qui</span>:frause smoking, <span class="kw">clear</span></span>
+<span id="cb8-2"><a></a>xtset state <span class="fu">year</span></span>
+<span id="cb8-3"><a></a><span class="kw">tempfile</span> sc3</span>
+<span id="cb8-4"><a></a>** For California</span>
+<span id="cb8-5"><a></a>synth cigsale cigsale(1970) cigsale(1975) cigsale(1980) cigsale(1985) cigsale(1988), trunit(3) trperiod(1989) <span class="kw">keep</span>(<span class="ot">`sc3'</span>) <span class="kw">replace</span></span>
+<span id="cb8-6"><a></a>** Same Specification <span class="kw">for</span> All other States excluding California</span>
+<span id="cb8-7"><a></a><span class="kw">forvalues</span> i =1/39{</span>
+<span id="cb8-8"><a></a>    <span class="kw">if</span> <span class="ot">`i'</span>!=3 {</span>
+<span id="cb8-9"><a></a>        <span class="kw">local</span> pool</span>
+<span id="cb8-10"><a></a>        <span class="kw">foreach</span> j <span class="kw">of</span> <span class="kw">local</span> stl {</span>
+<span id="cb8-11"><a></a>            <span class="kw">if</span> <span class="ot">`j'</span>!=3 &amp; <span class="ot">`j'</span>!=<span class="ot">`i'</span> <span class="kw">local</span> pool <span class="ot">`pool'</span> <span class="ot">`j'</span></span>
+<span id="cb8-12"><a></a>        }</span>
+<span id="cb8-13"><a></a>        <span class="kw">tempfile</span> sc<span class="ot">`i'</span></span>
+<span id="cb8-14"><a></a>        synth cigsale cigsale(1970) cigsale(1975) cigsale(1980) cigsale(1985) cigsale(1988), <span class="co">///</span></span>
+<span id="cb8-15"><a></a>        trunit(<span class="ot">`i'</span>) trperiod(1989) <span class="kw">keep</span>(<span class="ot">`sc`i'</span>') <span class="kw">replace</span> counit(<span class="ot">`pool'</span>)</span>
+<span id="cb8-16"><a></a>    }</span>
+<span id="cb8-17"><a></a>}</span>
+<span id="cb8-18"><a></a>** Some <span class="kw">data</span> cleaning and prepration</span>
+<span id="cb8-19"><a></a><span class="kw">forvalues</span> i =1/39{</span>
+<span id="cb8-20"><a></a>    <span class="kw">use</span> <span class="ot">`sc`i'</span>' , <span class="kw">clear</span></span>
+<span id="cb8-21"><a></a>    <span class="kw">gen</span> tef<span class="ot">`i'</span> = _Y_treated - _Y_synthetic</span>
+<span id="cb8-22"><a></a>    <span class="kw">egen</span> sef<span class="ot">`i'</span>a =<span class="kw">mean</span>( (_Y_treated - _Y_synthetic)^2) <span class="kw">if</span> _time&lt;=1988</span>
+<span id="cb8-23"><a></a>    <span class="kw">egen</span> sef<span class="ot">`i'</span>b =<span class="kw">mean</span>( (_Y_treated - _Y_synthetic)^2) <span class="kw">if</span> _time&gt;1988</span>
+<span id="cb8-24"><a></a>  <span class="kw">replace</span> sef<span class="ot">`i'</span>a=<span class="fu">sqrt</span>(sef<span class="ot">`i'</span>a[1])</span>
+<span id="cb8-25"><a></a>    <span class="kw">replace</span> sef<span class="ot">`i'</span>b=<span class="fu">sqrt</span>(sef<span class="ot">`i'</span>b[_N])</span>
+<span id="cb8-26"><a></a>    <span class="kw">drop</span> <span class="kw">if</span> _time==.</span>
+<span id="cb8-27"><a></a>    <span class="kw">keep</span> tef<span class="ot">`i'</span> sef<span class="ot">`i'</span>* _time</span>
+<span id="cb8-28"><a></a>    <span class="kw">save</span> <span class="ot">`sc`i'</span>', <span class="kw">replace</span></span>
+<span id="cb8-29"><a></a>}</span>
+<span id="cb8-30"><a></a>**</span>
+<span id="cb8-31"><a></a>** Merging <span class="ot">all</span> together, and getting ready to plot</span>
+<span id="cb8-32"><a></a>** </span>
+<span id="cb8-33"><a></a></span>
+<span id="cb8-34"><a></a><span class="kw">use</span> <span class="ot">`sc1'</span>, <span class="kw">clear</span></span>
+<span id="cb8-35"><a></a><span class="kw">forvalues</span> i = 2/39 {</span>
+<span id="cb8-36"><a></a>    <span class="kw">merge</span> 1:1 _time <span class="kw">using</span> <span class="ot">`sc`i'</span>', nogen</span>
+<span id="cb8-37"><a></a>}</span>
+<span id="cb8-38"><a></a><span class="kw">global</span> toplot</span>
+<span id="cb8-39"><a></a><span class="kw">global</span> toplot2</span>
+<span id="cb8-40"><a></a></span>
+<span id="cb8-41"><a></a><span class="kw">forvalues</span> i = 1/39 {</span>
+<span id="cb8-42"><a></a>    <span class="kw">global</span> toplot <span class="ot">$toplot</span> (<span class="kw">line</span> tef<span class="ot">`i'</span> _time, <span class="kw">color</span>(gs11) )</span>
+<span id="cb8-43"><a></a>  <span class="kw">if</span> (sef<span class="ot">`i'</span>a[1])&lt;(2*sef3a[1]) {</span>
+<span id="cb8-44"><a></a>        <span class="kw">global</span> toplot2 <span class="ot">$toplot2</span> (<span class="kw">line</span> tef<span class="ot">`i'</span> _time, <span class="kw">color</span>(gs11) )</span>
+<span id="cb8-45"><a></a>    }</span>
+<span id="cb8-46"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p><strong>All Cases</strong></p>
-<div id="c28d0cbc" class="cell" data-execution_count="6">
+<div id="b1f78c75" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">two</span> <span class="ot">$toplot</span> (<span class="kw">line</span> tef3 _time, lw(1) <span class="kw">color</span>(<span class="bn">navy</span>*.8)), <span class="bn">xline</span>(1989) <span class="bn">legend</span>(<span class="kw">off</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a></a><span class="kw">two</span> <span class="ot">$toplot</span> (<span class="kw">line</span> tef3 _time, lw(1) <span class="kw">color</span>(<span class="bn">navy</span>*.8)), <span class="bn">xline</span>(1989) <span class="bn">legend</span>(<span class="kw">off</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
-<img data-src="13sc_files/figure-revealjs/cell-7-output-1.png" class="r-stretch"></section>
+<img data-src="13SC_files/figure-revealjs/cell-7-output-1.png" class="r-stretch"></section>
 <section id="section-10" class="slide level2">
 <h2></h2>
 <p><strong>Good Cases</strong> Restricts to States with Good RMSEP (less than 2 California)</p>
-<div id="a8151342" class="cell" data-execution_count="7">
+<div id="a00ce86d" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">two</span> <span class="ot">$toplot2</span> (<span class="kw">line</span> tef3 _time, lw(1) <span class="kw">color</span>(<span class="bn">navy</span>*.8)), <span class="bn">xline</span>(1989) <span class="bn">legend</span>(<span class="kw">off</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a></a><span class="kw">two</span> <span class="ot">$toplot2</span> (<span class="kw">line</span> tef3 _time, lw(1) <span class="kw">color</span>(<span class="bn">navy</span>*.8)), <span class="bn">xline</span>(1989) <span class="bn">legend</span>(<span class="kw">off</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
-<img data-src="13sc_files/figure-revealjs/cell-8-output-1.png" class="r-stretch"></section>
+<img data-src="13SC_files/figure-revealjs/cell-8-output-1.png" class="r-stretch"></section>
 <section id="rmse-ratio" class="slide level2">
 <h2>RMSE Ratio</h2>
-<div id="f745124e" class="cell" data-execution_count="8">
+<div id="280478e2" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">forvalues</span> i = 1/39 {</span>
-<span id="cb11-2"><a href="#cb11-2"></a>  <span class="kw">if</span> (sef<span class="ot">`i'</span>a[1])&lt;(2*sef3a[1]) {</span>
-<span id="cb11-3"><a href="#cb11-3"></a>        <span class="fu">matrix</span> rt=<span class="fu">nullmat</span>(rt)\[<span class="ot">`i'</span>,sef<span class="ot">`i'</span>b[1]/sef<span class="ot">`i'</span>a[1]]</span>
-<span id="cb11-4"><a href="#cb11-4"></a>    }</span>
-<span id="cb11-5"><a href="#cb11-5"></a>}</span>
-<span id="cb11-6"><a href="#cb11-6"></a><span class="kw">svmat</span> rt</span>
-<span id="cb11-7"><a href="#cb11-7"></a><span class="kw">egen</span> rnk=<span class="fu">rank</span>(rt2)</span>
-<span id="cb11-8"><a href="#cb11-8"></a> </span>
-<span id="cb11-9"><a href="#cb11-9"></a><span class="kw">two</span> <span class="bn">bar</span> rt2 rnk || <span class="bn">bar</span> rt2 rnk <span class="kw">if</span> rt1==3 , <span class="co">///</span></span>
-<span id="cb11-10"><a href="#cb11-10"></a> <span class="bn">legend</span>(<span class="kw">order</span>( 2 <span class="st">"California"</span>)) <span class="co">///</span></span>
-<span id="cb11-11"><a href="#cb11-11"></a>  <span class="bn">ytitle</span>(RMSE <span class="kw">ratio</span>)  <span class="bn">xtitle</span>(RMSE <span class="fu">rank</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a></a><span class="kw">forvalues</span> i = 1/39 {</span>
+<span id="cb11-2"><a></a>  <span class="kw">if</span> (sef<span class="ot">`i'</span>a[1])&lt;(2*sef3a[1]) {</span>
+<span id="cb11-3"><a></a>        <span class="fu">matrix</span> rt=<span class="fu">nullmat</span>(rt)\[<span class="ot">`i'</span>,sef<span class="ot">`i'</span>b[1]/sef<span class="ot">`i'</span>a[1]]</span>
+<span id="cb11-4"><a></a>    }</span>
+<span id="cb11-5"><a></a>}</span>
+<span id="cb11-6"><a></a><span class="kw">svmat</span> rt</span>
+<span id="cb11-7"><a></a><span class="kw">egen</span> rnk=<span class="fu">rank</span>(rt2)</span>
+<span id="cb11-8"><a></a> </span>
+<span id="cb11-9"><a></a><span class="kw">two</span> <span class="bn">bar</span> rt2 rnk || <span class="bn">bar</span> rt2 rnk <span class="kw">if</span> rt1==3 , <span class="co">///</span></span>
+<span id="cb11-10"><a></a> <span class="bn">legend</span>(<span class="kw">order</span>( 2 <span class="st">"California"</span>)) <span class="co">///</span></span>
+<span id="cb11-11"><a></a>  <span class="bn">ytitle</span>(RMSE <span class="kw">ratio</span>)  <span class="bn">xtitle</span>(RMSE <span class="fu">rank</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>number of observations will be reset to 32
@@ -827,22 +827,22 @@ Number of observations (_N) was 31, now 32.</code></pre>
 </div>
 
 </div>
-<img data-src="13sc_files/figure-revealjs/cell-9-output-2.png" class="r-stretch"></section>
+<img data-src="13SC_files/figure-revealjs/cell-9-output-2.png" class="r-stretch"></section>
 <section id="p-values" class="slide level2">
 <h2>p-values</h2>
-<div id="ebf64ccd" class="cell" data-execution_count="9">
+<div id="c86dd468" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1"></a> <span class="kw">gen</span> rnk2=0</span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="kw">forvalues</span> i = 1/39 {</span>
-<span id="cb13-3"><a href="#cb13-3"></a>    <span class="kw">if</span>   (sef<span class="ot">`i'</span>a[1])&lt;(2*sef3a[1]) {</span>
-<span id="cb13-4"><a href="#cb13-4"></a>        <span class="kw">local</span> t = <span class="ot">`t'</span>+1</span>
-<span id="cb13-5"><a href="#cb13-5"></a>        <span class="kw">replace</span> rnk2=rnk2+(tef<span class="ot">`i'</span>&lt;=tef3)    </span>
-<span id="cb13-6"><a href="#cb13-6"></a>    }</span>
-<span id="cb13-7"><a href="#cb13-7"></a>} </span>
-<span id="cb13-8"><a href="#cb13-8"></a><span class="kw">gen</span> pv=rnk2*100/<span class="ot">`t'</span></span>
-<span id="cb13-9"><a href="#cb13-9"></a> </span>
-<span id="cb13-10"><a href="#cb13-10"></a><span class="kw">two</span> <span class="bn">bar</span> pv _time <span class="kw">if</span> _time&gt;1988 &amp; rnk2&lt;32, <span class="kw">ylabel</span>(0(2)15) <span class="kw">xlabel</span>(1989/2000)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a></a> <span class="kw">gen</span> rnk2=0</span>
+<span id="cb13-2"><a></a><span class="kw">forvalues</span> i = 1/39 {</span>
+<span id="cb13-3"><a></a>    <span class="kw">if</span>   (sef<span class="ot">`i'</span>a[1])&lt;(2*sef3a[1]) {</span>
+<span id="cb13-4"><a></a>        <span class="kw">local</span> t = <span class="ot">`t'</span>+1</span>
+<span id="cb13-5"><a></a>        <span class="kw">replace</span> rnk2=rnk2+(tef<span class="ot">`i'</span>&lt;=tef3)    </span>
+<span id="cb13-6"><a></a>    }</span>
+<span id="cb13-7"><a></a>} </span>
+<span id="cb13-8"><a></a><span class="kw">gen</span> pv=rnk2*100/<span class="ot">`t'</span></span>
+<span id="cb13-9"><a></a> </span>
+<span id="cb13-10"><a></a><span class="kw">two</span> <span class="bn">bar</span> pv _time <span class="kw">if</span> _time&gt;1988 &amp; rnk2&lt;32, <span class="kw">ylabel</span>(0(2)15) <span class="kw">xlabel</span>(1989/2000)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>(10 real changes made)
@@ -880,7 +880,7 @@ Number of observations (_N) was 31, now 32.</code></pre>
 </div>
 
 </div>
-<img data-src="13sc_files/figure-revealjs/cell-10-output-2.png" class="r-stretch"></section>
+<img data-src="13SC_files/figure-revealjs/cell-10-output-2.png" class="r-stretch"></section>
 <section id="other-falsification-tests" class="slide level2">
 <h2>Other Falsification Tests</h2>
 <ul>
@@ -916,27 +916,30 @@ Number of observations (_N) was 31, now 32.</code></pre>
 <section id="next-week" class="title-slide slide level1 center">
 <h1>Next week:</h1>
 <p>Your papers! And Goodluck Friday</p>
+
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 </section>
     </div>
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="13sc_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="13sc_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="13sc_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="13sc_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="13sc_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="13sc_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="13sc_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="13sc_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="13sc_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="13sc_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>

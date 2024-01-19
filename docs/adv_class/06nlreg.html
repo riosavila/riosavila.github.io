@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.455">
+  <meta name="generator" content="quarto-1.4.537">
 
   <meta name="author" content="Fernando Rios-Avila">
   <title>Econometrics MSC Levy - NLS, IRLS, and MLE</title>
@@ -490,59 +490,59 @@ g(\beta_0)+H(\beta_0)(\beta-\beta_0)&amp;=0 \\
 <p>S2. Hessian: <span class="math inline">\(\frac{\partial y ^2}{\partial^2 x}=12*x^2-36\)</span></p>
 <p>Solution:</p>
 <p><span class="math display">\[x_t = x_{t-1} - \frac{dy/dx}{dy^2/d^2x}\]</span></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">mata</span>:</span>
-<span id="cb1-2"><a href="#cb1-2"></a>     <span class="co">// function to obtain the Value, the gradient and Hessian </span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>     <span class="fu">real</span> <span class="fu">matrix</span>  fgh_x(<span class="fu">real</span> <span class="fu">matrix</span> x, <span class="fu">real</span> <span class="fu">scalar</span> g){</span>
-<span id="cb1-4"><a href="#cb1-4"></a>        <span class="fu">real</span> <span class="fu">matrix</span> <span class="fu">y</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>        <span class="kw">if</span> (g==0)      <span class="fu">y</span> =    -x:^4 :- 18*x:^2 :+ 15*x</span>
-<span id="cb1-6"><a href="#cb1-6"></a>        <span class="kw">else</span> <span class="kw">if</span> (g==1) <span class="fu">y</span> =  -4*x:^3 :- 36*x    :+ 15</span>
-<span id="cb1-7"><a href="#cb1-7"></a>        <span class="kw">else</span> <span class="kw">if</span> (g==2) <span class="fu">y</span> = -12*x:^2 :- 36   </span>
-<span id="cb1-8"><a href="#cb1-8"></a>        <span class="fu">return</span>(<span class="fu">y</span>)</span>
-<span id="cb1-9"><a href="#cb1-9"></a>     }</span>
-<span id="cb1-10"><a href="#cb1-10"></a>    <span class="co">// Some initial values</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a>     x = -2 , 2 ,0 </span>
-<span id="cb1-12"><a href="#cb1-12"></a>     xt = x,fgh_x(x,0),fgh_x(x,1)</span>
-<span id="cb1-13"><a href="#cb1-13"></a>    <span class="kw">for</span>(i=1;i&lt;8;i++) {</span>
-<span id="cb1-14"><a href="#cb1-14"></a>         x = x :- fgh_x(x,1):/fgh_x(x,2)</span>
-<span id="cb1-15"><a href="#cb1-15"></a>         xt = xt \ x,fgh_x(x,0),fgh_x(x,1)</span>
-<span id="cb1-16"><a href="#cb1-16"></a>    }</span>
-<span id="cb1-17"><a href="#cb1-17"></a>    xt[,(1,4,7)] </span>
-<span id="cb1-18"><a href="#cb1-18"></a>    xt[,(2,5,8)] </span>
-<span id="cb1-19"><a href="#cb1-19"></a>    xt[,(3,6,9)] </span>
-<span id="cb1-20"><a href="#cb1-20"></a>    <span class="kw">end</span></span>
-<span id="cb1-21"><a href="#cb1-21"></a></span>
-<span id="cb1-22"><a href="#cb1-22"></a>        +----------------------------------------------+</span>
-<span id="cb1-23"><a href="#cb1-23"></a>      1 |            -2            -86             55  |</span>
-<span id="cb1-24"><a href="#cb1-24"></a>      2 |  -6.583333333    999.5046779   -889.2939815  |</span>
-<span id="cb1-25"><a href="#cb1-25"></a>      3 |  -4.746265374    30.78669521   -241.8115913  |</span>
-<span id="cb1-26"><a href="#cb1-26"></a>      4 |  -3.714313214   -113.7119057   -56.25720696  |</span>
-<span id="cb1-27"><a href="#cb1-27"></a>      5 |  -3.280073929   -127.1074326   -8.077091068  |</span>
-<span id="cb1-28"><a href="#cb1-28"></a>      6 |  -3.193322943   -127.4662895   -.2936080906  |</span>
-<span id="cb1-29"><a href="#cb1-29"></a>      7 |  -3.189923432   -127.4667891   -.0004426933  |</span>
-<span id="cb1-30"><a href="#cb1-30"></a>      8 |  -3.189918291   -127.4667891   -1.01177e-09  |</span>
-<span id="cb1-31"><a href="#cb1-31"></a>        +----------------------------------------------+</span>
-<span id="cb1-32"><a href="#cb1-32"></a>                      1              2              3</span>
-<span id="cb1-33"><a href="#cb1-33"></a>        +----------------------------------------------+</span>
-<span id="cb1-34"><a href="#cb1-34"></a>      1 |             2            -26            -25  |</span>
-<span id="cb1-35"><a href="#cb1-35"></a>      2 |   4.083333333    39.13430748    140.3356481  |</span>
-<span id="cb1-36"><a href="#cb1-36"></a>      3 |    3.22806275   -30.56155349    33.34042084  |</span>
-<span id="cb1-37"><a href="#cb1-37"></a>      4 |   2.853639205   -37.46140286    5.220655055  |</span>
-<span id="cb1-38"><a href="#cb1-38"></a>      5 |   2.769051829    -37.6890608    .2425933896  |</span>
-<span id="cb1-39"><a href="#cb1-39"></a>      6 |   2.764720715   -37.68958705    .0006229957  |</span>
-<span id="cb1-40"><a href="#cb1-40"></a>      7 |   2.764709535   -37.68958705    4.14680e-09  |</span>
-<span id="cb1-41"><a href="#cb1-41"></a>      8 |   2.764709535   -37.68958705    1.42109e-14  |</span>
-<span id="cb1-42"><a href="#cb1-42"></a>        +----------------------------------------------+</span>
-<span id="cb1-43"><a href="#cb1-43"></a>                     1             2             3</span>
-<span id="cb1-44"><a href="#cb1-44"></a>        +-------------------------------------------+</span>
-<span id="cb1-45"><a href="#cb1-45"></a>      1 |            0             0            15  |</span>
-<span id="cb1-46"><a href="#cb1-46"></a>      2 |  .4166666667   3.155140818   .2893518519  |</span>
-<span id="cb1-47"><a href="#cb1-47"></a>      3 |  .4251979252   3.156376126   .0003663956  |</span>
-<span id="cb1-48"><a href="#cb1-48"></a>      4 |  .4252087555   3.156376128   5.98494e-10  |</span>
-<span id="cb1-49"><a href="#cb1-49"></a>      5 |  .4252087556   3.156376128   1.77636e-15  |</span>
-<span id="cb1-50"><a href="#cb1-50"></a>      6 |  .4252087556   3.156376128             0  |</span>
-<span id="cb1-51"><a href="#cb1-51"></a>      7 |  .4252087556   3.156376128             0  |</span>
-<span id="cb1-52"><a href="#cb1-52"></a>      8 |  .4252087556   3.156376128             0  |</span>
-<span id="cb1-53"><a href="#cb1-53"></a>        +-------------------------------------------+</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a></a><span class="kw">mata</span>:</span>
+<span id="cb1-2"><a></a>     <span class="co">// function to obtain the Value, the gradient and Hessian </span></span>
+<span id="cb1-3"><a></a>     <span class="fu">real</span> <span class="fu">matrix</span>  fgh_x(<span class="fu">real</span> <span class="fu">matrix</span> x, <span class="fu">real</span> <span class="fu">scalar</span> g){</span>
+<span id="cb1-4"><a></a>        <span class="fu">real</span> <span class="fu">matrix</span> <span class="fu">y</span></span>
+<span id="cb1-5"><a></a>        <span class="kw">if</span> (g==0)      <span class="fu">y</span> =    -x:^4 :- 18*x:^2 :+ 15*x</span>
+<span id="cb1-6"><a></a>        <span class="kw">else</span> <span class="kw">if</span> (g==1) <span class="fu">y</span> =  -4*x:^3 :- 36*x    :+ 15</span>
+<span id="cb1-7"><a></a>        <span class="kw">else</span> <span class="kw">if</span> (g==2) <span class="fu">y</span> = -12*x:^2 :- 36   </span>
+<span id="cb1-8"><a></a>        <span class="fu">return</span>(<span class="fu">y</span>)</span>
+<span id="cb1-9"><a></a>     }</span>
+<span id="cb1-10"><a></a>    <span class="co">// Some initial values</span></span>
+<span id="cb1-11"><a></a>     x = -2 , 2 ,0 </span>
+<span id="cb1-12"><a></a>     xt = x,fgh_x(x,0),fgh_x(x,1)</span>
+<span id="cb1-13"><a></a>    <span class="kw">for</span>(i=1;i&lt;8;i++) {</span>
+<span id="cb1-14"><a></a>         x = x :- fgh_x(x,1):/fgh_x(x,2)</span>
+<span id="cb1-15"><a></a>         xt = xt \ x,fgh_x(x,0),fgh_x(x,1)</span>
+<span id="cb1-16"><a></a>    }</span>
+<span id="cb1-17"><a></a>    xt[,(1,4,7)] </span>
+<span id="cb1-18"><a></a>    xt[,(2,5,8)] </span>
+<span id="cb1-19"><a></a>    xt[,(3,6,9)] </span>
+<span id="cb1-20"><a></a>    <span class="kw">end</span></span>
+<span id="cb1-21"><a></a></span>
+<span id="cb1-22"><a></a>        +----------------------------------------------+</span>
+<span id="cb1-23"><a></a>      1 |            -2            -86             55  |</span>
+<span id="cb1-24"><a></a>      2 |  -6.583333333    999.5046779   -889.2939815  |</span>
+<span id="cb1-25"><a></a>      3 |  -4.746265374    30.78669521   -241.8115913  |</span>
+<span id="cb1-26"><a></a>      4 |  -3.714313214   -113.7119057   -56.25720696  |</span>
+<span id="cb1-27"><a></a>      5 |  -3.280073929   -127.1074326   -8.077091068  |</span>
+<span id="cb1-28"><a></a>      6 |  -3.193322943   -127.4662895   -.2936080906  |</span>
+<span id="cb1-29"><a></a>      7 |  -3.189923432   -127.4667891   -.0004426933  |</span>
+<span id="cb1-30"><a></a>      8 |  -3.189918291   -127.4667891   -1.01177e-09  |</span>
+<span id="cb1-31"><a></a>        +----------------------------------------------+</span>
+<span id="cb1-32"><a></a>                      1              2              3</span>
+<span id="cb1-33"><a></a>        +----------------------------------------------+</span>
+<span id="cb1-34"><a></a>      1 |             2            -26            -25  |</span>
+<span id="cb1-35"><a></a>      2 |   4.083333333    39.13430748    140.3356481  |</span>
+<span id="cb1-36"><a></a>      3 |    3.22806275   -30.56155349    33.34042084  |</span>
+<span id="cb1-37"><a></a>      4 |   2.853639205   -37.46140286    5.220655055  |</span>
+<span id="cb1-38"><a></a>      5 |   2.769051829    -37.6890608    .2425933896  |</span>
+<span id="cb1-39"><a></a>      6 |   2.764720715   -37.68958705    .0006229957  |</span>
+<span id="cb1-40"><a></a>      7 |   2.764709535   -37.68958705    4.14680e-09  |</span>
+<span id="cb1-41"><a></a>      8 |   2.764709535   -37.68958705    1.42109e-14  |</span>
+<span id="cb1-42"><a></a>        +----------------------------------------------+</span>
+<span id="cb1-43"><a></a>                     1             2             3</span>
+<span id="cb1-44"><a></a>        +-------------------------------------------+</span>
+<span id="cb1-45"><a></a>      1 |            0             0            15  |</span>
+<span id="cb1-46"><a></a>      2 |  .4166666667   3.155140818   .2893518519  |</span>
+<span id="cb1-47"><a></a>      3 |  .4251979252   3.156376126   .0003663956  |</span>
+<span id="cb1-48"><a></a>      4 |  .4252087555   3.156376128   5.98494e-10  |</span>
+<span id="cb1-49"><a></a>      5 |  .4252087556   3.156376128   1.77636e-15  |</span>
+<span id="cb1-50"><a></a>      6 |  .4252087556   3.156376128             0  |</span>
+<span id="cb1-51"><a></a>      7 |  .4252087556   3.156376128             0  |</span>
+<span id="cb1-52"><a></a>      8 |  .4252087556   3.156376128             0  |</span>
+<span id="cb1-53"><a></a>        +-------------------------------------------+</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="why-so-many-solutions" class="slide level2">
 <h2>Why So many Solutions?</h2>
@@ -576,83 +576,83 @@ b^* \sim N(b, (\tilde X' \tilde X)^{-1}\tilde X' \Omega \tilde X (\tilde X' \til
 </section>
 <section id="nls-in-stata-long-example" class="slide level2 scrollable">
 <h2>NLS in Stata: Long Example</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">clear</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">set</span> <span class="dv">seed</span> 101</span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">set</span> <span class="kw">obs</span> 100</span>
-<span id="cb2-4"><a href="#cb2-4"></a>** Generating fake <span class="kw">data</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="kw">gen</span> x = runiform()</span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="kw">gen</span> <span class="fu">y</span> = 1+0.5*x^0.5+rnormal()*.1</span>
-<span id="cb2-7"><a href="#cb2-7"></a>*** Load <span class="kw">data</span> <span class="kw">in</span> Mata...to make things quick</span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="kw">mata</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a>x=st_data(.,<span class="st">"x"</span>)</span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="fu">y</span>=st_data(.,<span class="st">"y"</span>)</span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="kw">end</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a></span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="kw">mata</span></span>
-<span id="cb2-14"><a href="#cb2-14"></a><span class="co">// Initial data</span></span>
-<span id="cb2-15"><a href="#cb2-15"></a>b=1\1\1</span>
-<span id="cb2-16"><a href="#cb2-16"></a>b0=999\999\999</span>
-<span id="cb2-17"><a href="#cb2-17"></a>bb=b'</span>
-<span id="cb2-18"><a href="#cb2-18"></a><span class="co">// and a loop to see when data converges</span></span>
-<span id="cb2-19"><a href="#cb2-19"></a><span class="kw">while</span> (<span class="kw">sum</span>(<span class="fu">abs</span>(b0:-b))&gt; 0.000001 ) { </span>
-<span id="cb2-20"><a href="#cb2-20"></a>    b0=b    </span>
-<span id="cb2-21"><a href="#cb2-21"></a>    <span class="co">// residuals</span></span>
-<span id="cb2-22"><a href="#cb2-22"></a>    <span class="fu">e</span>=<span class="fu">y</span>:-(b[1]:+b[2]*x:^b[3])</span>
-<span id="cb2-23"><a href="#cb2-23"></a>    <span class="co">// pseudo regressors</span></span>
-<span id="cb2-24"><a href="#cb2-24"></a>    sx=<span class="fu">J</span>(100,1,1),x:^b[3],b[2]*x:^b[3]:*<span class="fu">ln</span>(x)</span>
-<span id="cb2-25"><a href="#cb2-25"></a>    <span class="co">// gradient and Hessian</span></span>
-<span id="cb2-26"><a href="#cb2-26"></a>    g=-<span class="kw">cross</span>(sx,<span class="fu">e</span>)</span>
-<span id="cb2-27"><a href="#cb2-27"></a>    H=<span class="kw">cross</span>(sx,sx)</span>
-<span id="cb2-28"><a href="#cb2-28"></a>    <span class="co">// updating B</span></span>
-<span id="cb2-29"><a href="#cb2-29"></a>    b=b-<span class="fu">invsym</span>(H)*g</span>
-<span id="cb2-30"><a href="#cb2-30"></a>    <span class="co">// Storing results</span></span>
-<span id="cb2-31"><a href="#cb2-31"></a>    bb=bb\b'</span>
-<span id="cb2-32"><a href="#cb2-32"></a>}</span>
-<span id="cb2-33"><a href="#cb2-33"></a><span class="co">/// Now STD ERR (for fun 😃 )</span></span>
-<span id="cb2-34"><a href="#cb2-34"></a>vcv = e'e / (100-3) * <span class="fu">invsym</span>(H)</span>
-<span id="cb2-35"><a href="#cb2-35"></a>b , diagonal(vcv):^0.5</span>
-<span id="cb2-36"><a href="#cb2-36"></a></span>
-<span id="cb2-37"><a href="#cb2-37"></a><span class="kw">end</span></span>
-<span id="cb2-38"><a href="#cb2-38"></a>: b , diagonal(vcv):^0.5</span>
-<span id="cb2-39"><a href="#cb2-39"></a>                 1             2</span>
-<span id="cb2-40"><a href="#cb2-40"></a>    +-----------------------------+</span>
-<span id="cb2-41"><a href="#cb2-41"></a>  1 |   1.06407084   .0527603468  |</span>
-<span id="cb2-42"><a href="#cb2-42"></a>  2 |  .4228891942   .0477125017  |</span>
-<span id="cb2-43"><a href="#cb2-43"></a>  3 |  .5788053878    .159931095  |</span>
-<span id="cb2-44"><a href="#cb2-44"></a>    +-----------------------------+</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a></a><span class="kw">clear</span></span>
+<span id="cb2-2"><a></a><span class="kw">set</span> <span class="dv">seed</span> 101</span>
+<span id="cb2-3"><a></a><span class="kw">set</span> <span class="kw">obs</span> 100</span>
+<span id="cb2-4"><a></a>** Generating fake <span class="kw">data</span></span>
+<span id="cb2-5"><a></a><span class="kw">gen</span> x = runiform()</span>
+<span id="cb2-6"><a></a><span class="kw">gen</span> <span class="fu">y</span> = 1+0.5*x^0.5+rnormal()*.1</span>
+<span id="cb2-7"><a></a>*** Load <span class="kw">data</span> <span class="kw">in</span> Mata...to make things quick</span>
+<span id="cb2-8"><a></a><span class="kw">mata</span></span>
+<span id="cb2-9"><a></a>x=st_data(.,<span class="st">"x"</span>)</span>
+<span id="cb2-10"><a></a><span class="fu">y</span>=st_data(.,<span class="st">"y"</span>)</span>
+<span id="cb2-11"><a></a><span class="kw">end</span></span>
+<span id="cb2-12"><a></a></span>
+<span id="cb2-13"><a></a><span class="kw">mata</span></span>
+<span id="cb2-14"><a></a><span class="co">// Initial data</span></span>
+<span id="cb2-15"><a></a>b=1\1\1</span>
+<span id="cb2-16"><a></a>b0=999\999\999</span>
+<span id="cb2-17"><a></a>bb=b'</span>
+<span id="cb2-18"><a></a><span class="co">// and a loop to see when data converges</span></span>
+<span id="cb2-19"><a></a><span class="kw">while</span> (<span class="kw">sum</span>(<span class="fu">abs</span>(b0:-b))&gt; 0.000001 ) { </span>
+<span id="cb2-20"><a></a>    b0=b    </span>
+<span id="cb2-21"><a></a>    <span class="co">// residuals</span></span>
+<span id="cb2-22"><a></a>    <span class="fu">e</span>=<span class="fu">y</span>:-(b[1]:+b[2]*x:^b[3])</span>
+<span id="cb2-23"><a></a>    <span class="co">// pseudo regressors</span></span>
+<span id="cb2-24"><a></a>    sx=<span class="fu">J</span>(100,1,1),x:^b[3],b[2]*x:^b[3]:*<span class="fu">ln</span>(x)</span>
+<span id="cb2-25"><a></a>    <span class="co">// gradient and Hessian</span></span>
+<span id="cb2-26"><a></a>    g=-<span class="kw">cross</span>(sx,<span class="fu">e</span>)</span>
+<span id="cb2-27"><a></a>    H=<span class="kw">cross</span>(sx,sx)</span>
+<span id="cb2-28"><a></a>    <span class="co">// updating B</span></span>
+<span id="cb2-29"><a></a>    b=b-<span class="fu">invsym</span>(H)*g</span>
+<span id="cb2-30"><a></a>    <span class="co">// Storing results</span></span>
+<span id="cb2-31"><a></a>    bb=bb\b'</span>
+<span id="cb2-32"><a></a>}</span>
+<span id="cb2-33"><a></a><span class="co">/// Now STD ERR (for fun 😃 )</span></span>
+<span id="cb2-34"><a></a>vcv = e'e / (100-3) * <span class="fu">invsym</span>(H)</span>
+<span id="cb2-35"><a></a>b , diagonal(vcv):^0.5</span>
+<span id="cb2-36"><a></a></span>
+<span id="cb2-37"><a></a><span class="kw">end</span></span>
+<span id="cb2-38"><a></a>: b , diagonal(vcv):^0.5</span>
+<span id="cb2-39"><a></a>                 1             2</span>
+<span id="cb2-40"><a></a>    +-----------------------------+</span>
+<span id="cb2-41"><a></a>  1 |   1.06407084   .0527603468  |</span>
+<span id="cb2-42"><a></a>  2 |  .4228891942   .0477125017  |</span>
+<span id="cb2-43"><a></a>  3 |  .5788053878    .159931095  |</span>
+<span id="cb2-44"><a></a>    +-----------------------------+</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="nls-in-stata-short-example-nl-function" class="slide level2 scrollable">
 <h2>NLS in Stata: Short Example: NL function</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a>** Stata has the <span class="kw">function</span> -<span class="kw">nl</span>- (nonlinear)</span>
-<span id="cb3-2"><a href="#cb3-2"></a>** it can <span class="kw">be</span> used to estimate <span class="kw">this</span> types <span class="kw">of</span> models</span>
-<span id="cb3-3"><a href="#cb3-3"></a>** see <span class="kw">help</span> <span class="kw">nl</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a>** Be careful about Initial <span class="kw">values</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="kw">nl</span> ( <span class="fu">y</span> = {b0=1} + {b1=1} * x ^ {b2=1})</span>
-<span id="cb3-6"><a href="#cb3-6"></a></span>
-<span id="cb3-7"><a href="#cb3-7"></a>Iteration 0:  residual SS =   .854919</span>
-<span id="cb3-8"><a href="#cb3-8"></a>Iteration 1:  residual SS =  .7742535</span>
-<span id="cb3-9"><a href="#cb3-9"></a>Iteration 2:  residual SS =   .766106</span>
-<span id="cb3-10"><a href="#cb3-10"></a>Iteration 3:  residual SS =  .7660948</span>
-<span id="cb3-11"><a href="#cb3-11"></a>Iteration 4:  residual SS =  .7660947</span>
-<span id="cb3-12"><a href="#cb3-12"></a>Iteration 5:  residual SS =  .7660947</span>
-<span id="cb3-13"><a href="#cb3-13"></a>Iteration 6:  residual SS =  .7660947</span>
-<span id="cb3-14"><a href="#cb3-14"></a></span>
-<span id="cb3-15"><a href="#cb3-15"></a></span>
-<span id="cb3-16"><a href="#cb3-16"></a>      Source |      SS            df       MS</span>
-<span id="cb3-17"><a href="#cb3-17"></a>-------------+----------------------------------    Number <span class="kw">of</span> <span class="kw">obs</span> =        100</span>
-<span id="cb3-18"><a href="#cb3-18"></a>       Model |  1.2706842          2  .635342093    R-squared     =     0.6239</span>
-<span id="cb3-19"><a href="#cb3-19"></a>    Residual |  .76609469         97  .007897883    Adj R-squared =     0.6161</span>
-<span id="cb3-20"><a href="#cb3-20"></a>-------------+----------------------------------    Root MSE      =     .08887</span>
-<span id="cb3-21"><a href="#cb3-21"></a>       Total |  2.0367789         99  .020573524    Res. <span class="kw">dev</span>.     =  -203.3743</span>
-<span id="cb3-22"><a href="#cb3-22"></a></span>
-<span id="cb3-23"><a href="#cb3-23"></a>------------------------------------------------------------------------------</span>
-<span id="cb3-24"><a href="#cb3-24"></a>           <span class="fu">y</span> | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]</span>
-<span id="cb3-25"><a href="#cb3-25"></a>-------------+----------------------------------------------------------------</span>
-<span id="cb3-26"><a href="#cb3-26"></a>         /b0 |   1.064071   .0527608    20.17   0.000     .9593554    1.168786</span>
-<span id="cb3-27"><a href="#cb3-27"></a>         /b1 |   .4228891   .0477129     8.86   0.000     .3281923     .517586</span>
-<span id="cb3-28"><a href="#cb3-28"></a>         /b2 |   .5788057   .1599306     3.62   0.000     .2613878    .8962236</span>
-<span id="cb3-29"><a href="#cb3-29"></a>------------------------------------------------------------------------------</span>
-<span id="cb3-30"><a href="#cb3-30"></a>Note: Parameter b0 is used <span class="kw">as</span> a constant term during estimation.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a>** Stata has the <span class="kw">function</span> -<span class="kw">nl</span>- (nonlinear)</span>
+<span id="cb3-2"><a></a>** it can <span class="kw">be</span> used to estimate <span class="kw">this</span> types <span class="kw">of</span> models</span>
+<span id="cb3-3"><a></a>** see <span class="kw">help</span> <span class="kw">nl</span></span>
+<span id="cb3-4"><a></a>** Be careful about Initial <span class="kw">values</span></span>
+<span id="cb3-5"><a></a><span class="kw">nl</span> ( <span class="fu">y</span> = {b0=1} + {b1=1} * x ^ {b2=1})</span>
+<span id="cb3-6"><a></a></span>
+<span id="cb3-7"><a></a>Iteration 0:  residual SS =   .854919</span>
+<span id="cb3-8"><a></a>Iteration 1:  residual SS =  .7742535</span>
+<span id="cb3-9"><a></a>Iteration 2:  residual SS =   .766106</span>
+<span id="cb3-10"><a></a>Iteration 3:  residual SS =  .7660948</span>
+<span id="cb3-11"><a></a>Iteration 4:  residual SS =  .7660947</span>
+<span id="cb3-12"><a></a>Iteration 5:  residual SS =  .7660947</span>
+<span id="cb3-13"><a></a>Iteration 6:  residual SS =  .7660947</span>
+<span id="cb3-14"><a></a></span>
+<span id="cb3-15"><a></a></span>
+<span id="cb3-16"><a></a>      Source |      SS            df       MS</span>
+<span id="cb3-17"><a></a>-------------+----------------------------------    Number <span class="kw">of</span> <span class="kw">obs</span> =        100</span>
+<span id="cb3-18"><a></a>       Model |  1.2706842          2  .635342093    R-squared     =     0.6239</span>
+<span id="cb3-19"><a></a>    Residual |  .76609469         97  .007897883    Adj R-squared =     0.6161</span>
+<span id="cb3-20"><a></a>-------------+----------------------------------    Root MSE      =     .08887</span>
+<span id="cb3-21"><a></a>       Total |  2.0367789         99  .020573524    Res. <span class="kw">dev</span>.     =  -203.3743</span>
+<span id="cb3-22"><a></a></span>
+<span id="cb3-23"><a></a>------------------------------------------------------------------------------</span>
+<span id="cb3-24"><a></a>           <span class="fu">y</span> | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]</span>
+<span id="cb3-25"><a></a>-------------+----------------------------------------------------------------</span>
+<span id="cb3-26"><a></a>         /b0 |   1.064071   .0527608    20.17   0.000     .9593554    1.168786</span>
+<span id="cb3-27"><a></a>         /b1 |   .4228891   .0477129     8.86   0.000     .3281923     .517586</span>
+<span id="cb3-28"><a></a>         /b2 |   .5788057   .1599306     3.62   0.000     .2613878    .8962236</span>
+<span id="cb3-29"><a></a>------------------------------------------------------------------------------</span>
+<span id="cb3-30"><a></a>Note: Parameter b0 is used <span class="kw">as</span> a constant term during estimation.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>So, you could now estimate many nonlinear models! (logits, probits, poissons, etc) or can you?</p>
 </section>
 <section id="nls-for-logit" class="slide level2 scrollable">
@@ -662,40 +662,40 @@ b^* \sim N(b, (\tilde X' \tilde X)^{-1}\tilde X' \Omega \tilde X (\tilde X' \til
 P(y=1|x) = \frac{exp(x\beta)}{1+exp(x\beta)}+e
 \]</span></p>
 <p>This guaranties the predicted value is between 0 and 1. But, still assumes errors are homoskedastic!</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1"></a>frause oaxaca, <span class="kw">clear</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">nl</span> (lfp = <span class="kw">logistic</span>({b0}+{b1:female age educ}))</span>
-<span id="cb4-3"><a href="#cb4-3"></a></span>
-<span id="cb4-4"><a href="#cb4-4"></a>      Source |      SS            df       MS</span>
-<span id="cb4-5"><a href="#cb4-5"></a>-------------+----------------------------------    Number <span class="kw">of</span> <span class="kw">obs</span> =      1,647</span>
-<span id="cb4-6"><a href="#cb4-6"></a>       Model |  1272.8283          4  318.207079    R-squared     =     0.8876</span>
-<span id="cb4-7"><a href="#cb4-7"></a>    Residual |  161.17168       1643  .098095973    Adj R-squared =     0.8873</span>
-<span id="cb4-8"><a href="#cb4-8"></a>-------------+----------------------------------    Root MSE      =   .3132028</span>
-<span id="cb4-9"><a href="#cb4-9"></a>       Total |       1434       1647  .870673953    Res. <span class="kw">dev</span>.     =   845.9593</span>
-<span id="cb4-10"><a href="#cb4-10"></a></span>
-<span id="cb4-11"><a href="#cb4-11"></a>------------------------------------------------------------------------------</span>
-<span id="cb4-12"><a href="#cb4-12"></a>         lfp | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]</span>
-<span id="cb4-13"><a href="#cb4-13"></a>-------------+----------------------------------------------------------------</span>
-<span id="cb4-14"><a href="#cb4-14"></a>         /b0 |   3.432866   .9601508     3.58   0.000     1.549617    5.316114</span>
-<span id="cb4-15"><a href="#cb4-15"></a>  /b1_female |  -3.056149   .8625563    -3.54   0.000    -4.747975   -1.364324</span>
-<span id="cb4-16"><a href="#cb4-16"></a>     /b1_age |  -.0205121   .0054815    -3.74   0.000    -.0312635   -.0097607</span>
-<span id="cb4-17"><a href="#cb4-17"></a>    /b1_educ |   .1522987   .0329513     4.62   0.000     .0876679    .2169296</span>
-<span id="cb4-18"><a href="#cb4-18"></a>------------------------------------------------------------------------------</span>
-<span id="cb4-19"><a href="#cb4-19"></a><span class="kw">logit</span> lfp female age educ</span>
-<span id="cb4-20"><a href="#cb4-20"></a></span>
-<span id="cb4-21"><a href="#cb4-21"></a></span>
-<span id="cb4-22"><a href="#cb4-22"></a>Logistic regression                                     Number <span class="kw">of</span> <span class="kw">obs</span> =  1,647</span>
-<span id="cb4-23"><a href="#cb4-23"></a>                                                        LR <span class="fu">chi2</span>(3)    = 251.69</span>
-<span id="cb4-24"><a href="#cb4-24"></a>                                                        Prob &gt; <span class="fu">chi2</span>   = 0.0000</span>
-<span id="cb4-25"><a href="#cb4-25"></a>Log likelihood = -508.42172                             Pseudo R2     = 0.1984</span>
-<span id="cb4-26"><a href="#cb4-26"></a></span>
-<span id="cb4-27"><a href="#cb4-27"></a>------------------------------------------------------------------------------</span>
-<span id="cb4-28"><a href="#cb4-28"></a>         lfp | Coefficient  Std. err.      z    P&gt;|z|     [95% conf. interval]</span>
-<span id="cb4-29"><a href="#cb4-29"></a>-------------+----------------------------------------------------------------</span>
-<span id="cb4-30"><a href="#cb4-30"></a>      female |   -3.21864    .365329    -8.81   0.000    -3.934672   -2.502609</span>
-<span id="cb4-31"><a href="#cb4-31"></a>         age |  -.0233149   .0072746    -3.20   0.001    -.0375729   -.0090569</span>
-<span id="cb4-32"><a href="#cb4-32"></a>        educ |   .1719904   .0411498     4.18   0.000     .0913383    .2526425</span>
-<span id="cb4-33"><a href="#cb4-33"></a>       <span class="dt">_cons</span> |   3.507185   .6550208     5.35   0.000     2.223367    4.791002</span>
-<span id="cb4-34"><a href="#cb4-34"></a>------------------------------------------------------------------------------</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a></a>frause oaxaca, <span class="kw">clear</span></span>
+<span id="cb4-2"><a></a><span class="kw">nl</span> (lfp = <span class="kw">logistic</span>({b0}+{b1:female age educ}))</span>
+<span id="cb4-3"><a></a></span>
+<span id="cb4-4"><a></a>      Source |      SS            df       MS</span>
+<span id="cb4-5"><a></a>-------------+----------------------------------    Number <span class="kw">of</span> <span class="kw">obs</span> =      1,647</span>
+<span id="cb4-6"><a></a>       Model |  1272.8283          4  318.207079    R-squared     =     0.8876</span>
+<span id="cb4-7"><a></a>    Residual |  161.17168       1643  .098095973    Adj R-squared =     0.8873</span>
+<span id="cb4-8"><a></a>-------------+----------------------------------    Root MSE      =   .3132028</span>
+<span id="cb4-9"><a></a>       Total |       1434       1647  .870673953    Res. <span class="kw">dev</span>.     =   845.9593</span>
+<span id="cb4-10"><a></a></span>
+<span id="cb4-11"><a></a>------------------------------------------------------------------------------</span>
+<span id="cb4-12"><a></a>         lfp | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]</span>
+<span id="cb4-13"><a></a>-------------+----------------------------------------------------------------</span>
+<span id="cb4-14"><a></a>         /b0 |   3.432866   .9601508     3.58   0.000     1.549617    5.316114</span>
+<span id="cb4-15"><a></a>  /b1_female |  -3.056149   .8625563    -3.54   0.000    -4.747975   -1.364324</span>
+<span id="cb4-16"><a></a>     /b1_age |  -.0205121   .0054815    -3.74   0.000    -.0312635   -.0097607</span>
+<span id="cb4-17"><a></a>    /b1_educ |   .1522987   .0329513     4.62   0.000     .0876679    .2169296</span>
+<span id="cb4-18"><a></a>------------------------------------------------------------------------------</span>
+<span id="cb4-19"><a></a><span class="kw">logit</span> lfp female age educ</span>
+<span id="cb4-20"><a></a></span>
+<span id="cb4-21"><a></a></span>
+<span id="cb4-22"><a></a>Logistic regression                                     Number <span class="kw">of</span> <span class="kw">obs</span> =  1,647</span>
+<span id="cb4-23"><a></a>                                                        LR <span class="fu">chi2</span>(3)    = 251.69</span>
+<span id="cb4-24"><a></a>                                                        Prob &gt; <span class="fu">chi2</span>   = 0.0000</span>
+<span id="cb4-25"><a></a>Log likelihood = -508.42172                             Pseudo R2     = 0.1984</span>
+<span id="cb4-26"><a></a></span>
+<span id="cb4-27"><a></a>------------------------------------------------------------------------------</span>
+<span id="cb4-28"><a></a>         lfp | Coefficient  Std. err.      z    P&gt;|z|     [95% conf. interval]</span>
+<span id="cb4-29"><a></a>-------------+----------------------------------------------------------------</span>
+<span id="cb4-30"><a></a>      female |   -3.21864    .365329    -8.81   0.000    -3.934672   -2.502609</span>
+<span id="cb4-31"><a></a>         age |  -.0233149   .0072746    -3.20   0.001    -.0375729   -.0090569</span>
+<span id="cb4-32"><a></a>        educ |   .1719904   .0411498     4.18   0.000     .0913383    .2526425</span>
+<span id="cb4-33"><a></a>       <span class="dt">_cons</span> |   3.507185   .6550208     5.35   0.000     2.223367    4.791002</span>
+<span id="cb4-34"><a></a>------------------------------------------------------------------------------</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="glm-and-interative-reweighted-ls-irls" class="slide level2">
 <h2>GLM and Interative Reweighted LS (IRLS)</h2>
@@ -738,76 +738,76 @@ SSR(\beta) = \sum \left( \frac{y-h(x,\beta)}{\sigma(x,\beta)} \right)^2 \\\
 \beta_t =\beta_{t-1}-(\tilde X'\tilde X)^{-1} (\tilde X' \tilde e)
 \]</span></p>
 <p>Then simply derive Standard errors from here.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1"></a>frause oaxaca, <span class="kw">clear</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">nl</span> (lfp = <span class="kw">logistic</span>({b0}+{b1:female age educ}))   </span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">logit</span> lfp female age educ</span>
-<span id="cb5-4"><a href="#cb5-4"></a></span>
-<span id="cb5-5"><a href="#cb5-5"></a>** IRSL</span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="kw">gen</span> one =1</span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="kw">mata</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="fu">y</span> = st_data(.,<span class="st">"lfp"</span>)</span>
-<span id="cb5-9"><a href="#cb5-9"></a>x = st_data(.,<span class="st">"female age educ one"</span>)</span>
-<span id="cb5-10"><a href="#cb5-10"></a>b = 0\0\0\0</span>
-<span id="cb5-11"><a href="#cb5-11"></a> <span class="kw">end</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a></span>
-<span id="cb5-13"><a href="#cb5-13"></a></span>
-<span id="cb5-14"><a href="#cb5-14"></a><span class="kw">mata</span>:</span>
-<span id="cb5-15"><a href="#cb5-15"></a>b0=999\999\999\999</span>
-<span id="cb5-16"><a href="#cb5-16"></a>bb=b'</span>
-<span id="cb5-17"><a href="#cb5-17"></a><span class="kw">while</span> (<span class="kw">sum</span>(<span class="fu">abs</span>(b0:-b))&gt; 0.000001 )  {</span>
-<span id="cb5-18"><a href="#cb5-18"></a>    b0=b    </span>
-<span id="cb5-19"><a href="#cb5-19"></a>    <span class="fu">yh</span> = <span class="kw">logistic</span>(x*b)</span>
-<span id="cb5-20"><a href="#cb5-20"></a>    err = <span class="fu">y</span>:-<span class="fu">yh</span></span>
-<span id="cb5-21"><a href="#cb5-21"></a>    se = <span class="fu">sqrt</span>(<span class="fu">yh</span>:*(1:-<span class="fu">yh</span>))</span>
-<span id="cb5-22"><a href="#cb5-22"></a>    wsx =  <span class="fu">yh</span>:*(1:-<span class="fu">yh</span>):*x:/se</span>
-<span id="cb5-23"><a href="#cb5-23"></a>    werr=  err:/se</span>
-<span id="cb5-24"><a href="#cb5-24"></a>    g = -<span class="kw">cross</span>(wsx,werr)</span>
-<span id="cb5-25"><a href="#cb5-25"></a>    <span class="kw">h</span> = <span class="kw">cross</span>(wsx,wsx)</span>
-<span id="cb5-26"><a href="#cb5-26"></a>    b = b:-<span class="fu">invsym</span>(<span class="kw">h</span>)*g;b'</span>
-<span id="cb5-27"><a href="#cb5-27"></a>    }</span>
-<span id="cb5-28"><a href="#cb5-28"></a>b,diagonal(<span class="kw">cross</span>(werr,werr)/1643*<span class="fu">invsym</span>(<span class="kw">h</span>)):^.5</span>
-<span id="cb5-29"><a href="#cb5-29"></a><span class="kw">end</span></span>
-<span id="cb5-30"><a href="#cb5-30"></a>    +-------------------------------+</span>
-<span id="cb5-31"><a href="#cb5-31"></a>  1 |  -3.218640936    .3458501096  |</span>
-<span id="cb5-32"><a href="#cb5-32"></a>  2 |  -.0233149268    .0068867539  |</span>
-<span id="cb5-33"><a href="#cb5-33"></a>  3 |   .1719904055    .0389557282  |</span>
-<span id="cb5-34"><a href="#cb5-34"></a>  4 |   3.507185231    .6200958697  |</span>
-<span id="cb5-35"><a href="#cb5-35"></a>  +-------------------------------+</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a></a>frause oaxaca, <span class="kw">clear</span></span>
+<span id="cb5-2"><a></a><span class="kw">nl</span> (lfp = <span class="kw">logistic</span>({b0}+{b1:female age educ}))   </span>
+<span id="cb5-3"><a></a><span class="kw">logit</span> lfp female age educ</span>
+<span id="cb5-4"><a></a></span>
+<span id="cb5-5"><a></a>** IRSL</span>
+<span id="cb5-6"><a></a><span class="kw">gen</span> one =1</span>
+<span id="cb5-7"><a></a><span class="kw">mata</span></span>
+<span id="cb5-8"><a></a><span class="fu">y</span> = st_data(.,<span class="st">"lfp"</span>)</span>
+<span id="cb5-9"><a></a>x = st_data(.,<span class="st">"female age educ one"</span>)</span>
+<span id="cb5-10"><a></a>b = 0\0\0\0</span>
+<span id="cb5-11"><a></a> <span class="kw">end</span></span>
+<span id="cb5-12"><a></a></span>
+<span id="cb5-13"><a></a></span>
+<span id="cb5-14"><a></a><span class="kw">mata</span>:</span>
+<span id="cb5-15"><a></a>b0=999\999\999\999</span>
+<span id="cb5-16"><a></a>bb=b'</span>
+<span id="cb5-17"><a></a><span class="kw">while</span> (<span class="kw">sum</span>(<span class="fu">abs</span>(b0:-b))&gt; 0.000001 )  {</span>
+<span id="cb5-18"><a></a>    b0=b    </span>
+<span id="cb5-19"><a></a>    <span class="fu">yh</span> = <span class="kw">logistic</span>(x*b)</span>
+<span id="cb5-20"><a></a>    err = <span class="fu">y</span>:-<span class="fu">yh</span></span>
+<span id="cb5-21"><a></a>    se = <span class="fu">sqrt</span>(<span class="fu">yh</span>:*(1:-<span class="fu">yh</span>))</span>
+<span id="cb5-22"><a></a>    wsx =  <span class="fu">yh</span>:*(1:-<span class="fu">yh</span>):*x:/se</span>
+<span id="cb5-23"><a></a>    werr=  err:/se</span>
+<span id="cb5-24"><a></a>    g = -<span class="kw">cross</span>(wsx,werr)</span>
+<span id="cb5-25"><a></a>    <span class="kw">h</span> = <span class="kw">cross</span>(wsx,wsx)</span>
+<span id="cb5-26"><a></a>    b = b:-<span class="fu">invsym</span>(<span class="kw">h</span>)*g;b'</span>
+<span id="cb5-27"><a></a>    }</span>
+<span id="cb5-28"><a></a>b,diagonal(<span class="kw">cross</span>(werr,werr)/1643*<span class="fu">invsym</span>(<span class="kw">h</span>)):^.5</span>
+<span id="cb5-29"><a></a><span class="kw">end</span></span>
+<span id="cb5-30"><a></a>    +-------------------------------+</span>
+<span id="cb5-31"><a></a>  1 |  -3.218640936    .3458501096  |</span>
+<span id="cb5-32"><a></a>  2 |  -.0233149268    .0068867539  |</span>
+<span id="cb5-33"><a></a>  3 |   .1719904055    .0389557282  |</span>
+<span id="cb5-34"><a></a>  4 |   3.507185231    .6200958697  |</span>
+<span id="cb5-35"><a></a>  +-------------------------------+</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="glm-in-stata" class="slide level2 scrollable">
 <h2>GLM in <code>Stata</code></h2>
 <p>This one is easy as 🥧</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">help</span> <span class="kw">glm</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>* see <span class="kw">for</span> advanced options <span class="kw">if</span> interested</span>
-<span id="cb6-3"><a href="#cb6-3"></a>* <span class="kw">syntax</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="kw">glm</span> <span class="fu">y</span> x1 <span class="kw">x2</span> x3 , <span class="kw">family</span>( <span class="kw">family</span> ) <span class="kw">link</span>(<span class="kw">function</span>) method</span>
-<span id="cb6-5"><a href="#cb6-5"></a>frause oaxaca</span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="kw">glm</span> lfp female age educ, <span class="kw">family</span>(binomial)  <span class="kw">link</span>(<span class="kw">probit</span>)</span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="kw">glm</span> lfp female age educ, <span class="kw">family</span>(binomial)  <span class="kw">link</span>(<span class="kw">identity</span>)</span>
-<span id="cb6-8"><a href="#cb6-8"></a><span class="kw">glm</span> lfp female age educ, <span class="kw">family</span>(binomial)  <span class="kw">link</span>(<span class="kw">logit</span>)</span>
-<span id="cb6-9"><a href="#cb6-9"></a></span>
-<span id="cb6-10"><a href="#cb6-10"></a></span>
-<span id="cb6-11"><a href="#cb6-11"></a>Generalized linear models                         Number <span class="kw">of</span> <span class="kw">obs</span>   =      1,647</span>
-<span id="cb6-12"><a href="#cb6-12"></a>Optimization     : ML                             Residual df     =      1,643</span>
-<span id="cb6-13"><a href="#cb6-13"></a>                                                  Scale parameter =          1</span>
-<span id="cb6-14"><a href="#cb6-14"></a>Deviance         =   1016.84343                   (1/df) Deviance =   .6188944</span>
-<span id="cb6-15"><a href="#cb6-15"></a>Pearson          =  1472.464769                   (1/df) Pearson  =    .896205</span>
-<span id="cb6-16"><a href="#cb6-16"></a></span>
-<span id="cb6-17"><a href="#cb6-17"></a>Variance <span class="kw">function</span>: <span class="kw">V</span>(u) = u*(1-u)                 [Bernoulli]</span>
-<span id="cb6-18"><a href="#cb6-18"></a>Link <span class="kw">function</span>    : g(u) = <span class="fu">ln</span>(u/(1-u))             [Logit]</span>
-<span id="cb6-19"><a href="#cb6-19"></a></span>
-<span id="cb6-20"><a href="#cb6-20"></a>                                                  AIC             =   .6222486</span>
-<span id="cb6-21"><a href="#cb6-21"></a>Log likelihood   = -508.4217152                   BIC             =  -11152.38</span>
-<span id="cb6-22"><a href="#cb6-22"></a></span>
-<span id="cb6-23"><a href="#cb6-23"></a>------------------------------------------------------------------------------</span>
-<span id="cb6-24"><a href="#cb6-24"></a>             |                 OIM</span>
-<span id="cb6-25"><a href="#cb6-25"></a>         lfp | Coefficient  <span class="fu">std</span>. err.      z    P&gt;|z|     [95% conf. interval]</span>
-<span id="cb6-26"><a href="#cb6-26"></a>-------------+----------------------------------------------------------------</span>
-<span id="cb6-27"><a href="#cb6-27"></a>      female |  -3.218641    .365329    -8.81   0.000    -3.934672   -2.502609</span>
-<span id="cb6-28"><a href="#cb6-28"></a>         age |  -.0233149   .0072746    -3.20   0.001    -.0375729   -.0090569</span>
-<span id="cb6-29"><a href="#cb6-29"></a>        educ |   .1719904   .0411498     4.18   0.000     .0913383    .2526425</span>
-<span id="cb6-30"><a href="#cb6-30"></a>       <span class="dt">_cons</span> |   3.507185   .6550209     5.35   0.000     2.223368    4.791002</span>
-<span id="cb6-31"><a href="#cb6-31"></a>------------------------------------------------------------------------------</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a></a><span class="kw">help</span> <span class="kw">glm</span></span>
+<span id="cb6-2"><a></a>* see <span class="kw">for</span> advanced options <span class="kw">if</span> interested</span>
+<span id="cb6-3"><a></a>* <span class="kw">syntax</span></span>
+<span id="cb6-4"><a></a><span class="kw">glm</span> <span class="fu">y</span> x1 <span class="kw">x2</span> x3 , <span class="kw">family</span>( <span class="kw">family</span> ) <span class="kw">link</span>(<span class="kw">function</span>) method</span>
+<span id="cb6-5"><a></a>frause oaxaca</span>
+<span id="cb6-6"><a></a><span class="kw">glm</span> lfp female age educ, <span class="kw">family</span>(binomial)  <span class="kw">link</span>(<span class="kw">probit</span>)</span>
+<span id="cb6-7"><a></a><span class="kw">glm</span> lfp female age educ, <span class="kw">family</span>(binomial)  <span class="kw">link</span>(<span class="kw">identity</span>)</span>
+<span id="cb6-8"><a></a><span class="kw">glm</span> lfp female age educ, <span class="kw">family</span>(binomial)  <span class="kw">link</span>(<span class="kw">logit</span>)</span>
+<span id="cb6-9"><a></a></span>
+<span id="cb6-10"><a></a></span>
+<span id="cb6-11"><a></a>Generalized linear models                         Number <span class="kw">of</span> <span class="kw">obs</span>   =      1,647</span>
+<span id="cb6-12"><a></a>Optimization     : ML                             Residual df     =      1,643</span>
+<span id="cb6-13"><a></a>                                                  Scale parameter =          1</span>
+<span id="cb6-14"><a></a>Deviance         =   1016.84343                   (1/df) Deviance =   .6188944</span>
+<span id="cb6-15"><a></a>Pearson          =  1472.464769                   (1/df) Pearson  =    .896205</span>
+<span id="cb6-16"><a></a></span>
+<span id="cb6-17"><a></a>Variance <span class="kw">function</span>: <span class="kw">V</span>(u) = u*(1-u)                 [Bernoulli]</span>
+<span id="cb6-18"><a></a>Link <span class="kw">function</span>    : g(u) = <span class="fu">ln</span>(u/(1-u))             [Logit]</span>
+<span id="cb6-19"><a></a></span>
+<span id="cb6-20"><a></a>                                                  AIC             =   .6222486</span>
+<span id="cb6-21"><a></a>Log likelihood   = -508.4217152                   BIC             =  -11152.38</span>
+<span id="cb6-22"><a></a></span>
+<span id="cb6-23"><a></a>------------------------------------------------------------------------------</span>
+<span id="cb6-24"><a></a>             |                 OIM</span>
+<span id="cb6-25"><a></a>         lfp | Coefficient  <span class="fu">std</span>. err.      z    P&gt;|z|     [95% conf. interval]</span>
+<span id="cb6-26"><a></a>-------------+----------------------------------------------------------------</span>
+<span id="cb6-27"><a></a>      female |  -3.218641    .365329    -8.81   0.000    -3.934672   -2.502609</span>
+<span id="cb6-28"><a></a>         age |  -.0233149   .0072746    -3.20   0.001    -.0375729   -.0090569</span>
+<span id="cb6-29"><a></a>        educ |   .1719904   .0411498     4.18   0.000     .0913383    .2526425</span>
+<span id="cb6-30"><a></a>       <span class="dt">_cons</span> |   3.507185   .6550209     5.35   0.000     2.223368    4.791002</span>
+<span id="cb6-31"><a></a>------------------------------------------------------------------------------</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section>
 <section id="going-full-ml" class="title-slide slide level1 center">
@@ -1061,77 +1061,77 @@ H = \Bigg[\begin{matrix} -\frac{X'X}{\sigma^2}&amp; 0 \\
 <blockquote>
 <p><span class="math inline">\(y\)</span> distributes as normal distribution, which depends on the mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>. We assume that only the mean depends on <span class="math inline">\(X\)</span>.</p>
 </blockquote>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1"></a>** Define Program</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">capture</span> <span class="kw">program</span> <span class="kw">drop</span> my_ols</span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">program</span> <span class="kw">define</span> my_ols</span>
-<span id="cb7-4"><a href="#cb7-4"></a>  <span class="kw">args</span> lnf <span class="co">///   &lt;- Stores the LL for obs i</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a>       <span class="kw">xb</span>  <span class="co">///   &lt;- Captures the Linear combination of X's</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a>       lnsigma <span class="co">// &lt;- captures the Log standard error</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a>  ** Start creating <span class="ot">all</span> aux variables and lnf     </span>
-<span id="cb7-8"><a href="#cb7-8"></a>  <span class="kw">qui</span> {</span>
-<span id="cb7-9"><a href="#cb7-9"></a>    <span class="kw">tempvar</span> sigma <span class="co">// Temporary variable</span></span>
-<span id="cb7-10"><a href="#cb7-10"></a>    <span class="kw">gen</span> <span class="kw">double</span> <span class="ot">`sigma'</span> = <span class="fu">exp</span>(<span class="ot">`lnsigma'</span>)</span>
-<span id="cb7-11"><a href="#cb7-11"></a>    <span class="kw">tempvar</span> <span class="fu">y</span></span>
-<span id="cb7-12"><a href="#cb7-12"></a>    <span class="kw">local</span> <span class="fu">y</span> <span class="ot">$ML_y1</span></span>
-<span id="cb7-13"><a href="#cb7-13"></a>    <span class="kw">replace</span> <span class="ot">`lnf'</span>      = <span class="fu">log</span>( <span class="fu">normalden</span>(<span class="ot">`y'</span>,<span class="ot">`xb'</span>,<span class="ot">`sigma'</span> ) )</span>
-<span id="cb7-14"><a href="#cb7-14"></a>  }     </span>
-<span id="cb7-15"><a href="#cb7-15"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a></a>** Define Program</span>
+<span id="cb7-2"><a></a><span class="kw">capture</span> <span class="kw">program</span> <span class="kw">drop</span> my_ols</span>
+<span id="cb7-3"><a></a><span class="kw">program</span> <span class="kw">define</span> my_ols</span>
+<span id="cb7-4"><a></a>  <span class="kw">args</span> lnf <span class="co">///   &lt;- Stores the LL for obs i</span></span>
+<span id="cb7-5"><a></a>       <span class="kw">xb</span>  <span class="co">///   &lt;- Captures the Linear combination of X's</span></span>
+<span id="cb7-6"><a></a>       lnsigma <span class="co">// &lt;- captures the Log standard error</span></span>
+<span id="cb7-7"><a></a>  ** Start creating <span class="ot">all</span> aux variables and lnf     </span>
+<span id="cb7-8"><a></a>  <span class="kw">qui</span> {</span>
+<span id="cb7-9"><a></a>    <span class="kw">tempvar</span> sigma <span class="co">// Temporary variable</span></span>
+<span id="cb7-10"><a></a>    <span class="kw">gen</span> <span class="kw">double</span> <span class="ot">`sigma'</span> = <span class="fu">exp</span>(<span class="ot">`lnsigma'</span>)</span>
+<span id="cb7-11"><a></a>    <span class="kw">tempvar</span> <span class="fu">y</span></span>
+<span id="cb7-12"><a></a>    <span class="kw">local</span> <span class="fu">y</span> <span class="ot">$ML_y1</span></span>
+<span id="cb7-13"><a></a>    <span class="kw">replace</span> <span class="ot">`lnf'</span>      = <span class="fu">log</span>( <span class="fu">normalden</span>(<span class="ot">`y'</span>,<span class="ot">`xb'</span>,<span class="ot">`sigma'</span> ) )</span>
+<span id="cb7-14"><a></a>  }     </span>
+<span id="cb7-15"><a></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Now Just Call on the program</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1"></a>* <span class="kw">load</span> some <span class="kw">data</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>frause oaxaca, <span class="kw">clear</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="kw">ml</span> <span class="kw">model</span> lf   <span class="co">/// Ask to use -ml- to estimate a model with method -lf-</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a>   my_ols     <span class="co">/// your ML program</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a>   (<span class="kw">xb</span>: lnwage = age educ female  ) <span class="co">/// 1st Eq (only one in this case)</span></span>
-<span id="cb8-6"><a href="#cb8-6"></a>   (lnsig: = female ) <span class="co">// Empty, (no other Y, but could add X's)</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a>   <span class="co">// I could haave added weights, or IF conditions</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a><span class="kw">ml</span> check     <span class="co">// checks if the code is correct</span></span>
-<span id="cb8-9"><a href="#cb8-9"></a><span class="kw">ml</span> <span class="kw">maximize</span>  <span class="co">// maximizes</span></span>
-<span id="cb8-10"><a href="#cb8-10"></a><span class="kw">ml</span> <span class="kw">display</span>   <span class="co">// shows results</span></span>
-<span id="cb8-11"><a href="#cb8-11"></a></span>
-<span id="cb8-12"><a href="#cb8-12"></a>* Short <span class="kw">version</span> </span>
-<span id="cb8-13"><a href="#cb8-13"></a><span class="kw">ml</span> <span class="kw">model</span> lf  my_ols <span class="co">/// Model and method</span></span>
-<span id="cb8-14"><a href="#cb8-14"></a>   (<span class="kw">xb</span>: lnwage = age educ female) (lnsig: = female ) <span class="co">/// model Parms</span></span>
-<span id="cb8-15"><a href="#cb8-15"></a>   , <span class="kw">robust</span> <span class="kw">maximize</span> <span class="co">// Other SE options, and maximize</span></span>
-<span id="cb8-16"><a href="#cb8-16"></a>   </span>
-<span id="cb8-17"><a href="#cb8-17"></a></span>
-<span id="cb8-18"><a href="#cb8-18"></a><span class="kw">ml</span> <span class="kw">display</span></span>
-<span id="cb8-19"><a href="#cb8-19"></a></span>
-<span id="cb8-20"><a href="#cb8-20"></a>                                                        Number <span class="kw">of</span> <span class="kw">obs</span> =  1,434</span>
-<span id="cb8-21"><a href="#cb8-21"></a>                                                        Wald <span class="fu">chi2</span>(3)  = 393.05</span>
-<span id="cb8-22"><a href="#cb8-22"></a>Log pseudolikelihood = -870.41117                       Prob &gt; <span class="fu">chi2</span>   = 0.0000</span>
-<span id="cb8-23"><a href="#cb8-23"></a></span>
-<span id="cb8-24"><a href="#cb8-24"></a>------------------------------------------------------------------------------</span>
-<span id="cb8-25"><a href="#cb8-25"></a>             |               Robust</span>
-<span id="cb8-26"><a href="#cb8-26"></a>      lnwage | Coefficient  <span class="fu">std</span>. err.      z    P&gt;|z|     [95% conf. interval]</span>
-<span id="cb8-27"><a href="#cb8-27"></a>-------------+----------------------------------------------------------------</span>
-<span id="cb8-28"><a href="#cb8-28"></a><span class="kw">xb</span>           |</span>
-<span id="cb8-29"><a href="#cb8-29"></a>         age |   .0177272   .0012221    14.51   0.000      .015332    .0201224</span>
-<span id="cb8-30"><a href="#cb8-30"></a>        educ |   .0685501   .0056712    12.09   0.000     .0574347    .0796655</span>
-<span id="cb8-31"><a href="#cb8-31"></a>      female |  -.1487184   .0247333    -6.01   0.000    -.1971948   -.1002421</span>
-<span id="cb8-32"><a href="#cb8-32"></a>       <span class="dt">_cons</span> |   1.949072   .0888074    21.95   0.000     1.775012    2.123131</span>
-<span id="cb8-33"><a href="#cb8-33"></a>-------------+----------------------------------------------------------------</span>
-<span id="cb8-34"><a href="#cb8-34"></a>lnsig        |</span>
-<span id="cb8-35"><a href="#cb8-35"></a>      female |   .3440266   .0691673     4.97   0.000     .2084611     .479592</span>
-<span id="cb8-36"><a href="#cb8-36"></a>       <span class="dt">_cons</span> |  -.9758137   .0488944   -19.96   0.000    -1.071645   -.8799825</span>
-<span id="cb8-37"><a href="#cb8-37"></a>------------------------------------------------------------------------------</span>
-<span id="cb8-38"><a href="#cb8-38"></a></span>
-<span id="cb8-39"><a href="#cb8-39"></a>. <span class="kw">reg</span>  lnwage age educ female</span>
-<span id="cb8-40"><a href="#cb8-40"></a></span>
-<span id="cb8-41"><a href="#cb8-41"></a>      Source |       SS           df       MS      Number <span class="kw">of</span> <span class="kw">obs</span>   =     1,434</span>
-<span id="cb8-42"><a href="#cb8-42"></a>-------------+----------------------------------   <span class="fu">F</span>(3, 1430)      =    167.12</span>
-<span id="cb8-43"><a href="#cb8-43"></a>       Model |  104.907056         3  34.9690188   Prob &gt; <span class="fu">F</span>        =    0.0000</span>
-<span id="cb8-44"><a href="#cb8-44"></a>    Residual |  299.212747     1,430  .209239683   R-squared       =    0.2596</span>
-<span id="cb8-45"><a href="#cb8-45"></a>-------------+----------------------------------   Adj R-squared   =    0.2580</span>
-<span id="cb8-46"><a href="#cb8-46"></a>       Total |  404.119804     1,433  .282009633   Root MSE        =    .45743</span>
-<span id="cb8-47"><a href="#cb8-47"></a></span>
-<span id="cb8-48"><a href="#cb8-48"></a>------------------------------------------------------------------------------</span>
-<span id="cb8-49"><a href="#cb8-49"></a>      lnwage | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]</span>
-<span id="cb8-50"><a href="#cb8-50"></a>-------------+----------------------------------------------------------------</span>
-<span id="cb8-51"><a href="#cb8-51"></a>         age |   .0161424   .0010978    14.70   0.000      .013989    .0182959</span>
-<span id="cb8-52"><a href="#cb8-52"></a>        educ |   .0719322   .0050365    14.28   0.000     .0620524     .081812</span>
-<span id="cb8-53"><a href="#cb8-53"></a>      female |  -.1453936   .0243888    -5.96   0.000    -.1932352    -.097552</span>
-<span id="cb8-54"><a href="#cb8-54"></a>       <span class="dt">_cons</span> |   1.970021   .0725757    27.14   0.000     1.827654    2.112387</span>
-<span id="cb8-55"><a href="#cb8-55"></a>------------------------------------------------------------------------------</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a></a>* <span class="kw">load</span> some <span class="kw">data</span></span>
+<span id="cb8-2"><a></a>frause oaxaca, <span class="kw">clear</span></span>
+<span id="cb8-3"><a></a><span class="kw">ml</span> <span class="kw">model</span> lf   <span class="co">/// Ask to use -ml- to estimate a model with method -lf-</span></span>
+<span id="cb8-4"><a></a>   my_ols     <span class="co">/// your ML program</span></span>
+<span id="cb8-5"><a></a>   (<span class="kw">xb</span>: lnwage = age educ female  ) <span class="co">/// 1st Eq (only one in this case)</span></span>
+<span id="cb8-6"><a></a>   (lnsig: = female ) <span class="co">// Empty, (no other Y, but could add X's)</span></span>
+<span id="cb8-7"><a></a>   <span class="co">// I could haave added weights, or IF conditions</span></span>
+<span id="cb8-8"><a></a><span class="kw">ml</span> check     <span class="co">// checks if the code is correct</span></span>
+<span id="cb8-9"><a></a><span class="kw">ml</span> <span class="kw">maximize</span>  <span class="co">// maximizes</span></span>
+<span id="cb8-10"><a></a><span class="kw">ml</span> <span class="kw">display</span>   <span class="co">// shows results</span></span>
+<span id="cb8-11"><a></a></span>
+<span id="cb8-12"><a></a>* Short <span class="kw">version</span> </span>
+<span id="cb8-13"><a></a><span class="kw">ml</span> <span class="kw">model</span> lf  my_ols <span class="co">/// Model and method</span></span>
+<span id="cb8-14"><a></a>   (<span class="kw">xb</span>: lnwage = age educ female) (lnsig: = female ) <span class="co">/// model Parms</span></span>
+<span id="cb8-15"><a></a>   , <span class="kw">robust</span> <span class="kw">maximize</span> <span class="co">// Other SE options, and maximize</span></span>
+<span id="cb8-16"><a></a>   </span>
+<span id="cb8-17"><a></a></span>
+<span id="cb8-18"><a></a><span class="kw">ml</span> <span class="kw">display</span></span>
+<span id="cb8-19"><a></a></span>
+<span id="cb8-20"><a></a>                                                        Number <span class="kw">of</span> <span class="kw">obs</span> =  1,434</span>
+<span id="cb8-21"><a></a>                                                        Wald <span class="fu">chi2</span>(3)  = 393.05</span>
+<span id="cb8-22"><a></a>Log pseudolikelihood = -870.41117                       Prob &gt; <span class="fu">chi2</span>   = 0.0000</span>
+<span id="cb8-23"><a></a></span>
+<span id="cb8-24"><a></a>------------------------------------------------------------------------------</span>
+<span id="cb8-25"><a></a>             |               Robust</span>
+<span id="cb8-26"><a></a>      lnwage | Coefficient  <span class="fu">std</span>. err.      z    P&gt;|z|     [95% conf. interval]</span>
+<span id="cb8-27"><a></a>-------------+----------------------------------------------------------------</span>
+<span id="cb8-28"><a></a><span class="kw">xb</span>           |</span>
+<span id="cb8-29"><a></a>         age |   .0177272   .0012221    14.51   0.000      .015332    .0201224</span>
+<span id="cb8-30"><a></a>        educ |   .0685501   .0056712    12.09   0.000     .0574347    .0796655</span>
+<span id="cb8-31"><a></a>      female |  -.1487184   .0247333    -6.01   0.000    -.1971948   -.1002421</span>
+<span id="cb8-32"><a></a>       <span class="dt">_cons</span> |   1.949072   .0888074    21.95   0.000     1.775012    2.123131</span>
+<span id="cb8-33"><a></a>-------------+----------------------------------------------------------------</span>
+<span id="cb8-34"><a></a>lnsig        |</span>
+<span id="cb8-35"><a></a>      female |   .3440266   .0691673     4.97   0.000     .2084611     .479592</span>
+<span id="cb8-36"><a></a>       <span class="dt">_cons</span> |  -.9758137   .0488944   -19.96   0.000    -1.071645   -.8799825</span>
+<span id="cb8-37"><a></a>------------------------------------------------------------------------------</span>
+<span id="cb8-38"><a></a></span>
+<span id="cb8-39"><a></a>. <span class="kw">reg</span>  lnwage age educ female</span>
+<span id="cb8-40"><a></a></span>
+<span id="cb8-41"><a></a>      Source |       SS           df       MS      Number <span class="kw">of</span> <span class="kw">obs</span>   =     1,434</span>
+<span id="cb8-42"><a></a>-------------+----------------------------------   <span class="fu">F</span>(3, 1430)      =    167.12</span>
+<span id="cb8-43"><a></a>       Model |  104.907056         3  34.9690188   Prob &gt; <span class="fu">F</span>        =    0.0000</span>
+<span id="cb8-44"><a></a>    Residual |  299.212747     1,430  .209239683   R-squared       =    0.2596</span>
+<span id="cb8-45"><a></a>-------------+----------------------------------   Adj R-squared   =    0.2580</span>
+<span id="cb8-46"><a></a>       Total |  404.119804     1,433  .282009633   Root MSE        =    .45743</span>
+<span id="cb8-47"><a></a></span>
+<span id="cb8-48"><a></a>------------------------------------------------------------------------------</span>
+<span id="cb8-49"><a></a>      lnwage | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]</span>
+<span id="cb8-50"><a></a>-------------+----------------------------------------------------------------</span>
+<span id="cb8-51"><a></a>         age |   .0161424   .0010978    14.70   0.000      .013989    .0182959</span>
+<span id="cb8-52"><a></a>        educ |   .0719322   .0050365    14.28   0.000     .0620524     .081812</span>
+<span id="cb8-53"><a></a>      female |  -.1453936   .0243888    -5.96   0.000    -.1932352    -.097552</span>
+<span id="cb8-54"><a></a>       <span class="dt">_cons</span> |   1.970021   .0725757    27.14   0.000     1.827654    2.112387</span>
+<span id="cb8-55"><a></a>------------------------------------------------------------------------------</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="other-considerations-1" class="slide level2">
 <h2>Other Considerations</h2>
@@ -1147,52 +1147,52 @@ H = \Bigg[\begin{matrix} -\frac{X'X}{\sigma^2}&amp; 0 \\
 </section>
 <section id="margins-in-action" class="slide level2 scrollable">
 <h2>Margins in action</h2>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1"></a>**Estimate Logit <span class="kw">model</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">logit</span> lfp educ female age married divorced</span>
-<span id="cb9-3"><a href="#cb9-3"></a>** <span class="kw">use</span> margins to estimate predicted probability</span>
-<span id="cb9-4"><a href="#cb9-4"></a>margins</span>
-<span id="cb9-5"><a href="#cb9-5"></a>** <span class="kw">or</span> <span class="kw">use</span> expression</span>
-<span id="cb9-6"><a href="#cb9-6"></a>margins, expression(<span class="fu">exp</span>(<span class="kw">xb</span>())/(1+<span class="fu">exp</span>(<span class="kw">xb</span>())))</span>
-<span id="cb9-7"><a href="#cb9-7"></a></span>
-<span id="cb9-8"><a href="#cb9-8"></a>------------------------------------------------------------------------------</span>
-<span id="cb9-9"><a href="#cb9-9"></a>             |            Delta-method</span>
-<span id="cb9-10"><a href="#cb9-10"></a>             |     Margin   <span class="fu">std</span>. err.      z    P&gt;|z|     [95% conf. interval]</span>
-<span id="cb9-11"><a href="#cb9-11"></a>-------------+----------------------------------------------------------------</span>
-<span id="cb9-12"><a href="#cb9-12"></a>       <span class="dt">_cons</span> |    .870674   .0071023   122.59   0.000     .8567537    .8845942</span>
-<span id="cb9-13"><a href="#cb9-13"></a>------------------------------------------------------------------------------</span>
-<span id="cb9-14"><a href="#cb9-14"></a></span>
-<span id="cb9-15"><a href="#cb9-15"></a>** marginal <span class="kw">effects</span></span>
-<span id="cb9-16"><a href="#cb9-16"></a>margins, <span class="kw">dydx</span>(educ) </span>
-<span id="cb9-17"><a href="#cb9-17"></a></span>
-<span id="cb9-18"><a href="#cb9-18"></a>------------------------------------------------------------------------------</span>
-<span id="cb9-19"><a href="#cb9-19"></a>             |            Delta-method</span>
-<span id="cb9-20"><a href="#cb9-20"></a>             |      dy/dx   <span class="fu">std</span>. err.      z    P&gt;|z|     [95% conf. interval]</span>
-<span id="cb9-21"><a href="#cb9-21"></a>-------------+----------------------------------------------------------------</span>
-<span id="cb9-22"><a href="#cb9-22"></a>        educ |   .0161004   .0037127     4.34   0.000     .0088236    .0233772</span>
-<span id="cb9-23"><a href="#cb9-23"></a>------------------------------------------------------------------------------</span>
-<span id="cb9-24"><a href="#cb9-24"></a></span>
-<span id="cb9-25"><a href="#cb9-25"></a></span>
-<span id="cb9-26"><a href="#cb9-26"></a>** Marginal effect <span class="kw">of</span> the marginal effect?</span>
-<span id="cb9-27"><a href="#cb9-27"></a>margins, expression( <span class="kw">logistic</span>(<span class="kw">xb</span>())*(1-<span class="kw">logistic</span>(<span class="kw">xb</span>()))*_b[educ] )</span>
-<span id="cb9-28"><a href="#cb9-28"></a>------------------------------------------------------------------------------</span>
-<span id="cb9-29"><a href="#cb9-29"></a>             |            Delta-method</span>
-<span id="cb9-30"><a href="#cb9-30"></a>             |     Margin   <span class="fu">std</span>. err.      z    P&gt;|z|     [95% conf. interval]</span>
-<span id="cb9-31"><a href="#cb9-31"></a>-------------+----------------------------------------------------------------</span>
-<span id="cb9-32"><a href="#cb9-32"></a>       <span class="dt">_cons</span> |   .0161004   .0037127     4.34   0.000     .0088236    .0233772</span>
-<span id="cb9-33"><a href="#cb9-33"></a>------------------------------------------------------------------------------</span>
-<span id="cb9-34"><a href="#cb9-34"></a>margins, <span class="kw">dydx</span>(*) expression( <span class="kw">logistic</span>(<span class="kw">xb</span>())*(1-<span class="kw">logistic</span>(<span class="kw">xb</span>()))*_b[educ] )</span>
-<span id="cb9-35"><a href="#cb9-35"></a></span>
-<span id="cb9-36"><a href="#cb9-36"></a>------------------------------------------------------------------------------</span>
-<span id="cb9-37"><a href="#cb9-37"></a>             |            Delta-method</span>
-<span id="cb9-38"><a href="#cb9-38"></a>             |      dy/dx   <span class="fu">std</span>. err.      z    P&gt;|z|     [95% conf. interval]</span>
-<span id="cb9-39"><a href="#cb9-39"></a></span>
-<span id="cb9-40"><a href="#cb9-40"></a>-------------+----------------------------------------------------------------</span>
-<span id="cb9-41"><a href="#cb9-41"></a>        educ |  -.0010759   .0004973    -2.16   0.031    -.0020507   -.0001012</span>
-<span id="cb9-42"><a href="#cb9-42"></a>    1.female |   .0246023   .0054734     4.49   0.000     .0138747    .0353299</span>
-<span id="cb9-43"><a href="#cb9-43"></a>         age |   5.41e-06   .0000502     0.11   0.914     -.000093    .0001039</span>
-<span id="cb9-44"><a href="#cb9-44"></a>   1.married |    .021062    .004861     4.33   0.000     .0115346    .0305893</span>
-<span id="cb9-45"><a href="#cb9-45"></a>  1.divorced |   .0037604   .0013899     2.71   0.007     .0010362    .0064846</span>
-<span id="cb9-46"><a href="#cb9-46"></a>------------------------------------------------------------------------------</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a></a>**Estimate Logit <span class="kw">model</span></span>
+<span id="cb9-2"><a></a><span class="kw">logit</span> lfp educ female age married divorced</span>
+<span id="cb9-3"><a></a>** <span class="kw">use</span> margins to estimate predicted probability</span>
+<span id="cb9-4"><a></a>margins</span>
+<span id="cb9-5"><a></a>** <span class="kw">or</span> <span class="kw">use</span> expression</span>
+<span id="cb9-6"><a></a>margins, expression(<span class="fu">exp</span>(<span class="kw">xb</span>())/(1+<span class="fu">exp</span>(<span class="kw">xb</span>())))</span>
+<span id="cb9-7"><a></a></span>
+<span id="cb9-8"><a></a>------------------------------------------------------------------------------</span>
+<span id="cb9-9"><a></a>             |            Delta-method</span>
+<span id="cb9-10"><a></a>             |     Margin   <span class="fu">std</span>. err.      z    P&gt;|z|     [95% conf. interval]</span>
+<span id="cb9-11"><a></a>-------------+----------------------------------------------------------------</span>
+<span id="cb9-12"><a></a>       <span class="dt">_cons</span> |    .870674   .0071023   122.59   0.000     .8567537    .8845942</span>
+<span id="cb9-13"><a></a>------------------------------------------------------------------------------</span>
+<span id="cb9-14"><a></a></span>
+<span id="cb9-15"><a></a>** marginal <span class="kw">effects</span></span>
+<span id="cb9-16"><a></a>margins, <span class="kw">dydx</span>(educ) </span>
+<span id="cb9-17"><a></a></span>
+<span id="cb9-18"><a></a>------------------------------------------------------------------------------</span>
+<span id="cb9-19"><a></a>             |            Delta-method</span>
+<span id="cb9-20"><a></a>             |      dy/dx   <span class="fu">std</span>. err.      z    P&gt;|z|     [95% conf. interval]</span>
+<span id="cb9-21"><a></a>-------------+----------------------------------------------------------------</span>
+<span id="cb9-22"><a></a>        educ |   .0161004   .0037127     4.34   0.000     .0088236    .0233772</span>
+<span id="cb9-23"><a></a>------------------------------------------------------------------------------</span>
+<span id="cb9-24"><a></a></span>
+<span id="cb9-25"><a></a></span>
+<span id="cb9-26"><a></a>** Marginal effect <span class="kw">of</span> the marginal effect?</span>
+<span id="cb9-27"><a></a>margins, expression( <span class="kw">logistic</span>(<span class="kw">xb</span>())*(1-<span class="kw">logistic</span>(<span class="kw">xb</span>()))*_b[educ] )</span>
+<span id="cb9-28"><a></a>------------------------------------------------------------------------------</span>
+<span id="cb9-29"><a></a>             |            Delta-method</span>
+<span id="cb9-30"><a></a>             |     Margin   <span class="fu">std</span>. err.      z    P&gt;|z|     [95% conf. interval]</span>
+<span id="cb9-31"><a></a>-------------+----------------------------------------------------------------</span>
+<span id="cb9-32"><a></a>       <span class="dt">_cons</span> |   .0161004   .0037127     4.34   0.000     .0088236    .0233772</span>
+<span id="cb9-33"><a></a>------------------------------------------------------------------------------</span>
+<span id="cb9-34"><a></a>margins, <span class="kw">dydx</span>(*) expression( <span class="kw">logistic</span>(<span class="kw">xb</span>())*(1-<span class="kw">logistic</span>(<span class="kw">xb</span>()))*_b[educ] )</span>
+<span id="cb9-35"><a></a></span>
+<span id="cb9-36"><a></a>------------------------------------------------------------------------------</span>
+<span id="cb9-37"><a></a>             |            Delta-method</span>
+<span id="cb9-38"><a></a>             |      dy/dx   <span class="fu">std</span>. err.      z    P&gt;|z|     [95% conf. interval]</span>
+<span id="cb9-39"><a></a></span>
+<span id="cb9-40"><a></a>-------------+----------------------------------------------------------------</span>
+<span id="cb9-41"><a></a>        educ |  -.0010759   .0004973    -2.16   0.031    -.0020507   -.0001012</span>
+<span id="cb9-42"><a></a>    1.female |   .0246023   .0054734     4.49   0.000     .0138747    .0353299</span>
+<span id="cb9-43"><a></a>         age |   5.41e-06   .0000502     0.11   0.914     -.000093    .0001039</span>
+<span id="cb9-44"><a></a>   1.married |    .021062    .004861     4.33   0.000     .0115346    .0305893</span>
+<span id="cb9-45"><a></a>  1.divorced |   .0037604   .0013899     2.71   0.007     .0010362    .0064846</span>
+<span id="cb9-46"><a></a>------------------------------------------------------------------------------</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="going-beyond" class="slide level2">
 <h2>Going Beyond?</h2>
@@ -1210,8 +1210,10 @@ H = \Bigg[\begin{matrix} -\frac{X'X}{\sigma^2}&amp; 0 \\
 <h1>Done!</h1>
 <p>Next, we start with Causal effects Strategies. First the gold Standard RCT</p>
 
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 </section>
     </div>

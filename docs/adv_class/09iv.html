@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.455">
+  <meta name="generator" content="quarto-1.4.537">
 
   <meta name="author" content="Fernando Rios-Avila">
   <title>Econometrics MSC Levy - Instrumental Variables</title>
@@ -438,32 +438,35 @@ Fernando Rios-Avila
 <p>If the latter is not true, we have a problem of confunders or Endogeneity. But why?</p>
 <p>Consider the following diagram</p>
 <div class="quarto-layout-panel" data-layout="[1,1]">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <p>Here the effect of <span class="math inline">\(D\)</span> on <span class="math inline">\(Y\)</span> is direct, because there is nothing else that would get people confuse why treatment affects outcome</p>
 </div>
-<div class="cell quarto-layout-cell" data-reveal="true" data-fig-width="8.5" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell quarto-layout-cell" data-reveal="true" data-fig-width="8.5" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="cell-output-display">
 <div>
+<p></p><figure class=""><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart LR
   e(error) --&gt; Y(Outcome)  
   D(Treatment) --&gt; Y(Outcome)  
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="quarto-layout-panel" data-layout="[1,1]">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <p>Here the effect of <span class="math inline">\(D\)</span> on <span class="math inline">\(Y\)</span> is not as clear, because there is an additional factor <span class="math inline">\(v\)</span> that affects <span class="math inline">\(D\)</span> and <span class="math inline">\(Y\)</span> (is in the way)</p>
 </div>
-<div class="cell quarto-layout-cell" data-reveal="true" data-fig-responsive="false" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell quarto-layout-cell" data-reveal="true" data-fig-responsive="false" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="cell-output-display">
 <div>
+<p></p><figure class=""><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart LR
   e( error ) --&gt; Y(Outcome)  
@@ -472,6 +475,7 @@ Fernando Rios-Avila
   v(unobserved) -.-&gt; Y(Outcome)  
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
@@ -484,9 +488,10 @@ Fernando Rios-Avila
 <ul>
 <li>Not everything in <span class="math inline">\(D\)</span> is affected by <span class="math inline">\(v\)</span>. Some may, but some may be trully exogenous. What if we have an instrument that helps you ID this:</li>
 </ul>
-<div class="cell" data-reveal="true" data-fig-responsive="false">
+<div class="cell" data-reveal="true" data-fig-responsive="false" data-layout-align="default">
 <div class="cell-output-display">
 <div>
+<p></p><figure class=""><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart LR
 e( error ) --&gt; Y(Outcome)  
@@ -503,6 +508,7 @@ e( error ) --&gt; Y(Outcome)
   v(unobserved) -.-&gt; Y(Outcome)  
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
@@ -690,79 +696,79 @@ ATE &amp;=\frac{\beta_z}{\gamma_z}=\frac{cov(y,\tilde z)}{cov(d,\tilde z)}
 </section>
 <section id="iv-strength" class="slide level2 scrollable">
 <h2>IV Strength</h2>
-<div id="51a468a9" class="cell" data-execution_count="1">
+<div id="a75c88f2" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">capture</span> <span class="kw">program</span> <span class="kw">drop</span> simx</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">program</span> simx, <span class="kw">eclass</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>    <span class="kw">clear</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>    <span class="kw">set</span> <span class="kw">obs</span> 500</span>
-<span id="cb1-5"><a href="#cb1-5"></a>    <span class="kw">gen</span> z=rnormal()&gt;0</span>
-<span id="cb1-6"><a href="#cb1-6"></a>    <span class="kw">gen</span> u1=rnormal()</span>
-<span id="cb1-7"><a href="#cb1-7"></a>    <span class="kw">gen</span> u2=rnormal()</span>
-<span id="cb1-8"><a href="#cb1-8"></a>    <span class="kw">gen</span> u3=rnormal()</span>
-<span id="cb1-9"><a href="#cb1-9"></a>    <span class="kw">forvalues</span> i = 1/5 {</span>
-<span id="cb1-10"><a href="#cb1-10"></a>        <span class="kw">gen</span> d<span class="ot">`i'</span> = ((-0.5+z) + (u1 + u2)*0.5*<span class="ot">`i'</span>)&gt;0</span>
-<span id="cb1-11"><a href="#cb1-11"></a>        <span class="kw">gen</span> y<span class="ot">`i'</span> = 1 + d<span class="ot">`i'</span>+u3+u2</span>
-<span id="cb1-12"><a href="#cb1-12"></a>    }</span>
-<span id="cb1-13"><a href="#cb1-13"></a>    <span class="kw">forvalues</span> i = 1/5 {</span>
-<span id="cb1-14"><a href="#cb1-14"></a>        <span class="kw">reg</span> d<span class="ot">`i'</span> z</span>
-<span id="cb1-15"><a href="#cb1-15"></a>        <span class="fu">matrix</span> b<span class="ot">`i'</span> =(_b[z]/_se[z])^2</span>
-<span id="cb1-16"><a href="#cb1-16"></a>        ivregress  2sls y<span class="ot">`i'</span> (d<span class="ot">`i'</span>=z)</span>
-<span id="cb1-17"><a href="#cb1-17"></a>        <span class="fu">matrix</span> b<span class="ot">`i'</span> = b<span class="ot">`i'</span>,_b[d<span class="ot">`i'</span>],_se[d<span class="ot">`i'</span>],_b[d<span class="ot">`i'</span>]/_se[d<span class="ot">`i'</span>]</span>
-<span id="cb1-18"><a href="#cb1-18"></a>        <span class="fu">matrix</span> colname b<span class="ot">`i'</span>=f_stat beta beta_se beta_t</span>
-<span id="cb1-19"><a href="#cb1-19"></a>        <span class="fu">matrix</span> <span class="ot">coleq</span> b<span class="ot">`i'</span>=md<span class="ot">`i'</span></span>
-<span id="cb1-20"><a href="#cb1-20"></a>    }</span>
-<span id="cb1-21"><a href="#cb1-21"></a>    <span class="fu">matrix</span> b=b1</span>
-<span id="cb1-22"><a href="#cb1-22"></a>    <span class="kw">forvalues</span> i = 2/5 {</span>
-<span id="cb1-23"><a href="#cb1-23"></a>        <span class="fu">matrix</span> b=b,b<span class="ot">`i'</span></span>
-<span id="cb1-24"><a href="#cb1-24"></a>    }</span>
-<span id="cb1-25"><a href="#cb1-25"></a>    <span class="kw">ereturn</span> <span class="kw">post</span> b</span>
-<span id="cb1-26"><a href="#cb1-26"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a></a><span class="kw">capture</span> <span class="kw">program</span> <span class="kw">drop</span> simx</span>
+<span id="cb1-2"><a></a><span class="kw">program</span> simx, <span class="kw">eclass</span></span>
+<span id="cb1-3"><a></a>    <span class="kw">clear</span></span>
+<span id="cb1-4"><a></a>    <span class="kw">set</span> <span class="kw">obs</span> 500</span>
+<span id="cb1-5"><a></a>    <span class="kw">gen</span> z=rnormal()&gt;0</span>
+<span id="cb1-6"><a></a>    <span class="kw">gen</span> u1=rnormal()</span>
+<span id="cb1-7"><a></a>    <span class="kw">gen</span> u2=rnormal()</span>
+<span id="cb1-8"><a></a>    <span class="kw">gen</span> u3=rnormal()</span>
+<span id="cb1-9"><a></a>    <span class="kw">forvalues</span> i = 1/5 {</span>
+<span id="cb1-10"><a></a>        <span class="kw">gen</span> d<span class="ot">`i'</span> = ((-0.5+z) + (u1 + u2)*0.5*<span class="ot">`i'</span>)&gt;0</span>
+<span id="cb1-11"><a></a>        <span class="kw">gen</span> y<span class="ot">`i'</span> = 1 + d<span class="ot">`i'</span>+u3+u2</span>
+<span id="cb1-12"><a></a>    }</span>
+<span id="cb1-13"><a></a>    <span class="kw">forvalues</span> i = 1/5 {</span>
+<span id="cb1-14"><a></a>        <span class="kw">reg</span> d<span class="ot">`i'</span> z</span>
+<span id="cb1-15"><a></a>        <span class="fu">matrix</span> b<span class="ot">`i'</span> =(_b[z]/_se[z])^2</span>
+<span id="cb1-16"><a></a>        ivregress  2sls y<span class="ot">`i'</span> (d<span class="ot">`i'</span>=z)</span>
+<span id="cb1-17"><a></a>        <span class="fu">matrix</span> b<span class="ot">`i'</span> = b<span class="ot">`i'</span>,_b[d<span class="ot">`i'</span>],_se[d<span class="ot">`i'</span>],_b[d<span class="ot">`i'</span>]/_se[d<span class="ot">`i'</span>]</span>
+<span id="cb1-18"><a></a>        <span class="fu">matrix</span> colname b<span class="ot">`i'</span>=f_stat beta beta_se beta_t</span>
+<span id="cb1-19"><a></a>        <span class="fu">matrix</span> <span class="ot">coleq</span> b<span class="ot">`i'</span>=md<span class="ot">`i'</span></span>
+<span id="cb1-20"><a></a>    }</span>
+<span id="cb1-21"><a></a>    <span class="fu">matrix</span> b=b1</span>
+<span id="cb1-22"><a></a>    <span class="kw">forvalues</span> i = 2/5 {</span>
+<span id="cb1-23"><a></a>        <span class="fu">matrix</span> b=b,b<span class="ot">`i'</span></span>
+<span id="cb1-24"><a></a>    }</span>
+<span id="cb1-25"><a></a>    <span class="kw">ereturn</span> <span class="kw">post</span> b</span>
+<span id="cb1-26"><a></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1"></a></span>
-<span id="cb2-2"><a href="#cb2-2"></a>    Variable |        Obs        Mean    Std. <span class="kw">dev</span>.       Min        Max</span>
-<span id="cb2-3"><a href="#cb2-3"></a>-------------+---------------------------------------------------------</span>
-<span id="cb2-4"><a href="#cb2-4"></a>md1_b_f_stat |        494    189.9262    38.63693   101.8865   337.4117</span>
-<span id="cb2-5"><a href="#cb2-5"></a>  md1_b_beta |        494    .9912474    .2289997   .1758122    1.64053</span>
-<span id="cb2-6"><a href="#cb2-6"></a>md1_b_beta~<span class="fu">e</span> |        494    .2440663    .0235266   .1867024   .3293121</span>
-<span id="cb2-7"><a href="#cb2-7"></a>-------------+---------------------------------------------------------</span>
-<span id="cb2-8"><a href="#cb2-8"></a>md2_b_f_stat |        494    43.33591    13.76347   12.07967   101.6624</span>
-<span id="cb2-9"><a href="#cb2-9"></a>  md2_b_beta |        494    .9717824    .4421832  -.8390987   2.327243</span>
-<span id="cb2-10"><a href="#cb2-10"></a>md2_b_beta~<span class="fu">e</span> |        494    .4711093    .0945389   .3032212   .9873207</span>
-<span id="cb2-11"><a href="#cb2-11"></a>-------------+---------------------------------------------------------</span>
-<span id="cb2-12"><a href="#cb2-12"></a>md3_b_f_stat |        494    19.25043     8.81203   2.051613   61.55846</span>
-<span id="cb2-13"><a href="#cb2-13"></a>  md3_b_beta |        494    .9354647    .6820819  -1.964163   2.996998</span>
-<span id="cb2-14"><a href="#cb2-14"></a>md3_b_beta~<span class="fu">e</span> |        494    .7430147    .2493365    .383426    2.16554</span>
-<span id="cb2-15"><a href="#cb2-15"></a>-------------+---------------------------------------------------------</span>
-<span id="cb2-16"><a href="#cb2-16"></a>md4_b_f_stat |        494    11.19082    6.428525   .0483399   38.44057</span>
-<span id="cb2-17"><a href="#cb2-17"></a>  md4_b_beta |        494    .8711808    .9987467  -4.383311   5.634943</span>
-<span id="cb2-18"><a href="#cb2-18"></a>md4_b_beta~<span class="fu">e</span> |        494    1.135114    1.244907   .4609722   25.16503</span>
-<span id="cb2-19"><a href="#cb2-19"></a>-------------+---------------------------------------------------------</span>
-<span id="cb2-20"><a href="#cb2-20"></a>md5_b_f_stat |        494    7.522731    5.144063   .0544148   28.23535</span>
-<span id="cb2-21"><a href="#cb2-21"></a>  md5_b_beta |        494    .7696057    1.443986  -6.293723   8.951643</span>
-<span id="cb2-22"><a href="#cb2-22"></a>md5_b_beta~<span class="fu">e</span> |        494     1.69479    1.866909    .530196    18.3837</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a></a></span>
+<span id="cb2-2"><a></a>    Variable |        Obs        Mean    Std. <span class="kw">dev</span>.       Min        Max</span>
+<span id="cb2-3"><a></a>-------------+---------------------------------------------------------</span>
+<span id="cb2-4"><a></a>md1_b_f_stat |        494    189.9262    38.63693   101.8865   337.4117</span>
+<span id="cb2-5"><a></a>  md1_b_beta |        494    .9912474    .2289997   .1758122    1.64053</span>
+<span id="cb2-6"><a></a>md1_b_beta~<span class="fu">e</span> |        494    .2440663    .0235266   .1867024   .3293121</span>
+<span id="cb2-7"><a></a>-------------+---------------------------------------------------------</span>
+<span id="cb2-8"><a></a>md2_b_f_stat |        494    43.33591    13.76347   12.07967   101.6624</span>
+<span id="cb2-9"><a></a>  md2_b_beta |        494    .9717824    .4421832  -.8390987   2.327243</span>
+<span id="cb2-10"><a></a>md2_b_beta~<span class="fu">e</span> |        494    .4711093    .0945389   .3032212   .9873207</span>
+<span id="cb2-11"><a></a>-------------+---------------------------------------------------------</span>
+<span id="cb2-12"><a></a>md3_b_f_stat |        494    19.25043     8.81203   2.051613   61.55846</span>
+<span id="cb2-13"><a></a>  md3_b_beta |        494    .9354647    .6820819  -1.964163   2.996998</span>
+<span id="cb2-14"><a></a>md3_b_beta~<span class="fu">e</span> |        494    .7430147    .2493365    .383426    2.16554</span>
+<span id="cb2-15"><a></a>-------------+---------------------------------------------------------</span>
+<span id="cb2-16"><a></a>md4_b_f_stat |        494    11.19082    6.428525   .0483399   38.44057</span>
+<span id="cb2-17"><a></a>  md4_b_beta |        494    .8711808    .9987467  -4.383311   5.634943</span>
+<span id="cb2-18"><a></a>md4_b_beta~<span class="fu">e</span> |        494    1.135114    1.244907   .4609722   25.16503</span>
+<span id="cb2-19"><a></a>-------------+---------------------------------------------------------</span>
+<span id="cb2-20"><a></a>md5_b_f_stat |        494    7.522731    5.144063   .0544148   28.23535</span>
+<span id="cb2-21"><a></a>  md5_b_beta |        494    .7696057    1.443986  -6.293723   8.951643</span>
+<span id="cb2-22"><a></a>md5_b_beta~<span class="fu">e</span> |        494     1.69479    1.866909    .530196    18.3837</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="iv-strength-bias-distribution" class="slide level2">
 <h2>IV Strength: Bias distribution</h2>
-<div id="a4016bcf" class="cell" data-execution_count="2">
+<div id="768cbb4d" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">use</span> resources/simiv.dta, <span class="kw">clear</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">forvalues</span> i = 1/5 {</span>
-<span id="cb3-3"><a href="#cb3-3"></a>  <span class="kw">qui</span>:<span class="kw">sum</span> md<span class="ot">`i'</span>_b_beta</span>
-<span id="cb3-4"><a href="#cb3-4"></a>  <span class="kw">gen</span> new<span class="ot">`i'</span>=(md<span class="ot">`i'</span>_b_beta-1)/<span class="fu">r</span>(<span class="fu">sd</span>)</span>
-<span id="cb3-5"><a href="#cb3-5"></a>}</span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="kw">set</span> <span class="dv">scheme</span> white2</span>
-<span id="cb3-7"><a href="#cb3-7"></a>color_style tableau</span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="kw">two</span> <span class="kw">function</span> <span class="fu">y</span>=<span class="fu">normalden</span>(x), <span class="kw">range</span>(-5 5) lwidth(1) pstyle(p2) || <span class="kw">histogram</span> new1, <span class="bn">name</span>(m1, <span class="kw">replace</span>) , <span class="bn">legend</span>(<span class="kw">off</span>)</span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="kw">two</span> <span class="kw">function</span> <span class="fu">y</span>=<span class="fu">normalden</span>(x), <span class="kw">range</span>(-5 5) lwidth(1) pstyle(p2) || <span class="kw">histogram</span> new2, <span class="bn">name</span>(m2, <span class="kw">replace</span>) , <span class="bn">legend</span>(<span class="kw">off</span>)</span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="kw">two</span> <span class="kw">function</span> <span class="fu">y</span>=<span class="fu">normalden</span>(x), <span class="kw">range</span>(-5 5) lwidth(1) pstyle(p2) || <span class="kw">histogram</span> new3, <span class="bn">name</span>(m3, <span class="kw">replace</span>) , <span class="bn">legend</span>(<span class="kw">off</span>)</span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="kw">two</span> <span class="kw">function</span> <span class="fu">y</span>=<span class="fu">normalden</span>(x), <span class="kw">range</span>(-5 5) lwidth(1) pstyle(p2) || <span class="kw">histogram</span> new4, <span class="bn">name</span>(m4, <span class="kw">replace</span>) , <span class="bn">legend</span>(<span class="kw">off</span>)</span>
-<span id="cb3-12"><a href="#cb3-12"></a><span class="kw">two</span> <span class="kw">function</span> <span class="fu">y</span>=<span class="fu">normalden</span>(x), <span class="kw">range</span>(-5 5) lwidth(1) pstyle(p2) || <span class="kw">histogram</span> new5, <span class="bn">name</span>(m5, <span class="kw">replace</span>) , <span class="bn">legend</span>(<span class="kw">off</span>)</span>
-<span id="cb3-13"><a href="#cb3-13"></a><span class="kw">graph</span> <span class="bn">combine</span> m1 m2 m3 m4 m5, col(3) <span class="bn">xcommon</span> <span class="bn">ycommon</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a><span class="kw">graph</span> <span class="kw">export</span> resources/cmb.png, <span class="kw">width</span>(1500)  <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a><span class="kw">use</span> resources/simiv.dta, <span class="kw">clear</span></span>
+<span id="cb3-2"><a></a><span class="kw">forvalues</span> i = 1/5 {</span>
+<span id="cb3-3"><a></a>  <span class="kw">qui</span>:<span class="kw">sum</span> md<span class="ot">`i'</span>_b_beta</span>
+<span id="cb3-4"><a></a>  <span class="kw">gen</span> new<span class="ot">`i'</span>=(md<span class="ot">`i'</span>_b_beta-1)/<span class="fu">r</span>(<span class="fu">sd</span>)</span>
+<span id="cb3-5"><a></a>}</span>
+<span id="cb3-6"><a></a><span class="kw">set</span> <span class="dv">scheme</span> white2</span>
+<span id="cb3-7"><a></a>color_style tableau</span>
+<span id="cb3-8"><a></a><span class="kw">two</span> <span class="kw">function</span> <span class="fu">y</span>=<span class="fu">normalden</span>(x), <span class="kw">range</span>(-5 5) lwidth(1) pstyle(p2) || <span class="kw">histogram</span> new1, <span class="bn">name</span>(m1, <span class="kw">replace</span>) , <span class="bn">legend</span>(<span class="kw">off</span>)</span>
+<span id="cb3-9"><a></a><span class="kw">two</span> <span class="kw">function</span> <span class="fu">y</span>=<span class="fu">normalden</span>(x), <span class="kw">range</span>(-5 5) lwidth(1) pstyle(p2) || <span class="kw">histogram</span> new2, <span class="bn">name</span>(m2, <span class="kw">replace</span>) , <span class="bn">legend</span>(<span class="kw">off</span>)</span>
+<span id="cb3-10"><a></a><span class="kw">two</span> <span class="kw">function</span> <span class="fu">y</span>=<span class="fu">normalden</span>(x), <span class="kw">range</span>(-5 5) lwidth(1) pstyle(p2) || <span class="kw">histogram</span> new3, <span class="bn">name</span>(m3, <span class="kw">replace</span>) , <span class="bn">legend</span>(<span class="kw">off</span>)</span>
+<span id="cb3-11"><a></a><span class="kw">two</span> <span class="kw">function</span> <span class="fu">y</span>=<span class="fu">normalden</span>(x), <span class="kw">range</span>(-5 5) lwidth(1) pstyle(p2) || <span class="kw">histogram</span> new4, <span class="bn">name</span>(m4, <span class="kw">replace</span>) , <span class="bn">legend</span>(<span class="kw">off</span>)</span>
+<span id="cb3-12"><a></a><span class="kw">two</span> <span class="kw">function</span> <span class="fu">y</span>=<span class="fu">normalden</span>(x), <span class="kw">range</span>(-5 5) lwidth(1) pstyle(p2) || <span class="kw">histogram</span> new5, <span class="bn">name</span>(m5, <span class="kw">replace</span>) , <span class="bn">legend</span>(<span class="kw">off</span>)</span>
+<span id="cb3-13"><a></a><span class="kw">graph</span> <span class="bn">combine</span> m1 m2 m3 m4 m5, col(3) <span class="bn">xcommon</span> <span class="bn">ycommon</span></span>
+<span id="cb3-14"><a></a><span class="kw">graph</span> <span class="kw">export</span> resources/cmb.png, <span class="kw">width</span>(1500)  <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 
@@ -794,32 +800,32 @@ ATE &amp;=\frac{\beta_z}{\gamma_z}=\frac{cov(y,\tilde z)}{cov(d,\tilde z)}
 </section>
 <section id="simulation-example" class="slide level2 scrollable">
 <h2>Simulation Example:</h2>
-<div id="9a9704c9" class="cell" data-execution_count="3">
+<div id="bc4814cd" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">clear</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">set</span> <span class="kw">obs</span> 10000</span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">gen</span> sex = rnormal()&gt;0</span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">gen</span> z1 = rnormal()&gt;0</span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="kw">gen</span> z2 = rnormal()&gt;0</span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="kw">gen</span> e_1 =rnormal()</span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="kw">gen</span> e_2 =rnormal()</span>
-<span id="cb4-8"><a href="#cb4-8"></a><span class="kw">gen</span> e_3 =rnormal()</span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="kw">gen</span> D =(z1*(sex==0) + z2*(sex==1) + (e_1 + e_2)*.5)&gt;0</span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="kw">gen</span> Ds =(  (e_1 + e_2)*.5)&gt;0</span>
-<span id="cb4-11"><a href="#cb4-11"></a><span class="kw">gen</span> <span class="fu">y</span> = 1 + D*(sex==0) +2*D*(sex==1)+e_3+e_2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a></a><span class="kw">clear</span></span>
+<span id="cb4-2"><a></a><span class="kw">set</span> <span class="kw">obs</span> 10000</span>
+<span id="cb4-3"><a></a><span class="kw">gen</span> sex = rnormal()&gt;0</span>
+<span id="cb4-4"><a></a><span class="kw">gen</span> z1 = rnormal()&gt;0</span>
+<span id="cb4-5"><a></a><span class="kw">gen</span> z2 = rnormal()&gt;0</span>
+<span id="cb4-6"><a></a><span class="kw">gen</span> e_1 =rnormal()</span>
+<span id="cb4-7"><a></a><span class="kw">gen</span> e_2 =rnormal()</span>
+<span id="cb4-8"><a></a><span class="kw">gen</span> e_3 =rnormal()</span>
+<span id="cb4-9"><a></a><span class="kw">gen</span> D =(z1*(sex==0) + z2*(sex==1) + (e_1 + e_2)*.5)&gt;0</span>
+<span id="cb4-10"><a></a><span class="kw">gen</span> Ds =(  (e_1 + e_2)*.5)&gt;0</span>
+<span id="cb4-11"><a></a><span class="kw">gen</span> <span class="fu">y</span> = 1 + D*(sex==0) +2*D*(sex==1)+e_3+e_2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Number of observations (_N) was 0, now 10,000.</code></pre>
 </div>
 </div>
-<div id="d2da45b0" class="cell" data-execution_count="4">
+<div id="6891c1c9" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1"></a>%%echo</span>
-<span id="cb6-2"><a href="#cb6-2"></a>ivregress 2sls <span class="fu">y</span> (D=z1)</span>
-<span id="cb6-3"><a href="#cb6-3"></a>ivregress 2sls <span class="fu">y</span> (D=z2)</span>
-<span id="cb6-4"><a href="#cb6-4"></a>ivregress 2sls <span class="fu">y</span> (D=z1 z2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a></a>%%echo</span>
+<span id="cb6-2"><a></a>ivregress 2sls <span class="fu">y</span> (D=z1)</span>
+<span id="cb6-3"><a></a>ivregress 2sls <span class="fu">y</span> (D=z2)</span>
+<span id="cb6-4"><a></a>ivregress 2sls <span class="fu">y</span> (D=z1 z2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -837,8 +843,8 @@ Instrumental variables 2SLS regression            Number of obs   =     10,000
            D |   1.170842   .1413543     8.28   0.000     .8937923    1.447891
        _cons |   1.233464   .1015275    12.15   0.000     1.034474    1.432455
 ------------------------------------------------------------------------------
-Instrumented: D
- Instruments: z1
+Endogenous: D
+Exogenous:  z1
 
 . ivregress 2sls y (D=z2)
 
@@ -854,8 +860,8 @@ Instrumental variables 2SLS regression            Number of obs   =     10,000
            D |   1.948051   .1339876    14.54   0.000      1.68544    2.210662
        _cons |   .6818014   .0962172     7.09   0.000     .4932192    .8703836
 ------------------------------------------------------------------------------
-Instrumented: D
- Instruments: z2
+Endogenous: D
+Exogenous:  z2
 
 . ivregress 2sls y (D=z1 z2)
 
@@ -871,8 +877,8 @@ Instrumental variables 2SLS regression            Number of obs   =     10,000
            D |   1.556085   .0968958    16.06   0.000     1.366172    1.745997
        _cons |   .9600188   .0703862    13.64   0.000     .8220643    1.097973
 ------------------------------------------------------------------------------
-Instrumented: D
- Instruments: z1 z2
+Endogenous: D
+Exogenous:  z1 z2
 
 . </code></pre>
 </div>
@@ -942,8 +948,10 @@ Instrumented: D
 <section id="til-next-time-matching-and-reweithing" class="title-slide slide level1 center">
 <h1>Til Next time: Matching and Reweithing</h1>
 
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 </section>
     </div>
