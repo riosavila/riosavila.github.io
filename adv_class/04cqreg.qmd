@@ -5,7 +5,7 @@ author: Fernando Rios-Avila
 format:
   revealjs: 
     slide-number: true
-    width: 1500
+    width: 1600
     height: 900
     code-fold: true
     echo: true
@@ -19,15 +19,15 @@ execute:
 
 ### Question: What are quantiles? and why do we care??
 
--   Quantiles are statistics that have the purpose of providing a better characterization of distributions.
+-   Quantiles provide a better characterization of distributions.
 
-    -   This is possible, because it provides you with more information than standard summary statistics (means and variance)
+    -   It provides you with more information than standard summary statistics (means and variance)
 
 -   How so? In general, there are 3 ways you can use to know "everything" about a distribution.
 
     -   You either have access to every single $y_i$
 
-    -   Or you know the distribution function $f(y)$ (or probability density function pdf)
+    -   Or you know the distribution function $f(y)$ (pdf)
 
     -   Or you know the cumulative distribution function $F(y)=\int_\infty^y f(t) dt = P(Y\leq y)$
 
@@ -37,204 +37,234 @@ $$
 Q(\theta) = F^{-1}(p)
 $$
 
--   Which in principle, is nothing but the inverse cumulative density function.
 
-##
-$Q(\theta) = F^{-1}(\theta)$
+## $Q(\theta) = F^{-1}(\theta)$
 
 ![](resources/qreg1.png){fig-align="center"}
 
 ## Other advantages? Yes! {.scrollable}
 
--   Quantiles are far more stable in the presence of outliers. Because of this, they are particularly useful as measures of central tendency (perhaps superior to the mean) (🤔?)
+1.  Quantiles are far more stable in the presence of outliers. Because of this, they are particularly useful as measures of central tendency (perhaps superior to the mean) (🤔?)
 
     -   Simple "test". In the small town of Troy-NY one of the residents wins the 2B\$ lottery. How much has welfare increase for the average resident?
 
--   Scaled IQR can be used as an alternative measure of dispersion.
+2.  Scaled IQR can be used as an alternative measure of dispersion.
 
 $$
 se2 = \frac{Q_{75}-Q_{25}}{1.34898}
 $$
 
--   They are also "function-transformation" resistant: $exp(Q_{log(y)} (.10)) = Q_y(.10)$
+3.  They are also "function-transformation" resistant: $exp(Q_{log(y)} (.10)) = Q_y(.10)$
 
--   And are also very easy to estimate:
+##
 
-    1.  Sort data by y $\rightarrow$ Obtain weighted ranks $\rightarrow$ choose the lowest value so that $\theta$ % of the data is less of equal to that number
+4.   And are also very easy to estimate:
+
+-  Sort data by $y$ $\rightarrow$ Obtain weighted ranks $\rightarrow$ choose the lowest value so that $\theta$ % of the data is less of equal to that number
 
 $$
 F^{-1} (tau) = inf(x: F(x)\geq t)
 $$
 
-This "just" requires obtaining an approximation for $F(\theta)$, which can be approximated using nonparametric methods!
+- This "just" requires obtaining an approximation for $F(\theta)$, which can be approximated using nonparametric methods!
 
 $$\hat F(x) = \frac{1}{N}\sum (K_F(x,x_i,h)) = 
 \frac{1}{N}\sum 1(x_i<x)
 $$
 
-then we simply "invert" the function for whichever quantile we are interested in.
+- then we simply "invert" the function for whichever quantile we are interested in.
 
+## Technical Note
+
+- There are many empirical ways to estimate quantiles, even when using the empirical distribution function. 
+
+- So do not be suprised about small differences in the estimates.
+
+- When using Smooth functions, the choice of the kernel is also important. (and bandwidth)
+ 
 ## Statistical Inference {.scrollable}
 
-As with the mean, sampling quantiles are measured with sampling error. Thus its important to recognize its sampling distribution.
+- As with the mean, sampling quantiles are measured with sampling error.
 
-However, because of the nature of how quantiles are defined, their standard errors are not as intuitive to obtain, although they can be derived using the delta Method. We start from:
+- However their standard errors are not as intuitive to obtain ( but can be derived using the delta Method)
 
-$$Q_y(\tau) = F_y^{-1}(\tau) \rightarrow F_y(Q_y(\tau)) = \tau
+$$Q_y(\tau) = F_y^{-1}(\tau) \rightarrow F_y(Q_y(\tau)) = \tau \ || \ \frac{\partial}{\partial \tau}
 $$
 
-$$1 = f_y(Q_y(\tau)) \frac{dQ}{d\tau} \rightarrow \frac{dQ}{d\tau} =  \frac{1}{f(Q_y(\tau))}
+This gives us:
+$$f_y(Q_y(\tau)) \frac{dQ}{d\tau}  =1 \rightarrow \frac{dQ}{d\tau} =  \frac{1}{f(Q_y(\tau))}
 $$
+
+##
+### 
 
 So we have:
 
 $$
 \begin{aligned}
-\hat Q_y(\tau) - Q_y(\tau) \simeq \frac{1}{f(Q_y(\tau)}(\hat \tau-\tau) \\
-Var(\hat Q_y(\tau)) = \frac{Var(\hat \tau - \tau) }{f^2(Q_y(\tau))} = \frac{N^{-1} \tau(1-\tau)}{f^2(Q_y(\tau))}
+\hat Q_y(\tau) &\simeq Q_y(\tau) + \frac{1}{f(Q_y(\tau))}(\hat \tau-\tau) \\
+\hat Q_y(\tau) - Q_y(\tau) &\simeq \frac{1}{f(Q_y(\tau)}(\hat \tau-\tau) \\
+Var(\hat Q_y(\tau)) &= \frac{Var(\hat \tau - \tau) }{f^2(Q_y(\tau))} = \frac{N^{-1} \tau(1-\tau)}{f^2(Q_y(\tau))}
 \end{aligned}
 $$
 
 Lets understand this elements
 
-## Quantile SE {.scrollable}
+##
+### Quantile SE {.scrollable}
 
 $$
-Var(\hat Q_y(\tau)) = \frac{Var(\hat \tau - \tau) }{f^2(Q_y(\tau))} = \frac{N^{-1} \tau(1-\tau)}{f^2(Q_y(\tau))}
+Var(\hat Q_y(\tau)) = \frac{Var(\hat \tau - \tau) }{f^2(Q_y(\tau))} = \frac{1}{f^2(Q_y(\tau))}\frac{\tau(1-\tau)}{N}
 $$
 
--   the variance of a quantile depends on the distribution of $\tau$ which is nothing else that the distribution of a Bernoulli experiment: Is $y\geq Q_y$ or $y<Q_y$.
+-   The variance of a quantile depends on the distribution of $\tau$. This follows a Bernoulli distribution: Is $y\geq Q_y$ or $y<Q_y$.
 
-    -   This is the largest near the center of the distribution (50%-50%) but smaller (more precise) near the tails of the distribution (more certainty that something will be larger or smaller.
+    -   Largest near the center of the distribution (50%-50%) but smaller (more precise) near the tails of the distribution.
 
 -   But also depends on the density of the distribution.
 
     -   More precise estimates when the density is high (center), but less precise near tails of the distribution.
+    -   And, because $f()$ is unknown, there is another source of variation.
 
--   And as usual, it depends on the sample size (N) (for more precision one needs more data)
+-   And as usual, it depends on the sample size (N) 
+-   Of course, you also have the alternative method. **Bootstrap**!
 
-    > A minor problem. This depends on $f()$. Unless this is known, is another source of variation! (that we usually ignore
+## {.scrollable}
 
--   Of course, you also have the alternative method. Bootstrap!
+### Example
 
-## Example
-
-```stata
+#### Using Bootstrap
+```{stata}
+*| classes: larger
+*| code-fold: false
 frause wage2, clear
-bootstrap q10=r(r1) q25=r(r2) q50=r(r3) q75=r(r4) q90=r(r5), reps(1000): _pctile wage  , p(10 25 50 75 90)
+bootstrap q10=r(r1) q25=r(r2) q50=r(r3) ///
+          q75=r(r4) q90=r(r5), reps(1000) nodots: ///
+          _pctile wage  , p(10 25 50 75 90)
+```
 
-Bootstrap results                                        Number of obs =   935
-                                                         Replications  = 1,000
 
-      Command: _pctile wage, p(10 25 50 75 90)
+#### Analytical SE
 
-------------------------------------------------------------------------------
-             |   Observed   Bootstrap                         Normal-based
-             | coefficient  std. err.      z    P>|z|     [95% conf. interval]
--------------+----------------------------------------------------------------
-         q10 |        500   8.720396    57.34   0.000     482.9083    517.0917
-         q25 |        668   14.49296    46.09   0.000     639.5943    696.4057
-         q50 |        905   14.61303    61.93   0.000      876.359     933.641
-         q75 |       1160   20.18665    57.46   0.000     1120.435    1199.565
-         q90 |       1444   33.10919    43.61   0.000     1379.107    1508.893
-------------------------------------------------------------------------------
-
-* Analytical
+```{stata}
+*| classes: larger
+*| code-fold: false
 sort wage
 gen w1 = _n
 gen w0 = _n-1
 by wage:gen p=0.5*(w1[_N]+w0[1])/935
-kdensity wage, at(wage) gen(fwage)
-replace se = sqrt(p*(1-p)/935)/fwage
+kdensity wage, at(wage) gen(fwage) nodraw
+gen se = sqrt(p*(1-p)/935)/fwage
 tabstat wage se if inlist(wage,500,668,905,1160,1444), by(wage)
-
-
-    wage |      wage        se
----------+--------------------
-     500 |       500  13.27634
-     668 |       668  14.78419
-     905 |       905  14.69217
-    1160 |      1160   19.3574
-    1444 |      1444  29.32711
----------+--------------------
-   Total |  730.7619  15.88035
-------------------------------
 ```
 
 ## From $Q_Y$ to $Q_{Y|X}$ {.scrollable}
 
-The previous approaches used to identify a particular quantile are not the only ones.
+- The approaches used earlier to identify a particular quantile are not the only ones.
 
-Just like we can use OLS to estimate Means (Can you prove it?), we could also use a similar method to estimate the median. We only need to change the loss function $L()$ from an $L^2$ to a $|L|$.
+- Just like we can use OLS to estimate Means, we could also use a similar method to estimate the median. 
+  
+- We only need to change the loss function $L()$ from an $L^2$ to a $|L|$.
 
 Consider this:
 
+$$\begin{aligned}
+median(Y) &= min_\mu \frac{1}{N}\sum |y-\mu| \\
+&=\frac{2}{N}\sum (y-u)(0.5-I([y-u]<0)
+\end{aligned}
 $$
-median(Y) = min_\mu \frac{1}{N}\sum |y-\mu|=\frac{2}{N}\sum (y-u)(0.5-I([y-u]<0)
-$$
+
+##
 
 ![](resources/image-639081794.png){fig-align="center" width="751"}
 
 ## 
-
 ### Q and Loss functions
 
-Why does it matter?
+::: {.panel-tabset}
 
--   The loss function for Quantiles does not penalize "errors" as much as $L^2$ does. This is why its more robust to outliers (almost not affected by them). (the R2 will also need to be changed)
+## Why does it matter?
 
--   However, the loss function is no longer differentiable (is discontinuous). So requires other methods to find the solution. Even tho it may not look like that:
+-   The loss function for Quantiles does not penalize "errors" as much as $L^2$ does. 
+    -   This is why its more robust to outliers (almost not affected by them). 
 
-![](resources/image-1802600465.png){fig-align="center"}
+-   However, the loss function is no longer differentiable (is discontinuous). So requires other methods to find the solution. Even if it may not look like that:
 
-## 
+## Objective function
 
-### From B to XB
+![](resources/image-1802600465.png){fig-align="center" width=90%}
 
-Koenker and Bassett (1978) extended this last approximation in two ways:
+:::
 
--   Allows for Covariates ($X's$) variation
+##
+### From $\beta$ to $X\beta$
 
--   Allows to identify other quantiles in the distribution:
+Koenker and Bassett (1978) extended this approximation in two ways:
+
+-   Allowing for Covariates ($X's$) variation
+
+-   Allowing to identify other quantiles in the distribution:
 
 $$ \beta(\tau) = \underset {b}{min} \ N^{-1} \sum \rho_\tau(y_i-X_i'b) \\
 \rho_\tau (u) = u (\tau-I(u<0))
 $$
 
--   This implicitly states that you want to find a combination of $X's$ such that $\tau$ proportion of $y_i$ are lower than the $X_i'\beta(\tau)$ .
+-   This implicitly states that you want to find a combination of $X's$ such that $\tau$ proportion of $y_i$ are lower than the $X_i'\beta(\tau)$, for every combination of $X's$.
+    - Or as close as possible.
 
-    -   But because we are using controls, we also need that, conditional on $x^c$, $\tau$% is lower than $x'^{c}\beta$
+## Interpretation: Why is it so different from OLS?  
 
-$$Q_{Y|X}(\tau) = \beta_0(\tau) + \beta_1(\tau)x_1 +...+ \beta_k(\tau)x_k
-$$
+::: {.panel-tabset}
 
-## Interpretation: Why is it so different from OLS? {.scrollable}
+## 
 
--   In Rios-Avila and Maroto(2022?) we stress that OLS can be interpreted at different "levels". So consider the following:
+-   In Rios-Avila and Maroto(2022) we stress that OLS can be interpreted at different "levels". Consider the following:
 
 $$
 y_i = b_0 + b_1 x_1 + b_2 x_2  + e
 $$ 
 
-If there errors are exogenous, and there is no heteroskedasticty, you can "obtain" marginal effects at many levels:
+If the errors are exogenous, and there is no heteroskedasticty, you can "obtain" marginal effects at many levels
 
+## Individual 
+$$ Ind &: \frac{dy_i}{dx_{1i}}=b_1 
 $$
-\begin{aligned}
-Ind &: \frac{dy_i}{dx_{1i}}=b_1 \\
-Cond &: E(y_i|X=x)=b_0 + b_1 x_1 + b_2 x_2 \\
-&: \frac{dE(y|x)}{dx_1} =b_1 \\
-Ucond &: E(y_i) = b_0 + b_1 E(x_1) + b_2 E(x_2) \\
-&:  \frac{dE(y)}{dE(x_1)} =b_1 
+
+If $x_1i$ changes, and everything else is fixed, then $y_i$ changes by $b_1$ units for that individual.
+
+## Conditional 
+
+$$\begin{aligned}
+E(y_i|X=x)&=b_0 + b_1 x_1 + b_2 x_2 \\
+\frac{dE(y|x)}{dx_1} &=b_1 \\
+\end{aligned}
+$$
+
+If $x_1$ changes for a group of individuals with the same characterisitcs, everything else is fixed, then everyone in that group will experience a change in $Y$ by $b_1$ units.
+
+## Unconditional
+
+$$\begin{aligned}
+E(y_i) &= b_0 + b_1 E(x_1) + b_2 E(x_2) \\
+\frac{dE(y)}{dE(x_1)} &=b_1 
 \end{aligned}
 $$ 
 
+If $E(x_1)$ changes for everyone, then the overall average change in $Y$ is $b_1$ units.
+
+## Conclusion
+
 - So in OLS, assuming a linear model in parameters, **Nothing** changes. The effect is the same! (although magnitude of the "experiment" changes)
+
+:::
 
 ## But *C*Qreg? {.scrollable}
 
 For quantile regressions, things are not that simple.
 
-1.  There is no "individual" level quantile effect, because we do not observe individual ranks $\tau$ . If we could observe them, and we assume they are fixed, then one can obtain individual level effects.
+1.  There is no "individual" level quantile effect, because we do not observe individual ranks $\tau$. 
+
+    - If we could observe them, and we assume they are fixed, then one can obtain individual level effects.
 
 2.  Because $\tau$ is unobserved, all Qregression coefficients, should be interpreted as effects on Conditional Distributions (thus the name **C**QREG).
 
@@ -246,54 +276,88 @@ $$
 E(Q_{Y|X}(\tau)) \neq Q_Y(\tau)
 $$
 
-and you cannot "simply" average the CQREG effects to get unconditional.
+and you cannot "simply" average the CQREG effects to get unconditional quantiles.
 
-But what does it mean? This means that CQREG interpretation are percentile $\tau$ and covariate $X$ specific. But that is not all:
+##
+### what does it mean?
 
- -   **Fixed rank.** If you happen to be on the top of the distribution (and stay there), the quantile effect is given by the $\beta(\tau)$
- -   **Changes in Conditional distributions:** What we see are how distribution changes along characteristics
+- This means that CQREG interpretation are percentile $\tau$ and covariate $X$ specific. 
+ 
+   -   **Fixed rank.** If you happen to be on the top of the distribution (and stay there), the quantile effect is given by the $\beta(\tau)$
+      
+   -   **Rank is not fixed:** What we see is the effect of a change in $X$ on the conditional distribution of $Y$ (measured by the quantile)
 
 So this must be kept in mind, whenever one interpret results
 
+##
+
+### Visualizing Differences in Interpretation
+
+```{stata}
+*| echo: false
+*| output: false
+clear
+set obs 3000
+
+gen p=runiform()
+gen p2=runiform()
+
+gen x = runiformint(0,5)
+gen x1=x+1
+gen y = invnormal(p) + normal(3*invnormal(p)) * x
+gen y1 = invnormal(p) + normal(3*invnormal(p)) * (x+1)
+gen y2 = invnormal(p2) + normal(3*invnormal(p2)) * (x+1)
+gen rn = rnormal()*.1
+gen xs = x + rn
+gen xs1 = x1 + rn
+```
+
+::: {.panel-tabset}
+
+## Fixed Rank
+
+```{stata}
+*| echo: false
+set scheme white2
+two scatter y xs, color(gs1%10) || ///
+    scatter y1 xs1, color(gs1%10) || ///
+    pcarrow y x y1 x1 if _n<30, color(navy*.7) lw(0.5) ///
+    legend(off) ysize(6) xsize(10)
+```
+
+## Varying Rank
+
+```{stata}
+*| echo: false
+two scatter y xs, color(gs1%10) || ///
+    scatter y1 xs1, color(gs1%10) || ///
+    pcarrow y x y2 x1 if _n<30, color(navy*.7) lw(0.5) ///
+    legend(off) ysize(6) xsize(10)
+```
+
+:::
+
 ## Example: Wages...
 
-```stata
+```{stata}
+*| classes: larger
+*| code-fold: false
 frause oaxaca, clear
-qreg  lnwage educ exper tenure female, nolog q(10)
+qui:qreg  lnwage educ exper tenure female, nolog q(10)
 est sto m1
-qreg  lnwage educ exper tenure female, nolog q(50)
+qui:qreg  lnwage educ exper tenure female, nolog q(50)
 est sto m2
-qreg  lnwage educ exper tenure female, nolog q(90)
+qui:qreg  lnwage educ exper tenure female, nolog q(90)
 est sto m3
 * ssc install estout
-esttab m1 m2 m3, nogaps mtitle(q10 q50 q90)
-------------------------------------------------------------
-                      (1)             (2)             (3)   
-                      q10             q50             q90   
-------------------------------------------------------------
-educ                0.103***       0.0694***       0.0639***
-                   (6.21)         (16.03)          (7.09)   
-exper              0.0200***      0.00758***      0.00402   
-                   (4.06)          (5.91)          (1.50)   
-tenure           0.000669         0.00657***      0.00774*  
-                   (0.11)          (4.19)          (2.37)   
-female             -0.151         -0.0689**       -0.0543   
-                  (-1.87)         (-3.29)         (-1.24)   
-_cons               1.462***        2.474***        2.984***
-                   (6.67)         (43.36)         (25.10)   
-------------------------------------------------------------
-N                    1434            1434            1434   
-------------------------------------------------------------
-t statistics in parentheses
-* p<0.05, ** p<0.01, *** p<0.001
-** Also
-** ssc install qregplot
-qregplot educ exper tenure female, cons q(5/95)
+esttab m1 m2 m3, se nogaps mtitle(q10 q50 q90)
 ```
 
 ## Example: Wages...
 
-![](resources/image-728310792.png){fig-align="center"}
+`qregplot educ exper tenure female, cons q(5/95)`
+
+![](resources/image-728310792.png){fig-align="center" width=100%}
 
 # Other Interpretations of Qreg
 
@@ -303,31 +367,40 @@ One approach to both understanding, and simulating QREG is by also understanding
 
 $$
 \begin{aligned}
-y = b_0(\tau)+b_1(\tau)x_1 + +b_2(\tau)x_2+...+b_k(\tau) x_k \\
- \tau \sim runiform(0,1) 
+y &= b_0(\tau)+b_1(\tau)x_1 + +b_2(\tau)x_2+...+b_k(\tau) x_k \\
+ \tau &\sim runiform(0,1) 
 \end{aligned}
 $$
 
-where all coefficients are some function (preferably monotonically increasing or decreasing) of $\tau$ .
+where all coefficients are a function (preferably monotonically increasing or decreasing) of $\tau$ .
 
 > We want them to be monotonically increasing or decreasing because we want that
 $$
-X B(\tau_1 ) \geq
-X B(\tau_2 ) \  if \ \tau_1 > \tau_2$$
+X \beta(\tau_1 ) \geq
+X \beta(\tau_2 ) \  \text{ if } \ \tau_1 > \tau_2
+$$
 
-This specification suggest that the unobserved component $\tau$ is a random indicator a kind to luck. If you are lucky and get a high $\tau$ then you will have better outcomes than anyone of your peers.
+##
 
-Also notice that this setup assumes that $\tau$ is the only random factor, and should be uncorrelated with $X$ (you do not make your luck!)
+- In this specification the unobserved component $\tau$ is similar to luck. If you are lucky and get a high $\tau$ then you will have better outcomes than anyone of your peers.
 
-Can you create data with these characteristics?
+- Also notice: $\tau$ is the only random factor, and should be uncorrelated with $X$ (you do not make your luck!)
+ 
 
 ## SVC model with a latent running variable {.scrollable}
 
-Another way you can think of Qreg is to align it to the -semiparametric- method we introduced ealier. SVC model.
+- Another way of thinking about Qreg is to align it to the **semiparametric** method we introduced ealier. SVC model.
 
-The difference here is that the running variable is unknown. Given the outcome, and characteristics, however, we can identify something akin to the presence of a "latent" component. (but not really estimating it).
 
-There are a few (recent) papers that focus on estimation and identification of these models. The general intuition is that the qreg model is identified by the following moment condition:
+- In SVC, there is an observed running variable $z$, and we focus on analyzing how the "local" effects of $X$ on $Y$ change as a function of $z$.
+  
+- The difference with Qreg is that the running variable is unknown $\tau$. 
+ 
+  - Given the outcome, and characteristics we can identify something like a "latent" component.
+
+## 
+
+- There are a few (recent) papers that focus on estimation and identification of these models. The general intuition is that the qreg model is identified by the following moment condition:
 
 $$
 E\Big( 1[x\beta(\tau) - y > 0 ] - \tau \Big) = 0
@@ -341,7 +414,7 @@ $$
 
 Being differentiable, this problem is relatively easier to solve (given good initial values)
 
-## Example
+## Example (with `sivqr`)
 
 ![](resources/image-2068895861.png){fig-align="center"}
 
@@ -352,56 +425,56 @@ Another approach that can be used to understand Quantile regressions (and elabor
 $$y = Xb + Xg(\tau)
 $$
 
--   **Location:** which indicates what is the average relationship between X and Y. ${b}$
+-   **Location:** $Xb$ which indicates what is the average/typical relationship between X and Y.
 
--   **Scale:** which indicates how far one could be from the average effect, given a relative to its position $g(\tau)$
-
-The model Still assumes random coefficients
+-   **Scale:** $Xg(\tau)$ which indicates how far one could be from the average effect, given a relative rank $\tau$
 
 Estimation of this model is not standard. But can be manually implemented:
 
 1.  Estimate OLS and get residuals
 2.  Estimate QREG using those residuals
 
-Requires additional care for the estimation of SE, or just bootstrap
+Requires additional care for the estimation of SE
 
 ## Scale and Location 2: Heteroskedasticity {.scrollable}
 
 A second approach that is useful to understand and interpret CQreg is to consider a parametric version of the LS model:
 
-$$y = Xb + \gamma (X) * e
+$$y = Xb + \gamma (X) * e \text{ with } $\gamma(X)>>0$$ 
+
+- This shows the relationship between a quantile regressions and heteroskedasticity in the error term. 
+
+- If we assume Heteroskedasticity is parametric ($\gamma(x) = X \gamma$), it constrains the relationship across all quantile coefficients:
+
+$$y = X(b+\gamma F^{-1}(\tau)) \rightarrow b(\tau)=b+\gamma\times q(\tau)
 $$
 
-Where we assume $\gamma(X)>0$ . which directly shows the relationship between a quantile regressions and heteroskedasticity in the error term. (typically model as $X\gamma$)
+- Making it more efficient, albeit imposing constrains of the relationship.
 
-Because Heteroskedasticity is parametric, it constrains the relationship across all quantile coefficients:
 
-$$y = X(b+\gamma F^{-1}(\tau)) \rightarrow b(\tau)=b+\gamma(\tau)
-$$
+## {.scrollable}
 
-Making it more efficient, albeit imposing constrains of the relationship.
+### Example (with `mmqreg`)
 
-It shows more clearly the nature of the overall inequality increasing or decreasing effect.
-
-## Visual Loc vs Scale
-
-![](resources/image-1741672981.png){fig-align="center"}
-
-## Visual Loc vs Scale
-
-![](resources/image-1238178930.png)
+```{stata}
+*| classes: larger
+qui:frause oaxaca, clear
+qui:mmqreg lnwage educ exper tenure female, robust
+qregplot educ exper tenure female, cons q(5(5)95)
+```
 
 ## Estimation and Statistical Inference {.scrollable}
 
 As hinted previously, there are many approaches that can be used for the estimation of Conditional Quantile regressions.
 
--   Stata: `qreg`, `sqreg`, `bsqreg`, `qreg2`, `qrprocess`, `mmqreg`, `smqreg`, `sivqr`
+-   Official: `qreg`, `sqreg`, `bsqreg`, `iqreg`
+-   CContributed: `qreg2`, `qrprocess`, `mmqreg`, `smqreg`, `sivqr`
 
-Each one with its own assumptions. For Standard errors, however, there are 3 options. Under the assumption of iid error. Non iid error (robust), and assuming clustered standard errors.
+- For Standard errors, however, there are main 3 options. Under the assumption of iid error. Non iid error (robust), and assuming clustered standard errors.
 
 $$
 \begin{aligned}
- iid: \Sigma_\beta &=\frac{\tau(1-\tau)}{f^2_y(F^{-1}(\tau))}(X'X)^{-1} \\
+ iid: \Sigma_\beta &=\frac{\tau(1-\tau)}{N f^2_y(F^{-1}(\tau))}(X'X)^{-1} \\
 niid: \Sigma_\beta &= \tau(1-\tau) (X'f(0|x)X)^{-1} \ (X'X) \ (X'f(0|x)X)^{-1} \\
 alt: \Sigma_\beta &= (IF_\beta \ ' IF_\beta) N^{-2}
 \end{aligned}
@@ -417,6 +490,161 @@ Or simply Bootstrap
 4.  Non-linear effects will be present if either the location or scale components are nonlinear.
 5.  Quantile regressions are very sensitive to measurement errors in both dependent and independent variables
 6.  They can be difficult to interpret (see references)
+
+7. Implementation of fixed effects is not straightforward 
+
+# Quantile Regressions with Fixed Effects
+
+## The problem
+
+- There are two problems related to Estimating Quantile Regressions with (multiple) Fixed Effects
+  - First: As with nonlinear models, Adding many fixed effects creates an incidental parameter problem.
+  - Second: For Conditional Quantile Regressions, it can be difficult to interpret the role of fixed effects.
+  
+## Simulating some data
+
+```{stata}
+*| classes: larger
+*| code-fold: false
+clear
+set obs 1000
+gen id = _n
+gen vi = rnormal()
+gen ui = rnormal()+vi
+
+gen toexp = 1+rpoisson(5)
+expand toexp
+gen err = rnormal()
+gen x1 = rnormal()+vi+err
+gen x2 = rnormal()+vi+err
+gen y = 1+x1+x2+ui+rnormal()*exp(0.2*x1-0.2*x2+0.3*ui)
+```
+
+# Accounting for Fixed effects
+
+## Benchmark
+
+Assume you observe those fixed effects:
+```{stata}
+*| classes: larger
+set line 255
+qui:qreg y x1 x2 ui, q(10)
+est sto m10
+qui:qreg y x1 x2 ui, q(50)
+est sto m20
+qui:qreg y x1 x2 ui, q(90)
+est sto m30
+esttab m10 m20 m30, se nogaps mtitle(q10 q50 q90)
+```
+
+## Ignoring Fixed Effects
+
+```{stata}
+*| classes: larger
+qui:qreg y x1 x2  , q(10)
+est sto m1
+qui:qreg y x1 x2  , q(50)
+est sto m2
+qui:qreg y x1 x2  , q(90)
+est sto m3
+esttab m1 m2 m3 m10 m20 m30, se nogaps mtitle(q10 q50 q90)
+```
+
+## Solution 1: Correlated Random Effects {.scrollable}
+
+Idea: Include "PAnel average" of all indep variables as regressors. 
+
+They should control (at least partially) for the unobserved effects.
+
+$$Q_p(y|X) = X\beta + \alpha \bar X + \epsilon$$
+
+```{stata}
+*| classes: larger
+
+bysort id: egen x1p = mean(x1)
+bysort id: egen x2p = mean(x2)
+qui:qreg y x1 x2 x1p x2p , q(10)
+est sto m1
+qui:qreg y x1 x2  x1p x2p , q(50)
+est sto m2
+qui:qreg y x1 x2  x1p x2p , q(90)
+est sto m3
+esttab m1 m2 m3 m10 m20 m30, se nogaps mtitle(q10 q50 q90)
+```
+
+## Solution 2: FE are Fixed {.scrollable}
+
+- Canay (2011) proposes make the "simplifying" that "Fixed effects" are constant across quantiles. 
+- Thus a two step procedure is proposed:
+  - First: Estimate the fixed effects using OLS
+  - Second: Estimate the quantile regression using outcome after taking FE "off"
+
+$$\begin{aligned}
+y &= X\beta + \alpha_i + \epsilon \\
+Q_\tau(y - \hat \alpha_i |X) &= X\beta(\tau) +  \epsilon_\tau \\
+\end{aligned}
+$$
+
+```{stata}
+*| classes: larger
+qui:reghdfe y x1 x2, absorb(fe = id)
+gen y_fe = y - fe
+qui:qreg y_fe x1 x2   , q(10)
+est sto m1
+qui:qreg y_fe x1 x2   , q(50)
+est sto m2
+qui:qreg y_fe x1 x2 , q(90)
+est sto m3
+esttab m1 m2 m3 m10 m20 m30, se nogaps mtitle(q10 q50 q90)
+```
+
+## Solution 3: Modified Canay(2011) {.scrollable}
+
+- Same as before, but rather than "removing" fixed effects, we control for them in the model:
+
+$$\begin{aligned}
+y &= X\beta + \alpha_i + \epsilon \\
+Q_\tau(y |X) &= X\beta(\tau) + \gamma \hat \alpha_i + \epsilon_\tau \\
+\end{aligned}
+$$
+
+```{stata}
+*| classes: larger
+
+qui:qreg y x1 x2 fe  , q(10)
+est sto m1
+qui:qreg y x1 x2 fe  , q(50)
+est sto m2
+qui:qreg y x1 x2 fe, q(90)
+est sto m3
+esttab m1 m2 m3 m10 m20 m30, se nogaps mtitle(q10 q50 q90)
+```
+
+## Solution 4: LS model {.scrollable}
+
+- Machado and Silva (2019) propose a different approach. They suggest modeling the quantile regression using linear models for a scale and location model.
+- This simplifies the task of estimating multiple equations:
+
+$$\begin{aligned}
+y &= X\beta + \epsilon \\
+\hat\epsilon^2 &= X\gamma + \nu \\
+Q\left( \frac{\hat\epsilon}{X\gamma}\right) &= q(\tau) \\
+\beta(\tau) &= \beta + \gamma \times q(\tau)
+\end {aligned}
+$$
+
+```{stata}
+*| classes: larger
+*| code-fold: false
+
+qui:mmqreg y x1 x2   , q(10)  abs(id) robust
+est sto m1
+qui:mmqreg y x1 x2   , q(50)  abs(id) robust
+est sto m2
+qui:mmqreg y x1 x2 , q(90) abs(id) robust
+est sto m3
+esttab m1 m2 m3 m10 m20 m30, se nogaps mtitle(q10 q50 q90)
+```
 
 # Next topic...Unconditional Quantiles
 
