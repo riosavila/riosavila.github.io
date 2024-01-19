@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.455">
+  <meta name="generator" content="quarto-1.4.537">
 
   <meta name="author" content="Fernando Rios-Avila">
   <title>Econometrics MSC Levy - Conditional Quantile Regressions</title>
@@ -430,7 +430,7 @@ Q(\theta) = F^{-1}(p)
 <section id="qtheta-f-1theta" class="slide level2">
 <h2><span class="math inline">\(Q(\theta) = F^{-1}(\theta)\)</span></h2>
 
-<img data-src="resources/qreg1.png" class="quarto-figure-center r-stretch"></section>
+<img data-src="resources/qreg1.png" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="other-advantages-yes" class="slide level2 scrollable">
 <h2>Other advantages? Yes!</h2>
 <ol type="1">
@@ -524,11 +524,11 @@ Var(\hat Q_y(\tau)) = \frac{Var(\hat \tau - \tau) }{f^2(Q_y(\tau))} = \frac{1}{f
 <h2></h2>
 <h3 id="example">Example</h3>
 <h4 id="using-bootstrap">Using Bootstrap</h4>
-<div id="d7209e3e" class="cell larger" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a>frause wage2, <span class="kw">clear</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">bootstrap</span> q10=<span class="fu">r</span>(r1) q25=<span class="fu">r</span>(r2) q50=<span class="fu">r</span>(r3) <span class="co">///</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>          q75=<span class="fu">r</span>(r4) q90=<span class="fu">r</span>(r5), reps(1000) <span class="kw">nodots</span>: <span class="co">///</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>          _pctile wage  , <span class="kw">p</span>(10 25 50 75 90)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="78e7f1ed" class="cell larger" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a></a>frause wage2, <span class="kw">clear</span></span>
+<span id="cb1-2"><a></a><span class="kw">bootstrap</span> q10=<span class="fu">r</span>(r1) q25=<span class="fu">r</span>(r2) q50=<span class="fu">r</span>(r3) <span class="co">///</span></span>
+<span id="cb1-3"><a></a>          q75=<span class="fu">r</span>(r4) q90=<span class="fu">r</span>(r5), reps(1000) <span class="kw">nodots</span>: <span class="co">///</span></span>
+<span id="cb1-4"><a></a>          _pctile wage  , <span class="kw">p</span>(10 25 50 75 90)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <style>div.jp-Notebook .datagrid-container {min-height: 448px; }</style>
 </div>
@@ -562,14 +562,14 @@ Bootstrap results                                        Number of obs =   935
 </div>
 </div>
 <h4 id="analytical-se">Analytical SE</h4>
-<div id="40f44571" class="cell larger" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">sort</span> wage</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">gen</span> w1 = <span class="dt">_n</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">gen</span> w0 = <span class="dt">_n</span>-1</span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="kw">by</span> wage:<span class="kw">gen</span> <span class="kw">p</span>=0.5*(w1[_N]+w0[1])/935</span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="kw">kdensity</span> wage, <span class="fu">at</span>(wage) <span class="kw">gen</span>(fwage) <span class="bn">nodraw</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="kw">gen</span> se = <span class="fu">sqrt</span>(<span class="kw">p</span>*(1-<span class="kw">p</span>)/935)/fwage</span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="kw">tabstat</span> wage se <span class="kw">if</span> <span class="fu">inlist</span>(wage,500,668,905,1160,1444), <span class="kw">by</span>(wage)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="5cb21fb9" class="cell larger" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a><span class="kw">sort</span> wage</span>
+<span id="cb3-2"><a></a><span class="kw">gen</span> w1 = <span class="dt">_n</span></span>
+<span id="cb3-3"><a></a><span class="kw">gen</span> w0 = <span class="dt">_n</span>-1</span>
+<span id="cb3-4"><a></a><span class="kw">by</span> wage:<span class="kw">gen</span> <span class="kw">p</span>=0.5*(w1[_N]+w0[1])/935</span>
+<span id="cb3-5"><a></a><span class="kw">kdensity</span> wage, <span class="fu">at</span>(wage) <span class="kw">gen</span>(fwage) <span class="bn">nodraw</span></span>
+<span id="cb3-6"><a></a><span class="kw">gen</span> se = <span class="fu">sqrt</span>(<span class="kw">p</span>*(1-<span class="kw">p</span>)/935)/fwage</span>
+<span id="cb3-7"><a></a><span class="kw">tabstat</span> wage se <span class="kw">if</span> <span class="fu">inlist</span>(wage,500,668,905,1160,1444), <span class="kw">by</span>(wage)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Summary statistics: Mean
@@ -605,7 +605,7 @@ median(Y) &amp;= min_\mu \frac{1}{N}\sum |y-\mu| \\
 <section id="section-5" class="slide level2">
 <h2></h2>
 
-<img data-src="resources/image-639081794.png" class="quarto-figure-center r-stretch" width="751"></section>
+<img data-src="resources/image-639081794.png" class="quarto-figure quarto-figure-center r-stretch" width="751"></section>
 <section id="section-6" class="slide level2">
 <h2></h2>
 <h3 id="q-and-loss-functions">Q and Loss functions</h3>
@@ -622,7 +622,11 @@ median(Y) &amp;= min_\mu \frac{1}{N}\sum |y-\mu| \\
 </ul>
 </div>
 <div id="tabset-1-2">
-<p><img data-src="resources/image-1802600465.png" class="quarto-figure-center" style="width:90.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="resources/image-1802600465.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -660,7 +664,7 @@ y_i = b_0 + b_1 x_1 + b_2 x_2  + e
 <p>If the errors are exogenous, and there is no heteroskedasticty, you can “obtain” marginal effects at many levels</p>
 </div>
 <div id="tabset-2-2">
-<p><span class="math display">\[ Ind &amp;: \frac{dy_i}{dx_{1i}}=b_1
+<p><span class="math display">\[ Ind: \frac{dy_i}{dx_{1i}}=b_1
 \]</span></p>
 <p>If <span class="math inline">\(x_1i\)</span> changes, and everything else is fixed, then <span class="math inline">\(y_i\)</span> changes by <span class="math inline">\(b_1\)</span> units for that individual.</p>
 </div>
@@ -726,16 +730,24 @@ E(Q_{Y|X}(\tau)) \neq Q_Y(\tau)
 <ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Fixed Rank</a></li><li><a href="#tabset-3-2">Varying Rank</a></li></ul>
 <div class="tab-content">
 <div id="tabset-3-1">
-<div id="469c0e31" class="cell" data-execution_count="4">
+<div id="49b71291" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
+<div>
+<figure>
 <p><img data-src="04cqreg_files/figure-revealjs/cell-5-output-1.png"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
 <div id="tabset-3-2">
-<div id="9f665544" class="cell" data-execution_count="5">
+<div id="8412ea7b" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
+<div>
+<figure>
 <p><img data-src="04cqreg_files/figure-revealjs/cell-6-output-1.png"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -744,16 +756,16 @@ E(Q_{Y|X}(\tau)) \neq Q_Y(\tau)
 </section>
 <section id="example-wages" class="slide level2">
 <h2>Example: Wages…</h2>
-<div id="ec5c96bf" class="cell larger" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1"></a>frause oaxaca, <span class="kw">clear</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">qui</span>:<span class="kw">qreg</span>  lnwage educ exper tenure female, <span class="kw">nolog</span> <span class="fu">q</span>(10)</span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">est</span> sto m1</span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">qui</span>:<span class="kw">qreg</span>  lnwage educ exper tenure female, <span class="kw">nolog</span> <span class="fu">q</span>(50)</span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="kw">est</span> sto m2</span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="kw">qui</span>:<span class="kw">qreg</span>  lnwage educ exper tenure female, <span class="kw">nolog</span> <span class="fu">q</span>(90)</span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="kw">est</span> sto m3</span>
-<span id="cb5-8"><a href="#cb5-8"></a>* <span class="kw">ssc</span> install estout</span>
-<span id="cb5-9"><a href="#cb5-9"></a>esttab m1 m2 m3, se nogaps mtitle(q10 q50 q90)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="56562446" class="cell larger" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a></a>frause oaxaca, <span class="kw">clear</span></span>
+<span id="cb5-2"><a></a><span class="kw">qui</span>:<span class="kw">qreg</span>  lnwage educ exper tenure female, <span class="kw">nolog</span> <span class="fu">q</span>(10)</span>
+<span id="cb5-3"><a></a><span class="kw">est</span> sto m1</span>
+<span id="cb5-4"><a></a><span class="kw">qui</span>:<span class="kw">qreg</span>  lnwage educ exper tenure female, <span class="kw">nolog</span> <span class="fu">q</span>(50)</span>
+<span id="cb5-5"><a></a><span class="kw">est</span> sto m2</span>
+<span id="cb5-6"><a></a><span class="kw">qui</span>:<span class="kw">qreg</span>  lnwage educ exper tenure female, <span class="kw">nolog</span> <span class="fu">q</span>(90)</span>
+<span id="cb5-7"><a></a><span class="kw">est</span> sto m3</span>
+<span id="cb5-8"><a></a>* <span class="kw">ssc</span> install estout</span>
+<span id="cb5-9"><a></a>esttab m1 m2 m3, se nogaps mtitle(q10 q50 q90)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Excerpt from the Swiss Labor Market Survey 1998)
 
@@ -783,7 +795,7 @@ Standard errors in parentheses
 <h2>Example: Wages…</h2>
 <p><code>qregplot educ exper tenure female, cons q(5/95)</code></p>
 
-<img data-src="resources/image-728310792.png" class="quarto-figure-center r-stretch" style="width:100.0%"></section>
+<img data-src="resources/image-728310792.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
 <section>
 <section id="other-interpretations-of-qreg" class="title-slide slide level1 center">
 <h1>Other Interpretations of Qreg</h1>
@@ -841,7 +853,7 @@ E\Big( F(x\beta(\tau) - y) - \tau \Big) = 0
 <section id="example-with-sivqr" class="slide level2">
 <h2>Example (with <code>sivqr</code>)</h2>
 
-<img data-src="resources/image-2068895861.png" class="quarto-figure-center r-stretch"></section>
+<img data-src="resources/image-2068895861.png" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="scale-and-location-model" class="slide level2 scrollable">
 <h2>Scale and Location Model</h2>
 <p>Another approach that can be used to understand Quantile regressions (and elaborate the interpretation) is to assume that the coefficients are in fact capturing two components:</p>
@@ -861,7 +873,7 @@ E\Big( F(x\beta(\tau) - y) - \tau \Big) = 0
 <section id="scale-and-location-2-heteroskedasticity" class="slide level2 scrollable">
 <h2>Scale and Location 2: Heteroskedasticity</h2>
 <p>A second approach that is useful to understand and interpret CQreg is to consider a parametric version of the LS model:</p>
-<p><span class="math display">\[y = Xb + \gamma (X) * e \text{ with } $\gamma(X)&gt;&gt;0\]</span></p>
+<p><span class="math display">\[y = Xb + \gamma (X) * e \text{ with } \gamma(X)&gt;&gt;0\]</span></p>
 <ul>
 <li><p>This shows the relationship between a quantile regressions and heteroskedasticity in the error term.</p></li>
 <li><p>If we assume Heteroskedasticity is parametric (<span class="math inline">\(\gamma(x) = X \gamma\)</span>), it constrains the relationship across all quantile coefficients:</p></li>
@@ -875,12 +887,12 @@ E\Big( F(x\beta(\tau) - y) - \tau \Big) = 0
 <section id="section-13" class="slide level2 scrollable">
 <h2></h2>
 <h3 id="example-with-mmqreg">Example (with <code>mmqreg</code>)</h3>
-<div id="f04dfe4d" class="cell larger" data-execution_count="7">
+<div id="60a60958" class="cell larger" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">qui</span>:frause oaxaca, <span class="kw">clear</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">qui</span>:mmqreg lnwage educ exper tenure female, <span class="kw">robust</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>qregplot educ exper tenure female, cons <span class="fu">q</span>(5(5)95)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a></a><span class="kw">qui</span>:frause oaxaca, <span class="kw">clear</span></span>
+<span id="cb7-2"><a></a><span class="kw">qui</span>:mmqreg lnwage educ exper tenure female, <span class="kw">robust</span></span>
+<span id="cb7-3"><a></a>qregplot educ exper tenure female, cons <span class="fu">q</span>(5(5)95)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
@@ -931,19 +943,19 @@ alt: \Sigma_\beta &amp;= (IF_\beta \ ' IF_\beta) N^{-2}
 </section>
 <section id="simulating-some-data" class="slide level2">
 <h2>Simulating some data</h2>
-<div id="1c92c693" class="cell larger" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">clear</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">set</span> <span class="kw">obs</span> 1000</span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="kw">gen</span> id = <span class="dt">_n</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="kw">gen</span> vi = rnormal()</span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="kw">gen</span> ui = rnormal()+vi</span>
-<span id="cb8-6"><a href="#cb8-6"></a></span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="kw">gen</span> toexp = 1+rpoisson(5)</span>
-<span id="cb8-8"><a href="#cb8-8"></a>expand toexp</span>
-<span id="cb8-9"><a href="#cb8-9"></a><span class="kw">gen</span> err = rnormal()</span>
-<span id="cb8-10"><a href="#cb8-10"></a><span class="kw">gen</span> x1 = rnormal()+vi+err</span>
-<span id="cb8-11"><a href="#cb8-11"></a><span class="kw">gen</span> <span class="kw">x2</span> = rnormal()+vi+err</span>
-<span id="cb8-12"><a href="#cb8-12"></a><span class="kw">gen</span> <span class="fu">y</span> = 1+x1+<span class="kw">x2</span>+ui+rnormal()*<span class="fu">exp</span>(0.2*x1-0.2*<span class="kw">x2</span>+0.3*ui)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="c7c8cbe5" class="cell larger" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a></a><span class="kw">clear</span></span>
+<span id="cb8-2"><a></a><span class="kw">set</span> <span class="kw">obs</span> 1000</span>
+<span id="cb8-3"><a></a><span class="kw">gen</span> id = <span class="dt">_n</span></span>
+<span id="cb8-4"><a></a><span class="kw">gen</span> vi = rnormal()</span>
+<span id="cb8-5"><a></a><span class="kw">gen</span> ui = rnormal()+vi</span>
+<span id="cb8-6"><a></a></span>
+<span id="cb8-7"><a></a><span class="kw">gen</span> toexp = 1+rpoisson(5)</span>
+<span id="cb8-8"><a></a>expand toexp</span>
+<span id="cb8-9"><a></a><span class="kw">gen</span> err = rnormal()</span>
+<span id="cb8-10"><a></a><span class="kw">gen</span> x1 = rnormal()+vi+err</span>
+<span id="cb8-11"><a></a><span class="kw">gen</span> <span class="kw">x2</span> = rnormal()+vi+err</span>
+<span id="cb8-12"><a></a><span class="kw">gen</span> <span class="fu">y</span> = 1+x1+<span class="kw">x2</span>+ui+rnormal()*<span class="fu">exp</span>(0.2*x1-0.2*<span class="kw">x2</span>+0.3*ui)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Number of observations (_N) was 0, now 1,000.
 (5,019 observations created)</code></pre>
@@ -958,17 +970,17 @@ alt: \Sigma_\beta &amp;= (IF_\beta \ ' IF_\beta) N^{-2}
 <section id="benchmark" class="slide level2">
 <h2>Benchmark</h2>
 <p>Assume you observe those fixed effects:</p>
-<div id="dcf71e1e" class="cell larger" data-execution_count="9">
+<div id="3a430836" class="cell larger" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">set</span> <span class="kw">line</span> 255</span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="kw">qui</span>:<span class="kw">qreg</span> <span class="fu">y</span> x1 <span class="kw">x2</span> ui, <span class="fu">q</span>(10)</span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="kw">est</span> sto m10</span>
-<span id="cb10-4"><a href="#cb10-4"></a><span class="kw">qui</span>:<span class="kw">qreg</span> <span class="fu">y</span> x1 <span class="kw">x2</span> ui, <span class="fu">q</span>(50)</span>
-<span id="cb10-5"><a href="#cb10-5"></a><span class="kw">est</span> sto m20</span>
-<span id="cb10-6"><a href="#cb10-6"></a><span class="kw">qui</span>:<span class="kw">qreg</span> <span class="fu">y</span> x1 <span class="kw">x2</span> ui, <span class="fu">q</span>(90)</span>
-<span id="cb10-7"><a href="#cb10-7"></a><span class="kw">est</span> sto m30</span>
-<span id="cb10-8"><a href="#cb10-8"></a>esttab m10 m20 m30, se nogaps mtitle(q10 q50 q90)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a></a><span class="kw">set</span> <span class="kw">line</span> 255</span>
+<span id="cb10-2"><a></a><span class="kw">qui</span>:<span class="kw">qreg</span> <span class="fu">y</span> x1 <span class="kw">x2</span> ui, <span class="fu">q</span>(10)</span>
+<span id="cb10-3"><a></a><span class="kw">est</span> sto m10</span>
+<span id="cb10-4"><a></a><span class="kw">qui</span>:<span class="kw">qreg</span> <span class="fu">y</span> x1 <span class="kw">x2</span> ui, <span class="fu">q</span>(50)</span>
+<span id="cb10-5"><a></a><span class="kw">est</span> sto m20</span>
+<span id="cb10-6"><a></a><span class="kw">qui</span>:<span class="kw">qreg</span> <span class="fu">y</span> x1 <span class="kw">x2</span> ui, <span class="fu">q</span>(90)</span>
+<span id="cb10-7"><a></a><span class="kw">est</span> sto m30</span>
+<span id="cb10-8"><a></a>esttab m10 m20 m30, se nogaps mtitle(q10 q50 q90)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -994,16 +1006,16 @@ Standard errors in parentheses
 </section>
 <section id="ignoring-fixed-effects" class="slide level2">
 <h2>Ignoring Fixed Effects</h2>
-<div id="88178f21" class="cell larger" data-execution_count="10">
+<div id="666bb7d1" class="cell larger" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">qui</span>:<span class="kw">qreg</span> <span class="fu">y</span> x1 <span class="kw">x2</span>  , <span class="fu">q</span>(10)</span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="kw">est</span> sto m1</span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="kw">qui</span>:<span class="kw">qreg</span> <span class="fu">y</span> x1 <span class="kw">x2</span>  , <span class="fu">q</span>(50)</span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="kw">est</span> sto m2</span>
-<span id="cb12-5"><a href="#cb12-5"></a><span class="kw">qui</span>:<span class="kw">qreg</span> <span class="fu">y</span> x1 <span class="kw">x2</span>  , <span class="fu">q</span>(90)</span>
-<span id="cb12-6"><a href="#cb12-6"></a><span class="kw">est</span> sto m3</span>
-<span id="cb12-7"><a href="#cb12-7"></a>esttab m1 m2 m3 m10 m20 m30, se nogaps mtitle(q10 q50 q90)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a></a><span class="kw">qui</span>:<span class="kw">qreg</span> <span class="fu">y</span> x1 <span class="kw">x2</span>  , <span class="fu">q</span>(10)</span>
+<span id="cb12-2"><a></a><span class="kw">est</span> sto m1</span>
+<span id="cb12-3"><a></a><span class="kw">qui</span>:<span class="kw">qreg</span> <span class="fu">y</span> x1 <span class="kw">x2</span>  , <span class="fu">q</span>(50)</span>
+<span id="cb12-4"><a></a><span class="kw">est</span> sto m2</span>
+<span id="cb12-5"><a></a><span class="kw">qui</span>:<span class="kw">qreg</span> <span class="fu">y</span> x1 <span class="kw">x2</span>  , <span class="fu">q</span>(90)</span>
+<span id="cb12-6"><a></a><span class="kw">est</span> sto m3</span>
+<span id="cb12-7"><a></a>esttab m1 m2 m3 m10 m20 m30, se nogaps mtitle(q10 q50 q90)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1032,18 +1044,18 @@ Standard errors in parentheses
 <p>Idea: Include “PAnel average” of all indep variables as regressors.</p>
 <p>They should control (at least partially) for the unobserved effects.</p>
 <p><span class="math display">\[Q_p(y|X) = X\beta + \alpha \bar X + \epsilon\]</span></p>
-<div id="e352f18e" class="cell larger" data-execution_count="11">
+<div id="62b55df2" class="cell larger" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">bysort</span> id: <span class="kw">egen</span> x1p = <span class="kw">mean</span>(x1)</span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="kw">bysort</span> id: <span class="kw">egen</span> x2p = <span class="kw">mean</span>(<span class="kw">x2</span>)</span>
-<span id="cb14-3"><a href="#cb14-3"></a><span class="kw">qui</span>:<span class="kw">qreg</span> <span class="fu">y</span> x1 <span class="kw">x2</span> x1p x2p , <span class="fu">q</span>(10)</span>
-<span id="cb14-4"><a href="#cb14-4"></a><span class="kw">est</span> sto m1</span>
-<span id="cb14-5"><a href="#cb14-5"></a><span class="kw">qui</span>:<span class="kw">qreg</span> <span class="fu">y</span> x1 <span class="kw">x2</span>  x1p x2p , <span class="fu">q</span>(50)</span>
-<span id="cb14-6"><a href="#cb14-6"></a><span class="kw">est</span> sto m2</span>
-<span id="cb14-7"><a href="#cb14-7"></a><span class="kw">qui</span>:<span class="kw">qreg</span> <span class="fu">y</span> x1 <span class="kw">x2</span>  x1p x2p , <span class="fu">q</span>(90)</span>
-<span id="cb14-8"><a href="#cb14-8"></a><span class="kw">est</span> sto m3</span>
-<span id="cb14-9"><a href="#cb14-9"></a>esttab m1 m2 m3 m10 m20 m30, se nogaps mtitle(q10 q50 q90)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a></a><span class="kw">bysort</span> id: <span class="kw">egen</span> x1p = <span class="kw">mean</span>(x1)</span>
+<span id="cb14-2"><a></a><span class="kw">bysort</span> id: <span class="kw">egen</span> x2p = <span class="kw">mean</span>(<span class="kw">x2</span>)</span>
+<span id="cb14-3"><a></a><span class="kw">qui</span>:<span class="kw">qreg</span> <span class="fu">y</span> x1 <span class="kw">x2</span> x1p x2p , <span class="fu">q</span>(10)</span>
+<span id="cb14-4"><a></a><span class="kw">est</span> sto m1</span>
+<span id="cb14-5"><a></a><span class="kw">qui</span>:<span class="kw">qreg</span> <span class="fu">y</span> x1 <span class="kw">x2</span>  x1p x2p , <span class="fu">q</span>(50)</span>
+<span id="cb14-6"><a></a><span class="kw">est</span> sto m2</span>
+<span id="cb14-7"><a></a><span class="kw">qui</span>:<span class="kw">qreg</span> <span class="fu">y</span> x1 <span class="kw">x2</span>  x1p x2p , <span class="fu">q</span>(90)</span>
+<span id="cb14-8"><a></a><span class="kw">est</span> sto m3</span>
+<span id="cb14-9"><a></a>esttab m1 m2 m3 m10 m20 m30, se nogaps mtitle(q10 q50 q90)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1086,18 +1098,18 @@ y &amp;= X\beta + \alpha_i + \epsilon \\
 Q_\tau(y - \hat \alpha_i |X) &amp;= X\beta(\tau) +  \epsilon_\tau \\
 \end{aligned}
 \]</span></p>
-<div id="5aa63c6f" class="cell larger" data-execution_count="12">
+<div id="e4185730" class="cell larger" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">qui</span>:reghdfe <span class="fu">y</span> x1 <span class="kw">x2</span>, absorb(<span class="kw">fe</span> = id)</span>
-<span id="cb16-2"><a href="#cb16-2"></a><span class="kw">gen</span> y_fe = <span class="fu">y</span> - <span class="kw">fe</span></span>
-<span id="cb16-3"><a href="#cb16-3"></a><span class="kw">qui</span>:<span class="kw">qreg</span> y_fe x1 <span class="kw">x2</span>   , <span class="fu">q</span>(10)</span>
-<span id="cb16-4"><a href="#cb16-4"></a><span class="kw">est</span> sto m1</span>
-<span id="cb16-5"><a href="#cb16-5"></a><span class="kw">qui</span>:<span class="kw">qreg</span> y_fe x1 <span class="kw">x2</span>   , <span class="fu">q</span>(50)</span>
-<span id="cb16-6"><a href="#cb16-6"></a><span class="kw">est</span> sto m2</span>
-<span id="cb16-7"><a href="#cb16-7"></a><span class="kw">qui</span>:<span class="kw">qreg</span> y_fe x1 <span class="kw">x2</span> , <span class="fu">q</span>(90)</span>
-<span id="cb16-8"><a href="#cb16-8"></a><span class="kw">est</span> sto m3</span>
-<span id="cb16-9"><a href="#cb16-9"></a>esttab m1 m2 m3 m10 m20 m30, se nogaps mtitle(q10 q50 q90)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a></a><span class="kw">qui</span>:reghdfe <span class="fu">y</span> x1 <span class="kw">x2</span>, absorb(<span class="kw">fe</span> = id)</span>
+<span id="cb16-2"><a></a><span class="kw">gen</span> y_fe = <span class="fu">y</span> - <span class="kw">fe</span></span>
+<span id="cb16-3"><a></a><span class="kw">qui</span>:<span class="kw">qreg</span> y_fe x1 <span class="kw">x2</span>   , <span class="fu">q</span>(10)</span>
+<span id="cb16-4"><a></a><span class="kw">est</span> sto m1</span>
+<span id="cb16-5"><a></a><span class="kw">qui</span>:<span class="kw">qreg</span> y_fe x1 <span class="kw">x2</span>   , <span class="fu">q</span>(50)</span>
+<span id="cb16-6"><a></a><span class="kw">est</span> sto m2</span>
+<span id="cb16-7"><a></a><span class="kw">qui</span>:<span class="kw">qreg</span> y_fe x1 <span class="kw">x2</span> , <span class="fu">q</span>(90)</span>
+<span id="cb16-8"><a></a><span class="kw">est</span> sto m3</span>
+<span id="cb16-9"><a></a>esttab m1 m2 m3 m10 m20 m30, se nogaps mtitle(q10 q50 q90)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>(4 missing values generated)
@@ -1132,16 +1144,16 @@ y &amp;= X\beta + \alpha_i + \epsilon \\
 Q_\tau(y |X) &amp;= X\beta(\tau) + \gamma \hat \alpha_i + \epsilon_\tau \\
 \end{aligned}
 \]</span></p>
-<div id="79d57a1e" class="cell larger" data-execution_count="13">
+<div id="3234679f" class="cell larger" data-execution_count="13">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">qui</span>:<span class="kw">qreg</span> <span class="fu">y</span> x1 <span class="kw">x2</span> <span class="kw">fe</span>  , <span class="fu">q</span>(10)</span>
-<span id="cb18-2"><a href="#cb18-2"></a><span class="kw">est</span> sto m1</span>
-<span id="cb18-3"><a href="#cb18-3"></a><span class="kw">qui</span>:<span class="kw">qreg</span> <span class="fu">y</span> x1 <span class="kw">x2</span> <span class="kw">fe</span>  , <span class="fu">q</span>(50)</span>
-<span id="cb18-4"><a href="#cb18-4"></a><span class="kw">est</span> sto m2</span>
-<span id="cb18-5"><a href="#cb18-5"></a><span class="kw">qui</span>:<span class="kw">qreg</span> <span class="fu">y</span> x1 <span class="kw">x2</span> <span class="kw">fe</span>, <span class="fu">q</span>(90)</span>
-<span id="cb18-6"><a href="#cb18-6"></a><span class="kw">est</span> sto m3</span>
-<span id="cb18-7"><a href="#cb18-7"></a>esttab m1 m2 m3 m10 m20 m30, se nogaps mtitle(q10 q50 q90)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a></a><span class="kw">qui</span>:<span class="kw">qreg</span> <span class="fu">y</span> x1 <span class="kw">x2</span> <span class="kw">fe</span>  , <span class="fu">q</span>(10)</span>
+<span id="cb18-2"><a></a><span class="kw">est</span> sto m1</span>
+<span id="cb18-3"><a></a><span class="kw">qui</span>:<span class="kw">qreg</span> <span class="fu">y</span> x1 <span class="kw">x2</span> <span class="kw">fe</span>  , <span class="fu">q</span>(50)</span>
+<span id="cb18-4"><a></a><span class="kw">est</span> sto m2</span>
+<span id="cb18-5"><a></a><span class="kw">qui</span>:<span class="kw">qreg</span> <span class="fu">y</span> x1 <span class="kw">x2</span> <span class="kw">fe</span>, <span class="fu">q</span>(90)</span>
+<span id="cb18-6"><a></a><span class="kw">est</span> sto m3</span>
+<span id="cb18-7"><a></a>esttab m1 m2 m3 m10 m20 m30, se nogaps mtitle(q10 q50 q90)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1180,14 +1192,14 @@ Q\left( \frac{\hat\epsilon}{X\gamma}\right) &amp;= q(\tau) \\
 \beta(\tau) &amp;= \beta + \gamma \times q(\tau)
 \end {aligned}
 \]</span></p>
-<div id="19f47065" class="cell larger" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw">qui</span>:mmqreg <span class="fu">y</span> x1 <span class="kw">x2</span>   , <span class="fu">q</span>(10)  <span class="fu">abs</span>(id) <span class="kw">robust</span></span>
-<span id="cb20-2"><a href="#cb20-2"></a><span class="kw">est</span> sto m1</span>
-<span id="cb20-3"><a href="#cb20-3"></a><span class="kw">qui</span>:mmqreg <span class="fu">y</span> x1 <span class="kw">x2</span>   , <span class="fu">q</span>(50)  <span class="fu">abs</span>(id) <span class="kw">robust</span></span>
-<span id="cb20-4"><a href="#cb20-4"></a><span class="kw">est</span> sto m2</span>
-<span id="cb20-5"><a href="#cb20-5"></a><span class="kw">qui</span>:mmqreg <span class="fu">y</span> x1 <span class="kw">x2</span> , <span class="fu">q</span>(90) <span class="fu">abs</span>(id) <span class="kw">robust</span></span>
-<span id="cb20-6"><a href="#cb20-6"></a><span class="kw">est</span> sto m3</span>
-<span id="cb20-7"><a href="#cb20-7"></a>esttab m1 m2 m3 m10 m20 m30, se nogaps mtitle(q10 q50 q90)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="c7f05939" class="cell larger" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb20-1"><a></a><span class="kw">qui</span>:mmqreg <span class="fu">y</span> x1 <span class="kw">x2</span>   , <span class="fu">q</span>(10)  <span class="fu">abs</span>(id) <span class="kw">robust</span></span>
+<span id="cb20-2"><a></a><span class="kw">est</span> sto m1</span>
+<span id="cb20-3"><a></a><span class="kw">qui</span>:mmqreg <span class="fu">y</span> x1 <span class="kw">x2</span>   , <span class="fu">q</span>(50)  <span class="fu">abs</span>(id) <span class="kw">robust</span></span>
+<span id="cb20-4"><a></a><span class="kw">est</span> sto m2</span>
+<span id="cb20-5"><a></a><span class="kw">qui</span>:mmqreg <span class="fu">y</span> x1 <span class="kw">x2</span> , <span class="fu">q</span>(90) <span class="fu">abs</span>(id) <span class="kw">robust</span></span>
+<span id="cb20-6"><a></a><span class="kw">est</span> sto m3</span>
+<span id="cb20-7"><a></a>esttab m1 m2 m3 m10 m20 m30, se nogaps mtitle(q10 q50 q90)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 ------------------------------------------------------------------------------------------------------------
@@ -1215,8 +1227,10 @@ Standard errors in parentheses
 <h1>Next topic…Unconditional Quantiles</h1>
 <p>Unconditional Quantile Regressions and RIF-Regressions</p>
 
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 </section>
     </div>

@@ -491,7 +491,7 @@ ATE &amp;= \int ATE(X) dFx
 <section id="subclassification-or-stratification" class="slide level2 scrollable">
 <h2>Subclassification or stratification</h2>
 <p>Consider the following dataset:</p>
-<div id="0f5b299d" class="cell" data-execution_count="1">
+<div id="b82130f2" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a></a>frause titanic, <span class="kw">clear</span></span>
@@ -520,7 +520,7 @@ ATE &amp;= \int ATE(X) dFx
 </div>
 <p>If we assume full Independence assumption we would believe that being in first class increased chance of survival in 35.4%. but is that the case?</p>
 <p>What if the composition of individuals differs across classes (women and children)</p>
-<div id="3d53880b" class="cell" data-execution_count="2">
+<div id="c189cbb9" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a><span class="kw">tab</span> age class1, nofreq col</span>
@@ -550,7 +550,7 @@ ATE &amp;= \int ATE(X) dFx
 <section id="section" class="slide level2 scrollable">
 <h2></h2>
 <p>A better approach would be to look into the survival probabilities stratifying the data:</p>
-<div id="f946f686" class="cell" data-execution_count="3">
+<div id="5cfaebf8" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a></a><span class="kw">gen</span> surv=survived==2</span>
@@ -576,7 +576,7 @@ Age          |
 </div>
 </div>
 <p>So even within each group, the survival probability is larger in first class. What about Average?</p>
-<div id="f77d3794" class="cell" data-execution_count="4">
+<div id="228af519" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a></a><span class="kw">bysort</span> age sex:<span class="kw">egen</span> sr_mean_class1=<span class="fu">max</span>(sr_mean*(class1==1))</span>
@@ -631,7 +631,7 @@ Age          |
 <li>for ATU: <span class="math inline">\(0&lt;P(D|X)\)</span></li>
 </ul>
 <p>For example:</p>
-<div id="507546f0" class="cell" data-execution_count="5">
+<div id="3d26d1a8" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a></a>frause hhprice, <span class="kw">clear</span></span>
@@ -661,7 +661,7 @@ Age          |
 <h2>Curse of dimensionality</h2>
 <p>There is a second problem in terms of stratification. How would we deal with Multiple dimensions? Would it be possible to find “twins” for every observation?</p>
 <p>The answer is, probably no. Too many groups to track, to many micro cells to make use of:</p>
-<div id="f372f71d" class="cell" data-execution_count="6">
+<div id="8b065e64" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a></a>frause oaxaca, <span class="kw">clear</span></span>
@@ -786,7 +786,7 @@ Maha =d(x_i,x_j) &amp;=\sqrt{(x_i-x_j)'S^{-1}(x_i-x_j)}
 <section id="example" class="slide level2 scrollable">
 <h2>Example</h2>
 <p>This file contains information on experimental and observed data for the analysis of training on earnings program:</p>
-<div id="32d4928d" class="cell" data-execution_count="7">
+<div id="89b39337" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a></a><span class="kw">use</span> https:<span class="co">//friosavila.github.io/playingwithstata/drdid/lalonde.dta, clear</span></span>
@@ -811,7 +811,7 @@ Maha =d(x_i,x_j) &amp;=\sqrt{(x_i-x_j)'S^{-1}(x_i-x_j)}
 </div>
 </div>
 <p>First Experimental design - RCT</p>
-<div id="3c32a635" class="cell" data-execution_count="8">
+<div id="8d3ea67b" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a></a><span class="kw">reg</span> re treated</span>
@@ -872,7 +872,7 @@ Log likelihood = -294.71464                             Pseudo R2     = 0.0244
 <section id="section-1" class="slide level2 scrollable">
 <h2></h2>
 <p>Then using PScore Matching CPS</p>
-<div id="00fcfccb" class="cell" data-execution_count="9">
+<div id="f80e47c1" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb17-1"><a></a><span class="kw">keep</span> <span class="kw">if</span> treated == 1 | <span class="kw">sample</span> ==2</span>
@@ -914,7 +914,7 @@ Group variable: treated
 <section id="section-2" class="slide level2 scrollable">
 <h2></h2>
 <p>We need to do trimming</p>
-<div id="07c268c0" class="cell" data-execution_count="10">
+<div id="ee3b75c1" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb19-1"><a></a><span class="kw">bysort</span> educ <span class="bn">black</span> hisp married:<span class="kw">egen</span> n11=<span class="kw">sum</span>(treated==1)</span>
@@ -956,7 +956,7 @@ Group variable: treated
 <section id="section-3" class="slide level2 scrollable">
 <h2></h2>
 <p>Lets do some matching</p>
-<div id="a8c2f7a3" class="cell" data-execution_count="11">
+<div id="a28a6a11" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb21-1"><a></a>teffects nnmatch (re age educ <span class="bn">black</span>   married nodegree  ) (treated)</span>
@@ -1111,7 +1111,7 @@ Control obs   =        2,456        2,641
 <section id="section-4" class="slide level2 scrollable">
 <h2></h2>
 <p>A missing variable? Earnings in previous year. May capture information of Need to do treatment (selection)</p>
-<div id="37c47c26" class="cell" data-execution_count="12">
+<div id="e5fe1a3d" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><a></a><span class="kw">tabstat</span> age educ <span class="bn">black</span> hisp married nodegree re74, <span class="kw">by</span>(treated)</span>

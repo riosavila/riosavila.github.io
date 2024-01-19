@@ -508,7 +508,7 @@ ATU &amp;= E(\delta_i|D_i=0)
 </section>
 <section id="simulating-effects-stata" class="slide level2">
 <h2>Simulating effects <code class="scrollable">Stata</code></h2>
-<div id="193ad937" class="cell" data-execution_count="1">
+<div id="6ba6d3fc" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a></a><span class="kw">clear</span></span>
@@ -561,7 +561,7 @@ Group variable: trt
 <h2>But there is only 1</h2>
 <p>But, we never see potential outcomes, nor unit specific effects.</p>
 <p>The most naive estimator is to just estimate the mean difference in “post-treatment” outcome after treatment was in place. But that would be very biased!</p>
-<div id="c09330be" class="cell" data-execution_count="2">
+<div id="faf70d03" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a><span class="kw">gen</span> yy0 = <span class="fu">y</span> <span class="kw">if</span> trt==0</span>
@@ -712,7 +712,7 @@ ATE &amp;= E(Y|D=1)-E(Y|D=0) \\
 </section>
 <section id="stata-example" class="slide level2 scrollable">
 <h2>Stata Example</h2>
-<div id="c276d5d2" class="cell" data-execution_count="3">
+<div id="62eba48d" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a></a><span class="kw">gen</span> trt2=rnormal()&gt;0</span>

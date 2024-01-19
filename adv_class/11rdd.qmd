@@ -114,6 +114,7 @@ Unless you think grades near the threshold are as good as random, then you have 
 ```{stata}
 *| output: false
 clear
+ssc install synth
 set scheme white2
 color_style bay
 set seed 1
@@ -373,6 +374,8 @@ Impact of Scores on Scholarship recipiency
 ```{stata}
 use resources\fuzzy, clear
 color_style bay
+ssc install rdrobust
+ssc install rddensity
 qui:rdplot d x1, graph_options(legend( pos(6)))
 ```
 

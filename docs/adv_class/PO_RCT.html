@@ -254,7 +254,7 @@ window.Quarto = {
 <li>Estimate two wages models. For men and women, using an heteroskedastic regression model.</li>
 </ol>
 <p>The goal: estimate two potential outcomes for wages. One following Womens wage structure, and the other using Men wage structure.</p>
-<div id="c7941507" class="cell" data-execution_count="1">
+<div id="ee6c4b60" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="dv">linesize</span> 255 </span>
@@ -284,7 +284,7 @@ ln\hat w_1 \sim N(xb_1,s^2_1) \\
 ln\hat w_0 \sim N(xb_0,s_0^2)
 \end{aligned}
 \]</span></p>
-<div id="c735cddb" class="cell" data-execution_count="2">
+<div id="25956991" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> lnwage1 = rnormal(xb0,s0)</span>
@@ -296,7 +296,7 @@ ln\hat w_0 \sim N(xb_0,s_0^2)
 <p><span class="math display">\[
 Y_i = Y_i(0) + trt_i * \delta_i
 \]</span></p>
-<div id="032d4348" class="cell" data-execution_count="3">
+<div id="2b2490ce" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> trt = runiform()&lt;.5</span>
@@ -310,7 +310,7 @@ Y_i = Y_i(0) + trt_i * \delta_i
 <section id="visual-exploration" class="level2">
 <h2 class="anchored" data-anchor-id="visual-exploration">Visual Exploration</h2>
 <p>Now that we have a randomized treatment, we could start exploring the data:</p>
-<div id="f049b4b1" class="cell" data-execution_count="4">
+<div id="e121bcde" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> (<span class="kw">kdensity</span> lnwage <span class="kw">if</span> trt == 1) (<span class="kw">kdensity</span> lnwage <span class="kw">if</span> trt == 0) , <span class="co">///</span></span>
@@ -329,7 +329,7 @@ Y_i = Y_i(0) + trt_i * \delta_i
 </section>
 <section id="estimation-of-ate-effect" class="level2">
 <h2 class="anchored" data-anchor-id="estimation-of-ate-effect">Estimation of ATE Effect</h2>
-<div id="82aad361" class="cell" data-execution_count="5">
+<div id="239e9eeb" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>** True Effect</span>
@@ -462,7 +462,7 @@ Linear regression                               Number of obs     =      1,647
 <section id="balance-test" class="level2">
 <h2 class="anchored" data-anchor-id="balance-test">Balance test</h2>
 <p>You should also try to create balance tables, where you compare and test if characteristics are similar across treated and control groups:</p>
-<div id="b20550bb" class="cell" data-execution_count="8">
+<div id="0bfdcfc5" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">tabstat</span> age agesq married divorced kids6 kids714 , <span class="kw">by</span>(trt)</span>

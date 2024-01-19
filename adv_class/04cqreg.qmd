@@ -227,7 +227,7 @@ $$
 If the errors are exogenous, and there is no heteroskedasticty, you can "obtain" marginal effects at many levels
 
 ## Individual 
-$$ Ind &: \frac{dy_i}{dx_{1i}}=b_1 
+$$ Ind: \frac{dy_i}{dx_{1i}}=b_1 
 $$
 
 If $x_1i$ changes, and everything else is fixed, then $y_i$ changes by $b_1$ units for that individual.
@@ -440,7 +440,7 @@ Requires additional care for the estimation of SE
 
 A second approach that is useful to understand and interpret CQreg is to consider a parametric version of the LS model:
 
-$$y = Xb + \gamma (X) * e \text{ with } $\gamma(X)>>0$$ 
+$$y = Xb + \gamma (X) * e \text{ with } \gamma(X)>>0$$ 
 
 - This shows the relationship between a quantile regressions and heteroskedasticity in the error term. 
 

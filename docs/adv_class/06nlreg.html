@@ -557,12 +557,12 @@ y = b_0 + b_1 x ^{b_2} + e = h(x,b) + e
 <p>Pseudo Regressors and gradients</p>
 <p><span class="math display">\[
 \begin{aligned}
-\tilde X(b) = \frac{\partial h(x,b)}{\partial b_0},
+\tilde X(b) &amp;= \frac{\partial h(x,b)}{\partial b_0},
 \frac{\partial h(x,b)}{\partial b_1},
 \frac{\partial h(x,b)}{\partial b_2} \\
-\tilde X(b) = 1, x^{b_2},{b_1} x^{b_2}\ log\ b_2 \\
-\beta_t =\beta_{t-1}-(\tilde X ' \tilde X) ^{-1} \tilde X' \hat e \\
-\hat e=y-h(x,b_{t-1})
+\tilde X(b) &amp;= 1, x^{b_2},{b_1} x^{b_2}\ log\ b_2 \\
+\beta_t &amp;=\beta_{t-1}-(\tilde X ' \tilde X) ^{-1} \tilde X' \hat e \\
+\hat e&amp;=y-h(x,b_{t-1})
 \end{aligned}
 \]</span></p>
 <p>It turns out that:</p>
@@ -873,9 +873,9 @@ LnL(\lambda|y_1,y_2,...,y_{10}) &amp;=\sum ln f(y_i|\lambda) \\\
 <ol type="1">
 <li>When you have <span class="math inline">\(X's\)</span>, you can further modify this model, to allow for covariates. For example:</li>
 </ol>
-<p><span class="math display">\[
-\lambda = e^{x\beta}
-\]</span>Which guaranties the mean, or more specifically conditional mean <span class="math inline">\(\lambda = E(y|X)\)</span> , is positive.</p>
+<p><span class="math display">\[\lambda = e^{x\beta}
+\]</span></p>
+<p>Which guaranties the mean, or more specifically conditional mean <span class="math inline">\(\lambda = E(y|X)\)</span> , is positive.</p>
 <ol start="2" type="1">
 <li>We divide LnL by <span class="math inline">\(N\)</span>. (Number of observations)</li>
 </ol>
@@ -925,10 +925,10 @@ SOC&amp;: \\
 Var\left(N^{-1/2}(\hat\beta - \beta) \right) = H^{-1}g'gH^{-1} = A^{-1}BA^{-1}
 \]</span></p>
 <ol start="2" type="1">
-<li>Or you can use of of the following: <span class="math display">\[
+<li>Or you can use one of the following: <span class="math display">\[
 \begin{aligned}
-Var\left(N^{-1/2}(\hat\beta - \beta) \right) = -H^{-1} \\
-Var\left(N^{-1/2}(\hat\beta - \beta) \right) = \left(\frac{1}{N}\sum g_i g_i'\right)^{-1}
+Var\left(N^{-1/2}(\hat\beta - \beta) \right) &amp;= -H^{-1} \\
+Var\left(N^{-1/2}(\hat\beta - \beta) \right) &amp;= \left(\frac{1}{N}\sum g_i g_i'\right)^{-1}
 \end{aligned}
 \]</span></li>
 </ol>
@@ -941,16 +941,16 @@ Var\left(N^{-1/2}(\hat\beta - \beta) \right) = \left(\frac{1}{N}\sum g_i g_i'\ri
 </ol>
 <p><span class="math display">\[
 \begin{aligned}
-\int f(y|\theta) dy =1 \\
-\int \frac{\partial f(y|\theta)}{\partial \theta}dy=\int  \frac{\partial ln f(y|\theta)}{\partial \theta} f(y|\theta)=0 \\
-E(g_i)=0
+\int f(y|\theta) dy &amp;=1 \\
+\int \frac{\partial f(y|\theta)}{\partial \theta}dy&amp;=\int  \frac{\partial ln f(y|\theta)}{\partial \theta} f(y|\theta)=E(g_i)=0
 \end{aligned}
 \]</span></p>
 <ol start="2" type="1">
-<li>Order of Diff and Integration is interchangeable. We obtain SOC: <span class="math display">\[
+<li>Order of Diff and Integration is interchangeable. We obtain SOC: <span class="math display">\[\begin{aligned}
 \int \left( \frac{\partial^2 ln f(y|\theta)}{\partial \theta \partial \theta'}f(y|\theta) +
-\frac{\partial ln f(y|\theta)}{\partial \theta} \frac{\partial ln f(y|\theta)}{\partial \theta'} \right)dy = 0 \\
+\frac{\partial ln f(y|\theta)}{\partial \theta} \frac{\partial ln f(y|\theta)}{\partial \theta'} f(y|\theta) \right)dy &amp;= 0 \\
 E(H_i) = -E(g_ig_i')
+\end{aligned}
 \]</span></li>
 </ol>
 </section>
@@ -1392,7 +1392,7 @@ H = \Bigg[\begin{matrix} -\frac{X'X}{\sigma^2}&amp; 0 \\
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1500,
+        width: 1600,
 
         height: 900,
 
