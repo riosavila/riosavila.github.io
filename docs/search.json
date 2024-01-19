@@ -8202,5 +8202,138 @@
     "title": "Unconditional Quantile Regressions (and RIF’s)",
     "section": "",
     "text": "Other Considerations\n\nAccounting for “local” unconditional effects beyond means require Center Polynomials:\n\n\\[\nRIF(.,y) = b_0 + b_1 x + b_2 (x-\\bar x)^2+\\varepsilon\n\\]\n\nQuantile treatment effects (on and off) are possible using PC-RIF (When you condition the distribution on just 1 variable)\n\n\\[\nRIF(.,F_{Y|D},y) = b_0 + b_1 D+b_2 x + b_3 (x-\\bar x)^2+\\varepsilon\n\\]"
+  },
+  {
+    "objectID": "rmethods2/session_6.html#missing-data",
+    "href": "rmethods2/session_6.html#missing-data",
+    "title": "Research Methods II",
+    "section": "Missing Data",
+    "text": "Missing Data\n\nAs we described before, missing data is a problem for micro data analysis.\n\nReduces sample size, statistical power, and may bias estimates. (depending on the type of missingness)\n\nWe have also discussed that there are few ways to deal with missing data.\n\nComplete case analysis\nReweighting\nImputation: Prediction\nImputation: Hotdecking\n\nThis methods allows you solve for missing data if data is MCAR or MAR.\n\nwith MNAR, dealing with missing data is difficult\n\nNevertheless, you can deal with Missing data, because you have some observed data that can be used to impute it."
+  },
+  {
+    "objectID": "rmethods2/session_6.html#types-of-missing-data",
+    "href": "rmethods2/session_6.html#types-of-missing-data",
+    "title": "Research Methods II",
+    "section": "Types of Missing data",
+    "text": "Types of Missing data\n\nT1T2T3"
+  },
+  {
+    "objectID": "rmethods2/session_6.html#missing-data-1",
+    "href": "rmethods2/session_6.html#missing-data-1",
+    "title": "Research Methods II",
+    "section": "MISSING DATA",
+    "text": "MISSING DATA\n\nWhat would happen if all data is missing?\nExample:\n\nYou are working with the CPS, but are interested in looking at the relationship between income and time use.\n\nCPS does NOT have time use data.\n\n\nWe are going for the -lion hunt-\n\nYou can’t impute time use data\nYou can’t use complete case analysis\nYou can’t use reweighting\nYou can’t use hotdecking\nwhat do we do?"
+  },
+  {
+    "objectID": "rmethods2/session_6.html#section",
+    "href": "rmethods2/session_6.html#section",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "What do we do?\n\nOne option would be using a different data set.\n\nIn the US, the American Time Use Survey (ATUS) could be a good option.\nBut…The data has no income information!\n\nWhat if we could combine the two data sets?\nThis changes the problem from Missing all data, to one of Missing Data by design.\n\nSome segment of the population was asked about income, and some other segment was asked about time use."
+  },
+  {
+    "objectID": "rmethods2/session_6.html#imputation-and-statistical-matching",
+    "href": "rmethods2/session_6.html#imputation-and-statistical-matching",
+    "title": "Research Methods II",
+    "section": "Imputation and Statistical Matching",
+    "text": "Imputation and Statistical Matching\n\nIf you consider the idea of combining two data sets, you can treat the problem as one of imputation.\n\nYou have a sample (two) that represents the population of interest.\nWe can reasonably assume the data is MCAR. But the data of interest is not observed at the same time.\nThen, we can use the combine data to impute the missing data, using many of the approaches we have discussed before.\n\nAnd there is also another method that is more commonly used (at Levy) to deal with this problem.\n\nStatistical Matching (aka Data Fusion).\n\nWhat does this imply?:\n\nMatch individuals across datasets (“Donor” and “Recipient”)\nTransfer information based on the matching links"
+  },
+  {
+    "objectID": "rmethods2/session_6.html#official-examples",
+    "href": "rmethods2/session_6.html#official-examples",
+    "title": "Research Methods II",
+    "section": "Official examples:",
+    "text": "Official examples:\nThere is a lot of work on this topic. Many statistical agencies use this approach to combine data Survey data with administrative data.\n\nAdministrative data is usually more accurate, but it is not collected for the purpose of research.\nSurvey data is collected for research purposes, but may not have accurate data in some areas (income)\nUnless Survey Data was collected with the purpose of being linked with administrative data, one requires methods similar to statistical matching to combine both data sets."
+  },
+  {
+    "objectID": "rmethods2/session_6.html#in-house-some-examples",
+    "href": "rmethods2/session_6.html#in-house-some-examples",
+    "title": "Research Methods II",
+    "section": "In house Some examples:",
+    "text": "In house Some examples:\n\nAt Levy we have used this approach to produce relevant datasets:\n\nLIMEW: Levy Institute Measure of Economic Well-Being Combines Time use, wealtgh and Survey data (in addition to other aggregate data)\nLIMTIP: Levy Institute Measure of Time and Income Poverty Combines ATUS, with income/consumption data"
+  },
+  {
+    "objectID": "rmethods2/session_6.html#what-do-we-need",
+    "href": "rmethods2/session_6.html#what-do-we-need",
+    "title": "Research Methods II",
+    "section": "What do we need?",
+    "text": "What do we need?\n\nConsider two data sets: \\(A\\) and \\(B\\).\n\n\\(A\\) has informtion on \\(X\\) and \\(Z\\)\n\\(B\\) has information on \\(Y\\) and \\(Z\\)\nWe want a file that has \\(X\\), \\(Y\\) and \\(Z\\)."
+  },
+  {
+    "objectID": "rmethods2/session_6.html#assumptions",
+    "href": "rmethods2/session_6.html#assumptions",
+    "title": "Research Methods II",
+    "section": "Assumptions",
+    "text": "Assumptions\n\n(\\(X,Y,Z\\)) are multivariate random variables with joint distribution \\(f(x,y,z)\\), that represents the population of interest.\nBoth datasets are random samples from the same population of interest.\n\\(\\frac{P_w(D=A|X,Y,Z)}{P_w(D=B|X,Y,Z)} = \\frac{P(D=A)}{P(D=B)} = 1\\)\nConditional Independence assumption:\n\n\\(Y\\) and \\(Z\\) are independent from each other given \\(X\\). \\[f(x,y|z) = f(x|z)f(y|z)\\]\n\nThe goal is to combine the two data sets to produce a file that has data on \\(X\\), \\(Y\\) and \\(Z\\). by identifying \\(f(x,y,z)\\)."
+  },
+  {
+    "objectID": "rmethods2/session_6.html#statistical-matching-limitations",
+    "href": "rmethods2/session_6.html#statistical-matching-limitations",
+    "title": "Research Methods II",
+    "section": "Statistical Matching: Limitations",
+    "text": "Statistical Matching: Limitations\n\nThe quality of this identification will depend on how well the conditional independence assumption holds.\nBecause of this, synthetic datasets can’t tell you much about covariances or causal relationships\n\n\\[Cov(z,y,z) = \\begin{pmatrix}\nV(X) & \\color{red}{V(X,Y)} & V(X,Z) \\\\\n\\color{red}{V(X,Y)'} & V(Y) & V(Y,Z) \\\\\nV(X,Z)' & V(Y,Z)' & V(Z)\n\\end{pmatrix}\n\\]\nalbeit, you can impose certain bounderies on the covariance matrix."
+  },
+  {
+    "objectID": "rmethods2/session_6.html#matching-approaches",
+    "href": "rmethods2/session_6.html#matching-approaches",
+    "title": "Research Methods II",
+    "section": "Matching Approaches:",
+    "text": "Matching Approaches:\nThere are two types of statistical matching procedures:\n\nUnconstrained MatchingConstraints Matching\n\n\n\nRecords from \\(A\\) and \\(B\\) can be used multiple times (or none) in the matching.\n\nAbsurd case: One observation from \\(A\\) is matched with all observations from \\(B\\).\n\nThis is the most common approach in the literature for policy evaluation\nPros: Uses the “best” candidate for the matching. Cons: It may not transfer the uncoditional distribution of the data.\nDoes not necessarily required \\(A\\) and \\(B\\) to be from the same population. (weighted size)\n\n\n\n\nAll records from \\(A\\) and \\(B\\) are used once and only once in the matching. (without replacement)\nWhen using weighted samples, records are matched until the weights are exhausted.\n\nRequires \\(A\\) and \\(B\\) to be from the same population. (weighted size)\n\nPros: It transfers the unconditional distribution of the data. Cons: My not use “best” candidate for the matching."
+  },
+  {
+    "objectID": "rmethods2/session_6.html#matching-records",
+    "href": "rmethods2/session_6.html#matching-records",
+    "title": "Research Methods II",
+    "section": "Matching Records:",
+    "text": "Matching Records:\n\nMatching records, requires defining a measure of similarity between records.\nThis measures can vary depending on the data type, and dimensionality of the data\n\n\\[\\begin{aligned}\n\\text{ Euclidian: } d(r^A,r^b) &= \\sqrt{\\sum_i^k(x^A_i-x^B_i)^2 } \\\\\n\\text{ SdEuclidian: } d(r^A,r^b) &= \\sqrt{\\sum_i^k\\left(\\frac{x^A_i-x^B_i}{\\sigma_j}\\right)^2 } \\\\\n\\text{ Mahalanobis: } d(r^A,r^b) &= \\sqrt{(x^A-x^B)'\\Sigma_x^{-1}(x^A-x^B)} \\\\\n\\end{aligned}\n\\]\n\nAll this measures are useful when one has high dimensional data."
+  },
+  {
+    "objectID": "rmethods2/session_6.html#matching-reducing-dimensionality",
+    "href": "rmethods2/session_6.html#matching-reducing-dimensionality",
+    "title": "Research Methods II",
+    "section": "Matching: Reducing Dimensionality",
+    "text": "Matching: Reducing Dimensionality\n\nA second alternative is to reduce data dimensionality before estimating distances.\n\n\nPredictive mean matching:Propensity score matching:PCA\n\n\n\nModel \\(x = z\\beta + \\epsilon\\) using \\(A\\).\nMake predictions \\(z\\hat\\beta\\) for both samples.\nMatch records based on \\(z\\hat\\beta\\)\nGood results to match individuals with similar “predicted” income.\nPuts more “weight” on the variables used to predict the outcome.\n\n\n\n\nModel the likehood of an observation being in \\(A\\) using \\(Z\\). \\[P(D=A|Z) = G(Z\\gamma)\\]\nMake predictions \\(\\hat P\\) or \\(z\\hat\\gamma\\) for both samples.\nMatch records based on \\(\\hat\\pi\\)\nGeneral purpose score.\nMay be problematic if \\(A\\) and \\(B\\) have very similar distributions of \\(Z\\).\n\nPuts more “weight” on the variables with different distributions between \\(A\\) and \\(B\\).\n\n\n\n\nUse PCA to reduce dimensionality of \\(Z\\) into a single index.\n\nCan use either a single dataset or both\n\nMake predictions of the first principal component \\(PC1\\)\nMatch records based on \\(PC1\\)\nPuts more weight on variables that explain most of the variance in \\(Z\\)."
+  },
+  {
+    "objectID": "rmethods2/session_6.html#matching-rank-matching",
+    "href": "rmethods2/session_6.html#matching-rank-matching",
+    "title": "Research Methods II",
+    "section": "Matching: Rank Matching",
+    "text": "Matching: Rank Matching\n\nMost of distance based matching is usually feasible with unconstrained matching.\n\nthus, best records are always matched.\n\nWhen considering constrained matching, distance based matching may not be adecuate\n\nWhile first records are matched the best, last records may be matched poorly match.\n\nA balance therefore is to use rank matching.\n\nRank observations based on a single variable (pscore, predicted mean, etc)\nMatch records based on rank.\n\nNo match would be “best”, but reduces changes of poor matches."
+  },
+  {
+    "objectID": "rmethods2/session_6.html#data-harmonization",
+    "href": "rmethods2/session_6.html#data-harmonization",
+    "title": "Research Methods II",
+    "section": "1. Data Harmonization",
+    "text": "1. Data Harmonization\n\nBecause Data files come from different data sources, they may have different variables names, coding schemes, or definitions.\nWe need to set \\(Z\\) variables to be defined as identically as possible in both files\nBeyond definition harmonization, one must also be mindful of the distribution of the variables in both files.\n\nIf the distribution of \\(Z\\) is different in both files, the matching may not be adequate.\n\nThe weights schemes in both files should be adjusted to add up to the same population size (typically the “recipient” values)\n\nWeight adjustment could be done by selected strata"
+  },
+  {
+    "objectID": "rmethods2/session_6.html#estimation-of-matching-score",
+    "href": "rmethods2/session_6.html#estimation-of-matching-score",
+    "title": "Research Methods II",
+    "section": "2. Estimation of Matching Score",
+    "text": "2. Estimation of Matching Score\n\nEither using full or sub (strata) samples, estimate a matching score\n\nThis could be a propensity score, predicted mean, or first principal component.\n\nYou may want to create “further cells” to improve matching. (not necessarily re estimate the matching score)\n\nFor example, You consider Gender as strata (two scores), but further create cells by “age” (5 groups)"
+  },
+  {
+    "objectID": "rmethods2/session_6.html#perform-the-match",
+    "href": "rmethods2/session_6.html#perform-the-match",
+    "title": "Research Methods II",
+    "section": "3. Perform the match",
+    "text": "3. Perform the match\n\nUsing the finest definition of “cells”, rank observations based on Matching Scores\nUsing rank, match observations till all weights are exhausted.(from either Sample)\n“unmatched” observations are left for later rounds using coarser definitions of cells.\nMatching continues until all units (recipients) are matched."
+  },
+  {
+    "objectID": "rmethods2/session_6.html#assessing-the-quality-of-the-match",
+    "href": "rmethods2/session_6.html#assessing-the-quality-of-the-match",
+    "title": "Research Methods II",
+    "section": "4. Assessing the quality of the match",
+    "text": "4. Assessing the quality of the match\n\nThe idea is to compare the distribution of the “transfered/imputed” data with the distribution from the “donor” data.\n\nOverall distribution of the data will be the same by construction.\n\nCompare distributions by Strata, smaller cells, or specific variables or interest.\nRule of thumb +/- 10% is acceptable (mean, median, Standard error).\n\nBut it may depend on the variable of interest.\n\nOne may also use other approaches like “regression” to compare all variables at once.\nIf the distribution of the data is not adequate, one may want re-do the matching, with different “cell” definitions or matching scores."
+  },
+  {
+    "objectID": "rmethods2/session_6.html#example",
+    "href": "rmethods2/session_6.html#example",
+    "title": "Research Methods II",
+    "section": "Example",
+    "text": "Example"
   }
 ]

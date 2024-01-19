@@ -14,5 +14,269 @@ format:
 
 # Missing Data vs MISSING DATA
 
+## Missing Data
 
+-   As we described before, missing data is a problem for micro data analysis.
+    -   Reduces sample size, statistical power, and may bias estimates. (depending on the type of missingness)
+-   We have also discussed that there are few ways to deal with missing data.
+    -   Complete case analysis
+    -   Reweighting
+    -   Imputation: Prediction
+    -   Imputation: Hotdecking
+-   This methods allows you solve for missing data if data is MCAR or MAR.
+    -   with MNAR, dealing with missing data is difficult
+-   Nevertheless, you can deal with Missing data, because you have some observed data that can be used to impute it.
 
+## Types of Missing data
+
+::: panel-tabset
+## T1
+
+![](images/paste-8.png){width="900"}
+
+## T2
+
+![](images/paste-9.png){width="900"}
+
+## T3
+
+![](images/paste-10.png){width="900"}
+:::
+
+## MISSING DATA
+
+-   What would happen if all data is missing?
+
+-   Example:
+
+    -   You are working with the CPS, but are interested in looking at the relationship between income and time use.
+        -   CPS does NOT have time use data.
+
+-   We are going for the -lion hunt-
+
+    -   You can't impute time use data
+    -   You can't use complete case analysis
+    -   You can't use reweighting
+    -   You can't use hotdecking
+    -   what do we do?
+
+## 
+
+### What do we do?
+
+-   One option would be using a different data set.
+
+    -   In the US, the American Time Use Survey (ATUS) could be a good option.
+    -   But...The data has no income information!
+
+-   What if we could combine the two data sets?
+
+-   This changes the problem from Missing all data, to one of Missing Data by design.
+
+    -   Some segment of the population was asked about income, and some other segment was asked about time use.
+
+## Imputation and Statistical Matching
+
+-   If you consider the idea of combining two data sets, you can treat the problem as one of imputation.
+
+    -   You have a sample (two) that represents the population of interest.
+    -   We can reasonably assume the data is MCAR. But the data of interest is not observed at the same time.
+    -   Then, we can use the combine data to impute the missing data, using many of the approaches we have discussed before.
+
+-   And there is also another method that is more commonly used (at Levy) to deal with this problem.
+
+    -   **Statistical Matching** (aka Data Fusion).
+
+-   What does this imply?:
+
+    -   Match individuals across datasets ("Donor" and "Recipient")
+    -   Transfer information based on the matching links
+
+## Official examples:
+
+There is a lot of work on this topic. Many statistical agencies use this approach to combine data Survey data with administrative data.
+
+- Administrative data is usually more accurate, but it is not collected for the purpose of research.
+- Survey data is collected for research purposes, but may not have accurate data in some areas (income)
+- Unless Survey Data was collected with the purpose of being linked with administrative data, one requires methods similar to statistical matching to combine both data sets.
+
+## In house Some examples:
+
+- At Levy we have used this approach to produce relevant datasets:
+  - LIMEW: Levy Institute Measure of Economic Well-Being
+    Combines Time use, wealtgh and Survey data (in addition to other aggregate data)
+
+  - LIMTIP: Levy Institute Measure of Time and Income Poverty
+    Combines ATUS, with income/consumption data 
+
+# Framework    
+
+## What do we need?
+
+- Consider two data sets: $A$ and $B$.  
+- $A$ has informtion on $X$ and $Z$
+- $B$ has information on $Y$ and $Z$
+- We want a file that has $X$, $Y$ and $Z$.
+  
+## Assumptions
+
+- ($X,Y,Z$) are multivariate random variables with joint distribution $f(x,y,z)$, that represents the population of interest. 
+- Both datasets are random samples from the same population of interest.
+
+  $\frac{P_w(D=A|X,Y,Z)}{P_w(D=B|X,Y,Z)} = \frac{P(D=A)}{P(D=B)} = 1$
+
+- Conditional Independence assumption: 
+  - $Y$ and $Z$ are independent from each other given $X$.
+  $$f(x,y|z) = f(x|z)f(y|z)$$
+
+-   The goal is to combine the two data sets to produce a file that has data on $X$, $Y$ and $Z$. by  identifying $f(x,y,z)$. 
+  
+## Statistical Matching: Limitations
+
+-   The quality of this identification will depend on how well the conditional independence assumption holds.
+   
+-   Because of this, synthetic datasets can't tell you much about covariances or causal relationships  
+   
+$$Cov(z,y,z) = \begin{pmatrix} 
+V(X) & \color{red}{V(X,Y)} & V(X,Z) \\ 
+\color{red}{V(X,Y)'} & V(Y) & V(Y,Z) \\ 
+V(X,Z)' & V(Y,Z)' & V(Z) 
+\end{pmatrix}
+$$
+    
+albeit, you can impose certain bounderies on the covariance matrix.
+
+## Matching Approaches:  
+
+There are two types of **statistical matching** procedures:
+
+::: {.panel-tabset}
+
+## Unconstrained Matching
+
+- Records from $A$ and $B$ can be used multiple times (or none) in the matching.
+  - Absurd case: One observation from $A$ is matched with all observations from $B$. 
+- This is the most common approach in the literature for policy evaluation
+  
+  Pros: Uses the "best" candidate for the matching.
+  Cons: It may not transfer the uncoditional distribution of the data.
+
+- Does not necessarily required $A$ and $B$ to be from the same population. (weighted size)
+
+## Constraints Matching
+
+- All records from $A$ and $B$ are used once and only once in the matching. (without replacement)
+- When using weighted samples, records are matched until the weights are exhausted.
+  - Requires $A$ and $B$ to be from the same population. (weighted size)
+  
+  Pros: It transfers the unconditional distribution of the data.
+  Cons: My not use "best" candidate for the matching.
+  
+:::
+
+## Matching Records:
+
+- Matching records, requires defining a measure of similarity between records.
+ 
+- This measures can vary depending on the data type, and dimensionality of the data
+
+$$\begin{aligned}
+\text{ Euclidian: } d(r^A,r^b) &= \sqrt{\sum_i^k(x^A_i-x^B_i)^2 } \\
+\text{ SdEuclidian: } d(r^A,r^b) &= \sqrt{\sum_i^k\left(\frac{x^A_i-x^B_i}{\sigma_j}\right)^2 } \\
+\text{ Mahalanobis: } d(r^A,r^b) &= \sqrt{(x^A-x^B)'\Sigma_x^{-1}(x^A-x^B)} \\ 
+\end{aligned}
+$$
+
+- All this measures are useful when one has high dimensional data.
+ 
+## Matching: Reducing Dimensionality
+
+- A second alternative is to reduce data dimensionality before estimating distances.
+
+::: {.panel-tabset}
+
+## Predictive mean matching:
+
+  - Model $x = z\beta + \epsilon$ using $A$. 
+  - Make predictions $z\hat\beta$ for both samples.
+  - Match records based on $z\hat\beta$
+  - Good results to match individuals with similar "predicted" income.
+  - Puts more "weight" on the variables used to predict the outcome.
+
+## Propensity score matching:
+
+  - Model the likehood of an observation being in $A$ using $Z$.
+  $$P(D=A|Z) = G(Z\gamma)$$
+
+  - Make predictions $\hat P$ or $z\hat\gamma$ for both samples.
+  - Match records based on $\hat\pi$
+  - General purpose score. 
+  - May be problematic if $A$ and $B$ have very similar distributions of $Z$.  
+  - Puts more "weight" on the variables with different distributions between $A$ and $B$.
+     
+## PCA
+
+  - Use PCA to reduce dimensionality of $Z$ into a single index.
+    - Can use either a single dataset or both
+  - Make predictions of the first principal component $PC1$
+  - Match records based on $PC1$
+  - Puts more weight on variables that explain most of the variance in $Z$.
+
+:::
+
+## Matching: Rank Matching
+
+- Most of distance based matching is usually feasible with unconstrained matching.
+  - thus, best records are always matched.
+
+- When considering constrained matching, distance based matching may not be adecuate
+  - While first records are matched the best, last records may be matched poorly match.
+
+- A balance therefore is to use rank matching.
+  - Rank observations based on a single variable (pscore, predicted mean, etc)
+  - Match records based on rank.
+
+- No match would be "best", but reduces changes of poor matches.
+ 
+# Levy Matching Algorithm
+- At Levy, we use a constrained matching algorithm, with stratification and rank matching.
+
+## 1. Data Harmonization 
+
+- Because Data files come from different data sources, they may have different variables names, coding schemes, or definitions.
+- We need to set $Z$ variables to be defined as identically as possible  in both files
+- Beyond definition harmonization, one must also be mindful of the distribution of the variables in both files.
+    - If the distribution of $Z$ is different in both files, the matching may not be adequate.
+- The weights schemes in both files should be adjusted to add up to the same population size (typically the "recipient" values)
+    - Weight adjustment could be done by selected strata
+
+## 2. Estimation of Matching Score
+
+- Either using full or sub (strata) samples, estimate a matching score
+  - This could be a propensity score, predicted mean, or first principal component.
+- You may want to create "further cells" to improve matching. (not necessarily re estimate the matching score)
+  - For example, You consider Gender as strata (two scores), but further create cells by "age" (5 groups)
+
+## 3. Perform the match
+
+- Using the finest definition of "cells", rank observations based on Matching Scores
+- Using rank, match observations till all weights are exhausted.(from either Sample)
+- "unmatched" observations are left for later rounds using coarser definitions of cells.
+- Matching continues until all units (recipients) are matched.
+
+## 4. Assessing the quality of the match
+
+- The idea is to compare the distribution of the "transfered/imputed" data with the distribution from the "donor" data.
+  - Overall distribution of the data will be the same by construction.
+- Compare distributions by Strata, smaller cells, or specific variables or interest.
+- Rule of thumb +/- 10% is acceptable (mean, median, Standard error).
+  - But it may depend on the variable of interest.
+  
+- One may also use other approaches like "regression" to compare all variables at once.
+  
+- If the distribution of the data is not adequate, one may want re-do the matching, with different "cell" definitions or matching scores.
+
+## Example
+
+# Next Class: Micro Simulation
+just more imputations
