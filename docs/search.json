@@ -8335,5 +8335,145 @@
     "title": "Research Methods II",
     "section": "Example",
     "text": "Example"
+  },
+  {
+    "objectID": "rmethods2/session_7.html#what-are-micro-simulations",
+    "href": "rmethods2/session_7.html#what-are-micro-simulations",
+    "title": "Research Methods II",
+    "section": "What are micro-simulations?",
+    "text": "What are micro-simulations?\n\nMicro-simulation is a technique that is used to make micro units act and interact in a way that it is possible to aggregate to the level of interest.\nA micro simulation model can be seen as a set of rules, which operates on a sample of micro units (individuals, households, firms, etc.) to produce a set of outcomes.\nThe goal is to produce synthetic datasets that can be used to estimate the effects of policy changes.\nBecause micro-simulations are based on micro-data, they have the potential to capture the heterogeneity of the population. (decisions, preferences, etc.)"
+  },
+  {
+    "objectID": "rmethods2/session_7.html#section",
+    "href": "rmethods2/session_7.html#section",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "We can also think about micro-simulations as a way to simulate/predict/impute the behavior of a population of interest.\n\nThus a lot of what you learned in terms of Modeling, imputations, and matching can be applied here.\n\n\nSo what do we need?\n\nWe need a population of micro units (individuals, households, firms, etc.) that is representative of the population of interest. (survey data)\nDetails on a policy change that we want to simulate. (policy parameters)\nA set of rules that describe how the micro units interact with each other and with the policy change. (model for behavior)\nAn outcome of interest that we want to study. (outcome variable)"
+  },
+  {
+    "objectID": "rmethods2/session_7.html#how-do-we-do-it",
+    "href": "rmethods2/session_7.html#how-do-we-do-it",
+    "title": "Research Methods II",
+    "section": "How do we do it?",
+    "text": "How do we do it?\n\nDepending on the type of analysis we want to do, the structure of a micro-simulation can be very simple or very complex.\nConsider the following example:\n\nWe want to study the effect of a policy that aims to increase the minimum wage in the labor market. What effects would this have?\n\nHigher wages ?\nincrease/decrease in employment?\n\nChanges in the distribution of wages?\nChanges in the Economic structure?\n\n\nMore complex models require more sophisticated interactions between the micro/and macro units and the policy change.\nHowever, simpler models can be useful at least to study first order/statistical effects of a policy change."
+  },
+  {
+    "objectID": "rmethods2/session_7.html#example-the-case-of-higher-education",
+    "href": "rmethods2/session_7.html#example-the-case-of-higher-education",
+    "title": "Research Methods II",
+    "section": "Example: The case of higher education",
+    "text": "Example: The case of higher education\n\nConsider the following. The government wants to increase educational attainment in the population.\nTo do so, they want to evaluate the impact that a 2 additional years for people with less than 12 years of education would have on the population.\nHow do we do this?\nFor simplicilty , lets use the oaxaca dataset"
+  },
+  {
+    "objectID": "rmethods2/session_7.html#section-1",
+    "href": "rmethods2/session_7.html#section-1",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "We can start by modeling the effect of education on wages.\n\\[log(wage)= \\beta X + \\beta_e educ + u\\]\n*| code-fold: false\n*| classes: larger\nfrause oaxaca, clear\nreg lnwage educ exper tenure female age, \npredict  res, res\nID the policy change\n*| code-fold: false\n*| classes: larger\nclonevar educ2=educ\nreplace educ=educ+2 if educ&lt;12\npredict yhat2, xb\nSo what is the effect on wages? (if there is no selection bias)\n*| code-fold: false\n*| classes: larger\ngen wage = exp(lnwage)\ngen wage2 = exp(yhat2+res)\ngen wage_diff = wage2-wage\ntabstat wage_diff\nreplace educ = educ2\nWage has increased in 2.95.\nBut is this the only effect??"
+  },
+  {
+    "objectID": "rmethods2/session_7.html#section-2",
+    "href": "rmethods2/session_7.html#section-2",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "What about the effect on employment?\nThis is a more complex model, and we need further assumptions\n\nAssume anyone who wants to work, will find a job.\nThose employed remain employed\nThose non-employed will transition to employment marginally\n\n\n\\[P(lfp=1|X,educ)= \\beta X + \\beta_e educ + u\n\\]\nFirst model the probability of employment\n*| code-fold: false\n*| classes: larger\nfrause oaxaca, clear\nqui:probit lfp educ female age single married kids6 kids714\npredict lfp_xb, xb\npredict pr_org, pr\n\nreplace lfp_xb = lfp_xb + _b[educ] * 2 if educ&lt;12\ngen plfp = normal(lfp_xb)\n\n** Before and after the policy change\nsum plfp pr_org \nSo now we have the original probability of employment and the probability of employment after the policy change.\nHow do we know who will transition from not working to working?\n\nOption 1. Assign new workers based on the relative change in the probability of employment.\n\n*| code-fold: false\n*| classes: larger\ngen dprob = (plfp-pr_org)/pr_org\nclonevar lfp_post1 = lfp\nreplace lfp_post1 =1 if lfp==0 & dprob&gt;runiform()\nsum  lfp_post1 lfp\n\nOption 2. Simulate employment status based on the original and post-policy probability of employment.\n\n*| code-fold: false\n*| classes: larger\n** Option 2\ndrop2 unf lfp_org lfp_post\ngen unf = runiform()\ngen lfp_org  = pr_org&gt;unf\ngen lfp_post = plfp  &gt;unf\n\nsum lfp_post  lfp_org\n\nBoth options are valid, but\n\nFirst one requires to impute wages for the new workers only.\nSecond one requires to impute wages for the entire population."
+  },
+  {
+    "objectID": "rmethods2/session_7.html#section-3",
+    "href": "rmethods2/session_7.html#section-3",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "Imputing wages:\n\nWe could assume no selection bias.\nWe may need to use only data available for everyone, or use imputed data (exper tenure) (perhaps at 0?)\n\n*| code-fold: false\n*| classes: larger\nreg lnwage educ female age single married kids6 kids714, \npredict  res, res\npredict lnwage_hat, xb\n** Simulating Known wages component\nreplace lnwage_hat = lnwage_hat + _b[educ] * 2 if educ&lt;12\n** Simulating random component\n** For those already working:\nreplace lnwage_hat = lnwage_hat + res if lfp==1\n** Simulate unobserved\nqui: sum res, \nreplace lnwage_hat = lnwage_hat + rnormal(0,r(sd)) if lfp_post1==1 & lfp==0\n\ngen wage_post = exp(lnwage_hat) if lfp_post1==1 | lfp==1\ngen wage = exp(lnwage)\nsum wage wage_post\nsgini wage wage_post\nThis is equivalent to running a single imputation round. However, we could repeat the process M times to get a measure for the precission of our estimates.\nWhat else can we do?\n\nWe could go further and also simulate where would people work, and how would the economy change.\nWe could also account for selection problems\nor make a more explicit model for distributional analysis."
+  },
+  {
+    "objectID": "rmethods2/session_7.html#st-micro-simulation",
+    "href": "rmethods2/session_7.html#st-micro-simulation",
+    "title": "Research Methods II",
+    "section": "1st Micro-simulation",
+    "text": "1st Micro-simulation\na Review\n\nWe have just use a simple micro-simulation to study the effect of a policy change (education) on wages and employment.\nThis simulation had many assumptions, and we could have done it in many different ways.\nAmong others, we assume no selection bias, with an instantaneous change in education, and no again of the population.\nWe also made important assumptions regarding the transition from non-employment to employment, and the imputation of wages."
+  },
+  {
+    "objectID": "rmethods2/session_7.html#what-is-monte-carlo-simulation",
+    "href": "rmethods2/session_7.html#what-is-monte-carlo-simulation",
+    "title": "Research Methods II",
+    "section": "What is Monte Carlo Simulation?",
+    "text": "What is Monte Carlo Simulation?\n\nMonte Carlo simulation are a generic name given to methods that use random numbers to simulate a process.\nIn econometrics, Monte Carlo methods are used to study the properties of estimators, and to evaluate the performance of statistical tests.\nThis can be a useful tool to understand some of the properties of estimators, or even problems related to violations of assumptions.\nIt can also be used to evaluate the performance of estimators in finite samples, and to compare different estimators."
+  },
+  {
+    "objectID": "rmethods2/session_7.html#example-mean-vs-median",
+    "href": "rmethods2/session_7.html#example-mean-vs-median",
+    "title": "Research Methods II",
+    "section": "Example: Mean vs Median",
+    "text": "Example: Mean vs Median\n\nWhich of this estimators is more robust and efficient, when samples are small ?\nLets setup a program that would simulate this:\n\n*| code-fold: false\n*| classes: larger\n// define a program\ncapture program drop mean_vs_median\nprogram define mean_vs_median, eclass\n  syntax, [nobs(int 100)]\n  clear\n  ** Set  # of obs\n  set obs `nobs'\n  ** Generate a random variable\n  gen x = rnormal(0,1)\n  ** Calculate mean and median\n  qui:sum x,d\n  ** Store results\n  matrix b = r(mean), r(p50)\n  ** post results\n  matrix colname b = \"mean\" \"median\"\n  ereturn post b\nend\nmean_vs_median\nereturn display\nNow that the program is SET, lets run it 1000 times:\n*| code-fold: false\n*| classes: larger\nset seed 101\nsimulate, reps(1000): mean_vs_median, nobs(500)\nsum\nConclusion, when N=100, and the distribution is normal, the mean is more efficient than the median.\nChange assumptions, from N to t-distribution\n*| code-fold: false\n*| classes: larger\n// define a program\ncapture program drop mean_vs_median\nprogram define mean_vs_median, eclass\n  syntax, [nobs(int 100) rt(int 5)]\n  clear\n  set obs `nobs'\n  gen x = rt(`rt')\n  qui:sum x,d\n  matrix b = r(mean), r(p50)\n  matrix colname b = \"mean\" \"median\"\n  ereturn post b\nend\n set seed 101\nsimulate, reps(1000) nodots: mean_vs_median, nobs(500) rt(2)\nsum\nsimulate, reps(1000) nodots: mean_vs_median, nobs(500) rt(4)\nsum\nsimulate, reps(1000) nodots: mean_vs_median, nobs(500) rt(6)\nsum"
+  },
+  {
+    "objectID": "rmethods2/session_7.html#properties-of-estimators",
+    "href": "rmethods2/session_7.html#properties-of-estimators",
+    "title": "Research Methods II",
+    "section": "Properties of estimators",
+    "text": "Properties of estimators\n\nMonte Carlo methods can also be used to study the properties of estimators.\nConsider the following example:\n\nWe want to study the properties of the OLS estimator when the error term is heteroskedastic.\n\n\n\\[y_i = \\beta_0 + \\beta_1 x_i + u_i*exp(\\gamma x_i)\\]\n\nWhat are the consequences of heteroskedasticity in the OLS estimator?\nlets set up a simulation to study this.\n\n*| code-fold: false\n*| classes: larger\n// define a program\ncapture program drop ols_hetero\nprogram define ols_hetero, eclass\n  syntax, [nobs(int 100) b0(real 1) b1(real 1) gamma(real 1)]\n  clear\n  set obs `nobs'\n  gen x = rnormal(0,1)\n  gen u = rnormal(0,1)\n  gen y = `b0' + `b1' * x + u*exp(`gamma'*x)\n  // run regression (under homoskedasticity)\n  qui:reg y x\n  // store results\n  matrix b = _b[_cons], _se[_cons], _b[x], _se[x]\n  matrix colname b = \"b0\" \"se0\" \"b1\" \"se1\"\n  ereturn post b\nend\nsimulate, reps(1000) nodots: ols_hetero, nobs(500) b0(1) b1(1) gamma(1)\nsum \nCorrecting for heteroskedasticity\nWe can correct for heteroskedasticity using robust standard errors.\n*| code-fold: false\n*| classes: larger\n// define a program\ncapture program drop ols_hetero\nprogram define ols_hetero, eclass\n  syntax, [nobs(int 100) b0(real 1) b1(real 1) gamma(real 1)]\n  clear\n  set obs `nobs'\n  gen x = rnormal(0,1)\n  gen u = rnormal(0,1)\n  gen y = `b0' + `b1' * x + u*exp(`gamma'*x)\n  // run regression (under homoskedasticity)\n  qui:reg y x, robust\n  // store results\n  matrix b = _b[_cons], _se[_cons], _b[x], _se[x]\n  matrix colname b = \"b0\" \"se0\" \"b1\" \"se1\"\n  ereturn post b\nend\nsimulate, reps(1000) nodots: ols_hetero, nobs(500) b0(1) b1(1) gamma(1)\nsum \nor using weighted least squares.\n*| code-fold: false\n*| classes: larger\n// define a program\ncapture program drop ols_hetero\nprogram define ols_hetero, eclass\n  syntax, [nobs(int 100) b0(real 1) b1(real 1) gamma(real 1)]\n  clear\n  set obs `nobs'\n  gen x = rnormal(0,1)\n  gen u = rnormal(0,1)\n  gen y = `b0' + `b1' * x + u*exp(`gamma'*x)\n  // run regression (under homoskedasticity)\n  qui:reg y x, \n  predict uhat, resid\n  gen lnuhat2 = ln(uhat^2)\n  reg lnuhat2 x\n  predict lnhx\n  gen hx=exp(lnhx)\n  // store results\n  qui:reg y x [w=1/hx], \n  matrix b = _b[_cons], _se[_cons], _b[x], _se[x]\n  matrix colname b = \"b0\" \"se0\" \"b1\" \"se1\"\n  ereturn post b\nend\nsimulate, reps(1000) nodots: ols_hetero, nobs(500) b0(1) b1(1) gamma(1)\nsum"
+  },
+  {
+    "objectID": "rmethods2/session_7.html#more-on-monte-carlo-simulations",
+    "href": "rmethods2/session_7.html#more-on-monte-carlo-simulations",
+    "title": "Research Methods II",
+    "section": "More on Monte Carlo Simulations",
+    "text": "More on Monte Carlo Simulations\n\nYou can use Monte Carlo simulations to study the properties of new estimators as well. (most often)\nThe structure of the simulation, however, will depend on the estimator you want to study, and may not be fully generalizable.\n\nNotice that in the previous example, we assumed that all data needed to be simulated.\nBut, we could just as well simulate only “parts” of the data, and use observed data for the rest.\n\n\n*| code-fold: false\n*| classes: larger\nfrause oaxaca, clear\nprobit lfp female educ age agesq married divorced\npredict lfp_xb, xb\nmatrix b=e(b)\n*| code-fold: false\n*| classes: larger\n* Latent model LFP =1(lfp_xb + e&gt;0)\ncapture program drop probit_sim\nprogram  probit_sim, eclass\n  capture drop lfp_hat\n  gen lfp_hat=(lfp_xb + rnormal(0,1))&gt;0\n  probit lfp_hat female educ age agesq married divorced, from(b, copy)\nend\nsimulate _b _se, reps(500) nodots: probit_sim\nren lfp_hat* *\nsum ,sep(7)\n\nTo some extent, this is similar to the imputation methods we have seen before.\nMore complex versions of this can be used to elaborate micro-simulations."
+  },
+  {
+    "objectID": "rmethods2/session_7.html#not-the-only-way-to-do-it",
+    "href": "rmethods2/session_7.html#not-the-only-way-to-do-it",
+    "title": "Research Methods II",
+    "section": "Not the only way to do it",
+    "text": "Not the only way to do it\n\nWhile many micro-simulations are based on stochastic simultions, there are other ways to do it.\nIn Hotckiss et al. (forthcoming), we use a deterministic micro-simulation to study the effect of tax-reforms on welfare changes and its distribution for the - first\nHow did we do it?"
+  },
+  {
+    "objectID": "rmethods2/session_7.html#tax-reform-on-households-welfare",
+    "href": "rmethods2/session_7.html#tax-reform-on-households-welfare",
+    "title": "Research Methods II",
+    "section": "Tax Reform on Households Welfare",
+    "text": "Tax Reform on Households Welfare\n\nWe concentrated mostly on couple households with young children (0-18 years old).\nUsing a heckman selection model, we impute wages for the non-working people (based on PMM).\nUsing observed and imputed wages, we impute the tax liability for each household before and after the reform. (TAX-SIM), and estimate after-tax wages.\nEstimate Household Labor Supply based on HH utility and Non-linear Tobit model\nUse HLS models, we make predictions for Labor Supply changes and utility changes given the Reform.\n\nThe Outcome was how much better/worse off would households be after the reform."
+  },
+  {
+    "objectID": "rmethods2/session_7.html#intro",
+    "href": "rmethods2/session_7.html#intro",
+    "title": "Research Methods II",
+    "section": "Intro",
+    "text": "Intro\n\nAt Levy, we have also constructed a micro-simulation model to study employment simulations.\nMethod first developed for estimating the impact of the American Recovery and Reinvestment Act of 2009\n\nConvert spending into jobs by industry and occupation (I/O matrix)\nAssign potential workers to jobs\nPredict earnings and hours\n\nFor the work with LIMEW and LIMPTIP, this has also been used for distributional analysis of employment assigment and services use."
+  },
+  {
+    "objectID": "rmethods2/session_7.html#limm-step-i",
+    "href": "rmethods2/session_7.html#limm-step-i",
+    "title": "Research Methods II",
+    "section": "LIMM: Step I",
+    "text": "LIMM: Step I\nJob Creation\n\nConsider a policy: Road construction, Services provision, etc.\n\nCalculate changes in final demand for each industry the policy creates\nUsing I-O tables estimate change in total output for each industry\nUse that change in output to estimate change demand for labor inputs\n\nTransform the changes from labor imputs to generated jobs (consider wages)\n\nDistribute changes across occupations (within industry)\n\nUsing, for example, shares of employment by occupation within industry\n\n\n\nWith this we have a total number of jobs created by industry and occupation."
+  },
+  {
+    "objectID": "rmethods2/session_7.html#limm-step-ii",
+    "href": "rmethods2/session_7.html#limm-step-ii",
+    "title": "Research Methods II",
+    "section": "LIMM: Step II",
+    "text": "LIMM: Step II\nJob Assigment\n\nGiven the Total change in Jobs, we need to assign workers to those jobs.\n\nWho are the potential workers?\n\nNot in LF: Potential, but not looking for work (may depend on characteristics). Avoid retired, disabled and students\nUnemployed: Most likely to take a job (pool may not be large enough)\nUnderemployed: Working part-time, but willing to work full-time, or people aiming for better jobs. (May create job openings)\nand Employed: May be willing to change jobs (may create job openings)"
+  },
+  {
+    "objectID": "rmethods2/session_7.html#section-4",
+    "href": "rmethods2/session_7.html#section-4",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "Job Assigment II\n\nFor LIMM, in addition to identifying potential workers, we also need to identify potential job characteristics\n\nHours of work (full-time, part-time), wage levels, etc\n\nThis is done using “Observed” Jobs characteristics of “currently employed” workers.\n\n\n\n\n\n\n\nNote\n\n\nThis is not the only way to do it. We could make assumptions about wage levels, hours of work, etc. (e.g. minimum wage, full-time, etc.) (Employment guarantee?)\n\n\n\n\nA probit/logit model would be estimated to predict the likelihood of working, and this will be used to assign jobs.\n\nHigh p-scores, first ones to be assigned jobs."
+  },
+  {
+    "objectID": "rmethods2/session_7.html#section-5",
+    "href": "rmethods2/session_7.html#section-5",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "Job Assigment III\n\nJob assignment is done using a multinomial model (mprobit) to predict likelihoods of working on a given occupation & industry.\n\nIdeally, you would like to do both at the same time, but that is a very complex model to estimate. Instead, each one is estimated separately.\n\n\n\\[\\begin{aligned}\nI^*(ind = 1 ) &= \\beta_1 X + e_1 \\\\\nI^*(ind = 2 ) &= \\beta_2 X + e_2 \\\\\n&\\vdots \\\\\nI^*(ind = k ) &= \\beta_k X + e_k\n\\end{aligned}\n\\]\nWhere \\(I^*(ind = k )\\) is the latent likelihood of working on industry \\(k\\) given characteristics. Mprobit or Mlogit depends on the distribution of \\(e_k\\).\nYou choose Industry \\(k\\) if \\(I^*(ind = k )\\) is the highest among all industries."
+  },
+  {
+    "objectID": "rmethods2/session_7.html#section-6",
+    "href": "rmethods2/session_7.html#section-6",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "Job Assigment IV\n\nJob Assigment is done as follows:\n\nFor each potential worker, Calculate Prob of working. Those with the highest probability are assigned jobs first.\nFor Worker, \\(i\\), the individual is assigned to the industry with the highest likelihood of working. (until all jobs are assigned)\n\nCan be done followed by doing similar assigment for occupation within industry.\nOr combine both industry and occupation (p_o * p_i)\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nJob allocation must consider jobs available and likehood of working on a given Occupation/Industry.\nMay want to avoid deterministic assignment.\ncould assigned based on random draws from the distribution of likelihoods.\n\n\n\n\n\nJobs wages and hours are assigned based on matched data (with donors)"
   }
 ]
