@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-html/tabby.min.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.537">
+  <meta name="generator" content="quarto-1.4.455">
 
   <meta name="author" content="Fernando Rios-Avila">
   <title>Econometrics MSC Levy - Research Methods II</title>
@@ -29,6 +29,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #24292e;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #24292e; } /* Normal */
+    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
+    code span.an { color: #6a737d; } /* Annotation */
+    code span.at { color: #d73a49; } /* Attribute */
+    code span.bn { color: #005cc5; } /* BaseN */
+    code span.bu { color: #d73a49; } /* BuiltIn */
+    code span.cf { color: #d73a49; } /* ControlFlow */
+    code span.ch { color: #032f62; } /* Char */
+    code span.cn { color: #005cc5; } /* Constant */
+    code span.co { color: #6a737d; } /* Comment */
+    code span.cv { color: #6a737d; } /* CommentVar */
+    code span.do { color: #6a737d; } /* Documentation */
+    code span.dt { color: #d73a49; } /* DataType */
+    code span.dv { color: #005cc5; } /* DecVal */
+    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
+    code span.ex { color: #d73a49; font-weight: bold; } /* Extension */
+    code span.fl { color: #005cc5; } /* Float */
+    code span.fu { color: #6f42c1; } /* Function */
+    code span.im { color: #032f62; } /* Import */
+    code span.in { color: #6a737d; } /* Information */
+    code span.kw { color: #d73a49; } /* Keyword */
+    code span.op { color: #24292e; } /* Operator */
+    code span.ot { color: #6f42c1; } /* Other */
+    code span.pp { color: #d73a49; } /* Preprocessor */
+    code span.re { color: #6a737d; } /* RegionMarker */
+    code span.sc { color: #005cc5; } /* SpecialChar */
+    code span.ss { color: #032f62; } /* SpecialString */
+    code span.st { color: #032f62; } /* String */
+    code span.va { color: #e36209; } /* Variable */
+    code span.vs { color: #032f62; } /* VerbatimString */
+    code span.wa { color: #ff5555; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="styles.css">
@@ -321,6 +386,9 @@
       margin-right: 0; 
     }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+  
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -328,7 +396,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Research Methods II</h1>
-  <p class="subtitle">Imputation: Statistical Matching</p>
+  <p class="subtitle">Session 6: Imputation: Statistical Matching</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -669,15 +737,250 @@ Pros: It transfers the unconditional distribution of the data. Cons: My not use 
 </section>
 <section id="example" class="slide level2">
 <h2>Example</h2>
+<div id="09d431f1" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a>frause wage2, <span class="kw">clear</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">set</span> <span class="dv">seed</span> 312</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">xtile</span> smp = runiform()</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">replace</span> smp=smp==1</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">gen</span> wage_s = wage <span class="kw">if</span> smp==1</span>
+<span id="cb1-6"><a href="#cb1-6"></a>**three Matching scores</span>
+<span id="cb1-7"><a href="#cb1-7"></a>** Pmm</span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="kw">reg</span> wage_s hours iq kww educ exper tenure age married <span class="bn">black</span> south urban sibs </span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="kw">predict</span> wageh</span>
+<span id="cb1-10"><a href="#cb1-10"></a>** pscore</span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="kw">logit</span> smp hours iq kww educ exper tenure age married <span class="bn">black</span> south urban sibs </span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="kw">predict</span> pscore, <span class="kw">xb</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>** <span class="kw">pca</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="kw">pca</span> hours iq kww educ exper tenure age married <span class="bn">black</span> south urban sibs , comp(1)</span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="kw">predict</span> pc1</span>
+<span id="cb1-16"><a href="#cb1-16"></a></span>
+<span id="cb1-17"><a href="#cb1-17"></a><span class="kw">foreach</span> i <span class="kw">in</span> wageh pscore pc1 {</span>
+<span id="cb1-18"><a href="#cb1-18"></a>    <span class="kw">qui</span>:<span class="kw">sum</span> <span class="ot">`i'</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a>    <span class="kw">replace</span> <span class="ot">`i'</span> = (<span class="ot">`i'</span>-<span class="fu">r</span>(<span class="kw">mean</span>))/<span class="fu">r</span>(<span class="fu">sd</span>)</span>
+<span id="cb1-20"><a href="#cb1-20"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<style>div.jp-Notebook .datagrid-container {min-height: 448px; }</style>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(467 real changes made)
+(467 missing values generated)
+
+      Source |       SS           df       MS      Number of obs   =       468
+-------------+----------------------------------   F(12, 455)      =     14.83
+       Model |  24043666.1        12  2003638.84   Prob &gt; F        =    0.0000
+    Residual |  61493527.5       455   135150.61   R-squared       =    0.2811
+-------------+----------------------------------   Adj R-squared   =    0.2621
+       Total |  85537193.6       467  183163.155   Root MSE        =    367.63
+
+------------------------------------------------------------------------------
+      wage_s | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       hours |  -4.080234   2.204689    -1.85   0.065    -8.412869    .2524015
+          iq |   3.090831   1.459171     2.12   0.035     .2232806    5.958381
+         kww |   5.637987   2.888128     1.95   0.052    -.0377362    11.31371
+        educ |   53.43222   10.41882     5.13   0.000     32.95724     73.9072
+       exper |   8.816439    5.30953     1.66   0.098    -1.617804    19.25068
+      tenure |   6.327233   3.534248     1.79   0.074    -.6182417    13.27271
+         age |   10.92113   7.195943     1.52   0.130    -3.220278    25.06253
+     married |    143.306   54.35023     2.64   0.009     36.49735    250.1146
+       black |  -144.0597   60.51784    -2.38   0.018    -262.9889    -25.1306
+       south |  -37.37316    37.7745    -0.99   0.323    -111.6073    36.86096
+       urban |   200.3258   38.93558     5.15   0.000       123.81    276.8417
+        sibs |   1.881618   8.468635     0.22   0.824    -14.76087    18.52411
+       _cons |  -842.6706     273.28    -3.08   0.002    -1379.718   -305.6231
+------------------------------------------------------------------------------
+(option xb assumed; fitted values)
+
+Iteration 0:   log likelihood = -648.09208  
+Iteration 1:   log likelihood = -642.21625  
+Iteration 2:   log likelihood = -642.21522  
+Iteration 3:   log likelihood = -642.21522  
+
+Logistic regression                                     Number of obs =    935
+                                                        LR chi2(12)   =  11.75
+                                                        Prob &gt; chi2   = 0.4657
+Log likelihood = -642.21522                             Pseudo R2     = 0.0091
+
+------------------------------------------------------------------------------
+         smp | Coefficient  Std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       hours |   .0153544   .0093201     1.65   0.099    -.0029127    .0336215
+          iq |   .0024677   .0057346     0.43   0.667    -.0087719    .0137072
+         kww |  -.0095774   .0113247    -0.85   0.398    -.0317735    .0126186
+        educ |  -.0255069   .0409702    -0.62   0.534     -.105807    .0547932
+       exper |   .0256009   .0205087     1.25   0.212    -.0145955    .0657973
+      tenure |   .0131078   .0137404     0.95   0.340     -.013823    .0400385
+         age |  -.0033883   .0281317    -0.12   0.904    -.0585256    .0517489
+     married |  -.2382151   .2167632    -1.10   0.272    -.6630632    .1866331
+       black |  -.1214461   .2276112    -0.53   0.594    -.5675559    .3246637
+       south |  -.0370746   .1457381    -0.25   0.799    -.3227161    .2485669
+       urban |  -.0371736   .1495076    -0.25   0.804    -.3302031     .255856
+        sibs |   -.041735   .0313008    -1.33   0.182    -.1030835    .0196135
+       _cons |  -.1246922   1.056515    -0.12   0.906    -2.195424    1.946039
+------------------------------------------------------------------------------
+
+Principal components/correlation                 Number of obs    =        935
+                                                 Number of comp.  =          1
+                                                 Trace            =         12
+    Rotation: (unrotated = principal)            Rho              =     0.2112
+
+    --------------------------------------------------------------------------
+       Component |   Eigenvalue   Difference         Proportion   Cumulative
+    -------------+------------------------------------------------------------
+           Comp1 |       2.5348      .622213             0.2112       0.2112
+           Comp2 |      1.91258      .821455             0.1594       0.3706
+           Comp3 |      1.09113     .0297471             0.0909       0.4615
+           Comp4 |      1.06138     .0497587             0.0884       0.5500
+           Comp5 |      1.01162     .0867533             0.0843       0.6343
+           Comp6 |      .924871     .0639678             0.0771       0.7114
+           Comp7 |      .860903     .0907871             0.0717       0.7831
+           Comp8 |      .770116      .144885             0.0642       0.8473
+           Comp9 |      .625231      .119791             0.0521       0.8994
+          Comp10 |       .50544     .0919858             0.0421       0.9415
+          Comp11 |      .413454      .124988             0.0345       0.9760
+          Comp12 |      .288466            .             0.0240       1.0000
+    --------------------------------------------------------------------------
+
+Principal components (eigenvectors) 
+
+    --------------------------------------
+        Variable |    Comp1 | Unexplained 
+    -------------+----------+-------------
+           hours |   0.1320 |       .9558 
+              iq |   0.4921 |       .3863 
+             kww |   0.4220 |       .5486 
+            educ |   0.4555 |        .474 
+           exper |  -0.2161 |       .8817 
+          tenure |   0.0463 |       .9946 
+             age |   0.0527 |        .993 
+         married |   0.0053 |       .9999 
+           black |  -0.3722 |       .6488 
+           south |  -0.2076 |       .8908 
+           urban |   0.0723 |       .9868 
+            sibs |  -0.3411 |       .7051 
+    --------------------------------------
+(score assumed)
+
+Scoring coefficients 
+    sum of squares(column-loading) = 1
+
+    ------------------------
+        Variable |    Comp1 
+    -------------+----------
+           hours |   0.1320 
+              iq |   0.4921 
+             kww |   0.4220 
+            educ |   0.4555 
+           exper |  -0.2161 
+          tenure |   0.0463 
+             age |   0.0527 
+         married |   0.0053 
+           black |  -0.3722 
+           south |  -0.2076 
+           urban |   0.0723 
+            sibs |  -0.3411 
+    ------------------------
+(935 real changes made)
+(935 real changes made)
+(935 real changes made)</code></pre>
+</div>
+</div>
+<p>Next we create ranks for each observation, assuming no stratification.</p>
+<div id="ae3f8e27" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">bysort</span> smp (wageh) :<span class="kw">gen</span> rnk1=<span class="dt">_n</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">bysort</span> smp (pscore):<span class="kw">gen</span> rnk2=<span class="dt">_n</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">bysort</span> smp (pc1)   :<span class="kw">gen</span> rnk3=<span class="dt">_n</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Finally, the imputation. Simply “matching” information from the donor to the recipient.</p>
+<div id="54f7f169" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1"></a>* Imputation</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">clonevar</span> wage1 = wage_s</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">clonevar</span> wage2 = wage_s</span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">clonevar</span> wage3 = wage_s</span>
+<span id="cb4-5"><a href="#cb4-5"></a></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="kw">gsort</span> -smp rnk1</span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="kw">replace</span> wage1 = wage_s[rnk1] <span class="kw">if</span> smp==0</span>
+<span id="cb4-8"><a href="#cb4-8"></a></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="kw">gsort</span> -smp rnk2</span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="kw">replace</span> wage2 = wage_s[rnk2] <span class="kw">if</span> smp==0</span>
+<span id="cb4-11"><a href="#cb4-11"></a></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="kw">gsort</span> -smp rnk3</span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="kw">replace</span> wage3 = wage_s[rnk3] <span class="kw">if</span> smp==0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(467 missing values generated)
+(467 missing values generated)
+(467 missing values generated)
+(467 real changes made)
+(467 real changes made)
+(467 real changes made)</code></pre>
+</div>
+</div>
+<p>Simple quality assessment.</p>
+<div id="29d1a599" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">qui</span>:<span class="kw">reg</span> wage hours iq kww educ exper tenure age married <span class="bn">black</span> south <span class="kw">if</span> smp==0</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">est</span> sto m1</span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">qui</span>:<span class="kw">reg</span> wage1 hours iq kww educ exper tenure age married <span class="bn">black</span> south <span class="kw">if</span> smp==0</span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="kw">est</span> sto m2</span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="kw">qui</span>:<span class="kw">reg</span> wage2 hours iq kww educ exper tenure age married <span class="bn">black</span> south <span class="kw">if</span> smp==0</span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="kw">est</span> sto m3</span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="kw">qui</span>:<span class="kw">reg</span> wage3 hours iq kww educ exper tenure age married <span class="bn">black</span> south <span class="kw">if</span> smp==0</span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="kw">est</span> sto m4</span>
+<span id="cb6-9"><a href="#cb6-9"></a>esttab m1 m2 m3 m4 , se mtitle(True Wageh pscore <span class="kw">pca</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+----------------------------------------------------------------------------
+                      (1)             (2)             (3)             (4)   
+                     True           Wageh          pscore             pca   
+----------------------------------------------------------------------------
+hours              -3.076          -5.508*          0.208          -0.971   
+                  (2.482)         (2.678)         (3.109)         (2.825)   
+
+iq                  2.579           0.343          -2.775           3.653*  
+                  (1.411)         (1.522)         (1.767)         (1.605)   
+
+kww                 5.410*          8.750**         1.954           7.545*  
+                  (2.745)         (2.961)         (3.438)         (3.124)   
+
+educ                46.14***        77.82***        8.331           44.53***
+                  (10.18)         (10.98)         (12.75)         (11.58)   
+
+exper               11.66*          15.17**        -2.006           5.108   
+                  (4.980)         (5.372)         (6.237)         (5.667)   
+
+tenure              3.844           5.238          -0.511          0.0757   
+                  (3.332)         (3.595)         (4.174)         (3.792)   
+
+age                -0.945          -9.667          -10.91          -5.380   
+                  (6.905)         (7.449)         (8.648)         (7.858)   
+
+married             187.2***        165.6**         89.99           38.58   
+                  (54.26)         (58.54)         (67.96)         (61.75)   
+
+black              -64.09          -99.07           46.48          -39.87   
+                  (52.43)         (56.57)         (65.67)         (59.67)   
+
+south              -80.79*         -74.14           9.854          -120.9** 
+                  (35.19)         (37.96)         (44.07)         (40.04)   
+
+_cons              -254.2          -199.6          1349.4***       -104.9   
+                  (251.2)         (271.0)         (314.6)         (285.9)   
+----------------------------------------------------------------------------
+N                     467             467             467             467   
+----------------------------------------------------------------------------
+Standard errors in parentheses
+* p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001</code></pre>
+</div>
+</div>
 </section></section>
 <section id="next-class-micro-simulation" class="title-slide slide level1 center">
 <h1>Next Class: Micro Simulation</h1>
 <p>just more imputations</p>
 
-<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
-</div>
 </div>
 </section>
     </div>

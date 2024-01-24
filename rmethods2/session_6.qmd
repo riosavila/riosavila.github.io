@@ -1,6 +1,6 @@
 ---
 title: "Research Methods II"
-subtitle: "Imputation: Statistical Matching"
+subtitle: "Session 6: Imputation: Statistical Matching"
 author: Fernando Rios-Avila
 format: 
   revealjs: 
@@ -11,7 +11,6 @@ format:
     echo: true
     css: styles.css 
     highlight-style: github
-    
 ---
 
 # Missing Data vs MISSING DATA

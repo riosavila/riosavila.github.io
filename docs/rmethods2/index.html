@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.533">
+<meta name="generator" content="quarto-1.4.455">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -63,7 +63,6 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -105,7 +104,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Research Methods: Econometrics I</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../rm2_return.html"> 
+    <a class="nav-link active" href="../rmethods2/index.html" aria-current="page"> 
 <span class="menu-text">Research Methods II: Applied Methods</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -193,21 +192,25 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="sessions" class="level2">
 <h2 class="anchored" data-anchor-id="sessions">Sessions</h2>
-<p><strong>Session 1:</strong></p>
+<p><strong>Session 1: Surveys, IO and SAM</strong></p>
 <p>Slides: <a href="../rmethods2/session_1.html">html</a> and <a href="session_1.pdf">pdf</a></p>
 <p>Readings: [link]</p>
-<p><strong>Session 2:</strong></p>
+<p><strong>Session 2: MLE &amp; Limited Dependent Variables</strong></p>
 <p>Slides: <a href="../rmethods2/session_2.html">html</a> and <a href="session_2.pdf">pdf</a></p>
-<p><strong>Session 3:</strong></p>
+<p>Readings: [link]</p>
+<p><strong>Session 3: Measuring Inequality</strong></p>
 <p>Slides: <a href="../rmethods2/session_3.html">html</a> and <a href="session_3.pdf">pdf</a></p>
-<p><strong>Session 4:</strong></p>
+<p>Readings: [link]</p>
+<p><strong>Session 4: Analyzing Gaps</strong></p>
 <p>Slides: <a href="../rmethods2/session_4.html">html</a> and <a href="session_4.pdf">pdf</a></p>
-<p><strong>Session 5:</strong></p>
+<p>Readings: [link]</p>
+<p><strong>Session 5: Significance and Missing Data</strong></p>
 <p>Slides: <a href="../rmethods2/session_5.html">html</a> and <a href="session_5.pdf">pdf</a></p>
-<p><strong>Session 6:</strong></p>
-<p>Slides: <a href="../rmethods2/session_6.html">html</a> and <a href="session_6.pdf">pdf</a></p>
-<p><strong>Session 7:</strong></p>
-<p>Slides: <a href="../rmethods2/session_7.html">html</a> and <a href="session_7.pdf">pdf</a></p>
+<p>Readings: [link]</p>
+<p><strong>Session 6: Imputation: Statistical Matching</strong></p>
+<p>Slides: <a href="../rmethods2/session_6.html">html</a> and <a href="session_6.pdf">pdf</a> Readings: [link]</p>
+<p><strong>Session 7: Session 7: Micro-Simulations, and Monte Carlo Methods</strong></p>
+<p>Slides: <a href="../rmethods2/session_7.html">html</a> and <a href="session_7.pdf">pdf</a> Readings: [link]</p>
 
 
 </section>
@@ -485,28 +488,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
+    const typesetMath = (el) => {
+      if (window.MathJax) {
+        // MathJax Typeset
+        window.MathJax.typeset([el]);
+      } else if (window.katex) {
+        // KaTeX Render
+        var mathElements = el.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            window.katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }
+    }
     if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
-          }
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
-        }
+        typesetMath(container);
         return container.innerHTML
       } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
+        typesetMath(note);
         return note.innerHTML;
       }
     } else {
@@ -515,9 +528,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
+      typesetMath(note);
       return note.innerHTML;
     }
   }

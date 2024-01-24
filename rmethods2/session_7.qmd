@@ -1,6 +1,6 @@
 ---
 title: "Research Methods II"
-subtitle: "Micro-Simulations, and Monte Carlo Methods"
+subtitle: "Session 7: Micro-Simulations, and Monte Carlo Methods"
 author: Fernando Rios-Avila
 format: 
   revealjs: 
@@ -30,7 +30,7 @@ format:
 - Which of this estimators is more robust and efficient, when samples are small ?
 - Lets setup a program that would simulate this:
 
-```stata
+```{stata}
 *| code-fold: false
 *| classes: larger
 // define a program
@@ -56,7 +56,7 @@ ereturn display
 
 Now that the program is SET, lets run it 1000 times:
 
-```stata
+```{stata}
 *| code-fold: false
 *| classes: larger
 set seed 101
@@ -68,7 +68,7 @@ Conclusion, when N=100, and the distribution is normal, the mean is more efficie
 
 ### Change assumptions, from N to t-distribution
 
-```stata
+```{stata}
 *| code-fold: false
 *| classes: larger
 // define a program
@@ -104,7 +104,7 @@ $$y_i = \beta_0 + \beta_1 x_i + u_i*exp(\gamma x_i)$$
 
 - lets set up a simulation to study this.
 
-```stata
+```{stata}
 *| code-fold: false
 *| classes: larger
 // define a program
@@ -132,7 +132,7 @@ sum
 We can correct for heteroskedasticity using robust standard errors.
 
 
-```stata
+```{stata}
 *| code-fold: false
 *| classes: larger
 // define a program
@@ -157,7 +157,7 @@ sum
 
 or using weighted least squares.
 
-```stata
+```{stata}
 *| code-fold: false
 *| classes: larger
 // define a program
@@ -194,7 +194,7 @@ sum
   - Notice that in the previous example, we assumed that all data needed to be simulated.
   -  But, we could just as well simulate only "parts" of the data, and use observed data for the rest.
 
-```stata
+```{stata}
 *| code-fold: false
 *| classes: larger
 frause oaxaca, clear
@@ -204,7 +204,7 @@ matrix b=e(b)
 
 ```
 
-```stata
+```{stata}
 *| code-fold: false
 *| classes: larger
 * Latent model LFP =1(lfp_xb + e>0)
@@ -277,7 +277,7 @@ We can start by modeling the effect of education on wages.
 
 $$log(wage)= \beta X + \beta_e educ + u$$
 
-```stata
+```{stata}
 *| code-fold: false
 *| classes: larger
 frause oaxaca, clear
@@ -286,7 +286,7 @@ predict  res, res
 ```
 
 ID the policy change
-```stata
+```{stata}
 *| code-fold: false
 *| classes: larger
 clonevar educ2=educ
@@ -296,7 +296,7 @@ predict yhat2, xb
 
 So what is the effect on wages? (if there is no selection bias)
 
-```stata
+```{stata}
 *| code-fold: false
 *| classes: larger
 gen wage = exp(lnwage)
@@ -324,7 +324,7 @@ $$
 
 First model the probability of employment
 
-```stata
+```{stata}
 *| code-fold: false
 *| classes: larger
 frause oaxaca, clear
@@ -345,7 +345,7 @@ How do we know who will transition from not working to working?
 
 - Option 1. Assign new workers based on the relative change in the probability of employment.
 
-```stata
+```{stata}
 *| code-fold: false
 *| classes: larger
 gen dprob = (plfp-pr_org)/pr_org
@@ -356,7 +356,7 @@ sum  lfp_post1 lfp
 
 - Option 2. Simulate employment status based on the original and post-policy probability of employment.
 
-```stata
+```{stata}
 *| code-fold: false
 *| classes: larger
 ** Option 2
@@ -379,7 +379,7 @@ sum lfp_post  lfp_org
   - We could assume no selection bias.
   - We may need to use only data available for everyone, or use imputed data (exper tenure) (perhaps at 0?)
 
-```stata
+```{stata}
 *| code-fold: false
 *| classes: larger
 reg lnwage educ female age single married kids6 kids714, 
@@ -444,7 +444,7 @@ This is equivalent to running a single imputation round. However, we could repea
   - Convert spending into jobs by industry and occupation (I/O matrix)
   - Assign potential workers to jobs
   - Predict earnings and hours
-- For the work with LIMEW and LIMPTIP, this has also been used for distributional analysis of employment assigment and services use.
+- For the work with LIMEW and LIMTIP, this has also been used for distributional analysis of employment assigment and services use.
 
 ## LIMM: Step I 
 
@@ -457,7 +457,7 @@ This is equivalent to running a single imputation round. However, we could repea
     - Transform the changes from labor imputs to generated jobs (consider wages)
   - Distribute changes across occupations (within industry)
     - Using, for example, shares of employment by occupation within industry
-    - 
+     
 - With this we have a total number of jobs created by industry and occupation.
 
 ## LIMM: Step II
@@ -474,24 +474,12 @@ This is equivalent to running a single imputation round. However, we could repea
 ##
 ### Job Assigment II
 
-- For LIMM, in addition to identifying potential workers, we also need to identify potential job characteristics 
-  - Hours of work (full-time, part-time), wage levels, etc
+- Two Steps, modeling job creation and job assigment
  
-- This is done using "Observed" Jobs characteristics of "currently employed" workers.
-
-::: {.callout-note}
-
-This is not the only way to do it. We could make assumptions about wage levels, hours of work, etc. (e.g. minimum wage, full-time, etc.) (Employment guarantee?)
-:::
-
 - A probit/logit model would be estimated to predict the likelihood of working, and this will be used to assign jobs.
 
-  - High `p-scores`, first ones to be assigned jobs.
-
-##
-### Job Assigment III
-
-- Job assignment is done using a multinomial model (`mprobit`) to predict likelihoods of working on a given occupation & industry. 
+  - Job assignment is done using a multinomial model (`mprobit`) to predict likelihoods of working on a given occupation & industry. 
+ 
   - Ideally, you would like to do both at the same time, but that is a very complex model to estimate. Instead, each one is estimated separately.
 
 $$\begin{aligned}
@@ -507,7 +495,7 @@ Where $I^*(ind = k )$ is the latent likelihood of working on industry $k$ given 
 You choose Industry $k$ if $I^*(ind = k )$ is the highest among all industries.
 
 ##
-### Job Assigment IV
+### Job Assigment III
 
 - Job Assigment is done as follows:
 
@@ -523,6 +511,57 @@ You choose Industry $k$ if $I^*(ind = k )$ is the highest among all industries.
   - could assigned based on random draws from the distribution of likelihoods.
 :::
   
-- Jobs wages and hours are assigned based on matched data (with donors)
+##
+### Earning contributions
 
+- Because some of the newly created jobs go to people who are employed in Family businesses (Farm and non farm income), one has to account for the "loss" of income from those jobs. 
+ 
+- This is done by estimating the contribution of each member to the family business, and imputing the loss of income from the now "formally employed" member.
+  - For example, modeling farm income, predicting that income without the family member, and imputing the difference as the loss of income.
 
+##
+### Job Assigment IV: Wages and Hours
+
+- Hours and Wages are imputed using a heckman model, and multiple stage process
+
+1. Use a probit model to predict the likelihood of working.
+2. Given the model obtain the inverse mills ratios. $imr = \phi(\alpha'x)/\Phi(\alpha'x)$
+3. Model wages and hours using IMR as a regressor. (Heckit model) (This includes info on imputed occupations/industry)
+4. Use Imputed wages and hours to Match data to "donor" individuals. (PMM)
+5. For people "potentially" leaving family business, compare new wages to family business contributions
+
+##
+### Hours of HP re-assigment
+
+- People taking jobs may have to change their contributions to household production. (less time for HP)
+- But the rest of the family may also have to adjust their contributions to HP. (more time for HP?)
+  - This is done via matching, where the "donor" are working individuals with similar family characteristics.
+  - Or All working individuals 
+  - Currently, "recipients" are all individuals in the household, with atleast one new worker.
+    - May be more sensible to impute hours
+    - One may argue those not working may have to increase hours of HP. Or do nothing
+
+### Other considerations
+
+- Assigment of Child Care services
+
+## Assessing the quality of the simulation
+
+- In principle, there is no way to know if the simulation is correct.
+  - There is no "true" value to compare to.
+  - However, one may want to at least ensure the simulation replicates the data.
+  - One can potetially use the simulation to predict changes of a past policy, and compare to the actual changes.
+- We do want to make "sanity" checks 
+  - Are results consistent and plausible?
+  - Are distributions of post-assigment outcomes consistent with the data?
+
+## Limitations
+
+- Since we use existing data, we make the implicit assumption "no behavioral changes" in other aspects
+  - Things change as far as we can model them.
+- Results are typically point estimates, and do not account for uncertainty.
+  - We can use multiple imputation, monte carlo simulations, or bootstrapping to account for uncertainty.
+- The results are only as good as the data we use and the assumptions we make.
+  - We can use sensitivity analysis to test the robustness of the results to changes in assumptions.
+
+# Thats All Folks!

@@ -10,6 +10,7 @@ format:
     code-fold: true
     echo: true
     css: styles.css 
+    highlight-style: github
 ---
 
 ## Introduction
@@ -466,7 +467,7 @@ reg lnwage female [pw=ipw2]
 - It also allows you to move away from focusing on differences in means. Any transformation of the outcome is now valid! 
 
 ```{stata}
-//gen wage = exp(lnwage)
+gen wage = exp(lnwage)
 rifhdreg wage female [pw=ipw1] , rif(gini) over(female)
 rifhdreg wage female [pw=ipw2] , rif(gini) over(female)
 ```

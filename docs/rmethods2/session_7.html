@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-html/tabby.min.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.537">
+  <meta name="generator" content="quarto-1.4.455">
 
   <meta name="author" content="Fernando Rios-Avila">
   <title>Econometrics MSC Levy - Research Methods II</title>
@@ -386,6 +386,9 @@
       margin-right: 0; 
     }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+  
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -393,7 +396,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Research Methods II</h1>
-  <p class="subtitle">Micro-Simulations, and Monte Carlo Methods</p>
+  <p class="subtitle">Session 7: Micro-Simulations, and Monte Carlo Methods</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -424,56 +427,128 @@ Fernando Rios-Avila
 <li>Which of this estimators is more robust and efficient, when samples are small ?</li>
 <li>Lets setup a program that would simulate this:</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a></a>*| code-fold: false</span>
-<span id="cb1-2"><a></a>*| classes: larger</span>
-<span id="cb1-3"><a></a><span class="co">// define a program</span></span>
-<span id="cb1-4"><a></a><span class="kw">capture</span> <span class="kw">program</span> <span class="kw">drop</span> mean_vs_median</span>
-<span id="cb1-5"><a></a><span class="kw">program</span> <span class="kw">define</span> mean_vs_median, <span class="kw">eclass</span></span>
-<span id="cb1-6"><a></a>  <span class="kw">syntax</span>, [nobs(<span class="kw">int</span> 100)]</span>
-<span id="cb1-7"><a></a>  <span class="kw">clear</span></span>
-<span id="cb1-8"><a></a>  ** Set  # <span class="kw">of</span> <span class="kw">obs</span></span>
-<span id="cb1-9"><a></a>  <span class="kw">set</span> <span class="kw">obs</span> <span class="ot">`nobs'</span></span>
-<span id="cb1-10"><a></a>  ** Generate a random <span class="kw">variable</span></span>
-<span id="cb1-11"><a></a>  <span class="kw">gen</span> x = rnormal(0,1)</span>
-<span id="cb1-12"><a></a>  ** Calculate <span class="kw">mean</span> and <span class="kw">median</span></span>
-<span id="cb1-13"><a></a>  <span class="kw">qui</span>:<span class="kw">sum</span> x,<span class="kw">d</span></span>
-<span id="cb1-14"><a></a>  ** Store results</span>
-<span id="cb1-15"><a></a>  <span class="fu">matrix</span> b = <span class="fu">r</span>(<span class="kw">mean</span>), <span class="fu">r</span>(p50)</span>
-<span id="cb1-16"><a></a>  ** <span class="kw">post</span> results</span>
-<span id="cb1-17"><a></a>  <span class="fu">matrix</span> colname b = <span class="st">"mean"</span> <span class="st">"median"</span></span>
-<span id="cb1-18"><a></a>  <span class="kw">ereturn</span> <span class="kw">post</span> b</span>
-<span id="cb1-19"><a></a><span class="kw">end</span></span>
-<span id="cb1-20"><a></a>mean_vs_median</span>
-<span id="cb1-21"><a></a><span class="kw">ereturn</span> <span class="kw">display</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="92a264ef" class="cell larger" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">// define a program</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">capture</span> <span class="kw">program</span> <span class="kw">drop</span> mean_vs_median</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">program</span> <span class="kw">define</span> mean_vs_median, <span class="kw">eclass</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>  <span class="kw">syntax</span>, [nobs(<span class="kw">int</span> 100)]</span>
+<span id="cb1-5"><a href="#cb1-5"></a>  <span class="kw">clear</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>  ** Set  # <span class="kw">of</span> <span class="kw">obs</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>  <span class="kw">set</span> <span class="kw">obs</span> <span class="ot">`nobs'</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>  ** Generate a random <span class="kw">variable</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>  <span class="kw">gen</span> x = rnormal(0,1)</span>
+<span id="cb1-10"><a href="#cb1-10"></a>  ** Calculate <span class="kw">mean</span> and <span class="kw">median</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>  <span class="kw">qui</span>:<span class="kw">sum</span> x,<span class="kw">d</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>  ** Store results</span>
+<span id="cb1-13"><a href="#cb1-13"></a>  <span class="fu">matrix</span> b = <span class="fu">r</span>(<span class="kw">mean</span>), <span class="fu">r</span>(p50)</span>
+<span id="cb1-14"><a href="#cb1-14"></a>  ** <span class="kw">post</span> results</span>
+<span id="cb1-15"><a href="#cb1-15"></a>  <span class="fu">matrix</span> colname b = <span class="st">"mean"</span> <span class="st">"median"</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>  <span class="kw">ereturn</span> <span class="kw">post</span> b</span>
+<span id="cb1-17"><a href="#cb1-17"></a><span class="kw">end</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a>mean_vs_median</span>
+<span id="cb1-19"><a href="#cb1-19"></a><span class="kw">ereturn</span> <span class="kw">display</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<style>div.jp-Notebook .datagrid-container {min-height: 448px; }</style>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Number of observations (_N) was 0, now 100.
+------------------------------------------------------------------------------
+             | Coefficient
+-------------+----------------------------------------------------------------
+        mean |  -.1445693
+      median |  -.1970271
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
 <p>Now that the program is SET, lets run it 1000 times:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a></a>*| code-fold: false</span>
-<span id="cb2-2"><a></a>*| classes: larger</span>
-<span id="cb2-3"><a></a><span class="kw">set</span> <span class="dv">seed</span> 101</span>
-<span id="cb2-4"><a></a><span class="kw">simulate</span>, reps(1000): mean_vs_median, nobs(500)</span>
-<span id="cb2-5"><a></a><span class="kw">sum</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fd633be3" class="cell larger" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">set</span> <span class="dv">seed</span> 101</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">simulate</span>, reps(1000): mean_vs_median, nobs(500)</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">sum</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Command: mean_vs_median, nobs(500)
+
+Simulations (1,000)
+----+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5 
+..................................................    50
+..................................................   100
+..................................................   150
+..................................................   200
+..................................................   250
+..................................................   300
+..................................................   350
+..................................................   400
+..................................................   450
+..................................................   500
+..................................................   550
+..................................................   600
+..................................................   650
+..................................................   700
+..................................................   750
+..................................................   800
+..................................................   850
+..................................................   900
+..................................................   950
+.................................................. 1,000
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+     _b_mean |      1,000     .001419     .043875  -.1660358   .1525889
+   _b_median |      1,000    .0000899    .0544004  -.1851489   .1853068</code></pre>
+</div>
+</div>
 <p>Conclusion, when N=100, and the distribution is normal, the mean is more efficient than the median.</p>
 <h3 id="change-assumptions-from-n-to-t-distribution">Change assumptions, from N to t-distribution</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a>*| code-fold: false</span>
-<span id="cb3-2"><a></a>*| classes: larger</span>
-<span id="cb3-3"><a></a><span class="co">// define a program</span></span>
-<span id="cb3-4"><a></a><span class="kw">capture</span> <span class="kw">program</span> <span class="kw">drop</span> mean_vs_median</span>
-<span id="cb3-5"><a></a><span class="kw">program</span> <span class="kw">define</span> mean_vs_median, <span class="kw">eclass</span></span>
-<span id="cb3-6"><a></a>  <span class="kw">syntax</span>, [nobs(<span class="kw">int</span> 100) rt(<span class="kw">int</span> 5)]</span>
-<span id="cb3-7"><a></a>  <span class="kw">clear</span></span>
-<span id="cb3-8"><a></a>  <span class="kw">set</span> <span class="kw">obs</span> <span class="ot">`nobs'</span></span>
-<span id="cb3-9"><a></a>  <span class="kw">gen</span> x = rt(<span class="ot">`rt'</span>)</span>
-<span id="cb3-10"><a></a>  <span class="kw">qui</span>:<span class="kw">sum</span> x,<span class="kw">d</span></span>
-<span id="cb3-11"><a></a>  <span class="fu">matrix</span> b = <span class="fu">r</span>(<span class="kw">mean</span>), <span class="fu">r</span>(p50)</span>
-<span id="cb3-12"><a></a>  <span class="fu">matrix</span> colname b = <span class="st">"mean"</span> <span class="st">"median"</span></span>
-<span id="cb3-13"><a></a>  <span class="kw">ereturn</span> <span class="kw">post</span> b</span>
-<span id="cb3-14"><a></a><span class="kw">end</span></span>
-<span id="cb3-15"><a></a> <span class="kw">set</span> <span class="dv">seed</span> 101</span>
-<span id="cb3-16"><a></a><span class="kw">simulate</span>, reps(1000) <span class="kw">nodots</span>: mean_vs_median, nobs(500) rt(2)</span>
-<span id="cb3-17"><a></a><span class="kw">sum</span></span>
-<span id="cb3-18"><a></a><span class="kw">simulate</span>, reps(1000) <span class="kw">nodots</span>: mean_vs_median, nobs(500) rt(4)</span>
-<span id="cb3-19"><a></a><span class="kw">sum</span></span>
-<span id="cb3-20"><a></a><span class="kw">simulate</span>, reps(1000) <span class="kw">nodots</span>: mean_vs_median, nobs(500) rt(6)</span>
-<span id="cb3-21"><a></a><span class="kw">sum</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="db8e2f12" class="cell larger" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">// define a program</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">capture</span> <span class="kw">program</span> <span class="kw">drop</span> mean_vs_median</span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">program</span> <span class="kw">define</span> mean_vs_median, <span class="kw">eclass</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="kw">syntax</span>, [nobs(<span class="kw">int</span> 100) rt(<span class="kw">int</span> 5)]</span>
+<span id="cb5-5"><a href="#cb5-5"></a>  <span class="kw">clear</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>  <span class="kw">set</span> <span class="kw">obs</span> <span class="ot">`nobs'</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>  <span class="kw">gen</span> x = rt(<span class="ot">`rt'</span>)</span>
+<span id="cb5-8"><a href="#cb5-8"></a>  <span class="kw">qui</span>:<span class="kw">sum</span> x,<span class="kw">d</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a>  <span class="fu">matrix</span> b = <span class="fu">r</span>(<span class="kw">mean</span>), <span class="fu">r</span>(p50)</span>
+<span id="cb5-10"><a href="#cb5-10"></a>  <span class="fu">matrix</span> colname b = <span class="st">"mean"</span> <span class="st">"median"</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a>  <span class="kw">ereturn</span> <span class="kw">post</span> b</span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="kw">end</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a> <span class="kw">set</span> <span class="dv">seed</span> 101</span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="kw">simulate</span>, reps(1000) <span class="kw">nodots</span>: mean_vs_median, nobs(500) rt(2)</span>
+<span id="cb5-15"><a href="#cb5-15"></a><span class="kw">sum</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a><span class="kw">simulate</span>, reps(1000) <span class="kw">nodots</span>: mean_vs_median, nobs(500) rt(4)</span>
+<span id="cb5-17"><a href="#cb5-17"></a><span class="kw">sum</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a><span class="kw">simulate</span>, reps(1000) <span class="kw">nodots</span>: mean_vs_median, nobs(500) rt(6)</span>
+<span id="cb5-19"><a href="#cb5-19"></a><span class="kw">sum</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+      Command: mean_vs_median, nobs(500) rt(2)
+
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+     _b_mean |      1,000   -.0199475    .2203307  -4.369244   .6070946
+   _b_median |      1,000    .0002406    .0640181  -.1970648   .1889922
+
+      Command: mean_vs_median, nobs(500) rt(4)
+
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+     _b_mean |      1,000    .0007863    .0647392  -.2136446   .2056455
+   _b_median |      1,000    .0024002    .0602134  -.1902502   .2014696
+
+      Command: mean_vs_median, nobs(500) rt(6)
+
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+     _b_mean |      1,000    .0007195    .0531958  -.1984012   .2054568
+   _b_median |      1,000    .0008841    .0580835  -.1863388   .2035508</code></pre>
+</div>
+</div>
 </section>
 <section id="properties-of-estimators" class="slide level2 scrollable">
 <h2>Properties of estimators</h2>
@@ -489,75 +564,114 @@ Fernando Rios-Avila
 <li><p>What are the consequences of heteroskedasticity in the OLS estimator?</p></li>
 <li><p>lets set up a simulation to study this.</p></li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a></a>*| code-fold: false</span>
-<span id="cb4-2"><a></a>*| classes: larger</span>
-<span id="cb4-3"><a></a><span class="co">// define a program</span></span>
-<span id="cb4-4"><a></a><span class="kw">capture</span> <span class="kw">program</span> <span class="kw">drop</span> ols_hetero</span>
-<span id="cb4-5"><a></a><span class="kw">program</span> <span class="kw">define</span> ols_hetero, <span class="kw">eclass</span></span>
-<span id="cb4-6"><a></a>  <span class="kw">syntax</span>, [nobs(<span class="kw">int</span> 100) b0(<span class="fu">real</span> 1) b1(<span class="fu">real</span> 1) <span class="kw">gamma</span>(<span class="fu">real</span> 1)]</span>
-<span id="cb4-7"><a></a>  <span class="kw">clear</span></span>
-<span id="cb4-8"><a></a>  <span class="kw">set</span> <span class="kw">obs</span> <span class="ot">`nobs'</span></span>
-<span id="cb4-9"><a></a>  <span class="kw">gen</span> x = rnormal(0,1)</span>
-<span id="cb4-10"><a></a>  <span class="kw">gen</span> u = rnormal(0,1)</span>
-<span id="cb4-11"><a></a>  <span class="kw">gen</span> <span class="fu">y</span> = <span class="ot">`b0'</span> + <span class="ot">`b1'</span> * x + u*<span class="fu">exp</span>(<span class="ot">`gamma'</span>*x)</span>
-<span id="cb4-12"><a></a>  <span class="co">// run regression (under homoskedasticity)</span></span>
-<span id="cb4-13"><a></a>  <span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> x</span>
-<span id="cb4-14"><a></a>  <span class="co">// store results</span></span>
-<span id="cb4-15"><a></a>  <span class="fu">matrix</span> b = _b[<span class="dt">_cons</span>], _se[<span class="dt">_cons</span>], _b[x], _se[x]</span>
-<span id="cb4-16"><a></a>  <span class="fu">matrix</span> colname b = <span class="st">"b0"</span> <span class="st">"se0"</span> <span class="st">"b1"</span> <span class="st">"se1"</span></span>
-<span id="cb4-17"><a></a>  <span class="kw">ereturn</span> <span class="kw">post</span> b</span>
-<span id="cb4-18"><a></a><span class="kw">end</span></span>
-<span id="cb4-19"><a></a><span class="kw">simulate</span>, reps(1000) <span class="kw">nodots</span>: ols_hetero, nobs(500) b0(1) b1(1) <span class="kw">gamma</span>(1)</span>
-<span id="cb4-20"><a></a><span class="kw">sum</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="037fa497" class="cell larger" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">// define a program</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">capture</span> <span class="kw">program</span> <span class="kw">drop</span> ols_hetero</span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">program</span> <span class="kw">define</span> ols_hetero, <span class="kw">eclass</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="kw">syntax</span>, [nobs(<span class="kw">int</span> 100) b0(<span class="fu">real</span> 1) b1(<span class="fu">real</span> 1) <span class="kw">gamma</span>(<span class="fu">real</span> 1)]</span>
+<span id="cb7-5"><a href="#cb7-5"></a>  <span class="kw">clear</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>  <span class="kw">set</span> <span class="kw">obs</span> <span class="ot">`nobs'</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a>  <span class="kw">gen</span> x = rnormal(0,1)</span>
+<span id="cb7-8"><a href="#cb7-8"></a>  <span class="kw">gen</span> u = rnormal(0,1)</span>
+<span id="cb7-9"><a href="#cb7-9"></a>  <span class="kw">gen</span> <span class="fu">y</span> = <span class="ot">`b0'</span> + <span class="ot">`b1'</span> * x + u*<span class="fu">exp</span>(<span class="ot">`gamma'</span>*x)</span>
+<span id="cb7-10"><a href="#cb7-10"></a>  <span class="co">// run regression (under homoskedasticity)</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a>  <span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> x</span>
+<span id="cb7-12"><a href="#cb7-12"></a>  <span class="co">// store results</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a>  <span class="fu">matrix</span> b = _b[<span class="dt">_cons</span>], _se[<span class="dt">_cons</span>], _b[x], _se[x]</span>
+<span id="cb7-14"><a href="#cb7-14"></a>  <span class="fu">matrix</span> colname b = <span class="st">"b0"</span> <span class="st">"se0"</span> <span class="st">"b1"</span> <span class="st">"se1"</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a>  <span class="kw">ereturn</span> <span class="kw">post</span> b</span>
+<span id="cb7-16"><a href="#cb7-16"></a><span class="kw">end</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a><span class="kw">simulate</span>, reps(1000) <span class="kw">nodots</span>: ols_hetero, nobs(500) b0(1) b1(1) <span class="kw">gamma</span>(1)</span>
+<span id="cb7-18"><a href="#cb7-18"></a><span class="kw">sum</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+      Command: ols_hetero, nobs(500) b0(1) b1(1) gamma(1)
+
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+       _b_b0 |      1,000    .9979773    .1210228   .6013685   1.434932
+      _b_se0 |      1,000    .1196379    .0220658   .0737395   .2717805
+       _b_b1 |      1,000    .9864205    .2661498   .0342865     1.8922
+      _b_se1 |      1,000    .1195836    .0210792   .0808713   .2756631</code></pre>
+</div>
+</div>
 <h3 id="correcting-for-heteroskedasticity">Correcting for heteroskedasticity</h3>
 <p>We can correct for heteroskedasticity using robust standard errors.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a></a>*| code-fold: false</span>
-<span id="cb5-2"><a></a>*| classes: larger</span>
-<span id="cb5-3"><a></a><span class="co">// define a program</span></span>
-<span id="cb5-4"><a></a><span class="kw">capture</span> <span class="kw">program</span> <span class="kw">drop</span> ols_hetero</span>
-<span id="cb5-5"><a></a><span class="kw">program</span> <span class="kw">define</span> ols_hetero, <span class="kw">eclass</span></span>
-<span id="cb5-6"><a></a>  <span class="kw">syntax</span>, [nobs(<span class="kw">int</span> 100) b0(<span class="fu">real</span> 1) b1(<span class="fu">real</span> 1) <span class="kw">gamma</span>(<span class="fu">real</span> 1)]</span>
-<span id="cb5-7"><a></a>  <span class="kw">clear</span></span>
-<span id="cb5-8"><a></a>  <span class="kw">set</span> <span class="kw">obs</span> <span class="ot">`nobs'</span></span>
-<span id="cb5-9"><a></a>  <span class="kw">gen</span> x = rnormal(0,1)</span>
-<span id="cb5-10"><a></a>  <span class="kw">gen</span> u = rnormal(0,1)</span>
-<span id="cb5-11"><a></a>  <span class="kw">gen</span> <span class="fu">y</span> = <span class="ot">`b0'</span> + <span class="ot">`b1'</span> * x + u*<span class="fu">exp</span>(<span class="ot">`gamma'</span>*x)</span>
-<span id="cb5-12"><a></a>  <span class="co">// run regression (under homoskedasticity)</span></span>
-<span id="cb5-13"><a></a>  <span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> x, <span class="kw">robust</span></span>
-<span id="cb5-14"><a></a>  <span class="co">// store results</span></span>
-<span id="cb5-15"><a></a>  <span class="fu">matrix</span> b = _b[<span class="dt">_cons</span>], _se[<span class="dt">_cons</span>], _b[x], _se[x]</span>
-<span id="cb5-16"><a></a>  <span class="fu">matrix</span> colname b = <span class="st">"b0"</span> <span class="st">"se0"</span> <span class="st">"b1"</span> <span class="st">"se1"</span></span>
-<span id="cb5-17"><a></a>  <span class="kw">ereturn</span> <span class="kw">post</span> b</span>
-<span id="cb5-18"><a></a><span class="kw">end</span></span>
-<span id="cb5-19"><a></a><span class="kw">simulate</span>, reps(1000) <span class="kw">nodots</span>: ols_hetero, nobs(500) b0(1) b1(1) <span class="kw">gamma</span>(1)</span>
-<span id="cb5-20"><a></a><span class="kw">sum</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="bcb13e3f" class="cell larger" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">// define a program</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">capture</span> <span class="kw">program</span> <span class="kw">drop</span> ols_hetero</span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="kw">program</span> <span class="kw">define</span> ols_hetero, <span class="kw">eclass</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>  <span class="kw">syntax</span>, [nobs(<span class="kw">int</span> 100) b0(<span class="fu">real</span> 1) b1(<span class="fu">real</span> 1) <span class="kw">gamma</span>(<span class="fu">real</span> 1)]</span>
+<span id="cb9-5"><a href="#cb9-5"></a>  <span class="kw">clear</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>  <span class="kw">set</span> <span class="kw">obs</span> <span class="ot">`nobs'</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>  <span class="kw">gen</span> x = rnormal(0,1)</span>
+<span id="cb9-8"><a href="#cb9-8"></a>  <span class="kw">gen</span> u = rnormal(0,1)</span>
+<span id="cb9-9"><a href="#cb9-9"></a>  <span class="kw">gen</span> <span class="fu">y</span> = <span class="ot">`b0'</span> + <span class="ot">`b1'</span> * x + u*<span class="fu">exp</span>(<span class="ot">`gamma'</span>*x)</span>
+<span id="cb9-10"><a href="#cb9-10"></a>  <span class="co">// run regression (under homoskedasticity)</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a>  <span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> x, <span class="kw">robust</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a>  <span class="co">// store results</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a>  <span class="fu">matrix</span> b = _b[<span class="dt">_cons</span>], _se[<span class="dt">_cons</span>], _b[x], _se[x]</span>
+<span id="cb9-14"><a href="#cb9-14"></a>  <span class="fu">matrix</span> colname b = <span class="st">"b0"</span> <span class="st">"se0"</span> <span class="st">"b1"</span> <span class="st">"se1"</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a>  <span class="kw">ereturn</span> <span class="kw">post</span> b</span>
+<span id="cb9-16"><a href="#cb9-16"></a><span class="kw">end</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a><span class="kw">simulate</span>, reps(1000) <span class="kw">nodots</span>: ols_hetero, nobs(500) b0(1) b1(1) <span class="kw">gamma</span>(1)</span>
+<span id="cb9-18"><a href="#cb9-18"></a><span class="kw">sum</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+      Command: ols_hetero, nobs(500) b0(1) b1(1) gamma(1)
+
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+       _b_b0 |      1,000     1.00342    .1180407   .6255065     1.3921
+      _b_se0 |      1,000    .1171892    .0219696   .0807092   .3564852
+       _b_b1 |      1,000     1.00355    .2589393  -.2493259   1.956252
+      _b_se1 |      1,000    .2407364    .0913925   .1092693   1.174903</code></pre>
+</div>
+</div>
 <p>or using weighted least squares.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a></a>*| code-fold: false</span>
-<span id="cb6-2"><a></a>*| classes: larger</span>
-<span id="cb6-3"><a></a><span class="co">// define a program</span></span>
-<span id="cb6-4"><a></a><span class="kw">capture</span> <span class="kw">program</span> <span class="kw">drop</span> ols_hetero</span>
-<span id="cb6-5"><a></a><span class="kw">program</span> <span class="kw">define</span> ols_hetero, <span class="kw">eclass</span></span>
-<span id="cb6-6"><a></a>  <span class="kw">syntax</span>, [nobs(<span class="kw">int</span> 100) b0(<span class="fu">real</span> 1) b1(<span class="fu">real</span> 1) <span class="kw">gamma</span>(<span class="fu">real</span> 1)]</span>
-<span id="cb6-7"><a></a>  <span class="kw">clear</span></span>
-<span id="cb6-8"><a></a>  <span class="kw">set</span> <span class="kw">obs</span> <span class="ot">`nobs'</span></span>
-<span id="cb6-9"><a></a>  <span class="kw">gen</span> x = rnormal(0,1)</span>
-<span id="cb6-10"><a></a>  <span class="kw">gen</span> u = rnormal(0,1)</span>
-<span id="cb6-11"><a></a>  <span class="kw">gen</span> <span class="fu">y</span> = <span class="ot">`b0'</span> + <span class="ot">`b1'</span> * x + u*<span class="fu">exp</span>(<span class="ot">`gamma'</span>*x)</span>
-<span id="cb6-12"><a></a>  <span class="co">// run regression (under homoskedasticity)</span></span>
-<span id="cb6-13"><a></a>  <span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> x, </span>
-<span id="cb6-14"><a></a>  <span class="kw">predict</span> uhat, <span class="kw">resid</span></span>
-<span id="cb6-15"><a></a>  <span class="kw">gen</span> lnuhat2 = <span class="fu">ln</span>(uhat^2)</span>
-<span id="cb6-16"><a></a>  <span class="kw">reg</span> lnuhat2 x</span>
-<span id="cb6-17"><a></a>  <span class="kw">predict</span> lnhx</span>
-<span id="cb6-18"><a></a>  <span class="kw">gen</span> hx=<span class="fu">exp</span>(lnhx)</span>
-<span id="cb6-19"><a></a>  <span class="co">// store results</span></span>
-<span id="cb6-20"><a></a>  <span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> x [<span class="fu">w</span>=1/hx], </span>
-<span id="cb6-21"><a></a>  <span class="fu">matrix</span> b = _b[<span class="dt">_cons</span>], _se[<span class="dt">_cons</span>], _b[x], _se[x]</span>
-<span id="cb6-22"><a></a>  <span class="fu">matrix</span> colname b = <span class="st">"b0"</span> <span class="st">"se0"</span> <span class="st">"b1"</span> <span class="st">"se1"</span></span>
-<span id="cb6-23"><a></a>  <span class="kw">ereturn</span> <span class="kw">post</span> b</span>
-<span id="cb6-24"><a></a><span class="kw">end</span></span>
-<span id="cb6-25"><a></a><span class="kw">simulate</span>, reps(1000) <span class="kw">nodots</span>: ols_hetero, nobs(500) b0(1) b1(1) <span class="kw">gamma</span>(1)</span>
-<span id="cb6-26"><a></a><span class="kw">sum</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="2296f9a7" class="cell larger" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">// define a program</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="kw">capture</span> <span class="kw">program</span> <span class="kw">drop</span> ols_hetero</span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="kw">program</span> <span class="kw">define</span> ols_hetero, <span class="kw">eclass</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="kw">syntax</span>, [nobs(<span class="kw">int</span> 100) b0(<span class="fu">real</span> 1) b1(<span class="fu">real</span> 1) <span class="kw">gamma</span>(<span class="fu">real</span> 1)]</span>
+<span id="cb11-5"><a href="#cb11-5"></a>  <span class="kw">clear</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a>  <span class="kw">set</span> <span class="kw">obs</span> <span class="ot">`nobs'</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a>  <span class="kw">gen</span> x = rnormal(0,1)</span>
+<span id="cb11-8"><a href="#cb11-8"></a>  <span class="kw">gen</span> u = rnormal(0,1)</span>
+<span id="cb11-9"><a href="#cb11-9"></a>  <span class="kw">gen</span> <span class="fu">y</span> = <span class="ot">`b0'</span> + <span class="ot">`b1'</span> * x + u*<span class="fu">exp</span>(<span class="ot">`gamma'</span>*x)</span>
+<span id="cb11-10"><a href="#cb11-10"></a>  <span class="co">// run regression (under homoskedasticity)</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a>  <span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> x, </span>
+<span id="cb11-12"><a href="#cb11-12"></a>  <span class="kw">predict</span> uhat, <span class="kw">resid</span></span>
+<span id="cb11-13"><a href="#cb11-13"></a>  <span class="kw">gen</span> lnuhat2 = <span class="fu">ln</span>(uhat^2)</span>
+<span id="cb11-14"><a href="#cb11-14"></a>  <span class="kw">reg</span> lnuhat2 x</span>
+<span id="cb11-15"><a href="#cb11-15"></a>  <span class="kw">predict</span> lnhx</span>
+<span id="cb11-16"><a href="#cb11-16"></a>  <span class="kw">gen</span> hx=<span class="fu">exp</span>(lnhx)</span>
+<span id="cb11-17"><a href="#cb11-17"></a>  <span class="co">// store results</span></span>
+<span id="cb11-18"><a href="#cb11-18"></a>  <span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> x [<span class="fu">w</span>=1/hx], </span>
+<span id="cb11-19"><a href="#cb11-19"></a>  <span class="fu">matrix</span> b = _b[<span class="dt">_cons</span>], _se[<span class="dt">_cons</span>], _b[x], _se[x]</span>
+<span id="cb11-20"><a href="#cb11-20"></a>  <span class="fu">matrix</span> colname b = <span class="st">"b0"</span> <span class="st">"se0"</span> <span class="st">"b1"</span> <span class="st">"se1"</span></span>
+<span id="cb11-21"><a href="#cb11-21"></a>  <span class="kw">ereturn</span> <span class="kw">post</span> b</span>
+<span id="cb11-22"><a href="#cb11-22"></a><span class="kw">end</span></span>
+<span id="cb11-23"><a href="#cb11-23"></a><span class="kw">simulate</span>, reps(1000) <span class="kw">nodots</span>: ols_hetero, nobs(500) b0(1) b1(1) <span class="kw">gamma</span>(1)</span>
+<span id="cb11-24"><a href="#cb11-24"></a><span class="kw">sum</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+      Command: ols_hetero, nobs(500) b0(1) b1(1) gamma(1)
+
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+       _b_b0 |      1,000    1.001033    .0465683   .8545606   1.252005
+      _b_se0 |      1,000    .0478398    .0084316   .0288236   .1462429
+       _b_b1 |      1,000    1.001063    .0277128   .8875045   1.301835
+      _b_se1 |      1,000    .0270911    .0091106   .0088032   .1357872</code></pre>
+</div>
+</div>
 </section>
 <section id="more-on-monte-carlo-simulations" class="slide level2 scrollable">
 <h2>More on Monte Carlo Simulations</h2>
@@ -569,24 +683,75 @@ Fernando Rios-Avila
 <li>But, we could just as well simulate only “parts” of the data, and use observed data for the rest.</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a></a>*| code-fold: false</span>
-<span id="cb7-2"><a></a>*| classes: larger</span>
-<span id="cb7-3"><a></a>frause oaxaca, <span class="kw">clear</span></span>
-<span id="cb7-4"><a></a><span class="kw">probit</span> lfp female educ age agesq married divorced</span>
-<span id="cb7-5"><a></a><span class="kw">predict</span> lfp_xb, <span class="kw">xb</span></span>
-<span id="cb7-6"><a></a><span class="fu">matrix</span> b=<span class="fu">e</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a></a>*| code-fold: false</span>
-<span id="cb8-2"><a></a>*| classes: larger</span>
-<span id="cb8-3"><a></a>* Latent <span class="kw">model</span> LFP =1(lfp_xb + <span class="fu">e</span>&gt;0)</span>
-<span id="cb8-4"><a></a><span class="kw">capture</span> <span class="kw">program</span> <span class="kw">drop</span> probit_sim</span>
-<span id="cb8-5"><a></a><span class="kw">program</span>  probit_sim, <span class="kw">eclass</span></span>
-<span id="cb8-6"><a></a>  <span class="kw">capture</span> <span class="kw">drop</span> lfp_hat</span>
-<span id="cb8-7"><a></a>  <span class="kw">gen</span> lfp_hat=(lfp_xb + rnormal(0,1))&gt;0</span>
-<span id="cb8-8"><a></a>  <span class="kw">probit</span> lfp_hat female educ age agesq married divorced, from(b, copy)</span>
-<span id="cb8-9"><a></a><span class="kw">end</span></span>
-<span id="cb8-10"><a></a><span class="kw">simulate</span> _b _se, reps(500) <span class="kw">nodots</span>: probit_sim</span>
-<span id="cb8-11"><a></a><span class="kw">ren</span> lfp_hat* *</span>
-<span id="cb8-12"><a></a><span class="kw">sum</span> ,sep(7)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="c51e2d9a" class="cell larger" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1"></a>frause oaxaca, <span class="kw">clear</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="kw">probit</span> lfp female educ age agesq married divorced</span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="kw">predict</span> lfp_xb, <span class="kw">xb</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="fu">matrix</span> b=<span class="fu">e</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Excerpt from the Swiss Labor Market Survey 1998)
+
+Iteration 0:   log likelihood = -634.26553  
+Iteration 1:   log likelihood = -453.80541  
+Iteration 2:   log likelihood = -429.25759  
+Iteration 3:   log likelihood = -428.40991  
+Iteration 4:   log likelihood = -428.40986  
+Iteration 5:   log likelihood = -428.40986  
+
+Probit regression                                       Number of obs =  1,647
+                                                        LR chi2(6)    = 411.71
+                                                        Prob &gt; chi2   = 0.0000
+Log likelihood = -428.40986                             Pseudo R2     = 0.3246
+
+------------------------------------------------------------------------------
+         lfp | Coefficient  Std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      female |  -1.644408   .1498206   -10.98   0.000    -1.938051   -1.350765
+        educ |   .1051167   .0251728     4.18   0.000     .0557789    .1544544
+         age |   .1045008   .0385916     2.71   0.007     .0288627    .1801389
+       agesq |  -.0012596   .0004463    -2.82   0.005    -.0021344   -.0003848
+     married |  -1.692076   .1887409    -8.97   0.000    -2.062001    -1.32215
+    divorced |    -.68518   .2319883    -2.95   0.003    -1.139869   -.2304912
+       _cons |   .4413072   .7648821     0.58   0.564    -1.057834    1.940448
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<div id="47c2fb6b" class="cell larger" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a href="#cb15-1"></a>* Latent <span class="kw">model</span> LFP =1(lfp_xb + <span class="fu">e</span>&gt;0)</span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="kw">capture</span> <span class="kw">program</span> <span class="kw">drop</span> probit_sim</span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="kw">program</span>  probit_sim, <span class="kw">eclass</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a>  <span class="kw">capture</span> <span class="kw">drop</span> lfp_hat</span>
+<span id="cb15-5"><a href="#cb15-5"></a>  <span class="kw">gen</span> lfp_hat=(lfp_xb + rnormal(0,1))&gt;0</span>
+<span id="cb15-6"><a href="#cb15-6"></a>  <span class="kw">probit</span> lfp_hat female educ age agesq married divorced, from(b, copy)</span>
+<span id="cb15-7"><a href="#cb15-7"></a><span class="kw">end</span></span>
+<span id="cb15-8"><a href="#cb15-8"></a><span class="kw">simulate</span> _b _se, reps(500) <span class="kw">nodots</span>: probit_sim</span>
+<span id="cb15-9"><a href="#cb15-9"></a><span class="kw">ren</span> lfp_hat* *</span>
+<span id="cb15-10"><a href="#cb15-10"></a><span class="kw">sum</span> ,sep(7)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+      Command: probit_sim
+
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+   _b_female |        500    -1.67208    .1594671  -2.262682  -1.280128
+     _b_educ |        500     .108218    .0251913   .0453378   .1974491
+      _b_age |        500    .1022977     .038849   -.004108   .2443264
+    _b_agesq |        500   -.0012359    .0004483  -.0029406  -.0000835
+  _b_married |        500   -1.720405    .1903062  -2.425838  -1.247641
+ _b_divorced |        500   -.7046396    .2310935  -1.387282   .1018858
+     _b_cons |        500    .5167748    .7899037  -1.920398   2.650355
+-------------+---------------------------------------------------------
+  _se_female |        500    .1548574    .0187049   .1234346   .2547092
+    _se_educ |        500    .0255194    .0012991   .0223761    .029805
+     _se_age |        500    .0389973    .0017384   .0336116   .0466778
+   _se_agesq |        500    .0004507    .0000184   .0003941   .0005336
+ _se_married |        500    .1987176    .0234131   .1538517   .3142596
+_se_divorced |        500    .2410041    .0207673    .199707   .3420741
+    _se_cons |        500    .7709869    .0397739   .6426999   .9831291</code></pre>
+</div>
+</div>
 <ul>
 <li>To some extent, this is similar to the imputation methods we have seen before.</li>
 <li>More complex versions of this can be used to elaborate micro-simulations.</li>
@@ -649,25 +814,62 @@ Fernando Rios-Avila
 <h2></h2>
 <p>We can start by modeling the effect of education on wages.</p>
 <p><span class="math display">\[log(wage)= \beta X + \beta_e educ + u\]</span></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a></a>*| code-fold: false</span>
-<span id="cb9-2"><a></a>*| classes: larger</span>
-<span id="cb9-3"><a></a>frause oaxaca, <span class="kw">clear</span></span>
-<span id="cb9-4"><a></a><span class="kw">reg</span> lnwage educ exper tenure female age, </span>
-<span id="cb9-5"><a></a><span class="kw">predict</span>  res, res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="600dddc8" class="cell larger" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb17-1"><a href="#cb17-1"></a>frause oaxaca, <span class="kw">clear</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="kw">reg</span> lnwage educ exper tenure female age, </span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="kw">predict</span>  res, res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Excerpt from the Swiss Labor Market Survey 1998)
+
+      Source |       SS           df       MS      Number of obs   =     1,434
+-------------+----------------------------------   F(5, 1428)      =    101.03
+       Model |   105.60186         5   21.120372   Prob &gt; F        =    0.0000
+    Residual |  298.517944     1,428  .209046179   R-squared       =    0.2613
+-------------+----------------------------------   Adj R-squared   =    0.2587
+       Total |  404.119804     1,433  .282009633   Root MSE        =    .45722
+
+------------------------------------------------------------------------------
+      lnwage | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        educ |   .0743986   .0052612    14.14   0.000     .0640782    .0847191
+       exper |   .0022628   .0018958     1.19   0.233    -.0014562    .0059817
+      tenure |   .0021805   .0019783     1.10   0.271    -.0017001    .0060611
+      female |  -.1321951   .0254327    -5.20   0.000    -.1820846   -.0823056
+         age |   .0136344   .0017751     7.68   0.000     .0101523    .0171165
+       _cons |   1.985785   .0732567    27.11   0.000     1.842083    2.129488
+------------------------------------------------------------------------------
+(213 missing values generated)</code></pre>
+</div>
+</div>
 <p>ID the policy change</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a></a>*| code-fold: false</span>
-<span id="cb10-2"><a></a>*| classes: larger</span>
-<span id="cb10-3"><a></a><span class="kw">clonevar</span> educ2=educ</span>
-<span id="cb10-4"><a></a><span class="kw">replace</span> educ=educ+2 <span class="kw">if</span> educ&lt;12</span>
-<span id="cb10-5"><a></a><span class="kw">predict</span> yhat2, <span class="kw">xb</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="4c980d91" class="cell larger" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">clonevar</span> educ2=educ</span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="kw">replace</span> educ=educ+2 <span class="kw">if</span> educ&lt;12</span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="kw">predict</span> yhat2, <span class="kw">xb</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(1,099 real changes made)
+(213 missing values generated)</code></pre>
+</div>
+</div>
 <p>So what is the effect on wages? (if there is no selection bias)</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a></a>*| code-fold: false</span>
-<span id="cb11-2"><a></a>*| classes: larger</span>
-<span id="cb11-3"><a></a><span class="kw">gen</span> wage = <span class="fu">exp</span>(lnwage)</span>
-<span id="cb11-4"><a></a><span class="kw">gen</span> wage2 = <span class="fu">exp</span>(yhat2+res)</span>
-<span id="cb11-5"><a></a><span class="kw">gen</span> wage_diff = wage2-wage</span>
-<span id="cb11-6"><a></a><span class="kw">tabstat</span> wage_diff</span>
-<span id="cb11-7"><a></a><span class="kw">replace</span> educ = educ2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="34051cf0" class="cell larger" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">gen</span> wage = <span class="fu">exp</span>(lnwage)</span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="kw">gen</span> wage2 = <span class="fu">exp</span>(yhat2+res)</span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="kw">gen</span> wage_diff = wage2-wage</span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="kw">tabstat</span> wage_diff</span>
+<span id="cb21-5"><a href="#cb21-5"></a><span class="kw">replace</span> educ = educ2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(213 missing values generated)
+(213 missing values generated)
+(213 missing values generated)
+
+    Variable |      Mean
+-------------+----------
+   wage_diff |  2.947924
+------------------------
+(1,099 real changes made)</code></pre>
+</div>
+</div>
 <p>Wage has increased in 2.95.</p>
 <p>But is this the only effect??</p>
 </section>
@@ -685,41 +887,68 @@ Fernando Rios-Avila
 <p><span class="math display">\[P(lfp=1|X,educ)= \beta X + \beta_e educ + u
 \]</span></p>
 <p>First model the probability of employment</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a></a>*| code-fold: false</span>
-<span id="cb12-2"><a></a>*| classes: larger</span>
-<span id="cb12-3"><a></a>frause oaxaca, <span class="kw">clear</span></span>
-<span id="cb12-4"><a></a><span class="kw">qui</span>:<span class="kw">probit</span> lfp educ female age single married kids6 kids714</span>
-<span id="cb12-5"><a></a><span class="kw">predict</span> lfp_xb, <span class="kw">xb</span></span>
-<span id="cb12-6"><a></a><span class="kw">predict</span> pr_org, pr</span>
-<span id="cb12-7"><a></a></span>
-<span id="cb12-8"><a></a><span class="kw">replace</span> lfp_xb = lfp_xb + _b[educ] * 2 <span class="kw">if</span> educ&lt;12</span>
-<span id="cb12-9"><a></a><span class="kw">gen</span> plfp = <span class="fu">normal</span>(lfp_xb)</span>
-<span id="cb12-10"><a></a></span>
-<span id="cb12-11"><a></a>** Before and after the policy change</span>
-<span id="cb12-12"><a></a><span class="kw">sum</span> plfp pr_org </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="3a774d6f" class="cell larger" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><a href="#cb23-1"></a>frause oaxaca, <span class="kw">clear</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="kw">qui</span>:<span class="kw">probit</span> lfp educ female age single married kids6 kids714</span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="kw">predict</span> lfp_xb, <span class="kw">xb</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="kw">predict</span> pr_org, pr</span>
+<span id="cb23-5"><a href="#cb23-5"></a></span>
+<span id="cb23-6"><a href="#cb23-6"></a><span class="kw">replace</span> lfp_xb = lfp_xb + _b[educ] * 2 <span class="kw">if</span> educ&lt;12</span>
+<span id="cb23-7"><a href="#cb23-7"></a><span class="kw">gen</span> plfp = <span class="fu">normal</span>(lfp_xb)</span>
+<span id="cb23-8"><a href="#cb23-8"></a></span>
+<span id="cb23-9"><a href="#cb23-9"></a>** Before and after the policy change</span>
+<span id="cb23-10"><a href="#cb23-10"></a><span class="kw">sum</span> plfp pr_org </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Excerpt from the Swiss Labor Market Survey 1998)
+(1,099 real changes made)
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+        plfp |      1,647    .8995986    .1614962   .0777393   .9999999
+      pr_org |      1,647    .8707874    .1925782   .0604887   .9999999</code></pre>
+</div>
+</div>
 <p>So now we have the original probability of employment and the probability of employment after the policy change.</p>
 <p>How do we know who will transition from not working to working?</p>
 <ul>
 <li>Option 1. Assign new workers based on the relative change in the probability of employment.</li>
 </ul>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a></a>*| code-fold: false</span>
-<span id="cb13-2"><a></a>*| classes: larger</span>
-<span id="cb13-3"><a></a><span class="kw">gen</span> dprob = (plfp-pr_org)/pr_org</span>
-<span id="cb13-4"><a></a><span class="kw">clonevar</span> lfp_post1 = lfp</span>
-<span id="cb13-5"><a></a><span class="kw">replace</span> lfp_post1 =1 <span class="kw">if</span> lfp==0 &amp; dprob&gt;runiform()</span>
-<span id="cb13-6"><a></a><span class="kw">sum</span>  lfp_post1 lfp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="790275c9" class="cell larger" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb25-1"><a href="#cb25-1"></a><span class="kw">gen</span> dprob = (plfp-pr_org)/pr_org</span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="kw">clonevar</span> lfp_post1 = lfp</span>
+<span id="cb25-3"><a href="#cb25-3"></a><span class="kw">replace</span> lfp_post1 =1 <span class="kw">if</span> lfp==0 &amp; dprob&gt;runiform()</span>
+<span id="cb25-4"><a href="#cb25-4"></a><span class="kw">sum</span>  lfp_post1 lfp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(35 real changes made)
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+   lfp_post1 |      1,647    .8919247    .3105698          0          1
+         lfp |      1,647     .870674    .3356624          0          1</code></pre>
+</div>
+</div>
 <ul>
 <li>Option 2. Simulate employment status based on the original and post-policy probability of employment.</li>
 </ul>
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a></a>*| code-fold: false</span>
-<span id="cb14-2"><a></a>*| classes: larger</span>
-<span id="cb14-3"><a></a>** Option 2</span>
-<span id="cb14-4"><a></a>drop2 unf lfp_org lfp_post</span>
-<span id="cb14-5"><a></a><span class="kw">gen</span> unf = runiform()</span>
-<span id="cb14-6"><a></a><span class="kw">gen</span> lfp_org  = pr_org&gt;unf</span>
-<span id="cb14-7"><a></a><span class="kw">gen</span> lfp_post = plfp  &gt;unf</span>
-<span id="cb14-8"><a></a></span>
-<span id="cb14-9"><a></a><span class="kw">sum</span> lfp_post  lfp_org</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="79cfaaa2" class="cell larger" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb27-1"><a href="#cb27-1"></a>** Option 2</span>
+<span id="cb27-2"><a href="#cb27-2"></a>drop2 unf lfp_org lfp_post</span>
+<span id="cb27-3"><a href="#cb27-3"></a><span class="kw">gen</span> unf = runiform()</span>
+<span id="cb27-4"><a href="#cb27-4"></a><span class="kw">gen</span> lfp_org  = pr_org&gt;unf</span>
+<span id="cb27-5"><a href="#cb27-5"></a><span class="kw">gen</span> lfp_post = plfp  &gt;unf</span>
+<span id="cb27-6"><a href="#cb27-6"></a></span>
+<span id="cb27-7"><a href="#cb27-7"></a><span class="kw">sum</span> lfp_post  lfp_org</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>variable unf not found
+variable lfp_org not found
+variable lfp_post not found
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+    lfp_post |      1,647    .9046752    .2937523          0          1
+     lfp_org |      1,647    .8737098    .3322771          0          1</code></pre>
+</div>
+</div>
 <ul>
 <li>Both options are valid, but
 <ul>
@@ -735,24 +964,66 @@ Fernando Rios-Avila
 <li>We could assume no selection bias.</li>
 <li>We may need to use only data available for everyone, or use imputed data (exper tenure) (perhaps at 0?)</li>
 </ul>
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a></a>*| code-fold: false</span>
-<span id="cb15-2"><a></a>*| classes: larger</span>
-<span id="cb15-3"><a></a><span class="kw">reg</span> lnwage educ female age single married kids6 kids714, </span>
-<span id="cb15-4"><a></a><span class="kw">predict</span>  res, res</span>
-<span id="cb15-5"><a></a><span class="kw">predict</span> lnwage_hat, <span class="kw">xb</span></span>
-<span id="cb15-6"><a></a>** Simulating Known wages component</span>
-<span id="cb15-7"><a></a><span class="kw">replace</span> lnwage_hat = lnwage_hat + _b[educ] * 2 <span class="kw">if</span> educ&lt;12</span>
-<span id="cb15-8"><a></a>** Simulating random component</span>
-<span id="cb15-9"><a></a>** For those already working:</span>
-<span id="cb15-10"><a></a><span class="kw">replace</span> lnwage_hat = lnwage_hat + res <span class="kw">if</span> lfp==1</span>
-<span id="cb15-11"><a></a>** Simulate unobserved</span>
-<span id="cb15-12"><a></a><span class="kw">qui</span>: <span class="kw">sum</span> res, </span>
-<span id="cb15-13"><a></a><span class="kw">replace</span> lnwage_hat = lnwage_hat + rnormal(0,<span class="fu">r</span>(<span class="fu">sd</span>)) <span class="kw">if</span> lfp_post1==1 &amp; lfp==0</span>
-<span id="cb15-14"><a></a></span>
-<span id="cb15-15"><a></a><span class="kw">gen</span> wage_post = <span class="fu">exp</span>(lnwage_hat) <span class="kw">if</span> lfp_post1==1 | lfp==1</span>
-<span id="cb15-16"><a></a><span class="kw">gen</span> wage = <span class="fu">exp</span>(lnwage)</span>
-<span id="cb15-17"><a></a><span class="kw">sum</span> wage wage_post</span>
-<span id="cb15-18"><a></a>sgini wage wage_post</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="4796cca9" class="cell larger" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb29-1"><a href="#cb29-1"></a><span class="kw">reg</span> lnwage educ female age single married kids6 kids714, </span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="kw">predict</span>  res, res</span>
+<span id="cb29-3"><a href="#cb29-3"></a><span class="kw">predict</span> lnwage_hat, <span class="kw">xb</span></span>
+<span id="cb29-4"><a href="#cb29-4"></a>** Simulating Known wages component</span>
+<span id="cb29-5"><a href="#cb29-5"></a><span class="kw">replace</span> lnwage_hat = lnwage_hat + _b[educ] * 2 <span class="kw">if</span> educ&lt;12</span>
+<span id="cb29-6"><a href="#cb29-6"></a>** Simulating random component</span>
+<span id="cb29-7"><a href="#cb29-7"></a>** For those already working:</span>
+<span id="cb29-8"><a href="#cb29-8"></a><span class="kw">replace</span> lnwage_hat = lnwage_hat + res <span class="kw">if</span> lfp==1</span>
+<span id="cb29-9"><a href="#cb29-9"></a>** Simulate unobserved</span>
+<span id="cb29-10"><a href="#cb29-10"></a><span class="kw">qui</span>: <span class="kw">sum</span> res, </span>
+<span id="cb29-11"><a href="#cb29-11"></a><span class="kw">replace</span> lnwage_hat = lnwage_hat + rnormal(0,<span class="fu">r</span>(<span class="fu">sd</span>)) <span class="kw">if</span> lfp_post1==1 &amp; lfp==0</span>
+<span id="cb29-12"><a href="#cb29-12"></a></span>
+<span id="cb29-13"><a href="#cb29-13"></a><span class="kw">gen</span> wage_post = <span class="fu">exp</span>(lnwage_hat) <span class="kw">if</span> lfp_post1==1 | lfp==1</span>
+<span id="cb29-14"><a href="#cb29-14"></a><span class="kw">gen</span> wage = <span class="fu">exp</span>(lnwage)</span>
+<span id="cb29-15"><a href="#cb29-15"></a><span class="kw">sum</span> wage wage_post</span>
+<span id="cb29-16"><a href="#cb29-16"></a>sgini wage wage_post</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Source |       SS           df       MS      Number of obs   =     1,434
+-------------+----------------------------------   F(7, 1426)      =     79.23
+       Model |  113.158257         7  16.1654653   Prob &gt; F        =    0.0000
+    Residual |  290.961547     1,426  .204040355   R-squared       =    0.2800
+-------------+----------------------------------   Adj R-squared   =    0.2765
+       Total |  404.119804     1,433  .282009633   Root MSE        =    .45171
+
+------------------------------------------------------------------------------
+      lnwage | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        educ |   .0709179   .0050262    14.11   0.000     .0610584    .0807774
+      female |  -.1427501   .0244736    -5.83   0.000    -.1907583   -.0947419
+         age |    .016475   .0014033    11.74   0.000     .0137222    .0192277
+      single |  -.0711724   .0443651    -1.60   0.109    -.1582002    .0158554
+     married |  -.0977016   .0379654    -2.57   0.010    -.1721755   -.0232276
+       kids6 |   .1085073   .0239699     4.53   0.000     .0614873    .1555272
+     kids714 |   .0656187    .019681     3.33   0.001      .027012    .1042254
+       _cons |   1.999222   .0902563    22.15   0.000     1.822173    2.176272
+------------------------------------------------------------------------------
+(213 missing values generated)
+(1,099 real changes made)
+(1,434 real changes made)
+(35 real changes made)
+(178 missing values generated)
+(213 missing values generated)
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+        wage |      1,434    32.39167    16.12498   1.661434   192.3077
+   wage_post |      1,469    35.19396    16.94609   1.873127   221.6129
+
+Gini coefficient for wage, wage_post
+
+-----------------------
+    Variable |      v=2
+-------------+---------
+        wage |   0.2460
+   wage_post |   0.2356
+-----------------------</code></pre>
+</div>
+</div>
 <p>This is equivalent to running a single imputation round. However, we could repeat the process M times to get a measure for the precission of our estimates.</p>
 <h3 id="what-else-can-we-do">What else can we do?</h3>
 <ul>
@@ -807,7 +1078,7 @@ Fernando Rios-Avila
 <li>Assign potential workers to jobs</li>
 <li>Predict earnings and hours</li>
 </ul></li>
-<li>For the work with LIMEW and LIMPTIP, this has also been used for distributional analysis of employment assigment and services use.</li>
+<li>For the work with LIMEW and LIMTIP, this has also been used for distributional analysis of employment assigment and services use.</li>
 </ul>
 </section>
 <section id="limm-step-i" class="slide level2">
@@ -825,7 +1096,6 @@ Fernando Rios-Avila
 <li>Distribute changes across occupations (within industry)
 <ul>
 <li>Using, for example, shares of employment by occupation within industry</li>
-<li></li>
 </ul></li>
 </ul></li>
 <li>With this we have a total number of jobs created by industry and occupation.</li>
@@ -851,39 +1121,11 @@ Fernando Rios-Avila
 <h2></h2>
 <h3 id="job-assigment-ii">Job Assigment II</h3>
 <ul>
-<li>For LIMM, in addition to identifying potential workers, we also need to identify potential job characteristics
-<ul>
-<li>Hours of work (full-time, part-time), wage levels, etc</li>
-</ul></li>
-<li>This is done using “Observed” Jobs characteristics of “currently employed” workers.</li>
-</ul>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p>This is not the only way to do it. We could make assumptions about wage levels, hours of work, etc. (e.g.&nbsp;minimum wage, full-time, etc.) (Employment guarantee?)</p>
-</div>
-</div>
-</div>
-<ul>
+<li><p>Two Steps, modeling job creation and job assigment</p></li>
 <li><p>A probit/logit model would be estimated to predict the likelihood of working, and this will be used to assign jobs.</p>
 <ul>
-<li>High <code>p-scores</code>, first ones to be assigned jobs.</li>
-</ul></li>
-</ul>
-</section>
-<section id="section-5" class="slide level2">
-<h2></h2>
-<h3 id="job-assigment-iii">Job Assigment III</h3>
-<ul>
-<li>Job assignment is done using a multinomial model (<code>mprobit</code>) to predict likelihoods of working on a given occupation &amp; industry.
-<ul>
-<li>Ideally, you would like to do both at the same time, but that is a very complex model to estimate. Instead, each one is estimated separately.</li>
+<li><p>Job assignment is done using a multinomial model (<code>mprobit</code>) to predict likelihoods of working on a given occupation &amp; industry.</p></li>
+<li><p>Ideally, you would like to do both at the same time, but that is a very complex model to estimate. Instead, each one is estimated separately.</p></li>
 </ul></li>
 </ul>
 <p><span class="math display">\[\begin{aligned}
@@ -896,9 +1138,9 @@ I^*(ind = k ) &amp;= \beta_k X + e_k
 <p>Where <span class="math inline">\(I^*(ind = k )\)</span> is the latent likelihood of working on industry <span class="math inline">\(k\)</span> given characteristics. Mprobit or Mlogit depends on the distribution of <span class="math inline">\(e_k\)</span>.</p>
 <p>You choose Industry <span class="math inline">\(k\)</span> if <span class="math inline">\(I^*(ind = k )\)</span> is the highest among all industries.</p>
 </section>
-<section id="section-6" class="slide level2">
+<section id="section-5" class="slide level2">
 <h2></h2>
-<h3 id="job-assigment-iv">Job Assigment IV</h3>
+<h3 id="job-assigment-iii">Job Assigment III</h3>
 <ul>
 <li><p>Job Assigment is done as follows:</p>
 <ul>
@@ -927,16 +1169,93 @@ I^*(ind = k ) &amp;= \beta_k X + e_k
 </div>
 </div>
 </div>
+</section>
+<section id="section-6" class="slide level2">
+<h2></h2>
+<h3 id="earning-contributions">Earning contributions</h3>
 <ul>
-<li>Jobs wages and hours are assigned based on matched data (with donors)</li>
+<li><p>Because some of the newly created jobs go to people who are employed in Family businesses (Farm and non farm income), one has to account for the “loss” of income from those jobs.</p></li>
+<li><p>This is done by estimating the contribution of each member to the family business, and imputing the loss of income from the now “formally employed” member.</p>
+<ul>
+<li>For example, modeling farm income, predicting that income without the family member, and imputing the difference as the loss of income.</li>
+</ul></li>
 </ul>
+</section>
+<section id="section-7" class="slide level2">
+<h2></h2>
+<h3 id="job-assigment-iv-wages-and-hours">Job Assigment IV: Wages and Hours</h3>
+<ul>
+<li>Hours and Wages are imputed using a heckman model, and multiple stage process</li>
+</ul>
+<ol type="1">
+<li>Use a probit model to predict the likelihood of working.</li>
+<li>Given the model obtain the inverse mills ratios. <span class="math inline">\(imr = \phi(\alpha'x)/\Phi(\alpha'x)\)</span></li>
+<li>Model wages and hours using IMR as a regressor. (Heckit model) (This includes info on imputed occupations/industry)</li>
+<li>Use Imputed wages and hours to Match data to “donor” individuals. (PMM)</li>
+<li>For people “potentially” leaving family business, compare new wages to family business contributions</li>
+</ol>
+</section>
+<section id="section-8" class="slide level2">
+<h2></h2>
+<h3 id="hours-of-hp-re-assigment">Hours of HP re-assigment</h3>
+<ul>
+<li>People taking jobs may have to change their contributions to household production. (less time for HP)</li>
+<li>But the rest of the family may also have to adjust their contributions to HP. (more time for HP?)
+<ul>
+<li>This is done via matching, where the “donor” are working individuals with similar family characteristics.</li>
+<li>Or All working individuals</li>
+<li>Currently, “recipients” are all individuals in the household, with atleast one new worker.
+<ul>
+<li>May be more sensible to impute hours</li>
+<li>One may argue those not working may have to increase hours of HP. Or do nothing</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="other-considerations">Other considerations</h3>
+<ul>
+<li>Assigment of Child Care services</li>
+</ul>
+</section>
+<section id="assessing-the-quality-of-the-simulation" class="slide level2">
+<h2>Assessing the quality of the simulation</h2>
+<ul>
+<li>In principle, there is no way to know if the simulation is correct.
+<ul>
+<li>There is no “true” value to compare to.</li>
+<li>However, one may want to at least ensure the simulation replicates the data.</li>
+<li>One can potetially use the simulation to predict changes of a past policy, and compare to the actual changes.</li>
+</ul></li>
+<li>We do want to make “sanity” checks
+<ul>
+<li>Are results consistent and plausible?</li>
+<li>Are distributions of post-assigment outcomes consistent with the data?</li>
+</ul></li>
+</ul>
+</section>
+<section id="limitations" class="slide level2">
+<h2>Limitations</h2>
+<ul>
+<li>Since we use existing data, we make the implicit assumption “no behavioral changes” in other aspects
+<ul>
+<li>Things change as far as we can model them.</li>
+</ul></li>
+<li>Results are typically point estimates, and do not account for uncertainty.
+<ul>
+<li>We can use multiple imputation, monte carlo simulations, or bootstrapping to account for uncertainty.</li>
+</ul></li>
+<li>The results are only as good as the data we use and the assumptions we make.
+<ul>
+<li>We can use sensitivity analysis to test the robustness of the results to changes in assumptions.</li>
+</ul></li>
+</ul>
+</section></section>
+<section id="thats-all-folks" class="title-slide slide level1 center">
+<h1>Thats All Folks!</h1>
 
-<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
-</div>
-</section></section>
+</section>
     </div>
   </div>
 

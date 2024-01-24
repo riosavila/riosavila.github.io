@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.537">
+  <meta name="generator" content="quarto-1.4.455">
 
   <meta name="author" content="Fernando Rios-Avila">
   <title>Econometrics MSC Levy - Research Methods II</title>
@@ -586,12 +586,12 @@ Fernando Rios-Avila
 <section id="how-to-account-for-weights-in-stata" class="slide level2 scrollable">
 <h2>How to account for weights in Stata?</h2>
 <p>Lets use data from the National Health and Nutrition Examination Survey (NHANES) to illustrate how to account for weights in Stata.</p>
-<div id="0a8630a9" class="cell larger" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a></a> frause oaxaca, <span class="kw">clear</span></span>
-<span id="cb1-2"><a></a>** Create Weights &lt;- This will <span class="kw">be</span> provided</span>
-<span id="cb1-3"><a></a><span class="kw">sum</span> wt, <span class="kw">meanonly</span></span>
-<span id="cb1-4"><a></a><span class="kw">replace</span> wt = <span class="fu">round</span>(wt/<span class="fu">r</span>(<span class="fu">min</span>))</span>
-<span id="cb1-5"><a></a><span class="kw">gen</span> wage = <span class="fu">exp</span>(lnwage)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="06b8cc20" class="cell larger" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a> frause oaxaca, <span class="kw">clear</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>** Create Weights &lt;- This will <span class="kw">be</span> provided</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">sum</span> wt, <span class="kw">meanonly</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">replace</span> wt = <span class="fu">round</span>(wt/<span class="fu">r</span>(<span class="fu">min</span>))</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">gen</span> wage = <span class="fu">exp</span>(lnwage)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <style>div.jp-Notebook .datagrid-container {min-height: 448px; }</style>
 </div>
@@ -602,11 +602,11 @@ Fernando Rios-Avila
 </div>
 </div>
 <p>Summary Statistics:</p>
-<div id="cd195a83" class="cell larger" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a>** unweighted</span>
-<span id="cb3-2"><a></a><span class="kw">sum</span> wage,<span class="kw">d</span></span>
-<span id="cb3-3"><a></a>** weighted</span>
-<span id="cb3-4"><a></a><span class="kw">sum</span> wage [aw=wt],<span class="kw">d</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="4c2914be" class="cell larger" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a>** unweighted</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">sum</span> wage,<span class="kw">d</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>** weighted</span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="kw">sum</span> wage [aw=wt],<span class="kw">d</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
                             wage
@@ -641,12 +641,12 @@ Fernando Rios-Avila
 </div>
 </div>
 <p>Accounting for weights for summary Statistics</p>
-<div id="001e43d1" class="cell larger" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a></a>** unweighted</span>
-<span id="cb5-2"><a></a><span class="kw">mean</span> wage </span>
-<span id="cb5-3"><a></a>** weighted</span>
-<span id="cb5-4"><a></a><span class="kw">mean</span> wage [pw=wt]</span>
-<span id="cb5-5"><a></a><span class="kw">mean</span> wage [pw=wt], <span class="bn">over</span>(female)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="f875caed" class="cell larger" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1"></a>** unweighted</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">mean</span> wage </span>
+<span id="cb5-3"><a href="#cb5-3"></a>** weighted</span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">mean</span> wage [pw=wt]</span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="kw">mean</span> wage [pw=wt], <span class="bn">over</span>(female)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Mean estimation                          Number of obs = 1,434
@@ -677,11 +677,11 @@ c.wage@female |
 </div>
 </div>
 <p>Tables and cross tables</p>
-<div id="eae292b6" class="cell larger" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a></a>** unweighted</span>
-<span id="cb7-2"><a></a><span class="kw">tab</span> educ female</span>
-<span id="cb7-3"><a></a></span>
-<span id="cb7-4"><a></a><span class="kw">tab</span> educ female [<span class="fu">w</span>=wt]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="77db53e4" class="cell larger" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1"></a>** unweighted</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">tab</span> educ female</span>
+<span id="cb7-3"><a href="#cb7-3"></a></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="kw">tab</span> educ female [<span class="fu">w</span>=wt]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
            |   sex of respondent
@@ -720,14 +720,14 @@ c.wage@female |
 </div>
 </div>
 <p>Better approach: <code>svyset</code></p>
-<div id="bc71605f" class="cell larger" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a></a><span class="kw">webuse</span> nhanes2f, <span class="kw">clear</span></span>
-<span id="cb9-2"><a></a><span class="kw">svyset</span> psuid <span class="co">/// Cluster</span></span>
-<span id="cb9-3"><a></a>       [<span class="kw">pweight</span>=finalwgt], <span class="co">/// Survey Weight as Inverse of Prob of Selection</span></span>
-<span id="cb9-4"><a></a>       <span class="kw">strata</span>(stratid)     <span class="co">// Strata Identifier</span></span>
-<span id="cb9-5"><a></a><span class="kw">mean</span> zinc      </span>
-<span id="cb9-6"><a></a><span class="kw">mean</span> zinc [pw=finalwgt]</span>
-<span id="cb9-7"><a></a><span class="kw">svy</span>: <span class="kw">mean</span> zinc      </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="a21da7e4" class="cell larger" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">webuse</span> nhanes2f, <span class="kw">clear</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">svyset</span> psuid <span class="co">/// Cluster</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>       [<span class="kw">pweight</span>=finalwgt], <span class="co">/// Survey Weight as Inverse of Prob of Selection</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>       <span class="kw">strata</span>(stratid)     <span class="co">// Strata Identifier</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="kw">mean</span> zinc      </span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="kw">mean</span> zinc [pw=finalwgt]</span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="kw">svy</span>: <span class="kw">mean</span> zinc      </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Sampling weights: finalwgt
@@ -816,13 +816,13 @@ Number of PSUs   = 62            Population size = 104,176,071
 <li>Make sure you use “robust” standard errors, or “pw” option.</li>
 </ul></li>
 </ul>
-<div id="f9e0e5b5" class="cell larger" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a></a> frause oaxaca, <span class="kw">clear</span></span>
-<span id="cb11-2"><a></a>** Create Weights &lt;- This will <span class="kw">be</span> provided</span>
-<span id="cb11-3"><a></a><span class="kw">sum</span> wt, <span class="kw">meanonly</span></span>
-<span id="cb11-4"><a></a><span class="kw">replace</span> wt = <span class="fu">round</span>(wt/<span class="fu">r</span>(<span class="fu">min</span>))</span>
-<span id="cb11-5"><a></a><span class="kw">gen</span> wage = <span class="fu">exp</span>(lnwage)</span>
-<span id="cb11-6"><a></a><span class="kw">reg</span> wage i.female [pw=wt],</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="0648182d" class="cell larger" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1"></a> frause oaxaca, <span class="kw">clear</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>** Create Weights &lt;- This will <span class="kw">be</span> provided</span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="kw">sum</span> wt, <span class="kw">meanonly</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="kw">replace</span> wt = <span class="fu">round</span>(wt/<span class="fu">r</span>(<span class="fu">min</span>))</span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="kw">gen</span> wage = <span class="fu">exp</span>(lnwage)</span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="kw">reg</span> wage i.female [pw=wt],</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Excerpt from the Swiss Labor Market Survey 1998)
 (1,647 real changes made)
@@ -1085,19 +1085,19 @@ A \begin{pmatrix} X_1 \\ X_2 \\ X_3 \end{pmatrix} = (I-A) \begin{pmatrix} X_1 \\
 \begin{pmatrix} 45.54 \\ 21.08 \\ 12.84 \end{pmatrix}
 \]</span></p>
 <p>S4: How much would labor demand change if the final consumer demand for Agriculture increases in 20%? <span class="math display">\[\Delta L_i = \lambda_i * \Delta X_i\]</span></p>
-<p><span class="math inline">\(\Delta L_1 = 0.372 * 45.54 = 16.95 ; \Delta L_2 =  0.263 * 21.08 = 5.544 ; \Delta L_3 =  0.259 * 12.84 = 3.326\)</span></p>
+<p><span class="math inline">\(\Delta L_1 = 0.372 * 45.54 = 16.95 ; \Delta L_2 = 0.263 * 21.08 = 5.544 ; \Delta L_3 = 0.259 * 12.84 = 3.326\)</span></p>
 </section>
 <section id="example---stata" class="slide level2 scrollable">
 <h2>Example - <code>Stata</code></h2>
 <p><code>mata</code>: Input Data</p>
-<div id="9d9636ef" class="cell larger" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a></a><span class="kw">mata</span>: x  = (102, 103, 153 \ 133, 124, 77 \ 71, 92, 51)</span>
-<span id="cb13-2"><a></a><span class="kw">mata</span>: <span class="fu">y</span>  = (129 \ 99 \ 165)</span>
-<span id="cb13-3"><a></a><span class="kw">mata</span>: hh = ( 181 , 114 , 98)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="35cba61f" class="cell larger" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">mata</span>: x  = (102, 103, 153 \ 133, 124, 77 \ 71, 92, 51)</span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="kw">mata</span>: <span class="fu">y</span>  = (129 \ 99 \ 165)</span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="kw">mata</span>: hh = ( 181 , 114 , 98)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Estimate Total Production</p>
-<div id="010a4d1b" class="cell larger" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a></a><span class="kw">mata</span>: tp = colsum(x):+hh ; tp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="0885e75d" class="cell larger" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">mata</span>: tp = colsum(x):+hh ; tp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         1     2     3
     +-------------------+
@@ -1106,9 +1106,9 @@ A \begin{pmatrix} X_1 \\ X_2 \\ X_3 \end{pmatrix} = (I-A) \begin{pmatrix} X_1 \\
 </div>
 </div>
 <p>Estimate Technical Coefficients</p>
-<div id="aeec2d00" class="cell larger" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a></a><span class="co">// Technical Coefficients</span></span>
-<span id="cb16-2"><a></a><span class="kw">mata</span>:ai = x:/tp ; ai</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="ba0727cd" class="cell larger" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a href="#cb16-1"></a><span class="co">// Technical Coefficients</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="kw">mata</span>:ai = x:/tp ; ai</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                 1             2             3
     +-------------------------------------------+
@@ -1119,9 +1119,9 @@ A \begin{pmatrix} X_1 \\ X_2 \\ X_3 \end{pmatrix} = (I-A) \begin{pmatrix} X_1 \\
 </div>
 </div>
 <p>Estimate Change in Demand: 20% increase in Agriculture</p>
-<div id="08028c6e" class="cell larger" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a></a><span class="co">// Technical Coefficients</span></span>
-<span id="cb18-2"><a></a><span class="kw">mata</span>:dy = <span class="fu">y</span> :* (.2 \ 0 \ 0); dy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="791a9a70" class="cell larger" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a href="#cb18-1"></a><span class="co">// Technical Coefficients</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="kw">mata</span>:dy = <span class="fu">y</span> :* (.2 \ 0 \ 0); dy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          1
     +--------+
@@ -1132,9 +1132,9 @@ A \begin{pmatrix} X_1 \\ X_2 \\ X_3 \end{pmatrix} = (I-A) \begin{pmatrix} X_1 \\
 </div>
 </div>
 <p>Estimate Change in Production</p>
-<div id="50de442f" class="cell larger" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb20-1"><a></a><span class="co">// Change in Production</span></span>
-<span id="cb20-2"><a></a><span class="kw">mata</span>:dx = <span class="kw">qrinv</span>(<span class="fu">I</span>(3)-ai)*dy; dx</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="ffd1ae78" class="cell larger" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb20-1"><a href="#cb20-1"></a><span class="co">// Change in Production</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="kw">mata</span>:dx = <span class="kw">qrinv</span>(<span class="fu">I</span>(3)-ai)*dy; dx</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                 1
     +---------------+
@@ -1145,8 +1145,8 @@ A \begin{pmatrix} X_1 \\ X_2 \\ X_3 \end{pmatrix} = (I-A) \begin{pmatrix} X_1 \\
 </div>
 </div>
 <p>Estimate Change in Labor Demand</p>
-<div id="2f799ffa" class="cell larger" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb22-1"><a></a><span class="kw">mata</span>:dl = (hh:/tp)':*dx; dl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="584eba08" class="cell larger" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw">mata</span>:dl = (hh:/tp)':*dx; dl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                 1
     +---------------+
@@ -1454,10 +1454,8 @@ A \begin{pmatrix} X_1 \\ X_2 \\ X_3 \end{pmatrix} = (I-A) \begin{pmatrix} X_1 \\
 <li>Understand how SAM can be used to represent an Economy</li>
 </ul>
 
-<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
-</div>
 </div>
 </section></section>
     </div>
