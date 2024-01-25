@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Econometrics MSC Levy - ECON 629 - Applied Econometric Methods for Empirical Research and Policy Evaluation</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Econometrics MSC Levy</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../adv_class/index.html"> 
+<span class="menu-text">Adv Methods and Causal Effects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../rmethods/index.html"> 
+<span class="menu-text">Research Methods: Econometrics I</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../rmethods2/index.html"> 
+<span class="menu-text">Research Methods II: Applied Methods</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-math-refresher" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Math Refresher</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-math-refresher">    
+        <li>
+    <a class="dropdown-item" href="../mathref/math_1.html">
+ <span class="dropdown-text">Math Refresher: Basic Calculus</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../mathref/math_2.html">
+ <span class="dropdown-text">Math Refresher: Basic Linear Algebra</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../mathref/math_3.html">
+ <span class="dropdown-text">Math Refresher: Basic Statistics and Probability</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../resources.html"> 
+<span class="menu-text">Resources</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#course-description" id="toc-course-description" class="nav-link active" data-scroll-target="#course-description">Course Description</a></li>
+  <li><a href="#course-outline" id="toc-course-outline" class="nav-link" data-scroll-target="#course-outline">Course outline</a>
+  <ul class="collapse">
+  <li><a href="#part-i-advanced-estimation-methods" id="toc-part-i-advanced-estimation-methods" class="nav-link" data-scroll-target="#part-i-advanced-estimation-methods">Part I: Advanced Estimation Methods</a></li>
+  <li><a href="#part-ii-causal-inference" id="toc-part-ii-causal-inference" class="nav-link" data-scroll-target="#part-ii-causal-inference">Part II: Causal Inference</a></li>
+  </ul></li>
+  <li><a href="#suggested-readings" id="toc-suggested-readings" class="nav-link" data-scroll-target="#suggested-readings">Suggested Readings</a></li>
+  <li><a href="#further-readings" id="toc-further-readings" class="nav-link" data-scroll-target="#further-readings">Further Readings</a>
+  <ul class="collapse">
+  <li><a href="#potential-outcomes-causal-model" id="toc-potential-outcomes-causal-model" class="nav-link" data-scroll-target="#potential-outcomes-causal-model">Potential Outcomes Causal Model</a></li>
+  <li><a href="#panel-data-and-fixed-effects" id="toc-panel-data-and-fixed-effects" class="nav-link" data-scroll-target="#panel-data-and-fixed-effects">Panel Data and Fixed Effects</a></li>
+  <li><a href="#instrumental-variables---iv" id="toc-instrumental-variables---iv" class="nav-link" data-scroll-target="#instrumental-variables---iv">Instrumental Variables - IV</a></li>
+  <li><a href="#matching-and-reweighting" id="toc-matching-and-reweighting" class="nav-link" data-scroll-target="#matching-and-reweighting">Matching and Reweighting</a></li>
+  <li><a href="#regression-discontinuity" id="toc-regression-discontinuity" class="nav-link" data-scroll-target="#regression-discontinuity">Regression Discontinuity</a></li>
+  <li><a href="#differences-in-differences" id="toc-differences-in-differences" class="nav-link" data-scroll-target="#differences-in-differences">Differences in Differences</a></li>
+  <li><a href="#synthetic-control" id="toc-synthetic-control" class="nav-link" data-scroll-target="#synthetic-control">Synthetic Control</a></li>
+  </ul></li>
+  <li><a href="#course-website" id="toc-course-website" class="nav-link" data-scroll-target="#course-website">Course website</a></li>
+  <li><a href="#attendance" id="toc-attendance" class="nav-link" data-scroll-target="#attendance">Attendance:</a></li>
+  <li><a href="#course-software" id="toc-course-software" class="nav-link" data-scroll-target="#course-software">Course Software</a></li>
+  <li><a href="#additional-information" id="toc-additional-information" class="nav-link" data-scroll-target="#additional-information">Additional Information:</a></li>
+  <li><a href="#grading" id="toc-grading" class="nav-link" data-scroll-target="#grading">Grading</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="syllabus.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">ECON 629 - Applied Econometric Methods for Empirical Research and Policy Evaluation</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>Instructor:</strong> Fernando Rios-Avila<br>
+<strong>Office:</strong> Room 307, Blithewood<br>
+<strong>Office hours:</strong> By appointment<br>
+<strong>Email:</strong> friosavi@levy.org<br>
+<strong>Website:</strong> <a href="https://riosavila.github.io/" class="uri">https://riosavila.github.io/</a>.</p>
+<section id="course-description" class="level2">
+<h2 class="anchored" data-anchor-id="course-description">Course Description</h2>
+<p>This course is designed to introduce students to econometric methods used in empirical research, with emphasis on the analysis and identification of causal effects and Policy Evaluation. It aims to provide an overview and general guidelines on practical implementation, discussing the intuition behind the empirical methods.</p>
+<p>The course is divided in two sections. The first section focuses on a review of advanced estimation methods for the analysis of data under the linearity assumption: ordinary least squares, parametric and semiparametric model estimation, quantile regression, and RIF regressions. We also review the use of maximum likelihood estimation (MLE), and Nonlinear Least Squares (NLS) as methodologies that allows the estimation of both linear and nonlinear models.</p>
+<p>In the second part of the course, we re-introduce the problem of identification of causal effects, the role of experimental designs, and the idea of potential outcome models, discussing the main limitations on the identification of causal effects. We follow by discussing various methods focused on the identification of causal effects including, fixed effects / Panel data models, matching and reweighting, instrumental variables, Regression Discontinuity, Differences in Differences and extensions, and Synthetic controls. In all cases, we discuss limitations and interpretation of treatment effects.</p>
+<p>By the end of the course students should have a good understanding of the estimation of causal effects, as well as the main methods used to address this problem, and critically evaluate and interpret the output of such analyses.</p>
+</section>
+<section id="course-outline" class="level2">
+<h2 class="anchored" data-anchor-id="course-outline">Course outline</h2>
+<p>This course syllabus provides a general plan for the course; deviations may be necessary:</p>
+<section id="part-i-advanced-estimation-methods" class="level3">
+<h3 class="anchored" data-anchor-id="part-i-advanced-estimation-methods">Part I: Advanced Estimation Methods</h3>
+<ol type="1">
+<li>Introduction: General Overview of the course</li>
+<li>Linear Regression:</li>
+</ol>
+<ul>
+<li>Estimation, Assumptions, Inference</li>
+<li>Deviation from Main Assumptions</li>
+<li>Alternative Approaches: Robust-Standard errors, Cluster Standard errors, Bootstrap Standard error.</li>
+<li>Model Selection, and Shrinkage Methods
+<ul>
+<li>MHE – Chapter 3</li>
+<li>CI – Chapter 2</li>
+<li>MMA - Chapter 11</li>
+<li>ISL – Chapter 3, Chapter 6.1 – 6.2</li>
+<li>MacKinnon, et al (2023) “Cluster-Robust Inference: A Guide to Empirical Practice” Journal of Econometrics</li>
+</ul></li>
+</ul>
+<ol start="3" type="1">
+<li>Parametric, non-parametric and Semi-parametric Regressions:</li>
+</ol>
+<ul>
+<li><p>Difference between Parametric and Non-Parametric models</p></li>
+<li><p>Distributions, densities and histograms</p></li>
+<li><p>Advantages and disadvantages of non-parametric models (bias vs variance)</p></li>
+<li><p>Estimation: Kernel vs Splines; Semi - Parametric vs non-parametric</p>
+<ul>
+<li>MMA Chapter 9</li>
+<li>ISL Chapter 7</li>
+<li>Henderson and Parmeter 2016 Teaching Nonparametric Econometrics to Undergraduates</li>
+<li>Racine, 2008 Nonparametric Econometrics: A Primer</li>
+<li>Rios-Avila, 2020 Smooth Varying-coefficient Models in Stata</li>
+<li>Verardi and Debarsy 2012 Robinson’s square root of N consistent semiparametric regression estimator in Stata</li>
+</ul></li>
+</ul>
+<ol start="4" type="1">
+<li>Going Beyond the Mean: [conditional] Quantile Regression</li>
+</ol>
+<ul>
+<li><p>Difference between Linear Regression and CQuantile Regression</p></li>
+<li><p>Estimation and Statistical Inference</p></li>
+<li><p>Quantile Regression: Modeling Heteroskedasticity</p></li>
+<li><p>Quantile Regression: As a semiparametric model with unobserved Heterogeneity</p>
+<ul>
+<li>MHE Chapter 7</li>
+<li>Koenker and Hallok (2001) Quantile Regression</li>
+<li>Machado and Santos Silva (2019) Quantiles via moments</li>
+<li>Wenz (2018) What does QR does and Doesn’t do</li>
+<li>Castro et al (2019) Smoothed GMM for quantile models</li>
+</ul></li>
+</ul>
+<ol start="5" type="1">
+<li>Going Beyond the Mean II: RIF – regressions</li>
+</ol>
+<ul>
+<li>Influence Functions and Recentered Influence functions</li>
+<li>Usage with distributional Statistics</li>
+<li>RIF-Regressions: Unconditional Quantile Regressions, Partially Conditional Quantile Regressions
+<ul>
+<li>Rios-Avila and Maroto (2022) Moving Beyond Linear Regression: Implementing and Interpreting Quantile Regression Models With Fixed Effects</li>
+<li>Borah and Basu (2013) Highlighting Differences Between Conditional and Unconditional Quantile Regression Approaches Through An Application To Assess Medication Adherence</li>
+<li>Firpo Fortin and Lemieux (2009) Unconditional Quantile Regressions</li>
+<li>Rios-Avila (2020) Recentered influence functions (RIFs) in Stata: RIF regression and RIF decomposition</li>
+</ul></li>
+</ul>
+<ol start="6" type="1">
+<li>Maximum Likelihood Estimation</li>
+</ol>
+<ul>
+<li>Linear vs Non-Linear models</li>
+<li>Non-Linear Least Squares</li>
+<li>MLE for Logit/probit/poisson</li>
+<li>MLE for heckman/tobit</li>
+<li>MLE for other NL models
+<ul>
+<li>MMA Chapter 4</li>
+<li>EA Chapter 7, 14 (Greene)</li>
+<li>Rios-Avila (2018) Standard-error correction in two-stage optimization models: A quasi–maximum likelihood estimation approach</li>
+<li>Kapteyn and Ypma (2007) Measurement Error and Misclassification: A comparison of Survey and Administrative Data.</li>
+<li>Ransom (1987) An Empirical Model of Discrete and Continuous Choice in Family Labor Supply</li>
+</ul></li>
+</ul>
+</section>
+<section id="part-ii-causal-inference" class="level3">
+<h3 class="anchored" data-anchor-id="part-ii-causal-inference">Part II: Causal Inference</h3>
+<ol start="7" type="1">
+<li>Potential Outcomes Causal Model</li>
+</ol>
+<ul>
+<li>Assumptions, Implications and Imputations</li>
+<li>Randomized Control Trials</li>
+<li>Regression in Experimental settings
+<ul>
+<li>MHE Chapter 1</li>
+<li>CI Chapter 4</li>
+<li>IEP Chapter 3 – 4</li>
+<li>MM Chapter 1-2</li>
+<li>TE Chapter 10 - 11</li>
+</ul></li>
+</ul>
+<ol start="8" type="1">
+<li>Panel Data and Fixed Effects</li>
+</ol>
+<ul>
+<li><p>Random Effects vs Fixed effects</p></li>
+<li><p>Correlated Random Effects Model</p></li>
+<li><p>2 or more FE: Frisch-Waugh-Lovell Theorem</p>
+<ul>
+<li>TE Chapter 16</li>
+<li>MHE Chapter 5</li>
+<li>CI Chapter 8</li>
+<li>Rios-Avila (2015) Feasible fitting of linear models with N fixed effects</li>
+<li>Correia (2016) A Feasible Estimator for Linear Models with Multi-Way Fixed Effects</li>
+<li>Wooldridge (2019) Correlated random effects models with unbalanced panels</li>
+<li>Machado &amp; Santos Silva (2019) Quantiles via moments</li>
+</ul></li>
+</ul>
+<ol start="9" type="1">
+<li>Instrumental Variables - IV</li>
+</ol>
+<ul>
+<li><p>Theory, assumptions and Limitations</p></li>
+<li><p>Randomization and Natural Experiments</p></li>
+<li><p>Heterogeneity and Local Average Treatment Effects</p></li>
+<li><p>Leading Examples and Limitations</p>
+<ul>
+<li>CI Chapter 7</li>
+<li>MHE Chapter 4</li>
+<li>MM Chapter 3</li>
+<li>TE Chapter 19</li>
+</ul></li>
+</ul>
+<ol start="10" type="1">
+<li>Matching and Reweighting</li>
+</ol>
+<ul>
+<li><p>Stratification, Exact Matching, Approximate Matching</p></li>
+<li><p>Curse of Dimensionality</p></li>
+<li><p>Weighting and Re-weighting Analysis</p>
+<ul>
+<li>CI Chapter 5</li>
+<li>TE Chapter 14</li>
+<li>IEP Chapter 8</li>
+<li>Austin (2011) An Introduction to Propensity Score Methods for Reducing the Effects of Confounding in Observational Studies</li>
+<li>King and Nielsen (2019) Why Propensity Scores Should Not Be Used for Matching</li>
+<li>Caliendo et al (2008) Some Practical Guidance for the Implementation Of Propensity Score Matching</li>
+</ul></li>
+</ul>
+<ol start="11" type="1">
+<li>Regression Discontinuity</li>
+</ol>
+<ul>
+<li><p>Identification, Assumptions and Limitations</p></li>
+<li><p>Leveraging threshold: Estimation – Parametric and non-parametric</p></li>
+<li><p>Sharp vs Fuzzy RD</p>
+<ul>
+<li>CI Chapter 6</li>
+<li>MHE Chapter 6</li>
+<li>TE Chapter 20</li>
+<li>MM Chapter 4</li>
+<li>Cattaneo &amp; Titiunik 2022 Regression Discontinuity Designs</li>
+<li>Lee &amp; Lemieux 2010 Regression Discontinuity Designs in Economics</li>
+</ul></li>
+</ul>
+<ol start="12" type="1">
+<li>Differences in Differences</li>
+</ol>
+<ul>
+<li><p>Assumptions and Identification of Canonical 2x2 DID</p></li>
+<li><p>Allowing for Covariates</p></li>
+<li><p>Generalized DID, TWFE, and Limitations</p></li>
+<li><p>Event Studies</p></li>
+<li><p>Timing and cohort Heterogeneity</p>
+<ul>
+<li>CI Chapter 9</li>
+<li>MHE Chapter 5</li>
+<li>TE Chapter 18</li>
+<li>MM Chapter 5</li>
+<li>Roth et al (2022) What’s Trending in Difference-in-Differences? A Synthesis of the Recent Econometrics Literature</li>
+<li>Chaisemartin &amp; D’Haultfeuille 2022 Two-Way Fixed Effects and Differences-in-Differences with Heterogeneous Treatment Effects: A Survey</li>
+</ul></li>
+</ul>
+<ol start="13" type="1">
+<li>Synthetic Control</li>
+</ol>
+<ul>
+<li>Identification and Estimation</li>
+<li>Internal vs external Validity</li>
+<li>Exact Statistics and Extensions
+<ul>
+<li>CI Chapter 10</li>
+<li>TE Chapter 21</li>
+<li>Abadie (2020), “Using Synthetic Controls: Feasibility, Data Requirements, and Methodological Aspects,” JEL</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="suggested-readings" class="level2">
+<h2 class="anchored" data-anchor-id="suggested-readings">Suggested Readings</h2>
+<p><strong>MHE</strong> - Mostly Harmless Econometrics: An Empiricist’s Companion<br>
+by Joshua D. Angrist and Jorn-Steffen Pischke</p>
+<p><strong>CI</strong> - Causal Inference: The Mixtape<br>
+By Scott Cunningham</p>
+<p><strong>TE</strong> - The Effect: An Introduction to Research Design and Causality<br>
+By Nick Huntington-Klein</p>
+<p><strong>MM</strong> - Mastering Metrics: The path from Cause to Effect<br>
+by Joshua D. Angrist and Jorn-Steffen Pischke</p>
+<p><strong>MMA</strong> - Microeconometrics: Methods and Applications<br>
+By Colin Cameron and Pravin Trivedi (Selected Chapters)</p>
+<p><strong>EA</strong> - Econometric Analysis<br>
+By William Greene (Selected Chapters)</p>
+<p><strong>ISL</strong> - An Introduction to Statistical Learning By Gareth James, Daniela Witten, Trevor Hastie and Robert Tibshirani (Selected Chapters)</p>
+</section>
+<section id="further-readings" class="level2">
+<h2 class="anchored" data-anchor-id="further-readings">Further Readings</h2>
+<section id="potential-outcomes-causal-model" class="level3">
+<h3 class="anchored" data-anchor-id="potential-outcomes-causal-model">Potential Outcomes Causal Model</h3>
+<p>Blattman, Christopher, Nathan Fiala, and Sebastian Martinez. 2014. “Generating Skilled Self-Employment in Developing Countries: Experimental Evidence from Uganda.” Quarterly Journal of Economics 129 (2): 697–752. doi: 10.1093/qje/qjt057.</p>
+<p>Schultz, Paul. 2004. “School Subsidies for the Poor: Evaluating the Mexican Progresa Poverty Program.” Journal of Development Economics 74 (1): 199–250</p>
+<p>Manning, Willard G., et al.&nbsp;“Health Insurance and the Demand for Medical Care: Evidence from a Randomized Experiment.” The American Economic Review, vol.&nbsp;77, no. 3, 1987, pp.&nbsp;251–77. JSTOR, http://www.jstor.org/stable/1804094. Accessed 18 Jan.&nbsp;2023.</p>
+</section>
+<section id="panel-data-and-fixed-effects" class="level3">
+<h3 class="anchored" data-anchor-id="panel-data-and-fixed-effects">Panel Data and Fixed Effects</h3>
+<p>Cornwell, C. And Rupert, P. (1997), Unobservable Individual Effects, Marriage And The Earnings Of Young Men. Economic Inquiry, 35: 285-294. Https://Doi.Org/10.1111/J.1465-7295.1997.Tb01910.X</p>
+<p>Freeman, R. B. (1984). Longitudinal Analyses of the Effects of Trade Unions. Journal of Labor Economics, 2(1), 1–26. http://www.jstor.org/stable/2535015Instrumental Variables - IV</p>
+<p>Ashenfelter, O., &amp; Rouse, C. (1998). Income, Schooling, and Ability: Evidence from a New Sample of Identical Twins. The Quarterly Journal of Economics, 113(1), 253–284. http://www.jstor.org/stable/2586991</p>
+<p>Sandra E. Black, Paul J. Devereux, Kjell G. Salvanes, From the Cradle to the Labor Market? The Effect of Birth Weight on Adult Outcomes, The Quarterly Journal of Economics, Volume 122, Issue 1, February 2007, Pages 409–439, https://doi.org/10.1162/qjec.122.1.409</p>
+</section>
+<section id="instrumental-variables---iv" class="level3">
+<h3 class="anchored" data-anchor-id="instrumental-variables---iv">Instrumental Variables - IV</h3>
+<p>Cygan-Rehm, K., &amp; Wunder, C. (2018). Do working hours affect health? Evidence from statutory workweek regulations in Germany. Labour Economics, 53, 162-171. https://doi.org/10.1016/j.labeco.2018.05.003</p>
+<p>Bulman, George, Robert Fairlie, Sarena Goodman, and Adam Isen. 2021. “Parental Resources and College Attendance: Evidence from Lottery Wins.” American Economic Review, 111 (4): 1201-40.</p>
+<p>Tsai, A. C., &amp; Venkataramani, A. S. (2015). The causal effect of education on HIV stigma in Uganda: Evidence from a natural experiment. Social Science &amp; Medicine, 142, 37-46. https://doi.org/10.1016/j.socscimed.2015.08.009</p>
+<p>Koppel, Stephen, Bergin, Tiffany, Ropac, René, Randolph, Imani, &amp; Joseph, Hannah. (2022). Examining the causal effect of pretrial detention on case outcomes: a judge fixed effect instrumental variable approach. Journal of Experimental Criminology.</p>
+</section>
+<section id="matching-and-reweighting" class="level3">
+<h3 class="anchored" data-anchor-id="matching-and-reweighting">Matching and Reweighting</h3>
+<p>Jyotsna Jalan &amp; Martin Ravallion (2003) Estimating the Benefit Incidence of an Antipoverty Program by Propensity-Score Matching, Journal of Business &amp; Economic Statistics, 21:1, 19-30, DOI: 10.1198/073500102288618720 Arceneaux, K., Gerber, A., &amp; Green, D. (2006). Comparing experimental and matching methods using a largescale voter mobilization experiment. Political Analysis, 14, 1-26.</p>
+<p>Ren Mu &amp; Dominique van de Walle (2011) Rural Roads and Local Market Development in Vietnam, The Journal of Development Studies, 47:5, 709-734, DOI: 10.1080/00220381003599436</p>
+</section>
+<section id="regression-discontinuity" class="level3">
+<h3 class="anchored" data-anchor-id="regression-discontinuity">Regression Discontinuity</h3>
+<p>Card, D., Dobkin, C., &amp; Maestas, N. (2008). The Impact of Nearly Universal Insurance Coverage on Health Care Utilization: Evidence from Medicare. The American Economic Review, 98(5), 2242–2258. http://www.jstor.org/stable/29730170</p>
+<p>Carpenter, Christopher, and Carlos Dobkin. 2009. “The Effect of Alcohol Consumption on Mortality: Regression Discontinuity Evidence from the Minimum Drinking Age.” American Economic Journal: Applied Economics, 1 (1): 164-82.</p>
+<p>Bleemer, Zachary, and Aashish Mehta. 2022. “Will Studying Economics Make You Rich? A Regression Discontinuity Analysis of the Returns to College Major.” American Economic Journal: Applied Economics, 14 (2): 1-22.</p>
+</section>
+<section id="differences-in-differences" class="level3">
+<h3 class="anchored" data-anchor-id="differences-in-differences">Differences in Differences</h3>
+<p>Nollenberger, Natalia and Rodriguez-Planas, Núria, (2015), Full-time universal childcare in a context of low maternal employment: Quasi-experimental evidence from Spain, Labour Economics, 36, issue C, p.&nbsp;124-136</p>
+<p>Gousse, Marion and Leturcq, Marion, (2022), More or Less unmarried. The impact of legal settings of cohabitation on labour market outcomes, European Economic Review 149 (2022)</p>
+<p>Hotchkiss, J. L., Moore, R. E., &amp; Rios-Avila, F. (2014). Reevaluation of the Employment Impact of the 1996 Summer Olympic Games. Southern Economic Journal, 140619071514006. doi:10.4284/0038-4038-2013.063</p>
+</section>
+<section id="synthetic-control" class="level3">
+<h3 class="anchored" data-anchor-id="synthetic-control">Synthetic Control</h3>
+<p>Abadie, A., Diamond, A., &amp; Hainmueller, J. (2010). Synthetic Control Methods for Comparative Case Studies: Estimating the Effect of California’s Tobacco Control Program. Journal of the American Statistical Association, 105(490), 493–505. doi:10.1198/jasa.2009.ap08746</p>
+<p>Peri, G., &amp; Yasenov, V. (2018). The Labor Market Effects of a Refugee Wave: Synthetic Control Method Meets the Mariel Boatlift. Journal of Human Resources, 0217_8561R1.</p>
+<p>Viana, J. H., Barbosa, A. V., &amp; Sampaio, B. (2018). Does the World Cup get the economic ball rolling? Evidence from a synthetic control approach. EconomiA, 19(3), 330-349. https://doi.org/10.1016/j.econ.2018.05.001</p>
+</section>
+</section>
+<section id="course-website" class="level2">
+<h2 class="anchored" data-anchor-id="course-website">Course website</h2>
+<p>We will be using <code>Github</code> for all materials, presentations and announcements. The course website is located at <a href="https://riosavila.github.io/" class="uri">https://riosavila.github.io/</a>.</p>
+</section>
+<section id="attendance" class="level2">
+<h2 class="anchored" data-anchor-id="attendance">Attendance:</h2>
+<p>Class attendance is highly recommended, but not compulsory. Material for homeworks will come from class lectures.</p>
+</section>
+<section id="course-software" class="level2">
+<h2 class="anchored" data-anchor-id="course-software">Course Software</h2>
+<p>There are several statistical packages for analyzing data. In this course, I will be using <code>Stata</code> to cover all materials in class. The Institute will be providing you with licenses for Stata/BE for length of the course. However, you may also use other-software of your liking. Two of the books used for the course, Causal Effect and The Effect, provides codes for most of the material we cover here using <code>Stata</code>, <code>Python</code> and <code>R</code>. <code>Julia</code> is also a viable option.</p>
+<p><code>Stata</code> offers many free short webinars and video tutorials that may be useful if you never used Stata before, or even if you have some experience with it. See the <a href="../resources.html">resources</a> for links to the webinars offered by <code>Stata</code>.</p>
+<p>There are also a series of Cheat sheets to remember basics of Data processing, analysis, and visualization here <a href="https://www.stata.com/bookstore/stata-cheat-sheets/">stata-cheat-sheets</a></p>
+</section>
+<section id="additional-information" class="level2">
+<h2 class="anchored" data-anchor-id="additional-information">Additional Information:</h2>
+<p>All students are responsible for knowing Bard’s Policy on Academic Honesty as publish in Bard College Student Handbook.</p>
+</section>
+<section id="grading" class="level2">
+<h2 class="anchored" data-anchor-id="grading">Grading</h2>
+<ul>
+<li>Presentations 20%: Students will have to do a series of presentations during the second half of the semester based on the suggested material (further reading) or other papers the students may be interested in.</li>
+</ul>
+<p>The main requirement. The paper should implement any of the methodologies we will be covering in class. The presentation should emphasize the Research question, assumptions used, methodology, and results. If possible, provide comments and suggestions to extend the paper.</p>
+<ul>
+<li><p>Homework 40%: Homeworks will be provided for you to practice and implement the different methodologies discussed in class. They can be carried out individually or in groups. This will include making a brief description of the results.</p></li>
+<li><p>Paper Project 40: Write a term paper that can be of two types:</p>
+<ul>
+<li><strong>Paper Replication</strong>: You can choose to write a replication paper on a methodological paper, or applied empirical paper.</li>
+</ul>
+<p>In either case, the replication will have to extend the analysis of the original paper to a different setup (empirical paper), different software (if replication paper), or other extensions to the original analysis/methodology.</p>
+<ul>
+<li><strong>Original Research:</strong> A 20-25 pages paper where students answer a research question of their choice, using any of the methodologies presented in class. Standard structure of the paper applies.</li>
+</ul></li>
+</ul>
+<p>10% of the grade will be based on a presentation of the paper.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

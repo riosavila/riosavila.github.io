@@ -11,7 +11,7 @@ website:
     left:        
       - href: index.qmd
         text: Home
-      - href: adv_class.qmd
+      - href: adv_class/index.qmd
         text: "Adv Methods and Causal Effects"
       - href: rmethods/index.qmd
         text: "Research Methods: Econometrics I"
