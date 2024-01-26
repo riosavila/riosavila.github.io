@@ -2,12 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.455">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Fernando Rios-Avila">
 
-<title>Econometrics MSC Levy – homework1</title>
+<title>Econometrics MSC Levy - Homework I</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -62,6 +63,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -94,7 +96,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../adv_class.html"> 
+    <a class="nav-link" href="../adv_class/index.html"> 
 <span class="menu-text">Adv Methods and Causal Effects</span></a>
   </li>  
   <li class="nav-item">
@@ -145,16 +147,165 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#part-i-io-tables" id="toc-part-i-io-tables" class="nav-link active" data-scroll-target="#part-i-io-tables">Part I: IO tables</a></li>
+  <li><a href="#sec-part2" id="toc-sec-part2" class="nav-link" data-scroll-target="#sec-part2">Part II: MLE</a></li>
+  <li><a href="#part-iii-inequality-gaps" id="toc-part-iii-inequality-gaps" class="nav-link" data-scroll-target="#part-iii-inequality-gaps">Part III: Inequality Gaps</a></li>
+  <li><a href="#part-iv-explaining-gaps" id="toc-part-iv-explaining-gaps" class="nav-link" data-scroll-target="#part-iv-explaining-gaps">Part IV: Explaining Gaps</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="HomeWork1.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Homework I</h1>
+<p class="subtitle lead">IO-MLE-Inequality-Gaps</p>
+</div>
 
 
 
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Fernando Rios-Avila </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
 
 
+</header>
+
+
+<section id="part-i-io-tables" class="level2">
+<h2 class="anchored" data-anchor-id="part-i-io-tables">Part I: IO tables</h2>
+<p>Consider the following IO table for a hypothetical economy:</p>
+<table class="table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Agriculture</th>
+<th>Manufacture</th>
+<th>Services</th>
+<th>Construction</th>
+<th>Final Demand</th>
+<th>Total Output</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Agriculture</td>
+<td>160</td>
+<td>230</td>
+<td>260</td>
+<td>290</td>
+<td>340</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Manufacture</td>
+<td>210</td>
+<td>190</td>
+<td>450</td>
+<td>170</td>
+<td>340</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Services</td>
+<td>410</td>
+<td>380</td>
+<td>200</td>
+<td>160</td>
+<td>350</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Construction</td>
+<td>180</td>
+<td>320</td>
+<td>240</td>
+<td>170</td>
+<td>280</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Labor</td>
+<td>320</td>
+<td>240</td>
+<td>350</td>
+<td>400</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>Calculate total output by Industry</p></li>
+<li><p>Provide the Matrix of technical coefficients and labor coefficients for this Economy</p></li>
+<li><p>Assume that Final demand has shifted. There is a 30% increase in demand in Construction, but with a 10% decline in demand for services and Manufacturing. Estimate the changes expected in total ouput for all Sectors, as well as the changes in Labor Inputs.</p></li>
+</ul>
+</section>
+<section id="sec-part2" class="level2">
+<h2 class="anchored" data-anchor-id="sec-part2">Part II: MLE</h2>
+<p>Consider data from the American Time use Survey for 2019 <a href="atus_2019.dta">atus_2019.dta</a>. This data contains aggregates on various time use activities for 9K individuals. Because this is survey data, be mindful of the sampling weights. You can use either <code>wt06</code> or <code>wtfinal</code> as the sampling weight.</p>
+<ul>
+<li><p>At Levy, Household production activities are typically classified as</p>
+<ul>
+<li><code>Core</code>: Main activities taking care of the household</li>
+<li><code>Proc</code>: Procurement, shopping, and other activities related to the household production</li>
+<li><code>acare</code> and <code>ccare</code>: Activities related to the care of children and other adults in the household</li>
+</ul>
+<p>In the dataset, these variables contain information on hours spend on these activities per day.</p></li>
+<li><p>with this in mind, what is the average time spent on total household production activities per day? when weighted and when unweighted? why are they different?</p></li>
+<li><p>Estimate the average time spend on Total household production between weekends and weekdays (use variable <code>wkend_wkday</code>) Are they statistically different?</p></li>
+<li><p>Hours of Household production have a large share of zeros (about 11% in the data). Because of this, using a simple Linear model may not be appropriate. Instead estimate a Tobit model and Poisson model using individual and household characteristics (plus others of your choice). Discuss why you choose to control for these variables, and intepret the results.</p>
+<ul>
+<li>For the tobit model answer, is this a problem of corner solution or censoring? How would this affect the estimation of marginal effects?</li>
+</ul></li>
+</ul>
+</section>
+<section id="part-iii-inequality-gaps" class="level2">
+<h2 class="anchored" data-anchor-id="part-iii-inequality-gaps">Part III: Inequality Gaps</h2>
+<p>The GINI index is commonly used to measure income or wealth inequality. However, you could also use the GINI index to measure inequality in other variables.</p>
+<ul>
+<li><p>Produce a table that decomposes the GINI of total hours of household production by source. That is Core, Procurement, child care and adult care.</p></li>
+<li><p>Which one is the component with the greatest share of household production.</p></li>
+<li><p>Which component shows the greatest concentration?</p></li>
+<li><p>What is the greatest contributor to overall inequality?</p></li>
+</ul>
+</section>
+<section id="part-iv-explaining-gaps" class="level2">
+<h2 class="anchored" data-anchor-id="part-iv-explaining-gaps">Part IV: Explaining Gaps</h2>
+<ul>
+<li>Considering the methodology known as Oaxaca-Blinder decomposition. Using this methodology, analyze the gender gap on household production using a similar model specification as you did in Part II. Discuss the results.
+<ul>
+<li>Include the use of weights.</li>
+<li>For better understanding of the gaps, include summary statistics and model coefficients for the relevant regressions.</li>
+</ul></li>
+</ul>
+
+
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -429,38 +580,28 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    const typesetMath = (el) => {
-      if (window.MathJax) {
-        // MathJax Typeset
-        window.MathJax.typeset([el]);
-      } else if (window.katex) {
-        // KaTeX Render
-        var mathElements = el.getElementsByClassName("math");
-        var macros = [];
-        for (var i = 0; i < mathElements.length; i++) {
-          var texText = mathElements[i].firstChild;
-          if (mathElements[i].tagName == "SPAN") {
-            window.katex.render(texText.data, mathElements[i], {
-              displayMode: mathElements[i].classList.contains('display'),
-              throwOnError: false,
-              macros: macros,
-              fleqn: false
-            });
-          }
-        }
-      }
-    }
     if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
         }
-        typesetMath(container);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
         return container.innerHTML
       } else {
-        typesetMath(note);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -469,8 +610,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      typesetMath(note);
-      return note.innerHTML;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {

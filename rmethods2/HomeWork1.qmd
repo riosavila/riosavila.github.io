@@ -1,1 +1,64 @@
+---
+title: "Homework I"
+subtitle: "IO-MLE-Inequality-Gaps"
+author: Fernando Rios-Avila
+format:
+  html: default
+  pdf: default  
+execute:
+  freeze: true 
+---
 
+## Part I: IO tables
+
+Consider the following IO table for a hypothetical economy:
+
+|               | Agriculture | Manufacture | Services | Construction | Final Demand | Total Output |
+|-----------|-----------|-----------|-----------|-----------|-----------|-----------|
+| Agriculture   | 160         | 230           | 260      | 290          | 340          |              |
+| Manufacture | 210         | 190           | 450      | 170          | 340          |              |
+| Services      | 410         | 380           | 200      | 160          | 350          |              |
+| Construction  | 180         | 320           | 240      | 170          | 280          |              |
+| Labor         | 320         | 240           | 350      | 400          |              |              |
+
+-   Calculate total output by Industry
+
+-   Provide the Matrix of technical coefficients and labor coefficients for this Economy
+
+-   Assume that Final demand has shifted. There is a 30% increase in demand in Construction, but with a 10% decline in demand for services and Manufacturing. Estimate the changes expected in total ouput for all Sectors, as well as the changes in Labor Inputs.
+
+## Part II: MLE {#sec-part2}
+
+Consider data from the American Time use Survey for 2019 [atus_2019.dta](atus_2019.dta). This data contains aggregates on various time use activities for 9K individuals. Because this is survey data, be mindful of the sampling weights. You can use either `wt06` or `wtfinal` as the sampling weight.
+
+- At Levy, Household production activities are typically classified as 
+  - `Core`: Main activities taking care of the household
+  - `Proc`: Procurement, shopping, and other activities related to the household production
+  - `acare` and `ccare`: Activities related to the care of children and other adults in the household
+  
+  In the dataset, these variables contain information on hours spend on these activities per day.
+
+- with this in mind, what is the average time spent on total household production activities per day? when weighted and when unweighted? why are they different?
+- Estimate the average time spend on Total household production between weekends and weekdays (use variable `wkend_wkday`) Are they statistically different?
+
+- Hours of Household production have a large share of zeros (about 11% in the data). Because of this, using a simple Linear model may not be appropriate. Instead estimate a Tobit model and Poisson model using individual and household characteristics (plus others of your choice). Discuss why you choose to control for these variables, and intepret the results.
+  - For the tobit model answer, is this a problem of corner solution or censoring? How would this affect the estimation of marginal effects?
+
+## Part III: Inequality Gaps
+
+The GINI index is commonly used to measure income or wealth inequality. However, you could also use the GINI index to measure inequality in other variables. 
+
+- Produce a table that decomposes the GINI of total hours of household production by source. That is Core, Procurement, child care and adult care.
+
+- Which one is the component with the greatest share of household production.
+
+- Which component shows the greatest concentration?
+
+- What is the greatest contributor to overall inequality?
+
+
+## Part IV: Explaining Gaps
+
+- Considering the methodology known as Oaxaca-Blinder decomposition. Using this methodology, analyze the gender gap on household production using a similar model specification as you did in Part II. Discuss the results. 
+  - Include the use of weights.
+  - For better understanding of the gaps, include summary statistics and model coefficients for the relevant regressions.

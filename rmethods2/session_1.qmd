@@ -293,7 +293,9 @@ see [here](https://stats.oarc.ucla.edu/stata/faq/how-can-i-do-a-t-test-with-surv
 
 ## 
 
-This simple Economy can be represented as follows: $$
+This simple Economy can be represented as follows: 
+
+$$
 \begin{aligned}
 X_{11} &+ X_{12} &+ X_{13} &+ Y_{1}  &= X_{1} \\
 X_{21} &+ X_{22} &+ X_{23} &+ Y_{2} &= X_{2} \\
@@ -315,7 +317,9 @@ Y_1 &+ Y_2 &+ Y_3 &  &= Y
 \end{aligned}
 $$
 
-And from here we can get the technical coefficients: $$
+And from here we can get the technical coefficients: 
+
+$$
 \begin{aligned}
 a_{11} X_1 &+ a_{21} X_1 &+ a_{31} X_1 &+ \lambda_{1} X_1 &= X_1 \\
 a_{12} X_2 &+ a_{22} X_2 &+ a_{32} X_2 &+ \lambda_{2} X_2 &= X_2 \\
@@ -341,7 +345,9 @@ a_{31} X_1 &+ a_{32} X_2 &+ a_{33} X_3  &+ \delta_3 Y &= X_{3} \\
 \end{aligned} 
 $$
 
-Or into Matrix Form $$
+Or into Matrix Form 
+
+$$
 \begin{pmatrix}
 a_{11} & a_{12} & a_{13}  \\
 a_{21} & a_{22} & a_{23} \\

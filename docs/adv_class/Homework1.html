@@ -2,12 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.455">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Fernando Rios-Avila">
 
-<title>Econometrics MSC Levy – homework1</title>
+<title>Econometrics MSC Levy - Homework I</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -62,12 +63,42 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -94,7 +125,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../adv_class.html"> 
+    <a class="nav-link" href="../adv_class/index.html"> 
 <span class="menu-text">Adv Methods and Causal Effects</span></a>
   </li>  
   <li class="nav-item">
@@ -145,16 +176,105 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#part-i-ols-and-standard-errors" id="toc-part-i-ols-and-standard-errors" class="nav-link active" data-scroll-target="#part-i-ols-and-standard-errors">Part I: OLS and Standard errors</a></li>
+  <li><a href="#part-ii-model-selection-and-cross-validation" id="toc-part-ii-model-selection-and-cross-validation" class="nav-link" data-scroll-target="#part-ii-model-selection-and-cross-validation">Part II: Model selection and Cross validation</a></li>
+  <li><a href="#part-iii-non-parametric-models" id="toc-part-iii-non-parametric-models" class="nav-link" data-scroll-target="#part-iii-non-parametric-models">Part III: Non-parametric models</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="Homework1.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Homework I</h1>
+<p class="subtitle lead">OLS - SE - Non-parametric models</p>
+</div>
 
 
 
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Fernando Rios-Avila </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
 
 
+</header>
+
+
+<section id="part-i-ols-and-standard-errors" class="level2">
+<h2 class="anchored" data-anchor-id="part-i-ols-and-standard-errors">Part I: OLS and Standard errors</h2>
+<p>Consider the dataset <code>hhprice.dta</code>, available from <code>frause</code> repository. The dataset contains information on 10k house values with data on house characteristics and location.</p>
+<ol type="1">
+<li>Using data for all houses with information on latitude and longitude, estimate a log linear model on the determinants of TownHouse prices (<code>type_h==1</code>). Interpret the Results and discuss significance of the coefficients.</li>
+</ol>
+<p>Be mindful of using data with sufficient variation, specially if using categorical variables. (for example, if using categorical variables, avoid using groups with fewer than 10 observations).</p>
+<ol start="2" type="1">
+<li>Consider the code <a href="example_1.do">here</a>, adapt the code to estimate robust Standard errors and robust standard errors clustered by <code>postcode</code> for your model.
+<ul>
+<li>Is there any reason to believe errors are related to <code>postcode</code>?</li>
+<li>Does any of your conclusions (regarding significance) change when using clustered standard errors?</li>
+</ul></li>
+</ol>
+</section>
+<section id="part-ii-model-selection-and-cross-validation" class="level2">
+<h2 class="anchored" data-anchor-id="part-ii-model-selection-and-cross-validation">Part II: Model selection and Cross validation</h2>
+<p>As explained in class, some times models are selected based on their capability to make outsample predictions. This is what methods like Lasso and Ridge use to select among a myriad of possible models.</p>
+<p>One way to evaluate the predictive power of a model is to use cross validation.</p>
+<p>Using the same dataset as in Part I, but now consider two models: - The same one you propose in Part I - A model where all variables are interacted with each other (over parametrized model)</p>
+<ol type="1">
+<li><p>Report the number of parameters used, the goodness of fit (R2 and adjusted R2) of the models, and comment on these results.</p></li>
+<li><p>Implement a simple one round 5-fold Crossvalidation procedure to evaluate the predictive power of the two models.</p>
+<p>Process:</p>
+<ul>
+<li>Split the data into 5 random groups of equal size</li>
+<li>Using the first 4 groups, estimate the two models, and predict the values for the 5th group</li>
+<li>Repeat the process for all possible combinations of 4 groups (there are 5 possible combinations)</li>
+<li>For each model, calculate the MSE (mean squared error) of the predictions.</li>
+</ul></li>
+</ol>
+<p>The MSE is estimated as:</p>
+<p><span class="math display">\[MSE = \frac{1}{n}\sum_{i=1}^n (y_i - \hat{y}_i)^2\]</span></p>
+<p>where <span class="math inline">\(y_i\)</span> is the actual value of the dependent variable, and <span class="math inline">\(\hat{y}_i\)</span> is the predicted value of the dependent variable using the different models.</p>
+<ul>
+<li>What do you conclude?</li>
+<li>Repeat the process again, and see if your conclusions change.</li>
+</ul>
+</section>
+<section id="part-iii-non-parametric-models" class="level2">
+<h2 class="anchored" data-anchor-id="part-iii-non-parametric-models">Part III: Non-parametric models</h2>
+<ul>
+<li><p>In real-estate, Location of a house is a very important determinant of house prices. One way to measure this location effect is to use the distance to the city center, as the center may offer the most amenities and services.</p></li>
+<li><p>Consider your model from Part I. If you have not done so, add the distance (log distance) to the city center as a regressor.</p></li>
+<li><p>Following the code <a href="example_1.do">here</a>, adapt it to estimate <a href="https://www.jstor.org/stable/1912705">Robinson (1988)</a> Root-N-Consistent Semiparametric regression</p>
+<p>The model:</p></li>
+</ul>
+<p><span class="math display">\[lprice = x\beta + \theta (distance) + e\]</span></p>
+<ul>
+<li><p>Compare the results of other coefficients with the OLS model. What do you conclude? Does modeling distance non-parametrically matter?</p></li>
+<li><p>Based on your results, Is the effect of distance on house prices linear?</p></li>
+<li><p>A second way to explore the role of distance on housing price-determination is by looking at the model coefficients across houses at different distances from the city center.</p></li>
+<li><p>Classify houses into 5 groups based on their distance to the city center, and estimate the model for each group. (this is a rough approach to the Smooth varying coefficient model)</p>
+<ul>
+<li>What do you conclude? Does distance affect how other amenities impact house prices?</li>
+</ul></li>
+</ul>
+
+
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -429,38 +549,28 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    const typesetMath = (el) => {
-      if (window.MathJax) {
-        // MathJax Typeset
-        window.MathJax.typeset([el]);
-      } else if (window.katex) {
-        // KaTeX Render
-        var mathElements = el.getElementsByClassName("math");
-        var macros = [];
-        for (var i = 0; i < mathElements.length; i++) {
-          var texText = mathElements[i].firstChild;
-          if (mathElements[i].tagName == "SPAN") {
-            window.katex.render(texText.data, mathElements[i], {
-              displayMode: mathElements[i].classList.contains('display'),
-              throwOnError: false,
-              macros: macros,
-              fleqn: false
-            });
-          }
-        }
-      }
-    }
     if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
         }
-        typesetMath(container);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
         return container.innerHTML
       } else {
-        typesetMath(note);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -469,8 +579,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      typesetMath(note);
-      return note.innerHTML;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
