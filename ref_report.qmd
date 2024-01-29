@@ -1,0 +1,46 @@
+---
+title: "Referee Report for Moving up the Social Ladder"
+format: html
+---
+
+1. Aim to analyze Wage inequality gap between natives and imigrants.
+Show effects excluding second gen imigrants, also show effects across distribution (may not be same)
+
+describe the legal framework for imigration. For Immigrants to be identified or require identification, something else is needed
+How are they identified, is it legal to work, do they require permits, ids?
+
+- Still not looking at wage evolition, but wages for two groups in different stages of migration status
+- Perhaps looking longterm wages>
+
+- what factors cause gaps?
+   discrimination? segregation
+
+   WHile Discrimnation is on itself important, may be just as important focusing or discussing segregation and job opportunities.
+
+- Imigrants. vs secon gen Migrants
+   - All around same time? Can we make sure this is the case? (RW analysis so both groups are similar)
+   - 
+   Perhaps change on description. 
+
+
+   - Other sources of problems Selection (heckman selection) and access to markets and sectors
+   (Prob of Working? Prob of Working on High paying sectors?)
+
+- Important point to consider. X heterogneiey. Namely, Men women (done) education (high vs low) Not all groups would be discriminated
+
+- Y heterogeneity important because tells us about gap distribution (widining or not)
+
+- RIF REGRESSIOn can also be done for heterogeneity (over option)
+
+- Controlling for Fixed effects may be a problem. they partially address it using normalization
+
+- Segregation across sectors and industries may be imporant to analayze
+
+- Are you interested in wage gaps accounting for Firm Heterogeneity? The way its done right now, simpley looks into checking if there is any residual variation in X that could be related to changes in the distribution of the outcome.
+Probably not what you want
+
+- may be more interesting to control for market structure (Reweighted)
+
+- Perhaps evidence for wage distribution for dev contries too
+
+for regression, use over ref
