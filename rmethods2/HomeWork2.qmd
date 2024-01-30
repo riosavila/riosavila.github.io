@@ -1,1 +1,102 @@
+---
+title: "Homework II"
+subtitle: "Significance Testing, Imputation, and Simulations"
+author: Fernando Rios-Avila
+format:
+  html: default
+  pdf: default  
+execute:
+  freeze: true 
+---
+
+## Instructions
+
+Submit a document containing your answer to the following question as well as a do file with the code
+you used in `Stata` to produce your answers. Your program needs to work as submitted and produce the answers that you report for full credit.
+
+## Part I: Significance Testing
+
+As discuss in class, Testing for Statistical testing is very important, but may lead to incorrect conclusions if not done properly. Specifically, it may lead to incorrectly rejecting the Null hypothesis too often due to not controling for multiple testing. 
+
+In this part of the homework you will need to use a simulation to show:
+
+- How the probability of rejecting the null hypothesis increases as the number of tests increases.
+- How the Benferroni correction can be used to control for multiple testing.
+- How joint testing can be used to control for multiple testing.
+
+#### Tasks
+
+Consider the file [`hw2.do`](hw2.do). This file has a template example of a program that simulates data for N individuals and K variables. Each variable is a random draw from a normal distribution with mean 0 and standard deviation 1. And makes simple tasks with the data.
+
+Modify this program to do the following:
+
+1. Test the null hypothesis that the mean of each variable is equal to zero using a significance level of 10%. And indicate if you reject the null for any of the K variables.
+
+2. Now repeat the test in 1, but using a modified significance level of 10%/K (benferroni correction). Indicate if you reject the null for any of the K variables. 
+      
+3. Now make a joint test that the mean of all K variables is equal to zero, using a 10% significance level. 
+
+Repeat the above tasks 1000 times and report the proportion of times you reject the null hypothesis in each case (summary tables). Explain your results.
+
+For the parameters K and N use the following combinations: 
+
+- K = 2, N = 20
+- K = 5, N = 20
+- K = 2, N = 100
+- K = 5, N = 100
+
+## Part II: Imputation and Statistical Matching
+
+Imputation and Statistical matching are two methods that allow us to deal with missing data. One of the main differences between both methods is that Statistical matching is typically used to "match" data from two different sources, while imputation is used to fill in missing data in a single data set.
+
+In this part of the homework you will need to use imputation and statistical matching to deal with missing data.
+
+#### Considerations
+
+- The file [`cps_imput_miss.dta`](cps_imput_miss.dta) contains household level data from the Current Population Survey (CPS). This sample is restricted to couple-households with or without children (but younger than 15), and no other kind of family members. 
+
+- These families only source of income are wages and salaries, and both husband and wife work. 
+
+- The dataset is structured so that variables ending in `_1` are for the husband, and variables ending in `_2` are for the wife. In addition there are few variables that correspond to household level variables (number of children for example)
+
+- The variable `cutoff`  indicates the poverty line for the household.
+ 
+#### The problem
+
+The problem on this dataset is that in 50% of the households, husband's wages are missing. And we are interested in estimating the poverty rate and for the sample. 
+
+#### Tasks
+
+- Impute the missing wages for husbands, and estimate the poverty rate for the sample.
+
+- To do this, write a report that explains the steps you took to impute the missing wages, including model specification. You can use  imputation or statistical matching methods. 
+
+- In addition, include a table with poverty rates for the whole sample, by husband education level, and race. Provide a brief explanation of the results. Who is more likely to be poor?
+
+> Note: A do-file with the code to generate the imputation and summary statistics should be provided.
+
+
+## Part III: Micro-Simulations
+
+Micro-simulations are a useful tool to study the effects of policy changes. In this part of the homework you will need to use micro-simulations to study the effects of a Employer of Last Resort (ELR) program on the labor market of a country.
+
+#### Considerations
+
+- The country has decided to lunch a ELR program. The program will guarantee a job to all anyone who applies for it, as long as there is budget for it. 
+- To be eligible for the program, a person must be between 18 and 65 years old, and not be employed.
+
+- To attract workers with different skill levels, the program will offer three different types of jobs, based on education of the applicants, with wages as follows:
+
+| Education | Wage |
+|-----------|------|
+| High School | 10 |
+| Some College | 15 |
+| College | 20 |
+
+- All jobs are full time (40 hours per week), full year (48 weeks per year). 
+- The order at which people apply for the program is based on their likelihood of being employed. That is, the first person to apply is the one with the highest probability of being employed, and the last person to apply is the one with the lowest probability of being employed.
+
+#### Tasks
+
+- Estimate the impact of the program. 
 

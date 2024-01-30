@@ -61,4 +61,4 @@ The GINI index is commonly used to measure income or wealth inequality. However,
 
 - Considering the methodology known as Oaxaca-Blinder decomposition. Using this methodology, analyze the gender gap on household production using a similar model specification as you did in Part II. Discuss the results. 
   - Include the use of weights.
-  - For better understanding of the gaps, include summary statistics and model coefficients for the relevant regressions.
+  - For better understanding of the gaps, include summary statistics and model coefficients for the relevant regressions and variables.
