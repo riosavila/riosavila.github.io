@@ -1,0 +1,40 @@
+---
+title: "Homework II"
+subtitle: "[C|U]Quantile Regressions and MLE"
+author: Fernando Rios-Avila
+format:
+  html: default
+  pdf: default  
+execute:
+  freeze: true 
+---
+
+## Part I: Conditional Quantile Regressions
+
+Consider the dataset [`atus_2020_22.dta`](atus_2020_22.dta). This dataset is a subsample of the American Time Use survey for the years 2020 through 2022. The dataset contains information on time dedicated by individuals 15 years old or older to household production activities. It also contains information on the average MET value of their activities during the day (x100) (`avgmet`).  So a person with an `avgmet` value of 100 is spending the same ammount of energy as if they were sitting down all day.
+
+- Propose a model to analyze the determinants of AvgMet activities, justify the variables you include in the model.
+- Estimate the model using Linear Regression, and for Conditional quanttiles at 0.1, 0.25, 0.5, 0.75, and 0.9. Interpret the results of the variables you consider most important or interesting. 
+
+  
+## Part II: Unconditional Quantile Regressions
+
+Consider the dataset `hprice2.dta`, available with `frause`. Propose a model to analyze the determinants of housing prices, making sure you also include data on `crime` and `nox` (nitrogen oxide concentration). 
+
+- Estimate unconditional quantile regressions at 0.1, 0.25, 0.5, 0.75, and 0.9. And interpret the results of the variables you consider most important.
+
+- Say that there is a policy that promises to reduce average crime by 50%, and average NOX by 50%. How would this affect the distribution of housing prices? 
+
+## Part III: Maximum Likelihood Estimation
+
+Maximum likelihood estimation is a method to estimate the parameters of a model by maximizing the likelihood of the data given the parameters. 
+
+You have been provided with a do-file `mypoisson.do` that estimates the parameters of a standard Poisson model, which is valid when data is fully observed. However, lets assume that data you have access too is censored. That is, 
+
+    - You observe the exact number of events if more than 3 occured. If they are less than that, they are recoded as 3.
+
+- Explain how would you modify the likelihood function to account for this censoring.
+- Modify the do-file `mypoisson.do` to account for this censoring, and estimate the parameters of the model.
+- Using that data from `mypoisson.dta` estimate the parameters of the model using the modified do-file. 
+
+

@@ -21,25 +21,25 @@ As the course progresses, I will add links to the syllabus, assignments, and oth
 
 Slides: [html](session_1.qmd) and [pdf](session_1.pdf)
 
-Readings: [link]
+Readings: [link](https://github.com/riosavila/rmethods2/tree/main/msession_1)
 
 **Session 2: MLE & Limited Dependent Variables** 
 
 Slides: [html](session_2.qmd) and [pdf](session_2.pdf)
 
-Readings: [link]
+Readings: [link](https://github.com/riosavila/rmethods2/tree/main/msession_2)
 
 **Session 3: Measuring Inequality** 
 
 Slides: [html](session_3.qmd) and [pdf](session_3.pdf)
 
-Readings: [link]
+Readings: [link](https://github.com/riosavila/rmethods2/tree/main/msession_3)
 
 **Session 4: Analyzing Gaps** 
 
 Slides: [html](session_4.qmd) and [pdf](session_4.pdf)
 
-Readings: [link]
+Readings: [link](https://github.com/riosavila/rmethods2/tree/main/msession_4)
 
 ## Homework 1
 
@@ -50,19 +50,19 @@ The first homework is due on **TBD**. You can find the instructions [here](HomeW
 
 Slides: [html](session_5.qmd) and [pdf](session_5.pdf)
 
-Readings: [link]
+Readings: [link](https://github.com/riosavila/rmethods2/tree/main/msession_5)
 
 **Session 6: Imputation: Statistical Matching** 
 
 Slides: [html](session_6.qmd) and [pdf](session_6.pdf)
 
-Readings: [link]
+Readings: [link](https://github.com/riosavila/rmethods2/tree/main/msession_6)
 
-**Session 7: Session 7: Micro-Simulations, and Monte Carlo Methods** 
+**Session 7: Micro-Simulations, and Monte Carlo Methods** 
 
 Slides: [html](session_7.qmd) and [pdf](session_7.pdf)
 
-Readings: [link]
+Readings: [link](https://github.com/riosavila/rmethods2/tree/main/msession_7)
 
 ## Homework 2
 
