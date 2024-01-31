@@ -10,6 +10,8 @@ format:
     code-fold: true
     echo: true
     css: styles.css 
+execute: 
+  freeze: auto
 ---
 
 ## Why are we here?
@@ -28,7 +30,7 @@ format:
 
 -   Thus, we will do much more use of empirical tools and software than we did in Research methods I.
 
--   We will have 7 Sessions, 2 homeworks and a final project.
+-   We will have 7 Sessions, and 2 homeworks .
 
 # Surveys: What are they?
 

@@ -11,6 +11,8 @@ format:
     echo: true
     css: styles.css 
     highlight-style: github
+execute: 
+  freeze: auto
 ---
 
 # Measuring Inequality
@@ -289,12 +291,14 @@ $$Gini(y) = \frac{2}{\mu_y} Cov(y_p,p)$$
 ```{stata}
 *| echo: true
 *| code-fold: false
+capture:ssc install sgini
 sgini wage 
 ```
 
 ```{stata}
 *| echo: true
 *| code-fold: false
+capture:ssc install ineqdeco
 ineqdeco wage [pw=wt]
 ```
 
@@ -423,7 +427,7 @@ $$
 *| code-fold: false
 *| classes: larger
 frause limew1972.dta, clear
-
+capture: ssc install ineqfac
 ineqfac basemi inchomewealth incnonhomewealth govtr_n pubcon tx_n valhp [aw=hhwgt]
 ```
 
@@ -515,6 +519,8 @@ $$Gini_{bw} = \frac{2}{\mu_y} Cov(\mu_i,\bar F_i)$$
 *| echo: true
 *| code-fold: false
 *| classes: larger
+capture:ssc install anogi
+capture:ssc install moremata
 anogi limew [aw= hhwgt ], by(educl) detail
 ```
 

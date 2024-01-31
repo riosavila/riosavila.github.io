@@ -11,6 +11,8 @@ format:
     echo: true
     css: styles.css 
     highlight-style: github
+execute: 
+  freeze: auto    
 ---
 
 ## Introduction

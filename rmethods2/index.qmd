@@ -41,6 +41,11 @@ Slides: [html](session_4.qmd) and [pdf](session_4.pdf)
 
 Readings: [link]
 
+## Homework 1
+
+The first homework is due on **TBD**. You can find the instructions [here](HomeWork1.qmd).
+
+
 **Session 5: Significance and Missing Data** 
 
 Slides: [html](session_5.qmd) and [pdf](session_5.pdf)
@@ -50,9 +55,15 @@ Readings: [link]
 **Session 6: Imputation: Statistical Matching** 
 
 Slides: [html](session_6.qmd) and [pdf](session_6.pdf)
+
 Readings: [link]
 
 **Session 7: Session 7: Micro-Simulations, and Monte Carlo Methods** 
 
 Slides: [html](session_7.qmd) and [pdf](session_7.pdf)
+
 Readings: [link]
+
+## Homework 2
+
+The Second homework is due on **TBD**. You can find the instructions [here](HomeWork2.qmd).
