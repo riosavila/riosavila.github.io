@@ -386,7 +386,7 @@ rifhdreg wage i.female [pw=wt], rif(gini) over(female)
 ## Decompose by sources
 
 - Some inequality indices are well suited to decompose inequality by sources.
-  - Variance Decomposition (Sorrocks 1998)
+  - Variance Decomposition (Shorrocks 1982)
   - Gini Decomposition by source (Lerman and Yitzhaki 1985)
 
 - The idea is assess inequality (or concentration) of each source of income, and then combine them to obtain their contribution to overall inequality.
@@ -459,7 +459,7 @@ Gini(y)&= \sum R_k \times G_k \times sh_k
 $$ 
 
 - $R_k$ = Gini Correlation; $G_k$ = Gini of source $k$; $sh_k$ = share of source $k$ in total income.
-- $R_k\timex G_k$ is the Concentration Index of $Y_k$
+- $R_k\time G_k$ is the Concentration Index of $Y_k$
 
 ## Example `Stata` {.scrollable}
 
@@ -525,4 +525,4 @@ anogi limew [aw= hhwgt ], by(educl) detail
 ```
 
 # Thats all for today...
-Until next week!-> HW1
+Until next week!
