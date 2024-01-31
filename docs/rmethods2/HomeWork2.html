@@ -2,12 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.455">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Fernando Rios-Avila">
 
-<title>Econometrics MSC Levy – homework2</title>
+<title>Econometrics MSC Levy - Homework II</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -62,6 +63,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -94,7 +96,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../adv_class.html"> 
+    <a class="nav-link" href="../adv_class/index.html"> 
 <span class="menu-text">Adv Methods and Causal Effects</span></a>
   </li>  
   <li class="nav-item">
@@ -145,16 +147,168 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#instructions" id="toc-instructions" class="nav-link active" data-scroll-target="#instructions">Instructions</a></li>
+  <li><a href="#part-i-significance-testing" id="toc-part-i-significance-testing" class="nav-link" data-scroll-target="#part-i-significance-testing">Part I: Significance Testing</a></li>
+  <li><a href="#part-ii-imputation-and-statistical-matching" id="toc-part-ii-imputation-and-statistical-matching" class="nav-link" data-scroll-target="#part-ii-imputation-and-statistical-matching">Part II: Imputation and Statistical Matching</a></li>
+  <li><a href="#part-iii-micro-simulations" id="toc-part-iii-micro-simulations" class="nav-link" data-scroll-target="#part-iii-micro-simulations">Part III: Micro-Simulations</a>
+  <ul class="collapse">
+  <li><a href="#remarks" id="toc-remarks" class="nav-link" data-scroll-target="#remarks">Remarks</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="HomeWork2.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Homework II</h1>
+<p class="subtitle lead">Significance Testing, Imputation, and Simulations</p>
+</div>
 
 
 
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Fernando Rios-Avila </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
 
 
+</header>
+
+
+<section id="instructions" class="level2">
+<h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
+<p>Submit a document containing your answers to the following questions and a do file with the code used in <code>Stata</code> to produce the answers. Ensure your program works as submitted and produces the reported answers for full credit.</p>
+</section>
+<section id="part-i-significance-testing" class="level2">
+<h2 class="anchored" data-anchor-id="part-i-significance-testing">Part I: Significance Testing</h2>
+<p>In this section, use simulation to demonstrate: - How rejecting the null hypothesis probability increases with the number of tests. - Benferroni correction application to control for multiple testing. - Joint testing usage to control for multiple testing.</p>
+<section id="tasks" class="level4">
+<h4 class="anchored" data-anchor-id="tasks">Tasks</h4>
+<p>Refer to the file <a href="hw2.do"><code>hw2.do</code></a> for a template program simulating data for N individuals and K variables. Modify this program to:</p>
+<ol type="1">
+<li>Test the null hypothesis that the mean of each variable is zero with a significance level of 10%. Indicate if you reject the null for any variable.</li>
+<li>Repeat the test in 1 using a modified significance level of 10%/K (Benferroni correction). Indicate if you reject the null for any variable.</li>
+<li>Conduct a joint test that the mean of all K variables is zero, using a 10% significance level.</li>
+</ol>
+<p>Repeat the above tasks 1000 times and report the proportion of times you reject the null hypothesis in each case (summary tables). Provide an explanation for your results.</p>
+<p>For the parameters K and N, use the following combinations: - K = 2, N = 20 - K = 5, N = 20 - K = 2, N = 100 - K = 5, N = 100</p>
+</section>
+</section>
+<section id="part-ii-imputation-and-statistical-matching" class="level2">
+<h2 class="anchored" data-anchor-id="part-ii-imputation-and-statistical-matching">Part II: Imputation and Statistical Matching</h2>
+<p>Imputation and Statistical Matching are methods for handling missing data. Use any of these methods on the dataset <a href="cps_imput_miss.dta"><code>cps_imput_miss.dta</code></a>, to address the problem of missing wages.</p>
+<p>The dataset focuses on couple-households with or without children (below 15 years old) and no other family members. Their only source of income comes from wages.</p>
+<p>The dataset includes variables ending in <code>_1</code> for the husband and <code>_2</code> for the wife. Household-level variables and the variable <code>cutoff</code> indicating the poverty line are also provided</p>
+<section id="the-problem" class="level4">
+<h4 class="anchored" data-anchor-id="the-problem">The problem</h4>
+<p>The problem on this dataset is that in 50% of the households, husband’s wages are missing. And we are interested in estimating the poverty rate and for the sample.</p>
+</section>
+<section id="tasks-1" class="level4">
+<h4 class="anchored" data-anchor-id="tasks-1">Tasks</h4>
+<ul>
+<li>Impute missing wages for husbands and estimate the poverty rate for the sample.</li>
+<li></li>
+<li>Write a report explaining the steps you have taken for imputation, including model specification. Provide a table with poverty rates for the entire sample, by husband education level, and race. Offer a brief explanation of the results.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Note: Include a do-file with the code for imputation and summary statistics.</p>
+</blockquote>
+</section>
+</section>
+<section id="part-iii-micro-simulations" class="level2">
+<h2 class="anchored" data-anchor-id="part-iii-micro-simulations">Part III: Micro-Simulations</h2>
+<p>Micro-simulations are a valuable tool for studying the effects of policy changes. In this section, use micro-simulations to explore the impact of an Employer of Last Resort (ELR) program on the labor market of Tanga-Mandapio, a small Pacific country similar to the United States.</p>
+<section id="considerations" class="level4">
+<h4 class="anchored" data-anchor-id="considerations">Considerations</h4>
+<ul>
+<li>The ELR program guarantees a job to anyone between 18 and 65 years old who is not employed.</li>
+<li>The program offers different wages based on education levels, based on the following schedule:</li>
+</ul>
+<table class="table">
+<caption>Wages per hour offered by the ELR program</caption>
+<thead>
+<tr class="header">
+<th>Education</th>
+<th>Wage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Less than High School</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td>High School</td>
+<td>15</td>
+</tr>
+<tr class="odd">
+<td>Some College</td>
+<td>20</td>
+</tr>
+<tr class="even">
+<td>College</td>
+<td>25</td>
+</tr>
+<tr class="odd">
+<td>Graduate School</td>
+<td>30</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>All jobs offered by the program are full time (40 hours per week), full year (48 weeks per year).</p></li>
+<li><p>There is a budget of 100 Million dollars per year for the program.</p></li>
+</ul>
+</section>
+<section id="tasks-2" class="level4">
+<h4 class="anchored" data-anchor-id="tasks-2">Tasks</h4>
+<p>Use the following steps to simulate the impact of the ELR program:</p>
+<ul>
+<li>Determine eligibility for the ELR program.</li>
+<li>Estimate a logit model to predict employment probability considering only those employed and those who are eligible for the program.</li>
+<li>Use model predictions to assign jobs until the budget is exhausted, prioritizing those with higher employment probability.</li>
+<li>Recalculate total household income accounting for new jobs.</li>
+</ul>
+<p>Write a report explaining the simulation steps, including model specification, and discuss the program’s impact:</p>
+<ul>
+<li>How many people are eligible for the program by education level?</li>
+<li>What would the the budget requirement be to guarantee a job to all unemployed individuals.</li>
+<li>Jobs created, impact on the unemployment rate by education.</li>
+<li>Impact on poverty and inequality using <code>cutoff</code> and Income Percapita (<code>hhincome</code>/<code>hhsize</code>).</li>
+</ul>
+<p>Provide summary statistics before and after the simulation by gender and race.</p>
+<blockquote class="blockquote">
+<p>Note: Include a do-file with the code for the simulation and summary statistics.</p>
+</blockquote>
+</section>
+<section id="remarks" class="level3">
+<h3 class="anchored" data-anchor-id="remarks">Remarks</h3>
+<ul>
+<li>The data file is <a href="tanga_mandapio.dta"><code>tanga_mandapio</code></a>. Assume each person has a weight of 1.</li>
+<li><code>hhincome</code> is total household income, and <code>incwage</code> is individual wage income.</li>
+<li><code>cutoff</code> is the poverty line for a household.</li>
+<li><code>educ_g</code> is the aggregated education level.</li>
+<li>Explore the dataset for a better understanding of available variables.</li>
+</ul>
+
+
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -429,38 +583,28 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    const typesetMath = (el) => {
-      if (window.MathJax) {
-        // MathJax Typeset
-        window.MathJax.typeset([el]);
-      } else if (window.katex) {
-        // KaTeX Render
-        var mathElements = el.getElementsByClassName("math");
-        var macros = [];
-        for (var i = 0; i < mathElements.length; i++) {
-          var texText = mathElements[i].firstChild;
-          if (mathElements[i].tagName == "SPAN") {
-            window.katex.render(texText.data, mathElements[i], {
-              displayMode: mathElements[i].classList.contains('display'),
-              throwOnError: false,
-              macros: macros,
-              fleqn: false
-            });
-          }
-        }
-      }
-    }
     if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
         }
-        typesetMath(container);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
         return container.innerHTML
       } else {
-        typesetMath(note);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -469,8 +613,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      typesetMath(note);
-      return note.innerHTML;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
