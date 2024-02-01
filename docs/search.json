@@ -1019,98 +1019,168 @@
     "href": "mathref/math_2.html",
     "title": "Math Refresher: Basic Linear Algebra",
     "section": "",
-    "text": "A vector is a list of numbers. We can think of a vector as a point in space, or as an arrow pointing from the origin to that point. For example, the vector\n\\[\\vec{v} = \\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix}\\] is a vector in \\(\\mathbb{R}^3\\) (three-dimensional space) that points from the origin to the point \\((1, 2, 3)\\).\nWe can add vectors together by adding their corresponding elements. For example,\n\\[\\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix} + \\begin{bmatrix} 4 \\\\ 5 \\\\ 6 \\end{bmatrix} = \\begin{bmatrix} 5 \\\\ 7 \\\\ 9 \\end{bmatrix}\\]\nWe can also multiply a vector by a scalar (a single number) by multiplying each element of the vector by that number. For example,\n\\[2 \\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix} = \\begin{bmatrix} 2 \\\\ 4 \\\\ 6 \\end{bmatrix}\n\\]"
+    "text": "A vector is a list of numbers. We can think of a vector as a point in space, or as an arrow pointing from the origin to that point. For example, the vector\n\\[\\vec{v} = \\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix}\\] is a vector in \\(\\mathbb{R}^3\\) (three-dimensional space) that points from the origin to the point \\((1, 2, 3)\\).\nWe can add vectors together by adding their corresponding elements. For example,\n\\[\\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix} + \\begin{bmatrix} 4 \\\\ 5 \\\\ 6 \\end{bmatrix} = \\begin{bmatrix} 5 \\\\ 7 \\\\ 9 \\end{bmatrix}\\]\nWe can also multiply a vector by a scalar (a single number) by multiplying each element of the vector by that number. For example,\n\\[2 \\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix} = \\begin{bmatrix} 2 \\\\ 4 \\\\ 6 \\end{bmatrix}\n\\]",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher: Basic Linear Algebra"
+    ]
   },
   {
     "objectID": "mathref/math_2.html#vectors",
     "href": "mathref/math_2.html#vectors",
     "title": "Math Refresher: Basic Linear Algebra",
     "section": "",
-    "text": "A vector is a list of numbers. We can think of a vector as a point in space, or as an arrow pointing from the origin to that point. For example, the vector\n\\[\\vec{v} = \\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix}\\] is a vector in \\(\\mathbb{R}^3\\) (three-dimensional space) that points from the origin to the point \\((1, 2, 3)\\).\nWe can add vectors together by adding their corresponding elements. For example,\n\\[\\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix} + \\begin{bmatrix} 4 \\\\ 5 \\\\ 6 \\end{bmatrix} = \\begin{bmatrix} 5 \\\\ 7 \\\\ 9 \\end{bmatrix}\\]\nWe can also multiply a vector by a scalar (a single number) by multiplying each element of the vector by that number. For example,\n\\[2 \\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix} = \\begin{bmatrix} 2 \\\\ 4 \\\\ 6 \\end{bmatrix}\n\\]"
+    "text": "A vector is a list of numbers. We can think of a vector as a point in space, or as an arrow pointing from the origin to that point. For example, the vector\n\\[\\vec{v} = \\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix}\\] is a vector in \\(\\mathbb{R}^3\\) (three-dimensional space) that points from the origin to the point \\((1, 2, 3)\\).\nWe can add vectors together by adding their corresponding elements. For example,\n\\[\\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix} + \\begin{bmatrix} 4 \\\\ 5 \\\\ 6 \\end{bmatrix} = \\begin{bmatrix} 5 \\\\ 7 \\\\ 9 \\end{bmatrix}\\]\nWe can also multiply a vector by a scalar (a single number) by multiplying each element of the vector by that number. For example,\n\\[2 \\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix} = \\begin{bmatrix} 2 \\\\ 4 \\\\ 6 \\end{bmatrix}\n\\]",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher: Basic Linear Algebra"
+    ]
   },
   {
     "objectID": "mathref/math_2.html#matrices",
     "href": "mathref/math_2.html#matrices",
     "title": "Math Refresher: Basic Linear Algebra",
     "section": "Matrices",
-    "text": "Matrices\nA matrix is a two-dimensional array of numbers. We can think of a matrix as a list of vectors. For example, the matrix:\n\\[A = \\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{bmatrix} =\n\\begin{bmatrix} 1 \\\\ 4  \\end{bmatrix},\n\\begin{bmatrix} 2 \\\\ 5  \\end{bmatrix},\n\\begin{bmatrix} 3 \\\\ 6  \\end{bmatrix} \\]\nis a matrix that concatenates 3 \\(\\mathbb{R}^2\\) vectors together.\nMatrices can have different dimensions. For example, the matrix:\n\\[B = \\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\\\ 7 & 8 & 9 \\end{bmatrix}\\]\nis a square matrix that concatenates 3 \\(\\mathbb{R}^3\\) vectors together."
+    "text": "Matrices\nA matrix is a two-dimensional array of numbers. We can think of a matrix as a list of vectors. For example, the matrix:\n\\[A = \\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{bmatrix} =\n\\begin{bmatrix} 1 \\\\ 4  \\end{bmatrix},\n\\begin{bmatrix} 2 \\\\ 5  \\end{bmatrix},\n\\begin{bmatrix} 3 \\\\ 6  \\end{bmatrix} \\]\nis a matrix that concatenates 3 \\(\\mathbb{R}^2\\) vectors together.\nMatrices can have different dimensions. For example, the matrix:\n\\[B = \\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\\\ 7 & 8 & 9 \\end{bmatrix}\\]\nis a square matrix that concatenates 3 \\(\\mathbb{R}^3\\) vectors together.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher: Basic Linear Algebra"
+    ]
   },
   {
     "objectID": "mathref/math_2.html#matrix-dimensions",
     "href": "mathref/math_2.html#matrix-dimensions",
     "title": "Math Refresher: Basic Linear Algebra",
     "section": "Matrix Dimensions",
-    "text": "Matrix Dimensions\nMatrices are often denoted by their dimensions. For example, the matrix \\(A\\) above is a \\(2 \\times 3\\) matrix, because it has 2 rows and 3 columns. The matrix \\(B\\) above is a \\(3 \\times 3\\) matrix, because it has 3 rows and 3 columns.\nIn general, we can denote a matrix \\(M\\) with \\(r\\) rows and \\(c\\) columns as an \\(r \\times c\\) matrix. For Notation, I will usually refer to this like \\(M_{r \\times c}\\). In this case we have \\(A_{2 \\times 3}\\) and \\(B_{3 \\times 3}\\).\nWe can denote the element in the \\(i\\)th row and \\(j\\)th column of \\(M\\) as \\(M_{ij}\\). For example, the element in the 2nd row and 3rd column of \\(B\\) is \\(B_{23} = 6\\)."
+    "text": "Matrix Dimensions\nMatrices are often denoted by their dimensions. For example, the matrix \\(A\\) above is a \\(2 \\times 3\\) matrix, because it has 2 rows and 3 columns. The matrix \\(B\\) above is a \\(3 \\times 3\\) matrix, because it has 3 rows and 3 columns.\nIn general, we can denote a matrix \\(M\\) with \\(r\\) rows and \\(c\\) columns as an \\(r \\times c\\) matrix. For Notation, I will usually refer to this like \\(M_{r \\times c}\\). In this case we have \\(A_{2 \\times 3}\\) and \\(B_{3 \\times 3}\\).\nWe can denote the element in the \\(i\\)th row and \\(j\\)th column of \\(M\\) as \\(M_{ij}\\). For example, the element in the 2nd row and 3rd column of \\(B\\) is \\(B_{23} = 6\\).",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher: Basic Linear Algebra"
+    ]
   },
   {
     "objectID": "mathref/math_2.html#special-matrices",
     "href": "mathref/math_2.html#special-matrices",
     "title": "Math Refresher: Basic Linear Algebra",
     "section": "Special Matrices",
-    "text": "Special Matrices\nThere are a few special matrices that we will use often. The zero matrix is a matrix where all of the elements are 0. For example, the zero matrix with 2 rows and 3 columns is:\n\\[Zero=\\begin{bmatrix} 0 & 0 & 0 \\\\ 0 & 0 & 0 \\end{bmatrix}\\]\nA square matrix is a matrix where the number of rows is equal to the number of columns. For example, \\(B\\) is a square matrix.\nThe identity matrix is a square matrix where all of the elements are 0, except for the elements along the diagonal, which are 1. For example, the identity matrix with 3 rows and 3 columns is:\n\\[I_{3}=\\begin{bmatrix} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\end{bmatrix}\\]\nFor simplicitly, we will use the subscript to denote the size of the identity matrix. For example, \\(I_{3}\\) is a 3x3 identity matrix, and \\(I_{5}\\) is a 5x5 identity matrix.\nA \\(1\\times c\\) matrix is called a row vector. Wheras a \\(r \\times 1\\) matrix is called a column vector.\nA diagonal matrix is a square matrix where all of the elements off the diagonal are 0. For example, the following matrix is a diagonal matrix:\n\\[\\begin{bmatrix} 1 & 0 & 0 \\\\ 0 & 2 & 0 \\\\ 0 & 0 & 3 \\end{bmatrix}\\]\nThe identify matrix is a special case of a diagonal matrix."
+    "text": "Special Matrices\nThere are a few special matrices that we will use often. The zero matrix is a matrix where all of the elements are 0. For example, the zero matrix with 2 rows and 3 columns is:\n\\[Zero=\\begin{bmatrix} 0 & 0 & 0 \\\\ 0 & 0 & 0 \\end{bmatrix}\\]\nA square matrix is a matrix where the number of rows is equal to the number of columns. For example, \\(B\\) is a square matrix.\nThe identity matrix is a square matrix where all of the elements are 0, except for the elements along the diagonal, which are 1. For example, the identity matrix with 3 rows and 3 columns is:\n\\[I_{3}=\\begin{bmatrix} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\end{bmatrix}\\]\nFor simplicitly, we will use the subscript to denote the size of the identity matrix. For example, \\(I_{3}\\) is a 3x3 identity matrix, and \\(I_{5}\\) is a 5x5 identity matrix.\nA \\(1\\times c\\) matrix is called a row vector. Wheras a \\(r \\times 1\\) matrix is called a column vector.\nA diagonal matrix is a square matrix where all of the elements off the diagonal are 0. For example, the following matrix is a diagonal matrix:\n\\[\\begin{bmatrix} 1 & 0 & 0 \\\\ 0 & 2 & 0 \\\\ 0 & 0 & 3 \\end{bmatrix}\\]\nThe identify matrix is a special case of a diagonal matrix.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher: Basic Linear Algebra"
+    ]
   },
   {
     "objectID": "mathref/math_2.html#matrix-operations",
     "href": "mathref/math_2.html#matrix-operations",
     "title": "Math Refresher: Basic Linear Algebra",
     "section": "Matrix Operations",
-    "text": "Matrix Operations\nWe can add matrices together by adding their corresponding elements. For example,\n\\[\\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{bmatrix} + \\begin{bmatrix} 7 & 8 & 9 \\\\ 10 & 11 & 12 \\end{bmatrix} = \\begin{bmatrix} 8 & 10 & 12 \\\\ 14 & 16 & 18 \\end{bmatrix}\\]\nHowever, both matrices must have the same dimensions. For example, we cannot add the following matrices together:\n\\[\\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{bmatrix}_{2\\times 3} + \\begin{bmatrix} 7 & 8 \\\\ 10 & 11 \\end{bmatrix}_{2\\times 2}\\]"
+    "text": "Matrix Operations\nWe can add matrices together by adding their corresponding elements. For example,\n\\[\\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{bmatrix} + \\begin{bmatrix} 7 & 8 & 9 \\\\ 10 & 11 & 12 \\end{bmatrix} = \\begin{bmatrix} 8 & 10 & 12 \\\\ 14 & 16 & 18 \\end{bmatrix}\\]\nHowever, both matrices must have the same dimensions. For example, we cannot add the following matrices together:\n\\[\\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{bmatrix}_{2\\times 3} + \\begin{bmatrix} 7 & 8 \\\\ 10 & 11 \\end{bmatrix}_{2\\times 2}\\]",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher: Basic Linear Algebra"
+    ]
   },
   {
     "objectID": "mathref/math_2.html#matrix-scalar-multiplication",
     "href": "mathref/math_2.html#matrix-scalar-multiplication",
     "title": "Math Refresher: Basic Linear Algebra",
     "section": "Matrix Scalar Multiplication",
-    "text": "Matrix Scalar Multiplication\nWe can multiply a matrix by a scalar by multiplying each element of the matrix by that scalar. For example,\n\\[ a \\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{bmatrix} = \\begin{bmatrix} 2a & 4a & 6a \\\\ 8a & 10a & 12a \\end{bmatrix}\\]"
+    "text": "Matrix Scalar Multiplication\nWe can multiply a matrix by a scalar by multiplying each element of the matrix by that scalar. For example,\n\\[ a \\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{bmatrix} = \\begin{bmatrix} 2a & 4a & 6a \\\\ 8a & 10a & 12a \\end{bmatrix}\\]",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher: Basic Linear Algebra"
+    ]
   },
   {
     "objectID": "mathref/math_2.html#matrix-multiplication",
     "href": "mathref/math_2.html#matrix-multiplication",
     "title": "Math Refresher: Basic Linear Algebra",
     "section": "Matrix Multiplication",
-    "text": "Matrix Multiplication\nWe can multiple two matrices together by taking the dot product of each row of the first matrix with each column of the second matrix. For example:\n\\[\\begin{aligned}\n\\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{bmatrix}_{2\\times 3} \\begin{bmatrix} 7 & 8 \\\\ 10 & 11 \\\\ 13 & 14 \\end{bmatrix}_{3\\times 2} &= \\begin{bmatrix} 1*7 + 2*10 + 3*13 & 1*8 + 2*11 + 3*14 \\\\ 4*7 + 5*10 + 6*13 & 4*8 + 5*11 + 6*14 \\end{bmatrix}_{2\\times 2} \\\\\n&= \\begin{bmatrix} 66 & 82 \\\\ 156 & 199 \\end{bmatrix}\n\\end{aligned}\n\\]\nA good way of remembering this is to follow the flow: \\(\\rightarrow \\times \\downarrow\\).\nNote that the number of columns in the first matrix must be equal to the number of rows in the second matrix. For example, we cannot multiply the following matrices together:\n\\[\\begin{pmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{pmatrix}_{2\\times 3} \\begin{pmatrix} 7 & 8 \\\\ 10 & 11 \\end{pmatrix}_{2\\times 2}\\]\nIn general, given two matrixes \\(A_{a\\times b}\\) and \\(B_{c\\times d}\\), we can multiply them together if and only if \\(b=c\\). The resulting matrix will be \\(AB_{a\\times d}\\).\nSome properties of matrix multiplication:\n\nMatrix multiplication is not commutative. That is, \\(AB \\neq BA\\) in general.\nMatrix multiplication is associative. That is, \\(A(BC) = (AB)C\\).\nAny matrix multiplied by \\(I\\) is equal to itself. That is, \\(AI = IA = A\\)."
+    "text": "Matrix Multiplication\nWe can multiple two matrices together by taking the dot product of each row of the first matrix with each column of the second matrix. For example:\n\\[\\begin{aligned}\n\\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{bmatrix}_{2\\times 3} \\begin{bmatrix} 7 & 8 \\\\ 10 & 11 \\\\ 13 & 14 \\end{bmatrix}_{3\\times 2} &= \\begin{bmatrix} 1*7 + 2*10 + 3*13 & 1*8 + 2*11 + 3*14 \\\\ 4*7 + 5*10 + 6*13 & 4*8 + 5*11 + 6*14 \\end{bmatrix}_{2\\times 2} \\\\\n&= \\begin{bmatrix} 66 & 82 \\\\ 156 & 199 \\end{bmatrix}\n\\end{aligned}\n\\]\nA good way of remembering this is to follow the flow: \\(\\rightarrow  \\times \\downarrow\\).\nNote that the number of columns in the first matrix must be equal to the number of rows in the second matrix. For example, we cannot multiply the following matrices together:\n\\[\\begin{pmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{pmatrix}_{2\\times 3} \\begin{pmatrix} 7 & 8 \\\\ 10 & 11 \\end{pmatrix}_{2\\times 2}\\]\nIn general, given two matrixes \\(A_{a\\times b}\\) and \\(B_{c\\times d}\\), we can multiply them together if and only if \\(b=c\\). The resulting matrix will be \\(AB_{a\\times d}\\).\nSome properties of matrix multiplication:\n\nMatrix multiplication is not commutative. That is, \\(AB \\neq BA\\) in general.\nMatrix multiplication is associative. That is, \\(A(BC) = (AB)C\\).\nAny matrix multiplied by \\(I\\) is equal to itself. That is, \\(AI = IA = A\\).",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher: Basic Linear Algebra"
+    ]
   },
   {
     "objectID": "mathref/math_2.html#transpose",
     "href": "mathref/math_2.html#transpose",
     "title": "Math Refresher: Basic Linear Algebra",
     "section": "Transpose",
-    "text": "Transpose\nThe transpose of a matrix is a matrix where the rows and columns are swapped. For example, if the matrix \\(A\\) is defined as:\n\\[A = \\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{bmatrix}\\]\nthen the transpose of \\(A\\), denoted \\(A^T\\), is:\n\\[A^T = \\begin{bmatrix} 1 & 4 \\\\ 2 & 5 \\\\ 3 & 6 \\end{bmatrix}\\]\nNote that if \\(A_{a\\times b}\\), then \\(A^T_{b\\times a}\\).\nSome properties of the transpose:\n\n\\((A^T)^T = A\\)\n\\((AB)^T = B^TA^T\\)\n\\((A+B)^T = A^T + B^T\\)\n\\((aA)^T = aA^T\\)\n\\((A^T)^{-1} = (A^{-1})^T\\)"
+    "text": "Transpose\nThe transpose of a matrix is a matrix where the rows and columns are swapped. For example, if the matrix \\(A\\) is defined as:\n\\[A = \\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{bmatrix}\\]\nthen the transpose of \\(A\\), denoted \\(A^T\\), is:\n\\[A^T = \\begin{bmatrix} 1 & 4 \\\\ 2 & 5 \\\\ 3 & 6 \\end{bmatrix}\\]\nNote that if \\(A_{a\\times b}\\), then \\(A^T_{b\\times a}\\).\nSome properties of the transpose:\n\n\\((A^T)^T = A\\)\n\\((AB)^T = B^TA^T\\)\n\\((A+B)^T = A^T + B^T\\)\n\\((aA)^T = aA^T\\)\n\\((A^T)^{-1} = (A^{-1})^T\\)",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher: Basic Linear Algebra"
+    ]
   },
   {
     "objectID": "mathref/math_2.html#inverse",
     "href": "mathref/math_2.html#inverse",
     "title": "Math Refresher: Basic Linear Algebra",
     "section": "Inverse",
-    "text": "Inverse\nThe inverse of a square matrix is a matrix that, when multiplied by the original matrix (\\(A A^{-1} = I\\)), results in the identity matrix. For example, if the matrix \\(A\\) is defined as:\n\\[A = \\begin{bmatrix} 1 & 2 \\\\ 4   & 6 \\end{bmatrix}\\]\nthen the inverse of \\(A\\), denoted \\(A^{-1}\\), is:\n\\[A^{-1} = \\begin{bmatrix} -3 & 1 \\\\ 2 & -.5 \\end{bmatrix}\\]\nFor a \\(2 \\times 2\\) matrix, the inverse is defined as:\n\\[\\begin{bmatrix} a & b \\\\ c & d \\end{bmatrix}^{-1} = \\frac{1}{ad-bc} \\begin{bmatrix} d & -b \\\\ -c & a \\end{bmatrix}\\]\nIf a matrix has determinant 0, then it is not invertible.\nSome properties of the inverse:\n\n\\((A^{-1})^{-1} = A\\)\n\\((AB)^{-1} = B^{-1}A^{-1}\\)\n\\((A^T)^{-1} = (A^{-1})^T\\)\n\\((aA)^{-1} = \\frac{1}{a}A^{-1}\\)"
+    "text": "Inverse\nThe inverse of a square matrix is a matrix that, when multiplied by the original matrix (\\(A A^{-1} = I\\)), results in the identity matrix. For example, if the matrix \\(A\\) is defined as:\n\\[A = \\begin{bmatrix} 1 & 2 \\\\ 4   & 6 \\end{bmatrix}\\]\nthen the inverse of \\(A\\), denoted \\(A^{-1}\\), is:\n\\[A^{-1} = \\begin{bmatrix} -3 & 1 \\\\ 2 & -.5 \\end{bmatrix}\\]\nFor a \\(2 \\times 2\\) matrix, the inverse is defined as:\n\\[\\begin{bmatrix} a & b \\\\ c & d \\end{bmatrix}^{-1} = \\frac{1}{ad-bc} \\begin{bmatrix} d & -b \\\\ -c & a \\end{bmatrix}\\]\nIf a matrix has determinant 0, then it is not invertible.\nSome properties of the inverse:\n\n\\((A^{-1})^{-1} = A\\)\n\\((AB)^{-1} = B^{-1}A^{-1}\\)\n\\((A^T)^{-1} = (A^{-1})^T\\)\n\\((aA)^{-1} = \\frac{1}{a}A^{-1}\\)",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher: Basic Linear Algebra"
+    ]
   },
   {
     "objectID": "mathref/math_2.html#determinant",
     "href": "mathref/math_2.html#determinant",
     "title": "Math Refresher: Basic Linear Algebra",
     "section": "Determinant",
-    "text": "Determinant\nThe determinant of a square matrix is a scalar value that is a function of the elements of the matrix. The determinant of a \\(2 \\times 2\\) matrix is defined as:\n\\[\\begin{vmatrix} a & b \\\\ c & d \\end{vmatrix} = ad - bc\\]\nThe determinant of a \\(3 \\times 3\\) matrix is defined as:\n\\[\\begin{vmatrix} a & b & c \\\\ d & e & f \\\\ g & h & i \\end{vmatrix} = aei+dhc+gbf-ceg-fha-ibd\\]"
+    "text": "Determinant\nThe determinant of a square matrix is a scalar value that is a function of the elements of the matrix. The determinant of a \\(2 \\times 2\\) matrix is defined as:\n\\[\\begin{vmatrix} a & b \\\\ c & d \\end{vmatrix} = ad - bc\\]\nThe determinant of a \\(3 \\times 3\\) matrix is defined as:\n\\[\\begin{vmatrix} a & b & c \\\\ d & e & f \\\\ g & h & i \\end{vmatrix} = aei+dhc+gbf-ceg-fha-ibd\\]",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher: Basic Linear Algebra"
+    ]
   },
   {
     "objectID": "mathref/math_2.html#rank-and-linear-independence",
     "href": "mathref/math_2.html#rank-and-linear-independence",
     "title": "Math Refresher: Basic Linear Algebra",
     "section": "Rank and linear independence",
-    "text": "Rank and linear independence\nThe rank of a matrix is the number of linearly independent rows or columns in the matrix. In a rectangular matrix, the rank cannot be larger than the smaller of the rows or columns.\nIf we consider each column, or rows, of a matrix as a vector, then the rank of the matrix is the number of linearly independent vectors in the matrix. If a set of vectors are not linearly independent, then one of the vectors can be expressed as a linear combination of the other vectors. For example, the following vectors are not linearly independent:\n\\[a_1 \\vec x_1 + a_2 \\vec x_2 + a_3 \\vec x_3 = 0\\]"
+    "text": "Rank and linear independence\nThe rank of a matrix is the number of linearly independent rows or columns in the matrix. In a rectangular matrix, the rank cannot be larger than the smaller of the rows or columns.\nIf we consider each column, or rows, of a matrix as a vector, then the rank of the matrix is the number of linearly independent vectors in the matrix. If a set of vectors are not linearly independent, then one of the vectors can be expressed as a linear combination of the other vectors. For example, the following vectors are not linearly independent:\n\\[a_1 \\vec x_1 + a_2 \\vec x_2 + a_3 \\vec x_3 = 0\\]",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher: Basic Linear Algebra"
+    ]
   },
   {
     "objectID": "mathref/math_2.html#eigenvalues-and-eigenvectors",
     "href": "mathref/math_2.html#eigenvalues-and-eigenvectors",
     "title": "Math Refresher: Basic Linear Algebra",
     "section": "Eigenvalues and eigenvectors",
-    "text": "Eigenvalues and eigenvectors\nThe eigenvalues and eigenvectors of a matrix are scalars and vectors that satisfy the following equation:\n\\[A \\vec x = \\lambda \\vec x\\]\nwhere \\(A\\) is a square matrix, \\(\\vec x\\) is the an eigen a vector, and \\(\\lambda\\) is a scalar. In other words, multiplying a vector by a matrix is the same as multiplying the vector by a scalar.\nThe eigenvalues of a matrix are the values of \\(\\lambda\\) that satisfy this equation. The eigenvectors of a matrix are the vectors \\(\\vec x\\) that satisfy this equation.\nThe eigenvalues and eigenvectors of a matrix can be found by solving the following equation:\n\\[det(A - \\lambda I) = 0\\]\nwhere \\(I\\) is the identity matrix.\nIf the matrix A is of dimension \\(n \\times n\\), then there are \\(n\\) eigenvalues and \\(n\\) eigenvectors."
+    "text": "Eigenvalues and eigenvectors\nThe eigenvalues and eigenvectors of a matrix are scalars and vectors that satisfy the following equation:\n\\[A \\vec x = \\lambda \\vec x\\]\nwhere \\(A\\) is a square matrix, \\(\\vec x\\) is the an eigen a vector, and \\(\\lambda\\) is a scalar. In other words, multiplying a vector by a matrix is the same as multiplying the vector by a scalar.\nThe eigenvalues of a matrix are the values of \\(\\lambda\\) that satisfy this equation. The eigenvectors of a matrix are the vectors \\(\\vec x\\) that satisfy this equation.\nThe eigenvalues and eigenvectors of a matrix can be found by solving the following equation:\n\\[det(A - \\lambda I) = 0\\]\nwhere \\(I\\) is the identity matrix.\nIf the matrix A is of dimension \\(n \\times n\\), then there are \\(n\\) eigenvalues and \\(n\\) eigenvectors.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher: Basic Linear Algebra"
+    ]
   },
   {
     "objectID": "mathref/math_2.html#system-of-linear-equations",
     "href": "mathref/math_2.html#system-of-linear-equations",
     "title": "Math Refresher: Basic Linear Algebra",
     "section": "System of linear equations",
-    "text": "System of linear equations\nA system of linear equations is a set of equations that can be expressed in the form:\n\\[\\begin{aligned}\na_{11}x_1 + a_{12}x_2 + \\cdots + a_{1n}x_n &= b_1 \\\\\na_{21}x_1 + a_{22}x_2 + \\cdots + a_{2n}x_n &= b_2 \\\\\n\\vdots \\\\\na_{n1}x_1 + a_{n2}x_2 + \\cdots + a_{nn}x_n &= b_n \\\\\n\\end{aligned}\\]\nwhere \\(a_{ij}\\) and \\(b_i\\) are constants, and \\(x_i\\) are variables.\nThis system of equations can be written in matrix form as:\n\\[A_{n\\times n}   X_{n\\times 1} =   b_{n\\times 1}\\]\nif the system has a unique solution, then the matrix \\(A\\) is invertible, and the solution is given by:\n\\[X = A^{-1}b\\]\nThus if there is no solution, then \\(A\\) is not invertible. If the determinant of \\(A\\) is 0, then \\(A\\) is not invertible."
+    "text": "System of linear equations\nA system of linear equations is a set of equations that can be expressed in the form:\n\\[\\begin{aligned}\na_{11}x_1 + a_{12}x_2 + \\cdots + a_{1n}x_n &= b_1 \\\\\na_{21}x_1 + a_{22}x_2 + \\cdots + a_{2n}x_n &= b_2 \\\\\n\\vdots \\\\\na_{n1}x_1 + a_{n2}x_2 + \\cdots + a_{nn}x_n &= b_n \\\\\n\\end{aligned}\\]\nwhere \\(a_{ij}\\) and \\(b_i\\) are constants, and \\(x_i\\) are variables.\nThis system of equations can be written in matrix form as:\n\\[A_{n\\times n}   X_{n\\times 1} =   b_{n\\times 1}\\]\nif the system has a unique solution, then the matrix \\(A\\) is invertible, and the solution is given by:\n\\[X = A^{-1}b\\]\nThus if there is no solution, then \\(A\\) is not invertible. If the determinant of \\(A\\) is 0, then \\(A\\) is not invertible.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher: Basic Linear Algebra"
+    ]
   },
   {
     "objectID": "index.html",
@@ -4435,63 +4505,108 @@
     "href": "mathref/math_1.html",
     "title": "Math Refresher: Basic Calculus",
     "section": "",
-    "text": "This is a refresher on basic calculus. It is not meant to be a substitute for a full course on calculus, but rather a quick review of the basic concepts and techniques that will be used in this semester."
+    "text": "This is a refresher on basic calculus. It is not meant to be a substitute for a full course on calculus, but rather a quick review of the basic concepts and techniques that will be used in this semester.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher: Basic Calculus"
+    ]
   },
   {
     "objectID": "mathref/math_1.html#introduction",
     "href": "mathref/math_1.html#introduction",
     "title": "Math Refresher: Basic Calculus",
     "section": "",
-    "text": "This is a refresher on basic calculus. It is not meant to be a substitute for a full course on calculus, but rather a quick review of the basic concepts and techniques that will be used in this semester."
+    "text": "This is a refresher on basic calculus. It is not meant to be a substitute for a full course on calculus, but rather a quick review of the basic concepts and techniques that will be used in this semester.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher: Basic Calculus"
+    ]
   },
   {
     "objectID": "mathref/math_1.html#limits",
     "href": "mathref/math_1.html#limits",
     "title": "Math Refresher: Basic Calculus",
     "section": "Limits",
-    "text": "Limits\nThe limit of a function \\(f(x)\\) as \\(x\\) approaches \\(a\\) is the value that \\(f(x)\\) approaches as \\(x\\) gets closer and closer to \\(a\\). We write this as:\n\\[\\lim_{x \\to a} f(x) = L\\]\nIn this case, the limit of the function \\(f(x)\\) as \\(x\\) approaches \\(a\\) is \\(L\\). For example, consider the function \\(f(x) = x^2\\). The limit of \\(f(x)\\) as \\(x\\) approaches \\(2\\) is \\(4\\):"
+    "text": "Limits\nThe limit of a function \\(f(x)\\) as \\(x\\) approaches \\(a\\) is the value that \\(f(x)\\) approaches as \\(x\\) gets closer and closer to \\(a\\). We write this as:\n\\[\\lim_{x \\to a} f(x) = L\\]\nIn this case, the limit of the function \\(f(x)\\) as \\(x\\) approaches \\(a\\) is \\(L\\). For example, consider the function \\(f(x) = x^2\\). The limit of \\(f(x)\\) as \\(x\\) approaches \\(2\\) is \\(4\\):",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher: Basic Calculus"
+    ]
   },
   {
     "objectID": "mathref/math_1.html#limits-to-derivatives",
     "href": "mathref/math_1.html#limits-to-derivatives",
     "title": "Math Refresher: Basic Calculus",
     "section": "Limits to Derivatives",
-    "text": "Limits to Derivatives\nLimits can also be used to estimate derivatives. The derivative of a function \\(f(x)\\) is the slope of the function at a given point. The derivative of \\(f(x)\\) at \\(x = a\\) is written as \\(f'(a)\\). The derivative of \\(f(x)\\) is defined as:\n\\[f'(a) = \\lim_{h \\to 0} \\frac{f(a+h) - f(a)}{h}\\]\nIn other words, the deriviative is the slope of a function at a particular point \\(a\\). This can be proxied using derivatives, by choosing a very small value for \\(h\\).\nFor example, consider the function \\(f(x) = x^2\\). The derivative of \\(f(x)\\) at \\(x = a\\) is:\n\\[\\begin{aligned}\nf'(a) &= \\lim_{h \\to 0} \\frac{f(a+h) - f(a)}{h} \\\\\n&=\\lim_{h \\to 0} \\frac{(a+h)^2 - (a)^2}{h} \\\\\n&= \\lim_{h \\to 0} \\frac{a^2 + 2ah + h^2 - a^2}{h} \\\\\n&= \\lim_{h \\to 0} 2a + h= 2a\n\\end{aligned}\n\\]\nIf anything else fails, one can always rely on numerical differentiation."
+    "text": "Limits to Derivatives\nLimits can also be used to estimate derivatives. The derivative of a function \\(f(x)\\) is the slope of the function at a given point. The derivative of \\(f(x)\\) at \\(x = a\\) is written as \\(f'(a)\\). The derivative of \\(f(x)\\) is defined as:\n\\[f'(a) = \\lim_{h \\to 0} \\frac{f(a+h) - f(a)}{h}\\]\nIn other words, the deriviative is the slope of a function at a particular point \\(a\\). This can be proxied using derivatives, by choosing a very small value for \\(h\\).\nFor example, consider the function \\(f(x) = x^2\\). The derivative of \\(f(x)\\) at \\(x = a\\) is:\n\\[\\begin{aligned}\nf'(a) &= \\lim_{h \\to 0} \\frac{f(a+h) - f(a)}{h} \\\\\n&=\\lim_{h \\to 0} \\frac{(a+h)^2 - (a)^2}{h} \\\\\n&= \\lim_{h \\to 0} \\frac{a^2 + 2ah + h^2 - a^2}{h} \\\\\n&= \\lim_{h \\to 0} 2a + h= 2a\n\\end{aligned}\n\\]\nIf anything else fails, one can always rely on numerical differentiation.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher: Basic Calculus"
+    ]
   },
   {
     "objectID": "mathref/math_1.html#derivative-of-common-functions",
     "href": "mathref/math_1.html#derivative-of-common-functions",
     "title": "Math Refresher: Basic Calculus",
     "section": "Derivative of common functions",
-    "text": "Derivative of common functions\nFor most common functions, the derivative can be calculated using the following rules:\n\nThe derivative of a constant is zero\nThe derivative of \\(x^n\\) is \\(nx^{n-1}\\)\nThe derivative of \\(ln(x)\\) is \\(\\frac{1}{x}\\)\nThe derivative of \\(e^x\\) is \\(e^x\\)\nThe derivative of \\(a^x\\) is \\(a^x \\ln a\\)\n\nThere are other rules for derivatives, but these are the ones that will be used most often."
+    "text": "Derivative of common functions\nFor most common functions, the derivative can be calculated using the following rules:\n\nThe derivative of a constant is zero\nThe derivative of \\(x^n\\) is \\(nx^{n-1}\\)\nThe derivative of \\(ln(x)\\) is \\(\\frac{1}{x}\\)\nThe derivative of \\(e^x\\) is \\(e^x\\)\nThe derivative of \\(a^x\\) is \\(a^x \\ln a\\)\n\nThere are other rules for derivatives, but these are the ones that will be used most often.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher: Basic Calculus"
+    ]
   },
   {
     "objectID": "mathref/math_1.html#derivative-of-composite-functions",
     "href": "mathref/math_1.html#derivative-of-composite-functions",
     "title": "Math Refresher: Basic Calculus",
     "section": "Derivative of composite functions",
-    "text": "Derivative of composite functions\nThe derivative of a composite function \\(f(g(x))\\) is given by the chain rule:\n\\[\\frac{d}{dx} f(g(x)) = f'(g(x)) g'(x)\\]\nFor example, consider the function \\(f(x) = \\ln(x^2)\\). The derivative of \\(f(x)\\) is:\n\\[\\begin{aligned}\n\\frac{d}{dx} \\ln(x^2) &= \\frac{1}{x^2} \\frac{d}{dx} x^2 \\\\\n&= \\frac{1}{x^2} 2x \\\\\n&= \\frac{2}{x}\n\\end{aligned}\n\\]"
+    "text": "Derivative of composite functions\nThe derivative of a composite function \\(f(g(x))\\) is given by the chain rule:\n\\[\\frac{d}{dx} f(g(x)) = f'(g(x)) g'(x)\\]\nFor example, consider the function \\(f(x) = \\ln(x^2)\\). The derivative of \\(f(x)\\) is:\n\\[\\begin{aligned}\n\\frac{d}{dx} \\ln(x^2) &= \\frac{1}{x^2} \\frac{d}{dx} x^2 \\\\\n&= \\frac{1}{x^2} 2x \\\\\n&= \\frac{2}{x}\n\\end{aligned}\n\\]",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher: Basic Calculus"
+    ]
   },
   {
     "objectID": "mathref/math_1.html#derivative-of-sums-and-products",
     "href": "mathref/math_1.html#derivative-of-sums-and-products",
     "title": "Math Refresher: Basic Calculus",
     "section": "Derivative of sums and products",
-    "text": "Derivative of sums and products\nThe derivative of a sum of functions is the sum of the derivatives of the functions.\n\\[\\frac{d}{dx} (f(x) + g(x)) = \\frac{d}{dx} f(x) + \\frac{d}{dx} g(x)\\]\nThe derivative of a product of functions is given by the product rule:\n\\[\\frac{d}{dx} (f(x) g(x)) = f'(x) g(x) + f(x) g'(x)\\]\nThe derivative of a quotient of functions is given by the quotient rule:\n\\[\\frac{d}{dx} \\frac{f(x)}{g(x)} = \\frac{f'(x) g(x) - f(x) g'(x)}{g(x)^2}\\]\nWhich is a special case of th product rule."
+    "text": "Derivative of sums and products\nThe derivative of a sum of functions is the sum of the derivatives of the functions.\n\\[\\frac{d}{dx} (f(x) + g(x)) = \\frac{d}{dx} f(x) + \\frac{d}{dx} g(x)\\]\nThe derivative of a product of functions is given by the product rule:\n\\[\\frac{d}{dx} (f(x) g(x)) = f'(x) g(x) + f(x) g'(x)\\]\nThe derivative of a quotient of functions is given by the quotient rule:\n\\[\\frac{d}{dx} \\frac{f(x)}{g(x)} = \\frac{f'(x) g(x) - f(x) g'(x)}{g(x)^2}\\]\nWhich is a special case of th product rule.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher: Basic Calculus"
+    ]
   },
   {
     "objectID": "mathref/math_1.html#optimization-with-multiple-variables",
     "href": "mathref/math_1.html#optimization-with-multiple-variables",
     "title": "Math Refresher: Basic Calculus",
     "section": "Optimization with multiple variables",
-    "text": "Optimization with multiple variables\nWhen considering multiple variables, we also need to rely on the first and second order conditions to find minimum and maximum values. Consider a function \\(f(x,y)\\). The first order conditions are:\n\\[\\begin{aligned}\n\\frac{\\partial}{\\partial x} f(x,y) &= 0 \\\\\n\\frac{\\partial}{\\partial y} f(x,y) &= 0\n\\end{aligned}\n\\]\nThis conditions now say that, in the direction of \\(x\\) and \\(y\\), the function \\(f(x,y)\\) is not changing anymore. Thus we have a potential maximum or minimum. Now, to identify a minimum, we need second order conditions to be:\n\\[\\begin{aligned}\nH=\\begin{bmatrix}\nf_{xx} & f_{xy} \\\\\nf_{xy} & f_{yy} \\\\\n\\end{bmatrix}\n\\end{aligned}\n\\]\nIf \\(Det(H)&gt;0\\) and \\(f_{xx}&gt;0\\) then we have a minimum. If \\(Det(H)&gt;0\\) and \\(f_{xx}&lt;0\\) then we have a maximum. If \\(Det(H)&lt;0\\) then we have a saddle point. And if \\(Det(H)=0\\) then we have an inconclusive result."
+    "text": "Optimization with multiple variables\nWhen considering multiple variables, we also need to rely on the first and second order conditions to find minimum and maximum values. Consider a function \\(f(x,y)\\). The first order conditions are:\n\\[\\begin{aligned}\n\\frac{\\partial}{\\partial x} f(x,y) &= 0 \\\\\n\\frac{\\partial}{\\partial y} f(x,y) &= 0\n\\end{aligned}\n\\]\nThis conditions now say that, in the direction of \\(x\\) and \\(y\\), the function \\(f(x,y)\\) is not changing anymore. Thus we have a potential maximum or minimum. Now, to identify a minimum, we need second order conditions to be:\n\\[\\begin{aligned}\nH=\\begin{bmatrix}\nf_{xx} & f_{xy} \\\\\nf_{xy} & f_{yy} \\\\\n\\end{bmatrix}\n\\end{aligned}\n\\]\nIf \\(Det(H)&gt;0\\) and \\(f_{xx}&gt;0\\) then we have a minimum. If \\(Det(H)&gt;0\\) and \\(f_{xx}&lt;0\\) then we have a maximum. If \\(Det(H)&lt;0\\) then we have a saddle point. And if \\(Det(H)=0\\) then we have an inconclusive result.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher: Basic Calculus"
+    ]
   },
   {
     "objectID": "mathref/math_1.html#optimization-with-constraints",
     "href": "mathref/math_1.html#optimization-with-constraints",
     "title": "Math Refresher: Basic Calculus",
     "section": "Optimization with constraints",
-    "text": "Optimization with constraints\nWhen optimizing a function with constraints, we can use the method of Lagrange multipliers. Consider a function \\(f(x,y)\\) subject to the constraint \\(g(x,y) = z\\). The Lagrangian is:\n\\[\\begin{aligned}\nL(x,y,\\lambda) = f(x,y) + \\lambda (z - g(x,y))\n\\end{aligned}\n\\]\nNotice that the Lagrangian is the function \\(f(x,y)\\) plus the constraint \\(g(x,y)\\) multiplied by a constant \\(\\lambda\\). The constant \\(\\lambda\\) is called the Lagrange multiplier. The constrain is written as the difference between the constant \\(z\\) and the function \\(g(x,y)\\). The Lagrangian is then optimized with respect to \\(x\\), \\(y\\), and \\(\\lambda\\). This are the equivalent of the first order conditions:\n\\[\\begin{aligned}\n\\frac{\\partial}{\\partial x} L(x,y,\\lambda) &= 0 \\\\\n\\frac{\\partial}{\\partial y} L(x,y,\\lambda) &= 0 \\\\\n\\frac{\\partial}{\\partial \\lambda} L(x,y,\\lambda) &= z - g(x,y)=0\n\\end{aligned}\n\\]\nThe last condition is the constraint, and it implies that the constraint must be satisfied. The second order conditions are the same as before."
+    "text": "Optimization with constraints\nWhen optimizing a function with constraints, we can use the method of Lagrange multipliers. Consider a function \\(f(x,y)\\) subject to the constraint \\(g(x,y) = z\\). The Lagrangian is:\n\\[\\begin{aligned}\nL(x,y,\\lambda) = f(x,y) + \\lambda (z - g(x,y))\n\\end{aligned}\n\\]\nNotice that the Lagrangian is the function \\(f(x,y)\\) plus the constraint \\(g(x,y)\\) multiplied by a constant \\(\\lambda\\). The constant \\(\\lambda\\) is called the Lagrange multiplier. The constrain is written as the difference between the constant \\(z\\) and the function \\(g(x,y)\\). The Lagrangian is then optimized with respect to \\(x\\), \\(y\\), and \\(\\lambda\\). This are the equivalent of the first order conditions:\n\\[\\begin{aligned}\n\\frac{\\partial}{\\partial x} L(x,y,\\lambda) &= 0 \\\\\n\\frac{\\partial}{\\partial y} L(x,y,\\lambda) &= 0 \\\\\n\\frac{\\partial}{\\partial \\lambda} L(x,y,\\lambda) &= z - g(x,y)=0\n\\end{aligned}\n\\]\nThe last condition is the constraint, and it implies that the constraint must be satisfied. The second order conditions are the same as before.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher: Basic Calculus"
+    ]
   },
   {
     "objectID": "mathref/math_3.html",
@@ -5548,56 +5663,96 @@
     "href": "rmethods/index.html",
     "title": "Research Methods: Econometrics I",
     "section": "",
-    "text": "Class syllabus is here."
+    "text": "Class syllabus is here.",
+    "crumbs": [
+      "Home",
+      "Courses",
+      "Research Methods: Econometrics I"
+    ]
   },
   {
     "objectID": "rmethods/index.html#syllabus",
     "href": "rmethods/index.html#syllabus",
     "title": "Research Methods: Econometrics I",
     "section": "",
-    "text": "Class syllabus is here."
+    "text": "Class syllabus is here.",
+    "crumbs": [
+      "Home",
+      "Courses",
+      "Research Methods: Econometrics I"
+    ]
   },
   {
     "objectID": "rmethods/index.html#zoom-link",
     "href": "rmethods/index.html#zoom-link",
     "title": "Research Methods: Econometrics I",
     "section": "Zoom Link",
-    "text": "Zoom Link\nWhen there is need to attend a class online, and you have requested to attend online, use the following link:\nZoom class"
+    "text": "Zoom Link\nWhen there is need to attend a class online, and you have requested to attend online, use the following link:\nZoom class",
+    "crumbs": [
+      "Home",
+      "Courses",
+      "Research Methods: Econometrics I"
+    ]
   },
   {
     "objectID": "rmethods/index.html#introduction",
     "href": "rmethods/index.html#introduction",
     "title": "Research Methods: Econometrics I",
     "section": "Introduction",
-    "text": "Introduction\n\nChapter 1\nOnce Upon a time, why Econometrics?:"
+    "text": "Introduction\n\nChapter 1\nOnce Upon a time, why Econometrics?:",
+    "crumbs": [
+      "Home",
+      "Courses",
+      "Research Methods: Econometrics I"
+    ]
   },
   {
     "objectID": "rmethods/index.html#part-i-basic-tools",
     "href": "rmethods/index.html#part-i-basic-tools",
     "title": "Research Methods: Econometrics I",
     "section": "Part I: Basic Tools",
-    "text": "Part I: Basic Tools\n\n1. Chapter 2:\nThe Simple Regression Model\n\n\n2. Chapter 3:\nMultiple Regression Analysis: Estimation\n\n\n3. Chapter 4 - 5\nMRA: Inference and Asymptotics\n\n\nHomeWork 1 Also Github link\n\n\nDue Date September 27"
+    "text": "Part I: Basic Tools\n\n1. Chapter 2:\nThe Simple Regression Model\n\n\n2. Chapter 3:\nMultiple Regression Analysis: Estimation\n\n\n3. Chapter 4 - 5\nMRA: Inference and Asymptotics\n\n\nHomeWork 1 Also Github link\n\n\nDue Date September 27",
+    "crumbs": [
+      "Home",
+      "Courses",
+      "Research Methods: Econometrics I"
+    ]
   },
   {
     "objectID": "rmethods/index.html#part-ii-addressing-problems-with-mra",
     "href": "rmethods/index.html#part-ii-addressing-problems-with-mra",
     "title": "Research Methods: Econometrics I",
     "section": "Part II: Addressing Problems with MRA",
-    "text": "Part II: Addressing Problems with MRA\n\n4. Chapter 6 - 7\nMRA: Scaling, functional forms, Goodness of Fit, and Qualitative Information\n\n\n5. Chapter 8\nHeteroskedasticity\n\n\n6. Chapter 9\nFurther Problems: Functional form, Missing variables, measurement errors, missing data\n\n\nHomeWork 2 Also Github link\n\n\nDue Date October 25 !!\n\n\nReview Class: Wednesday October 18\n\n\nMIDTERM! October 20: 9:30 - 12:50\n\n7. Chapter 15\nInstrumental Variables and 2SLS\n\n\n8. Chapter 17\nLimited Dep Variables"
+    "text": "Part II: Addressing Problems with MRA\n\n4. Chapter 6 - 7\nMRA: Scaling, functional forms, Goodness of Fit, and Qualitative Information\n\n\n5. Chapter 8\nHeteroskedasticity\n\n\n6. Chapter 9\nFurther Problems: Functional form, Missing variables, measurement errors, missing data\n\n\nHomeWork 2 Also Github link\n\n\nDue Date October 25 !!\n\n\nReview Class: Wednesday October 18\n\n\nMIDTERM! October 20: 9:30 - 12:50\n\n7. Chapter 15\nInstrumental Variables and 2SLS\n\n\n8. Chapter 17\nLimited Dep Variables",
+    "crumbs": [
+      "Home",
+      "Courses",
+      "Research Methods: Econometrics I"
+    ]
   },
   {
     "objectID": "rmethods/index.html#part-iii-panel-data-methods",
     "href": "rmethods/index.html#part-iii-panel-data-methods",
     "title": "Research Methods: Econometrics I",
     "section": "Part III: Panel Data Methods",
-    "text": "Part III: Panel Data Methods\n\n9. Chapter 13\nPool Cross Section and Panel Data\n\n\n10. Chapter 14\nAdvanced Panel Data Methods\n\n\n[HomeWork 3] Github\n\n\nDue Date November 29 at 1pm"
+    "text": "Part III: Panel Data Methods\n\n9. Chapter 13\nPool Cross Section and Panel Data\n\n\n10. Chapter 14\nAdvanced Panel Data Methods\n\n\n[HomeWork 3] Github\n\n\nDue Date November 29 at 1pm",
+    "crumbs": [
+      "Home",
+      "Courses",
+      "Research Methods: Econometrics I"
+    ]
   },
   {
     "objectID": "rmethods/index.html#part-iv-time-series",
     "href": "rmethods/index.html#part-iv-time-series",
     "title": "Research Methods: Econometrics I",
     "section": "Part IV: Time Series",
-    "text": "Part IV: Time Series\n\n11. Chapter 10 - 11\nBasics of Regression analysis with TSD\n\n\n12. Chapter 12 & 18\nAdvanced TSD Problems\n\n\nFinal\n\nPossible Date December 13"
+    "text": "Part IV: Time Series\n\n11. Chapter 10 - 11\nBasics of Regression analysis with TSD\n\n\n12. Chapter 12 & 18\nAdvanced TSD Problems\n\n\nFinal\n\nPossible Date December 13",
+    "crumbs": [
+      "Home",
+      "Courses",
+      "Research Methods: Econometrics I"
+    ]
   },
   {
     "objectID": "rmethods/Syllabus.html",
@@ -6591,21 +6746,36 @@
     "href": "rmethods2/index.html",
     "title": "Research Methods II",
     "section": "",
-    "text": "If you are reading this, you are probably enrolled in the course. This page will contain information about the course, including the syllabus, assignments, and other relevant information.\nAs the course progresses, I will add links to the syllabus, assignments, and other relevant information."
+    "text": "If you are reading this, you are probably enrolled in the course. This page will contain information about the course, including the syllabus, assignments, and other relevant information.\nAs the course progresses, I will add links to the syllabus, assignments, and other relevant information.",
+    "crumbs": [
+      "Home",
+      "Courses",
+      "Research Methods II"
+    ]
   },
   {
     "objectID": "rmethods2/index.html#syllabus",
     "href": "rmethods2/index.html#syllabus",
     "title": "Research Methods II",
     "section": "",
-    "text": "If you are reading this, you are probably enrolled in the course. This page will contain information about the course, including the syllabus, assignments, and other relevant information.\nAs the course progresses, I will add links to the syllabus, assignments, and other relevant information."
+    "text": "If you are reading this, you are probably enrolled in the course. This page will contain information about the course, including the syllabus, assignments, and other relevant information.\nAs the course progresses, I will add links to the syllabus, assignments, and other relevant information.",
+    "crumbs": [
+      "Home",
+      "Courses",
+      "Research Methods II"
+    ]
   },
   {
     "objectID": "rmethods2/index.html#sessions",
     "href": "rmethods2/index.html#sessions",
     "title": "Research Methods II",
     "section": "Sessions",
-    "text": "Sessions\nSession 1: Surveys, IO and SAM\nSlides: html and pdf\nReadings: link\nSession 2: MLE & Limited Dependent Variables\nSlides: html and pdf\nReadings: link\nSession 3: Measuring Inequality\nSlides: html and pdf\nReadings: link\nSession 4: Analyzing Gaps\nSlides: html and pdf\nReadings: link"
+    "text": "Sessions\nSession 1: Surveys, IO and SAM\nSlides: html and pdf\nReadings: link\nSession 2: MLE & Limited Dependent Variables\nSlides: html and pdf\nReadings: link\nSession 3: Measuring Inequality\nSlides: html and pdf\nReadings: link\nSession 4: Analyzing Gaps\nSlides: html and pdf\nReadings: link",
+    "crumbs": [
+      "Home",
+      "Courses",
+      "Research Methods II"
+    ]
   },
   {
     "objectID": "rmethods2/session_3.html",
@@ -8558,21 +8728,36 @@
     "href": "adv_class/index.html",
     "title": "Advance Econometrics: Causal Effects",
     "section": "",
-    "text": "Find the syllabus here-HTML and here-PDF\nAll reading materials are available here\nIntroduction: Even the longest journey starts somewhere"
+    "text": "Find the syllabus here-HTML and here-PDF\nAll reading materials are available here\nIntroduction: Even the longest journey starts somewhere",
+    "crumbs": [
+      "Home",
+      "Courses",
+      "Advance Econometrics: Causal Effects"
+    ]
   },
   {
     "objectID": "adv_class/index.html#part-i-the-tools",
     "href": "adv_class/index.html#part-i-the-tools",
     "title": "Advance Econometrics: Causal Effects",
     "section": "Part I: The tools",
-    "text": "Part I: The tools\n\n1. Unveiling the Tapestry of Truth: The Grand Saga of Linear Regression and its Statistical Inference\nLinear Regression Model: Statistical Inference and Extensions: html or pdf\n\n\n2. Unleashing the Power of Infinite Flexibility: Exploring the Cosmos of Semi- and Non-Parametric Regression\nSemi- and Non-Parametric Regression: How Flexible is Flexible Enough?: html or pdf\n\n\n3. Beyond the Ordinary: Embarking on the Quest of Conditional Quantile Regressions\nConditional Quantile Regressions: Because No One is Average html or pdf\n\n\n4. Ascending the Ladder of Equality: Studying the Mysteries of Unconditional Quantile Regressions\nUnconditional Quantile Regressions: When We Care About Everyone html or pdf\n\n\n5. Breaking the Chains of Linearity: A Transcendent Expedition into NLS, IRLS, and MLE\nNLS, IRLS, and MLE: Going Truly Nonlinear html or pdf"
+    "text": "Part I: The tools\n\n1. Unveiling the Tapestry of Truth: The Grand Saga of Linear Regression and its Statistical Inference\nLinear Regression Model: Statistical Inference and Extensions: html or pdf\n\n\n2. Unleashing the Power of Infinite Flexibility: Exploring the Cosmos of Semi- and Non-Parametric Regression\nSemi- and Non-Parametric Regression: How Flexible is Flexible Enough?: html or pdf\n\n\n3. Beyond the Ordinary: Embarking on the Quest of Conditional Quantile Regressions\nConditional Quantile Regressions: Because No One is Average html or pdf\n\n\n4. Ascending the Ladder of Equality: Studying the Mysteries of Unconditional Quantile Regressions\nUnconditional Quantile Regressions: When We Care About Everyone html or pdf\n\n\n5. Breaking the Chains of Linearity: A Transcendent Expedition into NLS, IRLS, and MLE\nNLS, IRLS, and MLE: Going Truly Nonlinear html or pdf",
+    "crumbs": [
+      "Home",
+      "Courses",
+      "Advance Econometrics: Causal Effects"
+    ]
   },
   {
     "objectID": "adv_class/index.html#part-ii-the-methods",
     "href": "adv_class/index.html#part-ii-the-methods",
     "title": "Advance Econometrics: Causal Effects",
     "section": "Part II: The methods",
-    "text": "Part II: The methods\n\n6. Chronicles of Fate: Exploring the Mystical What-Ifs in the Web of Causal Models\nPotential outcomes and Causal Models html or pdf\n\n\n7. The Mirror’s Embrace: Taming Unobservables with the Power of Fixed Effects\nPanel Data and Fixed Effects (Many FE) html or pdf\n\n\n8. The Summoner’s Call: Using Instrumental Variables to estimate LATE’s\nInstrumental Variables html or pdf\n\n\n9. The Blade of Equivalence: Unleashing the Art of Matching in the Realm of Divergence\nMatching and Re-weighting html or pdf\n\n\n10. Beyond the Discontinuity Veil: Crossing thresholds to Illuminate Secrets\nRegression Discontinuity Design html or pdf\n\n\n11. Twofold Wisdom: Unraveling Truths with the Dual Forces of Differences in Differences\nDifferences in Differences pdf\n\n\n12. Cosmic Recreations: Forging New Realities through Synthetic Control\nSynthetic Control html or pdf"
+    "text": "Part II: The methods\n\n6. Chronicles of Fate: Exploring the Mystical What-Ifs in the Web of Causal Models\nPotential outcomes and Causal Models html or pdf\n\n\n7. The Mirror’s Embrace: Taming Unobservables with the Power of Fixed Effects\nPanel Data and Fixed Effects (Many FE) html or pdf\n\n\n8. The Summoner’s Call: Using Instrumental Variables to estimate LATE’s\nInstrumental Variables html or pdf\n\n\n9. The Blade of Equivalence: Unleashing the Art of Matching in the Realm of Divergence\nMatching and Re-weighting html or pdf\n\n\n10. Beyond the Discontinuity Veil: Crossing thresholds to Illuminate Secrets\nRegression Discontinuity Design html or pdf\n\n\n11. Twofold Wisdom: Unraveling Truths with the Dual Forces of Differences in Differences\nDifferences in Differences pdf\n\n\n12. Cosmic Recreations: Forging New Realities through Synthetic Control\nSynthetic Control html or pdf",
+    "crumbs": [
+      "Home",
+      "Courses",
+      "Advance Econometrics: Causal Effects"
+    ]
   },
   {
     "objectID": "adv_class/syllabus.html#course-website",
@@ -8614,7 +8799,12 @@
     "href": "adv_class/index.html#syllabus",
     "title": "Advance Econometrics: Causal Effects",
     "section": "",
-    "text": "Find the syllabus here-HTML and here-PDF\nAll reading materials are available here\nIntroduction: Even the longest journey starts somewhere"
+    "text": "Find the syllabus here-HTML and here-PDF\nAll reading materials are available here\nIntroduction: Even the longest journey starts somewhere",
+    "crumbs": [
+      "Home",
+      "Courses",
+      "Advance Econometrics: Causal Effects"
+    ]
   },
   {
     "objectID": "adv_class/syllabus.html#course-outline",
@@ -8761,14 +8951,24 @@
     "href": "rmethods2/index.html#homework-1",
     "title": "Research Methods II",
     "section": "Homework 1",
-    "text": "Homework 1\nThe first homework is due on TBD. You can find the instructions here.\nSession 5: Significance and Missing Data\nSlides: html and pdf\nReadings: link\nSession 6: Imputation: Statistical Matching\nSlides: html and pdf\nReadings: link\nSession 7: Micro-Simulations, and Monte Carlo Methods\nSlides: html and pdf\nReadings: link"
+    "text": "Homework 1\nThe first homework is due on TBD. You can find the instructions here.\nSession 5: Significance and Missing Data\nSlides: html and pdf\nReadings: link\nSession 6: Imputation: Statistical Matching\nSlides: html and pdf\nReadings: link\nSession 7: Micro-Simulations, and Monte Carlo Methods\nSlides: html and pdf\nReadings: link",
+    "crumbs": [
+      "Home",
+      "Courses",
+      "Research Methods II"
+    ]
   },
   {
     "objectID": "rmethods2/index.html#homework-2",
     "href": "rmethods2/index.html#homework-2",
     "title": "Research Methods II",
     "section": "Homework 2",
-    "text": "Homework 2\nThe Second homework is due on TBD. You can find the instructions here."
+    "text": "Homework 2\nThe Second homework is due on TBD. You can find the instructions here.",
+    "crumbs": [
+      "Home",
+      "Courses",
+      "Research Methods II"
+    ]
   },
   {
     "objectID": "adv_class/Homework2.html",

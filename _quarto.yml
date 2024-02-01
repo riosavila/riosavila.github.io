@@ -11,20 +11,23 @@ website:
     left:        
       - href: index.qmd
         text: Home
-      - href: adv_class/index.qmd
-        text: "Adv Methods and Causal Effects"
-      - href: rmethods/index.qmd
-        text: "Research Methods: Econometrics I"
-      - href: rmethods2/index.qmd
-        text: "Research Methods II: Applied Methods"  
-      - text: "Math Refresher"
-        menu:
-          - href: mathref/math_1.qmd
-          - href: mathref/math_2.qmd
-          - href: mathref/math_3.qmd
       - href: resources.qmd
         text: "Resources"  
       - about.qmd
+  sidebar: 
+    style: docked
+    search: true
+    contents:
+      - section: "Courses"
+        contents: 
+          - adv_class/index.qmd
+          - rmethods/index.qmd
+          - rmethods2/index.qmd
+      - section: "Math Refresher"
+        contents:
+          - mathref/math_1.qmd
+          - mathref/math_2.qmd
+          - mathref/math_3.qmd
 
 format:
   html:
