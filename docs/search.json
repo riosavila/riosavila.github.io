@@ -4613,77 +4613,132 @@
     "href": "mathref/math_3.html",
     "title": "Math Refresher: Basic Statistics and Probability",
     "section": "",
-    "text": "A random variable is a variable whose value is determined by the outcome of a random experiment. For example, if we toss a coin, the outcome is random, but the possible values of \\(X\\) are 0 and 1. If we roll a die, the outcome is random with possible values 1, 2, 3, 4, 5, and 6.\nThere are two kinds of random variables:\n\nDiscrete random variables can only take on a finite number of values. For example, the number of heads in 10 coin tosses is a discrete random variable.\nContinuous random variables can take on any value in a range. For example, the height of a randomly selected person is a continuous random variable.\n\nIf \\(X\\) is discrete random variable, then \\(P(X=c)\\) is the probability that \\(X\\) takes on the value \\(c\\). It can be any value between 0 and 1.\nBy definition, the sum of all probabilities for all feasible values of \\(X\\) is 1. That is, \\(\\sum_{c} P(X=c)=1\\).\nIf \\(X\\) is continuous random variable, then \\(P(X=c)=0\\) for any value \\(c\\). The probability to observe a particular number is zero. Instead, when using continuous data, we focus on the probability of observing a value in a range. For example, \\(P(1.7 \\leq X \\leq 1.8)\\) is the probability that \\(X\\) is between 1.7 and 1.8, which can be any value between 0 and 1."
+    "text": "A random variable is a variable whose value is determined by the outcome of a random experiment. For example, if we toss a coin, the outcome is random, but the possible values of \\(X\\) are 0 and 1. If we roll a die, the outcome is random with possible values 1, 2, 3, 4, 5, and 6.\nThere are two kinds of random variables:\n\nDiscrete random variables can only take on a finite number of values. For example, the number of heads in 10 coin tosses is a discrete random variable.\nContinuous random variables can take on any value in a range. For example, the height of a randomly selected person is a continuous random variable.\n\nIf \\(X\\) is discrete random variable, then \\(P(X=c)\\) is the probability that \\(X\\) takes on the value \\(c\\). It can be any value between 0 and 1.\nBy definition, the sum of all probabilities for all feasible values of \\(X\\) is 1. That is, \\(\\sum_{c} P(X=c)=1\\).\nIf \\(X\\) is continuous random variable, then \\(P(X=c)=0\\) for any value \\(c\\). The probability to observe a particular number is zero. Instead, when using continuous data, we focus on the probability of observing a value in a range. For example, \\(P(1.7 \\leq X \\leq 1.8)\\) is the probability that \\(X\\) is between 1.7 and 1.8, which can be any value between 0 and 1.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher: Basic Statistics and Probability"
+    ]
   },
   {
     "objectID": "mathref/math_3.html#random-variables",
     "href": "mathref/math_3.html#random-variables",
     "title": "Math Refresher: Basic Statistics and Probability",
     "section": "",
-    "text": "A random variable is a variable whose value is determined by the outcome of a random experiment. For example, if we toss a coin, the outcome is random, but the possible values of \\(X\\) are 0 and 1. If we roll a die, the outcome is random with possible values 1, 2, 3, 4, 5, and 6.\nThere are two kinds of random variables:\n\nDiscrete random variables can only take on a finite number of values. For example, the number of heads in 10 coin tosses is a discrete random variable.\nContinuous random variables can take on any value in a range. For example, the height of a randomly selected person is a continuous random variable.\n\nIf \\(X\\) is discrete random variable, then \\(P(X=c)\\) is the probability that \\(X\\) takes on the value \\(c\\). It can be any value between 0 and 1.\nBy definition, the sum of all probabilities for all feasible values of \\(X\\) is 1. That is, \\(\\sum_{c} P(X=c)=1\\).\nIf \\(X\\) is continuous random variable, then \\(P(X=c)=0\\) for any value \\(c\\). The probability to observe a particular number is zero. Instead, when using continuous data, we focus on the probability of observing a value in a range. For example, \\(P(1.7 \\leq X \\leq 1.8)\\) is the probability that \\(X\\) is between 1.7 and 1.8, which can be any value between 0 and 1."
+    "text": "A random variable is a variable whose value is determined by the outcome of a random experiment. For example, if we toss a coin, the outcome is random, but the possible values of \\(X\\) are 0 and 1. If we roll a die, the outcome is random with possible values 1, 2, 3, 4, 5, and 6.\nThere are two kinds of random variables:\n\nDiscrete random variables can only take on a finite number of values. For example, the number of heads in 10 coin tosses is a discrete random variable.\nContinuous random variables can take on any value in a range. For example, the height of a randomly selected person is a continuous random variable.\n\nIf \\(X\\) is discrete random variable, then \\(P(X=c)\\) is the probability that \\(X\\) takes on the value \\(c\\). It can be any value between 0 and 1.\nBy definition, the sum of all probabilities for all feasible values of \\(X\\) is 1. That is, \\(\\sum_{c} P(X=c)=1\\).\nIf \\(X\\) is continuous random variable, then \\(P(X=c)=0\\) for any value \\(c\\). The probability to observe a particular number is zero. Instead, when using continuous data, we focus on the probability of observing a value in a range. For example, \\(P(1.7 \\leq X \\leq 1.8)\\) is the probability that \\(X\\) is between 1.7 and 1.8, which can be any value between 0 and 1.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher: Basic Statistics and Probability"
+    ]
   },
   {
     "objectID": "mathref/math_3.html#probability-distributions",
     "href": "mathref/math_3.html#probability-distributions",
     "title": "Math Refresher: Basic Statistics and Probability",
     "section": "Probability Distributions",
-    "text": "Probability Distributions\nA probability distribution is a function that assigns probabilities to the values of a random variable. For discrete random variables, we can use a table to describe the probability distribution. For example, the probability distribution of the number of heads in 5 coin tosses is:\n\n\n\nNumber of heads\nProbability\n\n\n\n\n0\n0.03125\n\n\n1\n0.15625\n\n\n2\n0.3125\n\n\n3\n0.3125\n\n\n4\n0.15625\n\n\n5\n0.03125\n\n\n\nIn this case, the sum of all probabilities is 1.\nFor continuous random variables, we can use a function to describe the probability distribution. For example, we can say that the probability distribution of the height of a randomly selected person is:\n\\[f(x)\\]\nThis function has important properties:\n\n\\(f(x) \\geq 0\\) for all \\(x\\).\n\\(\\int_{-\\infty}^{\\infty} f(x) dx = 1\\).\n\\(P(a \\leq X \\leq b) = \\int_{a}^{b} f(x) dx\\).\n\\(P(X \\leq a) + P(X &gt; a) = 1\\).\n\\(P(a \\leq X \\leq b) = P(X &lt; b) - P(X &lt; a)\\)."
+    "text": "Probability Distributions\nA probability distribution is a function that assigns probabilities to the values of a random variable. For discrete random variables, we can use a table to describe the probability distribution. For example, the probability distribution of the number of heads in 5 coin tosses is:\n\n\n\nNumber of heads\nProbability\n\n\n\n\n0\n0.03125\n\n\n1\n0.15625\n\n\n2\n0.3125\n\n\n3\n0.3125\n\n\n4\n0.15625\n\n\n5\n0.03125\n\n\n\nIn this case, the sum of all probabilities is 1.\nFor continuous random variables, we can use a function to describe the probability distribution. For example, we can say that the probability distribution of the height of a randomly selected person is:\n\\[f(x)\\]\nThis function has important properties:\n\n\\(f(x) \\geq 0\\) for all \\(x\\).\n\\(\\int_{-\\infty}^{\\infty} f(x) dx = 1\\).\n\\(P(a \\leq X \\leq b) = \\int_{a}^{b} f(x) dx\\).\n\\(P(X \\leq a) + P(X &gt; a) = 1\\).\n\\(P(a \\leq X \\leq b) = P(X &lt; b) - P(X &lt; a)\\).",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher: Basic Statistics and Probability"
+    ]
   },
   {
     "objectID": "mathref/math_3.html#joint-probability-distributions",
     "href": "mathref/math_3.html#joint-probability-distributions",
     "title": "Math Refresher: Basic Statistics and Probability",
     "section": "Joint Probability Distributions",
-    "text": "Joint Probability Distributions\nThe joint probability distribution of \\(X\\) and \\(Y\\) is a function that assigns probabilities to the values of \\(X\\) and \\(Y\\). For discrete random variables, we can use a table to describe the joint probability distribution. For continuous variables, it must be the case that:\n\\[\\int_{-\\infty}^{\\infty} \\int_{-\\infty}^{\\infty} f(x,y) dx dy = 1\\]"
+    "text": "Joint Probability Distributions\nThe joint probability distribution of \\(X\\) and \\(Y\\) is a function that assigns probabilities to the values of \\(X\\) and \\(Y\\). For discrete random variables, we can use a table to describe the joint probability distribution. For continuous variables, it must be the case that:\n\\[\\int_{-\\infty}^{\\infty} \\int_{-\\infty}^{\\infty} f(x,y) dx dy = 1\\]",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher: Basic Statistics and Probability"
+    ]
   },
   {
     "objectID": "mathref/math_3.html#marginal-probability-distributions",
     "href": "mathref/math_3.html#marginal-probability-distributions",
     "title": "Math Refresher: Basic Statistics and Probability",
     "section": "Marginal Probability Distributions",
-    "text": "Marginal Probability Distributions\nThe marginal probability distribution of \\(X\\) is the probability distribution of \\(X\\) ignoring the values of \\(Y\\). This can be expressed as:\n\\[P(x) = \\sum_{z=-\\infty}^{\\infty} P(x,y=z)\\]\nit still must be the case that\n\\[ \\sum_{w=-\\infty}^{\\infty}\\sum_{z=-\\infty}^{\\infty} P(x=w,y=z)=1\\]\nFor continuous random variables, we have the following \\[\\int_{-\\infty}^{\\infty} f(x) dx = 1\\]\nwhere \\(f(x)\\) is the marginal probability distribution of \\(X\\). What is left after we “integrate out” \\(Y\\) is the marginal probability distribution of \\(X\\).\n\\[f(x) = \\int_{-\\infty}^{\\infty} f(x,y) dy\\]"
+    "text": "Marginal Probability Distributions\nThe marginal probability distribution of \\(X\\) is the probability distribution of \\(X\\) ignoring the values of \\(Y\\). This can be expressed as:\n\\[P(x) = \\sum_{z=-\\infty}^{\\infty} P(x,y=z)\\]\nit still must be the case that\n\\[ \\sum_{w=-\\infty}^{\\infty}\\sum_{z=-\\infty}^{\\infty} P(x=w,y=z)=1\\]\nFor continuous random variables, we have the following \\[\\int_{-\\infty}^{\\infty} f(x) dx = 1\\]\nwhere \\(f(x)\\) is the marginal probability distribution of \\(X\\). What is left after we “integrate out” \\(Y\\) is the marginal probability distribution of \\(X\\).\n\\[f(x) = \\int_{-\\infty}^{\\infty} f(x,y) dy\\]",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher: Basic Statistics and Probability"
+    ]
   },
   {
     "objectID": "mathref/math_3.html#independence",
     "href": "mathref/math_3.html#independence",
     "title": "Math Refresher: Basic Statistics and Probability",
     "section": "Independence",
-    "text": "Independence\nTwo random variables \\(X\\) and \\(Y\\) are independent if and only if:\n\\[P(x,y) = P(x)P(y) or f(x,y)=f(x)*f(y)\\]"
+    "text": "Independence\nTwo random variables \\(X\\) and \\(Y\\) are independent if and only if:\n\\[P(x,y) = P(x)P(y) or f(x,y)=f(x)*f(y)\\]",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher: Basic Statistics and Probability"
+    ]
   },
   {
     "objectID": "mathref/math_3.html#conditional-probability",
     "href": "mathref/math_3.html#conditional-probability",
     "title": "Math Refresher: Basic Statistics and Probability",
     "section": "Conditional Probability",
-    "text": "Conditional Probability\nThe conditional probability of \\(X\\) given \\(Y\\) is:\n\\[P(x|y) = \\frac{P(x,y)}{P(y)}\\]\nor, the conditional probabilty density function:\n\\[f(x|y) = \\frac{f(x,y)}{f(y)}\\]\nAnd if \\(X\\) and \\(Y\\) are independent, then:\n\\(P(x|y) = P(x)\\) or \\(f(x|y) = f(x)\\)."
+    "text": "Conditional Probability\nThe conditional probability of \\(X\\) given \\(Y\\) is:\n\\[P(x|y) = \\frac{P(x,y)}{P(y)}\\]\nor, the conditional probabilty density function:\n\\[f(x|y) = \\frac{f(x,y)}{f(y)}\\]\nAnd if \\(X\\) and \\(Y\\) are independent, then:\n\\(P(x|y) = P(x)\\) or \\(f(x|y) = f(x)\\).",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher: Basic Statistics and Probability"
+    ]
   },
   {
     "objectID": "mathref/math_3.html#mean-and-variance",
     "href": "mathref/math_3.html#mean-and-variance",
     "title": "Math Refresher: Basic Statistics and Probability",
     "section": "Mean, and variance",
-    "text": "Mean, and variance\nThe mean of a random variable \\(X\\) is:\n\\[E(X) = \\sum_{x} xP(x)\\] or \\[E(X) = \\int_{-\\infty}^{\\infty} xf(x) dx\\]\nWhich is a weighted sum of all possible values of \\(X\\), and where the weights are the probabilities (or densities) of each value. It can also be written or referred as:\n\\[E(X), \\mu_x , \\bar x\\]\nThis measure is also called the expected value of \\(X\\), and proviveds a measure of the “center” of the distribution of \\(X\\). It can be very sensitive to outliers.\nThe variance of a random variable \\(X\\) is:\n\\[Var(X) = E[(X-E(X))^2] \\]\n\\[Var(X) = \\sum_{x} (X-E(X))^2 P(x) \\] or\n\\[Var(X) = \\int_{x} (X-E(X))^2 f(x) dx \\]\nWhich is the expected value of the squared difference between \\(X\\) and its mean. It provides a measure of average the “spread” of the distribution of \\(X\\).\nIt could also be defined as follows:\n\\[\\sigma^2_x = Var(x) = E(X^2) - [E(X)]^2\\]\nThere are other measures that can be used to characterize a distribution, such as the median, the mode, the skewness, and the kurtosis. They are defined as follows:\n\nThe median is the value of \\(X\\) such that \\(P(X \\leq x) = 0.5\\).\nThe mode is the value of \\(X\\) that maximizes \\(P(X=x)\\).\nThe skewness is a measure of the asymmetry of the distribution of \\(X\\). It is defined as:\n\n\\[\\frac{E[(X-E(X))^3]}{[Var(X)]^{3/2}}\\]\n\nThe kurtosis is a measure of the “peakedness” of the distribution of \\(X\\). It is defined as:\n\n\\[\\frac{E[(X-E(X))^4]}{[Var(X)]^{2}}\\]\n\nThe quantiles of a distribution are values that divide the distribution into equal parts. For example, the 0.25 quantile is the value of \\(X\\) such that \\(P(X \\leq x) = 0.25\\).\n\nFor a normal distribution, the mean, median, and mode are all equal. The skewness is 0, and the kurtosis is 3."
+    "text": "Mean, and variance\nThe mean of a random variable \\(X\\) is:\n\\[E(X) = \\sum_{x} xP(x)\\] or \\[E(X) = \\int_{-\\infty}^{\\infty} xf(x) dx\\]\nWhich is a weighted sum of all possible values of \\(X\\), and where the weights are the probabilities (or densities) of each value. It can also be written or referred as:\n\\[E(X), \\mu_x , \\bar x\\]\nThis measure is also called the expected value of \\(X\\), and proviveds a measure of the “center” of the distribution of \\(X\\). It can be very sensitive to outliers.\nThe variance of a random variable \\(X\\) is:\n\\[Var(X) = E[(X-E(X))^2] \\]\n\\[Var(X) = \\sum_{x} (X-E(X))^2 P(x) \\] or\n\\[Var(X) = \\int_{x} (X-E(X))^2 f(x) dx \\]\nWhich is the expected value of the squared difference between \\(X\\) and its mean. It provides a measure of average the “spread” of the distribution of \\(X\\).\nIt could also be defined as follows:\n\\[\\sigma^2_x = Var(x) = E(X^2) - [E(X)]^2\\]\nThere are other measures that can be used to characterize a distribution, such as the median, the mode, the skewness, and the kurtosis. They are defined as follows:\n\nThe median is the value of \\(X\\) such that \\(P(X \\leq x) = 0.5\\).\nThe mode is the value of \\(X\\) that maximizes \\(P(X=x)\\).\nThe skewness is a measure of the asymmetry of the distribution of \\(X\\). It is defined as:\n\n\\[\\frac{E[(X-E(X))^3]}{[Var(X)]^{3/2}}\\]\n\nThe kurtosis is a measure of the “peakedness” of the distribution of \\(X\\). It is defined as:\n\n\\[\\frac{E[(X-E(X))^4]}{[Var(X)]^{2}}\\]\n\nThe quantiles of a distribution are values that divide the distribution into equal parts. For example, the 0.25 quantile is the value of \\(X\\) such that \\(P(X \\leq x) = 0.25\\).\n\nFor a normal distribution, the mean, median, and mode are all equal. The skewness is 0, and the kurtosis is 3.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher: Basic Statistics and Probability"
+    ]
   },
   {
     "objectID": "mathref/math_3.html#covariance-and-correlation",
     "href": "mathref/math_3.html#covariance-and-correlation",
     "title": "Math Refresher: Basic Statistics and Probability",
     "section": "Covariance and Correlation",
-    "text": "Covariance and Correlation\nThe covariance of two random variables \\(X\\) and \\(Y\\) is:\n\\[Cov(X,Y) = E[(X-E(X))(Y-E(Y))]\\]\n\\[Cov(X,Y) = \\sum_{x}\\sum_{y} (x-E(X))(y-E(Y))P(x,y)\\]\n\\[Cov(X,Y) = \\int_{x}\\int_{y} (x-E(X))(y-E(Y))f(x,y)\\]\nThe covariance measures the linear association between \\(X\\) and \\(Y\\). If \\(X\\) and \\(Y\\) are independent, then \\(Cov(X,Y)=0\\). However, if \\(Cov(X,Y)=0\\), then \\(X\\) and \\(Y\\) are not necessarily independent. For example \\(y=(x-E(X))^2\\) and \\(x\\) are not independent, but \\(Cov(y,x)=0\\).\nThis measure is scale dependent. For example, if we measure \\(X\\) in meters, and \\(Y\\) in centimeters, then \\(Cov(X,Y)\\) will be 100 times larger than if we measure \\(X\\) in meters and \\(Y\\) in kilometers.\nAn alternative measure of association is the correlation coefficient, which is defined as:\n\\[Corr(X,Y) = \\frac{Cov(X,Y)}{\\sqrt{Var(X)Var(Y)}}\\] \\[\\rho_{X,Y} = \\frac{\\sigma_{X,Y}}{\\sigma_x \\sigma_y}\\]\nThis statistics is always between -1 and 1, regardless of the scale of \\(x\\) or \\(y\\)."
+    "text": "Covariance and Correlation\nThe covariance of two random variables \\(X\\) and \\(Y\\) is:\n\\[Cov(X,Y) = E[(X-E(X))(Y-E(Y))]\\]\n\\[Cov(X,Y) = \\sum_{x}\\sum_{y} (x-E(X))(y-E(Y))P(x,y)\\]\n\\[Cov(X,Y) = \\int_{x}\\int_{y} (x-E(X))(y-E(Y))f(x,y)\\]\nThe covariance measures the linear association between \\(X\\) and \\(Y\\). If \\(X\\) and \\(Y\\) are independent, then \\(Cov(X,Y)=0\\). However, if \\(Cov(X,Y)=0\\), then \\(X\\) and \\(Y\\) are not necessarily independent. For example \\(y=(x-E(X))^2\\) and \\(x\\) are not independent, but \\(Cov(y,x)=0\\).\nThis measure is scale dependent. For example, if we measure \\(X\\) in meters, and \\(Y\\) in centimeters, then \\(Cov(X,Y)\\) will be 100 times larger than if we measure \\(X\\) in meters and \\(Y\\) in kilometers.\nAn alternative measure of association is the correlation coefficient, which is defined as:\n\\[Corr(X,Y) = \\frac{Cov(X,Y)}{\\sqrt{Var(X)Var(Y)}}\\] \\[\\rho_{X,Y} = \\frac{\\sigma_{X,Y}}{\\sigma_x \\sigma_y}\\]\nThis statistics is always between -1 and 1, regardless of the scale of \\(x\\) or \\(y\\).",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher: Basic Statistics and Probability"
+    ]
   },
   {
     "objectID": "mathref/math_3.html#propeties-of-mean-variance-and-covariance",
     "href": "mathref/math_3.html#propeties-of-mean-variance-and-covariance",
     "title": "Math Refresher: Basic Statistics and Probability",
     "section": "Propeties of Mean, Variance and Covariance",
-    "text": "Propeties of Mean, Variance and Covariance\nConsider two random variables \\(X\\) and \\(Y\\), and let \\(a\\), \\(b\\), \\(c\\) and \\(d\\) be constants. Then:\n\n\\(Var(aX+b) = a^2Var(X)\\)\n\\(Cov(aX+b,cY+d) = acCov(X,Y)\\)\n\\(Var(aX+bY) = a^2Var(X) + b^2Var(Y) + 2abCov(X,Y)\\)\n\\(Cov(X,Y) = E(XY) - E(X)E(Y)\\)\n\\(Cov(X,X) = Var(X)\\)\n\nFor the mean:\n\n\\(E(aX+b) = aE(X)+b\\)\n\\(E(aX+bY) = aE(X) + bE(Y)\\)"
+    "text": "Propeties of Mean, Variance and Covariance\nConsider two random variables \\(X\\) and \\(Y\\), and let \\(a\\), \\(b\\), \\(c\\) and \\(d\\) be constants. Then:\n\n\\(Var(aX+b) = a^2Var(X)\\)\n\\(Cov(aX+b,cY+d) = acCov(X,Y)\\)\n\\(Var(aX+bY) = a^2Var(X) + b^2Var(Y) + 2abCov(X,Y)\\)\n\\(Cov(X,Y) = E(XY) - E(X)E(Y)\\)\n\\(Cov(X,X) = Var(X)\\)\n\nFor the mean:\n\n\\(E(aX+b) = aE(X)+b\\)\n\\(E(aX+bY) = aE(X) + bE(Y)\\)",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher: Basic Statistics and Probability"
+    ]
   },
   {
     "objectID": "mathref/math_3.html#some-useful-distributions",
     "href": "mathref/math_3.html#some-useful-distributions",
     "title": "Math Refresher: Basic Statistics and Probability",
     "section": "Some useful distributions",
-    "text": "Some useful distributions\n\nDiscrete distributions\n\nBernoulli distribution: \\(X \\sim Bernoulli(p)\\), where \\(p=P(X=1)\\) and \\(1-p=P(X=0)\\). \\(E(X)=p\\) and variance \\(Var(X)=p(1-p)\\). Flip a coin with probability \\(p\\) of getting heads.\nBinomial distribution: \\(X \\sim Binomial(n,p)\\), where \\(p=P(X=1)\\) and \\(1-p=P(X=0)\\). \\(E(x)=np\\) and \\(Var(X)=np(1-p)\\). The binomial distribution is the distribution of the number of successes in \\(n\\) independent Bernoulli trials.\nPoisson distribution: \\(X \\sim Poisson(\\lambda)\\), where \\(\\lambda=E(X)=Var(x)\\). Typically used for counts. For example, the number of customers arriving at a store in a given hour.\n\n\n\nContinuous distributions\n\nUniform distribution: \\(X \\sim Uniform(a,b)\\), where \\(f(x)=\\frac{1}{b-a}\\) for \\(a \\leq x \\leq b\\), and \\(f(x)=0\\) otherwise. \\(E(X)=\\frac{a+b}{2}\\) and \\(Var(X)=\\frac{(b-a)^2}{12}\\). Time between bus arrivals.\nNormal distribution: \\(X \\sim Normal(\\mu,\\sigma^2)\\), where \\(f(x)=\\frac{1}{\\sqrt{2\\pi\\sigma^2}}e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}\\). \\(E(X)=\\mu\\) and \\(Var(X)=\\sigma^2\\). For example, the height of a randomly selected person.\nt-distribution: \\(X \\sim t(\\nu)\\), where \\(f(x)=\\frac{\\Gamma(\\frac{\\nu+1}{2})}{\\sqrt{\\nu\\pi}\\Gamma(\\frac{\\nu}{2})}(1+\\frac{x^2}{\\nu})^{-\\frac{\\nu+1}{2}}\\). \\(E(X)=0\\) if \\(\\nu&gt;1\\), and \\(Var(X)=\\frac{\\nu}{\\nu-2}\\) if \\(\\nu&gt;2\\). For example, the distribution of the sample mean of a small sample from a normal distribution.\nAlternatively. \\(X \\sim t(\\nu)\\), where \\(X=\\frac{Z}{\\sqrt{V/\\nu}}\\), where \\(Z \\sim Normal(0,1)\\) and \\(V \\sim \\chi^2(\\nu)\\), and \\(Z\\) and \\(V\\) are independent.\nChi-squared distribution: \\(X \\sim \\chi^2(\\nu)\\), where \\(f(x)=\\frac{1}{2^{\\nu/2}\\Gamma(\\nu/2)}x^{\\nu/2-1}e^{-x/2}\\). \\(E(X)=\\nu\\) and \\(Var(X)=2\\nu\\).\nAlternatively, \\(X \\sim \\chi^2(\\nu)\\), where \\(X=Z_1^2+Z_2^2+...+Z_\\nu^2\\), where \\(Z_i \\sim Normal(0,1)\\), and \\(Z_1\\), \\(Z_2\\), …, \\(Z_\\nu\\) are independent.\nF-distribution:\n\\(X \\sim F(\\nu_1,\\nu_2)\\), where \\(f(x)=\\frac{\\Gamma(\\frac{\\nu_1+\\nu_2}{2})}{\\Gamma(\\frac{\\nu_1}{2})\\Gamma(\\frac{\\nu_2}{2})}(\\frac{\\nu_1}{\\nu_2})^{\\nu_1/2}x^{\\nu_1/2-1}(1+\\frac{\\nu_1}{\\nu_2}x)^{-(\\nu_1+\\nu_2)/2}\\). \\(E(X)=\\frac{\\nu_2}{\\nu_2-2}\\) if \\(\\nu_2&gt;2\\), and \\(Var(X)=\\frac{2\\nu_2^2(\\nu_1+\\nu_2-2)}{\\nu_1(\\nu_2-2)^2(\\nu_2-4)}\\) if \\(\\nu_2&gt;4\\).\nAlternatively, \\(X \\sim F(\\nu_1,\\nu_2)\\), where \\(X=\\frac{V_1/\\nu_1}{V_2/\\nu_2}\\), where \\(V_1 \\sim \\chi^2(\\nu_1)\\) and \\(V_2 \\sim \\chi^2(\\nu_2)\\), and \\(V_1\\) and \\(V_2\\) are independent."
+    "text": "Some useful distributions\n\nDiscrete distributions\n\nBernoulli distribution: \\(X \\sim Bernoulli(p)\\), where \\(p=P(X=1)\\) and \\(1-p=P(X=0)\\). \\(E(X)=p\\) and variance \\(Var(X)=p(1-p)\\). Flip a coin with probability \\(p\\) of getting heads.\nBinomial distribution: \\(X \\sim Binomial(n,p)\\), where \\(p=P(X=1)\\) and \\(1-p=P(X=0)\\). \\(E(x)=np\\) and \\(Var(X)=np(1-p)\\). The binomial distribution is the distribution of the number of successes in \\(n\\) independent Bernoulli trials.\nPoisson distribution: \\(X \\sim Poisson(\\lambda)\\), where \\(\\lambda=E(X)=Var(x)\\). Typically used for counts. For example, the number of customers arriving at a store in a given hour.\n\n\n\nContinuous distributions\n\nUniform distribution: \\(X \\sim Uniform(a,b)\\), where \\(f(x)=\\frac{1}{b-a}\\) for \\(a \\leq x \\leq b\\), and \\(f(x)=0\\) otherwise. \\(E(X)=\\frac{a+b}{2}\\) and \\(Var(X)=\\frac{(b-a)^2}{12}\\). Time between bus arrivals.\nNormal distribution: \\(X \\sim Normal(\\mu,\\sigma^2)\\), where \\(f(x)=\\frac{1}{\\sqrt{2\\pi\\sigma^2}}e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}\\). \\(E(X)=\\mu\\) and \\(Var(X)=\\sigma^2\\). For example, the height of a randomly selected person.\nt-distribution: \\(X \\sim t(\\nu)\\), where \\(f(x)=\\frac{\\Gamma(\\frac{\\nu+1}{2})}{\\sqrt{\\nu\\pi}\\Gamma(\\frac{\\nu}{2})}(1+\\frac{x^2}{\\nu})^{-\\frac{\\nu+1}{2}}\\). \\(E(X)=0\\) if \\(\\nu&gt;1\\), and \\(Var(X)=\\frac{\\nu}{\\nu-2}\\) if \\(\\nu&gt;2\\). For example, the distribution of the sample mean of a small sample from a normal distribution.\nAlternatively. \\(X \\sim t(\\nu)\\), where \\(X=\\frac{Z}{\\sqrt{V/\\nu}}\\), where \\(Z \\sim Normal(0,1)\\) and \\(V \\sim \\chi^2(\\nu)\\), and \\(Z\\) and \\(V\\) are independent.\nChi-squared distribution: \\(X \\sim \\chi^2(\\nu)\\), where \\(f(x)=\\frac{1}{2^{\\nu/2}\\Gamma(\\nu/2)}x^{\\nu/2-1}e^{-x/2}\\). \\(E(X)=\\nu\\) and \\(Var(X)=2\\nu\\).\nAlternatively, \\(X \\sim \\chi^2(\\nu)\\), where \\(X=Z_1^2+Z_2^2+...+Z_\\nu^2\\), where \\(Z_i \\sim Normal(0,1)\\), and \\(Z_1\\), \\(Z_2\\), …, \\(Z_\\nu\\) are independent.\nF-distribution:\n\\(X \\sim F(\\nu_1,\\nu_2)\\), where \\(f(x)=\\frac{\\Gamma(\\frac{\\nu_1+\\nu_2}{2})}{\\Gamma(\\frac{\\nu_1}{2})\\Gamma(\\frac{\\nu_2}{2})}(\\frac{\\nu_1}{\\nu_2})^{\\nu_1/2}x^{\\nu_1/2-1}(1+\\frac{\\nu_1}{\\nu_2}x)^{-(\\nu_1+\\nu_2)/2}\\). \\(E(X)=\\frac{\\nu_2}{\\nu_2-2}\\) if \\(\\nu_2&gt;2\\), and \\(Var(X)=\\frac{2\\nu_2^2(\\nu_1+\\nu_2-2)}{\\nu_1(\\nu_2-2)^2(\\nu_2-4)}\\) if \\(\\nu_2&gt;4\\).\nAlternatively, \\(X \\sim F(\\nu_1,\\nu_2)\\), where \\(X=\\frac{V_1/\\nu_1}{V_2/\\nu_2}\\), where \\(V_1 \\sim \\chi^2(\\nu_1)\\) and \\(V_2 \\sim \\chi^2(\\nu_2)\\), and \\(V_1\\) and \\(V_2\\) are independent.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher: Basic Statistics and Probability"
+    ]
   },
   {
     "objectID": "quarto/regress.html",
