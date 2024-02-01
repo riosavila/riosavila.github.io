@@ -29,12 +29,47 @@ Consider the dataset `hprice2.dta`, available with `frause`. Propose a model to 
 
 Maximum likelihood estimation is a method to estimate the parameters of a model by maximizing the likelihood of the data given the parameters. 
 
-You have been provided with a do-file `mypoisson.do` that estimates the parameters of a standard Poisson model, which is valid when data is fully observed. However, lets assume that data you have access too is censored. That is, 
+In this part, you will estimate the parameters of a Poisson model using maximum likelihood estimation, when the data is censored.
 
-    - You observe the exact number of events if more than 3 occured. If they are less than that, they are recoded as 3.
+### The Poisson Model
 
-- Explain how would you modify the likelihood function to account for this censoring.
-- Modify the do-file `mypoisson.do` to account for this censoring, and estimate the parameters of the model.
-- Using that data from `mypoisson.dta` estimate the parameters of the model using the modified do-file. 
+The Poisson model is a model for count data. The likelihood function for a single observation in a Poisson model is given by:
+
+$$
+P(y=y_i) = \frac{e^{-\lambda} \lambda^{y_i}}{y_i!}
+$$
+
+Where $y_i$ is the count of events, and $\lambda$ is the mean of the distribution. If we assume $\lambda$ depends on a set of covariates, then we can parameterize $\lambda = \exp x\beta $.
+
+For the purpose of programming the likelihood function, it is easier to work with the log-likelihood function, which is given by:
+
+$$
+\begin{aligned}
+L_i(y,X\beta) = - \exp(x\beta) + y_i (x\beta) - log(y_i!)
+\end{aligned}
+$$
+
+Which corresponds to line 16 in the do-file `mypoisson.do`.
+
+### Censored Data
+
+If data is censored, the likelihood function needs to be modified to account for the fact that we do not observe the exact number of events. Specifically:
+
+if $y_i$ is the number of events, and $c$ is the censoring threshold, then the likelihood function is given by:
+
+$$\begin{aligned}
+\text{if }y>c &\rightarrow P(y=y_i) = \frac{e^{-\lambda} \lambda^{y_i}}{y_i!}  \\
+\text{if }y \leq c &\rightarrow P(y \leq c) = \sum_{k=0}^c \frac{e^{-\lambda} \lambda^{k }}{k!}
+\end{aligned}
+$$
+
+### Exercise
+
+Assume that you have data ($yc$) that is censored. You observe the exact number of events if more than 3 occured. If they are less than that, they are recoded as 3.
+
+- Modify the program `mypoissonc` in `mypoisson.do` to account for this censoring, and estimate the parameters of the model.
+
+- Using the simulated `y`,`yc`, `x1` and `x2`, estimate the parameters of the model using the standard Poisson model (`y`), and the censored poisson model (`yc`). Compare the results, and discuss the implications of the censoring on the estimation of the parameters.
+
 
 

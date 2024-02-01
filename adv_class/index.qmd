@@ -6,6 +6,8 @@ title: "Advance Econometrics: Causal Effects"
 
 Find the syllabus [here-HTML](syllabus.qmd) and [here-PDF](syllabus.pdf) 
 
+All reading materials are available [here](https://github.com/riosavila/madvclass)
+
 [**Introduction**](01Introduction.qmd): Even the longest journey starts somewhere
 
 ## Part I: The tools

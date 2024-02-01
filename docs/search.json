@@ -8558,7 +8558,7 @@
     "href": "adv_class/index.html",
     "title": "Advance Econometrics: Causal Effects",
     "section": "",
-    "text": "Find the syllabus here-HTML and here-PDF\nIntroduction: Even the longest journey starts somewhere"
+    "text": "Find the syllabus here-HTML and here-PDF\nAll reading materials are available here\nIntroduction: Even the longest journey starts somewhere"
   },
   {
     "objectID": "adv_class/index.html#part-i-the-tools",
@@ -8614,7 +8614,7 @@
     "href": "adv_class/index.html#syllabus",
     "title": "Advance Econometrics: Causal Effects",
     "section": "",
-    "text": "Find the syllabus here-HTML and here-PDF\nIntroduction: Even the longest journey starts somewhere"
+    "text": "Find the syllabus here-HTML and here-PDF\nAll reading materials are available here\nIntroduction: Even the longest journey starts somewhere"
   },
   {
     "objectID": "adv_class/syllabus.html#course-outline",
@@ -8796,6 +8796,6 @@
     "href": "adv_class/Homework2.html#part-iii-maximum-likelihood-estimation",
     "title": "Homework II",
     "section": "Part III: Maximum Likelihood Estimation",
-    "text": "Part III: Maximum Likelihood Estimation\nMaximum likelihood estimation is a method to estimate the parameters of a model by maximizing the likelihood of the data given the parameters.\nYou have been provided with a do-file mypoisson.do that estimates the parameters of a standard Poisson model, which is valid when data is fully observed. However, lets assume that data you have access too is censored. That is,\n- You observe the exact number of events if more than 3 occured. If they are less than that, they are recoded as 3.\n\nExplain how would you modify the likelihood function to account for this censoring.\nModify the do-file mypoisson.do to account for this censoring, and estimate the parameters of the model.\nUsing that data from mypoisson.dta estimate the parameters of the model using the modified do-file."
+    "text": "Part III: Maximum Likelihood Estimation\nMaximum likelihood estimation is a method to estimate the parameters of a model by maximizing the likelihood of the data given the parameters.\nIn this part, you will estimate the parameters of a Poisson model using maximum likelihood estimation, when the data is censored.\n\nThe Poisson Model\nThe Poisson model is a model for count data. The likelihood function for a single observation in a Poisson model is given by:\n\\[\nP(y=y_i) = \\frac{e^{-\\lambda} \\lambda^{y_i}}{y_i!}\n\\]\nWhere \\(y_i\\) is the count of events, and \\(\\lambda\\) is the mean of the distribution. If we assume \\(\\lambda\\) depends on a set of covariates, then we can parameterize $= x$.\nFor the purpose of programming the likelihood function, it is easier to work with the log-likelihood function, which is given by:\n\\[\n\\begin{aligned}\nL_i(y,X\\beta) = - \\exp(x\\beta) + y_i (x\\beta) - log(y_i!)\n\\end{aligned}\n\\]\nWhich corresponds to line 16 in the do-file mypoisson.do.\n\n\nCensored Data\nIf data is censored, the likelihood function needs to be modified to account for the fact that we do not observe the exact number of events. Specifically:\nif \\(y_i\\) is the number of events, and \\(c\\) is the censoring threshold, then the likelihood function is given by:\n\\[\\begin{aligned}\n\\text{if }y&gt;c &\\rightarrow P(y=y_i) = \\frac{e^{-\\lambda} \\lambda^{y_i}}{y_i!}  \\\\\n\\text{if }y \\leq c &\\rightarrow P(y \\leq c) = \\sum_{k=0}^c \\frac{e^{-\\lambda} \\lambda^{k }}{k!}\n\\end{aligned}\n\\]\n\n\nExercise\nAssume that you have data (\\(yc\\)) that is censored. You observe the exact number of events if more than 3 occured. If they are less than that, they are recoded as 3.\n\nModify the program mypoissonc in mypoisson.do to account for this censoring, and estimate the parameters of the model.\nUsing the simulated y,yc, x1 and x2, estimate the parameters of the model using the standard Poisson model (y), and the censored poisson model (yc). Compare the results, and discuss the implications of the censoring on the estimation of the parameters."
   }
 ]
