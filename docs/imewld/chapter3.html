@@ -57,7 +57,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -102,6 +102,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -301,10 +304,13 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="example-3.1-determinants-of-college-gpa">Example 3.1: Determinants of College GPA</h2>
 <p>Model:</p>
 <p><span class="math display">\[colGPA = \beta_0 + \beta_1hsGPA + \beta_2ACT + u\]</span></p>
-<div id="f149b0cb" class="cell" data-execution_count="1">
+<div id="013f6eb7" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>frause gpa1, <span class="kw">clear</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">regress</span> colgpa hsgpa act</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">regress</span> colgpa act</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<style>div.jp-Notebook .datagrid-container {min-height: 448px; }</style>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
       Source |       SS           df       MS      Number of obs   =       141
@@ -342,7 +348,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="example-3.2-hourly-wage-equation">Example 3.2: Hourly Wage Equation</h2>
 <p>Model:</p>
 <p><span class="math display">\[log(wage)=\beta_0 + \beta_1educ + \beta_2exper + \beta_3tenure + u\]</span></p>
-<div id="19673b20" class="cell" data-execution_count="2">
+<div id="827d6246" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>frause wage1, <span class="kw">clear</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> logwage = <span class="fu">log</span>(wage)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> logwage educ exper tenure</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -373,7 +379,7 @@ window.Quarto = {
 <p>We could estimate the same models with the followin:</p>
 <p><span class="math display">\[educ=\gamma_0 + \gamma_1exper + \gamma_2tenure + v\]</span></p>
 <p><span class="math display">\[log(wage)=\beta_0 + \beta_1 \hat v + u\]</span></p>
-<div id="542d0e6c" class="cell" data-execution_count="3">
+<div id="fa7b8d9e" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:<span class="kw">reg</span> logwage exper tenure</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">predict</span> logwage_res, <span class="kw">resid</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:<span class="kw">reg</span> educ exper tenure</span>
@@ -403,7 +409,7 @@ window.Quarto = {
 </section>
 <section id="example-3.5-explaining-arrest-records" class="level2">
 <h2 class="anchored" data-anchor-id="example-3.5-explaining-arrest-records">Example 3.5 : Explaining Arrest Records</h2>
-<div id="aaefcf21" class="cell" data-execution_count="4">
+<div id="258ce5ff" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>frause crime1, <span class="kw">clear</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">regress</span> narr86 pcnv  ptime86 qemp86</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -425,7 +431,7 @@ window.Quarto = {
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
-<div id="e35f67a1" class="cell" data-execution_count="5">
+<div id="19dde52c" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">regress</span> narr86 pcnv avgsen ptime86 qemp86</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -450,7 +456,7 @@ window.Quarto = {
 </section>
 <section id="variance-inflation-factors" class="level2">
 <h2 class="anchored" data-anchor-id="variance-inflation-factors">Variance Inflation Factors</h2>
-<div id="a2e578d8" class="cell" data-execution_count="6">
+<div id="28675864" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:<span class="kw">regress</span> narr86 pcnv avgsen ptime86 qemp86</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">estat</span> <span class="kw">vif</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -465,7 +471,7 @@ window.Quarto = {
     Mean VIF |      1.07</code></pre>
 </div>
 </div>
-<div id="2758f452" class="cell" data-execution_count="7">
+<div id="4c4125da" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:<span class="kw">regress</span> pcnv avgsen ptime86 qemp86</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">display</span> <span class="st">"VIF for pcnv:   "</span> 1/(1-<span class="fu">e</span>(r2))</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:<span class="kw">regress</span> avgsen ptime86 qemp86 pcnv</span>
@@ -478,7 +484,7 @@ VIF for avgsen: 1.0611622</code></pre>
 </section>
 <section id="example-3.7-evaluating-a-job-training-program" class="level2">
 <h2 class="anchored" data-anchor-id="example-3.7-evaluating-a-job-training-program">Example 3.7 : Evaluating a Job Training Program</h2>
-<div id="6a5f5844" class="cell" data-execution_count="8">
+<div id="e61ab75b" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>frause jtrain98, <span class="kw">clear</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">regress</span> earn98 train</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -498,7 +504,7 @@ VIF for avgsen: 1.0611622</code></pre>
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
-<div id="0c1413cb" class="cell" data-execution_count="9">
+<div id="1cc2d7e3" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">regress</span> earn98 train earn96 educ age married  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
