@@ -39,7 +39,7 @@ $$
 P(y=y_i) = \frac{e^{-\lambda} \lambda^{y_i}}{y_i!}
 $$
 
-Where $y_i$ is the count of events, and $\lambda$ is the mean of the distribution. If we assume $\lambda$ depends on a set of covariates, then we can parameterize $\lambda = \exp x\beta $.
+Where $y_i$ is the count of events, and $\lambda$ is the mean of the distribution. If we assume $\lambda$ depends on a set of covariates, then we can parameterize $\lambda = \exp x\beta$.
 
 For the purpose of programming the likelihood function, it is easier to work with the log-likelihood function, which is given by:
 

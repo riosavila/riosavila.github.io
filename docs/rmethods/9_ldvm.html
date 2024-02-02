@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.251">
+  <meta name="generator" content="quarto-1.4.549">
 
   <meta name="author" content="Fernando Rios-Avila">
   <title>Econometrics MSC Levy - Limited Dependent Variable Models</title>
@@ -31,7 +31,7 @@
     }
     /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -409,22 +409,22 @@ Fernando Rios-Avila
 <section id="what-do-we-mean-limited" class="slide level2">
 <h2>What do we mean Limited??</h2>
 <div id="1e9faf56" class="cell" data-execution_count="1">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">clear</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">set</span> <span class="kw">obs</span> 2000</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">gen</span> r1 = runiform()</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">gen</span> r2 = rchi2(5)/5 </span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">gen</span> r3 = <span class="fu">round</span>(rchi2(3))*3</span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="kw">gen</span> r4 = rnormal()</span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="kw">set</span> <span class="dv">scheme</span> white2</span>
-<span id="cb1-8"><a href="#cb1-8"></a>color_style tableau</span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="kw">histogram</span> r1, <span class="bn">name</span>(m1, <span class="kw">replace</span>) </span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="kw">histogram</span> r2, <span class="bn">name</span>(m2, <span class="kw">replace</span>)</span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="kw">histogram</span> r3, <span class="bn">name</span>(m3, <span class="kw">replace</span>) <span class="kw">width</span>(1)  </span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="kw">histogram</span> r4, <span class="bn">name</span>(m4, <span class="kw">replace</span>)</span>
-<span id="cb1-13"><a href="#cb1-13"></a><span class="kw">graph</span> <span class="bn">combine</span> m1 m2 m3 m4</span>
-<span id="cb1-14"><a href="#cb1-14"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig9_1.png, <span class="kw">width</span>(1000) <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a></a><span class="kw">clear</span></span>
+<span id="cb1-2"><a></a><span class="kw">set</span> <span class="kw">obs</span> 2000</span>
+<span id="cb1-3"><a></a><span class="kw">gen</span> r1 = runiform()</span>
+<span id="cb1-4"><a></a><span class="kw">gen</span> r2 = rchi2(5)/5 </span>
+<span id="cb1-5"><a></a><span class="kw">gen</span> r3 = <span class="fu">round</span>(rchi2(3))*3</span>
+<span id="cb1-6"><a></a><span class="kw">gen</span> r4 = rnormal()</span>
+<span id="cb1-7"><a></a><span class="kw">set</span> <span class="dv">scheme</span> white2</span>
+<span id="cb1-8"><a></a>color_style tableau</span>
+<span id="cb1-9"><a></a><span class="kw">histogram</span> r1, <span class="bn">name</span>(m1, <span class="kw">replace</span>) </span>
+<span id="cb1-10"><a></a><span class="kw">histogram</span> r2, <span class="bn">name</span>(m2, <span class="kw">replace</span>)</span>
+<span id="cb1-11"><a></a><span class="kw">histogram</span> r3, <span class="bn">name</span>(m3, <span class="kw">replace</span>) <span class="kw">width</span>(1)  </span>
+<span id="cb1-12"><a></a><span class="kw">histogram</span> r4, <span class="bn">name</span>(m4, <span class="kw">replace</span>)</span>
+<span id="cb1-13"><a></a><span class="kw">graph</span> <span class="bn">combine</span> m1 m2 m3 m4</span>
+<span id="cb1-14"><a></a><span class="kw">graph</span> <span class="kw">export</span> images/fig9_1.png, <span class="kw">width</span>(1000) <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 
@@ -572,24 +572,24 @@ p(y=1|x) &amp;= G(\beta_0 + \beta_1 x_1 +\beta_2 D_2 ) \\
 <section id="section-5" class="slide level2">
 <h2></h2>
 <div id="95ae5e98" class="cell" data-execution_count="2">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1"></a>  <span class="kw">clear</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>  <span class="kw">set</span> <span class="kw">obs</span> 25</span>
-<span id="cb2-3"><a href="#cb2-3"></a>  <span class="kw">gen</span> <span class="fu">r</span> = runiform()&lt;.7</span>
-<span id="cb2-4"><a href="#cb2-4"></a>  <span class="kw">mata</span>: </span>
-<span id="cb2-5"><a href="#cb2-5"></a>    <span class="fu">r</span> = st_data(.,<span class="st">"r"</span>)</span>
-<span id="cb2-6"><a href="#cb2-6"></a>    ll = <span class="fu">J</span>(99,2,0)</span>
-<span id="cb2-7"><a href="#cb2-7"></a>    <span class="kw">for</span>(i=1;i&lt;=99;i++){</span>
-<span id="cb2-8"><a href="#cb2-8"></a>      theta = i/100</span>
-<span id="cb2-9"><a href="#cb2-9"></a>      <span class="co">// Log Properties</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a>      ll[i,]= theta,<span class="fu">exp</span>(<span class="kw">sum</span>(<span class="fu">log</span>(theta:^(<span class="fu">r</span>:==1) :* (1-theta):^(<span class="fu">r</span>:==0))))</span>
-<span id="cb2-11"><a href="#cb2-11"></a>    }</span>
-<span id="cb2-12"><a href="#cb2-12"></a>  <span class="kw">end</span></span>
-<span id="cb2-13"><a href="#cb2-13"></a>  <span class="kw">qui</span> getmata ll*=ll , <span class="kw">force</span></span>
-<span id="cb2-14"><a href="#cb2-14"></a>  <span class="kw">ren</span> ll1 theta</span>
-<span id="cb2-15"><a href="#cb2-15"></a>  <span class="kw">ren</span> ll2 likelihood</span>
-<span id="cb2-16"><a href="#cb2-16"></a>  *<span class="kw">scatter</span> likelihood theta </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a></a>  <span class="kw">clear</span></span>
+<span id="cb2-2"><a></a>  <span class="kw">set</span> <span class="kw">obs</span> 25</span>
+<span id="cb2-3"><a></a>  <span class="kw">gen</span> <span class="fu">r</span> = runiform()&lt;.7</span>
+<span id="cb2-4"><a></a>  <span class="kw">mata</span>: </span>
+<span id="cb2-5"><a></a>    <span class="fu">r</span> = st_data(.,<span class="st">"r"</span>)</span>
+<span id="cb2-6"><a></a>    ll = <span class="fu">J</span>(99,2,0)</span>
+<span id="cb2-7"><a></a>    <span class="kw">for</span>(i=1;i&lt;=99;i++){</span>
+<span id="cb2-8"><a></a>      theta = i/100</span>
+<span id="cb2-9"><a></a>      <span class="co">// Log Properties</span></span>
+<span id="cb2-10"><a></a>      ll[i,]= theta,<span class="fu">exp</span>(<span class="kw">sum</span>(<span class="fu">log</span>(theta:^(<span class="fu">r</span>:==1) :* (1-theta):^(<span class="fu">r</span>:==0))))</span>
+<span id="cb2-11"><a></a>    }</span>
+<span id="cb2-12"><a></a>  <span class="kw">end</span></span>
+<span id="cb2-13"><a></a>  <span class="kw">qui</span> getmata ll*=ll , <span class="kw">force</span></span>
+<span id="cb2-14"><a></a>  <span class="kw">ren</span> ll1 theta</span>
+<span id="cb2-15"><a></a>  <span class="kw">ren</span> ll2 likelihood</span>
+<span id="cb2-16"><a></a>  *<span class="kw">scatter</span> likelihood theta </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Number of observations (_N) was 0, now 25.
@@ -618,20 +618,20 @@ p(y=1|x) &amp;= G(\beta_0 + \beta_1 x_1 +\beta_2 D_2 ) \\
 <section id="stata---example" class="slide level2 scrollable">
 <h2>Stata - Example</h2>
 <div id="25347e29" class="cell larger" data-execution_count="4">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1"></a>frause mroz, <span class="kw">clear</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>* LPM with Robust Standard errors</span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">qui</span>:<span class="kw">reg</span> inlf nwifeinc educ exper expersq age kidslt6 kidsge6, <span class="kw">robust</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">est</span> sto m1</span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="kw">qui</span>:<span class="kw">logit</span> inlf nwifeinc educ exper expersq age kidslt6 kidsge6, </span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="kw">est</span> sto m2a</span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="kw">qui</span>:margins, <span class="kw">dydx</span>(*) <span class="kw">post</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a><span class="kw">est</span> sto m2b</span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="kw">probit</span> inlf nwifeinc educ exper expersq age kidslt6 kidsge6, </span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="kw">est</span> sto m3a</span>
-<span id="cb4-11"><a href="#cb4-11"></a><span class="kw">qui</span>:margins, <span class="kw">dydx</span>(*) <span class="kw">post</span></span>
-<span id="cb4-12"><a href="#cb4-12"></a><span class="kw">est</span> sto m3b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a></a>frause mroz, <span class="kw">clear</span></span>
+<span id="cb4-2"><a></a>* LPM with Robust Standard errors</span>
+<span id="cb4-3"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> inlf nwifeinc educ exper expersq age kidslt6 kidsge6, <span class="kw">robust</span></span>
+<span id="cb4-4"><a></a><span class="kw">est</span> sto m1</span>
+<span id="cb4-5"><a></a><span class="kw">qui</span>:<span class="kw">logit</span> inlf nwifeinc educ exper expersq age kidslt6 kidsge6, </span>
+<span id="cb4-6"><a></a><span class="kw">est</span> sto m2a</span>
+<span id="cb4-7"><a></a><span class="kw">qui</span>:margins, <span class="kw">dydx</span>(*) <span class="kw">post</span></span>
+<span id="cb4-8"><a></a><span class="kw">est</span> sto m2b</span>
+<span id="cb4-9"><a></a><span class="kw">probit</span> inlf nwifeinc educ exper expersq age kidslt6 kidsge6, </span>
+<span id="cb4-10"><a></a><span class="kw">est</span> sto m3a</span>
+<span id="cb4-11"><a></a><span class="kw">qui</span>:margins, <span class="kw">dydx</span>(*) <span class="kw">post</span></span>
+<span id="cb4-12"><a></a><span class="kw">est</span> sto m3b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -661,13 +661,13 @@ Log likelihood = -401.30219                             Pseudo R2     = 0.2206
 </div>
 </div>
 <div id="36d05ba7" class="cell" data-execution_count="5">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">set</span> <span class="dv">linesize</span> 255</span>
-<span id="cb6-2"><a href="#cb6-2"></a>*| classes: larger</span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">display</span> <span class="st">"Prob Models"</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a>esttab m1 m2a m2b m3a m3b, <span class="fu">scalar</span>(r2 ll) cell(b(fmt(%5.3f)) <span class="co">///</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a>se(par([ ])) <span class="kw">p</span>( par(( )) ) )  gap  mtitle(LPM Logit Logit-<span class="kw">mfx</span> Probit Probit-<span class="kw">mfx</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a></a><span class="kw">set</span> <span class="dv">linesize</span> 255</span>
+<span id="cb6-2"><a></a>*| classes: larger</span>
+<span id="cb6-3"><a></a><span class="kw">display</span> <span class="st">"Prob Models"</span></span>
+<span id="cb6-4"><a></a>esttab m1 m2a m2b m3a m3b, <span class="fu">scalar</span>(r2 ll) cell(b(fmt(%5.3f)) <span class="co">///</span></span>
+<span id="cb6-5"><a></a>se(par([ ])) <span class="kw">p</span>( par(( )) ) )  gap  mtitle(LPM Logit Logit-<span class="kw">mfx</span> Probit Probit-<span class="kw">mfx</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Prob Models
@@ -717,12 +717,12 @@ ll                 -423.9       -401.8                    -401.3
 </div>
 </div>
 <div id="59e26afd" class="cell larger" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">display</span> <span class="st">"LR test"</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">qui</span>:<span class="kw">probit</span> inlf nwifeinc educ exper expersq age kidslt6 kidsge6 motheduc fatheduc, </span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="kw">est</span> sto unrestricted</span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="kw">qui</span>:<span class="kw">probit</span> inlf nwifeinc educ exper expersq age kidslt6 kidsge6 , </span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="kw">est</span> sto restricted</span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="kw">lrtest</span> unrestricted restricted</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a></a><span class="kw">display</span> <span class="st">"LR test"</span></span>
+<span id="cb8-2"><a></a><span class="kw">qui</span>:<span class="kw">probit</span> inlf nwifeinc educ exper expersq age kidslt6 kidsge6 motheduc fatheduc, </span>
+<span id="cb8-3"><a></a><span class="kw">est</span> sto unrestricted</span>
+<span id="cb8-4"><a></a><span class="kw">qui</span>:<span class="kw">probit</span> inlf nwifeinc educ exper expersq age kidslt6 kidsge6 , </span>
+<span id="cb8-5"><a></a><span class="kw">est</span> sto restricted</span>
+<span id="cb8-6"><a></a><span class="kw">lrtest</span> unrestricted restricted</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>LR test
 
@@ -764,20 +764,20 @@ Prob &gt; chi2 = 0.8668</code></pre>
 <li>You can estimate the model using OLS or ML</li>
 </ul>
 <div id="05a2c08d" class="cell" data-execution_count="7">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">qui</span>:{</span>
-<span id="cb10-2"><a href="#cb10-2"></a>  <span class="kw">clear</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a>  <span class="kw">set</span> <span class="kw">obs</span> 999</span>
-<span id="cb10-4"><a href="#cb10-4"></a>  <span class="kw">gen</span> <span class="kw">p</span>   = <span class="dt">_n</span>/(_N+1)</span>
-<span id="cb10-5"><a href="#cb10-5"></a>  <span class="kw">gen</span> fob = <span class="fu">invnormal</span>(<span class="kw">p</span>)</span>
-<span id="cb10-6"><a href="#cb10-6"></a>}</span>
-<span id="cb10-7"><a href="#cb10-7"></a><span class="kw">qui</span>:<span class="kw">histogram</span> fob</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a></a><span class="kw">qui</span>:{</span>
+<span id="cb10-2"><a></a>  <span class="kw">clear</span></span>
+<span id="cb10-3"><a></a>  <span class="kw">set</span> <span class="kw">obs</span> 999</span>
+<span id="cb10-4"><a></a>  <span class="kw">gen</span> <span class="kw">p</span>   = <span class="dt">_n</span>/(_N+1)</span>
+<span id="cb10-5"><a></a>  <span class="kw">gen</span> fob = <span class="fu">invnormal</span>(<span class="kw">p</span>)</span>
+<span id="cb10-6"><a></a>}</span>
+<span id="cb10-7"><a></a><span class="kw">qui</span>:<span class="kw">histogram</span> fob</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="9_ldvm_files/figure-revealjs/cell-8-output-1.png"></p>
+<p><img data-src="9_ldvm_files/figure-revealjs/cell-8-output-1.png" class="quarto-figure quarto-figure-center"></p>
 </figure>
 </div>
 </div>
@@ -791,15 +791,15 @@ Prob &gt; chi2 = 0.8668</code></pre>
 </ul></li>
 </ul>
 <div id="e7cb2f68" class="cell" data-execution_count="8">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">qui</span>: <span class="kw">replace</span> fob = -2 <span class="kw">if</span> fob&lt;-2</span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="kw">qui</span>:<span class="kw">histogram</span> fob, <span class="kw">xlabel</span>(-4 (2) 4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a></a><span class="kw">qui</span>: <span class="kw">replace</span> fob = -2 <span class="kw">if</span> fob&lt;-2</span>
+<span id="cb11-2"><a></a><span class="kw">qui</span>:<span class="kw">histogram</span> fob, <span class="kw">xlabel</span>(-4 (2) 4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="9_ldvm_files/figure-revealjs/cell-9-output-1.png"></p>
+<p><img data-src="9_ldvm_files/figure-revealjs/cell-9-output-1.png" class="quarto-figure quarto-figure-center"></p>
 </figure>
 </div>
 </div>
@@ -813,7 +813,7 @@ Prob &gt; chi2 = 0.8668</code></pre>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="9_ldvm_files/figure-revealjs/cell-10-output-1.png"></p>
+<p><img data-src="9_ldvm_files/figure-revealjs/cell-10-output-1.png" class="quarto-figure quarto-figure-center"></p>
 </figure>
 </div>
 </div>
@@ -901,15 +901,15 @@ E(y|x) &amp;= p(y&gt;0|x)*E(y|y&gt;0,x) + (1-p(y&gt;0|x))*0 \\
 <section id="example" class="slide level2 scrollable">
 <h2>Example</h2>
 <div id="f28f267f" class="cell" data-execution_count="10">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1"></a>frause mroz, <span class="kw">clear</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="kw">qui</span>:<span class="kw">tobit</span> hours nwifeinc educ c.exper##c.exper   age kidslt6 kidsge6 , ll(0)</span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="kw">qui</span>:emargins, <span class="kw">dydx</span>(*) estore(m1)</span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="kw">qui</span>:emargins, <span class="kw">dydx</span>(*) <span class="kw">predict</span>(<span class="kw">p</span>(0,.)) estore(m2)</span>
-<span id="cb12-5"><a href="#cb12-5"></a><span class="kw">qui</span>:emargins, <span class="kw">dydx</span>(*) <span class="kw">predict</span>(<span class="fu">e</span>(0,.)) estore(m3)</span>
-<span id="cb12-6"><a href="#cb12-6"></a><span class="kw">qui</span>:emargins, <span class="kw">dydx</span>(*) <span class="kw">predict</span>(ystar(0,.)) estore(m4)</span>
-<span id="cb12-7"><a href="#cb12-7"></a>esttab m1 m2 m3 m4, mtitle(Latent P(<span class="fu">y</span>&gt;0) E(<span class="fu">y</span>|<span class="fu">y</span>&gt;0) E(<span class="fu">y</span>) ) b(3) se</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a></a>frause mroz, <span class="kw">clear</span></span>
+<span id="cb12-2"><a></a><span class="kw">qui</span>:<span class="kw">tobit</span> hours nwifeinc educ c.exper##c.exper   age kidslt6 kidsge6 , ll(0)</span>
+<span id="cb12-3"><a></a><span class="kw">qui</span>:emargins, <span class="kw">dydx</span>(*) estore(m1)</span>
+<span id="cb12-4"><a></a><span class="kw">qui</span>:emargins, <span class="kw">dydx</span>(*) <span class="kw">predict</span>(<span class="kw">p</span>(0,.)) estore(m2)</span>
+<span id="cb12-5"><a></a><span class="kw">qui</span>:emargins, <span class="kw">dydx</span>(*) <span class="kw">predict</span>(<span class="fu">e</span>(0,.)) estore(m3)</span>
+<span id="cb12-6"><a></a><span class="kw">qui</span>:emargins, <span class="kw">dydx</span>(*) <span class="kw">predict</span>(ystar(0,.)) estore(m4)</span>
+<span id="cb12-7"><a></a>esttab m1 m2 m3 m4, mtitle(Latent P(<span class="fu">y</span>&gt;0) E(<span class="fu">y</span>|<span class="fu">y</span>&gt;0) E(<span class="fu">y</span>) ) b(3) se</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -971,12 +971,12 @@ Hayek (in <a href="https://www.youtube.com/watch?v=d0nERTFo-Sk">Fear the Boom an
 </ul></li>
 </ul>
 <div id="3ef7e4a9" class="cell" data-execution_count="11">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">qui</span>:frause recid, <span class="kw">clear</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="kw">gen</span> lldur = ldurat             <span class="co">// Lower Limit</span></span>
-<span id="cb14-3"><a href="#cb14-3"></a><span class="kw">gen</span> uudur = ldurat <span class="kw">if</span> cens==0  <span class="co">// upper limit = . if censored.</span></span>
-<span id="cb14-4"><a href="#cb14-4"></a><span class="kw">intreg</span> lldur uudur workprg priors tserved felon alcohol drugs <span class="bn">black</span> married educ age</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a></a><span class="kw">qui</span>:frause recid, <span class="kw">clear</span></span>
+<span id="cb14-2"><a></a><span class="kw">gen</span> lldur = ldurat             <span class="co">// Lower Limit</span></span>
+<span id="cb14-3"><a></a><span class="kw">gen</span> uudur = ldurat <span class="kw">if</span> cens==0  <span class="co">// upper limit = . if censored.</span></span>
+<span id="cb14-4"><a></a><span class="kw">intreg</span> lldur uudur workprg priors tserved felon alcohol drugs <span class="bn">black</span> married educ age</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>(893 missing values generated)
@@ -1036,11 +1036,11 @@ Log likelihood = -1597.059                          Prob &gt; chi2       = 0.000
 <li>marginal effects decisions are similar to Tobit</li>
 </ul>
 <div id="4eb8db56" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a href="#cb16-1"></a>frause mroz, <span class="kw">clear</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a><span class="kw">qui</span>:<span class="kw">truncreg</span> hours nwifeinc educ c.exper##c.exper   age kidslt6 kidsge6 , ll(0)</span>
-<span id="cb16-3"><a href="#cb16-3"></a>emargins, <span class="kw">dydx</span>(*) estore(m1b)</span>
-<span id="cb16-4"><a href="#cb16-4"></a>emargins, <span class="kw">dydx</span>(*) <span class="kw">predict</span>(<span class="fu">e</span>(0,.)) estore(m2b)</span>
-<span id="cb16-5"><a href="#cb16-5"></a>esttab m1 m1b m3 m2b, mtitle(Lat-Tobit Lat-Trunc E(<span class="fu">y</span>&gt;0)-Tobit E(<span class="fu">y</span>&gt;0)-Trunc ) b(3) se</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a></a>frause mroz, <span class="kw">clear</span></span>
+<span id="cb16-2"><a></a><span class="kw">qui</span>:<span class="kw">truncreg</span> hours nwifeinc educ c.exper##c.exper   age kidslt6 kidsge6 , ll(0)</span>
+<span id="cb16-3"><a></a>emargins, <span class="kw">dydx</span>(*) estore(m1b)</span>
+<span id="cb16-4"><a></a>emargins, <span class="kw">dydx</span>(*) <span class="kw">predict</span>(<span class="fu">e</span>(0,.)) estore(m2b)</span>
+<span id="cb16-5"><a></a>esttab m1 m1b m3 m2b, mtitle(Lat-Tobit Lat-Trunc E(<span class="fu">y</span>&gt;0)-Tobit E(<span class="fu">y</span>&gt;0)-Trunc ) b(3) se</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Average marginal effects                                   Number of obs = 428
@@ -1152,14 +1152,14 @@ Solution: use Robust Standard Errors!</li>
 <section id="example-1" class="slide level2 scrollable">
 <h2>Example</h2>
 <div id="58da32aa" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a href="#cb18-1"></a>frause crime1, <span class="kw">clear</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a><span class="kw">qui</span>: <span class="kw">reg</span> narr86 pcnv avgsen tottime ptime86 qemp86 inc86 <span class="bn">black</span> hispan born60</span>
-<span id="cb18-3"><a href="#cb18-3"></a><span class="kw">est</span> sto m1</span>
-<span id="cb18-4"><a href="#cb18-4"></a><span class="kw">qui</span>:<span class="kw">poisson</span> narr86 pcnv avgsen tottime ptime86 qemp86 inc86 <span class="bn">black</span> hispan born60, <span class="kw">robust</span></span>
-<span id="cb18-5"><a href="#cb18-5"></a><span class="kw">est</span> sto m2</span>
-<span id="cb18-6"><a href="#cb18-6"></a><span class="kw">qui</span>:emargins, <span class="kw">dydx</span>(*) estore(m3)</span>
-<span id="cb18-7"><a href="#cb18-7"></a>esttab m1 m2 m3, se b(3) mtitle(LRM Poisson Poisson-<span class="kw">mfx</span>) <span class="co">///</span></span>
-<span id="cb18-8"><a href="#cb18-8"></a><span class="kw">keep</span>(pcnv ptime86  qemp86 inc86 <span class="bn">black</span> hispan) <span class="kw">label</span> varwidth(20) wrap</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a></a>frause crime1, <span class="kw">clear</span></span>
+<span id="cb18-2"><a></a><span class="kw">qui</span>: <span class="kw">reg</span> narr86 pcnv avgsen tottime ptime86 qemp86 inc86 <span class="bn">black</span> hispan born60</span>
+<span id="cb18-3"><a></a><span class="kw">est</span> sto m1</span>
+<span id="cb18-4"><a></a><span class="kw">qui</span>:<span class="kw">poisson</span> narr86 pcnv avgsen tottime ptime86 qemp86 inc86 <span class="bn">black</span> hispan born60, <span class="kw">robust</span></span>
+<span id="cb18-5"><a></a><span class="kw">est</span> sto m2</span>
+<span id="cb18-6"><a></a><span class="kw">qui</span>:emargins, <span class="kw">dydx</span>(*) estore(m3)</span>
+<span id="cb18-7"><a></a>esttab m1 m2 m3, se b(3) mtitle(LRM Poisson Poisson-<span class="kw">mfx</span>) <span class="co">///</span></span>
+<span id="cb18-8"><a></a><span class="kw">keep</span>(pcnv ptime86  qemp86 inc86 <span class="bn">black</span> hispan) <span class="kw">label</span> varwidth(20) wrap</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 --------------------------------------------------------------------
@@ -1211,8 +1211,10 @@ Standard errors in parentheses
 <h1>Thats all.</h1>
 <p>Next class: Pool and Basic Panel data analysis</p>
 
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 </section>
     </div>

@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.251">
+  <meta name="generator" content="quarto-1.4.549">
 
   <meta name="author" content="Fernando Rios-Avila">
   <title>Econometrics MSC Levy - Pool Cross-section and Panel Data</title>
@@ -31,7 +31,7 @@
     }
     /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -442,10 +442,10 @@ Fernando Rios-Avila
 <h2>Example</h2>
 <p>Lets use the data <code>fertil1</code> to estimate the changes in fertility rates across time. This data comes from the <em>General Social Survey</em>.</p>
 <div id="1335db22" class="cell" data-execution_count="1">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a>frause fertil1, <span class="kw">clear</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">regress</span> kids educ age agesq <span class="bn">black</span> east northcen west farm othrural town smcity i.<span class="fu">year</span>, <span class="kw">robust</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a></a>frause fertil1, <span class="kw">clear</span></span>
+<span id="cb1-2"><a></a><span class="kw">regress</span> kids educ age agesq <span class="bn">black</span> east northcen west farm othrural town smcity i.<span class="fu">year</span>, <span class="kw">robust</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -488,10 +488,10 @@ Linear regression                               Number of obs     =      1,129
 <li>One could even interact the year dummies with other variables to see how the effect of other variables have changed across time.</li>
 </ul>
 <div id="e05cb01c" class="cell" data-execution_count="2">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a>frause cps78_85, <span class="kw">clear</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">regress</span> lwage i.year##c.(educ i.female) exper expersq <span class="kw">union</span>, <span class="kw">robust</span> cformat(%5.4f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a>frause cps78_85, <span class="kw">clear</span></span>
+<span id="cb3-2"><a></a><span class="kw">regress</span> lwage i.year##c.(educ i.female) exper expersq <span class="kw">union</span>, <span class="kw">robust</span> cformat(%5.4f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -540,10 +540,10 @@ Linear regression                               Number of obs     =      1,084
 <section id="example-1" class="slide level2 scrollable">
 <h2>Example</h2>
 <div id="63213b1f" class="cell" data-execution_count="3">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1"></a>frause cps78_85, <span class="kw">clear</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">regress</span> lwage i.year##c.(educ i.female exper expersq i.<span class="kw">union</span>), <span class="kw">robust</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a></a>frause cps78_85, <span class="kw">clear</span></span>
+<span id="cb5-2"><a></a><span class="kw">regress</span> lwage i.year##c.(educ i.female exper expersq i.<span class="kw">union</span>), <span class="kw">robust</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -585,7 +585,7 @@ year#c.exper |
 </div>
 </div>
 <div id="df2051d5" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">test</span> 85.year#c.educ 85.year#1.female 85.year#c.exper   85.year#c.expersq 85.year#1.<span class="kw">union</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a></a><span class="kw">test</span> 85.year#c.educ 85.year#1.female 85.year#c.exper   85.year#c.expersq 85.year#1.<span class="kw">union</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
  ( 1)  85.year#c.educ = 0
@@ -618,10 +618,10 @@ year#c.exper |
 </ul>
 <p>using only 1981 data. But this would not be a good idea. Why?</p>
 <div id="2034afea" class="cell larger" data-execution_count="5">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1"></a>frause kielmc, <span class="kw">clear</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">regress</span> rprice nearinc <span class="kw">if</span> <span class="fu">year</span> == 1981, <span class="kw">robust</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a></a>frause kielmc, <span class="kw">clear</span></span>
+<span id="cb9-2"><a></a><span class="kw">regress</span> rprice nearinc <span class="kw">if</span> <span class="fu">year</span> == 1981, <span class="kw">robust</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -647,9 +647,9 @@ Linear regression                               Number of obs     =        142
 <li>We could also estimate the model using only 1971 data. What would this be showing us?</li>
 </ul>
 <div id="330d42b9" class="cell larger" data-execution_count="6">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">regress</span> rprice nearinc <span class="kw">if</span> <span class="fu">year</span> == 1978, <span class="kw">robust</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a></a><span class="kw">regress</span> rprice nearinc <span class="kw">if</span> <span class="fu">year</span> == 1978, <span class="kw">robust</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -747,9 +747,9 @@ Linear regression                               Number of obs     =        179
 <p><span class="math display">\[ y = \beta_0 + \beta_1 post + \beta_2 treat + \beta_3 post*treat + e\]</span></p>
 <p>Where <span class="math inline">\(\beta_3\)</span> is the treatment effect. (only for 2x2 DD)</p>
 <div id="5302dc1a" class="cell" data-execution_count="7">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">regress</span> rprice nearinc##y81, <span class="kw">robust</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a></a><span class="kw">regress</span> rprice nearinc##y81, <span class="kw">robust</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -908,24 +908,24 @@ y_{i0} &amp;= \beta_0 + \beta_1 x_{i0} + e_i + e_{i0} \\
 <section id="example-2" class="slide level2 scrollable">
 <h2>Example</h2>
 <div id="1181345a" class="cell" data-execution_count="8">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a href="#cb15-1"></a>** This <span class="kw">data</span> is <span class="kw">in</span> <span class="kw">wide</span> <span class="kw">format</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a>frause slp75_81, <span class="kw">clear</span></span>
-<span id="cb15-3"><a href="#cb15-3"></a>** Lets <span class="kw">reshape</span> it so its <span class="kw">in</span> standard <span class="kw">long</span> <span class="kw">format</span></span>
-<span id="cb15-4"><a href="#cb15-4"></a><span class="kw">gen</span> id = <span class="dt">_n</span></span>
-<span id="cb15-5"><a href="#cb15-5"></a><span class="kw">reshape</span> <span class="kw">long</span> educ gdhlth marr slpnap totwrk yngkid, i(id) j(<span class="fu">year</span>)</span>
-<span id="cb15-6"><a href="#cb15-6"></a><span class="kw">gen</span> time = <span class="fu">year</span>==81</span>
-<span id="cb15-7"><a href="#cb15-7"></a>xtset id time</span>
-<span id="cb15-8"><a href="#cb15-8"></a>** Regression <span class="kw">as</span> Pool Crossection</span>
-<span id="cb15-9"><a href="#cb15-9"></a><span class="kw">qui</span>: <span class="kw">reg</span> slpnap time totwrk educ marr yngkid gdhlth male, <span class="kw">cluster</span>(id)</span>
-<span id="cb15-10"><a href="#cb15-10"></a><span class="kw">est</span> sto m1</span>
-<span id="cb15-11"><a href="#cb15-11"></a>** <span class="kw">using</span> FE</span>
-<span id="cb15-12"><a href="#cb15-12"></a><span class="kw">qui</span>: <span class="kw">areg</span> slpnap time totwrk educ marr yngkid gdhlth male, absorb(id) <span class="kw">cluster</span>(id)</span>
-<span id="cb15-13"><a href="#cb15-13"></a><span class="kw">est</span> sto m2</span>
-<span id="cb15-14"><a href="#cb15-14"></a>** <span class="kw">using</span> FD</span>
-<span id="cb15-15"><a href="#cb15-15"></a><span class="kw">qui</span>: <span class="kw">reg</span> <span class="kw">d</span>.slpnap <span class="kw">d</span>.time <span class="kw">d</span>.totwrk <span class="kw">d</span>.educ <span class="kw">d</span>.marr <span class="kw">d</span>.yngkid <span class="kw">d</span>.gdhlth <span class="kw">d</span>.male, <span class="kw">robust</span></span>
-<span id="cb15-16"><a href="#cb15-16"></a><span class="kw">est</span> sto m3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a></a>** This <span class="kw">data</span> is <span class="kw">in</span> <span class="kw">wide</span> <span class="kw">format</span></span>
+<span id="cb15-2"><a></a>frause slp75_81, <span class="kw">clear</span></span>
+<span id="cb15-3"><a></a>** Lets <span class="kw">reshape</span> it so its <span class="kw">in</span> standard <span class="kw">long</span> <span class="kw">format</span></span>
+<span id="cb15-4"><a></a><span class="kw">gen</span> id = <span class="dt">_n</span></span>
+<span id="cb15-5"><a></a><span class="kw">reshape</span> <span class="kw">long</span> educ gdhlth marr slpnap totwrk yngkid, i(id) j(<span class="fu">year</span>)</span>
+<span id="cb15-6"><a></a><span class="kw">gen</span> time = <span class="fu">year</span>==81</span>
+<span id="cb15-7"><a></a>xtset id time</span>
+<span id="cb15-8"><a></a>** Regression <span class="kw">as</span> Pool Crossection</span>
+<span id="cb15-9"><a></a><span class="kw">qui</span>: <span class="kw">reg</span> slpnap time totwrk educ marr yngkid gdhlth male, <span class="kw">cluster</span>(id)</span>
+<span id="cb15-10"><a></a><span class="kw">est</span> sto m1</span>
+<span id="cb15-11"><a></a>** <span class="kw">using</span> FE</span>
+<span id="cb15-12"><a></a><span class="kw">qui</span>: <span class="kw">areg</span> slpnap time totwrk educ marr yngkid gdhlth male, absorb(id) <span class="kw">cluster</span>(id)</span>
+<span id="cb15-13"><a></a><span class="kw">est</span> sto m2</span>
+<span id="cb15-14"><a></a>** <span class="kw">using</span> FD</span>
+<span id="cb15-15"><a></a><span class="kw">qui</span>: <span class="kw">reg</span> <span class="kw">d</span>.slpnap <span class="kw">d</span>.time <span class="kw">d</span>.totwrk <span class="kw">d</span>.educ <span class="kw">d</span>.marr <span class="kw">d</span>.yngkid <span class="kw">d</span>.gdhlth <span class="kw">d</span>.male, <span class="kw">robust</span></span>
+<span id="cb15-16"><a></a><span class="kw">est</span> sto m3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>(j = 75 81)
@@ -950,8 +950,10 @@ Panel variable: id (strongly balanced)
 </div>
 </div>
 
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 </section></section>
     </div>

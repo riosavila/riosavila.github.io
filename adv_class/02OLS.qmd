@@ -819,7 +819,7 @@ $$
 
 # Linear Model Selection and Regularization
 
-![](https://www.atakanekiz.com/en/technical/understanding-lasso-and-ridge-regression/featured.jpg){fig-align="center"}
+![](https://images.datacamp.com/image/upload/v1648205672/image18_a3zz7y.png){fig-align="center"}
 
 ## What happens when K is too big?  {.scrollable}
 

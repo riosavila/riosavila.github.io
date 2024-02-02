@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.251">
+  <meta name="generator" content="quarto-1.4.549">
 
   <meta name="author" content="Fernando Rios-Avila">
   <title>Econometrics MSC Levy - Multiple Regression Analysis</title>
@@ -31,7 +31,7 @@
     }
     /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -431,20 +431,20 @@ Fernando Rios-Avila
 <section id="example" class="slide level2 smaller">
 <h2>Example:</h2>
 <div id="97a6476f" class="cell" data-execution_count="1">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">set</span> <span class="dv">linesize</span> 255</span>
-<span id="cb1-2"><a href="#cb1-2"></a>frause bwght, <span class="kw">clear</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">gen</span> bwkg = bwghtlbs*0.454</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">gen</span> bwgr = bwkg*1000</span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">regress</span> bwght male <span class="bn">white</span> cigs lfaminc </span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="kw">est</span> sto m1</span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="kw">regress</span> bwghtlbs male <span class="bn">white</span> cigs lfaminc</span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="kw">est</span> sto m2</span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="kw">regress</span> bwkg male <span class="bn">white</span> cigs lfaminc</span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="kw">est</span> sto m3</span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="kw">regress</span> bwgr male <span class="bn">white</span> cigs lfaminc</span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="kw">est</span> sto m4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a></a><span class="kw">set</span> <span class="dv">linesize</span> 255</span>
+<span id="cb1-2"><a></a>frause bwght, <span class="kw">clear</span></span>
+<span id="cb1-3"><a></a><span class="kw">gen</span> bwkg = bwghtlbs*0.454</span>
+<span id="cb1-4"><a></a><span class="kw">gen</span> bwgr = bwkg*1000</span>
+<span id="cb1-5"><a></a><span class="kw">regress</span> bwght male <span class="bn">white</span> cigs lfaminc </span>
+<span id="cb1-6"><a></a><span class="kw">est</span> sto m1</span>
+<span id="cb1-7"><a></a><span class="kw">regress</span> bwghtlbs male <span class="bn">white</span> cigs lfaminc</span>
+<span id="cb1-8"><a></a><span class="kw">est</span> sto m2</span>
+<span id="cb1-9"><a></a><span class="kw">regress</span> bwkg male <span class="bn">white</span> cigs lfaminc</span>
+<span id="cb1-10"><a></a><span class="kw">est</span> sto m3</span>
+<span id="cb1-11"><a></a><span class="kw">regress</span> bwgr male <span class="bn">white</span> cigs lfaminc</span>
+<span id="cb1-12"><a></a><span class="kw">est</span> sto m4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <table class="table-striped table-hover">
@@ -628,7 +628,7 @@ Fernando Rios-Avila
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong></strong></p>
+<p><strong>Important</strong></p>
 </div>
 <div class="callout-content">
 <p>Re-Scaling is an important tool/trick that can be used for interpreting more complex models.</p>
@@ -648,9 +648,9 @@ Fernando Rios-Avila
 </ul>
 <p><span class="math display">\[\tilde w = \frac{w-\bar w}{\sigma_w} \rightarrow E(\tilde w)=0 \text{ and } Var(\tilde w) = 1
 \]</span></p>
-<div class="sourceCode" id="cb2" style="font-size: 1.3em"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">reg</span> <span class="fu">y</span> x1 <span class="kw">x2</span> x3, beta</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">est</span> sto m1</span>
-<span id="cb2-3"><a href="#cb2-3"></a>esttab m1, beta </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2" style="font-size: 1.3em"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a></a><span class="kw">reg</span> <span class="fu">y</span> x1 <span class="kw">x2</span> x3, beta</span>
+<span id="cb2-2"><a></a><span class="kw">est</span> sto m1</span>
+<span id="cb2-3"><a></a>esttab m1, beta </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>It also helps you make comparison of the relative importance of each covariate explanatory power.</li>
 </ul>
@@ -670,9 +670,9 @@ Fernando Rios-Avila
 </ul></li>
 <li><p>Unless further restrictions are used, you can’t add Dummies for both categories in the model.</p></li>
 </ul>
-<div class="sourceCode" id="cb3" style="font-size: 1.3em"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a>* Stata Code</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">reg</span> <span class="fu">y</span> x1 <span class="kw">x2</span> <span class="kw">d</span>    &lt;-- Possible <span class="kw">if</span> <span class="kw">d</span> = 0 <span class="kw">or</span> 1</span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">reg</span> <span class="fu">y</span> x1 <span class="kw">x2</span> i.<span class="kw">d</span>  &lt;-- Better</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3" style="font-size: 1.3em"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a>* Stata Code</span>
+<span id="cb3-2"><a></a><span class="kw">reg</span> <span class="fu">y</span> x1 <span class="kw">x2</span> <span class="kw">d</span>    &lt;-- Possible <span class="kw">if</span> <span class="kw">d</span> = 0 <span class="kw">or</span> 1</span>
+<span id="cb3-3"><a></a><span class="kw">reg</span> <span class="fu">y</span> x1 <span class="kw">x2</span> i.<span class="kw">d</span>  &lt;-- Better</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="functional-forms-multiple-dummies" class="slide level2">
 <h2>Functional Forms: Multiple Dummies</h2>
@@ -689,27 +689,27 @@ y &amp;= b_0 + b_1 young + b_2 old + b_3 x + e &amp; || Base = Adult
 <ul>
 <li>When using with ordered data, multiple dummies may create somewhat counterintuitive results</li>
 </ul>
-<div class="sourceCode" id="cb4" style="font-size: 1.3em"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">tab</span> race, <span class="kw">gen</span>(race_)  &lt;- creates dummies</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">reg</span> <span class="fu">y</span> i.race x1 <span class="kw">x2</span> x3 &lt;- generally uses first <span class="fu">group</span> <span class="kw">as</span> base</span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">reg</span> <span class="fu">y</span> ib2.race x1 <span class="kw">x2</span> x3 &lt;- indicates a particular <span class="st">"base"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4" style="font-size: 1.3em"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a></a><span class="kw">tab</span> race, <span class="kw">gen</span>(race_)  &lt;- creates dummies</span>
+<span id="cb4-2"><a></a><span class="kw">reg</span> <span class="fu">y</span> i.race x1 <span class="kw">x2</span> x3 &lt;- generally uses first <span class="fu">group</span> <span class="kw">as</span> base</span>
+<span id="cb4-3"><a></a><span class="kw">reg</span> <span class="fu">y</span> ib2.race x1 <span class="kw">x2</span> x3 &lt;- indicates a particular <span class="st">"base"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="example-1" class="slide level2 scrollable">
 <h2>Example</h2>
 <div id="a19245cc" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1"></a>frause beauty, <span class="kw">clear</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>** Union also a dummy. </span>
-<span id="cb5-3"><a href="#cb5-3"></a>** looks <span class="kw">as</span> Continous</span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">qui</span>:<span class="kw">reg</span> lwage exper <span class="kw">union</span> educ female looks</span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="kw">est</span> sto m1</span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="kw">gen</span> looks_good = looks&gt;=4 <span class="kw">if</span> !<span class="fu">missing</span>(looks)</span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="kw">qui</span>:<span class="kw">reg</span> lwage exper <span class="kw">union</span> educ female looks_good</span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="kw">est</span> sto m2</span>
-<span id="cb5-9"><a href="#cb5-9"></a><span class="kw">qui</span>:<span class="kw">reg</span> lwage exper <span class="kw">union</span> educ female i.looks</span>
-<span id="cb5-10"><a href="#cb5-10"></a><span class="kw">est</span> sto m3</span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="kw">qui</span>:<span class="kw">reg</span> lwage exper <span class="kw">union</span> educ female ib3.looks</span>
-<span id="cb5-12"><a href="#cb5-12"></a><span class="kw">est</span> sto m4</span>
-<span id="cb5-13"><a href="#cb5-13"></a>esttab m1 m2 m3 m4, se <span class="kw">star</span>( * 0.1 ** 0.05 *** 0.01  ) nogaps nomtitle</span>
-<span id="cb5-14"><a href="#cb5-14"></a><span class="kw">display</span> <span class="dt">_n</span> <span class="st">"Exact Change Union : "</span> %5.3f (<span class="fu">exp</span>(_b[<span class="kw">union</span>])-1)*100 <span class="st">"%"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a></a>frause beauty, <span class="kw">clear</span></span>
+<span id="cb5-2"><a></a>** Union also a dummy. </span>
+<span id="cb5-3"><a></a>** looks <span class="kw">as</span> Continous</span>
+<span id="cb5-4"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> lwage exper <span class="kw">union</span> educ female looks</span>
+<span id="cb5-5"><a></a><span class="kw">est</span> sto m1</span>
+<span id="cb5-6"><a></a><span class="kw">gen</span> looks_good = looks&gt;=4 <span class="kw">if</span> !<span class="fu">missing</span>(looks)</span>
+<span id="cb5-7"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> lwage exper <span class="kw">union</span> educ female looks_good</span>
+<span id="cb5-8"><a></a><span class="kw">est</span> sto m2</span>
+<span id="cb5-9"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> lwage exper <span class="kw">union</span> educ female i.looks</span>
+<span id="cb5-10"><a></a><span class="kw">est</span> sto m3</span>
+<span id="cb5-11"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> lwage exper <span class="kw">union</span> educ female ib3.looks</span>
+<span id="cb5-12"><a></a><span class="kw">est</span> sto m4</span>
+<span id="cb5-13"><a></a>esttab m1 m2 m3 m4, se <span class="kw">star</span>( * 0.1 ** 0.05 *** 0.01  ) nogaps nomtitle</span>
+<span id="cb5-14"><a></a><span class="kw">display</span> <span class="dt">_n</span> <span class="st">"Exact Change Union : "</span> %5.3f (<span class="fu">exp</span>(_b[<span class="kw">union</span>])-1)*100 <span class="st">"%"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 ----------------------------------------------------------------------------
@@ -823,15 +823,15 @@ x_1^* &amp;= - \frac{b_1}{2b_2} x_1
 <section id="example-2" class="slide level2 scrollable">
 <h2>Example</h2>
 <div id="9c3aa1e8" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1"></a>frause hprice2, <span class="kw">clear</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">gen</span> rooms2=rooms*rooms</span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">qui</span>:<span class="kw">reg</span> lprice lnox dist rooms </span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="kw">est</span> sto m0</span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="kw">qui</span>:<span class="kw">reg</span> lprice lnox dist rooms rooms2</span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="kw">est</span> sto m1</span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="kw">qui</span>:<span class="kw">reg</span> lprice lnox dist c.rooms c.rooms#c.rooms</span>
-<span id="cb7-8"><a href="#cb7-8"></a><span class="kw">est</span> sto m2</span>
-<span id="cb7-9"><a href="#cb7-9"></a>esttab m0 m1 m2, se varwidth(20) <span class="kw">star</span>(* 0.1 ** 0.05 *** 0.01) nogaps</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a></a>frause hprice2, <span class="kw">clear</span></span>
+<span id="cb7-2"><a></a><span class="kw">gen</span> rooms2=rooms*rooms</span>
+<span id="cb7-3"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> lprice lnox dist rooms </span>
+<span id="cb7-4"><a></a><span class="kw">est</span> sto m0</span>
+<span id="cb7-5"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> lprice lnox dist rooms rooms2</span>
+<span id="cb7-6"><a></a><span class="kw">est</span> sto m1</span>
+<span id="cb7-7"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> lprice lnox dist c.rooms c.rooms#c.rooms</span>
+<span id="cb7-8"><a></a><span class="kw">est</span> sto m2</span>
+<span id="cb7-9"><a></a>esttab m0 m1 m2, se varwidth(20) <span class="kw">star</span>(* 0.1 ** 0.05 *** 0.01) nogaps</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 --------------------------------------------------------------------
@@ -877,10 +877,10 @@ Standard errors in parentheses
 <li>Does it make a difference how we estimate the model?</li>
 </ul>
 <div id="fb3e2f39" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">qui</span>:<span class="kw">reg</span> lprice lnox dist rooms rooms2</span>
-<span id="cb10-2"><a href="#cb10-2"></a>margins, <span class="kw">dydx</span>(rooms)</span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="kw">qui</span>:<span class="kw">reg</span> lprice lnox dist c.rooms c.rooms#c.rooms</span>
-<span id="cb10-4"><a href="#cb10-4"></a>margins, <span class="kw">dydx</span>(rooms) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> lprice lnox dist rooms rooms2</span>
+<span id="cb10-2"><a></a>margins, <span class="kw">dydx</span>(rooms)</span>
+<span id="cb10-3"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> lprice lnox dist c.rooms c.rooms#c.rooms</span>
+<span id="cb10-4"><a></a>margins, <span class="kw">dydx</span>(rooms) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Average marginal effects                                   Number of obs = 506
@@ -932,9 +932,9 @@ y &amp;= b_0 + b_1 female \times nonunion + b_2 male \times union +b_3 female \t
 <section id="section-1" class="slide level2">
 <h2></h2>
 <p>For this, you may need to use manual dummy creation, or use explicit interactions:</p>
-<div class="sourceCode" id="cb12" style="font-size: 1.5em"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">reg</span> <span class="fu">y</span> i.d1 i.d2 i.d1#i.d2</span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="kw">reg</span> <span class="fu">y</span> i.d1##i.d2</span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="kw">reg</span> <span class="fu">y</span> i.d1#i.d2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12" style="font-size: 1.5em"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a></a><span class="kw">reg</span> <span class="fu">y</span> i.d1 i.d2 i.d1#i.d2</span>
+<span id="cb12-2"><a></a><span class="kw">reg</span> <span class="fu">y</span> i.d1##i.d2</span>
+<span id="cb12-3"><a></a><span class="kw">reg</span> <span class="fu">y</span> i.d1#i.d2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol type="1">
 <li>You set the interactions</li>
 <li>Similar to one, but <code>Stata</code> does it for you</li>
@@ -999,7 +999,7 @@ y &amp;= b_0 + b_1 x_1 + b_2 (x_1-\bar x_1)^2 + b_3 x_2 + e \\
 <li><span class="math inline">\(b_1 + b_3 \overline{educ}\)</span>: Average wage difference between men and women.</li>
 </ul>
 <p><code>Stata</code>:</p>
-<div class="sourceCode" id="cb13" style="font-size: 1.3em"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">reg</span> <span class="fu">y</span> x1 i.<span class="kw">d</span> c.x1#i.<span class="kw">d</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13" style="font-size: 1.3em"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a></a><span class="kw">reg</span> <span class="fu">y</span> x1 i.<span class="kw">d</span> c.x1#i.<span class="kw">d</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="functional-forms-full-interactions-with-dummies" class="slide level2">
 <h2>Functional Forms: Full Interactions (with dummies)</h2>
@@ -1043,21 +1043,21 @@ F_{M2} = \frac{(SSR_{M2}-SSR_0-SSR_1)/k}{(SSR_0+SSR_1)/(n - 2(k+1))}
 <section id="example-3" class="slide level2 scrollable">
 <h2>Example</h2>
 <div id="39150549" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1"></a> frause gpa3, <span class="kw">clear</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="kw">drop</span> <span class="kw">if</span> cumgpa==0</span>
-<span id="cb14-3"><a href="#cb14-3"></a><span class="kw">replace</span> sat = sat /100</span>
-<span id="cb14-4"><a href="#cb14-4"></a><span class="kw">qui</span>:<span class="kw">reg</span> cumgpa sat hsperc tothrs</span>
-<span id="cb14-5"><a href="#cb14-5"></a><span class="kw">est</span> sto m1</span>
-<span id="cb14-6"><a href="#cb14-6"></a><span class="kw">qui</span>:<span class="kw">reg</span> cumgpa sat hsperc tothrs female</span>
-<span id="cb14-7"><a href="#cb14-7"></a><span class="kw">est</span> sto m2</span>
-<span id="cb14-8"><a href="#cb14-8"></a><span class="kw">qui</span>:<span class="kw">reg</span> cumgpa sat hsperc tothrs <span class="kw">if</span> female==0</span>
-<span id="cb14-9"><a href="#cb14-9"></a><span class="kw">est</span> sto m3</span>
-<span id="cb14-10"><a href="#cb14-10"></a><span class="kw">qui</span>:<span class="kw">reg</span> cumgpa sat hsperc tothrs <span class="kw">if</span> female==1</span>
-<span id="cb14-11"><a href="#cb14-11"></a><span class="kw">est</span> sto m4</span>
-<span id="cb14-12"><a href="#cb14-12"></a><span class="kw">qui</span>:<span class="kw">reg</span> cumgpa i.female##c.(sat hsperc tothrs)</span>
-<span id="cb14-13"><a href="#cb14-13"></a><span class="kw">est</span> sto m5</span>
-<span id="cb14-14"><a href="#cb14-14"></a>esttab m1 m2 m3 m4 m5, mtitle( Simple With_fem Men Women Full_int) <span class="co">///</span></span>
-<span id="cb14-15"><a href="#cb14-15"></a>se <span class="kw">star</span>(* .1 ** 0.05 *** 0.01) nogaps noomitted </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a></a> frause gpa3, <span class="kw">clear</span></span>
+<span id="cb14-2"><a></a><span class="kw">drop</span> <span class="kw">if</span> cumgpa==0</span>
+<span id="cb14-3"><a></a><span class="kw">replace</span> sat = sat /100</span>
+<span id="cb14-4"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> cumgpa sat hsperc tothrs</span>
+<span id="cb14-5"><a></a><span class="kw">est</span> sto m1</span>
+<span id="cb14-6"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> cumgpa sat hsperc tothrs female</span>
+<span id="cb14-7"><a></a><span class="kw">est</span> sto m2</span>
+<span id="cb14-8"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> cumgpa sat hsperc tothrs <span class="kw">if</span> female==0</span>
+<span id="cb14-9"><a></a><span class="kw">est</span> sto m3</span>
+<span id="cb14-10"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> cumgpa sat hsperc tothrs <span class="kw">if</span> female==1</span>
+<span id="cb14-11"><a></a><span class="kw">est</span> sto m4</span>
+<span id="cb14-12"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> cumgpa i.female##c.(sat hsperc tothrs)</span>
+<span id="cb14-13"><a></a><span class="kw">est</span> sto m5</span>
+<span id="cb14-14"><a></a>esttab m1 m2 m3 m4 m5, mtitle( Simple With_fem Men Women Full_int) <span class="co">///</span></span>
+<span id="cb14-15"><a></a>se <span class="kw">star</span>(* .1 ** 0.05 *** 0.01) nogaps noomitted </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(98 observations deleted)
 variable sat was int now float
@@ -1095,9 +1095,9 @@ Standard errors in parentheses
 </div>
 </div>
 <div id="e42ed156" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">test</span> 1.female#c.sat 1.female#c.hsperc 1.female#c.tothrs</span>
-<span id="cb16-2"><a href="#cb16-2"></a><span class="kw">test</span> 1.female 1.female#c.sat 1.female#c.hsperc 1.female#c.tothrs</span>
-<span id="cb16-3"><a href="#cb16-3"></a>margins female, <span class="kw">dydx</span>(sat hsperc tothrs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a></a><span class="kw">test</span> 1.female#c.sat 1.female#c.hsperc 1.female#c.tothrs</span>
+<span id="cb16-2"><a></a><span class="kw">test</span> 1.female 1.female#c.sat 1.female#c.hsperc 1.female#c.tothrs</span>
+<span id="cb16-3"><a></a>margins female, <span class="kw">dydx</span>(sat hsperc tothrs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
  ( 1)  1.female#c.sat = 0
@@ -1170,12 +1170,12 @@ tothrs       |
 <ul>
 <li>In <code>Stata</code> you can do this only for interactions. For constructed variables you need <code>f_able</code>, or do it by hand.</li>
 </ul>
-<div class="sourceCode" id="cb18" style="font-size: 1.3em"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">reg</span> <span class="fu">y</span> c.x1##c.x1##c.x1</span>
-<span id="cb18-2"><a href="#cb18-2"></a>margins, <span class="kw">dydx</span>(x1) &lt;-- Default is Average Marginal Effects</span>
-<span id="cb18-3"><a href="#cb18-3"></a>margins, <span class="kw">dydx</span>(x1) atmeans &lt;-- Request marginal <span class="kw">effects</span> <span class="fu">at</span> <span class="kw">means</span></span>
-<span id="cb18-4"><a href="#cb18-4"></a>margins, <span class="kw">dydx</span>(x1) <span class="fu">at</span>(x1=(1/5)) &lt;-- Request marginal <span class="kw">effects</span> <span class="fu">at</span> specific <span class="kw">values</span> <span class="kw">of</span> x1</span>
-<span id="cb18-5"><a href="#cb18-5"></a>* and plot afterwards</span>
-<span id="cb18-6"><a href="#cb18-6"></a>marginsplot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18" style="font-size: 1.3em"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a></a><span class="kw">reg</span> <span class="fu">y</span> c.x1##c.x1##c.x1</span>
+<span id="cb18-2"><a></a>margins, <span class="kw">dydx</span>(x1) &lt;-- Default is Average Marginal Effects</span>
+<span id="cb18-3"><a></a>margins, <span class="kw">dydx</span>(x1) atmeans &lt;-- Request marginal <span class="kw">effects</span> <span class="fu">at</span> <span class="kw">means</span></span>
+<span id="cb18-4"><a></a>margins, <span class="kw">dydx</span>(x1) <span class="fu">at</span>(x1=(1/5)) &lt;-- Request marginal <span class="kw">effects</span> <span class="fu">at</span> specific <span class="kw">values</span> <span class="kw">of</span> x1</span>
+<span id="cb18-5"><a></a>* and plot afterwards</span>
+<span id="cb18-6"><a></a>marginsplot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="goodness-of-fit-r2-vs-r2_adj" class="slide level2">
 <h2>Goodness of Fit: <span class="math inline">\(R^2\)</span> vs <span class="math inline">\(R^2_{adj}\)</span></h2>
@@ -1248,29 +1248,29 @@ E(y|x_1,x_2) &amp;=E(e^{a_0 + a_1 x_1 + a_2 x_2}) \times E(e^ \varepsilon ) \\
 <h2></h2>
 <h3 id="example-4">Example</h3>
 <div id="9c68ee6e" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb19-1"><a href="#cb19-1"></a>frause oaxaca, <span class="kw">clear</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a><span class="kw">drop</span> <span class="kw">if</span> lnwage==.</span>
-<span id="cb19-3"><a href="#cb19-3"></a><span class="kw">gen</span> wage = <span class="fu">exp</span>(lnwage)</span>
-<span id="cb19-4"><a href="#cb19-4"></a><span class="kw">qui</span>:<span class="kw">reg</span> lnwage educ exper tenure female married divorced</span>
-<span id="cb19-5"><a href="#cb19-5"></a><span class="kw">predict</span> lnw_hat</span>
-<span id="cb19-6"><a href="#cb19-6"></a><span class="kw">predict</span> lnw_res, res</span>
-<span id="cb19-7"><a href="#cb19-7"></a>** Case 1:</span>
-<span id="cb19-8"><a href="#cb19-8"></a><span class="kw">egen</span> alpha_01 = <span class="kw">mean</span>( <span class="fu">exp</span>(lnw_res))</span>
-<span id="cb19-9"><a href="#cb19-9"></a>** Case 2:</span>
-<span id="cb19-10"><a href="#cb19-10"></a><span class="kw">qui</span>:<span class="kw">sum</span> lnw_res</span>
-<span id="cb19-11"><a href="#cb19-11"></a><span class="kw">gen</span> alpha_02 = <span class="fu">exp</span>(<span class="fu">r</span>(Var)/2)</span>
-<span id="cb19-12"><a href="#cb19-12"></a><span class="kw">gen</span> elnw_hat = <span class="fu">exp</span>(lnw_hat)</span>
-<span id="cb19-13"><a href="#cb19-13"></a><span class="kw">qui</span>: <span class="kw">reg</span> wage elnw_hat, <span class="kw">nocons</span></span>
-<span id="cb19-14"><a href="#cb19-14"></a><span class="kw">gen</span> alpha_03 = _b[elnw_hat]</span>
-<span id="cb19-15"><a href="#cb19-15"></a><span class="kw">gen</span> wage_1 = elnw_hat</span>
-<span id="cb19-16"><a href="#cb19-16"></a><span class="kw">gen</span> wage_2 = elnw_hat*alpha_01</span>
-<span id="cb19-17"><a href="#cb19-17"></a><span class="kw">gen</span> wage_3 = elnw_hat*alpha_02</span>
-<span id="cb19-18"><a href="#cb19-18"></a><span class="kw">gen</span> wage_4 = elnw_hat*alpha_03</span>
-<span id="cb19-19"><a href="#cb19-19"></a><span class="kw">mata</span>:  <span class="fu">y</span> = st_data(.,<span class="st">"wage"</span>); my = <span class="kw">mean</span>(<span class="fu">y</span>)</span>
-<span id="cb19-20"><a href="#cb19-20"></a><span class="kw">mata</span>:  <span class="fu">yh</span> = st_data(.,<span class="st">"wage_1 wage_2 wage_3 wage_4"</span>)</span>
-<span id="cb19-21"><a href="#cb19-21"></a><span class="kw">mata</span>:<span class="st">"R2_1 "</span>; 1 - <span class="kw">sum</span>((<span class="fu">y</span>:-<span class="fu">yh</span>[,1]):^2)/<span class="kw">sum</span>( (<span class="fu">y</span>:-my):^2 )</span>
-<span id="cb19-22"><a href="#cb19-22"></a><span class="kw">mata</span>:<span class="st">"R2_2 "</span>; 1 - <span class="kw">sum</span>((<span class="fu">y</span>:-<span class="fu">yh</span>[,2]):^2)/<span class="kw">sum</span>( (<span class="fu">y</span>:-my):^2 )</span>
-<span id="cb19-23"><a href="#cb19-23"></a><span class="kw">mata</span>:<span class="st">"R2_3 "</span>; 1 - <span class="kw">sum</span>((<span class="fu">y</span>:-<span class="fu">yh</span>[,3]):^2)/<span class="kw">sum</span>( (<span class="fu">y</span>:-my):^2 )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb19-1"><a></a>frause oaxaca, <span class="kw">clear</span></span>
+<span id="cb19-2"><a></a><span class="kw">drop</span> <span class="kw">if</span> lnwage==.</span>
+<span id="cb19-3"><a></a><span class="kw">gen</span> wage = <span class="fu">exp</span>(lnwage)</span>
+<span id="cb19-4"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> lnwage educ exper tenure female married divorced</span>
+<span id="cb19-5"><a></a><span class="kw">predict</span> lnw_hat</span>
+<span id="cb19-6"><a></a><span class="kw">predict</span> lnw_res, res</span>
+<span id="cb19-7"><a></a>** Case 1:</span>
+<span id="cb19-8"><a></a><span class="kw">egen</span> alpha_01 = <span class="kw">mean</span>( <span class="fu">exp</span>(lnw_res))</span>
+<span id="cb19-9"><a></a>** Case 2:</span>
+<span id="cb19-10"><a></a><span class="kw">qui</span>:<span class="kw">sum</span> lnw_res</span>
+<span id="cb19-11"><a></a><span class="kw">gen</span> alpha_02 = <span class="fu">exp</span>(<span class="fu">r</span>(Var)/2)</span>
+<span id="cb19-12"><a></a><span class="kw">gen</span> elnw_hat = <span class="fu">exp</span>(lnw_hat)</span>
+<span id="cb19-13"><a></a><span class="kw">qui</span>: <span class="kw">reg</span> wage elnw_hat, <span class="kw">nocons</span></span>
+<span id="cb19-14"><a></a><span class="kw">gen</span> alpha_03 = _b[elnw_hat]</span>
+<span id="cb19-15"><a></a><span class="kw">gen</span> wage_1 = elnw_hat</span>
+<span id="cb19-16"><a></a><span class="kw">gen</span> wage_2 = elnw_hat*alpha_01</span>
+<span id="cb19-17"><a></a><span class="kw">gen</span> wage_3 = elnw_hat*alpha_02</span>
+<span id="cb19-18"><a></a><span class="kw">gen</span> wage_4 = elnw_hat*alpha_03</span>
+<span id="cb19-19"><a></a><span class="kw">mata</span>:  <span class="fu">y</span> = st_data(.,<span class="st">"wage"</span>); my = <span class="kw">mean</span>(<span class="fu">y</span>)</span>
+<span id="cb19-20"><a></a><span class="kw">mata</span>:  <span class="fu">yh</span> = st_data(.,<span class="st">"wage_1 wage_2 wage_3 wage_4"</span>)</span>
+<span id="cb19-21"><a></a><span class="kw">mata</span>:<span class="st">"R2_1 "</span>; 1 - <span class="kw">sum</span>((<span class="fu">y</span>:-<span class="fu">yh</span>[,1]):^2)/<span class="kw">sum</span>( (<span class="fu">y</span>:-my):^2 )</span>
+<span id="cb19-22"><a></a><span class="kw">mata</span>:<span class="st">"R2_2 "</span>; 1 - <span class="kw">sum</span>((<span class="fu">y</span>:-<span class="fu">yh</span>[,2]):^2)/<span class="kw">sum</span>( (<span class="fu">y</span>:-my):^2 )</span>
+<span id="cb19-23"><a></a><span class="kw">mata</span>:<span class="st">"R2_3 "</span>; 1 - <span class="kw">sum</span>((<span class="fu">y</span>:-<span class="fu">yh</span>[,3]):^2)/<span class="kw">sum</span>( (<span class="fu">y</span>:-my):^2 )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Excerpt from the Swiss Labor Market Survey 1998)
 (213 observations deleted)
@@ -1311,11 +1311,11 @@ E(D|Xs) &amp;= P(D=1|Xs) \\
 <li>For marginal effects, we no longer consider effects at the individual level.</li>
 <li>Instead we look into conditional means, and likelihood</li>
 </ul>
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb21-1"><a href="#cb21-1"></a>frause mroz, <span class="kw">clear</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a><span class="kw">qui</span>: <span class="kw">reg</span> inlf  age educ exper kidsge6 kidslt6 nwifeinc </span>
-<span id="cb21-3"><a href="#cb21-3"></a>model_display</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb21-1"><a></a>frause mroz, <span class="kw">clear</span></span>
+<span id="cb21-2"><a></a><span class="kw">qui</span>: <span class="kw">reg</span> inlf  age educ exper kidsge6 kidslt6 nwifeinc </span>
+<span id="cb21-3"><a></a>model_display</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <p>E(inlf|X) = 0.707 - 0.018 age + 0.040 educ + 0.023 exper + 0.013 kidsge6 - 0.272 kidslt6 - 0.003 nwifeinc</p>
 <p>N = 753 R^2 = 0.254</p>
@@ -1347,11 +1347,11 @@ E(D|Xs) &amp;= P(D=1|Xs) \\
 <ul>
 <li>Nothing changes for estimation, but its useful to change language:</li>
 </ul>
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb22-1"><a href="#cb22-1"></a>frause fertil2, <span class="kw">clear</span></span>
-<span id="cb22-2"><a href="#cb22-2"></a><span class="kw">qui</span> <span class="kw">reg</span> children age educ</span>
-<span id="cb22-3"><a href="#cb22-3"></a>model_display</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb22-1"><a></a>frause fertil2, <span class="kw">clear</span></span>
+<span id="cb22-2"><a></a><span class="kw">qui</span> <span class="kw">reg</span> children age educ</span>
+<span id="cb22-3"><a></a>model_display</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <p>E(children|X) = -1.997 + 0.175 age - 0.090 educ</p>
 <p>N = 4361 R^2 = 0.560</p>
@@ -1379,16 +1379,16 @@ E(D|Xs) &amp;= P(D=1|Xs) \\
 </ul></li>
 </ul>
 <div id="d41b64a2" class="cell" data-execution_count="13">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><a href="#cb23-1"></a>frause gpa2, <span class="kw">clear</span></span>
-<span id="cb23-2"><a href="#cb23-2"></a><span class="kw">gen</span> sat0=sat-1200</span>
-<span id="cb23-3"><a href="#cb23-3"></a><span class="kw">gen</span> hsperc0=hsperc-30</span>
-<span id="cb23-4"><a href="#cb23-4"></a><span class="kw">gen</span> hsize0=hsize-5</span>
-<span id="cb23-5"><a href="#cb23-5"></a><span class="kw">gen</span> hsize20=hsize^2-25</span>
-<span id="cb23-6"><a href="#cb23-6"></a><span class="kw">qui</span>:<span class="kw">reg</span> colgpa sat hsperc c.hsize##c.hsize</span>
-<span id="cb23-7"><a href="#cb23-7"></a>margins, <span class="fu">at</span>(sat = 1200 hsperc = 30 hsize = 5)</span>
-<span id="cb23-8"><a href="#cb23-8"></a><span class="kw">reg</span> colgpa sat0 hsperc0 hsize0 hsize20</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><a></a>frause gpa2, <span class="kw">clear</span></span>
+<span id="cb23-2"><a></a><span class="kw">gen</span> sat0=sat-1200</span>
+<span id="cb23-3"><a></a><span class="kw">gen</span> hsperc0=hsperc-30</span>
+<span id="cb23-4"><a></a><span class="kw">gen</span> hsize0=hsize-5</span>
+<span id="cb23-5"><a></a><span class="kw">gen</span> hsize20=hsize^2-25</span>
+<span id="cb23-6"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> colgpa sat hsperc c.hsize##c.hsize</span>
+<span id="cb23-7"><a></a>margins, <span class="fu">at</span>(sat = 1200 hsperc = 30 hsize = 5)</span>
+<span id="cb23-8"><a></a><span class="kw">reg</span> colgpa sat0 hsperc0 hsize0 hsize20</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1453,27 +1453,27 @@ y  &amp;= b_0 + \delta_{atu} trt + b_1 x_1 + g_1 trt (x_1- E(x_1|trt=0)) + e \\
 \end{aligned}
 \]</span></p>
 <div id="58be300b" class="cell" data-execution_count="14">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb25-1"><a href="#cb25-1"></a>frause jtrain98, <span class="kw">clear</span></span>
-<span id="cb25-2"><a href="#cb25-2"></a><span class="kw">foreach</span> i <span class="kw">in</span> earn96 educ age married {</span>
-<span id="cb25-3"><a href="#cb25-3"></a>  <span class="kw">sum</span> <span class="ot">`i'</span> <span class="kw">if</span> train==0, <span class="kw">meanonly</span></span>
-<span id="cb25-4"><a href="#cb25-4"></a>  <span class="kw">gen</span> atu_<span class="ot">`i'</span> = (<span class="ot">`i'</span> - <span class="fu">r</span>(<span class="kw">mean</span>))*train</span>
-<span id="cb25-5"><a href="#cb25-5"></a>  <span class="kw">sum</span> <span class="ot">`i'</span> <span class="kw">if</span> train==1, <span class="kw">meanonly</span></span>
-<span id="cb25-6"><a href="#cb25-6"></a>  <span class="kw">gen</span> att_<span class="ot">`i'</span> = (<span class="ot">`i'</span> - <span class="fu">r</span>(<span class="kw">mean</span>))*train</span>
-<span id="cb25-7"><a href="#cb25-7"></a>  <span class="kw">sum</span> <span class="ot">`i'</span> , <span class="kw">meanonly</span></span>
-<span id="cb25-8"><a href="#cb25-8"></a>  <span class="kw">gen</span> ate_<span class="ot">`i'</span> = (<span class="ot">`i'</span> - <span class="fu">r</span>(<span class="kw">mean</span>))*train</span>
-<span id="cb25-9"><a href="#cb25-9"></a>}</span>
-<span id="cb25-10"><a href="#cb25-10"></a><span class="kw">qui</span>:<span class="kw">reg</span> earn98 train earn96 educ age married</span>
-<span id="cb25-11"><a href="#cb25-11"></a><span class="kw">est</span> sto m1</span>
-<span id="cb25-12"><a href="#cb25-12"></a><span class="kw">qui</span>:<span class="kw">reg</span> earn98 train earn96 educ age married ate*</span>
-<span id="cb25-13"><a href="#cb25-13"></a><span class="kw">est</span> sto m2</span>
-<span id="cb25-14"><a href="#cb25-14"></a><span class="kw">qui</span>:<span class="kw">reg</span> earn98 train earn96 educ age married atu*</span>
-<span id="cb25-15"><a href="#cb25-15"></a><span class="kw">est</span> sto m3</span>
-<span id="cb25-16"><a href="#cb25-16"></a><span class="kw">qui</span>:<span class="kw">reg</span> earn98 train earn96 educ age married att*</span>
-<span id="cb25-17"><a href="#cb25-17"></a><span class="kw">est</span> sto m4</span>
-<span id="cb25-18"><a href="#cb25-18"></a></span>
-<span id="cb25-19"><a href="#cb25-19"></a>esttab m1 m2 m3 m4, <span class="kw">keep</span>(train) mtitle(Homogenous ATE ATU ATT) se</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb25-1"><a></a>frause jtrain98, <span class="kw">clear</span></span>
+<span id="cb25-2"><a></a><span class="kw">foreach</span> i <span class="kw">in</span> earn96 educ age married {</span>
+<span id="cb25-3"><a></a>  <span class="kw">sum</span> <span class="ot">`i'</span> <span class="kw">if</span> train==0, <span class="kw">meanonly</span></span>
+<span id="cb25-4"><a></a>  <span class="kw">gen</span> atu_<span class="ot">`i'</span> = (<span class="ot">`i'</span> - <span class="fu">r</span>(<span class="kw">mean</span>))*train</span>
+<span id="cb25-5"><a></a>  <span class="kw">sum</span> <span class="ot">`i'</span> <span class="kw">if</span> train==1, <span class="kw">meanonly</span></span>
+<span id="cb25-6"><a></a>  <span class="kw">gen</span> att_<span class="ot">`i'</span> = (<span class="ot">`i'</span> - <span class="fu">r</span>(<span class="kw">mean</span>))*train</span>
+<span id="cb25-7"><a></a>  <span class="kw">sum</span> <span class="ot">`i'</span> , <span class="kw">meanonly</span></span>
+<span id="cb25-8"><a></a>  <span class="kw">gen</span> ate_<span class="ot">`i'</span> = (<span class="ot">`i'</span> - <span class="fu">r</span>(<span class="kw">mean</span>))*train</span>
+<span id="cb25-9"><a></a>}</span>
+<span id="cb25-10"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> earn98 train earn96 educ age married</span>
+<span id="cb25-11"><a></a><span class="kw">est</span> sto m1</span>
+<span id="cb25-12"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> earn98 train earn96 educ age married ate*</span>
+<span id="cb25-13"><a></a><span class="kw">est</span> sto m2</span>
+<span id="cb25-14"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> earn98 train earn96 educ age married atu*</span>
+<span id="cb25-15"><a></a><span class="kw">est</span> sto m3</span>
+<span id="cb25-16"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> earn98 train earn96 educ age married att*</span>
+<span id="cb25-17"><a></a><span class="kw">est</span> sto m4</span>
+<span id="cb25-18"><a></a></span>
+<span id="cb25-19"><a></a>esttab m1 m2 m3 m4, <span class="kw">keep</span>(train) mtitle(Homogenous ATE ATU ATT) se</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1495,8 +1495,10 @@ Standard errors in parentheses
 <h1>Thanks all !</h1>
 <p>Next week Lifting Assumptions: Heteroskedasticity</p>
 
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 </section>
     </div>

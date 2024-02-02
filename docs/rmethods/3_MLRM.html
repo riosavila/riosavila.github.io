@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.251">
+  <meta name="generator" content="quarto-1.4.549">
 
   <meta name="author" content="Fernando Rios-Avila">
   <title>Econometrics MSC Levy - Multiple Regression Analysis: Estimation</title>
@@ -31,7 +31,7 @@
     }
     /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -533,13 +533,13 @@ y &amp;= \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 (X_1+X_2) + e \\
 <section id="mata-interlute-for-those-curious" class="slide level2 scrollable">
 <h2><code>mata</code> Interlute (for those curious)</h2>
 <div id="9c31ddd8" class="cell larger" data-execution_count="2">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a>frause gpa1, <span class="kw">clear</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">gen</span> one =1 </span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">mata</span>: <span class="fu">y</span>=st_data(.,<span class="st">"colgpa"</span>); <span class="kw">mata</span>: x=st_data(.,<span class="st">"hsgpa act one"</span>)</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">mata</span>: xx=x'x ; ixx=<span class="fu">invsym</span>(xx) ; xy = x'y </span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">mata</span>: b = ixx * xy ; b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a></a>frause gpa1, <span class="kw">clear</span></span>
+<span id="cb1-2"><a></a><span class="kw">gen</span> one =1 </span>
+<span id="cb1-3"><a></a><span class="kw">mata</span>: <span class="fu">y</span>=st_data(.,<span class="st">"colgpa"</span>); <span class="kw">mata</span>: x=st_data(.,<span class="st">"hsgpa act one"</span>)</span>
+<span id="cb1-4"><a></a><span class="kw">mata</span>: xx=x'x ; ixx=<span class="fu">invsym</span>(xx) ; xy = x'y </span>
+<span id="cb1-5"><a></a><span class="kw">mata</span>: b = ixx * xy ; b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>                 1
@@ -569,15 +569,15 @@ y_i = \hat\beta_0 + \hat\beta_1 x_{1i}  + \hat\beta_2 x_{2i} + e_i \\
 </section>
 <section id="example" class="slide level2">
 <h2>Example</h2>
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">qui</span>: frause wage1, <span class="kw">clear</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">qui</span>: <span class="kw">reg</span> lwage educ exper tenure</span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">local</span> b0:<span class="kw">display</span> %5.3f _b[<span class="dt">_cons</span>]</span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="kw">local</span> b1:<span class="kw">display</span> %5.3f _b[educ]</span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="kw">local</span> b2:<span class="kw">display</span> %5.3f _b[exper]</span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="kw">local</span> b3:<span class="kw">display</span> %5.3f _b[tenure]</span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="kw">display</span> <span class="st">"\$log(wage) = `b0' + `b1' educ + `b2' exper + `b3' tenure$"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a><span class="kw">qui</span>: frause wage1, <span class="kw">clear</span></span>
+<span id="cb3-2"><a></a><span class="kw">qui</span>: <span class="kw">reg</span> lwage educ exper tenure</span>
+<span id="cb3-3"><a></a><span class="kw">local</span> b0:<span class="kw">display</span> %5.3f _b[<span class="dt">_cons</span>]</span>
+<span id="cb3-4"><a></a><span class="kw">local</span> b1:<span class="kw">display</span> %5.3f _b[educ]</span>
+<span id="cb3-5"><a></a><span class="kw">local</span> b2:<span class="kw">display</span> %5.3f _b[exper]</span>
+<span id="cb3-6"><a></a><span class="kw">local</span> b3:<span class="kw">display</span> %5.3f _b[tenure]</span>
+<span id="cb3-7"><a></a><span class="kw">display</span> <span class="st">"\$log(wage) = `b0' + `b1' educ + `b2' exper + `b3' tenure$"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <p><span class="math inline">\(log(wage) = 0.284 + 0.092 educ + 0.004 exper + 0.022 tenure\)</span></p>
 <ul>
@@ -634,21 +634,21 @@ P_{X^c_2} &amp;= X^c_2 (X'^{c}_2  X^{c}_2) X'^{c}_2 : \text{Projection Matrix}
 <section id="example-1" class="slide level2 scrollable">
 <h2>Example</h2>
 <div id="fdcea21f" class="cell larger" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">qui</span> {</span>
-<span id="cb4-2"><a href="#cb4-2"></a>  frause oaxaca, <span class="kw">clear</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a>  <span class="kw">drop</span> <span class="kw">if</span> lnwage==.</span>
-<span id="cb4-4"><a href="#cb4-4"></a>  <span class="kw">reg</span> lnwage educ exper tenure</span>
-<span id="cb4-5"><a href="#cb4-5"></a>  <span class="kw">est</span> sto m1</span>
-<span id="cb4-6"><a href="#cb4-6"></a>  <span class="kw">reg</span> educ        exper tenure</span>
-<span id="cb4-7"><a href="#cb4-7"></a>  <span class="kw">predict</span> r_educ , res</span>
-<span id="cb4-8"><a href="#cb4-8"></a>  <span class="kw">reg</span> lnwage      exper tenure</span>
-<span id="cb4-9"><a href="#cb4-9"></a>  <span class="kw">predict</span> r_lnwage , res</span>
-<span id="cb4-10"><a href="#cb4-10"></a>  <span class="kw">reg</span> r_lnwage r_educ</span>
-<span id="cb4-11"><a href="#cb4-11"></a>  <span class="kw">est</span> sto m2</span>
-<span id="cb4-12"><a href="#cb4-12"></a>  <span class="kw">reg</span> lnwage educ</span>
-<span id="cb4-13"><a href="#cb4-13"></a>  <span class="kw">est</span> sto m3</span>
-<span id="cb4-14"><a href="#cb4-14"></a>}</span>
-<span id="cb4-15"><a href="#cb4-15"></a>esttab m1 m2 m3, se  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a></a><span class="kw">qui</span> {</span>
+<span id="cb4-2"><a></a>  frause oaxaca, <span class="kw">clear</span></span>
+<span id="cb4-3"><a></a>  <span class="kw">drop</span> <span class="kw">if</span> lnwage==.</span>
+<span id="cb4-4"><a></a>  <span class="kw">reg</span> lnwage educ exper tenure</span>
+<span id="cb4-5"><a></a>  <span class="kw">est</span> sto m1</span>
+<span id="cb4-6"><a></a>  <span class="kw">reg</span> educ        exper tenure</span>
+<span id="cb4-7"><a></a>  <span class="kw">predict</span> r_educ , res</span>
+<span id="cb4-8"><a></a>  <span class="kw">reg</span> lnwage      exper tenure</span>
+<span id="cb4-9"><a></a>  <span class="kw">predict</span> r_lnwage , res</span>
+<span id="cb4-10"><a></a>  <span class="kw">reg</span> r_lnwage r_educ</span>
+<span id="cb4-11"><a></a>  <span class="kw">est</span> sto m2</span>
+<span id="cb4-12"><a></a>  <span class="kw">reg</span> lnwage educ</span>
+<span id="cb4-13"><a></a>  <span class="kw">est</span> sto m3</span>
+<span id="cb4-14"><a></a>}</span>
+<span id="cb4-15"><a></a>esttab m1 m2 m3, se  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 ------------------------------------------------------------
@@ -885,11 +885,11 @@ Estimated: &amp; y = g_0 + g_1 x_1 + g_2 x_2 + v   \\
 <li><p>For prediction you do not need to worry about “endogeneity” as much. Just on Predictive power (how ??)</p></li>
 </ul>
 <div id="8c77929a" class="cell larger" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">qui</span>:frause oaxaca, <span class="kw">clear</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">gen</span> wage = <span class="fu">exp</span>(lnwage)</span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">qui</span>:<span class="kw">reg</span> wage educ female age agesq single married</span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="kw">predict</span> wage_hat</span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="ot">list</span> wage wage_hat educ female age agesq single married <span class="kw">in</span> 1/5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a></a><span class="kw">qui</span>:frause oaxaca, <span class="kw">clear</span></span>
+<span id="cb6-2"><a></a><span class="kw">gen</span> wage = <span class="fu">exp</span>(lnwage)</span>
+<span id="cb6-3"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> wage educ female age agesq single married</span>
+<span id="cb6-4"><a></a><span class="kw">predict</span> wage_hat</span>
+<span id="cb6-5"><a></a><span class="ot">list</span> wage wage_hat educ female age agesq single married <span class="kw">in</span> 1/5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(213 missing values generated)
 (option xb assumed; fitted values)
@@ -912,13 +912,13 @@ Estimated: &amp; y = g_0 + g_1 x_1 + g_2 x_2 + v   \\
 <li><p>We could use MLRM to test theories, like the Efficient Market Theory.</p></li>
 <li><p>For housing, the Assessed price of a house should be all information needed to assess the price of the house. (other ammenities should not matter)</p></li>
 </ul>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1"></a>frause hprice1, <span class="kw">clear</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">qui</span>:<span class="kw">reg</span> price assess bdrms llotsize lsqrft colonial</span>
-<span id="cb8-3"><a href="#cb8-3"></a>model_display</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a></a>frause hprice1, <span class="kw">clear</span></span>
+<span id="cb8-2"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> price assess bdrms llotsize lsqrft colonial</span>
+<span id="cb8-3"><a></a>model_display</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>price_hat = 206.645 + 1.007 assess + 11.404 bdrms + 1.363 llotsize - 38.335 lsqrft + 9.297 colonial</p>
 <p>N= 88 R2=0.831</p>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">qui</span>:<span class="kw">reg</span> lprice lassess bdrms llotsize lsqrft colonial</span>
-<span id="cb9-2"><a href="#cb9-2"></a>model_display</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> lprice lassess bdrms llotsize lsqrft colonial</span>
+<span id="cb9-2"><a></a>model_display</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>lprice_hat = 0.210 + 1.036 lassess + 0.025 bdrms + 0.008 llotsize - 0.092 lsqrft + 0.045 colonial</p>
 <p>N= 88 R2=0.777</p>
 </section>
@@ -928,13 +928,13 @@ Estimated: &amp; y = g_0 + g_1 x_1 + g_2 x_2 + v   \\
 <li><p>We could test for discrimination: Unexplained differences in outcomes once other factors are kept fixed.</p></li>
 <li><p>It does require that groups are similar in terms of unobservables.</p></li>
 </ul>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">qui</span>: frause oaxaca, <span class="kw">clear</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="kw">qui</span>:<span class="kw">reg</span> lnwage female </span>
-<span id="cb10-3"><a href="#cb10-3"></a>model_display</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a></a><span class="kw">qui</span>: frause oaxaca, <span class="kw">clear</span></span>
+<span id="cb10-2"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> lnwage female </span>
+<span id="cb10-3"><a></a>model_display</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>lnwage_hat = 3.440 - 0.173 female</p>
 <p>N= 1434 R2=0.027</p>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">qui</span>:<span class="kw">reg</span> lnwage female educ age agesq single married exper tenure</span>
-<span id="cb11-2"><a href="#cb11-2"></a>model_display</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> lnwage female educ age agesq single married exper tenure</span>
+<span id="cb11-2"><a></a>model_display</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>lnwage_hat = 0.383 - 0.160 female + 0.064 educ + 0.113 age - 0.001 agesq - 0.072 single - 0.094 married - 0.000 exper + 0.007 tenure</p>
 <p>N= 1434 R2=0.345</p>
 </section>
@@ -944,13 +944,13 @@ Estimated: &amp; y = g_0 + g_1 x_1 + g_2 x_2 + v   \\
 <li>Under Random Assingment SRM was enough to estimate ATTs.</li>
 <li>But if assigment was conditionally random, a better approach would be using MLRM</li>
 </ul>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1"></a>frause jtrain98, <span class="kw">clear</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="kw">qui</span>:<span class="kw">reg</span> earn98 train </span>
-<span id="cb12-3"><a href="#cb12-3"></a>model_display</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a></a>frause jtrain98, <span class="kw">clear</span></span>
+<span id="cb12-2"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> earn98 train </span>
+<span id="cb12-3"><a></a>model_display</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>earn98_hat = 10.610 - 2.050 train</p>
 <p>N= 1130 R2=0.016</p>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">qui</span>:<span class="kw">reg</span> earn98 train earn96 educ age married</span>
-<span id="cb13-2"><a href="#cb13-2"></a>model_display</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> earn98 train earn96 educ age married</span>
+<span id="cb13-2"><a></a>model_display</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>earn98_hat = 4.667 + 2.411 train + 0.373 earn96 + 0.363 educ - 0.181 age + 2.482 married</p>
 <p>N= 1130 R2=0.405</p>
 </section></section>
@@ -958,8 +958,10 @@ Estimated: &amp; y = g_0 + g_1 x_1 + g_2 x_2 + v   \\
 <h1>Thats all for Today</h1>
 <p>Next Week: Inference and Asymptotics</p>
 
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 </section>
     </div>

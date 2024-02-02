@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.251">
+  <meta name="generator" content="quarto-1.4.549">
 
   <meta name="author" content="Fernando Rios-Avila">
   <title>Econometrics MSC Levy - Multiple Regression Analysis</title>
@@ -31,7 +31,7 @@
     }
     /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -459,21 +459,21 @@ y &amp;= \color{red}{\beta_0}+\beta_1 x + R+ e
 </ul></li>
 </ul>
 <div id="0828d208" class="cell" data-execution_count="1">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">clear</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">set</span> <span class="dv">seed</span> 10</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">set</span> <span class="kw">obs</span> 1000</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">gen</span> <span class="kw">p</span> = (2*<span class="dt">_n</span>-1)/(2*_N) </span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">gen</span> x = <span class="fu">invchi2</span>(5, <span class="kw">p</span>)/2</span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="kw">gen</span> <span class="fu">y</span> = 1 + x + (x-2.5)^2 + rnormal()  </span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="kw">reg</span> <span class="fu">y</span> x</span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="kw">display</span> <span class="st">"Quadratic"</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> c.x##c.x</span>
-<span id="cb1-10"><a href="#cb1-10"></a>margins, <span class="kw">dydx</span>(x)</span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="kw">display</span> <span class="st">"Cubic"</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> c.x##c.x##c.x</span>
-<span id="cb1-13"><a href="#cb1-13"></a>margins, <span class="kw">dydx</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a></a><span class="kw">clear</span></span>
+<span id="cb1-2"><a></a><span class="kw">set</span> <span class="dv">seed</span> 10</span>
+<span id="cb1-3"><a></a><span class="kw">set</span> <span class="kw">obs</span> 1000</span>
+<span id="cb1-4"><a></a><span class="kw">gen</span> <span class="kw">p</span> = (2*<span class="dt">_n</span>-1)/(2*_N) </span>
+<span id="cb1-5"><a></a><span class="kw">gen</span> x = <span class="fu">invchi2</span>(5, <span class="kw">p</span>)/2</span>
+<span id="cb1-6"><a></a><span class="kw">gen</span> <span class="fu">y</span> = 1 + x + (x-2.5)^2 + rnormal()  </span>
+<span id="cb1-7"><a></a><span class="kw">reg</span> <span class="fu">y</span> x</span>
+<span id="cb1-8"><a></a><span class="kw">display</span> <span class="st">"Quadratic"</span></span>
+<span id="cb1-9"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> c.x##c.x</span>
+<span id="cb1-10"><a></a>margins, <span class="kw">dydx</span>(x)</span>
+<span id="cb1-11"><a></a><span class="kw">display</span> <span class="st">"Cubic"</span></span>
+<span id="cb1-12"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> c.x##c.x##c.x</span>
+<span id="cb1-13"><a></a>margins, <span class="kw">dydx</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Number of observations (_N) was 0, now 1,000.
@@ -536,7 +536,7 @@ dy/dx wrt:  x
 <ul>
 <li>RRT does not tell you “How” to fix the problem.</li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">estat</span> <span class="kw">ovtest</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a><span class="kw">estat</span> <span class="kw">ovtest</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>(bad name tho)</p>
 </section>
 <section id="davidson-mackinnon-test" class="slide level2">
@@ -639,17 +639,17 @@ y &amp;= \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 (\delta_0 + \delta_1 x_3 
 <li>But allows controlling for underlying factors or historical factors</li>
 </ul>
 <div id="4537fc86" class="cell" data-execution_count="2">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1"></a>frause crime2, <span class="kw">clear</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">qui</span>:<span class="kw">reg</span> crmrte unem llawexpc <span class="kw">if</span> <span class="fu">year</span> == 87</span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">est</span> sto m1</span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">qui</span>:<span class="kw">reg</span> crmrte unem llawexpc lcrmrt_1 <span class="kw">if</span> <span class="fu">year</span> == 87</span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="kw">est</span> sto m2</span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="kw">qui</span>:<span class="kw">reg</span> ccrmrte unem llawexpc <span class="kw">if</span> <span class="fu">year</span>==87  </span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="kw">est</span> sto m3</span>
-<span id="cb4-8"><a href="#cb4-8"></a>esttab m1 m2 m3, se <span class="kw">star</span>(* .1 ** 0.05 *** 0.01) b(3) <span class="co">///</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a>mtitle(crimert crimert change_crrt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a></a>frause crime2, <span class="kw">clear</span></span>
+<span id="cb4-2"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> crmrte unem llawexpc <span class="kw">if</span> <span class="fu">year</span> == 87</span>
+<span id="cb4-3"><a></a><span class="kw">est</span> sto m1</span>
+<span id="cb4-4"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> crmrte unem llawexpc lcrmrt_1 <span class="kw">if</span> <span class="fu">year</span> == 87</span>
+<span id="cb4-5"><a></a><span class="kw">est</span> sto m2</span>
+<span id="cb4-6"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> ccrmrte unem llawexpc <span class="kw">if</span> <span class="fu">year</span>==87  </span>
+<span id="cb4-7"><a></a><span class="kw">est</span> sto m3</span>
+<span id="cb4-8"><a></a>esttab m1 m2 m3, se <span class="kw">star</span>(* .1 ** 0.05 *** 0.01) b(3) <span class="co">///</span></span>
+<span id="cb4-9"><a></a>mtitle(crimert crimert change_crrt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -709,16 +709,16 @@ E(\varepsilon) &amp;=0; cov(\varepsilon,y_{true})=0; cov(\varepsilon,X's)=0
 <li><p>However <strong>variance</strong> will be larger than when using true data:</p></li>
 </ul>
 <div id="02fb5474" class="cell" data-execution_count="3">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">qui</span>: frause oaxaca, <span class="kw">clear</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">set</span> <span class="dv">seed</span> 101</span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">gen</span> lnwage2=lnwage + rnormal(2) </span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="kw">qui</span>:<span class="kw">reg</span> lnwage educ exper female</span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="kw">est</span> sto m1</span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="kw">qui</span>:<span class="kw">reg</span> lnwage2 educ exper female</span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="kw">est</span> sto m2</span>
-<span id="cb6-8"><a href="#cb6-8"></a>esttab m1 m2, se</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a></a><span class="kw">qui</span>: frause oaxaca, <span class="kw">clear</span></span>
+<span id="cb6-2"><a></a><span class="kw">set</span> <span class="dv">seed</span> 101</span>
+<span id="cb6-3"><a></a><span class="kw">gen</span> lnwage2=lnwage + rnormal(2) </span>
+<span id="cb6-4"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> lnwage educ exper female</span>
+<span id="cb6-5"><a></a><span class="kw">est</span> sto m1</span>
+<span id="cb6-6"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> lnwage2 educ exper female</span>
+<span id="cb6-7"><a></a><span class="kw">est</span> sto m2</span>
+<span id="cb6-8"><a></a>esttab m1 m2, se</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>(213 missing values generated)
@@ -762,17 +762,17 @@ Standard errors in parentheses
 <section id="section-5" class="slide level2">
 <h2></h2>
 <div id="0f295ab8" class="cell" data-execution_count="4">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1"></a>frause oaxaca, <span class="kw">clear</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">qui</span>:<span class="kw">sum</span> educ</span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="kw">gen</span> educ_error = educ + rnormal()*<span class="fu">r</span>(<span class="fu">sd</span>)</span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="kw">sum</span> educ educ_error</span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="kw">qui</span>:<span class="kw">reg</span> lnwage educ</span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="kw">est</span> sto m1</span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="kw">qui</span>:<span class="kw">reg</span> lnwage educ_error</span>
-<span id="cb8-8"><a href="#cb8-8"></a><span class="kw">est</span> sto m2</span>
-<span id="cb8-9"><a href="#cb8-9"></a>esttab m1 m2, se</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a></a>frause oaxaca, <span class="kw">clear</span></span>
+<span id="cb8-2"><a></a><span class="kw">qui</span>:<span class="kw">sum</span> educ</span>
+<span id="cb8-3"><a></a><span class="kw">gen</span> educ_error = educ + rnormal()*<span class="fu">r</span>(<span class="fu">sd</span>)</span>
+<span id="cb8-4"><a></a><span class="kw">sum</span> educ educ_error</span>
+<span id="cb8-5"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> lnwage educ</span>
+<span id="cb8-6"><a></a><span class="kw">est</span> sto m1</span>
+<span id="cb8-7"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> lnwage educ_error</span>
+<span id="cb8-8"><a></a><span class="kw">est</span> sto m2</span>
+<span id="cb8-9"><a></a>esttab m1 m2, se</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Excerpt from the Swiss Labor Market Survey 1998)
@@ -867,20 +867,20 @@ Standard errors in parentheses
 <section id="example" class="slide level2">
 <h2>Example</h2>
 <div id="fdd70c61" class="cell" data-execution_count="5">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">qui</span>:{</span>
-<span id="cb10-2"><a href="#cb10-2"></a>frause oaxaca, <span class="kw">clear</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="kw">drop</span> <span class="kw">if</span> lnwage==.</span>
-<span id="cb10-4"><a href="#cb10-4"></a><span class="kw">reg</span> lnwage educ exper tenure female age</span>
-<span id="cb10-5"><a href="#cb10-5"></a><span class="kw">predict</span> lev, lev</span>
-<span id="cb10-6"><a href="#cb10-6"></a><span class="kw">sum</span> lev, <span class="kw">meanonly</span></span>
-<span id="cb10-7"><a href="#cb10-7"></a><span class="kw">replace</span> lev=lev/<span class="fu">r</span>(<span class="kw">mean</span>)</span>
-<span id="cb10-8"><a href="#cb10-8"></a><span class="kw">predict</span> rst, rstud</span>
-<span id="cb10-9"><a href="#cb10-9"></a>}</span>
-<span id="cb10-10"><a href="#cb10-10"></a><span class="kw">set</span> <span class="dv">scheme</span> white2</span>
-<span id="cb10-11"><a href="#cb10-11"></a>color_style tableau</span>
-<span id="cb10-12"><a href="#cb10-12"></a><span class="kw">scatter</span> lev rst</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a></a><span class="kw">qui</span>:{</span>
+<span id="cb10-2"><a></a>frause oaxaca, <span class="kw">clear</span></span>
+<span id="cb10-3"><a></a><span class="kw">drop</span> <span class="kw">if</span> lnwage==.</span>
+<span id="cb10-4"><a></a><span class="kw">reg</span> lnwage educ exper tenure female age</span>
+<span id="cb10-5"><a></a><span class="kw">predict</span> lev, lev</span>
+<span id="cb10-6"><a></a><span class="kw">sum</span> lev, <span class="kw">meanonly</span></span>
+<span id="cb10-7"><a></a><span class="kw">replace</span> lev=lev/<span class="fu">r</span>(<span class="kw">mean</span>)</span>
+<span id="cb10-8"><a></a><span class="kw">predict</span> rst, rstud</span>
+<span id="cb10-9"><a></a>}</span>
+<span id="cb10-10"><a></a><span class="kw">set</span> <span class="dv">scheme</span> white2</span>
+<span id="cb10-11"><a></a>color_style tableau</span>
+<span id="cb10-12"><a></a><span class="kw">scatter</span> lev rst</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
@@ -916,15 +916,17 @@ Standard errors in parentheses
 <li>Drawbacks: Its slower than OLS, and it can be difficult to interpret</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb11" style="font-size: 1.3em"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">rreg</span> &lt;- Robust Regression</span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="kw">qreg</span> &lt;- Quantile Regression</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11" style="font-size: 1.3em"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a></a><span class="kw">rreg</span> &lt;- Robust Regression</span>
+<span id="cb11-2"><a></a><span class="kw">qreg</span> &lt;- Quantile Regression</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section></section>
 <section id="done-for-now" class="title-slide slide level1 center">
 <h1>Done for now</h1>
 <p>Next week Midterm! and after that helping with A4</p>
 
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 </section>
     </div>

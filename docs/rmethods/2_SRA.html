@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.251">
+  <meta name="generator" content="quarto-1.4.549">
 
   <meta name="author" content="Fernando Rios-Avila">
   <title>Econometrics MSC Levy - Simple Regression Model</title>
@@ -31,7 +31,7 @@
     }
     /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -438,21 +438,21 @@ Fernando Rios-Avila
 <section id="simple-scatter-1" class="slide level2">
 <h2>Simple Scatter 1</h2>
 <div id="df0de242" class="cell" data-execution_count="1">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a>** To download <span class="ot">all</span> Wooldrige Files</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">qui</span>: <span class="kw">ssc</span> install frause, <span class="kw">replace</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>** <span class="kw">for</span> some additional <span class="kw">color</span> schemes</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">qui</span>: <span class="kw">ssc</span> install color_style</span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">set</span> <span class="dv">scheme</span> white2</span>
-<span id="cb1-6"><a href="#cb1-6"></a>color_style tableau</span>
-<span id="cb1-7"><a href="#cb1-7"></a>** Loads file wage1</span>
-<span id="cb1-8"><a href="#cb1-8"></a>frause wage1, <span class="kw">clear</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="kw">scatter</span> wage educ</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a></a>** To download <span class="ot">all</span> Wooldrige Files</span>
+<span id="cb1-2"><a></a><span class="kw">qui</span>: <span class="kw">ssc</span> install frause, <span class="kw">replace</span></span>
+<span id="cb1-3"><a></a>** <span class="kw">for</span> some additional <span class="kw">color</span> schemes</span>
+<span id="cb1-4"><a></a><span class="kw">qui</span>: <span class="kw">ssc</span> install color_style</span>
+<span id="cb1-5"><a></a><span class="kw">set</span> <span class="dv">scheme</span> white2</span>
+<span id="cb1-6"><a></a>color_style tableau</span>
+<span id="cb1-7"><a></a>** Loads file wage1</span>
+<span id="cb1-8"><a></a>frause wage1, <span class="kw">clear</span></span>
+<span id="cb1-9"><a></a><span class="kw">scatter</span> wage educ</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
-<img data-src="2_SRA_files/figure-revealjs/cell-2-output-1.png" class="r-stretch quarto-figure-center"><ul>
+<img data-src="2_SRA_files/figure-revealjs/cell-2-output-1.png" class="quarto-figure quarto-figure-center r-stretch"><ul>
 <li>We observe a positive relationship between Wages and years of education</li>
 <li>This relationship does not seem to be linear</li>
 </ul>
@@ -460,7 +460,7 @@ Fernando Rios-Avila
 <section id="simple-scatter-2" class="slide level2">
 <h2>Simple Scatter 2</h2>
 
-<img data-src="images/paste-3.png" class="r-stretch quarto-figure-center"></section>
+<img data-src="images/paste-3.png" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="even-more-concrete" class="slide level2">
 <h2>Even more Concrete</h2>
 <ul>
@@ -515,66 +515,66 @@ Fernando Rios-Avila
 <section id="visualization" class="slide level2">
 <h2>Visualization</h2>
 <div id="73e1bdc8" class="cell" data-execution_count="2">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">set</span> <span class="dv">seed</span> 10</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">clear</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">range</span> x -2 2 20</span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="kw">gen</span> <span class="fu">y</span> = 1 + x + rnormal()</span>
-<span id="cb2-5"><a href="#cb2-5"></a>color_style tableau</span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="kw">two</span> (<span class="kw">scatter</span>  <span class="fu">y</span> x) <span class="co">///</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a>    (<span class="kw">function</span> <span class="fu">y</span> = 0.5 + 2*x, <span class="kw">range</span>(-2 2)) <span class="co">///</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a>    (<span class="kw">function</span> <span class="fu">y</span> = 2 + 0.5*x, <span class="kw">range</span>(-2 2)) <span class="co">///</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a>    (<span class="kw">function</span> <span class="fu">y</span> = 1 + 1*x  , <span class="kw">range</span>(-2 2)) , <span class="co">///</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a>    <span class="bn">legend</span>(<span class="kw">order</span>(2 <span class="st">"y=0.5+2x"</span> 3 <span class="st">"y=2+0.5x"</span> 4 <span class="st">"y=1+1x"</span>))</span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_1.png , <span class="kw">replace</span> <span class="kw">width</span>(1000)</span>
-<span id="cb2-12"><a href="#cb2-12"></a></span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="kw">gen</span> y1=.5+2*x</span>
-<span id="cb2-14"><a href="#cb2-14"></a><span class="kw">gen</span> y2=2+0.5*x</span>
-<span id="cb2-15"><a href="#cb2-15"></a><span class="kw">gen</span> y3=+1+1*x</span>
-<span id="cb2-16"><a href="#cb2-16"></a></span>
-<span id="cb2-17"><a href="#cb2-17"></a></span>
-<span id="cb2-18"><a href="#cb2-18"></a><span class="kw">egen</span> u21 = <span class="kw">sum</span>((<span class="fu">y</span>-y1)^2)</span>
-<span id="cb2-19"><a href="#cb2-19"></a><span class="kw">egen</span> u22 = <span class="kw">sum</span>((<span class="fu">y</span>-y2)^2)</span>
-<span id="cb2-20"><a href="#cb2-20"></a><span class="kw">egen</span> u23 = <span class="kw">sum</span>((<span class="fu">y</span>-y3)^2)</span>
-<span id="cb2-21"><a href="#cb2-21"></a><span class="kw">reg</span> <span class="fu">y</span> x</span>
-<span id="cb2-22"><a href="#cb2-22"></a><span class="kw">egen</span> u24 = <span class="kw">sum</span>((<span class="fu">y</span>-_b[<span class="dt">_cons</span>] - _b[x]*x)^2)</span>
-<span id="cb2-23"><a href="#cb2-23"></a><span class="kw">label</span> <span class="kw">var</span> u21 <span class="st">"SSR-model 1"</span></span>
-<span id="cb2-24"><a href="#cb2-24"></a><span class="kw">label</span> <span class="kw">var</span> u22 <span class="st">"SSR-model 2"</span></span>
-<span id="cb2-25"><a href="#cb2-25"></a><span class="kw">label</span> <span class="kw">var</span> u23 <span class="st">"SSR-model 3"</span></span>
-<span id="cb2-26"><a href="#cb2-26"></a><span class="kw">label</span> <span class="kw">var</span> u24 <span class="st">"SSR-model 4"</span></span>
-<span id="cb2-27"><a href="#cb2-27"></a></span>
-<span id="cb2-28"><a href="#cb2-28"></a><span class="kw">two</span> (<span class="kw">scatter</span> <span class="fu">y</span> x) <span class="co">///</span></span>
-<span id="cb2-29"><a href="#cb2-29"></a>    (<span class="kw">function</span> <span class="fu">y</span> = 0.5 + 2*x, <span class="kw">range</span>(-2 2)) <span class="co">///</span></span>
-<span id="cb2-30"><a href="#cb2-30"></a>    (rspike <span class="fu">y</span> y1 x), <span class="kw">ylabel</span>(-4/6) <span class="bn">ytitle</span>(<span class="fu">y</span>) <span class="co">///</span></span>
-<span id="cb2-31"><a href="#cb2-31"></a>    <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"Data"</span> 2 <span class="st">"Prediction "</span> 3 <span class="st">"Residual"</span>))</span>
-<span id="cb2-32"><a href="#cb2-32"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_2.png , <span class="kw">replace</span> <span class="kw">width</span>(1000) </span>
-<span id="cb2-33"><a href="#cb2-33"></a>    </span>
-<span id="cb2-34"><a href="#cb2-34"></a><span class="kw">two</span> (<span class="kw">scatter</span> <span class="fu">y</span> x) <span class="co">///</span></span>
-<span id="cb2-35"><a href="#cb2-35"></a>    (<span class="kw">function</span> <span class="fu">y</span> = 2 + 0.5*x, <span class="kw">range</span>(-2 2)) <span class="co">///</span></span>
-<span id="cb2-36"><a href="#cb2-36"></a>    (rspike <span class="fu">y</span> y2 x), <span class="kw">ylabel</span>(-4/6) <span class="bn">ytitle</span>(<span class="fu">y</span>) <span class="co">///</span></span>
-<span id="cb2-37"><a href="#cb2-37"></a>    <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"Data"</span> 2 <span class="st">"Prediction "</span> 3 <span class="st">"Residual"</span>))</span>
-<span id="cb2-38"><a href="#cb2-38"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_3.png , <span class="kw">replace</span> <span class="kw">width</span>(1000) </span>
-<span id="cb2-39"><a href="#cb2-39"></a>    </span>
-<span id="cb2-40"><a href="#cb2-40"></a><span class="kw">two</span> (<span class="kw">scatter</span> <span class="fu">y</span> x) <span class="co">///</span></span>
-<span id="cb2-41"><a href="#cb2-41"></a>    (<span class="kw">function</span> <span class="fu">y</span> = 1 + 1*x, <span class="kw">range</span>(-2 2)) <span class="co">///</span></span>
-<span id="cb2-42"><a href="#cb2-42"></a>    (rspike <span class="fu">y</span> y3 x) , <span class="kw">ylabel</span>(-4/6) <span class="bn">ytitle</span>(<span class="fu">y</span>) <span class="co">///</span></span>
-<span id="cb2-43"><a href="#cb2-43"></a>    <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"Data"</span> 2 <span class="st">"Prediction "</span> 3 <span class="st">"Residual"</span>))</span>
-<span id="cb2-44"><a href="#cb2-44"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_4.png , <span class="kw">replace</span> <span class="kw">width</span>(1000)    </span>
-<span id="cb2-45"><a href="#cb2-45"></a></span>
-<span id="cb2-46"><a href="#cb2-46"></a><span class="kw">reg</span> <span class="fu">y</span> x</span>
-<span id="cb2-47"><a href="#cb2-47"></a><span class="kw">predict</span> <span class="fu">yh</span></span>
-<span id="cb2-48"><a href="#cb2-48"></a><span class="kw">two</span> (<span class="kw">scatter</span> <span class="fu">y</span> x) <span class="co">///</span></span>
-<span id="cb2-49"><a href="#cb2-49"></a>    (<span class="kw">function</span> <span class="fu">y</span> = _b[<span class="dt">_cons</span>] + _b[x]*x, <span class="kw">range</span>(-2 2)) <span class="co">///</span></span>
-<span id="cb2-50"><a href="#cb2-50"></a>    (rspike <span class="fu">y</span> <span class="fu">yh</span> x) , <span class="kw">ylabel</span>(-4/6) <span class="bn">ytitle</span>(<span class="fu">y</span>) <span class="co">///</span></span>
-<span id="cb2-51"><a href="#cb2-51"></a>    <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"Data"</span> 2 <span class="st">"Prediction "</span> 3 <span class="st">"Residual"</span>))    </span>
-<span id="cb2-52"><a href="#cb2-52"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_5.png , <span class="kw">replace</span> <span class="kw">width</span>(1000)    </span>
-<span id="cb2-53"><a href="#cb2-53"></a><span class="kw">clonevar</span> u24x=u24</span>
-<span id="cb2-54"><a href="#cb2-54"></a><span class="kw">graph</span> <span class="bn">bar</span> u24 u21 u22 u23 u24x , <span class="co">///</span></span>
-<span id="cb2-55"><a href="#cb2-55"></a>   <span class="bn">legend</span>(<span class="kw">order</span>( 2 <span class="st">"SSR-Model 1"</span> 3 <span class="st">"SSR-Model 2"</span> 4 <span class="st">"SSR-Model 3"</span> 5 <span class="st">"Sample Fit"</span>) <span class="co">///</span></span>
-<span id="cb2-56"><a href="#cb2-56"></a>   <span class="bn">ring</span>(0) pos(2)) <span class="bn">xsize</span>(5) <span class="bn">ysize</span>(8) <span class="kw">scale</span>(1.5) <span class="bn">bar</span>(1, <span class="kw">color</span>(gs0%0))</span>
-<span id="cb2-57"><a href="#cb2-57"></a>   </span>
-<span id="cb2-58"><a href="#cb2-58"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_5x.png , <span class="kw">replace</span> <span class="kw">width</span>(300)    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a></a><span class="kw">set</span> <span class="dv">seed</span> 10</span>
+<span id="cb2-2"><a></a><span class="kw">clear</span></span>
+<span id="cb2-3"><a></a><span class="kw">range</span> x -2 2 20</span>
+<span id="cb2-4"><a></a><span class="kw">gen</span> <span class="fu">y</span> = 1 + x + rnormal()</span>
+<span id="cb2-5"><a></a>color_style tableau</span>
+<span id="cb2-6"><a></a><span class="kw">two</span> (<span class="kw">scatter</span>  <span class="fu">y</span> x) <span class="co">///</span></span>
+<span id="cb2-7"><a></a>    (<span class="kw">function</span> <span class="fu">y</span> = 0.5 + 2*x, <span class="kw">range</span>(-2 2)) <span class="co">///</span></span>
+<span id="cb2-8"><a></a>    (<span class="kw">function</span> <span class="fu">y</span> = 2 + 0.5*x, <span class="kw">range</span>(-2 2)) <span class="co">///</span></span>
+<span id="cb2-9"><a></a>    (<span class="kw">function</span> <span class="fu">y</span> = 1 + 1*x  , <span class="kw">range</span>(-2 2)) , <span class="co">///</span></span>
+<span id="cb2-10"><a></a>    <span class="bn">legend</span>(<span class="kw">order</span>(2 <span class="st">"y=0.5+2x"</span> 3 <span class="st">"y=2+0.5x"</span> 4 <span class="st">"y=1+1x"</span>))</span>
+<span id="cb2-11"><a></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_1.png , <span class="kw">replace</span> <span class="kw">width</span>(1000)</span>
+<span id="cb2-12"><a></a></span>
+<span id="cb2-13"><a></a><span class="kw">gen</span> y1=.5+2*x</span>
+<span id="cb2-14"><a></a><span class="kw">gen</span> y2=2+0.5*x</span>
+<span id="cb2-15"><a></a><span class="kw">gen</span> y3=+1+1*x</span>
+<span id="cb2-16"><a></a></span>
+<span id="cb2-17"><a></a></span>
+<span id="cb2-18"><a></a><span class="kw">egen</span> u21 = <span class="kw">sum</span>((<span class="fu">y</span>-y1)^2)</span>
+<span id="cb2-19"><a></a><span class="kw">egen</span> u22 = <span class="kw">sum</span>((<span class="fu">y</span>-y2)^2)</span>
+<span id="cb2-20"><a></a><span class="kw">egen</span> u23 = <span class="kw">sum</span>((<span class="fu">y</span>-y3)^2)</span>
+<span id="cb2-21"><a></a><span class="kw">reg</span> <span class="fu">y</span> x</span>
+<span id="cb2-22"><a></a><span class="kw">egen</span> u24 = <span class="kw">sum</span>((<span class="fu">y</span>-_b[<span class="dt">_cons</span>] - _b[x]*x)^2)</span>
+<span id="cb2-23"><a></a><span class="kw">label</span> <span class="kw">var</span> u21 <span class="st">"SSR-model 1"</span></span>
+<span id="cb2-24"><a></a><span class="kw">label</span> <span class="kw">var</span> u22 <span class="st">"SSR-model 2"</span></span>
+<span id="cb2-25"><a></a><span class="kw">label</span> <span class="kw">var</span> u23 <span class="st">"SSR-model 3"</span></span>
+<span id="cb2-26"><a></a><span class="kw">label</span> <span class="kw">var</span> u24 <span class="st">"SSR-model 4"</span></span>
+<span id="cb2-27"><a></a></span>
+<span id="cb2-28"><a></a><span class="kw">two</span> (<span class="kw">scatter</span> <span class="fu">y</span> x) <span class="co">///</span></span>
+<span id="cb2-29"><a></a>    (<span class="kw">function</span> <span class="fu">y</span> = 0.5 + 2*x, <span class="kw">range</span>(-2 2)) <span class="co">///</span></span>
+<span id="cb2-30"><a></a>    (rspike <span class="fu">y</span> y1 x), <span class="kw">ylabel</span>(-4/6) <span class="bn">ytitle</span>(<span class="fu">y</span>) <span class="co">///</span></span>
+<span id="cb2-31"><a></a>    <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"Data"</span> 2 <span class="st">"Prediction "</span> 3 <span class="st">"Residual"</span>))</span>
+<span id="cb2-32"><a></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_2.png , <span class="kw">replace</span> <span class="kw">width</span>(1000) </span>
+<span id="cb2-33"><a></a>    </span>
+<span id="cb2-34"><a></a><span class="kw">two</span> (<span class="kw">scatter</span> <span class="fu">y</span> x) <span class="co">///</span></span>
+<span id="cb2-35"><a></a>    (<span class="kw">function</span> <span class="fu">y</span> = 2 + 0.5*x, <span class="kw">range</span>(-2 2)) <span class="co">///</span></span>
+<span id="cb2-36"><a></a>    (rspike <span class="fu">y</span> y2 x), <span class="kw">ylabel</span>(-4/6) <span class="bn">ytitle</span>(<span class="fu">y</span>) <span class="co">///</span></span>
+<span id="cb2-37"><a></a>    <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"Data"</span> 2 <span class="st">"Prediction "</span> 3 <span class="st">"Residual"</span>))</span>
+<span id="cb2-38"><a></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_3.png , <span class="kw">replace</span> <span class="kw">width</span>(1000) </span>
+<span id="cb2-39"><a></a>    </span>
+<span id="cb2-40"><a></a><span class="kw">two</span> (<span class="kw">scatter</span> <span class="fu">y</span> x) <span class="co">///</span></span>
+<span id="cb2-41"><a></a>    (<span class="kw">function</span> <span class="fu">y</span> = 1 + 1*x, <span class="kw">range</span>(-2 2)) <span class="co">///</span></span>
+<span id="cb2-42"><a></a>    (rspike <span class="fu">y</span> y3 x) , <span class="kw">ylabel</span>(-4/6) <span class="bn">ytitle</span>(<span class="fu">y</span>) <span class="co">///</span></span>
+<span id="cb2-43"><a></a>    <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"Data"</span> 2 <span class="st">"Prediction "</span> 3 <span class="st">"Residual"</span>))</span>
+<span id="cb2-44"><a></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_4.png , <span class="kw">replace</span> <span class="kw">width</span>(1000)    </span>
+<span id="cb2-45"><a></a></span>
+<span id="cb2-46"><a></a><span class="kw">reg</span> <span class="fu">y</span> x</span>
+<span id="cb2-47"><a></a><span class="kw">predict</span> <span class="fu">yh</span></span>
+<span id="cb2-48"><a></a><span class="kw">two</span> (<span class="kw">scatter</span> <span class="fu">y</span> x) <span class="co">///</span></span>
+<span id="cb2-49"><a></a>    (<span class="kw">function</span> <span class="fu">y</span> = _b[<span class="dt">_cons</span>] + _b[x]*x, <span class="kw">range</span>(-2 2)) <span class="co">///</span></span>
+<span id="cb2-50"><a></a>    (rspike <span class="fu">y</span> <span class="fu">yh</span> x) , <span class="kw">ylabel</span>(-4/6) <span class="bn">ytitle</span>(<span class="fu">y</span>) <span class="co">///</span></span>
+<span id="cb2-51"><a></a>    <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"Data"</span> 2 <span class="st">"Prediction "</span> 3 <span class="st">"Residual"</span>))    </span>
+<span id="cb2-52"><a></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_5.png , <span class="kw">replace</span> <span class="kw">width</span>(1000)    </span>
+<span id="cb2-53"><a></a><span class="kw">clonevar</span> u24x=u24</span>
+<span id="cb2-54"><a></a><span class="kw">graph</span> <span class="bn">bar</span> u24 u21 u22 u23 u24x , <span class="co">///</span></span>
+<span id="cb2-55"><a></a>   <span class="bn">legend</span>(<span class="kw">order</span>( 2 <span class="st">"SSR-Model 1"</span> 3 <span class="st">"SSR-Model 2"</span> 4 <span class="st">"SSR-Model 3"</span> 5 <span class="st">"Sample Fit"</span>) <span class="co">///</span></span>
+<span id="cb2-56"><a></a>   <span class="bn">ring</span>(0) pos(2)) <span class="bn">xsize</span>(5) <span class="bn">ysize</span>(8) <span class="kw">scale</span>(1.5) <span class="bn">bar</span>(1, <span class="kw">color</span>(gs0%0))</span>
+<span id="cb2-57"><a></a>   </span>
+<span id="cb2-58"><a></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_5x.png , <span class="kw">replace</span> <span class="kw">width</span>(300)    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="panel-tabset">
@@ -681,27 +681,27 @@ Fernando Rios-Avila
 <section id="visualization-1" class="slide level2">
 <h2>Visualization</h2>
 <div id="ea6b39d6" class="cell" data-execution_count="3">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">gen</span> y0 = 0</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">two</span> (<span class="kw">scatter</span> <span class="fu">y</span> x) <span class="co">///</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>    (<span class="kw">function</span> <span class="fu">y</span> = _b[<span class="dt">_cons</span>] + _b[x]*x, <span class="kw">range</span>(-2.1 2.1)) <span class="co">///</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a>    (rspike <span class="fu">y</span> y0 x, <span class="kw">color</span>(gs9%50) lw(1)) <span class="co">///</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a>    , <span class="kw">ylabel</span>(-4/6) <span class="bn">ytitle</span>(<span class="fu">y</span>) <span class="kw">yline</span>(0) <span class="co">///</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a>    <span class="bn">title</span>(<span class="st">"Data"</span>)   <span class="bn">legend</span>(<span class="kw">off</span>)</span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_6.png, <span class="kw">replace</span> <span class="kw">width</span>(1000)</span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="kw">two</span> (<span class="kw">scatter</span> <span class="fu">y</span> x) <span class="co">///</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a>    (<span class="kw">function</span> <span class="fu">y</span> = _b[<span class="dt">_cons</span>] + _b[x]*x, <span class="kw">range</span>(-2.1 2.1)) <span class="co">///</span></span>
-<span id="cb3-10"><a href="#cb3-10"></a>    (rspike <span class="fu">yh</span> y0 x, <span class="kw">color</span>(gs9%50) lw(1)) <span class="co">///</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a>    , <span class="kw">ylabel</span>(-4/6) <span class="bn">ytitle</span>(<span class="fu">y</span>) <span class="kw">yline</span>(0) <span class="co">///</span></span>
-<span id="cb3-12"><a href="#cb3-12"></a>    <span class="bn">title</span>(<span class="st">"Prediction"</span>) <span class="bn">legend</span>(<span class="kw">off</span>)</span>
-<span id="cb3-13"><a href="#cb3-13"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_7.png, <span class="kw">replace</span> <span class="kw">width</span>(1000) </span>
-<span id="cb3-14"><a href="#cb3-14"></a><span class="kw">two</span> (<span class="kw">scatter</span> <span class="fu">y</span> x) <span class="co">///</span></span>
-<span id="cb3-15"><a href="#cb3-15"></a>    (<span class="kw">function</span> <span class="fu">y</span> = _b[<span class="dt">_cons</span>] + _b[x]*x, <span class="kw">range</span>(-2.1 2.1)) <span class="co">///</span></span>
-<span id="cb3-16"><a href="#cb3-16"></a>    (rspike <span class="fu">y</span> <span class="fu">yh</span> x, <span class="kw">color</span>(gs9%50) lw(1)) <span class="co">///</span></span>
-<span id="cb3-17"><a href="#cb3-17"></a>    , <span class="kw">ylabel</span>(-4/6) <span class="bn">ytitle</span>(<span class="fu">y</span>) <span class="kw">yline</span>(0) <span class="co">///</span></span>
-<span id="cb3-18"><a href="#cb3-18"></a>    <span class="bn">title</span>(<span class="st">"Residual"</span>)   <span class="bn">legend</span>(<span class="kw">off</span>)</span>
-<span id="cb3-19"><a href="#cb3-19"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_8.png, <span class="kw">replace</span> <span class="kw">width</span>(1000) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a><span class="kw">gen</span> y0 = 0</span>
+<span id="cb3-2"><a></a><span class="kw">two</span> (<span class="kw">scatter</span> <span class="fu">y</span> x) <span class="co">///</span></span>
+<span id="cb3-3"><a></a>    (<span class="kw">function</span> <span class="fu">y</span> = _b[<span class="dt">_cons</span>] + _b[x]*x, <span class="kw">range</span>(-2.1 2.1)) <span class="co">///</span></span>
+<span id="cb3-4"><a></a>    (rspike <span class="fu">y</span> y0 x, <span class="kw">color</span>(gs9%50) lw(1)) <span class="co">///</span></span>
+<span id="cb3-5"><a></a>    , <span class="kw">ylabel</span>(-4/6) <span class="bn">ytitle</span>(<span class="fu">y</span>) <span class="kw">yline</span>(0) <span class="co">///</span></span>
+<span id="cb3-6"><a></a>    <span class="bn">title</span>(<span class="st">"Data"</span>)   <span class="bn">legend</span>(<span class="kw">off</span>)</span>
+<span id="cb3-7"><a></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_6.png, <span class="kw">replace</span> <span class="kw">width</span>(1000)</span>
+<span id="cb3-8"><a></a><span class="kw">two</span> (<span class="kw">scatter</span> <span class="fu">y</span> x) <span class="co">///</span></span>
+<span id="cb3-9"><a></a>    (<span class="kw">function</span> <span class="fu">y</span> = _b[<span class="dt">_cons</span>] + _b[x]*x, <span class="kw">range</span>(-2.1 2.1)) <span class="co">///</span></span>
+<span id="cb3-10"><a></a>    (rspike <span class="fu">yh</span> y0 x, <span class="kw">color</span>(gs9%50) lw(1)) <span class="co">///</span></span>
+<span id="cb3-11"><a></a>    , <span class="kw">ylabel</span>(-4/6) <span class="bn">ytitle</span>(<span class="fu">y</span>) <span class="kw">yline</span>(0) <span class="co">///</span></span>
+<span id="cb3-12"><a></a>    <span class="bn">title</span>(<span class="st">"Prediction"</span>) <span class="bn">legend</span>(<span class="kw">off</span>)</span>
+<span id="cb3-13"><a></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_7.png, <span class="kw">replace</span> <span class="kw">width</span>(1000) </span>
+<span id="cb3-14"><a></a><span class="kw">two</span> (<span class="kw">scatter</span> <span class="fu">y</span> x) <span class="co">///</span></span>
+<span id="cb3-15"><a></a>    (<span class="kw">function</span> <span class="fu">y</span> = _b[<span class="dt">_cons</span>] + _b[x]*x, <span class="kw">range</span>(-2.1 2.1)) <span class="co">///</span></span>
+<span id="cb3-16"><a></a>    (rspike <span class="fu">y</span> <span class="fu">yh</span> x, <span class="kw">color</span>(gs9%50) lw(1)) <span class="co">///</span></span>
+<span id="cb3-17"><a></a>    , <span class="kw">ylabel</span>(-4/6) <span class="bn">ytitle</span>(<span class="fu">y</span>) <span class="kw">yline</span>(0) <span class="co">///</span></span>
+<span id="cb3-18"><a></a>    <span class="bn">title</span>(<span class="st">"Residual"</span>)   <span class="bn">legend</span>(<span class="kw">off</span>)</span>
+<span id="cb3-19"><a></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_8.png, <span class="kw">replace</span> <span class="kw">width</span>(1000) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="panel-tabset">
@@ -894,25 +894,25 @@ E(\hat \beta_1) &amp;= \beta_1
 <section id="visualization-2" class="slide level2">
 <h2>Visualization</h2>
 <div id="c43c4e50" class="cell" data-execution_count="4">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">clear</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">set</span> <span class="dv">scheme</span> white2</span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">set</span> <span class="kw">obs</span> 1000</span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">gen</span> x = runiform(-2 , 2)    </span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="kw">gen</span> u = rnormal()</span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="kw">gen</span> y1 = x + u</span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="kw">gen</span> y2 = x + u*<span class="fu">abs</span>(x)</span>
-<span id="cb4-8"><a href="#cb4-8"></a><span class="kw">gen</span> y3 = x + u*(2-<span class="fu">abs</span>(x))</span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="kw">gen</span> y4 = x + u*(<span class="fu">sin</span>(2*x))</span>
-<span id="cb4-10"><a href="#cb4-10"></a></span>
-<span id="cb4-11"><a href="#cb4-11"></a></span>
-<span id="cb4-12"><a href="#cb4-12"></a><span class="kw">two</span> <span class="kw">scatter</span> y1 x, <span class="bn">name</span>(m1, <span class="kw">replace</span>)</span>
-<span id="cb4-13"><a href="#cb4-13"></a><span class="kw">scatter</span> y2 x, <span class="bn">name</span>(m2, <span class="kw">replace</span>)</span>
-<span id="cb4-14"><a href="#cb4-14"></a><span class="kw">scatter</span> y3 x, <span class="bn">name</span>(m3, <span class="kw">replace</span>)</span>
-<span id="cb4-15"><a href="#cb4-15"></a><span class="kw">scatter</span> y4 x, <span class="bn">name</span>(m4, <span class="kw">replace</span>)</span>
-<span id="cb4-16"><a href="#cb4-16"></a><span class="kw">graph</span> <span class="bn">combine</span> m1 m2 m3 m4</span>
-<span id="cb4-17"><a href="#cb4-17"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_9.png, <span class="kw">replace</span> <span class="kw">width</span>(1000)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a></a><span class="kw">clear</span></span>
+<span id="cb4-2"><a></a><span class="kw">set</span> <span class="dv">scheme</span> white2</span>
+<span id="cb4-3"><a></a><span class="kw">set</span> <span class="kw">obs</span> 1000</span>
+<span id="cb4-4"><a></a><span class="kw">gen</span> x = runiform(-2 , 2)    </span>
+<span id="cb4-5"><a></a><span class="kw">gen</span> u = rnormal()</span>
+<span id="cb4-6"><a></a><span class="kw">gen</span> y1 = x + u</span>
+<span id="cb4-7"><a></a><span class="kw">gen</span> y2 = x + u*<span class="fu">abs</span>(x)</span>
+<span id="cb4-8"><a></a><span class="kw">gen</span> y3 = x + u*(2-<span class="fu">abs</span>(x))</span>
+<span id="cb4-9"><a></a><span class="kw">gen</span> y4 = x + u*(<span class="fu">sin</span>(2*x))</span>
+<span id="cb4-10"><a></a></span>
+<span id="cb4-11"><a></a></span>
+<span id="cb4-12"><a></a><span class="kw">two</span> <span class="kw">scatter</span> y1 x, <span class="bn">name</span>(m1, <span class="kw">replace</span>)</span>
+<span id="cb4-13"><a></a><span class="kw">scatter</span> y2 x, <span class="bn">name</span>(m2, <span class="kw">replace</span>)</span>
+<span id="cb4-14"><a></a><span class="kw">scatter</span> y3 x, <span class="bn">name</span>(m3, <span class="kw">replace</span>)</span>
+<span id="cb4-15"><a></a><span class="kw">scatter</span> y4 x, <span class="bn">name</span>(m4, <span class="kw">replace</span>)</span>
+<span id="cb4-16"><a></a><span class="kw">graph</span> <span class="bn">combine</span> m1 m2 m3 m4</span>
+<span id="cb4-17"><a></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_9.png, <span class="kw">replace</span> <span class="kw">width</span>(1000)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 
@@ -951,14 +951,14 @@ Var(\hat \beta_1 - \beta_1) &amp;= Var \left( \frac {\sum  \tilde x_i u_i }{\sum
 <h2>Examples</h2>
 <p>Deriving OLS <span class="math inline">\(\beta's\)</span>:</p>
 <div id="9b103bd6" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1"></a>** Wage and Education: Example 2.7</span>
-<span id="cb5-2"><a href="#cb5-2"></a></span>
-<span id="cb5-3"><a href="#cb5-3"></a>frause wage1, <span class="kw">clear</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">mata</span>: <span class="fu">y</span> = st_data(.,<span class="st">"wage"</span>)</span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="kw">mata</span>: x = st_data(.,<span class="st">"educ"</span>)</span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="kw">mata</span>: b1 = <span class="kw">sum</span>( (x :- <span class="kw">mean</span>(x)) :* (<span class="fu">y</span> :- <span class="kw">mean</span>(<span class="fu">y</span>)) ) / <span class="kw">sum</span>( (x :- <span class="kw">mean</span>(x)):^2 ) </span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="kw">mata</span>: b0 = <span class="kw">mean</span>(<span class="fu">y</span>)-<span class="kw">mean</span>(x)*b1</span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="kw">mata</span>: b1, b0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a></a>** Wage and Education: Example 2.7</span>
+<span id="cb5-2"><a></a></span>
+<span id="cb5-3"><a></a>frause wage1, <span class="kw">clear</span></span>
+<span id="cb5-4"><a></a><span class="kw">mata</span>: <span class="fu">y</span> = st_data(.,<span class="st">"wage"</span>)</span>
+<span id="cb5-5"><a></a><span class="kw">mata</span>: x = st_data(.,<span class="st">"educ"</span>)</span>
+<span id="cb5-6"><a></a><span class="kw">mata</span>: b1 = <span class="kw">sum</span>( (x :- <span class="kw">mean</span>(x)) :* (<span class="fu">y</span> :- <span class="kw">mean</span>(<span class="fu">y</span>)) ) / <span class="kw">sum</span>( (x :- <span class="kw">mean</span>(x)):^2 ) </span>
+<span id="cb5-7"><a></a><span class="kw">mata</span>: b0 = <span class="kw">mean</span>(<span class="fu">y</span>)-<span class="kw">mean</span>(x)*b1</span>
+<span id="cb5-8"><a></a><span class="kw">mata</span>: b1, b0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                 1             2
     +-----------------------------+
@@ -968,11 +968,11 @@ Var(\hat \beta_1 - \beta_1) &amp;= Var \left( \frac {\sum  \tilde x_i u_i }{\sum
 </div>
 <p>SST = SSE + SSR</p>
 <div id="c44d2e04" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">mata</span>: <span class="fu">yh</span>  = b0:+b1*x</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">mata</span>: sst = <span class="kw">sum</span>( (<span class="fu">y</span>:-<span class="kw">mean</span>(<span class="fu">y</span>)):^2 )</span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">mata</span>: sse = <span class="kw">sum</span>( (<span class="fu">yh</span>:-<span class="kw">mean</span>(<span class="fu">y</span>)):^2 )</span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="kw">mata</span>: ssr = <span class="kw">sum</span>( (<span class="fu">y</span>:-<span class="fu">yh</span>):^2 )</span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="kw">mata</span>: sst, sse, ssr, sse + ssr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a></a><span class="kw">mata</span>: <span class="fu">yh</span>  = b0:+b1*x</span>
+<span id="cb7-2"><a></a><span class="kw">mata</span>: sst = <span class="kw">sum</span>( (<span class="fu">y</span>:-<span class="kw">mean</span>(<span class="fu">y</span>)):^2 )</span>
+<span id="cb7-3"><a></a><span class="kw">mata</span>: sse = <span class="kw">sum</span>( (<span class="fu">yh</span>:-<span class="kw">mean</span>(<span class="fu">y</span>)):^2 )</span>
+<span id="cb7-4"><a></a><span class="kw">mata</span>: ssr = <span class="kw">sum</span>( (<span class="fu">y</span>:-<span class="fu">yh</span>):^2 )</span>
+<span id="cb7-5"><a></a><span class="kw">mata</span>: sst, sse, ssr, sse + ssr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                 1             2             3             4
     +---------------------------------------------------------+
@@ -982,7 +982,7 @@ Var(\hat \beta_1 - \beta_1) &amp;= Var \left( \frac {\sum  \tilde x_i u_i }{\sum
 </div>
 <p><span class="math inline">\(R^2\)</span>:</p>
 <div id="de5e01e6" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">mata</span>: sse/sst , 1-ssr/sst</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a></a><span class="kw">mata</span>: sse/sst , 1-ssr/sst</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                1            2
     +---------------------------+
@@ -992,11 +992,11 @@ Var(\hat \beta_1 - \beta_1) &amp;= Var \left( \frac {\sum  \tilde x_i u_i }{\sum
 </div>
 <p><span class="math inline">\(\hat\sigma_\beta\)</span></p>
 <div id="195927b0" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">mata</span>: sig2_u = ssr / (<span class="bn">rows</span>(<span class="fu">y</span>)-2)</span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="kw">mata</span>: sst_x  = <span class="kw">sum</span>( (x:-<span class="kw">mean</span>(x)):^2 )</span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="kw">mata</span>: sig_b1 = <span class="fu">sqrt</span>( sig2_u / sst_x )</span>
-<span id="cb11-4"><a href="#cb11-4"></a><span class="kw">mata</span>: sig_b0 = <span class="fu">sqrt</span>( sig2_u * <span class="kw">mean</span>(x:^2) / sst_x ) </span>
-<span id="cb11-5"><a href="#cb11-5"></a><span class="kw">mata</span>: sig_b1 , sig_b0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a></a><span class="kw">mata</span>: sig2_u = ssr / (<span class="bn">rows</span>(<span class="fu">y</span>)-2)</span>
+<span id="cb11-2"><a></a><span class="kw">mata</span>: sst_x  = <span class="kw">sum</span>( (x:-<span class="kw">mean</span>(x)):^2 )</span>
+<span id="cb11-3"><a></a><span class="kw">mata</span>: sig_b1 = <span class="fu">sqrt</span>( sig2_u / sst_x )</span>
+<span id="cb11-4"><a></a><span class="kw">mata</span>: sig_b0 = <span class="fu">sqrt</span>( sig2_u * <span class="kw">mean</span>(x:^2) / sst_x ) </span>
+<span id="cb11-5"><a></a><span class="kw">mata</span>: sig_b1 , sig_b0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                 1             2
     +-----------------------------+
@@ -1006,9 +1006,9 @@ Var(\hat \beta_1 - \beta_1) &amp;= Var \left( \frac {\sum  \tilde x_i u_i }{\sum
 </div>
 <p>Stata command:</p>
 <div id="bccdc812" class="cell" data-execution_count="9">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">regress</span> wage educ</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a></a><span class="kw">regress</span> wage educ</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1033,15 +1033,15 @@ Var(\hat \beta_1 - \beta_1) &amp;= Var \left( \frac {\sum  \tilde x_i u_i }{\sum
 <p>First thing you should always consider doing is obtaining some summary statistics.</p>
 <p>without that its difficult o understand the magnitud of the coefficients and their effects.</p>
 <div id="6ef98dda" class="cell" data-execution_count="10">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a href="#cb15-1"></a>frause ceosal1, <span class="kw">clear</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a><span class="kw">display</span> <span class="st">"***Variables Description***"</span></span>
-<span id="cb15-3"><a href="#cb15-3"></a><span class="kw">des</span> salary roe</span>
-<span id="cb15-4"><a href="#cb15-4"></a><span class="kw">display</span> <span class="st">"***Summary Statistics***"</span></span>
-<span id="cb15-5"><a href="#cb15-5"></a><span class="kw">sum</span> salary roe</span>
-<span id="cb15-6"><a href="#cb15-6"></a><span class="kw">display</span> <span class="st">"***Simple Regression***"</span></span>
-<span id="cb15-7"><a href="#cb15-7"></a><span class="kw">reg</span> salary roe</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a></a>frause ceosal1, <span class="kw">clear</span></span>
+<span id="cb15-2"><a></a><span class="kw">display</span> <span class="st">"***Variables Description***"</span></span>
+<span id="cb15-3"><a></a><span class="kw">des</span> salary roe</span>
+<span id="cb15-4"><a></a><span class="kw">display</span> <span class="st">"***Summary Statistics***"</span></span>
+<span id="cb15-5"><a></a><span class="kw">sum</span> salary roe</span>
+<span id="cb15-6"><a></a><span class="kw">display</span> <span class="st">"***Simple Regression***"</span></span>
+<span id="cb15-7"><a></a><span class="kw">reg</span> salary roe</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>***Variables Description***
@@ -1077,15 +1077,15 @@ roe             float   %9.0g                 return on equity, 88-90 avg
 <p>Now, Changing scales has no effect on <span class="math inline">\(R^2\)</span>, nor the coefficient to Standard error ratio (<span class="math inline">\(t-stat\)</span>)</p>
 <p>It could allow for easier interpretation of the results.</p>
 <div id="cba5bc95" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">gen</span> saldol=salary*1000</span>
-<span id="cb17-2"><a href="#cb17-2"></a><span class="kw">gen</span> roedec=roe / 100</span>
-<span id="cb17-3"><a href="#cb17-3"></a><span class="kw">qui</span>: <span class="kw">reg</span> salary roe</span>
-<span id="cb17-4"><a href="#cb17-4"></a><span class="kw">est</span> sto m1</span>
-<span id="cb17-5"><a href="#cb17-5"></a><span class="kw">qui</span>: <span class="kw">reg</span> saldol roe</span>
-<span id="cb17-6"><a href="#cb17-6"></a><span class="kw">est</span> sto m2</span>
-<span id="cb17-7"><a href="#cb17-7"></a><span class="kw">qui</span>: <span class="kw">reg</span> salary roedec</span>
-<span id="cb17-8"><a href="#cb17-8"></a><span class="kw">est</span> sto m3</span>
-<span id="cb17-9"><a href="#cb17-9"></a>esttab m1 m2 m3, se r2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb17-1"><a></a><span class="kw">gen</span> saldol=salary*1000</span>
+<span id="cb17-2"><a></a><span class="kw">gen</span> roedec=roe / 100</span>
+<span id="cb17-3"><a></a><span class="kw">qui</span>: <span class="kw">reg</span> salary roe</span>
+<span id="cb17-4"><a></a><span class="kw">est</span> sto m1</span>
+<span id="cb17-5"><a></a><span class="kw">qui</span>: <span class="kw">reg</span> saldol roe</span>
+<span id="cb17-6"><a></a><span class="kw">est</span> sto m2</span>
+<span id="cb17-7"><a></a><span class="kw">qui</span>: <span class="kw">reg</span> salary roedec</span>
+<span id="cb17-8"><a></a><span class="kw">est</span> sto m3</span>
+<span id="cb17-9"><a></a>esttab m1 m2 m3, se r2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 ------------------------------------------------------------
@@ -1124,40 +1124,40 @@ log(y) &amp;= \beta_0 + \beta_1 log(x) + e \rightarrow &amp; \beta_1 =\frac{\% \
 <li><p>This transformation compresses the distribution of a variable, potentially addressing problems of Heteroskedasticity (non-constant variance)</p></li>
 </ul>
 <div id="696abd49" class="cell" data-execution_count="12">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb19-1"><a href="#cb19-1"></a>*** Example 2.10</span>
-<span id="cb19-2"><a href="#cb19-2"></a>frause wage1, <span class="kw">clear</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a><span class="kw">gen</span> lnwage = <span class="fu">log</span>(wage)</span>
-<span id="cb19-4"><a href="#cb19-4"></a><span class="kw">gen</span> lneduc = <span class="fu">log</span>(educ)</span>
-<span id="cb19-5"><a href="#cb19-5"></a><span class="kw">two</span> <span class="kw">scatter</span> wage educ     || <span class="kw">lfit</span> wage educ    , <span class="co">///</span></span>
-<span id="cb19-6"><a href="#cb19-6"></a>    <span class="bn">name</span>(m1, <span class="kw">replace</span>) <span class="bn">title</span>(lin-lin) <span class="bn">legend</span>(<span class="kw">off</span>)</span>
-<span id="cb19-7"><a href="#cb19-7"></a><span class="kw">two</span> <span class="kw">scatter</span> lnwage educ   || <span class="kw">lfit</span> lnwage educ  , <span class="co">///</span></span>
-<span id="cb19-8"><a href="#cb19-8"></a>    <span class="bn">name</span>(m2, <span class="kw">replace</span>) <span class="bn">title</span>(<span class="fu">log</span>-lin) <span class="bn">legend</span>(<span class="kw">off</span>)</span>
-<span id="cb19-9"><a href="#cb19-9"></a><span class="kw">two</span> <span class="kw">scatter</span> wage lneduc   || <span class="kw">lfit</span> wage lneduc  , <span class="co">///</span></span>
-<span id="cb19-10"><a href="#cb19-10"></a>    <span class="bn">name</span>(m3, <span class="kw">replace</span>) <span class="bn">title</span>(lin-<span class="fu">log</span>) <span class="bn">legend</span>(<span class="kw">off</span>)</span>
-<span id="cb19-11"><a href="#cb19-11"></a><span class="kw">two</span> <span class="kw">scatter</span> lnwage lneduc || <span class="kw">lfit</span> lnwage lneduc, <span class="co">///</span></span>
-<span id="cb19-12"><a href="#cb19-12"></a>    <span class="bn">name</span>(m4, <span class="kw">replace</span>) <span class="bn">title</span>(<span class="fu">log</span>-<span class="fu">log</span>) <span class="bn">legend</span>(<span class="kw">off</span>)</span>
-<span id="cb19-13"><a href="#cb19-13"></a><span class="kw">graph</span> <span class="bn">combine</span> m1 m2 m3 m4, </span>
-<span id="cb19-14"><a href="#cb19-14"></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_10.png, <span class="kw">width</span>(1000) <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb19-1"><a></a>*** Example 2.10</span>
+<span id="cb19-2"><a></a>frause wage1, <span class="kw">clear</span></span>
+<span id="cb19-3"><a></a><span class="kw">gen</span> lnwage = <span class="fu">log</span>(wage)</span>
+<span id="cb19-4"><a></a><span class="kw">gen</span> lneduc = <span class="fu">log</span>(educ)</span>
+<span id="cb19-5"><a></a><span class="kw">two</span> <span class="kw">scatter</span> wage educ     || <span class="kw">lfit</span> wage educ    , <span class="co">///</span></span>
+<span id="cb19-6"><a></a>    <span class="bn">name</span>(m1, <span class="kw">replace</span>) <span class="bn">title</span>(lin-lin) <span class="bn">legend</span>(<span class="kw">off</span>)</span>
+<span id="cb19-7"><a></a><span class="kw">two</span> <span class="kw">scatter</span> lnwage educ   || <span class="kw">lfit</span> lnwage educ  , <span class="co">///</span></span>
+<span id="cb19-8"><a></a>    <span class="bn">name</span>(m2, <span class="kw">replace</span>) <span class="bn">title</span>(<span class="fu">log</span>-lin) <span class="bn">legend</span>(<span class="kw">off</span>)</span>
+<span id="cb19-9"><a></a><span class="kw">two</span> <span class="kw">scatter</span> wage lneduc   || <span class="kw">lfit</span> wage lneduc  , <span class="co">///</span></span>
+<span id="cb19-10"><a></a>    <span class="bn">name</span>(m3, <span class="kw">replace</span>) <span class="bn">title</span>(lin-<span class="fu">log</span>) <span class="bn">legend</span>(<span class="kw">off</span>)</span>
+<span id="cb19-11"><a></a><span class="kw">two</span> <span class="kw">scatter</span> lnwage lneduc || <span class="kw">lfit</span> lnwage lneduc, <span class="co">///</span></span>
+<span id="cb19-12"><a></a>    <span class="bn">name</span>(m4, <span class="kw">replace</span>) <span class="bn">title</span>(<span class="fu">log</span>-<span class="fu">log</span>) <span class="bn">legend</span>(<span class="kw">off</span>)</span>
+<span id="cb19-13"><a></a><span class="kw">graph</span> <span class="bn">combine</span> m1 m2 m3 m4, </span>
+<span id="cb19-14"><a></a><span class="kw">graph</span> <span class="kw">export</span> images/fig2_10.png, <span class="kw">width</span>(1000) <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p><img data-src="images/fig2_10.png" style="height:70.0%"></p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div id="7ce1e73a" class="cell" data-execution_count="13">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw">set</span> <span class="dv">linesize</span> 255</span>
-<span id="cb20-2"><a href="#cb20-2"></a><span class="kw">qui</span>: <span class="kw">reg</span> wage educ</span>
-<span id="cb20-3"><a href="#cb20-3"></a><span class="kw">est</span> sto m1</span>
-<span id="cb20-4"><a href="#cb20-4"></a><span class="kw">qui</span>: <span class="kw">reg</span> lnwage educ</span>
-<span id="cb20-5"><a href="#cb20-5"></a><span class="kw">est</span> sto m2</span>
-<span id="cb20-6"><a href="#cb20-6"></a><span class="kw">qui</span>: <span class="kw">reg</span> wage lneduc</span>
-<span id="cb20-7"><a href="#cb20-7"></a><span class="kw">est</span> sto m3</span>
-<span id="cb20-8"><a href="#cb20-8"></a><span class="kw">qui</span>: <span class="kw">reg</span> lnwage lneduc</span>
-<span id="cb20-9"><a href="#cb20-9"></a><span class="kw">est</span> sto m4</span>
-<span id="cb20-10"><a href="#cb20-10"></a>esttab m1 m2 m3 m4, se r2 nonumber  <span class="kw">compress</span> nostar nogaps</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb20-1"><a></a><span class="kw">set</span> <span class="dv">linesize</span> 255</span>
+<span id="cb20-2"><a></a><span class="kw">qui</span>: <span class="kw">reg</span> wage educ</span>
+<span id="cb20-3"><a></a><span class="kw">est</span> sto m1</span>
+<span id="cb20-4"><a></a><span class="kw">qui</span>: <span class="kw">reg</span> lnwage educ</span>
+<span id="cb20-5"><a></a><span class="kw">est</span> sto m2</span>
+<span id="cb20-6"><a></a><span class="kw">qui</span>: <span class="kw">reg</span> wage lneduc</span>
+<span id="cb20-7"><a></a><span class="kw">est</span> sto m3</span>
+<span id="cb20-8"><a></a><span class="kw">qui</span>: <span class="kw">reg</span> lnwage lneduc</span>
+<span id="cb20-9"><a></a><span class="kw">est</span> sto m4</span>
+<span id="cb20-10"><a></a>esttab m1 m2 m3 m4, se r2 nonumber  <span class="kw">compress</span> nostar nogaps</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1209,16 +1209,16 @@ An additional year of education
 \]</span></p>
 <p>In most Software, you need to either Create the new variable explicitly, or use internal code to make it for you:</p>
 <div id="889a63d8" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><a href="#cb23-1"></a>frause wage1, <span class="kw">clear</span></span>
-<span id="cb23-2"><a href="#cb23-2"></a>** verify Coding</span>
-<span id="cb23-3"><a href="#cb23-3"></a><span class="kw">ssc</span> install fre, <span class="kw">replace</span></span>
-<span id="cb23-4"><a href="#cb23-4"></a>fre female</span>
-<span id="cb23-5"><a href="#cb23-5"></a>** create your own</span>
-<span id="cb23-6"><a href="#cb23-6"></a><span class="kw">gen</span> is_male = female==0</span>
-<span id="cb23-7"><a href="#cb23-7"></a>** Regression <span class="kw">using</span> Newly created <span class="kw">variable</span></span>
-<span id="cb23-8"><a href="#cb23-8"></a><span class="kw">reg</span> wage is_male</span>
-<span id="cb23-9"><a href="#cb23-9"></a>** Regression <span class="kw">using</span> Stata <span class="st">"factor notation"</span></span>
-<span id="cb23-10"><a href="#cb23-10"></a><span class="kw">reg</span> wage i.female</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><a></a>frause wage1, <span class="kw">clear</span></span>
+<span id="cb23-2"><a></a>** verify Coding</span>
+<span id="cb23-3"><a></a><span class="kw">ssc</span> install fre, <span class="kw">replace</span></span>
+<span id="cb23-4"><a></a>fre female</span>
+<span id="cb23-5"><a></a>** create your own</span>
+<span id="cb23-6"><a></a><span class="kw">gen</span> is_male = female==0</span>
+<span id="cb23-7"><a></a>** Regression <span class="kw">using</span> Newly created <span class="kw">variable</span></span>
+<span id="cb23-8"><a></a><span class="kw">reg</span> wage is_male</span>
+<span id="cb23-9"><a></a>** Regression <span class="kw">using</span> Stata <span class="st">"factor notation"</span></span>
+<span id="cb23-10"><a></a><span class="kw">reg</span> wage i.female</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>checking fre consistency and verifying not already installed...
 all files already exist and are up to date.
@@ -1272,10 +1272,10 @@ y_i &amp;= \alpha_0 + \tau_{ate} D + u_i
 \]</span></p>
 <p>But we expect <span class="math inline">\(u_i(1)-u_i(0)=0\)</span></p>
 <div id="d6c7f265" class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb25-1"><a href="#cb25-1"></a>** Example 2.14</span>
-<span id="cb25-2"><a href="#cb25-2"></a>frause jtrain2, <span class="kw">clear</span></span>
-<span id="cb25-3"><a href="#cb25-3"></a>** Training was Randomly assigned</span>
-<span id="cb25-4"><a href="#cb25-4"></a><span class="kw">reg</span> re78 i.train</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb25-1"><a></a>** Example 2.14</span>
+<span id="cb25-2"><a></a>frause jtrain2, <span class="kw">clear</span></span>
+<span id="cb25-3"><a></a>** Training was Randomly assigned</span>
+<span id="cb25-4"><a></a><span class="kw">reg</span> re78 i.train</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
       Source |       SS           df       MS      Number of obs   =       445
@@ -1302,8 +1302,10 @@ y_i &amp;= \alpha_0 + \tau_{ate} D + u_i
 <section id="section" class="slide level2" data-background-image="images/paste-7.png" data-background-size="contain">
 <h2></h2>
 
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 </section></section>
 

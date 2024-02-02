@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.512">
+  <meta name="generator" content="quarto-1.4.549">
 
   <meta name="author" content="Fernando Rios-Avila">
   <title>Econometrics MSC Levy - Times Series Part-I</title>
@@ -502,18 +502,22 @@ Fernando Rios-Avila
 <h2></h2>
 <h3 id="what-do-you-expect-to-see">What do you expect to see?</h3>
 <div class="quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-figure quarto-figure-center quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/paste-11.png"></p>
 <figcaption>Transitory</figcaption>
 </figure>
 </div>
-<div class="quarto-figure quarto-figure-center quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/paste-12.png"></p>
 <figcaption>Permanent</figcaption>
 </figure>
+</div>
 </div>
 </div>
 </div>
@@ -627,8 +631,8 @@ x_{T1} &amp; x_{T2} &amp; \dots &amp; x_{Tk}
 <p>A5: NO! There could be many things in <span class="math inline">\(u_t\)</span> that are correlated across time. (taxes?)</p>
 <p>A6: NO…the errors are almost never normal</p>
 <div id="d64d1a1a" class="cell larger" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a>frause intdef, <span class="kw">clear</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">reg</span> i3 inf def</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a></a>frause intdef, <span class="kw">clear</span></span>
+<span id="cb1-2"><a></a><span class="kw">reg</span> i3 inf def</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <style>div.jp-Notebook .datagrid-container {min-height: 448px; }</style>
 </div>
@@ -706,8 +710,8 @@ x_{T1} &amp; x_{T2} &amp; \dots &amp; x_{Tk}
 <div id="b1e4df04" class="cell larger" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">qui</span>:frause hseinv,<span class="kw">clear</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">reg</span>  linvpc lprice</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a><span class="kw">qui</span>:frause hseinv,<span class="kw">clear</span></span>
+<span id="cb3-2"><a></a><span class="kw">reg</span>  linvpc lprice</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -733,7 +737,7 @@ x_{T1} &amp; x_{T2} &amp; \dots &amp; x_{Tk}
 <div id="6422cb75" class="cell larger" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">reg</span> linvpc lprice  <span class="fu">year</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a></a><span class="kw">reg</span> linvpc lprice  <span class="fu">year</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -800,8 +804,10 @@ x_{T1} &amp; x_{T2} &amp; \dots &amp; x_{Tk}
 <h1>Thats all for today!</h1>
 <p>Next week, Advanced Time series</p>
 
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 </section>
     </div>
