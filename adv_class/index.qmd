@@ -20,6 +20,8 @@ All reading materials are available [here](https://github.com/riosavila/madvclas
    
    Semi- and Non-Parametric Regression: How Flexible is Flexible Enough?: [html](03par_spar_npar.html) or [pdf](03par_spar_npar.pdf)
 
+### Homework 1: [html](Homework1.qmd) or [pdf](Homework1.pdf)
+
 #### 3. Beyond the Ordinary: Embarking on the Quest of Conditional Quantile Regressions
    
    Conditional Quantile Regressions: Because No One is Average [html](04cqreg.html) or [pdf](04cqreg.pdf)
@@ -31,6 +33,8 @@ All reading materials are available [here](https://github.com/riosavila/madvclas
 #### 5. Breaking the Chains of Linearity: A Transcendent Expedition into NLS, IRLS, and MLE
    
    NLS, IRLS, and MLE: Going Truly Nonlinear [html](06nlreg.html) or [pdf](06nlreg.pdf)
+
+### Homework 2: [html](Homework2.qmd) or [pdf](Homework2.pdf)
 
 ## Part II: The methods
 
