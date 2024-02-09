@@ -669,7 +669,8 @@ bootstrap: bs_wages_children
 
 Why does it matter? because you may want to test coefficients individually, or across models. This is only possible if the FULL system is estimated jointly
 
-##
+## {.scrollable}
+
 ### What about Wild Bootstrap? 
 
 - Wildbootstrap is available using `boottest` (`ssc install bootest`)
@@ -758,12 +759,11 @@ Although you need to get the partial derivatives of $g(\theta,\gamma)$
 - Say that you obtain the mean standard error for averages wages for men and women, along with the correlation between the two. 
 
 - however, you are insterested in estimating the wage ratio, and its variance. How do you do this?
-
-$$R = \frac{ \mu_f}{\mu_m}$$
-
 - Need to obtain the Gradients $g$
 
-$$g = \begin{bmatrix}
+$$
+R = \frac{ \mu_f}{\mu_m};
+g = \begin{bmatrix}
     \frac{ \partial R}{\partial \mu_f} \\
     \frac{ \partial R}{\partial \mu_m}
     \end{bmatrix} =
@@ -776,8 +776,8 @@ Then the variance of $R$ is:
 
 $$Var(R) = g' \Sigma_\mu g$$
 
-##
-### Example in `Stata` {.scrollable}
+## {.scrollable}
+### Example in `Stata` 
 
 ```{stata}
 *| classes: larger
@@ -874,8 +874,8 @@ $$
 -   This has the restrictions of mentioned before ($k < N$). In addition to letting coefficents vary "too much"
 
 -   An alternative is to Impose additional restrictions so that coefficients do not vary as much. This is known as **Regularization**.
--   
-##
+   
+##  {.scrollable}
 ### Ridge Regression
 
 - One such approach is **Ridge** regression, which minimizes the following:
@@ -889,7 +889,7 @@ $$
 
 -   If $\lambda = 0$ you get Standard OLS, and if $\lambda \rightarrow \infty$ , you get a situation where all betas (but the constant) are zero. For intermediate values, you may have better models than OLS, because you can balance Bias (when $\beta's$ are zero) with increase variance (when all $\beta's$ vary as they "please")
 
-##  {.scrollable}
+## {.scrollable}
 
 -   We usually start with Ridge, because is relatively Easy to implement, since it has a close form Solution:
 
@@ -904,15 +904,25 @@ keep if lnwage!=.
 gen male = 1-female
 mata:
     y = st_data(.,"lnwage")
-    x = st_data(.,"educ exper female male"),J(1434,1,1)
+    x = st_data(.,"educ exper female male")
+    // Standardization. Need men and SD
+    mn_x = mean(x)
+    sd_x = diagonal(sqrt(variance(x)))'
+    // Centering and addinc constant
+    x = (x:-mn_x):/sd_x; x = x,J(1434,1,1)
     i0 = I(5);i0[5,5]=0
+    // SD errors as Column, including a 1 for Constant
+    sd_x=sd_x'\1
     xx = (cross(x,x)) ; xy = (cross(x,y))
     bb0 = invsym(xx)*xy 
     bb1 = invsym(xx:+i0*1)*xy 
     bb10 = invsym(xx:+i0*10)*xy 
     bb100 = invsym(xx:+i0*100)*xy 
     bb1000 = invsym(xx:+i0*1000)*xy 
-    bb0,bb1,bb10,bb100,bb1000
+    bb10000 = invsym(xx:+i0*10000)*xy
+    bb100000 = invsym(xx:+i0*100000)*xy
+    // 
+    bb0:/sd_x,bb1:/sd_x,bb10:/sd_x,bb100:/sd_x,bb1000:/sd_x,bb10000:/sd_x, bb100000:/sd_x
 end 
 ```
 

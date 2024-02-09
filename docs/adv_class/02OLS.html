@@ -467,7 +467,7 @@ E(y_i|X_i=x) = \beta_0 + \beta_1 x_1 +\beta_2 x_2 + ... +
 \left(\frac{1}{N} \sum_i X_i'X_i \right)^{-1}
 \frac{1}{N} \sum_i X_i'y_i=(X'X)^{-1}X'y
 \]</span></p>
-<div id="d04b9f78" class="cell" data-execution_count="1">
+<div id="65843d7c" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a></a>frause oaxaca, <span class="kw">clear</span></span>
@@ -593,7 +593,7 @@ Var(\hat\beta)_{00} &amp;=(X'X)^{-1} X'I(N)\sigma^2 X (X'X)^{-1} =\sigma^2 (X'X)
 \sigma^2 &amp;= E(\varepsilon^2)
 \end{aligned}
 \]</span></p>
-<div id="42faba6d" class="cell larger" data-execution_count="2">
+<div id="998c15e4" class="cell larger" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a><span class="kw">mata</span>: <span class="fu">e</span>=err = <span class="fu">y</span>:-x*b</span>
@@ -617,7 +617,7 @@ Var(\hat\beta)_{00} &amp;=(X'X)^{-1} X'I(N)\sigma^2 X (X'X)^{-1} =\sigma^2 (X'X)
 \hat\sigma^2 = \frac{1}{N-k-1}\sum \hat e^2
 \]</span></p>
 <p>Where we account for the fact true errors are not observed, but rather residuals are estimated, adjusting the degrees of freedom.</p>
-<div id="9d9cc7bd" class="cell larger" data-execution_count="3">
+<div id="252d644f" class="cell larger" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a></a><span class="kw">mata</span>:</span>
@@ -672,7 +672,7 @@ Var(\hat\beta)_{0} &amp;= (X'X)^{-1} (X \cdot \hat e)'(X \cdot  \hat e) (X'X)^{-
 <p><span class="math display">\[
 Var(\hat\beta)_{1}=\frac{N}{N-K-1}Var(\hat\beta)_{0}
 \]</span></p>
-<div id="8dfe0b2a" class="cell larger" data-execution_count="4">
+<div id="13574fcf" class="cell larger" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a></a><span class="kw">mata</span>:</span>
@@ -731,7 +731,7 @@ HC3: \psi_i =   \hat e^2 \frac{1}{(1-h_{ii})^2}
 </section>
 <section id="coding-robust-se" class="slide level2">
 <h2>Coding Robust SE</h2>
-<div id="d0943c75" class="cell larger" data-execution_count="5">
+<div id="037cb7f5" class="cell larger" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a></a><span class="kw">mata</span>:</span>
@@ -874,7 +874,7 @@ CV_1 &amp;= \frac{G(N-1)}{(G-1)(N-k-1)}(X'X)^{-1} \sum_{g=1}^G \hat \Sigma_g (X'
 <ul>
 <li>Similar to HC. CV0 does not correct for degrees of freedom. CV1, however, accounts for Degrees of freedom in the model, and clusters.</li>
 </ul>
-<div id="ef952117" class="cell" data-execution_count="6">
+<div id="ec8cc9d6" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a></a><span class="kw">sort</span> isco</span>
@@ -939,7 +939,7 @@ CV_1 &amp;= \frac{G(N-1)}{(G-1)(N-k-1)}(X'X)^{-1} \sum_{g=1}^G \hat \Sigma_g (X'
 </div>
 </div>
 <p>or compare it to</p>
-<div id="87243f53" class="cell" data-execution_count="7">
+<div id="d132e308" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a></a><span class="kw">reg</span> lnwage educ exper female, <span class="kw">cluster</span>(isco)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -967,7 +967,7 @@ Linear regression                               Number of obs     =      1,434
 </section>
 <section id="visualizing-the-difference" class="slide level2 scrollable">
 <h2>Visualizing the difference</h2>
-<div id="f7bc22d4" class="cell" data-execution_count="8">
+<div id="7a30f39b" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a></a><span class="kw">clear</span></span>
@@ -1012,7 +1012,7 @@ Linear regression                               Number of obs     =      1,434
 <ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">First Cluster</a></li><li><a href="#tabset-1-2">Second Cluster</a></li><li><a href="#tabset-1-3">Combining Clusters</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1">
-<div id="332df9a0" class="cell" data-execution_count="9">
+<div id="03bc5e94" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a></a><span class="kw">two</span> (<span class="kw">scatter</span> rr11 rr12 <span class="kw">if</span> rr13==1,  ms(<span class="fu">s</span>) msize(2.1))  <span class="co">///</span></span>
@@ -1028,7 +1028,7 @@ Linear regression                               Number of obs     =      1,434
 </div>
 </div>
 <div id="tabset-1-2">
-<div id="edf5a818" class="cell" data-execution_count="10">
+<div id="7e685015" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb19-1"><a></a><span class="kw">two</span> (<span class="kw">scatter</span> rr11 rr12 <span class="kw">if</span> rr14==1,  ms(<span class="fu">s</span>) msize(2.1))  <span class="co">///</span></span>
@@ -1044,7 +1044,7 @@ Linear regression                               Number of obs     =      1,434
 </div>
 </div>
 <div id="tabset-1-3">
-<div id="1e8bdcc7" class="cell" data-execution_count="11">
+<div id="262cf4b3" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb20-1"><a></a><span class="kw">two</span> (<span class="kw">scatter</span> rr11 rr12 <span class="kw">if</span> rr14==1 | rr13==1,  ms(<span class="fu">s</span>) msize(2.1))  <span class="co">///</span></span>
@@ -1251,7 +1251,7 @@ Linear regression                               Number of obs     =      1,434
 <ol start="3" type="1">
 <li>This last command may allow you to bootstrap multiple models at the same time, although it does require a bit of programming. (and a do file)</li>
 </ol>
-<div id="d8314125" class="cell" data-execution_count="12">
+<div id="49fa5890" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><a></a>frause oaxaca, <span class="kw">clear</span></span>
@@ -1308,14 +1308,14 @@ tchild       |
 </div>
 <p>Why does it matter? because you may want to test coefficients individually, or across models. This is only possible if the FULL system is estimated jointly</p>
 </section>
-<section id="section-19" class="slide level2">
+<section id="section-19" class="slide level2 scrollable">
 <h2></h2>
 <h3 id="what-about-wild-bootstrap">What about Wild Bootstrap?</h3>
 <ul>
 <li><p>Wildbootstrap is available using <code>boottest</code> (<code>ssc install bootest</code>)</p></li>
 <li><p>And in <code>Stata18+</code>, you have <code>wildbootstrap</code> (although is meant for clustered SE)</p></li>
 </ul>
-<div id="82e4ca5a" class="cell" data-execution_count="13">
+<div id="26b0dfcc" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb25-1"><a></a>frause oaxaca, <span class="kw">clear</span></span>
@@ -1446,12 +1446,11 @@ g(\hat \theta, \hat \gamma)-g(\theta,\gamma) &amp;\simeq N(0,\nabla g ' \Sigma \
 <ul>
 <li><p>Say that you obtain the mean standard error for averages wages for men and women, along with the correlation between the two.</p></li>
 <li><p>however, you are insterested in estimating the wage ratio, and its variance. How do you do this?</p></li>
+<li><p>Need to obtain the Gradients <span class="math inline">\(g\)</span></p></li>
 </ul>
-<p><span class="math display">\[R = \frac{ \mu_f}{\mu_m}\]</span></p>
-<ul>
-<li>Need to obtain the Gradients <span class="math inline">\(g\)</span></li>
-</ul>
-<p><span class="math display">\[g = \begin{bmatrix}
+<p><span class="math display">\[
+R = \frac{ \mu_f}{\mu_m};
+g = \begin{bmatrix}
     \frac{ \partial R}{\partial \mu_f} \\
     \frac{ \partial R}{\partial \mu_m}
     \end{bmatrix} =
@@ -1462,10 +1461,10 @@ g(\hat \theta, \hat \gamma)-g(\theta,\gamma) &amp;\simeq N(0,\nabla g ' \Sigma \
 <p>Then the variance of <span class="math inline">\(R\)</span> is:</p>
 <p><span class="math display">\[Var(R) = g' \Sigma_\mu g\]</span></p>
 </section>
-<section id="section-23" class="slide level2">
+<section id="section-23" class="slide level2 scrollable">
 <h2></h2>
-<h3 class="scrollable" id="example-in-stata">Example in <code>Stata</code></h3>
-<div id="269f85bd" class="cell larger" data-execution_count="14">
+<h3 id="example-in-stata">Example in <code>Stata</code></h3>
+<div id="8a5ee664" class="cell larger" data-execution_count="14">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb27-1"><a></a>frause oaxaca, <span class="kw">clear</span></span>
@@ -1595,9 +1594,13 @@ SSR = \sum_i(y_i - X_i \beta)^2
 <ul>
 <li><p>This has the restrictions of mentioned before (<span class="math inline">\(k &lt; N\)</span>). In addition to letting coefficents vary “too much”</p></li>
 <li><p>An alternative is to Impose additional restrictions so that coefficients do not vary as much. This is known as <strong>Regularization</strong>.</p></li>
-<li><h2 id="section-24"></h2>
-<h3 id="ridge-regression">Ridge Regression</h3></li>
-<li><p>One such approach is <strong>Ridge</strong> regression, which minimizes the following:</p></li>
+</ul>
+</section>
+<section id="section-24" class="slide level2 scrollable">
+<h2></h2>
+<h3 id="ridge-regression">Ridge Regression</h3>
+<ul>
+<li>One such approach is <strong>Ridge</strong> regression, which minimizes the following:</li>
 </ul>
 <p><span class="math display">\[
 rSS = \sum_i(y_i - X_i \beta)^2+ \lambda \sum_{k=1}^K\beta_k^2
@@ -1615,7 +1618,7 @@ rSS = \sum_i(y_i - X_i \beta)^2+ \lambda \sum_{k=1}^K\beta_k^2
 <p><span class="math display">\[
 \beta = (X'X + \lambda I)^{-1}{X'y}
 \]</span></p>
-<div id="892c5826" class="cell" data-execution_count="15">
+<div id="a498eb45" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb29-1"><a></a><span class="kw">set</span> <span class="dv">linesize</span> 255</span>
@@ -1624,16 +1627,26 @@ rSS = \sum_i(y_i - X_i \beta)^2+ \lambda \sum_{k=1}^K\beta_k^2
 <span id="cb29-4"><a></a><span class="kw">gen</span> male = 1-female</span>
 <span id="cb29-5"><a></a><span class="kw">mata</span>:</span>
 <span id="cb29-6"><a></a>    <span class="fu">y</span> = st_data(.,<span class="st">"lnwage"</span>)</span>
-<span id="cb29-7"><a></a>    x = st_data(.,<span class="st">"educ exper female male"</span>),<span class="fu">J</span>(1434,1,1)</span>
-<span id="cb29-8"><a></a>    i0 = <span class="fu">I</span>(5);i0[5,5]=0</span>
-<span id="cb29-9"><a></a>    xx = (<span class="kw">cross</span>(x,x)) ; xy = (<span class="kw">cross</span>(x,<span class="fu">y</span>))</span>
-<span id="cb29-10"><a></a>    bb0 = <span class="fu">invsym</span>(xx)*xy </span>
-<span id="cb29-11"><a></a>    bb1 = <span class="fu">invsym</span>(xx:+i0*1)*xy </span>
-<span id="cb29-12"><a></a>    bb10 = <span class="fu">invsym</span>(xx:+i0*10)*xy </span>
-<span id="cb29-13"><a></a>    bb100 = <span class="fu">invsym</span>(xx:+i0*100)*xy </span>
-<span id="cb29-14"><a></a>    bb1000 = <span class="fu">invsym</span>(xx:+i0*1000)*xy </span>
-<span id="cb29-15"><a></a>    bb0,bb1,bb10,bb100,bb1000</span>
-<span id="cb29-16"><a></a><span class="kw">end</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb29-7"><a></a>    x = st_data(.,<span class="st">"educ exper female male"</span>)</span>
+<span id="cb29-8"><a></a>    <span class="co">// Standardization. Need men and SD</span></span>
+<span id="cb29-9"><a></a>    mn_x = <span class="kw">mean</span>(x)</span>
+<span id="cb29-10"><a></a>    sd_x = diagonal(<span class="fu">sqrt</span>(<span class="kw">variance</span>(x)))'</span>
+<span id="cb29-11"><a></a>    <span class="co">// Centering and addinc constant</span></span>
+<span id="cb29-12"><a></a>    x = (x:-mn_x):/sd_x; x = x,<span class="fu">J</span>(1434,1,1)</span>
+<span id="cb29-13"><a></a>    i0 = <span class="fu">I</span>(5);i0[5,5]=0</span>
+<span id="cb29-14"><a></a>    <span class="co">// SD errors as Column, including a 1 for Constant</span></span>
+<span id="cb29-15"><a></a>    sd_x=sd_x'\1</span>
+<span id="cb29-16"><a></a>    xx = (<span class="kw">cross</span>(x,x)) ; xy = (<span class="kw">cross</span>(x,<span class="fu">y</span>))</span>
+<span id="cb29-17"><a></a>    bb0 = <span class="fu">invsym</span>(xx)*xy </span>
+<span id="cb29-18"><a></a>    bb1 = <span class="fu">invsym</span>(xx:+i0*1)*xy </span>
+<span id="cb29-19"><a></a>    bb10 = <span class="fu">invsym</span>(xx:+i0*10)*xy </span>
+<span id="cb29-20"><a></a>    bb100 = <span class="fu">invsym</span>(xx:+i0*100)*xy </span>
+<span id="cb29-21"><a></a>    bb1000 = <span class="fu">invsym</span>(xx:+i0*1000)*xy </span>
+<span id="cb29-22"><a></a>    bb10000 = <span class="fu">invsym</span>(xx:+i0*10000)*xy</span>
+<span id="cb29-23"><a></a>    bb100000 = <span class="fu">invsym</span>(xx:+i0*100000)*xy</span>
+<span id="cb29-24"><a></a>    <span class="co">// </span></span>
+<span id="cb29-25"><a></a>    bb0:/sd_x,bb1:/sd_x,bb10:/sd_x,bb100:/sd_x,bb1000:/sd_x,bb10000:/sd_x, bb100000:/sd_x</span>
+<span id="cb29-26"><a></a><span class="kw">end</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Excerpt from the Swiss Labor Market Survey 1998)
@@ -1643,9 +1656,17 @@ rSS = \sum_i(y_i - X_i \beta)^2+ \lambda \sum_{k=1}^K\beta_k^2
 ------------------------------------------------- mata (type end to exit) -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 :     y = st_data(.,"lnwage")
 
-:     x = st_data(.,"educ exper female male"),J(1434,1,1)
+:     x = st_data(.,"educ exper female male")
+
+:     mn_x = mean(x)
+
+:     sd_x = diagonal(sqrt(variance(x)))'
+
+:     x = (x:-mn_x):/sd_x; x = x,J(1434,1,1)
 
 :     i0 = I(5);i0[5,5]=0
+
+:     sd_x=sd_x'\1
 
 :     xx = (cross(x,x)) ; xy = (cross(x,y))
 
@@ -1659,15 +1680,19 @@ rSS = \sum_i(y_i - X_i \beta)^2+ \lambda \sum_{k=1}^K\beta_k^2
 
 :     bb1000 = invsym(xx:+i0*1000)*xy
 
-:     bb0,bb1,bb10,bb100,bb1000
-                  1              2              3              4              5
-    +----------------------------------------------------------------------------+
-  1 |   .0858251775    .0858183338    .0857563567    .0851046501    .0778292498  |
-  2 |   .0147342796    .0147345813    .0147372042    .0147554544    .0146298058  |
-  3 |  -.0949227416    -.047396817   -.0468240416    -.041806663   -.0208062854  |
-  4 |             0     .047396817    .0468240416     .041806663    .0208062854  |
-  5 |   2.218849962    2.171466638    2.172174327    2.179690914    2.266275433  |
-    +----------------------------------------------------------------------------+
+:     bb10000 = invsym(xx:+i0*10000)*xy
+
+:     bb100000 = invsym(xx:+i0*100000)*xy
+
+:     bb0:/sd_x,bb1:/sd_x,bb10:/sd_x,bb100:/sd_x,bb1000:/sd_x,bb10000:/sd_x, bb100000:/sd_x
+                  1              2              3              4              5              6              7
+    +----------------------------------------------------------------------------------------------------------+
+  1 |   .0858251775    .0857575755    .0851540495    .0795662808     .048317346    .0100245225    .0011301355  |
+  2 |   .0147342796    .0147216463     .014608921    .0135704573    .0079519909    .0015717189    .0001752401  |
+  3 |  -.0949227416   -.0474767326   -.0476121478   -.0487120452   -.0481537918   -.0183303744   -.0024025378  |
+  4 |             0    .0474767326    .0476121478    .0487120452    .0481537918    .0183303744    .0024025378  |
+  5 |   3.357604356    3.357604356    3.357604356    3.357604356    3.357604356    3.357604356    3.357604356  |
+    +----------------------------------------------------------------------------------------------------------+
 
 : end
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1710,7 +1735,7 @@ eSS = \sum_i(y_i - X_i \beta)^2+ \lambda_L \sum_{k=1}^K |\beta_k| +
 </section>
 <section id="brief-example" class="slide level2">
 <h2>Brief Example:</h2>
-<div id="2b98012b" class="cell" data-execution_count="16">
+<div id="f72e99e9" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb31-1"><a></a><span class="kw">qui</span> {</span>
