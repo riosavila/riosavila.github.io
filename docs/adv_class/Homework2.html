@@ -305,7 +305,7 @@ P(y=y_i) = \frac{e^{-\lambda} \lambda^{y_i}}{y_i!}
 L_i(y,X\beta) = - \exp(x\beta) + y_i (x\beta) - log(y_i!)
 \end{aligned}
 \]</span></p>
-<p>Which corresponds to line 16 in the do-file <code>mypoisson.do</code>.</p>
+<p>Which corresponds to line 16 in the do-file <a href="mypoisson.do"><code>mypoisson.do</code></a>.</p>
 </section>
 <section id="censored-data" class="level3">
 <h3 class="anchored" data-anchor-id="censored-data">Censored Data</h3>
@@ -321,7 +321,7 @@ L_i(y,X\beta) = - \exp(x\beta) + y_i (x\beta) - log(y_i!)
 <h3 class="anchored" data-anchor-id="exercise">Exercise</h3>
 <p>Assume that you have data (<span class="math inline">\(yc\)</span>) that is censored. You observe the exact number of events if more than 3 occured. If they are less than that, they are recoded as 3.</p>
 <ul>
-<li><p>Modify the program <code>mypoissonc</code> in <code>mypoisson.do</code> to account for this censoring, and estimate the parameters of the model.</p></li>
+<li><p>Modify the program <code>mypoissonc</code> in <a href="mypoisson.do"><code>mypoisson.do</code></a> to account for this censoring, and estimate the parameters of the model.</p></li>
 <li><p>Using the simulated <code>y</code>,<code>yc</code>, <code>x1</code> and <code>x2</code>, estimate the parameters of the model using the standard Poisson model (<code>y</code>), and the censored poisson model (<code>yc</code>). Compare the results, and discuss the implications of the censoring on the estimation of the parameters.</p></li>
 </ul>
 
