@@ -14,6 +14,7 @@ format:
     code-fold: true
     echo: true
     css: styles.css 
+  pdf: default  
 execute: 
   freeze: auto
 ---
@@ -255,7 +256,7 @@ Consider two groups with the following characteristics:
 -   Test $H_0: \mu_1 = \mu_2$ vs $H_1: \mu_1 \neq \mu_2$
 
 $$t = \frac{\mu_2 - \mu_1}{\sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}}
-=\frac{10}{\sqrt{\frac{32.56}{100}+\frac{21.97}{150}}}=\frac{10}{.47207} = 14.55453
+=\frac{10}{\sqrt{\frac{32.56}{100}+\frac{21.97}{150}}}=\frac{10}{\sqrt{.47207}} = 14.55453
 $$
 
 -   If $t$ is large enough, we can reject the null hypothesis.

@@ -746,7 +746,7 @@
     "href": "rmethods2/session_1.html#testing-significance-across-2-groups",
     "title": "Research Methods II",
     "section": "Testing Significance across 2 groups",
-    "text": "Testing Significance across 2 groups\nConsider two groups with the following characteristics:\n\n\n\nGroup\nN\nmean\nVar\n\n\n\n\n1\n100\n45\n32.56\n\n\n2\n150\n55\n21.97\n\n\n\n\nIs the difference in means statistically significant?\nTest \\(H_0: \\mu_1 = \\mu_2\\) vs \\(H_1: \\mu_1 \\neq \\mu_2\\)\n\n\\[t = \\frac{\\mu_2 - \\mu_1}{\\sqrt{\\frac{\\sigma_1^2}{n_1} + \\frac{\\sigma_2^2}{n_2}}}\n=\\frac{10}{\\sqrt{\\frac{32.56}{100}+\\frac{21.97}{150}}}=\\frac{10}{.47207} = 14.55453\n\\]\n\nIf \\(t\\) is large enough, we can reject the null hypothesis.\nBut this does not work if you have weights…"
+    "text": "Testing Significance across 2 groups\nConsider two groups with the following characteristics:\n\n\n\nGroup\nN\nmean\nVar\n\n\n\n\n1\n100\n45\n32.56\n\n\n2\n150\n55\n21.97\n\n\n\n\nIs the difference in means statistically significant?\nTest \\(H_0: \\mu_1 = \\mu_2\\) vs \\(H_1: \\mu_1 \\neq \\mu_2\\)\n\n\\[t = \\frac{\\mu_2 - \\mu_1}{\\sqrt{\\frac{\\sigma_1^2}{n_1} + \\frac{\\sigma_2^2}{n_2}}}\n=\\frac{10}{\\sqrt{\\frac{32.56}{100}+\\frac{21.97}{150}}}=\\frac{10}{\\sqrt{.47207}} = 14.55453\n\\]\n\nIf \\(t\\) is large enough, we can reject the null hypothesis.\nBut this does not work if you have weights…"
   },
   {
     "objectID": "rmethods2/session_1.html#testing-significance-across-2-groups-1",
@@ -8457,5 +8457,12 @@
     "title": "Research Methods II",
     "section": "Why are we here? {.background-image=s2fig8.jpg}",
     "text": "Why are we here? {.background-image=s2fig8.jpg}\n\nIf you are reading this, you are probably interested in the Microeconometrics path of Research methods II.\nThis course assumes you are familiar with the basics of econometrics and statistics.\n\nWe will not cover questions from Research methods I. You probably know the answers to those questions already!\n\nThis course will focus on tools that are commonly used in empirical research in economics:\n\nWe will emphasize the use of Household Surveys (with the issues it entails)\nAnd focus on applied econometrics using cross-sectional data, for distributional analysis and policy simulation.\n\nThus, we will do much more use of empirical tools and software than we did in Research methods I.\nWe will have 7 Sessions, and 2 homeworks ."
+  },
+  {
+    "objectID": "rmethods2/session_1.html",
+    "href": "rmethods2/session_1.html",
+    "title": "Research Methods II",
+    "section": "",
+    "text": "If you are reading this, you are probably interested in the Microeconometrics path of Research methods II.\nThis course assumes you are familiar with the basics of econometrics and statistics.\n\nWe will not cover questions from Research methods I. You probably know the answers to those questions already!\n\nThis course will focus on tools that are commonly used in empirical research in economics:\n\nWe will emphasize the use of Household Surveys (with the issues it entails)\nAnd focus on applied econometrics using cross-sectional data, for distributional analysis and policy simulation.\n\nThus, we will do much more use of empirical tools and software than we did in Research methods I.\nWe will have 7 Sessions, and 2 homeworks ."
   }
 ]
