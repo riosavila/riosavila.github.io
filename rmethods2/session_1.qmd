@@ -41,7 +41,7 @@ execute:
 -   They can be useful to identify and analyze policy questions.
 -   However, they are secondary data, and thus have limitations in terms of the questions that can be answered with them.
     -   You cannot answer questions that require data that was not collected.
-    -   They can also be limited to Interivewee recall, or willingness to answer.
+    -   They can also be limited to Interviewee recall, or willingness to answer.
     -   Or how accessible the population of interest is.
 
 ## Example of Surveys
@@ -57,7 +57,7 @@ execute:
 
 ## What makes a good survey?
 
--   A Good survey is one that allows you to obtain estimates of statistics of interest for the population with "Tolaraable" levels of Accuracy.
+-   A Good survey is one that allows you to obtain estimates of statistics of interest for the population with "Tolerable" levels of Accuracy.
 
 -   To do this, you need to have a good sampling design (representation and "independence of the population") and a good questionnaire design (questions that are clear and easy to answer).
 
@@ -94,7 +94,7 @@ execute:
 -   The sampling design is important to ensure that the sample is representative of the population of interest.
 -   However, there are limitations:
     -   Not every-one selected will respond to the survey. (Is it random? )
-    -   Rarey one assumes equal probability of selection. (Different sampling weights)
+    -   Rarely one assumes equal probability of selection. (Different sampling weights)
     -   Use of Stratatification and Clustering may require special treatment.
 -   Something else: Panel data
     -   Because of attrition, it can be difficult to analyze if representativeity is required.
@@ -164,7 +164,11 @@ Which is similar to "robust" Standard errors in OLS.
 
 ## How to account for weights in Stata? {.scrollable}
 
-Lets use data from the National Health and Nutrition Examination Survey (NHANES) to illustrate how to account for weights in Stata.
+Lets use data two Examples.
+
+- First Labor Force Survey: Oaxaca 
+
+- Second National Health and Nutrition Examination Survey (NHANES) 
 
 ```{stata}
 *| classes: larger
@@ -174,6 +178,15 @@ Lets use data from the National Health and Nutrition Examination Survey (NHANES)
 sum wt, meanonly
 replace wt = round(wt/r(min))
 gen wage = exp(lnwage)
+tab wt
+```
+
+Weights Distribution
+
+```{stata}
+*| classes: larger
+*| code-fold: false
+tab wt
 ```
 
 Summary Statistics:
@@ -299,12 +312,20 @@ This simple Economy can be represented as follows:
 
 $$
 \begin{aligned}
-X_{11} &+ X_{12} &+ X_{13} &+ Y_{1}  &= X_{1} \\
-X_{21} &+ X_{22} &+ X_{23} &+ Y_{2} &= X_{2} \\
-X_{31} &+ X_{32} &+ X_{33} &+ Y_{3} &= X_{3} \\
-L_1 &+ L_2 &+ L_3 &\ \ &= L 
+X_{11} + X_{12} + X_{13} + Y_{1}  &= X_{1} \\
+X_{21} + X_{22} + X_{23} + Y_{2} &= X_{2} \\
+X_{31} + X_{32} + X_{33} + Y_{3} &= X_{3} \\
+L_1 + L_2 + L_3 + 0 &= L 
 \end{aligned}
 $$
+
+|    | S1 | S2 | S3 | HH |    |
+|----|----|----|----|----|----|
+|Supply: | | | | | |
+| S1 | $X_{11}$ | $X_{12}$ | $X_{13}$ | $Y_{1}$ | $X_{1}$ |
+| S2 | $X_{21}$ | $X_{22}$ | $X_{23}$ | $Y_{2}$ | $X_{2}$ |
+| S3 | $X_{31}$ | $X_{32}$ | $X_{33}$ | $Y_{3}$ | $X_{3}$ |
+| HH | $L_1$ | $L_2$ | $L_3$ | 0 |  $L$ |
 
 ## 
 
