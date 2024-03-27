@@ -8450,5 +8450,12 @@
     "title": "Linear Regression Model",
     "section": "",
     "text": "Ridge Regression\n\nOne such approach is Ridge regression, which minimizes the following:\n\n\\[\nrSS = \\sum_i(y_i - X_i \\beta)^2+ \\lambda \\sum_{k=1}^K\\beta_k^2\n\\]\n\nThis essentially aims to find parameters that reduces SSR, but also “controls” for how large \\(\\beta's\\) can be, using a shrinkage penalty that depends on \\(\\lambda\\).\nIf \\(\\lambda = 0\\) you get Standard OLS, and if \\(\\lambda \\rightarrow \\infty\\) , you get a situation where all betas (but the constant) are zero. For intermediate values, you may have better models than OLS, because you can balance Bias (when \\(\\beta's\\) are zero) with increase variance (when all \\(\\beta's\\) vary as they “please”)"
+  },
+  {
+    "objectID": "rmethods2/session_1.html#why-are-we-here-.background-images2fig8.jpg",
+    "href": "rmethods2/session_1.html#why-are-we-here-.background-images2fig8.jpg",
+    "title": "Research Methods II",
+    "section": "Why are we here? {.background-image=s2fig8.jpg}",
+    "text": "Why are we here? {.background-image=s2fig8.jpg}\n\nIf you are reading this, you are probably interested in the Microeconometrics path of Research methods II.\nThis course assumes you are familiar with the basics of econometrics and statistics.\n\nWe will not cover questions from Research methods I. You probably know the answers to those questions already!\n\nThis course will focus on tools that are commonly used in empirical research in economics:\n\nWe will emphasize the use of Household Surveys (with the issues it entails)\nAnd focus on applied econometrics using cross-sectional data, for distributional analysis and policy simulation.\n\nThus, we will do much more use of empirical tools and software than we did in Research methods I.\nWe will have 7 Sessions, and 2 homeworks ."
   }
 ]
