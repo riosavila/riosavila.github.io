@@ -737,7 +737,7 @@ Pros: It transfers the unconditional distribution of the data. Cons: My not use 
 </section>
 <section id="example" class="slide level2">
 <h2>Example</h2>
-<div id="80e02b68" class="cell" data-execution_count="1">
+<div id="4d74b62d" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a></a>frause wage2, <span class="kw">clear</span></span>
 <span id="cb1-2"><a></a><span class="kw">set</span> <span class="dv">seed</span> 312</span>
 <span id="cb1-3"><a></a><span class="kw">xtile</span> smp = runiform()</span>
@@ -886,7 +886,7 @@ Scoring coefficients
 </div>
 </div>
 <p>Next we create ranks for each observation, assuming no stratification.</p>
-<div id="164c4362" class="cell" data-execution_count="2">
+<div id="6d759485" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a><span class="kw">bysort</span> smp (wageh) :<span class="kw">gen</span> rnk1=<span class="dt">_n</span></span>
@@ -895,7 +895,7 @@ Scoring coefficients
 </details>
 </div>
 <p>Finally, the imputation. Simply “matching” information from the donor to the recipient.</p>
-<div id="01fb1177" class="cell" data-execution_count="3">
+<div id="b8d8b8cd" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a></a>* Imputation</span>
 <span id="cb4-2"><a></a><span class="kw">clonevar</span> wage1 = wage_s</span>
 <span id="cb4-3"><a></a><span class="kw">clonevar</span> wage2 = wage_s</span>
@@ -919,7 +919,7 @@ Scoring coefficients
 </div>
 </div>
 <p>Simple quality assessment.</p>
-<div id="c2ad36f9" class="cell" data-execution_count="4">
+<div id="52b22eac" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> wage hours iq kww educ exper tenure age married <span class="bn">black</span> south <span class="kw">if</span> smp==0</span>
 <span id="cb6-2"><a></a><span class="kw">est</span> sto m1</span>
 <span id="cb6-3"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> wage1 hours iq kww educ exper tenure age married <span class="bn">black</span> south <span class="kw">if</span> smp==0</span>

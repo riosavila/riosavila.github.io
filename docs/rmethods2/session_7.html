@@ -427,7 +427,7 @@ Fernando Rios-Avila
 <li>Which of this estimators is more robust and efficient, when samples are small ?</li>
 <li>Lets setup a program that would simulate this:</li>
 </ul>
-<div id="4bed1d25" class="cell larger" data-execution_count="1">
+<div id="6597105c" class="cell larger" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a></a><span class="co">// define a program</span></span>
 <span id="cb1-2"><a></a><span class="kw">capture</span> <span class="kw">program</span> <span class="kw">drop</span> mean_vs_median</span>
 <span id="cb1-3"><a></a><span class="kw">program</span> <span class="kw">define</span> mean_vs_median, <span class="kw">eclass</span></span>
@@ -462,7 +462,7 @@ Number of observations (_N) was 0, now 100.
 </div>
 </div>
 <p>Now that the program is SET, lets run it 1000 times:</p>
-<div id="2f42d5c0" class="cell larger" data-execution_count="2">
+<div id="757a097a" class="cell larger" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a><span class="kw">set</span> <span class="dv">seed</span> 101</span>
 <span id="cb3-2"><a></a><span class="kw">simulate</span>, reps(1000): mean_vs_median, nobs(500)</span>
 <span id="cb3-3"><a></a><span class="kw">sum</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -495,7 +495,7 @@ Simulations (1,000): .........10.........20.........30.........40.........50...
 </div>
 <p>Conclusion, when N=100, and the distribution is normal, the mean is more efficient than the median.</p>
 <h3 id="change-assumptions-from-n-to-t-distribution">Change assumptions, from N to t-distribution</h3>
-<div id="5819aa91" class="cell larger" data-execution_count="3">
+<div id="62eebb08" class="cell larger" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a></a><span class="co">// define a program</span></span>
 <span id="cb5-2"><a></a><span class="kw">capture</span> <span class="kw">program</span> <span class="kw">drop</span> mean_vs_median</span>
 <span id="cb5-3"><a></a><span class="kw">program</span> <span class="kw">define</span> mean_vs_median, <span class="kw">eclass</span></span>
@@ -558,7 +558,7 @@ Simulations (1,000): .........10.........20.........30.........40.........50...
 <li><p>What are the consequences of heteroskedasticity in the OLS estimator?</p></li>
 <li><p>lets set up a simulation to study this.</p></li>
 </ul>
-<div id="831594ed" class="cell larger" data-execution_count="4">
+<div id="fbf00190" class="cell larger" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a></a><span class="co">// define a program</span></span>
 <span id="cb7-2"><a></a><span class="kw">capture</span> <span class="kw">program</span> <span class="kw">drop</span> ols_hetero</span>
 <span id="cb7-3"><a></a><span class="kw">program</span> <span class="kw">define</span> ols_hetero, <span class="kw">eclass</span></span>
@@ -593,7 +593,7 @@ Simulations (1,000): .........10.........20.........30.........40.........50...
 </div>
 <h3 id="correcting-for-heteroskedasticity">Correcting for heteroskedasticity</h3>
 <p>We can correct for heteroskedasticity using robust standard errors.</p>
-<div id="16d9d0a6" class="cell larger" data-execution_count="5">
+<div id="f78e4b99" class="cell larger" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a></a><span class="co">// define a program</span></span>
 <span id="cb9-2"><a></a><span class="kw">capture</span> <span class="kw">program</span> <span class="kw">drop</span> ols_hetero</span>
 <span id="cb9-3"><a></a><span class="kw">program</span> <span class="kw">define</span> ols_hetero, <span class="kw">eclass</span></span>
@@ -627,7 +627,7 @@ Simulations (1,000): .........10.........20.........30.........40.........50...
 </div>
 </div>
 <p>or using weighted least squares.</p>
-<div id="2d3a80c5" class="cell larger" data-execution_count="6">
+<div id="e5966504" class="cell larger" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a></a><span class="co">// define a program</span></span>
 <span id="cb11-2"><a></a><span class="kw">capture</span> <span class="kw">program</span> <span class="kw">drop</span> ols_hetero</span>
 <span id="cb11-3"><a></a><span class="kw">program</span> <span class="kw">define</span> ols_hetero, <span class="kw">eclass</span></span>
@@ -677,7 +677,7 @@ Simulations (1,000): .........10.........20.........30.........40.........50...
 <li>But, we could just as well simulate only “parts” of the data, and use observed data for the rest.</li>
 </ul></li>
 </ul>
-<div id="b68d6fe6" class="cell larger" data-execution_count="7">
+<div id="95784d6b" class="cell larger" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a></a>frause oaxaca, <span class="kw">clear</span></span>
 <span id="cb13-2"><a></a><span class="kw">probit</span> lfp female educ age agesq married divorced</span>
 <span id="cb13-3"><a></a><span class="kw">predict</span> lfp_xb, <span class="kw">xb</span></span>
@@ -710,7 +710,7 @@ Log likelihood = -428.40986                             Pseudo R2     = 0.3246
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
-<div id="8c808e51" class="cell larger" data-execution_count="8">
+<div id="16317a3c" class="cell larger" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a></a>* Latent <span class="kw">model</span> LFP =1(lfp_xb + <span class="fu">e</span>&gt;0)</span>
 <span id="cb15-2"><a></a><span class="kw">capture</span> <span class="kw">program</span> <span class="kw">drop</span> probit_sim</span>
 <span id="cb15-3"><a></a><span class="kw">program</span>  probit_sim, <span class="kw">eclass</span></span>
@@ -808,7 +808,7 @@ _se_divorced |        500    .2410041    .0207673    .199707   .3420741
 <h2></h2>
 <p>We can start by modeling the effect of education on wages.</p>
 <p><span class="math display">\[log(wage)= \beta X + \beta_e educ + u\]</span></p>
-<div id="342d3e55" class="cell larger" data-execution_count="9">
+<div id="0c046c0e" class="cell larger" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb17-1"><a></a>frause oaxaca, <span class="kw">clear</span></span>
 <span id="cb17-2"><a></a><span class="kw">reg</span> lnwage educ exper tenure female age, </span>
 <span id="cb17-3"><a></a><span class="kw">predict</span>  res, res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -836,7 +836,7 @@ _se_divorced |        500    .2410041    .0207673    .199707   .3420741
 </div>
 </div>
 <p>ID the policy change</p>
-<div id="c0e5652a" class="cell larger" data-execution_count="10">
+<div id="c7e442e2" class="cell larger" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb19-1"><a></a><span class="kw">clonevar</span> educ2=educ</span>
 <span id="cb19-2"><a></a><span class="kw">replace</span> educ=educ+2 <span class="kw">if</span> educ&lt;12</span>
 <span id="cb19-3"><a></a><span class="kw">predict</span> yhat2, <span class="kw">xb</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -846,7 +846,7 @@ _se_divorced |        500    .2410041    .0207673    .199707   .3420741
 </div>
 </div>
 <p>So what is the effect on wages? (if there is no selection bias)</p>
-<div id="1eff791c" class="cell larger" data-execution_count="11">
+<div id="74eda541" class="cell larger" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb21-1"><a></a><span class="kw">gen</span> wage = <span class="fu">exp</span>(lnwage)</span>
 <span id="cb21-2"><a></a><span class="kw">gen</span> wage2 = <span class="fu">exp</span>(yhat2+res)</span>
 <span id="cb21-3"><a></a><span class="kw">gen</span> wage_diff = wage2-wage</span>
@@ -881,7 +881,7 @@ _se_divorced |        500    .2410041    .0207673    .199707   .3420741
 <p><span class="math display">\[P(lfp=1|X,educ)= \beta X + \beta_e educ + u
 \]</span></p>
 <p>First model the probability of employment</p>
-<div id="7149f966" class="cell larger" data-execution_count="12">
+<div id="4bef62aa" class="cell larger" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><a></a>frause oaxaca, <span class="kw">clear</span></span>
 <span id="cb23-2"><a></a><span class="kw">qui</span>:<span class="kw">probit</span> lfp educ female age single married kids6 kids714</span>
 <span id="cb23-3"><a></a><span class="kw">predict</span> lfp_xb, <span class="kw">xb</span></span>
@@ -907,7 +907,7 @@ _se_divorced |        500    .2410041    .0207673    .199707   .3420741
 <ul>
 <li>Option 1. Assign new workers based on the relative change in the probability of employment.</li>
 </ul>
-<div id="17e7ad93" class="cell larger" data-execution_count="13">
+<div id="e9b4161b" class="cell larger" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb25-1"><a></a><span class="kw">gen</span> dprob = (plfp-pr_org)/pr_org</span>
 <span id="cb25-2"><a></a><span class="kw">clonevar</span> lfp_post1 = lfp</span>
 <span id="cb25-3"><a></a><span class="kw">replace</span> lfp_post1 =1 <span class="kw">if</span> lfp==0 &amp; dprob&gt;runiform()</span>
@@ -924,7 +924,7 @@ _se_divorced |        500    .2410041    .0207673    .199707   .3420741
 <ul>
 <li>Option 2. Simulate employment status based on the original and post-policy probability of employment.</li>
 </ul>
-<div id="c86dc802" class="cell larger" data-execution_count="14">
+<div id="111d1527" class="cell larger" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb27-1"><a></a>** Option 2</span>
 <span id="cb27-2"><a></a>drop2 unf lfp_org lfp_post</span>
 <span id="cb27-3"><a></a><span class="kw">gen</span> unf = runiform()</span>
@@ -958,7 +958,7 @@ variable lfp_post not found
 <li>We could assume no selection bias.</li>
 <li>We may need to use only data available for everyone, or use imputed data (exper tenure) (perhaps at 0?)</li>
 </ul>
-<div id="5254763c" class="cell larger" data-execution_count="15">
+<div id="53e4ffec" class="cell larger" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb29-1"><a></a><span class="kw">reg</span> lnwage educ female age single married kids6 kids714, </span>
 <span id="cb29-2"><a></a><span class="kw">predict</span>  res, res</span>
 <span id="cb29-3"><a></a><span class="kw">predict</span> lnwage_hat, <span class="kw">xb</span></span>

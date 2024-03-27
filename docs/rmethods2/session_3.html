@@ -510,7 +510,7 @@ F(Q_y(p)) &amp;=p \rightarrow Q_y(p) = F^{-1}(p)
 </ul>
 </div>
 <div id="tabset-1-2">
-<div id="abc87540" class="cell" data-execution_count="1">
+<div id="03e523a0" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a></a><span class="kw">set</span> <span class="dv">scheme</span> white2</span>
@@ -530,7 +530,7 @@ F(Q_y(p)) &amp;=p \rightarrow Q_y(p) = F^{-1}(p)
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="session_3_files/figure-html/cell-2-output-2.png"></p>
+<p><img data-src="session_3_files/figure-revealjs/cell-2-output-2.png"></p>
 </figure>
 </div>
 </div>
@@ -564,7 +564,7 @@ F(Q_y(p)) &amp;=p \rightarrow Q_y(p) = F^{-1}(p)
 <span id="cb2-3"><a></a><span class="kw">qui</span>:<span class="kw">gen</span> <span class="kw">p</span> = <span class="dt">_n</span> <span class="kw">if</span> <span class="dt">_n</span>&lt;100</span>
 <span id="cb2-4"><a></a><span class="kw">scatter</span> qwage <span class="kw">p</span>, <span class="kw">connect</span>(<span class="ot">l</span>) <span class="bn">name</span>(m1, <span class="kw">replace</span>) <span class="bn">ysize</span>(5) <span class="bn">xsize</span>(8)</span>
 <span id="cb2-5"><a></a><span class="kw">scatter</span> <span class="kw">p</span> qwage, <span class="kw">connect</span>(<span class="ot">l</span>) <span class="bn">name</span>(m2, <span class="kw">replace</span>) <span class="bn">ysize</span>(5) <span class="bn">xsize</span>(8)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="673ca624" class="cell quarto-layout-panel" data-layout-ncol="2" data-execution_count="2">
+<div id="7f5f6cdf" class="cell quarto-layout-panel" data-layout-ncol="2" data-execution_count="2">
 <div class="quarto-layout-row">
 <details class="code-fold">
 <summary>Code</summary>
@@ -572,7 +572,7 @@ F(Q_y(p)) &amp;=p \rightarrow Q_y(p) = F^{-1}(p)
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="session_3_files/figure-html/cell-3-output-1.png"></p>
+<p><img data-src="session_3_files/figure-revealjs/cell-3-output-1.png"></p>
 <figcaption>Pen-Parade</figcaption>
 </figure>
 </div>
@@ -582,7 +582,7 @@ F(Q_y(p)) &amp;=p \rightarrow Q_y(p) = F^{-1}(p)
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="session_3_files/figure-html/cell-3-output-2.png"></p>
+<p><img data-src="session_3_files/figure-revealjs/cell-3-output-2.png"></p>
 <figcaption>Cum Distribution Function</figcaption>
 </figure>
 </div>
@@ -628,7 +628,7 @@ F(Q_y(p)) &amp;=p \rightarrow Q_y(p) = F^{-1}(p)
 <p><span class="math display">\[LC_j = \frac{\sum_{i=1}^j y_i w_i}{\sum_{i=1}^n y_iw_i}\]</span></p>
 </div>
 </div>
-<div id="08fbeae2" class="cell" data-execution_count="3">
+<div id="7866ec52" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a>frause oaxaca, <span class="kw">clear</span></span>
 <span id="cb3-2"><a></a><span class="kw">gen</span> wage = <span class="fu">exp</span>(lnwage)</span>
 <span id="cb3-3"><a></a><span class="kw">sort</span> wage wt  <span class="co">// sort by income and weight </span></span>
@@ -641,7 +641,7 @@ F(Q_y(p)) &amp;=p \rightarrow Q_y(p) = F^{-1}(p)
 </div>
 </div>
 <div id="tabset-3-3">
-<div id="1b37fdb6" class="cell" data-execution_count="4">
+<div id="17719cdb" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a></a><span class="kw">two</span> (<span class="kw">line</span> lc_i p_i) <span class="co">/// Lorenz Curve</span></span>
@@ -654,7 +654,7 @@ F(Q_y(p)) &amp;=p \rightarrow Q_y(p) = F^{-1}(p)
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="session_3_files/figure-html/cell-5-output-1.png"></p>
+<p><img data-src="session_3_files/figure-revealjs/cell-5-output-1.png"></p>
 <figcaption>Lorenz Curve</figcaption>
 </figure>
 </div>
@@ -727,7 +727,7 @@ F(Q_y(p)) &amp;=p \rightarrow Q_y(p) = F^{-1}(p)
 </section>
 <section id="section-3" class="slide level2 scrollable">
 <h2></h2>
-<div id="62dd3886" class="cell" data-execution_count="5">
+<div id="da478217" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a></a><span class="kw">capture</span>:<span class="kw">ssc</span> install sgini</span>
 <span id="cb6-2"><a></a>sgini wage </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -741,7 +741,7 @@ Gini coefficient for wage
 -----------------------</code></pre>
 </div>
 </div>
-<div id="f07da84a" class="cell" data-execution_count="6">
+<div id="27f1e85b" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a></a><span class="kw">capture</span>:<span class="kw">ssc</span> install ineqdeco</span>
 <span id="cb8-2"><a></a>ineqdeco wage [pw=wt]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -826,7 +826,7 @@ Atkinson indices, A(e), where e &gt; 0 is the inequality aversion parameter
 <li>Bootstrap its a non-parametric method to estimate the standard error of a statistic. Its based on Resampling and re-estimating data.</li>
 </ul>
 <p><code>bootstrap gini=r(coeff): sgini wage</code></p>
-<div id="982b84a9" class="cell" data-execution_count="7">
+<div id="a91ee6ac" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-stdout">
 <pre><code>
 warning: sgini does not set e(sample), so no observations will be excluded from the resampling because of missing values or other reasons. To exclude observations, press Break, save the data, drop any observations that are to be excluded, and rerun
@@ -850,7 +850,7 @@ Bootstrap results                                        Number of obs = 1,647
 <li>RIF (Recentered Influence Function) is a method that uses the moment conditions to estimate the standard error of a statistic.</li>
 </ul>
 <p><code>rifhdreg wage , rif(gini)</code></p>
-<div id="b47c4bb0" class="cell" data-execution_count="8">
+<div id="ce418bf2" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Linear regression                               Number of obs     =      1,434
@@ -873,7 +873,7 @@ Sample Mean    RIF gini :  .24603</code></pre>
 <li>Better yet, because you can use regressions (RIF-regressions), you can use weights, and test for differences in inequality across groups.</li>
 </ul>
 <p><code>rifhdreg wage ibn.female [pw=wt], rif(gini) over(female) noconstant</code></p>
-<div id="04811b17" class="cell" data-execution_count="9">
+<div id="696ee307" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Linear regression                               Number of obs     =      1,434
@@ -895,7 +895,7 @@ Sample Mean    RIF gini :  .25805</code></pre>
 </div>
 </div>
 <p><code>rifhdreg wage i.female [pw=wt], rif(gini) over(female)</code></p>
-<div id="051fd80d" class="cell" data-execution_count="10">
+<div id="acb3ede4" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Linear regression                               Number of obs     =      1,434
@@ -972,7 +972,7 @@ V(y) = \sigma^2_Y &amp;= \rho_1 \sigma_Y \sigma_{y_1} + \rho_2 \sigma_Y \sigma_{
 <section id="example-stata" class="slide level2 scrollable">
 <h2>Example <code>Stata</code></h2>
 <p><code>ssc install ineqfac</code></p>
-<div id="a8164514" class="cell larger" data-execution_count="11">
+<div id="abcd3373" class="cell larger" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a></a>frause limew1972.dta, <span class="kw">clear</span></span>
 <span id="cb14-2"><a></a><span class="kw">capture</span>: <span class="kw">ssc</span> install ineqfac</span>
 <span id="cb14-3"><a></a>ineqfac basemi inchomewealth incnonhomewealth govtr_n pubcon tx_n valhp [aw=hhwgt]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1037,7 +1037,7 @@ Gini(y)&amp;= \sum R_k \times G_k \times sh_k
 <h2>Example <code>Stata</code></h2>
 <p>You probably already have it installed</p>
 <p><code>ssc install sgini</code></p>
-<div id="577b347e" class="cell larger" data-execution_count="12">
+<div id="1f6c6fc1" class="cell larger" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a></a>sgini basemi inchomewealth incnonhomewealth govtr_n pubcon tx_n valhp [aw=hhwgt], source</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1127,7 +1127,7 @@ Gini(y) &amp;= \sum_{k=1}^K s_k O_k Gini(y_k) + Gini_{bw}
 <h2>Example <code>Stata</code></h2>
 <p><code>ssc install anogi</code> (Tom Masterson is one of the authors)<br>
 <code>ssc install moremata</code> (needed for <code>anogi</code>)</p>
-<div id="e0741d31" class="cell larger" data-execution_count="13">
+<div id="7d474a2f" class="cell larger" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a></a><span class="kw">capture</span>:<span class="kw">ssc</span> install anogi</span>
 <span id="cb18-2"><a></a><span class="kw">capture</span>:<span class="kw">ssc</span> install moremata</span>
 <span id="cb18-3"><a></a>anogi limew [aw= hhwgt ], <span class="kw">by</span>(educl) <span class="kw">detail</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

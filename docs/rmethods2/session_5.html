@@ -775,7 +775,7 @@ V_{\beta} &amp; 0 \\
 <section id="section-17" class="slide level2 scrollable">
 <h2></h2>
 <h3 id="example-stata">Example: <code>Stata</code></h3>
-<div id="6629b171" class="cell larger" data-execution_count="1">
+<div id="de439134" class="cell larger" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a>frause oaxaca, <span class="kw">clear</span></span>
 <span id="cb3-2"><a></a><span class="kw">drop</span> <span class="kw">if</span> lnwage ==.</span>
 <span id="cb3-3"><a></a></span>
@@ -796,7 +796,7 @@ V_{\beta} &amp; 0 \\
 </div>
 </div>
 <p>Setting data for -<code>mi</code>- commands</p>
-<div id="50511476" class="cell larger" data-execution_count="2">
+<div id="a4f4f7b1" class="cell larger" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a></a><span class="fu">mi</span> <span class="kw">set</span> <span class="kw">wide</span></span>
 <span id="cb5-2"><a></a><span class="fu">mi</span> register imputed m_*</span>
 <span id="cb5-3"><a></a><span class="fu">mi</span> <span class="kw">impute</span> chain (<span class="kw">reg</span>) m_* = lnwage single female, add(10) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -841,7 +841,7 @@ Initialization: monotone                     Iterations =      100
 </div>
 </div>
 <p>Estmating the model(s):</p>
-<div id="6f672e19" class="cell larger" data-execution_count="3">
+<div id="21da8ebf" class="cell larger" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a></a><span class="fu">mi</span> estimate, <span class="kw">post</span>: <span class="kw">regress</span> lnwage m_* single female</span>
 <span id="cb7-2"><a></a><span class="kw">est</span> sto m1</span>
 <span id="cb7-3"><a></a><span class="kw">regress</span> lnwage educ exper tenure age single  female</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -924,7 +924,7 @@ Within VCE type:          OLS                   Prob &gt; F          =     0.000
 <section id="example-1" class="slide level2 scrollable">
 <h2>Example</h2>
 <p>Imputing data for wages in <code>oaxaca</code>.</p>
-<div id="e83859f2" class="cell larger" data-execution_count="4">
+<div id="af3372a3" class="cell larger" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a></a>frause oaxaca, <span class="kw">clear</span></span>
 <span id="cb9-2"><a></a>** ID pool <span class="kw">of</span> donors based <span class="kw">on</span> age and gender</span>
 <span id="cb9-3"><a></a><span class="kw">egen</span> id_pool = <span class="fu">group</span>(age female)</span>
@@ -986,7 +986,7 @@ Within VCE type:          OLS                   Prob &gt; F          =     0.000
 <h2></h2>
 <h3 id="example-stata-1">Example: <code>Stata</code></h3>
 <p>Using single Score (Data reduction)</p>
-<div id="ef892b25" class="cell larger" data-execution_count="5">
+<div id="6ada87c7" class="cell larger" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a></a>frause oaxaca, <span class="kw">clear</span></span>
 <span id="cb11-2"><a></a><span class="kw">drop</span> <span class="kw">if</span> lnwage ==.</span>
 <span id="cb11-3"><a></a><span class="co">// 25% of data is missing</span></span>
@@ -1005,7 +1005,7 @@ Within VCE type:          OLS                   Prob &gt; F          =     0.000
 </div>
 </div>
 <p>For imputation, lets do something simple, Use data from the closet observation (with lower score) as donor.</p>
-<div id="832e6543" class="cell larger" data-execution_count="6">
+<div id="920b3399" class="cell larger" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a></a><span class="kw">foreach</span> i <span class="kw">in</span> psc lnwh pc1 {</span>
 <span id="cb13-2"><a></a> </span>
 <span id="cb13-3"><a></a>    drop2   lnwage_<span class="ot">`i'</span></span>
