@@ -501,7 +501,7 @@
     "href": "rmethods2/session_3.html#visualization-tools",
     "title": "Research Methods II",
     "section": "Visualization tools",
-    "text": "Visualization tools\n\nThere are several tools that can be used to visualize income distribution:\n\nDensity Function/Histogram\nPen_parade/Cumulative Distribution Function\nLorenz Curve"
+    "text": "Visualization tools\n\nThere are several tools that can be used to visualize income distribution:\n\nDensity Function/Histogram\nPen parade/Cumulative Distribution Function\nLorenz Curve"
   },
   {
     "objectID": "rmethods2/session_3.html#section",
@@ -515,7 +515,7 @@
     "href": "rmethods2/session_3.html#section-1",
     "title": "Research Methods II",
     "section": "",
-    "text": "PenParade/CDFplot\n\n\n\nA different approach to visualize the distribution.\nThe Pen Parade plots the values of the variable of interest in ascending order.\n\ny-axis: Q(p); x-axis: p\n\nThe CDF plots the cumulative distribution of the variable of interest.\n\ny-axis: p; x-axis: Q(p)\n\nThey give you a sense of the distribution, and easy comparison across high and low values.\n\n\n\nqui:pctile qlnwage = lnwage [w=wt], nq(100)\nqui:gen  qwage = exp(qlnwage)\nqui:gen p = _n if _n&lt;100\nscatter qwage p, connect(l) name(m1, replace) ysize(5) xsize(8)\nscatter p qwage, connect(l) name(m2, replace) ysize(5) xsize(8)\n\n\n\nCode\n\n\n\n\n\nPen-Parade\n\n\n\n\n\n\n\n\n\nCum Distribution Function\n\n\n\n\nDistribution plots"
+    "text": "PenParade/CDFplot\n\n\n\nA different approach to visualize the distribution.\nThe Pen Parade plots the values of the variable of interest in ascending order.\n\ny-axis: Q(p); x-axis: p\n\nThe CDF plots the cumulative distribution of the variable of interest.\n\ny-axis: p; x-axis: Q(p)\n\nThey give you a sense of the distribution, and easy comparison across high and low values.\n\n\n\nqui:pctile qlnwage = lnwage [w=wt], nq(100)\nqui:gen  qwage = exp(qlnwage)\nqui:gen p = _n if _n&lt;100\nscatter qwage p, connect(l) name(m1, replace) ysize(5) xsize(8) title(\"Pen Parade\")\nscatter p qwage, connect(l) name(m2, replace) ysize(5) xsize(8) title(\"Cumulative Distribution Function\")\n\n\n\nCode"
   },
   {
     "objectID": "rmethods2/session_3.html#section-2",
@@ -536,7 +536,7 @@
     "href": "rmethods2/session_3.html#inequality-measures-1",
     "title": "Research Methods II",
     "section": "Inequality Measures",
-    "text": "Inequality Measures\n\nLorenz Curve:\n\n\\[LC(p) = \\frac{\\int_0^p Q_y(u)du}{\\int_0^1 Q_y(u)du}\n= \\frac{1}{\\mu_y} \\int_0^p Q_y(u)du\n\\]\n\nProperties\n\n\\[\\frac{\\partial LC(p)}{\\partial p} = \\frac{Q_y(p)}{\\mu_y} \\geq 0\\]\n\\[\\frac{\\partial^2 LC(p)}{\\partial p^2} = \\frac{1}{\\mu_y f(y)} \\geq 0\\]"
+    "text": "Inequality Measures\n\nLorenz Curve:\n\n\\[LC(p) = \\frac{\\int_0^p Q_y(u)du}{\\int_0^1 Q_y(u)du}\n= \\frac{1}{\\mu_y} \\int_0^p Q_y(u)du\n\\]\n\nProperties 1: Lorenz Curve is a non-decreasing function of \\(p\\).\n\n\\[\\frac{\\partial LC(p)}{\\partial p} = \\frac{Q_y(p)}{\\mu_y} \\geq 0\\]\n\nProperties 2: Lorenz Curve is a concave function of \\(p\\) (increases at a fasterate). \\[\\frac{\\partial^2 LC(p)}{\\partial p^2} = \\frac{1}{\\mu_y f(y)} \\geq 0\\]"
   },
   {
     "objectID": "rmethods2/session_3.html#inequality-measures-gini-coefficient",

@@ -12,7 +12,7 @@ format:
     css: styles.css 
     highlight-style: github
 execute: 
-  freeze: auto
+  freeze: true
 ---
 
 # Measuring Inequality
@@ -77,7 +77,7 @@ $$
 
 - There are several tools that can be used to visualize income distribution:
   - Density Function/Histogram
-  - Pen_parade/Cumulative Distribution Function
+  - Pen parade/Cumulative Distribution Function
   - Lorenz Curve
 
 ## 
@@ -115,11 +115,11 @@ qui:two histogram lnwage [fw=wt2] ///
 
 :::
 
-## 
+## {.scrollable} 
 
 :::{.panel-tabset}
 
-## PenParade/CDF
+## PenParade/CDF 
 
 - A different approach to visualize the distribution.
 - The Pen Parade plots the values of the variable of interest in ascending order.
@@ -134,16 +134,11 @@ qui:two histogram lnwage [fw=wt2] ///
 *| echo: true
 *| code-fold: true
 *| layout-ncol: 2
-*| fig-cap: "Distribution plots"
-*| fig-subcap:
-*|   - Pen-Parade
-*|   - Cum Distribution Function
-
 qui:pctile qlnwage = lnwage [w=wt], nq(100)
 qui:gen  qwage = exp(qlnwage)
 qui:gen p = _n if _n<100
-scatter qwage p, connect(l) name(m1, replace) ysize(5) xsize(8)
-scatter p qwage, connect(l) name(m2, replace) ysize(5) xsize(8)
+scatter qwage p, connect(l) name(m1, replace) ysize(5) xsize(8) title("Pen Parade")
+scatter p qwage, connect(l) name(m2, replace) ysize(5) xsize(8) title("Cumulative Distribution Function")
 ```
 
 
@@ -255,10 +250,11 @@ $$LC(p) = \frac{\int_0^p Q_y(u)du}{\int_0^1 Q_y(u)du}
 = \frac{1}{\mu_y} \int_0^p Q_y(u)du
 $$
 
-- Properties
+- Properties 1: Lorenz Curve is a non-decreasing function of $p$.
 
 $$\frac{\partial LC(p)}{\partial p} = \frac{Q_y(p)}{\mu_y} \geq 0$$
 
+- Properties 2: Lorenz Curve is a concave function of $p$ (increases at a fasterate).
 $$\frac{\partial^2 LC(p)}{\partial p^2} = \frac{1}{\mu_y f(y)} \geq 0$$
 
 ## Inequality Measures: Gini Coefficient
