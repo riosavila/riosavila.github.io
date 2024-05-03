@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.554">
+  <meta name="generator" content="quarto-1.4.553">
 
   <meta name="author" content="Fernando Rios-Avila">
   <title>Econometrics MSC Levy - Diff in Diff: From 2x2 to GxT DID</title>
@@ -504,13 +504,13 @@ ATT &amp;=E(Y_{i,1}(1)|D=1)-\color{red}{E(Y_{i,1}(0)|D=1)} \\
 </section>
 <section id="graphically" class="slide level2">
 <h2>Graphically</h2>
-<div id="b1e351f6" class="cell" data-execution_count="1">
+<div id="ea93f125" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <style>div.jp-Notebook .datagrid-container {min-height: 448px; }</style>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>checking did_imputation consistency and verifying not already installed...
-installing into C:\Users\Fernando\ado\plus\...
+installing into c:\ado\plus\...
 installation complete.</code></pre>
 </div>
 </div>
@@ -659,7 +659,7 @@ Y_{i,t} &amp;= \beta_0 + \sum \delta_i  + \beta_2 t + \beta_3 (D_i \times t) + \
 <section id="example" class="slide level2 scrollable">
 <h2>Example</h2>
 <p>Some Data Preparation</p>
-<div id="1c3e87c5" class="cell larger" data-execution_count="3">
+<div id="eb5e2f7c" class="cell larger" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a><span class="kw">qui</span>:frause lalonde, <span class="kw">clear</span></span>
 <span id="cb3-2"><a></a><span class="kw">keep</span>  <span class="kw">if</span> treated==0 | <span class="kw">sample</span>==2</span>
 <span id="cb3-3"><a></a><span class="kw">bysort</span> id (<span class="fu">year</span>):<span class="kw">gen</span> dy = re[2]-re[1]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -668,12 +668,12 @@ Y_{i,t} &amp;= \beta_0 + \sum \delta_i  + \beta_2 t + \beta_3 (D_i \times t) + \
 </div>
 </div>
 <p>Using <code>teffects</code>:</p>
-<div id="0372cbe2" class="cell larger" data-execution_count="4">
+<div id="d90994d8" class="cell larger" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a></a>teffects ra (dy educ <span class="bn">black</span> married nodegree hisp re74) (experimental) <span class="kw">if</span> <span class="fu">year</span>==1975 , atet</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-Iteration 0:   EE criterion =  2.891e-23  
-Iteration 1:   EE criterion =  6.094e-26  
+Iteration 0:  EE criterion =  4.433e-21  
+Iteration 1:  EE criterion =  8.994e-26  
 
 Treatment-effects estimation                    Number of obs     =     16,417
 Estimator      : regression adjustment
@@ -694,7 +694,7 @@ experimental |
 </div>
 </div>
 <p>Using <code>drdid</code>:</p>
-<div id="1231026b" class="cell larger" data-execution_count="5">
+<div id="ab7ba4c0" class="cell larger" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a></a>drdid re educ <span class="bn">black</span> married nodegree hisp re74 , ivar(id) time(<span class="fu">year</span>) tr(experimental) <span class="kw">reg</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -711,7 +711,7 @@ experimental |
 </div>
 </div>
 <p>by hand:</p>
-<div id="181610a8" class="cell larger" data-execution_count="6">
+<div id="6f5152e5" class="cell larger" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> dy educ <span class="bn">black</span> married nodegree hisp re74 <span class="kw">if</span> exper==0</span>
 <span id="cb9-2"><a></a><span class="kw">predict</span> dy_hat, <span class="kw">xb</span></span>
 <span id="cb9-3"><a></a><span class="kw">gen</span> att_i = dy-dy_hat</span>
@@ -1009,7 +1009,7 @@ G\times T: Y_{i,t} &amp;= \sum \gamma_t + \sum \delta_i  + \theta^{fe} PT_{i,t} 
 <li>There are two implementations of the method in Stata: <code>did_imputation</code> and <code>did2s</code>. In addition to the original GMM estimator described in <span class="citation" data-cites="gardner2022twostage">Gardner (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2022</a>)</span>.</li>
 <li>However, the most flexible and Robust implementation is <code>did_imputation</code>.</li>
 </ul>
-<div id="2e779d1a" class="cell larger" data-execution_count="11">
+<div id="c295e43b" class="cell larger" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a></a><span class="kw">use</span> http:<span class="co">//pped.org/bacon_example.dta, clear</span></span>
 <span id="cb11-2"><a></a>**Estimate <span class="kw">model</span> <span class="kw">for</span> Pre-treatment <span class="kw">data</span></span>
 <span id="cb11-3"><a></a><span class="kw">qui</span>:reghdfe asmrs <span class="kw">if</span> <span class="kw">post</span>==0, <span class="fu">abs</span>(fe1 = stfips fe2 = <span class="fu">year</span>)</span>
@@ -1036,7 +1036,7 @@ G\times T: Y_{i,t} &amp;= \sum \gamma_t + \sum \delta_i  + \theta^{fe} PT_{i,t} 
 </div>
 </div>
 <p>using <code>did_imputation</code>:</p>
-<div id="aeb97c19" class="cell larger" data-execution_count="12">
+<div id="5e476dbf" class="cell larger" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a></a>** Gvar</span>
 <span id="cb13-2"><a></a><span class="kw">egen</span> gvar = csgvar(<span class="kw">post</span>), ivar(stfips) tvar(<span class="fu">year</span>)</span>
 <span id="cb13-3"><a></a>** event</span>
@@ -1072,11 +1072,11 @@ Warning: part of the sample was dropped for the following coefficients because F
         tau8 |  -4.864576   3.374892    -1.44   0.149    -11.47924     1.75009
         tau9 |  -4.645944   2.361134    -1.97   0.049    -9.273682   -.0182059
        tau10 |  -6.772627   3.287879    -2.06   0.039    -13.21675   -.3285015
-        pre1 |   1.556381   3.521476     0.44   0.659    -5.345585    8.458346
-        pre2 |   1.200269   2.633824     0.46   0.649     -3.96193    6.362469
-        pre3 |  -.4639667   2.213583    -0.21   0.834     -4.80251    3.874576
-        pre4 |   1.921326   1.947613     0.99   0.324    -1.895926    5.738579
-        pre5 |  -1.315265   1.905243    -0.69   0.490    -5.049472    2.418942
+        pre1 |   1.556381   3.517751     0.44   0.658    -5.338285    8.451046
+        pre2 |   1.200269   2.631038     0.46   0.648     -3.95647    6.357009
+        pre3 |  -.4639667   2.211242    -0.21   0.834    -4.797921    3.869987
+        pre4 |   1.921326   1.945554     0.99   0.323    -1.891888    5.734541
+        pre5 |  -1.315265   1.903228    -0.69   0.490    -5.045522    2.414992
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
@@ -1138,7 +1138,7 @@ Warning: part of the sample was dropped for the following coefficients because F
 <p>For <span class="citation" data-cites="wooldridge_2021">Wooldridge (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span>, there is now the official Stata18 command <code>xthdidregress twfe</code>, the one I developed: <code>jwdid</code> and a newer one <code>wooldid</code>.</p>
 <p>Will focus on <code>jwdid</code>.</p>
 <p>Base Estimation:</p>
-<div id="ce966732" class="cell larger" data-execution_count="13">
+<div id="2cbc34b3" class="cell larger" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a></a><span class="kw">qui</span>:<span class="kw">ssc</span> install frause, <span class="kw">replace</span></span>
 <span id="cb15-2"><a></a>frause mpdta, <span class="kw">clear</span></span>
 <span id="cb15-3"><a></a>** </span>
@@ -1179,7 +1179,7 @@ Absorbed degrees of freedom:
  Absorbed FE | Categories  - Redundant  = Num. Coefs |
 -------------+---------------------------------------|
   countyreal |       500         500           0    *|
-        year |         5           0           5     |
+        year |         5           1           4     |
 -----------------------------------------------------+
 * = FE nested within cluster; treated as redundant for DoF computation
 ------------------------------------------------------------------------------
@@ -1191,12 +1191,11 @@ Absorbed degrees of freedom:
 </div>
 </div>
 <p>Adding controls</p>
-<div id="0271b0aa" class="cell larger" data-execution_count="14">
+<div id="20bf08af" class="cell larger" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb17-1"><a></a>jwdid lemp lpop, ivar(countyreal) tvar(<span class="fu">year</span>) gvar(first_treat) </span>
 <span id="cb17-2"><a></a><span class="kw">estat</span> simple</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>__000003
-WARNING: Singleton observations not dropped; statistical significance is biased (link)
+<pre><code>WARNING: Singleton observations not dropped; statistical significance is biased (link)
 (MWFE estimator converged in 2 iterations)
 
 HDFE Linear regression                            Number of obs   =      2,500
@@ -1244,7 +1243,7 @@ Absorbed degrees of freedom:
  Absorbed FE | Categories  - Redundant  = Num. Coefs |
 -------------+---------------------------------------|
   countyreal |       500         500           0    *|
-        year |         5           0           5     |
+        year |         5           1           4     |
 -----------------------------------------------------+
 * = FE nested within cluster; treated as redundant for DoF computation
 ------------------------------------------------------------------------------
@@ -1256,7 +1255,7 @@ Absorbed degrees of freedom:
 </div>
 </div>
 <p>Compared to <code>did_imputation</code></p>
-<div id="ebd18205" class="cell larger" data-execution_count="15">
+<div id="b9482ea5" class="cell larger" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb19-1"><a></a><span class="kw">gen</span> first2=first_treat <span class="kw">if</span> first_treat&gt;0</span>
 <span id="cb19-2"><a></a>did_imputation lemp countyreal <span class="fu">year</span> first2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1270,7 +1269,7 @@ Absorbed degrees of freedom:
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
-<div id="f1971e19" class="cell larger" data-execution_count="16">
+<div id="4711aa65" class="cell larger" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb21-1"><a></a><span class="kw">qui</span>:jwdid lemp, ivar(countyreal) tvar(<span class="fu">year</span>) gvar(first_treat) </span>
 <span id="cb21-2"><a></a><span class="kw">estat</span> simple</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1284,7 +1283,7 @@ Absorbed degrees of freedom:
 </div>
 </div>
 <p>Estimating an effect similar to <span class="citation" data-cites="sun_estimating_2021">Sun and Abraham (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span></p>
-<div id="7c2862d2" class="cell larger" data-execution_count="17">
+<div id="3de3642b" class="cell larger" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><a></a><span class="kw">qui</span>:jwdid lemp, ivar(countyreal) tvar(<span class="fu">year</span>) gvar(first_treat) <span class="co">///</span></span>
 <span id="cb23-2"><a></a>    never <span class="co">//&lt;- request full interaction</span></span>
 <span id="cb23-3"><a></a><span class="kw">estat</span> event</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1307,7 +1306,7 @@ Absorbed degrees of freedom:
 </div>
 </div>
 <p>It is also possible to add further restrictions to “event/calendar/group” aggregates</p>
-<div id="7cb370ba" class="cell larger" data-execution_count="18">
+<div id="e2acf873" class="cell larger" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb25-1"><a></a>** requires latest JWDID</span>
 <span id="cb25-2"><a></a><span class="kw">qui</span>:net install jwdid, from(https:<span class="co">//friosavila.github.io/stpackages) replace</span></span>
 <span id="cb25-3"><a></a><span class="kw">program</span> <span class="kw">drop</span> <span class="dt">_all</span></span>
@@ -1419,7 +1418,7 @@ AGG(ATT(g,t)) = \frac{\sum_{g,t \in G\times T}   ATT(g,t) * w_{g,t} * sel_{g,t} 
 <li><p>However, it can be slow in large tasks, because of the bottle neck of using the Full Dataset for every task.</p></li>
 <li><p><code>csdid2</code> works almost identically to <code>csdid</code>, its faster, but some functions are not yet documented (helpfile is still missing). Will use this one here</p></li>
 </ul>
-<div id="3d56e37d" class="cell larger" data-execution_count="19">
+<div id="9c1cc693" class="cell larger" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb27-1"><a></a><span class="kw">qui</span>:net install csdid2, from(https:<span class="co">//friosavila.github.io/stpackages) replace</span></span>
 <span id="cb27-2"><a></a><span class="kw">use</span> http:<span class="co">//pped.org/bacon_example.dta, clear</span></span>
 <span id="cb27-3"><a></a></span>
@@ -1449,7 +1448,7 @@ Using method reg
 <li><code>csdid2</code> is creating the full set of ATT(g,t) estimations for the data. But will produce no result</li>
 <li>To obtain results and plotting, one must use post estimation commands:</li>
 </ul>
-<div id="7e90eae6" class="cell larger" data-execution_count="20">
+<div id="cd16abc7" class="cell larger" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb29-1"><a></a><span class="kw">estat</span> event, <span class="co">/// request event-type estimates</span></span>
 <span id="cb29-2"><a></a>    noavg    <span class="co">/// asks not to produce Averages</span></span>
 <span id="cb29-3"><a></a>    revent(-10/10) <span class="co">// requests to limit the output to events between -10/10</span></span>
@@ -1483,7 +1482,7 @@ Using method reg
 </div>
 </div>
 <p><code>estat plot</code>, will produce a figure from the last estimation</p>
-<div id="abd3205d" class="cell larger" data-execution_count="21">
+<div id="7b3224bb" class="cell larger" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb31-1"><a></a><span class="kw">estat</span> plot, <span class="bn">xsize</span>(10) <span class="bn">ysize</span>(8)</span>
 <span id="cb31-2"><a></a><span class="kw">graph</span> <span class="kw">export</span> figev.png, <span class="kw">replace</span> <span class="kw">width</span>(800)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
