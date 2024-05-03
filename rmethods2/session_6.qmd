@@ -279,7 +279,7 @@ $$
   
 - If the distribution of the data is not adequate, one may want re-do the matching, with different "cell" definitions or matching scores.
 
-## Example
+## Example {.scrollable}
 
 ```{stata}
 *| code-fold: false

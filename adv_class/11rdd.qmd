@@ -17,7 +17,7 @@ execute:
   freeze: true 
 ---
 
-## Re-Cap: Potential outcome Model {.smaler}
+## Re-Cap: Potential outcome Model {.smaller}
 
 In the ideal world, where we can see all possible outcomes and scenarios of your potential treatments, it will be very simple to estimate treatment effects:
 
@@ -442,7 +442,7 @@ two (rspike ll1 ul1 z, lw(1) pstyle(p1) color(%50) ) (scatter b11 z, pstyle(p1) 
 
 ```
 
-## Flasification test
+## Falsification test
 
 ```{stata}
 qui {

@@ -407,7 +407,7 @@ Fernando Rios-Avila
 </div>
 
 </section>
-<section id="re-cap-potential-outcome-model" class="slide level2 smaler">
+<section id="re-cap-potential-outcome-model" class="slide level2 smaller">
 <h2>Re-Cap: Potential outcome Model</h2>
 <p>In the ideal world, where we can see all possible outcomes and scenarios of your potential treatments, it will be very simple to estimate treatment effects:</p>
 <p><span class="math display">\[
@@ -504,7 +504,7 @@ Fernando Rios-Avila
 </section>
 <section id="sharp-rdd" class="slide level2">
 <h2>Sharp RDD</h2>
-<div id="afd81d5f" class="cell" data-execution_count="1">
+<div id="2cac3556" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a></a><span class="kw">clear</span></span>
@@ -559,7 +559,7 @@ E(y(1)|Z=c) &amp;-E(y(0)|Z=c)
 </section>
 <section id="example" class="slide level2">
 <h2>Example</h2>
-<div id="63336d1b" class="cell" data-execution_count="2">
+<div id="3bb0cca7" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a></a> <span class="kw">qui</span>: {</span>
@@ -595,7 +595,7 @@ E(y(1)|Z=c) &amp;-E(y(0)|Z=c)
 <img data-src="11rdd_files/figure-revealjs/cell-3-output-1.png" class="r-stretch"></section>
 <section id="example-1" class="slide level2">
 <h2>Example</h2>
-<div id="8787b33a" class="cell" data-execution_count="3">
+<div id="82257894" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a><span class="kw">qui</span>: {</span>
@@ -709,7 +709,7 @@ E(y(1)|Z=c) &amp;-E(y(0)|Z=c)
 <li>In Stata: ssc install <code>rddensity</code>. In r install.packages(c(‘rdd’,‘rddensity’))</li>
 </ul></li>
 </ul>
-<div id="1c1888f1" class="cell" data-execution_count="6">
+<div id="5b45b8a0" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a></a><span class="kw">set</span> <span class="dv">linesize</span> 100</span>
@@ -744,7 +744,7 @@ E(y(1)|Z=c) &amp;-E(y(0)|Z=c)
 <section id="example-3" class="slide level2">
 <h2>Example</h2>
 <p>Impact of Scores on Scholarship recipiency</p>
-<div id="de5aba87" class="cell" data-execution_count="7">
+<div id="0c526d3a" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a></a><span class="kw">use</span> resources\fuzzy, <span class="kw">clear</span></span>
@@ -764,7 +764,7 @@ all files already exist and are up to date.</code></pre>
 <img data-src="11rdd_files/figure-revealjs/cell-8-output-2.png" class="r-stretch"></section>
 <section id="manipulation-test" class="slide level2">
 <h2>Manipulation test</h2>
-<div id="3d3c20f0" class="cell" data-execution_count="8">
+<div id="ca76959c" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a></a><span class="kw">qui</span>:rddensity x1, plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -775,7 +775,7 @@ all files already exist and are up to date.</code></pre>
 <section id="intention-to-treat" class="slide level2">
 <h2>Intention to treat</h2>
 <p>Impact on Enrollment</p>
-<div id="9ccd53df" class="cell" data-execution_count="9">
+<div id="b34916b1" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a></a><span class="kw">qui</span>:rdplot <span class="fu">y</span> x1, graph_options(<span class="bn">legend</span>( pos(6)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -785,7 +785,7 @@ all files already exist and are up to date.</code></pre>
 <img data-src="11rdd_files/figure-revealjs/cell-10-output-1.png" class="r-stretch"></section>
 <section id="estimation-of-the-effect" class="slide level2">
 <h2>Estimation of the effect:</h2>
-<div id="2a72defb" class="cell" data-execution_count="10">
+<div id="5137332d" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a></a><span class="kw">gen</span> dx1 = x1&gt;0</span>
@@ -821,7 +821,7 @@ Exogenous:  0b.dx1#c.x1 1.dx1#c.x1 0b.dx1#c.x1#c.x1 1.dx1#c.x1#c.x1 dx1</code></
 </section>
 <section id="some-sensitivity" class="slide level2">
 <h2>Some Sensitivity</h2>
-<div id="6cdd28c3" class="cell" data-execution_count="11">
+<div id="4df339b7" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a></a><span class="kw">qui</span>:{   </span>
@@ -868,9 +868,9 @@ Exogenous:  0b.dx1#c.x1 1.dx1#c.x1 0b.dx1#c.x1#c.x1 1.dx1#c.x1#c.x1 dx1</code></
 
 </div>
 <img data-src="11rdd_files/figure-revealjs/cell-12-output-2.png" class="r-stretch"></section>
-<section id="flasification-test" class="slide level2">
-<h2>Flasification test</h2>
-<div id="b512abe2" class="cell" data-execution_count="12">
+<section id="falsification-test" class="slide level2">
+<h2>Falsification test</h2>
+<div id="f1be2832" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a></a><span class="kw">qui</span> {</span>

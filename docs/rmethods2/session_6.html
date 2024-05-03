@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.549">
+  <meta name="generator" content="quarto-1.4.553">
 
   <meta name="author" content="Fernando Rios-Avila">
   <title>Econometrics MSC Levy - Research Methods II</title>
@@ -735,9 +735,9 @@ Pros: It transfers the unconditional distribution of the data. Cons: My not use 
 <li><p>If the distribution of the data is not adequate, one may want re-do the matching, with different “cell” definitions or matching scores.</p></li>
 </ul>
 </section>
-<section id="example" class="slide level2">
+<section id="example" class="slide level2 scrollable">
 <h2>Example</h2>
-<div id="4d74b62d" class="cell" data-execution_count="1">
+<div id="8968517e" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a></a>frause wage2, <span class="kw">clear</span></span>
 <span id="cb1-2"><a></a><span class="kw">set</span> <span class="dv">seed</span> 312</span>
 <span id="cb1-3"><a></a><span class="kw">xtile</span> smp = runiform()</span>
@@ -886,7 +886,7 @@ Scoring coefficients
 </div>
 </div>
 <p>Next we create ranks for each observation, assuming no stratification.</p>
-<div id="6d759485" class="cell" data-execution_count="2">
+<div id="f28fcad0" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a><span class="kw">bysort</span> smp (wageh) :<span class="kw">gen</span> rnk1=<span class="dt">_n</span></span>
@@ -895,7 +895,7 @@ Scoring coefficients
 </details>
 </div>
 <p>Finally, the imputation. Simply “matching” information from the donor to the recipient.</p>
-<div id="b8d8b8cd" class="cell" data-execution_count="3">
+<div id="f8ea3cf4" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a></a>* Imputation</span>
 <span id="cb4-2"><a></a><span class="kw">clonevar</span> wage1 = wage_s</span>
 <span id="cb4-3"><a></a><span class="kw">clonevar</span> wage2 = wage_s</span>
@@ -919,7 +919,7 @@ Scoring coefficients
 </div>
 </div>
 <p>Simple quality assessment.</p>
-<div id="52b22eac" class="cell" data-execution_count="4">
+<div id="bd2f0b71" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> wage hours iq kww educ exper tenure age married <span class="bn">black</span> south <span class="kw">if</span> smp==0</span>
 <span id="cb6-2"><a></a><span class="kw">est</span> sto m1</span>
 <span id="cb6-3"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> wage1 hours iq kww educ exper tenure age married <span class="bn">black</span> south <span class="kw">if</span> smp==0</span>
@@ -1271,6 +1271,24 @@ Standard errors in parentheses
         // clear code selection
         e.clearSelection();
       });
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
       function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
@@ -1307,7 +1325,11 @@ Standard errors in parentheses
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
       const findCites = (el) => {
