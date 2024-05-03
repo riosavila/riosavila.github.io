@@ -60,7 +60,7 @@ All reading materials are available [here](https://github.com/riosavila/madvclas
 
 #### 11. Twofold Wisdom: Unraveling Truths with the Dual Forces of Differences in Differences
    
-   Differences in Differences [pdf](resources/DRDID_CSDID.pdf)      
+   Differences in Differences [html](12did.qmd) 
 
 #### 12. Cosmic Recreations: Forging New Realities through Synthetic Control 
    
