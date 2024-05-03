@@ -8464,5 +8464,369 @@
     "title": "Research Methods II",
     "section": "",
     "text": "If you are reading this, you are probably interested in the Microeconometrics path of Research methods II.\nThis course assumes you are familiar with the basics of econometrics and statistics.\n\nWe will not cover questions from Research methods I. You probably know the answers to those questions already!\n\nThis course will focus on tools that are commonly used in empirical research in economics:\n\nWe will emphasize the use of Household Surveys (with the issues it entails)\nAnd focus on applied econometrics using cross-sectional data, for distributional analysis and policy simulation.\n\nThus, we will do much more use of empirical tools and software than we did in Research methods I.\nWe will have 7 Sessions, and 2 homeworks ."
+  },
+  {
+    "objectID": "adv_class/12did.html#why-differences-in-diffences",
+    "href": "adv_class/12did.html#why-differences-in-diffences",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Why differences in diffences?",
+    "text": "Why differences in diffences?\n\nDifferences-in-Differences (DID) is one of the most popular tools in applied economics for analyzing causal effects of an intervention or policy treatment.\nUnder reasonable assumptions, DID allows you to identify these effects by comparing changes in the treatment group with changes in the control group.\n\nThis method of identification even allows for controlling for self-selection in the treatment.\n\nIn recent years, several advances in DID have been developed, revealing issues with the traditional DID design, particularly with the application of TWFE.\nToday, I will briefly present the problems and solutions that have been proposed, and how they are implemented in Stata.\nSo lets Start with the basics: 2x2 DID"
+  },
+  {
+    "objectID": "adv_class/12did.html#x2-did-cannonic-design",
+    "href": "adv_class/12did.html#x2-did-cannonic-design",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "2x2 DID: Cannonic Design",
+    "text": "2x2 DID: Cannonic Design\n\nIn the 2x2 DID design, we have 2 groups:\n\nControl (\\(D=1\\)) y treated (\\(D=0\\)),\n\nWhich are observed for two periods of time:\n\nBefore (\\(T=0\\)) and after (\\(T=1\\)) the treatment.\n\nFor all groups and periods of time, we observe the realized outcome \\(Y\\), but cannot observe all potential outcomes.\nThis setup is valid both for panel data and repeat cross-sections, but will focus on panel data."
+  },
+  {
+    "objectID": "adv_class/12did.html#potential-outcomes-and-treatment-effects",
+    "href": "adv_class/12did.html#potential-outcomes-and-treatment-effects",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Potential outcomes and Treatment Effects",
+    "text": "Potential outcomes and Treatment Effects\n\nPotential outcomes are the outcomes we would observe for each observation in the data if it were assigned to either the treatement or control group.\n\n\\(Y_{i,t}(D=0)\\): Potential outcome for individual \\(i\\) at time \\(t\\) if he was never treated.\n\\(Y_{j,s}(D=1)\\): Potential outcome for individual \\(j\\) at time \\(s\\) if he was treated.\n\nHowever, we are only able to observe one of this outcomes: \\[Y_{i,t} = Y_{i,t}(1)D_i + Y_{i,t}(0)(1-D_i)\\]\nWhere \\(D_i\\) is a dummy indicates the effective treatment status of individual \\(i\\).\nNow, we are interested in Treatment Effects for \\(i\\), or any summary measures, after the treatment is applied:\n\n\\[TE = Y_{i,1}(1)-Y_{i,1}(0) \\text{ or } ATT =E(Y_{i,1}(1)-Y_{i,1}(0)|D=1)\\]"
+  },
+  {
+    "objectID": "adv_class/12did.html#the-did-estimator-assumptions",
+    "href": "adv_class/12did.html#the-did-estimator-assumptions",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "The DID Estimator: Assumptions",
+    "text": "The DID Estimator: Assumptions\n\nBecause we can’t observe both potential outcomes, we need to make assumptions to identify the treatment effect.\n\n\nStable Unit Treatment Value Assumption (SUTVA): The treatment status of one unit does not affect the potential outcomes of other units. (No spillovers)\nParallel Trends: In the absence of treatment, in average, both groups would have followed the same trend (changes) over time.\n\n\\[\\color{blue}{E(Y_{i,1}(0) - Y_{i,0}(0)|D_i=1)} = \\color{green}{E(Y_{i,1}(0)-Y_{i,0}(0)|D_i=0)}\\]\n\nNo Anticipation: Before the treatment takes place (\\(T=0\\)), the potential outcomes do not depend on the treatment status.\n\n\\[Y_{i,0}(0) = Y_{i,0}(1)\\]"
+  },
+  {
+    "objectID": "adv_class/12did.html#the-did-estimator",
+    "href": "adv_class/12did.html#the-did-estimator",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "The DID Estimator",
+    "text": "The DID Estimator\n\nLets take a second look at the ATT definition: \\[\\begin{aligned}\nATT &=E(Y_{i,1}(1)|D=1)-\\color{red}{E(Y_{i,1}(0)|D=1)} \\\\\n&=E(Y_{i,1}|D=1)-\\color{red}{E(Y_{i,1}(0)|D=1)}\n\\end{aligned}\n\\]\nThe problem is to estimate the red component, to obtain an estimator for the ATT.\nHowever, under the PTA and No Anticipation, the observed part can be written as: \\[E(Y_{i,1}(0)|D=1) = E(Y_{i,1}-Y_{i,0}|D=0) + E(Y_{i,0}|D=1)\n\\]\nWhich gives the usual ATT estimator:\n\n\\[ATT =\\underbrace{E(Y_{i,1} - Y_{i,0}|D=1)}_{\\Delta treat} - \\underbrace{E(Y_{i,1}-Y_{i,0}|D=0)}_{\\Delta control}\\]"
+  },
+  {
+    "objectID": "adv_class/12did.html#graphically",
+    "href": "adv_class/12did.html#graphically",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Graphically",
+    "text": "Graphically\n\n\n\n\n\nchecking did_imputation consistency and verifying not already installed...\ninstalling into C:\\Users\\Fernando\\ado\\plus\\...\ninstallation complete."
+  },
+  {
+    "objectID": "adv_class/12did.html#how-to-estimate-it",
+    "href": "adv_class/12did.html#how-to-estimate-it",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "How to estimate it?",
+    "text": "How to estimate it?\n\nDifference-in-Means:\n\n\\[\\widehat{ATT}=\\bar Y^{D=1,T=1} - \\bar Y^{D=1,T=0} - [ \\bar Y^{D=0,T=1} - \\bar Y^{D=0,T=0} ]\\]\n\nRegression:\n\n\\[Y_{i,t} = \\beta_0 + \\beta_1 D_i + \\beta_2 t + \\beta_3 (D_i \\times t) + \\epsilon_{i,t}\\]\n\nWith Panel Data: Fixed Effects\n\n\\[\\begin{aligned}\nY_{i,t} &= \\beta_0 + \\sum \\delta_i  + \\beta_2 t + \\beta_3 (D_i \\times t) + \\epsilon_{i,t} \\\\\n\\Delta Y_{i} &= \\beta_2 + \\beta_3 D_i + \\epsilon_{i} \\text{ for } t=0 \\\\\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "adv_class/12did.html#extension-adding-controls",
+    "href": "adv_class/12did.html#extension-adding-controls",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Extension: Adding Controls",
+    "text": "Extension: Adding Controls\n\nThe DID estimator presented above relies on Unconditional Parallel Trends. It may work if both control and treated groups are similar in all aspects, except for the treatment. But they may not.\nIn this case, we can add controls to the model, to account for differences in the groups.\n\n\\[Y_{i,t} = \\beta_0 + \\beta_1 D_i + \\beta_2 t + \\beta_3 (D_i \\times t) +  X_{it} \\gamma + \\epsilon_{i,t}\\]\n\nBut this would be wrong. Why?"
+  },
+  {
+    "objectID": "adv_class/12did.html#problems-of-adding-controls",
+    "href": "adv_class/12did.html#problems-of-adding-controls",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Problems of Adding Controls",
+    "text": "Problems of Adding Controls\n\nSimply adding controls imposes assumption of homogenous treatement effects. As described in Sant’Anna and Zhao (2020), \\(\\gamma\\) may not be the same as the ATT.\n\nSolution: Interactions between controls and all group\\time dummies: \\[y_{i,t} = \\beta_0 + \\sum \\delta_i  + \\beta_2 t + \\beta_3 (D_i \\times t) +  X_{it} \\gamma + \\sum \\gamma_x (X-\\bar X_{D\\times T})*D*T + \\epsilon_{i,t}\\]\n\nControlling for time varying variables may introduce biases (bad controls)\n\nSolution: use only pre-treatment variables as controls. (panel) or variables that should not be affected by the treatment (cross-sections)\nAlso: If using Panel Data, one can add as controls all variables history. (see for example Caetano and Callaway (2022))"
+  },
+  {
+    "objectID": "adv_class/12did.html#potential-solution-santanna_doubly_2020",
+    "href": "adv_class/12did.html#potential-solution-santanna_doubly_2020",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Potential Solution: Sant’Anna and Zhao (2020)",
+    "text": "Potential Solution: Sant’Anna and Zhao (2020)\n\nDID is a straighforward estimator, that relies strongly on the Unconditional Parallel Trends Assumption. (UPTA)\nOne solution to the problem is to use the Conditional Parallel Trends Assumption (CPTA), which can be less restrictive.\nThis states that PTA holds, only after conditioning on a set of variables \\(X\\). (looking at subgroups).\n\n\\[\\color{blue}{E(Y_{i,1}(0) - Y_{i,0}(0)|D_i=1,X)} = \\color{green}{E(Y_{i,1}(0)-Y_{i,0}(0)|D_i=0,X)}\\]\n\nSo, if you can “control” for individual characteristics, you could estimate the treatment effect, and still report Average Treatment Effects for the population.\n\n\\[ATT = E\\big[ [E(Y_{i,1}(0) - Y_{i,0}(0)|D_i=1,X ] \\big]\\]"
+  },
+  {
+    "objectID": "adv_class/12did.html#added-assumption",
+    "href": "adv_class/12did.html#added-assumption",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Added Assumption",
+    "text": "Added Assumption\n\nWhen accouting for covariates, one needs to add an additional assumption to the data:\nThere is an overlap in the distribution of \\(X\\) between the treated and control groups. (common support)\n\n\\[0 &lt;&lt; Pr(D=1|X) &lt;&lt; 1\\]\n\nThis is important, because if there is no overlap, the treatment effect cannot be identified for all groups, and may create distorted estimates."
+  },
+  {
+    "objectID": "adv_class/12did.html#potential-solution-drdid-teffects",
+    "href": "adv_class/12did.html#potential-solution-drdid-teffects",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Potential Solution: drdid, teffects",
+    "text": "Potential Solution: drdid, teffects\n\nSant’Anna and Zhao (2020) propose various alternatives to estimate the treatment effect with controls, under CPTA. They contrast the implementation of methods that use linear regressions, Inverse Probability Weighting (IPW) and Doubly Robust Estimators (DR).\nSimilar estimates could be obtained using teffects in Stata.\nBut how does this work? Two Cases:\n\nPanel Data: This simplifies the problem, because we can use the Data structure to estimate the model.\nCrossection: This is more complicated because requires careful consideration of idenfication assumptions, and groups of interest."
+  },
+  {
+    "objectID": "adv_class/12did.html#panel-data",
+    "href": "adv_class/12did.html#panel-data",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Panel Data",
+    "text": "Panel Data\n\nStep 1: Estimate the changes in the outcome \\(\\Delta Y_i = Y_{i,1} - Y_{i,0}\\). (the First D)\n\nBecause of this, we are implicitly reducing our sample size: from \\(N\\) to \\(N/2\\) (because of the unestimated fixed effects)\n\nStep 2: Estimate the treatment effect:\n\nSimplest case, no controls: \\[\\Delta Y_i = \\beta_0 + \\beta_1 D_i + \\varepsilon_i\\]\n\nIn other words, the model is now a simple linear regression, with 1 period."
+  },
+  {
+    "objectID": "adv_class/12did.html#panel-data-adding-controls",
+    "href": "adv_class/12did.html#panel-data-adding-controls",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Panel Data: Adding controls",
+    "text": "Panel Data: Adding controls\n\nBecause you have now only 1 period, and two groups. All treatment effect estimators can be used.\n\nregression outcome, IPW, doubly robust, matching, etc.\nWe use them to estimate the second D of DID\n\nEmpirically: With Transformed data (\\(\\Delta y\\)) as dependent variable, any of the methods in teffects can be used to estimate the treatment effect.\nWith untransformed data (RC), you can use drdid to estimate the treatment effect, and their Standard errors.\n\nYou need to make sure you have only 2 periods of data."
+  },
+  {
+    "objectID": "adv_class/12did.html#panel-data-methods",
+    "href": "adv_class/12did.html#panel-data-methods",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Panel Data: Methods",
+    "text": "Panel Data: Methods\n\nRegression: reg (drdid) or ra (teffects)\n\nusing \\(\\Delta y\\) as dependent variable, estimate a linear model with covariates (No FE) for the untreated, and predict outcomes. This would become your “Potential outcome change under no-treatment”\n\n\n\\[ ATT = E(\\Delta Y_{i}|D=1) - E({\\hat\\gamma X|D=1})\\]\n\nInverse Probability Weighting: stdipw (drdid) or ipw (teffects)\n\nEstimate the likelihood of being treated, and use it to identify a propensity score and IPW weights \\(p(D=1|X) = \\hat p(X)\\)\n\n\n\\[ ATT = E(\\Delta Y_{i}|D=1) - E\\left({\\Delta Y_{i} \\frac{p(X)}{1-p(X)}|D=0}\\right)\\]"
+  },
+  {
+    "objectID": "adv_class/12did.html#panel-data-methods-1",
+    "href": "adv_class/12did.html#panel-data-methods-1",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Panel Data: Methods",
+    "text": "Panel Data: Methods\n\nDoubly Robust Estimation: dript and dripw (drdid) or ipwra aipw (teffects)\n\nEstimate the likelihood of being treated, and use it to identify a propensity score and IPW weights \\(p(D=1|X) = \\hat p(X)\\)\nEstimate a weighted regression with \\(\\Delta y\\) as dependent variable or estimate a weighted regression correction. (see here slide 17-18) for more details.\nCombinations of modeling outcome and modeling likelihood and pscores makes the estimator doubly robust.\n\nFor Repeated crossection, the math becomes more complicated to follow and identify the “group of interest”\n\nSee here slide 53-54 for more details."
+  },
+  {
+    "objectID": "adv_class/12did.html#example",
+    "href": "adv_class/12did.html#example",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Example",
+    "text": "Example\nSome Data Preparation\n\nqui:frause lalonde, clear\nkeep  if treated==0 | sample==2\nbysort id (year):gen dy = re[2]-re[1]\n\n(5,574 observations deleted)\n\n\nUsing teffects:\n\nteffects ra (dy educ black married nodegree hisp re74) (experimental) if year==1975 , atet\n\n\nIteration 0:   EE criterion =  2.891e-23  \nIteration 1:   EE criterion =  6.094e-26  \n\nTreatment-effects estimation                    Number of obs     =     16,417\nEstimator      : regression adjustment\nOutcome model  : linear\nTreatment model: none\n------------------------------------------------------------------------------\n             |               Robust\n          dy | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\nATET         |\nexperimental |\n   (1 vs 0)  |  -1055.483   346.1459    -3.05   0.002    -1733.917   -377.0497\n-------------+----------------------------------------------------------------\nPOmean       |\nexperimental |\n          0  |   3118.849   185.0719    16.85   0.000     2756.114    3481.583\n------------------------------------------------------------------------------\n\n\nUsing drdid:\n\ndrdid re educ black married nodegree hisp re74 , ivar(id) time(year) tr(experimental) reg\n\n\nDoubly robust difference-in-differences                 Number of obs = 32,834\nOutcome model  : regression adjustment\nTreatment model: none\n------------------------------------------------------------------------------\n             | Coefficient  Std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\nATET         |\nexperimental |\n   (1 vs 0)  |  -1055.483   346.1451    -3.05   0.002    -1733.915   -377.0511\n------------------------------------------------------------------------------\n\n\nby hand:\n\nqui:reg dy educ black married nodegree hisp re74 if exper==0\npredict dy_hat, xb\ngen att_i = dy-dy_hat\ntabstat att_i, by(exper) \n\n\nSummary for variables: att_i\nGroup variable: experimental \n\nexperimental |      Mean\n-------------+----------\n           0 | -9.61e-06\n           1 | -1055.483\n-------------+----------\n       Total | -27.32414\n------------------------"
+  },
+  {
+    "objectID": "adv_class/12did.html#highlights-i-identification",
+    "href": "adv_class/12did.html#highlights-i-identification",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Highlights I: Identification",
+    "text": "Highlights I: Identification\n\nThe identification relies on the non-anticipation assumption and the parallel trends assumption.\n\nNeither of these assumptions can be tested, but they can be supported by the data.\n\nFor Implementation, If one has panel data, teffects and drdid can be used to estimate the treatment effect, and their standard errors. (after preparing the data)\nOtherwise, drdid can be used for repeated crossection as well. (or GMM)"
+  },
+  {
+    "objectID": "adv_class/12did.html#highlighs-ii-overlapping",
+    "href": "adv_class/12did.html#highlighs-ii-overlapping",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Highlighs II: Overlapping",
+    "text": "Highlighs II: Overlapping\n\nThe overlapping assumption is important, and has different implications for the different methods.\nWhen the estimation method is reg or ra, the overlapping assumption is less biding, because the model is extrapolates to created “potential outcomes” for the treated group.\n\nHowever, extrapolation may not be accurate, or create incorrect extrapolations (base category dummies)\n\nWith doubly robust methods, the overlapping assumption is more relevant. dript is particularly sensitive to this assumption, and may not even converge if there is weak overlap.\nFor most practical purposes, dripw may be the most stable, and preferred method."
+  },
+  {
+    "objectID": "adv_class/12did.html#highlighs-iii-controls",
+    "href": "adv_class/12did.html#highlighs-iii-controls",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Highlighs III: Controls",
+    "text": "Highlighs III: Controls\n\nWith panel data, drdid automatically constrains model specification to use pre-treatment information only.\n\nAdded work is required to include post-treatment information.\n\nWith Repeated crossection, drdid would use both pre-treatment and post-treatment information."
+  },
+  {
+    "objectID": "adv_class/12did.html#how-gxt-did-was-suppoused-to-work",
+    "href": "adv_class/12did.html#how-gxt-did-was-suppoused-to-work",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "How GxT DID was suppoused to work",
+    "text": "How GxT DID was suppoused to work\n\nWhile the 2x2 DID design is simple to understand, it does not reflect the type of information that is available in most cases. (G&gt;2 and T&gt;2)\nUntil few years ago, when this kind of data was available, the standard approach was to use a generalized DID design, which extended the use of Fixed Effects:\n\n\\[\n\\begin{aligned}\n2\\times2: Y_{i,t} &= \\beta_0 + \\beta_1 T  + \\beta_2 D_i + \\beta_3 (D_i \\times T) + \\epsilon_{i,t} \\\\\nG\\times T: Y_{i,t} &= \\sum \\gamma_t + \\sum \\delta_i  + \\theta^{fe} PT_{i,t} + \\epsilon_{i,t} \\\\\n\\end{aligned}\n\\]\nwhere \\(PT_{i,t}\\) assume the value of 1 for the treated group After the treatment is applied, and 0 otherwise, and \\(\\theta^{fe}\\) representing the treatment effect.\n\nLittle that we know that this approach only works if the treatment effect is homogeneous across all groups and periods."
+  },
+  {
+    "objectID": "adv_class/12did.html#why-it-doesnt-work",
+    "href": "adv_class/12did.html#why-it-doesnt-work",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Why it doesn’t work?",
+    "text": "Why it doesn’t work?\nThere are at least two-ways that have been used to explain why the Standard TWFE does not work:\n\nThe “Bad Controls” Problem: Goodman-Bacon (2021) shows that the TWFE estimator for ATT is a kind of weighted average of all possible DID one could estimate. Some of these would not be good DID designs.\nNegative Weights: Chaisemartin and D’Haultfœuille (2020) and Borusyak, Jaravel, and Spiess (2023) show that because TWFE ATT estimator is a weighted average of all group-Specific ATT, some may include negative weights.\nThis may produce negative ATT even if all group-specific ATT are positive.\nHowever, when the treatment effect is homogeneous, Neither of these situations would be a problem."
+  },
+  {
+    "objectID": "adv_class/12did.html#the-bad-controls-problem",
+    "href": "adv_class/12did.html#the-bad-controls-problem",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "The “Bad Controls” Problem",
+    "text": "The “Bad Controls” Problem\n\nAll CasesEarly Treated vs Later Treated (Good)Early Treated vs Later Treated (bad)"
+  },
+  {
+    "objectID": "adv_class/12did.html#the-bad-controls-problem-1",
+    "href": "adv_class/12did.html#the-bad-controls-problem-1",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "The “Bad Controls” Problem",
+    "text": "The “Bad Controls” Problem\n\nAll CasesEarly Treated vs Later Treated (Good)Early Treated vs Later Treated (bad)"
+  },
+  {
+    "objectID": "adv_class/12did.html#negative-weights",
+    "href": "adv_class/12did.html#negative-weights",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Negative Weights",
+    "text": "Negative Weights\n\nTo understand the idea of Negative Weights, lets consider the following example:\n\n\\[Y_{i,t} = \\sum \\delta_i + \\sum \\gamma_t  + \\theta PT + \\epsilon_{i,t}\\]\nIf the panel data is balanced, and we apply FWL, we can use partialling out the Fixed Effects:\n\\[\\widetilde{PT}_{it}=PT_{it}-\\overline{PT}_{i}-\\overline{PT}_{t}+\\overline{PT}\\]\nand estimate \\(\\theta^{fe}\\) as:\n\\[\\hat\\theta^{fe} = \\frac{\\sum \\widetilde{PT_{it}} Y_{it}}{\\sum \\widetilde{PT}_{it}^2}\n= w_{it} Y_{it}\n\\]"
+  },
+  {
+    "objectID": "adv_class/12did.html#section",
+    "href": "adv_class/12did.html#section",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "",
+    "text": "\\[\\widetilde{PT}_{it}=PT_{it}-\\overline{PT}_{i}-\\overline{PT}_{t}+\\overline{PT}\\]\n\n\\(\\overline{PT}_{i}\\) is the share of periods a unit is observed to be treated. (larger for early treated)\n\\(\\overline{PT}_{t}\\) is the share of units treated at time \\(t\\). (increasing)\n\\(\\overline{PT}\\) Share of treated “unit-periods”\n\nThus,\n\nUnits that are treated early, (high \\(\\overline{PT}_{i}\\))\nbut are analyzed at later periods (\\(\\overline{PT}_{t}\\) increasing in \\(t\\))\n\nWill be more likely to have a negative weight \\(w_{it}\\), thus contaminating the ATT estimate."
+  },
+  {
+    "objectID": "adv_class/12did.html#graphically-1",
+    "href": "adv_class/12did.html#graphically-1",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Graphically",
+    "text": "Graphically"
+  },
+  {
+    "objectID": "adv_class/12did.html#summarizing-the-problem",
+    "href": "adv_class/12did.html#summarizing-the-problem",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Summarizing the Problem",
+    "text": "Summarizing the Problem\n\nBoth Negative Weights and Bad Controls are capturing the same problem.\n\n\nBy using already treated units as controls (bad controls), we are implicitly applying negative weights to units that are already treated.\nThis would not be a problem on its own, if the treatment effect is homogeneous across all groups and periods.\nHowever, if the treatment effect is heterogeneous, Parallel Trends between already treated and late treated units may not hold."
+  },
+  {
+    "objectID": "adv_class/12did.html#gxt-did-generalized-did",
+    "href": "adv_class/12did.html#gxt-did-generalized-did",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "GxT DID: Generalized DID",
+    "text": "GxT DID: Generalized DID\nSetup\n\nIn the Generalized DID\n\nOne has access to multiple periods of data: \\(t = 1,2,...,T\\).\nAnd units can be treated at any point before, during or after the available Data \\(G = -k,..1,2,..,T+l\\).\n\nThis is the cohort or group.\n\nWe also assume that once a unit is treated, it remains treated. (no reversals/no cohort-change)\n\nFrom our perspective, units treated at or before \\(t=1\\) will be considered as Allways treated.\n\nThis units cannot be used for analysis.\n\nFor any practical purpose, if we do not observe a unit being treated in the window of time observed, we assume its Never Treated.\n\nFor Notation we say these units belong to \\(g=\\infty\\) (or that they could be treated at some point in the far future)"
+  },
+  {
+    "objectID": "adv_class/12did.html#gxt-did-generalized-did-1",
+    "href": "adv_class/12did.html#gxt-did-generalized-did-1",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "GxT DID: Generalized DID",
+    "text": "GxT DID: Generalized DID\nPotential Outcomes\n\nIn contrast with previous setup, with the GDID, we believe observations have multiple potential outcomes, for each period of time.\n\n\\(Y_{i,t}(G)\\) is the potenital outcome for individual \\(i\\) at time \\(t\\), if this unit would be treated at time \\(G\\).\nThus we state that depending on “when” a unit is treated, the potential outcomes could be different.\nThis is what it means allowing for heterogeneity."
+  },
+  {
+    "objectID": "adv_class/12did.html#gxt-did-generalized-did-2",
+    "href": "adv_class/12did.html#gxt-did-generalized-did-2",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "GxT DID: Generalized DID",
+    "text": "GxT DID: Generalized DID\nParallel Trends Assumption\n\nPTA assumption is also slightly modified. Because we can differentiate between never-treated and not-yet-treated, one could impose those PTA assumptions.\nNever Treated \\[E(Y_{i,t}(\\infty) - Y_{i,t-s}(\\infty)|G=g) = E(Y_{i,t}(\\infty) - Y_{i,t-s}(\\infty)|G=\\infty) \\forall s&gt;0 \\]\nNot Yet Treated\n\\[E(Y_{i,t}(\\infty) - Y_{i,t-s}(\\infty)|G=g) = E(Y_{i,t}(\\infty) - Y_{i,t-s}(\\infty)|G=g') \\forall s&gt;0 \\]\nWhich suggests PTA hold for all pre- and post-treatment periods.\nSome methods only rely on Post-treatment PTA."
+  },
+  {
+    "objectID": "adv_class/12did.html#gxt-did-generalized-did-3",
+    "href": "adv_class/12did.html#gxt-did-generalized-did-3",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "GxT DID: Generalized DID",
+    "text": "GxT DID: Generalized DID\nNo Anticipation\n\nAs before, we also require no anticipation.\n\nThat the before treatment takes place (or is announced), the potential outcomes do not depend on the treatment status.\n\n\n\\[Y_{i,t}(G) = Y_{i,t}(\\infty) \\text{ if } t&lt;G \\]\n\nAlso important.\n\n\\(E(Y_{i,t}(G)|g=G) = E(Y_{i,t}|g=G)\\) if \\(t&gt;G\\)\n\\(E(Y_{i,t}(\\infty)|g=\\infty) = E(Y_{i,t}|g=\\infty)\\)"
+  },
+  {
+    "objectID": "adv_class/12did.html#general-overview",
+    "href": "adv_class/12did.html#general-overview",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "General Overview",
+    "text": "General Overview\nThe root of the problem with TWFE:\n\nIf treatment effects are heterogenous, the TWFE estimator of treatment effects produces incorrect estimates because of “negative weights” or “bad controls”\n\nTo solve the problem we need to do (at least) one of three things:\n\nAvoid using bad controls (Borusyak, Jaravel, and Spiess (2023) and Gardner (2022))\nAllow for heterogeneity in the treatment effect. (Wooldridge (2021) and Sun and Abraham (2021))\nUse only good DID designs. (Callaway and Sant’Anna (2021))"
+  },
+  {
+    "objectID": "adv_class/12did.html#avoid-using-bad-controls-did_imputation-and-did2s",
+    "href": "adv_class/12did.html#avoid-using-bad-controls-did_imputation-and-did2s",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Avoid using bad controls: did_imputation and did2s",
+    "text": "Avoid using bad controls: did_imputation and did2s\nBorusyak, Jaravel, and Spiess (2023) and Gardner (2022)\n\nBoth methods are based on the idea of “imputing” the missing potential outcomes \\(Y_{it}(0)\\) for the treated group, using a method similar to the one used for 2x2 DID. A two-stage approach.\n\n\nWe know that estimating the following model would be incorrect:\n\n\\[y_{it} = \\delta_i + \\gamma_t + \\theta D_{it} + \\epsilon_{it}\\]\n\nHowever, what this authors suggest is to identify \\(\\delta_i\\) and \\(\\gamma_t\\) using pre-treatment data only:\n\n\\[y_{it} = \\delta_i + \\gamma_t + \\epsilon_{it} \\text{ if } t&lt;g \\]\nThis helps identifying the fixed effects, without any contamination. (its a model for the potential outcome of no treatment)"
+  },
+  {
+    "objectID": "adv_class/12did.html#avoid-using-bad-controls-did_imputation-and-did2s-1",
+    "href": "adv_class/12did.html#avoid-using-bad-controls-did_imputation-and-did2s-1",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Avoid using bad controls: did_imputation and did2s",
+    "text": "Avoid using bad controls: did_imputation and did2s\nBorusyak, Jaravel, and Spiess (2023) and Gardner (2022)\n\nUse the previous model to re-estimate 1:\n\n\\[y_{it} = \\hat \\delta_i + \\hat \\gamma_t + \\theta D_{it} + \\epsilon_{it}\\]\n\nIn fact, one could use many other specifications to identify Treatment effects, including by group, by calendar, or dynamic effects.\n\n\\[y_{it} = \\hat \\delta_i + \\hat \\gamma_t + \\theta D_{it}*(other Heterogeneity) + \\epsilon_{it}\\]"
+  },
+  {
+    "objectID": "adv_class/12did.html#avoid-using-bad-controls-did_imputation-and-did2s-2",
+    "href": "adv_class/12did.html#avoid-using-bad-controls-did_imputation-and-did2s-2",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Avoid using bad controls: did_imputation and did2s",
+    "text": "Avoid using bad controls: did_imputation and did2s\nBorusyak, Jaravel, and Spiess (2023) and Gardner (2022)\n\nThe identification of TE using the imputation method relies on the same assumptions as the traditional DID design.\nHowever, It also requires the Parallel Trends Assumption (PTA) to hold for all pre-treatment periods.\n\nThis why how we can use pre-treatment information to predict the potential outcomes for the treated group.\n\nAt the extreme, one could even identify TE without access to non-treated units!\n\n\nThis also means that the method is sensitive to problems with long PTA. Although it can be somewhat relaxed (based on model specification).\nHowever, its more efficient than other models because it uses all-pretreatment data for estimation.\n\nData requirements are similar to the traditional DID design."
+  },
+  {
+    "objectID": "adv_class/12did.html#example-1",
+    "href": "adv_class/12did.html#example-1",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Example",
+    "text": "Example\n\nThere are two implementations of the method in Stata: did_imputation and did2s. In addition to the original GMM estimator described in Gardner (2022).\nHowever, the most flexible and Robust implementation is did_imputation.\n\n\nuse http://pped.org/bacon_example.dta, clear\n**Estimate model for Pre-treatment data\nqui:reghdfe asmrs if post==0, abs(fe1 = stfips fe2 = year)\n** Extra polate\nbysort stfips (fe1):replace fe1=fe1[1]\nbysort year (fe2):replace fe2=fe2[1]\n\n** get TE for i\ngen te = asmrs-fe1-fe2-_b[_cons]\nsum te if post==0\nsum te if post==1\n\n(843 real changes made)\n(1107 real changes made)\n(264 missing values generated)\n\n    Variable |        Obs        Mean    Std. dev.       Min        Max\n-------------+---------------------------------------------------------\n          te |        510    2.92e-09    9.204828  -36.51952   51.26879\n\n    Variable |        Obs        Mean    Std. dev.       Min        Max\n-------------+---------------------------------------------------------\n          te |        843   -5.530065    15.66787  -69.98216   48.63423\n\n\nusing did_imputation:\n\n** Gvar\negen gvar = csgvar(post), ivar(stfips) tvar(year)\n** event\ngen event = year - gvar if gvar!=0\n** Gvar = . (missing implies never treated)\nclonevar gvar2=gvar if gvar!=0\ndid_imputation asmrs stfips year gvar2, autosample\ndid_imputation asmrs stfips year gvar2, autosample horizon(1/10) pretrends(5)\n\n(165 missing values generated)\n(165 missing values generated)\nWarning: part of the sample was dropped for the following coefficients because FE could not be imputed: tau.\n\n                                                         Number of obs = 1,353\n------------------------------------------------------------------------------\n       asmrs | Coefficient  Std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         tau |  -5.530065   2.978178    -1.86   0.063    -11.36719    .3070564\n------------------------------------------------------------------------------\nWarning: part of the sample was dropped for the following coefficients because FE could not be imputed: tau1 tau2 tau3 tau4 tau5 tau6 tau7 tau8 tau9 tau10.\n\n                                                           Number of obs = 870\n------------------------------------------------------------------------------\n       asmrs | Coefficient  Std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n        tau1 |   .1501093   1.857768     0.08   0.936     -3.49105    3.791268\n        tau2 |   1.089884    2.60167     0.42   0.675    -4.009296    6.189064\n        tau3 |    1.02914   2.788825     0.37   0.712    -4.436857    6.495136\n        tau4 |   .3781413   2.549497     0.15   0.882     -4.61878    5.375063\n        tau5 |  -1.302828   2.063713    -0.63   0.528    -5.347632    2.741976\n        tau6 |  -1.137572    3.37171    -0.34   0.736    -7.746001    5.470858\n        tau7 |  -5.499892   2.053929    -2.68   0.007    -9.525519   -1.474265\n        tau8 |  -4.864576   3.374892    -1.44   0.149    -11.47924     1.75009\n        tau9 |  -4.645944   2.361134    -1.97   0.049    -9.273682   -.0182059\n       tau10 |  -6.772627   3.287879    -2.06   0.039    -13.21675   -.3285015\n        pre1 |   1.556381   3.521476     0.44   0.659    -5.345585    8.458346\n        pre2 |   1.200269   2.633824     0.46   0.649     -3.96193    6.362469\n        pre3 |  -.4639667   2.213583    -0.21   0.834     -4.80251    3.874576\n        pre4 |   1.921326   1.947613     0.99   0.324    -1.895926    5.738579\n        pre5 |  -1.315265   1.905243    -0.69   0.490    -5.049472    2.418942\n------------------------------------------------------------------------------"
+  },
+  {
+    "objectID": "adv_class/12did.html#allow-for-heterogeneity-jwdid-and-eventstudyinteract",
+    "href": "adv_class/12did.html#allow-for-heterogeneity-jwdid-and-eventstudyinteract",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Allow for Heterogeneity: jwdid and eventstudyinteract",
+    "text": "Allow for Heterogeneity: jwdid and eventstudyinteract\nWooldridge (2021) and Sun and Abraham (2021)\n\nThe work by Wooldridge (2021) suggested that the GDID-TWFE estimator was not a problem perse.\nThe problem was that the GDID-TWFE estimator was simply misspecified.\nInstead of modeling: \\[Y_{i,t} = \\delta_i + \\gamma_t  + \\theta^{fe} PT_{i,t} + \\epsilon_{i,t}\\]\nOne should allow for a full set of interactions between the group and time dummies:\n\n\\[Y_{i,t} = \\delta_i + \\gamma_t  + \\sum_{g=2}^T \\sum_{t=g}^T \\theta_{g,t} \\mathbb{1}(G=g,T=t) + \\epsilon_{i,t}\\]\n\nIn this framework, each \\(\\theta_{g,t}\\) represents the ATT for each group at a particular period."
+  },
+  {
+    "objectID": "adv_class/12did.html#allow-for-heterogeneity-jwdid-and-eventstudyinteract-1",
+    "href": "adv_class/12did.html#allow-for-heterogeneity-jwdid-and-eventstudyinteract-1",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Allow for Heterogeneity: jwdid and eventstudyinteract",
+    "text": "Allow for Heterogeneity: jwdid and eventstudyinteract\nWooldridge (2021) and Sun and Abraham (2021)\n\nIn the basic setup, this approach is basically the same as the method proposed by Borusyak, Jaravel, and Spiess (2023) and Gardner (2022).\nWooldridge, however, was not the first approach that aim to “allow for heterogeneity” in the treatment effect. Early attempts were done by using a dynamic events structure, using both leads ands lags of the treatment variable. \\[Y_{i,t} = \\delta_i + \\gamma_t  + \\sum_{e=-k}^{-2} \\theta_e \\mathbb{1}(t-G_i=e) + \\sum_{e=0}^L \\theta_e \\mathbb{1}(t-G_i=e) + \\epsilon_{i,t}\\]\nThis not only allows for heterogenous effects across time, but also allows you to analyze pre-treatments effects.\nHowever Sun and Abraham (2021) showed that this approach could also be wrong, if dynamic effects are also heterogenous across groups."
+  },
+  {
+    "objectID": "adv_class/12did.html#allow-for-heterogeneity-jwdid-and-eventstudyinteract-2",
+    "href": "adv_class/12did.html#allow-for-heterogeneity-jwdid-and-eventstudyinteract-2",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Allow for Heterogeneity: jwdid and eventstudyinteract",
+    "text": "Allow for Heterogeneity: jwdid and eventstudyinteract\nWooldridge (2021) and Sun and Abraham (2021)\n\nAs solution, Sun and Abraham (2021) propose to use a full set of interactions between the group dummies and the event-study dummies. This is similar to Wooldridge (2021). \\[Y_{i,t} = \\delta_i + \\gamma_t  + \\sum_{g=2}^T \\sum_{e=-k}^{-2} \\theta_{g,e} \\mathbb{1}(t-G_i=e, G=g) + \\sum_{g=2}^T \\sum_{e=0}^L \\theta_{g,e} \\mathbb{1}(t-G_i=e, G=g) + \\epsilon_{i,t}\\]\nIn fact, if we write the “event” as “time”, it would look very similar to the model proposed by Wooldridge (2021).\n\n\\[Y_{i,t} = \\delta_i + \\gamma_t  + \\sum_{g=2}^T \\sum_{t=1}^{g-2} \\theta_{g,t} \\mathbb{1}(T=t, G=g)\n+ \\sum_{g=2}^T \\sum_{t=g}^{T} \\theta_{g,t} \\mathbb{1}(T=t, G=g) + \\epsilon_{i,t}\n\\]\n\nThus, both approaches are identical if we allow for Full interactions before and after treatment."
+  },
+  {
+    "objectID": "adv_class/12did.html#allow-for-heterogeneity-jwdid-and-eventstudyinteract-3",
+    "href": "adv_class/12did.html#allow-for-heterogeneity-jwdid-and-eventstudyinteract-3",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Allow for Heterogeneity: jwdid and eventstudyinteract",
+    "text": "Allow for Heterogeneity: jwdid and eventstudyinteract\nAssumptions and Limitations\n\nThe model proposed by Wooldridge (2021) follows the same assumptions as Borusyak, Jaravel, and Spiess (2023). (Long PTA)\nSun and Abraham (2021) and the modified Wooldridge (2021), however, only requires PTA to hold “after” treatment takes place.\nBoth methods require careful consideration of covariates (time constant), and they require additional work for adding it into a model (variable shifting).\n\nThe limitations of sample size are somewhat more evident in this framework.\n\nWooldridge’s approach, however, could also be used beyond the linear case as shown in Wooldridge (2023)."
+  },
+  {
+    "objectID": "adv_class/12did.html#implementation",
+    "href": "adv_class/12did.html#implementation",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Implementation",
+    "text": "Implementation\nThere are various commands that implement Sun and Abraham (2021) estimator, including her original command eventsudyinteract, as well as xtevent.\nFor Wooldridge (2021), there is now the official Stata18 command xthdidregress twfe, the one I developed: jwdid and a newer one wooldid.\nWill focus on jwdid.\nBase Estimation:\n\nqui:ssc install frause, replace\nfrause mpdta, clear\n** \njwdid lemp, ivar(countyreal) tvar(year) gvar(first_treat) \nestat simple\n\n(Written by R.              )\nWARNING: Singleton observations not dropped; statistical significance is biased (link)\n(MWFE estimator converged in 2 iterations)\n\nHDFE Linear regression                            Number of obs   =      2,500\nAbsorbing 2 HDFE groups                           F(   7,    499) =       3.82\nStatistics robust to heteroskedasticity           Prob &gt; F        =     0.0005\n                                                  R-squared       =     0.9933\n                                                  Adj R-squared   =     0.9915\n                                                  Within R-sq.    =     0.0101\nNumber of clusters (countyreal) =        500      Root MSE        =     0.1389\n\n                                        (Std. err. adjusted for 500 clusters in countyreal)\n-------------------------------------------------------------------------------------------\n                          |               Robust\n                     lemp | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]\n--------------------------+----------------------------------------------------------------\nfirst_treat#year#c.__tr__ |\n               2004 2004  |  -.0193724   .0223818    -0.87   0.387    -.0633465    .0246018\n               2004 2005  |  -.0783191   .0304878    -2.57   0.010    -.1382195   -.0184187\n               2004 2006  |  -.1360781   .0354555    -3.84   0.000    -.2057386   -.0664177\n               2004 2007  |  -.1047075   .0338743    -3.09   0.002    -.1712613   -.0381536\n               2006 2006  |   .0025139   .0199328     0.13   0.900    -.0366487    .0416765\n               2006 2007  |  -.0391927   .0240087    -1.63   0.103    -.0863634     .007978\n               2007 2007  |   -.043106   .0184311    -2.34   0.020    -.0793182   -.0068938\n                          |\n                    _cons |    5.77807    .001544  3742.17   0.000     5.775036    5.781103\n-------------------------------------------------------------------------------------------\n\nAbsorbed degrees of freedom:\n-----------------------------------------------------+\n Absorbed FE | Categories  - Redundant  = Num. Coefs |\n-------------+---------------------------------------|\n  countyreal |       500         500           0    *|\n        year |         5           0           5     |\n-----------------------------------------------------+\n* = FE nested within cluster; treated as redundant for DoF computation\n------------------------------------------------------------------------------\n             |            Delta-method\n             | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n      simple |  -.0477099    .013265    -3.60   0.000    -.0737088   -.0217111\n------------------------------------------------------------------------------\n\n\nAdding controls\n\njwdid lemp lpop, ivar(countyreal) tvar(year) gvar(first_treat) \nestat simple\n\n__000003\nWARNING: Singleton observations not dropped; statistical significance is biased (link)\n(MWFE estimator converged in 2 iterations)\n\nHDFE Linear regression                            Number of obs   =      2,500\nAbsorbing 2 HDFE groups                           F(  18,    499) =       3.62\nStatistics robust to heteroskedasticity           Prob &gt; F        =     0.0000\n                                                  R-squared       =     0.9933\n                                                  Adj R-squared   =     0.9916\n                                                  Within R-sq.    =     0.0212\nNumber of clusters (countyreal) =        500      Root MSE        =     0.1385\n\n                                                  (Std. err. adjusted for 500 clusters in countyreal)\n-----------------------------------------------------------------------------------------------------\n                                    |               Robust\n                               lemp | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]\n------------------------------------+----------------------------------------------------------------\n          first_treat#year#c.__tr__ |\n                         2004 2004  |   -.021248   .0216933    -0.98   0.328    -.0638695    .0213735\n                         2004 2005  |    -.08185   .0273307    -2.99   0.003    -.1355474   -.0281526\n                         2004 2006  |  -.1378704   .0307448    -4.48   0.000    -.1982756   -.0774651\n                         2004 2007  |  -.1095395   .0322696    -3.39   0.001    -.1729405   -.0461384\n                         2006 2006  |   .0025368   .0188523     0.13   0.893    -.0345029    .0395765\n                         2006 2007  |  -.0450935   .0219516    -2.05   0.040    -.0882223   -.0019646\n                         2007 2007  |  -.0459545    .017946    -2.56   0.011    -.0812136   -.0106954\n                                    |\nfirst_treat#year#c.__tr__#c._x_lpop |\n                         2004 2004  |   .0046278   .0175555     0.26   0.792     -.029864    .0391196\n                         2004 2005  |   .0251131   .0178749     1.40   0.161    -.0100063    .0602325\n                         2004 2006  |   .0507346   .0210361     2.41   0.016     .0094043    .0920648\n                         2004 2007  |   .0112497   .0265741     0.42   0.672    -.0409613    .0634607\n                         2006 2006  |   .0389352   .0164453     2.37   0.018     .0066246    .0712457\n                         2006 2007  |   .0380597   .0224407     1.70   0.091    -.0060301    .0821495\n                         2007 2007  |  -.0198351    .016172    -1.23   0.221    -.0516088    .0119385\n                                    |\n                        year#c.lpop |\n                              2004  |   .0110137   .0075431     1.46   0.145    -.0038064    .0258338\n                              2005  |   .0207333    .008093     2.56   0.011     .0048328    .0366339\n                              2006  |   .0105354   .0108004     0.98   0.330    -.0106845    .0317552\n                              2007  |    .020921   .0117917     1.77   0.077    -.0022465    .0440884\n                                    |\n                              _cons |   5.736532   .0215065   266.73   0.000     5.694277    5.778786\n-----------------------------------------------------------------------------------------------------\n\nAbsorbed degrees of freedom:\n-----------------------------------------------------+\n Absorbed FE | Categories  - Redundant  = Num. Coefs |\n-------------+---------------------------------------|\n  countyreal |       500         500           0    *|\n        year |         5           0           5     |\n-----------------------------------------------------+\n* = FE nested within cluster; treated as redundant for DoF computation\n------------------------------------------------------------------------------\n             |            Delta-method\n             | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n      simple |   -.050627   .0124796    -4.06   0.000    -.0750866   -.0261675\n------------------------------------------------------------------------------\n\n\nCompared to did_imputation\n\ngen first2=first_treat if first_treat&gt;0\ndid_imputation lemp countyreal year first2\n\n(1,545 missing values generated)\n\n                                                         Number of obs = 2,500\n------------------------------------------------------------------------------\n        lemp | Coefficient  Std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         tau |  -.0477101   .0132225    -3.61   0.000    -.0736257   -.0217944\n------------------------------------------------------------------------------\n\n\n\nqui:jwdid lemp, ivar(countyreal) tvar(year) gvar(first_treat) \nestat simple\n\nWARNING: Singleton observations not dropped; statistical significance is biased (link)\n------------------------------------------------------------------------------\n             |            Delta-method\n             | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n      simple |  -.0477099    .013265    -3.60   0.000    -.0737088   -.0217111\n------------------------------------------------------------------------------\n\n\nEstimating an effect similar to Sun and Abraham (2021)\n\nqui:jwdid lemp, ivar(countyreal) tvar(year) gvar(first_treat) ///\n    never //&lt;- request full interaction\nestat event\n\nWARNING: Singleton observations not dropped; statistical significance is biased (link)\n------------------------------------------------------------------------------\n             |            Delta-method\n             | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n   __event__ |\n         -4  |   .0033064   .0245551     0.13   0.893    -.0448207    .0514335\n         -3  |   .0250218   .0181543     1.38   0.168      -.01056    .0606037\n         -2  |   .0244587   .0142668     1.71   0.086    -.0035037    .0524211\n         -1  |          0  (omitted)\n          0  |  -.0199318   .0118575    -1.68   0.093    -.0431722    .0033085\n          1  |  -.0509574   .0168707    -3.02   0.003    -.0840233   -.0178914\n          2  |  -.1372587   .0365895    -3.75   0.000    -.2089728   -.0655447\n          3  |  -.1008114   .0345043    -2.92   0.003    -.1684385   -.0331842\n------------------------------------------------------------------------------\n\n\nIt is also possible to add further restrictions to “event/calendar/group” aggregates\n\n** requires latest JWDID\nqui:net install jwdid, from(https://friosavila.github.io/stpackages) replace\nprogram drop _all\ngen subsample = inrange(__event__,2,6)\nestat event, other(subsample)\n\noption other() not allowed"
+  },
+  {
+    "objectID": "adv_class/12did.html#using-good-did-designs-csdid-and-csdid2",
+    "href": "adv_class/12did.html#using-good-did-designs-csdid-and-csdid2",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Using Good DID Designs: csdid and csdid2",
+    "text": "Using Good DID Designs: csdid and csdid2\nCallaway and Sant’Anna (2021)\n\nA third, and last, approach has been proposed by Callaway and Sant’Anna (2021).\nIn contrast with previous methods (which focus on global estimators), this approach suggests deconstructing the estimation into smaller, but well define pieces: The ATTGTs for 2x2 DIDs\n\nMakes it easy to use using GOOD DID designs only\nand, once all ATTGT’s are estimated, they can be aggregated in various ways\n\nThis approach takes full advantage of the fact we know quite well (drdid + others) how to estimate 2x2 DID.\nand (or but) forces you to utilize time constant or pretreatment controls only.\nHowever, one now needs to estimate as many as periods and cohorts are available in the data."
+  },
+  {
+    "objectID": "adv_class/12did.html#using-good-did-designs-csdid-and-csdid2-1",
+    "href": "adv_class/12did.html#using-good-did-designs-csdid-and-csdid2-1",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Using Good DID Designs: csdid and csdid2",
+    "text": "Using Good DID Designs: csdid and csdid2\nCallaway and Sant’Anna (2021)\n\nThe proposed estimator starts with the assumption that one is interested in the ATTGT:\n\n\\[ATT(g,t) = E(y_{i,t}(G) - y_{i,t}(\\infty) |G_i =g)\n\\]\n\nAs in the simpler 2x2 case, however, we cannot observe the \\(y_{i,t}(\\infty)\\) after they are treated.\nWhat Callaway and Sant’Anna (2021) does is to impute this piece applyint PTA and no Anticipation.\n\\[{E(y_{i,t}(\\infty)|G_i =g)} \\approx E(y_{i,G-k}|G_i =g) + E(y_{i,t}-y_{i,G-k}| G_i \\in Control)\n\\]\nThus, the estimator for the ATT(g,t) becomes: \\[\\widehat{ATT(g,t)} = E(y_{i,t}- y_{i,G-k}|G_i =g)- E(y_{i,t}- y_{i,G-k}|G_i \\in Control)\n\\]"
+  },
+  {
+    "objectID": "adv_class/12did.html#using-good-did-designs-csdid-and-csdid2-2",
+    "href": "adv_class/12did.html#using-good-did-designs-csdid-and-csdid2-2",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Using Good DID Designs: csdid and csdid2",
+    "text": "Using Good DID Designs: csdid and csdid2\nCallaway and Sant’Anna (2021)\n\\[\\widehat{ATT(g,t)} = E(y_{i,t}- y_{i,G-k}|G_i =g)- E(y_{i,t}- y_{i,G-k}|G_i \\in Control)\\]\n\nWith no anticipation and PTA, ANY period before treatment (\\(G-k\\)) could be used to construct the ATT(g,t).\nBecause of this, it only relies on Post-treatment PTA. (Violations of PTA before treatment have no impact on the estimates)\nDepending on the analysis of interest, one could choose different “control groups”\n\nNever treated: Most common\nNot-yet-treated: Include observations that up to time \\(t\\) have not been treated.\nFor pre-treatment ATT(g,t)’s, the Not-yet treated cound include all cohorts not treated until \\(t\\) R or those not treat until \\(t\\) nor \\(g\\) Stata."
+  },
+  {
+    "objectID": "adv_class/12did.html#using-good-did-designs-csdid-and-csdid2-3",
+    "href": "adv_class/12did.html#using-good-did-designs-csdid-and-csdid2-3",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Using Good DID Designs: csdid and csdid2",
+    "text": "Using Good DID Designs: csdid and csdid2\nCallaway and Sant’Anna (2021)\n\nThis approach is relatively easy to implement. The main difficulty is keeping track of ALL the ATT(g,t)s that are estimated (and their VCV)\nHowever, once all ATT(g,t)’s are obtained, aggregation is straight forward:\n\n\\[\nAGG(ATT(g,t)) = \\frac{\\sum_{g,t \\in G\\times T}   ATT(g,t) * w_{g,t} * sel_{g,t} }\n{\\sum_{g,t \\in G\\times T} w_{g,t} * sel_{g,t} }\n\\]\n\nwhere \\(w_{g,t}\\) represents the size of cohort \\(g\\) at time \\(t\\) used in the estimation of ATT(g,t).\nand \\(sel_{g,t}\\) is an indicator for whether that ATTGT will be used in the aggregation."
+  },
+  {
+    "objectID": "adv_class/12did.html#using-good-did-designs-csdid-and-csdid2-4",
+    "href": "adv_class/12did.html#using-good-did-designs-csdid-and-csdid2-4",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Using Good DID Designs: csdid and csdid2",
+    "text": "Using Good DID Designs: csdid and csdid2\nCallaway and Sant’Anna (2021)\nTypical Aggregations:\n\nSimple: \\(sel_{g,t}=1\\) if \\(t&gt;=g\\)\nGroup/cohort: \\(sel_{g,t}=1\\) if \\(t&gt;=g\\) and \\(g=G\\)\nCalendar: \\(sel_{g,t}=1\\) if \\(t&gt;=g\\) and \\(t=T\\)\nEvent: \\(sel_{g,t}=1\\) if \\(t-g=e\\)\nCevent: \\(sel_{g,t}=1\\) if \\(t-g \\in [ll,\\dots,uu]\\)\n\nand may be possible to combine some of these restrictions\n\nAlso, because the method is based on 2x2 DID, it allows to easily implement various methodologies, including the Doubly Robust."
+  },
+  {
+    "objectID": "adv_class/12did.html#map-how-callaway_2021-relates-to-wooldridge_2021-and-borusyak2023revisiting",
+    "href": "adv_class/12did.html#map-how-callaway_2021-relates-to-wooldridge_2021-and-borusyak2023revisiting",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Map: How Callaway and Sant’Anna (2021) relates to Wooldridge (2021) and Borusyak, Jaravel, and Spiess (2023)",
+    "text": "Map: How Callaway and Sant’Anna (2021) relates to Wooldridge (2021) and Borusyak, Jaravel, and Spiess (2023)\nRelations: Simple case of no covariates\n\njwdid = did_imputation: jwdid can be applied to nonlinear models, but did_imputation is more flexible for linear models.\njwdid = did_imputation = csdid, notyet: When using the not-yet treated as control, csdid will produce the same estimates as the others if there is only 1 pretreatment period.\njwdid, never = csdid = eventinteract: If jwdid uses full interactions for pre and post treatment periods, the results will be the same as csdid or eventinteract\n\nThus the main differences across models is:\n\nHow they use “pre-treatment” information for the estimation of ATTs (long vs short)\nWhether they use only “never-treated” or “not-yet-treated” units for estimation\nAnd how are covariates treated"
+  },
+  {
+    "objectID": "adv_class/12did.html#example-2",
+    "href": "adv_class/12did.html#example-2",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Example",
+    "text": "Example\n\ncsdid is the older command, with all functions well documented (helpfile).\nHowever, it can be slow in large tasks, because of the bottle neck of using the Full Dataset for every task.\ncsdid2 works almost identically to csdid, its faster, but some functions are not yet documented (helpfile is still missing). Will use this one here\n\n\nqui:net install csdid2, from(https://friosavila.github.io/stpackages) replace\nuse http://pped.org/bacon_example.dta, clear\n\n** create Gvar: still needs csdid\negen gvar = csgvar(post), ivar(stfips) tvar(year)\n\ncsdid2 asmrs, ///\n    ivar(stfips) /// &lt;- required for panel Data. Otherwise RC\n    tvar(year)   /// &lt;- Time variable. Should be continuously (month 11, 12, 13, ...)\n    gvar(gvar)   \n** Default uses \"never treated\", and produces Long gaps.\n\nProducing Long Gaps by default\nUsing method reg\n----+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5 \n..................................................    50\n..................................................   100\n..................................................   150\n..................................................   200\n..................................................   250\n..................................................   300\n..................................................   350\n..................................\n\n\n\ncsdid2 is creating the full set of ATT(g,t) estimations for the data. But will produce no result\nTo obtain results and plotting, one must use post estimation commands:\n\n\nestat event, /// request event-type estimates\n    noavg    /// asks not to produce Averages\n    revent(-10/10) // requests to limit the output to events between -10/10\n** Its also possible to restrict to specific groups/cohorts rgroup( list of numbers)\n** or restrict to specific years rcalendar( list of numbers)\n\n------------------------------------------------------------------------------\n             | Coefficient  Std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n        tm10 |  -1.456481   6.604164    -0.22   0.825     -14.4004    11.48744\n         tm9 |  -7.234872   4.564612    -1.58   0.113    -16.18135    1.711603\n         tm8 |  -4.652236   4.995688    -0.93   0.352    -14.44361    5.139134\n         tm7 |  -6.442625   6.308106    -1.02   0.307    -18.80629    5.921036\n         tm6 |  -4.424961   4.217086    -1.05   0.294     -12.6903    3.840376\n         tm5 |  -6.785855   5.032378    -1.35   0.178    -16.64913    3.077424\n         tm4 |  -1.428164   3.663803    -0.39   0.697    -8.609087    5.752758\n         tm3 |  -2.313338    3.60909    -0.64   0.522    -9.387025    4.760349\n         tm2 |  -.8035454   3.215177    -0.25   0.803    -7.105177    5.498086\n         tp0 |  -.7577979   2.763696    -0.27   0.784    -6.174542    4.658946\n         tp1 |  -2.687627   3.036269    -0.89   0.376    -8.638605     3.26335\n         tp2 |  -3.590762   4.207388    -0.85   0.393    -11.83709    4.655566\n         tp3 |  -3.341711   2.549732    -1.31   0.190    -8.339094    1.655672\n         tp4 |  -4.882915   2.892191    -1.69   0.091    -10.55151    .7856753\n         tp5 |  -6.205122   2.776364    -2.23   0.025     -11.6467   -.7635485\n         tp6 |  -6.301267    3.82955    -1.65   0.100    -13.80705    1.204514\n         tp7 |  -10.83263     3.3192    -3.26   0.001    -17.33814   -4.327119\n         tp8 |  -9.945774   3.590409    -2.77   0.006    -16.98285   -2.908703\n         tp9 |  -9.285554    3.65841    -2.54   0.011    -16.45591   -2.115202\n        tp10 |  -11.17722   3.836158    -2.91   0.004    -18.69596   -3.658494\n------------------------------------------------------------------------------\n\n\nestat plot, will produce a figure from the last estimation\n\nestat plot, xsize(10) ysize(8)\ngraph export figev.png, replace width(800)\n\n \nAdvantage of csdid2 over other methods. Uniform Confidence Intervals using Wildbootstrap SE."
+  },
+  {
+    "objectID": "adv_class/12did.html#conclusions",
+    "href": "adv_class/12did.html#conclusions",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Conclusions",
+    "text": "Conclusions\n\nIn this workshop I aimed to provide a brief overview of the problems with TWFE and the potential solutions.\n3 main solutions were presented:\n\nAvoid using bad controls (Borusyak, Jaravel, and Spiess (2023) and Gardner (2022))\nAllow for heterogeneity in the treatment effect. (Wooldridge (2021) and Sun and Abraham (2021))\nUse only good DID designs. (Callaway and Sant’Anna (2021))"
+  },
+  {
+    "objectID": "adv_class/12did.html#conclusions-1",
+    "href": "adv_class/12did.html#conclusions-1",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Conclusions",
+    "text": "Conclusions\n\nAll methods have their own advantages and disadvantages.\n\nis the most robust based on the assumptions, but is the least efficient because of the sample size requirements. It also allows for flexiblity of DR estimators, and ensures you use pre-treatment controls only.\n\n\nand 2) are more efficient, (more data is used), but rely strongy on Long PTA assumption.\n\n\ncan be applied in non-linear settings, using nonlinear models. But aggregations are slower to obtain.\n\n\nand 2) can also be adapted to consider -dose-response- effects. As well as Treatment Reversals."
+  },
+  {
+    "objectID": "adv_class/12did.html#suggested-readings",
+    "href": "adv_class/12did.html#suggested-readings",
+    "title": "Diff in Diff: From 2x2 to GxT DID",
+    "section": "Suggested readings",
+    "text": "Suggested readings\n\n\nBorusyak, Kirill, Xavier Jaravel, and Jann Spiess. 2023. “Revisiting Event Study Designs: Robust and Efficient Estimation.” https://arxiv.org/abs/2108.12419.\n\n\nCaetano, Carolina, and Brantly Callaway. 2022. “Difference-in-Differences with Time-Varying Covariates in the Parallel Trends Assumption.” https://doi.org/10.48550/ARXIV.2202.02903.\n\n\nCallaway, Brantly, and Pedro H. C. Sant’Anna. 2021. “Difference-in-Differences with Multiple Time Periods.” Journal of Econometrics, Themed Issue: Treatment Effect 1, 225 (2): 200–230. https://doi.org/10.1016/j.jeconom.2020.12.001.\n\n\nChaisemartin, Clément de, and Xavier D’Haultfœuille. 2020. “Two-Way Fixed Effects Estimators with Heterogeneous Treatment Effects.” American Economic Review 110 (9): 2964–96. https://doi.org/10.1257/aer.20181169.\n\n\n———. 2023. “Two-Way Fixed Effects and Differences-in-Differences with Heterogeneous Treatment Effects: A Survey.” The Econometrics Journal 26 (3): C1–30. https://doi.org/10.1093/ectj/utac017.\n\n\nGardner, John. 2022. “Two-Stage Differences in Differences.” https://arxiv.org/abs/2207.05943.\n\n\nGoodman-Bacon, Andrew. 2021. “Difference-in-Differences with Variation in Treatment Timing.” Journal of Econometrics 225 (2): 254–77. https://doi.org/https://doi.org/10.1016/j.jeconom.2021.03.014.\n\n\nRoth, Jonathan, Pedro H. C. Sant’Anna, Alyssa Bilinski, and John Poe. 2023. “What’s Trending in Difference-in-Differences? A Synthesis of the Recent Econometrics Literature.” Journal of Econometrics 235 (2): 2218–44. https://doi.org/10.1016/j.jeconom.2023.03.008.\n\n\nSant’Anna, Pedro H. C., and Jun Zhao. 2020. “Doubly Robust Difference-in-Differences Estimators.” Journal of Econometrics 219 (1): 101–22. https://doi.org/10.1016/j.jeconom.2020.06.003.\n\n\nSun, Liyang, and Sarah Abraham. 2021. “Estimating Dynamic Treatment Effects in Event Studies with Heterogeneous Treatment Effects.” Journal of Econometrics, Themed Issue: Treatment Effect 1, 225 (2): 175–99. https://doi.org/10.1016/j.jeconom.2020.09.006.\n\n\nWooldridge, Jeffrey M. 2021. “Two-Way Fixed Effects, the Two-Way Mundlak Regression, and Difference-in-Differences Estimators.” SSRN Journal. https://doi.org/10.2139/ssrn.3906345.\n\n\n———. 2023. “Simple Approaches to Nonlinear Difference-in-Differences with Panel Data.” The Econometrics Journal 26 (3): C31–66. https://doi.org/10.1093/ectj/utad016."
   }
 ]

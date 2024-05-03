@@ -1,751 +1,1964 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
-<meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
-<title>Econometrics MSC Levy</title>
-<style>
-code{white-space: pre-wrap;}
-span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
-div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-ul.task-list{list-style: none;}
-ul.task-list li input[type="checkbox"] {
-  width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
-  vertical-align: middle;
-}
-</style>
-
-
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js"></script>
+<html lang="en"><head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
-  "copy-button": false,
-  "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
-  "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.4.554">
+
+  <meta name="author" content="Fernando Rios-Avila">
+  <title>Econometrics MSC Levy - Diff in Diff: From 2x2 to GxT DID</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css">
+  <link rel="stylesheet" href="styles.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
   }
-}</script>
 
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
 
-<link rel="stylesheet" href="../styles.css">
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+  
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
 
-<body class="nav-sidebar docked nav-fixed">
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Diff in Diff: From 2x2 to GxT DID</h1>
+  <p class="subtitle">Advances, Problems and Solutions</p>
 
-<div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">Econometrics MSC Levy</span>
-    </a>
-  </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
-<span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../resources.html"> 
-<span class="menu-text">Resources</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../about.html"> 
-<span class="menu-text">About</span></a>
-  </li>  
-</ul>
-          </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Fernando Rios-Avila 
 </div>
-      </div> <!-- /container-fluid -->
-    </nav>
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
-      </button>
+        <p class="quarto-title-affiliation">
+            Levy Economics Institute of Bard College
+          </p>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
-<!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-        <div class="mt-2 flex-shrink-0 align-items-center">
-        <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
-        </div>
-        </div>
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Courses</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../adv_class/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Advance Econometrics: Causal Effects</span></a>
-  </div>
+</div>
+
+</section>
+<section id="why-differences-in-diffences" class="slide level2">
+<h2>Why differences in diffences?</h2>
+<ul>
+<li><p>Differences-in-Differences (DID) is one of the most popular tools in applied economics for analyzing causal effects of an intervention or policy treatment.</p></li>
+<li><p>Under reasonable assumptions, DID allows you to identify these effects by comparing changes in the treatment group with changes in the control group.</p>
+<ul>
+<li>This method of identification even allows for controlling for self-selection in the treatment.</li>
+</ul></li>
+<li><p>In recent years, several advances in DID have been developed, revealing issues with the traditional DID design, particularly with the application of TWFE.</p></li>
+<li><p>Today, I will briefly present the problems and solutions that have been proposed, and how they are implemented in <code>Stata</code>.</p></li>
+<li><p>So lets Start with the basics: 2x2 DID</p></li>
+</ul>
+</section>
+<section id="x2-did-cannonic-design" class="slide level2">
+<h2>2x2 DID: Cannonic Design</h2>
+<ul>
+<li>In the 2x2 DID design, we have 2 groups:
+<ul>
+<li>Control (<span class="math inline">\(D=1\)</span>) y treated (<span class="math inline">\(D=0\)</span>),</li>
+</ul></li>
+<li>Which are observed for two periods of time:
+<ul>
+<li>Before (<span class="math inline">\(T=0\)</span>) and after (<span class="math inline">\(T=1\)</span>) the treatment.</li>
+</ul></li>
+<li>For all groups and periods of time, we observe the <em>realized</em> outcome <span class="math inline">\(Y\)</span>, but cannot observe all <em>potential</em> outcomes.</li>
+<li>This setup is valid both for panel data and repeat cross-sections, but will focus on panel data.</li>
+</ul>
+</section>
+<section id="potential-outcomes-and-treatment-effects" class="slide level2">
+<h2>Potential outcomes and Treatment Effects</h2>
+<ul>
+<li><p><strong>Potential outcomes</strong> are the outcomes we would observe for each observation in the data if it were assigned to either the treatement or control group.</p>
+<ul>
+<li><span class="math inline">\(Y_{i,t}(D=0)\)</span>: Potential outcome for individual <span class="math inline">\(i\)</span> at time <span class="math inline">\(t\)</span> if he was never treated.</li>
+<li><span class="math inline">\(Y_{j,s}(D=1)\)</span>: Potential outcome for individual <span class="math inline">\(j\)</span> at time <span class="math inline">\(s\)</span> if he was treated.</li>
+</ul></li>
+<li><p>However, we are only able to observe one of this outcomes: <span class="math display">\[Y_{i,t} = Y_{i,t}(1)D_i + Y_{i,t}(0)(1-D_i)\]</span></p></li>
+<li><p>Where <span class="math inline">\(D_i\)</span> is a dummy indicates the effective treatment status of individual <span class="math inline">\(i\)</span>.</p></li>
+<li><p>Now, we are interested in Treatment Effects for <span class="math inline">\(i\)</span>, or any summary measures, after the treatment is applied:</p></li>
+</ul>
+<p><span class="math display">\[TE = Y_{i,1}(1)-Y_{i,1}(0) \text{ or } ATT =E(Y_{i,1}(1)-Y_{i,1}(0)|D=1)\]</span></p>
+</section>
+<section id="the-did-estimator-assumptions" class="slide level2">
+<h2>The DID Estimator: Assumptions</h2>
+<ul>
+<li>Because we can’t observe both potential outcomes, we need to make assumptions to identify the treatment effect.</li>
+</ul>
+<ol type="1">
+<li><p><strong>Stable Unit Treatment Value Assumption (SUTVA)</strong>: The treatment status of one unit does not affect the potential outcomes of other units. (No spillovers)</p></li>
+<li><p><strong>Parallel Trends</strong>: In the absence of treatment, in average, both groups would have followed the same trend (changes) over time.</p></li>
+</ol>
+<p><span class="math display">\[\color{blue}{E(Y_{i,1}(0) - Y_{i,0}(0)|D_i=1)} = \color{green}{E(Y_{i,1}(0)-Y_{i,0}(0)|D_i=0)}\]</span></p>
+<ol start="3" type="1">
+<li><strong>No Anticipation</strong>: Before the treatment takes place (<span class="math inline">\(T=0\)</span>), the potential outcomes do not depend on the treatment status.</li>
+</ol>
+<p><span class="math display">\[Y_{i,0}(0) = Y_{i,0}(1)\]</span></p>
+</section>
+<section id="the-did-estimator" class="slide level2">
+<h2>The DID Estimator</h2>
+<ul>
+<li><p>Lets take a second look at the ATT definition: <span class="math display">\[\begin{aligned}
+ATT &amp;=E(Y_{i,1}(1)|D=1)-\color{red}{E(Y_{i,1}(0)|D=1)} \\
+&amp;=E(Y_{i,1}|D=1)-\color{red}{E(Y_{i,1}(0)|D=1)}
+\end{aligned}
+\]</span></p></li>
+<li><p>The problem is to estimate the <strong>red</strong> component, to obtain an estimator for the ATT.</p></li>
+<li><p>However, under the PTA and No Anticipation, the observed part can be written as: <span class="math display">\[E(Y_{i,1}(0)|D=1) = E(Y_{i,1}-Y_{i,0}|D=0) + E(Y_{i,0}|D=1)
+\]</span></p></li>
+<li><p>Which gives the usual ATT estimator:</p></li>
+</ul>
+<p><span class="math display">\[ATT =\underbrace{E(Y_{i,1} - Y_{i,0}|D=1)}_{\Delta treat} - \underbrace{E(Y_{i,1}-Y_{i,0}|D=0)}_{\Delta control}\]</span></p>
+</section>
+<section id="graphically" class="slide level2">
+<h2>Graphically</h2>
+<div id="b1e351f6" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display">
+<style>div.jp-Notebook .datagrid-container {min-height: 448px; }</style>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>checking did_imputation consistency and verifying not already installed...
+installing into C:\Users\Fernando\ado\plus\...
+installation complete.</code></pre>
+</div>
+</div>
+
+<img data-src="12did_files/figure-revealjs/cell-3-output-2.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="how-to-estimate-it" class="slide level2">
+<h2>How to estimate it?</h2>
+<ul>
+<li><strong>Difference-in-Means</strong>:</li>
+</ul>
+<p><span class="math display">\[\widehat{ATT}=\bar Y^{D=1,T=1} - \bar Y^{D=1,T=0} - [ \bar Y^{D=0,T=1} - \bar Y^{D=0,T=0} ]\]</span></p>
+<ul>
+<li><strong>Regression</strong>:</li>
+</ul>
+<p><span class="math display">\[Y_{i,t} = \beta_0 + \beta_1 D_i + \beta_2 t + \beta_3 (D_i \times t) + \epsilon_{i,t}\]</span></p>
+<ul>
+<li>With Panel Data: <strong>Fixed Effects</strong></li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+Y_{i,t} &amp;= \beta_0 + \sum \delta_i  + \beta_2 t + \beta_3 (D_i \times t) + \epsilon_{i,t} \\
+\Delta Y_{i} &amp;= \beta_2 + \beta_3 D_i + \epsilon_{i} \text{ for } t=0 \\
+\end{aligned}
+\]</span></p>
+</section>
+<section id="extension-adding-controls" class="slide level2">
+<h2>Extension: Adding Controls</h2>
+<ul>
+<li>The DID estimator presented above relies on Unconditional Parallel Trends. It may work if both control and treated groups are similar in all aspects, except for the treatment. But they may not.</li>
+<li>In this case, we can add controls to the model, to account for differences in the groups.</li>
+</ul>
+<p><span class="math display">\[Y_{i,t} = \beta_0 + \beta_1 D_i + \beta_2 t + \beta_3 (D_i \times t) +  X_{it} \gamma + \epsilon_{i,t}\]</span></p>
+<ul>
+<li>But this would be wrong. Why?</li>
+</ul>
+</section>
+<section id="problems-of-adding-controls" class="slide level2">
+<h2>Problems of Adding Controls</h2>
+<ul>
+<li>Simply adding controls imposes assumption of homogenous treatement effects. As described in <span class="citation" data-cites="santanna_doubly_2020">Sant’Anna and Zhao (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2020</a>)</span>, <span class="math inline">\(\gamma\)</span> may not be the same as the ATT.
+<ul>
+<li>Solution: Interactions between controls and all group\time dummies: <span class="math display">\[y_{i,t} = \beta_0 + \sum \delta_i  + \beta_2 t + \beta_3 (D_i \times t) +  X_{it} \gamma + \sum \gamma_x (X-\bar X_{D\times T})*D*T + \epsilon_{i,t}\]</span></li>
+</ul></li>
+<li>Controlling for time varying variables may introduce biases (bad controls)
+<ul>
+<li>Solution: use only pre-treatment variables as controls. (panel) or variables that should not be affected by the treatment (cross-sections)</li>
+<li>Also: If using Panel Data, one can add as controls all variables history. (see for example <span class="citation" data-cites="caetano_difference_2022">Caetano and Callaway (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2022</a>)</span>)</li>
+</ul></li>
+</ul>
+</section>
+<section id="potential-solution-santanna_doubly_2020" class="slide level2">
+<h2>Potential Solution: <span class="citation" data-cites="santanna_doubly_2020">Sant’Anna and Zhao (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2020</a>)</span></h2>
+<ul>
+<li><p>DID is a straighforward estimator, that relies strongly on the Unconditional Parallel Trends Assumption. (UPTA)</p></li>
+<li><p>One solution to the problem is to use the <strong>Conditional Parallel Trends Assumption</strong> (CPTA), which can be less restrictive.</p></li>
+<li><p>This states that PTA holds, only after conditioning on a set of variables <span class="math inline">\(X\)</span>. (looking at subgroups).</p></li>
+</ul>
+<p><span class="math display">\[\color{blue}{E(Y_{i,1}(0) - Y_{i,0}(0)|D_i=1,X)} = \color{green}{E(Y_{i,1}(0)-Y_{i,0}(0)|D_i=0,X)}\]</span></p>
+<ul>
+<li>So, if you can “control” for individual characteristics, you could estimate the treatment effect, and still report Average Treatment Effects for the population.</li>
+</ul>
+<p><span class="math display">\[ATT = E\big[ [E(Y_{i,1}(0) - Y_{i,0}(0)|D_i=1,X ] \big]\]</span></p>
+</section>
+<section id="added-assumption" class="slide level2">
+<h2>Added Assumption</h2>
+<ul>
+<li><p>When accouting for covariates, one needs to add an additional assumption to the data:</p></li>
+<li><p>There is an overlap in the distribution of <span class="math inline">\(X\)</span> between the treated and control groups. (common support)</p></li>
+</ul>
+<p><span class="math display">\[0 &lt;&lt; Pr(D=1|X) &lt;&lt; 1\]</span></p>
+<ul>
+<li>This is important, because if there is no overlap, the treatment effect cannot be identified for all groups, and may create distorted estimates.</li>
+</ul>
+</section>
+<section id="potential-solution-drdid-teffects" class="slide level2">
+<h2>Potential Solution: <code>drdid</code>, <code>teffects</code></h2>
+<ul>
+<li><span class="citation" data-cites="santanna_doubly_2020">Sant’Anna and Zhao (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2020</a>)</span> propose various alternatives to estimate the treatment effect with controls, under CPTA. They contrast the implementation of methods that use linear regressions, Inverse Probability Weighting (IPW) and Doubly Robust Estimators (DR).</li>
+<li>Similar estimates could be obtained using <code>teffects</code> in Stata.</li>
+<li>But how does this work? Two Cases:
+<ul>
+<li>Panel Data: This simplifies the problem, because we can use the Data structure to estimate the model.</li>
+<li>Crossection: This is more complicated because requires careful consideration of idenfication assumptions, and groups of interest.</li>
+</ul></li>
+</ul>
+</section>
+<section id="panel-data" class="slide level2">
+<h2>Panel Data</h2>
+<ul>
+<li>Step 1: Estimate the changes in the outcome <span class="math inline">\(\Delta Y_i = Y_{i,1} - Y_{i,0}\)</span>. (the First D)
+<ul>
+<li>Because of this, we are implicitly reducing our sample size: from <span class="math inline">\(N\)</span> to <span class="math inline">\(N/2\)</span> (because of the unestimated fixed effects)</li>
+</ul></li>
+<li>Step 2: Estimate the treatment effect:
+<ul>
+<li>Simplest case, no controls: <span class="math display">\[\Delta Y_i = \beta_0 + \beta_1 D_i + \varepsilon_i\]</span></li>
+</ul></li>
+<li>In other words, the model is now a simple linear regression, with 1 period.</li>
+</ul>
+</section>
+<section id="panel-data-adding-controls" class="slide level2">
+<h2>Panel Data: Adding controls</h2>
+<ul>
+<li>Because you have now only 1 period, and two groups. All treatment effect estimators can be used.
+<ul>
+<li>regression outcome, IPW, doubly robust, matching, etc.</li>
+<li>We use them to estimate the second D of DID</li>
+</ul></li>
+<li>Empirically: With Transformed data (<span class="math inline">\(\Delta y\)</span>) as dependent variable, any of the methods in <code>teffects</code> can be used to estimate the treatment effect.</li>
+<li>With untransformed data (RC), you can use <code>drdid</code> to estimate the treatment effect, and their Standard errors.
+<ul>
+<li>You need to make sure you have only 2 periods of data.</li>
+</ul></li>
+</ul>
+</section>
+<section id="panel-data-methods" class="slide level2">
+<h2>Panel Data: Methods</h2>
+<ul>
+<li><strong>Regression</strong>: reg (<code>drdid</code>) or ra (<code>teffects</code>)
+<ul>
+<li>using <span class="math inline">\(\Delta y\)</span> as dependent variable, estimate a linear model with covariates (No FE) for the untreated, and predict outcomes. This would become your “Potential outcome change under no-treatment”</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[ ATT = E(\Delta Y_{i}|D=1) - E({\hat\gamma X|D=1})\]</span></p>
+<ul>
+<li><strong>Inverse Probability Weighting</strong>: stdipw (<code>drdid</code>) or ipw (<code>teffects</code>)
+<ul>
+<li>Estimate the likelihood of being treated, and use it to identify a propensity score and IPW weights <span class="math inline">\(p(D=1|X) = \hat p(X)\)</span></li>
+</ul></li>
+</ul>
+<p><span class="math display">\[ ATT = E(\Delta Y_{i}|D=1) - E\left({\Delta Y_{i} \frac{p(X)}{1-p(X)}|D=0}\right)\]</span></p>
+</section>
+<section id="panel-data-methods-1" class="slide level2">
+<h2>Panel Data: Methods</h2>
+<ul>
+<li><strong>Doubly Robust Estimation</strong>: dript and dripw (<code>drdid</code>) or ipwra aipw (<code>teffects</code>)
+<ul>
+<li>Estimate the likelihood of being treated, and use it to identify a propensity score and IPW weights <span class="math inline">\(p(D=1|X) = \hat p(X)\)</span></li>
+<li>Estimate a weighted regression with <span class="math inline">\(\Delta y\)</span> as dependent variable or estimate a weighted regression correction. (see <a href="https://friosavila.github.io/app_metrics/app_metrics2.html">here</a> slide 17-18) for more details.</li>
+<li>Combinations of modeling outcome and modeling likelihood and pscores makes the estimator doubly robust.</li>
+</ul></li>
+<li>For Repeated crossection, the math becomes more complicated to follow and identify the “group of interest”<br>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../rmethods/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Research Methods: Econometrics I</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../rmethods2/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Research Methods II</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
- <span class="menu-text">Math Refresher</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../mathref/math_1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Math Refresher: Basic Calculus</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../mathref/math_2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Math Refresher: Basic Linear Algebra</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../mathref/math_3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Math Refresher: Basic Statistics and Probability</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-    </ul>
+<li>See <a href="https://friosavila.github.io/app_metrics/app_metrics2.html">here</a> slide 53-54 for more details.</li>
+</ul>
+</section>
+<section id="example" class="slide level2 scrollable">
+<h2>Example</h2>
+<p>Some Data Preparation</p>
+<div id="1c3e87c5" class="cell larger" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a><span class="kw">qui</span>:frause lalonde, <span class="kw">clear</span></span>
+<span id="cb3-2"><a></a><span class="kw">keep</span>  <span class="kw">if</span> treated==0 | <span class="kw">sample</span>==2</span>
+<span id="cb3-3"><a></a><span class="kw">bysort</span> id (<span class="fu">year</span>):<span class="kw">gen</span> dy = re[2]-re[1]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(5,574 observations deleted)</code></pre>
+</div>
+</div>
+<p>Using <code>teffects</code>:</p>
+<div id="0372cbe2" class="cell larger" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a></a>teffects ra (dy educ <span class="bn">black</span> married nodegree hisp re74) (experimental) <span class="kw">if</span> <span class="fu">year</span>==1975 , atet</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Iteration 0:   EE criterion =  2.891e-23  
+Iteration 1:   EE criterion =  6.094e-26  
+
+Treatment-effects estimation                    Number of obs     =     16,417
+Estimator      : regression adjustment
+Outcome model  : linear
+Treatment model: none
+------------------------------------------------------------------------------
+             |               Robust
+          dy | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ATET         |
+experimental |
+   (1 vs 0)  |  -1055.483   346.1459    -3.05   0.002    -1733.917   -377.0497
+-------------+----------------------------------------------------------------
+POmean       |
+experimental |
+          0  |   3118.849   185.0719    16.85   0.000     2756.114    3481.583
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>Using <code>drdid</code>:</p>
+<div id="1231026b" class="cell larger" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a></a>drdid re educ <span class="bn">black</span> married nodegree hisp re74 , ivar(id) time(<span class="fu">year</span>) tr(experimental) <span class="kw">reg</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Doubly robust difference-in-differences                 Number of obs = 32,834
+Outcome model  : regression adjustment
+Treatment model: none
+------------------------------------------------------------------------------
+             | Coefficient  Std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ATET         |
+experimental |
+   (1 vs 0)  |  -1055.483   346.1451    -3.05   0.002    -1733.915   -377.0511
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>by hand:</p>
+<div id="181610a8" class="cell larger" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> dy educ <span class="bn">black</span> married nodegree hisp re74 <span class="kw">if</span> exper==0</span>
+<span id="cb9-2"><a></a><span class="kw">predict</span> dy_hat, <span class="kw">xb</span></span>
+<span id="cb9-3"><a></a><span class="kw">gen</span> att_i = dy-dy_hat</span>
+<span id="cb9-4"><a></a><span class="kw">tabstat</span> att_i, <span class="kw">by</span>(exper) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Summary for variables: att_i
+Group variable: experimental 
+
+experimental |      Mean
+-------------+----------
+           0 | -9.61e-06
+           1 | -1055.483
+-------------+----------
+       Total | -27.32414
+------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="highlights-i-identification" class="slide level2">
+<h2>Highlights I: Identification</h2>
+<ul>
+<li>The identification relies on the non-anticipation assumption and the parallel trends assumption.
+<ul>
+<li>Neither of these assumptions can be tested, but they can be supported by the data.</li>
+</ul></li>
+<li>For Implementation, If one has panel data, <code>teffects</code> and <code>drdid</code> can be used to estimate the treatment effect, and their standard errors. (after preparing the data)</li>
+<li>Otherwise, <code>drdid</code> can be used for repeated crossection as well. (or GMM)</li>
+</ul>
+</section>
+<section id="highlighs-ii-overlapping" class="slide level2">
+<h2>Highlighs II: Overlapping</h2>
+<ul>
+<li>The <strong>overlapping</strong> assumption is important, and has different implications for the different methods.</li>
+<li>When the estimation method is <code>reg</code> or <code>ra</code>, the overlapping assumption is less biding, because the model is extrapolates to created “potential outcomes” for the treated group.
+<ul>
+<li>However, extrapolation may not be accurate, or create incorrect extrapolations (base category dummies)</li>
+</ul></li>
+<li>With doubly robust methods, the overlapping assumption is more relevant. <code>dript</code> is particularly sensitive to this assumption, and may not even converge if there is weak overlap.</li>
+<li>For most practical purposes, <code>dripw</code> may be the most stable, and preferred method.</li>
+</ul>
+</section>
+<section id="highlighs-iii-controls" class="slide level2">
+<h2>Highlighs III: Controls</h2>
+<ul>
+<li>With panel data, <code>drdid</code> automatically constrains model specification to use pre-treatment information only.
+<ul>
+<li>Added work is required to include post-treatment information.</li>
+</ul></li>
+<li>With Repeated crossection, <code>drdid</code> would use both pre-treatment and post-treatment information.</li>
+</ul>
+</section>
+<section>
+<section id="from-2x2-to-gxt-did" class="title-slide slide level1 center">
+<h1>From 2x2 to GxT DID</h1>
+
+</section>
+<section id="how-gxt-did-was-suppoused-to-work" class="slide level2">
+<h2>How GxT DID was suppoused to work</h2>
+<ul>
+<li><p>While the 2x2 DID design is simple to understand, it does not reflect the type of information that is available in most cases. (G&gt;2 and T&gt;2)</p></li>
+<li><p>Until few years ago, when this kind of data was available, the standard approach was to use a generalized DID design, which extended the use of Fixed Effects:</p></li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned}
+2\times2: Y_{i,t} &amp;= \beta_0 + \beta_1 T  + \beta_2 D_i + \beta_3 (D_i \times T) + \epsilon_{i,t} \\
+G\times T: Y_{i,t} &amp;= \sum \gamma_t + \sum \delta_i  + \theta^{fe} PT_{i,t} + \epsilon_{i,t} \\
+\end{aligned}
+\]</span></p>
+<p>where <span class="math inline">\(PT_{i,t}\)</span> assume the value of 1 for the treated group After the treatment is applied, and 0 otherwise, and <span class="math inline">\(\theta^{fe}\)</span> representing the treatment effect.</p>
+<ul>
+<li>Little that we know that this approach only works if the treatment effect is homogeneous across all groups and periods.</li>
+</ul>
+</section>
+<section id="why-it-doesnt-work" class="slide level2">
+<h2>Why it doesn’t work?</h2>
+<p>There are at least two-ways that have been used to explain why the Standard TWFE does not work:</p>
+<ul>
+<li><p><strong>The “Bad Controls” Problem</strong>: <span class="citation" data-cites="goodmanbacon2021">Goodman-Bacon (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span> shows that the TWFE estimator for ATT is a kind of weighted average of all possible DID one could estimate. Some of these would not be <strong>good</strong> DID designs.</p></li>
+<li><p><strong>Negative Weights</strong>: <span class="citation" data-cites="dechaisemartin2020">Chaisemartin and D’Haultfœuille (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2020</a>)</span> and <span class="citation" data-cites="borusyak2023revisiting">Borusyak, Jaravel, and Spiess (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2023</a>)</span> show that because TWFE ATT estimator is a weighted average of all group-Specific ATT, some may include negative weights.</p>
+<p>This may produce negative ATT even if all group-specific ATT are positive.</p></li>
+<li><p>However, when the treatment effect is homogeneous, Neither of these situations would be a problem.</p></li>
+</ul>
+</section>
+<section id="the-bad-controls-problem" class="slide level2">
+<h2>The “Bad Controls” Problem</h2>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">All Cases</a></li><li><a href="#tabset-1-2">Early Treated vs Later Treated (Good)</a></li><li><a href="#tabset-1-3">Early Treated vs Later Treated (bad)</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<p><img data-src="fig1.png" style="height:50.0%"></p>
+</div>
+<div id="tabset-1-2">
+<p><img data-src="fig2.png"></p>
+</div>
+<div id="tabset-1-3">
+<p><img data-src="fig3.png"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="the-bad-controls-problem-1" class="slide level2">
+<h2>The “Bad Controls” Problem</h2>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">All Cases</a></li><li><a href="#tabset-2-2">Early Treated vs Later Treated (Good)</a></li><li><a href="#tabset-2-3">Early Treated vs Later Treated (bad)</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
+<p><img data-src="fig1b.png"></p>
+</div>
+<div id="tabset-2-2">
+<p><img data-src="fig2b.png"></p>
+</div>
+<div id="tabset-2-3">
+<p><img data-src="fig3b.png"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="negative-weights" class="slide level2">
+<h2>Negative Weights</h2>
+<ul>
+<li>To understand the idea of Negative Weights, lets consider the following example:</li>
+</ul>
+<p><span class="math display">\[Y_{i,t} = \sum \delta_i + \sum \gamma_t  + \theta PT + \epsilon_{i,t}\]</span></p>
+<p>If the panel data is balanced, and we apply FWL, we can use partialling out the Fixed Effects:</p>
+<p><span class="math display">\[\widetilde{PT}_{it}=PT_{it}-\overline{PT}_{i}-\overline{PT}_{t}+\overline{PT}\]</span></p>
+<p>and estimate <span class="math inline">\(\theta^{fe}\)</span> as:</p>
+<p><span class="math display">\[\hat\theta^{fe} = \frac{\sum \widetilde{PT_{it}} Y_{it}}{\sum \widetilde{PT}_{it}^2}
+= w_{it} Y_{it}
+\]</span></p>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+<p><span class="math display">\[\widetilde{PT}_{it}=PT_{it}-\overline{PT}_{i}-\overline{PT}_{t}+\overline{PT}\]</span></p>
+<ul>
+<li><span class="math inline">\(\overline{PT}_{i}\)</span> is the share of periods a unit is observed to be treated. (larger for early treated)</li>
+<li><span class="math inline">\(\overline{PT}_{t}\)</span> is the share of units treated at time <span class="math inline">\(t\)</span>. (increasing)</li>
+<li><span class="math inline">\(\overline{PT}\)</span> Share of treated “unit-periods”</li>
+</ul>
+<p>Thus,</p>
+<ul>
+<li>Units that are treated early, (high <span class="math inline">\(\overline{PT}_{i}\)</span>)</li>
+<li>but are analyzed at later periods (<span class="math inline">\(\overline{PT}_{t}\)</span> increasing in <span class="math inline">\(t\)</span>)</li>
+</ul>
+<p>Will be more likely to have a negative weight <span class="math inline">\(w_{it}\)</span>, thus contaminating the ATT estimate.</p>
+</section>
+<section id="graphically-1" class="slide level2">
+<h2>Graphically</h2>
+
+<img data-src="12did_files/figure-revealjs/cell-11-output-1.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="summarizing-the-problem" class="slide level2">
+<h2>Summarizing the Problem</h2>
+<ul>
+<li>Both Negative Weights and Bad Controls are capturing the same problem.</li>
+</ul>
+<ol type="1">
+<li><p>By using already treated units as controls (bad controls), we are implicitly applying negative weights to units that are already treated.</p></li>
+<li><p>This would not be a problem on its own, if the treatment effect is homogeneous across all groups and periods.</p></li>
+<li><p>However, if the treatment effect is heterogeneous, Parallel Trends between already treated and late treated units may not hold.</p></li>
+</ol>
+</section>
+<section id="gxt-did-generalized-did" class="slide level2">
+<h2>GxT DID: Generalized DID</h2>
+<h3 id="setup">Setup</h3>
+<ul>
+<li>In the Generalized DID
+<ul>
+<li>One has access to multiple periods of data: <span class="math inline">\(t = 1,2,...,T\)</span>.</li>
+<li>And units can be treated at any point before, during or after the available Data <span class="math inline">\(G = -k,..1,2,..,T+l\)</span>.
+<ul>
+<li>This is the cohort or group.</li>
+</ul></li>
+<li>We also assume that once a unit is treated, it remains treated. (no reversals/no cohort-change)</li>
+</ul></li>
+<li>From our perspective, units treated <strong>at or before</strong> <span class="math inline">\(t=1\)</span> will be considered as <strong>Allways treated</strong>.
+<ul>
+<li>This units cannot be used for analysis.</li>
+</ul></li>
+<li>For any practical purpose, if we do not observe a unit being treated in the window of time observed, we assume its <strong>Never Treated</strong>.
+<ul>
+<li>For Notation we say these units belong to <span class="math inline">\(g=\infty\)</span> (or that they could be treated at some point in the far future)</li>
+</ul></li>
+</ul>
+</section>
+<section id="gxt-did-generalized-did-1" class="slide level2">
+<h2>GxT DID: Generalized DID</h2>
+<h3 id="potential-outcomes">Potential Outcomes</h3>
+<ul>
+<li>In contrast with previous setup, with the GDID, we believe observations have multiple potential outcomes, for each period of time.
+<ul>
+<li><span class="math inline">\(Y_{i,t}(G)\)</span> is the potenital outcome for individual <span class="math inline">\(i\)</span> at time <span class="math inline">\(t\)</span>, if this unit would be treated at time <span class="math inline">\(G\)</span>.</li>
+<li>Thus we state that depending on “when” a unit is treated, the potential outcomes could be different.</li>
+<li>This is what it means allowing for heterogeneity.</li>
+</ul></li>
+</ul>
+</section>
+<section id="gxt-did-generalized-did-2" class="slide level2">
+<h2>GxT DID: Generalized DID</h2>
+<h3 id="parallel-trends-assumption">Parallel Trends Assumption</h3>
+<ul>
+<li><p>PTA assumption is also slightly modified. Because we can differentiate between <strong>never-treated</strong> and <strong>not-yet-treated</strong>, one could impose those PTA assumptions.</p>
+<p>Never Treated <span class="math display">\[E(Y_{i,t}(\infty) - Y_{i,t-s}(\infty)|G=g) = E(Y_{i,t}(\infty) - Y_{i,t-s}(\infty)|G=\infty) \forall s&gt;0 \]</span></p>
+<p>Not Yet Treated</p>
+<p><span class="math display">\[E(Y_{i,t}(\infty) - Y_{i,t-s}(\infty)|G=g) = E(Y_{i,t}(\infty) - Y_{i,t-s}(\infty)|G=g') \forall s&gt;0 \]</span></p></li>
+<li><p>Which suggests PTA hold for all pre- and post-treatment periods.</p></li>
+<li><p>Some methods only rely on Post-treatment PTA.</p></li>
+</ul>
+</section>
+<section id="gxt-did-generalized-did-3" class="slide level2">
+<h2>GxT DID: Generalized DID</h2>
+<h3 id="no-anticipation">No Anticipation</h3>
+<ul>
+<li>As before, we also require no anticipation.
+<ul>
+<li>That the before treatment takes place (or is announced), the potential outcomes do not depend on the treatment status.</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[Y_{i,t}(G) = Y_{i,t}(\infty) \text{ if } t&lt;G \]</span></p>
+<ul>
+<li>Also important.
+<ul>
+<li><span class="math inline">\(E(Y_{i,t}(G)|g=G) = E(Y_{i,t}|g=G)\)</span> if <span class="math inline">\(t&gt;G\)</span></li>
+<li><span class="math inline">\(E(Y_{i,t}(\infty)|g=\infty) = E(Y_{i,t}|g=\infty)\)</span></li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="solutions" class="title-slide slide level1 center">
+<h1>Solutions</h1>
+
+</section>
+<section id="general-overview" class="slide level2">
+<h2>General Overview</h2>
+<p>The root of the problem with TWFE:</p>
+<blockquote>
+<p>If treatment effects are heterogenous, the TWFE estimator of treatment effects produces incorrect estimates because of “negative weights” or “bad controls”</p>
+</blockquote>
+<p>To solve the problem we need to do (at least) one of three things:</p>
+<ol type="1">
+<li>Avoid using bad controls (<span class="citation" data-cites="borusyak2023revisiting">Borusyak, Jaravel, and Spiess (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2023</a>)</span> and <span class="citation" data-cites="gardner2022twostage">Gardner (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2022</a>)</span>)</li>
+<li>Allow for heterogeneity in the treatment effect. (<span class="citation" data-cites="wooldridge_2021">Wooldridge (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span> and <span class="citation" data-cites="sun_estimating_2021">Sun and Abraham (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span>)</li>
+<li>Use <em>only</em> good DID designs. (<span class="citation" data-cites="callaway_2021">Callaway and Sant’Anna (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span>)</li>
+</ol>
+</section>
+<section id="avoid-using-bad-controls-did_imputation-and-did2s" class="slide level2">
+<h2>Avoid using bad controls: <code>did_imputation</code> and <code>did2s</code></h2>
+<h4 id="borusyak2023revisiting-and-gardner2022twostage"><span class="citation" data-cites="borusyak2023revisiting">Borusyak, Jaravel, and Spiess (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2023</a>)</span> and <span class="citation" data-cites="gardner2022twostage">Gardner (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2022</a>)</span></h4>
+<ul>
+<li>Both methods are based on the idea of “imputing” the missing potential outcomes <span class="math inline">\(Y_{it}(0)\)</span> for the treated group, using a method similar to the one used for 2x2 DID. A two-stage approach.</li>
+</ul>
+<ol type="1">
+<li>We know that estimating the following model would be incorrect:</li>
+</ol>
+<p><span class="math display">\[y_{it} = \delta_i + \gamma_t + \theta D_{it} + \epsilon_{it}\]</span></p>
+<ol start="2" type="1">
+<li>However, what this authors suggest is to identify <span class="math inline">\(\delta_i\)</span> and <span class="math inline">\(\gamma_t\)</span> using pre-treatment data only:</li>
+</ol>
+<p><span class="math display">\[y_{it} = \delta_i + \gamma_t + \epsilon_{it} \text{ if } t&lt;g \]</span></p>
+<p>This helps identifying the fixed effects, without any contamination. (its a model for the potential outcome of no treatment)</p>
+</section>
+<section id="avoid-using-bad-controls-did_imputation-and-did2s-1" class="slide level2">
+<h2>Avoid using bad controls: <code>did_imputation</code> and <code>did2s</code></h2>
+<h4 id="borusyak2023revisiting-and-gardner2022twostage-1"><span class="citation" data-cites="borusyak2023revisiting">Borusyak, Jaravel, and Spiess (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2023</a>)</span> and <span class="citation" data-cites="gardner2022twostage">Gardner (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2022</a>)</span></h4>
+<ol start="3" type="1">
+<li>Use the previous model to re-estimate 1:</li>
+</ol>
+<p><span class="math display">\[y_{it} = \hat \delta_i + \hat \gamma_t + \theta D_{it} + \epsilon_{it}\]</span></p>
+<ol start="4" type="1">
+<li>In fact, one could use many other specifications to identify Treatment effects, including by group, by calendar, or dynamic effects.</li>
+</ol>
+<p><span class="math display">\[y_{it} = \hat \delta_i + \hat \gamma_t + \theta D_{it}*(other Heterogeneity) + \epsilon_{it}\]</span></p>
+</section>
+<section id="avoid-using-bad-controls-did_imputation-and-did2s-2" class="slide level2">
+<h2>Avoid using bad controls: <code>did_imputation</code> and <code>did2s</code></h2>
+<h4 id="borusyak2023revisiting-and-gardner2022twostage-2"><span class="citation" data-cites="borusyak2023revisiting">Borusyak, Jaravel, and Spiess (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2023</a>)</span> and <span class="citation" data-cites="gardner2022twostage">Gardner (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2022</a>)</span></h4>
+<ul>
+<li><p>The identification of TE using the imputation method relies on the same assumptions as the traditional DID design.</p></li>
+<li><p>However, It also requires the Parallel Trends Assumption (PTA) to hold for all pre-treatment periods.</p>
+<ul>
+<li>This why how we can use pre-treatment information to predict the potential outcomes for the treated group.
+<ul>
+<li>At the extreme, one could even identify TE without access to non-treated units!</li>
+</ul></li>
+</ul></li>
+<li><p>This also means that the method is sensitive to problems with <strong>long</strong> PTA. Although it can be somewhat relaxed (based on model specification).</p></li>
+<li><p>However, its more efficient than other models because it uses all-pretreatment data for estimation.</p>
+<ul>
+<li>Data requirements are similar to the traditional DID design.</li>
+</ul></li>
+</ul>
+</section>
+<section id="example-1" class="slide level2 scrollable">
+<h2>Example</h2>
+<ul>
+<li>There are two implementations of the method in Stata: <code>did_imputation</code> and <code>did2s</code>. In addition to the original GMM estimator described in <span class="citation" data-cites="gardner2022twostage">Gardner (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2022</a>)</span>.</li>
+<li>However, the most flexible and Robust implementation is <code>did_imputation</code>.</li>
+</ul>
+<div id="2e779d1a" class="cell larger" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a></a><span class="kw">use</span> http:<span class="co">//pped.org/bacon_example.dta, clear</span></span>
+<span id="cb11-2"><a></a>**Estimate <span class="kw">model</span> <span class="kw">for</span> Pre-treatment <span class="kw">data</span></span>
+<span id="cb11-3"><a></a><span class="kw">qui</span>:reghdfe asmrs <span class="kw">if</span> <span class="kw">post</span>==0, <span class="fu">abs</span>(fe1 = stfips fe2 = <span class="fu">year</span>)</span>
+<span id="cb11-4"><a></a>** Extra polate</span>
+<span id="cb11-5"><a></a><span class="kw">bysort</span> stfips (fe1):<span class="kw">replace</span> fe1=fe1[1]</span>
+<span id="cb11-6"><a></a><span class="kw">bysort</span> <span class="fu">year</span> (fe2):<span class="kw">replace</span> fe2=fe2[1]</span>
+<span id="cb11-7"><a></a></span>
+<span id="cb11-8"><a></a>** <span class="fu">get</span> TE <span class="kw">for</span> i</span>
+<span id="cb11-9"><a></a><span class="kw">gen</span> <span class="kw">te</span> = asmrs-fe1-fe2-_b[<span class="dt">_cons</span>]</span>
+<span id="cb11-10"><a></a><span class="kw">sum</span> <span class="kw">te</span> <span class="kw">if</span> <span class="kw">post</span>==0</span>
+<span id="cb11-11"><a></a><span class="kw">sum</span> <span class="kw">te</span> <span class="kw">if</span> <span class="kw">post</span>==1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(843 real changes made)
+(1107 real changes made)
+(264 missing values generated)
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+          te |        510    2.92e-09    9.204828  -36.51952   51.26879
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+          te |        843   -5.530065    15.66787  -69.98216   48.63423</code></pre>
+</div>
+</div>
+<p>using <code>did_imputation</code>:</p>
+<div id="aeb97c19" class="cell larger" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a></a>** Gvar</span>
+<span id="cb13-2"><a></a><span class="kw">egen</span> gvar = csgvar(<span class="kw">post</span>), ivar(stfips) tvar(<span class="fu">year</span>)</span>
+<span id="cb13-3"><a></a>** event</span>
+<span id="cb13-4"><a></a><span class="kw">gen</span> event = <span class="fu">year</span> - gvar <span class="kw">if</span> gvar!=0</span>
+<span id="cb13-5"><a></a>** Gvar = . (<span class="fu">missing</span> implies never treated)</span>
+<span id="cb13-6"><a></a><span class="kw">clonevar</span> gvar2=gvar <span class="kw">if</span> gvar!=0</span>
+<span id="cb13-7"><a></a>did_imputation asmrs stfips <span class="fu">year</span> gvar2, autosample</span>
+<span id="cb13-8"><a></a>did_imputation asmrs stfips <span class="fu">year</span> gvar2, autosample horizon(1/10) pretrends(5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(165 missing values generated)
+(165 missing values generated)
+Warning: part of the sample was dropped for the following coefficients because FE could not be imputed: tau.
+
+                                                         Number of obs = 1,353
+------------------------------------------------------------------------------
+       asmrs | Coefficient  Std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         tau |  -5.530065   2.978178    -1.86   0.063    -11.36719    .3070564
+------------------------------------------------------------------------------
+Warning: part of the sample was dropped for the following coefficients because FE could not be imputed: tau1 tau2 tau3 tau4 tau5 tau6 tau7 tau8 tau9 tau10.
+
+                                                           Number of obs = 870
+------------------------------------------------------------------------------
+       asmrs | Coefficient  Std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        tau1 |   .1501093   1.857768     0.08   0.936     -3.49105    3.791268
+        tau2 |   1.089884    2.60167     0.42   0.675    -4.009296    6.189064
+        tau3 |    1.02914   2.788825     0.37   0.712    -4.436857    6.495136
+        tau4 |   .3781413   2.549497     0.15   0.882     -4.61878    5.375063
+        tau5 |  -1.302828   2.063713    -0.63   0.528    -5.347632    2.741976
+        tau6 |  -1.137572    3.37171    -0.34   0.736    -7.746001    5.470858
+        tau7 |  -5.499892   2.053929    -2.68   0.007    -9.525519   -1.474265
+        tau8 |  -4.864576   3.374892    -1.44   0.149    -11.47924     1.75009
+        tau9 |  -4.645944   2.361134    -1.97   0.049    -9.273682   -.0182059
+       tau10 |  -6.772627   3.287879    -2.06   0.039    -13.21675   -.3285015
+        pre1 |   1.556381   3.521476     0.44   0.659    -5.345585    8.458346
+        pre2 |   1.200269   2.633824     0.46   0.649     -3.96193    6.362469
+        pre3 |  -.4639667   2.213583    -0.21   0.834     -4.80251    3.874576
+        pre4 |   1.921326   1.947613     0.99   0.324    -1.895926    5.738579
+        pre5 |  -1.315265   1.905243    -0.69   0.490    -5.049472    2.418942
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="allow-for-heterogeneity-jwdid-and-eventstudyinteract" class="slide level2">
+<h2>Allow for Heterogeneity: <code>jwdid</code> and <code>eventstudyinteract</code></h2>
+<h4 id="wooldridge_2021-and-sun_estimating_2021"><span class="citation" data-cites="wooldridge_2021">Wooldridge (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span> and <span class="citation" data-cites="sun_estimating_2021">Sun and Abraham (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span></h4>
+<ul>
+<li><p>The work by <span class="citation" data-cites="wooldridge_2021">Wooldridge (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span> suggested that the GDID-TWFE estimator was not a problem perse.</p></li>
+<li><p>The problem was that the GDID-TWFE estimator was simply misspecified.</p></li>
+<li><p>Instead of modeling: <span class="math display">\[Y_{i,t} = \delta_i + \gamma_t  + \theta^{fe} PT_{i,t} + \epsilon_{i,t}\]</span></p></li>
+<li><p>One should allow for a full set of interactions between the group and time dummies:</p></li>
+</ul>
+<p><span class="math display">\[Y_{i,t} = \delta_i + \gamma_t  + \sum_{g=2}^T \sum_{t=g}^T \theta_{g,t} \mathbb{1}(G=g,T=t) + \epsilon_{i,t}\]</span></p>
+<ul>
+<li>In this framework, each <span class="math inline">\(\theta_{g,t}\)</span> represents the ATT for each group at a particular period.</li>
+</ul>
+</section>
+<section id="allow-for-heterogeneity-jwdid-and-eventstudyinteract-1" class="slide level2">
+<h2>Allow for Heterogeneity: <code>jwdid</code> and <code>eventstudyinteract</code></h2>
+<h4 id="wooldridge_2021-and-sun_estimating_2021-1"><span class="citation" data-cites="wooldridge_2021">Wooldridge (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span> and <span class="citation" data-cites="sun_estimating_2021">Sun and Abraham (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span></h4>
+<ul>
+<li><p>In the basic setup, this approach is basically the same as the method proposed by <span class="citation" data-cites="borusyak2023revisiting">Borusyak, Jaravel, and Spiess (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2023</a>)</span> and <span class="citation" data-cites="gardner2022twostage">Gardner (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2022</a>)</span>.</p></li>
+<li><p>Wooldridge, however, was not the first approach that aim to “allow for heterogeneity” in the treatment effect. Early attempts were done by using a dynamic events structure, using both leads ands lags of the treatment variable. <span class="math display">\[Y_{i,t} = \delta_i + \gamma_t  + \sum_{e=-k}^{-2} \theta_e \mathbb{1}(t-G_i=e) + \sum_{e=0}^L \theta_e \mathbb{1}(t-G_i=e) + \epsilon_{i,t}\]</span></p></li>
+<li><p>This not only allows for heterogenous effects across time, but also allows you to analyze pre-treatments effects.</p></li>
+<li><p>However <span class="citation" data-cites="sun_estimating_2021">Sun and Abraham (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span> showed that this approach could also be wrong, if dynamic effects are also heterogenous across groups.</p></li>
+</ul>
+</section>
+<section id="allow-for-heterogeneity-jwdid-and-eventstudyinteract-2" class="slide level2">
+<h2>Allow for Heterogeneity: <code>jwdid</code> and <code>eventstudyinteract</code></h2>
+<h4 id="wooldridge_2021-and-sun_estimating_2021-2"><span class="citation" data-cites="wooldridge_2021">Wooldridge (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span> and <span class="citation" data-cites="sun_estimating_2021">Sun and Abraham (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span></h4>
+<ul>
+<li><p>As solution, <span class="citation" data-cites="sun_estimating_2021">Sun and Abraham (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span> propose to use a full set of interactions between the group dummies and the event-study dummies. This is similar to <span class="citation" data-cites="wooldridge_2021">Wooldridge (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span>. <span class="math display">\[Y_{i,t} = \delta_i + \gamma_t  + \sum_{g=2}^T \sum_{e=-k}^{-2} \theta_{g,e} \mathbb{1}(t-G_i=e, G=g) + \sum_{g=2}^T \sum_{e=0}^L \theta_{g,e} \mathbb{1}(t-G_i=e, G=g) + \epsilon_{i,t}\]</span></p></li>
+<li><p>In fact, if we write the “event” as “time”, it would look very similar to the model proposed by <span class="citation" data-cites="wooldridge_2021">Wooldridge (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span>.</p></li>
+</ul>
+<p><span class="math display">\[Y_{i,t} = \delta_i + \gamma_t  + \sum_{g=2}^T \sum_{t=1}^{g-2} \theta_{g,t} \mathbb{1}(T=t, G=g)
++ \sum_{g=2}^T \sum_{t=g}^{T} \theta_{g,t} \mathbb{1}(T=t, G=g) + \epsilon_{i,t}
+\]</span></p>
+<ul>
+<li>Thus, both approaches are identical if we allow for Full interactions before and after treatment.</li>
+</ul>
+</section>
+<section id="allow-for-heterogeneity-jwdid-and-eventstudyinteract-3" class="slide level2">
+<h2>Allow for Heterogeneity: <code>jwdid</code> and <code>eventstudyinteract</code></h2>
+<h3 id="assumptions-and-limitations">Assumptions and Limitations</h3>
+<ul>
+<li>The model proposed by <span class="citation" data-cites="wooldridge_2021">Wooldridge (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span> follows the same assumptions as <span class="citation" data-cites="borusyak2023revisiting">Borusyak, Jaravel, and Spiess (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2023</a>)</span>. (Long PTA)</li>
+<li><span class="citation" data-cites="sun_estimating_2021">Sun and Abraham (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span> and the modified <span class="citation" data-cites="wooldridge_2021">Wooldridge (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span>, however, only requires PTA to hold “after” treatment takes place.</li>
+<li>Both methods require careful consideration of covariates (time constant), and they require additional work for adding it into a model (variable shifting).
+<ul>
+<li>The limitations of sample size are somewhat more evident in this framework.</li>
+</ul></li>
+<li>Wooldridge’s approach, however, could also be used beyond the linear case as shown in <span class="citation" data-cites="wooldridge_2023">Wooldridge (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2023</a>)</span>.</li>
+</ul>
+</section>
+<section id="implementation" class="slide level2 scrollable">
+<h2>Implementation</h2>
+<p>There are various commands that implement <span class="citation" data-cites="sun_estimating_2021">Sun and Abraham (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span> estimator, including her original command <code>eventsudyinteract</code>, as well as <code>xtevent</code>.</p>
+<p>For <span class="citation" data-cites="wooldridge_2021">Wooldridge (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span>, there is now the official Stata18 command <code>xthdidregress twfe</code>, the one I developed: <code>jwdid</code> and a newer one <code>wooldid</code>.</p>
+<p>Will focus on <code>jwdid</code>.</p>
+<p>Base Estimation:</p>
+<div id="ce966732" class="cell larger" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a></a><span class="kw">qui</span>:<span class="kw">ssc</span> install frause, <span class="kw">replace</span></span>
+<span id="cb15-2"><a></a>frause mpdta, <span class="kw">clear</span></span>
+<span id="cb15-3"><a></a>** </span>
+<span id="cb15-4"><a></a>jwdid lemp, ivar(countyreal) tvar(<span class="fu">year</span>) gvar(first_treat) </span>
+<span id="cb15-5"><a></a><span class="kw">estat</span> simple</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Written by R.              )
+WARNING: Singleton observations not dropped; statistical significance is biased (link)
+(MWFE estimator converged in 2 iterations)
+
+HDFE Linear regression                            Number of obs   =      2,500
+Absorbing 2 HDFE groups                           F(   7,    499) =       3.82
+Statistics robust to heteroskedasticity           Prob &gt; F        =     0.0005
+                                                  R-squared       =     0.9933
+                                                  Adj R-squared   =     0.9915
+                                                  Within R-sq.    =     0.0101
+Number of clusters (countyreal) =        500      Root MSE        =     0.1389
+
+                                        (Std. err. adjusted for 500 clusters in countyreal)
+-------------------------------------------------------------------------------------------
+                          |               Robust
+                     lemp | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+--------------------------+----------------------------------------------------------------
+first_treat#year#c.__tr__ |
+               2004 2004  |  -.0193724   .0223818    -0.87   0.387    -.0633465    .0246018
+               2004 2005  |  -.0783191   .0304878    -2.57   0.010    -.1382195   -.0184187
+               2004 2006  |  -.1360781   .0354555    -3.84   0.000    -.2057386   -.0664177
+               2004 2007  |  -.1047075   .0338743    -3.09   0.002    -.1712613   -.0381536
+               2006 2006  |   .0025139   .0199328     0.13   0.900    -.0366487    .0416765
+               2006 2007  |  -.0391927   .0240087    -1.63   0.103    -.0863634     .007978
+               2007 2007  |   -.043106   .0184311    -2.34   0.020    -.0793182   -.0068938
+                          |
+                    _cons |    5.77807    .001544  3742.17   0.000     5.775036    5.781103
+-------------------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+  countyreal |       500         500           0    *|
+        year |         5           0           5     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+------------------------------------------------------------------------------
+             |            Delta-method
+             | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      simple |  -.0477099    .013265    -3.60   0.000    -.0737088   -.0217111
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>Adding controls</p>
+<div id="0271b0aa" class="cell larger" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb17-1"><a></a>jwdid lemp lpop, ivar(countyreal) tvar(<span class="fu">year</span>) gvar(first_treat) </span>
+<span id="cb17-2"><a></a><span class="kw">estat</span> simple</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>__000003
+WARNING: Singleton observations not dropped; statistical significance is biased (link)
+(MWFE estimator converged in 2 iterations)
+
+HDFE Linear regression                            Number of obs   =      2,500
+Absorbing 2 HDFE groups                           F(  18,    499) =       3.62
+Statistics robust to heteroskedasticity           Prob &gt; F        =     0.0000
+                                                  R-squared       =     0.9933
+                                                  Adj R-squared   =     0.9916
+                                                  Within R-sq.    =     0.0212
+Number of clusters (countyreal) =        500      Root MSE        =     0.1385
+
+                                                  (Std. err. adjusted for 500 clusters in countyreal)
+-----------------------------------------------------------------------------------------------------
+                                    |               Robust
+                               lemp | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+------------------------------------+----------------------------------------------------------------
+          first_treat#year#c.__tr__ |
+                         2004 2004  |   -.021248   .0216933    -0.98   0.328    -.0638695    .0213735
+                         2004 2005  |    -.08185   .0273307    -2.99   0.003    -.1355474   -.0281526
+                         2004 2006  |  -.1378704   .0307448    -4.48   0.000    -.1982756   -.0774651
+                         2004 2007  |  -.1095395   .0322696    -3.39   0.001    -.1729405   -.0461384
+                         2006 2006  |   .0025368   .0188523     0.13   0.893    -.0345029    .0395765
+                         2006 2007  |  -.0450935   .0219516    -2.05   0.040    -.0882223   -.0019646
+                         2007 2007  |  -.0459545    .017946    -2.56   0.011    -.0812136   -.0106954
+                                    |
+first_treat#year#c.__tr__#c._x_lpop |
+                         2004 2004  |   .0046278   .0175555     0.26   0.792     -.029864    .0391196
+                         2004 2005  |   .0251131   .0178749     1.40   0.161    -.0100063    .0602325
+                         2004 2006  |   .0507346   .0210361     2.41   0.016     .0094043    .0920648
+                         2004 2007  |   .0112497   .0265741     0.42   0.672    -.0409613    .0634607
+                         2006 2006  |   .0389352   .0164453     2.37   0.018     .0066246    .0712457
+                         2006 2007  |   .0380597   .0224407     1.70   0.091    -.0060301    .0821495
+                         2007 2007  |  -.0198351    .016172    -1.23   0.221    -.0516088    .0119385
+                                    |
+                        year#c.lpop |
+                              2004  |   .0110137   .0075431     1.46   0.145    -.0038064    .0258338
+                              2005  |   .0207333    .008093     2.56   0.011     .0048328    .0366339
+                              2006  |   .0105354   .0108004     0.98   0.330    -.0106845    .0317552
+                              2007  |    .020921   .0117917     1.77   0.077    -.0022465    .0440884
+                                    |
+                              _cons |   5.736532   .0215065   266.73   0.000     5.694277    5.778786
+-----------------------------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+  countyreal |       500         500           0    *|
+        year |         5           0           5     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation
+------------------------------------------------------------------------------
+             |            Delta-method
+             | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      simple |   -.050627   .0124796    -4.06   0.000    -.0750866   -.0261675
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>Compared to <code>did_imputation</code></p>
+<div id="ebd18205" class="cell larger" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb19-1"><a></a><span class="kw">gen</span> first2=first_treat <span class="kw">if</span> first_treat&gt;0</span>
+<span id="cb19-2"><a></a>did_imputation lemp countyreal <span class="fu">year</span> first2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(1,545 missing values generated)
+
+                                                         Number of obs = 2,500
+------------------------------------------------------------------------------
+        lemp | Coefficient  Std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         tau |  -.0477101   .0132225    -3.61   0.000    -.0736257   -.0217944
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<div id="f1971e19" class="cell larger" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb21-1"><a></a><span class="kw">qui</span>:jwdid lemp, ivar(countyreal) tvar(<span class="fu">year</span>) gvar(first_treat) </span>
+<span id="cb21-2"><a></a><span class="kw">estat</span> simple</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>WARNING: Singleton observations not dropped; statistical significance is biased (link)
+------------------------------------------------------------------------------
+             |            Delta-method
+             | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      simple |  -.0477099    .013265    -3.60   0.000    -.0737088   -.0217111
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>Estimating an effect similar to <span class="citation" data-cites="sun_estimating_2021">Sun and Abraham (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span></p>
+<div id="7c2862d2" class="cell larger" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><a></a><span class="kw">qui</span>:jwdid lemp, ivar(countyreal) tvar(<span class="fu">year</span>) gvar(first_treat) <span class="co">///</span></span>
+<span id="cb23-2"><a></a>    never <span class="co">//&lt;- request full interaction</span></span>
+<span id="cb23-3"><a></a><span class="kw">estat</span> event</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>WARNING: Singleton observations not dropped; statistical significance is biased (link)
+------------------------------------------------------------------------------
+             |            Delta-method
+             | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+   __event__ |
+         -4  |   .0033064   .0245551     0.13   0.893    -.0448207    .0514335
+         -3  |   .0250218   .0181543     1.38   0.168      -.01056    .0606037
+         -2  |   .0244587   .0142668     1.71   0.086    -.0035037    .0524211
+         -1  |          0  (omitted)
+          0  |  -.0199318   .0118575    -1.68   0.093    -.0431722    .0033085
+          1  |  -.0509574   .0168707    -3.02   0.003    -.0840233   -.0178914
+          2  |  -.1372587   .0365895    -3.75   0.000    -.2089728   -.0655447
+          3  |  -.1008114   .0345043    -2.92   0.003    -.1684385   -.0331842
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>It is also possible to add further restrictions to “event/calendar/group” aggregates</p>
+<div id="7cb370ba" class="cell larger" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb25-1"><a></a>** requires latest JWDID</span>
+<span id="cb25-2"><a></a><span class="kw">qui</span>:net install jwdid, from(https:<span class="co">//friosavila.github.io/stpackages) replace</span></span>
+<span id="cb25-3"><a></a><span class="kw">program</span> <span class="kw">drop</span> <span class="dt">_all</span></span>
+<span id="cb25-4"><a></a><span class="kw">gen</span> subsample = <span class="fu">inrange</span>(__event__,2,6)</span>
+<span id="cb25-5"><a></a><span class="kw">estat</span> event, other(subsample)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>option other() not allowed</code></pre>
+</div>
+</div>
+</section>
+<section id="using-good-did-designs-csdid-and-csdid2" class="slide level2">
+<h2>Using Good DID Designs: <code>csdid</code> and <code>csdid2</code></h2>
+<h4 id="callaway_2021"><span class="citation" data-cites="callaway_2021">Callaway and Sant’Anna (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span></h4>
+<ul>
+<li><p>A third, and last, approach has been proposed by <span class="citation" data-cites="callaway_2021">Callaway and Sant’Anna (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span>.</p></li>
+<li><p>In contrast with previous methods (which focus on global estimators), this approach suggests deconstructing the estimation into smaller, but well define pieces: The ATTGTs for 2x2 DIDs</p>
+<ul>
+<li>Makes it easy to use using <strong>GOOD</strong> DID designs only</li>
+<li>and, once all ATTGT’s are estimated, they can be aggregated in various ways</li>
+</ul></li>
+<li><p>This approach takes full advantage of the fact we know quite well (<code>drdid</code> + others) how to estimate 2x2 DID.</p></li>
+<li><p>and (or but) forces you to utilize time constant or pretreatment controls only.</p></li>
+<li><p>However, one now needs to estimate as many as periods and cohorts are available in the data.</p></li>
+</ul>
+</section>
+<section id="using-good-did-designs-csdid-and-csdid2-1" class="slide level2">
+<h2>Using Good DID Designs: <code>csdid</code> and <code>csdid2</code></h2>
+<h4 id="callaway_2021-1"><span class="citation" data-cites="callaway_2021">Callaway and Sant’Anna (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span></h4>
+<ul>
+<li>The proposed estimator starts with the assumption that one is interested in the ATTGT:</li>
+</ul>
+<p><span class="math display">\[ATT(g,t) = E(y_{i,t}(G) - y_{i,t}(\infty) |G_i =g)
+\]</span></p>
+<ul>
+<li><p>As in the simpler 2x2 case, however, we cannot observe the <span class="math inline">\(y_{i,t}(\infty)\)</span> after they are treated.</p></li>
+<li><p>What <span class="citation" data-cites="callaway_2021">Callaway and Sant’Anna (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span> does is to impute this piece applyint PTA and no Anticipation.</p></li>
+<li><p><span class="math display">\[{E(y_{i,t}(\infty)|G_i =g)} \approx E(y_{i,G-k}|G_i =g) + E(y_{i,t}-y_{i,G-k}| G_i \in Control)
+\]</span></p></li>
+<li><p>Thus, the estimator for the ATT(g,t) becomes: <span class="math display">\[\widehat{ATT(g,t)} = E(y_{i,t}- y_{i,G-k}|G_i =g)- E(y_{i,t}- y_{i,G-k}|G_i \in Control)
+\]</span></p></li>
+</ul>
+</section>
+<section id="using-good-did-designs-csdid-and-csdid2-2" class="slide level2">
+<h2>Using Good DID Designs: <code>csdid</code> and <code>csdid2</code></h2>
+<h4 id="callaway_2021-2"><span class="citation" data-cites="callaway_2021">Callaway and Sant’Anna (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span></h4>
+<p><span class="math display">\[\widehat{ATT(g,t)} = E(y_{i,t}- y_{i,G-k}|G_i =g)- E(y_{i,t}- y_{i,G-k}|G_i \in Control)\]</span></p>
+<ol type="1">
+<li>With no anticipation and PTA, <em>ANY</em> period before treatment (<span class="math inline">\(G-k\)</span>) could be used to construct the ATT(g,t).</li>
+<li>Because of this, it only relies on Post-treatment PTA. (Violations of PTA before treatment have no impact on the estimates)</li>
+<li>Depending on the analysis of interest, one could choose different “control groups”
+<ul>
+<li>Never treated: Most common</li>
+<li>Not-yet-treated: Include observations that up to time <span class="math inline">\(t\)</span> have not been treated.</li>
+<li>For pre-treatment ATT(g,t)’s, the Not-yet treated cound include all cohorts not treated until <span class="math inline">\(t\)</span> <code>R</code> or those not treat until <span class="math inline">\(t\)</span> nor <span class="math inline">\(g\)</span> <code>Stata</code>.</li>
+</ul></li>
+</ol>
+</section>
+<section id="using-good-did-designs-csdid-and-csdid2-3" class="slide level2">
+<h2>Using Good DID Designs: <code>csdid</code> and <code>csdid2</code></h2>
+<h4 id="callaway_2021-3"><span class="citation" data-cites="callaway_2021">Callaway and Sant’Anna (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span></h4>
+<ul>
+<li>This approach is relatively easy to implement. The main difficulty is keeping track of ALL the ATT(g,t)s that are estimated (and their VCV)</li>
+<li>However, once all ATT(g,t)’s are obtained, aggregation is straight forward:</li>
+</ul>
+<p><span class="math display">\[
+AGG(ATT(g,t)) = \frac{\sum_{g,t \in G\times T}   ATT(g,t) * w_{g,t} * sel_{g,t} }
+{\sum_{g,t \in G\times T} w_{g,t} * sel_{g,t} }
+\]</span></p>
+<ul>
+<li><p>where <span class="math inline">\(w_{g,t}\)</span> represents the size of cohort <span class="math inline">\(g\)</span> at time <span class="math inline">\(t\)</span> used in the estimation of ATT(g,t).</p></li>
+<li><p>and <span class="math inline">\(sel_{g,t}\)</span> is an indicator for whether that ATTGT will be used in the aggregation.</p></li>
+</ul>
+</section>
+<section id="using-good-did-designs-csdid-and-csdid2-4" class="slide level2">
+<h2>Using Good DID Designs: <code>csdid</code> and <code>csdid2</code></h2>
+<h4 id="callaway_2021-4"><span class="citation" data-cites="callaway_2021">Callaway and Sant’Anna (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span></h4>
+<p>Typical Aggregations:</p>
+<ul>
+<li>Simple: <span class="math inline">\(sel_{g,t}=1\)</span> if <span class="math inline">\(t&gt;=g\)</span></li>
+<li>Group/cohort: <span class="math inline">\(sel_{g,t}=1\)</span> if <span class="math inline">\(t&gt;=g\)</span> and <span class="math inline">\(g=G\)</span></li>
+<li>Calendar: <span class="math inline">\(sel_{g,t}=1\)</span> if <span class="math inline">\(t&gt;=g\)</span> and <span class="math inline">\(t=T\)</span></li>
+<li>Event: <span class="math inline">\(sel_{g,t}=1\)</span> if <span class="math inline">\(t-g=e\)</span></li>
+<li>Cevent: <span class="math inline">\(sel_{g,t}=1\)</span> if <span class="math inline">\(t-g \in [ll,\dots,uu]\)</span></li>
+</ul>
+<p>and may be possible to combine some of these restrictions</p>
+<ul>
+<li>Also, because the method is based on 2x2 DID, it allows to easily implement various methodologies, including the Doubly Robust.</li>
+</ul>
+</section>
+<section id="map-how-callaway_2021-relates-to-wooldridge_2021-and-borusyak2023revisiting" class="slide level2">
+<h2>Map: How <span class="citation" data-cites="callaway_2021">Callaway and Sant’Anna (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span> relates to <span class="citation" data-cites="wooldridge_2021">Wooldridge (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span> and <span class="citation" data-cites="borusyak2023revisiting">Borusyak, Jaravel, and Spiess (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2023</a>)</span></h2>
+<p>Relations: Simple case of no covariates</p>
+<ul>
+<li><code>jwdid</code> = <code>did_imputation</code>: <code>jwdid</code> can be applied to nonlinear models, but <code>did_imputation</code> is more flexible for linear models.</li>
+<li><code>jwdid</code> = <code>did_imputation</code> = <code>csdid, notyet</code>: When using the not-yet treated as control, <code>csdid</code> will produce the same estimates as the others if there is only <strong>1 pretreatment</strong> period.</li>
+<li><code>jwdid, never</code> = <code>csdid</code> = <code>eventinteract</code>: If <code>jwdid</code> uses full interactions for pre and post treatment periods, the results will be the same as <code>csdid</code> or <code>eventinteract</code></li>
+</ul>
+<p>Thus the main differences across models is:</p>
+<ul>
+<li>How they use “pre-treatment” information for the estimation of ATTs (long vs short)</li>
+<li>Whether they use only “never-treated” or “not-yet-treated” units for estimation</li>
+<li>And how are covariates treated</li>
+</ul>
+</section>
+<section id="example-2" class="slide level2 scrollable">
+<h2>Example</h2>
+<ul>
+<li><p><code>csdid</code> is the older command, with all functions well documented (helpfile).</p></li>
+<li><p>However, it can be slow in large tasks, because of the bottle neck of using the Full Dataset for every task.</p></li>
+<li><p><code>csdid2</code> works almost identically to <code>csdid</code>, its faster, but some functions are not yet documented (helpfile is still missing). Will use this one here</p></li>
+</ul>
+<div id="3d56e37d" class="cell larger" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb27-1"><a></a><span class="kw">qui</span>:net install csdid2, from(https:<span class="co">//friosavila.github.io/stpackages) replace</span></span>
+<span id="cb27-2"><a></a><span class="kw">use</span> http:<span class="co">//pped.org/bacon_example.dta, clear</span></span>
+<span id="cb27-3"><a></a></span>
+<span id="cb27-4"><a></a>** create Gvar: still needs csdid</span>
+<span id="cb27-5"><a></a><span class="kw">egen</span> gvar = csgvar(<span class="kw">post</span>), ivar(stfips) tvar(<span class="fu">year</span>)</span>
+<span id="cb27-6"><a></a></span>
+<span id="cb27-7"><a></a>csdid2 asmrs, <span class="co">///</span></span>
+<span id="cb27-8"><a></a>    ivar(stfips) <span class="co">/// &lt;- required for panel Data. Otherwise RC</span></span>
+<span id="cb27-9"><a></a>    tvar(<span class="fu">year</span>)   <span class="co">/// &lt;- Time variable. Should be continuously (month 11, 12, 13, ...)</span></span>
+<span id="cb27-10"><a></a>    gvar(gvar)   </span>
+<span id="cb27-11"><a></a>** Default uses <span class="st">"never treated"</span>, and produces Long gaps.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Producing Long Gaps by default
+Using method reg
+----+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5 
+..................................................    50
+..................................................   100
+..................................................   150
+..................................................   200
+..................................................   250
+..................................................   300
+..................................................   350
+..................................</code></pre>
+</div>
+</div>
+<ul>
+<li><code>csdid2</code> is creating the full set of ATT(g,t) estimations for the data. But will produce no result</li>
+<li>To obtain results and plotting, one must use post estimation commands:</li>
+</ul>
+<div id="7e90eae6" class="cell larger" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb29-1"><a></a><span class="kw">estat</span> event, <span class="co">/// request event-type estimates</span></span>
+<span id="cb29-2"><a></a>    noavg    <span class="co">/// asks not to produce Averages</span></span>
+<span id="cb29-3"><a></a>    revent(-10/10) <span class="co">// requests to limit the output to events between -10/10</span></span>
+<span id="cb29-4"><a></a>** Its also possible to restrict to specific groups/cohorts rgroup( <span class="ot">list</span> <span class="kw">of</span> numbers)</span>
+<span id="cb29-5"><a></a>** <span class="kw">or</span> restrict to specific years rcalendar( <span class="ot">list</span> <span class="kw">of</span> numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>------------------------------------------------------------------------------
+             | Coefficient  Std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        tm10 |  -1.456481   6.604164    -0.22   0.825     -14.4004    11.48744
+         tm9 |  -7.234872   4.564612    -1.58   0.113    -16.18135    1.711603
+         tm8 |  -4.652236   4.995688    -0.93   0.352    -14.44361    5.139134
+         tm7 |  -6.442625   6.308106    -1.02   0.307    -18.80629    5.921036
+         tm6 |  -4.424961   4.217086    -1.05   0.294     -12.6903    3.840376
+         tm5 |  -6.785855   5.032378    -1.35   0.178    -16.64913    3.077424
+         tm4 |  -1.428164   3.663803    -0.39   0.697    -8.609087    5.752758
+         tm3 |  -2.313338    3.60909    -0.64   0.522    -9.387025    4.760349
+         tm2 |  -.8035454   3.215177    -0.25   0.803    -7.105177    5.498086
+         tp0 |  -.7577979   2.763696    -0.27   0.784    -6.174542    4.658946
+         tp1 |  -2.687627   3.036269    -0.89   0.376    -8.638605     3.26335
+         tp2 |  -3.590762   4.207388    -0.85   0.393    -11.83709    4.655566
+         tp3 |  -3.341711   2.549732    -1.31   0.190    -8.339094    1.655672
+         tp4 |  -4.882915   2.892191    -1.69   0.091    -10.55151    .7856753
+         tp5 |  -6.205122   2.776364    -2.23   0.025     -11.6467   -.7635485
+         tp6 |  -6.301267    3.82955    -1.65   0.100    -13.80705    1.204514
+         tp7 |  -10.83263     3.3192    -3.26   0.001    -17.33814   -4.327119
+         tp8 |  -9.945774   3.590409    -2.77   0.006    -16.98285   -2.908703
+         tp9 |  -9.285554    3.65841    -2.54   0.011    -16.45591   -2.115202
+        tp10 |  -11.17722   3.836158    -2.91   0.004    -18.69596   -3.658494
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p><code>estat plot</code>, will produce a figure from the last estimation</p>
+<div id="abd3205d" class="cell larger" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb31-1"><a></a><span class="kw">estat</span> plot, <span class="bn">xsize</span>(10) <span class="bn">ysize</span>(8)</span>
+<span id="cb31-2"><a></a><span class="kw">graph</span> <span class="kw">export</span> figev.png, <span class="kw">replace</span> <span class="kw">width</span>(800)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img data-src="figev.png" alt="a"> <img src="figev.png" alt="Trulli" style="width:1%"></p>
+<p>Advantage of <code>csdid2</code> over other methods. Uniform Confidence Intervals using Wildbootstrap SE.</p>
+</section>
+<section id="conclusions" class="slide level2">
+<h2>Conclusions</h2>
+<ul>
+<li>In this workshop I aimed to provide a brief overview of the problems with TWFE and the potential solutions.</li>
+<li>3 main solutions were presented:
+<ol type="1">
+<li>Avoid using bad controls (<span class="citation" data-cites="borusyak2023revisiting">Borusyak, Jaravel, and Spiess (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2023</a>)</span> and <span class="citation" data-cites="gardner2022twostage">Gardner (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2022</a>)</span>)</li>
+<li>Allow for heterogeneity in the treatment effect. (<span class="citation" data-cites="wooldridge_2021">Wooldridge (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span> and <span class="citation" data-cites="sun_estimating_2021">Sun and Abraham (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span>)</li>
+<li>Use <em>only</em> good DID designs. (<span class="citation" data-cites="callaway_2021">Callaway and Sant’Anna (<a href="#/suggested-readings" role="doc-biblioref" onclick="">2021</a>)</span>)</li>
+</ol></li>
+</ul>
+</section>
+<section id="conclusions-1" class="slide level2">
+<h2>Conclusions</h2>
+<ul>
+<li>All methods have their own advantages and disadvantages.</li>
+<li><ol start="3" type="1">
+<li>is the most robust based on the assumptions, but is the least efficient because of the sample size requirements. It also allows for flexiblity of DR estimators, and ensures you use pre-treatment controls only.</li>
+</ol></li>
+<li><ol type="1">
+<li>and 2) are more efficient, (more data is used), but rely strongy on Long PTA assumption.</li>
+</ol></li>
+<li><ol start="2" type="1">
+<li>can be applied in non-linear settings, using nonlinear models. But aggregations are slower to obtain.</li>
+</ol></li>
+<li><ol type="1">
+<li>and 2) can also be adapted to consider -dose-response- effects. As well as Treatment Reversals.</li>
+</ol></li>
+</ul>
+</section></section>
+<section>
+<section id="thank-you" class="title-slide slide level1 center">
+<h1>Thank you!</h1>
+
+</section>
+<h3 id="comments-questions">Comments? Questions?</h3>
+<section id="suggested-readings" class="slide level2 smaller scrollable">
+<h2>Suggested readings</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-borusyak2023revisiting" class="csl-entry" role="listitem">
+Borusyak, Kirill, Xavier Jaravel, and Jann Spiess. 2023. <span>“Revisiting Event Study Designs: Robust and Efficient Estimation.”</span> <a href="https://arxiv.org/abs/2108.12419">https://arxiv.org/abs/2108.12419</a>.
+</div>
+<div id="ref-caetano_difference_2022" class="csl-entry" role="listitem">
+Caetano, Carolina, and Brantly Callaway. 2022. <span>“Difference-in-<span>Differences</span> with <span>Time</span>-<span>Varying</span> <span>Covariates</span> in the <span>Parallel</span> <span>Trends</span> <span>Assumption</span>.”</span> <a href="https://doi.org/10.48550/ARXIV.2202.02903">https://doi.org/10.48550/ARXIV.2202.02903</a>.
+</div>
+<div id="ref-callaway_2021" class="csl-entry" role="listitem">
+Callaway, Brantly, and Pedro H. C. Sant’Anna. 2021. <span>“Difference-in-<span>Differences</span> with Multiple Time Periods.”</span> <em>Journal of Econometrics</em>, Themed <span>Issue</span>: <span>Treatment</span> <span>Effect</span> 1, 225 (2): 200–230. <a href="https://doi.org/10.1016/j.jeconom.2020.12.001">https://doi.org/10.1016/j.jeconom.2020.12.001</a>.
+</div>
+<div id="ref-dechaisemartin2020" class="csl-entry" role="listitem">
+Chaisemartin, Clément de, and Xavier D’Haultfœuille. 2020. <span>“Two-Way Fixed Effects Estimators with Heterogeneous Treatment Effects.”</span> <em>American Economic Review</em> 110 (9): 2964–96. <a href="https://doi.org/10.1257/aer.20181169">https://doi.org/10.1257/aer.20181169</a>.
+</div>
+<div id="ref-dechaisemartin_two-way_2023" class="csl-entry" role="listitem">
+———. 2023. <span>“Two-Way Fixed Effects and Differences-in-Differences with Heterogeneous Treatment Effects: A Survey.”</span> <em>The Econometrics Journal</em> 26 (3): C1–30. <a href="https://doi.org/10.1093/ectj/utac017">https://doi.org/10.1093/ectj/utac017</a>.
+</div>
+<div id="ref-gardner2022twostage" class="csl-entry" role="listitem">
+Gardner, John. 2022. <span>“Two-Stage Differences in Differences.”</span> <a href="https://arxiv.org/abs/2207.05943">https://arxiv.org/abs/2207.05943</a>.
+</div>
+<div id="ref-goodmanbacon2021" class="csl-entry" role="listitem">
+Goodman-Bacon, Andrew. 2021. <span>“Difference-in-Differences with Variation in Treatment Timing.”</span> <em>Journal of Econometrics</em> 225 (2): 254–77. https://doi.org/<a href="https://doi.org/10.1016/j.jeconom.2021.03.014">https://doi.org/10.1016/j.jeconom.2021.03.014</a>.
+</div>
+<div id="ref-roth_whats_2023" class="csl-entry" role="listitem">
+Roth, Jonathan, Pedro H. C. Sant’Anna, Alyssa Bilinski, and John Poe. 2023. <span>“What’s Trending in Difference-in-Differences? <span>A</span> Synthesis of the Recent Econometrics Literature.”</span> <em>Journal of Econometrics</em> 235 (2): 2218–44. <a href="https://doi.org/10.1016/j.jeconom.2023.03.008">https://doi.org/10.1016/j.jeconom.2023.03.008</a>.
+</div>
+<div id="ref-santanna_doubly_2020" class="csl-entry" role="listitem">
+Sant’Anna, Pedro H. C., and Jun Zhao. 2020. <span>“Doubly Robust Difference-in-Differences Estimators.”</span> <em>Journal of Econometrics</em> 219 (1): 101–22. <a href="https://doi.org/10.1016/j.jeconom.2020.06.003">https://doi.org/10.1016/j.jeconom.2020.06.003</a>.
+</div>
+<div id="ref-sun_estimating_2021" class="csl-entry" role="listitem">
+Sun, Liyang, and Sarah Abraham. 2021. <span>“Estimating Dynamic Treatment Effects in Event Studies with Heterogeneous Treatment Effects.”</span> <em>Journal of Econometrics</em>, Themed <span>Issue</span>: <span>Treatment</span> <span>Effect</span> 1, 225 (2): 175–99. <a href="https://doi.org/10.1016/j.jeconom.2020.09.006">https://doi.org/10.1016/j.jeconom.2020.09.006</a>.
+</div>
+<div id="ref-wooldridge_2021" class="csl-entry" role="listitem">
+Wooldridge, Jeffrey M. 2021. <span>“Two-<span>Way</span> <span>Fixed</span> <span>Effects</span>, the <span>Two</span>-<span>Way</span> <span>Mundlak</span> <span>Regression</span>, and <span>Difference</span>-in-<span>Differences</span> <span>Estimators</span>.”</span> <em>SSRN Journal</em>. <a href="https://doi.org/10.2139/ssrn.3906345">https://doi.org/10.2139/ssrn.3906345</a>.
+</div>
+<div id="ref-wooldridge_2023" class="csl-entry" role="listitem">
+———. 2023. <span>“Simple Approaches to Nonlinear Difference-in-Differences with Panel Data.”</span> <em>The Econometrics Journal</em> 26 (3): C31–66. <a href="https://doi.org/10.1093/ectj/utad016">https://doi.org/10.1093/ectj/utad016</a>.
+</div>
+</div>
+
+<div class="quarto-auto-generated-content">
+<div class="footer footer-default">
+
+</div>
+</div>
+</section></section>
     </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    </div>
-<!-- main -->
-<main class="content" id="quarto-document-content">
+  </div>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
 
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
+  <script>
 
-<p>title: “Differences in Differences” subtitle: “1 is good, 2 is twice as good” author: Fernando Rios-Avila format: revealjs: slide-number: true reveal-js-url: ppt_files width: 1400 height: 900 code-overflow: wrap</p>
-<hr>
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
 
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
 
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
 
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const disableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'prefetch';
-    }
-  }
-  const enableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'stylesheet';
-    }
-  }
-  const manageTransitions = (selector, allowTransitions) => {
-    const els = window.document.querySelectorAll(selector);
-    for (let i=0; i < els.length; i++) {
-      const el = els[i];
-      if (allowTransitions) {
-        el.classList.remove('notransition');
-      } else {
-        el.classList.add('notransition');
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1700,
+
+        height: 900,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
       }
-    }
-  }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
       }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
         }
       });
-    }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
-    }
-  }
-  const toggleColorMode = (alternate) => {
-    // Switch the stylesheets
-    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-    manageTransitions('#quarto-margin-sidebar .nav-link', false);
-    if (alternate) {
-      enableStylesheet(alternateStylesheets);
-      for (const sheetNode of alternateStylesheets) {
-        if (sheetNode.id === "quarto-bootstrap") {
-          toggleBodyColorMode(sheetNode);
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
         }
-      }
-    } else {
-      disableStylesheet(alternateStylesheets);
-      toggleBodyColorPrimary();
-    }
-    manageTransitions('#quarto-margin-sidebar .nav-link', true);
-    // Switch the toggles
-    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-    for (let i=0; i < toggles.length; i++) {
-      const toggle = toggles[i];
-      if (toggle) {
-        if (alternate) {
-          toggle.classList.add("alternate");     
-        } else {
-          toggle.classList.remove("alternate");
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
-      }
-    }
-    // Hack to workaround the fact that safari doesn't
-    // properly recolor the scrollbar when toggling (#1455)
-    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-      manageTransitions("body", false);
-      window.scrollTo(0, 1);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        manageTransitions("body", true);
-      }, 40);  
-    }
-  }
-  const isFileUrl = () => { 
-    return window.location.protocol === 'file:';
-  }
-  const hasAlternateSentinel = () => {  
-    let styleSentinel = getColorSchemeSentinel();
-    if (styleSentinel !== null) {
-      return styleSentinel === "alternate";
-    } else {
-      return false;
-    }
-  }
-  const setStyleSentinel = (alternate) => {
-    const value = alternate ? "alternate" : "default";
-    if (!isFileUrl()) {
-      window.localStorage.setItem("quarto-color-scheme", value);
-    } else {
-      localAlternateSentinel = value;
-    }
-  }
-  const getColorSchemeSentinel = () => {
-    if (!isFileUrl()) {
-      const storageValue = window.localStorage.getItem("quarto-color-scheme");
-      return storageValue != null ? storageValue : localAlternateSentinel;
-    } else {
-      return localAlternateSentinel;
-    }
-  }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-  // Dark / light mode switch
-  window.quartoToggleColorScheme = () => {
-    // Read the current dark / light value 
-    let toAlternate = !hasAlternateSentinel();
-    toggleColorMode(toAlternate);
-    setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
-  };
-  // Ensure there is a toggle, if there isn't float one in the top right
-  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-    const a = window.document.createElement('a');
-    a.classList.add('top-right');
-    a.classList.add('quarto-color-scheme-toggle');
-    a.href = "";
-    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-    const i = window.document.createElement("i");
-    i.classList.add('bi');
-    a.appendChild(i);
-    window.document.body.appendChild(a);
-  }
-  // Switch to dark mode if need be
-  if (hasAlternateSentinel()) {
-    toggleColorMode(true);
-  } else {
-    toggleColorMode(false);
-  }
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
         }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  });
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      return note.innerHTML;
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
         }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
       }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
           } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+            return "";
           }
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
-        }
-        return container.innerHTML
-      } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
-        return note.innerHTML;
+        });
       }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
-    }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
-            if (note !== null) {
-              const html = processXRef(id, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
       }
-    }, function(instance) {
     });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
-      });
-    }
-  }
-});
-</script>
-</div> <!-- /content -->
-
-
-
+    </script>
+    
 
 </body></html>
