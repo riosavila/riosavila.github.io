@@ -387,11 +387,8 @@
     }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-
   
-
   <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
-
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -562,7 +559,7 @@ w_2 \\ w_3 \\ ... \\ w_k
 </section>
 <section id="small-example" class="slide level2">
 <h2>Small Example</h2>
-<div id="e9f7b3b4" class="cell" data-execution_count="1">
+<div id="bf86cee3" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a></a><span class="kw">qui</span>:frause smoking, <span class="kw">clear</span></span>
@@ -582,7 +579,7 @@ w_2 \\ w_3 \\ ... \\ w_k
 <img data-src="13SC_files/figure-revealjs/cell-2-output-3.png" class="r-stretch"></section>
 <section id="section-6" class="slide level2">
 <h2></h2>
-<div id="1589abe2" class="cell" data-execution_count="2">
+<div id="75687441" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a><span class="kw">drop</span> mean_cig</span>
@@ -602,7 +599,7 @@ w_2 \\ w_3 \\ ... \\ w_k
 </section>
 <section id="section-7" class="slide level2">
 <h2></h2>
-<div id="bca9bbdc" class="cell" data-execution_count="3">
+<div id="37a3f0df" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> mcigsale cigsale* <span class="kw">if</span> <span class="fu">year</span>&lt;=1988, <span class="kw">nocons</span></span>
@@ -643,7 +640,7 @@ w_2 \\ w_3 \\ ... \\ w_k
 </section>
 <section id="section-8" class="slide level2">
 <h2></h2>
-<div id="b8db1c44" class="cell" data-execution_count="4">
+<div id="567485f4" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a></a><span class="kw">qui</span>:frause smoking, <span class="kw">clear</span></span>
@@ -735,7 +732,7 @@ w_2 \\ w_3 \\ ... \\ w_k
 </section>
 <section id="lets-continue-the-example" class="slide level2">
 <h2>Lets continue the example:</h2>
-<div id="cb7066b4" class="cell" data-execution_count="5">
+<div id="6e88cbb8" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a></a><span class="kw">qui</span>:frause smoking, <span class="kw">clear</span></span>
@@ -787,7 +784,7 @@ w_2 \\ w_3 \\ ... \\ w_k
 </details>
 </div>
 <p><strong>All Cases</strong></p>
-<div id="f078e343" class="cell" data-execution_count="6">
+<div id="9da01603" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a></a><span class="kw">two</span> <span class="ot">$toplot</span> (<span class="kw">line</span> tef3 _time, lw(1) <span class="kw">color</span>(<span class="bn">navy</span>*.8)), <span class="bn">xline</span>(1989) <span class="bn">legend</span>(<span class="kw">off</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -798,7 +795,7 @@ w_2 \\ w_3 \\ ... \\ w_k
 <section id="section-10" class="slide level2">
 <h2></h2>
 <p><strong>Good Cases</strong> Restricts to States with Good RMSEP (less than 2 California)</p>
-<div id="420eff27" class="cell" data-execution_count="7">
+<div id="ba530416" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a></a><span class="kw">two</span> <span class="ot">$toplot2</span> (<span class="kw">line</span> tef3 _time, lw(1) <span class="kw">color</span>(<span class="bn">navy</span>*.8)), <span class="bn">xline</span>(1989) <span class="bn">legend</span>(<span class="kw">off</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -808,7 +805,7 @@ w_2 \\ w_3 \\ ... \\ w_k
 <img data-src="13SC_files/figure-revealjs/cell-8-output-1.png" class="r-stretch"></section>
 <section id="rmse-ratio" class="slide level2">
 <h2>RMSE Ratio</h2>
-<div id="d5e10360" class="cell" data-execution_count="8">
+<div id="3eb4be0e" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a></a><span class="kw">forvalues</span> i = 1/39 {</span>
@@ -833,57 +830,23 @@ Number of observations (_N) was 31, now 32.</code></pre>
 <img data-src="13SC_files/figure-revealjs/cell-9-output-2.png" class="r-stretch"></section>
 <section id="p-values" class="slide level2">
 <h2>p-values</h2>
-<div id="381b9e5c" class="cell" data-execution_count="9">
+<div id="ffaca761" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a></a> <span class="kw">gen</span> rnk2=0</span>
 <span id="cb13-2"><a></a><span class="kw">forvalues</span> i = 1/39 {</span>
 <span id="cb13-3"><a></a>    <span class="kw">if</span>   (sef<span class="ot">`i'</span>a[1])&lt;(2*sef3a[1]) {</span>
 <span id="cb13-4"><a></a>        <span class="kw">local</span> t = <span class="ot">`t'</span>+1</span>
-<span id="cb13-5"><a></a>        <span class="kw">replace</span> rnk2=rnk2+(tef<span class="ot">`i'</span>&lt;=tef3)    </span>
+<span id="cb13-5"><a></a>        <span class="kw">qui</span>:<span class="kw">replace</span> rnk2=rnk2+(tef<span class="ot">`i'</span>&lt;=tef3)    </span>
 <span id="cb13-6"><a></a>    }</span>
 <span id="cb13-7"><a></a>} </span>
-<span id="cb13-8"><a></a><span class="kw">gen</span> pv=rnk2*100/<span class="ot">`t'</span></span>
+<span id="cb13-8"><a></a><span class="kw">qui</span>: <span class="kw">gen</span> pv=rnk2*100/<span class="ot">`t'</span></span>
 <span id="cb13-9"><a></a> </span>
 <span id="cb13-10"><a></a><span class="kw">two</span> <span class="bn">bar</span> pv _time <span class="kw">if</span> _time&gt;1988 &amp; rnk2&lt;32, <span class="kw">ylabel</span>(0(2)15) <span class="kw">xlabel</span>(1989/2000)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>(10 real changes made)
-(6 real changes made)
-(32 real changes made)
-(5 real changes made)
-(9 real changes made)
-(3 real changes made)
-(5 real changes made)
-(4 real changes made)
-(6 real changes made)
-(4 real changes made)
-(4 real changes made)
-(8 real changes made)
-(5 real changes made)
-(4 real changes made)
-(8 real changes made)
-(3 real changes made)
-(5 real changes made)
-(8 real changes made)
-(5 real changes made)
-(5 real changes made)
-(7 real changes made)
-(2 real changes made)
-(4 real changes made)
-(4 real changes made)
-(2 real changes made)
-(6 real changes made)
-(3 real changes made)
-(6 real changes made)
-(8 real changes made)
-(5 real changes made)
-(4 real changes made)
-(6 real changes made)</code></pre>
-</div>
 
 </div>
-<img data-src="13SC_files/figure-revealjs/cell-10-output-2.png" class="r-stretch"></section>
+<img data-src="13SC_files/figure-revealjs/cell-10-output-1.png" class="r-stretch"></section>
 <section id="other-falsification-tests" class="slide level2">
 <h2>Other Falsification Tests</h2>
 <ul>

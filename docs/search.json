@@ -3525,7 +3525,7 @@
     "href": "adv_class/13SC.html#p-values",
     "title": "Synthetic Control",
     "section": "p-values",
-    "text": "p-values\n\n\nCode\n gen rnk2=0\nforvalues i = 1/39 {\n    if   (sef`i'a[1])&lt;(2*sef3a[1]) {\n        local t = `t'+1\n        replace rnk2=rnk2+(tef`i'&lt;=tef3)    \n    }\n} \ngen pv=rnk2*100/`t'\n \ntwo bar pv _time if _time&gt;1988 & rnk2&lt;32, ylabel(0(2)15) xlabel(1989/2000)\n\n\n(10 real changes made)\n(6 real changes made)\n(32 real changes made)\n(5 real changes made)\n(9 real changes made)\n(3 real changes made)\n(5 real changes made)\n(4 real changes made)\n(6 real changes made)\n(4 real changes made)\n(4 real changes made)\n(8 real changes made)\n(5 real changes made)\n(4 real changes made)\n(8 real changes made)\n(3 real changes made)\n(5 real changes made)\n(8 real changes made)\n(5 real changes made)\n(5 real changes made)\n(7 real changes made)\n(2 real changes made)\n(4 real changes made)\n(4 real changes made)\n(2 real changes made)\n(6 real changes made)\n(3 real changes made)\n(6 real changes made)\n(8 real changes made)\n(5 real changes made)\n(4 real changes made)\n(6 real changes made)"
+    "text": "p-values\n\n\nCode\n gen rnk2=0\nforvalues i = 1/39 {\n    if   (sef`i'a[1])&lt;(2*sef3a[1]) {\n        local t = `t'+1\n        qui:replace rnk2=rnk2+(tef`i'&lt;=tef3)    \n    }\n} \nqui: gen pv=rnk2*100/`t'\n \ntwo bar pv _time if _time&gt;1988 & rnk2&lt;32, ylabel(0(2)15) xlabel(1989/2000)"
   },
   {
     "objectID": "adv_class/13SC.html#other-falsification-tests",

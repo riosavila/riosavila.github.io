@@ -410,10 +410,10 @@ two bar rt2 rnk || bar rt2 rnk if rt1==3 , ///
 forvalues i = 1/39 {
 	if   (sef`i'a[1])<(2*sef3a[1]) {
 		local t = `t'+1
-		replace rnk2=rnk2+(tef`i'<=tef3)	
+		qui:replace rnk2=rnk2+(tef`i'<=tef3)	
 	}
 } 
-gen pv=rnk2*100/`t'
+qui: gen pv=rnk2*100/`t'
  
 two bar pv _time if _time>1988 & rnk2<32, ylabel(0(2)15) xlabel(1989/2000)
 ```
