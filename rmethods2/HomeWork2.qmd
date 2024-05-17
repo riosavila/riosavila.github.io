@@ -13,7 +13,7 @@ execute:
 
 Submit a document containing your answers to the following questions and a do file with the code used in `Stata` to produce the answers. Ensure your program works as submitted and produces the reported answers for full credit.
 
-## Part I: Significance Testing
+## Part I: Significance Testing (15pts)
 
 In this section, use simulation to demonstrate:
 - How rejecting the null hypothesis probability increases with the number of tests.
@@ -31,12 +31,15 @@ Refer to the file [`hw2.do`](hw2.do) for a template program simulating data for 
 Repeat the above tasks 1000 times and report the proportion of times you reject the null hypothesis in each case (summary tables). Provide an explanation for your results.
 
 For the parameters K and N, use the following combinations:
+
 - K = 2, N = 20
 - K = 5, N = 20
 - K = 2, N = 100
 - K = 5, N = 100
 
-## Part II: Imputation and Statistical Matching
+Using the code, you need to change the parameters K and N to run each simulation. Create a table with the results for each combination of K and N, and explain.
+
+## Part II: Imputation and Statistical Matching (30pts)
 
 Imputation and Statistical Matching are methods for handling missing data. Use any of these methods on the dataset [`cps_imput_miss.dta`](cps_imput_miss.dta), to address the problem of missing wages. 
 
@@ -56,7 +59,7 @@ The problem on this dataset is that in 50% of the households, husband's wages ar
 
 > Note: Include a do-file with the code for imputation and summary statistics.
 
-## Part III: Micro-Simulations
+## Part III: Micro-Simulations (55pts)
 
 Micro-simulations are a valuable tool for studying the effects of policy changes. In this section, use micro-simulations to explore the impact of an Employer of Last Resort (ELR) program on the labor market of Tanga-Mandapio, a small Pacific country similar to the United States.
 
@@ -94,7 +97,7 @@ Write a report explaining the simulation steps, including model specification, a
 - Jobs created, impact on the unemployment rate by education.
 - Impact on poverty and inequality using `cutoff` and Income Percapita (`hhincome`/`hhsize`).
 
-Provide summary statistics before and after the simulation by gender and race.
+Provide summary statistics for poverty before and after the simulation, by gender and race.
 
 > Note: Include a do-file with the code for the simulation and summary statistics.
 
@@ -105,3 +108,15 @@ Provide summary statistics before and after the simulation by gender and race.
 - `cutoff` is the poverty line for a household.
 - `educ_g` is the aggregated education level.
 - Explore the dataset for a better understanding of available variables.
+
+### Hints on How to proceed
+
+1. Create a dummy `emp` that is equal to 1 if employed and 0 otherwise only for people age = 18 to 65.
+2. Estimate your logit model using `emp` as dependent variable, as a function of characteristics.
+3. Using predicted Probabilities, assign jobs to those eligible for the program, using those with highest predicted probability first. 
+   1. First for the unemployed, sort data by predicted probability (highest to lowest) and assign jobs until the budget is exhausted.(each persons anual wage is **wage**x40x48, where wages depends on his education level)
+4. To recalculate total household income, you can simply create `gen new_hhincome = hhincome + new_wage_elr` where `new_wage_elr` the sum of ELR wages for each household. Some households may have more than one person employed by the ELR program.
+5. Households are identified with the variable `serial`.
+
+
+  

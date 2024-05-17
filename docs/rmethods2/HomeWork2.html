@@ -204,11 +204,12 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#instructions" id="toc-instructions" class="nav-link active" data-scroll-target="#instructions">Instructions</a></li>
-  <li><a href="#part-i-significance-testing" id="toc-part-i-significance-testing" class="nav-link" data-scroll-target="#part-i-significance-testing">Part I: Significance Testing</a></li>
-  <li><a href="#part-ii-imputation-and-statistical-matching" id="toc-part-ii-imputation-and-statistical-matching" class="nav-link" data-scroll-target="#part-ii-imputation-and-statistical-matching">Part II: Imputation and Statistical Matching</a></li>
-  <li><a href="#part-iii-micro-simulations" id="toc-part-iii-micro-simulations" class="nav-link" data-scroll-target="#part-iii-micro-simulations">Part III: Micro-Simulations</a>
+  <li><a href="#part-i-significance-testing-15pts" id="toc-part-i-significance-testing-15pts" class="nav-link" data-scroll-target="#part-i-significance-testing-15pts">Part I: Significance Testing (15pts)</a></li>
+  <li><a href="#part-ii-imputation-and-statistical-matching-30pts" id="toc-part-ii-imputation-and-statistical-matching-30pts" class="nav-link" data-scroll-target="#part-ii-imputation-and-statistical-matching-30pts">Part II: Imputation and Statistical Matching (30pts)</a></li>
+  <li><a href="#part-iii-micro-simulations-55pts" id="toc-part-iii-micro-simulations-55pts" class="nav-link" data-scroll-target="#part-iii-micro-simulations-55pts">Part III: Micro-Simulations (55pts)</a>
   <ul class="collapse">
   <li><a href="#remarks" id="toc-remarks" class="nav-link" data-scroll-target="#remarks">Remarks</a></li>
+  <li><a href="#hints-on-how-to-proceed" id="toc-hints-on-how-to-proceed" class="nav-link" data-scroll-target="#hints-on-how-to-proceed">Hints on How to proceed</a></li>
   </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="HomeWork2.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
@@ -246,8 +247,8 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
 <p>Submit a document containing your answers to the following questions and a do file with the code used in <code>Stata</code> to produce the answers. Ensure your program works as submitted and produces the reported answers for full credit.</p>
 </section>
-<section id="part-i-significance-testing" class="level2">
-<h2 class="anchored" data-anchor-id="part-i-significance-testing">Part I: Significance Testing</h2>
+<section id="part-i-significance-testing-15pts" class="level2">
+<h2 class="anchored" data-anchor-id="part-i-significance-testing-15pts">Part I: Significance Testing (15pts)</h2>
 <p>In this section, use simulation to demonstrate: - How rejecting the null hypothesis probability increases with the number of tests. - Benferroni correction application to control for multiple testing. - Joint testing usage to control for multiple testing.</p>
 <section id="tasks" class="level4">
 <h4 class="anchored" data-anchor-id="tasks">Tasks</h4>
@@ -258,11 +259,18 @@ ul.task-list li input[type="checkbox"] {
 <li>Conduct a joint test that the mean of all K variables is zero, using a 10% significance level.</li>
 </ol>
 <p>Repeat the above tasks 1000 times and report the proportion of times you reject the null hypothesis in each case (summary tables). Provide an explanation for your results.</p>
-<p>For the parameters K and N, use the following combinations: - K = 2, N = 20 - K = 5, N = 20 - K = 2, N = 100 - K = 5, N = 100</p>
+<p>For the parameters K and N, use the following combinations:</p>
+<ul>
+<li>K = 2, N = 20</li>
+<li>K = 5, N = 20</li>
+<li>K = 2, N = 100</li>
+<li>K = 5, N = 100</li>
+</ul>
+<p>Using the code, you need to change the parameters K and N to run each simulation. Create a table with the results for each combination of K and N, and explain.</p>
 </section>
 </section>
-<section id="part-ii-imputation-and-statistical-matching" class="level2">
-<h2 class="anchored" data-anchor-id="part-ii-imputation-and-statistical-matching">Part II: Imputation and Statistical Matching</h2>
+<section id="part-ii-imputation-and-statistical-matching-30pts" class="level2">
+<h2 class="anchored" data-anchor-id="part-ii-imputation-and-statistical-matching-30pts">Part II: Imputation and Statistical Matching (30pts)</h2>
 <p>Imputation and Statistical Matching are methods for handling missing data. Use any of these methods on the dataset <a href="cps_imput_miss.dta"><code>cps_imput_miss.dta</code></a>, to address the problem of missing wages.</p>
 <p>The dataset focuses on couple-households with or without children (below 15 years old) and no other family members. Their only source of income comes from wages.</p>
 <p>The dataset includes variables ending in <code>_1</code> for the husband and <code>_2</code> for the wife. Household-level variables and the variable <code>cutoff</code> indicating the poverty line are also provided</p>
@@ -282,8 +290,8 @@ ul.task-list li input[type="checkbox"] {
 </blockquote>
 </section>
 </section>
-<section id="part-iii-micro-simulations" class="level2">
-<h2 class="anchored" data-anchor-id="part-iii-micro-simulations">Part III: Micro-Simulations</h2>
+<section id="part-iii-micro-simulations-55pts" class="level2">
+<h2 class="anchored" data-anchor-id="part-iii-micro-simulations-55pts">Part III: Micro-Simulations (55pts)</h2>
 <p>Micro-simulations are a valuable tool for studying the effects of policy changes. In this section, use micro-simulations to explore the impact of an Employer of Last Resort (ELR) program on the labor market of Tanga-Mandapio, a small Pacific country similar to the United States.</p>
 <section id="considerations" class="level4">
 <h4 class="anchored" data-anchor-id="considerations">Considerations</h4>
@@ -343,7 +351,7 @@ ul.task-list li input[type="checkbox"] {
 <li>Jobs created, impact on the unemployment rate by education.</li>
 <li>Impact on poverty and inequality using <code>cutoff</code> and Income Percapita (<code>hhincome</code>/<code>hhsize</code>).</li>
 </ul>
-<p>Provide summary statistics before and after the simulation by gender and race.</p>
+<p>Provide summary statistics for poverty before and after the simulation, by gender and race.</p>
 <blockquote class="blockquote">
 <p>Note: Include a do-file with the code for the simulation and summary statistics.</p>
 </blockquote>
@@ -357,6 +365,19 @@ ul.task-list li input[type="checkbox"] {
 <li><code>educ_g</code> is the aggregated education level.</li>
 <li>Explore the dataset for a better understanding of available variables.</li>
 </ul>
+</section>
+<section id="hints-on-how-to-proceed" class="level3">
+<h3 class="anchored" data-anchor-id="hints-on-how-to-proceed">Hints on How to proceed</h3>
+<ol type="1">
+<li>Create a dummy <code>emp</code> that is equal to 1 if employed and 0 otherwise only for people age = 18 to 65.</li>
+<li>Estimate your logit model using <code>emp</code> as dependent variable, as a function of characteristics.</li>
+<li>Using predicted Probabilities, assign jobs to those eligible for the program, using those with highest predicted probability first.
+<ol type="1">
+<li>First for the unemployed, sort data by predicted probability (highest to lowest) and assign jobs until the budget is exhausted.(each persons anual wage is <strong>wage</strong>x40x48, where wages depends on his education level)</li>
+</ol></li>
+<li>To recalculate total household income, you can simply create <code>gen new_hhincome = hhincome + new_wage_elr</code> where <code>new_wage_elr</code> the sum of ELR wages for each household. Some households may have more than one person employed by the ELR program.</li>
+<li>Households are identified with the variable <code>serial</code>.</li>
+</ol>
 
 
 </section>
