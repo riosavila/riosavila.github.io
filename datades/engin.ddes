@@ -1,0 +1,18 @@
+1. Dataset information:
+   - Datafile name: ENGIN.DES
+   - Dataset title (if known): Not provided
+   - Suggested title: Thai Engineering Workforce Dataset
+
+2. The dataset appears to contain information about the characteristics and employment of a sample of Thai engineering workers. The variables include demographic information (gender), educational attainment (highest grade completed, high school graduate, college graduate, graduate school, polytechnic), work experience (years on current job, previous experience), and wage-related measures (monthly salary, starting wage, log of wage and starting wage). The dataset has 403 observations.
+
+3. Potential research ideas:
+
+   a. Examining the relationship between educational attainment and monthly salary for Thai engineering workers. This could involve analyzing the impact of different levels of education (high school, college, graduate school, polytechnic) on wages, while controlling for other factors such as work experience.
+
+   b. Investigating the gender wage gap in the Thai engineering workforce. Researchers could explore the differences in wages between male and female engineers, and identify potential factors contributing to this gap, such as differences in educational attainment, work experience, or other characteristics.
+
+   c. Analyzing the impact of work experience on the wages of Thai engineering workers. Researchers could examine the relationship between years of experience (both current job and previous experience) and monthly salary, and explore whether there are diminishing returns to experience over time.
+
+   d. Studying the transition from starting wage to current wage for Thai engineering workers. Researchers could investigate the factors that influence the change in wages over time, such as educational attainment, work experience, or other individual characteristics.
+
+   e. Exploring the role of educational specialization (e.g., polytechnic vs. traditional university) on the employment and wages of Thai engineering workers. This could provide insights into the labor market preferences and outcomes for different types of engineering education.

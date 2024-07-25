@@ -1,0 +1,18 @@
+1. Dataset information:
+   - Datafile name: CPS78_85.DES
+   - Dataset title (if known): Not provided
+   - Suggested title: Wage and Employment Data from the Current Population Survey (1978 and 1985)
+
+2. The dataset contains information on various demographic and employment-related variables for individuals in the United States. The variables include years of schooling, region of residence (south or not), race (nonwhite or not), gender, marital status, work experience, union membership, and log hourly wage. The data spans two years, 1978 and 1985, and includes interaction terms between the year 1985 and some of the other variables.
+
+3. Potential research ideas:
+
+   a. Examine the relationship between education and wages, and how this relationship may have changed between 1978 and 1985. Investigate whether the returns to education differ for individuals living in the South compared to other regions, and whether this varies by gender or race.
+
+   b. Analyze the impact of union membership on wages, and explore whether the effect of unions on wages has changed over time. Investigate whether the union wage premium differs for individuals with different levels of education or work experience.
+
+   c. Explore the gender wage gap and how it has evolved between 1978 and 1985. Examine the role of factors such as education, work experience, and marital status in explaining the gender wage gap.
+
+   d. Investigate the relationship between work experience and wages, and whether the returns to experience have changed over time. Analyze whether the experience-wage profile differs for individuals with different levels of education or union membership.
+
+   e. Examine the regional differences in wages, particularly the wage gap between the South and other regions of the United States. Explore the extent to which this regional wage gap can be explained by differences in individual characteristics, such as education, race, and gender.

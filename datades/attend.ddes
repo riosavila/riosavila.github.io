@@ -1,0 +1,18 @@
+1. Dataset information:
+   - Datafile name: ATTEND.DES
+   - Dataset title (if known): Not provided
+   - Suggested title: Student Attendance and Academic Performance
+
+2. The dataset contains information about 680 students, including their class attendance, academic performance, and demographic characteristics. The variables include the number of classes attended, term GPA, cumulative GPA prior to the term, ACT score, final exam score, percentage of classes attended, percentage of homework turned in, and whether the student is a freshman or sophomore. Additionally, the dataset includes the number of classes skipped and a standardized final exam score.
+
+3. Potential research ideas:
+
+   a. Investigate the relationship between class attendance and academic performance: Analyze the impact of class attendance, as measured by the number of classes attended and the percentage of classes attended, on student GPA and final exam scores. This could provide insights into the importance of class attendance for academic success.
+
+   b. Explore the influence of prior academic achievement on current performance: Examine the relationship between the students' cumulative GPA prior to the term and their term GPA and final exam scores. This could help identify the role of previous academic performance in predicting current outcomes.
+
+   c. Assess the impact of demographic factors on academic performance: Investigate whether the students' freshman or sophomore status has any significant effect on their academic performance, as measured by GPA and final exam scores. This could provide insights into the challenges and opportunities faced by students at different stages of their academic journey.
+
+   d. Analyze the relationship between homework completion and academic performance: Explore the association between the percentage of homework turned in and student GPA and final exam scores. This could shed light on the importance of consistent homework completion for academic success.
+
+   e. Develop a predictive model for student academic performance: Utilize the available variables, such as class attendance, prior GPA, ACT score, and homework completion, to create a predictive model that can estimate a student's final exam score or term GPA. This could help identify the key factors that contribute to academic performance and inform interventions to support student success.

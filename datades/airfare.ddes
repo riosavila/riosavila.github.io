@@ -1,0 +1,14 @@
+1. Dataset information:
+   - Datafile name: AIRFARE.DES
+   - Dataset title (if known): Not provided
+   - Suggested title: Airline Fare and Passenger Data
+
+2. The dataset contains information about airline fares and passenger volumes for various routes over the years 1997 to 2000. The variables include the year, origin and destination airports, a unique route identifier, the distance of the route, the average number of passengers per day, the average one-way fare, the market share of the largest carrier, and several derived variables such as the logarithm of distance, fare, and passengers.
+
+3. Potential research ideas:
+
+   a. Analyze the relationship between route distance and average fare, and investigate how this relationship has changed over the years.
+   b. Examine the impact of market concentration (as measured by the largest carrier's market share) on average fares and passenger volumes.
+   c. Explore the factors that influence the average number of passengers per day on a given route, such as distance, fare, and market concentration.
+   d. Investigate the role of the economic conditions (as indicated by the year dummies) in shaping the trends in airline fares and passenger volumes.
+   e. Develop a predictive model to forecast average fares or passenger volumes based on the available variables, and assess the model's performance over time.

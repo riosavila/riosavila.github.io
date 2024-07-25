@@ -1,0 +1,18 @@
+1. Dataset information:
+   - Datafile name: RETURN.DES
+   - Dataset title (if known): Not provided
+   - Suggested title: CEO Compensation and Firm Performance
+
+2. The dataset contains information on various financial and performance metrics for a sample of 142 companies. The variables include measures of profitability (return on equity, return on capital), leverage (debt/capital), earnings (earnings per share, net income), stock prices (at the end of 1990 and 1994), CEO salary, and the percentage change in stock price from 1990 to 1994. The data appears to be focused on the relationship between CEO compensation and firm performance.
+
+3. Potential research ideas:
+
+1. Examine the relationship between CEO compensation (salary) and firm profitability (return on equity, return on capital). This could provide insights into the alignment between executive pay and company performance.
+
+2. Investigate the impact of leverage (debt/capital) on firm performance and CEO compensation. This could shed light on how capital structure decisions influence both financial outcomes and executive incentives.
+
+3. Analyze the association between earnings measures (earnings per share, net income) and stock price performance (1990-1994 returns). This could help understand the market's valuation of different financial metrics.
+
+4. Explore the factors that influence the change in stock price over the 1990-1994 period, such as the relationship between CEO salary, firm profitability, and stock market returns.
+
+5. Conduct a comparative analysis of the determinants of CEO compensation across different industries or firm characteristics within the sample. This could identify any systematic differences in the pay-performance relationship.

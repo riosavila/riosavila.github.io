@@ -1,0 +1,18 @@
+1. Dataset information:
+   - Datafile name: MEAP01.DES
+   - Dataset title (if known): Not provided
+   - Suggested title: School District and Building-Level Data
+
+2. The dataset contains information about school districts and individual school buildings, including the percentage of students who performed satisfactorily on 4th-grade math and reading assessments, the percentage of students eligible for free or reduced-price lunch, school enrollment, total spending, and expenditures per pupil. The data also includes the natural logarithms of enrollment, total spending, and expenditures per pupil.
+
+3. Potential research ideas:
+
+a. Examine the relationship between school spending and student academic performance, as measured by the 4th-grade math and reading assessment scores. This could help identify whether increased funding is associated with improved educational outcomes.
+
+b. Investigate the relationship between the percentage of students eligible for free or reduced-price lunch (a proxy for socioeconomic status) and school-level academic performance. This could provide insights into the impact of socioeconomic factors on student achievement.
+
+c. Analyze the differences in school-level characteristics, such as enrollment and expenditures per pupil, between districts or buildings with high and low academic performance. This could help identify factors that contribute to educational disparities.
+
+d. Explore the relationship between school enrollment and per-pupil expenditures, as well as the impact of these variables on academic performance. This could inform discussions about optimal school size and resource allocation.
+
+e. Conduct a longitudinal analysis to examine how changes in school-level variables, such as spending or enrollment, are associated with changes in academic performance over time. This could provide insights into the dynamics of educational improvement.

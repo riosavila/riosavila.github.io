@@ -1,0 +1,18 @@
+1. Dataset information:
+   - Datafile name: mabelfmm.dta
+   - Dataset title (if known): Not provided
+   - Suggested title: Medical Professionals' Annual Hours and Earnings
+
+2. The dataset contains information on 5,384 medical professionals, including their annual hours worked (yhrs), gender (female), whether they have a dependent child under 5 years old (childu5), whether they have a temporary resident visa (visa), years of medical practice experience (expr), whether they have a fellowship of colleges (fellow), the number of other postgraduate qualifications they have (pgradoth), the number of full-time and part-time doctors in their practice (pracsize), the logarithm of their annual earnings (logyearn), the square of their years of experience (exprsq), and the logarithm of their annual hours worked (logyhrs).
+
+3. Potential research ideas:
+
+1. Examine the relationship between annual hours worked (yhrs) and annual earnings (logyearn) for medical professionals, and investigate how this relationship is influenced by factors such as gender (female), experience (expr), and practice size (pracsize).
+
+2. Analyze the impact of having a dependent child under 5 years old (childu5) on the annual hours worked (yhrs) and earnings (logyearn) of medical professionals, and explore potential gender differences in this relationship.
+
+3. Investigate the role of temporary resident visas (visa) in the employment and earnings of medical professionals, and how this may vary based on factors such as experience (expr) and practice size (pracsize).
+
+4. Explore the relationship between the number of postgraduate qualifications (pgradoth) and the annual earnings (logyearn) of medical professionals, and examine how this relationship is influenced by factors such as experience (expr) and fellowship status (fellow).
+
+5. Analyze the differences in the logarithm of annual hours worked (logyhrs) and the logarithm of annual earnings (logyearn) between medical professionals with different practice sizes (pracsize), and investigate the potential mediating role of factors such as experience (expr) and gender (female).

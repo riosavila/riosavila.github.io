@@ -1,0 +1,18 @@
+1. Dataset information:
+   - Datafile name: Not provided
+   - Dataset title (if known): Not provided
+   - Suggested title: Titanic Passenger Data
+
+2. The dataset contains information about passengers on the Titanic, including their passenger class, survival status, name, age, number of siblings/spouses and parents/children aboard, ticket number, fare, cabin, lifeboat (if survived), body number (if did not survive and body was recovered), home destination, sex, and port of embarkation.
+
+3. Potential research ideas:
+
+   a. Analyze the relationship between passenger class and survival rate. Investigate whether there were significant differences in survival rates among the different passenger classes.
+
+   b. Explore the impact of family size (measured by the number of siblings/spouses and parents/children aboard) on the likelihood of survival. Determine if larger families had a higher or lower survival rate.
+
+   c. Investigate the role of gender in survival outcomes. Examine whether there were significant differences in survival rates between male and female passengers.
+
+   d. Analyze the relationship between passenger age and survival rate. Determine if certain age groups had higher or lower chances of survival.
+
+   e. Explore the influence of port of embarkation on survival rates. Investigate whether passengers who embarked from different ports had varying survival outcomes.

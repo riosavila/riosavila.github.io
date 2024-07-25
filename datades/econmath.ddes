@@ -1,0 +1,18 @@
+1. Dataset information:
+   - Datafile name: ECONMATH.DES
+   - Dataset title (if known): Not provided
+   - Suggested title: Economics and Mathematics Performance Dataset
+
+2. The dataset contains information on 856 observations and 17 variables related to the academic performance and background of students. The variables include age, hours worked per week, hours studying per week, whether the student took economics in high school, college GPA, high school GPA, ACT English and math scores, ACT composite score, math quiz score, gender, whether the student took a calculus course, attendance ratings, and whether the student's parents have a college degree. The data appears to be focused on understanding the factors that influence academic performance, particularly in economics and mathematics-related courses.
+
+3. Potential research ideas:
+
+a. Investigate the relationship between study hours, work hours, and academic performance (GPA, ACT scores, math quiz score, course score). Explore whether there are optimal levels of study and work that maximize academic success.
+
+b. Analyze the impact of prior academic preparation (high school GPA, economics in high school, calculus course) on college-level performance in economics and mathematics-related courses. Identify the key factors that contribute to success in these fields.
+
+c. Examine the role of family background (parental education) in shaping student academic outcomes. Determine whether there are significant differences in performance based on socioeconomic status.
+
+d. Explore the gender differences in academic performance, particularly in mathematics and economics-related courses. Investigate the potential factors (e.g., study habits, attendance, prior preparation) that may contribute to any observed gender gaps.
+
+e. Develop a predictive model to identify the key variables that best explain and predict a student's overall course performance (score). This could help inform admissions and academic support strategies.

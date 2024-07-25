@@ -1,0 +1,14 @@
+1. Dataset information:
+   - Datafile name: mabelunbalsmall.dta
+   - Dataset title (if known): Not provided
+   - Suggested title: Medical Professionals' Earnings and Employment
+
+2. The dataset contains information on 3,897 medical professionals across multiple survey waves. The variables include individual identification (id), survey wave (wave), gross annual earnings (yearn), annual hours worked (yhrs), gender (female), years of medical practice experience (expr), whether the individual does hospital work (hospwork), whether the individual is self-employed (selfempl), the natural logarithm of earnings (lyearn), the natural logarithm of hours worked (lyhrs), and the square of years of experience (exprsq).
+
+3. Potential research ideas:
+
+   a. Examine the relationship between years of medical practice experience and earnings, accounting for potential nonlinearities in the relationship.
+   b. Investigate the differences in earnings and hours worked between self-employed and hospital-employed medical professionals, controlling for other relevant factors.
+   c. Analyze the gender wage gap among medical professionals and explore potential factors contributing to the observed differences in earnings between male and female practitioners.
+   d. Assess the impact of hospital work on the earnings and employment status of medical professionals, considering the potential trade-offs between different work arrangements.
+   e. Explore the factors that influence the decision of medical professionals to become self-employed, such as years of experience, gender, and earnings potential.

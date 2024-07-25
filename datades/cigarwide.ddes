@@ -1,0 +1,18 @@
+1. Dataset information:
+   - Datafile name: cigarwide.dta
+   - Dataset title (if known): Not provided
+   - Suggested title: Cigarette Consumption and Prices by U.S. State
+
+2. The dataset contains information on cigarette consumption and prices for 10 U.S. states over three years (1963, 1964, and 1965). The variables include the state identifier, the natural logarithm of cigarette prices (lnp63, lnp64, lnp65), and the natural logarithm of cigarette consumption (lnc63, lnc64, lnc65) for each of the three years.
+
+3. Potential research ideas:
+
+   1. Analyze the relationship between cigarette prices and consumption over time: Investigate how changes in cigarette prices have affected consumption levels in the different states, and whether the relationship has remained consistent or changed over the three-year period.
+
+   2. Explore regional differences in cigarette consumption and pricing: Examine if there are any notable differences in cigarette consumption and pricing patterns across the 10 U.S. states included in the dataset, and identify potential factors that may contribute to these regional variations.
+
+   3. Investigate the impact of economic factors on cigarette consumption: Analyze the influence of variables such as income, unemployment, or other socioeconomic indicators on the observed changes in cigarette consumption over time.
+
+   4. Assess the effectiveness of tobacco control policies: Utilize the data to evaluate the impact of any state-level tobacco control policies or regulations implemented during the study period, and their influence on cigarette consumption.
+
+   5. Develop predictive models for cigarette consumption: Explore the feasibility of using the available data to build forecasting models that can predict future cigarette consumption patterns based on the observed trends in prices and other relevant factors.

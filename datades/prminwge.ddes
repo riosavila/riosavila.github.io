@@ -1,0 +1,18 @@
+1. Dataset information:
+   - Datafile name: PRMINWGE.DES
+   - Dataset title (if known): Not provided
+   - Suggested title: Puerto Rico Minimum Wage and Labor Market Data
+
+2. The dataset contains information on various labor market and economic indicators for Puerto Rico from 1950 to 1987. The variables include the average minimum wage, average hourly wage, Kaitz minimum wage index, average industry coverage, economy-wide minimum wage coverage, average manufacturing wage, Puerto Rican price deflator, employment-to-population ratio, Puerto Rican GNP, Puerto Rican unemployment rate, and U.S. GNP. The dataset also includes several derived variables, such as logarithmic transformations of the original variables.
+
+3. Potential research ideas:
+
+   a. Examining the relationship between the minimum wage and employment in Puerto Rico: The dataset provides information on the Kaitz minimum wage index, which measures the minimum wage relative to the average wage, as well as the employment-to-population ratio and unemployment rate. Researchers could investigate how changes in the minimum wage have affected employment and unemployment in Puerto Rico over the study period.
+
+   b. Analyzing the impact of minimum wage coverage on wages and employment: The dataset includes variables on the average industry coverage and economy-wide minimum wage coverage. Researchers could explore how changes in minimum wage coverage have influenced the average wage and employment levels in Puerto Rico.
+
+   c. Investigating the relationship between the Puerto Rican and U.S. economies: The dataset includes variables for Puerto Rican GNP and U.S. GNP, which could be used to analyze the economic linkages between the two regions. Researchers could examine how changes in the U.S. economy have affected the Puerto Rican economy and vice versa.
+
+   d. Studying the role of the minimum wage in the Puerto Rican price level: The dataset includes a Puerto Rican price deflator, which could be used to investigate how changes in the minimum wage have affected the overall price level in Puerto Rico.
+
+   e: Exploring the dynamics of the Puerto Rican labor market: The dataset includes several variables related to the Puerto Rican labor market, such as the employment-to-population ratio and unemployment rate. Researchers could use these variables to analyze the dynamics of the Puerto Rican labor market, including how it has responded to changes in economic conditions and policy interventions.
