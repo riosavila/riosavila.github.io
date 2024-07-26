@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Economic Research Adventure</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        #game-container {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        #options {
+            margin-top: 20px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        #stats {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        #feedback {
+            margin-top: 15px;
+            font-style: italic;
+        }
+        .warning {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Economic Research Adventure</h1>
+    <div id="game-container">
+        <div id="scenario"></div>
+        <div id="options"></div>
+        <div id="feedback"></div>
+        <div id="stats"></div>
+    </div>
+
+    <script>
+        const game = {
+            initialTime: 100,
+            timeUnits: 100,
+            qualityPoints: 0,
+            currentStep: 0,
+            scenario: [
+                {
+                    text: "You're an economics graduate student ready to start your research project. Choose your topic:",
+                    options: [
+                        { text: "Impact of minimum wage on employment", time: 5, quality: "random" },
+                        { text: "Effects of monetary policy on inflation", time: 5, quality: "random" },
+                        { text: "Relationship between education and income inequality", time: 5, quality: "random" }
+                    ]
+                },
+                {
+                    text: "How will you approach your literature review?",
+                    options: [
+                        { text: "Comprehensive review", time: 30, quality: "high" },
+                        { text: "Moderate review", time: 20, quality: "medium" },
+                        { text: "Quick overview", time: 10, quality: "low" },
+                        { text: "Skip literature review", time: 0, quality: "very low" }
+                    ]
+                },
+                {
+                    text: "How thoroughly will you explore your data?",
+                    options: [
+                        { text: "In-depth analysis", time: 30, quality: "high" },
+                        { text: "Standard analysis", time: 20, quality: "medium" },
+                        { text: "Basic analysis", time: 10, quality: "low" },
+                        { text: "Skip data exploration", time: 0, quality: "very low" }
+                    ]
+                },
+                {
+                    text: "What type of model will you use?",
+                    options: [
+                        { text: "Advanced econometric model", time: 35, quality: "high" },
+                        { text: "Standard regression model", time: 25, quality: "medium" },
+                        { text: "Simple correlation analysis", time: 10, quality: "low" }
+                    ]
+                },
+                {
+                    text: "How will you ensure the reliability of your results?",
+                    options: [
+                        { text: "Comprehensive checks", time: 20, quality: "high" },
+                        { text: "Basic checks", time: 10, quality: "medium" },
+                        { text: "Skip robustness checks", time: 0, quality: "very low" }
+                    ]
+                },
+                {
+                    text: "How much effort will you put into writing and revising your paper?",
+                    options: [
+                        { text: "Multiple drafts and peer review", time: 25, quality: "high" },
+                        { text: "Two drafts with basic review", time: 15, quality: "medium" },
+                        { text: "Single draft with minimal editing", time: 10, quality: "low" }
+                    ]
+                }
+            ],
+            events: [
+                { text: "You find a groundbreaking paper that perfectly aligns with your research.", quality: 15, feedback: "This discovery significantly enhances your understanding of the topic." },
+                { text: "Your computer crashes, and you lose some of your work.", quality: -10, time: -10, feedback: "This setback forces you to redo some of your work, affecting both time and quality." },
+                { text: "You receive valuable feedback from your advisor.", quality: 10, feedback: "Your advisor's insights help you refine your approach." },
+                { text: "You discover a flaw in your initial assumptions.", quality: -15, feedback: "This realization requires you to rethink parts of your research." },
+                { text: "You're invited to present your preliminary findings at a conference.", quality: 20, time: -15, feedback: "The conference presentation sharpens your ideas but takes time away from your research." }
+            ],
+            init() {
+                this.displayScenario();
+                this.updateStats();
+            },
+            displayScenario() {
+                if (this.currentStep >= this.scenario.length) {
+                    this.endGame();
+                    return;
+                }
+                const currentScenario = this.scenario[this.currentStep];
+                document.getElementById('scenario').innerHTML = `<p>${currentScenario.text}</p>`;
+                const optionsHtml = currentScenario.options.map((option, index) => 
+                    `<button onclick="game.selectOption(${index})">${option.text}</button>`
+                ).join('');
+                document.getElementById('options').innerHTML = optionsHtml;
+            },
+            selectOption(optionIndex) {
+                const option = this.scenario[this.currentStep].options[optionIndex];
+                this.timeUnits -= option.time;
+                
+                if (option.quality === "random") {
+                    this.qualityPoints += Math.floor(Math.random() * 15) + 1; // 1 to 15 points
+                } else {
+                    const qualityMap = {
+                        "very low": Math.floor(Math.random() * 5),
+                        "low": Math.floor(Math.random() * 10) + 5,
+                        "medium": Math.floor(Math.random() * 15) + 10,
+                        "high": Math.floor(Math.random() * 20) + 15
+                    };
+                    this.qualityPoints += qualityMap[option.quality];
+                }
+                
+                this.currentStep++;
+                this.checkRandomEvent();
+                this.displayScenario();
+                this.updateStats();
+            },
+            checkRandomEvent() {
+                if (Math.random() < 0.3) {  // 30% chance of an event
+                    const event = this.events[Math.floor(Math.random() * this.events.length)];
+                    this.qualityPoints += event.quality;
+                    if (event.time) this.timeUnits += event.time;
+                    document.getElementById('feedback').innerHTML = `<p>${event.text} ${event.feedback}</p>`;
+                } else {
+                    document.getElementById('feedback').innerHTML = '';
+                }
+            },
+            updateStats() {
+                let statsHtml = `Time Remaining: ${this.timeUnits} units`;
+                if (this.timeUnits < 0) {
+                    statsHtml += ` <span class="warning">(Overtime)</span>`;
+                }
+                document.getElementById('stats').innerHTML = statsHtml;
+            },
+            endGame() {
+                // Apply penalty for going over time
+                if (this.timeUnits < 0) {
+                    const penaltyPercentage = Math.min(100, Math.abs(this.timeUnits) * 2); // 2% penalty per unit of overtime, max 100%
+                    const penalty = Math.floor(this.qualityPoints * (penaltyPercentage / 100));
+                    this.qualityPoints -= penalty;
+                    if (this.qualityPoints < 0) this.qualityPoints = 0;
+                }
+
+                let result;
+                if (this.qualityPoints <= 50) result = "Not good enough (major revisions needed)";
+                else if (this.qualityPoints <= 80) result = "Needs significant improvement";
+                else if (this.qualityPoints <= 110) result = "Decent, but requires some work";
+                else if (this.qualityPoints <= 130) result = "Good, minor revisions needed";
+                else result = "Excellent, almost ready for publication";
+
+                let timeStatus = this.timeUnits >= 0 ? "on time" : `${Math.abs(this.timeUnits)} units over time`;
+
+                document.getElementById('game-container').innerHTML = `
+                    <h2>Research Complete!</h2>
+                    <p>You finished ${timeStatus}.</p>
+                    <p>Final Quality Points: ${this.qualityPoints}</p>
+                    <p>Result: ${result}</p>
+                    ${this.timeUnits < 0 ? `<p class="warning">Due to overtime, your quality was significantly reduced.</p>` : ''}
+                    <button onclick="location.reload()">Play Again</button>
+                `;
+            }
+        };
+
+        // Wait for the DOM to be fully loaded before initializing the game
+        document.addEventListener('DOMContentLoaded', () => game.init());
+    </script>
+</body>
+</html>

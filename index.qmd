@@ -2,6 +2,9 @@
 title: "Econometrics"
 ---
 
+Check [Test1](test1.html)
+Check [Test2](test2.html)
+
 Greetings, valiant students of the realm!
 
 Prepare yourselves, for you stand upon the precipice of a grand and extraordinary odyssey, one that will propel you through the cosmic tapestry of knowledge and understanding. Behold, the epic adventure that awaits you: the realm of Econometrics, where the forces of knowledge converge!
