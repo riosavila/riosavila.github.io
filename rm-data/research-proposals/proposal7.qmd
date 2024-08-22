@@ -1,0 +1,60 @@
+---
+title: "The Iron Bank Always Collects: A Study of Debt and Financial Institutions in Game of Thrones"
+author: "Your Name"
+date: "2023-08-22"
+format: pdf
+bibliography: references.bib
+---
+
+# Introduction
+
+George R.R. Martin's "A Song of Ice and Fire" series and its television adaptation "Game of Thrones" present a rich, complex world with its own economic systems. This research proposal aims to analyze the role of debt and financial institutions in the series, focusing on the Iron Bank of Braavos, to draw parallels with real-world economic history and financial systems.
+
+# Background and Research Question
+
+The Iron Bank of Braavos plays a crucial role in the political economy of the Game of Thrones world, financing wars and influencing the rise and fall of regimes [@McCaffrey2018]. Its operations bear similarities to historical institutions like the Medici Bank and modern central banks [@Graeber2011]. The series depicts various forms of debt, from personal loans to sovereign debt, and their consequences, providing a fictional lens through which to examine real-world financial dynamics.
+
+The economic aspects of Game of Thrones have been subject to some academic scrutiny [@Hudson2017], but a comprehensive analysis of its financial institutions and their parallels to real-world economic history is lacking. This research aims to fill this gap, using the fictional world as a case study to explore broader economic principles.
+
+Main Research Question: How do the depictions of debt and financial institutions in Game of Thrones reflect real-world historical and contemporary economic phenomena?
+
+Secondary Research Questions:
+1. What parallels can be drawn between the Iron Bank of Braavos and historical financial institutions?
+2. How does sovereign debt in Game of Thrones compare to real-world sovereign debt crises?
+3. What insights does the series offer about the relationship between financial power and political authority?
+
+# Potential Data Sources
+
+1. Book Series: "A Song of Ice and Fire" by George R.R. Martin
+2. TV Series: Scripts and scenes from "Game of Thrones"
+3. Fan Wikis: Detailed information about the economic aspects of the Game of Thrones world
+4. Historical Economic Data: Information on medieval and early modern financial systems
+5. Contemporary Economic Data: Modern sovereign debt and banking system data
+
+# Potential Approach
+
+We will employ a mixed-methods approach, combining qualitative textual analysis with quantitative historical comparisons. First, we will conduct a systematic review of all mentions and depictions of the Iron Bank and debt in both the book series and TV show, coding for types of transactions, terms of loans, and consequences of default.
+
+Using this data, we will construct a model of the Game of Thrones financial system, estimating key parameters such as interest rates, default risks, and the Bank's impact on political stability. We will then compare this model with historical data on institutions like the Medici Bank and the Bank of England.
+
+To analyze sovereign debt, we will use comparative case studies, contrasting the Crown's debt to the Iron Bank with real-world sovereign debt crises. We will also employ network analysis to map the relationships between financial and political power in the series.
+
+# Expected Findings
+
+We anticipate finding significant parallels between the Iron Bank and historical financial institutions, particularly in terms of their political influence and role in state formation. We expect to see that sovereign debt in Game of Thrones mirrors many aspects of real-world sovereign debt, including the consequences of default and the relationship between debt and political legitimacy.
+
+We also anticipate finding that the series offers insights into the interplay between financial and political power, potentially highlighting how control over credit can be as important as military might in shaping political outcomes.
+
+# Conclusion
+
+This research will provide a novel perspective on financial history and institutions by examining them through the lens of a popular fantasy series. While based on a fictional setting, the findings may offer insights into real-world financial dynamics, particularly regarding the role of debt in political economy. Moreover, this study could demonstrate the potential of using popular media as a tool for economic education and analysis.
+
+# GitHub Repository
+
+The data analysis and code for this project will be available in the following GitHub repository:
+
+[https://github.com/yourusername/ironbank-economics](https://github.com/yourusername/ironbank-economics)
+
+This repository will contain all data collection scripts, economic models, visualization code, and the final paper in Quarto format.
+
+# References

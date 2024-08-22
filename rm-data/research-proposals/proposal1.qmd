@@ -1,0 +1,54 @@
+---
+title: "The Impact of Remote Work on Urban Housing Prices"
+author: "Your Name"
+date: "2023-08-22"
+format: pdf
+bibliography: references1.bib
+---
+
+# Introduction
+
+The COVID-19 pandemic has dramatically altered work arrangements worldwide, with a significant shift towards remote work. This change has potential far-reaching implications for urban housing markets. This research proposal aims to investigate the impact of increased remote work adoption on housing prices in major urban centers.
+
+# Background and Research Question
+
+The traditional model of urban development has been centered around the concept of central business districts, where job concentration drives housing demand in surrounding areas. This model has been a cornerstone of urban economics for decades [@alonso1964location]. However, the rapid adoption of remote work, accelerated by the COVID-19 pandemic, challenges this traditional understanding [@dingel2020how].
+
+Remote work allows employees to live further from their workplace, potentially reducing the premium placed on centrally located housing. Early evidence suggests that this shift is already impacting housing markets, with some urban centers experiencing slower price growth or even price declines, while suburban and rural areas see increased demand [@ramani2021work]. However, the long-term implications of this trend remain unclear.
+
+Main Research Question: How has the increase in remote work adoption influenced housing prices in major urban centers?
+
+Secondary Research Questions:
+1. Is there a correlation between the percentage of remote workers in a city and changes in housing prices?
+2. How does the impact of remote work on housing prices vary across different urban areas?
+
+# Potential Data Sources
+
+1. Remote Work Adoption: U.S. Census Bureau's American Community Survey (ACS)
+2. Housing Prices: Zillow Home Value Index (ZHVI)
+3. Urban Characteristics: U.S. Census Bureau's City and Town Population Totals
+4. Employment Data: Bureau of Labor Statistics
+
+# Potential Approach
+
+This study will employ a difference-in-differences (DiD) approach to analyze the impact of remote work adoption on housing prices. We will use the COVID-19 pandemic as an exogenous shock that dramatically increased remote work adoption. The treatment group will consist of cities with high levels of remote work adoption, while the control group will include cities with lower levels of remote work adoption.
+
+We will control for various urban characteristics, such as population size, pre-pandemic economic conditions, and industry composition. To address potential endogeneity concerns, we will use an instrumental variable approach, using pre-pandemic internet connectivity as an instrument for remote work adoption.
+
+# Expected Findings
+
+We anticipate finding a negative relationship between remote work adoption and housing price growth in urban centers. We expect this effect to be more pronounced in cities with a higher concentration of jobs suitable for remote work. However, we also anticipate heterogeneity in the results, with some cities potentially showing resilience in housing prices despite increased remote work.
+
+# Conclusion
+
+This research will contribute to our understanding of how changing work patterns influence urban housing markets. The findings will have implications for urban planning, housing policy, and corporate real estate strategies in the post-pandemic era.
+
+# GitHub Repository
+
+The data analysis and code for this project will be available in the following GitHub repository:
+
+[https://github.com/yourusername/remote-work-housing-prices](https://github.com/yourusername/remote-work-housing-prices)
+
+This repository will contain all data processing scripts, analysis code, and the final paper in Quarto format.
+
+# References

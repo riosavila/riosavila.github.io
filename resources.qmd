@@ -24,6 +24,10 @@ using this software
 - General Learning resources: <https://www.stata.com/links/resources-for-learning-stata/>
 - Excellent Stata tutorial for beginners: <https://grodri.github.io/stata/index>
 - Our own Tutorial! [Stata Basics](Stata_Basics.html)
+- Also, you may want to check the following for a quick reference on
+  - [Data Management](https://friosavila.github.io/chatgpt/stata_08_02_2024/)
+  - [Publication Ready Tables](https://friosavila.github.io/chatgpt/stata_08_04_2024/)
+  - [Graphs](https://friosavila.github.io/chatgpt/stata_08_06_2024/)
 
 But of course, `Stata` is not **free**. There are other resources you may want to explore, if you are interested
 in doing econometric analysis, but no longer have access to Stata. These are R, Python and Julia.

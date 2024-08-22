@@ -1,0 +1,56 @@
+---
+title: "The Effect of Social Media Sentiment on Stock Market Volatility"
+author: "Your Name"
+date: "2023-08-22"
+format: pdf
+bibliography: references2.bib
+---
+
+# Introduction
+
+In the age of digital communication, social media platforms have become significant sources of information and sentiment expression. This research proposal aims to investigate the relationship between social media sentiment and stock market volatility, focusing on how sentiment expressed on platforms like Twitter can influence or predict market movements.
+
+# Background and Research Question
+
+The Efficient Market Hypothesis (EMH) suggests that stock prices reflect all available information [@fama1970efficient]. However, behavioral finance theories argue that investor sentiment can lead to deviations from fundamental values [@baker2007investor]. With the rise of social media, these platforms have become a new source of real-time information and sentiment that could potentially influence market behavior.
+
+Previous studies have shown that social media sentiment can predict stock returns and trading volume [@bollen2011twitter]. However, the relationship between social media sentiment and market volatility is less explored. Volatility is a crucial measure of market risk and plays a significant role in asset pricing and risk management [@poon2003forecasting].
+
+Main Research Question: To what extent does social media sentiment predict or influence stock market volatility?
+
+Secondary Research Questions:
+1. How does the predictive power of social media sentiment vary across different industries or company sizes?
+2. Is there a lag between changes in social media sentiment and changes in market volatility?
+
+# Potential Data Sources
+
+1. Social Media Data: Twitter API for tweets related to specific stocks or market indices
+2. Stock Market Data: Yahoo Finance API for historical stock prices and volatility indices
+3. Company Information: Compustat database for company characteristics
+4. News Sentiment: RavenPack database for comparison with traditional media sentiment
+
+# Potential Approach
+
+We will use natural language processing (NLP) techniques to analyze the sentiment of tweets related to specific stocks or market indices. We will then construct a daily sentiment index for each stock or index in our sample.
+
+To analyze the relationship between social media sentiment and market volatility, we will use a Vector Autoregression (VAR) model. This will allow us to capture the dynamic relationships between sentiment and volatility while controlling for other factors that might influence volatility, such as trading volume and macroeconomic news.
+
+We will also conduct Granger causality tests to determine if social media sentiment has predictive power for future volatility. To address potential endogeneity concerns, we will use an instrumental variable approach, using exogenous events that affect sentiment but are unlikely to directly affect volatility.
+
+# Expected Findings
+
+We anticipate finding a significant relationship between social media sentiment and stock market volatility. We expect that negative sentiment will be associated with increased volatility, while positive sentiment may have a stabilizing effect. We also anticipate that the strength of this relationship may vary across different industries, with tech stocks potentially showing a stronger link to social media sentiment.
+
+# Conclusion
+
+This research will contribute to our understanding of how information dissemination through social media influences financial markets. The findings will have implications for risk management strategies, regulatory policies regarding social media and market manipulation, and the development of sentiment-based trading strategies.
+
+# GitHub Repository
+
+The data analysis and code for this project will be available in the following GitHub repository:
+
+[https://github.com/yourusername/social-media-market-volatility](https://github.com/yourusername/social-media-market-volatility)
+
+This repository will contain all data collection scripts, sentiment analysis code, econometric models, and the final paper in Quarto format.
+
+# References

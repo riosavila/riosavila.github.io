@@ -1,0 +1,66 @@
+---
+title: "The Economics of the Matrix: Scarcity, Choice, and Human Capital in a Simulated Reality"
+author: "Your Name"
+date: "2023-08-22"
+format: pdf
+bibliography: references.bib
+---
+
+# Introduction
+
+The Matrix trilogy presents a unique scenario where most of humanity exists within a simulated reality. This research proposal aims to analyze the economic implications of such a system, focusing on concepts of scarcity, choice, and human capital in both the simulated world and the real world of the films.
+
+# Background and Research Question
+
+The Matrix depicts a world where machines use human bodies as an energy source, while human minds exist in a simulated reality [@Irwin2002]. This scenario raises intriguing questions about the nature of economic activity in a world where physical scarcity is largely artificial, but cognitive scarcity remains real [@Chalmers2005].
+
+The films also present two contrasting economic systems: the seemingly abundant but illusory economy of the Matrix, and the scarce, survival-focused economy of Zion. This dichotomy offers a unique opportunity to explore how different resource constraints shape economic behavior and institutions [@Yeffeth2003].
+
+Moreover, the concept of human capital takes on new dimensions in the Matrix, where individuals can instantly learn new skills by downloading them directly to their minds. This aspect of the films allows us to explore questions about the nature of skill acquisition, the value of education, and the role of human capital in economic growth.
+
+Main Research Question: How do the economic systems depicted in the Matrix trilogy reflect and challenge traditional economic concepts of scarcity, choice, and human capital?
+
+Secondary Research Questions:
+1. How does the artificial scarcity in the Matrix compare to real-world economic scarcity?
+2. What are the economic implications of instant skill acquisition as depicted in the films?
+3. How does the economy of Zion reflect real-world economies operating under extreme resource constraints?
+
+# Potential Data Sources
+
+1. Film Scripts: Detailed scripts of the Matrix trilogy
+2. Supplementary Material: The Animatrix and related comics
+3. Fan Wikis: Detailed information about the Matrix universe
+4. Economic Literature: Theories on scarcity, choice, and human capital
+5. Technological Forecasting: Predictions about future AI and VR technologies
+
+# Potential Approach
+
+We will employ a mixed-methods approach, combining qualitative analysis of the films with economic modeling. First, we will conduct a systematic review of the trilogy, coding for economic concepts, resource allocation mechanisms, and depictions of skill acquisition.
+
+Using this data, we will construct economic models of both the Matrix and Zion, estimating key parameters such as production possibilities, resource constraints, and returns to human capital. We will then compare these models with real-world economic data and theories.
+
+To analyze the implications of instant skill acquisition, we will develop a theoretical model of human capital accumulation based on the Matrix's depiction, comparing it with standard models of education and on-the-job training.
+
+We will also use comparative analysis to contrast the economic systems of the Matrix and Zion with various real-world economic systems, from abundance-oriented tech economies to resource-constrained developing economies.
+
+# Expected Findings
+
+We anticipate finding that the Matrix's economy challenges traditional concepts of scarcity, potentially offering insights into post-scarcity economic theories. We expect to see that while physical scarcity is artificially imposed in the Matrix, cognitive scarcity (e.g., limitations on attention and decision-making) remains a key economic factor.
+
+Regarding human capital, we expect to find that the Matrix's depiction of instant skill acquisition has profound implications for theories of human capital and economic growth, potentially highlighting the importance of knowledge distribution over knowledge creation in driving economic progress.
+
+For Zion's economy, we anticipate finding parallels with real-world economies operating under extreme resource constraints, potentially offering insights into economic resilience and adaptation.
+
+# Conclusion
+
+This research will provide a novel perspective on fundamental economic concepts by examining them through the lens of a popular science fiction narrative. While based on a fictional setting, the findings may offer insights into real-world economic phenomena, particularly as we move towards increasingly digitalized and AI-driven economies. Moreover, this study could demonstrate the potential of using science fiction scenarios as thought experiments for economic theory and policy.
+
+# GitHub Repository
+
+The data analysis and code for this project will be available in the following GitHub repository:
+
+[https://github.com/yourusername/matrix-economics](https://github.com/yourusername/matrix-economics)
+
+This repository will contain all data collection scripts, economic models, visualization code, and the final paper in Quarto format.
+
+# References

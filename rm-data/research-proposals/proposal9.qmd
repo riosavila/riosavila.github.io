@@ -1,0 +1,65 @@
+---
+title: "To Boldly Go: Resource Allocation and Post-Scarcity Economics in Star Trek"
+author: "Your Name"
+date: "2023-08-22"
+format: pdf
+bibliography: references.bib
+---
+
+# Introduction
+
+The Star Trek universe presents a vision of a future where scarcity has been largely eliminated through advanced technology. This research proposal aims to analyze the economic system depicted in Star Trek, focusing on resource allocation mechanisms, the nature of work, and the implications of technologies like replicators for economic theory.
+
+# Background and Research Question
+
+Star Trek depicts a future where the Federation has moved beyond money-based economies, thanks to technologies like matter replicators that can produce most goods on demand [@Saadia2016]. This post-scarcity scenario challenges many fundamental assumptions of economics, which is traditionally defined as the study of resource allocation under conditions of scarcity [@Margolis1998].
+
+However, even in this abundant future, some forms of scarcity persist, such as scarce antimatter for starship fuel, and limited spots in Starfleet Academy. This mix of abundance and residual scarcity provides a unique lens through which to examine economic principles [@Krauss2007].
+
+Moreover, the show depicts various alien civilizations with different economic systems, allowing for comparative analysis. The Ferengi, for instance, represent an extreme form of capitalism, contrasting sharply with the Federation's post-scarcity economy.
+
+Main Research Question: How does the post-scarcity economy depicted in Star Trek challenge and inform traditional economic theories of resource allocation and value?
+
+Secondary Research Questions:
+1. What mechanisms replace market-based resource allocation in Star Trek's moneyless economy?
+2. How does the nature of work and human motivation change in a post-scarcity environment?
+3. What insights does Star Trek offer about the transition from a scarcity-based to a post-scarcity economy?
+
+# Potential Data Sources
+
+1. TV Series and Films: Scripts and scenes from various Star Trek series and movies
+2. Star Trek Technical Manuals: Detailed information about technologies in the Star Trek universe
+3. Fan Wikis: Comprehensive databases of Star Trek lore
+4. Economic Literature: Theories on post-scarcity economics and resource allocation
+5. Futurist Predictions: Technological forecasts related to automation and resource abundance
+
+# Potential Approach
+
+We will employ a mixed-methods approach, combining qualitative content analysis with economic modeling. First, we will conduct a systematic review of Star Trek series and films, coding for depictions of economic activities, resource allocation decisions, and technologies with economic implications.
+
+Using this data, we will construct a model of the Federation's economy, estimating key parameters such as production possibilities, resource constraints, and mechanisms for allocating scarce resources (e.g., starship assignments). We will then compare this model with various real-world economic systems and theoretical post-scarcity models.
+
+To analyze the nature of work and motivation, we will conduct a comparative analysis between the depiction of work in Star Trek and real-world theories of work motivation and job satisfaction. We will also develop a theoretical model of skill development and career progression in a post-scarcity environment.
+
+For the transition to post-scarcity, we will use the limited information provided in Star Trek about Earth's history to construct a speculative model of economic transition, comparing it with real-world technological transitions and economic development theories.
+
+# Expected Findings
+
+We anticipate finding that Star Trek's post-scarcity economy challenges many fundamental economic assumptions, potentially offering insights into alternative resource allocation mechanisms beyond market-based systems. We expect to see that while replicator technology eliminates scarcity for most goods, the allocation of truly scarce resources (like starships) involves complex decision-making processes that may inform real-world resource allocation theories.
+
+Regarding work and motivation, we expect to find that Star Trek depicts a shift from extrinsic to intrinsic motivation, potentially offering insights into how work might be restructured in highly automated future economies.
+
+We also anticipate that the study of various alien economies in Star Trek will provide a rich comparative framework for understanding different economic systems and their cultural underpinnings.
+
+# Conclusion
+
+This research will provide a novel perspective on economic theory by examining a fictional post-scarcity society. While based on a speculative future, the findings may offer valuable insights into potential long-term economic developments, particularly as we move towards increasing automation and resource efficiency. Moreover, this study could demonstrate the potential of using science fiction scenarios as thought experiments for economic theory and policy planning.
+
+# GitHub Repository
+The data analysis and code for this project will be available in the following GitHub repository:
+
+https://github.com/yourusername/startrek-economics
+
+This repository will contain all data collection scripts, economic models, visualization code, and the final paper in Quarto format.
+
+# References

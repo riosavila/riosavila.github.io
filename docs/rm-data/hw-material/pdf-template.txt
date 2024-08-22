@@ -1,0 +1,16 @@
+---
+title: "Your Title"
+format: 
+    pdf:
+        documentclass: article 
+        number-sections: true
+        margin-top: 1in
+        margin-bottom: 1in
+        margin-left: 1in
+        margin-right: 1in
+        linestretch:  1.5
+        fontsize: 11pt
+    html: default 
+author: "author"        
+bibliography: references.bib
+---

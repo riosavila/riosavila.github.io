@@ -1,0 +1,59 @@
+---
+title: "The Economics of Springfield: A Case Study of Resource Allocation in The Simpsons"
+author: "Your Name"
+date: "2023-08-22"
+format: pdf
+bibliography: references.bib
+---
+
+# Introduction
+
+The long-running animated series "The Simpsons" provides a unique lens through which to examine economic principles in a fictional setting. This research proposal aims to analyze the economic structure and resource allocation mechanisms in the town of Springfield, using it as a case study to explore real-world economic theories and phenomena.
+
+# Background and Research Question
+
+"The Simpsons" presents a microcosm of American society, complete with its own economic system [@alberti2004leaving]. The town of Springfield features various industries, public services, and economic actors that interact in ways that often mirror real-world economic dynamics. From the nuclear power plant's monopoly to Moe's Tavern's role in the informal economy, Springfield offers numerous examples of economic principles in action [@scanlan2013simpsons].
+
+The show's longevity and consistency in depicting Springfield's economy provide a unique opportunity to study how a fictional economy responds to various shocks and policy interventions over time. This can offer insights into the applicability and limitations of economic theories in a controlled, albeit fictional, environment.
+
+Main Research Question: How does the fictional economy of Springfield in "The Simpsons" reflect real-world economic principles and theories?
+
+Secondary Research Questions:
+1. How does the monopolistic structure of the Springfield Nuclear Power Plant affect resource allocation in the town?
+2. What role does corruption (as exemplified by Mayor Quimby) play in Springfield's economic development?
+3. How do external shocks (e.g., the various disasters that befall Springfield) impact its economic resilience?
+
+# Potential Data Sources
+
+1. Episode Scripts: Transcripts of all "The Simpsons" episodes
+2. Fan Wikis: Detailed information about Springfield's businesses and economic events
+3. Academic Literature: Existing analyses of economics in "The Simpsons"
+4. Real-world Economic Data: For comparison with Springfield's fictional economy
+
+# Potential Approach
+
+We will employ a mixed-methods approach, combining qualitative content analysis with quantitative modeling. First, we will conduct a systematic review of all episodes, coding for economic events, policies, and outcomes. This will allow us to create a comprehensive database of Springfield's economic history.
+
+Using this database, we will construct economic models of Springfield, estimating key parameters such as the town's GDP, unemployment rate, and income distribution. We will then use these models to simulate the effects of various economic policies and shocks depicted in the show.
+
+To analyze the role of institutions, we will use a comparative institutional analysis, contrasting Springfield's institutions with real-world examples. We will also employ network analysis to map the economic relationships between characters and businesses in Springfield.
+
+# Expected Findings
+
+We anticipate finding that Springfield's economy exhibits many real-world economic phenomena, including market failures, externalities, and public choice problems. We expect to see significant impacts of the nuclear plant's monopoly on resource allocation and evidence of the "resource curse" related to Springfield's over-reliance on this industry.
+
+We also anticipate finding that corruption plays a significant role in Springfield's economic outcomes, potentially leading to inefficient resource allocation. However, we expect to observe a high degree of economic resilience, with Springfield quickly recovering from numerous disasters, possibly highlighting the role of social capital in economic recovery.
+
+# Conclusion
+
+This research will provide a novel perspective on economic principles by examining them through the lens of a popular cultural artifact. While based on a fictional setting, the findings may offer insights into real-world economic dynamics, particularly in small, isolated economies. Moreover, this study could demonstrate the potential of using popular media as a tool for economic education and analysis.
+
+# GitHub Repository
+
+The data analysis and code for this project will be available in the following GitHub repository:
+
+[https://github.com/yourusername/springfield-economics](https://github.com/yourusername/springfield-economics)
+
+This repository will contain all data collection scripts, economic models, visualization code, and the final paper in Quarto format.
+
+# References

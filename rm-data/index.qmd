@@ -1,0 +1,186 @@
+---
+title: "Research Methods I: Data Analysis for Economics and Policy"
+---
+
+## Syllabus
+
+The detailed class syllabus is available [here](syllabus.qmd).
+
+## Instructor Information
+
+- **Instructor**: Fernando Rios-Avila
+- **Email**: friosavi@levy.org
+- **Office Hours**: Wednesdays 1:30pm to 4:00pm, or by appointment. Other times can be arranged remotely.
+- **Class Time**: Wednesday, 9:30 am - 12:45 pm
+
+## Course Description
+
+This course focuses on providing students with the tools and skills necessary to conduct data analysis for economics and policy research. Students will be exposed to the entire process of data analysis, from formulating questions and collecting data to cleaning, exploring, analyzing, and presenting results. The course covers exploratory data analysis, regression analysis, and introduces topics on prediction with machine learning. Students will gain hands-on experience using Stata, with Quarto for reproducible reporting, and GitHub for version control and collaboration.
+
+## Course Objectives
+
+By the end of this course, students will be able to:
+
+1. Apply advanced data analysis techniques to economic and policy questions.
+2. Use modern tools such as GitHub and Quarto for research collaboration and reproducibility.
+3. Formulate research questions and design appropriate data collection methods.
+4. Clean, organize, and explore data using various techniques and visualizations.
+5. Apply regression analysis techniques to analyze relationships between variables.
+6. Use machine learning methods for prediction and classification tasks.
+7. Implement data analysis techniques using Stata.
+8. Effectively communicate research findings through written reports and oral presentations.
+
+## Required Textbook
+
+Békés, G., & Kézdi, G. (2021). Data Analysis for Business, Economics, and Policy. Cambridge University Press.
+
+## Software Requirements
+
+- `Stata`: A student license will be provided.
+- `Quarto`: Free and open-source software for reproducible research.
+- `VSCode`: Free and open-source code editor.
+- `GitHub/GitHub-Desktop`: Free platform for version control and collaboration.
+- `Zotero`: Free reference manager.
+
+::: {.callout-important}
+All homework assignments are required to be submitted in Quarto format, using GitHub repositories to submit the assignments.
+:::
+
+## Course Outline
+
+### Part I: Introduction to Modern Research Tools
+
+#### Week 1: Course Overview and Tools Setup
+- **Introduction to GitHub and Quarto**
+- **Data Organization and Management**
+- [Slides](week1.qmd)
+- [Homework 1](homework.qmd#hw01)
+
+### Part II: Data Analysis and Exploration
+
+#### Week 2: Introduction to Data Analysis
+- **Data Collection and Preparation**
+- **Tidy Data Principles**
+- Reading: Békés & Kézdi (2021), Chapters 1-2
+- [Slides](week2.qmd)
+- [Homework 2](homework.qmd#hw02)
+ 
+#### Week 3: Data Exploration
+- **Exploratory Data Analysis Techniques**
+- **Data Cleaning and Tidy Data Principles**
+- Reading: Békés & Kézdi (2021), Chapters 3-4
+- [Slides](week3.qmd)
+- [Homework 3](homework.qmd#hw03)
+
+### Part III: Generalization and Regression Analysis
+
+#### Week 4: Generalization: From Sample to Population
+- **Sampling and Hypothesis Testing**
+- **Confidence Intervals and Errors**
+- Reading: Békés & Kézdi (2021), Chapters 5-6
+- [Slides](week4.qmd)
+- [Homework 4](homework.qmd#hw04)
+ 
+#### Weeks 5-6: Regression Analysis I: Simple Regression
+- **Linear Regression and Causality**
+- **Model Assumptions and Transformations**
+- Reading: Békés & Kézdi (2021), Chapters 7-9
+- [Slides](week5_6.qmd)
+- [Homework 5](homework.qmd#hw05)
+- [Homework 6](homework.qmd#hw06)
+ 
+#### Week 7: Regression Analysis II: Multiple Regression
+- **Estimation and Inference**
+- **Interactions and Non-linearities**
+- Reading: Békés & Kézdi (2021), Chapter 10
+- [Slides](week7.qmd)
+- [Homework 7](homework.qmd#hw07)
+  
+#### Week 8: Regression Analysis III: Modeling Probabilities
+- **Logit and Probit Models**
+- **Interpretation and Predictive Power**
+- Reading: Békés & Kézdi (2021), Chapter 11
+- [Slides](week8.qmd)
+- [Homework 8](homework.qmd#hw08)
+ 
+### Part IV: Advanced Topics
+
+#### Week 9: Time Series Analysis
+- **Trend, Seasonality, and Stationarity**
+- Reading: Békés & Kézdi (2021), Chapter 12
+- [Slides](week9.qmd)
+- [Homework 9](homework.qmd#hw09)
+ 
+#### Week 10: Prediction
+- **Model Fit and Cross-validation**
+- Reading: Békés & Kézdi (2021), Chapter 13
+- [Slides](week10.qmd)
+- [Homework 10](homework.qmd#hw10)
+ 
+#### Week 11: Model Building for Prediction: LASSO
+- **LASSO for Prediction and Diagnosis**
+- Reading: Békés & Kézdi (2021), Chapter 14
+- [Slides](week11.qmd)
+- [Homework 11](homework.qmd#hw11)
+ 
+#### Week 12: Predicting Probabilities and Classification
+- **Classification Techniques and ROC Curves**
+- Reading: Békés & Kézdi (2021), Chapter 17
+- [Slides](week12.qmd)
+- [Homework 12](homework.qmd#hw12)
+- 
+#### Week 13: Forecasting Data
+- **ARIMA and Forecasting Techniques**
+- Reading: Békés & Kézdi (2021), Chapter 18
+- [Slides](week13.qmd)
+- [Homework 13](homework.qmd#hw13)
+ 
+## Grading Policy
+
+- **Weekly Quizzes**: 10%
+- **Weekly Problem Sets**: 30%
+- **Term Paper**: 60%
+- **Referee Reports**: 5% (Extra Credit)
+
+### Term Paper Schedule (60% of final grade)
+
+- **Part I**: Research Proposal (5%, due Week 2). See [here](example_proposals.qmd) for few examples of research proposals. 
+
+- **Part II**: Data Collection and Cleaning (10%, due Week 4)
+
+- **Interim Progress Report** (5%, due Week 7)
+
+- **Part III**: Data Analysis (15%, due Week 10)
+
+- **Peer Review Report**: (Extra 5% Week 11):
+
+- **Part IV**: Final Report and Presentation (25%, due Week 14)
+
+Complete research paper including all previous sections plus:
+
+  - Literature Review
+  - Robustness Checks or Sensitivity/Sub-group Analysis
+  - Conclusion
+  - References
+  - Appendices (if any)
+
+- 15-minute presentation of your research to the class
+
+### Additional Requirements
+
+- You should submit a PDF of your report by the deadline, along with the Github repository link
+- Your GitHub repository should include all code, data, and the Quarto document for your report
+- At each stage, you should submit your work to GitHub to follow the progress of your project
+
+
+## Resources
+
+- **Textbook**: Békés, G., & Kézdi, G. (2021). Data Analysis for Business, Economics, and Policy. Cambridge University Press. Additional resources are available on the book's website: [Data Analysis](https://gabors-data-analysis.com/getting-started)
+
+
+## Course Policies
+
+- **Attendance**: Attendance is highly recommended. Classes will not be recorded, and except for exceptional cases, there will be no online classes.
+- **Late Assignments**: Late assignments will not be accepted unless prior arrangements have been made with the instructor.
+- **Academic Integrity**: All work submitted must be your own. Plagiarism will not be tolerated and will result in a failing grade for the assignment or course.
+- **AI Usage**: The use of AI in the class is allowed. However, you must disclose any AI tools used in your assignments. AI is a tool you can use to generate ideas, edit your text, provide help with coding, etc. However, it is completely unacceptable to use AI to generate the entire assignment. You will have to be able to explain and defend your work in class.

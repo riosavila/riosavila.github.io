@@ -1,0 +1,91 @@
+---
+title: "The Impact of Resource Management in StarCraft: A Strategic Analysis"
+format: 
+    pdf:
+        documentclass: article 
+        number-sections: true
+        margin-top: 1in
+        margin-bottom: 1in
+        margin-left: 1in
+        margin-right: 1in
+        linestretch:  1.5
+        fontsize: 12pt
+    html: default
+execute: 
+  echo: false
+  warning: false     
+author: "Kathryn Janeway"        
+bibliography: references.bib
+---
+
+# Introduction
+
+This report examines the crucial role of resource management in the popular real-time strategy game StarCraft. We will explore how effective resource allocation influences gameplay dynamics and strategic decision-making. The analysis will include a mathematical model of resource gathering, a visualization of unit production rates, and a comparison of resource types across different races.
+
+# Resource Dynamics in StarCraft
+
+## Mathematical Model of Resource Gathering
+
+In StarCraft, the rate of resource accumulation can be modeled using a simple differential equation. If we denote the amount of resources as $R$ and time as $t$, we can express the rate of change of resources as:
+
+$$
+\frac{dR}{dt} = \alpha N - \beta P
+$${#eq-resource}
+
+Where $\alpha$ is the gathering rate per worker, $N$ is the number of workers, $\beta$ is the consumption rate, and $P$ is the production rate of units or structures. This model, as shown in @eq-resource, forms the basis of the game's economic system [@choi2015].
+
+## Unit Production Rates
+
+To illustrate the impact of resource management on unit production, we've created a visualization of unit production rates for different races in StarCraft.
+
+```{python}
+#| label: fig-production
+#| fig-cap: "Unit Production Rates by Race in StarCraft"
+#| echo: false
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+races = ['Terran', 'Protoss', 'Zerg']
+resources = [100, 150, 200]
+production_rates = [5, 4, 7]
+
+plt.figure(figsize=(10, 6))
+plt.bar(races, production_rates, color=['blue', 'yellow', 'purple'])
+plt.title('Unit Production Rates by Race')
+plt.xlabel('Race')
+plt.ylabel('Units Produced per Minute')
+
+for i, v in enumerate(production_rates):
+    plt.text(i, v + 0.1, str(v), ha='center')
+
+plt.show()
+```
+
+As shown in @fig-production, the Zerg race has the highest unit production rate, reflecting their swarm-based strategy. This aligns with the game's design philosophy, where each race has unique strengths and weaknesses[^1].
+
+## Resource Types Comparison
+
+StarCraft features two primary resource types: minerals and vespene gas. Their availability and usage vary across races:
+
+| Race    | Mineral Usage | Gas Usage | Resource Dependency |
+|---------|---------------|-----------|---------------------|
+| Terran  | High          | Medium    | Balanced            |
+| Protoss | Medium        | High      | Gas-heavy           |
+| Zerg    | High          | Low       | Mineral-heavy       |
+
+: Resource Usage by Race {#tbl-resources}
+
+@tbl-resources illustrates how different races prioritize resources, influencing their strategic options and tech progression paths.
+
+# Strategic Implications
+
+The resource management system in StarCraft creates a complex strategic landscape. Players must balance immediate needs with long-term goals, deciding whether to invest in economy, technology, or military strength. According to @kim2010, successful players often demonstrate superior resource management skills, which translate into strategic advantages on the battlefield.
+
+# Conclusion
+
+Resource management is a cornerstone of StarCraft gameplay, deeply influencing strategic decisions and overall game outcomes. The mathematical model, production rate analysis, and resource usage comparison presented in this report highlight the intricate balance between gathering, allocation, and consumption of resources. Understanding these dynamics is crucial for players aiming to master the game and for game designers seeking to create balanced and engaging strategy games.
+
+[^1]: This design approach contributes to StarCraft's enduring popularity in esports and casual gaming circles.
+
+# References

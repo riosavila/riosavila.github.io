@@ -1,0 +1,57 @@
+---
+title: "The Impact of Climate Change on Agricultural Productivity: A Global Analysis"
+author: "Your Name"
+date: "2023-08-22"
+format: pdf
+bibliography: references3.bib
+---
+
+# Introduction
+
+Climate change poses significant challenges to global food security through its impact on agricultural productivity. This research proposal aims to quantify the effects of climate change on agricultural yields across different regions and crops, providing insights for adaptation strategies and policy interventions.
+
+# Background and Research Question
+
+Agriculture is highly sensitive to climate conditions, and changes in temperature and precipitation patterns can significantly affect crop yields [@lobell2011climate]. While some regions may benefit from warmer temperatures or increased CO2 levels, others face threats from extreme weather events, water scarcity, and shifting growing seasons [@rosenzweig2014assessing].
+
+Previous studies have examined the impact of climate change on agriculture at local or regional levels, but a comprehensive global analysis is needed to understand the full scope of the challenge. Moreover, the heterogeneous effects across different crops and regions need to be quantified to inform targeted adaptation strategies [@challinor2014meta].
+
+Main Research Question: How does climate change impact agricultural productivity across different regions and crops globally?
+
+Secondary Research Questions:
+1. Which regions and crops are most vulnerable to climate change impacts?
+2. How do adaptation measures mitigate the negative effects of climate change on agricultural productivity?
+
+# Potential Data Sources
+
+1. Agricultural Data: FAO's FAOSTAT database for crop yields and production
+2. Climate Data: World Bank's Climate Change Knowledge Portal
+3. Soil Data: FAO's Harmonized World Soil Database
+4. Socioeconomic Data: World Bank's World Development Indicators
+5. Adaptation Measures: UNFCCC's database on climate change adaptation measures
+
+# Potential Approach
+
+We will use a panel data approach, combining time-series and cross-sectional data on crop yields, climate variables, and other relevant factors across countries and regions. The main econometric model will be a fixed-effects regression, allowing us to control for time-invariant country-specific factors.
+
+To address potential non-linear relationships between climate variables and crop yields, we will use flexible functional forms, such as polynomial terms or semi-parametric methods. We will also interact climate variables with indicators for adaptation measures to assess their effectiveness in mitigating climate impacts.
+
+To account for spatial correlation in agricultural productivity and climate patterns, we will employ spatial econometric techniques. This will allow us to capture spillover effects and improve the precision of our estimates.
+
+# Expected Findings
+
+We anticipate finding significant negative impacts of climate change on global agricultural productivity, with substantial heterogeneity across regions and crops. We expect that regions with already warm climates and limited adaptive capacity will be most vulnerable. We also anticipate that certain adaptation measures, such as drought-resistant crop varieties or improved irrigation systems, will show effectiveness in mitigating negative impacts.
+
+# Conclusion
+
+This research will provide a comprehensive global assessment of climate change impacts on agriculture, informing policy decisions on climate adaptation and food security. The findings will be crucial for identifying vulnerable regions and crops, prioritizing adaptation efforts, and developing targeted strategies to ensure global food security in the face of climate change.
+
+# GitHub Repository
+
+The data analysis and code for this project will be available in the following GitHub repository:
+
+[https://github.com/yourusername/climate-change-agriculture](https://github.com/yourusername/climate-change-agriculture)
+
+This repository will contain all data processing scripts, econometric models, visualization code, and the final paper in Quarto format.
+
+# References

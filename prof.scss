@@ -1,0 +1,79 @@
+/*-- scss:defaults --*/
+$primary-color: #4a90e2; // A magical blue
+$secondary-color: #f5a623; // A golden accent
+$background-color: #f0f0f5; // Light background
+$text-color: #333; // Dark text
+$font-family: 'Roboto', sans-serif; // Clean and modern font
+$heading-font-family: 'Merriweather', serif; // Fantasy-like font for headings
+
+
+/*-- scss:hero-image --*/
+.hero {
+  position: relative;
+  background-image: url('/hero-image.jpg'); // Replace with your image path
+  background-size: cover;
+  background-position: center;
+  height: 60vh; // Adjust height as needed
+  color: white;
+  text-align: center;
+  @include flex-center;
+  flex-direction: column;
+  padding: 2rem;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); // Dark overlay for text readability
+  }
+
+  h1 {
+    position: relative;
+    font-size: 3rem;
+    font-family: $heading-font-family;
+    z-index: 1;
+    margin: 0;
+  }
+
+  p {
+    position: relative;
+    font-size: 1.5rem;
+    z-index: 1;
+    margin-top: 1rem;
+  }
+}
+
+/*-- scss:header --*/
+header {
+  background-color: $primary-color;
+  color: white;
+  padding: 1rem 0;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    font-family: $heading-font-family;
+  }
+}
+
+  .magic-box {
+    @include flex-center;
+    background-color: $secondary-color;
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    @include box-shadow();
+    margin-bottom: 2rem;
+
+    &::before {
+      content: '✨';
+      margin-right: 0.5rem;
+    }
+  }
+}
+

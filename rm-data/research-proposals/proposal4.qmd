@@ -1,0 +1,61 @@
+---
+title: "The Economic Impact of Artificial Intelligence Adoption in Small and Medium Enterprises"
+author: "Your Name"
+date: "2023-08-22"
+format: pdf
+bibliography: references4.bib
+---
+
+# Introduction
+
+Artificial Intelligence (AI) is rapidly transforming various sectors of the economy. While much attention has been given to AI adoption in large corporations, its impact on Small and Medium Enterprises (SMEs) remains understudied. This research proposal aims to investigate the economic effects of AI adoption on SMEs, focusing on productivity, profitability, and employment dynamics.
+
+# Background and Research Question
+
+AI technologies have the potential to significantly enhance business processes, decision-making, and customer interactions [@brynjolfsson2017artificial]. However, the adoption and impact of AI may differ between large corporations and SMEs due to differences in resources, expertise, and scale [@ghobakhloo2020industry].
+
+SMEs play a crucial role in most economies, often accounting for the majority of businesses and employment [@ayyagari2011small]. Understanding how AI adoption affects these firms is essential for policymakers and business leaders. Previous studies have examined the impact of digital technologies on SMEs [@neirotti2018digital], but the specific effects of AI adoption remain unclear.
+
+Main Research Question: What is the economic impact of AI adoption on Small and Medium Enterprises?
+
+Secondary Research Questions:
+1. How does AI adoption affect productivity and profitability in SMEs?
+2. What are the employment effects of AI adoption in SMEs?
+3. How does the impact of AI adoption vary across different industries and firm sizes within the SME category?
+
+# Potential Data Sources
+
+1. AI Adoption Data: Surveys conducted by national statistical offices or industry associations
+2. Firm-level Financial Data: Orbis database by Bureau van Dijk
+3. Employment Data: National labor force surveys or social security records
+4. Industry Classification: Standard Industrial Classification (SIC) codes
+5. Firm Characteristics: National business registries
+
+# Potential Approach
+
+We will use a difference-in-differences (DiD) approach to estimate the causal effect of AI adoption on various economic outcomes. We will compare the performance of SMEs that adopt AI (treatment group) with similar firms that do not adopt AI (control group) before and after the adoption.
+
+To address potential selection bias, we will use propensity score matching to ensure that the treatment and control groups are comparable in terms of observable characteristics. We will also employ an instrumental variable approach, using the geographical variation in broadband internet availability as an instrument for AI adoption.
+
+To examine heterogeneous effects, we will interact the AI adoption variable with industry and firm size indicators. We will also conduct a series of robustness checks, including placebo tests and alternative definitions of AI adoption.
+
+# Expected Findings
+
+We anticipate finding positive effects of AI adoption on productivity and profitability in SMEs, although these effects
+may vary across industries and firm sizes. We expect to see larger positive effects in knowledge-intensive industries and for firms at the upper end of the SME size spectrum.
+
+Regarding employment, we anticipate a more nuanced picture. While AI adoption may lead to some job displacement in certain roles, it may also create new job opportunities and increase demand for skilled workers. Overall, we expect to find a skill-biased change in employment structure rather than a significant net change in total employment.
+
+# Conclusion
+
+This research will provide valuable insights into the economic impact of AI adoption on SMEs, a crucial but often overlooked segment of the economy. The findings will have important implications for policymakers designing support programs for SMEs, for business leaders making technology investment decisions, and for workers and educators preparing for the future of work in an AI-driven economy.
+
+# GitHub Repository
+
+The data analysis and code for this project will be available in the following GitHub repository:
+
+[https://github.com/yourusername/ai-impact-sme](https://github.com/yourusername/ai-impact-sme)
+
+This repository will contain all data processing scripts, econometric models, visualization code, and the final paper in Quarto format.
+
+# References

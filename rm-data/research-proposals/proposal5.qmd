@@ -1,0 +1,60 @@
+---
+title: "The Impact of Financial Literacy Programs on Household Savings and Investment Behavior"
+author: "Your Name"
+date: "2023-08-22"
+format: pdf
+bibliography: references5.bib
+---
+
+# Introduction
+
+Financial literacy is increasingly recognized as a critical life skill in today's complex economic environment. This research proposal aims to evaluate the effectiveness of financial literacy programs in improving household savings and investment behavior, with a focus on long-term financial well-being.
+
+# Background and Research Question
+
+Financial literacy has been linked to better financial decision-making, increased savings, and improved economic outcomes [@lusardi2014economic]. However, financial literacy levels remain low in many countries, even among developed economies [@klapper2015financial]. In response, many governments and organizations have implemented financial literacy programs, but their effectiveness remains debated [@fernandes2014financial].
+
+Previous studies have examined the short-term effects of financial education, but less is known about its long-term impact on savings and investment behavior. Moreover, the heterogeneity in program effectiveness across different demographic groups and the mechanisms through which financial literacy affects behavior are not well understood [@kaiser2017does].
+
+Main Research Question: How do financial literacy programs impact household savings and investment behavior in the long term?
+
+Secondary Research Questions:
+1. How does the effectiveness of financial literacy programs vary across different demographic groups?
+2. What are the mechanisms through which financial literacy affects savings and investment behavior?
+3. How do different types of financial literacy programs (e.g., school-based, workplace-based, community-based) compare in terms of effectiveness?
+
+# Potential Data Sources
+
+1. Financial Literacy Program Data: Information from government agencies or NGOs implementing these programs
+2. Household Finance Data: National household finance surveys or panel studies
+3. Demographic Data: National statistical offices
+4. Financial Market Participation Data: National securities depositories or financial regulators
+5. Behavioral Data: Custom surveys or experiments conducted as part of the study
+
+# Potential Approach
+
+We will use a combination of quasi-experimental methods and randomized controlled trials (RCTs) to evaluate the impact of financial literacy programs. For existing programs, we will employ a difference-in-differences approach, comparing changes in financial behavior between program participants and non-participants over time.
+
+For new programs, we will conduct RCTs, randomly assigning individuals or households to treatment (financial literacy program) and control groups. We will collect data on financial knowledge, attitudes, and behaviors before the program, immediately after, and at several points in the future to assess long-term effects.
+
+To understand mechanisms, we will use mediation analysis, examining how changes in financial knowledge and attitudes mediate the effect of the program on financial behaviors. We will also use heterogeneity analysis to examine how program effects vary across different demographic groups.
+
+# Expected Findings
+
+We anticipate finding positive effects of financial literacy programs on savings rates and investment diversification, with stronger effects for more intensive and longer-duration programs. We expect to see heterogeneity in program effectiveness, with potentially larger impacts for individuals with lower initial financial literacy levels.
+
+We also anticipate that the effects of financial literacy programs will be mediated by changes in financial attitudes and self-efficacy, in addition to increases in financial knowledge. We expect to find that different types of programs (school-based, workplace-based, community-based) may be more effective for different demographic groups.
+
+# Conclusion
+
+This research will provide valuable insights into the effectiveness of financial literacy programs and their long-term impact on household financial behavior. The findings will have important implications for policymakers designing financial education initiatives, for educators developing financial literacy curricula, and for individuals seeking to improve their financial well-being.
+
+# GitHub Repository
+
+The data analysis and code for this project will be available in the following GitHub repository:
+
+[https://github.com/yourusername/financial-literacy-impact](https://github.com/yourusername/financial-literacy-impact)
+
+This repository will contain all data processing scripts, econometric models, experimental designs, visualization code, and the final paper in Quarto format.
+
+# References

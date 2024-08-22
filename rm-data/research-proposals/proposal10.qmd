@@ -1,0 +1,66 @@
+---
+title: "For the Horde: Resource Competition and Virtual Economies in World of Warcraft" 
+author: "Your Name" 
+date: "2023-08-22" 
+format: pdf 
+bibliography: references.bib
+---
+
+# Introduction
+
+World of Warcraft (WoW), one of the most popular massively multiplayer online role-playing games (MMORPGs), has created a complex virtual economy that mirrors many aspects of real-world economic systems. This research proposal aims to analyze the economic dynamics within WoW, focusing on resource competition, market structures, and the intersection between virtual and real-world economies.
+
+# Background and Research Question
+
+World of Warcraft's virtual economy involves millions of players engaging in production, trade, and consumption of virtual goods [@Castronova2005]. The game features scarce resources, a player-driven auction house, and even experiences inflation and market crashes [@Dibbell2006]. This virtual economy provides a unique laboratory for studying economic behavior and testing economic theories [@Castronova2008].
+
+Moreover, the existence of "gold farming" - the practice of playing the game to earn virtual currency which is then sold for real money - creates interesting intersections between the virtual and real economies [@Heeks2009]. This phenomenon raises questions about the nature of value and the boundaries between virtual and real economic activity.
+
+The game also presents interesting scenarios of resource competition, both between players (e.g., competition for rare spawns) and between factions (Horde vs. Alliance), which can be analyzed through the lens of game theory and resource economics.
+
+Main Research Question: How do the economic dynamics in World of Warcraft reflect and differ from real-world economic systems, and what insights can they provide for economic theory and policy?
+
+Secondary Research Questions:
+
+-How does resource competition in WoW compare to real-world resource competition, and what strategies emerge?
+-What factors influence inflation and market stability in the WoW economy?
+-How does the intersection of virtual and real economies in WoW challenge traditional notions of economic value and activity?
+
+# Potential Data Sources
+
+In-game Economic Data: Auction house prices, resource spawn rates, etc. (potentially through API access or data scraping)
+Player Surveys: Custom surveys on economic behavior and decision-making in WoW
+WoW Forums and Wikis: Player discussions and documentation of economic strategies
+Academic Literature: Existing studies on virtual economies and WoW
+Real-world Economic Data: For comparison with WoW economic trends
+
+# Potential Approach
+
+We will employ a mixed-methods approach, combining quantitative analysis of in-game economic data with qualitative analysis of player behavior and strategies. First, we will collect and analyze time-series data on prices, trade volumes, and resource availability in the WoW economy, using econometric techniques to identify trends and patterns.
+
+To study resource competition, we will use game theory models to analyze player strategies around contested resources. We will also conduct surveys and interviews with players to understand their economic decision-making processes and strategies.
+
+For the intersection of virtual and real economies, we will analyze the market for "gold farming" services, examining factors that influence exchange rates between virtual and real currencies. We will also explore the legal and ethical implications of this intersection.
+
+To compare WoW's economy with real-world economies, we will use comparative analysis, looking at factors such as inflation rates, market concentration, and responses to economic shocks.
+
+# Expected Findings
+
+We anticipate finding that the WoW economy exhibits many features of real-world economies, including market cycles, inflation, and emergent economic strategies. We expect to see that resource competition in WoW leads to complex strategies that may offer insights into real-world resource economics.
+
+Regarding the virtual-real economy intersection, we expect to find that the value of virtual currencies is influenced by both in-game factors and real-world economic conditions, challenging traditional notions of economic value.
+
+We also anticipate finding that the controlled environment of WoW allows for clearer observation of certain economic phenomena, potentially offering insights that could inform real-world economic policy and theory.
+
+# Conclusion
+
+This research will provide a novel perspective on economic dynamics by examining them in a virtual world. While based on a game environment, the findings may offer valuable insights into real-world economic phenomena, particularly in areas such as resource competition, market behavior, and the increasing digitalization of economic activity. Moreover, this study could demonstrate the potential of using virtual worlds as laboratories for economic research and policy experimentation.
+
+# GitHub Repository
+The data analysis and code for this project will be available in the following GitHub repository:
+
+https://github.com/yourusername/warcraft-economics
+
+This repository will contain all data collection scripts, economic models, visualization code, and the final paper in Quarto format.
+
+# References
