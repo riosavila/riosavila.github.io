@@ -1,0 +1,65 @@
+
+# Gender Gap in Earnings: A Case Study
+
+## Introduction
+
+The gender gap in earnings is a critical issue in labor economics, reflecting potential inequalities in the labor market. This case study investigates whether there are systematic wage differences between male and female workers, focusing on data from the U.S. Current Population Survey (CPS) for 2014. The study aims to understand the factors contributing to the gender gap and examines specific occupations to provide detailed insights into these disparities.
+
+## Data Collection and Methodology
+
+### Data Source: Current Population Survey (CPS)
+
+The CPS is a monthly survey conducted by the U.S. Census Bureau and the Bureau of Labor Statistics. It provides comprehensive data on labor force characteristics, including employment, earnings, and demographic information. The survey uses a rotating panel design, where households are interviewed for four consecutive months, not interviewed for the next eight months, and then interviewed again for four months. This design helps in capturing both short-term and long-term labor market trends.
+
+### Sample Restrictions
+
+To focus on the working-age population, the sample includes individuals aged 16-65 who are employed and have reported earnings. Self-employed individuals are excluded to maintain consistency in earnings data, as self-employment income can vary significantly and may not be directly comparable to wage and salary earnings. After applying these restrictions, the dataset for 2014 consists of 149,316 observations.
+
+### Earnings Measurement
+
+Weekly earnings data are collected before tax deductions. High earnings are top-coded at $2,884.6 to account for inflation and to prevent the influence of outliers on the analysis. This top-coding represents the top 2.5% of earnings in 2014. To control for differences in hours worked, weekly earnings are divided by 'usual' weekly hours, as reported in the survey. This adjustment is crucial because women may work fewer hours on average than men, affecting their total earnings.
+
+## Descriptive Statistics
+
+The descriptive statistics provide an overview of the earnings distribution by gender. The table below summarizes the key percentiles of earnings for male and female workers:
+
+| Gender | Mean | p25 | p50 | p75 | p90 | p95 |
+|--------|-----:|----:|----:|----:|----:|----:|
+| Male   |   24 |  13 |  19 |  30 |  45 |  55 |
+| Female |   20 |  11 |  16 |  24 |  36 |  45 |
+
+These statistics reveal a 17% average difference in per-hour earnings between men and women, highlighting a significant gender gap.
+
+## Analysis of Gender Gap in Specific Occupations
+
+### Computer Science Occupations
+
+The analysis focuses on computer science occupations, which are often associated with high earnings and significant gender disparities. The sample size for this occupation is 4,740. The regression model used is:
+
+$$
+\ln(w)_E = \alpha + \beta \times G_{female}
+$$
+
+Where $G_{female}$ is a binary variable indicating if the individual is female. The regression estimate $\hat{\beta} = -0.1475$ suggests that female employees in computer science earn 14.7% less on average than their male counterparts. The 95% confidence interval for this estimate is [-18.2%, -11.2%], which does not include zero, allowing us to rule out equal average earnings with 95% confidence. This finding is statistically significant, with a standard error of 0.0177.
+
+### Market Research Analysts
+
+For market research analysts and marketing specialists, the sample size is 281, with females comprising 61% of the sample. The regression estimate $\hat{\beta} = -0.113$ indicates that female analysts earn 11.3% less on average. However, the 95% confidence interval [-23%, +1%] includes zero, indicating that we cannot rule out equal average earnings with 95% confidence. The p-value of 0.068 suggests that the result is not statistically significant at the 5% level, although it is at the 10% level.
+
+## Discussion
+
+### Sources of Difference in Confidence Intervals
+
+The difference in confidence intervals between the two occupations can be attributed to:
+
+1. **True Difference**: The gender gap is higher in computer science occupations, possibly due to industry-specific factors such as negotiation practices, discrimination, or differences in experience and education levels.
+
+2. **Statistical Error**: The smaller sample size for market analysts may lead to more variability in estimates. Smaller samples tend to have larger standard errors, resulting in wider confidence intervals. This variability can obscure true differences in earnings.
+
+### Statistical Testing
+
+To formally test whether average earnings are the same by gender, we examine if the coefficient on the gender variable is zero. The t-statistic for market analysts is 1.8, which falls within the critical values for a 5% significance level (±2), indicating that we cannot reject the null hypothesis of equal average earnings. The p-value of 0.07 further supports this conclusion, as it is greater than the 0.05 threshold for statistical significance.
+
+## Conclusion
+
+This case study highlights the complexities of analyzing the gender gap in earnings. While significant disparities exist in computer science occupations, the evidence is less clear for market research analysts due to sample size limitations. The findings underscore the need for further data collection and analysis to draw more definitive conclusions about the gender gap across different sectors. Understanding these disparities is crucial for developing policies aimed at achieving gender equality in the workplace.

@@ -2,7 +2,17 @@
 title: "The Impact of Remote Work on Urban Housing Prices"
 author: "Your Name"
 date: "2023-08-22"
-format: pdf
+format:
+    pdf:
+        documentclass: article 
+        number-sections: true
+        margin-top: 1in
+        margin-bottom: 1in
+        margin-left: 1in
+        margin-right: 1in
+        linestretch:  1.5
+        fontsize: 11pt
+    html: default 
 bibliography: references1.bib
 ---
 
@@ -19,6 +29,7 @@ Remote work allows employees to live further from their workplace, potentially r
 Main Research Question: How has the increase in remote work adoption influenced housing prices in major urban centers?
 
 Secondary Research Questions:
+
 1. Is there a correlation between the percentage of remote workers in a city and changes in housing prices?
 2. How does the impact of remote work on housing prices vary across different urban areas?
 

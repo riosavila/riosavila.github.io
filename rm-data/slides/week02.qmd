@@ -1,0 +1,691 @@
+---
+title: "Origins of Data, and Data Preparation"
+author: 
+  - name: Fernando Rios-Avila
+    affiliation: Levy Economics Institute  
+date: last-modified
+date-format: long
+format:
+  revealjs:
+    theme: [default, clean2.scss]
+    slide-number: true
+    footer: "*Rios-Avila and Cia*"
+    date-format: long
+    width:  1300
+    height: 675
+execute: 
+  cache: true
+  freeze: auto    
+---
+
+## Motivation
+
+-   Suppose, you want to understand the extent and patterns of differences in online and offline prices. How would you go about collecting data?
+    -   A super project, the Billion Prices Project at MIT did a variety of data collection approaches such as crowd-sourcing platforms, mobile phone apps and web scraping methods.
+-   Interested in understanding more about management practices?
+    -   The World Management Survey is a major effort by academics to survey practices around the world - asking the same questions in many countries the same way.
+
+# What is data ?
+
+## What is data ? 0s and 1s...
+
+-   Data is a collection of numbers, characters, images, or other formats.
+-   They provide information about **something**. (Prices? Management practices? Hotel characteristics? etc.)
+-   Of course, depending on how the data was collected, and what structure it has, it can be more or less useful for answering a particular question.
+
+## What is data ?
+
+As Economist, we are more familiar with a specific data structure:
+
+-   Data is most straightforward to analyze if it is in a ***data table*** form (2D Matrix form):
+    -   A single *file* with rows and columns.
+    -   Each row is an observation, and each column is a variable.
+-   How do you find it in the real world?1
+    -   Storage: Comma separated values .csv (.txt) is simplest, but other formats are possible
+    -   Stata (.dta), SPSS (.sav), R (.rda), Python (.pkl), etc.
+-   A Dataset is a collection of data tables that may be related to each other.
+
+## Data structures
+
+Aside from "format", data can be structured in different ways:
+
+-   **Cross-sectional** (*xsec*) data have information on many units observed at the same time
+-   **Time series** (*tseries*) data have information on a single unit observed many times
+-   **Multi-dimensional** (*panel*?) data have multiple dimensions (the observations)
+
+## Data structures: Panel (xt) data
+
+**Multi-dimensional: Panel data** is of particular interest in economics:
+
+-   A common type of **panel data** has many units, each observed multiple times 
+    -   countries observed repeatedly for several years
+-   In **xt** data tables observations are identified by two ID variables: one for the cross-sectional units, one for time
+-   **xt** data is balanced if all cross-sectional units are observed at the very same time periods
+-   It is called unbalanced if some cross-sectional units are observed more times than others
+
+# Data Quality
+
+Not all data is created equal
+
+## Data quality is key
+
+-   **Keyword**: Quality, Quality, Quality
+-   Data quality is key for any analysis
+    -   **Garbage-in-garbage-out**: If data is *useless*, then answers of our analysis are bound to be useless...
+    -   ... no matter how fancy a method we apply to it.
+-   Data quality is generally a subjective notion: Different standards for different purposes
+-   First you have to specify what is your (research) question:
+    -   What do you want to explore or understand?
+-   If you have a clear (pseudo) answer, then you can decide on your data quality
+
+::: incremental
+-   However, there are some objective measures to decide if you have your question
+:::
+
+## Dimensions of data quality
+
+1.  **Content** - what is the variable really capturing?
+2.  **Validity** - how close the actual content of the variable to the intended content
+3.  **Reliability** - if we were to measure the same variable multiple times for the same observation it should give the same result
+4.  **Comparability of measurement** - how similarly the same variable is measured across different observations
+5.  **Coverage** - what proportion of the population are represented in the data
+6.  **Unbiased selection** - if coverage is incomplete, is it representative of the population?
+
+::: notes
+How was the data collected??
+
+Does the variable capture what it is supposed to capture? are labels correct? is the variable measured correctly? (is =1 a true or a false?)
+:::
+
+## **YOU** should allways know your data
+
+-   How data was born? How was it collected, and processed?
+-   All details of measurement that may be relevant for their analysis
+    -   When in doubt, ask the data source. Manuals, codebooks, etc.
+-   Because of this, you may want to have a:
+    -   `README.txt` that describes where dataset comes from
+    -   `VARIABLES.xls` that provides basic information on your variables (cookbook)
+
+# Data collection
+
+How was the data Born?
+
+## Secondary data: General characteristics
+
+-   **Type**: Data, or information, collected by someone else, for different purposes
+    -   Tax records collects do not contain demographics and education.
+    -   A Survey that collects Demographics, but not income data.
+-   **Data quality** consequences
+    -   May not contain variables that we need
+    -   Validity may be high or low
+    -   Potential selection bias if low covarege
+-   **Frequent advantages**
+    -   Inexpensive?
+    -   Often many observations
+
+::: notes
+-   Secondary data is data that was collected by someone else for a different purpose
+-   We cant control how the data was collected, but we can control how we use it. You need to assume that the data is not perfect. And assume consequences of that.
+:::
+
+## How to Collect the Data
+
+-   **By hand**:
+    -   Many data sources are available online: World Bank and IMF data, etc. (usually easy to download)
+    -   For the US, <ipums.org> has a lot of standardized data (CPS, ATUS, ACS, etc.)
+-   Automated **API**:
+    -   Many agencies also offer API (Application Programming Interface) to directly load data into a statistical software
+    -   API widely used in many context. see [here](https://guides.lib.berkeley.edu/c.php?g=4395&p=7995952) for a list from Berkeley
+
+## How to Collect the Data
+
+-   Data from online platform (**web scraping**):
+    -   html code includes data, that can be collected and analyzed
+    -   R (rvest) and Python (beautiful soup) can be used for that purpose
+    -   Stata does not have good tools for web scraping
+-   **Need extensive cleaning**
+-   Can be repeated (automated) if data is updated frequently
+    -   Mindful of the terms of service of the website
+-   Data collection limited to what is on a site
+
+::: notes
+-   Web scraping is a powerful tool that needs a know-how, and requires extensive cleaning
+-   Web scraping is limited to what is on a site
+-   Always be mindful of the terms of service of the website. Not all websites allow web scraping
+:::
+
+## Administrative Data: General Characteristics
+
+-   Business transactions, Government records, taxes, social security
+-   **Many advantages**
+    -   Often great coverage (Census), few missing values, high quality content (tax records)
+    -   Many well defined and documented variables
+-   **Some disadvantages**
+    -   Defined for a different purpose, not your research question
+    -   Often not detailed/specific enough
+    -   **Biggest** problem is very ***limited access***: Need to apply for access
+
+# Survey and sampling
+
+If you ask (few), they *may* answer
+
+## Survey: General characteristics
+
+-   Surveys collect data by asking people (respondents) and recording their answers
+-   Answers should be short(!) and easily(!) transformed into variables
+-   **Major advantage**: you can ask what you want to know
+-   How?
+    -   self-administered surveys and interviews
+    -   Web, telephone, in person, mix - computer aided interview
+-   What could go wrong? (and assume ***House MD*** is wrong)
+
+::: notes
+Choice of data collection approach matters a great deal. Can be done efficiently, with good aids. And depending on design, can be cheap
+:::
+
+## Sampling
+
+-   Perhaps one can collect data on all observations we want (the population)
+
+-   but, more often we don't because it's impractical or prohibitively expensive
+
+-   **Sampling** is when we purposefully collect data on a subset/sample ($<100%$ coverage) of the population
+
+-   **Sampling** is the **process** that selects that subset (How do we select the sample?)
+
+## What We Want: Representative samples
+
+-   A sample is [*good*]{.blue} if it represents the population
+    -   all **important** variables have very similar distributions in the sample and the population
+    -   all **patterns** in the sample are very similar to the patterns in the population
+-   Examples
+    -   The age distribution of a sample of employees is the same as the age distribution of all employees
+    -   The income distribution in the CPS is the same as the income distribution in the US
+-   But how can we tell?
+
+## How can we tell if a sample is representative
+
+-   Never for sure
+    -   If you knew the population, you wouldn't need the sample
+    -   We know the patterns in the sample but not in the population
+-   But, we could do Benchmarking
+    -   We may know **a few** distributions or patterns in the population
+    -   Those should be similar in the sample
+    -   Example: Using the Census to check the age distribution in the CPS
+-   Or, knowing the process of sampling
+    -   Random sampling is known to lead to representative samples with high likelihood
+
+## Sampling: Random sampling
+
+-   **Random sampling** is a selection rule [***independent***]{.red} of any important variable
+    -   its the most likely to produce representative samples
+    -   Any other methods may lead to biased selection
+-   Examples
+    -   Good: people with odd-numbered birth dates (a 50% sample)
+    -   Good: the first half of a list of firms **sorted** by a random number generated by the computer
+    -   Bad: the first half of a list of people by alphabetical order
+    -   Bad: firms that were established in the most recent years
+
+## Random sampling is **best**
+
+-   Provided sample is large enough (N$->$infinity)
+-   In small samples (dozens) anything is possible
+-   In a representative sample, size (N) matters, not coverage
+    -   CPS \~ 70,000 households (0.02% of US); ATUS \~ 9,000 ppl (0.003% of US)
+-   Larger samples better (more power/precise estimates) but ...
+
+## Sampling: Cluster/Stratified sampling
+
+-   Some times, however, random sampling is prohibitively expensive.
+-   Furthermore, sometimes we want to oversample some groups (rare groups), to make sure we have enough observations
+-   Both approaches may help to reduce costs of collection.
+
+## 
+
+<!--# 
+This is the code used for the following:
+{{< include chp1_figure1.do >}}
+ -->
+
+::: panel-tabset
+## Random sampling
+
+![](images/paste-1.png){fig-align="center" width="45%"}
+
+## Cluster sampling
+
+![](images/paste-2.png){fig-align="center" width="45%"}
+
+## Stratified sampling
+
+![](images/paste-3.png){fig-align="center" width="45%"}
+:::
+
+## What is different with Big Data?
+
+-   **massive** datasets that are (billions?) Not necessarily representative
+-   often **automatically** and **continuously** collected and stored (Transaction data, tweets, etc.)
+    -   Not necessarily for analytic purposes
+-   Complex
+    -   text (video, music/noise), network, multidimensional, maps
+
+## Different yet the same
+
+Different:
+
+-   A particular source of uncertainty of the results of an analysis is greatly reduced
+-   Rare or more nuanced patterns can be uncovered
+-   Practical challenges (storage, processing, etc.)
+-   Some challenges may be solved by working with a random subsample
+
+Same:
+
+-   Need to represent entire population if incomplete coverage
+-   Example: Big Data with 75% coverage with a selection bias leads to biased results
+-   Non-big data from same population with 1% random sample leads to good results
+
+# Other Aspects to consider
+
+## Sample selection bias
+
+-   The sample you collect is different from the population
+-   This difference is crucial in the story
+-   Example: Predicting presidential election
+    -   1936: Literary Digest. [FD Roosevelt vs Landon](https://en.wikipedia.org/wiki/The_Literary_Digest#:~:text=In%201936%2C%20the%20magazine's%20poll,vote%20and%20370%20electoral%20votes.). 10m people asked. 2m replied. Biggest poll ever. Landon was predicted win 57%\
+    -   1948 Chicago Tribune. [Dewey predicted beat Truman](https://en.wikipedia.org/wiki/Dewey_Defeats_Truman). Used phone registry
+
+## Legal and ethical aspects
+
+During Data collection, be aware of ethical and legal constraints, Special care with sensitive information
+
+More with web scraping...
+
+Always communicate with the source owner(s) and or with legal professional if you are planning to use seemingly sensitive data (names, addresses, etc.)
+
+## AI and data collection, wrangling
+
+-   Data collection and management often behind walls
+-   AI can help write code to web-scrape, etc. (Python is quite good at it)
+-   AI is great to give a first impression of your dataset, incl. quality, data structure
+-   AI is helpful to discuss sampling ideas
+-   AI needs context to do good, and will not have proper domain knowledge
+-   AI needs supervision
+
+Lesson: AI is a tool, not a replacement
+
+## Main takeaway
+
+-   Know your data
+    -   How it was born,
+    -   What its main advantages are
+    -   What its main disadvantages are
+-   Data quality determines the results of your analysis
+-   Data quality is determined by how the data was born, and how you are planning to use it
+   
+# **Break**
+
+# Preparing the Data
+From raw to tidy
+
+## Motivation
+
+-   Does immunization of infants against measles save lives in poor countries? Use data on immunization rates in various countries in various years from the World Bank. How should you store, organize and use the data to have all relevant information in an accessible format that lends itself to meaningful analysis?
+
+-   You want to know, who has been the best manager in the top English football league. Have downloaded data on football games and on managers. To answer your question you need to combine this data. How should you do that? And are there issues with the data that you need to address?
+
+# Variables
+
+## Variable types: Qualitative vs quantitative
+
+-   Data can be born (collected, generated) in different form, and our variables may capture the quality or the quantity of a phenomenon.
+-   Quantitative variables are born as numbers. Typically take many values. (age, height, steps...)
+-   Qualitative variables, also called categorical variables, take on a few values, with each value having a specific interpretation (belonging a category). (Race, Gender, Brand, etc)
+
+## Variable types: Dummies or binary
+
+-   A special case is a binary variable, which can take on two values
+-   ...yes/no answer to whether the observation belongs to some group. **Best** to represent these as `0` or `1` variables: `0` for no, `1` for yes.
+    -   Example: `is_female`, `is_head_of_household`, `is_pregnant`, `is_employed`
+-   Flag - binary showing existence of some issue (such as missing value for another variable, presence in another dataset)
+    -   Example: `missing_age`, `missing_income`, `in_sample`
+-   __Note__ Some times Surveys do **NOT** use 0-1 for binary variables. **Be careful**.
+      
+```stata
+ssc install fre
+fre categorical_variable
+* This program will tabulate the data and show you the labels if any
+```
+## Variable types - formal definition
+
+1.  **Nominal qualitative** variables take on values that *cannot* be unambiguously ordered: Color, brands, race
+2.  **Ordinal**, or **ordered** variables take on values that are unambiguously ordered. Grade, satisfaction, income brackets
+3.  **Interval/continuous** variables are ordered variables, with a comparable "change": Age, Degree Celsius, Price in dollars.
+
+# Data Wrangling & Cleaning{.left}
+
+Taking care of your data
+
+## Data Wrangling
+
+> Data wrangling is the process of transforming raw data to a set of data tables that can be used for a variety of downstream purposes such as data analysis.
+
+::: columns
+::: {.column width="50%"}
+-   Understanding and storing
+    -   start from raw data
+    -   understand the structure and content
+    -   create tidy data tables
+    -   understand links between tables
+:::
+
+::: {.column width="50%"}
+-   Data cleaning
+    -   understand features, variable types
+    -   filter duplicates
+    -   look for and manage missing observations
+    -   understand limitations
+:::
+:::
+
+- This is a **crucial** because out there, Data is Messy
+  
+## The tidy data approach
+
+A useful concept of organizing and cleaning data is called the tidy data approach:
+
+1.  Each observation forms a row.
+2.  Each variable forms a column.
+3.  Each type of observational unit forms a table. (One for Families, One for Members)
+4.  Each observation has a unique identifier (ID) (Family ID and Person ID)
+5. Can be merged with other tables if needed.
+  
+Advantages: 
+
+- Tidy tables are easy to work with, and make finding errors easy.
+- Easy to understand and extend: New observations adds rows; new variables adds columns.
+
+## Simple tidy data table
+
+| hotel_id | price | distance |
+|----------|-------|----------|
+| 21897    | 81    | 1.7      |
+| 21901    | 85    | 1.4      |
+| 21902    | 83    | 1.7      |
+
+Source: `hotels-vienna data`. Vienna, 2017 November week-end.
+
+Each Row a new observation, Each Column a new Variable
+
+## Tidy data table of multi-dimensional data
+
+-   The tidy approach - store **`xt`** data so that One row is one `it` observation  (Cross-section unit `i` observed at time `t`). (Long format)    
+-   The next row then may be the same cross-sectional unit observed in the next time period.
+    -   You may want to use similar criteria with multi-dimensional data (`ijt` data)
+  
+-   Alternative **wide format** : one row refers to one cross-sectional unit, and different time periods are represented in different columns. Not the best way to keep the data
+
+## Displaying immunization rates across countries - WIDE
+
+| Country  | imm2015 | imm2016 | imm2017 | gdppc2015 | gdppc2016 | gdppc2017 |
+|----------|---------|---------|---------|-----------|-----------|-----------|
+| India    | 87      | 88      | 88      | 5743      | 6145      | 6516      |
+| Pakistan | 75      | 75      | 76      | 4459      | 4608      | 4771      |
+
+Source: `world-bank-vaccination` data
+
+**Wide format** of country-year panel data, each row is one country, different years are different variables. 
+
+`imm`: rate of immunization against measles among 12–13-month-old infants.  
+`gdppc`: GDP per capital, PPP, constant 2011 USD. 
+
+## Displaying immunization rates across countries - LONG
+
+| Country  | Year | imm | gdppc |
+|----------|------|-----|-------|
+| India    | 2015 | 87  | 5743  |
+| India    | 2016 | 88  | 6145  |
+| India    | 2017 | 88  | 6516  |
+| Pakistan | 2015 | 75  | 4459  |
+| Pakistan | 2016 | 75  | 4608  |
+| Pakistan | 2017 | 76  | 4771  |
+
+Note: Tidy (long) format of country-year panel data, each row is one country in one year.   
+`imm`: rate of immunization against measles among 12–13-month-old infants.  
+`gdppc`: GDP per capital, PPP, constant 2011 USD. Source: world-bank-vaccination data.
+
+## Stata Programming corner
+
+- Transforming your data from Wide to Long format (or viceversa) can be done using `reshape`
+
+```stata
+* From wide to long
+ren *, low // <- Make sure your variables are all lower case
+reshape long imm gdppc, /// <- Make variable Long, and indicate what variables to "make" long
+    i(country) j(year) string // <- also the dimension that was previously "wide" Year
+
+* From long to wide
+reshape wide imm gdppc, /// <- Make variable Long, and indicate what variables to "make" long
+    i(country) j(year)  // <- also the dimension that was previously "wide" Year    
+```
+## Stata Programming corner
+
+- Some times, you may need to `reshape` only 1 variable, and keep the rest as they are.
+  - Adding [**head of household education**]{.blue} to all family members.
+- You can do it two ways: 
+  - Create a smaller dataset and `merge` 
+  - ID head, and gen the new variable  
+  `bysort hid: egen head_educ = max(educ*(is_head==1))`
+
+## A complex Dataset: Relational database
+
+- Some datasets cannot be stored in a single table. 
+    - ok, they could, but would be very inefficient.
+- Data like this are typically stored in a relational database.
+  - Smaller ***tidy*** datasets can be stored in a single table (single unit of observation), 
+  - and that can be linked to other tables with a unique identifiers (ID or Keys).
+-   This structure forces you to better understand your data.
+- After understanding the data, you can `merge`/`join`/`link`/`match` tables as needed.
+
+
+## Identifying successful Futbol managers
+
+- Review the example, Specially if interested in Futbol
+
+- In short, Data can have different structures (all tidy)
+
+- Some structures are more useful than others.
+
+- Understanding those structures will allow you to work with the data
+
+## American Time Use Survey
+
+- The ATUS is a good example of a relational dataset
+- If downloaded RAW (census) you need to navigate through many files:
+  - **ATUS-ACT**: contains all time activities, plus other info, for the individuals interviewed in the ATUS. Keys: `tucaseid` and `tuactivity_n`
+  - **ATUS-CPS**: Data for all Family members, from CPS. Keys `tucaseid` `tulineno`
+  - **ATUS-RESP**: Some aggregated TimeUse, and additional respondand information. Key `tucaseid`
+  - **ATUS-ROST**: Basic demographics for all household members. Keys `tucaseid` `tulineno`
+  - **ATUS-SUM**: Aggregated Time use data,  by different types. Keys `tucaseid`
+
+## American Time Use Survey
+
+- Depending on your goals, you may want to combine information from various datasets
+  - Aggregate some data, combine others, transform.
+- Understanding the data structure may also help you see how to best "merge the data"
+ 
+## Stata-Corner: Types of [Merging](https://friosavila.github.io/chatgpt/merge_04_20_2023/index.html)
+
+There are ~~4~~ 3 types of merging, depending of the `master` or `using` dataset
+
+- `1:1 merging`: Both master and using datasets are uniquely by the **same variables**. 
+    use atus-rost
+    merge 1:1 tucaseid tulineno using atus-cps
+- `1:m merging`: Each observation in the `master` file will be merge with `many` units in the `using` dataset. Master has unique ID. 
+    use atus-resp
+    merge 1:m tucaseid using atus-act
+- `m:1 merging`: Many observations in the `master` will be merge with `one` unit in the `using`. Using has a unique ID   
+    use atus-act
+    merge m:1 tucaseid using atus-resp
+- `m:m merging`: its wrong...dont do it. Perhaps think `joinby` instead
+
+## Stata-Corner
+
+::: {.callout-important}
+
+- Every time you do a merge, Stata will create a variable called `_merge` that will tell you what happened to the merge.
+- If this variable exist in your datasets (master or using) you will get an error.
+- so make sure to drop (or rename) it before merging (after you have checked it)
+
+:::
+      
+## Complex data - tidy data: summary
+
+-   Creating a tidy data is important so data tables are easy to understand, combine and extend in the future.
+-   If relational data, IDs are essential (allow to link tables)
+-   Often raw data will not come in a tidy format, and you will need to work understanding the structure, relationships and find the individual ingredients.
+-   For analysis work, may need to combine tidy data tables
+-   But probably only need a fraction of all variables.
+  
+
+# Data cleaning
+Tidying up your tidy data
+
+## Data cleaning
+
+With most data, in addition to understand it, you need to "clean", before using it (**Very Important**)
+
+-   Entity resolution:
+    -   Dealing with duplicates: Why are they there? What to do?
+    -   Ambiguous identification: is it John or Jonh or Jon ?
+    -   non-entity rows: uh? what is this?
+-   Missing values
+    -   why is it missing? is it missing at random? by design? endogenous?
+
+## Dealing with duplicates
+
+-  ** Duplicates**: Observations appearing more than once in the data.
+    -   May be the result of human error, or the features of data source (e.g., data scraped from classified ads. Some posts appear more than once).
+-   Often, easy spot
+    -   `duplicates report` in Stata, or `bysort ID: gen dup = _n`
+-   but one needs to investigate. Makes sense / an error? something else?
+-   Decision: what to keep. Sometimes no clear-cut way, but ***usually*** no big deal.
+
+## Entity identification and resolution
+
+-   You need to have unique IDs
+    -   you can use `isid` to check if a variable(s) is a unique identifier
+    -   If not, check why not. Perhaps wrong ID?
+-   Possible cases:
+    -   Same identifier, different entities
+    -   Different identifiers, same entity (??)
+-   Entity resolution: process of identifying, merging and eliminating duplicate entities.
+
+## Entity resolution example
+
+| Team ID | Unified name | Original name                   |
+|---------|--------------|---------------------------------|
+| 19      | Man City     | Manchester City                 |
+| 19      | Man City     | Man City                        |
+| 19      | Man City     | Man. City                       |
+| 19      | Man City     | Manchester City F.C.            |
+| 20      | Man United   | Manchester United               |
+| 20      | Man United   | Manchester United F.C.          |
+| 20      | Man United   | Manchester United Football Club |
+| 20      | Man United   | Man United                      |
+
+
+
+## Getting rid of non-entity observations
+
+- Sometimes, data may contain rows that do not belong to an entity we want
+  - For example, region-level data may contain country-level aggregates
+-   Find them and drop them (unless you have a good reason to keep them)
+-   Common Case: a data table from the World Bank on countries often includes observations for larger regions (continents, low income countries, etc) 
+
+# Missing Data
+
+## Missing values
+
+-   A frequent **and** important issue: missing values.
+-   Missing values mean that the value of a variable is available for some, but not all, observations.
+-   Different languages may encode missing values differently.
+    -   In `Stata` dot ".", an empty space "" are missing for numbers and strings. 
+    -   But, "." is considered larger than any number, so be careful when coding.
+-   Surveys, may also have their own rules for coding missing  
+    -   binary 0 for no, 1 for yes, 9 for missing
+    -   percent 0-100, 9999 for missing
+    -   numeric, range is 1-100000, 9999999999 for missing
+
+## Missing values: What to do?
+
+Depends on:  **Scope**: How much missing? and **Reason**: Why missing?
+
+1.  Look at content of data. This could be related to data quality (especially coverage)
+2.  Missing by design may not be a problem. (Ever been pregnant? missing for men)
+3.  Missing values should be counted, because they mean fewer observations with valid information. (compounding effect)
+4.  Big problem: potential selection bias. 
+    - Is data missing at random?
+    - Is the data still representative?
+  
+## Missing values: Understanding the selection process
+
+-   Random: When missing data really means no information, it may be the result of errors in the data collection process. Rare.
+-   In some other cases, missing just means "zero" or "no". In these instances, we should simply recode (replace) the missing values as "zero" or as "no". (how many children? missing means zero)
+-   Often, values are missing for a reason. 
+    -   Some survey respondents may not know the answer to a question or refuse to answer it, 
+    -   They are likely to be different from those who provide valid answers.
+
+## Missing values: what can we do?
+
+Two basic options:
+
+- Restrict the analysis to observations with non-missing values for all variables used in the analysis.
+    - Default option in many statistical packages.
+- Imputation - Fill in some value for the missing values, such as the mean or median.
+    - There are more advanced and better options, but should be used with caution.
+    - Not all imputation methods are created equal.
+- Be conservative, impute if absolutely necessary, and document it.
+     
+## Missing values: Some practical advice
+
+-   For binary variables: zero if yes/no.
+-   For qualitative nominal variables, missing as a new value: white, blue, red and missing.
+-   For ordinal variables, missing could be recoded to a neutral variable.
+-   For quantitative variables -> mean or median? (try not to! There are good imputation methods)
+-   if impute, create a flag and use it analysis. At the very least for sensitivity analysis.
+-   (**Bad**) Imputation will have consequences, be conservative.
+
+## More on Data Cleaning
+
+- Consider the data quality, and the data collection process.
+  - Are there outliers? data entry errors? bunching?
+- Understand the data generating process.
+  - Are there missing values? why?
+- This is an iterative process, and you may need to go back and forth between data cleaning and data analysis.
+
+- More on this with EDA and Data Visualization
+  
+## Data wrangling: Cooking recipe
+
+1.  [**Write a code**]{.blue}: it can be repeated, commented, cleaned, and improved later
+2.  Understand the structure of the dataset, recognize links. Draw a schema 
+3.  Start by looking into the data to spot issues. (`summarize`, `tabulate`, `edit`, `browse`)
+    -  do they have meaningful ranges? Correct them or set them as missing
+4.  Store data in **tidy** datasets. one row is one observation, one column a variable
+5.  Have a description of variables (Labels, make sure you know what they are)
+6.  Identify missing values and store them in an appropriate format. Make edits if needed.
+7.  Document every step of data cleaning <- **Very Important** and goes to the code
+
+## AI and data wrangling: Upside
+
+If given the right instructions, and information, AI can help you with data wrangling:
+
+-   understands your data structure
+-   combines datasets
+-   summarizes the data
+-   understands your variables
+-   finds potential problems
+
+But, it is not perfect. You need to understand the data and the process. Review and control.
+
+# Thats all for today

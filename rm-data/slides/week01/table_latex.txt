@@ -1,0 +1,9 @@
+\begin{tabular}{|c|c|c|}
+    \hline
+    Column 1 & Column 2 & Column 3 \\
+    \hline
+    Row 1 & Cell 1 & Cell 2 \\
+    \hline
+    Row 2 & Cell 3 & Cell 4 \\
+    \hline
+\end{tabular}

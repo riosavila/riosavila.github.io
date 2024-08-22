@@ -7,14 +7,14 @@ This document provides the homework for the each week of the course.
 
 ## Homework 1 {#hw01}
 
-Choose one of the following topics, and create a PDF version of it using Quarto. For this, create a new repository in your GitHub account, this repository should be named `homework_1`, and contain the html file that you will use to create the PDF.
+Choose one of the following topics, and create a PDF version of it using Quarto. For this, create a new repository in your GitHub account, this repository should be named `homework_1`, and contain the QMD file that you will use to create the PDF.
 
 For this homework use the following resources
 
  - Template: [template](hw-material/pdf-template.txt)
-   - Just copy the Heading of this file in your html file
+   - Just copy the Heading of this file in your QMD file
  - Bibliography: [reference.bib](hw-material/references.bib)
-   - Add this in the same folder as your html file
+   - Add this in the same folder as your QMD file
  - All figures, if any, can be saved as PNG or JPG files from the linked pages.
  - Tables, if any, may have to be replicated using `markdown` tables.
 

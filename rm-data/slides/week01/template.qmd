@@ -1,0 +1,33 @@
+---
+title: "My Economic Analysis"
+author:
+    - name: "Your Name"
+    - name: "Your friends Name"  
+date: last-modified
+date-format: long
+abstract: "This is a simple template for a report."
+abstract-title: "Abstract"
+format: 
+  pdf: 
+    number-sections: true
+    documentclass: article
+    fontsize: 11pt
+    margin-bottom: 1in
+    margin-top: 1in
+    margin-left: 1in
+    margin-right: 1in
+ 
+  html: default
+---
+
+# Introduction
+
+This is a simple template for a report.
+
+# Methods
+
+Some methods.
+
+## Method 1
+
+

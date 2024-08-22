@@ -2,8 +2,18 @@
 title: "The Iron Bank Always Collects: A Study of Debt and Financial Institutions in Game of Thrones"
 author: "Your Name"
 date: "2023-08-22"
-format: pdf
-bibliography: references.bib
+format:
+    pdf:
+        documentclass: article 
+        number-sections: true
+        margin-top: 1in
+        margin-bottom: 1in
+        margin-left: 1in
+        margin-right: 1in
+        linestretch:  1.5
+        fontsize: 11pt
+    html: default 
+bibliography: references7.bib
 ---
 
 # Introduction
@@ -19,6 +29,7 @@ The economic aspects of Game of Thrones have been subject to some academic scrut
 Main Research Question: How do the depictions of debt and financial institutions in Game of Thrones reflect real-world historical and contemporary economic phenomena?
 
 Secondary Research Questions:
+
 1. What parallels can be drawn between the Iron Bank of Braavos and historical financial institutions?
 2. How does sovereign debt in Game of Thrones compare to real-world sovereign debt crises?
 3. What insights does the series offer about the relationship between financial power and political authority?

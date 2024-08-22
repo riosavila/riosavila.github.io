@@ -4,3 +4,13 @@ title: Example of Research Proposals
 
 This page contains few examples of research proposals. The goal is to give you an idea of what expect your research proposal to look like for the term paper.
 
+1. The Impact of Remote Work on Urban Housing Prices [link](research-proposals/proposal1.qmd)
+2. The Effect of Social Media Sentiment on Stock Market Volatility [link](research-proposals/proposal2.qmd)
+3. The Impact of Climate Change on Agricultural Productivity: A Global Analysis [link](research-proposals/proposal3.qmd)
+4. The Economic Impact of Artificial Intelligence Adoption in Small and Medium Enterprises [link](research-proposals/proposal4.qmd)
+5. The Impact of Financial Literacy Programs on Household Savings and Investment Behavior [link](research-proposals/proposal5.qmd)
+6. The Economics of Springfield: A Case Study of Resource Allocation in The Simpson [link](research-proposals/proposal6.qmd)
+7. The Iron Bank Always Collects: A Study of Debt and Financial Institutions in Game of Thrones [link](research-proposals/proposal7.qmd)
+8. The Economics of the Matrix: Scarcity, Choice, and Human Capital in a Simulated Reality  [link](research-proposals/proposal8.qmd)
+9. To Boldly Go: Resource Allocation and Post-Scarcity Economics in Star Trek [link](research-proposals/proposal9.qmd)
+10. For the Horde: Resource Competition and Virtual Economies in World of Warcraft [link](research-proposals/proposal10.qmd)

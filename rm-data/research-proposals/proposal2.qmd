@@ -2,7 +2,17 @@
 title: "The Effect of Social Media Sentiment on Stock Market Volatility"
 author: "Your Name"
 date: "2023-08-22"
-format: pdf
+format:
+    pdf:
+        documentclass: article 
+        number-sections: true
+        margin-top: 1in
+        margin-bottom: 1in
+        margin-left: 1in
+        margin-right: 1in
+        linestretch:  1.5
+        fontsize: 11pt
+    html: default 
 bibliography: references2.bib
 ---
 

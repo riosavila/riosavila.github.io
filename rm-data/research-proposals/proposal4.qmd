@@ -2,7 +2,17 @@
 title: "The Economic Impact of Artificial Intelligence Adoption in Small and Medium Enterprises"
 author: "Your Name"
 date: "2023-08-22"
-format: pdf
+format:
+    pdf:
+        documentclass: article 
+        number-sections: true
+        margin-top: 1in
+        margin-bottom: 1in
+        margin-left: 1in
+        margin-right: 1in
+        linestretch:  1.5
+        fontsize: 11pt
+    html: default 
 bibliography: references4.bib
 ---
 
@@ -19,6 +29,7 @@ SMEs play a crucial role in most economies, often accounting for the majority of
 Main Research Question: What is the economic impact of AI adoption on Small and Medium Enterprises?
 
 Secondary Research Questions:
+
 1. How does AI adoption affect productivity and profitability in SMEs?
 2. What are the employment effects of AI adoption in SMEs?
 3. How does the impact of AI adoption vary across different industries and firm sizes within the SME category?

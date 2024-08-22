@@ -53,7 +53,7 @@ All homework assignments are required to be submitted in Quarto format, using Gi
 #### Week 1: Course Overview and Tools Setup
 - **Introduction to GitHub and Quarto**
 - **Data Organization and Management**
-- [Slides](week1.qmd)
+- [Slides](slides/week01/week01.qmd)
 - [Homework 1](homework.qmd#hw01)
 
 ### Part II: Data Analysis and Exploration
@@ -62,14 +62,14 @@ All homework assignments are required to be submitted in Quarto format, using Gi
 - **Data Collection and Preparation**
 - **Tidy Data Principles**
 - Reading: Békés & Kézdi (2021), Chapters 1-2
-- [Slides](week2.qmd)
+- [Slides](slides/week02.qmd)
 - [Homework 2](homework.qmd#hw02)
  
 #### Week 3: Data Exploration
 - **Exploratory Data Analysis Techniques**
 - **Data Cleaning and Tidy Data Principles**
 - Reading: Békés & Kézdi (2021), Chapters 3-4
-- [Slides](week3.qmd)
+- [Slides](slides/week03.qmd)
 - [Homework 3](homework.qmd#hw03)
 
 ### Part III: Generalization and Regression Analysis
@@ -78,14 +78,14 @@ All homework assignments are required to be submitted in Quarto format, using Gi
 - **Sampling and Hypothesis Testing**
 - **Confidence Intervals and Errors**
 - Reading: Békés & Kézdi (2021), Chapters 5-6
-- [Slides](week4.qmd)
+- [Slides](slides/week04.qmd)
 - [Homework 4](homework.qmd#hw04)
  
 #### Weeks 5-6: Regression Analysis I: Simple Regression
 - **Linear Regression and Causality**
 - **Model Assumptions and Transformations**
 - Reading: Békés & Kézdi (2021), Chapters 7-9
-- [Slides](week5_6.qmd)
+- [Slides](slides/week05-06.qmd)
 - [Homework 5](homework.qmd#hw05)
 - [Homework 6](homework.qmd#hw06)
  
@@ -93,14 +93,14 @@ All homework assignments are required to be submitted in Quarto format, using Gi
 - **Estimation and Inference**
 - **Interactions and Non-linearities**
 - Reading: Békés & Kézdi (2021), Chapter 10
-- [Slides](week7.qmd)
+- [Slides](slides/week07.qmd)
 - [Homework 7](homework.qmd#hw07)
   
 #### Week 8: Regression Analysis III: Modeling Probabilities
 - **Logit and Probit Models**
 - **Interpretation and Predictive Power**
 - Reading: Békés & Kézdi (2021), Chapter 11
-- [Slides](week8.qmd)
+- [Slides](slides/week08.qmd)
 - [Homework 8](homework.qmd#hw08)
  
 ### Part IV: Advanced Topics
@@ -108,31 +108,31 @@ All homework assignments are required to be submitted in Quarto format, using Gi
 #### Week 9: Time Series Analysis
 - **Trend, Seasonality, and Stationarity**
 - Reading: Békés & Kézdi (2021), Chapter 12
-- [Slides](week9.qmd)
+- [Slides](slides/week09.qmd)
 - [Homework 9](homework.qmd#hw09)
  
 #### Week 10: Prediction
 - **Model Fit and Cross-validation**
 - Reading: Békés & Kézdi (2021), Chapter 13
-- [Slides](week10.qmd)
+- [Slides](slides/week10.qmd)
 - [Homework 10](homework.qmd#hw10)
  
 #### Week 11: Model Building for Prediction: LASSO
 - **LASSO for Prediction and Diagnosis**
 - Reading: Békés & Kézdi (2021), Chapter 14
-- [Slides](week11.qmd)
+- [Slides](slides/week11.qmd)
 - [Homework 11](homework.qmd#hw11)
  
 #### Week 12: Predicting Probabilities and Classification
 - **Classification Techniques and ROC Curves**
 - Reading: Békés & Kézdi (2021), Chapter 17
-- [Slides](week12.qmd)
+- [Slides](slides/week12.qmd)
 - [Homework 12](homework.qmd#hw12)
 - 
 #### Week 13: Forecasting Data
 - **ARIMA and Forecasting Techniques**
 - Reading: Békés & Kézdi (2021), Chapter 18
-- [Slides](week13.qmd)
+- [Slides](slides/week13.qmd)
 - [Homework 13](homework.qmd#hw13)
  
 ## Grading Policy

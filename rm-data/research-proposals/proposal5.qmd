@@ -2,7 +2,17 @@
 title: "The Impact of Financial Literacy Programs on Household Savings and Investment Behavior"
 author: "Your Name"
 date: "2023-08-22"
-format: pdf
+format:
+    pdf:
+        documentclass: article 
+        number-sections: true
+        margin-top: 1in
+        margin-bottom: 1in
+        margin-left: 1in
+        margin-right: 1in
+        linestretch:  1.5
+        fontsize: 11pt
+    html: default 
 bibliography: references5.bib
 ---
 
@@ -19,6 +29,7 @@ Previous studies have examined the short-term effects of financial education, bu
 Main Research Question: How do financial literacy programs impact household savings and investment behavior in the long term?
 
 Secondary Research Questions:
+
 1. How does the effectiveness of financial literacy programs vary across different demographic groups?
 2. What are the mechanisms through which financial literacy affects savings and investment behavior?
 3. How do different types of financial literacy programs (e.g., school-based, workplace-based, community-based) compare in terms of effectiveness?

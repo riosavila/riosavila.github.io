@@ -1,0 +1,954 @@
+---
+title: "Introduction to Reproducible Research"
+format:  
+  clean-revealjs:
+    self-contained: true
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+author:
+  - name: Fernando Rios-Avila
+    email: friosavi@levy.org
+    affiliations: Levy Economics Institute
+bibliography: references.bib    
+---
+
+## Course Overview
+
+Duration: 3 hours (180 minutes)
+
+-   Introduction to Reproducible Research\
+-   Zotero for Bibliography Management
+-   Version Control with Git, GitHub, and GitHub-Desktop\
+-   Visual Studio Code (VSC) for Coding\
+-   Quarto and VSC for Documents\
+-   Other Essential Tools and Practices\
+-   Practical Exercise
+-   Q&A and Resources for Further Learning
+
+:::{.notes}
+Welcome to our course on Reproducible Research in Economics. Over the next 3 hours, we'll cover a range of tools and practices that will help you make your research more transparent, collaborative, and reproducible.
+:::
+
+# Introduction to <br> Reproducible <br> Research {background-image="transition-intro.jpg" background-position="right" background-size="contain" background-opacity="0.5"}
+
+:::{.notes}
+AI prompt for transition image: "Create an abstract image representing the concept of reproducible research, with interconnected gears and data flowing between them."
+:::
+
+## Why Reproducibility Matters in Economics
+
+-   Enhances credibility and transparency of research
+    -   Enables easier verification, replocation and extension of studies
+-   Facilitates collaboration and knowledge sharing
+-   Aligns with growing expectations from journals and funding bodies
+    -   Many journals now require reproducibility as part of the submission process
+
+:::{.notes}
+Reproducibility is crucial in economics as it ensures that other researchers can replicate and build upon your work. This transparency enhances the credibility of your findings and contributes to the cumulative nature of scientific knowledge.
+:::
+
+## Tools We'll Cover
+
+1.  Git & GitHub for version control
+2.  Zotero for bibliography management
+3.  Visual Studio Code as our integrated development environment
+4.  Quarto for dynamic document creation
+5.  Supporting tools for project organization and data management
+
+:::{.notes}
+These tools form a powerful ecosystem that will streamline your research workflow and make reproducibility a natural part of your process.
+:::
+
+## Setting Up Your Environment
+
+-   Create a GitHub account <https://github.com/>
+-   Download and install GitHub Desktop <https://desktop.github.com/download>
+-   Install Zotero and the Zotero Connector for your browser <https://www.zotero.org/download>
+-   Install Visual Studio Code <https://code.visualstudio.com/Download>
+-   Install Quarto [https://quarto.org/](https://github.com/quarto-dev/quarto-cli/releases/download/v1.5.55/quarto-1.5.55-win.msi)
+-   (Optional) Install R, Python, or Stata as needed
+
+:::{.notes}
+We'll guide you through the installation process for each of these tools. Don't worry if you encounter any issues - we're here to help!
+:::
+
+# Version Control <br> with Git <br> and GitHub {background-image="transition-git.jpg" background-position="right" background-size="contain" background-opacity="0.5"}
+
+:::{.notes}
+AI prompt for transition image: "Design a minimalist illustration showing branching paths merging together, representing Git version control."
+:::
+
+## Why do we care about Version Control?
+
+-   Life without version control
+    -   Do you keep every variant of every program you ever wrote on a project?
+    -   If so, how do you keep track of them? What if there is a bug?
+    -   If only keep latests, how do you know what you tried?
+-   Do you have the ThesisV1, ThesisV123, ThesisFinal, ThesisFinalFinal, ThesisFinalFinalFinal problem?
+
+## What is Git?
+
+-   Git is a program that does version control (tracking changes in files)
+-   It is the most popular version control program in software development and data science
+-   It is "easy" to set up and get started
+-   There are many programs that add intuitive interfaces on top of Git
+-   Git integrates seamlessly with online collaboration tools like GitHub and GitLab
+
+## Why use Git?
+
+-   Git is the current standard for version control.
+-   It has been used in the software industry for long, and it is now being adopted in other fields.
+-   It can help you keep track of changes in your code and documents.
+    -   It does not save every version of every file, but it saves the changes you made.
+    -   Which means, you can go back to a previous version of your code or document.
+    -   It also helps you keep track of who made what changes and when (Comments)
+-   Caveat: hard to keep track of changes in binary files (e.g., .docx, .pdf, .xlsx)
+
+## How to use Git?
+
+-   You can use Git from the command line! (Most powerful, but steep learning curve)
+-   Or you can use a GUI (Graphical User Interface) like GitHub Desktop, or Rstudio (which has Git integrated for Projects)
+-   If you need a remote repository, you can use GitHub, GitLab, or Bitbucket (among others)
+    -   GitHub is the most popular, and we will be using it.
+
+## Basic Git Concepts
+
+-   **Repository**: A project's folder containing all files and version history. It can be local (your PC) or remote (GitHub).
+-   **Commit**: A snapshot of your project at a specific point in time (like a save point in a game)
+    -   Commit message: A brief description of the changes made. All changes are local.
+-   **Push**: Sending your commits to a remote repository (like GitHub)
+-   **Pull**: Getting changes from a remote repository (from GitHub to your PC)
+
+::: callout
+If you want to use GitHub as a Dropbox-like service, you need to **commit** and **push** your changes.
+:::
+
+## Additional Git Concepts
+
+-   **Branch**: An independent line of development
+-   **Merge**: Combining changes from different branches
+    -   So far in our work we have been working on the `main` branch. That should be the case for most of your work.
+
+:::{.notes}
+These concepts form the foundation of version control with Git. Understanding them will help you manage your project's history effectively.
+:::
+
+## GitHub Desktop: Getting Started
+
+-   GitHub Desktop provides a user-friendly interface for Git operations, that works well with GitHub.
+    -   It is a good way to get started with Git, create repositories, and manage your projects.
+-   Download and install GitHub Desktop
+-   Log in with your GitHub account\
+-   Create a new repository or clone an existing one
+    -   Every one can have access to public repositories (transparent) but only you and collaborators can access private repositories.
+-   Make changes, commit, and push to GitHub
+
+:::{.notes}
+GitHub Desktop provides a user-friendly interface for Git operations, making it easier for beginners to get started with version control.
+:::
+
+## What should a the Git repository contain?
+
+-   The Core of the project (The code, the data, the documents):
+    -   Code (`.do`, `.R`, `.m`, `.jl`)
+    -   `.txt` files, `.md.` files, `.qmd` files.
+    -   LaTeX `.tex`, `.bib`, etc
+-   You may also want to include (small) Raw Data (`.csv`)
+    -   or a link to the data (other ways to access it)
+-   Normally, you wouldnt want binary files, but the following are exceptions:
+    -   PDF files
+    -   Word, Excel, PowerPoint files
+    -   Perhaps images, if they are part of the project
+
+## 
+
+-   You could include full datasets, but consider:
+    -   GitHub doesn't allow files larger than 100 MB, or projects with total size larger than 1 GB.
+    -   Look into Git LFS (Large File Storage) for large files.
+
+## What could you ignore?
+
+Consider adding a `.gitignore` file to your repository to exclude:
+
+-   Temporary files (`.bak`, `.swp`, `.log`, `.aux`)
+-   Junk files (`.RData`, `.pyc`)
+-   or simply any format or file you do not want to include. (keep the repository **clean**)
+
+## Project Workflow
+
+::: incremental
+-   Start a new project: Create a new repository on GitHub or Github Desktop
+    -   Clone it to your local machine (if you started on GitHub)\
+-   Create your project structure, add files, and start working.
+-   When you have made changes, and are ready to "save" them, **commit** them (**Local Snapshot**).
+    -   Add a message that describes the changes you made (make them meaningful).
+-   When you are ready to share your changes with the world, **push** them to GitHub (**Remote repository**).
+-   If working with others, you may want to **pull** changes from GitHub to your local machine.
+:::
+
+## 
+
+-   Commit often, push when you are ready to share.
+    -   Small mistakes are easier to fix.
+-   A bit of a challenge if working with multiple computers, but it is doable.
+-   And always check, everything works before pushing.
+
+# Zotero for <br> Bibliography <br> Management {background-image="transition-zotero.jpg" background-position="right" background-size="contain" background-opacity="0.5"}
+
+:::{.notes}
+AI prompt for transition image: "Create a minimalist illustration of a library transforming into a digital catalog, with book spines morphing into citation formats."
+:::
+
+## Introduction to Zotero
+
+-   Something that is not often taught in school is how to manage your bibliography.
+    -   You work on your paper, forget where you got a quote, and then you have to go back and find it!
+    -   Worse, you have to format your bibliography, and you have to do it manually.
+    -   then you change text, and drop a citation from text and refereces don't match.
+-   This is where Zotero comes in.
+    -   It is a free, open-source reference management software.
+    -   It helps you collect, organize, cite, and share your research sources.
+        -   More importantly, it will create `bib` files for all your references.
+    -   It integrates with word processors and browsers.
+
+:::{.notes}
+Zotero is a powerful tool that simplifies the process of managing your research sources and creating bibliographies.
+:::
+
+## Key Zotero Features
+
+-   Browser connector for easy capture of online sources
+-   PDF annotation and management
+-   Citation style editor for customized formatting
+    -   Many of Standard styles are already included. So you dont have to worry about formatting.
+-   Synchronization across devices (cloud storage)
+
+:::{.notes}
+These features make Zotero an essential tool for managing your research literature and ensuring accurate, consistent citations in your work.
+:::
+
+## Integrating Zotero with Your Workflow
+
+-   Use Zotero Connector to save sources while browsing
+-   Organize sources into collections for different projects
+-   Use tags and notes for efficient source management
+-   Generate in-text citations and bibliographies in your documents
+
+:::{.notes}
+Integrating Zotero into your research workflow can significantly streamline your literature management and citation process.
+:::
+
+# Break!
+
+# Visual Studio <br> Code {background-image="transition-vscode.jpg" background-position="right" background-size="contain" background-opacity="0.5"}
+
+:::{.notes}
+AI prompt for transition image: "Create a sleek, modern representation of an integrated development environment, with code snippets and tool icons."
+:::
+
+## Why not Word or Google Docs?
+
+-   Git can keep track of changes in your code, and documents, but you need a good editor to write them.
+-   MSWord, Google Docs, etc are good for writing, binary files...Git cannot read them.
+-   Thus, you need to write your code in plain text files (more later).
+    -   For example, most software code is written in plain text files.
+    -   This is also true for LaTeX, html and Markdown (more later).
+-   A good alternative for this is Visual Studio Code (VSC).
+
+## What is Visual Studio Code?
+
+- Free, open-source code editor by Microsoft that is constantly updated.
+- Supports multiple programming languages (R, Python, julia, Stata (with plugins))
+- Rich ecosystem of extensions (for Git, Quarto, Stata, Latex, etc)
+- Integrated terminal (will become important later)
+- Usually keeps your last session open, so you can pick up where you left off.
+
+:::{.notes}
+Visual Studio Code has become one of the most popular code editors due to its flexibility, performance, and extensive feature set.
+:::
+
+## Setting Up VSC
+
+-   Download and install Visual Studio Code
+-   Install language extensions for R, Python, or Stata This will give you syntax highlighting, code completion, and other language-specific features Even allow for running code from the editor
+-   Install helpful extensions like GitLens and Copilot (Free AI for coding)
+
+:::{.notes}
+We'll walk through the setup process and highlight some of the most useful extensions for economic research.
+:::
+
+## What can VSC do for you?
+
+-   As said before. Great editor for plain text files Code (R, Julia, Stata, Python, etc). And documents (Markdown, LaTeX, etc).
+-   It has a robust markdown support.
+-   It has a built-in terminal, so you can run your code from the editor.
+
+# Quarto {background-image="transition-quarto.jpg" background-position="right" background-size="contain" background-opacity="0.5"}
+
+:::{.notes}
+AI prompt for transition image: "Illustrate a document transforming from raw code and text into a polished report, with various output formats surrounding it."
+:::
+
+## Introduction to Quarto
+
+- Next-generation tool for literate programming
+- Supports multiple languages (R, Python, Julia, Observable JS, Stata with plugins)
+- It can be used to create documents (PDF's, Word, others), websites (like Mine), books (see examples), and presentations (like this one!)
+- Extends and improves upon R Markdown
+
+## What is Quarto?
+
+- Is an open-source scientific and technical publishing system
+
+- You can use plain text **markdown** in your favorite editor.
+
+- Create dynamic content with Python, R, Julia, and Observable.
+
+- Publish reproducible, production quality articles, presentations, dashboards, websites, blogs, and books in HTML, PDF, MS Word, ePub, and more.
+
+- Write using **Pandoc markdown** would allow you to including equations (LaTeX), citations (Zotero), crossrefs, figures panels, callouts, advanced layout, and more.
+
+## How Quarto Works?
+
+When you render a `.qmd` file with Quarto, the executable code blocks are processed by `Jupyter`, and the resulting combination of code, markdown, and output is converted to plain `markdown`. Then, this markdown is processed by `Pandoc`, which creates the `finished` format.
+
+![](qmd-how-it-works.png)
+
+## Creating a Quarto Document
+
+- In VSC, create a new file: `Quarto` document.  
+- Save it in the folder where you have your data and code.  
+- Add or modify the YAML header for document metadata. This tells Quarto how to render the document, who wrote it, other relevant information.  
+- Document Body: Markdown for text formatting (plain text), with minimal formatting. 
+
+- You can include images, links, tables, citations, etc. But also code chunks for running and displaying analysis. In some cases (`R`), you can also add In-line code for dynamic text
+
+## Another Flavor of Quarto: Visual Editor
+
+- Quarto also has a visual editor option. This is more user-friendly for first timers, and has a more WYSIWYG feel.
+
+- It does allow for more advanced features including Citations!
+
+- Since Visual Editor is simpler to use, lets cover the basics of using plain text Quarto in VSC.
+
+## First, the YAML Header
+
+::: {.panel-tabset}
+
+## YAML Header
+
+YAML is not necessary for Quarto, but it is useful for metadata and formatting. 
+It typically would include:
+
+- Title 
+- Author 
+- Format (HTML, PDF, Word, etc) 
+- Other metadata (date, keywords, etc)
+
+
+## YAML Header HTML
+
+```yaml
+---
+title: "My Economic Analysis"
+author: "Your Name"
+format: html
+date: last-modified
+---
+```
+
+## YAML Header PDF
+
+```yaml
+---
+title: "My Economic Analysis"
+author: 
+  - name: Author One
+  - name: Author Two
+format: 
+  pdf: 
+    number-sections: true
+    documentclass: article
+date: today
+---
+```
+:::
+
+## YAML Header Options
+
+For a template, you can use the following [template.qmd](template.qmd)  
+
+For more options see [YAML PDF Options](https://quarto.org/docs/reference/formats/pdf.html)
+
+:::{.notes}
+This example shows the basic structure of a Quarto document. The YAML header sets document properties.
+:::
+
+## Then the Body: Text Formatting
+
+Quarto uses Pandoc markdown for text formatting. This is a simple, plain text format that is easy to write and read in any text editor.
+
+## Then the Body: Text Formatting
+
+:::{.panel-tabset}
+
+## Headings
+
+```         
+# Heading 1
+
+## Heading 2
+
+### Heading 3
+```
+
+## H Rendered
+
+::: {.class}
+
+# Heading 1
+
+## Heading 2
+
+### Heading 3
+
+
+:::
+
+
+## Format
+
+``` markdown
+*italics*, **bold**, ***bold italics***
+
+~~strikeout~~, `code`
+
+superscript^2^, subscript~2~
+```
+
+## F Rendered
+
+::: {.class}
+
+*italics*, **bold**, ***bold italics***
+
+~~strikeout~~, `code`
+
+superscript^2^, subscript~2~
+
+::: 
+
+## List
+
+```         
+Lists:
+
+- Item 1
+- Item 2
+  - Subitem 1
+  - Subitem 2
+
+Lists:
+
+1. item 4
+    1. item 5 
+    1. item 5  
+2. ds
+```
+
+## L rendered
+
+::: columns
+::: {.column width="45%"}
+
+
+Lists:
+
+-   Item 1
+-   Item 2
+    -   Subitem 1
+    -   Subitem 2
+
+ 
+:::
+
+::: {.column width="45%"}
+ 
+
+Lists:
+
+1.  item 4
+    1.  item 5
+    2.  item 5\
+2.  ds
+
+ 
+:::
+:::
+:::
+
+# More on Quarto: Authoring
+
+## Authoring in Quarto
+
+- Quarto supports various types of content for the creation of academic writting.  
+
+- This include: equations, tables, images, footnotes, references and cross-references.
+
+- We will see how to include these in your document.
+
+## Equations
+
+Quarto supports LaTeX equations. You can include them in your document using the standard LaTeX syntax, for inline equations: `$...$`, and for display equations: `$$...$$`.
+
+For example, the theory of relativity can be expressed as ($E=mc^2$)`$E=mc^2$`. But also as:
+
+```latex
+$$E = \frac{{m \cdot c^2}}{{\sqrt{1 - \frac{{v^2}}{{c^2}}}}}
+$$
+```
+
+$$E = \frac{{m \cdot c^2}}{{\sqrt{1 - \frac{{v^2}}{{c^2}}}}}
+$$
+
+## Equations cross-references
+
+Display equations can be cross-referenced. For that you need to add a label to the equation, and then reference it in the text.
+
+For example:
+
+```latex
+$$E = mc^2
+$${#eq-emc2}
+```
+$$E = mc^2
+$${#eq-emc2}
+
+You can reference this equation as `@eq-emc2` which renders @eq-emc2.
+
+More complex equations can be created using LaTeX syntax.
+
+## Tables and Figures
+
+For Quarto, you can keep track of  Tables and Figures. However, you can use "anything" as a figure or table.
+
+The simplest approach is the following:
+
+:::: {.columns}
+
+::: {.column width="45%"}
+
+```markdown
+:::{#tbl-mytable}
+  content...
+:::
+```
+
+:::
+
+::: {.column width="45%"}
+
+```markdown
+:::{#fig-myfig}
+  content...
+:::
+```
+
+:::
+
+::::
+
+Quarto will not Care what is the content. A "Table" could be containing a figure, and a "Figure" could be a table. 
+
+And you can reference them as `@tbl-mytable` and `@fig-myfig`. Quarto will take care of the numbering.
+
+## Tables: how?
+
+You can add tables 4 different ways:
+
+- A file with markdown code: Markdown tables will render in any format.
+- A file with LaTeX code: LaTeX tables will only render in PDF.
+- A file with HTML code: HTML tables will render in any format.
+    - if you are using `R`, `kable` and `gt` will render tables in HTML and PDF.
+
+## Tables: Markdown
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```markdown
+:::{#tbl-mytable}
+
+{{{< include table_example.txt >}}}
+
+This are notes for the table
+
+And this the Title
+:::
+
+Crossreference:
+
+@tbl-mytable shows nothing.
+```
+
+:::
+
+::: {.column width="45%"}
+
+:::{#tbl-mytable}
+
+{{< include table_markdown.txt >}}
+
+This are notes for the table
+
+And this the Title
+:::
+
+Crossreference:
+
+@tbl-mytable shows nothing.
+
+:::
+
+::::
+ 
+The table is included in [`table_markdown.txt`](table_markdown.txt) and is rendered in the document.
+
+## Tables: LaTeX
+
+This wont render in HTML, but will render in PDF.
+
+:::: {.columns}
+
+::: {.column width="45%"}
+
+```markdown
+:::{#tbl-mytable}
+
+{{{< include table_latex.txt >}}}
+
+This are notes for the table
+
+And this the Title
+:::
+```
+:::
+
+::: {.column width="54%"}
+```markdown
+:::{#tbl-mytable}
+
+{{< include table_latex.txt >}}
+This are notes for the table
+
+And this the Title
+:::
+```
+:::
+
+::::
+
+## Tables: HTML
+
+There are two ways to include HTML tables in Quarto:
+
+:::: {.columns}
+
+::: {.column width="45%"}
+
+```markdown
+:::{#tbl-mytable}
+
+{{{< include table_html.txt >}}}
+
+This are notes for the table
+
+And this the Title
+:::
+```
+:::
+
+::: {.column width="54%"}
+````markdown
+:::{#tbl-mytable}
+
+```{=html}
+{{{< include table_html.txt >}}}
+```
+
+This are notes for the table
+
+And this the Title
+:::
+````
+:::
+
+::::
+
+## Tables: Figure
+
+If you are in a pinch, you can use a figure (from a well formated Excel file) as a table.
+
+:::: {.columns}
+
+::: {.column width="45%"}
+
+```markdown
+:::{#tbl-mytable2}
+
+![](transition-git.jpg){width=50% fig-align="center"}
+
+This are notes for the table
+
+And this the Title
+:::
+```
+:::
+
+::: {.column width="54%"}
+
+:::{#tbl-mytable2}
+
+![](transition-git.jpg){width=50% fig-align="center"}
+
+This are notes for the table
+
+And this the Title
+:::
+
+:::
+
+::::
+
+
+## Tables: comment
+
+When producing tables for PDF, you may notice that tables do not always render where expected.
+
+LaTeX is trying to optimize the layout of the document.
+
+To force a table to render where you want, you can use the `tbl-pos="H"` attribute.
+
+```markdown
+:::{#tbl-mytable tbl-pos="H"}
+
+{{{< include table_latex.txt >}}}
+
+This are notes for the table
+
+And this the Title
+:::
+```
+
+## Figures
+
+As with tables, you can include figures in your document using the following syntax:
+
+::: {.column width="45%"}
+
+```markdown
+:::{#fig-myfig1}
+
+![](transition-git.jpg){width=50% fig-align="center"}
+
+This are notes for the Figure
+
+And this the title
+:::
+```
+
+You can use `.png`, `.jpg`, `.svg`, `.pdf`, and other image formats, with few restrictions.
+
+Works across all formats.
+:::
+
+::: {.column width="54%"}
+
+:::{#fig-myfig1}
+
+![](transition-git.jpg){width=50% fig-align="center"}
+
+This are notes for the Figure
+
+And this the title
+
+:::
+
+:::
+
+::::
+
+## Footnotes
+
+Footnotes should not be used excessively, but they can be useful for additional information or references.
+
+To add a footnote, use the following syntax:
+
+```markdown
+This is a footnote[^1]. But this too ^[This is another footnote].
+
+[^1]: This is the text of the footnote.
+```
+
+This is a footnote[^1]. But this too ^[This is another footnote].
+
+[^1]: This is the text of the footnote.
+
+## Citations: Source code
+
+Quarto supports citations using the `@key` syntax. It you cite a reference, it will be included in the bibliography.
+
+First, you need to include a `.bib` file with your references in the YAML header.
+
+```yaml
+bibliography: references.bib
+```
+
+According to `@smith2021`, this citation works. However not everyone likes it `[@doe2021]`. However `[@smith2021; @doe2021]` works too.
+
+According to  @smith2021, this citation works. However not everyone likes it [@doe2021]. However [@smith2021; @doe2021] works too.
+
+::: {#refs}
+:::
+
+## Citations: Visual Editor
+
+If you are using Visual Editor (`cntrl+shift+F4`), you can add citations by using `cntrl+shift+F8`. 
+
+This will open a search box where you can search for the reference you want to cite. And then add it to the text. 
+
+Quarto will add the `reference.bib` file to the YAML header, and will add the information to the bibliography.
+
+## Last but not least: Rendering
+
+To render your document you have two options:
+
+- Press the Botton on the upper right corner of the VSC window. This creates a preview of the document, and you can see how it looks. This also renders one format at a time.
+
+- Use the terminal. You can use the terminal to render the document in multiple formats at once.
+
+Just type: `quarto render path_name/file.qmd` and it will render the document in the formats specified in the YAML header.
+
+- There are other options, you can explore at your leisure.
+
+# Other Tools <br> and Practices {background-image="transition-tools.jpg" background-position="right" background-size="contain" background-opacity="0.5"}
+
+
+:::{.notes}
+AI prompt for transition image: "Create a collage of icons representing various research tools and best practices, arranged in a circular pattern."
+:::
+
+## Project Organization
+
+This is one more thing we never really learn, but it is important! Declutter your projects!
+
+Good Organization will make it easy to find things, and to share your work with others. 
+
+-   One Project, One Folder
+-   Use consistent folder structures
+-   Separate data, code, and output
+-   Use relative paths for reproducibility
+-   Create a README file to guide others
+
+:::{.notes}
+Good project organization is crucial for reproducibility and collaboration. It helps others (and your future self) understand and navigate your project easily.
+:::
+
+## Suggested Folder Structure
+
+:::{.panel-tabset}
+
+## Data and Code
+
+```css
+root-project/
+├── data/
+│   ├── raw/       <- Depending on size: full raw data or instructions to get it.
+│   ├── processed/ <- Stores your cleaned data
+│   ├── final/     <- Opt: Stores the final Data for analysis
+│   └── doc/       <- Opt: Manuals, dictionaries, codebooks, etc.
+├── code/          <- Will contain all code files: Try to keep "Small" files (specific tasks).
+│   ├── 01-setup.do    <- Setup file (installing packages, setting up directories, etc.)
+│   ├── 02-cleaning.do <- Cleaning file (data cleaning and preprocessing)
+|   ├── 03-analysis.do <- Analysis file (main analysis script)
+|   ├── 04-visuals.do  <- Opt: Visualizations file and (creating plots and figures)
+```
+
+## Results and Documents
+
+```css
+├── results/
+│   ├── figures/ <- All the figures you have created.
+│   ├── tables/  <- All the tables you have created.
+│   └── other/   <- .ster, .log, etc
+├── reports/
+│   ├── proposal/      <- OPT: Include the proposal and any feedback you have received.
+│   ├── papers/        <- May include the Raw tex (Qmd, Tex, bib) and the PDF
+│   └── presentations/ <- If you have any presentations, include them here.
+└── README.md <- A readme file with instructions on how to understand the project.
+```
+
+::: 
+
+## Package Management
+
+-   Depending on the Software, it may be easier, or harder to manage packages.
+    -   Stata: `ssc`, `net`
+    -   R: `renv`, `packrat`, `checkpoint`
+    -   Python: `pip`, `conda`
+-   Ideally document versions, or "save" all the packages you are using.    
+-   In Stata, most required tools are available out of the box. 
+    -   You may want to use `ssc` or `net` to install additional packages.
+    -   But some may require going to the authors website.
+
+:::{.notes}
+Package management ensures that your code runs with the same package versions across different environments, enhancing reproducibility.
+:::
+
+## Data Storage and Sharing
+
+- For Small Projects, you can use GitHub to store your data.
+- For larger ones, use repositories like Zenodo or OSF for data sharing
+- Provide metadata and documentation for your datasets. Specially when you create it.
+- Consider data anonymization when necessary, or synthetic data if not possible to share.
+- Use proper licensing for your data and code
+
+:::{.notes}
+Proper data management and sharing practices are essential for reproducibility and can increase the impact of your research.
+:::
+
+## AI and Generative Assistants
+
+-   AI and GPT can assist in coding, writing, and data analysis. But be aware of their limitations.
+-   GitHub Copilot can help with code completion and suggestions, as well as text completition. 
+    -   It uses your "work-environment" to suggest code, or comments.
+-   But, like other tools, it is not perfect. It may suffer from allucinations, or code that does not work.
+    -   It is a tool, not a replacement for your work.
+-   Use it to speed up your work, but always check the results.
+    -   Example: Recently, we use AI to go over many files of data summaries, and it was able to find the data we were looking for. Required some cleaning, but it was faster than doing it manually.
+     
+:::{.notes}
+AI coding assistants can significantly boost productivity, but it's important to understand their capabilities and limitations, especially in a research context.
+:::
+
+## Example
+
+- We will go over the repository for a mock-up project, created exclusively for this course.
+
+- The repository contains all the elements we have discussed: data, code, documents, and more.
+
+- This is a simple example, but it illustrates how you can structure your own projects for reproducibility and transparency. 
+  
+- Assume the project to be a -mock- academic paper. Its not meant to be a real paper.
+
+Repository: <https://github.com/friosavila/rm-example>
+
+## Thank You!
+
+Questions? Feedback?
+
+:::{.notes}
+Thank you for participating in this course on reproducible research in economics. We hope you found it valuable and are excited to apply these tools and practices in your own work.
+:::

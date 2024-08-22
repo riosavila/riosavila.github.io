@@ -2,8 +2,18 @@
 title: "The Economics of Springfield: A Case Study of Resource Allocation in The Simpsons"
 author: "Your Name"
 date: "2023-08-22"
-format: pdf
-bibliography: references.bib
+format:
+    pdf:
+        documentclass: article 
+        number-sections: true
+        margin-top: 1in
+        margin-bottom: 1in
+        margin-left: 1in
+        margin-right: 1in
+        linestretch:  1.5
+        fontsize: 11pt
+    html: default 
+bibliography: references6.bib
 ---
 
 # Introduction
@@ -19,6 +29,7 @@ The show's longevity and consistency in depicting Springfield's economy provide 
 Main Research Question: How does the fictional economy of Springfield in "The Simpsons" reflect real-world economic principles and theories?
 
 Secondary Research Questions:
+
 1. How does the monopolistic structure of the Springfield Nuclear Power Plant affect resource allocation in the town?
 2. What role does corruption (as exemplified by Mayor Quimby) play in Springfield's economic development?
 3. How do external shocks (e.g., the various disasters that befall Springfield) impact its economic resilience?

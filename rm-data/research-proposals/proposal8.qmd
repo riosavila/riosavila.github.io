@@ -2,8 +2,18 @@
 title: "The Economics of the Matrix: Scarcity, Choice, and Human Capital in a Simulated Reality"
 author: "Your Name"
 date: "2023-08-22"
-format: pdf
-bibliography: references.bib
+format:
+    pdf:
+        documentclass: article 
+        number-sections: true
+        margin-top: 1in
+        margin-bottom: 1in
+        margin-left: 1in
+        margin-right: 1in
+        linestretch:  1.5
+        fontsize: 11pt
+    html: default 
+bibliography: references8.bib
 ---
 
 # Introduction
@@ -21,6 +31,7 @@ Moreover, the concept of human capital takes on new dimensions in the Matrix, wh
 Main Research Question: How do the economic systems depicted in the Matrix trilogy reflect and challenge traditional economic concepts of scarcity, choice, and human capital?
 
 Secondary Research Questions:
+
 1. How does the artificial scarcity in the Matrix compare to real-world economic scarcity?
 2. What are the economic implications of instant skill acquisition as depicted in the films?
 3. How does the economy of Zion reflect real-world economies operating under extreme resource constraints?

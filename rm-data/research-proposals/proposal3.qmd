@@ -2,7 +2,17 @@
 title: "The Impact of Climate Change on Agricultural Productivity: A Global Analysis"
 author: "Your Name"
 date: "2023-08-22"
-format: pdf
+format:
+    pdf:
+        documentclass: article 
+        number-sections: true
+        margin-top: 1in
+        margin-bottom: 1in
+        margin-left: 1in
+        margin-right: 1in
+        linestretch:  1.5
+        fontsize: 11pt
+    html: default 
 bibliography: references3.bib
 ---
 
@@ -19,6 +29,7 @@ Previous studies have examined the impact of climate change on agriculture at lo
 Main Research Question: How does climate change impact agricultural productivity across different regions and crops globally?
 
 Secondary Research Questions:
+
 1. Which regions and crops are most vulnerable to climate change impacts?
 2. How do adaptation measures mitigate the negative effects of climate change on agricultural productivity?
 

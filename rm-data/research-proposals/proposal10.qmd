@@ -2,8 +2,18 @@
 title: "For the Horde: Resource Competition and Virtual Economies in World of Warcraft" 
 author: "Your Name" 
 date: "2023-08-22" 
-format: pdf 
-bibliography: references.bib
+format:
+    pdf:
+        documentclass: article 
+        number-sections: true
+        margin-top: 1in
+        margin-bottom: 1in
+        margin-left: 1in
+        margin-right: 1in
+        linestretch:  1.5
+        fontsize: 11pt
+    html: default   
+bibliography: references10.bib
 ---
 
 # Introduction
@@ -22,17 +32,21 @@ Main Research Question: How do the economic dynamics in World of Warcraft reflec
 
 Secondary Research Questions:
 
--How does resource competition in WoW compare to real-world resource competition, and what strategies emerge?
--What factors influence inflation and market stability in the WoW economy?
--How does the intersection of virtual and real economies in WoW challenge traditional notions of economic value and activity?
+- How does resource competition in WoW compare to real-world resource competition, and what strategies emerge?
+- What factors influence inflation and market stability in the WoW economy?
+- How does the intersection of virtual and real economies in WoW challenge traditional notions of economic value and activity?
 
 # Potential Data Sources
 
-In-game Economic Data: Auction house prices, resource spawn rates, etc. (potentially through API access or data scraping)
-Player Surveys: Custom surveys on economic behavior and decision-making in WoW
-WoW Forums and Wikis: Player discussions and documentation of economic strategies
-Academic Literature: Existing studies on virtual economies and WoW
-Real-world Economic Data: For comparison with WoW economic trends
+- In-game Economic Data: Auction house prices, resource spawn rates, etc. (potentially through API access or data scraping)
+
+- Player Surveys: Custom surveys on economic behavior and decision-making in WoW
+
+- WoW Forums and Wikis: Player discussions and documentation of economic strategies
+
+- Academic Literature: Existing studies on virtual economies and WoW
+
+- Real-world Economic Data: For comparison with WoW economic trends
 
 # Potential Approach
 

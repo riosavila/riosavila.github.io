@@ -2,8 +2,18 @@
 title: "To Boldly Go: Resource Allocation and Post-Scarcity Economics in Star Trek"
 author: "Your Name"
 date: "2023-08-22"
-format: pdf
-bibliography: references.bib
+format:
+    pdf:
+        documentclass: article 
+        number-sections: true
+        margin-top: 1in
+        margin-bottom: 1in
+        margin-left: 1in
+        margin-right: 1in
+        linestretch:  1.5
+        fontsize: 11pt
+    html: default 
+bibliography: references9.bib
 ---
 
 # Introduction
@@ -21,6 +31,7 @@ Moreover, the show depicts various alien civilizations with different economic s
 Main Research Question: How does the post-scarcity economy depicted in Star Trek challenge and inform traditional economic theories of resource allocation and value?
 
 Secondary Research Questions:
+
 1. What mechanisms replace market-based resource allocation in Star Trek's moneyless economy?
 2. How does the nature of work and human motivation change in a post-scarcity environment?
 3. What insights does Star Trek offer about the transition from a scarcity-based to a post-scarcity economy?
