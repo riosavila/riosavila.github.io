@@ -75,7 +75,6 @@ All homework assignments are required to be submitted in Quarto format, using Gi
 - Preparing data for analysis
 - Tidy data principles
 - Data cleaning: Missing values, outliers, and errors
-- **Lab**: Introduction to Stata, and Quarto
 - **Readings**: Chapter 1 and 2
 
 ## 3: Data Exploration
@@ -97,7 +96,6 @@ All homework assignments are required to be submitted in Quarto format, using Gi
 - Hypothesis testing principles
 - Type I and Type II errors
 - Multiple Hypothesis Testing and p-hacking
-- **Lab**: Conducting hypothesis tests in Stata 
 - **Readings**: Chapters 5 and 6
 
 ## 5 and 6: Regression Analysis I: Simple Regression
@@ -110,9 +108,7 @@ All homework assignments are required to be submitted in Quarto format, using Gi
 - Extreme values, Influential observations and measurement error
 - Generalizing Results: SE and CI 
 - Testing Hypotheses
-- Presenting Results
 - **Readings**: Chapters 7, 8, and 9
-- **Lab**: Simple regression analysis in Stata: Interpretation and presentation of results
 
 ## 7: Regression Analysis II: Multiple Regression
 
@@ -128,7 +124,6 @@ All homework assignments are required to be submitted in Quarto format, using Gi
 - Interpretation and marginal effects
 - Goodness of Fit and Predictive Power
 - **Readings**: Chapter 11
-- **Lab**: Multiple regression analysis and Probability models
 
 ## 9: Time Series Analysis
 
@@ -137,7 +132,6 @@ All homework assignments are required to be submitted in Quarto format, using Gi
 - Stationarity and autocorrelation
 - Serial correlation 
 - **Readings**: Chapter 12
-- **Lab**: Using time series data
 
 ## 10: Prediction
 
@@ -154,7 +148,6 @@ All homework assignments are required to be submitted in Quarto format, using Gi
 - Working with $X's$
 - Introduction to LASSO: Prediction and Diagnosis
 - **Readings**: Chapter 14
-- **Lab**: Prediction and LASSO in Stata 
 
 ## 12: Predicting Probabilities and Classification
 
@@ -177,7 +170,7 @@ All homework assignments are required to be submitted in Quarto format, using Gi
   - Short quiz at the end of each class to test material covered.
   
 - **Weekly Problem Sets**: 30%
-  - Small problem-sets to be completed and submitted in Quarto format using GitHub.
+  - Small problem-sets of one or two questions to be completed and submitted in Quarto format using GitHub.
     This may include, data exploration and visualization, regressions and interpretation, and prediction.
  
 - **Term Paper**: 60%
@@ -210,8 +203,6 @@ Write a report that includes the following:
 - Preliminary analysis with descriptive statistics and visualizations
 - Include a data dictionary in your GitHub repository
 
-Peer Review: All work will be peer-reviewed by another student in the class. Feedback should be constructive and provide suggestions for improvement.
-
 ### Interim Progress Report (5%, due Week 7)
 
 - Brief update on progress, challenges faced, and next steps
@@ -226,12 +217,15 @@ Peer Review: All work will be peer-reviewed by another student in the class. Fee
 - Discuss Limitations and and robustness checks
 - Address any feedback received from the peer review in Part II
 
-Peer Review: All work will be peer-reviewed by another student in the class. Feedback should be constructive and provide suggestions for improvement.
+Peer Review (week 11): All work will be peer-reviewed by another student in the class. Feedback should be constructive and provide suggestions for improvement.
 
 ### Part IV: Final Report and Presentation (25%, due Week 14)
 
-- Complete research paper including all previous sections plus:
+Complete research paper should include:
+
+  - Introduction
   - Literature Review
+  - Data and Methodology
   - Robustness Checks or Sensitivity/Sub-group Analysis
   - Conclusion
   - References

@@ -152,13 +152,15 @@ All homework assignments are required to be submitted in Quarto format, using Gi
 
 - **Part III**: Data Analysis (15%, due Week 10)
 
-- **Peer Review Report**: (Extra 5% Week 11):
+- **Peer Review Report**: (Extra 2.5% Week 11):
 
 - **Part IV**: Final Report and Presentation (25%, due Week 14)
 
-Complete research paper including all previous sections plus:
+Complete research paper should include:
 
+  - Introduction
   - Literature Review
+  - Data and Methodology
   - Robustness Checks or Sensitivity/Sub-group Analysis
   - Conclusion
   - References
