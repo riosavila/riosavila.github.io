@@ -168,6 +168,8 @@ Complete research paper should include:
 
 - 15-minute presentation of your research to the class
 
+- See [here](https://github.com/riosavila/term-paper) for an example for the kind of report expected at each stage, based on the first research proposal on the impact of remote work on urban housing prices.
+
 ### Additional Requirements
 
 - You should submit a PDF of your report by the deadline, along with the Github repository link
