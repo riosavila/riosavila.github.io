@@ -2216,7 +2216,7 @@
     "href": "rm-data/syllabus.html#introduction-to-data-analysis",
     "title": "Research Methods I",
     "section": "2. Introduction to Data Analysis",
-    "text": "2. Introduction to Data Analysis\n\nIntroduction to data analysis: The Process\nWhat is Data? What types of Data are there?\nData collection methods\nPreparing data for analysis\nTidy data principles\nData cleaning: Missing values, outliers, and errors\nLab: Introduction to Stata, and Quarto\nReadings: Chapter 1 and 2"
+    "text": "2. Introduction to Data Analysis\n\nIntroduction to data analysis: The Process\nWhat is Data? What types of Data are there?\nData collection methods\nPreparing data for analysis\nTidy data principles\nData cleaning: Missing values, outliers, and errors\nReadings: Chapter 1 and 2"
   },
   {
     "objectID": "rm-data/syllabus.html#data-exploration",
@@ -2230,14 +2230,14 @@
     "href": "rm-data/syllabus.html#generalization-from-sample-to-population",
     "title": "Research Methods I",
     "section": "4: Generalization: From Sample to Population",
-    "text": "4: Generalization: From Sample to Population\n\nSampling and generalization\nRepetition and sampling variability\nConfidence intervals and standard errors: The Bootstrap method\nExternal validity\nHypothesis testing principles\nType I and Type II errors\nMultiple Hypothesis Testing and p-hacking\nLab: Conducting hypothesis tests in Stata\nReadings: Chapters 5 and 6"
+    "text": "4: Generalization: From Sample to Population\n\nSampling and generalization\nRepetition and sampling variability\nConfidence intervals and standard errors: The Bootstrap method\nExternal validity\nHypothesis testing principles\nType I and Type II errors\nMultiple Hypothesis Testing and p-hacking\nReadings: Chapters 5 and 6"
   },
   {
     "objectID": "rm-data/syllabus.html#and-6-regression-analysis-i-simple-regression",
     "href": "rm-data/syllabus.html#and-6-regression-analysis-i-simple-regression",
     "title": "Research Methods I",
     "section": "5 and 6: Regression Analysis I: Simple Regression",
-    "text": "5 and 6: Regression Analysis I: Simple Regression\n\nLinear and non-linear relationships\nLinear Regression: Estimation and interpretation\nCorrelations and coefficients: Searching for causality\nProperties and assumptions of the linear regression model\nTransformations and Semiparametric models\nExtreme values, Influential observations and measurement error\nGeneralizing Results: SE and CI\nTesting Hypotheses\nPresenting Results\nReadings: Chapters 7, 8, and 9\nLab: Simple regression analysis in Stata: Interpretation and presentation of results"
+    "text": "5 and 6: Regression Analysis I: Simple Regression\n\nLinear and non-linear relationships\nLinear Regression: Estimation and interpretation\nCorrelations and coefficients: Searching for causality\nProperties and assumptions of the linear regression model\nTransformations and Semiparametric models\nExtreme values, Influential observations and measurement error\nGeneralizing Results: SE and CI\nTesting Hypotheses\nReadings: Chapters 7, 8, and 9"
   },
   {
     "objectID": "rm-data/syllabus.html#regression-analysis-ii-multiple-regression",
@@ -2251,14 +2251,14 @@
     "href": "rm-data/syllabus.html#regression-analysis-iii-modeling-probabilities",
     "title": "Research Methods I",
     "section": "8: Regression Analysis III: Modeling Probabilities",
-    "text": "8: Regression Analysis III: Modeling Probabilities\n\nLinear Probability Model\nNon-linear models: Logit and Probit\nInterpretation and marginal effects\nGoodness of Fit and Predictive Power\nReadings: Chapter 11\nLab: Multiple regression analysis and Probability models"
+    "text": "8: Regression Analysis III: Modeling Probabilities\n\nLinear Probability Model\nNon-linear models: Logit and Probit\nInterpretation and marginal effects\nGoodness of Fit and Predictive Power\nReadings: Chapter 11"
   },
   {
     "objectID": "rm-data/syllabus.html#time-series-analysis",
     "href": "rm-data/syllabus.html#time-series-analysis",
     "title": "Research Methods I",
     "section": "9: Time Series Analysis",
-    "text": "9: Time Series Analysis\n\nIntroduction to time series data\nTrend and seasonality\nStationarity and autocorrelation\nSerial correlation\nReadings: Chapter 12\nLab: Using time series data"
+    "text": "9: Time Series Analysis\n\nIntroduction to time series data\nTrend and seasonality\nStationarity and autocorrelation\nSerial correlation\nReadings: Chapter 12"
   },
   {
     "objectID": "rm-data/syllabus.html#prediction",
@@ -2272,7 +2272,7 @@
     "href": "rm-data/syllabus.html#model-building-for-prediction-lasso",
     "title": "Research Methods I",
     "section": "11: Model Building for Prediction: LASSO",
-    "text": "11: Model Building for Prediction: LASSO\n\nThe Process of Prediction\nHow to choose \\(g(y)\\)\nWorking with \\(X's\\)\nIntroduction to LASSO: Prediction and Diagnosis\nReadings: Chapter 14\nLab: Prediction and LASSO in Stata"
+    "text": "11: Model Building for Prediction: LASSO\n\nThe Process of Prediction\nHow to choose \\(g(y)\\)\nWorking with \\(X's\\)\nIntroduction to LASSO: Prediction and Diagnosis\nReadings: Chapter 14"
   },
   {
     "objectID": "rm-data/syllabus.html#predicting-probabilities-and-classification",
@@ -2293,7 +2293,7 @@
     "href": "rm-data/syllabus.html#term-paper-60-of-final-grade",
     "title": "Research Methods I",
     "section": "Term Paper (60% of final grade)",
-    "text": "Term Paper (60% of final grade)\nThroughout the semester, students will work on a multi-part research project that applies the techniques learned in class to real-world data. This project will require students to propose a research question, collect and clean data, conduct exploratory and regression analyses, and present their findings.\n\nPart I: Research Proposal (5%, due Week 2)\n\nIntroduction (including research question and motivation)\nProposed data sources: Consider data from the textbook, Kaggle, or other sources\nExpected findings and relevance\nConclusion\nReferences (if any)\nSpecify which software (Stata or R) you plan to use for your analysis\nCreate a GitHub repository for your project and submit the link with your proposal\n\n\n\nPart II: Data Collection and Cleaning (10%, due Week 4)\nWrite a report that includes the following:\n\nDescription of data sources, collection methods, and potential biases\nData overview and preprocessing steps\nDiscussion of issues encountered and solutions\nPreliminary analysis with descriptive statistics and visualizations\nInclude a data dictionary in your GitHub repository\n\nPeer Review: All work will be peer-reviewed by another student in the class. Feedback should be constructive and provide suggestions for improvement.\n\n\nInterim Progress Report (5%, due Week 7)\n\nBrief update on progress, challenges faced, and next steps\nPreliminary visualizations or analyses\nAddress any feedback received from the peer review in Part II\n\n\n\nPart III: Data Analysis (15%, due Week 10)\n\nModel specification discussion\nRegression results presentation\nInterpretation of results\nDiscuss Limitations and and robustness checks\nAddress any feedback received from the peer review in Part II\n\nPeer Review: All work will be peer-reviewed by another student in the class. Feedback should be constructive and provide suggestions for improvement.\n\n\nPart IV: Final Report and Presentation (25%, due Week 14)\n\nComplete research paper including all previous sections plus:\n\nLiterature Review\nRobustness Checks or Sensitivity/Sub-group Analysis\nConclusion\nReferences\nAppendices (if any)\n\n15-minute presentation of your research to the class\n\n\n\nAdditional Requirements\n\nYou should submit a PDF of your report by the deadline\nYour GitHub repository should include with all code, data, and the Quarto document for your report\nAt each stage, you should submit your work to GitHub to follow the progress of your project"
+    "text": "Term Paper (60% of final grade)\nThroughout the semester, students will work on a multi-part research project that applies the techniques learned in class to real-world data. This project will require students to propose a research question, collect and clean data, conduct exploratory and regression analyses, and present their findings.\n\nPart I: Research Proposal (5%, due Week 2)\n\nIntroduction (including research question and motivation)\nProposed data sources: Consider data from the textbook, Kaggle, or other sources\nExpected findings and relevance\nConclusion\nReferences (if any)\nSpecify which software (if other than Stata) you plan to use for your analysis\nCreate a GitHub repository for your project and submit the link with your proposal\n\n\n\nPart II: Data Collection and Cleaning (10%, due Week 4)\nWrite a report that includes the following:\n\nDescription of data sources, collection methods, and potential biases\nData overview and preprocessing steps\nDiscussion of issues encountered and solutions\nPreliminary analysis with descriptive statistics and visualizations\nInclude a data dictionary in your GitHub repository\n\n\n\nPeer Review Report (due Week 5)\n\nReview another student’s work and provide feedback on their data collection and cleaning process. Provide suggestions for improvement and identify any potential issues.\n\n\n\nInterim Progress Report (5%, due Week 7)\n\nBrief update on progress, challenges faced, and next steps\nAdditional visualizations or analyses\nIt should include a draft of literature review and methodology\n\nFor the literature review include summaries for 3-5 papers related to your research question.\nIt should also include a draft of the methodology section, including the model specification.\n\nAddress any feedback received from the peer review in Part II\n\n\n\nPart III: Data Analysis (15%, due Week 10)\nPresent a draft for data analysis that includes the following:\n\nModel specification discussion\nRegression results presentation\nInterpretation of results\nDiscuss Limitations and robustness checks\n\n\n\nPeer Review Report (due week 11)\n\nReview another student’s work and provide feedback on their data analysis. Provide suggestions for improvement and identify any potential issues.\n\n\n\nPart IV: Final Report and Presentation (20%, due Week 13)\nComplete research paper should include:\n\nIntroduction\nLiterature Review\nData and Methodology\nRobustness Checks or Sensitivity/Sub-group Analysis\nConclusion\nReferences\nAppendices (if any)\n\n\n\nPresentaton (5%, Week 14)\n\n15-minute presentation of your research to the class\nSee here for an example for the kind of report expected at each stage, based on the first research proposal on the impact of remote work on urban housing prices.\n\n\n\nAdditional Requirements\n\nAll work should be submitted in Quarto format using GitHub.\nUnless Data used is confidential or too large, you should include all data in your GitHub repository.\nYour GitHub repository should include with all code, data (if possible), and the Quarto document for your report.\nIt should also include all papers used for the literature review.\nAt each stage, you should submit an email with the PDF and QMD files to the instructor, at or before the deadline. You should also push your work to GitHub to follow the progress of your project."
   },
   {
     "objectID": "rm-data/syllabus.html#resources",
@@ -3313,7 +3313,7 @@
     "href": "rm-data/index.html#grading-policy",
     "title": "Research Methods I: Data Analysis for Economics and Policy",
     "section": "Grading Policy",
-    "text": "Grading Policy\n\nWeekly Quizzes: 10%\nWeekly Problem Sets: 30%\nTerm Paper: 60%\nReferee Reports: 5% (Extra Credit)\n\n\nTerm Paper Schedule (60% of final grade)\n\nPart I: Research Proposal (5%, due Week 2). See here for few examples of research proposals.\nPart II: Data Collection and Cleaning (10%, due Week 4)\nInterim Progress Report (5%, due Week 7)\nPart III: Data Analysis (15%, due Week 10)\nPeer Review Report: (Extra 5% Week 11):\nPart IV: Final Report and Presentation (25%, due Week 14)\n\nComplete research paper including all previous sections plus:\n\nLiterature Review\nRobustness Checks or Sensitivity/Sub-group Analysis\nConclusion\nReferences\nAppendices (if any)\n15-minute presentation of your research to the class\n\n\n\nAdditional Requirements\n\nYou should submit a PDF of your report by the deadline, along with the Github repository link\nYour GitHub repository should include all code, data, and the Quarto document for your report\nAt each stage, you should submit your work to GitHub to follow the progress of your project",
+    "text": "Grading Policy\n\nWeekly Quizzes: 10%\nWeekly Problem Sets: 30%\nTerm Paper: 60%\n\n\nTerm Paper Schedule (60% of final grade)\n\nPart I: Research Proposal (5%, due Week 2). See here for few examples of research proposals.\nPart II: Data Collection and Cleaning (10%, due Week 4)\nPeer Review Report: (Week 5)\nInterim Progress Report (5%, due Week 7)\nPart III: Data Analysis (15%, due Week 10)\nPeer Review Report: (Week 11):\nPart IV: Final Report and Presentation (20%, due Week 13)\n\nComplete research paper should include:\n\nIntroduction\nLiterature Review\nData and Methodology\nRobustness Checks or Sensitivity/Sub-group Analysis\nConclusion\nReferences\nAppendices (if any)\nPresentation (5%)\n\n15-minute presentation of your research to the class\n\nSee here for an example for the kind of report expected at each stage, based on the first research proposal on the impact of remote work on urban housing prices.\n\n\n\nAdditional Requirements\n\nYou should submit a PDF of your report by the deadline, along with the Github repository link\nYour GitHub repository should include all code, data, and the Quarto document for your report\nAt each stage, you should submit your work to GitHub to follow the progress of your project",
     "crumbs": [
       "Home",
       "Courses",
@@ -12019,5 +12019,621 @@
     "title": "Research Methods: Econometrics I",
     "section": "Part IV: Time Series",
     "text": "Part IV: Time Series\n\n11. Chapter 10 - 11\nBasics of Regression analysis with TSD\n\n\n12. Chapter 12 & 18\nAdvanced TSD Problems\n\n\nFinal TBD"
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#motivation",
+    "href": "rm-data/slides/week07.html#motivation",
+    "title": "Multiple regression analysis",
+    "section": "Motivation",
+    "text": "Motivation\n\nWe are interested in finding evidence for or against labor market discrimination of women. Compare wages for men and women who share similarities in wage relevant factors such as experience and education.\nFind a good deal on a hotel to spend a night in a European city- analyzed the pattern of hotel price and distance and many other features to find hotels that are underpriced not only for their location but also those other features."
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#topics-to-cover",
+    "href": "rm-data/slides/week07.html#topics-to-cover",
+    "title": "Multiple regression analysis",
+    "section": "Topics to cover",
+    "text": "Topics to cover\n\nMultiple regression mechanics\nEstimation and interpreting coefficients\nNon-linear terms, interactions\nVariable selection, small sample problems\nMultiple regression and causality\nMultiple regression and prediction"
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#multivariate-regression",
+    "href": "rm-data/slides/week07.html#multivariate-regression",
+    "title": "Multiple regression analysis",
+    "section": "Multivariate Regression",
+    "text": "Multivariate Regression\n\nWhenever you start modeling an outcome \\(y\\), there will always be two factors that will determine that outcome:\n\nFactors that you can control (e.g., education, experience, etc.)\nFactors that you cannot control (e.g., errors)\n\n\nMultiple regression analysis uncovers average \\(y\\) as a function of more than one \\(x\\) variable: \\(y^E = f(x_1, x_2, ...)\\).\nIt can lead to better predictions \\(\\hat{y}\\) by considering more explanatory variables.\nIt may improve the interpretation of slope coefficients by comparing observations that are similar in terms of other \\(x's\\) variables."
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#multivariate-regression-1",
+    "href": "rm-data/slides/week07.html#multivariate-regression-1",
+    "title": "Multiple regression analysis",
+    "section": "Multivariate Regression",
+    "text": "Multivariate Regression\n\nMultiple linear regression specifies a linear function of the explanatory variables for the average \\(y\\): \\[y^E = \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + ... + \\beta_k x_k\\]\nBut, now that we now we can have more than one \\(x\\) variable, what happens if we don’t?"
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#mr-ommited-variable-bias",
+    "href": "rm-data/slides/week07.html#mr-ommited-variable-bias",
+    "title": "Multiple regression analysis",
+    "section": "MR: Ommited Variable Bias",
+    "text": "MR: Ommited Variable Bias\nLets say we have to models: \\[\\begin{aligned}\ny &= \\alpha_0 + \\alpha_1 x_1 + \\varepsilon_1  \\\\\ny &= \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\varepsilon_2\n\\end{aligned}\n\\]\n\nHow do \\(\\alpha_1\\) and \\(\\beta_1\\) compare?\nLets Start by regressing \\(x_2\\) on \\(x_1\\): \\(x_2 = \\delta_0 + \\delta_1 x_1 + u\\)\nAnd plug this back into the second equation:\n\n\\[\\begin{aligned}\ny &= \\beta_0 + \\beta_1 x_1 + \\beta_2 (\\delta_0 + \\delta_1 x_1 + u) + \\varepsilon_2 \\\\\ny &= (\\beta_0 + \\beta_2\\delta_0) + (\\beta_1 + \\beta_2 \\delta_1) x  + (\\beta_2 u + \\varepsilon_2)\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#mr-ommited-variable-bias-1",
+    "href": "rm-data/slides/week07.html#mr-ommited-variable-bias-1",
+    "title": "Multiple regression analysis",
+    "section": "MR: Ommited Variable Bias",
+    "text": "MR: Ommited Variable Bias\n\nSo it turns out that:\n\n\\[\\alpha_1 = \\beta_1 + \\beta_2 \\delta_1 \\rightarrow \\beta_1-\\alpha_1 = -\\beta_2 \\delta_1\n\\]\n\nBy “ignoring” \\(x_2\\) in the first regression, we are actually estimating a biased coefficient for \\(x_1\\).\n\nAssuming the second model is the “true” model\n\nThis is what is known as the Omitted variable bias OBV\n\nNote: You could also have a bias because you are including a variable that should not be there. This is known as bad control."
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#mr-ommited-variable-bias-2",
+    "href": "rm-data/slides/week07.html#mr-ommited-variable-bias-2",
+    "title": "Multiple regression analysis",
+    "section": "MR: Ommited Variable Bias",
+    "text": "MR: Ommited Variable Bias\n\nOBV is a common problem in empirical research because we can never include all the variables that determine \\(y\\).\nHowever, mechanically, there are two cases where OBV is not a problem:\n\nWhen \\(x_1\\) and \\(x_2\\) are uncorrelated (\\(\\delta_1 = 0\\))\nWhen \\(y\\) and \\(x_2\\) are uncorrelated (\\(\\beta_2 = 0\\))"
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#simple-example",
+    "href": "rm-data/slides/week07.html#simple-example",
+    "title": "Multiple regression analysis",
+    "section": "Simple example",
+    "text": "Simple example\n\nTS regression: Regress month-to-month change in log quantity sold of Beer (\\(y\\)) on month-to-month change in log price (\\(x_1\\)).\n\n\\(\\beta = -0.5\\): sales tend to decrease by 0.5% when our price increases by 1%.\n\nRobustness: \\(x_2\\): change in ln average price charged by our competitors\n\nNew Results: \\(\\hat{\\beta}_1 = -3\\) and \\(\\hat{\\beta}_2 = 3\\)\n\nThere is a OBV (Model 1 is flatter than Model 2)\nPossibly the result of two things:\n\na positive association between the two price changes (\\(\\delta_1\\)) and\na positive association between competitor price and our own sales (\\(\\beta_2\\))."
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#mr-some-language",
+    "href": "rm-data/slides/week07.html#mr-some-language",
+    "title": "Multiple regression analysis",
+    "section": "MR: Some language",
+    "text": "MR: Some language\n\nSetup: Multiple regression with two explanatory variables (\\(x_1\\) and \\(x_2\\)),\nTechnicallity:: We measure differences in expected \\(y\\) across observations that differ in \\(x_1\\) but are similar in terms of \\(x_2\\).\nInterpretation: Difference in \\(y\\) by \\(x_1\\), conditional on \\(x_2\\). OR controlling for \\(x_2\\).\n\nWe condition on \\(x_2\\), or control for \\(x_2\\), when we include \\(x_2\\) in a multiple regression that focuses on average differences in \\(y\\) by \\(x_1\\).\n\nWhat we care is \\(x_1\\)’s effect on \\(y\\), but we control for \\(x_2\\) to get a better estimate of this effect.\nConfounding: \\(x_2\\) is a confounder if \\(x_2\\) is correlated with \\(x_1\\) and \\(y\\).\n\nThus, we have a problem if we omit \\(x_2\\) from the regression."
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#stata-multiple-regression",
+    "href": "rm-data/slides/week07.html#stata-multiple-regression",
+    "title": "Multiple regression analysis",
+    "section": "Stata: Multiple regression",
+    "text": "Stata: Multiple regression\nregress y x1 [x2 x3 ... ], robust\nestimates store m1\nesttab m1, star(* 0.10 ** 0.05 *** 0.01) label"
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#mr-standard-errors",
+    "href": "rm-data/slides/week07.html#mr-standard-errors",
+    "title": "Multiple regression analysis",
+    "section": "MR: Standard Errors",
+    "text": "MR: Standard Errors\n\\[\\text{SE}(\\hat{\\beta}_1) = \\frac{\\text{Std}[e]}{\\sqrt{n}\\text{Std}(x_1)\\color{blue}{\\sqrt{1 - R^2_1}}}\\]\n\nSame:\n\nthe SE is small if better the fit, large samples, or large the Std of \\(x_1\\).\n\nNew: \\(\\sqrt{1 - R^2_1}\\) term in the denominator.\n\nthe R-squared of the regression of \\(x_1\\) on \\(x_2\\)\n\nThe higher is \\(R^2_1\\), the larger the SE of \\(\\hat{\\beta}_1\\).\nNote: in practice, use robust SE"
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#mr-collinearity",
+    "href": "rm-data/slides/week07.html#mr-collinearity",
+    "title": "Multiple regression analysis",
+    "section": "MR: Collinearity",
+    "text": "MR: Collinearity\n\nPerfectly collinearity is when \\(x_i\\) is a linear function of \\(x_{-i}\\).\n\nConsequence: cannot calculate coefficients.\nOne will be dropped by software (but you should know which one).\n\nStrong but imperfect correlation between explanatory is sometimes called multicollinearity.\n\nConsequence: We can get the slope coefficients and their standard errors,\nBut, the standard errors may be large."
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#mr-collinearity-and-se",
+    "href": "rm-data/slides/week07.html#mr-collinearity-and-se",
+    "title": "Multiple regression analysis",
+    "section": "MR: Collinearity and SE",
+    "text": "MR: Collinearity and SE\n\nStrong multicollinearity is a problem because it increases the standard errors of the coefficients.\n\nIt is typically a problem when the sample size is small.\n\nNumerically, it could make the coefficient estimates unstable. (rare)\nMore often, you may need to either drop one of the variables, or\nCombine them into a single variable. (index)\n\nHow to know how strong is the multicollinearity problem ??\n\nEstimate \\(R^2\\) of the regression of \\(x_i\\) on all other \\(x\\) variables. For all cases!\n\nor use the estat vif command in Stata. (only with OLS)"
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#mr-collinearity-1",
+    "href": "rm-data/slides/week07.html#mr-collinearity-1",
+    "title": "Multiple regression analysis",
+    "section": "MR: Collinearity",
+    "text": "MR: Collinearity\n\nqui:frause oaxaca, clear\nqui:regress lnwage female educ exper tenure c.age c.age#c.age, robust\nestat vif\n\n\n\n\n\n    Variable |       VIF       1/VIF  \n-------------+----------------------\n      female |      1.11    0.900413\n        educ |      1.15    0.873284\n       exper |      2.48    0.403924\n      tenure |      1.82    0.549891\n         age |     54.62    0.018310\n c.age#c.age |     53.08    0.018839\n-------------+----------------------\n    Mean VIF |     19.04"
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#mr-testing-single-hypotheses",
+    "href": "rm-data/slides/week07.html#mr-testing-single-hypotheses",
+    "title": "Multiple regression analysis",
+    "section": "MR: Testing Single hypotheses",
+    "text": "MR: Testing Single hypotheses\n\nSame as before, but now we have more than one \\(x\\) variable to test.\n\n\\(H_0: \\beta_1 = 0\\)\n\nYou may want to be careful with multiple testing.\n\ntesting each coefficient separately with the same \\(\\alpha\\) level\n\nThere is also testing single hypotheses on combinations of coefficients.\n\n$H_0: _1-2*_2=0 $\n\nAs before, you just need to know the point estimate and the standard error to calculate the t-statistic."
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#mr-testing-joint-hypotheses",
+    "href": "rm-data/slides/week07.html#mr-testing-joint-hypotheses",
+    "title": "Multiple regression analysis",
+    "section": "MR: Testing Joint hypotheses",
+    "text": "MR: Testing Joint hypotheses\n\nTesting joint hypotheses: null hypotheses that contain statements about more than one regression coefficient: \\(H_0: \\beta_1 = \\beta_2 = 0\\) vs \\(H_1: H_0\\) is false\nThis kind of test is used to evaluate a subset of the coefficients (such as all geographical variables) are all zero.\nBut for doing this you need a new test statistic: the F-test.\n\nDifference with the t-test:\n\nIn contrast with the t-test, the F-test follows an F-distribution.\nThis distribution is not symmetric! And you need to know the degrees of freedom.\n\nHow many restrictions are you imposing? and how many coefficients did you estimate?\n\nAlso, all test are on-sided"
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#mr-testing-joint-hypotheses-1",
+    "href": "rm-data/slides/week07.html#mr-testing-joint-hypotheses-1",
+    "title": "Multiple regression analysis",
+    "section": "MR: Testing Joint hypotheses",
+    "text": "MR: Testing Joint hypotheses\n\nF-test"
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#mr-testing-hypotheses-in-stata",
+    "href": "rm-data/slides/week07.html#mr-testing-hypotheses-in-stata",
+    "title": "Multiple regression analysis",
+    "section": "MR: Testing hypotheses in Stata",
+    "text": "MR: Testing hypotheses in Stata\n\nRegressionJoint testSingle test Combined\n\n\n\nqui:webuse dui, clear\nregress  citations  fines i.taxes i.csize i.college, robust nohead\n** regress, coefleg to know \"names\" of variables\n\n------------------------------------------------------------------------------\n             |               Robust\n   citations | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n       fines |  -7.690437   .3843873   -20.01   0.000    -8.445672   -6.935201\n             |\n       taxes |\n        Tax  |  -4.493918   .5819239    -7.72   0.000    -5.637269   -3.350566\n             |\n       csize |\n     Medium  |   5.492308    .531599    10.33   0.000     4.447834    6.536782\n      Large  |   11.23563   .5709191    19.68   0.000      10.1139    12.35736\n             |\n     college |\n    College  |   5.828441    .588277     9.91   0.000     4.672607    6.984274\n       _cons |   94.21955   3.948926    23.86   0.000     86.46079    101.9783\n------------------------------------------------------------------------------\n\n\n\n\n\ntest 1.taxes 1.college // &lt;- automatically test the joint hypothesis\n\n\n ( 1)  1.taxes = 0\n ( 2)  1.college = 0\n\n       F(  2,   494) =   66.74\n            Prob &gt; F =    0.0000\n\n\n\n\n\n** \"H0: 2*B_Taxes = B_fines\"\nlincom 2*1.taxes-fines\n\n\n ( 1)  - fines + 2*1.taxes = 0\n\n------------------------------------------------------------------------------\n   citations | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         (1) |  -1.297398   1.098122    -1.18   0.238    -3.454964    .8601678\n------------------------------------------------------------------------------"
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#mr-non-linear-patterns",
+    "href": "rm-data/slides/week07.html#mr-non-linear-patterns",
+    "title": "Multiple regression analysis",
+    "section": "MR: Non-linear patterns",
+    "text": "MR: Non-linear patterns\n\nSurprise! you can use the same tools as with single regression\n\nUses splines, polynomials, other non-linear functions of \\(x\\) variables.\n\nNon-linear function of various \\(x_i\\) variables may be combined.\nAs show before, using non-linear functions will increase multicollinearity, but worry not about that type of collinearity.\nBe more careful with the interpretation of the coefficients."
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#cs-understanding-the-gender-difference-in-earnings",
+    "href": "rm-data/slides/week07.html#cs-understanding-the-gender-difference-in-earnings",
+    "title": "Multiple regression analysis",
+    "section": "CS: Understanding the gender difference in earnings",
+    "text": "CS: Understanding the gender difference in earnings\n\nIn the USA (2014), women tend to earn about 20% less than men\nAim 1: Find patterns to better understand the gender gap. Our focus is the interaction with age.\nAim 2: Think about if there is a causal link from being female to getting paid less."
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#cs-the-data",
+    "href": "rm-data/slides/week07.html#cs-the-data",
+    "title": "Multiple regression analysis",
+    "section": "CS: The data",
+    "text": "CS: The data\n\n2014 census data\nAge between 15 to 65\nExclude self-employed (earnings is difficult to measure)\nInclude those who reported 20 hours more as their usual weekly time worked\nEmployees with a graduate degree (higher than 4-year college)\nUse log hourly earnings (\\(\\ln w\\)) as dependent variable\nUse gender and add age as explanatory variables"
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#cs-the-model",
+    "href": "rm-data/slides/week07.html#cs-the-model",
+    "title": "Multiple regression analysis",
+    "section": "CS: The model",
+    "text": "CS: The model\nWe are quite familiar with the relation between earnings and gender: \\[\\ln w_E = \\alpha + \\beta\\text{female}, \\beta &lt; 0\\] Let’s include age as well: \\[\\ln w_E = \\beta_0 + \\beta_1\\text{female} + \\beta_2\\text{age}\\]\nWhat happens if we do not include age?"
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#cs-the-regression",
+    "href": "rm-data/slides/week07.html#cs-the-regression",
+    "title": "Multiple regression analysis",
+    "section": "CS: The Regression",
+    "text": "CS: The Regression\n\n\n\nVariables\nln wage\nln wage\nage\n\n\n\n\nfemale\n-0.195**\n-0.185**\n-1.484**\n\n\n\n(0.008)\n(0.008)\n(0.159)\n\n\nage\n\n0.007**\n\n\n\n\n\n(0.000)\n\n\n\nConstant\n3.514**\n3.198**\n44.630**\n\n\n\n(0.006)\n(0.018)\n(0.116)\n\n\nObservations\n18,241\n18,241\n18,241\n\n\nR-squared\n0.028\n0.046\n0.005\n\n\n\n\nNote: Robust standard errors in parentheses\n*** p&lt;0.01, ** p&lt;0.05, * p&lt;0.1\nSource: cps-earnings dataset. 2014 CPS Morg.\n\nWhat if Age is not linear? (has a non-linear effect on earnings)"
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#cs-adjustment-and-robustness",
+    "href": "rm-data/slides/week07.html#cs-adjustment-and-robustness",
+    "title": "Multiple regression analysis",
+    "section": "CS: Adjustment and Robustness",
+    "text": "CS: Adjustment and Robustness\n\n\n\nVariable\nModel 1\nModel 2\nModel 3\nModel 4\n\n\n\n\nfemale\n-0.195**\n-0.185**\n-0.183**\n-0.183**\n\n\n\n(0.008)\n(0.008)\n(0.008)\n(0.008)\n\n\nage\n\n0.007**\n0.063**\n0.572**\n\n\n\n\n(0.000)\n(0.003)\n(0.116)\n\n\nage2\n\n\n-0.001**\n-0.017**\n\n\n\n\n\n(0.000)\n(0.004)\n\n\nage3\n\n\n\n0.000**\n\n\n\n\n\n\n(0.000)\n\n\nObservations\n18,241\n18,241\n18,241\n18,241\n\n\nR-squared\n0.028\n0.046\n0.060\n0.062\n\n\n\n\nNote: Robust standard errors in parentheses, *** p&lt;0.01, ** p&lt;0.05, * p&lt;0.1\nSource: cps-earnings dataset. 2014 CPS Morg."
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#mr-qualitative-variables",
+    "href": "rm-data/slides/week07.html#mr-qualitative-variables",
+    "title": "Multiple regression analysis",
+    "section": "MR: Qualitative variables",
+    "text": "MR: Qualitative variables\n\nMR can also handle using qualitative variables as explanatory variables.\nTwo ways to include qualitative variables:\n\nCreate a dummy for each category.\nLet the software create the binary variables for you.\n\nYou can only include \\(k-1\\) dummies (dummy variable trap)\n\nLeft out category is the reference category (Base).\n\nStata Corner\n\ni. in front of a variable tells Stata to treat it as a categorical variable. (makes dummies on the background): reg lnwage i.educ\nBut, the categorical variable cannot be negative."
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#mr-qualitative-variables-1",
+    "href": "rm-data/slides/week07.html#mr-qualitative-variables-1",
+    "title": "Multiple regression analysis",
+    "section": "MR: Qualitative variables",
+    "text": "MR: Qualitative variables\nSay \\(X\\) is a qualitative variable with \\(3\\) categories: low, medium, and high. \\[y^E = \\beta_0 + \\beta_1 D^{med} + \\beta_2 D^{high}\\]\n\nlow is the reference category. Other values compared to this.\n\\(\\beta_0\\) shows average \\(y\\) in the reference category. (medium and high \\(=0\\))\n\\(\\beta_1\\): Average difference between \\(D_{medium}\\) and \\(D_low\\)\n\\(\\beta_2\\): Average difference between \\(D_{high}\\) and \\(D_low\\)"
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#mr-how-to-pick-a-reference-category",
+    "href": "rm-data/slides/week07.html#mr-how-to-pick-a-reference-category",
+    "title": "Multiple regression analysis",
+    "section": "MR: How to pick a reference category?",
+    "text": "MR: How to pick a reference category?\n\nChoose the category to which we want to compare the rest.\n\nHome country, the capital city, the lowest or highest value group.\n\nOr, chose a category with a large number of observations.\n\nImportant when inference is important, and SE are needed.\n\nFor prediction, it does not matter."
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#cs-gender-difference-in-earnings-and-education",
+    "href": "rm-data/slides/week07.html#cs-gender-difference-in-earnings-and-education",
+    "title": "Multiple regression analysis",
+    "section": "CS: Gender difference in earnings and education",
+    "text": "CS: Gender difference in earnings and education\n\n\n\n\n\n\n\n\n\nVariables\nln wage\nln wage\nln wage\n\n\n\n\nfemale\n-0.195**\n-0.182**\n-0.182**\n\n\n\n(0.008)\n(0.009)\n(0.009)\n\n\ned_Profess\n\n0.134**\n-0.002\n\n\n\n\n(0.015)\n(0.018)\n\n\ned_PhD\n\n0.136**\n\n\n\n\n\n(0.013)\n\n\n\ned_MA\n\n\n-0.136**\n\n\n\n\n\n(0.013)\n\n\nConstant\n3.514**\n3.473**\n3.609**\n\n\n\n(0.006)\n(0.007)\n(0.013)\n\n\nObservations\n18,241\n18,241\n18,241\n\n\nR-squared\n0.028\n0.038\n0.038"
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#mr-interactions",
+    "href": "rm-data/slides/week07.html#mr-interactions",
+    "title": "Multiple regression analysis",
+    "section": "MR: Interactions",
+    "text": "MR: Interactions\n\nOften data is made up of important groups: male and female workers or countries in different continents.\nand, Some of the patterns we are after may vary across these groups.\nThe strength of a relation may also be altered by a special variable.\n\nIn medicine, a moderator variable can reduce or amplify the effect of a drug on people.\nIn business, financial strength can affect how firms may weather a recession.\n\nMessage: different patterns for subsets of observations."
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#mr-interactions-and-parallel-lines",
+    "href": "rm-data/slides/week07.html#mr-interactions-and-parallel-lines",
+    "title": "Multiple regression analysis",
+    "section": "MR: Interactions and parallel lines",
+    "text": "MR: Interactions and parallel lines\n\nOption 1: Simply the Dummy to the model\n\n\\(y^E = \\beta_0 + \\beta_1 x_1 + \\beta_2 D\\)\n\nThis assumes \\(\\beta_1\\) is the same for both groups, only the intercepts are different.\nOption 2: Different slopes\n\n\\(y^E = \\beta_0 + \\beta_1 x_1 + \\beta_2 D + \\beta_3 x_1 \\times D\\)\n\n\nThis now assumes slopes are different for both groups.\nOption 3: Separate regressions\n\nBut Option 2 is better for testing if slopes are different."
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#mr-interaction-with-two-continuous-variable",
+    "href": "rm-data/slides/week07.html#mr-interaction-with-two-continuous-variable",
+    "title": "Multiple regression analysis",
+    "section": "MR: Interaction with two continuous variable",
+    "text": "MR: Interaction with two continuous variable\n\nInteractions can also be used with continuous variables, \\(x_1\\) and \\(x_2\\): \\[y_E = \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\beta_3 x_1 x_2\\]\nExample:\n\n\\(y\\) is change in revenue \\(x_1\\) is change in global demand, \\(x_2\\) is firm’s financial health\nThe interaction can capture that drop in demand can cause financial problems in firms, but less so for firms with better balance sheet.\n\nPerhaps biggest challenge is to interpret a model with interactions."
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#mr-interaction-with-two-continuous-variable-1",
+    "href": "rm-data/slides/week07.html#mr-interaction-with-two-continuous-variable-1",
+    "title": "Multiple regression analysis",
+    "section": "MR: Interaction with two continuous variable",
+    "text": "MR: Interaction with two continuous variable\n\nThe interaction term \\(x_1 x_2\\) captures how this two variables affect each others effect on \\(y\\).\n\nTypically we assume this is zero.\n\nThe coefficient \\(\\beta_3\\) captures the magnitude of the interaction effect.\nHowever, if you are interested in the relationship betwee \\(x_1\\) or \\(x_2\\) with \\(y\\), you need extra care.\n\n\\(x_1\\) on \\(y\\) is \\(\\frac{dy}{dx_1}=\\beta_1 + \\beta_3 x_2\\).\n\\(x_2\\) on \\(y\\) is \\(\\frac{dy}{dx_2}=\\beta_2 + \\beta_3 x_1\\).\n\nSo you need to “fix” \\(x_2\\) to see the effect of \\(x_1\\) on \\(y\\). (typically at the mean)"
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#cs-interaction-between-gender-and-age",
+    "href": "rm-data/slides/week07.html#cs-interaction-between-gender-and-age",
+    "title": "Multiple regression analysis",
+    "section": "CS: Interaction between gender and age",
+    "text": "CS: Interaction between gender and age\n\n\n\nSeparate, Earning for men rises faster with age\nWith interaction, Same result!.\nFemale dummy is close to zero. Does this mean no gender gap?\n\nNo, Cumulative effect: \\(-0.036-0.003*age\\)\n\n\n\n\n\n\nVariables\nln wage (Women)\nln wage (Men)\nln wage (All)\n\n\n\n\nfemale\n\n\n-0.036\n\n\n\n\n\n(0.035)\n\n\nage\n0.006**\n0.009**\n0.009**\n\n\n\n(0.001)\n(0.001)\n(0.001)\n\n\nfemale × age\n\n\n-0.003**\n\n\n\n\n\n(0.001)\n\n\nConstant\n3.081**\n3.117**\n3.117**\n\n\n\n(0.023)\n(0.026)\n(0.026)\n\n\nObservations\n9,685\n8,556\n18,241\n\n\nR-squared\n0.011\n0.028\n0.047"
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#mr-stata-corner",
+    "href": "rm-data/slides/week07.html#mr-stata-corner",
+    "title": "Multiple regression analysis",
+    "section": "MR: Stata corner",
+    "text": "MR: Stata corner\n\nIn Stata you can use i. to create dummies for all categories of a variable.\nYou can also use # to create interactions between variables.\n\nUnless specified, Stata assume variables are categorical. You can use c. for continuous variables.\n\nYou can also use ## to create interactions plus the main effects.\n\nregress y i.x1##c.x2\nis equivalent to\nregress y i.x1 c.x2 i.x1#c.x2\nwhere i.x1 will create all dummies for x1\n\nIf dummies and interactions are created this way you can use margins to calculate effects of main variables.\n\nmargins, dydx(x1 x2)"
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#mr-causal-analysis",
+    "href": "rm-data/slides/week07.html#mr-causal-analysis",
+    "title": "Multiple regression analysis",
+    "section": "MR: Causal analysis",
+    "text": "MR: Causal analysis\n\nOne main reason to estimate multiple regressions is to get closer to a causal interpretation.\nBy conditioning on other observable variables, we can get closer to comparing similar objects – “apples to apples” – even in observational data.\nBut getting closer is not the same as getting there.\nIn principle, one could try conditioning on every potential confounder: variables that would affect \\(y\\) and the causal variable \\(x_1\\) at the same time.\nCeteris paribus = conditioning on every such relevant variable. (everything else constant)."
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#mr-causal-analysis-1",
+    "href": "rm-data/slides/week07.html#mr-causal-analysis-1",
+    "title": "Multiple regression analysis",
+    "section": "MR: Causal analysis",
+    "text": "MR: Causal analysis\n\nIn randomized experiments, we can use causal language: treated and untreated units similar - by random grouping.\nIn observational data, comparisons don’t uncover causal relations.\n\nCautious with language. Avoid use of “effect”, “increase”. But could use “associated with”, “linked to”.\nRegression, even with multiple \\(x\\) is just comparison. Conditional mean."
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#mr-causal-analysis-dont-overdo-it",
+    "href": "rm-data/slides/week07.html#mr-causal-analysis-dont-overdo-it",
+    "title": "Multiple regression analysis",
+    "section": "MR: Causal analysis Don’t overdo it",
+    "text": "MR: Causal analysis Don’t overdo it\n\nNot all variables should be included as control variables even if correlated both with the causal variable and the dependent variable.\nBad conditioning variables are variables that are correlated both with the causal variable and the dependent variable but are actually part of the causal mechanism.\n\nThis is the reason to exclude them.\n\nExample, should you control for visit to the doctor when estimating the effect of health spending on health?\n\nNo, because visiting the doctor is part of the causal mechanism."
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#mr-causal-analysis-2",
+    "href": "rm-data/slides/week07.html#mr-causal-analysis-2",
+    "title": "Multiple regression analysis",
+    "section": "MR: Causal analysis",
+    "text": "MR: Causal analysis\n\nA multiple regression on observational data is rarely capable of uncovering a causal relationship.\n\nCannot capture all potential confounder. (Not ceteris paribus)\nPotential Bad conditioning variables (bad controls)\nWe can never really know.\n\nMultiple regression can get us closer to uncovering a causal relationship\n\nCompare units that are the same in many respects - controls"
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#cs-understanding-the-gender-difference-in-earnings-1",
+    "href": "rm-data/slides/week07.html#cs-understanding-the-gender-difference-in-earnings-1",
+    "title": "Multiple regression analysis",
+    "section": "CS: Understanding the gender difference in earnings",
+    "text": "CS: Understanding the gender difference in earnings\n\n\n\n\n\n\n\n\n\n\nVariables\nln wage (Model 1)\nln wage (Model 2)\nln wage (Model 3)\nln wage (Model 4)\n\n\n\n\nfemale\n-0.224**\n-0.212**\n-0.151**\n-0.141**\n\n\n\n(0.012)\n(0.012)\n(0.012)\n(0.012)\n\n\nAge and education\n\nYES\nYES\nYES\n\n\nFamily circumstances\n\n\nYES\nYES\n\n\nDemographic background\n\n\n\nYES\n\n\nJob characteristics\n\n\n\nYES\n\n\nUnion member\n\n\n\nYES\n\n\nAge in polynomial\n\n\n\nYES\n\n\nHours in polynomial\n\n\n\nYES\n\n\nObservations\n9,816\n9,816\n9,816\n9,816\n\n\nR-squared\n0.036\n0.043\n0.182\n0.195\n\n\n\nMore and more confounders added"
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#regression-table-detour",
+    "href": "rm-data/slides/week07.html#regression-table-detour",
+    "title": "Multiple regression analysis",
+    "section": "Regression table detour",
+    "text": "Regression table detour\n\nRegression table with many \\(x\\) vars is hard to present\nIn presentation, suppress unimportant coefficients\nIn paper, you may present more, but mostly if you want to discuss them or for sanity check\nSanity check: do control variable coefficient make sense by and large?\nCheck \\(N\\) of observations: if the same sample, should be exactly the same.\n\\(R^2\\) is enough, no need for other stuff (unless other methods are used)"
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#mr-prediction-and-benchmarking",
+    "href": "rm-data/slides/week07.html#mr-prediction-and-benchmarking",
+    "title": "Multiple regression analysis",
+    "section": "MR: Prediction and benchmarking",
+    "text": "MR: Prediction and benchmarking\n\nSecond reason to estimate a multiple regression is to make a prediction\n\nfind the best guess for the dependent variable \\(y_j\\) for a particular observation \\(j\\) \\[\\hat{y} = \\hat{\\beta}_0 + \\hat{\\beta}_1 x_1 + \\hat{\\beta}_2 x_2 + \\cdots\\]\n\nA \\(\\hat{y} \\ vs \\ y\\) Scatter plot is a good way to visualize the fit of a prediction.\n\nAs well as identifying over or underpredictions.\n\nWe want the regression to produce as good a fit as possible.\n\nA common danger: Overfitting the data: finding patterns in the data that are not true in the population\n\nWe will discuss more about prediction in the next chapters."
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#mr-variable-selection",
+    "href": "rm-data/slides/week07.html#mr-variable-selection",
+    "title": "Multiple regression analysis",
+    "section": "MR: Variable selection",
+    "text": "MR: Variable selection\n\nHow should one decide which variables to include? and how?\nDepends on the purpose: prediction or causality.\n\nGeneral Advice:\n\nLot of judgment calls: theory, data, and context.\nNon-linear fit, use a non-parametric first and if non-linear, pick a model that is close - quadratic, piecewise spline.\nIf two or many variables strongly correlated, pick one of them.\nKeep it as simple as possible: Parsimony is a virtue."
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#mr-variable-selection-for-causal-questions",
+    "href": "rm-data/slides/week07.html#mr-variable-selection-for-causal-questions",
+    "title": "Multiple regression analysis",
+    "section": "MR: Variable selection for causal questions",
+    "text": "MR: Variable selection for causal questions\n\nCausal question: \\(x\\) impact on \\(y\\). Having \\(z\\) variables to condition on, to get closer to causality.\nOur aim is to focus on the coefficient on one variable. What matters are the estimated value of the coefficient and its confidence interval. Not prediction.\nKeep \\(z\\) – keep variables that help comparing units\nDrop \\(z\\) if they not matter, or if they are part of the causal mechanism. (affected by \\(x\\))\n\nFunctional form for \\(z\\) matters only for crucial confounders. (linear is fine)\n\nPresent the model you judge is best, and then report a few other solutions – robustness."
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#mr-variable-selection-process",
+    "href": "rm-data/slides/week07.html#mr-variable-selection-process",
+    "title": "Multiple regression analysis",
+    "section": "MR: Variable selection – process",
+    "text": "MR: Variable selection – process\n\nSelect control variables you want to include\nSelect functional form one by one\nFocus on key variables by domain knowledge (theory), add the rest linearly\nKey issue is sample size\n\nFor 20-40 obs, about 1-2 variables.\nFor 50-100 obs, about 2-4 variables\nFew hundred obs, 5-10 variables could work\nFew thousand obs, few dozen variables, including industry/country/profession etc dummmmies, interactions.\n10-100K obs - many variables, polynomials, interactions"
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#mr-variable-selection-for-prediction",
+    "href": "rm-data/slides/week07.html#mr-variable-selection-for-prediction",
+    "title": "Multiple regression analysis",
+    "section": "MR: Variable selection for prediction",
+    "text": "MR: Variable selection for prediction\n\nIf Prediction is the goal, keep whatever works\nBalance is needed to ensure it works beyond the data at hand\nOverfitting: building a model that captures some patterns that may fit the data in hand, but does not generalize well.\nFocus on functional form, interactions\nValue simplicity. Easier to explain, more robust.\nFormal way:\n\nBIC and AIC. Similar to R-squared but takes into account number of variables. The smaller, the better\n\nYou may use Adj R2, (although not perfect) to compare models."
+  },
+  {
+    "objectID": "rm-data/slides/week07.html#summary-take-away",
+    "href": "rm-data/slides/week07.html#summary-take-away",
+    "title": "Multiple regression analysis",
+    "section": "Summary take-away",
+    "text": "Summary take-away\n\nMultiple regression are linear models with several \\(x\\) variables.\nMay include binary variables and interactions\nMultiple regression can take us closer to a causal interpretation and help make better predictions.\n\n\n\n\nRios-Avila and Cia"
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#what-we-will-see-today",
+    "href": "rm-data/slides/week08.html#what-we-will-see-today",
+    "title": "Modeling Probabilities",
+    "section": "What we will see today",
+    "text": "What we will see today\n\nLinear Probability Model - LPM\nLogit & probit\nGoodness of fit\nDiagnostics\nSummary"
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#motivation",
+    "href": "rm-data/slides/week08.html#motivation",
+    "title": "Modeling Probabilities",
+    "section": "Motivation",
+    "text": "Motivation\n\nWhat are the health benefits of not smoking? Considering the 50+ population, we can investigate if differences in smoking habits are correlated with differences in health status.\n\ngood health vs bad health"
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#binary-events",
+    "href": "rm-data/slides/week08.html#binary-events",
+    "title": "Modeling Probabilities",
+    "section": "Binary events",
+    "text": "Binary events\n\nSome outcomes are things that either happen or don’t happen, which can be captured by binary variables\n\ne.g. a person is healthy or not, a person is employed or not, a person is a smoker or not. We dont see a person that is half healthy, half employed, or half a smoker.\n\nHow can we model these events?\n\nWe have seen this before. Instead of modeling the value itself, we model the probability of the event happening.\n\n\n\\[E[y] = P[y = 1]\\]\n\nIn fact, the average of a 0–1 event is the probability of that event happening. Which can also be estimated as conditional probabilities:\n\n\\[E[y|x_1, x_2, ...] = P[y = 1|x_1, x_2, ...]\\]\n\nGood news, we can use the same tools we have been using to model these probabilities."
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#lpm-linear-probability-model",
+    "href": "rm-data/slides/week08.html#lpm-linear-probability-model",
+    "title": "Modeling Probabilities",
+    "section": "LPM: Linear probability model",
+    "text": "LPM: Linear probability model\n\nLinear Probability Model (LPM) is a linear regression with a binary dependent variable\n\nIt has the goal of modeling the probability of an event happening\n\nA linear regressions with binary dependent variables shows:\n\ndifferences in expected \\(y\\) by \\(x\\), represent diferences in probability of \\(y = 1\\) by \\(x\\).\n\nIntroduce notation for probability: \\(y^P = P[y = 1|x_1, x_2, . . .]\\)\nLinear probability model (LPM) regression is \\(y^P = \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2\\)"
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#lpm-interpretation",
+    "href": "rm-data/slides/week08.html#lpm-interpretation",
+    "title": "Modeling Probabilities",
+    "section": "LPM: Interpretation",
+    "text": "LPM: Interpretation\n\\[y^P = \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2\\]\n\nSo far nothing changes in terms of modelling or estimation. However, the interpretation of the coefficients changes.\n\n\\(y^P\\) denotes the probability that the dependent variable is one, conditional on the right-hand-side variables of the model.\n\\(\\beta_0\\) shows the predicted probability of \\(y\\) if all \\(x\\) are zero.\n\\(\\beta_1\\) shows the difference in the probability that \\(y = 1\\) for observations that are different in \\(x_1\\) but are the same in terms of \\(x_2\\). (ceteris paribus)"
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#lpm-modelling",
+    "href": "rm-data/slides/week08.html#lpm-modelling",
+    "title": "Modeling Probabilities",
+    "section": "LPM: Modelling",
+    "text": "LPM: Modelling\n\nLinear probability model (LPM) can be estimated using OLS. (just like linear regression)\nWe can use all transformations in \\(x\\), that we used before:\n\nLog, Polinomials, Splines, dummies, interactions, etc. They all work.\n\nAll formulae and interpretations for standard errors, confidence intervals, hypotheses and p-values of tests are the same.\nIMPORTANT Heteroskedasticity robust error are essential in this case!\n\nBy construction LPMs are heteroskedastic!\nAnd ignoring this fact will lead to biased standard errors and confidence intervals."
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#lpm-prediction",
+    "href": "rm-data/slides/week08.html#lpm-prediction",
+    "title": "Modeling Probabilities",
+    "section": "LPM: Prediction",
+    "text": "LPM: Prediction\n\nPredicted values - \\(\\hat{y}_P\\) - may be problematic. Although they are calculated the same way, they need to be interpreted as probabilities.\n\n\\[\\hat{y}^P = \\hat{\\beta}_0 + \\hat{\\beta}_1 x_1 + \\hat{\\beta}_2 x_2\\]\n\nPredicted values need to be between 0 and 1 because they are probabilities\nBut in LPM, predictions may be below 0 and above 1. No formal bounds in the model.\n\nmore likely than certain, less likely than impossible"
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#lpm-prediction-1",
+    "href": "rm-data/slides/week08.html#lpm-prediction-1",
+    "title": "Modeling Probabilities",
+    "section": "LPM: Prediction",
+    "text": "LPM: Prediction\n\nWhen to get worried?:\n\nWith continuous variables that can take any value (GDP, Population, sales, etc), this could be a serious issue (extrapolation)\n\nWe need to check if predictions are within the 0-1 range at least “in-sample”. But, this is not a guarantee that it will be the case “out-of-sample”.\n\nWith binary variables, no problem (‘saturated models’) (interpolation)\n\nNot problem because “simple” means will always be between 0 and 1.\n\n\nSo, a problem if goal is prediction!\nNot a big issue for inference → uncover patterns of association.\n\nBut it may give biased estimates…(in theory)"
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#cs-does-smoking-pose-a-health-risk",
+    "href": "rm-data/slides/week08.html#cs-does-smoking-pose-a-health-risk",
+    "title": "Modeling Probabilities",
+    "section": "CS: Does smoking pose a health risk?",
+    "text": "CS: Does smoking pose a health risk?\n\nThis is on of the few datasets from the book that is not directly available from their website. If interested, you need to go over the repository, and follow the instructions to access the data.\n\nThus, we will use a different dataset to illustrate the concepts."
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#cs-does-smoking-during-pregnancy-affect-birth-weight",
+    "href": "rm-data/slides/week08.html#cs-does-smoking-during-pregnancy-affect-birth-weight",
+    "title": "Modeling Probabilities",
+    "section": "CS: Does smoking during pregnancy affect birth weight?",
+    "text": "CS: Does smoking during pregnancy affect birth weight?\n\nThe question is whether, and by how much, smoking during pregnancy affects the likelihood that a baby is born with low birth weight.\nWe will use “lbw” dataset from Stata’s example datasets.\nThe dataset contains information on 189 observations of mothers and their newborns.\n\nlow is a binary variable indicating whether the baby was born with low birth weight (&lt;2500gr &lt;5.5lbs).\nsmoke is a binary variable indicating whether the mother smoked during pregnancy."
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#data",
+    "href": "rm-data/slides/week08.html#data",
+    "title": "Modeling Probabilities",
+    "section": "Data",
+    "text": "Data\n\n\\(low = 1\\) if baby was born with low birth weight\n\\(low = 0\\) if baby was born with normal weight -Some demographic information on all individual\nWe exclude women &lt;15 years old and &gt;40 years old\n\nAlso exclude women with Weight &gt; 200lbs (before pregnancy)"
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#lpm-in-stata",
+    "href": "rm-data/slides/week08.html#lpm-in-stata",
+    "title": "Modeling Probabilities",
+    "section": "LPM: in Stata",
+    "text": "LPM: in Stata\n\nStart with a simple univariate model: \\(P[low|smoke] = \\alpha + \\beta[smoke]\\)\n\n\nwebuse lbw, clear\ndrop if age &lt; 15 | age &gt; 40 | lwt &gt; 200\nreg low smoke, robust\n\n\n\n\n(Hosmer & Lemeshow data)\n(10 observations deleted)\n\nLinear regression                               Number of obs     =        179\n                                                F(1, 177)         =       4.70\n                                                Prob &gt; F          =     0.0316\n                                                R-squared         =     0.0272\n                                                Root MSE          =     .46208\n\n------------------------------------------------------------------------------\n             |               Robust\n         low | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n       smoke |    .157405   .0726412     2.17   0.032     .0140507    .3007593\n       _cons |   .2568807   .0420845     6.10   0.000     .1738289    .3399326\n------------------------------------------------------------------------------"
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#lpm-interpretation-1",
+    "href": "rm-data/slides/week08.html#lpm-interpretation-1",
+    "title": "Modeling Probabilities",
+    "section": "LPM: Interpretation",
+    "text": "LPM: Interpretation\nInterpretation:\n\nThe coefficient on smoker shows the difference in the probability of a baby.\nBabies are 15.7 percentage points more likely to be born with low birth weight if the mother smoked during pregnancy.\n\nAre you comparing Apples to apples?\nLets add additional controls to capture other factors"
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#lpm-with-many-regressors-i",
+    "href": "rm-data/slides/week08.html#lpm-with-many-regressors-i",
+    "title": "Modeling Probabilities",
+    "section": "LPM: with many regressors I",
+    "text": "LPM: with many regressors I\n\nMultiple regression – closer to causality\nCompare women who are very similar in many respects but are different in smoking habits\nSmokers / non-smokers – different in many other behaviors and conditions:\n\npersonal traits (age, race)\nbehavior pre-pregnancy (Pre-pregnancy weight)\nMedical history (History of Hypertension)\nbackground for pregnancy (Number of prenatal visits, Previous premature labor)"
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#lpm-with-many-regressors-ii",
+    "href": "rm-data/slides/week08.html#lpm-with-many-regressors-ii",
+    "title": "Modeling Probabilities",
+    "section": "LPM with many regressors II",
+    "text": "LPM with many regressors II\n\nMay also consider functional form selection or interactions\nTrial and error, or theory-based\nUseful to check bivariate relationships (scatter plots, Lpoly, correlations)\n\nFor now, assume linear relationships"
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#lpm-with-many-regressors-iii",
+    "href": "rm-data/slides/week08.html#lpm-with-many-regressors-iii",
+    "title": "Modeling Probabilities",
+    "section": "LPM with many regressors III",
+    "text": "LPM with many regressors III\n\nCode\nqui {\ngen any_premature = ptl &gt;0\nren ftv no_of_visits_1tr\nren ht hist_hyper\nren lwt wgt_bef_preg\nreg low smoke age i.race any_premature hist_hyper  no_of_visits_1tr wgt_bef_preg, robust nohead\n}\nest store lpm_results\nesttab lpm_results,   se  wide nonumber ///\ncollabel(b se) md drop(1.race) nomtitle b(3) nonotes\n\n\n\n\n\nb\nse\n\n\n\n\nsmoke\n0.151*\n(0.075)\n\n\nage\n-0.005\n(0.007)\n\n\n2.race\n0.210\n(0.112)\n\n\n3.race\n0.126\n(0.079)\n\n\nany_premature\n0.275**\n(0.097)\n\n\nhist_hyper\n0.396**\n(0.143)\n\n\nno_of_visits_1tr\n-0.005\n(0.034)\n\n\nwgt_bef_preg\n-0.002\n(0.002)\n\n\n_cons\n0.464\n(0.252)\n\n\nN\n179\n\n\n\n\nRobust standard errors in parentheses * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001"
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#detour-regression-tables",
+    "href": "rm-data/slides/week08.html#detour-regression-tables",
+    "title": "Modeling Probabilities",
+    "section": "Detour: Regression Tables",
+    "text": "Detour: Regression Tables\n\nIf need to show many explanatory variables\nDo not show table 12*2 rows, people will not see it.\n\nAvoid copy pasting from your document! Those tables are unwieldy.\n\nEither only show selected variables (smoke + 2-3 others)\nOr may need to create two columns. (a bit more work)\n\nIn my case, Wide format did the trick.\n\nMake site you have title, N of observations, footnote on SE, stars.\nSE, stars: many different notations. Check carefully.\n\nesttab default is \\(p^{***}= p&lt;0.001\\), \\(0.01\\) and \\(0.05\\)\nIn papers there is \\(p^{***}=p&lt;0.01\\), \\(0.05\\) and \\(0.1\\)."
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#does-smoking-pose-a-health-risk-for-the-baby",
+    "href": "rm-data/slides/week08.html#does-smoking-pose-a-health-risk-for-the-baby",
+    "title": "Modeling Probabilities",
+    "section": "Does smoking pose a health risk for the baby?",
+    "text": "Does smoking pose a health risk for the baby?\n\nCoefficient on smoking during pregnancy is -.151.\n\nWomen who smoked during pregnancy are 15.1 percentage points more likely to have a baby with low birth weight.\n\nThe 95% confidence interval is relatively wide \\([0.002, 0.300]\\), but it does not contain zero\nAge, Race?, Nr of Visits and Pre-pregnancy weight do not seem to be factors\nHypertension and previous premature labor are significant factors, increasing the probability of low birth weight by 40pp and 27.5pp, respectively."
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#lpms-predicted-probabilities",
+    "href": "rm-data/slides/week08.html#lpms-predicted-probabilities",
+    "title": "Modeling Probabilities",
+    "section": "LPM’s predicted probabilities",
+    "text": "LPM’s predicted probabilities\n\n\nCode\nqui: reg low smoke age i.race any_premature hist_hyper  no_of_visits_1tr wgt_bef_preg, robust nohead\nqui: predict low_hat\nqui:histogram low_hat\nsum low_hat\n\n\n\n    Variable |        Obs        Mean    Std. dev.       Min        Max\n-------------+---------------------------------------------------------\n     low_hat |        179    .3184358    .1878437  -.0346098   .9483117"
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#analysis-of-lpms-predicted-probabilities",
+    "href": "rm-data/slides/week08.html#analysis-of-lpms-predicted-probabilities",
+    "title": "Modeling Probabilities",
+    "section": "Analysis of LPM’s predicted probabilities",
+    "text": "Analysis of LPM’s predicted probabilities\n\nWhat to doWhat we find\n\n\n\nDrill down in distribution:\n\nLooking at the composition of people: top vs bottom part of probability distribution\nLook at average values of covariates for top and bottom X% of predicted probabilities!\n\n\n\n\n\n\nCode\nsort low_hat\nset linesize 255\n \nqui: gen flag = 1 if _n&lt;=5\nqui: replace  flag = 2 if _n&gt;=_N-4\nlist low_hat smoke age race any_premature hist_hyper  no_of_visits_1tr wgt_bef_preg   if flag==1\nlist low_hat smoke age race any_premature hist_hyper  no_of_visits_1tr wgt_bef_preg   if flag==2\n\n\n\n     +---------------------------------------------------------------------------------+\n     |   low_hat       smoke   age    race   any_pr~e   hist_h~r   no_of_~r   wgt_be~g |\n     |---------------------------------------------------------------------------------|\n  1. | -.0346098   Nonsmoker    32   White          0          0          2        186 |\n  2. | -.0280454   Nonsmoker    36   White          0          0          0        175 |\n  3. |  .0019138   Nonsmoker    32   White          0          0          0        170 |\n  4. |  .0158307   Nonsmoker    23   White          0          0          0        190 |\n  5. |  .0284496   Nonsmoker    28   White          0          0          0        167 |\n     +---------------------------------------------------------------------------------+\n\n     +--------------------------------------------------------------------------------+\n     |  low_hat       smoke   age    race   any_pr~e   hist_h~r   no_of_~r   wgt_be~g |\n     |--------------------------------------------------------------------------------|\n175. | .7197446      Smoker    34   Black          0          1          0        187 |\n176. | .7369648   Nonsmoker    17   Black          0          1          0        142 |\n177. | .8160616      Smoker    18   Black          1          0          0        110 |\n178. | .8545191   Nonsmoker    26   Other          1          1          1        154 |\n179. | .9483117   Nonsmoker    25   Other          1          1          0        105 |\n     +--------------------------------------------------------------------------------+"
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#probability-models-logit-and-probit",
+    "href": "rm-data/slides/week08.html#probability-models-logit-and-probit",
+    "title": "Modeling Probabilities",
+    "section": "Probability models: logit and probit",
+    "text": "Probability models: logit and probit\n\nPrediction: predicted probability need to be between 0 and 1\n\nThus, for prediction, we must use non-linear models\nActually, its a quasi-linear model.\n\nThe model, itself, is linear in the parameters\nbut need to relate this to the probability of the \\(y = 1\\) event, using a nonlinear function that maps the linear index into a 0-1 range: ‘Link function’\n\n\\[\\begin{aligned}\nXB &= \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + ... \\\\\ny^P &= F(XB) \\rightarrow y^P \\in (0,1)\n\\end{aligned}\n\\]\n\nTwo options: Logit and probit – different link function"
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#link-functions-i.",
+    "href": "rm-data/slides/week08.html#link-functions-i.",
+    "title": "Modeling Probabilities",
+    "section": "Link functions I.",
+    "text": "Link functions I.\nCall \\(XB = \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + ...\\)\n\nThe Logit:\n\\(y^P = \\Lambda(XB) = \\frac{\\exp(XB)}{1 + \\exp(XB)}\\)\nThe probit:\n\\(y^P = \\Phi(XB) \\rightarrow \\Phi(z) = \\int_{-\\infty}^z \\frac{1}{\\sqrt{2\\pi}} \\exp\\left(-\\frac{z^2}{2}\\right) dz\\)\n\nwhere \\(\\Lambda()\\) is called logistic function, and \\(\\Phi()\\) is the cumulative distribution function (CDF) of the standard normal distribution."
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#link-functions-ii.",
+    "href": "rm-data/slides/week08.html#link-functions-ii.",
+    "title": "Modeling Probabilities",
+    "section": "Link functions II.",
+    "text": "Link functions II.\n\n\n\nBoth link functions are S-shaped curves bounded between 0 and 1.\nThere is but a small difference between the two.\nbut estimated coefficients will be different.\n\n\n\n\nCode\nqui {\nclear\nrange p 0 1 202\ndrop if p==0 | p==1 \ngen x = invnormal(p)\ngen y = (x+rnormal())&gt;0\nreg  y x\npredict y_1\nlogit y x\npredict y_2\nprobit y x\npredict y_3\ndrop if abs(x)&gt;2\ntwo (line y_1 x ) (line y_2 x) (line y_3 x), ///\nlegend(order(1 \"LPM\" 2 \"Logit\" 3 \"Probit\") pos(3) ring(0) col(1)) \n}"
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#logit-and-probit-interpretation",
+    "href": "rm-data/slides/week08.html#logit-and-probit-interpretation",
+    "title": "Modeling Probabilities",
+    "section": "Logit and probit interpretation",
+    "text": "Logit and probit interpretation\n\nBoth the probit and the logit transform the \\(\\beta_0 + \\beta_1 x_1 + ...\\) linear combination using a link function that shows an S-shaped curve.\nThe slope of this curve keeps changing as we change whatever is inside, but it’s steepest when \\(y^P = 0.5\\) (inflection point)\nThe difference in \\(y^P\\) corresponds to changes in probabilities, between any two values of \\(x\\).\nTo find how much is related to a particular \\(x\\), You need to take the partial derivatives.\nImportant consequence: no direct interpretation of the raw coefficient values!\n\nThus, always know if you are interpreting the raw coefficients or the marginal differences."
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#marginal-differences-marginal-effects",
+    "href": "rm-data/slides/week08.html#marginal-differences-marginal-effects",
+    "title": "Modeling Probabilities",
+    "section": "Marginal differences (marginal effects)",
+    "text": "Marginal differences (marginal effects)\n\nNOTE As before, the word “effect” should be used with caution. In the book, they use “marginal differences” instead. as a more neutral term.\n\n\nLink functions makes associates \\(\\Delta x\\) into \\(\\Delta y_P\\). we do not interpret raw coefficients! (except for direction)\nInstead, transform them into ‘marginal differences’ for interpretation purposes\nThey are also called ‘marginal effects’ or ‘average marginal effects (AME)’ or ‘average partial effects’.\nAverage marginal difference has the same interpretation as the coefficient of linear probability models, but with caveats."
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#marginal-differences-discrete-x",
+    "href": "rm-data/slides/week08.html#marginal-differences-discrete-x",
+    "title": "Modeling Probabilities",
+    "section": "Marginal differences: Discrete \\(x\\)",
+    "text": "Marginal differences: Discrete \\(x\\)\n\nif \\(x\\) is a categorical (0-1), the marginal difference is the difference in the predicted probability of \\(y = 1\\), that corresponds to a change from \\(x = 0\\) to \\(x = 1\\).\n\n\\[\\Delta y^P = y^P(x = 1) - y^P(x = 0)\\]\n\nThen we simply “average” this difference across all observations."
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#marginal-differences-continous-x",
+    "href": "rm-data/slides/week08.html#marginal-differences-continous-x",
+    "title": "Modeling Probabilities",
+    "section": "Marginal differences: continous \\(x\\)",
+    "text": "Marginal differences: continous \\(x\\)\n\nIf \\(x\\) is continuous, the marginal difference is calculated as the derivative (for a small change in \\(x\\)).\n\n\\[\\frac{\\partial y^P}{\\partial x_1} = \\beta_1 \\cdot f(XB)\\]\n\nWhich is then averaged across all observations to report a single number.\nIn practice, we interpret this as the change in the probability of \\(y = 1\\) for a one-unit change in \\(x_1\\)."
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#how-to-estimate-this-models",
+    "href": "rm-data/slides/week08.html#how-to-estimate-this-models",
+    "title": "Modeling Probabilities",
+    "section": "How to estimate this models?",
+    "text": "How to estimate this models?\nMaximum likelihood estimation!\n\nWhen estimating a logit or probit model, we use ‘maximum likelihood’ estimation.\n\nSee 11.U2 for details.\n\nIdea for maximum likelihood is another way to get coefficient estimates.\n\n1st You specify a (conditional) distribution, that you will use during the estimation.\n\nThis is logistic for logit and normal for probit model.\n\n2nd You maximize this function w.r.t. your \\(\\beta\\) parameters → gives the maximum likelihood for this model.\n\nDifferent from OLS: No closed form solution → need to use search algorithms.\n\nThus… more computationally intensive."
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#predictions-for-lmp-logit-and-probit-i.",
+    "href": "rm-data/slides/week08.html#predictions-for-lmp-logit-and-probit-i.",
+    "title": "Modeling Probabilities",
+    "section": "Predictions for LMP, Logit and Probit I.",
+    "text": "Predictions for LMP, Logit and Probit I.\n\n\nCode\nqui {\n  webuse lbw, clear\n  drop if age &lt; 15 | age &gt; 40 | lwt &gt; 200\n  gen any_premature = ptl &gt;0\n  ren ftv no_of_visits_1tr\n  ren ht hist_hyper\n  ren lwt wgt_bef_preg\n  gen black = 2.race\n  gen other = 3.race\n  reg low smoke age i.black i.other i.any_premature hist_hyper , robust nohead\n  predict low_hat_ols\n  est sto lpm_results\n  logit low smoke age black other any_premature hist_hyper , robust nohead\n  predict low_hat_logit\n   probit low smoke age black other any_premature hist_hyper , robust nohead\n  predict low_hat_probit\n   two (scatter  low_hat_logit low_hat_probit low_hat_ols) ///\n      (line low_hat_ols low_hat_ols, sort), ///\n      legend(order(1 \"Logit\" 2 \"Probit\" 3 \"LPM\") pos(3) ring(0) col(1))\n}"
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#coefficient-results-for-logit-and-probit",
+    "href": "rm-data/slides/week08.html#coefficient-results-for-logit-and-probit",
+    "title": "Modeling Probabilities",
+    "section": "Coefficient results for logit and probit",
+    "text": "Coefficient results for logit and probit\n\nCode\nqui {\n  logit low smoke age i.black i.other i.any_premature hist_hyper , robust nohead\n  est sto logit_results\n  margins, dydx(*) post\n  est sto logit_mfx\n  probit low smoke age i.black i.other i.any_premature hist_hyper , robust nohead  \n  est sto probit_results\n  margins, dydx(*) post\n  est sto probit_mfx\n}\nesttab lpm_results logit_results  logit_mfx probit_results probit_mfx, se  nonumber drop(0.*) ///\nmtitle(LPM Logit Logit_MFX Probit Probit_MFX) collabel(none) md ///\nstar(* 0.10 ** 0.05 *** 0.01) nonotes \n\n\n\n\n\n\n\n\n\n\n\n\n\nLPM\nLogit\nLogit_MFX\nProbit\nProbit_MFX\n\n\n\n\nmain\n\n\n\n\n\n\n\nsmoke\n0.166**\n0.925**\n0.169**\n0.549**\n0.169**\n\n\n\n(0.0739)\n(0.397)\n(0.0695)\n(0.235)\n(0.0697)\n\n\nage\n-0.00703\n-0.0447\n-0.00818\n-0.0271\n-0.00835\n\n\n\n(0.00669)\n(0.0377)\n(0.00688)\n(0.0221)\n(0.00679)\n\n\n1.black\n0.192*\n1.012*\n0.202*\n0.607*\n0.202*\n\n\n\n(0.111)\n(0.526)\n(0.109)\n(0.314)\n(0.108)\n\n\n1.other\n0.150*\n0.884**\n0.164**\n0.524**\n0.163**\n\n\n\n(0.0770)\n(0.435)\n(0.0787)\n(0.254)\n(0.0779)\n\n\n1.any_premature\n0.284***\n1.330***\n0.279***\n0.810***\n0.280***\n\n\n\n(0.0972)\n(0.441)\n(0.0944)\n(0.270)\n(0.0956)\n\n\nhist_hyper\n0.370***\n1.720**\n0.315***\n1.063**\n0.327***\n\n\n\n(0.137)\n(0.674)\n(0.117)\n(0.415)\n(0.122)\n\n\n_cons\n0.270\n-0.971\n\n-0.576\n\n\n\n\n(0.183)\n(0.983)\n\n(0.577)\n\n\n\nN\n179\n179\n179\n179\n179\n\n\n\nStandard errors in parentheses * p &lt; 0.1, ** p &lt; 0.04, *** p &lt; 0.01"
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#does-smoking-pose-a-health-risk-logit-and-probit",
+    "href": "rm-data/slides/week08.html#does-smoking-pose-a-health-risk-logit-and-probit",
+    "title": "Modeling Probabilities",
+    "section": "Does smoking pose a health risk?– logit and probit",
+    "text": "Does smoking pose a health risk?– logit and probit\n\nLPM – interpret the coefficients as usual.\nLogit, probit - Interpret the marginal differences. Basically the same.\n\nMarginal differences are essentially the same across the logit and the probit.\nEssentially the same as the corresponding LPM coefficients.\n\nHappens often:\n\nOften LPM is good enough for interpretation.\nCheck if logit/probit very different.\n\nif so, Investigate functional forms if yes."
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#goodness-of-fit",
+    "href": "rm-data/slides/week08.html#goodness-of-fit",
+    "title": "Modeling Probabilities",
+    "section": "Goodness of fit",
+    "text": "Goodness of fit\n\nThere is no generally accepted goodness of fit measure\n\nThis is because we do not observe probabilities only 1 and 0, so we cannot FIT those probabilities.\n\nThere are, however, other options to evaluate the quality of the model.\n\nR-squared\nBrier score\nPseudo R-squared\nlog-loss"
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#goodness-of-fit-r-squared",
+    "href": "rm-data/slides/week08.html#goodness-of-fit-r-squared",
+    "title": "Modeling Probabilities",
+    "section": "Goodness of fit: R-squared",
+    "text": "Goodness of fit: R-squared\n\\[R^2 = 1 - \\frac{\\sum_{i=1}^n (\\hat{y}_P^i - y_i)^2}{\\sum_{i=1}^n (y_i - \\bar{y})^2}\\]\n\nR-squared is not useful for binary outcomes\n\nIt can be calculated, but it lacks the interpretation we had for linear models, because we are fitting the probabilities, not the outcomes."
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#brier-score",
+    "href": "rm-data/slides/week08.html#brier-score",
+    "title": "Modeling Probabilities",
+    "section": "Brier score",
+    "text": "Brier score\n\\[\\text{Brier} = \\frac{1}{n}\\sum_{i=1}^n (\\hat{y}_P^i - y_i)^2\\]\n\nThe Brier score is the average distance (mean squared difference) between predicted probabilities and the actual value of \\(y\\).\nSmaller the Brier score, the better.\nWhen comparing two predictions, the one with the smaller Brier score is the better prediction because it produces less (squared) error on average.\nRelated to a main concept in prediction: mean squared error (MSE)"
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#pseudo-r2",
+    "href": "rm-data/slides/week08.html#pseudo-r2",
+    "title": "Modeling Probabilities",
+    "section": "Pseudo R2",
+    "text": "Pseudo R2\n\\[pR^2 = 1 - \\frac{\\text{Log-likelihood}_{\\text{model}}}{\\text{Log-likelihood}_{\\text{intercept only}}}\\]\n\nIt is similar to the R-squared, as it measures the goodness of fit, tailored to nonlinear models and binary outcomes.\n\nMost widely used: McFadden’s R-squared (Stata uses this)\n\nComputes the ratio of log-likelihood of the model vs intercept only.\nCan be computed for the logit and the probit but not for the linear probability model. (unless you re-define the Log-likelihood)"
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#log-loss",
+    "href": "rm-data/slides/week08.html#log-loss",
+    "title": "Modeling Probabilities",
+    "section": "Log-loss",
+    "text": "Log-loss\n\\[\\text{Log-loss} = \\frac{1}{n}\\sum_{i=1}^n \\left[y_i \\log(\\hat{y}_P^i) + (1-y_i) \\log(1-\\hat{y}_P^i) \\right]\\]\n\nThe log-loss is a measured derived from the log-likelihood function. It measures how much observed data dissagrees with the predicted probabilities.\nThe smaller (close to zero) the log-loss, the better the model."
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#practical-use",
+    "href": "rm-data/slides/week08.html#practical-use",
+    "title": "Modeling Probabilities",
+    "section": "Practical use",
+    "text": "Practical use\n\nThere are several measured of model fit, but they often give the same ranking of models.\nDo not use R-squared. Even for LPM, it has no interpretation.\nIf using probit vs logit: pseudo R-squared may be used to rank logit and probit models.\nUse, especially for prediction: Brier score is a metric that can be computed for all models and is used in prediction."
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#bias-of-the-predictions",
+    "href": "rm-data/slides/week08.html#bias-of-the-predictions",
+    "title": "Modeling Probabilities",
+    "section": "Bias of the predictions",
+    "text": "Bias of the predictions\n\nPost-prediction: we may be interested to study some features of our model\nOne specific goal: evaluating the bias of the prediction.\n\nProbability predictions are unbiased if they are right on average = the average of predicted probabilities is equal to the actual probability of the outcome.\nIf the prediction is unbiased, the bias is zero.\n\nUnless the model is really bad, unconditional bias is not a big issue.\n\nOnly Probit will be biased."
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#calibration",
+    "href": "rm-data/slides/week08.html#calibration",
+    "title": "Modeling Probabilities",
+    "section": "Calibration",
+    "text": "Calibration\n\nUnbiasedness refers to the whole distribution of probability predictions.\nA finer and stricter concept is calibration\nA prediction is well calibrated if the actual probability of the outcome is equal to the predicted probability for each and every value of the predicted probability. \\[E(y|y^P) = y^P\\]\n‘Calibration curve’ is used to show this.\nA model may be unbiased (right on average) but not well calibrated\n\nunderestimate high probability events and overestimate low probability ones"
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#calibration-curve",
+    "href": "rm-data/slides/week08.html#calibration-curve",
+    "title": "Modeling Probabilities",
+    "section": "Calibration curve",
+    "text": "Calibration curve\n\nHorizontal axis shows the values of all predicted probabilities (\\(\\hat{y}_P\\)).\nVertical axis shows the fraction of \\(y = 1\\) observations for all observations with the corresponding predicted probability.\nThe closer the curve is to the 45-degree line, the better the calibration.\n\nIn practice:\n\nCreate bins for predicted probabilities and make comparisons of the actual event’s probability.\nOr use non-parametric methods to estimate the calibration curve."
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#calibration-curve-1",
+    "href": "rm-data/slides/week08.html#calibration-curve-1",
+    "title": "Modeling Probabilities",
+    "section": "Calibration curve",
+    "text": "Calibration curve\n\n\nCode\ntwo (lpoly low low_hat_ols) (lpoly low low_hat_logit) ///\n(lpoly low low_hat_probit) (function y = x, range(0 1) lcolor(black%50)), ///\nlegend(order(1 \"LPM\" 2 \"Logit\" 3 \"Probit\") ) scale(1.5) ///\nxtitle(\"Predicted probability\") ytitle(\"Avg outcome\")"
+  },
+  {
+    "objectID": "rm-data/slides/week08.html#probability-models-summary",
+    "href": "rm-data/slides/week08.html#probability-models-summary",
+    "title": "Modeling Probabilities",
+    "section": "Probability models summary",
+    "text": "Probability models summary\n\nFind patterns when \\(y\\) is binary can be done using model probability with regressions\nLinear probability model is mostly good enough, easy inference.\n\nto-go for data exploration, quick analysis, and diagnostics\nbut, predicted values could be below 0, above 1\n\nLogit (and probit) - better when aim is prediction, predicted values strictly between 0-1\nMost often, LPM, logit, probit - similar inference\nUse marginal (average) differences (with logit/probit)\nNo trivial goodness of fit. Brier score or pseudo-R-Squared.\nCalibration is important for prediction.\n\n\n\n\nRios-Avila and Cia"
   }
 ]

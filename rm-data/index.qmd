@@ -140,21 +140,22 @@ All homework assignments are required to be submitted in Quarto format, using Gi
 - **Weekly Quizzes**: 10%
 - **Weekly Problem Sets**: 30%
 - **Term Paper**: 60%
-- **Referee Reports**: 5% (Extra Credit)
-
+ 
 ### Term Paper Schedule (60% of final grade)
 
 - **Part I**: Research Proposal (5%, due Week 2). See [here](example_proposals.qmd) for few examples of research proposals. 
 
 - **Part II**: Data Collection and Cleaning (10%, due Week 4)
 
+- **Peer Review Report**: (Week 5)
+
 - **Interim Progress Report** (5%, due Week 7)
 
 - **Part III**: Data Analysis (15%, due Week 10)
 
-- **Peer Review Report**: (Extra 2.5% Week 11):
+- **Peer Review Report**: (Week 11):
 
-- **Part IV**: Final Report and Presentation (25%, due Week 14)
+- **Part IV**: Final Report and Presentation (20%, due Week 13)
 
 Complete research paper should include:
 
@@ -166,7 +167,9 @@ Complete research paper should include:
   - References
   - Appendices (if any)
 
-- 15-minute presentation of your research to the class
+- **Presentation** (5%)
+  
+  - 15-minute presentation of your research to the class
 
 - See [here](https://github.com/riosavila/term-paper) for an example for the kind of report expected at each stage, based on the first research proposal on the impact of remote work on urban housing prices.
 

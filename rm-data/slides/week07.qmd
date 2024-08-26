@@ -1,0 +1,569 @@
+---
+title: "Multiple regression analysis"
+subtitle: "When one $x$ variable is not enough"
+author: 
+  - name: Fernando Rios-Avila
+    affiliation: Levy Economics Institute  
+date: last-modified
+date-format: long
+format:
+  revealjs:
+    theme: [ clean2.scss]
+    slide-number: true
+    footer: "*Rios-Avila and Cia*"
+    width:  1300
+    height: 675
+jupyter: nbstata    
+execute: 
+  cache: true
+  freeze: auto
+---
+
+## Motivation
+
+- We are interested in finding evidence for or against labor market discrimination of women. Compare wages for men and women who share similarities in wage relevant factors such as experience and education.
+- Find a good deal on a hotel to spend a night in a European city- analyzed the pattern of hotel price and distance and many other features to find hotels that are underpriced not only for their location but also those other features.
+
+## Topics to cover
+
+- Multiple regression mechanics
+- Estimation and interpreting coefficients
+- Non-linear terms, interactions 
+- Variable selection, small sample problems
+- Multiple regression and causality
+- Multiple regression and prediction
+
+# How multivariate OLS works
+
+## Multivariate Regression 
+
+- Whenever you start modeling an outcome $y$, there will always be two factors that will determine that outcome:
+  - Factors that you can control (e.g., education, experience, etc.)
+  - Factors that you cannot control (e.g., errors)   
+- Multiple regression analysis uncovers average $y$ as a function of more than one $x$ variable: $y^E = f(x_1, x_2, ...)$.
+- It can lead to better predictions $\hat{y}$ by considering more explanatory variables.
+- It **may** improve the interpretation of slope coefficients by comparing observations that are similar in terms of other $x's$ variables.
+
+## Multivariate Regression 
+
+- Multiple linear regression specifies a linear function of the explanatory variables for the average $y$:
+$$y^E = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_k x_k$$
+
+- But, now that we now we can have more than one $x$ variable, what happens if we don't?
+
+## MR: Ommited Variable Bias
+
+Lets say we have to models: 
+$$\begin{aligned}
+y &= \alpha_0 + \alpha_1 x_1 + \varepsilon_1  \\
+y &= \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \varepsilon_2
+\end{aligned}
+$$
+
+- How do $\alpha_1$ and $\beta_1$ compare?
+- Lets Start by regressing $x_2$ on $x_1$: $x_2 = \delta_0 + \delta_1 x_1 + u$
+- And plug this back into the second equation: 
+
+$$\begin{aligned}
+y &= \beta_0 + \beta_1 x_1 + \beta_2 (\delta_0 + \delta_1 x_1 + u) + \varepsilon_2 \\
+y &= (\beta_0 + \beta_2\delta_0) + (\beta_1 + \beta_2 \delta_1) x  + (\beta_2 u + \varepsilon_2)
+\end{aligned}
+$$
+
+## MR: Ommited Variable Bias
+
+- So it turns out that:
+
+$$\alpha_1 = \beta_1 + \beta_2 \delta_1 \rightarrow \beta_1-\alpha_1 = -\beta_2 \delta_1
+$$
+
+- By "ignoring" $x_2$ in the first regression, we are actually estimating a **biased** coefficient for $x_1$.
+  - Assuming the second model is the "true" model
+
+- This is what is known as the **Omitted variable bias** OBV
+  - Note: You could also have a bias because you are including a variable that **should not** be there. This is known as **bad control**.
+
+## MR: Ommited Variable Bias
+
+- **OBV** is a common problem in empirical research because we can never include all the variables that determine $y$.
+- However, mechanically, there are two cases where OBV is not a problem:
+  - When $x_1$ and $x_2$ are uncorrelated ($\delta_1 = 0$)
+  - When $y$ and $x_2$ are uncorrelated ($\beta_2 = 0$)
+
+## Simple example
+
+- TS regression: Regress month-to-month change in log quantity sold of Beer ($y$) on month-to-month change in log price ($x_1$).
+  - $\beta = -0.5$: sales tend to decrease by 0.5% when our price increases by 1%. 
+- Robustness: $x_2$: change in ln average price charged by our competitors
+  - New Results: $\hat{\beta}_1 = -3$ and $\hat{\beta}_2 = 3$
+- There is a ***OBV*** (Model 1 is flatter than Model 2)
+- Possibly the result of two things:
+  - a positive association between the two price changes ($\delta_1$) and
+  - a positive association between competitor price and our own sales ($\beta_2$).
+ 
+## MR: Some language
+
+- **Setup:** Multiple regression with two explanatory variables ($x_1$ and $x_2$),
+- **Technicallity:**: We measure differences in expected $y$ across observations that differ in $x_1$ but are similar in terms of $x_2$.
+- **Interpretation:** Difference in $y$ by $x_1$, conditional on $x_2$. OR controlling for $x_2$.
+  - We condition on $x_2$, or control for $x_2$, when we include $x_2$ in a multiple regression that focuses on average differences in $y$ by $x_1$.
+- What we care is $x_1$'s effect on $y$, but we control for $x_2$ to get a better estimate of this effect.
+
+- **Confounding:** $x_2$ is a confounder if $x_2$ is correlated with $x_1$ and $y$. 
+  - Thus, we have a problem if we omit $x_2$ from the regression.
+
+## Stata: Multiple regression
+
+```stata
+regress y x1 [x2 x3 ... ], robust
+estimates store m1
+esttab m1, star(* 0.10 ** 0.05 *** 0.01) label
+```
+
+# Estimation
+
+## MR: Standard Errors
+
+$$\text{SE}(\hat{\beta}_1) = \frac{\text{Std}[e]}{\sqrt{n}\text{Std}(x_1)\color{blue}{\sqrt{1 - R^2_1}}}$$
+
+- **Same**: 
+  - the **SE** is small if better the fit, large samples, or large the Std of $x_1$.
+- **New**: $\sqrt{1 - R^2_1}$ term in the denominator. 
+  - the R-squared of the regression of $x_1$ on $x_2$
+- The higher is $R^2_1$, the larger the SE of $\hat{\beta}_1$.
+- Note: in practice, use **robust SE**
+
+## MR: Collinearity
+
+- **Perfectly** collinearity is when $x_i$ is a linear function of $x_{-i}$. 
+  - Consequence: cannot calculate coefficients.
+  - One will be dropped by software (but you should know which one).
+- **Strong** but imperfect correlation between explanatory is sometimes called multicollinearity.
+  - Consequence: We can get the slope coefficients and their standard errors,
+  - But, the standard errors may be large.
+
+## MR: Collinearity and SE
+
+- Strong multicollinearity is a problem because it increases the standard errors of the coefficients.
+  - It is typically a problem when the sample size is small.
+- Numerically, it could make the coefficient estimates unstable. (rare)
+- More often, you may need to either drop one of the variables, or
+- Combine them into a single variable. (index)
+
+How to know how strong is the multicollinearity problem ??
+
+- Estimate $R^2$ of the regression of $x_i$ on all other $x$ variables. For all cases!
+  - or use the `estat vif` command in Stata. (only with OLS)
+
+## MR: Collinearity 
+
+```{stata}
+*| echo: true
+*| code-fold: false
+qui:frause oaxaca, clear
+qui:regress lnwage female educ exper tenure c.age c.age#c.age, robust
+estat vif
+```
+
+## MR: Testing Single hypotheses
+
+- Same as before, but now we have more than one $x$ variable to test.
+  - $H_0: \beta_1 = 0$ 
+- You may want to be careful with multiple testing. 
+  - testing each coefficient separately with the same $\alpha$ level
+- There is also testing single hypotheses on combinations of coefficients.
+  - $H_0: \beta_1-2*\beta_2=0 $
+- As before, you just need to know the point estimate and the standard error to calculate the t-statistic.
+ 
+## MR: Testing Joint hypotheses
+
+- Testing joint hypotheses: null hypotheses that contain statements about more than one regression coefficient: 
+  $H_0: \beta_1 = \beta_2 = 0$ vs $H_1: H_0$ is false
+- This kind of test is used to evaluate a subset of the coefficients (such as all geographical variables) are all zero.
+- But for doing this you need a new test statistic: the **F-test**.
+
+Difference with the t-test:
+
+- In contrast with the t-test, the F-test follows an F-distribution. 
+- This distribution is not symmetric! And you need to know the degrees of freedom. 
+  - How many restrictions are you imposing? and how many coefficients did you estimate?
+- Also, all test are on-sided
+  
+## MR: Testing Joint hypotheses
+
+![F-test](https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/F-test_plot.svg/1280px-F-test_plot.svg.png)
+
+## MR: Testing hypotheses in Stata
+
+::: {.panel-tabset}
+
+## Regression
+```{stata}
+*| echo: true
+*| code-fold: false
+qui:webuse dui, clear
+regress  citations  fines i.taxes i.csize i.college, robust nohead
+** regress, coefleg to know "names" of variables
+```
+
+## Joint test
+
+```{stata}
+*| echo: true
+*| code-fold: false
+test 1.taxes 1.college // <- automatically test the joint hypothesis
+```
+
+## Single test Combined
+
+
+```{stata}
+*| echo: true
+*| code-fold: false
+** "H0: 2*B_Taxes = B_fines"
+lincom 2*1.taxes-fines
+```
+
+:::
+
+## MR: Non-linear patterns
+
+- Surprise! you can use the same tools as with single regression
+  - Uses splines, polynomials, other non-linear functions of $x$ variables.
+- Non-linear function of various $x_i$ variables may be combined.
+- As show before, using non-linear functions will increase multicollinearity, but worry not about that type of collinearity.
+- Be more careful with the interpretation of the coefficients.
+
+## CS: Understanding the gender difference in earnings
+
+- In the USA (2014), women tend to earn about 20% less than men
+- Aim 1: Find patterns to better understand the gender gap. Our focus is the interaction with age.
+- Aim 2: Think about if there is a causal link from being female to getting paid less.
+
+## CS: The data
+
+- 2014 census data
+- Age between 15 to 65
+- Exclude self-employed *(earnings is difficult to measure)*
+- Include those who reported 20 hours more as their usual weekly time worked
+- Employees with a graduate degree (higher than 4-year college)
+- Use log hourly earnings ($\ln w$) as dependent variable
+- Use gender and add age as explanatory variables
+
+## CS: The model
+
+We are quite familiar with the relation between earnings and gender:
+$$\ln w_E = \alpha + \beta\text{female}, \beta < 0$$
+Let's include age as well:
+$$\ln w_E = \beta_0 + \beta_1\text{female} + \beta_2\text{age}$$
+
+What happens if we do not include age?
+
+## CS: The Regression
+
+
+| **Variables** | ln wage | ln wage | age     |
+|-------------|---------|-----------|---------|
+|**female**   |-0.195** | -0.185**  |-1.484** |
+|             |(0.008)  |(0.008)    |(0.159)  |
+|**age**      |         | 0.007**   |         |
+|             |         |(0.000)    |         |
+|Constant     |3.514**  | 3.198**   |44.630** |
+|             |(0.006)  |(0.018)    | (0.116) |
+|Observations | 18,241  |18,241     |18,241   |
+|R-squared    |0.028    |0.046      | 0.005   |
+
+::: {.small-text style="text-align: center"}
+Note: Robust standard errors in parentheses  
+*** p<0.01, ** p<0.05, * p<0.1  
+Source: cps-earnings dataset. 2014 CPS Morg.
+:::
+What if Age is not linear? (has a non-linear effect on earnings)
+
+## CS: Adjustment and Robustness
+
+| **Variable** | Model 1    | Model 2    | Model 3    | Model 4    |
+|--------------|------------|------------|------------|------------|
+| **female**   | -0.195**   | -0.185**   | -0.183**   | -0.183**   |
+|              | (0.008)    | (0.008)    | (0.008)    | (0.008)    |
+| **age**      |            | 0.007**    | 0.063**    | 0.572**    |
+|              |            | (0.000)    | (0.003)    | (0.116)    |
+| **age2**     |            |            | -0.001**   | -0.017**   |
+|              |            |            | (0.000)    | (0.004)    |
+| **age3**     |            |            |            | 0.000**    |  
+|              |            |            |            | (0.000)    | 
+| **Observations** | 18,241 | 18,241     | 18,241     | 18,241     |
+| **R-squared** | 0.028     | 0.046      | 0.060      | 0.062      |
+::: {.small-text style="text-align: center"}
+Note: Robust standard errors in parentheses, *** p<0.01, ** p<0.05, * p<0.1  
+Source: cps-earnings dataset. 2014 CPS Morg.
+:::
+ 
+# Qualitative variables <br> and interactions
+Traditional way to make things more interesting
+
+## MR: Qualitative variables
+
+- MR can also handle using qualitative variables as explanatory variables.
+- Two ways to include qualitative variables:
+  - Create a dummy for each category. 
+  - Let the software create the binary variables for you. 
+- You can only include $k-1$ dummies (dummy variable trap)
+  - Left out category is the reference category (Base).
+- `Stata Corner`
+  - `i.` in front of a variable tells Stata to treat it as a categorical variable. (makes dummies on the background): `reg lnwage i.educ`
+  - But, the categorical variable cannot be negative.
+
+## MR: Qualitative variables
+
+Say $X$ is a qualitative variable with $3$ categories: low, medium, and high.
+$$y^E = \beta_0 + \beta_1 D^{med} + \beta_2 D^{high}$$
+
+- **low** is the reference category. Other values compared to this.
+- $\beta_0$ shows average $y$ in the reference category. (medium and high $=0$)
+- $\beta_1$: Average difference between $D_{medium}$ and $D_low$
+- $\beta_2$: Average difference between $D_{high}$ and $D_low$
+
+## MR: How to pick a reference category?
+
+- Choose the category to which we want to compare the rest.
+  - Home country, the capital city, the lowest or highest value group.
+- Or, chose a category with a large number of observations.
+  - Important when inference is important, and SE are needed.
+- For prediction, it does not matter.
+
+## CS: Gender difference in earnings and education
+
+
+| Variables    |  ln wage  |  ln wage  | ln wage   |
+|--------------|:-----------:|:-----------:|:-----------:|
+| female       | -0.195**  | -0.182**  | -0.182**  |
+|              | (0.008)   | (0.009)   | (0.009)   |
+| ed_Profess   |           | 0.134**   | -0.002    |
+|              |           | (0.015)   | (0.018)   |
+| ed_PhD       |           | 0.136**   |           |
+|              |           | (0.013)   |           |
+| ed_MA        |           |           | -0.136**  |
+|              |           |           | (0.013)   |
+| Constant     | 3.514**   | 3.473**   | 3.609**   |
+|              | (0.006)   | (0.007)   | (0.013)   |
+| Observations | 18,241    | 18,241    | 18,241    |
+| R-squared    | 0.028     | 0.038     | 0.038     |
+ : {tbl-colwidths="[40,20,20,20]"}
+
+## MR: Interactions
+
+- Often data is made up of important groups: male and female workers or countries in different continents.
+- and, **Some** of the patterns we are after may vary across these groups.
+- The strength of a relation may also be altered by a special variable.
+  - In medicine, a moderator variable can reduce or amplify the effect of a drug on people.
+  - In business, financial strength can affect how firms may weather a recession.
+- **Message:** different patterns for subsets of observations.
+
+## MR: Interactions and parallel lines
+
+- **Option 1**: Simply the Dummy to the model
+  - $y^E = \beta_0 + \beta_1 x_1 + \beta_2 D$
+- This assumes $\beta_1$ is the same for both groups, only the intercepts are different.
+- **Option 2**: Different slopes
+  - $y^E = \beta_0 + \beta_1 x_1 + \beta_2 D + \beta_3 x_1 \times D$  
+- This now assumes slopes are different for both groups.
+- **Option 3**: Separate regressions
+  - But Option 2 is better for testing if slopes are different.
+
+## MR: Interaction with two continuous variable
+
+- Interactions can also be used with continuous variables, $x_1$ and $x_2$:
+$$y_E = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_1 x_2$$
+
+- Example:
+  - $y$ is change in revenue $x_1$ is change in global demand, $x_2$ is firm's financial health
+  - The interaction can capture that drop in demand can cause financial problems in firms, but less so for firms with better balance sheet.
+- Perhaps biggest challenge is to interpret a model with interactions.
+
+## MR: Interaction with two continuous variable
+
+- The interaction term $x_1 x_2$  captures how this two variables affect each others effect on $y$.
+  - Typically we assume this is zero.
+- The coefficient $\beta_3$ captures the magnitude of the interaction effect.
+- However, if you are interested in the relationship betwee $x_1$ or $x_2$ with $y$, you need extra care.
+  - $x_1$ on $y$ is $\frac{dy}{dx_1}=\beta_1 + \beta_3 x_2$.
+  - $x_2$ on $y$ is $\frac{dy}{dx_2}=\beta_2 + \beta_3 x_1$.  
+  - So you need to "fix" $x_2$ to see the effect of $x_1$ on $y$. (typically at the mean)
+
+
+## CS: Interaction between gender and age
+
+::: columns
+
+:::{.column width="50%"}
+
+- Separate, Earning for men rises faster with age
+- With interaction, Same result!.
+- Female dummy is close to zero. Does this mean no gender gap?
+  - No, Cumulative effect: $-0.036-0.003*age$
+
+:::
+
+:::{.column width="50%"}
+| Variables       | ln wage (Women) | ln wage (Men) | ln wage (All) |
+|-----------------|:---------------:|:-------------:|:-------------:|
+| **female**      |               |               | -0.036          |
+|                 |               |               | (0.035)         |
+| **age**         | 0.006**         | 0.009**       | 0.009**       |
+|                 | (0.001)         | (0.001)       | (0.001)       |
+| **female × age**|                |               |-0.003**        |
+|                 |                |               |(0.001)         |
+| **Constant**    | 3.081**         | 3.117**       | 3.117**       |
+|                 | (0.023)         | (0.026)       | (0.026)       |
+| **Observations**| 9,685           | 8,556         | 18,241        |
+| **R-squared**   | 0.011           | 0.028         | 0.047         |
+:::
+
+:::
+
+## MR: Stata corner
+
+- In `Stata` you can use `i.` to create dummies for all categories of a variable.
+- You can also use `#` to create interactions between variables.
+  - Unless specified, Stata assume variables are categorical.  You can use `c.` for continuous variables.
+- You can also use `##` to create interactions plus the main effects.
+
+```stata
+regress y i.x1##c.x2
+is equivalent to
+regress y i.x1 c.x2 i.x1#c.x2
+where i.x1 will create all dummies for x1
+```
+- If dummies and interactions are created this way you can use `margins` to calculate effects of main variables. 
+
+```stata
+margins, dydx(x1 x2)
+```
+
+# Conditioning and causality
+
+## MR: Causal analysis
+
+- One main reason to estimate multiple regressions is to get closer to a causal interpretation.
+- By conditioning on other observable variables, we can get closer to comparing similar objects – "apples to apples" – even in observational data.
+- **But** getting closer is not the same as getting there.
+- In principle, one could try conditioning on every potential confounder: variables that would affect $y$ and the causal variable $x_1$ at the same time.
+- Ceteris paribus = conditioning on every such relevant variable. (everything else constant).
+
+ 
+
+## MR: Causal analysis
+
+- In randomized experiments, we can use causal language: treated and untreated units similar - by random grouping.
+- In observational data, comparisons don't uncover causal relations.
+  - Cautious with language. Avoid use of "effect", "increase". But could use "associated with", "linked to".
+  - Regression, even with multiple $x$ is just comparison. Conditional mean.
+
+## MR: Causal analysis Don't overdo it
+
+- Not all variables should be included as control variables even if correlated both with the causal variable and the dependent variable.
+- **Bad conditioning** variables are variables that are correlated both with the causal variable and the dependent variable but are actually part of the causal mechanism.
+  - This is the reason to exclude them. 
+- Example, should you control for visit to the doctor when estimating the effect of health spending on health?
+  - No, because visiting the doctor is part of the causal mechanism.
+
+## MR: Causal analysis
+
+- A multiple regression on observational data is rarely capable of uncovering a causal relationship.
+  - Cannot capture all potential confounder. (Not ceteris paribus)
+  - Potential Bad conditioning variables (bad controls)
+  - We can never really know. 
+- Multiple regression can get us **closer** to uncovering a causal relationship
+  - Compare units that are the same in many respects - controls
+
+## CS: Understanding the gender difference in earnings
+
+| Variables               | ln wage (Model 1) | ln wage (Model 2) | ln wage (Model 3) | ln wage (Model 4) |
+|-------------------------|:-----------------:|:-----------------:|:-----------------:|:-----------------:|
+| **female**              | -0.224**          | -0.212**          | -0.151**          | -0.141**          |
+|                         | (0.012)           | (0.012)           | (0.012)           | (0.012)           |
+| **Age and education**   | |YES               | YES               | YES               |                   
+| **Family circumstances**|  |                 | YES               | YES               |                   
+| **Demographic background** | |                |                   | YES               |                  
+| **Job characteristics** |     |              |                   | YES               |                   
+| **Union member**        |      |             |                   | YES               |                   
+| **Age in polynomial**   |                   |                   |                   | YES               |
+| **Hours in polynomial** |                   |                   |                   | YES               |
+| **Observations**        | 9,816             | 9,816             | 9,816             | 9,816             |
+| **R-squared**           | 0.036             | 0.043             | 0.182             | 0.195             |
+
+More and more confounders added
+
+## Regression table detour
+
+- Regression table with many $x$ vars is hard to present
+- In presentation, **suppress** unimportant coefficients
+- In paper, you may present more, but mostly if you want to discuss them or for *sanity check*
+- **Sanity check**: do control variable coefficient make sense by and large?
+- Check $N$ of observations: if the same sample, should be exactly the same.
+- $R^2$ is enough, no need for other stuff (unless other methods are used)
+
+# Prediction
+
+## MR: Prediction and benchmarking
+
+- Second reason to estimate a multiple regression is to make a prediction
+  - find the best guess for the dependent variable $y_j$ for a particular observation $j$
+$$\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x_1 + \hat{\beta}_2 x_2 + \cdots$$
+
+- A $\hat{y} \ vs \ y$ Scatter plot is a good way to visualize the fit of a prediction.
+  - As well as identifying over or underpredictions.
+- We want the regression to produce as *good* a fit as possible.
+  - **A common danger**: Overfitting the data: finding patterns in the data that are not true in the population
+- We will discuss more about prediction in the next chapters.
+ 
+## MR: Variable selection
+
+- How should one decide which variables to include? and how?
+- Depends on the purpose: prediction or causality.
+ 
+General Advice:  
+
+- Lot of judgment calls: theory, data, and context.
+- Non-linear fit, use a non-parametric first and if non-linear, pick a model that is close - quadratic, piecewise spline.
+- If two or many variables strongly correlated, pick one of them.
+- Keep it as simple as possible: Parsimony is a virtue.
+
+## MR: Variable selection for causal questions
+
+- Causal question: $x$ impact on $y$. Having $z$ variables to condition on, to get closer to causality.
+- Our aim is to focus on the coefficient on one variable. What matters are the estimated value of the coefficient and its confidence interval. Not prediction.
+- Keep $z$ – keep variables that help comparing units
+- Drop $z$ if they not matter, or if they are part of the causal mechanism. (affected by $x$)
+  - Functional form for $z$ matters only for crucial confounders. (linear is fine)
+- Present the model you judge is best, and then report a few other solutions – robustness.
+
+## MR: Variable selection – process
+
+- Select control variables you want to include
+- Select functional form one by one
+- Focus on **key** variables by domain knowledge (theory), add the rest linearly
+- Key issue is sample size
+  - For 20-40 obs, about 1-2 variables.
+  - For 50-100 obs, about 2-4 variables
+  - Few hundred obs, 5-10 variables could work
+  - Few thousand obs, few dozen variables, including industry/country/profession etc dummmmies, interactions.
+  - 10-100K obs - many variables, polynomials, interactions
+
+## MR: Variable selection for prediction
+
+- If Prediction is the goal, keep whatever works
+- Balance is needed to ensure it works beyond the data at hand
+- **Overfitting**: building a model that captures some patterns that may fit the data in hand, but does not generalize well.
+- Focus on functional form, interactions
+- Value simplicity. Easier to explain, more robust.
+- Formal way: 
+  - BIC and AIC. Similar to R-squared but takes into account number of variables. The smaller, the better
+- You may use Adj R2, (although not perfect) to compare models.
+
+## Summary take-away
+
+- Multiple regression are linear models with several $x$ variables.
+- May include binary variables and interactions
+- Multiple regression can take us closer to a causal interpretation and help make better predictions.

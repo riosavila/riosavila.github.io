@@ -2,7 +2,7 @@
 title: "Research Methods I"
 subtitle: "Data Analysis for Economics and Policy"
 format: 
-    pdf:
+    pdf: 
         documentclass: article 
         number-sections: true
         margin-top: 1in
@@ -172,12 +172,10 @@ All homework assignments are required to be submitted in Quarto format, using Gi
 - **Weekly Problem Sets**: 30%
   - Small problem-sets of one or two questions to be completed and submitted in Quarto format using GitHub.
     This may include, data exploration and visualization, regressions and interpretation, and prediction.
+    It also includes the peer review of another student's work.
  
 - **Term Paper**: 60%
   - Multi-part research project applying techniques learned in class to real data.
-
-- **Referee Reports**: 5% (Extra Credit)
-  - Peer review of another student's work, providing constructive feedback, and suggestions for improvement.
 
 ## Term Paper (60% of final grade)
 
@@ -190,7 +188,7 @@ Throughout the semester, students will work on a multi-part research project tha
 - Expected findings and relevance
 - Conclusion
 - References (if any)
-- Specify which software (Stata or R) you plan to use for your analysis
+- Specify which software (if other than Stata) you plan to use for your analysis
 - Create a GitHub repository for your project and submit the link with your proposal
 
 ### Part II: Data Collection and Cleaning (10%, due Week 4)
@@ -203,23 +201,33 @@ Write a report that includes the following:
 - Preliminary analysis with descriptive statistics and visualizations
 - Include a data dictionary in your GitHub repository
 
+### Peer Review Report (due Week 5)
+
+- Review another student's work and provide feedback on their data collection and cleaning process. Provide suggestions for improvement and identify any potential issues.
+
 ### Interim Progress Report (5%, due Week 7)
 
 - Brief update on progress, challenges faced, and next steps
-- Preliminary visualizations or analyses
+- Additional visualizations or analyses
+- It should include a draft of literature review and methodology
+  - For the literature review include summaries for 3-5 papers related to your research question. 
+  - It should also include a draft of the methodology section, including the model specification.
 - Address any feedback received from the peer review in Part II
-  
+
 ### Part III: Data Analysis (15%, due Week 10)
+
+Present a draft for data analysis that includes the following:
 
 - Model specification discussion
 - Regression results presentation
 - Interpretation of results
-- Discuss Limitations and and robustness checks
-- Address any feedback received from the peer review in Part II
+- Discuss Limitations and robustness checks
 
-Peer Review (week 11): All work will be peer-reviewed by another student in the class. Feedback should be constructive and provide suggestions for improvement.
+### Peer Review Report (due week 11)
+  
+- Review another student's work and provide feedback on their data analysis. Provide suggestions for improvement and identify any potential issues.
 
-### Part IV: Final Report and Presentation (25%, due Week 14)
+### Part IV: Final Report and Presentation (20%, due Week 13)
 
 Complete research paper should include:
 
@@ -231,15 +239,19 @@ Complete research paper should include:
   - References
   - Appendices (if any)
 
+### Presentaton (5%, Week 14)
+
 - 15-minute presentation of your research to the class
 
 - See [here](https://github.com/riosavila/term-paper) for an example for the kind of report expected at each stage, based on the first research proposal on the impact of remote work on urban housing prices.
   
 ### Additional Requirements
 
-- You should submit a PDF of your report by the deadline
-- Your GitHub repository should include with all code, data, and the Quarto document for your report
-- At each stage, you should submit your work to GitHub to follow the progress of your project
+- All work should be submitted in Quarto format using GitHub.
+- Unless Data used is confidential or too large, you should include all data in your GitHub repository.
+- Your GitHub repository should include with all code, data (if possible), and the Quarto document for your report.
+- It should also include all papers used for the literature review.
+- At each stage, you should submit an email with the PDF and QMD files to the instructor, at or before the deadline. You should also *push* your work to GitHub to follow the progress of your project.
 
 ## Resources
 

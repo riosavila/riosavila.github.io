@@ -351,3 +351,26 @@ $selection-bg: #26351c !default;
 }
 
 // Highlighting tables
+
+.small-text{
+  font-size: 0.75em; // Adjust the size as needed
+  line-height: 1.2; // Optional: adjust line height for better readability
+}
+
+// for code blocks
+.reveal pre.sourceCode code {
+  /* height: 500px; */
+  max-height: 10000px;
+}
+.reveal pre code {
+  /*overflow: visible*/
+  max-height: 10000px;
+} 
+
+// table note
+
+.table-note {
+  display: flex;
+  font-size: 0.75em;
+  justify-content: center; /* Centers text horizontally */
+ }
