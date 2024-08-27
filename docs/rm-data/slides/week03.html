@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.56">
 
   <meta name="author" content="Fernando Rios-Avila">
-  <meta name="dcterms.date" content="2024-08-22">
+  <meta name="dcterms.date" content="2024-08-23">
   <title>Econometrics MSC Levy – Exploratory Analysis and Comparisons</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -408,7 +408,7 @@ Fernando Rios-Avila
     </div>
 </div>
 
-  <p class="date">August 22, 2024</p>
+  <p class="date">August 23, 2024</p>
 </section>
 <section id="motivation" class="slide level2">
 <h2>Motivation</h2>
@@ -527,7 +527,7 @@ Fernando Rios-Avila
 <h2>Hotel Stars histograms</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="832a5fbf" class="cell" data-execution_count="2">
+<div id="832a5fbf" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a></a><span class="kw">qui</span>:<span class="kw">histogram</span> stars, <span class="kw">d</span> <span class="kw">frequency</span> <span class="co">///</span></span>
@@ -543,7 +543,7 @@ Fernando Rios-Avila
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div id="c758f998" class="cell" data-execution_count="3">
+<div id="c758f998" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a><span class="kw">qui</span>:<span class="kw">histogram</span> stars, <span class="kw">d</span> <span class="kw">percent</span> <span class="co">///</span></span>
@@ -564,7 +564,7 @@ Fernando Rios-Avila
 <h2>Hotel price histograms</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="6ad4d9ef" class="cell" data-execution_count="4">
+<div id="6ad4d9ef" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a></a><span class="kw">qui</span>:<span class="kw">histogram</span> price, <span class="kw">d</span>  <span class="co">///</span></span>
@@ -580,7 +580,7 @@ Fernando Rios-Avila
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div id="36bdc240" class="cell" data-execution_count="5">
+<div id="36bdc240" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a></a><span class="kw">qui</span>:<span class="kw">histogram</span> price,  <span class="co">///</span></span>
@@ -616,7 +616,7 @@ Fernando Rios-Avila
 <ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Exmp1</a></li><li><a href="#tabset-1-2">Exmp2</a></li><li><a href="#tabset-1-3">Exmp3</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1">
-<div id="13873472" class="cell" data-execution_count="6">
+<div id="13873472" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a></a> *| <span class="kw">kdensity</span> price,   <span class="co">///</span></span>
@@ -625,7 +625,7 @@ Fernando Rios-Avila
 </div>
 </div>
 <div id="tabset-1-2">
-<div id="180e69b0" class="cell" data-execution_count="7">
+<div id="180e69b0" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a></a> <span class="kw">kdensity</span> price,   <span class="co">///</span></span>
@@ -642,7 +642,7 @@ Fernando Rios-Avila
 </div>
 </div>
 <div id="tabset-1-3">
-<div id="80e9457d" class="cell" data-execution_count="8">
+<div id="80e9457d" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a></a> <span class="kw">kdensity</span> price,   <span class="co">///</span></span>
@@ -858,7 +858,7 @@ Sk^1 = \frac{(\bar{x} - median(x))}{Std[x]} \text{ and } Sk^2 = \frac{\sum(x_i-\
 <ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Full Sample</a></li><li><a href="#tabset-2-2">By Stars</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1">
-<div id="6a78052c" class="cell" data-execution_count="9">
+<div id="6a78052c" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a></a><span class="kw">use</span> data_slides/hotels-vienna.dta, <span class="kw">clear</span></span>
@@ -877,7 +877,7 @@ Sk^1 = \frac{(\bar{x} - median(x))}{Std[x]} \text{ and } Sk^2 = \frac{\sum(x_i-\
 </div>
 </div>
 <div id="tabset-2-2">
-<div id="5c011404" class="cell" data-execution_count="10">
+<div id="5c011404" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a></a><span class="kw">use</span> data_slides/hotels-vienna.dta, <span class="kw">clear</span></span>
@@ -933,7 +933,7 @@ Sk^1 = \frac{(\bar{x} - median(x))}{Std[x]} \text{ and } Sk^2 = \frac{\sum(x_i-\
 <li>Symmetric = median, mean (and mode) are the same.</li>
 </ul>
 </div><div class="column" style="width:50%;">
-<div id="8362fdba" class="cell" data-execution_count="11">
+<div id="8362fdba" class="cell" data-execution_count="12">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -957,7 +957,7 @@ Sk^1 = \frac{(\bar{x} - median(x))}{Std[x]} \text{ and } Sk^2 = \frac{\sum(x_i-\
 <li>Example distributions of income, or firm size.</li>
 </ul>
 </div><div class="column" style="width:50%;">
-<div id="670b6b26" class="cell" data-execution_count="12">
+<div id="670b6b26" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-stdout">
 <pre><code>Number of observations (_N) was 0, now 10,000.
 (bin=40, start=.79124224, width=1.5880267)</code></pre>
@@ -1158,7 +1158,7 @@ Sk^1 = \frac{(\bar{x} - median(x))}{Std[x]} \text{ and } Sk^2 = \frac{\sum(x_i-\
 <li>With quantitative variables, this definition is less intuitive.</li>
 </ul>
 </div><div class="column" style="width:50%;">
-<div id="863e93ce" class="cell" data-execution_count="13">
+<div id="863e93ce" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a></a><span class="kw">qui</span>: <span class="kw">use</span> <span class="st">"data_slides/hotels-vienna-london"</span>, <span class="kw">clear</span></span>
@@ -1221,7 +1221,7 @@ Sk^1 = \frac{(\bar{x} - median(x))}{Std[x]} \text{ and } Sk^2 = \frac{\sum(x_i-\
 <h2>Case Study - Management quality and firm size</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="724e5e1b" class="cell" data-tbl-align="center" data-execution_count="15">
+<div id="724e5e1b" class="cell" data-tbl-align="center" data-execution_count="16">
 <table class="caption-top">
 <thead>
 <tr class="header">
@@ -1266,7 +1266,7 @@ Sk^1 = \frac{(\bar{x} - median(x))}{Std[x]} \text{ and } Sk^2 = \frac{\sum(x_i-\
 </table>
 </div>
 </div><div class="column" style="width:50%;">
-<div id="6c6aeb04" class="cell" data-tbl-align="center" data-execution_count="16">
+<div id="6c6aeb04" class="cell" data-tbl-align="center" data-execution_count="17">
 <table class="caption-top">
 <colgroup>
 <col style="width: 20%">
@@ -1366,7 +1366,7 @@ Sk^1 = \frac{(\bar{x} - median(x))}{Std[x]} \text{ and } Sk^2 = \frac{\sum(x_i-\
 <h2>Case Study - Management quality and firm size</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="026ab310" class="cell" data-execution_count="17">
+<div id="026ab310" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a></a><span class="kw">scatter</span> management emp_firm, <span class="bn">xtitle</span>(<span class="st">"Firm size"</span>) <span class="bn">ytitle</span>(<span class="st">"Management score"</span>) <span class="co">///</span></span>
@@ -1381,7 +1381,7 @@ Sk^1 = \frac{(\bar{x} - median(x))}{Std[x]} \text{ and } Sk^2 = \frac{\sum(x_i-\
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div id="600d2488" class="cell" data-execution_count="18">
+<div id="600d2488" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb17-1"><a></a><span class="kw">sort</span> emp_firm</span>
@@ -1427,7 +1427,7 @@ variable emp_mean_bin not found</code></pre>
 <ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Model Based Scatterplot</a></li><li><a href="#tabset-3-2">Scale Change</a></li></ul>
 <div class="tab-content">
 <div id="tabset-3-1">
-<div id="361fed4c" class="cell" data-execution_count="19">
+<div id="361fed4c" class="cell" data-execution_count="20">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb19-1"><a></a><span class="kw">two</span> (<span class="kw">scatter</span> management emp_firm) <span class="co">///</span></span>
@@ -1445,7 +1445,7 @@ variable emp_mean_bin not found</code></pre>
 </div>
 </div>
 <div id="tabset-3-2">
-<div id="27a7f401" class="cell" data-execution_count="20">
+<div id="27a7f401" class="cell" data-execution_count="21">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb20-1"><a></a><span class="kw">scatter</span> management emp_firm, <span class="co">///</span></span>
@@ -1730,7 +1730,7 @@ variable emp_mean_bin not found</code></pre>
 </section>
 <section id="stata-corner" class="slide level2">
 <h2>Stata Corner</h2>
-<div id="0119b75b" class="cell" data-execution_count="21">
+<div id="0119b75b" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb22-1"><a></a><span class="kw">use</span> <span class="st">"data_slides\wb-mx-management.dta"</span>, <span class="kw">clear</span></span>
 <span id="cb22-2"><a></a>** Simple <span class="kw">mean</span></span>
 <span id="cb22-3"><a></a><span class="kw">egen</span> mng_mean = <span class="fu">rowmean</span>(perf* talent* lean*)</span>

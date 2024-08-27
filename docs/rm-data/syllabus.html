@@ -263,9 +263,12 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#part-i-research-proposal-5-due-week-2" id="toc-part-i-research-proposal-5-due-week-2" class="nav-link" data-scroll-target="#part-i-research-proposal-5-due-week-2">Part I: Research Proposal (5%, due Week 2)</a></li>
   <li><a href="#part-ii-data-collection-and-cleaning-10-due-week-4" id="toc-part-ii-data-collection-and-cleaning-10-due-week-4" class="nav-link" data-scroll-target="#part-ii-data-collection-and-cleaning-10-due-week-4">Part II: Data Collection and Cleaning (10%, due Week 4)</a></li>
+  <li><a href="#peer-review-report-due-week-5" id="toc-peer-review-report-due-week-5" class="nav-link" data-scroll-target="#peer-review-report-due-week-5">Peer Review Report (due Week 5)</a></li>
   <li><a href="#interim-progress-report-5-due-week-7" id="toc-interim-progress-report-5-due-week-7" class="nav-link" data-scroll-target="#interim-progress-report-5-due-week-7">Interim Progress Report (5%, due Week 7)</a></li>
   <li><a href="#part-iii-data-analysis-15-due-week-10" id="toc-part-iii-data-analysis-15-due-week-10" class="nav-link" data-scroll-target="#part-iii-data-analysis-15-due-week-10">Part III: Data Analysis (15%, due Week 10)</a></li>
-  <li><a href="#part-iv-final-report-and-presentation-25-due-week-14" id="toc-part-iv-final-report-and-presentation-25-due-week-14" class="nav-link" data-scroll-target="#part-iv-final-report-and-presentation-25-due-week-14">Part IV: Final Report and Presentation (25%, due Week 14)</a></li>
+  <li><a href="#peer-review-report-due-week-11" id="toc-peer-review-report-due-week-11" class="nav-link" data-scroll-target="#peer-review-report-due-week-11">Peer Review Report (due week 11)</a></li>
+  <li><a href="#part-iv-final-report-and-presentation-20-due-week-13" id="toc-part-iv-final-report-and-presentation-20-due-week-13" class="nav-link" data-scroll-target="#part-iv-final-report-and-presentation-20-due-week-13">Part IV: Final Report and Presentation (20%, due Week 13)</a></li>
+  <li><a href="#presentaton-5-week-14" id="toc-presentaton-5-week-14" class="nav-link" data-scroll-target="#presentaton-5-week-14">Presentaton (5%, Week 14)</a></li>
   <li><a href="#additional-requirements" id="toc-additional-requirements" class="nav-link" data-scroll-target="#additional-requirements">Additional Requirements</a></li>
   </ul></li>
   <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
@@ -374,7 +377,6 @@ Important
 <li>Preparing data for analysis</li>
 <li>Tidy data principles</li>
 <li>Data cleaning: Missing values, outliers, and errors</li>
-<li><strong>Lab</strong>: Introduction to Stata, and Quarto</li>
 <li><strong>Readings</strong>: Chapter 1 and 2</li>
 </ul>
 </section>
@@ -400,7 +402,6 @@ Important
 <li>Hypothesis testing principles</li>
 <li>Type I and Type II errors</li>
 <li>Multiple Hypothesis Testing and p-hacking</li>
-<li><strong>Lab</strong>: Conducting hypothesis tests in Stata</li>
 <li><strong>Readings</strong>: Chapters 5 and 6</li>
 </ul>
 </section>
@@ -415,9 +416,7 @@ Important
 <li>Extreme values, Influential observations and measurement error</li>
 <li>Generalizing Results: SE and CI</li>
 <li>Testing Hypotheses</li>
-<li>Presenting Results</li>
 <li><strong>Readings</strong>: Chapters 7, 8, and 9</li>
-<li><strong>Lab</strong>: Simple regression analysis in Stata: Interpretation and presentation of results</li>
 </ul>
 </section>
 <section id="regression-analysis-ii-multiple-regression" class="level2">
@@ -437,7 +436,6 @@ Important
 <li>Interpretation and marginal effects</li>
 <li>Goodness of Fit and Predictive Power</li>
 <li><strong>Readings</strong>: Chapter 11</li>
-<li><strong>Lab</strong>: Multiple regression analysis and Probability models</li>
 </ul>
 </section>
 <section id="time-series-analysis" class="level2">
@@ -448,7 +446,6 @@ Important
 <li>Stationarity and autocorrelation</li>
 <li>Serial correlation</li>
 <li><strong>Readings</strong>: Chapter 12</li>
-<li><strong>Lab</strong>: Using time series data</li>
 </ul>
 </section>
 <section id="prediction" class="level2">
@@ -469,7 +466,6 @@ Important
 <li>Working with <span class="math inline">\(X's\)</span></li>
 <li>Introduction to LASSO: Prediction and Diagnosis</li>
 <li><strong>Readings</strong>: Chapter 14</li>
-<li><strong>Lab</strong>: Prediction and LASSO in Stata</li>
 </ul>
 </section>
 <section id="predicting-probabilities-and-classification" class="level2">
@@ -502,15 +498,11 @@ Important
 </ul></li>
 <li><strong>Weekly Problem Sets</strong>: 30%
 <ul>
-<li>Small problem-sets to be completed and submitted in Quarto format using GitHub. This may include, data exploration and visualization, regressions and interpretation, and prediction.</li>
+<li>Small problem-sets of one or two questions to be completed and submitted in Quarto format using GitHub. This may include, data exploration and visualization, regressions and interpretation, and prediction. It also includes the peer review of another student’s work.</li>
 </ul></li>
 <li><strong>Term Paper</strong>: 60%
 <ul>
 <li>Multi-part research project applying techniques learned in class to real data.</li>
-</ul></li>
-<li><strong>Referee Reports</strong>: 5% (Extra Credit)
-<ul>
-<li>Peer review of another student’s work, providing constructive feedback, and suggestions for improvement.</li>
 </ul></li>
 </ul>
 <section id="term-paper-60-of-final-grade" class="level2">
@@ -524,7 +516,7 @@ Important
 <li>Expected findings and relevance</li>
 <li>Conclusion</li>
 <li>References (if any)</li>
-<li>Specify which software (Stata or R) you plan to use for your analysis</li>
+<li>Specify which software (if other than Stata) you plan to use for your analysis</li>
 <li>Create a GitHub repository for your project and submit the link with your proposal</li>
 </ul>
 </section>
@@ -538,47 +530,70 @@ Important
 <li>Preliminary analysis with descriptive statistics and visualizations</li>
 <li>Include a data dictionary in your GitHub repository</li>
 </ul>
-<p>Peer Review: All work will be peer-reviewed by another student in the class. Feedback should be constructive and provide suggestions for improvement.</p>
+</section>
+<section id="peer-review-report-due-week-5" class="level3">
+<h3 class="anchored" data-anchor-id="peer-review-report-due-week-5">Peer Review Report (due Week 5)</h3>
+<ul>
+<li>Review another student’s work and provide feedback on their data collection and cleaning process. Provide suggestions for improvement and identify any potential issues.</li>
+</ul>
 </section>
 <section id="interim-progress-report-5-due-week-7" class="level3">
 <h3 class="anchored" data-anchor-id="interim-progress-report-5-due-week-7">Interim Progress Report (5%, due Week 7)</h3>
 <ul>
 <li>Brief update on progress, challenges faced, and next steps</li>
-<li>Preliminary visualizations or analyses</li>
+<li>Additional visualizations or analyses</li>
+<li>It should include a draft of literature review and methodology
+<ul>
+<li>For the literature review include summaries for 3-5 papers related to your research question.</li>
+<li>It should also include a draft of the methodology section, including the model specification.</li>
+</ul></li>
 <li>Address any feedback received from the peer review in Part II</li>
 </ul>
 </section>
 <section id="part-iii-data-analysis-15-due-week-10" class="level3">
 <h3 class="anchored" data-anchor-id="part-iii-data-analysis-15-due-week-10">Part III: Data Analysis (15%, due Week 10)</h3>
+<p>Present a draft for data analysis that includes the following:</p>
 <ul>
 <li>Model specification discussion</li>
 <li>Regression results presentation</li>
 <li>Interpretation of results</li>
-<li>Discuss Limitations and and robustness checks</li>
-<li>Address any feedback received from the peer review in Part II</li>
+<li>Discuss Limitations and robustness checks</li>
 </ul>
-<p>Peer Review: All work will be peer-reviewed by another student in the class. Feedback should be constructive and provide suggestions for improvement.</p>
 </section>
-<section id="part-iv-final-report-and-presentation-25-due-week-14" class="level3">
-<h3 class="anchored" data-anchor-id="part-iv-final-report-and-presentation-25-due-week-14">Part IV: Final Report and Presentation (25%, due Week 14)</h3>
+<section id="peer-review-report-due-week-11" class="level3">
+<h3 class="anchored" data-anchor-id="peer-review-report-due-week-11">Peer Review Report (due week 11)</h3>
 <ul>
-<li>Complete research paper including all previous sections plus:
+<li>Review another student’s work and provide feedback on their data analysis. Provide suggestions for improvement and identify any potential issues.</li>
+</ul>
+</section>
+<section id="part-iv-final-report-and-presentation-20-due-week-13" class="level3">
+<h3 class="anchored" data-anchor-id="part-iv-final-report-and-presentation-20-due-week-13">Part IV: Final Report and Presentation (20%, due Week 13)</h3>
+<p>Complete research paper should include:</p>
 <ul>
+<li>Introduction</li>
 <li>Literature Review</li>
+<li>Data and Methodology</li>
 <li>Robustness Checks or Sensitivity/Sub-group Analysis</li>
 <li>Conclusion</li>
 <li>References</li>
 <li>Appendices (if any)</li>
-</ul></li>
-<li>15-minute presentation of your research to the class</li>
+</ul>
+</section>
+<section id="presentaton-5-week-14" class="level3">
+<h3 class="anchored" data-anchor-id="presentaton-5-week-14">Presentaton (5%, Week 14)</h3>
+<ul>
+<li><p>15-minute presentation of your research to the class</p></li>
+<li><p>See <a href="https://github.com/riosavila/term-paper">here</a> for an example for the kind of report expected at each stage, based on the first research proposal on the impact of remote work on urban housing prices.</p></li>
 </ul>
 </section>
 <section id="additional-requirements" class="level3">
 <h3 class="anchored" data-anchor-id="additional-requirements">Additional Requirements</h3>
 <ul>
-<li>You should submit a PDF of your report by the deadline</li>
-<li>Your GitHub repository should include with all code, data, and the Quarto document for your report</li>
-<li>At each stage, you should submit your work to GitHub to follow the progress of your project</li>
+<li>All work should be submitted in Quarto format using GitHub.</li>
+<li>Unless Data used is confidential or too large, you should include all data in your GitHub repository.</li>
+<li>Your GitHub repository should include with all code, data (if possible), and the Quarto document for your report.</li>
+<li>It should also include all papers used for the literature review.</li>
+<li>At each stage, you should submit an email with the PDF and QMD files to the instructor, at or before the deadline. You should also <em>push</em> your work to GitHub to follow the progress of your project.</li>
 </ul>
 </section>
 </section>

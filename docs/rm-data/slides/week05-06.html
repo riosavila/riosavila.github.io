@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.56">
 
   <meta name="author" content="Fernando Rios-Avila">
-  <meta name="dcterms.date" content="2024-08-21">
+  <meta name="dcterms.date" content="2024-08-23">
   <title>Econometrics MSC Levy – Regression Analysis I</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -409,7 +409,7 @@ Fernando Rios-Avila
     </div>
 </div>
 
-  <p class="date">August 21, 2024</p>
+  <p class="date">August 23, 2024</p>
 </section>
 <section id="regression" class="slide level2">
 <h2>Regression</h2>
@@ -527,7 +527,7 @@ Fernando Rios-Avila
 </section>
 <section id="case-study-finding-a-good-deal-among-hotels" class="slide level2">
 <h2>Case Study: Finding a good deal among hotels</h2>
-<div id="f35d0e42" class="cell" data-execution_count="1">
+<div id="f35d0e42" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a></a><span class="kw">set</span> <span class="dv">scheme</span> white2</span>
@@ -642,7 +642,7 @@ Fernando Rios-Avila
 <li>It gives the best line by minimizing the squared of the model errors.</li>
 </ul>
 </div><div class="column" style="width:50%;">
-<div id="fe94b9f7" class="cell" data-execution_count="2">
+<div id="fe94b9f7" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a></a><span class="kw">clear</span> </span>
@@ -681,7 +681,7 @@ Fernando Rios-Avila
 </section>
 <section id="case-study-finding-a-good-deal-among-hotels-1" class="slide level2">
 <h2>Case Study: Finding a good deal among hotels</h2>
-<div id="0854ff5d" class="cell" data-execution_count="3">
+<div id="0854ff5d" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a><span class="kw">use</span> data_slides/hotels-vienna.dta, <span class="kw">clear</span></span>
@@ -725,7 +725,7 @@ Fernando Rios-Avila
 </section>
 <section id="case-study-finding-a-good-deal-among-hotels-2" class="slide level2">
 <h2>Case Study: Finding a good deal among hotels</h2>
-<div id="4ceda2cc" class="cell" data-execution_count="4">
+<div id="4ceda2cc" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a></a><span class="kw">qui</span>:drop2 pr_hat res</span>
@@ -1213,13 +1213,13 @@ variable res not found
 <li>You need to create all necessary variables, given your knots.</li>
 <li>Say we choose knots 1 and 2 for the price analysis</li>
 </ul>
-<div id="58dd4784" class="cell" data-execution_count="6">
+<div id="58dd4784" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a></a>*              v Knot  v knot2</span>
 <span id="cb7-2"><a></a><span class="kw">mkspline</span> dist1 1 dist2 2 dist3= distance  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-2-2">
-<div id="df681258" class="cell" data-execution_count="7">
+<div id="df681258" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a></a><span class="kw">regress</span> price dist1 dist2 dist3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1301,7 +1301,7 @@ variable res not found
 </section>
 <section id="life-expectancy-and-income-1" class="slide level2">
 <h2>Life expectancy and income</h2>
-<div id="fbf42fbc" class="cell" data-execution_count="8">
+<div id="fbf42fbc" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a></a><span class="kw">use</span> data_slides/wb-lifeexpectancy.dta, <span class="kw">clear</span></span>
 <span id="cb10-2"><a></a><span class="kw">keep</span> <span class="kw">if</span> <span class="fu">year</span> == 2017</span>
 <span id="cb10-3"><a></a><span class="kw">sum</span> gdppc lifeexp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1321,7 +1321,7 @@ variable res not found
 <ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Life Exp vs GDPpc</a></li><li><a href="#tabset-3-2">Life Exp vs Log GDPpc</a></li><li><a href="#tabset-3-3">Regression</a></li><li><a href="#tabset-3-4">Interesting Findings</a></li></ul>
 <div class="tab-content">
 <div id="tabset-3-1">
-<div id="2dc636ab" class="cell" data-execution_count="9">
+<div id="2dc636ab" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a></a><span class="kw">scatter</span> lifeexp gdppc, <span class="kw">scale</span>(1.4) <span class="co">///</span></span>
@@ -1338,7 +1338,7 @@ variable res not found
 </div>
 </div>
 <div id="tabset-3-2">
-<div id="b62b7db8" class="cell" data-execution_count="10">
+<div id="b62b7db8" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a></a><span class="kw">scatter</span> lifeexp gdppc, <span class="kw">scale</span>(1.4) <span class="co">///</span></span>
@@ -1355,7 +1355,7 @@ variable res not found
 </div>
 </div>
 <div id="tabset-3-3">
-<div id="dd5a6052" class="cell" data-execution_count="11">
+<div id="dd5a6052" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a></a><span class="kw">gen</span> log_gdp = <span class="fu">log</span>(gdppc)</span>
 <span id="cb14-2"><a></a><span class="kw">regress</span> lifeexp log_gdp</span>
 <span id="cb14-3"><a></a><span class="kw">predict</span> <span class="kw">resid</span>, res</span>
@@ -1381,7 +1381,7 @@ variable res not found
 </div>
 </div>
 <div id="tabset-3-4">
-<div id="3fadceff" class="cell" data-execution_count="12">
+<div id="3fadceff" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a></a><span class="ot">list</span> countryname lifeexp gdppc life_hat <span class="kw">if</span> <span class="fu">inrange</span>(<span class="dt">_n</span>,1,5) | <span class="fu">inrange</span>(<span class="dt">_n</span>,178,182) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1642,7 +1642,7 @@ Extreme values! and influential observations! Not everything is as it seems</p>
 </section>
 <section id="life-expectancy-and-gdp-per-capita---weights" class="slide level2">
 <h2>Life expectancy and GDP per capita - weights</h2>
-<div id="121a300e" class="cell" data-execution_count="13">
+<div id="121a300e" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a></a><span class="kw">qui</span>: <span class="kw">reg</span> lifeexp log_gdp [<span class="fu">w</span>=population ]</span>
@@ -1973,7 +1973,7 @@ Extreme values! and influential observations! Not everything is as it seems</p>
 </section>
 <section id="prediction-interval-2" class="slide level2">
 <h2>Prediction interval</h2>
-<div id="d6edaf32" class="cell" data-execution_count="14">
+<div id="d6edaf32" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb20-1"><a></a><span class="kw">qui</span>:<span class="kw">ssc</span> install frause,</span>
