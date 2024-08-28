@@ -2293,7 +2293,7 @@
     "href": "rm-data/syllabus.html#term-paper-60-of-final-grade",
     "title": "Research Methods I",
     "section": "Term Paper (60% of final grade)",
-    "text": "Term Paper (60% of final grade)\nThroughout the semester, students will work on a multi-part research project that applies the techniques learned in class to real-world data. This project will require students to propose a research question, collect and clean data, conduct exploratory and regression analyses, and present their findings.\n\nPart I: Research Proposal (5%, due Week 2)\n\nIntroduction (including research question and motivation)\nProposed data sources: Consider data from the textbook, Kaggle, or other sources\nExpected findings and relevance\nConclusion\nReferences (if any)\nSpecify which software (if other than Stata) you plan to use for your analysis\nCreate a GitHub repository for your project and submit the link with your proposal\n\n\n\nPart II: Data Collection and Cleaning (10%, due Week 4)\nWrite a report that includes the following:\n\nDescription of data sources, collection methods, and potential biases\nData overview and preprocessing steps\nDiscussion of issues encountered and solutions\nPreliminary analysis with descriptive statistics and visualizations\nInclude a data dictionary in your GitHub repository\n\n\n\nPeer Review Report (due Week 5)\n\nReview another student’s work and provide feedback on their data collection and cleaning process. Provide suggestions for improvement and identify any potential issues.\n\n\n\nInterim Progress Report (5%, due Week 7)\n\nBrief update on progress, challenges faced, and next steps\nAdditional visualizations or analyses\nIt should include a draft of literature review and methodology\n\nFor the literature review include summaries for 3-5 papers related to your research question.\nIt should also include a draft of the methodology section, including the model specification.\n\nAddress any feedback received from the peer review in Part II\n\n\n\nPart III: Data Analysis (15%, due Week 10)\nPresent a draft for data analysis that includes the following:\n\nModel specification discussion\nRegression results presentation\nInterpretation of results\nDiscuss Limitations and robustness checks\n\n\n\nPeer Review Report (due week 11)\n\nReview another student’s work and provide feedback on their data analysis. Provide suggestions for improvement and identify any potential issues.\n\n\n\nPart IV: Final Report and Presentation (20%, due Week 13)\nComplete research paper should include:\n\nIntroduction\nLiterature Review\nData and Methodology\nRobustness Checks or Sensitivity/Sub-group Analysis\nConclusion\nReferences\nAppendices (if any)\n\n\n\nPresentaton (5%, Week 14)\n\n15-minute presentation of your research to the class\nSee here for an example for the kind of report expected at each stage, based on the first research proposal on the impact of remote work on urban housing prices.\n\n\n\nAdditional Requirements\n\nAll work should be submitted in Quarto format using GitHub.\nUnless Data used is confidential or too large, you should include all data in your GitHub repository.\nYour GitHub repository should include with all code, data (if possible), and the Quarto document for your report.\nIt should also include all papers used for the literature review.\nAt each stage, you should submit an email with the PDF and QMD files to the instructor, at or before the deadline. You should also push your work to GitHub to follow the progress of your project."
+    "text": "Term Paper (60% of final grade)\nThroughout the semester, students will work on a multi-part research project that applies the techniques learned in class to real-world data. This project will require students to propose a research question, collect and clean data, conduct exploratory and regression analyses, and present their findings.\n\nPart I: Research Proposal (5%, due Week 2)\n\nIntroduction (including research question and motivation)\nProposed data sources: Consider data from the textbook, Kaggle, or other sources\nExpected findings and relevance\nConclusion\nReferences (if any)\nSpecify which software (if other than Stata) you plan to use for your analysis\nCreate a GitHub repository for your project and submit the link with your proposal\n\n\n\nPart II: Data Collection and Cleaning (10%, due Week 4)\nWrite a report that includes the following:\n\nDescription of data sources, collection methods, and potential biases\nData overview and preprocessing steps\nDiscussion of issues encountered and solutions\nPreliminary analysis with descriptive statistics and visualizations\nInclude a data dictionary in your GitHub repository\n\n\n\nPeer Review Report (due Week 5)\n\nReview another student’s work and provide feedback on their data collection and cleaning process. Provide suggestions for improvement and identify any potential issues.\n\n\n\nInterim Progress Report (5%, due Week 7)\n\nBrief update on progress, challenges faced, and next steps\nAdditional visualizations or analyses\nIt should include a draft of literature review and methodology\n\nFor the literature review include summaries for 3-5 papers related to your research question.\nIt should also include a draft of the methodology section, including the model specification.\n\nAddress any feedback received from the peer review in Part II\n\n\n\nPart III: Data Analysis (15%, due Week 10)\nPresent a draft for data analysis that includes the following:\n\nModel specification discussion\nRegression results presentation\nInterpretation of results\nDiscuss Limitations and robustness checks\n\n\n\nPeer Review Report (due week 11)\n\nReview another student’s work and provide feedback on their data analysis. Provide suggestions for improvement and identify any potential issues.\n\n\n\nPart IV: Final Report (20%, due Week 13)\nComplete research paper should include:\n\nIntroduction\nLiterature Review\nData and Methodology\nRobustness Checks or Sensitivity/Sub-group Analysis\nConclusion\nReferences\nAppendices (if any)\n\n\n\nPresentaton (5%, Week 14)\n\n15-minute presentation of your research to the class\nSee here for an example for the kind of report expected at each stage, based on the first research proposal on the impact of remote work on urban housing prices.\n\n\n\nAdditional Requirements\n\nAll work should be submitted in Quarto format using GitHub.\nUnless Data used is confidential or too large, you should include all data in your GitHub repository.\nYour GitHub repository should include with all code, data (if possible), and the Quarto document for your report.\nIt should also include all papers used for the literature review.\nAt each stage, you should submit an email with the PDF and QMD files to the instructor, at or before the deadline. You should also push your work to GitHub to follow the progress of your project."
   },
   {
     "objectID": "rm-data/syllabus.html#resources",
@@ -3625,133 +3625,133 @@
   {
     "objectID": "mathref/math_2.html#vectors",
     "href": "mathref/math_2.html#vectors",
-    "title": "Math Refresher: Basic Linear Algebra",
-    "section": "",
-    "text": "A vector is a list of numbers. We can think of a vector as a point in space, or as an arrow pointing from the origin to that point. For example, the vector\n\\[\\vec{v} = \\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix}\\] is a vector in \\(\\mathbb{R}^3\\) (three-dimensional space) that points from the origin to the point \\((1, 2, 3)\\).\nWe can add vectors together by adding their corresponding elements. For example,\n\\[\\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix} + \\begin{bmatrix} 4 \\\\ 5 \\\\ 6 \\end{bmatrix} = \\begin{bmatrix} 5 \\\\ 7 \\\\ 9 \\end{bmatrix}\\]\nWe can also multiply a vector by a scalar (a single number) by multiplying each element of the vector by that number. For example,\n\\[2 \\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix} = \\begin{bmatrix} 2 \\\\ 4 \\\\ 6 \\end{bmatrix}\n\\]",
+    "title": "Math Refresher",
+    "section": "Vectors",
+    "text": "Vectors\nA vector is a list of numbers. We can think of a vector as a point in space, or as an arrow pointing from the origin to that point. For example, the vector\n\\[\\vec{v} = \\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix}\\]\nis a vector in \\(\\mathbb{R}^3\\) (three-dimensional space) that points from the origin to the point \\((1, 2, 3)\\).",
     "crumbs": [
       "Home",
       "Math Refresher",
-      "Math Refresher: Basic Linear Algebra"
+      "Math Refresher"
     ]
   },
   {
     "objectID": "mathref/math_2.html#matrices",
     "href": "mathref/math_2.html#matrices",
-    "title": "Math Refresher: Basic Linear Algebra",
+    "title": "Math Refresher",
     "section": "Matrices",
-    "text": "Matrices\nA matrix is a two-dimensional array of numbers. We can think of a matrix as a list of vectors. For example, the matrix:\n\\[A = \\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{bmatrix} =\n\\begin{bmatrix} 1 \\\\ 4  \\end{bmatrix},\n\\begin{bmatrix} 2 \\\\ 5  \\end{bmatrix},\n\\begin{bmatrix} 3 \\\\ 6  \\end{bmatrix} \\]\nis a matrix that concatenates 3 \\(\\mathbb{R}^2\\) vectors together.\nMatrices can have different dimensions. For example, the matrix:\n\\[B = \\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\\\ 7 & 8 & 9 \\end{bmatrix}\\]\nis a square matrix that concatenates 3 \\(\\mathbb{R}^3\\) vectors together.",
+    "text": "Matrices\nA matrix is a two-dimensional array of numbers. We can think of a matrix as a list of vectors. For example, the matrix:\n\\[A = \\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{bmatrix} =\n\\begin{bmatrix} 1 \\\\ 4  \\end{bmatrix},\n\\begin{bmatrix} 2 \\\\ 5  \\end{bmatrix},\n\\begin{bmatrix} 3 \\\\ 6  \\end{bmatrix}\n\\]\nis a matrix that concatenates 3 \\(\\mathbb{R}^2\\) vectors together.\nMatrices can have different dimensions. For example, the matrix:\n\\[B = \\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\\\ 7 & 8 & 9 \\end{bmatrix}\\]\nis a square matrix that concatenates 3 \\(\\mathbb{R}^3\\) vectors together.",
     "crumbs": [
       "Home",
       "Math Refresher",
-      "Math Refresher: Basic Linear Algebra"
+      "Math Refresher"
     ]
   },
   {
     "objectID": "mathref/math_2.html#matrix-dimensions",
     "href": "mathref/math_2.html#matrix-dimensions",
-    "title": "Math Refresher: Basic Linear Algebra",
+    "title": "Math Refresher",
     "section": "Matrix Dimensions",
-    "text": "Matrix Dimensions\nMatrices are often denoted by their dimensions. For example, the matrix \\(A\\) above is a \\(2 \\times 3\\) matrix, because it has 2 rows and 3 columns. The matrix \\(B\\) above is a \\(3 \\times 3\\) matrix, because it has 3 rows and 3 columns.\nIn general, we can denote a matrix \\(M\\) with \\(r\\) rows and \\(c\\) columns as an \\(r \\times c\\) matrix. For Notation, I will usually refer to this like \\(M_{r \\times c}\\). In this case we have \\(A_{2 \\times 3}\\) and \\(B_{3 \\times 3}\\).\nWe can denote the element in the \\(i\\)th row and \\(j\\)th column of \\(M\\) as \\(M_{ij}\\). For example, the element in the 2nd row and 3rd column of \\(B\\) is \\(B_{23} = 6\\).",
+    "text": "Matrix Dimensions\nMatrices are often denoted by their dimensions.\n\nFor example, the matrix \\(A\\) above is a \\(2 \\times 3\\) matrix, because it has 2 rows and 3 columns.\n\nThe matrix \\(B\\) above is a \\(3 \\times 3\\) matrix, because it has 3 rows and 3 columns.\n\nIn general, we can denote a matrix \\(M\\) with \\(r\\) rows and \\(c\\) columns as an \\(r \\times c\\) matrix.\n\nFor Notation, I will usually refer to this like \\(M_{r \\times c}\\). In this case we have \\(A_{2 \\times 3}\\) and \\(B_{3 \\times 3}\\).\nWe can denote the element in the \\(i\\)th row and \\(j\\)th column of \\(M\\) as \\(M_{ij}\\). For example, the element in the 2nd row and 3rd column of \\(B\\) is \\(B_{23} = 6\\).",
     "crumbs": [
       "Home",
       "Math Refresher",
-      "Math Refresher: Basic Linear Algebra"
+      "Math Refresher"
     ]
   },
   {
     "objectID": "mathref/math_2.html#special-matrices",
     "href": "mathref/math_2.html#special-matrices",
-    "title": "Math Refresher: Basic Linear Algebra",
+    "title": "Math Refresher",
     "section": "Special Matrices",
-    "text": "Special Matrices\nThere are a few special matrices that we will use often. The zero matrix is a matrix where all of the elements are 0. For example, the zero matrix with 2 rows and 3 columns is:\n\\[Zero=\\begin{bmatrix} 0 & 0 & 0 \\\\ 0 & 0 & 0 \\end{bmatrix}\\]\nA square matrix is a matrix where the number of rows is equal to the number of columns. For example, \\(B\\) is a square matrix.\nThe identity matrix is a square matrix where all of the elements are 0, except for the elements along the diagonal, which are 1. For example, the identity matrix with 3 rows and 3 columns is:\n\\[I_{3}=\\begin{bmatrix} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\end{bmatrix}\\]\nFor simplicitly, we will use the subscript to denote the size of the identity matrix. For example, \\(I_{3}\\) is a 3x3 identity matrix, and \\(I_{5}\\) is a 5x5 identity matrix.\nA \\(1\\times c\\) matrix is called a row vector. Wheras a \\(r \\times 1\\) matrix is called a column vector.\nA diagonal matrix is a square matrix where all of the elements off the diagonal are 0. For example, the following matrix is a diagonal matrix:\n\\[\\begin{bmatrix} 1 & 0 & 0 \\\\ 0 & 2 & 0 \\\\ 0 & 0 & 3 \\end{bmatrix}\\]\nThe identify matrix is a special case of a diagonal matrix.",
+    "text": "Special Matrices\n\nThere are a few special matrices that we will use often. The zero matrix is a matrix where all of the elements are 0. For example, the zero matrix with 2 rows and 3 columns is:\n\n\\[Zero=\\begin{bmatrix} 0 & 0 & 0 \\\\ 0 & 0 & 0 \\end{bmatrix}\\]\nmata: J(2,3,0)\nA square matrix is a matrix where the number of rows is equal to the number of columns. For example, \\(B\\) is a square matrix.\nmata: J(3,3,0)",
     "crumbs": [
       "Home",
       "Math Refresher",
-      "Math Refresher: Basic Linear Algebra"
+      "Math Refresher"
     ]
   },
   {
     "objectID": "mathref/math_2.html#matrix-operations",
     "href": "mathref/math_2.html#matrix-operations",
-    "title": "Math Refresher: Basic Linear Algebra",
+    "title": "Math Refresher",
     "section": "Matrix Operations",
-    "text": "Matrix Operations\nWe can add matrices together by adding their corresponding elements. For example,\n\\[\\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{bmatrix} + \\begin{bmatrix} 7 & 8 & 9 \\\\ 10 & 11 & 12 \\end{bmatrix} = \\begin{bmatrix} 8 & 10 & 12 \\\\ 14 & 16 & 18 \\end{bmatrix}\\]\nHowever, both matrices must have the same dimensions. For example, we cannot add the following matrices together:\n\\[\\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{bmatrix}_{2\\times 3} + \\begin{bmatrix} 7 & 8 \\\\ 10 & 11 \\end{bmatrix}_{2\\times 2}\\]",
+    "text": "Matrix Operations\nWe can add matrices together by adding their corresponding elements. For example,\n\\[\\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{bmatrix} + \\begin{bmatrix} 7 & 8 & 9 \\\\ 10 & 11 & 12 \\end{bmatrix} = \\begin{bmatrix} 8 & 10 & 12 \\\\ 14 & 16 & 18 \\end{bmatrix}\\]\nHowever, both matrices must have the same dimensions. For example, we cannot add the following matrices together:\n\\[\\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{bmatrix}_{2\\times 3} + \\begin{bmatrix} 7 & 8 \\\\ 10 & 11 \\end{bmatrix}_{2\\times 2}\\]\nmata: a + b Will work if a and b have the same dimensions.\nmata will throw an error if you try to add matrices of different dimensions.",
     "crumbs": [
       "Home",
       "Math Refresher",
-      "Math Refresher: Basic Linear Algebra"
+      "Math Refresher"
     ]
   },
   {
     "objectID": "mathref/math_2.html#matrix-scalar-multiplication",
     "href": "mathref/math_2.html#matrix-scalar-multiplication",
-    "title": "Math Refresher: Basic Linear Algebra",
+    "title": "Math Refresher",
     "section": "Matrix Scalar Multiplication",
-    "text": "Matrix Scalar Multiplication\nWe can multiply a matrix by a scalar by multiplying each element of the matrix by that scalar. For example,\n\\[ a \\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{bmatrix} = \\begin{bmatrix} 2a & 4a & 6a \\\\ 8a & 10a & 12a \\end{bmatrix}\\]",
+    "text": "Matrix Scalar Multiplication\nWe can multiply a matrix by a scalar by multiplying each element of the matrix by that scalar. For example,\n\\[a \\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{bmatrix} = \\begin{bmatrix} 1a & 2a & 3a \\\\ 4a & 5a & 6a \\end{bmatrix}\\]\n\n\n\n. mata:\n------------------------------------------------- mata (type end to exit) -----\n: 2 * (1,2,3 \\ 4,5,6)\n        1    2    3\n    +----------------+\n  1 |   2    4    6  |\n  2 |   8   10   12  |\n    +----------------+\n\n: end\n-------------------------------------------------------------------------------\n\n.",
     "crumbs": [
       "Home",
       "Math Refresher",
-      "Math Refresher: Basic Linear Algebra"
+      "Math Refresher"
     ]
   },
   {
     "objectID": "mathref/math_2.html#matrix-multiplication",
     "href": "mathref/math_2.html#matrix-multiplication",
-    "title": "Math Refresher: Basic Linear Algebra",
+    "title": "Math Refresher",
     "section": "Matrix Multiplication",
-    "text": "Matrix Multiplication\nWe can multiple two matrices together by taking the dot product of each row of the first matrix with each column of the second matrix. For example:\n\\[\\begin{aligned}\n\\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{bmatrix}_{2\\times 3} \\begin{bmatrix} 7 & 8 \\\\ 10 & 11 \\\\ 13 & 14 \\end{bmatrix}_{3\\times 2} &= \\begin{bmatrix} 1*7 + 2*10 + 3*13 & 1*8 + 2*11 + 3*14 \\\\ 4*7 + 5*10 + 6*13 & 4*8 + 5*11 + 6*14 \\end{bmatrix}_{2\\times 2} \\\\\n&= \\begin{bmatrix} 66 & 82 \\\\ 156 & 199 \\end{bmatrix}\n\\end{aligned}\n\\]\nA good way of remembering this is to follow the flow: \\(\\rightarrow  \\times \\downarrow\\).\nNote that the number of columns in the first matrix must be equal to the number of rows in the second matrix. For example, we cannot multiply the following matrices together:\n\\[\\begin{pmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{pmatrix}_{2\\times 3} \\begin{pmatrix} 7 & 8 \\\\ 10 & 11 \\end{pmatrix}_{2\\times 2}\\]\nIn general, given two matrixes \\(A_{a\\times b}\\) and \\(B_{c\\times d}\\), we can multiply them together if and only if \\(b=c\\). The resulting matrix will be \\(AB_{a\\times d}\\).\nSome properties of matrix multiplication:\n\nMatrix multiplication is not commutative. That is, \\(AB \\neq BA\\) in general.\nMatrix multiplication is associative. That is, \\(A(BC) = (AB)C\\).\nAny matrix multiplied by \\(I\\) is equal to itself. That is, \\(AI = IA = A\\).",
+    "text": "Matrix Multiplication\nWe can multiple two matrices together by taking the dot product of each row of the first matrix with each column of the second matrix. For example:\n\\[\\begin{aligned}\n\\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{bmatrix}_{2\\times 3} \\begin{bmatrix} 7 & 8 \\\\ 10 & 11 \\\\ 13 & 14 \\end{bmatrix}_{3\\times 2} &= \\begin{bmatrix} 1*7 + 2*10 + 3*13 & 1*8 + 2*11 + 3*14 \\\\ 4*7 + 5*10 + 6*13 & 4*8 + 5*11 + 6*14 \\end{bmatrix}_{2\\times 2} \\\\\n&= \\begin{bmatrix} 66 & 72 \\\\ 156 & 171 \\end{bmatrix}\n\\end{aligned}\n\\]\nA good way of remembering this is to follow the flow: \\({\\rightarrow  \\times \\downarrow}\\)\nmata: a = (1,2,3 \\ 4,5,6) ; b = (7,8 \\ 10,11 \\ 13,14); a*b\n\n\n         1     2\n    +-------------+\n  1 |   66    72  |\n  2 |  156   171  |\n    +-------------+",
     "crumbs": [
       "Home",
       "Math Refresher",
-      "Math Refresher: Basic Linear Algebra"
+      "Math Refresher"
     ]
   },
   {
     "objectID": "mathref/math_2.html#transpose",
     "href": "mathref/math_2.html#transpose",
-    "title": "Math Refresher: Basic Linear Algebra",
+    "title": "Math Refresher",
     "section": "Transpose",
-    "text": "Transpose\nThe transpose of a matrix is a matrix where the rows and columns are swapped. For example, if the matrix \\(A\\) is defined as:\n\\[A = \\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{bmatrix}\\]\nthen the transpose of \\(A\\), denoted \\(A^T\\), is:\n\\[A^T = \\begin{bmatrix} 1 & 4 \\\\ 2 & 5 \\\\ 3 & 6 \\end{bmatrix}\\]\nNote that if \\(A_{a\\times b}\\), then \\(A^T_{b\\times a}\\).\nSome properties of the transpose:\n\n\\((A^T)^T = A\\)\n\\((AB)^T = B^TA^T\\)\n\\((A+B)^T = A^T + B^T\\)\n\\((aA)^T = aA^T\\)\n\\((A^T)^{-1} = (A^{-1})^T\\)",
+    "text": "Transpose\nThe transpose of a matrix is a matrix where the rows and columns are swapped. For example, if the matrix \\(A\\) is defined as:\n\\[A = \\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{bmatrix}\\]\nthen the transpose of \\(A\\), denoted \\(A^T\\), is:\n\\[A^T = \\begin{bmatrix} 1 & 4 \\\\ 2 & 5 \\\\ 3 & 6 \\end{bmatrix}\\]\nNote that if \\(A_{a\\times b}\\), then \\(A^T_{b\\times a}\\).\nmata: a_t = a'",
     "crumbs": [
       "Home",
       "Math Refresher",
-      "Math Refresher: Basic Linear Algebra"
+      "Math Refresher"
     ]
   },
   {
     "objectID": "mathref/math_2.html#inverse",
     "href": "mathref/math_2.html#inverse",
-    "title": "Math Refresher: Basic Linear Algebra",
+    "title": "Math Refresher",
     "section": "Inverse",
-    "text": "Inverse\nThe inverse of a square matrix is a matrix that, when multiplied by the original matrix (\\(A A^{-1} = I\\)), results in the identity matrix. For example, if the matrix \\(A\\) is defined as:\n\\[A = \\begin{bmatrix} 1 & 2 \\\\ 4   & 6 \\end{bmatrix}\\]\nthen the inverse of \\(A\\), denoted \\(A^{-1}\\), is:\n\\[A^{-1} = \\begin{bmatrix} -3 & 1 \\\\ 2 & -.5 \\end{bmatrix}\\]\nFor a \\(2 \\times 2\\) matrix, the inverse is defined as:\n\\[\\begin{bmatrix} a & b \\\\ c & d \\end{bmatrix}^{-1} = \\frac{1}{ad-bc} \\begin{bmatrix} d & -b \\\\ -c & a \\end{bmatrix}\\]\nIf a matrix has determinant 0, then it is not invertible.\nSome properties of the inverse:\n\n\\((A^{-1})^{-1} = A\\)\n\\((AB)^{-1} = B^{-1}A^{-1}\\)\n\\((A^T)^{-1} = (A^{-1})^T\\)\n\\((aA)^{-1} = \\frac{1}{a}A^{-1}\\)",
+    "text": "Inverse\nThe inverse of a square matrix is a matrix that, when multiplied by the original matrix (\\(A A^{-1} = I\\)), results in the identity matrix. For example:\n\\[\nA = \\begin{bmatrix} 1 & 2 \\\\ 4   & 6 \\end{bmatrix} \\rightarrow\nA^{-1} = \\begin{bmatrix} -3 & 1 \\\\ 2 & -.5 \\end{bmatrix}\n\\]\n\n\n\n. mata\n------------------------------------------------- mata (type end to exit) -----\n: a = (1,2 \\ 4,6)\n\n: a_inv = luinv(a); a_inv\n         1     2\n    +-------------+\n  1 |   -3     1  |\n  2 |    2   -.5  |\n    +-------------+\n\n: a*a_inv\n[symmetric]\n       1   2\n    +---------+\n  1 |  1      |\n  2 |  0   1  |\n    +---------+\n\n: end\n-------------------------------------------------------------------------------\n\n.",
     "crumbs": [
       "Home",
       "Math Refresher",
-      "Math Refresher: Basic Linear Algebra"
+      "Math Refresher"
     ]
   },
   {
     "objectID": "mathref/math_2.html#determinant",
     "href": "mathref/math_2.html#determinant",
-    "title": "Math Refresher: Basic Linear Algebra",
+    "title": "Math Refresher",
     "section": "Determinant",
-    "text": "Determinant\nThe determinant of a square matrix is a scalar value that is a function of the elements of the matrix. The determinant of a \\(2 \\times 2\\) matrix is defined as:\n\\[\\begin{vmatrix} a & b \\\\ c & d \\end{vmatrix} = ad - bc\\]\nThe determinant of a \\(3 \\times 3\\) matrix is defined as:\n\\[\\begin{vmatrix} a & b & c \\\\ d & e & f \\\\ g & h & i \\end{vmatrix} = aei+dhc+gbf-ceg-fha-ibd\\]",
+    "text": "Determinant\nThe determinant of a square matrix is a scalar value that is a function of the elements of the matrix. The determinant of a \\(2 \\times 2\\) matrix is defined as:\n\\[\\begin{vmatrix} a & b \\\\ c & d \\end{vmatrix} = ad - bc\\]\nThe determinant of a \\(3 \\times 3\\) matrix is defined as:\n\\[\\begin{vmatrix} a & b & c \\\\ d & e & f \\\\ g & h & i \\end{vmatrix} = aei+dhc+gbf-ceg-fha-ibd\\]\nmata: det(a)",
     "crumbs": [
       "Home",
       "Math Refresher",
-      "Math Refresher: Basic Linear Algebra"
+      "Math Refresher"
     ]
   },
   {
     "objectID": "mathref/math_2.html#rank-and-linear-independence",
     "href": "mathref/math_2.html#rank-and-linear-independence",
-    "title": "Math Refresher: Basic Linear Algebra",
+    "title": "Math Refresher",
     "section": "Rank and linear independence",
-    "text": "Rank and linear independence\nThe rank of a matrix is the number of linearly independent rows or columns in the matrix. In a rectangular matrix, the rank cannot be larger than the smaller of the rows or columns.\nIf we consider each column, or rows, of a matrix as a vector, then the rank of the matrix is the number of linearly independent vectors in the matrix. If a set of vectors are not linearly independent, then one of the vectors can be expressed as a linear combination of the other vectors. For example, the following vectors are not linearly independent:\n\\[a_1 \\vec x_1 + a_2 \\vec x_2 + a_3 \\vec x_3 = 0\\]",
+    "text": "Rank and linear independence\n\nThe rank of a matrix is the number of linearly independent rows or columns in the matrix.\n\nIn a rectangular matrix, the rank cannot be larger than the smaller of the rows or columns.\n\nIf we consider each column, or rows, of a matrix as a vector, then the rank of the matrix is the number of linearly independent vectors in the matrix.\nIf a set of vectors are not linearly independent, then one of the vectors can be expressed as a linear combination of the other vectors. For example, the following vectors are not linearly independent:\n\n\\[a_1 \\vec x_1 + a_2 \\vec x_2 + a_3 \\vec x_3 = 0\\]\nmata: rank(a)",
     "crumbs": [
       "Home",
       "Math Refresher",
-      "Math Refresher: Basic Linear Algebra"
+      "Math Refresher"
     ]
   },
   {
@@ -3769,13 +3769,13 @@
   {
     "objectID": "mathref/math_2.html#system-of-linear-equations",
     "href": "mathref/math_2.html#system-of-linear-equations",
-    "title": "Math Refresher: Basic Linear Algebra",
+    "title": "Math Refresher",
     "section": "System of linear equations",
-    "text": "System of linear equations\nA system of linear equations is a set of equations that can be expressed in the form:\n\\[\\begin{aligned}\na_{11}x_1 + a_{12}x_2 + \\cdots + a_{1n}x_n &= b_1 \\\\\na_{21}x_1 + a_{22}x_2 + \\cdots + a_{2n}x_n &= b_2 \\\\\n\\vdots \\\\\na_{n1}x_1 + a_{n2}x_2 + \\cdots + a_{nn}x_n &= b_n \\\\\n\\end{aligned}\\]\nwhere \\(a_{ij}\\) and \\(b_i\\) are constants, and \\(x_i\\) are variables.\nThis system of equations can be written in matrix form as:\n\\[A_{n\\times n}   X_{n\\times 1} =   b_{n\\times 1}\\]\nif the system has a unique solution, then the matrix \\(A\\) is invertible, and the solution is given by:\n\\[X = A^{-1}b\\]\nThus if there is no solution, then \\(A\\) is not invertible. If the determinant of \\(A\\) is 0, then \\(A\\) is not invertible.",
+    "text": "System of linear equations\nA system of linear equations is a set of equations that can be expressed in the form:\n\\[\\begin{aligned}\na_{11}x_1 + a_{12}x_2 + \\cdots + a_{1n}x_n &= b_1 \\\\\na_{21}x_1 + a_{22}x_2 + \\cdots + a_{2n}x_n &= b_2 \\\\\n\\vdots \\\\\na_{n1}x_1 + a_{n2}x_2 + \\cdots + a_{nn}x_n &= b_n \\\\\n\\end{aligned}\\]\nwhere \\(a_{ij}\\) and \\(b_i\\) are constants, and \\(x_i\\) are variables.",
     "crumbs": [
       "Home",
       "Math Refresher",
-      "Math Refresher: Basic Linear Algebra"
+      "Math Refresher"
     ]
   },
   {
@@ -7898,7 +7898,7 @@
     "href": "mathref/math_1.html",
     "title": "Math Refresher: Basic Calculus",
     "section": "",
-    "text": "This is a refresher on basic calculus. It is not meant to be a substitute for a full course on calculus, but rather a quick review of the basic concepts and techniques that will be used in this semester.",
+    "text": "Here is the edited version with corrections to spelling, grammar, and mathematical inaccuracies:\nTitle: Math Refresher: Basic Calculus\nFormat:\n- html: default\n- pdf: default",
     "crumbs": [
       "Home",
       "Math Refresher",
@@ -7908,37 +7908,37 @@
   {
     "objectID": "mathref/math_1.html#introduction",
     "href": "mathref/math_1.html#introduction",
-    "title": "Math Refresher: Basic Calculus",
-    "section": "",
-    "text": "This is a refresher on basic calculus. It is not meant to be a substitute for a full course on calculus, but rather a quick review of the basic concepts and techniques that will be used in this semester.",
+    "title": "Math Refresher",
+    "section": "Introduction",
+    "text": "Introduction\n\nThis is a refresher on basic calculus. It is not meant to be a substitute for a full course on calculus but rather a quick review of the fundamental concepts and techniques that will be used this semester.",
     "crumbs": [
       "Home",
       "Math Refresher",
-      "Math Refresher: Basic Calculus"
+      "Math Refresher"
     ]
   },
   {
     "objectID": "mathref/math_1.html#limits",
     "href": "mathref/math_1.html#limits",
-    "title": "Math Refresher: Basic Calculus",
+    "title": "Math Refresher",
     "section": "Limits",
-    "text": "Limits\nThe limit of a function \\(f(x)\\) as \\(x\\) approaches \\(a\\) is the value that \\(f(x)\\) approaches as \\(x\\) gets closer and closer to \\(a\\). We write this as:\n\\[\\lim_{x \\to a} f(x) = L\\]\nIn this case, the limit of the function \\(f(x)\\) as \\(x\\) approaches \\(a\\) is \\(L\\). For example, consider the function \\(f(x) = x^2\\). The limit of \\(f(x)\\) as \\(x\\) approaches \\(2\\) is \\(4\\):",
+    "text": "Limits\nThe limit of a function \\(f(x)\\) as \\(x\\) approaches \\(a\\) is the value that \\(f(x)\\) approaches as \\(x\\) gets closer and closer to \\(a\\). We write this as:\n\\[\n\\lim_{{x \\to a}} f(x) = L\n\\]\nHere, \\(L\\) is the limit of the function \\(f(x)\\) as \\(x\\) approaches \\(a\\).\nFor example, consider the function \\(f(x) = x^2\\). The limit of \\(f(x)\\) as \\(x\\) approaches 2 is 4:\n\\[\n\\lim_{{x \\to 2}} x^2 = 4\n\\]",
     "crumbs": [
       "Home",
       "Math Refresher",
-      "Math Refresher: Basic Calculus"
+      "Math Refresher"
     ]
   },
   {
     "objectID": "mathref/math_1.html#limits-to-derivatives",
     "href": "mathref/math_1.html#limits-to-derivatives",
-    "title": "Math Refresher: Basic Calculus",
+    "title": "Math Refresher",
     "section": "Limits to Derivatives",
-    "text": "Limits to Derivatives\nLimits can also be used to estimate derivatives. The derivative of a function \\(f(x)\\) is the slope of the function at a given point. The derivative of \\(f(x)\\) at \\(x = a\\) is written as \\(f'(a)\\). The derivative of \\(f(x)\\) is defined as:\n\\[f'(a) = \\lim_{h \\to 0} \\frac{f(a+h) - f(a)}{h}\\]\nIn other words, the deriviative is the slope of a function at a particular point \\(a\\). This can be proxied using derivatives, by choosing a very small value for \\(h\\).\nFor example, consider the function \\(f(x) = x^2\\). The derivative of \\(f(x)\\) at \\(x = a\\) is:\n\\[\\begin{aligned}\nf'(a) &= \\lim_{h \\to 0} \\frac{f(a+h) - f(a)}{h} \\\\\n&=\\lim_{h \\to 0} \\frac{(a+h)^2 - (a)^2}{h} \\\\\n&= \\lim_{h \\to 0} \\frac{a^2 + 2ah + h^2 - a^2}{h} \\\\\n&= \\lim_{h \\to 0} 2a + h= 2a\n\\end{aligned}\n\\]\nIf anything else fails, one can always rely on numerical differentiation.",
+    "text": "Limits to Derivatives\nLimits can also be used to define derivatives. The derivative of a function \\(f(x)\\) is the slope of the function at a given point. The derivative of \\(f(x)\\) at \\(x = a\\) is written as \\(f'(a)\\). The derivative is defined as:\n\\[\nf'(a) = \\lim_{{h \\to 0}} \\frac{f(a+h) - f(a)}{h}\n\\]\nIn other words, the derivative is the slope of the function at a particular point \\(a\\). This can be approximated numerically by choosing a very small value for \\(h\\).",
     "crumbs": [
       "Home",
       "Math Refresher",
-      "Math Refresher: Basic Calculus"
+      "Math Refresher"
     ]
   },
   {
@@ -7980,25 +7980,25 @@
   {
     "objectID": "mathref/math_1.html#optimization-with-multiple-variables",
     "href": "mathref/math_1.html#optimization-with-multiple-variables",
-    "title": "Math Refresher: Basic Calculus",
-    "section": "Optimization with multiple variables",
-    "text": "Optimization with multiple variables\nWhen considering multiple variables, we also need to rely on the first and second order conditions to find minimum and maximum values. Consider a function \\(f(x,y)\\). The first order conditions are:\n\\[\\begin{aligned}\n\\frac{\\partial}{\\partial x} f(x,y) &= 0 \\\\\n\\frac{\\partial}{\\partial y} f(x,y) &= 0\n\\end{aligned}\n\\]\nThis conditions now say that, in the direction of \\(x\\) and \\(y\\), the function \\(f(x,y)\\) is not changing anymore. Thus we have a potential maximum or minimum. Now, to identify a minimum, we need second order conditions to be:\n\\[\\begin{aligned}\nH=\\begin{bmatrix}\nf_{xx} & f_{xy} \\\\\nf_{xy} & f_{yy} \\\\\n\\end{bmatrix}\n\\end{aligned}\n\\]\nIf \\(Det(H)&gt;0\\) and \\(f_{xx}&gt;0\\) then we have a minimum. If \\(Det(H)&gt;0\\) and \\(f_{xx}&lt;0\\) then we have a maximum. If \\(Det(H)&lt;0\\) then we have a saddle point. And if \\(Det(H)=0\\) then we have an inconclusive result.",
+    "title": "Math Refresher",
+    "section": "Optimization with Multiple Variables",
+    "text": "Optimization with Multiple Variables\nWhen considering multiple variables, we also need to rely on the first- and second-order conditions to find minimum and maximum values. Consider a function \\(f(x, y)\\). The first-order conditions are:\n\\[\n\\begin{aligned}\n\\frac{\\partial}{\\partial x} f(x, y) &= 0, \\\\\n\\frac{\\partial}{\\partial y} f(x, y) &= 0.\n\\end{aligned}\n\\]\nThese conditions indicate that, in the direction of \\(x\\) and \\(y\\), the function \\(f(x, y)\\) is not changing anymore. Thus, we have a potential maximum or minimum. To identify a minimum, we need second-order conditions:\n\\[H = \\begin{bmatrix}\nf_{xx} & f_{xy} \\\\\nf_{yx} & f_{yy}\n\\end{bmatrix}\n\\]",
     "crumbs": [
       "Home",
       "Math Refresher",
-      "Math Refresher: Basic Calculus"
+      "Math Refresher"
     ]
   },
   {
     "objectID": "mathref/math_1.html#optimization-with-constraints",
     "href": "mathref/math_1.html#optimization-with-constraints",
-    "title": "Math Refresher: Basic Calculus",
-    "section": "Optimization with constraints",
-    "text": "Optimization with constraints\nWhen optimizing a function with constraints, we can use the method of Lagrange multipliers. Consider a function \\(f(x,y)\\) subject to the constraint \\(g(x,y) = z\\). The Lagrangian is:\n\\[\\begin{aligned}\nL(x,y,\\lambda) = f(x,y) + \\lambda (z - g(x,y))\n\\end{aligned}\n\\]\nNotice that the Lagrangian is the function \\(f(x,y)\\) plus the constraint \\(g(x,y)\\) multiplied by a constant \\(\\lambda\\). The constant \\(\\lambda\\) is called the Lagrange multiplier. The constrain is written as the difference between the constant \\(z\\) and the function \\(g(x,y)\\). The Lagrangian is then optimized with respect to \\(x\\), \\(y\\), and \\(\\lambda\\). This are the equivalent of the first order conditions:\n\\[\\begin{aligned}\n\\frac{\\partial}{\\partial x} L(x,y,\\lambda) &= 0 \\\\\n\\frac{\\partial}{\\partial y} L(x,y,\\lambda) &= 0 \\\\\n\\frac{\\partial}{\\partial \\lambda} L(x,y,\\lambda) &= z - g(x,y)=0\n\\end{aligned}\n\\]\nThe last condition is the constraint, and it implies that the constraint must be satisfied. The second order conditions are the same as before.",
+    "title": "Math Refresher",
+    "section": "Optimization with Constraints",
+    "text": "Optimization with Constraints\nWhen optimizing a function with constraints, we can use the method of Lagrange multipliers. Consider a function \\(f(x, y)\\) subject to the constraint \\(g(x, y) = z\\). The Lagrangian is:\n\\[\nL(x, y, \\lambda) = f(x, y) + \\lambda (z - g(x, y)).\n\\]\n\nThe Lagrangian is the function \\(f(x, y)\\) plus the constraint \\(g(x, y)\\) multiplied by a constant \\(\\lambda\\).\nThe constant \\(\\lambda\\) is called the Lagrange multiplier.\nThe constraint is written as the difference between the constant \\(z\\) and the function \\(g(x, y)\\).\nThe Lagrangian is then optimized with respect to \\(x\\), \\(y\\), and \\(\\lambda\\).",
     "crumbs": [
       "Home",
       "Math Refresher",
-      "Math Refresher: Basic Calculus"
+      "Math Refresher"
     ]
   },
   {
@@ -8016,121 +8016,121 @@
   {
     "objectID": "mathref/math_3.html#random-variables",
     "href": "mathref/math_3.html#random-variables",
-    "title": "Math Refresher: Basic Statistics and Probability",
-    "section": "",
-    "text": "A random variable is a variable whose value is determined by the outcome of a random experiment. For example, if we toss a coin, the outcome is random, but the possible values of \\(X\\) are 0 and 1. If we roll a die, the outcome is random with possible values 1, 2, 3, 4, 5, and 6.\nThere are two kinds of random variables:\n\nDiscrete random variables can only take on a finite number of values. For example, the number of heads in 10 coin tosses is a discrete random variable.\nContinuous random variables can take on any value in a range. For example, the height of a randomly selected person is a continuous random variable.\n\nIf \\(X\\) is discrete random variable, then \\(P(X=c)\\) is the probability that \\(X\\) takes on the value \\(c\\). It can be any value between 0 and 1.\nBy definition, the sum of all probabilities for all feasible values of \\(X\\) is 1. That is, \\(\\sum_{c} P(X=c)=1\\).\nIf \\(X\\) is continuous random variable, then \\(P(X=c)=0\\) for any value \\(c\\). The probability to observe a particular number is zero. Instead, when using continuous data, we focus on the probability of observing a value in a range. For example, \\(P(1.7 \\leq X \\leq 1.8)\\) is the probability that \\(X\\) is between 1.7 and 1.8, which can be any value between 0 and 1.",
+    "title": "Math Refresher",
+    "section": "Random Variables",
+    "text": "Random Variables\n\nA random variable is a variable whose value is determined by the outcome of a random experiment.\n\nFor example, if we toss a coin, the outcome is random, but the possible values of \\(X\\) are 0 and 1.\nIf we roll a die, the outcome is random with possible values 1, 2, 3, 4, 5, and 6.\nExact temperature in a room\n\n\nThere are two kinds of random variables:\n\nDiscrete random variables can only take on a finite number of values. For example, the number of heads in 10 coin tosses is a discrete random variable.\n\nThe probability of observing a particular value is not always zero\n\nContinuous random variables can take on any value in a range. For example, the height of a randomly selected person is a continuous random variable.",
     "crumbs": [
       "Home",
       "Math Refresher",
-      "Math Refresher: Basic Statistics and Probability"
+      "Math Refresher"
     ]
   },
   {
     "objectID": "mathref/math_3.html#probability-distributions",
     "href": "mathref/math_3.html#probability-distributions",
-    "title": "Math Refresher: Basic Statistics and Probability",
+    "title": "Math Refresher",
     "section": "Probability Distributions",
-    "text": "Probability Distributions\nA probability distribution is a function that assigns probabilities to the values of a random variable. For discrete random variables, we can use a table to describe the probability distribution. For example, the probability distribution of the number of heads in 5 coin tosses is:\n\n\n\nNumber of heads\nProbability\n\n\n\n\n0\n0.03125\n\n\n1\n0.15625\n\n\n2\n0.3125\n\n\n3\n0.3125\n\n\n4\n0.15625\n\n\n5\n0.03125\n\n\n\nIn this case, the sum of all probabilities is 1.\nFor continuous random variables, we can use a function to describe the probability distribution. For example, we can say that the probability distribution of the height of a randomly selected person is:\n\\[f(x)\\]\nThis function has important properties:\n\n\\(f(x) \\geq 0\\) for all \\(x\\).\n\\(\\int_{-\\infty}^{\\infty} f(x) dx = 1\\).\n\\(P(a \\leq X \\leq b) = \\int_{a}^{b} f(x) dx\\).\n\\(P(X \\leq a) + P(X &gt; a) = 1\\).\n\\(P(a \\leq X \\leq b) = P(X &lt; b) - P(X &lt; a)\\).",
+    "text": "Probability Distributions\n\nA probability distribution is a function that assigns probabilities to the values of a random variable.\n\nFor discrete random variables, we can use a table to describe the probability distribution. For example, the probability distribution of the number of heads in 5 coin tosses is:\n\n\n\n\n\nNumber of heads\nProbability\n\n\n\n\n0\n0.03125\n\n\n1\n0.15625\n\n\n2\n0.3125\n\n\n3\n0.3125\n\n\n4\n0.15625\n\n\n5\n0.03125\n\n\n\nIn this case, the sum of all probabilities is 1.",
     "crumbs": [
       "Home",
       "Math Refresher",
-      "Math Refresher: Basic Statistics and Probability"
+      "Math Refresher"
     ]
   },
   {
     "objectID": "mathref/math_3.html#joint-probability-distributions",
     "href": "mathref/math_3.html#joint-probability-distributions",
-    "title": "Math Refresher: Basic Statistics and Probability",
+    "title": "Math Refresher",
     "section": "Joint Probability Distributions",
-    "text": "Joint Probability Distributions\nThe joint probability distribution of \\(X\\) and \\(Y\\) is a function that assigns probabilities to the values of \\(X\\) and \\(Y\\). For discrete random variables, we can use a table to describe the joint probability distribution. For continuous variables, it must be the case that:\n\\[\\int_{-\\infty}^{\\infty} \\int_{-\\infty}^{\\infty} f(x,y) dx dy = 1\\]",
+    "text": "Joint Probability Distributions\n\nThe joint probability distribution of \\(X\\) and \\(Y\\) is a function that assigns probabilities to the values of \\(X\\) and \\(Y\\).\nFor discrete random variables, we can use a table to describe the joint probability distribution.\n\n\n\nCode\ntab race married, cell nofreq\n\n\n\n           |        Married\n      Race |    Single    Married |     Total\n-----------+----------------------+----------\n     White |     21.68      51.20 |     72.89 \n     Black |     13.76      12.20 |     25.96 \n     Other |      0.36       0.80 |      1.16 \n-----------+----------------------+----------\n     Total |     35.80      64.20 |    100.00 \n\n\n\nIt must be the case that the sum of all probabilities is 1.",
     "crumbs": [
       "Home",
       "Math Refresher",
-      "Math Refresher: Basic Statistics and Probability"
+      "Math Refresher"
     ]
   },
   {
     "objectID": "mathref/math_3.html#marginal-probability-distributions",
     "href": "mathref/math_3.html#marginal-probability-distributions",
-    "title": "Math Refresher: Basic Statistics and Probability",
+    "title": "Math Refresher",
     "section": "Marginal Probability Distributions",
-    "text": "Marginal Probability Distributions\nThe marginal probability distribution of \\(X\\) is the probability distribution of \\(X\\) ignoring the values of \\(Y\\). This can be expressed as:\n\\[P(x) = \\sum_{z=-\\infty}^{\\infty} P(x,y=z)\\]\nit still must be the case that\n\\[ \\sum_{w=-\\infty}^{\\infty}\\sum_{z=-\\infty}^{\\infty} P(x=w,y=z)=1\\]\nFor continuous random variables, we have the following \\[\\int_{-\\infty}^{\\infty} f(x) dx = 1\\]\nwhere \\(f(x)\\) is the marginal probability distribution of \\(X\\). What is left after we “integrate out” \\(Y\\) is the marginal probability distribution of \\(X\\).\n\\[f(x) = \\int_{-\\infty}^{\\infty} f(x,y) dy\\]",
+    "text": "Marginal Probability Distributions\nThe marginal probability distribution of \\(X\\) is the probability distribution of \\(X\\) ignoring/regardless the values of \\(Y\\). This can be expressed as:\n\\[P(x) = \\sum_{z=-\\infty}^{\\infty} P(X=x,y=z) \\text{ or }\nf_x(x) = \\int_{z=-\\infty}^{\\infty} f(x,z)dz\\]\nThis is also refer to “integrating out” the variable \\(Y\\) or averaging over \\(Y\\).\n\\[P(x) = \\sum_{z=-\\infty}^{\\infty} P(X=x|y=z)P_y(z) \\text{ or }\nf_x(x) = \\int_{z=-\\infty}^{\\infty} f(x|z)f_y(z)dz\\]",
     "crumbs": [
       "Home",
       "Math Refresher",
-      "Math Refresher: Basic Statistics and Probability"
+      "Math Refresher"
     ]
   },
   {
     "objectID": "mathref/math_3.html#independence",
     "href": "mathref/math_3.html#independence",
-    "title": "Math Refresher: Basic Statistics and Probability",
+    "title": "Math Refresher",
     "section": "Independence",
-    "text": "Independence\nTwo random variables \\(X\\) and \\(Y\\) are independent if and only if:\n\\[P(x,y) = P(x)P(y) or f(x,y)=f(x)*f(y)\\]",
+    "text": "Independence\nTwo random variables \\(X\\) and \\(Y\\) are independent if and only if:\n\\[P(x,y) = P(x)P(y) \\text{ or } f(x,y)=f(x)*f(y)\\]\nThat means the conditional probability of \\(X\\) given \\(Y\\) is the same as the marginal probability of \\(X\\).\n\\(P(x|y) = P(x)\\) or \\(f(x|y) = f(x)\\).",
     "crumbs": [
       "Home",
       "Math Refresher",
-      "Math Refresher: Basic Statistics and Probability"
+      "Math Refresher"
     ]
   },
   {
     "objectID": "mathref/math_3.html#conditional-probability",
     "href": "mathref/math_3.html#conditional-probability",
-    "title": "Math Refresher: Basic Statistics and Probability",
+    "title": "Math Refresher",
     "section": "Conditional Probability",
     "text": "Conditional Probability\nThe conditional probability of \\(X\\) given \\(Y\\) is:\n\\[P(x|y) = \\frac{P(x,y)}{P(y)}\\]\nor, the conditional probabilty density function:\n\\[f(x|y) = \\frac{f(x,y)}{f(y)}\\]\nAnd if \\(X\\) and \\(Y\\) are independent, then:\n\\(P(x|y) = P(x)\\) or \\(f(x|y) = f(x)\\).",
     "crumbs": [
       "Home",
       "Math Refresher",
-      "Math Refresher: Basic Statistics and Probability"
+      "Math Refresher"
     ]
   },
   {
     "objectID": "mathref/math_3.html#mean-and-variance",
     "href": "mathref/math_3.html#mean-and-variance",
-    "title": "Math Refresher: Basic Statistics and Probability",
+    "title": "Math Refresher",
     "section": "Mean, and variance",
     "text": "Mean, and variance\nThe mean of a random variable \\(X\\) is:\n\\[E(X) = \\sum_{x} xP(x)\\] or \\[E(X) = \\int_{-\\infty}^{\\infty} xf(x) dx\\]\nWhich is a weighted sum of all possible values of \\(X\\), and where the weights are the probabilities (or densities) of each value. It can also be written or referred as:\n\\[E(X), \\mu_x , \\bar x\\]\nThis measure is also called the expected value of \\(X\\), and proviveds a measure of the “center” of the distribution of \\(X\\). It can be very sensitive to outliers.\nThe variance of a random variable \\(X\\) is:\n\\[Var(X) = E[(X-E(X))^2] \\]\n\\[Var(X) = \\sum_{x} (X-E(X))^2 P(x) \\] or\n\\[Var(X) = \\int_{x} (X-E(X))^2 f(x) dx \\]\nWhich is the expected value of the squared difference between \\(X\\) and its mean. It provides a measure of average the “spread” of the distribution of \\(X\\).\nIt could also be defined as follows:\n\\[\\sigma^2_x = Var(x) = E(X^2) - [E(X)]^2\\]\nThere are other measures that can be used to characterize a distribution, such as the median, the mode, the skewness, and the kurtosis. They are defined as follows:\n\nThe median is the value of \\(X\\) such that \\(P(X \\leq x) = 0.5\\).\nThe mode is the value of \\(X\\) that maximizes \\(P(X=x)\\).\nThe skewness is a measure of the asymmetry of the distribution of \\(X\\). It is defined as:\n\n\\[\\frac{E[(X-E(X))^3]}{[Var(X)]^{3/2}}\\]\n\nThe kurtosis is a measure of the “peakedness” of the distribution of \\(X\\). It is defined as:\n\n\\[\\frac{E[(X-E(X))^4]}{[Var(X)]^{2}}\\]\n\nThe quantiles of a distribution are values that divide the distribution into equal parts. For example, the 0.25 quantile is the value of \\(X\\) such that \\(P(X \\leq x) = 0.25\\).\n\nFor a normal distribution, the mean, median, and mode are all equal. The skewness is 0, and the kurtosis is 3.",
     "crumbs": [
       "Home",
       "Math Refresher",
-      "Math Refresher: Basic Statistics and Probability"
+      "Math Refresher"
     ]
   },
   {
     "objectID": "mathref/math_3.html#covariance-and-correlation",
     "href": "mathref/math_3.html#covariance-and-correlation",
-    "title": "Math Refresher: Basic Statistics and Probability",
+    "title": "Math Refresher",
     "section": "Covariance and Correlation",
     "text": "Covariance and Correlation\nThe covariance of two random variables \\(X\\) and \\(Y\\) is:\n\\[Cov(X,Y) = E[(X-E(X))(Y-E(Y))]\\]\n\\[Cov(X,Y) = \\sum_{x}\\sum_{y} (x-E(X))(y-E(Y))P(x,y)\\]\n\\[Cov(X,Y) = \\int_{x}\\int_{y} (x-E(X))(y-E(Y))f(x,y)\\]\nThe covariance measures the linear association between \\(X\\) and \\(Y\\). If \\(X\\) and \\(Y\\) are independent, then \\(Cov(X,Y)=0\\). However, if \\(Cov(X,Y)=0\\), then \\(X\\) and \\(Y\\) are not necessarily independent. For example \\(y=(x-E(X))^2\\) and \\(x\\) are not independent, but \\(Cov(y,x)=0\\).\nThis measure is scale dependent. For example, if we measure \\(X\\) in meters, and \\(Y\\) in centimeters, then \\(Cov(X,Y)\\) will be 100 times larger than if we measure \\(X\\) in meters and \\(Y\\) in kilometers.\nAn alternative measure of association is the correlation coefficient, which is defined as:\n\\[Corr(X,Y) = \\frac{Cov(X,Y)}{\\sqrt{Var(X)Var(Y)}}\\] \\[\\rho_{X,Y} = \\frac{\\sigma_{X,Y}}{\\sigma_x \\sigma_y}\\]\nThis statistics is always between -1 and 1, regardless of the scale of \\(x\\) or \\(y\\).",
     "crumbs": [
       "Home",
       "Math Refresher",
-      "Math Refresher: Basic Statistics and Probability"
+      "Math Refresher"
     ]
   },
   {
     "objectID": "mathref/math_3.html#propeties-of-mean-variance-and-covariance",
     "href": "mathref/math_3.html#propeties-of-mean-variance-and-covariance",
-    "title": "Math Refresher: Basic Statistics and Probability",
+    "title": "Math Refresher",
     "section": "Propeties of Mean, Variance and Covariance",
     "text": "Propeties of Mean, Variance and Covariance\nConsider two random variables \\(X\\) and \\(Y\\), and let \\(a\\), \\(b\\), \\(c\\) and \\(d\\) be constants. Then:\n\n\\(Var(aX+b) = a^2Var(X)\\)\n\\(Cov(aX+b,cY+d) = acCov(X,Y)\\)\n\\(Var(aX+bY) = a^2Var(X) + b^2Var(Y) + 2abCov(X,Y)\\)\n\\(Cov(X,Y) = E(XY) - E(X)E(Y)\\)\n\\(Cov(X,X) = Var(X)\\)\n\nFor the mean:\n\n\\(E(aX+b) = aE(X)+b\\)\n\\(E(aX+bY) = aE(X) + bE(Y)\\)",
     "crumbs": [
       "Home",
       "Math Refresher",
-      "Math Refresher: Basic Statistics and Probability"
+      "Math Refresher"
     ]
   },
   {
     "objectID": "mathref/math_3.html#some-useful-distributions",
     "href": "mathref/math_3.html#some-useful-distributions",
-    "title": "Math Refresher: Basic Statistics and Probability",
+    "title": "Math Refresher",
     "section": "Some useful distributions",
-    "text": "Some useful distributions\n\nDiscrete distributions\n\nBernoulli distribution: \\(X \\sim Bernoulli(p)\\), where \\(p=P(X=1)\\) and \\(1-p=P(X=0)\\). \\(E(X)=p\\) and variance \\(Var(X)=p(1-p)\\). Flip a coin with probability \\(p\\) of getting heads.\nBinomial distribution: \\(X \\sim Binomial(n,p)\\), where \\(p=P(X=1)\\) and \\(1-p=P(X=0)\\). \\(E(x)=np\\) and \\(Var(X)=np(1-p)\\). The binomial distribution is the distribution of the number of successes in \\(n\\) independent Bernoulli trials.\nPoisson distribution: \\(X \\sim Poisson(\\lambda)\\), where \\(\\lambda=E(X)=Var(x)\\). Typically used for counts. For example, the number of customers arriving at a store in a given hour.\n\n\n\nContinuous distributions\n\nUniform distribution: \\(X \\sim Uniform(a,b)\\), where \\(f(x)=\\frac{1}{b-a}\\) for \\(a \\leq x \\leq b\\), and \\(f(x)=0\\) otherwise. \\(E(X)=\\frac{a+b}{2}\\) and \\(Var(X)=\\frac{(b-a)^2}{12}\\). Time between bus arrivals.\nNormal distribution: \\(X \\sim Normal(\\mu,\\sigma^2)\\), where \\(f(x)=\\frac{1}{\\sqrt{2\\pi\\sigma^2}}e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}\\). \\(E(X)=\\mu\\) and \\(Var(X)=\\sigma^2\\). For example, the height of a randomly selected person.\nt-distribution: \\(X \\sim t(\\nu)\\), where \\(f(x)=\\frac{\\Gamma(\\frac{\\nu+1}{2})}{\\sqrt{\\nu\\pi}\\Gamma(\\frac{\\nu}{2})}(1+\\frac{x^2}{\\nu})^{-\\frac{\\nu+1}{2}}\\). \\(E(X)=0\\) if \\(\\nu&gt;1\\), and \\(Var(X)=\\frac{\\nu}{\\nu-2}\\) if \\(\\nu&gt;2\\). For example, the distribution of the sample mean of a small sample from a normal distribution.\nAlternatively. \\(X \\sim t(\\nu)\\), where \\(X=\\frac{Z}{\\sqrt{V/\\nu}}\\), where \\(Z \\sim Normal(0,1)\\) and \\(V \\sim \\chi^2(\\nu)\\), and \\(Z\\) and \\(V\\) are independent.\nChi-squared distribution: \\(X \\sim \\chi^2(\\nu)\\), where \\(f(x)=\\frac{1}{2^{\\nu/2}\\Gamma(\\nu/2)}x^{\\nu/2-1}e^{-x/2}\\). \\(E(X)=\\nu\\) and \\(Var(X)=2\\nu\\).\nAlternatively, \\(X \\sim \\chi^2(\\nu)\\), where \\(X=Z_1^2+Z_2^2+...+Z_\\nu^2\\), where \\(Z_i \\sim Normal(0,1)\\), and \\(Z_1\\), \\(Z_2\\), …, \\(Z_\\nu\\) are independent.\nF-distribution:\n\\(X \\sim F(\\nu_1,\\nu_2)\\), where \\(f(x)=\\frac{\\Gamma(\\frac{\\nu_1+\\nu_2}{2})}{\\Gamma(\\frac{\\nu_1}{2})\\Gamma(\\frac{\\nu_2}{2})}(\\frac{\\nu_1}{\\nu_2})^{\\nu_1/2}x^{\\nu_1/2-1}(1+\\frac{\\nu_1}{\\nu_2}x)^{-(\\nu_1+\\nu_2)/2}\\). \\(E(X)=\\frac{\\nu_2}{\\nu_2-2}\\) if \\(\\nu_2&gt;2\\), and \\(Var(X)=\\frac{2\\nu_2^2(\\nu_1+\\nu_2-2)}{\\nu_1(\\nu_2-2)^2(\\nu_2-4)}\\) if \\(\\nu_2&gt;4\\).\nAlternatively, \\(X \\sim F(\\nu_1,\\nu_2)\\), where \\(X=\\frac{V_1/\\nu_1}{V_2/\\nu_2}\\), where \\(V_1 \\sim \\chi^2(\\nu_1)\\) and \\(V_2 \\sim \\chi^2(\\nu_2)\\), and \\(V_1\\) and \\(V_2\\) are independent.",
+    "text": "Some useful distributions\nDiscrete distributions\n\nBernoulli distribution: \\(X \\sim Bernoulli(p)\\), where \\(p \\in [0,1]\\).\n\n\\(E(X)=p\\) and variance \\(Var(X)=p(1-p)\\).\nFlip a coin with probability \\(p\\) of getting heads.\nrbinomial(1, p)\n\nBinomial distribution: \\(X \\sim Binomial(n,p)\\), where \\(p \\in [0,1]\\) and \\(n&gt;0\\)\n\n\\(E(x)=np\\) and \\(Var(X)=np(1-p)\\).\nDistribution of the number of successes in \\(n\\) independent Bernoulli trials.\nrbinomial(n, p)\n\nPoisson distribution: \\(X \\sim Poisson(\\lambda)\\), where \\(\\lambda&gt;0\\)\n\n\\(E(X)=Var(x)=\\lambda\\), Typically used for counts.\nFor example, the number of customers arriving at a store in a given hour.\nrpoisson(lambda)",
     "crumbs": [
       "Home",
       "Math Refresher",
-      "Math Refresher: Basic Statistics and Probability"
+      "Math Refresher"
     ]
   },
   {
@@ -12635,5 +12635,413 @@
     "title": "Modeling Probabilities",
     "section": "Probability models summary",
     "text": "Probability models summary\n\nFind patterns when \\(y\\) is binary can be done using model probability with regressions\nLinear probability model is mostly good enough, easy inference.\n\nto-go for data exploration, quick analysis, and diagnostics\nbut, predicted values could be below 0, above 1\n\nLogit (and probit) - better when aim is prediction, predicted values strictly between 0-1\nMost often, LPM, logit, probit - similar inference\nUse marginal (average) differences (with logit/probit)\nNo trivial goodness of fit. Brier score or pseudo-R-Squared.\nCalibration is important for prediction.\n\n\n\n\nRios-Avila and Cia"
+  },
+  {
+    "objectID": "mathref/math_1.html#derivatives-of-common-functions",
+    "href": "mathref/math_1.html#derivatives-of-common-functions",
+    "title": "Math Refresher",
+    "section": "Derivatives of Common Functions",
+    "text": "Derivatives of Common Functions\nFor most common functions, the derivative can be calculated using the following rules:\n\nThe derivative of a constant is zero.\n\nThe derivative of \\(x^n\\) is \\(nx^{n-1}\\).\n\nThe derivative of \\(\\ln(x)\\) is \\(\\frac{1}{x}\\).\n\nThe derivative of \\(e^x\\) is \\(e^x\\).\n\nThe derivative of \\(a^x\\) is \\(a^x \\ln a\\).\n\nThere are other rules for derivatives, but these are the ones that will be used most often.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher"
+    ]
+  },
+  {
+    "objectID": "mathref/math_1.html#derivatives-of-composite-functions",
+    "href": "mathref/math_1.html#derivatives-of-composite-functions",
+    "title": "Math Refresher",
+    "section": "Derivatives of Composite Functions",
+    "text": "Derivatives of Composite Functions\nThe derivative of a composite function \\(f(g(x))\\) is given by the chain rule:\n\\[\n\\frac{d}{dx} f(g(x)) = f'(g(x)) \\cdot g'(x).\n\\]\nFor example, consider the function \\(f(x) = \\ln(x^2)\\). The derivative of \\(f(x)\\) is:\n\\[\n\\begin{aligned}\n\\frac{d}{dx} \\ln(x^2) &= \\frac{1}{x^2} \\cdot \\frac{d}{dx} (x^2) \\\\\n&= \\frac{1}{x^2} \\cdot 2x \\\\\n&= \\frac{2}{x}.\n\\end{aligned}\n\\]",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher"
+    ]
+  },
+  {
+    "objectID": "mathref/math_1.html#derivatives-of-sums-and-products",
+    "href": "mathref/math_1.html#derivatives-of-sums-and-products",
+    "title": "Math Refresher",
+    "section": "Derivatives of Sums and Products",
+    "text": "Derivatives of Sums and Products\nThe derivative of a sum of functions is the sum of the derivatives of the functions:\n\\[\n\\frac{d}{dx} (f(x) + g(x)) = \\frac{d}{dx} f(x) + \\frac{d}{dx} g(x).\n\\]\nThe derivative of a product of functions is given by the product rule:\n\\[\n\\frac{d}{dx} (f(x) \\cdot g(x)) = f'(x) \\cdot g(x) + f(x) \\cdot g'(x).\n\\]\nThe derivative of a quotient of functions is given by the quotient rule:\n\\[\n\\frac{d}{dx} \\left( \\frac{f(x)}{g(x)} \\right) = \\frac{f'(x) \\cdot g(x) - f(x) \\cdot g'(x)}{g(x)^2}.\n\\]\nThis is a special case of the product rule.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher"
+    ]
+  },
+  {
+    "objectID": "mathref/math_1.html#maximization-and-minimization",
+    "href": "mathref/math_1.html#maximization-and-minimization",
+    "title": "Math Refresher",
+    "section": "Maximization and Minimization",
+    "text": "Maximization and Minimization\n\nDerivatives can be used to identify the maximum and minimum values of a function. Consider a function \\(f(x)\\).\nTo find the maximum (or minimum) value of \\(f(x)\\), we take the derivative of \\(f(x)\\) and set it equal to zero.\n\nThis is called the first-order condition.\nThe idea is that at the maximum (or minimum), the value of \\(f(x)\\) shouldn’t change anymore (it should be flat). Thus, the derivative of \\(f(x)\\) should be zero.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher"
+    ]
+  },
+  {
+    "objectID": "mathref/math_1.html#section",
+    "href": "mathref/math_1.html#section",
+    "title": "Math Refresher",
+    "section": "",
+    "text": "For example, consider the function \\(f(x) = x^2\\). The derivative of \\(f(x)\\) at \\(x = a\\) is:\n\\[\n\\begin{aligned}\nf'(a) &= \\lim_{{h \\to 0}} \\frac{(a+h)^2 - a^2}{h} \\\\\n&= \\lim_{{h \\to 0}} \\frac{a^2 + 2ah + h^2 - a^2}{h} \\\\\n&= \\lim_{{h \\to 0}} (2a + h) = 2a.\n\\end{aligned}\n\\]\nIf other methods fail, one can always rely on numerical differentiation.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher"
+    ]
+  },
+  {
+    "objectID": "mathref/math_1.html#stata-and-numerical-differentiation",
+    "href": "mathref/math_1.html#stata-and-numerical-differentiation",
+    "title": "Math Refresher",
+    "section": "Stata and Numerical Differentiation",
+    "text": "Stata and Numerical Differentiation\nStata can be used to calculate numerical derivatives. mata (matrix algebra language) has powerful rutines for numerical differentiation. Stata also has some capabilities, and you can always do it manually.\n\n\nCode\nclear\nrange x -_pi _pi 100\ngen y = sin(x)\ngen dydx = (sin(x+0.01) - sin(x)) / 0.01\ndydx y x, gen(dydx2)\ngen dydx3 = cos(x)\ngen diff1 = (dydx - dydx3)\ngen diff2 = (dydx2 - dydx3)\nline diff1 diff2 x\n\n\n\n\n\nNumber of observations (_N) was 0, now 100.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher"
+    ]
+  },
+  {
+    "objectID": "mathref/math_1.html#section-1",
+    "href": "mathref/math_1.html#section-1",
+    "title": "Math Refresher",
+    "section": "",
+    "text": "For example, consider the function \\(f(x) = 5x^2 - 4x + 2\\). The derivative of \\(f(x)\\) is:\n\\[\n\\begin{aligned}\nf'(x) &= 10x - 4 = 0 \\\\\nx &= \\frac{4}{10} = 0.4.\n\\end{aligned}\n\\]\nSo when \\(x\\) is equal to 0.4, the function \\(f(x)\\) does not change anymore.\n\nThis, however, is insufficient to determine whether the function is at a maximum or a minimum.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher"
+    ]
+  },
+  {
+    "objectID": "mathref/math_1.html#section-2",
+    "href": "mathref/math_1.html#section-2",
+    "title": "Math Refresher",
+    "section": "",
+    "text": "To determine this, we take the second derivative of \\(f(x)\\), known as the second-order condition:\n\\[\nf''(x) = 10 &gt; 0.\n\\]\n\nBecause the second derivative is positive, we know that \\(f(x)\\) is at a minimum when \\(x = 0.4\\).\n\nIf the second derivative were negative, we would know that \\(f(x)\\) is at a maximum when \\(x = 0.4\\).",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher"
+    ]
+  },
+  {
+    "objectID": "mathref/math_1.html#why-is-this-the-case",
+    "href": "mathref/math_1.html#why-is-this-the-case",
+    "title": "Math Refresher",
+    "section": "Why is this the case?",
+    "text": "Why is this the case?\n\n\\(f'(x)\\) measures the changes in \\(f(x)\\) along \\(x\\). When \\(f'(x) = 0\\), \\(f(x)\\) is not changing anymore.\n\\(f''(x)\\) measures the changes in \\(f'(x)\\) (the changes in those changes).\n\nBecause it is positive, we know that \\(f'(x)\\) is increasing. This means that at \\(x = 0.4\\), the changes in \\(f(x)\\) are going from negative to positive, indicating a minimum.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher"
+    ]
+  },
+  {
+    "objectID": "mathref/math_1.html#section-3",
+    "href": "mathref/math_1.html#section-3",
+    "title": "Math Refresher",
+    "section": "",
+    "text": "\\[H = \\begin{bmatrix}\nf_{xx} & f_{xy} \\\\\nf_{yx} & f_{yy}\n\\end{bmatrix}\n\\]\nwhere \\(H\\) is the Hessian matrix.\n\nIf \\(\\text{Det}(H) &gt; 0\\) and \\(f_{xx} &gt; 0\\), then we have a minimum.\nIf \\(\\text{Det}(H) &gt; 0\\) and \\(f_{xx} &lt; 0\\), then we have a maximum.\nIf \\(\\text{Det}(H) &lt; 0\\), then we have a saddle point.\nIf \\(\\text{Det}(H) = 0\\), the result is inconclusive.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher"
+    ]
+  },
+  {
+    "objectID": "mathref/math_1.html#section-4",
+    "href": "mathref/math_1.html#section-4",
+    "title": "Math Refresher",
+    "section": "",
+    "text": "These are the equivalent first-order conditions:\n\\[\n\\begin{aligned}\n\\frac{\\partial}{\\partial x} L(x, y, \\lambda) &= 0, \\\\\n\\frac{\\partial}{\\partial y} L(x, y, \\lambda) &= 0, \\\\\n\\frac{\\partial}{\\partial\\lambda} L(x, y, \\lambda) &= z - g(x, y) = 0.\n\\end{aligned}\n\\]\nThe last condition is the constraint, and it implies that the constraint must be satisfied. The second-order conditions are the same as before.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher"
+    ]
+  },
+  {
+    "objectID": "mathref/math_2.html#section",
+    "href": "mathref/math_2.html#section",
+    "title": "Math Refresher",
+    "section": "",
+    "text": "We can add vectors together by adding their corresponding elements. For example,\n\\[\\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix} + \\begin{bmatrix} 4 \\\\ 5 \\\\ 6 \\end{bmatrix} = \\begin{bmatrix} 5 \\\\ 7 \\\\ 9 \\end{bmatrix}\\]\nWe can also multiply a vector by a scalar (a single number) by multiplying each element of the vector by that number. For example,\n\\[2 \\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix} = \\begin{bmatrix} 2 \\\\ 4 \\\\ 6 \\end{bmatrix}\n\\]",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher"
+    ]
+  },
+  {
+    "objectID": "mathref/math_2.html#stata-and-matrices",
+    "href": "mathref/math_2.html#stata-and-matrices",
+    "title": "Math Refresher",
+    "section": "Stata and Matrices",
+    "text": "Stata and Matrices\nStata has a powerful matrix algebra language called mata. We can define matrices in mata using the following syntax:\n\n\n\n\n\n\n. mata\n------------------------------------------------- mata (type end to exit) -----\n:  vv1 = (1\\2\\3)\n\n:  vv2 = (1,2,3)\n\n:  a = (1,2,3 \\ 4,5,6);a\n       1   2   3\n    +-------------+\n  1 |  1   2   3  |\n  2 |  4   5   6  |\n    +-------------+\n\n:  a = (1\\4),(2\\5),(3\\6);a\n       1   2   3\n    +-------------+\n  1 |  1   2   3  |\n  2 |  4   5   6  |\n    +-------------+\n\n:  a[1,3]\n  3\n\n: end\n-------------------------------------------------------------------------------\n\n.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher"
+    ]
+  },
+  {
+    "objectID": "mathref/math_2.html#section-1",
+    "href": "mathref/math_2.html#section-1",
+    "title": "Math Refresher",
+    "section": "",
+    "text": ". mata\n------------------------------------------------- mata (type end to exit) -----\n:     (1\\2\\3)+(4\\5\\6)\n       1\n    +-----+\n  1 |  5  |\n  2 |  7  |\n  3 |  9  |\n    +-----+\n\n:     2*(1\\2\\3)\n       1\n    +-----+\n  1 |  2  |\n  2 |  4  |\n  3 |  6  |\n    +-----+\n\n: end\n-------------------------------------------------------------------------------\n\n.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher"
+    ]
+  },
+  {
+    "objectID": "mathref/math_2.html#special-matrices-1",
+    "href": "mathref/math_2.html#special-matrices-1",
+    "title": "Math Refresher",
+    "section": "Special Matrices",
+    "text": "Special Matrices\nThe identity matrix is a square matrix where all of the elements are 0, except for the elements along the diagonal, which are 1. For example, the identity matrix with 3 rows and 3 columns is:\n\\[I_{3}=\\begin{bmatrix} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\end{bmatrix}\\]\nmata: I(3)\nFor simplicitly, we will use the subscript to denote the size of the identity matrix. For example, \\(I_{3}\\) is a 3x3 identity matrix, and \\(I_{5}\\) is a 5x5 identity matrix.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher"
+    ]
+  },
+  {
+    "objectID": "mathref/math_2.html#special-matrices-2",
+    "href": "mathref/math_2.html#special-matrices-2",
+    "title": "Math Refresher",
+    "section": "Special Matrices",
+    "text": "Special Matrices\nA \\(1\\times c\\) matrix is called a row vector. Wheras a \\(r \\times 1\\) matrix is called a column vector.\nA diagonal matrix is a square matrix where all of the elements off the diagonal are 0. For example, the following matrix is a diagonal matrix:\n\\[\\begin{bmatrix} 1 & 0 & 0 \\\\ 0 & 2 & 0 \\\\ 0 & 0 & 3 \\end{bmatrix}\\]\nThe identify matrix is a special case of a diagonal matrix.\nmata: diag( (1,2,3) ) or mata: diag( (1\\2\\3) )",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher"
+    ]
+  },
+  {
+    "objectID": "mathref/math_2.html#matrix-multiplication-1",
+    "href": "mathref/math_2.html#matrix-multiplication-1",
+    "title": "Math Refresher",
+    "section": "Matrix Multiplication",
+    "text": "Matrix Multiplication\nNote that the number of columns in the first matrix must be equal to the number of rows in the second matrix.\n\\[M_{a \\times b} \\times N_{b \\times c} = P_{a \\times c}\\]\nFor example, we cannot multiply the following matrices together:\n\\[\\begin{pmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{pmatrix}_{2\\times 3} \\begin{pmatrix} 7 & 8 \\\\ 10 & 11 \\end{pmatrix}_{2\\times 2}\\]",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher"
+    ]
+  },
+  {
+    "objectID": "mathref/math_2.html#section-2",
+    "href": "mathref/math_2.html#section-2",
+    "title": "Math Refresher",
+    "section": "",
+    "text": "Some properties of matrix multiplication:\n\nMatrix multiplication is not commutative. That is, \\(AB \\neq BA\\) in general.\n\n\n\n\n. mata:\n------------------------------------------------- mata (type end to exit) -----\n: a*b\n         1     2\n    +-------------+\n  1 |   66    72  |\n  2 |  156   171  |\n    +-------------+\n\n: b*a\n[symmetric]\n         1     2     3\n    +-------------------+\n  1 |   39              |\n  2 |   54    75        |\n  3 |   69    96   123  |\n    +-------------------+\n\n: end\n-------------------------------------------------------------------------------\n\n.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher"
+    ]
+  },
+  {
+    "objectID": "mathref/math_2.html#section-3",
+    "href": "mathref/math_2.html#section-3",
+    "title": "Math Refresher",
+    "section": "",
+    "text": "Matrix multiplication is associative. That is, \\(A(BC) = (AB)C\\).\n\nmata: c=(4,1\\2,4)\n\n\n\n. mata:\n------------------------------------------------- mata (type end to exit) -----\n:  c=(4,1\\2,4)\n\n:  a*(b*c) ; (a*b)*c\n         1     2\n    +-------------+\n  1 |  408   354  |\n  2 |  966   840  |\n    +-------------+\n         1     2\n    +-------------+\n  1 |  408   354  |\n  2 |  966   840  |\n    +-------------+\n\n: end\n-------------------------------------------------------------------------------\n\n.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher"
+    ]
+  },
+  {
+    "objectID": "mathref/math_2.html#section-4",
+    "href": "mathref/math_2.html#section-4",
+    "title": "Math Refresher",
+    "section": "",
+    "text": "Any matrix multiplied by \\(I\\) is equal to itself. That is, \\(AI = IA = A\\).\n\n\n\n\n. mata:\n------------------------------------------------- mata (type end to exit) -----\n: a*I(3)\n       1   2   3\n    +-------------+\n  1 |  1   2   3  |\n  2 |  4   5   6  |\n    +-------------+\n\n: b*I(2)\n        1    2\n    +-----------+\n  1 |   7    8  |\n  2 |  10   11  |\n  3 |  13   14  |\n    +-----------+\n\n: end\n-------------------------------------------------------------------------------\n\n.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher"
+    ]
+  },
+  {
+    "objectID": "mathref/math_2.html#section-5",
+    "href": "mathref/math_2.html#section-5",
+    "title": "Math Refresher",
+    "section": "",
+    "text": "Some properties of the transpose:\n\n\\((A^T)^T = A\\)\n\\((AB)^T = B^TA^T\\)\n\\((A+B)^T = A^T + B^T\\)\n\\((aA)^T = aA^T\\)\n\\((A^T)^{-1} = (A^{-1})^T\\)",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher"
+    ]
+  },
+  {
+    "objectID": "mathref/math_2.html#section-6",
+    "href": "mathref/math_2.html#section-6",
+    "title": "Math Refresher",
+    "section": "",
+    "text": "For a \\(2 \\times 2\\) matrix, the inverse is defined as:\n\\[\\begin{bmatrix} a & b \\\\ c & d \\end{bmatrix}^{-1} = \\frac{1}{ad-bc} \\begin{bmatrix} d & -b \\\\ -c & a \\end{bmatrix}\\]\nThus, if a matrix has determinant 0, then it is not invertible.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher"
+    ]
+  },
+  {
+    "objectID": "mathref/math_2.html#section-7",
+    "href": "mathref/math_2.html#section-7",
+    "title": "Math Refresher",
+    "section": "",
+    "text": "This system of equations can be written in matrix form as:\n\\[A_{n\\times n}   X_{n\\times 1} =   b_{n\\times 1}\\]\nif the system has a unique solution, then the matrix \\(A\\) is invertible, and the solution is given by:\n\\[X = A^{-1}b\\]\nThus if there is no solution, then \\(A\\) is not invertible. If the determinant of \\(A\\) is 0, then \\(A\\) is not invertible.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher"
+    ]
+  },
+  {
+    "objectID": "mathref/math_3.html#section",
+    "href": "mathref/math_3.html#section",
+    "title": "Math Refresher",
+    "section": "",
+    "text": "If \\(X\\) is discrete random variable, then \\(P(X=c)\\) is the probability that \\(X\\) takes on the value \\(c\\). It can be any value between 0 and 1. ()\nBy definition, the sum of all probabilities for all feasible values of \\(X\\) is 1. That is, \\(\\sum_{c} P(X=c)=1\\).\nIf \\(X\\) is continuous random variable, then \\(P(X=c)=0\\) for any value \\(c\\).\n\nThe probability to observe a particular number is zero.\nInstead, when using continuous data, we focus on the probability of observing a value in a range. For example, \\(P(1.7 \\leq X \\leq 1.8)\\) is the probability that \\(X\\) is between 1.7 and 1.8, which can be any value between 0 and 1.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher"
+    ]
+  },
+  {
+    "objectID": "mathref/math_3.html#stata-and-random-variables",
+    "href": "mathref/math_3.html#stata-and-random-variables",
+    "title": "Math Refresher",
+    "section": "Stata and Random Variables",
+    "text": "Stata and Random Variables\n\nComputers CANNOT generate random numbers. They can only generate pseudo-random numbers.\n\nRandom numbers cannot be reproduced.\nPseudo-random numbers can be reproduced, if we know initial conditions. (seed)\n\nFor most purposes, pseudo-random numbers are good enough.\n\n\nStata has many built-in function to generate random numbers.\n\nhelp random for more information.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher"
+    ]
+  },
+  {
+    "objectID": "mathref/math_3.html#probability-density-functions",
+    "href": "mathref/math_3.html#probability-density-functions",
+    "title": "Math Refresher",
+    "section": "Probability Density Functions",
+    "text": "Probability Density Functions\n\nFor continuous random variables, we can use a function to describe the probability distribution.\n\nFor example, we can say that the probability distribution of the height of a randomly selected person is:\n\n\n\\[f(x)\\]\nThis function has important properties:\n\n\\(f(x) \\geq 0\\) for all \\(x\\).\n\\(\\int_{-\\infty}^{\\infty} f(x) dx = 1\\).\n\\(P(a \\leq X \\leq b) = \\int_{a}^{b} f(x) dx\\).\n\\(P(X \\leq a) + P(X &gt; a) = 1\\).\n\\(P(a \\leq X \\leq b) = P(X &lt; b) - P(X &lt; a)\\).",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher"
+    ]
+  },
+  {
+    "objectID": "mathref/math_3.html#stata-and-empirical-distributions",
+    "href": "mathref/math_3.html#stata-and-empirical-distributions",
+    "title": "Math Refresher",
+    "section": "Stata and Empirical Distributions",
+    "text": "Stata and Empirical Distributions\n\nTheoryDicreetContinuous\n\n\n\nGiven a dataset, you can use different tools to estimate the probability distribution or the probability density function of a random variable.\n\nFor example, you can use histograms, or frequency tables, to estimate the probability distribution of a discrete random variable.\nYou can use kernel density plots to estimate the probability density function of a continuous random variable.\n\n\n\n\n\n\nCode\nsysuse nlsw88.dta, clear\nreplace grade  = 11 if grade &lt;11\nfre grade\n\n\n\n\n\n(NLSW, 1988 extract)\n(211 real changes made)\n\ngrade -- Current grade completed\n-----------------------------------------------------------\n              |      Freq.    Percent      Valid       Cum.\n--------------+--------------------------------------------\nValid   11    |        334      14.87      14.88      14.88\n        12    |        943      41.99      42.02      56.91\n        13    |        176       7.84       7.84      64.75\n        14    |        187       8.33       8.33      73.08\n        15    |         92       4.10       4.10      77.18\n        16    |        252      11.22      11.23      88.41\n        17    |        106       4.72       4.72      93.14\n        18    |        154       6.86       6.86     100.00\n        Total |       2244      99.91     100.00           \nMissing .     |          2       0.09                      \nTotal         |       2246     100.00                      \n-----------------------------------------------------------\n\n\n\n\n\n\nCode\nkdensity wage, scale(1.25) title(\"Wage Density f(X)\")",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher"
+    ]
+  },
+  {
+    "objectID": "mathref/math_3.html#section-1",
+    "href": "mathref/math_3.html#section-1",
+    "title": "Math Refresher",
+    "section": "",
+    "text": "For continuous variables, estimation and graphical representation is tricky\nit must be the case that:\n\n\\[\\int_{-\\infty}^{\\infty} \\int_{-\\infty}^{\\infty} f(x,y) dx dy = 1\\]\n\nYou may be able to use scatter plots, or contour plots, to represent the joint probability distribution of two continuous random variables.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher"
+    ]
+  },
+  {
+    "objectID": "mathref/math_3.html#section-2",
+    "href": "mathref/math_3.html#section-2",
+    "title": "Math Refresher",
+    "section": "",
+    "text": "Scatter PlotHeatplotBiDensity\n\n\n\n\nCode\nscatter wage ttl_exp , msize(2) mcolor(%10)\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nqui:ssc install heatplot\nheatplot wage ttl_exp , \n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nqui:ssc install bidensity\nbidensity wage ttl_exp, levels(10)",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher"
+    ]
+  },
+  {
+    "objectID": "mathref/math_3.html#conditional-probability-distributions",
+    "href": "mathref/math_3.html#conditional-probability-distributions",
+    "title": "Math Refresher",
+    "section": "Conditional Probability Distributions",
+    "text": "Conditional Probability Distributions\nThe conditional probability distribution of \\(X\\) given \\(Y\\) is a function that assigns probabilities to the values of \\(X\\) given that \\(Y\\) has taken on a particular value.\n\nDiscrete random variables: \\[P(X=x|Y=y)\\]\nContinuous random variables:\n\n\\[f(x|y)\\]",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher"
+    ]
+  },
+  {
+    "objectID": "mathref/math_3.html#summary-statistics",
+    "href": "mathref/math_3.html#summary-statistics",
+    "title": "Math Refresher",
+    "section": "Summary Statistics",
+    "text": "Summary Statistics\nGiven a random variable \\(X\\), there are several summary statistics that can be used to describe the distribution of \\(X\\), without describing the entire distribution",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher"
+    ]
+  },
+  {
+    "objectID": "mathref/math_3.html#central-tendency",
+    "href": "mathref/math_3.html#central-tendency",
+    "title": "Math Refresher",
+    "section": "Central Tendency",
+    "text": "Central Tendency\n\nMean: average value of \\(X\\).\n\n\\[\\bar x = E(X) = \\sum_{x} xP(X=x) \\text{ or } E(X) = \\int_{-\\infty}^{\\infty} xf(x)dx\\]\n\nMedian: middle value of \\(X\\).\nPercentile: values that identify the boundaries of the distribuion. Median is the 50th percentile.\n\n\\[Q_y(p) = E(Y \\leq Q_y) = p\\]\n\nMode: most frequent value of \\(X\\).\n\nsum var,d in Stata will give you the mean, median, and selected quantiles.\nmode can be estimated using egen, or based on empirical distribution.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher"
+    ]
+  },
+  {
+    "objectID": "mathref/math_3.html#dispersion",
+    "href": "mathref/math_3.html#dispersion",
+    "title": "Math Refresher",
+    "section": "Dispersion",
+    "text": "Dispersion\n\nVariance: Average squared deviation from the mean.\n\n\\[Var(X) = E(X-\\mu)^2 = \\sum_{x} (x-\\mu)^2P(X=x) \\text{ or } Var(X) = \\int_{-\\infty}^{\\infty} (x-\\mu)^2f(x)dx\\]\n\nStandard deviation: square root of the variance. Easier to interpret.\nRange: difference between the maximum and minimum values of \\(X\\).\nInterquartile range: difference between the 75th and 25th percentiles of \\(X\\).\n\nsum var,d and tabstat can provide you with most of this information.",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher"
+    ]
+  },
+  {
+    "objectID": "mathref/math_3.html#section-3",
+    "href": "mathref/math_3.html#section-3",
+    "title": "Math Refresher",
+    "section": "",
+    "text": "Continuous distributions\n\nUniform distribution: \\(X \\sim Uniform(a,b)\\)\n\n\\(f(x)=\\frac{1}{b-a}\\) for \\(a \\leq x \\leq b\\), and \\(f(x)=0\\) otherwise.\n\\(E(X)=\\frac{a+b}{2}\\) and \\(Var(X)=\\frac{(b-a)^2}{12}\\).\nruniform(a, b)\n\nNormal distribution: \\(X \\sim Normal(\\mu,\\sigma^2)\\)\n\n\\(f(x)=\\frac{1}{\\sqrt{2\\pi\\sigma^2}}e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}\\).\n\\(E(X)=\\mu\\) and \\(Var(X)=\\sigma^2\\).\nrnormal(mu, sigma)\n\n\nOther useful distributions include:\n\nt-distribution, Chi-squared distribution, F-distribution\n\nhelp density_functions help random_number_functions",
+    "crumbs": [
+      "Home",
+      "Math Refresher",
+      "Math Refresher"
+    ]
   }
 ]

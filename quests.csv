@@ -1,0 +1,519 @@
+quest_id,name,region_id,min_level,difficulty,reward_gold,reward_xp,required_participants
+1,Exclusive tertiary knowledge user,7,113,Hard,433.8944155333235,86.7846080235175,1
+2,Decentralized content-based structure,2,116,Medium,35.613917427916974,478.70014628225147,1
+3,Down-sized global definition,7,10,Hard,217.61063430172516,975.3407610992682,10
+4,Automated zero-defect support,9,62,Elite,32.34456746733171,192.88753654786333,3
+5,Multi-lateral logistical initiative,6,53,Medium,113.13205143182833,221.70973615539407,1
+6,Synergized coherent analyzer,1,64,Easy,121.12570989139935,162.78285866581788,3
+7,Adaptive disintermediate adapter,8,70,Medium,114.96766217433387,340.6903743407469,1
+8,Monitored upward-trending concept,8,6,Elite,64.11568955610845,245.80337220139626,1
+9,Quality-focused next generation benchmark,5,94,Easy,64.10904385545535,1378.0109226167822,1
+10,Synchronized stable functionalities,5,26,Medium,99.11475495250392,2473.9868546821335,1
+11,Balanced real-time challenge,1,49,Elite,45.03817949017563,563.7909196163197,3
+12,Progressive reciprocal conglomeration,8,6,Easy,38.456989422928174,1512.164787155851,1
+13,Realigned composite hub,3,102,Easy,296.8569249303171,335.75669010182503,1
+14,Polarized transitional implementation,10,97,Medium,121.50345354199591,752.1739752240325,1
+15,Triple-buffered intangible neural-net,4,107,Medium,48.67745242763056,749.4014957794313,1
+16,Horizontal transitional open system,6,41,Medium,245.98116745227426,127.26656724453696,1
+17,Expanded explicit archive,2,7,Easy,62.063072205027105,70.86118838172072,1
+18,Digitized content-based parallelism,5,26,Hard,32.70145883638925,305.1044802348193,1
+19,Multi-channeled optimizing support,3,71,Medium,38.81800334865918,659.6138123307956,5
+20,Phased uniform focus group,1,49,Elite,46.11114854713493,82.74205339610619,10
+21,Face-to-face non-volatile model,2,47,Medium,206.69518637625586,218.96391494196743,1
+22,Organic scalable moderator,2,119,Elite,65.70156875331635,894.655295975977,1
+23,Organized interactive standardization,6,61,Medium,19.512849053566793,95.88121314862127,2
+24,Customizable dedicated array,4,119,Easy,63.70347462193746,1058.6917044678805,3
+25,User-centric client-server structure,5,29,Medium,55.601468609491036,254.0949019554493,2
+26,Re-contextualized national synergy,1,59,Hard,17.376531629805353,187.2486714797685,5
+27,Optional context-sensitive software,3,117,Elite,140.57010139618933,150.6636578660532,2
+28,Focused bottom-line knowledgebase,3,68,Medium,92.89114985836719,890.4872629230737,1
+29,Team-oriented client-driven contingency,8,54,Hard,56.88887090179466,383.35883100079604,1
+30,Triple-buffered content-based hardware,4,54,Medium,184.10977025137976,1866.357579818384,1
+31,Synergized full-range software,5,115,Elite,12.962830497050426,296.4985928498362,1
+32,Horizontal solution-oriented Graphical User Interface,3,89,Medium,51.37887818046977,477.31434930765397,1
+33,Multi-channeled bi-directional firmware,10,1,Hard,22.701258452548796,180.82453811020915,1
+34,Quality-focused multimedia open architecture,2,79,Medium,39.151127243172766,1487.193869524669,1
+35,Multi-layered object-oriented archive,9,79,Hard,49.39131964842047,210.66358858144704,1
+36,Decentralized real-time moratorium,8,19,Easy,119.72372464391749,93.95512875694261,10
+37,Reactive incremental analyzer,10,6,Medium,45.015965856583435,375.1668530289819,1
+38,Re-engineered bandwidth-monitored Graphic Interface,6,19,Easy,25.27184865871883,276.50240008872885,5
+39,Cloned encompassing array,9,91,Medium,107.09386128145626,158.03258073251823,1
+40,Managed disintermediate standardization,8,116,Legendary,62.12934314683155,254.10502565020786,10
+41,Configurable fault-tolerant projection,4,16,Medium,7.3993987598717235,854.6089579015947,2
+42,Phased client-driven secured line,4,59,Medium,97.94711680109626,998.4250573200196,25
+43,Cross-platform didactic functionalities,7,3,Easy,122.51386250113624,439.51367007851417,1
+44,Visionary asymmetric circuit,1,62,Easy,63.633989647429736,567.8561326251693,1
+45,Multi-layered responsive alliance,1,114,Elite,393.06666541684535,1298.4184528851977,1
+46,Synergistic logistical support,3,88,Easy,89.52893812849062,111.78280733906432,5
+47,De-engineered national monitoring,10,116,Easy,194.9265659752042,233.52349596389504,1
+48,Centralized homogeneous open system,9,20,Hard,34.680995047489716,470.65341910951287,3
+49,Ameliorated human-resource system engine,2,45,Hard,35.82724184835355,1895.0252631277883,5
+50,Networked 5thgeneration matrix,8,48,Elite,176.2853560584581,200.30048936678494,1
+51,Balanced intermediate hub,2,101,Medium,121.74634896433014,781.1993037754223,5
+52,Optimized zero administration encryption,9,35,Easy,33.18509122903589,324.17400402034156,1
+53,Configurable asymmetric instruction set,8,24,Elite,219.49541533148954,1737.1360600493904,2
+54,Customizable well-modulated Graphical User Interface,3,77,Hard,55.10080598886471,566.7751082134839,1
+55,Distributed mission-critical matrix,6,13,Medium,131.31396290746025,438.898726088894,1
+56,Cross-platform grid-enabled structure,2,74,Easy,113.02774615916539,427.14445505238456,5
+57,Inverse background customer loyalty,8,32,Elite,166.0948606850437,527.2660657404982,1
+58,Ameliorated reciprocal help-desk,6,69,Easy,24.286445871078325,319.0844903110036,1
+59,Mandatory impactful toolset,3,64,Medium,20.972023595035875,96.85957564011169,2
+60,Face-to-face 24hour help-desk,6,108,Easy,19.18064461358405,2616.4067185041945,5
+61,Object-based leadingedge strategy,2,74,Medium,84.33580407172101,395.5945160664134,2
+62,Robust high-level protocol,4,28,Medium,28.451271442957655,134.60072763857062,1
+63,Triple-buffered leadingedge budgetary management,3,13,Elite,45.1515190584293,431.2013407267624,10
+64,Synchronized 24hour complexity,6,45,Hard,297.682239882181,186.9389049287958,10
+65,Adaptive demand-driven benchmark,1,101,Easy,123.37891675570391,67.60347054131752,1
+66,Pre-emptive multi-tasking algorithm,8,54,Elite,22.346306079262934,97.43978254392708,2
+67,Multi-layered regional focus group,1,109,Medium,14.782431044129737,161.21185723833602,1
+68,Open-architected methodical adapter,2,114,Hard,124.45852299088585,207.8456886009998,1
+69,Profit-focused cohesive application,3,116,Medium,61.03109214402989,70.4804255096308,1
+70,Networked mobile neural-net,6,114,Elite,25.96256336656997,240.87718063644456,25
+71,Open-architected context-sensitive toolset,1,92,Medium,85.92844880897293,3715.436228438522,2
+72,Mandatory upward-trending attitude,1,92,Elite,83.815321791006,335.6942659038122,5
+73,Down-sized attitude-oriented budgetary management,4,117,Easy,126.55396172826404,3712.47850880568,3
+74,Adaptive asynchronous collaboration,8,74,Easy,230.39526721753683,577.2587359607736,1
+75,Total 3rdgeneration parallelism,7,35,Easy,79.63216171474177,247.7148406211394,1
+76,Advanced executive hardware,4,119,Easy,188.1248613912256,463.23683245356915,3
+77,Up-sized high-level throughput,8,64,Elite,343.19560361567,119.3765222489633,25
+78,Right-sized incremental utilization,4,108,Medium,43.67969987017598,45.75569230821886,5
+79,Synergistic national frame,7,118,Easy,120.32822266136027,192.48619165232955,5
+80,Customizable needs-based forecast,7,93,Hard,47.55865398154077,4391.044001564391,1
+81,Synergistic secondary project,9,16,Elite,82.65898850868959,115.5098126513387,10
+82,Enhanced 24/7 synergy,5,24,Medium,27.79294194126703,283.31232898782673,2
+83,Intuitive 24/7 superstructure,4,115,Hard,60.04924028147222,766.3442880793608,2
+84,Proactive reciprocal hub,1,74,Medium,17.268779321406182,54.53392316426825,2
+85,Secured zero tolerance forecast,8,91,Easy,88.11431239983295,265.90405602820056,1
+86,Implemented systemic matrices,5,17,Legendary,19.226649675368602,298.72513155703797,1
+87,Assimilated analyzing system engine,9,18,Legendary,8.54172636389788,188.08541866658547,1
+88,Ergonomic bifurcated protocol,8,94,Easy,35.33190450925392,330.71601587203565,3
+89,Open-source static alliance,7,67,Easy,20.416371116292932,745.4744935740459,2
+90,Decentralized bifurcated archive,7,20,Hard,7.135098370550317,413.6949473709921,10
+91,Organized heuristic open system,8,48,Easy,3.666597336365982,46.55353601841716,1
+92,Digitized disintermediate challenge,6,19,Easy,122.3752328585503,143.15195928102546,2
+93,Universal neutral analyzer,5,104,Easy,77.6687798820945,724.0953796610444,10
+94,Extended regional portal,6,77,Hard,265.9952413207475,1598.724111301503,1
+95,Polarized client-driven access,9,54,Elite,163.87623618177147,1556.7491514329972,1
+96,Persistent system-worthy process improvement,8,15,Elite,107.90041458845684,73.97107840837629,5
+97,Team-oriented leadingedge support,5,112,Hard,69.89881389029685,91.19688046188664,1
+98,Visionary mission-critical attitude,10,8,Easy,134.38317102686085,398.988586805006,2
+99,Cross-group heuristic budgetary management,9,67,Medium,25.887828465181318,244.90060821187228,10
+100,Reduced solution-oriented parallelism,5,31,Hard,13.050486298337466,1212.8217134435524,1
+101,Optional systematic capacity,4,68,Easy,30.12900213824078,967.6064260379485,5
+102,Mandatory analyzing frame,9,13,Medium,158.92107578617328,272.9871885934259,2
+103,Switchable clear-thinking forecast,6,23,Medium,128.9062662138208,922.951015740579,25
+104,Decentralized high-level open architecture,2,36,Medium,69.23868744383599,508.5889505928454,1
+105,Open-architected eco-centric database,9,43,Medium,141.90092719039305,3790.627064130113,10
+106,Operative well-modulated product,1,28,Medium,46.53092261311503,539.3707091727894,1
+107,Fundamental tangible capability,10,100,Medium,44.413003595987284,447.0395836514296,5
+108,Switchable neutral migration,5,16,Hard,23.59111472247631,541.3921899512917,1
+109,Monitored local protocol,5,117,Elite,111.41017720742961,915.2002330764959,10
+110,Profit-focused zero-defect info-mediaries,7,110,Elite,56.952834424755075,425.1810062363206,2
+111,User-friendly content-based algorithm,1,87,Easy,46.318582949073374,82.16151084328335,1
+112,Integrated holistic throughput,8,88,Elite,24.39855575567193,503.6131966124379,1
+113,Profit-focused modular capability,3,5,Hard,189.4053030139546,1461.352101701135,1
+114,Team-oriented dynamic orchestration,5,107,Easy,12.368643568745638,247.12029303608915,3
+115,Triple-buffered user-facing leverage,10,37,Medium,165.81324594434298,58.32679279978562,2
+116,Extended responsive utilization,2,6,Elite,33.53856268701028,449.9291592682234,1
+117,Versatile discrete monitoring,6,17,Hard,79.21447837941994,120.08316517615506,3
+118,Networked intermediate portal,6,34,Legendary,25.471258135093628,130.80150564140422,25
+119,Self-enabling empowering moratorium,8,81,Elite,74.26944704335386,129.35324477217455,1
+120,Monitored explicit array,4,55,Easy,94.06174828902417,151.921959718149,1
+121,Triple-buffered secondary concept,3,49,Elite,327.9999100715826,467.8176691157305,1
+122,Future-proofed zero tolerance interface,6,64,Hard,53.16971433552038,588.4176366989299,1
+123,Realigned analyzing system engine,4,72,Easy,35.12762173243916,449.6849399782534,10
+124,Object-based mission-critical success,6,25,Hard,226.94190190254022,433.347122214789,1
+125,Upgradable logistical emulation,3,81,Medium,37.6845672494464,126.401430057928,1
+126,Horizontal actuating portal,10,86,Easy,42.397385826200555,1394.2917537346045,3
+127,Robust executive intranet,9,23,Hard,162.79213886871366,178.5596195137598,1
+128,Visionary secondary strategy,8,114,Medium,37.45891305872524,331.2441519135982,5
+129,Object-based human-resource customer loyalty,3,8,Easy,45.79751313694787,441.9971262236945,10
+130,Public-key logistical conglomeration,3,75,Medium,76.0211336487655,56.12714078590684,1
+131,Compatible optimizing website,1,1,Medium,11.621016715701707,296.5086644334889,2
+132,Assimilated empowering capacity,2,77,Hard,744.1959216900129,148.4792200654865,1
+133,Integrated background emulation,10,12,Easy,63.17698262604513,232.48248675667213,1
+134,Realigned solution-oriented data-warehouse,1,85,Hard,34.9059887829673,367.4250781502283,1
+135,Re-contextualized next generation time-frame,7,32,Easy,135.129009738796,349.9930624249656,2
+136,Compatible bifurcated productivity,4,35,Easy,51.806869413843906,2207.116761796581,1
+137,Customer-focused mobile website,1,44,Easy,130.25094283823134,433.7214390114337,5
+138,Decentralized optimizing firmware,6,36,Elite,39.947703214102454,269.68749944213835,1
+139,Multi-channeled logistical matrix,10,42,Easy,67.36703174915931,25.759524133948396,1
+140,Multi-channeled 24/7 alliance,6,9,Hard,101.74412383715999,1305.6817695731957,2
+141,Advanced non-volatile firmware,1,31,Easy,81.29860680082528,118.2345963557393,10
+142,Self-enabling bifurcated customer loyalty,8,107,Easy,38.212824531131716,818.8747968185074,1
+143,User-centric systematic encryption,9,78,Legendary,57.768371217348744,1146.716167054101,1
+144,Phased zero administration open architecture,3,21,Medium,26.023450752457283,625.3258680521581,2
+145,Adaptive bifurcated focus group,9,112,Elite,71.83873395733313,337.7161299198403,2
+146,Public-key even-keeled frame,7,38,Medium,104.40478528493622,91.78995661630844,10
+147,Centralized clear-thinking intranet,1,13,Medium,59.630477267654065,72.80353846923187,1
+148,Optional scalable project,10,104,Medium,29.864218479624974,382.7652204354901,1
+149,Digitized directional methodology,4,44,Easy,71.17892165670294,48.17547654400902,1
+150,Business-focused analyzing protocol,10,12,Legendary,49.13776774369793,199.0778422474553,5
+151,Synergistic asymmetric project,2,104,Easy,106.34170916220184,237.41792675647113,2
+152,Synergized cohesive synergy,4,92,Hard,16.751218543243425,569.7891320274547,1
+153,Digitized national capability,4,65,Elite,201.3595610336677,1973.9443550983908,2
+154,Phased radical ability,9,20,Medium,27.398499043708025,798.2589101212851,1
+155,Adaptive executive info-mediaries,10,86,Medium,43.00096078533903,752.813505708672,1
+156,Optimized grid-enabled budgetary management,10,51,Easy,55.563023182196716,468.8463732532499,1
+157,Switchable impactful protocol,6,28,Easy,12.17079222051276,332.50039172239275,3
+158,Up-sized 3rdgeneration application,9,6,Legendary,28.87687849473365,509.65432842959547,2
+159,Fully-configurable client-server open system,5,98,Elite,32.283980415349255,590.9308608640464,2
+160,Up-sized incremental installation,3,108,Hard,48.686597825810075,1166.1329092877954,2
+161,Face-to-face global middleware,8,57,Hard,25.257991544694317,1782.428962645146,3
+162,Multi-channeled multimedia customer loyalty,6,5,Hard,15.4618572314026,3515.295202955399,1
+163,Business-focused attitude-oriented support,3,107,Easy,177.19597265431528,438.7598559212285,3
+164,Realigned content-based Graphical User Interface,8,107,Easy,109.3712184329857,476.62258175673924,10
+165,Re-contextualized attitude-oriented architecture,1,24,Legendary,19.9528283921344,699.5082068468067,10
+166,Universal next generation algorithm,3,31,Hard,26.545123997972446,327.869534274642,1
+167,Implemented regional firmware,8,10,Elite,92.0019706512775,389.0250148872494,1
+168,Customizable multi-state project,4,34,Medium,63.08905642577273,286.52055564798724,1
+169,Secured dynamic model,3,114,Medium,71.01201450621146,82.85186221495874,5
+170,De-engineered attitude-oriented software,6,90,Hard,67.96396859866375,1031.5040983265642,1
+171,Proactive client-server project,9,8,Hard,358.80749388265036,194.46921964551456,1
+172,Polarized attitude-oriented standardization,5,51,Easy,86.46047310733071,170.1660208232124,1
+173,Face-to-face heuristic hierarchy,9,34,Medium,56.582302351652125,167.00854836465945,1
+174,Intuitive asynchronous approach,10,10,Legendary,9.989005515323253,1678.356652880541,3
+175,Exclusive dedicated encryption,9,55,Medium,14.296797392631062,921.4974374972244,1
+176,Phased reciprocal structure,2,48,Easy,19.175554340439273,166.07594862423252,1
+177,Customer-focused user-facing challenge,8,50,Medium,135.81912865156806,109.910607692158,1
+178,Managed dedicated archive,3,58,Easy,95.52233570618823,190.13365971581894,1
+179,Future-proofed systemic collaboration,2,103,Medium,47.25949176022455,2078.303273170651,2
+180,Exclusive impactful portal,3,59,Easy,60.236664544956184,394.02714675895425,1
+181,Customer-focused mobile core,9,67,Hard,15.260504908327379,857.2913460835463,2
+182,Monitored heuristic website,10,104,Hard,66.14133310745129,297.55509575176865,1
+183,Object-based systemic toolset,4,99,Easy,18.799407217121544,84.70109510932834,1
+184,Customizable fresh-thinking approach,1,3,Medium,90.19394763592364,592.2214092889465,1
+185,Vision-oriented zero tolerance customer loyalty,7,72,Easy,72.38344966067227,1050.069144794087,1
+186,Open-source asynchronous frame,9,9,Easy,18.779237624754227,369.9296463408145,10
+187,Enterprise-wide empowering Internet solution,7,119,Easy,53.231355317197796,778.883915538698,1
+188,Streamlined multi-state policy,9,71,Medium,107.87534242399525,275.46419835005315,25
+189,Proactive fault-tolerant array,3,57,Easy,19.843718085757267,413.890940126137,10
+190,Customizable cohesive structure,3,34,Medium,68.3880591046212,914.9144311676052,2
+191,Up-sized mission-critical complexity,2,4,Hard,51.37546167599999,490.8750767632988,2
+192,Vision-oriented mission-critical forecast,3,115,Easy,237.04288430248715,3195.773557501003,2
+193,Profound clear-thinking infrastructure,5,49,Elite,16.357694297160805,517.3842817669438,3
+194,User-friendly explicit customer loyalty,8,64,Easy,94.3633466423484,44.050677701312765,1
+195,Synergized modular instruction set,1,88,Easy,50.19833620107797,681.0898469458563,1
+196,Decentralized methodical process improvement,4,57,Easy,68.7306963459011,263.0771428209713,1
+197,Innovative static application,1,86,Easy,167.09877037358024,608.7541690344015,1
+198,Object-based 3rdgeneration attitude,6,111,Hard,44.75218422562549,111.9729323872191,2
+199,Diverse systemic encoding,4,85,Hard,63.366181821039156,770.6016448230573,3
+200,Integrated mission-critical paradigm,4,111,Easy,48.85222646080485,235.8587045609717,2
+201,Enterprise-wide zero tolerance functionalities,1,78,Easy,27.635466052484993,2056.366901876284,1
+202,Cross-platform mission-critical software,5,112,Easy,31.116248581682193,2024.3585405111755,2
+203,Open-source motivating adapter,3,27,Hard,37.20782768936599,533.2110468248607,1
+204,Business-focused high-level methodology,2,42,Elite,99.59646456866388,170.39017135635564,2
+205,Mandatory dynamic initiative,9,68,Medium,64.88581702716453,852.1983519071229,1
+206,Distributed zero administration implementation,1,15,Hard,26.353840864930113,3629.885700575426,25
+207,Organized composite extranet,9,65,Hard,89.14142145410948,204.20099421472383,1
+208,Seamless executive groupware,1,65,Legendary,66.66707243341912,201.4863026149519,1
+209,Assimilated fresh-thinking strategy,9,26,Easy,21.373972210059716,1772.0942857776797,1
+210,Polarized logistical database,5,35,Legendary,31.85417489502119,91.29010352248706,5
+211,Universal stable archive,1,7,Easy,52.433977473250835,581.1743035214942,5
+212,Automated foreground structure,8,66,Elite,41.85259935190183,259.75232999259566,3
+213,Persevering full-range system engine,3,41,Medium,15.25743967738458,264.2563456122612,3
+214,Implemented intermediate system engine,8,88,Medium,39.51418815551287,425.59735714358965,3
+215,Focused needs-based contingency,7,32,Hard,52.850826995902395,645.4446137373462,1
+216,Automated 24hour open architecture,8,96,Easy,36.450079393017496,200.84071152704516,1
+217,Adaptive multi-state archive,2,92,Medium,109.60202861634623,636.009134914807,2
+218,Object-based asynchronous functionalities,7,92,Easy,370.58978429939793,383.88440741180415,3
+219,Enterprise-wide clear-thinking archive,6,19,Hard,74.04361960891629,383.8272994257853,1
+220,Intuitive heuristic contingency,3,2,Medium,33.94171827234739,757.6099166036346,2
+221,Future-proofed optimal policy,2,98,Hard,85.01139023320484,114.99295446182676,2
+222,Sharable 24hour archive,5,43,Medium,126.10468167482553,66.76034878872643,1
+223,Cloned high-level knowledge user,8,44,Elite,159.9261702877692,253.33641233144718,10
+224,Advanced client-server knowledge user,7,64,Medium,67.06631365916041,258.88235819760047,1
+225,Fundamental executive process improvement,9,58,Easy,284.1087171949688,506.20366577864144,1
+226,Pre-emptive foreground archive,7,29,Legendary,36.10837863880736,362.06972482613617,2
+227,Optimized high-level array,4,7,Easy,15.56588240764136,852.0053215818692,2
+228,Re-contextualized needs-based complexity,1,90,Hard,341.7093464131658,351.6758220493973,3
+229,Ameliorated tangible flexibility,1,39,Hard,56.895520634295416,103.10458017449184,1
+230,Distributed non-volatile contingency,1,52,Medium,101.81752768539677,702.0609548050771,3
+231,Diverse optimizing open system,1,75,Easy,8.965556935929497,399.39881226808575,1
+232,Vision-oriented needs-based encryption,7,72,Easy,60.42147728795001,690.2969424779537,1
+233,Synergistic uniform pricing structure,8,10,Medium,48.330798705203236,397.87823483635964,2
+234,Fully-configurable client-driven intranet,10,54,Medium,43.71164450889549,2170.0083269429047,1
+235,Down-sized national interface,8,81,Medium,320.2833737491327,996.6715161792102,25
+236,Down-sized upward-trending instruction set,10,48,Hard,120.99786116183853,488.3422643661471,5
+237,Cloned stable superstructure,2,116,Easy,52.07065096060294,224.4245239300148,5
+238,Inverse optimizing open architecture,1,21,Medium,40.688277971480986,407.23409816529255,1
+239,Innovative cohesive circuit,3,17,Medium,11.922474365974512,3613.253779737162,1
+240,Centralized asynchronous firmware,1,7,Elite,48.117092276529,124.83851227448869,1
+241,Grass-roots zero tolerance policy,5,42,Medium,31.11225907056885,1457.722226860729,2
+242,Universal hybrid toolset,9,59,Elite,30.388268734968964,166.32787641846372,2
+243,Persevering radical core,9,90,Legendary,105.62518346871713,2418.641595546974,3
+244,Profit-focused multimedia knowledgebase,9,34,Medium,30.261590077077926,203.28224148465063,10
+245,Implemented bottom-line moratorium,7,7,Hard,21.550130705358757,421.3703270052914,1
+246,Business-focused coherent leverage,5,104,Easy,65.7839633338241,365.3961184184746,1
+247,Team-oriented global hardware,6,52,Easy,53.45952633651947,521.025154865083,1
+248,Organized encompassing instruction set,3,9,Easy,274.0855314130421,1390.6475439234775,1
+249,Assimilated optimal benchmark,10,76,Elite,164.774525011426,199.03776208176683,5
+250,Triple-buffered demand-driven data-warehouse,2,38,Hard,36.88486081113397,179.6694343996555,2
+251,Advanced multimedia knowledge user,4,117,Hard,35.367540519548434,2258.973307840404,1
+252,Future-proofed discrete concept,3,111,Easy,90.42649947941338,239.5610078506786,2
+253,Organic grid-enabled algorithm,6,85,Medium,41.28213211273561,70.91141641616836,2
+254,Persistent multi-state capability,10,118,Hard,102.52957852857708,40.701202965358654,5
+255,Customizable fault-tolerant alliance,10,27,Hard,24.882830448530168,1185.4300572083987,3
+256,Enhanced dedicated knowledgebase,6,117,Medium,345.0900556790716,106.55331795220003,3
+257,Cross-group logistical moratorium,3,93,Elite,62.36487394389579,2645.1419883656163,2
+258,Expanded composite website,2,115,Medium,58.560497597495214,411.03771466582214,1
+259,Cloned methodical capability,6,34,Medium,90.03387120176289,859.0522119258385,3
+260,Seamless 5thgeneration interface,9,113,Hard,54.30372448410877,294.2195755183967,1
+261,Fundamental eco-centric core,6,116,Elite,128.71088894697635,368.6760127323949,1
+262,Business-focused even-keeled Graphical User Interface,9,103,Medium,54.554002421911875,50.15996363655981,2
+263,Reduced interactive groupware,3,103,Legendary,155.4166105165578,159.97457699827845,2
+264,Assimilated logistical database,9,90,Easy,125.0940306808989,228.66004871462079,2
+265,Face-to-face tangible workforce,6,29,Elite,157.02663351034963,315.207632928693,5
+266,Universal secondary flexibility,3,1,Medium,43.70953463387605,565.6212870119027,10
+267,Configurable incremental Local Area Network,2,63,Hard,62.52239725375219,244.3839978497021,5
+268,Total intermediate alliance,6,58,Hard,109.98560696319471,290.47226413290036,1
+269,Stand-alone foreground artificial intelligence,1,68,Easy,129.06480394980875,2539.6737723045007,5
+270,Self-enabling radical system engine,8,94,Hard,143.03233743804864,433.27634874569554,1
+271,Fundamental even-keeled hub,6,50,Medium,92.90178285180757,1030.0172851765487,25
+272,Triple-buffered holistic capability,9,69,Elite,87.41183448795248,860.4580028441452,1
+273,Compatible global leverage,2,17,Easy,19.34467494587125,117.23381410974247,1
+274,Ergonomic attitude-oriented artificial intelligence,10,35,Easy,284.88507404303414,289.43728517763975,1
+275,Expanded dynamic moratorium,6,68,Medium,25.398564362904423,353.02993038841265,1
+276,Seamless hybrid toolset,9,76,Elite,272.25193544603616,615.5217711877193,1
+277,Function-based empowering model,2,61,Easy,26.242973404368204,160.44742226481975,1
+278,Managed stable attitude,8,50,Medium,18.696198346424374,125.04768305490022,25
+279,Re-engineered methodical frame,10,98,Hard,43.35317549706252,221.83734427839042,1
+280,Inverse actuating artificial intelligence,10,33,Elite,52.6944170570279,625.788846969124,10
+281,Vision-oriented encompassing attitude,8,89,Medium,13.950881627011961,102.68831165502831,1
+282,Assimilated needs-based focus group,8,112,Medium,24.71858500171153,3549.604726319739,1
+283,Horizontal global portal,4,85,Easy,223.9693210014155,307.98132406823277,1
+284,Devolved web-enabled application,3,84,Elite,38.001948960777476,644.4737861895322,1
+285,Persevering bandwidth-monitored policy,1,60,Elite,25.236768391223762,103.48673560107042,1
+286,Distributed zero-defect solution,8,65,Easy,32.95480497105299,85.77217036226699,1
+287,Enhanced modular data-warehouse,5,100,Medium,75.0149052361462,388.37168827862257,3
+288,Fundamental radical initiative,4,84,Easy,39.382894882934934,594.8743160841121,1
+289,De-engineered zero administration adapter,4,77,Medium,41.76213995388923,708.075206532278,1
+290,Customer-focused hybrid groupware,10,118,Medium,23.33308343302315,116.29815494271067,2
+291,Balanced web-enabled Graphical User Interface,3,26,Elite,11.441641537637896,136.34246968255644,1
+292,Face-to-face context-sensitive Local Area Network,8,13,Medium,24.03291074453301,639.3997813836254,1
+293,De-engineered scalable instruction set,7,86,Easy,108.14499967917489,212.16354928222782,2
+294,Adaptive even-keeled contingency,7,102,Easy,195.4299787429415,158.4243418037931,1
+295,Upgradable value-added open system,8,8,Medium,147.56309476416726,559.04772355192,2
+296,Devolved logistical orchestration,2,14,Easy,20.60425548604894,77.80524151229757,1
+297,Devolved interactive system engine,2,62,Hard,116.7854440986031,1409.2602171069896,1
+298,Advanced bifurcated migration,1,21,Elite,126.33063292223137,427.8477212965886,1
+299,Robust radical website,3,1,Hard,251.02440482410552,489.9489046731841,1
+300,Profound solution-oriented time-frame,7,66,Medium,99.90941717663608,216.4728984141249,2
+301,Extended maximized customer loyalty,3,81,Elite,86.68838260417753,325.00823572826965,1
+302,Upgradable mobile monitoring,6,94,Easy,10.763043830201603,939.5009654919844,1
+303,Implemented clear-thinking adapter,2,31,Medium,53.327881136252124,1182.3365104522388,1
+304,Balanced background utilization,10,116,Easy,62.648516599369415,786.4968058543193,1
+305,Object-based cohesive budgetary management,4,11,Hard,36.29848074798757,211.4861625403832,2
+306,Self-enabling logistical Graphical User Interface,10,13,Easy,295.5436050124676,924.6782172878915,2
+307,Team-oriented attitude-oriented architecture,5,100,Hard,21.953023929824823,239.66389083296207,3
+308,Expanded dynamic interface,10,80,Hard,21.246971036163792,118.29247529574793,1
+309,Re-contextualized 3rdgeneration capacity,3,35,Easy,52.92097167486464,284.65329591332784,2
+310,Extended zero administration matrix,4,103,Hard,141.1092383681495,213.18928076983934,3
+311,Vision-oriented clear-thinking strategy,7,55,Easy,22.656596765612502,255.22217434221102,10
+312,Networked uniform analyzer,9,100,Easy,96.079168017115,52.30834849511121,3
+313,Diverse human-resource data-warehouse,8,38,Medium,20.440606500311265,545.2568758873817,1
+314,Networked scalable ability,8,96,Medium,213.36809379996527,82.60092167040288,1
+315,Diverse cohesive monitoring,10,96,Hard,141.87621810579867,519.355435481125,3
+316,Configurable heuristic artificial intelligence,7,73,Easy,18.053461137529442,266.1235786386345,10
+317,Function-based local utilization,6,82,Easy,57.046074538289005,37.52961325226654,1
+318,Persevering homogeneous artificial intelligence,3,72,Hard,18.00889664182254,36.34650210702763,10
+319,Inverse intangible toolset,8,105,Elite,141.9193815042208,1010.9479415784533,2
+320,Synchronized client-driven conglomeration,2,101,Hard,25.237554214542786,74.56346363447878,1
+321,Ameliorated 24hour conglomeration,5,27,Legendary,39.68953935418741,1007.5787747576882,5
+322,Optional next generation customer loyalty,8,43,Elite,79.87333935157866,130.41858363117805,1
+323,De-engineered explicit help-desk,1,42,Legendary,67.23737432712714,805.7149554661197,1
+324,Public-key asymmetric protocol,4,58,Medium,82.71327972014632,2640.607261696411,1
+325,Balanced zero tolerance synergy,2,61,Easy,133.87168047206194,807.7444509196457,3
+326,Progressive logistical flexibility,7,114,Hard,28.192408412904967,307.66863348630545,1
+327,Digitized analyzing productivity,4,30,Hard,35.05903288704433,724.24294010581,1
+328,Diverse asynchronous functionalities,1,89,Medium,20.582439664727637,218.45705418703326,2
+329,Multi-channeled impactful firmware,6,95,Hard,71.45055327226336,817.2858046811691,2
+330,Progressive modular time-frame,3,15,Elite,24.333749863607917,546.0330054496234,5
+331,Multi-layered foreground encryption,9,48,Easy,25.662477094261334,694.636271481162,1
+332,Reverse-engineered zero-defect monitoring,4,27,Medium,101.32661707382002,186.76185634899818,25
+333,Visionary upward-trending core,1,34,Elite,34.66238006965465,195.23698951107644,2
+334,Realigned uniform protocol,10,81,Medium,69.71274722971097,43.76118500751647,2
+335,Up-sized solution-oriented strategy,8,66,Elite,429.18962448017237,378.4334435708233,1
+336,Public-key zero-defect standardization,10,36,Easy,78.62496566395215,105.92860339249526,5
+337,Operative discrete open system,7,66,Elite,17.26685218517212,84.51605347481127,1
+338,Cross-group even-keeled protocol,7,47,Hard,91.07195101653197,91.6066470261201,1
+339,Profit-focused systematic website,2,80,Easy,79.38078448272734,704.4710033022043,2
+340,Fully-configurable 3rdgeneration emulation,6,47,Medium,63.704712808342734,490.93835598952904,1
+341,Phased logistical policy,10,2,Medium,22.333505254380707,1104.8564604286248,2
+342,Triple-buffered disintermediate concept,4,55,Medium,35.87443149706021,300.5744716917391,1
+343,Cloned eco-centric initiative,7,43,Medium,117.57303421390448,656.3571643210123,1
+344,Multi-channeled dynamic algorithm,10,80,Hard,81.58362266031877,73.3679357227939,3
+345,Front-line hybrid solution,6,9,Medium,12.158649359506951,254.31423822515436,25
+346,Assimilated 5thgeneration conglomeration,3,110,Easy,203.6222336310431,668.8392587116622,1
+347,Enhanced leadingedge success,5,90,Easy,4.289013711669525,454.12388185001436,1
+348,Reactive value-added concept,10,84,Medium,27.754526704080718,993.036487508525,2
+349,Object-based high-level analyzer,5,85,Easy,24.27298126954846,786.6810434536577,2
+350,Function-based full-range info-mediaries,6,78,Medium,7.800662365753208,978.1941968384057,2
+351,Quality-focused regional capability,6,7,Medium,67.669079658201,1958.9516977826627,25
+352,Extended global secured line,5,27,Elite,31.742447786614715,117.54025234435089,1
+353,Fully-configurable 6thgeneration matrices,7,90,Easy,110.98097084630774,847.1863929835223,1
+354,Universal context-sensitive interface,1,74,Medium,454.36084506302893,552.6741523441489,1
+355,Compatible solution-oriented strategy,2,43,Easy,21.874928719224307,81.19082149981111,5
+356,Future-proofed human-resource structure,2,21,Easy,51.557937065109506,388.16310358905673,2
+357,Progressive optimizing capacity,5,29,Elite,40.06334621859974,343.04876158762943,25
+358,Total multi-tasking portal,10,16,Medium,144.39415806931646,994.8151228558321,10
+359,Polarized 24/7 support,7,31,Easy,56.399857290058584,1059.7979829905041,2
+360,Persistent real-time moratorium,8,87,Easy,217.00050321089,794.3273800721462,10
+361,Balanced local Local Area Network,9,52,Easy,50.037565283606725,486.9730474067978,5
+362,Implemented context-sensitive collaboration,3,117,Medium,11.074548910139947,143.74650662863706,2
+363,Ergonomic directional functionalities,9,17,Elite,66.74869200814337,513.0034185614492,1
+364,Devolved motivating system engine,10,44,Easy,209.76844604365297,1761.287361681461,1
+365,Proactive attitude-oriented conglomeration,5,104,Hard,112.31190685033094,731.3182453254395,1
+366,Versatile background secured line,6,22,Legendary,31.11367134617339,2129.831487261382,3
+367,Vision-oriented global groupware,8,83,Easy,32.106995229076084,309.2923998631178,1
+368,Down-sized bi-directional initiative,1,110,Hard,517.1469269368978,882.2479887925602,1
+369,Implemented asynchronous migration,6,90,Medium,168.9373098033896,273.98173758736715,1
+370,Team-oriented tertiary challenge,4,20,Hard,13.914059838175547,285.35188332337196,1
+371,Assimilated scalable time-frame,5,72,Medium,46.21437121082781,1008.0695682745377,3
+372,Fully-configurable secondary protocol,9,83,Medium,32.165381238246944,1178.1912485112753,10
+373,Phased uniform benchmark,5,47,Hard,12.500912317474251,131.59116854179206,1
+374,Reverse-engineered zero-defect parallelism,1,62,Elite,14.991543792941965,609.951780856298,1
+375,De-engineered modular function,1,106,Medium,61.86877336510087,3372.2656957024005,10
+376,Customizable bottom-line installation,10,73,Elite,28.327824525678007,482.06865155958025,2
+377,Extended mission-critical moderator,3,82,Hard,87.93959131310513,51.04586976050861,2
+378,Fully-configurable interactive circuit,6,50,Legendary,12.916708985131118,82.0523097908988,2
+379,Fundamental regional workforce,8,28,Legendary,88.1791716862767,2295.266611234495,1
+380,Phased mobile algorithm,4,18,Elite,24.49255195355546,115.12638208323841,1
+381,Monitored eco-centric parallelism,9,71,Hard,80.30116727041867,244.13726478529915,3
+382,Progressive asynchronous leverage,10,61,Easy,24.081128399072792,117.62792883558784,2
+383,Reduced zero administration success,8,12,Medium,46.282088622275836,286.6848057674569,1
+384,Total 24hour ability,10,1,Elite,52.162512969991965,105.19953941641903,3
+385,Vision-oriented hybrid open architecture,3,114,Medium,166.90141860276404,192.94656721435499,10
+386,Upgradable upward-trending portal,5,58,Hard,36.94078120253669,797.8599484927782,1
+387,Multi-channeled dedicated groupware,1,74,Legendary,56.87669459503291,3387.0458811610715,1
+388,Cloned object-oriented strategy,8,70,Easy,109.50202628886436,36.9149801130082,2
+389,Reactive eco-centric analyzer,10,38,Easy,12.997350551597654,355.6315808736126,1
+390,Business-focused scalable Local Area Network,9,87,Easy,1508.259789203027,500.029492449616,1
+391,Cloned full-range architecture,8,103,Medium,98.43895338243304,54.435090179102154,1
+392,Face-to-face client-server architecture,5,79,Medium,25.08642162062124,154.55220153924225,1
+393,Fully-configurable client-server array,4,105,Elite,16.277538634983358,71.16725600448922,1
+394,Front-line methodical task-force,4,46,Medium,62.996701797282135,598.646941570082,10
+395,Self-enabling empowering attitude,3,56,Easy,62.61664951772119,1747.551953421754,1
+396,Future-proofed grid-enabled toolset,7,91,Hard,153.334693827585,412.2113697868831,3
+397,Vision-oriented disintermediate access,2,96,Easy,92.16429194709744,568.0198844700128,3
+398,Operative motivating emulation,7,78,Elite,101.72028207873944,145.97652671643502,1
+399,Re-engineered well-modulated capacity,8,29,Medium,18.331319742544476,1786.8290139012406,1
+400,Versatile multi-tasking artificial intelligence,8,22,Easy,57.81173756688711,437.5122700961881,10
+401,Profound web-enabled hub,4,88,Elite,113.02868743703056,1136.538600560584,1
+402,Multi-layered contextually-based encryption,8,11,Medium,47.81442592265934,559.2275023134204,1
+403,Inverse encompassing core,10,61,Hard,235.21505632014046,562.0042473262605,1
+404,Expanded bi-directional software,1,89,Medium,96.5317660138512,1550.2120393089476,2
+405,Reduced bi-directional analyzer,2,92,Hard,218.15073890230713,1158.8226028854554,1
+406,Multi-layered mobile service-desk,1,8,Easy,90.59864066579743,250.57735604345248,2
+407,Public-key global paradigm,4,104,Medium,40.48190187691704,447.82366111780306,2
+408,Multi-lateral national infrastructure,8,19,Elite,461.1162576296575,196.8896112841558,1
+409,Ergonomic empowering portal,3,117,Legendary,13.098931278513758,205.12958249981,1
+410,Upgradable heuristic time-frame,5,65,Medium,36.942051934524386,811.2234975628796,5
+411,Assimilated content-based system engine,1,21,Easy,43.15542347403359,183.34848711578266,1
+412,Re-engineered discrete initiative,8,4,Hard,50.29674894212724,263.97259735008583,1
+413,Multi-tiered contextually-based architecture,7,21,Easy,47.702325412217995,959.4738566290299,1
+414,Cloned regional protocol,10,65,Medium,79.21723553342576,142.35091655206628,1
+415,Advanced content-based workforce,5,4,Medium,24.389603506898954,280.25307200789615,5
+416,Right-sized clear-thinking leverage,2,44,Medium,102.4221861525954,273.4008641065729,1
+417,Switchable mission-critical array,9,57,Easy,58.1592002063839,151.71478103664745,5
+418,Decentralized solution-oriented extranet,7,36,Easy,53.27896676631242,130.59856208547387,2
+419,Inverse analyzing help-desk,10,44,Easy,204.39370657552044,88.40256770062216,3
+420,Cloned needs-based algorithm,5,99,Medium,75.5716917334688,92.96840728898412,2
+421,Distributed web-enabled Internet solution,2,99,Easy,19.359428437270374,1893.2949326544533,2
+422,Right-sized systematic workforce,10,26,Medium,501.04843392629647,1588.3834299364016,2
+423,Robust zero tolerance intranet,3,22,Medium,33.508875109412486,347.06185327154384,10
+424,Optimized 4thgeneration project,2,67,Hard,101.05828766033994,272.62570030315385,1
+425,Assimilated dynamic definition,3,71,Hard,173.58052825450707,1172.0745081090972,10
+426,Distributed even-keeled customer loyalty,5,48,Elite,42.17226230929436,1285.0437800590034,10
+427,Public-key real-time Internet solution,3,78,Elite,11.850028209003089,102.24186027539419,1
+428,Universal analyzing database,7,38,Elite,328.8056247970188,417.61951002629525,1
+429,Reduced disintermediate data-warehouse,10,118,Hard,198.79239846920098,135.73711311078281,1
+430,Optional uniform workforce,10,11,Elite,76.21074106158426,1849.3184195242575,3
+431,Cross-group intangible leverage,1,78,Medium,33.382822867447565,128.48397225614727,1
+432,Quality-focused reciprocal pricing structure,10,37,Hard,202.00253162097476,680.6667361981812,2
+433,Virtual intangible complexity,7,98,Hard,93.74138470597777,721.2616721263336,1
+434,Networked high-level encoding,1,30,Hard,23.457003211246786,1431.436949949583,1
+435,Inverse impactful installation,5,67,Medium,77.93267723793727,99.79557248466796,2
+436,Ameliorated web-enabled time-frame,7,12,Easy,57.88022705859354,481.95853740790426,25
+437,Re-engineered content-based support,7,96,Medium,16.87548208600219,70.22404356751065,5
+438,Re-contextualized upward-trending model,2,23,Medium,24.291310014907,109.24752436092504,1
+439,Pre-emptive encompassing synergy,9,6,Elite,19.738183435751914,723.7830031055714,3
+440,Exclusive zero administration throughput,8,29,Medium,69.76421400534191,568.9599291280923,2
+441,Right-sized national migration,7,75,Medium,20.293511645258913,123.25104864267863,5
+442,Intuitive bi-directional help-desk,7,5,Medium,46.66448142571568,988.2174994519858,1
+443,Programmable logistical service-desk,7,74,Medium,14.325267327972657,157.70524292277616,5
+444,Quality-focused high-level help-desk,1,2,Medium,70.10303413544457,656.0700478440896,2
+445,Vision-oriented impactful implementation,2,100,Medium,20.934557036896184,2745.5039072570853,1
+446,Synergistic neutral synergy,1,33,Hard,36.14672847289574,153.76901075365,1
+447,Public-key reciprocal throughput,2,43,Hard,53.19881331922949,107.90812789378052,10
+448,Enterprise-wide real-time array,6,94,Medium,159.09291343979444,425.63397340724686,2
+449,Streamlined explicit core,9,58,Easy,32.07048603185334,164.69853501117606,1
+450,Managed impactful moderator,9,13,Medium,10.112389533263839,114.63561319774735,1
+451,Organized fault-tolerant access,6,11,Legendary,128.93252669384407,960.623411324581,1
+452,Open-architected composite array,4,58,Hard,10.208654460734946,460.13202893764543,1
+453,Versatile well-modulated matrices,4,107,Legendary,7.231081377032437,982.994502927532,2
+454,Front-line needs-based Graphic Interface,3,69,Hard,40.487196700928514,1717.2507642060339,1
+455,Digitized background definition,4,118,Elite,36.906191578033145,279.4775313277613,5
+456,Open-source systematic Local Area Network,6,92,Elite,35.609383540256346,259.69398859354106,1
+457,Secured upward-trending software,3,105,Legendary,27.22577082045668,569.7907702991286,2
+458,Customer-focused solution-oriented success,3,10,Easy,70.97186099371224,183.9883127901831,3
+459,Profound next generation migration,6,16,Elite,93.12699923785836,517.2405101230302,1
+460,Customer-focused tertiary archive,9,74,Easy,129.92715937847524,816.8606628996064,2
+461,Multi-layered composite standardization,2,91,Easy,148.6780604021762,973.6189462992772,1
+462,Phased homogeneous functionalities,8,111,Medium,41.30774216262586,500.5129841103515,25
+463,Horizontal actuating application,9,63,Easy,87.21171681813671,164.2330934755506,1
+464,Switchable real-time project,4,33,Medium,52.08212900774793,1272.6674643825982,1
+465,Robust leadingedge extranet,3,3,Easy,103.42133834575627,429.0922703807755,1
+466,Implemented dedicated infrastructure,6,26,Easy,79.33523175786847,479.51662447783156,10
+467,Cross-platform discrete hardware,9,107,Easy,27.9015904411273,49.067077685944554,1
+468,Profound heuristic hub,1,59,Hard,27.6245242900571,412.31045006878963,2
+469,Monitored background core,10,113,Hard,192.8958896820541,156.63640334879003,1
+470,Future-proofed fresh-thinking circuit,9,106,Easy,48.90204195173417,265.30554338117065,2
+471,Multi-tiered intermediate parallelism,7,15,Easy,17.833636808887697,298.3160662490835,2
+472,Grass-roots asymmetric projection,4,97,Medium,299.8472556049256,403.0205204024104,1
+473,Monitored incremental definition,1,66,Medium,34.13181683510026,591.9044162528901,1
+474,Persistent non-volatile adapter,2,8,Medium,45.18122528435742,202.52077368537365,1
+475,Ergonomic global hardware,10,47,Easy,59.52899573098053,453.08492767440356,1
+476,Multi-tiered solution-oriented interface,8,109,Elite,124.3832003048245,153.1361491007582,3
+477,Face-to-face intermediate instruction set,4,42,Elite,9.9764525202895,382.91047157910964,10
+478,Adaptive optimal initiative,6,81,Elite,47.57594185859322,1321.4632732785053,1
+479,Innovative encompassing website,9,8,Medium,96.69771376797895,531.0548242194986,1
+480,Cloned composite parallelism,10,57,Medium,14.778469376264924,744.9283211404365,1
+481,Cross-platform transitional model,6,47,Hard,50.170398713759084,33.10134671184277,1
+482,Digitized exuding system engine,5,95,Elite,211.73985163268887,529.7054231352395,3
+483,Switchable multi-state intranet,1,37,Hard,20.060009001548533,3846.5598121352346,10
+484,Managed multi-tasking matrix,3,77,Medium,56.74548687528988,790.6200611728718,1
+485,Phased actuating budgetary management,5,105,Elite,20.494481817695476,40.094316668052834,1
+486,Quality-focused 3rdgeneration open architecture,3,30,Hard,9.276815776975031,311.9526501243533,1
+487,Fundamental reciprocal help-desk,3,114,Medium,24.255057742301826,276.16578235037395,2
+488,Triple-buffered upward-trending interface,7,101,Medium,52.064606271925555,178.22609679501392,2
+489,Reactive global moderator,8,65,Elite,110.7684880775226,443.52697856191685,1
+490,Seamless incremental website,6,35,Medium,38.59359392378834,132.14899710930789,1
+491,Automated well-modulated Internet solution,5,90,Hard,62.72313767778942,210.6677022627198,1
+492,Stand-alone heuristic matrix,3,75,Medium,23.633267943031942,1522.7510157273325,5
+493,Synchronized multi-state definition,10,55,Elite,66.48935004320833,439.32235971195536,2
+494,Diverse cohesive architecture,2,102,Medium,43.11673611534828,792.5407589751295,1
+495,Function-based high-level hub,10,100,Hard,33.764881030985514,674.9582185315859,2
+496,Open-source dynamic approach,8,93,Hard,95.35881037422928,948.9821055191468,25
+497,Programmable 3rdgeneration groupware,7,70,Easy,68.08815628461413,26.74552661947832,1
+498,Seamless exuding orchestration,7,46,Easy,8.58330548855457,178.74040297436264,10
+499,Re-engineered uniform archive,8,16,Easy,11.972647088146212,275.3248386403262,2
+500,Balanced user-facing alliance,2,3,Hard,47.95960994818296,845.0768448038554,2
+501,Synergized object-oriented pricing structure,8,50,Hard,39.1873117496867,127.21020315160108,25
+502,Fundamental directional database,6,30,Easy,14.010883699487355,269.02134093300475,1
+503,Upgradable value-added service-desk,10,46,Hard,63.46308595303772,60.979358540976946,1
+504,Total content-based initiative,8,63,Easy,278.31230875132735,990.1022125831125,1
+505,Upgradable secondary moratorium,9,49,Medium,212.41060118398,891.1686195403673,3
+506,Diverse foreground website,6,26,Easy,41.31275873222254,249.16060013347294,1
+507,Advanced discrete neural-net,3,80,Elite,118.0964841719792,407.288779170192,5
+508,Innovative intangible process improvement,8,77,Easy,391.7580263788544,59.969636265339716,3
+509,Expanded tertiary array,5,119,Medium,85.26785954600753,241.28103482831068,1
+510,User-friendly motivating ability,2,92,Medium,92.24222079506694,458.263360941357,1
+511,Proactive discrete projection,5,118,Elite,64.76620942925342,436.66737775153183,1
+512,Managed static product,8,14,Easy,40.9343824995332,242.1038113790249,1
+513,Up-sized clear-thinking firmware,3,39,Hard,7.912376560055391,210.8337184866266,2
+514,Open-architected logistical capacity,10,21,Elite,108.59204103365535,62.47425855963485,2
+515,Networked zero administration Internet solution,1,27,Easy,56.09333231400846,821.6610028640553,2
+516,Pre-emptive bottom-line pricing structure,4,100,Hard,15.582436182805662,1117.9795154200754,25
+517,Ergonomic leadingedge approach,8,19,Elite,164.85145257641136,650.2348838776576,1
+518,Right-sized context-sensitive flexibility,10,13,Medium,206.6950210656312,123.76063435733498,1
