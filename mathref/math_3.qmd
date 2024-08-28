@@ -85,7 +85,7 @@ This function has important properties:
   - For example, you can use histograms, or frequency tables, to estimate the probability distribution of a discrete random variable.
   - You can use kernel density plots to estimate the probability density function of a continuous random variable.
 
-## Dicreet
+## Discrete
 
 ```{stata}
 *| echo: true
