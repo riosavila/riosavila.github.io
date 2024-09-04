@@ -11,7 +11,7 @@ Choose one of the following topics, and create a PDF version of it using Quarto.
 
 For this homework use the following resources
 
- - Template: [template](hw-material/pdf-template.txt)
+ - Template: [template](hw-material/pdf-template.txt) [html](hw-material/pdf-template.html)
    - Just copy the Heading of this file in your QMD file
  - Bibliography: [reference.bib](hw-material/references.bib)
    - Add this in the same folder as your QMD file
@@ -22,7 +22,11 @@ Submit the link to your repository, the PDF and QMD files via email.
   
 ### Topics
 
--  The Impact of Resource Management in StarCraft: A Strategic Analysis [html](hw-material/report1.html) [pdf](hw-material/report1.pdf)
+- The Impact of Resource Management in StarCraft: A Strategic Analysis 
+  My replication
+  - [html](hw-material/report1.html) 
+  - [pdf](hw-material/report1.pdf)
+  - [qmd](hw-material/report1-example.qmd)
 - The Strategic Depth of StarCraft and Its Esports Legacy [html](hw-material/report2.html) [pdf](hw-material/report2.pdf)
 - The Mathematics of Dungeons and Dragons: A Statistical Adventure [html](hw-material/report3.html) [pdf](hw-material/report3.pdf)
 - The Rise of LitRPG: Blending Literature and Gaming [html](hw-material/report4.html) [pdf](hw-material/report4.pdf)
