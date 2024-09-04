@@ -1,4 +1,14 @@
 ---
+title: Template for PDF
+
+---
+
+Use this as the YAML template for your PDF files.
+
+Make sure you change "Your Title" to the title of your document and "author" to the name of the author.
+
+````yaml
+---
 title: "Your Title"
 format: 
     pdf:
@@ -14,3 +24,4 @@ format:
 author: "author"        
 bibliography: references.bib
 ---
+````

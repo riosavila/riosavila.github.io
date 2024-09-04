@@ -13043,5 +13043,103 @@
       "Math Refresher",
       "Math Refresher"
     ]
+  },
+  {
+    "objectID": "rm-data/hw-material/pdf-template.html",
+    "href": "rm-data/hw-material/pdf-template.html",
+    "title": "Template for PDF",
+    "section": "",
+    "text": "Use this as the YAML template for your PDF files.\nMake sure you change “Your Title” to the title of your document and “author” to the name of the author.\n---\ntitle: \"Your Title\"\nformat: \n    pdf:\n        documentclass: article \n        number-sections: true\n        margin-top: 1in\n        margin-bottom: 1in\n        margin-left: 1in\n        margin-right: 1in\n        linestretch:  1.5\n        fontsize: 11pt\n    html: default \nauthor: \"author\"        \nbibliography: references.bib\n---"
+  },
+  {
+    "objectID": "fantasy_world_data_dictionary.html",
+    "href": "fantasy_world_data_dictionary.html",
+    "title": "Fantasy World Data Dictionary",
+    "section": "",
+    "text": "Field\nDescription\n\n\n\n\ncharacter_id\nUnique identifier for each character\n\n\nname\nCharacter’s full name\n\n\nrace\nCharacter’s race\n\n\nclass\nCharacter’s class\n\n\nlevel\nCharacter’s current level (1-120)\n\n\nregion_id\nID of the region where the character resides\n\n\nprofession_primary\nCharacter’s primary profession\n\n\nprofession_secondary\nCharacter’s secondary profession\n\n\ngold\nAmount of gold the character possesses\n\n\nachievement_points\nCharacter’s total achievement points\n\n\nhousehold_id\nID of the household the character belongs to\n\n\nguild_id\nID of the guild the character belongs to\n\n\ngender\nCharacter’s gender\n\n\nage\nCharacter’s age in years\n\n\nbirth_date\nCharacter’s date of birth\n\n\neducation_level\nCharacter’s level of education\n\n\nrelationship_status\nCharacter’s relationship status\n\n\nnum_children\nNumber of children the character has\n\n\n\n\n\n\n\n\n\nField\nDescription\n\n\n\n\nhousehold_id\nUnique identifier for each household\n\n\nregion_id\nID of the region where the household is located\n\n\nsize\nNumber of characters in the household\n\n\ntotal_income\nTotal income of the household\n\n\n\n\n\n\n\n\n\nField\nDescription\n\n\n\n\nguild_id\nUnique identifier for each guild\n\n\nname\nName of the guild\n\n\nregion_id\nID of the region where the guild is based\n\n\nlevel\nGuild’s current level (1-25)\n\n\nmember_count\nNumber of members in the guild\n\n\nbank_gold\nAmount of gold in the guild bank\n\n\nachievement_points\nGuild’s total achievement points\n\n\n\n\n\n\n\n\n\nField\nDescription\n\n\n\n\nregion_id\nUnique identifier for each region\n\n\nregion_name\nName of the region\n\n\navg_item_price\nAverage price of items in the region\n\n\ninflation_rate\nCurrent inflation rate in the region\n\n\nunemployment_rate\nCurrent unemployment rate in the region\n\n\ngdp_growth\nGDP growth rate of the region\n\n\ntrade_volume\nTotal trade volume in the region\n\n\n\n\n\n\n\n\n\n\n\n\n\nField\nDescription\n\n\n\n\nquest_id\nUnique identifier for each quest\n\n\nname\nName of the quest\n\n\nregion_id\nID of the region where the quest is available\n\n\nmin_level\nMinimum level required to start the quest\n\n\ndifficulty\nDifficulty level of the quest\n\n\nreward_gold\nAmount of gold rewarded for completing the quest\n\n\nreward_xp\nAmount of experience points rewarded for completing the quest\n\n\nrequired_participants\nNumber of participants required for the quest\n\n\n\n\n\n\n\n\n\nField\nDescription\n\n\n\n\ncharacter_id\nID of the character performing the activity\n\n\nactivity_type\nType of activity performed\n\n\nduration_hours\nDuration of the activity in hours\n\n\ngold_earned\nAmount of gold earned from the activity\n\n\nxp_earned\nAmount of experience points earned from the activity"
+  },
+  {
+    "objectID": "fantasy_world_data_dictionary.html#characters",
+    "href": "fantasy_world_data_dictionary.html#characters",
+    "title": "Fantasy World Data Dictionary",
+    "section": "",
+    "text": "Field\nDescription\n\n\n\n\ncharacter_id\nUnique identifier for each character\n\n\nname\nCharacter’s full name\n\n\nrace\nCharacter’s race\n\n\nclass\nCharacter’s class\n\n\nlevel\nCharacter’s current level (1-120)\n\n\nregion_id\nID of the region where the character resides\n\n\nprofession_primary\nCharacter’s primary profession\n\n\nprofession_secondary\nCharacter’s secondary profession\n\n\ngold\nAmount of gold the character possesses\n\n\nachievement_points\nCharacter’s total achievement points\n\n\nhousehold_id\nID of the household the character belongs to\n\n\nguild_id\nID of the guild the character belongs to\n\n\ngender\nCharacter’s gender\n\n\nage\nCharacter’s age in years\n\n\nbirth_date\nCharacter’s date of birth\n\n\neducation_level\nCharacter’s level of education\n\n\nrelationship_status\nCharacter’s relationship status\n\n\nnum_children\nNumber of children the character has"
+  },
+  {
+    "objectID": "fantasy_world_data_dictionary.html#households",
+    "href": "fantasy_world_data_dictionary.html#households",
+    "title": "Fantasy World Data Dictionary",
+    "section": "",
+    "text": "Field\nDescription\n\n\n\n\nhousehold_id\nUnique identifier for each household\n\n\nregion_id\nID of the region where the household is located\n\n\nsize\nNumber of characters in the household\n\n\ntotal_income\nTotal income of the household"
+  },
+  {
+    "objectID": "fantasy_world_data_dictionary.html#guilds",
+    "href": "fantasy_world_data_dictionary.html#guilds",
+    "title": "Fantasy World Data Dictionary",
+    "section": "",
+    "text": "Field\nDescription\n\n\n\n\nguild_id\nUnique identifier for each guild\n\n\nname\nName of the guild\n\n\nregion_id\nID of the region where the guild is based\n\n\nlevel\nGuild’s current level (1-25)\n\n\nmember_count\nNumber of members in the guild\n\n\nbank_gold\nAmount of gold in the guild bank\n\n\nachievement_points\nGuild’s total achievement points"
+  },
+  {
+    "objectID": "fantasy_world_data_dictionary.html#economic-data",
+    "href": "fantasy_world_data_dictionary.html#economic-data",
+    "title": "Fantasy World Data Dictionary",
+    "section": "",
+    "text": "Field\nDescription\n\n\n\n\nregion_id\nUnique identifier for each region\n\n\nregion_name\nName of the region\n\n\navg_item_price\nAverage price of items in the region\n\n\ninflation_rate\nCurrent inflation rate in the region\n\n\nunemployment_rate\nCurrent unemployment rate in the region\n\n\ngdp_growth\nGDP growth rate of the region\n\n\ntrade_volume\nTotal trade volume in the region"
+  },
+  {
+    "objectID": "fantasy_world_data_dictionary.html#quests",
+    "href": "fantasy_world_data_dictionary.html#quests",
+    "title": "Fantasy World Data Dictionary",
+    "section": "",
+    "text": "Field\nDescription\n\n\n\n\nquest_id\nUnique identifier for each quest\n\n\nname\nName of the quest\n\n\nregion_id\nID of the region where the quest is available\n\n\nmin_level\nMinimum level required to start the quest\n\n\ndifficulty\nDifficulty level of the quest\n\n\nreward_gold\nAmount of gold rewarded for completing the quest\n\n\nreward_xp\nAmount of experience points rewarded for completing the quest\n\n\nrequired_participants\nNumber of participants required for the quest"
+  },
+  {
+    "objectID": "fantasy_world_data_dictionary.html#character-activities",
+    "href": "fantasy_world_data_dictionary.html#character-activities",
+    "title": "Fantasy World Data Dictionary",
+    "section": "",
+    "text": "Field\nDescription\n\n\n\n\ncharacter_id\nID of the character performing the activity\n\n\nactivity_type\nType of activity performed\n\n\nduration_hours\nDuration of the activity in hours\n\n\ngold_earned\nAmount of gold earned from the activity\n\n\nxp_earned\nAmount of experience points earned from the activity"
+  },
+  {
+    "objectID": "rm-data/hw-material/report1-example.html",
+    "href": "rm-data/hw-material/report1-example.html",
+    "title": "Example Replication Report",
+    "section": "",
+    "text": "asdas This template replicates the structure and content of the report “The Impact of Resource Management in StarCraft: A Strategic Analysis” by Kathryn Janeway.\nIt considers all elements of the original report, but does not include the image for replication.\n\n---\ntitle: \"The Impact of Resource Management in StarCraft: A Strategic Analysis\"\nformat: \n    pdf:\n        documentclass: article \n        number-sections: true\n        margin-top: 1in\n        margin-bottom: 1in\n        margin-left: 1in\n        margin-right: 1in\n        linestretch:  1.5\n        fontsize: 12pt\n    html: default\nexecute: \n  echo: false\n  warning: false     \nauthor: \"Kathryn Janeway\"        \nbibliography: references.bib\n---\n\n# Introduction\n\nThis report examines the crucial role of resource management in the popular real-time strategy game StarCraft. We will explore how effective resource allocation influences gameplay dynamics and strategic decision-making. The analysis will include a mathematical model of resource gathering, a visualization of unit production rates, and a comparison of resource types across different races.\n\n# Resource Dynamics in StarCraft\n\n## Mathematical Model of Resource Gathering\n\nIn StarCraft, the rate of resource accumulation can be modeled using a simple differential equation. If we denote the amount of resources as $R$ and time as $t$, we can express the rate of change of resources as:\n\n$$\n\\frac{dR}{dt} = \\alpha N - \\beta P\n$${#eq-resource}\n\nWhere $\\alpha$ is the gathering rate per worker, $N$ is the number of workers, $\\beta$ is the consumption rate, and $P$ is the production rate of units or structures. This model, as shown in @eq-resource, forms the basis of the game's economic system [@choi2015].\n\n## Unit Production Rates\n\nTo illustrate the impact of resource management on unit production, we've created a visualization of unit production rates for different races in StarCraft.\n\n:::{#fig-production fig-pos=\"H\" }\n\n![](figure_production.png)\n\nUnit Production Rates by Race in StarCraft\n\n:::\n\nAs shown in @fig-production, the Zerg race has the highest unit production rate, reflecting their swarm-based strategy. This aligns with the game's design philosophy, where each race has unique strengths and weaknesses[^1].\n\n## Resource Types Comparison\n\nStarCraft features two primary resource types: minerals and vespene gas. Their availability and usage vary across races:\n\n:::{#tbl-resources tbl-pos=\"H\"}\n\n| Race    | Mineral Usage | Gas Usage | Resource Dependency |\n|---------|---------------|-----------|---------------------|\n| Terran  | High          | Medium    | Balanced            |\n| Protoss | Medium        | High      | Gas-heavy           |\n| Zerg    | High          | Low       | Mineral-heavy       |\n\nResource Usage by Race \n\n:::\n\n@tbl-resources illustrates how different races prioritize resources, influencing their strategic options and tech progression paths.\n\n# Strategic Implications\n\nThe resource management system in StarCraft creates a complex strategic landscape. Players must balance immediate needs with long-term goals, deciding whether to invest in economy, technology, or military strength. According to @kim2010, successful players often demonstrate superior resource management skills, which translate into strategic advantages on the battlefield.\n\n# Conclusion\n\nResource management is a cornerstone of StarCraft gameplay, deeply influencing strategic decisions and overall game outcomes. The mathematical model, production rate analysis, and resource usage comparison presented in this report highlight the intricate balance between gathering, allocation, and consumption of resources. Understanding these dynamics is crucial for players aiming to master the game and for game designers seeking to create balanced and engaging strategy games.\n\n[^1]: This design approach contributes to StarCraft's enduring popularity in esports and casual gaming circles.\n\n# References\n\n::: {#refs}\n:::"
+  },
+  {
+    "objectID": "rm-data/hw-material/report1-example.html#sqmd-.code-overflow-wrap",
+    "href": "rm-data/hw-material/report1-example.html#sqmd-.code-overflow-wrap",
+    "title": "Example Replication Report",
+    "section": "```{sqmd .code-overflow-wrap}",
+    "text": "```{sqmd .code-overflow-wrap}\ntitle: “The Impact of Resource Management in StarCraft: A Strategic Analysis” format: pdf: documentclass: article number-sections: true margin-top: 1in margin-bottom: 1in margin-left: 1in margin-right: 1in linestretch: 1.5 fontsize: 12pt html: default execute: echo: false warning: false\nauthor: “Kathryn Janeway”\nbibliography: references.bib code-overflow: —"
+  },
+  {
+    "objectID": "rm-data/hw-material/report1-example.html#mathematical-model-of-resource-gathering",
+    "href": "rm-data/hw-material/report1-example.html#mathematical-model-of-resource-gathering",
+    "title": "Example Replication Report",
+    "section": "Mathematical Model of Resource Gathering",
+    "text": "Mathematical Model of Resource Gathering\nIn StarCraft, the rate of resource accumulation can be modeled using a simple differential equation. If we denote the amount of resources as \\(R\\) and time as \\(t\\), we can express the rate of change of resources as:\n\\[\n\\frac{dR}{dt} = \\alpha N - \\beta P\n\\tag{1}\\]\nWhere \\(\\alpha\\) is the gathering rate per worker, \\(N\\) is the number of workers, \\(\\beta\\) is the consumption rate, and \\(P\\) is the production rate of units or structures. This model, as shown in Equation 1, forms the basis of the game’s economic system [@choi2015]."
+  },
+  {
+    "objectID": "rm-data/hw-material/report1-example.html#unit-production-rates",
+    "href": "rm-data/hw-material/report1-example.html#unit-production-rates",
+    "title": "Example Replication Report",
+    "section": "Unit Production Rates",
+    "text": "Unit Production Rates\nTo illustrate the impact of resource management on unit production, we’ve created a visualization of unit production rates for different races in StarCraft.\n\n\n\n\n\n\nFigure 1: Unit Production Rates by Race in StarCraft\n\n\n\nAs shown in Figure 1, the Zerg race has the highest unit production rate, reflecting their swarm-based strategy. This aligns with the game’s design philosophy, where each race has unique strengths and weaknesses1."
+  },
+  {
+    "objectID": "rm-data/hw-material/report1-example.html#resource-types-comparison",
+    "href": "rm-data/hw-material/report1-example.html#resource-types-comparison",
+    "title": "Example Replication Report",
+    "section": "Resource Types Comparison",
+    "text": "Resource Types Comparison\nStarCraft features two primary resource types: minerals and vespene gas. Their availability and usage vary across races:\n\n\n\nTable 1: Resource Usage by Race\n\n\n\n\n\nRace\nMineral Usage\nGas Usage\nResource Dependency\n\n\n\n\nTerran\nHigh\nMedium\nBalanced\n\n\nProtoss\nMedium\nHigh\nGas-heavy\n\n\nZerg\nHigh\nLow\nMineral-heavy\n\n\n\n\n\n\nTable 1 illustrates how different races prioritize resources, influencing their strategic options and tech progression paths."
+  },
+  {
+    "objectID": "rm-data/hw-material/report1-example.html#footnotes",
+    "href": "rm-data/hw-material/report1-example.html#footnotes",
+    "title": "Example Replication Report",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nThis design approach contributes to StarCraft’s enduring popularity in esports and casual gaming circles.↩︎"
   }
 ]
