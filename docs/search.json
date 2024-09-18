@@ -13141,5 +13141,796 @@
     "title": "Example Replication Report",
     "section": "Footnotes",
     "text": "Footnotes\n\n\nThis design approach contributes to StarCraft’s enduring popularity in esports and casual gaming circles.↩︎"
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#motivation",
+    "href": "rm-data/slides/week09.html#motivation",
+    "title": "Time series data",
+    "section": "Motivation",
+    "text": "Motivation\n\nYou are considering investing in a company stock, and you want to know how risky that investment is. You have downloaded data on daily stock prices for many years. How should you define returns? How should you assess whether and to what extent returns on the company stock move together with market returns?\nHeating and cooling are important uses of electricity. How does weather conditions affect electricity consumption? We are going to use monthly data on temperature and residential electricity consumption in Arizona. How to formulate a model which captures these factors?"
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#what-is-special-in-the-analysis-of-time-series-data",
+    "href": "rm-data/slides/week09.html#what-is-special-in-the-analysis-of-time-series-data",
+    "title": "Time series data",
+    "section": "What is special in the analysis of time series data?",
+    "text": "What is special in the analysis of time series data?\n\n\nDifferent\n\nWe have time series data if we observe one unit across many time periods.\nThere is a special notation: \\(y_t\\), \\(t = 1, 2, \\ldots, T\\)\nTime series data presents additional opportunities as well as additional challenges to compare variables.\n\n\n\n\nWith other features\n\nData wrangling novelties: frequency and aggregation\nSpecial nature of time series: serial correlation\nCoefficient interpretation."
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#data-preparation",
+    "href": "rm-data/slides/week09.html#data-preparation",
+    "title": "Time series data",
+    "section": "Data preparation",
+    "text": "Data preparation\n\nWhat is Frequency? of time series? = time elapsed between two observations of a variable\nPractical problems with frequency:\n\nNot all data is captured at the same frequency\nThere may be regular/irregular gaps between them: e.g. weekends for stock-exchange\nTwo variables have different frequencies\nExtreme values (spikes) in your variable\n\nLast but not least: in Stata you need to Declare your data as time series data with tsset command"
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#consequences",
+    "href": "rm-data/slides/week09.html#consequences",
+    "title": "Time series data",
+    "section": "Consequences",
+    "text": "Consequences\n\nRegressions: to condition \\(y_t\\) on values of \\(x_t\\) the two variables need to be on the same frequency. Otherwise, we need to adjust one of them.\nHow to adjust? Aggregation!\n\nFlow variables: sum up the values within the interval. e.g. daily sales \\(\\rightarrow\\) weakly sales is the sum of daily sales.\nStock variables: take the end-period value. e.g. daily stock prices uses the closing price on a given day\nOther kinds of variables: usually take the average value"
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#what-is-not-special-in-time-series",
+    "href": "rm-data/slides/week09.html#what-is-not-special-in-time-series",
+    "title": "Time series data",
+    "section": "What is not special in time series",
+    "text": "What is not special in time series\n\nTime series regressions are special for several reasons…but many aspects remain the same\n\nGeneralization, confidence intervals: Same difficulties as in cross-section\nTime series regression uncover patterns rather than evidence of causality: There is no “sample of time”\nPractical data issues, missing observations, extreme values etc, remain\nCoefficient interpretation is based on conditional comparison"
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#what-is-special-in-time-series",
+    "href": "rm-data/slides/week09.html#what-is-special-in-time-series",
+    "title": "Time series data",
+    "section": "What is special in time series",
+    "text": "What is special in time series\n\nOrdering matters - key difference to cross section. Complications…Past before future\nTrend - variables tend to have trends! Increasing or decreasing values over time\nSeasonality - variables may show some cyclical component, such 4 seasons, months, - every e.g. December value is expected to be different.\nTime series values are often not independent - correlated in time\n\nFailure to account for this may lead to wrong (biased) conclusions"
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#ts-variables-may-have-trends-trends",
+    "href": "rm-data/slides/week09.html#ts-variables-may-have-trends-trends",
+    "title": "Time series data",
+    "section": "TS Variables may have trends Trends",
+    "text": "TS Variables may have trends Trends\n\nTime series data “tends” to have trends. how to detect them?.\nDefine change (or fist difference): \\(\\Delta y_t = y_t - y_{t-1}\\)\n\n\\[\n\\begin{align}\n\\text{Positive trend}: & E[\\Delta y_t] &gt; 0 \\\\\n\\text{Negative trend}: & E[\\Delta y_t] &lt; 0\n\\end{align}\n\\]\n\nOne may also consider two types of trends: linear and exponential\n\n\\[\n\\begin{align}\n\\text{Linear trend}: & E[\\Delta y_t] = \\text{constant} \\\\\n\\text{Exponential trend}: & E[\\Delta \\ln(y_t)] = \\text{constant}\n\\end{align}\n\\]\n\nExponential trend, Changes are proportional"
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#but-they-may-also-show-seasonality",
+    "href": "rm-data/slides/week09.html#but-they-may-also-show-seasonality",
+    "title": "Time series data",
+    "section": "But they may also show Seasonality",
+    "text": "But they may also show Seasonality\n\nThere is seasonal variation, or seasonality, if its expected value changes periodically.\n\nFollows the seasons of the year, days of the week, hours of the day.\n\nSeasonality may be linear, when the seasonal differences are constant; it may be exponential, if relative differences (that may be approximated by log differences) are constant.\nImportant real life phenomenon - many economic activities follow seasonal variation over the year, through the week or day.\n\nThus they need to be accounted for in the analysis."
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#what-is-special-in-time-series-stationarity",
+    "href": "rm-data/slides/week09.html#what-is-special-in-time-series-stationarity",
+    "title": "Time series data",
+    "section": "What is special in time series: Stationarity",
+    "text": "What is special in time series: Stationarity\n\nTo learn something, we need consistency in patterns If the patterns change constantly, we cannot learn anything from the data\n\n\n\nStationary time series have the same expected value and same distribution, at all times.\nStationarity is a feature of the time series itself.\nStationarity means stability (in expectations).\nIf series are stationary, we can learn from them!"
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#what-is-special-in-time-series-non-stationarity",
+    "href": "rm-data/slides/week09.html#what-is-special-in-time-series-non-stationarity",
+    "title": "Time series data",
+    "section": "What is special in time series: Non-stationarity",
+    "text": "What is special in time series: Non-stationarity\n\nIn absence of stationarity, we cannot learn anything from the data Or what we learn may be misleading\n\n\n\nNon-stationary time series are those that are not stable for some reason.\nSeries that violate stationarity because the expected value is different at different times:\n\nHas a trends\nHas seasonality\nHas some unstable patterns\n\n\n\n\n\nAlthough, some of this issues can be address by “controlling” for them in the regression."
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#a-special-case-random-walk",
+    "href": "rm-data/slides/week09.html#a-special-case-random-walk",
+    "title": "Time series data",
+    "section": "A Special case: Random walk",
+    "text": "A Special case: Random walk\nSome non-stationary variables are not easy to deal with:\n\n\nAnother example of non-stationary time series is the random walk.\nRandom walk when \\(y_t\\) follows a random walk if its value in \\(t\\) is the same as in \\((t - 1)\\) plus some random term: \\(y_t = y_{t-1} + e_t\\).\nTime series variables that follow random walk change in completely random ways.\nWhatever the previous change was the next one may be anything. Wherever it starts, a random walk variable may end up anywhere after a long time."
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#section",
+    "href": "rm-data/slides/week09.html#section",
+    "title": "Time series data",
+    "section": "",
+    "text": "Code\nqui: {\n  clear\nset scheme white2\ncolor_style bay\nqui:set obs 101\ngen r = runiform(0,2*_pi)\n\ngen y = 0 \ngen x = 0\nreplace y = y[_n-1] + sin(r) if _n&gt;1\nreplace x = x[_n-1] + cos(r) if _n&gt;1\ngen n = _n\n}\n\n*scatter  y x , connect(l) name(m1, replace) \n*line y x n, name(m2, replace)"
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#what-to-fear-of-random-walk",
+    "href": "rm-data/slides/week09.html#what-to-fear-of-random-walk",
+    "title": "Time series data",
+    "section": "What to fear of Random walk",
+    "text": "What to fear of Random walk\n\n\nRandom walks are impossible to predict\nafter a change, they don’t revert back to some value or trend line but continue their journey from that point.\nSpread rising from one interval to another\nWhy is this important?\n\n\n\n\nTo identify patterns, we need stationarity\nFor stationary series, we need stability of patterns\nAvoid series with random walk when running regressions\n\nUsing them would only cause problems of Spurious Regressions"
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#how-to-detect-it-unit-root-test",
+    "href": "rm-data/slides/week09.html#how-to-detect-it-unit-root-test",
+    "title": "Time series data",
+    "section": "How to detect it: Unit root test",
+    "text": "How to detect it: Unit root test\n\n\nWe can test if a series is a random walk.\nPhillips-Perron test is based on this model: \\[y_t = \\alpha + \\rho y_{t-1} + e_t\\]\nThis model represents a random walk if \\(\\rho = 1\\), which is also called a unit root\nRandom walk test = testing if the series has a unit root.\nThe Phillips-Perron test has hypothesis\n\n\\[H_0: \\rho = 1 \\text{ vs } H_A: \\rho &lt; 1\\]"
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#section-1",
+    "href": "rm-data/slides/week09.html#section-1",
+    "title": "Time series data",
+    "section": "",
+    "text": "This test does not follow the usual t-distribution. Has its own distribution.\nin Stata, you can use it with the pperron command. (see helpfile)\nWhen the p-value is large (e.g., larger than 0.05), we don’t reject the null, concluding that the time series variable follows a random walk\nMany versions of unit root test.\n\n(Augmented) Dicky Fuller test is another popular one.\n\n\n\\[\\Delta y_t = \\alpha + \\delta y_{t-1} + e_t\\]\n\n\\(H_0: \\delta = 0\\) vs \\(H_A: \\delta &lt; 0\\)\nTests usually agree, but not always. see dfuller"
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#time-series-summary",
+    "href": "rm-data/slides/week09.html#time-series-summary",
+    "title": "Time series data",
+    "section": "Time Series: Summary",
+    "text": "Time Series: Summary\n\nStationary series are those where the expected value, variance, and auto-correlation does not change.\nExamples of non–stationarity:\n\nTrend - Expected value is different in later time periods than in earlier time periods\nSeasonality - Expected value is different in periodically recurring time periods\nRandom walk – Variance keeps increasing over time\n\nThis is the one we need to avoid\n\n\nWhy care? Regression with time series data variables that are not stationary are likely to give misleading results (Spurious)."
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#what-to-do-with-ts-cook-book",
+    "href": "rm-data/slides/week09.html#what-to-do-with-ts-cook-book",
+    "title": "Time series data",
+    "section": "What to do With TS: Cook-book",
+    "text": "What to do With TS: Cook-book\n\n\nCheck if your variable is stationary\n\nVisualize\nDo a unit-root test\n\n\n\n\n\nIf there is a good reason to believe your variable trending (or is Random Walk)\n\nTake differences \\(\\Delta y_t\\), or add a trend variable\nTake percentage changes or log differences\n\nIn extremely rare cases, difference your variable twice\n\n\n\n\n\n\nIf your variable has a seasonality\n\nUse seasonality dummies in your regression\nMay consider to work with seasonal changes."
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#microsoft-and-sp-500-stock-prices---data",
+    "href": "rm-data/slides/week09.html#microsoft-and-sp-500-stock-prices---data",
+    "title": "Time series data",
+    "section": "Microsoft and S&P 500 stock prices - data",
+    "text": "Microsoft and S&P 500 stock prices - data\n\nDaily price of Microsoft stock and value of S&P 500 stock market index\nThe data covers 21 years starting with December 31 1997 and ending with December 31 2018.\nMany decisions to make…\nLook at data first"
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#case-study-stock-price-and-stock-market-index-value",
+    "href": "rm-data/slides/week09.html#case-study-stock-price-and-stock-market-index-value",
+    "title": "Time series data",
+    "section": "Case study: Stock price and stock market index value",
+    "text": "Case study: Stock price and stock market index value\n\nCode\nqui {\nuse \"data_slides/stock-prices-daily.dta\", clear\nren *, low\n}\nline p_sp500 date, name(m1, replace)\nline p_msft date, name(m2, replace)"
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#time-series-comparisons---sp-500-case-study",
+    "href": "rm-data/slides/week09.html#time-series-comparisons---sp-500-case-study",
+    "title": "Time series data",
+    "section": "Time series comparisons - S&P 500 case study",
+    "text": "Time series comparisons - S&P 500 case study\nKey decisions:\n\nDaily price = closing price\nGaps will be overlooked\n\nFriday-Monday gap ignored\nHolidays (Christmas, 4 of July (when would be a weekday)\n\nAll values kept, extreme values part of process\nIn finance, portfolio managers often focus on monthly returns, Hence we choose monthly returns to analyze.\nTake the last day of each month"
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#microsoft-and-sp-500-stock-prices---ts-plot",
+    "href": "rm-data/slides/week09.html#microsoft-and-sp-500-stock-prices---ts-plot",
+    "title": "Time series data",
+    "section": "Microsoft and S&P 500 stock prices - ts plot",
+    "text": "Microsoft and S&P 500 stock prices - ts plot\n\nCode\nqui {\nuse \"data_slides/stock-prices-daily.dta\", clear\nren *, low\nsort ym date\nbysort ym: gen flag = _n == _N\nkeep if flag==1\n}\nline p_sp500 ym, name(m1, replace)\nline p_msft ym, name(m2, replace)"
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#microsoft-and-sp-500-stock-prices---decisions-2",
+    "href": "rm-data/slides/week09.html#microsoft-and-sp-500-stock-prices---decisions-2",
+    "title": "Time series data",
+    "section": "Microsoft and S&P 500 stock prices - decisions 2",
+    "text": "Microsoft and S&P 500 stock prices - decisions 2\n\nMonthly time series plot - easier to read\nAdditional decision needed: it is obviously non-stationary (Phillips-Perron test: very high p-value)\nUse returns:\n\nReturns: percent change of the closing prices: \\(100\\% \\frac{y_t - y_{t-1}}{y_t}\\).\nmonthly returns - take the closing price for the last day of a month\nAlternative measure: first difference of log prices."
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#microsoft-and-sp-500---index-returns-pct",
+    "href": "rm-data/slides/week09.html#microsoft-and-sp-500---index-returns-pct",
+    "title": "Time series data",
+    "section": "Microsoft and S&P 500 - index returns (pct)",
+    "text": "Microsoft and S&P 500 - index returns (pct)\n\nCode\nqui: {\nuse \"data_slides/stock-prices-daily.dta\", clear\nren *, low\nsort ym date\nbysort ym: gen flag = _n == _N\nkeep if flag==1\ntsset ym\ngen ret_sp500 = 100 * (p_sp500 - p_sp500[_n-1]) / p_sp500[_n-1]\ngen ret_msft = 100 * (p_msft - p_msft[_n-1]) / p_msft[_n-1]\n}\n\nline ret_sp500 ym, name(m1, replace)\nline ret_msft ym, name(m2, replace)"
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#unit-root-test-microsoft-and-sp-500-returns",
+    "href": "rm-data/slides/week09.html#unit-root-test-microsoft-and-sp-500-returns",
+    "title": "Time series data",
+    "section": "Unit root test: Microsoft and S&P 500 returns",
+    "text": "Unit root test: Microsoft and S&P 500 returns\n\n\nCode\npperron ret_sp500\npperron ret_msft\n\n\n\nPhillips–Perron test for unit root       Number of obs   = 251\nVariable: ret_sp500                      Newey–West lags =   4\n\nH0: Random walk without drift, d = 0\n\n                                       Dickey–Fuller\n                   Test      -------- critical value ---------\n              statistic           1%           5%          10%\n--------------------------------------------------------------\n Z(rho)        -230.845      -20.301      -14.000      -11.200\n Z(t)           -14.365       -3.460       -2.880       -2.570\n--------------------------------------------------------------\nMacKinnon approximate p-value for Z(t) = 0.0000.\n\nPhillips–Perron test for unit root       Number of obs   = 251\nVariable: ret_msft                       Newey–West lags =   4\n\nH0: Random walk without drift, d = 0\n\n                                       Dickey–Fuller\n                   Test      -------- critical value ---------\n              statistic           1%           5%          10%\n--------------------------------------------------------------\n Z(rho)        -284.851      -20.301      -14.000      -11.200\n Z(t)           -19.346       -3.460       -2.880       -2.570\n--------------------------------------------------------------\nMacKinnon approximate p-value for Z(t) = 0.0000."
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#time-series-regressions-the-same",
+    "href": "rm-data/slides/week09.html#time-series-regressions-the-same",
+    "title": "Time series data",
+    "section": "Time series regressions: The same",
+    "text": "Time series regressions: The same\n\nRegression in time series data is defined and estimated the same way as in other data.\n\n\\[y^E_t = \\beta_0 + \\beta_1 x_{1t} + \\beta_2 x_{2t} + \\ldots\\]\n\nInterpretations similar to cross-section\n\n\\(\\beta_0\\): We expect \\(y\\) to be \\(\\beta_0\\) when all explanatory variables are zero.\n\\(\\beta_1\\): Comparing time periods with different \\(x_1\\) but the same in terms of all other explanatory variables, we expect \\(y\\) to be higher by \\(\\beta_1\\) when \\(x_1\\) is higher by one unit."
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#time-series-regression-but-different",
+    "href": "rm-data/slides/week09.html#time-series-regression-but-different",
+    "title": "Time series data",
+    "section": "Time series regression: But different",
+    "text": "Time series regression: But different\n\nWith time series data, we often estimate regressions in changes\nWe use the \\(\\Delta\\) notation for changes\n\n\\[\\Delta x_t = x_t - x_{t-1}\\]\n\nThe regression in changes is \\[\\Delta y^E_t = \\alpha + \\beta \\Delta x_t\\]\n\n\\(\\alpha\\): \\(y\\) is expected to change by \\(\\alpha\\) when \\(x\\) doesn’t change\n\\(\\beta\\): \\(y\\) is expected to change by \\(\\beta\\) more when \\(x\\) increases by one unit more"
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#time-series-regression-growth",
+    "href": "rm-data/slides/week09.html#time-series-regression-growth",
+    "title": "Time series data",
+    "section": "Time series regression: Growth",
+    "text": "Time series regression: Growth\n\nWe often have variables in relative or percentage changes,\n\n\\[\\%\\Delta  (y_t)^E = \\alpha + \\beta \\%\\Delta(x_t)\\]\n\nWe can approximate relative differences by log differences, which are here log change: first taking logs of the variables and then taking the first difference\n\n\\[\\Delta \\ln(y_t) = \\ln(y_t) - \\ln(y_{t1})\\]"
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#returns-on-a-company-stock-and-market-returns",
+    "href": "rm-data/slides/week09.html#returns-on-a-company-stock-and-market-returns",
+    "title": "Time series data",
+    "section": "Returns on a company stock and market returns",
+    "text": "Returns on a company stock and market returns\n\\[\\%\\Delta(\\text{MSFT}_t) = \\alpha + \\beta \\%\\Delta (\\text{SP500}_t)\\]\n\n\\(\\alpha = 0.54\\); \\(\\beta = 1.26\\)\nIntercept: returns on the Microsoft stock tend to be 0.54 percent when the S%P500 index doesn’t change.\nSlope: returns on the Microsoft stock tend to be 1.26% higher when the returns on the S&P500 index are 1% higher. The 95% CI is \\([1.06, 1.46]\\).\nR-squared: 0.36\nFirst difference of log prices. Estimate is 1.24\nDaily returns (percent), beta is 1.10"
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#issues-to-deal-with-before-regression-a-laundry-list",
+    "href": "rm-data/slides/week09.html#issues-to-deal-with-before-regression-a-laundry-list",
+    "title": "Time series data",
+    "section": "Issues to deal with, before Regression: a laundry list",
+    "text": "Issues to deal with, before Regression: a laundry list\n\nHandling trend(s) and random walk (RW)\n\nAdd trend variable or Difference the series\n\nTransforming the series, such as taking first differences or percent change\nHandling seasonality and special events\n\nInclude dummies\n\nReconsidering standard errors. Specially if series have Unit Roots\nDealing with serial correlation - taking time-to-build into account with lags"
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#trend-rw---spurious-regression",
+    "href": "rm-data/slides/week09.html#trend-rw---spurious-regression",
+    "title": "Time series data",
+    "section": "Trend & RW - Spurious regression",
+    "text": "Trend & RW - Spurious regression\n\nTrends, seasonality, and random walks can present serious threats to uncovering meaningful patterns in time series data.\n\nExample: time series regression in levels \\(y^E_t = \\alpha + \\beta x_t\\).\nIf both \\(y\\) and \\(x\\) have a positive trend, the slope coefficient \\(\\beta\\) will be positive whether the two variables are related or not.\nAssociations between variables only because of the effect of trends are said to be spurious correlation.\n\nThink of trend and seasonality are confounders (omitted variables)\n\ntrend: global tendencies e.g. economic activity, fashion\nseasonality: e.g. weather, holidays, human habits (sleep)\n\nAnother reason for spurious correlation is small sample size…"
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#time-series-regressions-trends-and-seasonality",
+    "href": "rm-data/slides/week09.html#time-series-regressions-trends-and-seasonality",
+    "title": "Time series data",
+    "section": "Time series regressions: Trends and seasonality",
+    "text": "Time series regressions: Trends and seasonality\n\nTrend as confounder example\nA regression of the price of college education in the U.S. on the GDP of Germany over the past few decades\nPositive slope coefficient even though that two may not be related in any fundamental way.\nBut US GDP is correlated with both\n\nExamples https://tylervigen.com/spurious-correlations"
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#time-series-regressions-trends-and-seasonality-1",
+    "href": "rm-data/slides/week09.html#time-series-regressions-trends-and-seasonality-1",
+    "title": "Time series data",
+    "section": "Time series regressions: Trends and seasonality",
+    "text": "Time series regressions: Trends and seasonality\n\nIn a regression, we shall deal with trends\n\nReplacing variables in the regression with their first differences\n\nVariables in differences – no trends – likely to to be stationary.\nCould be log difference for exponential trends\n\nCould also add trends to model\n\nIn a regression, we shall deal with seasonality\n\nIncluding binary season variables in regressions.\nLook at pattern, figure out if quarters, months, weeks, days of week, etc.\nOr work with year-on-year (event to event) changes instead of first differences."
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#trend-rw---solution-first-differences",
+    "href": "rm-data/slides/week09.html#trend-rw---solution-first-differences",
+    "title": "Time series data",
+    "section": "Trend & RW - solution: first differences",
+    "text": "Trend & RW - solution: first differences\n\\[\\Delta y^E_t = \\alpha + \\beta \\Delta x_t\\]\n\nCoefficients have the same interpretation as before, but relate changes in variables.\nBecause variables denote changes…\n\n\\(\\alpha\\) is the average change in \\(y\\) when \\(x\\) doesn’t change.\nThe slope coefficient on \\(\\Delta x_t\\) shows how much more \\(y\\) is expected to change when \\(x\\) changes by one more unit.\nThe slope shows how \\(y\\) is expected to change when \\(x\\) changes, in addition to \\(\\alpha\\)."
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#seasonality-in-time-series-regressions",
+    "href": "rm-data/slides/week09.html#seasonality-in-time-series-regressions",
+    "title": "Time series data",
+    "section": "Seasonality in time series regressions",
+    "text": "Seasonality in time series regressions\n\nCapturing seasonality is also crucial.\nHigher the frequency – the more important.\n\nPeople behave differently on different hours and days\nWeather varies over months\nHolidays, ect\n\nHave seasonal dummies if seasonality is stable.\n\n\\[y^E_t = \\alpha + \\beta x_t + \\delta_{Jan} + \\delta_{Feb} + \\cdots + \\delta_{Nov}\\]\n\nPattern may vary over time. If it does, solutions must capture exact pattern – (difficult, not covering here)"
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#another-problem-serial-correlation",
+    "href": "rm-data/slides/week09.html#another-problem-serial-correlation",
+    "title": "Time series data",
+    "section": "Another Problem: Serial correlation",
+    "text": "Another Problem: Serial correlation\n\nSerial correlation means correlation of a variable with its previous values\n\nIt usually refers to the correlation of the residuals with their previous values.\n\nOrder serial correlation coefficient is defined as \\[\\rho_k = \\text{Corr}[x_t, x_{t-k}]\\]\nIf independent variables are serially correlated, usually not a problem.\nIf dependent variable is serially correlated (the error), it is a problem.\nSerial correlation makes the usual standard error estimates wrong.\n\nEven classical heteroskedasticity robust SE is wrong - sometimes very wrong\n\nMore precisely it is serial correlation in residuals, but think about is as serial correlation in \\(y_t\\) is okay"
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#standard-errors-in-time-series-regressions",
+    "href": "rm-data/slides/week09.html#standard-errors-in-time-series-regressions",
+    "title": "Time series data",
+    "section": "Standard errors in time series regressions",
+    "text": "Standard errors in time series regressions\n\nIn most time series, there will be some serial correlation\nSol1: Use the Newey-West SE: in Stata newey command.\n\nThis incorporates structure of serial correlation of the regression residuals\nFine if heteroskedasticity as well\nNeed to specify lags, based on frequency and seasonality\n\nSol2: Have lagged dependent variable in the regression (one lag is usually enough) \\[y_t = \\alpha + \\beta x_t + \\gamma_1 y_{t-1} + \\gamma_2 y_{t-2} \\ldots\\]\n\nThis will change Coefficients and adjust SEs"
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#electricity-consumption-and-temperature",
+    "href": "rm-data/slides/week09.html#electricity-consumption-and-temperature",
+    "title": "Time series data",
+    "section": "Electricity consumption and temperature",
+    "text": "Electricity consumption and temperature\n\nWe have access to monthly weather and electricity data for Phoenix, Arizona: Overall 204 month\nAlso access to “cooling degree days” and “heating degree days” data\nThe cooling degree days measure Number of degrees that a day’s average temperature is above 65F (18C). This is add up over the month.\nSimilar for heating degree days but below 65F (18C)\nAccess to Electricity consumption data over the month\nAs expected, this values will be seasonal."
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#cs-modelling-decisions",
+    "href": "rm-data/slides/week09.html#cs-modelling-decisions",
+    "title": "Time series data",
+    "section": "CS: Modelling decisions",
+    "text": "CS: Modelling decisions\n\nThere is an exponential trend in electricity –&gt; use log difference\nFor easier interpretation, take first difference (FD) of cooling and heating days\nNatural question: How much does electricity consumption change when temperature changes?\nAdd monthly dummies, January (December to January) is reference\nUse Newey-West standard errors"
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#model-estimates",
+    "href": "rm-data/slides/week09.html#model-estimates",
+    "title": "Time series data",
+    "section": "Model estimates",
+    "text": "Model estimates\n\n\n\nVariables\n(1)\n(2)\n\n\n\n\n\\(\\Delta\\)CD\n0.031**\n0.017**\n\n\n\n(0.001)\n(0.002)\n\n\n\\(\\Delta\\)HD\n0.037**\n0.014**\n\n\n\n(0.003)\n(0.003)\n\n\nmonth = 2, February\n\n-0.274**\n\n\nmonth = 3, March\n\n-0.122**\n\n\n…\n\n\n\n\nConstant\n0.001\n0.092**\n\n\n\n(0.002)\n(0.013)\n\n\nObservations\n203\n203"
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#model-results",
+    "href": "rm-data/slides/week09.html#model-results",
+    "title": "Time series data",
+    "section": "Model results",
+    "text": "Model results\n\nSimple (1) model:\n\nIn months when cooling degrees increase by one degree and heating degrees do not change, electricity consumption increases by 3.1 percent, on average.\nWhen heating degrees increase by one degree and cooling degrees do not change, electricity consumption increases by 3.7 percent, on average.\n\nModel (2) with monthly dummies.\n\nThe reference month is January: constant (when cooling and heating degrees stay the same), electricity consumption increases by about 9% from December to January.\nThe other season coefficients compare to this change:\n\nFebruary: the January to February change is 28 percentage points lower than in the reference month, December to January."
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#electricity-consumption-and-temperature-different-se-estimates",
+    "href": "rm-data/slides/week09.html#electricity-consumption-and-temperature-different-se-estimates",
+    "title": "Time series data",
+    "section": "Electricity consumption and temperature – different SE estimates",
+    "text": "Electricity consumption and temperature – different SE estimates\n\n\n\nVariables\n(1)\n(2)\n(3)\n\n\n\n\n\nSimple SE\nNewey–West SE\nLagged dep.var\n\n\n\\(\\Delta\\)CD\n0.017**\n0.017**\n0.017**\n\n\n\n(0.002)\n(0.002)\n(0.002)\n\n\n\\(\\Delta\\)HD\n0.014**\n0.014**\n0.014**\n\n\n\n(0.002)\n(0.003)\n(0.002)\n\n\nLag of \\(\\Delta\\) ln Q\n\n\n-0.002\n\n\n\n\n\n(0.062)\n\n\nMonth dummies\nYES\nYES\nYES\n\n\nObservations\n203\n203\n202\n\n\nR-squared\n0.951\n0.951\n\n\n\nStandard errors in parentheses\n\n\n\n\n\n** p&lt;0.01, * p&lt;0.05"
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#electricity-consumption-and-temperature-different-se-estimates-1",
+    "href": "rm-data/slides/week09.html#electricity-consumption-and-temperature-different-se-estimates-1",
+    "title": "Time series data",
+    "section": "Electricity consumption and temperature – different SE estimates",
+    "text": "Electricity consumption and temperature – different SE estimates\n\nTo correct for serial correlation, compare simple SE model with two correctly specified models\n\nwith Newey-West SE\nwith Lagged dependent variable\n\nSE marginally different, and with lagged values, coefficients are also similar up to 3 digits\n\nSimilar, not the same\nSometimes substantial difference (if strong serial correlation)"
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#propagation-effect-changes-and-lags---fdl-model",
+    "href": "rm-data/slides/week09.html#propagation-effect-changes-and-lags---fdl-model",
+    "title": "Time series data",
+    "section": "Propagation effect: changes and lags - FDL model",
+    "text": "Propagation effect: changes and lags - FDL model\nIn time series, we can analyze how an impact builds up across several periods (time-to-build):\n\\[\\Delta y^E_t = \\alpha + \\beta_0 \\Delta x_t + \\beta_1 \\Delta x_{t-1} + \\beta_2 \\Delta x_{t-2}\\]\n\n\\(\\beta_0\\) = how many units more \\(y\\) is expected to change within the same time period when \\(x\\) changes by one more unit (No change before or after).\n\\(\\beta_1\\) = how much more \\(y\\) is expected to change in the next time period after \\(x\\) changed by one more unit.\nCumulative effect: \\(\\beta_\\text{cumul} = \\beta_0 + \\beta_1 + \\beta_2\\)\n\\(\\beta_k\\) are the short-term effects, \\(\\beta_\\text{cumul}\\) is the cumulative effect/Long Term Effect."
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#testing-the-cumulative-effect",
+    "href": "rm-data/slides/week09.html#testing-the-cumulative-effect",
+    "title": "Time series data",
+    "section": "Testing the cumulative effect",
+    "text": "Testing the cumulative effect\n\nTo get a SE on the cumulative effect, do a trick and transformation, and estimate a different model\n\n\\[\n\\begin{aligned}\n\\Delta y^E_t &= \\alpha + \\beta_0 \\Delta x_t + \\beta_1 \\Delta x_{t-1} + \\beta_2 \\Delta x_{t-2} \\\\\n\\Delta y^E_t &= \\alpha + (\\beta_\\text{cumul} - \\beta_1 - \\beta_2) \\Delta x_t + \\beta_1 \\Delta x_{t-1} + \\beta_2 \\Delta x_{t-2} \\\\\n\\Delta y^E_t &= \\alpha + \\beta_\\text{cumul} \\Delta x_t + \\beta_1 (\\Delta x_{t-1}- \\Delta x_t) + \\beta_2 (\\Delta x_{t-2} - \\Delta x_t)\\\\\n\\Delta y^E_t &= \\alpha + \\beta_\\text{cumul} \\Delta x_{t} + \\delta_0 \\Delta(\\Delta x_t) + \\delta_1 \\Delta(\\Delta x_{t-1})\n\\end{aligned}\\]\n\n\\(\\beta_\\text{cumul}\\) is exactly the same as \\(\\beta_0 + \\beta_1 + \\beta_2\\)\nUsually estimate both. Separate and cumulative effect\nOften need a few lags"
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#propagation-effect-changes-and-lags---fdl-model-1",
+    "href": "rm-data/slides/week09.html#propagation-effect-changes-and-lags---fdl-model-1",
+    "title": "Time series data",
+    "section": "Propagation effect: changes and lags - FDL model",
+    "text": "Propagation effect: changes and lags - FDL model\nSee Case Study in Chapter 12"
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#summary-of-the-process",
+    "href": "rm-data/slides/week09.html#summary-of-the-process",
+    "title": "Time series data",
+    "section": "Summary of the process",
+    "text": "Summary of the process\n\nDecide on frequency; deal with gaps if necessary.\nPlot the series. Identify features and issues.\nHandle trends by transforming variables (Often: first difference d.).\nSpecify regression that handles seasonality, usually by including season dummies.\nInclude or don’t include lags of the right-hand-side variable(s).\nHandle serial correlation. newey or lagged dependent variable.\nInterpret coefficients in a way that pays attention to potential trend and seasonality.\nTime series econometrics very complicated beyond this.\nBut: These steps often good enough."
+  },
+  {
+    "objectID": "rm-data/slides/week09.html#main-takeaways",
+    "href": "rm-data/slides/week09.html#main-takeaways",
+    "title": "Time series data",
+    "section": "Main takeaways",
+    "text": "Main takeaways\n\nRegressions with time series data allow for additional opportunities, but they pose additional challenges, too\nRegressions with time series data help uncover associations from changes and associations across time\nTrend, seasonality, and random walk-like non-stationarity are additional challenges\nDo not regress variables that have trend or seasonality; without dealing with them they produce spurious results\n\n\n\n\nRios-Avila and Cia"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#motivation",
+    "href": "rm-data/slides/week10.html#motivation",
+    "title": "Prediction Setup",
+    "section": "Motivation",
+    "text": "Motivation\n\nImagine you want to sell your car soon and need to predict its price. You have data on similar used cars, and several regression models could help estimate its value now and in a year. How do you choose the best model?\nOr, take an ice cream shop—using past sales and temperature data, you want to predict sales for the coming days. What factors should you consider to ensure your prediction is as accurate as possible?"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#prediction-basics",
+    "href": "rm-data/slides/week10.html#prediction-basics",
+    "title": "Prediction Setup",
+    "section": "Prediction Basics",
+    "text": "Prediction Basics\n\nWe start with original data (what we have) \\(\\rightarrow\\) to build a model\nThere is Live data (data we do not have yet)\nThe Target variable \\(Y\\) (=dependent variable, response, outcome)\nPredictor variables \\(X\\) (= inputs, covariates, features, independent variables)\nThe goal is to predict value of \\(Y\\) for target observation \\(j\\) in live data\n\nActual value for \\(Y_j\\) unknown\nbut value for \\(X_j\\) known\nNeed predicted value of \\(Y\\) for each target observation \\(j\\)"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#cs-price-cars",
+    "href": "rm-data/slides/week10.html#cs-price-cars",
+    "title": "Prediction Setup",
+    "section": "CS: Price cars",
+    "text": "CS: Price cars\n\nYou want to sell your car through online advertising\nTarget is continuous (in dollars)\nFeatures are continuous or categorical\nThe business question:\n\nWhat price should you put into the ad?"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#cs-price-apartments",
+    "href": "rm-data/slides/week10.html#cs-price-apartments",
+    "title": "Prediction Setup",
+    "section": "CS: Price apartments",
+    "text": "CS: Price apartments\n\nYou are planning to run an AirBnB business\n\nMaybe several rooms\n\nTarget is continuous (in dollars)\nFeatures are varied from text to binary\nThe business question:\n\nHow should you price apartments/houses?"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#cs-predict-companys-exit-from-business",
+    "href": "rm-data/slides/week10.html#cs-predict-companys-exit-from-business",
+    "title": "Prediction Setup",
+    "section": "CS: Predict company’s exit from business",
+    "text": "CS: Predict company’s exit from business\n\nYou have a consulting company\nPredict which firms will go out of business (exit) from a pool of partners\nTarget is binary: exit / stay\nFeatures of financial and management info\nBusiness decision:\n\nWhich firms to give loan to?"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#predictive-analysis-what-is-new",
+    "href": "rm-data/slides/week10.html#predictive-analysis-what-is-new",
+    "title": "Prediction Setup",
+    "section": "Predictive Analysis: what is new?",
+    "text": "Predictive Analysis: what is new?\n\nMost of econometrics focused on finding relationships between \\(X\\) and \\(Y\\)\n\nWhat is the relationship like (+/-, linear, etc.)\nIs it a robust relationship – true in the population /general pattern? (causal?)\n\nNow, we use \\(x_1, x_2, \\dots\\) to predict \\(y\\): \\(\\hat{y}_j = \\hat{f}(x_j)\\)\nHow is this different?\n\n\n\nWe care less about\n\nIndividual coefficient values, multicollinearity\n\nWe still care about the stability of our results.\nShould we care about causality?\n\nNot so much, we care more about making the best prediction."
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#what-are-we-predicting",
+    "href": "rm-data/slides/week10.html#what-are-we-predicting",
+    "title": "Prediction Setup",
+    "section": "What are we predicting?",
+    "text": "What are we predicting?\n\n\\(Y\\) is quantitative (e.g price)\n\nQuantitative prediction\n“Regression” problem\n\n\\(Y\\) is binary (e.g. Default or nor)\n\nProbability prediction\nClassification problem\nBroadly: \\(Y\\) takes values in a finite set of (unordered) classes (survived/died, sold/not sold, car model)\n\nTime series prediction (Forecasting). Make predictions about the future based on historical and current data."
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#our-focus-in-this-class",
+    "href": "rm-data/slides/week10.html#our-focus-in-this-class",
+    "title": "Prediction Setup",
+    "section": "Our focus in this class",
+    "text": "Our focus in this class\n\nFeature engineering (variable selection)\n\nselecting variables\ncoding, functional form\n\nModel building and prediction\n\nEstimate models\nRegressions with a variety of interactions, non-linear functional forms\nRemember splines, polynomials\nMachine learning methods\nAutomated model selection under some conditions\n\nModel evaluation and selection\n\nCompare models based on some measure of fit\nKey idea in prediction: systematically combine estimation and model selection"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#regression-and-prediction",
+    "href": "rm-data/slides/week10.html#regression-and-prediction",
+    "title": "Prediction Setup",
+    "section": "Regression and prediction",
+    "text": "Regression and prediction\n\nLinear regression produces a predicted value for the dependent variable.\n\nPredictions: are the expected value of \\(y\\) if we know \\(x\\).\n\nLinear regression with \\(y, x_1, x_2, etc.,\\), is a model for the conditional expected value of \\(y\\), and it has coefficients \\(\\beta\\).\nWe need estimated coefficients \\((\\hat{\\beta})\\) and actual \\(x\\) values \\((x_j)\\) to predict an actual value \\(\\hat{y}\\)\n\n\\[\\begin{aligned}\ny^E &= \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\dots \\\\\n\\hat{y}_j &= \\hat{\\beta}_0 + \\hat{\\beta}_1 x_{1j} + \\hat{\\beta}_2 x_{2j} + \\dots\n\\end{aligned}\\]\n\nThis can give us a predicted value for \\(y\\) for each target observation \\(j\\) in the live data."
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#the-prediction-error",
+    "href": "rm-data/slides/week10.html#the-prediction-error",
+    "title": "Prediction Setup",
+    "section": "The Prediction Error",
+    "text": "The Prediction Error\n\nThe Regression model can produce a Predicted value \\(\\hat{y}_j\\) for target observation \\(j\\)\nbut, actual value \\(y_j\\) is not known (that is why we are predicting)\nThus, there will be a prediction error\n\n\\[e_j = \\hat{y}_j - y_j\n\\]\n\nError = actual value - predicted value"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#prediction-error",
+    "href": "rm-data/slides/week10.html#prediction-error",
+    "title": "Prediction Setup",
+    "section": "Prediction Error",
+    "text": "Prediction Error\n\nThe ideal prediction error, is zero: our predicted value is right on target.\nThe prediction error is defined by the direction of miss and size.\nDirection of miss:\n\nPositive if we overpredict the value: we predict a higher value than actual value.\nNegative if we underpredict the value: our prediction is too low.\nWhether positive versus negative errors matter more or they are equally bad, depends on the decision problem.\n\nSize:\n\nLarger in absolute value the further away our prediction is from the actual value.\nIt is smaller the closer we are.\nIt is always better to have a prediction with as small an error as possible."
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#decomposing-the-prediction-error",
+    "href": "rm-data/slides/week10.html#decomposing-the-prediction-error",
+    "title": "Prediction Setup",
+    "section": "Decomposing the prediction error",
+    "text": "Decomposing the prediction error\nAssume the best model for \\(Y\\) is \\(Y = f(X,Z,XZ) + \\epsilon\\)\n\nThe prediction error can be decomposed into three parts:\n\nestimation error: Difference between \\(f(X,Z,XZ)\\) and \\(\\hat f(X,Z,XZ)\\)\nmodel error: If we using \\(f(X,Z)\\), it would be the Difference between \\(f(X,Z)\\) and \\(f(X,Z,XZ)\\).\ngenuine error: error even if have the best possible model. \\(\\epsilon\\)"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#interval-prediction-for-quantitative-target-variables",
+    "href": "rm-data/slides/week10.html#interval-prediction-for-quantitative-target-variables",
+    "title": "Prediction Setup",
+    "section": "Interval prediction for quantitative target variables",
+    "text": "Interval prediction for quantitative target variables\n\nOne advantage of regressions - it’s easy quantify uncertainty of prediction\n\nThis can be used to obtain Interval predictions\n\nInterval predictions quantify 2-out-of-3 sources of prediction uncertainty: estimation error and genuine (or irreducible) error.\nThey do not include the third source, model uncertainty! (Bayesian methods can help with this)\nThe 95% prediction interval (PI) tells where to expect the actual value for the target observation.\nThe PI for linear regression requires homoskedasticity. (but could be relaxed)"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#the-loss-function",
+    "href": "rm-data/slides/week10.html#the-loss-function",
+    "title": "Prediction Setup",
+    "section": "The Loss function",
+    "text": "The Loss function"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#loss-functions",
+    "href": "rm-data/slides/week10.html#loss-functions",
+    "title": "Prediction Setup",
+    "section": "Loss Functions",
+    "text": "Loss Functions\n\nWe use a Loss function to quantify the cost of prediction error\n\nIt attaches a value to the prediction error, specifying how bad it is\nThus, Loss function determines best predictor\n\nIdeally, it is derived from decision problem,\n\nHow much more costly is to overpredict than underpredict? (price is right!)\nThe shape and functional form could depent on the decision problem\n\nIn practice, highly crafted loss functions are rare (Machine learning, Neural Networks, Etc), so we use common ones\nLoss functions could be used to both estimate, but also to evaluate/compare models"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#loss-functions-1",
+    "href": "rm-data/slides/week10.html#loss-functions-1",
+    "title": "Prediction Setup",
+    "section": "Loss Functions",
+    "text": "Loss Functions\n\nThe most important Loss functions have the following characteristics:\n\nSymmetry: losses due to errors in opposing direction are similar\n\nAsymmetric loss: overprediction is more costly than underprediction\n\nConvexity: Twice as large errors generate more than twice as large losses. (We penalize large errors more than small ones)\n\nLinear loss: Errors are penalized proportionally to their size"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#loss-functions-of-various-shapes",
+    "href": "rm-data/slides/week10.html#loss-functions-of-various-shapes",
+    "title": "Prediction Setup",
+    "section": "Loss Functions of Various Shapes",
+    "text": "Loss Functions of Various Shapes\n\n\nCode\nqui {\nclear\nset scheme white2\ncolor_style tableau\nset obs 301\nrange r -5 5 \ngen ll = r^2\ngen ll2 = 2*abs(r)\ngen ll3 = 1.5*r^2*(r&gt;0)+0.5*r^2*(r&lt;0)\ndrop if ll&gt;30 | ll2&gt;30 | ll3&gt;30\nline ll ll2 ll3 r, lw(1 1 1) ///\n    legend(order(1 \"Symetric-Convex\" 2 \"Symetric-Linear\" 3 \"Asymetric-Convex\") )\n}"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#examples-1-used-cars",
+    "href": "rm-data/slides/week10.html#examples-1-used-cars",
+    "title": "Prediction Setup",
+    "section": "Examples 1 – used cars",
+    "text": "Examples 1 – used cars\n\nThe loss function for predicting the value of our used car depends on how we value money and how we value how much time it takes to sell our car (value of your car).\nA too low prediction may lead to selling our car cheap but fast;\nA too high prediction may make us wait a long time and, possibly, revising the sales price downwards before selling our car.\nWhat kind of loss function would make sense?"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#examples-2---creditors",
+    "href": "rm-data/slides/week10.html#examples-2---creditors",
+    "title": "Prediction Setup",
+    "section": "Examples 2 - creditors",
+    "text": "Examples 2 - creditors\n\nCreditors decide whether to issue a loan only to potential debtors that are predicted to pay it back with high likelihood.\nTwo kinds of errors are possible:\n\ndebtors that would pay back their loan don’t get a loan\ndebtors that would not pay back their loan get one nevertheless.\n\nThe costs of the first error are due to missed business opportunity; the costs of the second error are due to direct loss of money.\nThese losses may be quantified in relatively straightforward ways.\nWhat kind of loss function would make sense?"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#squared-loss",
+    "href": "rm-data/slides/week10.html#squared-loss",
+    "title": "Prediction Setup",
+    "section": "Squared Loss",
+    "text": "Squared Loss\n\n\\(L(e_j) = e^2_j = (\\hat{y}_j - y_j)^2\\)\nThe most widely used loss function\nSymmetric: Losses due to errors in opposing direction are same\nConvex: Twice as large errors generate more than twice as large losses\nBusiness sense ?"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#adding-up-mse-and-mae",
+    "href": "rm-data/slides/week10.html#adding-up-mse-and-mae",
+    "title": "Prediction Setup",
+    "section": "Adding up – MSE and MAE",
+    "text": "Adding up – MSE and MAE\n\nMany target observations in practice\nOr we can think about many situations with a single target observation\nSquared loss \\(\\rightarrow\\) Mean Squared Error (MSE) \\[\\begin{align*}\n\\text{MSE} &= \\frac{1}{K} \\sum_{k=1}^K (\\hat{y}_k - y_k)^2 \\\\\n\\text{RMSE} &= \\sqrt{\\text{MSE}} = \\sqrt{\\frac{1}{K} \\sum_{k=1}^K (\\hat{y}_k - y_k)^2}\n\\end{align*}\\]"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#mse-implies-expected-value",
+    "href": "rm-data/slides/week10.html#mse-implies-expected-value",
+    "title": "Prediction Setup",
+    "section": "MSE implies expected value",
+    "text": "MSE implies expected value\n\\[\\text{MSE} = \\frac{1}{K} \\sum_{k=1}^K (\\hat{y}_k - y_k)^2\\]\n\nMSE implies mean value for best predictor\nLinear (least squares) regression\nWhy?\n\nBecause the solution to least squares minimization problem is the average.\nTechnically: first-order condition of minimization problem\n\nRMSE = square root of MSE\nMSE is the numerator of the R-squared!"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#mse-decomposition-bias-and-variance",
+    "href": "rm-data/slides/week10.html#mse-decomposition-bias-and-variance",
+    "title": "Prediction Setup",
+    "section": "MSE decomposition : Bias and Variance",
+    "text": "MSE decomposition : Bias and Variance\n\nThe MSE can be decomposed into two parts: Bias and Variance \\[\\begin{align*}\nMSE &= \\frac{1}{J}\\sum_{j=1}^J (\\hat{y}_j - y_j)^2 \\\\\n&= \\left(\\frac{1}{J}\\sum_{j=1}^J (\\hat{y}_j - y_j)\\right)^2 + \\frac{1}{J}\\sum_{j=1}^J (\\hat y_j - \\bar{\\hat y})^2 \\\\\n&= \\text{Bias}^2 + \\text{PredictionVariance}\n\\end{align*}\n\\]\nThe bias of a prediction is the average of its prediction error.\n\nHow far off is the average prediction from the actual value?\n\nThe variance of a prediction describes shows how it varies around its average."
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#mse-decomposition-bias-and-variance-1",
+    "href": "rm-data/slides/week10.html#mse-decomposition-bias-and-variance-1",
+    "title": "Prediction Setup",
+    "section": "MSE decomposition : Bias and Variance",
+    "text": "MSE decomposition : Bias and Variance\n\\[\\begin{align*}\n\\text{MSE} &= \\frac{1}{K} \\sum_{k=1}^K (\\hat{y}_k - y_k)^2 \\\\\n         &= \\left(\\frac{1}{K} \\sum_{k=1}^K (\\hat{y}_k - \\bar{y})\\right)^2 + \\frac{1}{K} \\sum_{k=1}^K (y_k - \\bar{y})^2 \\\\\n         &= \\text{Bias}^2 + \\text{PredictionVariance}\n\\end{align*}\\]\n\nOLS is unbiased. Some other methods will allow for some bias in return for lower variance."
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#case-study-used-cars-data",
+    "href": "rm-data/slides/week10.html#case-study-used-cars-data",
+    "title": "Prediction Setup",
+    "section": "Case study: used cars data",
+    "text": "Case study: used cars data\n\nSuppose you want to sell your car of a certain make, type, year, miles, condition and other features.\nThe prediction analysis helps uncover the average advertised price of cars with these characteristics\nThat helps decide what price you may want to put on your ad."
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#case-study-used-cars-data-1",
+    "href": "rm-data/slides/week10.html#case-study-used-cars-data-1",
+    "title": "Prediction Setup",
+    "section": "Case study: used cars data",
+    "text": "Case study: used cars data\n\nScraped from a website\nYear of make (age), Odometer (miles)\nTech specifications such as fuel and drive\nDealer or private seller"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#case-study-loss-function",
+    "href": "rm-data/slides/week10.html#case-study-loss-function",
+    "title": "Prediction Setup",
+    "section": "Case study: Loss function",
+    "text": "Case study: Loss function\n\nThe loss function for predicting the value of our used car depends on how we value money and how we value how much time it takes to sell our car.\nA too low prediction may lead to selling our car cheap but fast;\nA too high prediction may make us wait a long time and, possibly, revising the sales price downwards before selling our car.\nSymmetric\nSensitive to big deviations\nRMSE and OLS"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#case-study---used-cars-features",
+    "href": "rm-data/slides/week10.html#case-study---used-cars-features",
+    "title": "Prediction Setup",
+    "section": "Case study - used cars: features",
+    "text": "Case study - used cars: features\n\nOdometer, measuring miles the car traveled (Continuous, linear)\nMore specific type of the car: LE, XLE, SE (missing in about 30% of the observations). (Factor – set of dummies , incl N/A)\nGood condition, excellent condition or it is like new (missing for about one third of the ads). (Factor – set of dummies, incl N/A)\nCar’s engine has 6 cylinders (20% of ads say this; 43% says 4 cylinders, and the rest has no information on this). (Binary for 6 cylinders)"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#case-study-models-by-hand",
+    "href": "rm-data/slides/week10.html#case-study-models-by-hand",
+    "title": "Prediction Setup",
+    "section": "Case study: models by hand",
+    "text": "Case study: models by hand\n\nModel 1: age, age squared\nModel 2: age, age squared, odometer, odometer squared\nModel 3: age, age squared, odometer, odometer squared, LE, excellent condition, good condition, dealer\nModel 4: age, age squared, odometer, odometer squared, LE, excellent condition, good condition, dealer, LE, XLE, cylinder\nModel 5: same as Model 4 but with all variables interacted with age (won’t show in next table)"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#case-study-car-price-model-results",
+    "href": "rm-data/slides/week10.html#case-study-car-price-model-results",
+    "title": "Prediction Setup",
+    "section": "Case study: Car price model results",
+    "text": "Case study: Car price model results\n(1)   (2)   (3)   (4)\nVariables Model 1 Model 2 Model 3 Model 4\nage     -1,530.09 -1,149.22 -873.47 -836.64\nagesq    35.05   27.65   18.21   17.63\nodometer           -303.84 -779.90 -788.70\nodometersq                 18.81   19.20\nLE                         28.11  -20.48\nXLE                                301.69\nSE                                1,338.79\ncond_likenew                       558.67\ncond_excellent                     176.49  190.40\ncond_good                          293.36  321.56\ncylind6                           -370.27\ndealer                            572.98  822.65\nConstant 18,365.45 18,860.20 19,431.89 18,963.35"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#case-study-results",
+    "href": "rm-data/slides/week10.html#case-study-results",
+    "title": "Prediction Setup",
+    "section": "Case study: Results",
+    "text": "Case study: Results\n\nWhen doing prediction, coefficients are less important.\nBut we shall use them for sanity check: age negative, convex (flattens out)\nSE may not be even displayed. It is helpful for model selection, but only along with other measures\nand values of the predictor variables for our car: age = 10 (years), odometer= 12 (10 thousand miles), type= LE, excellent condition=1.\nA point prediction, Model 3: age: -873.47, age squared=18.21, odometer -799.90, odometer sq = 18.81, LE=28.11, cond excellent: 176.49+ C=19.431.89\nPredicted is price is 6073."
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#case-study-prediction-interval",
+    "href": "rm-data/slides/week10.html#case-study-prediction-interval",
+    "title": "Prediction Setup",
+    "section": "Case study: Prediction Interval",
+    "text": "Case study: Prediction Interval\n\nCalculating prediction intervals for the baseline models\nVery wide interval despite high R2\nPrediction is hard!\nEven with a good model, you’ll make plenty of errors\nShould be aware\nLet your clients know in advance…"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#case-study-prediction-interval-1",
+    "href": "rm-data/slides/week10.html#case-study-prediction-interval-1",
+    "title": "Prediction Setup",
+    "section": "Case study: Prediction Interval",
+    "text": "Case study: Prediction Interval\nBased on the third model, we have a point prediction of \\(6073\\) Have a 80% prediction intervals (PI) – Ads for cars just like ours may ask a price ranging from \\(4,317\\) to \\(7,829\\) with a 80% chance.\n\n\n\nModel 1\nModel 3\n\n\n\n\nPoint prediction 6,569\n6,073\n\n\nPrediction Interval (80%) [4,296-8,843]\n[4,317-7,829]\n\n\nPrediction Interval (95%) [3,085-10,053]\n[3,382-8,763]\n\n\n\nNote: Chicago cars. Prices in dollars. Source: used-cars dataset."
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#model-selection",
+    "href": "rm-data/slides/week10.html#model-selection",
+    "title": "Prediction Setup",
+    "section": "Model selection",
+    "text": "Model selection"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#data-for-prediction",
+    "href": "rm-data/slides/week10.html#data-for-prediction",
+    "title": "Prediction Setup",
+    "section": "Data for prediction",
+    "text": "Data for prediction\n\nWe have a dataset\nWe wanna make some prediction"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#model-selection-1",
+    "href": "rm-data/slides/week10.html#model-selection-1",
+    "title": "Prediction Setup",
+    "section": "Model selection",
+    "text": "Model selection\nModel selection is finding the best fit while avoiding overfitting and aiming for high external validity"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#external-validity-avoiding-overfitting-and-model-selection",
+    "href": "rm-data/slides/week10.html#external-validity-avoiding-overfitting-and-model-selection",
+    "title": "Prediction Setup",
+    "section": "External validity, avoiding overfitting and model selection",
+    "text": "External validity, avoiding overfitting and model selection\n\nHave a dataset and a target variable. Compare various models of prediction.\nHow to choose a model?\nPick a model that can predict well….\nBest prediction - best model that would produce the smallest prediction error.\nContext of squared loss function \\(\\rightarrow\\) finding the regression that would produce the smallest RMSE for the target observations.\nPick a model that can predict well on the live data"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#underfit-overfit",
+    "href": "rm-data/slides/week10.html#underfit-overfit",
+    "title": "Prediction Setup",
+    "section": "Underfit, overfit",
+    "text": "Underfit, overfit\n\nComparing two models (model 1 and model 2)\nModel 1 can give a worse fit in the live data than model 2 in two ways.\n\nModel 1 may give a worse fit both in the original data and the live data. In this case, we say that model 1 underfits the original data.\n\nSimple: we should build a better model.\n\nModel 1 may actually give a better fit in the original, but a worse fit in the live data. In this case, we say that model 1 overfits the original data."
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#overfitting",
+    "href": "rm-data/slides/week10.html#overfitting",
+    "title": "Prediction Setup",
+    "section": "Overfitting",
+    "text": "Overfitting\n\nOverfitting is a key aspect of external validity\nfinding a model that fits the data better than alternative models\nbut makes worse actual prediction.\nThus, the problem of overfitting the original data is best split into two problems:\n\nfitting patterns in the original data that are not there in the population, or general pattern, it represents;\nfitting patterns in the world of the original data that will not be there in the world of the live data."
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#reason-for-overfitting",
+    "href": "rm-data/slides/week10.html#reason-for-overfitting",
+    "title": "Prediction Setup",
+    "section": "Reason for overfitting",
+    "text": "Reason for overfitting\n\nThe typical reason for overfitting is fitting a model that is too complex on the dataset.\nComplexity: number of estimated coefficients\nOften: fitting a model with too many predictor variables.\nIncluding too many variables from the dataset that do not really add to the predictive power of the regression,\noften because they are strongly correlated with other predictor variables.\nSpecifying too many interactions,\nToo detailed nonlinear patterns\n\nas piecewise linear splines with many knots\npolynomials of high degree."
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#increasing-model-complexity",
+    "href": "rm-data/slides/week10.html#increasing-model-complexity",
+    "title": "Prediction Setup",
+    "section": "Increasing model complexity",
+    "text": "Increasing model complexity\n\nAs we increase model complexity\n\nSuch as number of features (variables)\nBy adding interactions, etc.\n\nWe will see\n\nRMSE within dataset to fall monotonously\nRMSE for target observations (ie. not in our dataset) to fall and then rise as we overfit\n\nexample to come in class 2"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#finding-the-best-model-by-best-fit-and-penalty-the-bic",
+    "href": "rm-data/slides/week10.html#finding-the-best-model-by-best-fit-and-penalty-the-bic",
+    "title": "Prediction Setup",
+    "section": "Finding the best model by best fit and penalty: The BIC",
+    "text": "Finding the best model by best fit and penalty: The BIC\n\nApproach 1: Indirectly\nEstimate it by an adjustment\nUse a method based on some distributional assumptions\nNeed to pick an evaluation criterion\n=In-sample evaluation with penalty\nSpecify and estimate model using all data\nUse a measure of fit that helps avoid overfitting\n\nSuch as\n\nadjusted \\(R^2\\)\nBIC = Bayesian Information Criterion, or Schwarz criterion"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#indirect-evaluation-criteria",
+    "href": "rm-data/slides/week10.html#indirect-evaluation-criteria",
+    "title": "Prediction Setup",
+    "section": "Indirect evaluation criteria",
+    "text": "Indirect evaluation criteria\n\nMain methods: AIC, BIC and adjusted \\(R^2\\)\nAdvantage: easy to compute\nDisadvantage: assumptions\nAdjusted \\(R^2\\) – just add a penalty for having many RHS vars\n\ncorrects with \\((n - 1)/(n - p - 1)\\)\n\nAkaike Information Criterion\n\nAIC = \\(-2 \\times \\ln(\\text{likelihood}) + 2 \\times k\\)\n\nSchwarz – Bayesian Information Criterion\n\nBIC = \\(-2 \\times \\ln(\\text{likelihood}) + \\ln(N) \\times k\\)\n\nBoth quantities that take the log likelihood and apply a penalty for the number of parameters being estimated.Both are based on information loss theory from the fifties.\nBIC puts heavier penalty on models with many RHS variables, than AIC."
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#model-fit-evaluation",
+    "href": "rm-data/slides/week10.html#model-fit-evaluation",
+    "title": "Prediction Setup",
+    "section": "Model fit evaluation",
+    "text": "Model fit evaluation\n\nUse a good measure of fit to compare models.\nDon’t\n\nDon’t use MSE or R-squared (the two very closely related).\nThey choose best fit in data and don’t care about overfitting.\n\nIn practice, use BIC.\nBIC good approximation of what more sophisticated methods would pick. Or even more conservative…\nThat introduces a “penalty term”\nMore predictor variables leads to worse value\nEven more so in large samples."
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#finding-the-best-model-by-training-and-test-samples",
+    "href": "rm-data/slides/week10.html#finding-the-best-model-by-training-and-test-samples",
+    "title": "Prediction Setup",
+    "section": "Finding the best model by training and test samples",
+    "text": "Finding the best model by training and test samples\n\nApproach Nr.2: Directly\nEstimate it using a test (validation) set approach.\nNeeds cutting the dataset into training and test sample\nNo assumption\nNeed to pick evaluation criterion (loss function) = RMSE (root mean squared error)\nEstimate the model in part of the data (say, 80%).\n\nTraining sample\n\nEvaluate predictive performance on the rest of the data.\n\nTest sample\n\nAvoid overfitting in training data by evaluating on test data."
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#training-and-test-samples",
+    "href": "rm-data/slides/week10.html#training-and-test-samples",
+    "title": "Prediction Setup",
+    "section": "Training and Test Samples",
+    "text": "Training and Test Samples\n\nCreating two sub-samples\nRandomly! (ie. not 1—80 and 81—100)\nRandomly generate an ID, sort and create two sub-samples.\nTraining sample 80%\n\nRegressions will be on run on this sample\nCoefficients estimated\n\nTest (validation) sample 20%\n\nUsing estimated coefficients, we predict values for flats in the validation sample\nCalculate residual, RMSE in the test sample\n\nRMSE rather than MSE – smaller numbers…."
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#fold-cross-validation",
+    "href": "rm-data/slides/week10.html#fold-cross-validation",
+    "title": "Prediction Setup",
+    "section": "5-fold cross-validation",
+    "text": "5-fold cross-validation\n\nSplit sample \\(k=5\\) times to train and test\nFor each folds:\n\nEstimate model on training.\nGet coefficients.\nUse them to estimate on Test\nCalculate test MSE\n\nAverage and take Sqrt\nRepeat for models\nPick model w lowest avg RMSE"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#bic-vs-test-rmse",
+    "href": "rm-data/slides/week10.html#bic-vs-test-rmse",
+    "title": "Prediction Setup",
+    "section": "BIC vs test RMSE",
+    "text": "BIC vs test RMSE\n\nIn our experience, in practice, BIC is the best indirect criterion – closest to test sample.\nThe advantage of BIC is that it needs no sample splitting which may be a problem in small samples.\nThe advantage of test MSE is that it makes no assumption.\nBIC is a good first run, quick, is often not very wrong.\nUltimately, you want to do a test MSE."
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#case-study-model-selection",
+    "href": "rm-data/slides/week10.html#case-study-model-selection",
+    "title": "Prediction Setup",
+    "section": "Case study: Model selection",
+    "text": "Case study: Model selection\n\nWe have the ingredients, we need to pick a model.\nThis process involves variable selection and a decision rule of choosing the model based on some loss function.\nBIC on the actual data\nTest-sample RMSE\nCross-validated (CV) RMSE\nIf enough data / computer power, use CV RMSE\nWith larger dataset, overfit becomes less of an issue."
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#case-study-model-selection-1",
+    "href": "rm-data/slides/week10.html#case-study-model-selection-1",
+    "title": "Prediction Setup",
+    "section": "Case study: Model selection",
+    "text": "Case study: Model selection\n\n\n\nModel\nN vars\nN coeff\nR-squared\nRMSE\nBIC\n\n\n\n\n1 Model 1\n3\n0.85\n1,755\n5,018\n\n\n\n2 Model 2\n5\n0.90\n1,433\n4,910\n\n\n\n3 Model 3\n9\n0.91\n1,322\n4,893\n\n\n\n4 Model 4\n12\n0.92\n1,273\n4,894\n\n\n\n5 Model 5\n22\n0.92\n1,239\n4,935\n\n\n\n\nNote: In sample values. Model 1: age, age squared, Model 2= Model 1 +odometer, odometer squared, Model 3= Model2 + SE, excellent condition, good condition, dealer, Model 4= Model 3 + LE, XLE, like new condition, 6cylinder, Model 5 = Model 4 + many interactions. Source: used-cars dataset."
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#case-study-model-selection-2",
+    "href": "rm-data/slides/week10.html#case-study-model-selection-2",
+    "title": "Prediction Setup",
+    "section": "Case study: Model selection",
+    "text": "Case study: Model selection\n\nCross-validate using 4-fold cross validation.\nRun the regression on 3/4 of the sample, predicting on the remaining 1/4 of the sample, get RMSE on test sample.\nWe then average out RMSE values over the 4 test samples\n\n\n\n\nFold No.\nModel 1\nModel 2\nModel 3\nModel 4\nModel 5\n\n\n\n\n1 Fold1\n1,734\n1,428\n1,331\n1,395\n1,391\n\n\n2 Fold2\n2,010\n1,781\n1,692\n1,638\n1,693\n\n\n3 Fold3\n1,465\n1,251\n1,256\n1,253\n1,436\n\n\n4 Fold4\n1,823\n1,325\n1,250\n1,246\n1,307\n\n\n5 Average\n1,769\n1,460\n1,394\n1,392\n1,464\n\n\n\nSource: used-cars dataset."
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#case-study-model-selection-3",
+    "href": "rm-data/slides/week10.html#case-study-model-selection-3",
+    "title": "Prediction Setup",
+    "section": "Case study: Model selection",
+    "text": "Case study: Model selection\n\nModel 3 has lowest BIC, lowest average RMSE on test samples. Model 4 is close.\nInterestingly, both approaches suggests that Model 3 is the one that has the best prediction properties\nSmall sample, simple model."
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#external-validity-and-stable-patterns",
+    "href": "rm-data/slides/week10.html#external-validity-and-stable-patterns",
+    "title": "Prediction Setup",
+    "section": "External validity and stable patterns",
+    "text": "External validity and stable patterns\n\nBIC, Training-test, k-fold cross-validation…\nAll very nice\nBut, in the end, they all use the information in the data.\nHow would things look for the target observation(s)?\nThe issue of stationarity – how our data is related to other datasets we may use our model\nWe may have some ideas\nWe may use non-random test samples that may mimic the difference in our data and the target observations\nIn the end we can’t know but need to think about it.\nPlus be aware, that some difference is likely, so your model fit in an outside data source is likely to be worse…"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#external-validity-and-stable-patterns-1",
+    "href": "rm-data/slides/week10.html#external-validity-and-stable-patterns-1",
+    "title": "Prediction Setup",
+    "section": "External validity and stable patterns",
+    "text": "External validity and stable patterns\n\nMost predictions will be on future data\nHigh external validity requires that the environment is stationary.\nStationarity means that the way variables are distributed remains the same over time.\nHere that distribution is to be understood in a general way: the joint distribution of predictor variables and target variable are required to remain the same throughout the time covered in the data and the time of the forecast.\nStationarity ensures that the relationship between predictors and the target variable is the same in the data and the forecasted future.\nIf the relationship breaks down whatever we establish in our data won’t be true in the future, leading to wrong forecasts."
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#external-validity-and-stable-patterns-2",
+    "href": "rm-data/slides/week10.html#external-validity-and-stable-patterns-2",
+    "title": "Prediction Setup",
+    "section": "External validity and stable patterns",
+    "text": "External validity and stable patterns\n\nExternal validity and stable patterns - Very broad concept\nIt’s about representativeness of actual data \\(\\rightarrow\\) to live data\nOften hard to know.\nRemember hotels (other dates, other cities).\nDomain knowledge can help.\nStudy if patterns were stable in the past / other locations were stable can help."
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#algorithms",
+    "href": "rm-data/slides/week10.html#algorithms",
+    "title": "Prediction Setup",
+    "section": "Algorithms",
+    "text": "Algorithms"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#machine-learning-and-the-role-of-algorithms",
+    "href": "rm-data/slides/week10.html#machine-learning-and-the-role-of-algorithms",
+    "title": "Prediction Setup",
+    "section": "Machine Learning and the Role of Algorithms",
+    "text": "Machine Learning and the Role of Algorithms\n\nPredictive analytics is often used for data analysis whose goal is prediction. But a more popular, and related, term is machine learning.\nMachine learning is an umbrella concept for methods that use algorithms to find patterns in data and use them for prediction purposes.\nAn algorithm is a set of rules and steps that defines how to generate an output (predicted values) using various inputs (variables, observations in the original data).\nA formula is an example of an algorithm – one that can be formulated in terms of an equation.\nOLS formula for estimating the coefficients of a linear regression is an algorithm."
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#machine-learning-algorithms",
+    "href": "rm-data/slides/week10.html#machine-learning-algorithms",
+    "title": "Prediction Setup",
+    "section": "Machine Learning Algorithms",
+    "text": "Machine Learning Algorithms\n\nMachine learning is about algorithms, machines and learning\nAlgorithms specify each and every step to follow in a clear way.\nNot all algorithms can be translated into a formula.\n\nThe bootstrap estimation of a standard error (Chapter 5, Section 5.6) is an example.\nK-fold cross-validation.\n\nHeavy use of machines = computers. Steps of algorithm translated into computer code and make the computer follow those steps. Fast.\nLearning - learn something from the data with data and an algorithms.\n\nPredicted value of \\(y =?\\) If combine \\(x\\) variables using a particular model.\nlearning which model is best for predicting \\(y\\) as well as what that predicted value is."
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#what-is-machine-learning",
+    "href": "rm-data/slides/week10.html#what-is-machine-learning",
+    "title": "Prediction Setup",
+    "section": "What is, machine learning?",
+    "text": "What is, machine learning?\n\nMany definitions, discussions.\nHere: Machine learning is an approach to predictive data analysis – achieving the best possible prediction from available data.\nConsequence 1: understanding the patterns of associations between \\(y\\) and \\(x\\) is of secondary importance.\nWe need stable patterns for good prediction in live data, but that is it.\nThe machine learning attitude - a preference for evaluating methods based on data as opposed to abstract principles.\nOriginal data to live data\nNot a general rule or philosophy\nMachine learning broadly: all prediction models including OLS\nMachine learning narrowly: prediction models with no formula, ie not OLS"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#main-takeaways",
+    "href": "rm-data/slides/week10.html#main-takeaways",
+    "title": "Prediction Setup",
+    "section": "Main takeaways",
+    "text": "Main takeaways\n\nPrediction uses the original data with \\(y\\) and \\(x\\) to predict the value of \\(y\\) for observations in the live data, in which \\(x\\) is observed but \\(y\\) is not\nPrediction uses a model that describes the patterns of association between \\(y\\) and \\(x\\) in the original data\nCross-validation can help find the best model in the population, or general pattern, represented by the original data\nStability of the patterns of association is needed for a prediction with high external validity\n\n\n\n\nRios-Avila and Cia"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#what-is-different",
+    "href": "rm-data/slides/week10.html#what-is-different",
+    "title": "Prediction Setup",
+    "section": "What is Different?",
+    "text": "What is Different?\n\nFeature engineering (variable selection) including variable selection, coding and functional form\nModel building and prediction\n\nDecision regarding model complexity and estimation\n\nRemember splines, polynomials\n\nMachine learning methods\n\nAutomated model selection under some conditions\n\n\nModel evaluation and selection\n\nCompare models based on some measure of fit\n\nKey idea: Focus on systematically combine estimation and model selection"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#supervised-machine-learning-technique-regression",
+    "href": "rm-data/slides/week10.html#supervised-machine-learning-technique-regression",
+    "title": "Prediction Setup",
+    "section": "Supervised Machine Learning Technique: Regression",
+    "text": "Supervised Machine Learning Technique: Regression\n\nLinear regression produces a predicted value for the dependent variable.\n\nPredictions: are the expected value of \\(y\\) if we know \\(x\\).\n\nLinear regression with \\(y, x_1, x_2, etc.,\\), is a model for the conditional expected value of \\(y\\), which provide us with \\(\\beta's\\).\nWe need estimated coefficients \\((\\hat{\\beta})\\) and actual \\(x\\) values \\((x_j)\\) to predict an actual value \\(\\hat{y}\\)\n\n\\[\\begin{aligned}\ny^E &= \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\dots \\\\\n\\hat{y}_j &= \\hat{\\beta}_0 + \\hat{\\beta}_1 x_{1j} + \\hat{\\beta}_2 x_{2j} + \\dots\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#the-prediction-error-1",
+    "href": "rm-data/slides/week10.html#the-prediction-error-1",
+    "title": "Prediction Setup",
+    "section": "The Prediction Error",
+    "text": "The Prediction Error\n\nThe ideal prediction error, is zero: our predicted value is right on target.\nThe prediction error is defined by the direction of miss and size.\nDirection of miss:\n\nPositive if we overpredict the value: we predict a higher value than actual value.\nNegative if we underpredict the value: our prediction is too low.\nDegree of wrongness depends on the decision problem.\n\nSize:\n\nLarger in absolute value the further away our prediction is from the actual value.\nIt is smaller the closer we are.\nIt is always better to have a prediction with as small an error as possible."
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#some-common-loss-functions",
+    "href": "rm-data/slides/week10.html#some-common-loss-functions",
+    "title": "Prediction Setup",
+    "section": "Some common loss functions",
+    "text": "Some common loss functions\nSquared loss function:\n\\[L(e_j) = e^2_j = (\\hat{y}_j - y_j)^2\n\\]\n\nThe most widely used loss function\nSymmetric: Losses due to errors in opposing direction are same\nConvex: Twice as large errors generate more than twice (4x) as large losses"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#some-common-loss-functions-1",
+    "href": "rm-data/slides/week10.html#some-common-loss-functions-1",
+    "title": "Prediction Setup",
+    "section": "Some common loss functions",
+    "text": "Some common loss functions\nAbsolute loss function:\n\\[L(e_j) = e^2_j = Abs(\\hat{y}_j - y_j)\n\\]\n\nUsed for Median regression (Quantile regression)\nSymmetric: Losses due to errors in opposing direction are same\nLinear: Twice as large errors generate twice as large losses\nQuantile Regressions use Asymetric loss functions"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#mean-squared-error-mse",
+    "href": "rm-data/slides/week10.html#mean-squared-error-mse",
+    "title": "Prediction Setup",
+    "section": "Mean Squared Error: MSE",
+    "text": "Mean Squared Error: MSE\n\nThe most common way to quantify and aggregate the loss function is using the Mean Squared Error (MSE)\nSquared loss \\(\\rightarrow\\) Mean Squared Error (MSE)\n\n\\[\\begin{align*}\n\\text{MSE} &= \\frac{1}{K} \\sum_{k=1}^K (\\hat{y}_k - y_k)^2 \\\\\n\\text{RMSE} &= \\sqrt{\\text{MSE}} = \\sqrt{\\frac{1}{K} \\sum_{k=1}^K (\\hat{y}_k - y_k)^2}\n\\end{align*}\n\\]\n\nUsing this function typically implies we are interested in the Mean as the best predictor"
   }
 ]
