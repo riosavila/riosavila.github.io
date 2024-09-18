@@ -132,7 +132,7 @@ How was the data Born?
 
 -   **By hand**:
     -   Many data sources are available online: World Bank and IMF data, etc. (usually easy to download)
-    -   For the US, <ipums.org> has a lot of standardized data (CPS, ATUS, ACS, etc.)
+    -   For the US, [www.ipums.org](https://www.ipums.org) has a lot of standardized data (CPS, ATUS, ACS, etc.)
 -   Automated **API**:
     -   Many agencies also offer API (Application Programming Interface) to directly load data into a statistical software
     -   API widely used in many context. see [here](https://guides.lib.berkeley.edu/c.php?g=4395&p=7995952) for a list from Berkeley
@@ -228,7 +228,7 @@ Choice of data collection approach matters a great deal. Can be done efficiently
 
 ## Random sampling is **best**
 
--   Provided sample is large enough (N$->$infinity)
+-   Provided sample is large enough (N $\rightarrow$ infinity)
 -   In small samples (dozens) anything is possible
 -   In a representative sample, size (N) matters, not coverage
     -   CPS \~ 70,000 households (0.02% of US); ATUS \~ 9,000 ppl (0.003% of US)

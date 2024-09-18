@@ -2825,7 +2825,7 @@
     "href": "rm-data/slides/week02.html#how-to-collect-the-data",
     "title": "Origins of Data, and Data Preparation",
     "section": "How to Collect the Data",
-    "text": "How to Collect the Data\n\nBy hand:\n\nMany data sources are available online: World Bank and IMF data, etc. (usually easy to download)\nFor the US, &lt;ipums.org&gt; has a lot of standardized data (CPS, ATUS, ACS, etc.)\n\nAutomated API:\n\nMany agencies also offer API (Application Programming Interface) to directly load data into a statistical software\nAPI widely used in many context. see here for a list from Berkeley"
+    "text": "How to Collect the Data\n\nBy hand:\n\nMany data sources are available online: World Bank and IMF data, etc. (usually easy to download)\nFor the US, www.ipums.org has a lot of standardized data (CPS, ATUS, ACS, etc.)\n\nAutomated API:\n\nMany agencies also offer API (Application Programming Interface) to directly load data into a statistical software\nAPI widely used in many context. see here for a list from Berkeley"
   },
   {
     "objectID": "rm-data/slides/week02.html#how-to-collect-the-data-1",
@@ -2881,7 +2881,7 @@
     "href": "rm-data/slides/week02.html#random-sampling-is-best",
     "title": "Origins of Data, and Data Preparation",
     "section": "Random sampling is best",
-    "text": "Random sampling is best\n\nProvided sample is large enough (N\\(-&gt;\\)infinity)\nIn small samples (dozens) anything is possible\nIn a representative sample, size (N) matters, not coverage\n\nCPS ~ 70,000 households (0.02% of US); ATUS ~ 9,000 ppl (0.003% of US)\n\nLarger samples better (more power/precise estimates) but …"
+    "text": "Random sampling is best\n\nProvided sample is large enough (N \\(\\rightarrow\\) infinity)\nIn small samples (dozens) anything is possible\nIn a representative sample, size (N) matters, not coverage\n\nCPS ~ 70,000 households (0.02% of US); ATUS ~ 9,000 ppl (0.003% of US)\n\nLarger samples better (more power/precise estimates) but …"
   },
   {
     "objectID": "rm-data/slides/week02.html#sampling-clusterstratified-sampling",
