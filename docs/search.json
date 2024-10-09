@@ -2761,8 +2761,8 @@
     "objectID": "rm-data/slides/week02.html#motivation",
     "href": "rm-data/slides/week02.html#motivation",
     "title": "Origins of Data, and Data Preparation",
-    "section": "Motivation",
-    "text": "Motivation\n\nSuppose, you want to understand the extent and patterns of differences in online and offline prices. How would you go about collecting data?\n\nA super project, the Billion Prices Project at MIT did a variety of data collection approaches such as crowd-sourcing platforms, mobile phone apps and web scraping methods.\n\nInterested in understanding more about management practices?\n\nThe World Management Survey is a major effort by academics to survey practices around the world - asking the same questions in many countries the same way."
+    "section": "",
+    "text": "Suppose, you want to understand the extent and patterns of differences in online and offline prices. How would you go about collecting data?\n\nA super project, the Billion Prices Project at MIT did a variety of data collection approaches such as crowd-sourcing platforms, mobile phone apps and web scraping methods.\n\nInterested in understanding more about management practices?\n\nThe World Management Survey is a major effort by academics to survey practices around the world - asking the same questions in many countries the same way."
   },
   {
     "objectID": "rm-data/slides/week02.html#what-is-data-0s-and-1s",
@@ -2972,7 +2972,7 @@
     "href": "rm-data/slides/week02.html#data-wrangling",
     "title": "Origins of Data, and Data Preparation",
     "section": "Data Wrangling",
-    "text": "Data Wrangling\n\nData wrangling is the process of transforming raw data to a set of data tables that can be used for a variety of downstream purposes such as data analysis.\n\n\n\n\nUnderstanding and storing\n\nstart from raw data\nunderstand the structure and content\ncreate tidy data tables\nunderstand links between tables\n\n\n\n\nData cleaning\n\nunderstand features, variable types\nfilter duplicates\nlook for and manage missing observations\nunderstand limitations\n\n\n\n\nThis is a crucial because out there, Data is Messy"
+    "text": "Data Wrangling\n\nData wrangling is the process of transforming raw data to a set of data tables that can be used for a variety of downstream purposes such as data analysis.\n\n\n\n\nUnderstanding and storing\n\nstart from raw data\nunderstand the structure and content\ncreate tidy data tables\nunderstand links between tables\n\n\n\n\nData cleaning\n\nunderstand features, variable types\nfilter duplicates\nlook for and manage missing observations\nunderstand limitations\n\n\n\n\n\nThis is a crucial because out there, Data is Messy"
   },
   {
     "objectID": "rm-data/slides/week02.html#the-tidy-data-approach",
@@ -3063,7 +3063,7 @@
     "href": "rm-data/slides/week02.html#stata-corner",
     "title": "Origins of Data, and Data Preparation",
     "section": "Stata-Corner",
-    "text": "Stata-Corner\n\n\n\n\n\n\nImportant\n\n\n\nEvery time you do a merge, Stata will create a variable called _merge that will tell you what happened to the merge.\nIf this variable exist in your datasets (master or using) you will get an error.\nso make sure to drop (or rename) it before merging (after you have checked it)"
+    "text": "Stata-Corner\n\n\n\n\n\n\nImportant\n\n\n\n\nEvery time you do a merge, Stata will create a variable called _merge that will tell you what happened to the merge.\nIf this variable exist in your datasets (master or using) you will get an error.\nso make sure to drop (or rename) it before merging (after you have checked it)"
   },
   {
     "objectID": "rm-data/slides/week02.html#complex-data---tidy-data-summary",
@@ -3613,21 +3613,21 @@
   {
     "objectID": "mathref/math_2.html",
     "href": "mathref/math_2.html",
-    "title": "Math Refresher: Basic Linear Algebra",
+    "title": "Math Refresher",
     "section": "",
-    "text": "A vector is a list of numbers. We can think of a vector as a point in space, or as an arrow pointing from the origin to that point. For example, the vector\n\\[\\vec{v} = \\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix}\\] is a vector in \\(\\mathbb{R}^3\\) (three-dimensional space) that points from the origin to the point \\((1, 2, 3)\\).\nWe can add vectors together by adding their corresponding elements. For example,\n\\[\\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix} + \\begin{bmatrix} 4 \\\\ 5 \\\\ 6 \\end{bmatrix} = \\begin{bmatrix} 5 \\\\ 7 \\\\ 9 \\end{bmatrix}\\]\nWe can also multiply a vector by a scalar (a single number) by multiplying each element of the vector by that number. For example,\n\\[2 \\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix} = \\begin{bmatrix} 2 \\\\ 4 \\\\ 6 \\end{bmatrix}\n\\]",
+    "text": "A vector is a list of numbers. We can think of a vector as a point in space, or as an arrow pointing from the origin to that point. For example, the vector\n\\[\\vec{v} = \\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix}\\]\nis a vector in \\(\\mathbb{R}^3\\) (three-dimensional space) that points from the origin to the point \\((1, 2, 3)\\).",
     "crumbs": [
       "Home",
       "Math Refresher",
-      "Math Refresher: Basic Linear Algebra"
+      "Math Refresher"
     ]
   },
   {
     "objectID": "mathref/math_2.html#vectors",
     "href": "mathref/math_2.html#vectors",
     "title": "Math Refresher",
-    "section": "Vectors",
-    "text": "Vectors\nA vector is a list of numbers. We can think of a vector as a point in space, or as an arrow pointing from the origin to that point. For example, the vector\n\\[\\vec{v} = \\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix}\\]\nis a vector in \\(\\mathbb{R}^3\\) (three-dimensional space) that points from the origin to the point \\((1, 2, 3)\\).",
+    "section": "",
+    "text": "A vector is a list of numbers. We can think of a vector as a point in space, or as an arrow pointing from the origin to that point. For example, the vector\n\\[\\vec{v} = \\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix}\\]\nis a vector in \\(\\mathbb{R}^3\\) (three-dimensional space) that points from the origin to the point \\((1, 2, 3)\\).",
     "crumbs": [
       "Home",
       "Math Refresher",
@@ -7896,21 +7896,21 @@
   {
     "objectID": "mathref/math_1.html",
     "href": "mathref/math_1.html",
-    "title": "Math Refresher: Basic Calculus",
+    "title": "Math Refresher",
     "section": "",
-    "text": "Here is the edited version with corrections to spelling, grammar, and mathematical inaccuracies:\nTitle: Math Refresher: Basic Calculus\nFormat:\n- html: default\n- pdf: default",
+    "text": "This is a refresher on basic calculus. It is not meant to be a substitute for a full course on calculus but rather a quick review of the fundamental concepts and techniques that will be used this semester.",
     "crumbs": [
       "Home",
       "Math Refresher",
-      "Math Refresher: Basic Calculus"
+      "Math Refresher"
     ]
   },
   {
     "objectID": "mathref/math_1.html#introduction",
     "href": "mathref/math_1.html#introduction",
     "title": "Math Refresher",
-    "section": "Introduction",
-    "text": "Introduction\n\nThis is a refresher on basic calculus. It is not meant to be a substitute for a full course on calculus but rather a quick review of the fundamental concepts and techniques that will be used this semester.",
+    "section": "",
+    "text": "This is a refresher on basic calculus. It is not meant to be a substitute for a full course on calculus but rather a quick review of the fundamental concepts and techniques that will be used this semester.",
     "crumbs": [
       "Home",
       "Math Refresher",
@@ -8004,21 +8004,21 @@
   {
     "objectID": "mathref/math_3.html",
     "href": "mathref/math_3.html",
-    "title": "Math Refresher: Basic Statistics and Probability",
+    "title": "Math Refresher",
     "section": "",
-    "text": "A random variable is a variable whose value is determined by the outcome of a random experiment. For example, if we toss a coin, the outcome is random, but the possible values of \\(X\\) are 0 and 1. If we roll a die, the outcome is random with possible values 1, 2, 3, 4, 5, and 6.\nThere are two kinds of random variables:\n\nDiscrete random variables can only take on a finite number of values. For example, the number of heads in 10 coin tosses is a discrete random variable.\nContinuous random variables can take on any value in a range. For example, the height of a randomly selected person is a continuous random variable.\n\nIf \\(X\\) is discrete random variable, then \\(P(X=c)\\) is the probability that \\(X\\) takes on the value \\(c\\). It can be any value between 0 and 1.\nBy definition, the sum of all probabilities for all feasible values of \\(X\\) is 1. That is, \\(\\sum_{c} P(X=c)=1\\).\nIf \\(X\\) is continuous random variable, then \\(P(X=c)=0\\) for any value \\(c\\). The probability to observe a particular number is zero. Instead, when using continuous data, we focus on the probability of observing a value in a range. For example, \\(P(1.7 \\leq X \\leq 1.8)\\) is the probability that \\(X\\) is between 1.7 and 1.8, which can be any value between 0 and 1.",
+    "text": "A random variable is a variable whose value is determined by the outcome of a random experiment.\n\nFor example, if we toss a coin, the outcome is random, but the possible values of \\(X\\) are 0 and 1.\nIf we roll a die, the outcome is random with possible values 1, 2, 3, 4, 5, and 6.\nExact temperature in a room\n\n\nThere are two kinds of random variables:\n\nDiscrete random variables can only take on a finite number of values. For example, the number of heads in 10 coin tosses is a discrete random variable.\n\nThe probability of observing a particular value is not always zero\n\nContinuous random variables can take on any value in a range. For example, the height of a randomly selected person is a continuous random variable.",
     "crumbs": [
       "Home",
       "Math Refresher",
-      "Math Refresher: Basic Statistics and Probability"
+      "Math Refresher"
     ]
   },
   {
     "objectID": "mathref/math_3.html#random-variables",
     "href": "mathref/math_3.html#random-variables",
     "title": "Math Refresher",
-    "section": "Random Variables",
-    "text": "Random Variables\n\nA random variable is a variable whose value is determined by the outcome of a random experiment.\n\nFor example, if we toss a coin, the outcome is random, but the possible values of \\(X\\) are 0 and 1.\nIf we roll a die, the outcome is random with possible values 1, 2, 3, 4, 5, and 6.\nExact temperature in a room\n\n\nThere are two kinds of random variables:\n\nDiscrete random variables can only take on a finite number of values. For example, the number of heads in 10 coin tosses is a discrete random variable.\n\nThe probability of observing a particular value is not always zero\n\nContinuous random variables can take on any value in a range. For example, the height of a randomly selected person is a continuous random variable.",
+    "section": "",
+    "text": "A random variable is a variable whose value is determined by the outcome of a random experiment.\n\nFor example, if we toss a coin, the outcome is random, but the possible values of \\(X\\) are 0 and 1.\nIf we roll a die, the outcome is random with possible values 1, 2, 3, 4, 5, and 6.\nExact temperature in a room\n\n\nThere are two kinds of random variables:\n\nDiscrete random variables can only take on a finite number of values. For example, the number of heads in 10 coin tosses is a discrete random variable.\n\nThe probability of observing a particular value is not always zero\n\nContinuous random variables can take on any value in a range. For example, the height of a randomly selected person is a continuous random variable.",
     "crumbs": [
       "Home",
       "Math Refresher",
@@ -8126,7 +8126,7 @@
     "href": "mathref/math_3.html#some-useful-distributions",
     "title": "Math Refresher",
     "section": "Some useful distributions",
-    "text": "Some useful distributions\nDiscrete distributions\n\nBernoulli distribution: \\(X \\sim Bernoulli(p)\\), where \\(p \\in [0,1]\\).\n\n\\(E(X)=p\\) and variance \\(Var(X)=p(1-p)\\).\nFlip a coin with probability \\(p\\) of getting heads.\nrbinomial(1, p)\n\nBinomial distribution: \\(X \\sim Binomial(n,p)\\), where \\(p \\in [0,1]\\) and \\(n&gt;0\\)\n\n\\(E(x)=np\\) and \\(Var(X)=np(1-p)\\).\nDistribution of the number of successes in \\(n\\) independent Bernoulli trials.\nrbinomial(n, p)\n\nPoisson distribution: \\(X \\sim Poisson(\\lambda)\\), where \\(\\lambda&gt;0\\)\n\n\\(E(X)=Var(x)=\\lambda\\), Typically used for counts.\nFor example, the number of customers arriving at a store in a given hour.\nrpoisson(lambda)",
+    "text": "Some useful distributions\n\nDiscrete distributions\n\nBernoulli distribution: \\(X \\sim Bernoulli(p)\\), where \\(p \\in [0,1]\\).\n\n\\(E(X)=p\\) and variance \\(Var(X)=p(1-p)\\).\nFlip a coin with probability \\(p\\) of getting heads.\nrbinomial(1, p)\n\nBinomial distribution: \\(X \\sim Binomial(n,p)\\), where \\(p \\in [0,1]\\) and \\(n&gt;0\\)\n\n\\(E(x)=np\\) and \\(Var(X)=np(1-p)\\).\nDistribution of the number of successes in \\(n\\) independent Bernoulli trials.\nrbinomial(n, p)\n\nPoisson distribution: \\(X \\sim Poisson(\\lambda)\\), where \\(\\lambda&gt;0\\)\n\n\\(E(X)=Var(x)=\\lambda\\), Typically used for counts.\nFor example, the number of customers arriving at a store in a given hour.\nrpoisson(lambda)",
     "crumbs": [
       "Home",
       "Math Refresher",
@@ -12346,8 +12346,8 @@
     "objectID": "rm-data/slides/week08.html#what-we-will-see-today",
     "href": "rm-data/slides/week08.html#what-we-will-see-today",
     "title": "Modeling Probabilities",
-    "section": "What we will see today",
-    "text": "What we will see today\n\nLinear Probability Model - LPM\nLogit & probit\nGoodness of fit\nDiagnostics\nSummary"
+    "section": "",
+    "text": "Linear Probability Model - LPM\nLogit & probit\nGoodness of fit\nDiagnostics\nSummary"
   },
   {
     "objectID": "rm-data/slides/week08.html#motivation",
@@ -12536,7 +12536,7 @@
     "href": "rm-data/slides/week08.html#how-to-estimate-this-models",
     "title": "Modeling Probabilities",
     "section": "How to estimate this models?",
-    "text": "How to estimate this models?\nMaximum likelihood estimation!\n\nWhen estimating a logit or probit model, we use ‘maximum likelihood’ estimation.\n\nSee 11.U2 for details.\n\nIdea for maximum likelihood is another way to get coefficient estimates.\n\n1st You specify a (conditional) distribution, that you will use during the estimation.\n\nThis is logistic for logit and normal for probit model.\n\n2nd You maximize this function w.r.t. your \\(\\beta\\) parameters → gives the maximum likelihood for this model.\n\nDifferent from OLS: No closed form solution → need to use search algorithms.\n\nThus… more computationally intensive."
+    "text": "How to estimate this models?\n\nMaximum likelihood estimation!\n\nWhen estimating a logit or probit model, we use ‘maximum likelihood’ estimation.\n\nSee 11.U2 for details.\n\nIdea for maximum likelihood is another way to get coefficient estimates.\n\n1st You specify a (conditional) distribution, that you will use during the estimation.\n\nThis is logistic for logit and normal for probit model.\n\n2nd You maximize this function w.r.t. your \\(\\beta\\) parameters → gives the maximum likelihood for this model.\n\nDifferent from OLS: No closed form solution → need to use search algorithms.\n\nThus… more computationally intensive."
   },
   {
     "objectID": "rm-data/slides/week08.html#predictions-for-lmp-logit-and-probit-i.",
@@ -12634,7 +12634,7 @@
     "href": "rm-data/slides/week08.html#probability-models-summary",
     "title": "Modeling Probabilities",
     "section": "Probability models summary",
-    "text": "Probability models summary\n\nFind patterns when \\(y\\) is binary can be done using model probability with regressions\nLinear probability model is mostly good enough, easy inference.\n\nto-go for data exploration, quick analysis, and diagnostics\nbut, predicted values could be below 0, above 1\n\nLogit (and probit) - better when aim is prediction, predicted values strictly between 0-1\nMost often, LPM, logit, probit - similar inference\nUse marginal (average) differences (with logit/probit)\nNo trivial goodness of fit. Brier score or pseudo-R-Squared.\nCalibration is important for prediction.\n\n\n\n\nRios-Avila and Cia"
+    "text": "Probability models summary\n\nFind patterns when \\(y\\) is binary can be done using model probability with regressions\nLinear probability model is mostly good enough, easy inference.\n\nto-go for data exploration, quick analysis, and diagnostics\nbut, predicted values could be below 0, above 1\n\nLogit (and probit) - better when aim is prediction, predicted values strictly between 0-1\nMost often, LPM, logit, probit - similar inference\nUse marginal (average) differences (with logit/probit)\nNo trivial goodness of fit. Brier score or pseudo-R-Squared.\nCalibration is important for prediction."
   },
   {
     "objectID": "mathref/math_1.html#derivatives-of-common-functions",
@@ -13946,5 +13946,26 @@
     "title": "Time series data",
     "section": "",
     "text": "You are considering investing in a company stock, and you want to know how risky that investment is. You have downloaded data on daily stock prices for many years. How should you define returns? How should you assess whether and to what extent returns on the company stock move together with market returns?\nHeating and cooling are important uses of electricity. How does weather conditions affect electricity consumption? We are going to use monthly data on temperature and residential electricity consumption in Arizona. How to formulate a model which captures these factors?"
+  },
+  {
+    "objectID": "rm-data/quizes/quiz-1.html",
+    "href": "rm-data/quizes/quiz-1.html",
+    "title": "Quiz 1",
+    "section": "",
+    "text": "What is the key difference between a histogram and a density plot when visualizing the distribution of a quantitative variable?\n\nA histogram displays frequencies as bars, while a density plot uses a continuous curve to represent the distribution.\nA histogram is suitable for small datasets, while a density plot is better for large datasets.\nA histogram can only be used for quantitative variables, while a density plot can be used for both quantitative and qualitative variables.\nA histogram shows the exact frequencies of each value, while a density plot provides an estimated probability density.\n\nWhich of the following is NOT a recommended step in exploratory data analysis (EDA)?\n\nIdentify and address extreme values in the data.\nCalculate and interpret summary statistics like mean, median, and standard deviation.\nBegin by analyzing all variables in the dataset simultaneously.\nVisualize the distribution of quantitative variables using histograms or density plots.\n\nWhat is the primary distinction between experimental data and observational data concerning the source of variation in the conditioning variable (x)?\n\nExperimental data involve random sampling, while observational data rely on convenience sampling.\nExperimental data are collected in a controlled setting, while observational data are gathered from real-world scenarios.\nIn experimental data, researchers manipulate the conditioning variable, while in observational data, variation in x occurs naturally or due to factors outside the researcher’s control.\nExperimental data are typically longitudinal, while observational data are cross-sectional.\n\nWhat is a latent variable, and how is it typically incorporated into data analysis?\n\nA latent variable is a directly observable and easily measurable variable that is central to the research question.\nA latent variable is an abstract concept that cannot be directly measured and is represented in the analysis using proxy variables.\nA latent variable is an extraneous factor that is not of primary interest but needs to be controlled for in the analysis.\nA latent variable is a variable that mediates the relationship between the independent and dependent variables.\n\nWhen is it appropriate to consider dropping extreme values from a dataset during exploratory data analysis?\n\nAlways, as extreme values always indicate errors in data collection.\nWhen the extreme values are confirmed errors or when they are not relevant to the research question and would unduly influence the analysis.\nWhen the dataset is particularly large, as extreme values have less impact on large samples.\nNever, as extreme values are crucial for understanding the true spread and nature of the data."
+  },
+  {
+    "objectID": "rm-data/slides/week08.html",
+    "href": "rm-data/slides/week08.html",
+    "title": "Modeling Probabilities",
+    "section": "",
+    "text": "Linear Probability Model - LPM\nLogit & probit\nGoodness of fit\nDiagnostics\nSummary"
+  },
+  {
+    "objectID": "rm-data/slides/week02.html",
+    "href": "rm-data/slides/week02.html",
+    "title": "Origins of Data, and Data Preparation",
+    "section": "",
+    "text": "Suppose, you want to understand the extent and patterns of differences in online and offline prices. How would you go about collecting data?\n\nA super project, the Billion Prices Project at MIT did a variety of data collection approaches such as crowd-sourcing platforms, mobile phone apps and web scraping methods.\n\nInterested in understanding more about management practices?\n\nThe World Management Survey is a major effort by academics to survey practices around the world - asking the same questions in many countries the same way."
   }
 ]
