@@ -2306,8 +2306,8 @@
     "objectID": "rm-data/slides/week04.html#generalization",
     "href": "rm-data/slides/week04.html#generalization",
     "title": "Generalizing from Data",
-    "section": "Generalization",
-    "text": "Generalization\n\nSometimes we analyze a dataset with the goal of learning about patterns in that dataset alone.\n\nIn such cases there is no need to generalize our findings to other datasets.\nExample: We search for a good deal among offers of hotels, all we care about are the observations in our dataset.\n\nOften we analyze a dataset in order to learn about patterns that may be true in other situations.\n\nWe are interested in finding the relationship between our dataset and the situation we care about.\nExample: Will the treatment we are studying work in other settings?"
+    "section": "",
+    "text": "Sometimes we analyze a dataset with the goal of learning about patterns in that dataset alone.\n\nIn such cases there is no need to generalize our findings to other datasets.\nExample: We search for a good deal among offers of hotels, all we care about are the observations in our dataset.\n\nOften we analyze a dataset in order to learn about patterns that may be true in other situations.\n\nWe are interested in finding the relationship between our dataset and the situation we care about.\nExample: Will the treatment we are studying work in other settings?"
   },
   {
     "objectID": "rm-data/slides/week04.html#generalization-1",
@@ -2384,7 +2384,7 @@
     "href": "rm-data/slides/week04.html#case-study",
     "title": "Generalizing from Data",
     "section": "Case study",
-    "text": "Case study\nStock market returns: A simulation\n\nWe can not rerun history many many times…\nSo we will run a Simulation exercise - to better understand how repeated samples work.\nSuppose the 11-year dataset is the population - the fraction of days with 5%+ losses is 0.5% in the entire 11 years’ data. That’s the true value.\nWe assume we have only 500 days of daily returns in our dataset.\nTask: estimate the true value of the fraction in the 11-year period from the data we have using a simulation exercise."
+    "text": "Case study\n\nStock market returns: A simulation\n\nWe can not rerun history many many times…\nSo we will run a Simulation exercise - to better understand how repeated samples work.\nSuppose the 11-year dataset is the population - the fraction of days with 5%+ losses is 0.5% in the entire 11 years’ data. That’s the true value.\nWe assume we have only 500 days of daily returns in our dataset.\nTask: estimate the true value of the fraction in the 11-year period from the data we have using a simulation exercise."
   },
   {
     "objectID": "rm-data/slides/week04.html#stock-market-returns-a-simulation-1",
@@ -2510,14 +2510,14 @@
     "href": "rm-data/slides/week04.html#stock-market-returns-the-bootstrap-standard-error",
     "title": "Generalizing from Data",
     "section": "Stock market returns: The Bootstrap standard error",
-    "text": "Stock market returns: The Bootstrap standard error\nStata Corner\nBootstraping in Stata can be easy. Most commands have a built-in bootstrap option. Otherwise, we can program it!\n\ndisplay \"Bootstrap\"\nbootstrap mean=r(mean), nowarn reps(1000) seed(1) dots(100): sum lost5, meanonly\nest sto m1\ndisplay \"Formula\"\nmean lost5\nest sto m2"
+    "text": "Stock market returns: The Bootstrap standard error\n\nStata Corner\nBootstraping in Stata can be easy. Most commands have a built-in bootstrap option. Otherwise, we can program it!\n\ndisplay \"Bootstrap\"\nbootstrap mean=r(mean), nowarn reps(1000) seed(1) dots(100): sum lost5, meanonly\nest sto m1\ndisplay \"Formula\"\nmean lost5\nest sto m2"
   },
   {
     "objectID": "rm-data/slides/week04.html#stock-market-returns-the-bootstrap-standard-error-1",
     "href": "rm-data/slides/week04.html#stock-market-returns-the-bootstrap-standard-error-1",
     "title": "Generalizing from Data",
     "section": "Stock market returns: The Bootstrap standard error",
-    "text": "Stock market returns: The Bootstrap standard error\nStata Corner\n\n\n\n\n\n\n\n\n\n\n\n\n\nMean\n\n\n\n\n\nFormula\n0.0052\n[0.0023,0.0080]\n\n\n\n\nBootstrap\n\n\n0.0052\n[0.0024,0.0080]\n\n\nN\n2519\n\n2519"
+    "text": "Stock market returns: The Bootstrap standard error\n\nStata Corner\n\n\n\n\n\n\n\n\n\n\n\n\n\nMean\n\n\n\n\n\nFormula\n0.0052\n[0.0023,0.0080]\n\n\n\n\nBootstrap\n\n\n0.0052\n[0.0024,0.0080]\n\n\nN\n2519\n\n2519"
   },
   {
     "objectID": "rm-data/slides/week04.html#generalization---summary",
@@ -3301,7 +3301,7 @@
     "href": "rm-data/index.html#course-outline",
     "title": "Research Methods I: Data Analysis for Economics and Policy",
     "section": "Course Outline",
-    "text": "Course Outline\n\nPart I: Introduction to Modern Research Tools\n\nWeek 1: Course Overview and Tools Setup\n\nIntroduction to GitHub and Quarto\nData Organization and Management\nSlides\nHomework 1\n\n\n\n\nPart II: Data Analysis and Exploration\n\nWeek 2: Introduction to Data Analysis\n\nData Collection and Preparation\nTidy Data Principles\nReading: Békés & Kézdi (2021), Chapters 1-2\nSlides\nHomework 2\n\n\n\nWeek 3: Data Exploration\n\nExploratory Data Analysis Techniques\nData Cleaning and Tidy Data Principles\nReading: Békés & Kézdi (2021), Chapters 3-4\nSlides\nHomework 3\n\n\n\n\nPart III: Generalization and Regression Analysis\n\nWeek 4: Generalization: From Sample to Population\n\nSampling and Hypothesis Testing\nConfidence Intervals and Errors\nReading: Békés & Kézdi (2021), Chapters 5-6\nSlides\nHomework 4\n\n\n\nWeeks 5-6: Regression Analysis I: Simple Regression\n\nLinear Regression and Causality\nModel Assumptions and Transformations\nReading: Békés & Kézdi (2021), Chapters 7-9\nSlides\nHomework 5\nHomework 6\n\n\n\nWeek 7: Regression Analysis II: Multiple Regression\n\nEstimation and Inference\nInteractions and Non-linearities\nReading: Békés & Kézdi (2021), Chapter 10\nSlides\nHomework 7\n\n\n\nWeek 8: Regression Analysis III: Modeling Probabilities\n\nLogit and Probit Models\nInterpretation and Predictive Power\nReading: Békés & Kézdi (2021), Chapter 11\nSlides\nHomework 8\n\n\n\n\nPart IV: Advanced Topics\n\nWeek 9: Time Series Analysis\n\nTrend, Seasonality, and Stationarity\nReading: Békés & Kézdi (2021), Chapter 12\nSlides\nHomework 9\n\n\n\nWeek 10: Prediction\n\nModel Fit and Cross-validation\nReading: Békés & Kézdi (2021), Chapter 13\nSlides\nHomework 10\n\n\n\nWeek 11: Model Building for Prediction: LASSO\n\nLASSO for Prediction and Diagnosis\nReading: Békés & Kézdi (2021), Chapter 14\nSlides\nHomework 11\n\n\n\nWeek 12: Predicting Probabilities and Classification\n\nClassification Techniques and ROC Curves\nReading: Békés & Kézdi (2021), Chapter 17\nSlides\nHomework 12\nWeek 13: Forecasting Data\nARIMA and Forecasting Techniques\nReading: Békés & Kézdi (2021), Chapter 18\nSlides\nHomework 13",
+    "text": "Course Outline\n\nPart I: Introduction to Modern Research Tools\n\nWeek 1: Course Overview and Tools Setup\n\nIntroduction to GitHub and Quarto\nData Organization and Management\nSlides\nHomework 1\n\n\n\n\nPart II: Data Analysis and Exploration\n\nWeek 2: Introduction to Data Analysis\n\nData Collection and Preparation\nTidy Data Principles\nReading: Békés & Kézdi (2021), Chapters 1-2\nSlides\nHomework 2\n\n\n\nWeek 3: Data Exploration\n\nExploratory Data Analysis Techniques\nData Cleaning and Tidy Data Principles\nReading: Békés & Kézdi (2021), Chapters 3-4\nSlides\nHomework 3\n\n\n\n\nPart III: Generalization and Regression Analysis\n\nWeek 4: Generalization: From Sample to Population\n\nSampling and Hypothesis Testing\nConfidence Intervals and Errors\nReading: Békés & Kézdi (2021), Chapters 5-6\nSlides\nHomework 4\n\n\n\nWeeks 5-6: Regression Analysis I: Simple Regression\n\nDate: October 9 and 16\nLinear Regression and Causality\nModel Assumptions and Transformations\nReading: Békés & Kézdi (2021), Chapters 7-9\nSlides\nHomework 5\nHomework 6\n\n\n\nWeek 7: Regression Analysis II: Multiple Regression\n\nDate: October 18 (Make-up class)\nEstimation and Inference\nInteractions and Non-linearities\nReading: Békés & Kézdi (2021), Chapter 10\nSlides\nHomework 7\n\n\n\nWeek 8: Regression Analysis III: Modeling Probabilities\n\nDate: October 23\nLogit and Probit Models\nInterpretation and Predictive Power\nReading: Békés & Kézdi (2021), Chapter 11\nSlides\nHomework 8\n\n\n\n\nPart IV: Advanced Topics\n\nWeek 9: Time Series Analysis\n\nDate: October 30\nTrend, Seasonality, and Stationarity\nReading: Békés & Kézdi (2021), Chapter 12\nSlides\nHomework 9\n\n\n\nWeek 10: Prediction\n\nDate: November 6\nModel Fit and Cross-validation\nReading: Békés & Kézdi (2021), Chapter 13\nSlides\nHomework 10\n\n\n\nWeek 11: Model Building for Prediction: LASSO\n\nDate: November 13\nLASSO for Prediction and Diagnosis\nReading: Békés & Kézdi (2021), Chapter 14\nSlides\nHomework 11\n\n\n\nWeek 12: Predicting Probabilities and Classification\n\nDate: November 20\nClassification Techniques and ROC Curves\nReading: Békés & Kézdi (2021), Chapter 17\nSlides\nHomework 12\n\n\n\nWeek 13: Forecasting Data\n\nDate: November 27 (TBD)\nARIMA and Forecasting Techniques\nReading: Békés & Kézdi (2021), Chapter 18\nSlides\nHomework 13",
     "crumbs": [
       "Home",
       "Courses",
@@ -3313,7 +3313,7 @@
     "href": "rm-data/index.html#grading-policy",
     "title": "Research Methods I: Data Analysis for Economics and Policy",
     "section": "Grading Policy",
-    "text": "Grading Policy\n\nWeekly Quizzes: 10%\nWeekly Problem Sets: 30%\nTerm Paper: 60%\n\n\nTerm Paper Schedule (60% of final grade)\n\nPart I: Research Proposal (5%, due Week 2). See here for few examples of research proposals.\nPart II: Data Collection and Cleaning (10%, due Week 4)\nPeer Review Report: (Week 5)\nInterim Progress Report (5%, due Week 7)\nPart III: Data Analysis (15%, due Week 10)\nPeer Review Report: (Week 11):\nPart IV: Final Report and Presentation (20%, due Week 13)\n\nComplete research paper should include:\n\nIntroduction\nLiterature Review\nData and Methodology\nRobustness Checks or Sensitivity/Sub-group Analysis\nConclusion\nReferences\nAppendices (if any)\nPresentation (5%)\n\n15-minute presentation of your research to the class\n\nSee here for an example for the kind of report expected at each stage, based on the first research proposal on the impact of remote work on urban housing prices.\n\n\n\nAdditional Requirements\n\nYou should submit a PDF of your report by the deadline, along with the Github repository link\nYour GitHub repository should include all code, data, and the Quarto document for your report\nAt each stage, you should submit your work to GitHub to follow the progress of your project",
+    "text": "Grading Policy\n\nWeekly Quizzes: 10%\nWeekly Problem Sets: 30%\nTerm Paper: 60%\n\n\nTerm Paper Schedule (60% of final grade)\n\nPart I: Research Proposal (5%, due Week 2). See here for few examples of research proposals.\nPart II: Data Collection and Cleaning (10%, due Week 4)\nInterim Progress Report (5%, due Week 7): October 18\nPeer Review Report: (Week 8): October 23\nPart III: Data Analysis (15%, due Week 10): November 6\nPeer Review Report: (Week 11): November 13\nPart IV: (15%) Final Report: December 2\nPresentation (5%) due Last Date of Class: December 4 or 11\n\nComplete research paper should include:\n\nIntroduction\nLiterature Review\nData and Methodology\nRobustness Checks or Sensitivity/Sub-group Analysis\nConclusion\nReferences\nAppendices (if any)\nPresentation (5%)\n\n15-minute presentation of your research to the class\n\nSee here for an example for the kind of report expected at each stage, based on the first research proposal on the impact of remote work on urban housing prices.\n\n\n\nAdditional Requirements\n\nYou should submit a PDF of your report by the deadline, along with the Github repository link\nYour GitHub repository should include all code, data, and the Quarto document for your report\nAt each stage, you should submit your work to GitHub to follow the progress of your project",
     "crumbs": [
       "Home",
       "Courses",
@@ -8795,8 +8795,8 @@
     "objectID": "rm-data/slides/week03.html#motivation",
     "href": "rm-data/slides/week03.html#motivation",
     "title": "Exploratory Analysis and Comparisons",
-    "section": "Motivation",
-    "text": "Motivation\n\nYou want to understand the market conditions for hotels in Vienna, using prices.\n\nHow should you start the analysis itself?\nHow to describe the data and present the key features?\nHow to explore the data and check whether it is clean enough for (further) analysis?"
+    "section": "",
+    "text": "You want to understand the market conditions for hotels in Vienna, using prices.\n\nHow should you start the analysis itself?\nHow to describe the data and present the key features?\nHow to explore the data and check whether it is clean enough for (further) analysis?"
   },
   {
     "objectID": "rm-data/slides/week03.html#exploratory-data-analysis-eda---describing-variables",
@@ -9041,7 +9041,7 @@
     "href": "rm-data/slides/week03.html#data-visualization-process",
     "title": "Exploratory Analysis and Comparisons",
     "section": "Data Visualization Process",
-    "text": "Data Visualization Process\n\n\n\nPlanning\n\nDetermine content and audience\nSelect graph type and elements\nSeek help when needed (AI, online resources)\n\nExecution\n\nInclude supporting elements for understanding\nEnsure readability (use scale() function)\n\n\n\n\nEssential Components\n\nTitle (if not in the document)\nAxis titles and labels (what’s being measured)\nLegend (group explanations)\n\nFinal Check\n\nVerify all elements support the main message\nConfirm graph is clear and accessible to the audience\n\n\n\nSee DataViz for a guide of how to create graphs in Stata."
+    "text": "Data Visualization Process\n\n\n\nPlanning\n\nDetermine content and audience\nSelect graph type and elements\nSeek help when needed (AI, online resources)\n\nExecution\n\nInclude supporting elements for understanding\nEnsure readability (use scale() function)\n\n\n\n\nEssential Components\n\nTitle (if not in the document)\nAxis titles and labels (what’s being measured)\nLegend (group explanations)\n\nFinal Check\n\nVerify all elements support the main message\nConfirm graph is clear and accessible to the audience\n\n\n\n\nSee DataViz for a guide of how to create graphs in Stata."
   },
   {
     "objectID": "rm-data/slides/week03.html#ai-and-data-explorationviz",
@@ -9139,7 +9139,7 @@
     "href": "rm-data/slides/week03.html#case-study---management-quality-and-firm-size-3",
     "title": "Exploratory Analysis and Comparisons",
     "section": "Case Study - Management quality and firm size",
-    "text": "Case Study - Management quality and firm size\n\n\n\n\nCode\nscatter management emp_firm, xtitle(\"Firm size\") ytitle(\"Management score\") ///\n  legend(off) scale(1.5) \n\n\n\n\n\n\n\n\n\n\n\n\nCode\nsort emp_firm\nqui:drop2 emp_firm_bin emp_mean_bin\nxtile emp_firm_bin = _n, n(20)\nbysort emp_firm_bin: egen emp_mean_bin=mean(emp_firm)\nbysort emp_firm_bin:egen mean_mng=mean(management)\n\nscatter mean_mng emp_mean_bin, xtitle(\"Firm size\") ytitle(\"Management score\") ///\n  scale(1.5) legend(off) ylabel(1/5) ///\n  note(\"Using 20 bins\")\n\n\nvariable emp_firm_bin not found\nvariable emp_mean_bin not found\n\n\n\n\n\n\n\n\n\n\n\nSome association shown. Scatter not easy to read, bin-scatter shows positive (weak) association. Notice Scale of y-axis. Flat line for large firms"
+    "text": "Case Study - Management quality and firm size\n\n\n\n\nCode\nscatter management emp_firm, xtitle(\"Firm size\") ytitle(\"Management score\") ///\n  legend(off) scale(1.5) \n\n\n\n\n\n\n\n\n\n\n\n\nCode\nsort emp_firm\nqui:drop2 emp_firm_bin emp_mean_bin\nxtile emp_firm_bin = _n, n(20)\nbysort emp_firm_bin: egen emp_mean_bin=mean(emp_firm)\nbysort emp_firm_bin:egen mean_mng=mean(management)\n\nscatter mean_mng emp_mean_bin, xtitle(\"Firm size\") ytitle(\"Management score\") ///\n  scale(1.5) legend(off) ylabel(1/5) ///\n  note(\"Using 20 bins\")\n\n\nvariable emp_firm_bin not found\nvariable emp_mean_bin not found\n\n\n\n\n\n\n\n\n\n\n\n\nSome association shown. Scatter not easy to read, bin-scatter shows positive (weak) association. Notice Scale of y-axis. Flat line for large firms"
   },
   {
     "objectID": "rm-data/slides/week03.html#other-options-1",
@@ -9181,7 +9181,7 @@
     "href": "rm-data/slides/week03.html#dependence-mean-dependence-correlation",
     "title": "Exploratory Analysis and Comparisons",
     "section": "Dependence, mean-dependence, correlation",
-    "text": "Dependence, mean-dependence, correlation\n\n\n\n\n\n\nNote\n\n\nIf two variables are independent, they are also mean-independent, Thus \\(E[y|x] = E[y]\\) of any value of x.\n\n\n\n\n\nIs this true the other way around?\n\nNo, it is not.\n\nSpecial cases:\n\n\\(\\rho = 0\\) but mean dependence (Sqrt of x)\n\\(\\rho = 0\\) and mean independence but different spread of \\(y\\) (Heteroskedasticity)"
+    "text": "Dependence, mean-dependence, correlation\n\n\n\n\n\n\nNote\n\n\n\nIf two variables are independent, they are also mean-independent, Thus \\(E[y|x] = E[y]\\) of any value of x.\n\n\n\n\nIs this true the other way around?\n\nNo, it is not.\n\nSpecial cases:\n\n\\(\\rho = 0\\) but mean dependence (Sqrt of x)\n\\(\\rho = 0\\) and mean independence but different spread of \\(y\\) (Heteroskedasticity)"
   },
   {
     "objectID": "rm-data/slides/week03.html#case-study---management-quality-firm-size-industry",
@@ -9258,7 +9258,7 @@
     "href": "rm-data/slides/week03.html#scatter-pca-vs-mean",
     "title": "Exploratory Analysis and Comparisons",
     "section": "Scatter PCA vs Mean",
-    "text": "Scatter PCA vs Mean\n\nA Correlation analysis could also be useful to compare the two measures."
+    "text": "Scatter PCA vs Mean\n\n\n\n\n\n\n\n\n\nA Correlation analysis could also be useful to compare the two measures."
   },
   {
     "objectID": "rm-data/slides/week03.html#comparison-and-variation-in-x",
@@ -9328,14 +9328,14 @@
     "href": "rm-data/slides/week03.html#logarithmic-functions-of-y-andor-x",
     "title": "Exploratory Analysis and Comparisons",
     "section": "Logarithmic Functions of y and/or x",
-    "text": "Logarithmic Functions of y and/or x\n\nThis transformation works well if \\(\\Delta x\\) is small (\\(&lt;0.3\\))\nFor larger differences, relative differences need to be calculated by hand\nA difference of 0.1 log units corresponds to a 10% difference\nFor larger differences,\n\nif log difference is +1.0, it corresponds to a +170% difference\nif log difference is -1.0, it corresponds to a -63% difference\n\nThis transformation will be used often in economics.\n\n\n\n\nRios-Avila and Cia"
+    "text": "Logarithmic Functions of y and/or x\n\nThis transformation works well if \\(\\Delta x\\) is small (\\(&lt;0.3\\))\nFor larger differences, relative differences need to be calculated by hand\nA difference of 0.1 log units corresponds to a 10% difference\nFor larger differences,\n\nif log difference is +1.0, it corresponds to a +170% difference\nif log difference is -1.0, it corresponds to a -63% difference\n\nThis transformation will be used often in economics."
   },
   {
     "objectID": "rm-data/slides/week05-06.html#regression",
     "href": "rm-data/slides/week05-06.html#regression",
     "title": "Regression Analysis I",
-    "section": "Regression",
-    "text": "Regression\n\nRegression is the most widely used method of comparison in data analysis.\nDoing so uncovers the pattern of association between \\(y\\) and \\(x\\). Here, it is important what you use as \\(y\\) or \\(x\\).\nSimple regression uncovers mean-dependence between two variables.\n\nIt amounts to comparing average values of one variable, called the dependent variable (\\(y\\)), for observations that are different in the other variable, the explanatory variable (\\(x\\)).\n\nMultiple regression analysis involves more variables -&gt; for later."
+    "section": "",
+    "text": "Regression is the most widely used method of comparison in data analysis.\nDoing so uncovers the pattern of association between \\(y\\) and \\(x\\). Here, it is important what you use as \\(y\\) or \\(x\\).\nSimple regression uncovers mean-dependence between two variables.\n\nIt amounts to comparing average values of one variable, called the dependent variable (\\(y\\)), for observations that are different in the other variable, the explanatory variable (\\(x\\)).\n\nMultiple regression analysis involves more variables -&gt; for later."
   },
   {
     "objectID": "rm-data/slides/week05-06.html#regression---uses",
@@ -9447,7 +9447,7 @@
     "href": "rm-data/slides/week05-06.html#regression-coefficient-formula",
     "title": "Regression Analysis I",
     "section": "Regression coefficient formula",
-    "text": "Regression coefficient formula\nNotation\n\nPopulation coefficients are \\(\\alpha\\) and \\(\\beta\\).\nSample estimates - \\(\\hat{\\alpha}\\) and \\(\\hat{\\beta}\\)\nThe slope coefficient formula is \\[\\hat{\\beta} = \\frac{\\text{Cov}[x, y]}{\\text{Var}[x]} = \\frac{\\sum_{i=1}^n (x_i - \\bar{x})(y_i - \\bar{y})}{\\sum_{i=1}^n (x_i - \\bar{x})^2}\n\\]\nSlope coefficient formula is normalized version of the covariance between \\(x\\) and \\(y\\)."
+    "text": "Regression coefficient formula\n\nNotation\n\nPopulation coefficients are \\(\\alpha\\) and \\(\\beta\\).\nSample estimates - \\(\\hat{\\alpha}\\) and \\(\\hat{\\beta}\\)\nThe slope coefficient formula is \\[\\hat{\\beta} = \\frac{\\text{Cov}[x, y]}{\\text{Var}[x]} = \\frac{\\sum_{i=1}^n (x_i - \\bar{x})(y_i - \\bar{y})}{\\sum_{i=1}^n (x_i - \\bar{x})^2}\n\\]\nSlope coefficient formula is normalized version of the covariance between \\(x\\) and \\(y\\)."
   },
   {
     "objectID": "rm-data/slides/week05-06.html#regression-coefficient-formula-1",
@@ -9643,7 +9643,7 @@
     "href": "rm-data/slides/week05-06.html#hotel-price-distance-regression-and-functional-form",
     "title": "Regression Analysis I",
     "section": "Hotel price-distance regression and functional form",
-    "text": "Hotel price-distance regression and functional form\nComparing different models\n\nCode\nqui {\n  set linesize 255\n  capture gen log_price = log(price)\n  capture gen log_distance = log(distance)\n  regress price distance\n  est sto m1\n  regress log_price distance\n  est sto m2\n  regress price log_distance\n  est sto m3\n  regress log_price log_distance\n  est sto m4\n}\nesttab m1 m2 m3 m4, se md nostar nonumber note(\"\")\n\n\n\n\n\n\n\n\n\n\n\n\nprice\nlog_price\nprice\nlog_price\n\n\n\n\ndistance\n-12.05\n-0.104\n\n\n\n\n\n(2.001)\n(0.0161)\n\n\n\n\nlog_distance\n\n\n-21.28\n-0.176\n\n\n\n\n\n(2.251)\n(0.0183)\n\n\n_cons\n131.9\n4.829\n114.8\n4.682\n\n\n\n(3.740)\n(0.0301)\n(2.087)\n(0.0169)\n\n\nN\n321\n321\n320\n320\n\n\n\nAs Excercise, plot the different models."
+    "text": "Hotel price-distance regression and functional form\n\nComparing different models\n\nCode\nqui {\n  set linesize 255\n  capture gen log_price = log(price)\n  capture gen log_distance = log(distance)\n  regress price distance\n  est sto m1\n  regress log_price distance\n  est sto m2\n  regress price log_distance\n  est sto m3\n  regress log_price log_distance\n  est sto m4\n}\nesttab m1 m2 m3 m4, se md nostar nonumber note(\"\")\n\n\n\n\n\n\n\n\n\n\n\n\nprice\nlog_price\nprice\nlog_price\n\n\n\n\ndistance\n-12.05\n-0.104\n\n\n\n\n\n(2.001)\n(0.0161)\n\n\n\n\nlog_distance\n\n\n-21.28\n-0.176\n\n\n\n\n\n(2.251)\n(0.0183)\n\n\n_cons\n131.9\n4.829\n114.8\n4.682\n\n\n\n(3.740)\n(0.0301)\n(2.087)\n(0.0169)\n\n\nN\n321\n321\n320\n320\n\n\n\nAs Excercise, plot the different models."
   },
   {
     "objectID": "rm-data/slides/week05-06.html#which-model-shall-we-choose---substantive-reasons",
@@ -10042,7 +10042,7 @@
     "href": "rm-data/slides/week05-06.html#reading-homework",
     "title": "Regression Analysis I",
     "section": "Reading-Homework",
-    "text": "Reading-Homework\nRead Case Study as an example of a simple linear regression analysis.\n\n\n\nRios-Avila and Cia"
+    "text": "Reading-Homework\nRead Case Study as an example of a simple linear regression analysis."
   },
   {
     "objectID": "rmethods/10_pooldata.html#pooling-data-together-cross-section-and-panel-data",
@@ -12024,8 +12024,8 @@
     "objectID": "rm-data/slides/week07.html#motivation",
     "href": "rm-data/slides/week07.html#motivation",
     "title": "Multiple regression analysis",
-    "section": "Motivation",
-    "text": "Motivation\n\nWe are interested in finding evidence for or against labor market discrimination of women. Compare wages for men and women who share similarities in wage relevant factors such as experience and education.\nFind a good deal on a hotel to spend a night in a European city- analyzed the pattern of hotel price and distance and many other features to find hotels that are underpriced not only for their location but also those other features."
+    "section": "",
+    "text": "We are interested in finding evidence for or against labor market discrimination of women. Compare wages for men and women who share similarities in wage relevant factors such as experience and education.\nFind a good deal on a hotel to spend a night in a European city- analyzed the pattern of hotel price and distance and many other features to find hotels that are underpriced not only for their location but also those other features."
   },
   {
     "objectID": "rm-data/slides/week07.html#topics-to-cover",
@@ -12137,7 +12137,7 @@
     "href": "rm-data/slides/week07.html#mr-testing-joint-hypotheses-1",
     "title": "Multiple regression analysis",
     "section": "MR: Testing Joint hypotheses",
-    "text": "MR: Testing Joint hypotheses\n\nF-test"
+    "text": "MR: Testing Joint hypotheses\n\n\n\nF-test"
   },
   {
     "objectID": "rm-data/slides/week07.html#mr-testing-hypotheses-in-stata",
@@ -12340,7 +12340,7 @@
     "href": "rm-data/slides/week07.html#summary-take-away",
     "title": "Multiple regression analysis",
     "section": "Summary take-away",
-    "text": "Summary take-away\n\nMultiple regression are linear models with several \\(x\\) variables.\nMay include binary variables and interactions\nMultiple regression can take us closer to a causal interpretation and help make better predictions.\n\n\n\n\nRios-Avila and Cia"
+    "text": "Summary take-away\n\nMultiple regression are linear models with several \\(x\\) variables.\nMay include binary variables and interactions\nMultiple regression can take us closer to a causal interpretation and help make better predictions."
   },
   {
     "objectID": "rm-data/slides/week08.html#what-we-will-see-today",
@@ -13967,5 +13967,33 @@
     "title": "Origins of Data, and Data Preparation",
     "section": "",
     "text": "Suppose, you want to understand the extent and patterns of differences in online and offline prices. How would you go about collecting data?\n\nA super project, the Billion Prices Project at MIT did a variety of data collection approaches such as crowd-sourcing platforms, mobile phone apps and web scraping methods.\n\nInterested in understanding more about management practices?\n\nThe World Management Survey is a major effort by academics to survey practices around the world - asking the same questions in many countries the same way."
+  },
+  {
+    "objectID": "rm-data/slides/week07.html",
+    "href": "rm-data/slides/week07.html",
+    "title": "Multiple regression analysis",
+    "section": "",
+    "text": "We are interested in finding evidence for or against labor market discrimination of women. Compare wages for men and women who share similarities in wage relevant factors such as experience and education.\nFind a good deal on a hotel to spend a night in a European city- analyzed the pattern of hotel price and distance and many other features to find hotels that are underpriced not only for their location but also those other features."
+  },
+  {
+    "objectID": "rm-data/slides/week04.html",
+    "href": "rm-data/slides/week04.html",
+    "title": "Generalizing from Data",
+    "section": "",
+    "text": "Sometimes we analyze a dataset with the goal of learning about patterns in that dataset alone.\n\nIn such cases there is no need to generalize our findings to other datasets.\nExample: We search for a good deal among offers of hotels, all we care about are the observations in our dataset.\n\nOften we analyze a dataset in order to learn about patterns that may be true in other situations.\n\nWe are interested in finding the relationship between our dataset and the situation we care about.\nExample: Will the treatment we are studying work in other settings?"
+  },
+  {
+    "objectID": "rm-data/slides/week03.html",
+    "href": "rm-data/slides/week03.html",
+    "title": "Exploratory Analysis and Comparisons",
+    "section": "",
+    "text": "You want to understand the market conditions for hotels in Vienna, using prices.\n\nHow should you start the analysis itself?\nHow to describe the data and present the key features?\nHow to explore the data and check whether it is clean enough for (further) analysis?"
+  },
+  {
+    "objectID": "rm-data/slides/week05-06.html",
+    "href": "rm-data/slides/week05-06.html",
+    "title": "Regression Analysis I",
+    "section": "",
+    "text": "Regression is the most widely used method of comparison in data analysis.\nDoing so uncovers the pattern of association between \\(y\\) and \\(x\\). Here, it is important what you use as \\(y\\) or \\(x\\).\nSimple regression uncovers mean-dependence between two variables.\n\nIt amounts to comparing average values of one variable, called the dependent variable (\\(y\\)), for observations that are different in the other variable, the explanatory variable (\\(x\\)).\n\nMultiple regression analysis involves more variables -&gt; for later."
   }
 ]

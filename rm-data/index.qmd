@@ -81,7 +81,8 @@ All homework assignments are required to be submitted in Quarto format, using Gi
 - [Slides](slides/week04.qmd)
 - [Homework 4](homework.qmd#hw04)
  
-#### Weeks 5-6: Regression Analysis I: Simple Regression
+#### Weeks 5-6: Regression Analysis I: Simple Regression 
+- Date: October 9 and 16
 - **Linear Regression and Causality**
 - **Model Assumptions and Transformations**
 - Reading: Békés & Kézdi (2021), Chapters 7-9
@@ -90,6 +91,7 @@ All homework assignments are required to be submitted in Quarto format, using Gi
 - [Homework 6](homework.qmd#hw06)
  
 #### Week 7: Regression Analysis II: Multiple Regression
+- Date: October 18 (Make-up class)
 - **Estimation and Inference**
 - **Interactions and Non-linearities**
 - Reading: Békés & Kézdi (2021), Chapter 10
@@ -97,6 +99,7 @@ All homework assignments are required to be submitted in Quarto format, using Gi
 - [Homework 7](homework.qmd#hw07)
   
 #### Week 8: Regression Analysis III: Modeling Probabilities
+- Date: October 23 
 - **Logit and Probit Models**
 - **Interpretation and Predictive Power**
 - Reading: Békés & Kézdi (2021), Chapter 11
@@ -106,30 +109,35 @@ All homework assignments are required to be submitted in Quarto format, using Gi
 ### Part IV: Advanced Topics
 
 #### Week 9: Time Series Analysis
+- Date: October 30
 - **Trend, Seasonality, and Stationarity**
 - Reading: Békés & Kézdi (2021), Chapter 12
 - [Slides](slides/week09.qmd)
 - [Homework 9](homework.qmd#hw09)
  
 #### Week 10: Prediction
+- Date: November 6
 - **Model Fit and Cross-validation**
 - Reading: Békés & Kézdi (2021), Chapter 13
 - [Slides](slides/week10.qmd)
 - [Homework 10](homework.qmd#hw10)
  
 #### Week 11: Model Building for Prediction: LASSO
+- Date: November 13
 - **LASSO for Prediction and Diagnosis**
 - Reading: Békés & Kézdi (2021), Chapter 14
 - [Slides](slides/week11.qmd)
 - [Homework 11](homework.qmd#hw11)
  
 #### Week 12: Predicting Probabilities and Classification
+- Date: November 20
 - **Classification Techniques and ROC Curves**
 - Reading: Békés & Kézdi (2021), Chapter 17
 - [Slides](slides/week12.qmd)
 - [Homework 12](homework.qmd#hw12)
-- 
+
 #### Week 13: Forecasting Data
+- Date: November 27 (TBD)
 - **ARIMA and Forecasting Techniques**
 - Reading: Békés & Kézdi (2021), Chapter 18
 - [Slides](slides/week13.qmd)
@@ -147,15 +155,17 @@ All homework assignments are required to be submitted in Quarto format, using Gi
 
 - **Part II**: Data Collection and Cleaning (10%, due Week 4)
 
-- **Peer Review Report**: (Week 5)
+- **Interim Progress Report** (5%, due Week 7): October 18
 
-- **Interim Progress Report** (5%, due Week 7)
+- **Peer Review Report**: (Week 8): October 23
 
-- **Part III**: Data Analysis (15%, due Week 10)
+- **Part III**: Data Analysis (15%, due Week 10): November 6
 
-- **Peer Review Report**: (Week 11):
+- **Peer Review Report**: (Week 11): November 13
 
-- **Part IV**: Final Report and Presentation (20%, due Week 13)
+- **Part IV**: (15%) Final Report: December 2
+
+- **Presentation** (5%) due Last Date of Class: December 4 or 11
 
 Complete research paper should include:
 
