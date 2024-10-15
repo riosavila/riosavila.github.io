@@ -3482,21 +3482,21 @@
     "href": "rm-data/homework.html#hw04",
     "title": "HomeWorks",
     "section": "Homework 4",
-    "text": "Homework 4"
+    "text": "Homework 4\nNothing here"
   },
   {
     "objectID": "rm-data/homework.html#hw05",
     "href": "rm-data/homework.html#hw05",
     "title": "HomeWorks",
     "section": "Homework 5",
-    "text": "Homework 5"
+    "text": "Homework 5\nNothing here"
   },
   {
     "objectID": "rm-data/homework.html#hw06",
     "href": "rm-data/homework.html#hw06",
     "title": "HomeWorks",
     "section": "Homework 6",
-    "text": "Homework 6"
+    "text": "Homework 6\nq1: Use the wms-management-survey dataset and pick a country. (Not two students should pick the same country). Estimate a linear regression with the management quality score (X) and employment (Y). Interpret the slope coefficient, create its 95% CI, and interpret that, too. Explore potential nonlinearities in the patterns of association by lpoly. Estimate a regression that can capture those nonlinearities, and carry out a test to see if you can reject that the linear approximation was good enough for the population of firms represented by the data."
   },
   {
     "objectID": "rm-data/homework.html#hw07",
@@ -13950,9 +13950,9 @@
   {
     "objectID": "rm-data/quizes/quiz-1.html",
     "href": "rm-data/quizes/quiz-1.html",
-    "title": "Quiz 1",
+    "title": "Econometrics MSC Levy",
     "section": "",
-    "text": "What is the key difference between a histogram and a density plot when visualizing the distribution of a quantitative variable?\n\nA histogram displays frequencies as bars, while a density plot uses a continuous curve to represent the distribution.\nA histogram is suitable for small datasets, while a density plot is better for large datasets.\nA histogram can only be used for quantitative variables, while a density plot can be used for both quantitative and qualitative variables.\nA histogram shows the exact frequencies of each value, while a density plot provides an estimated probability density.\n\nWhich of the following is NOT a recommended step in exploratory data analysis (EDA)?\n\nIdentify and address extreme values in the data.\nCalculate and interpret summary statistics like mean, median, and standard deviation.\nBegin by analyzing all variables in the dataset simultaneously.\nVisualize the distribution of quantitative variables using histograms or density plots.\n\nWhat is the primary distinction between experimental data and observational data concerning the source of variation in the conditioning variable (x)?\n\nExperimental data involve random sampling, while observational data rely on convenience sampling.\nExperimental data are collected in a controlled setting, while observational data are gathered from real-world scenarios.\nIn experimental data, researchers manipulate the conditioning variable, while in observational data, variation in x occurs naturally or due to factors outside the researcher’s control.\nExperimental data are typically longitudinal, while observational data are cross-sectional.\n\nWhat is a latent variable, and how is it typically incorporated into data analysis?\n\nA latent variable is a directly observable and easily measurable variable that is central to the research question.\nA latent variable is an abstract concept that cannot be directly measured and is represented in the analysis using proxy variables.\nA latent variable is an extraneous factor that is not of primary interest but needs to be controlled for in the analysis.\nA latent variable is a variable that mediates the relationship between the independent and dependent variables.\n\nWhen is it appropriate to consider dropping extreme values from a dataset during exploratory data analysis?\n\nAlways, as extreme values always indicate errors in data collection.\nWhen the extreme values are confirmed errors or when they are not relevant to the research question and would unduly influence the analysis.\nWhen the dataset is particularly large, as extreme values have less impact on large samples.\nNever, as extreme values are crucial for understanding the true spread and nature of the data."
+    "text": "Quiz 1: Exploratory Data Analysis\nName: ____________________________ Grade: __/5\n\nWhat is the key difference between a histogram and a density plot when visualizing the distribution of a quantitative variable?\n\nA histogram displays frequencies as bars, while a density plot uses a continuous curve to represent the distribution.\nA histogram is suitable for small datasets, while a density plot is better for large datasets.\nA histogram can only be used for quantitative variables, while a density plot can be used for both quantitative and qualitative variables.\nA histogram shows the exact frequencies of each value, while a density plot provides an estimated probability density.\n\nWhich of the following is NOT a recommended step in exploratory data analysis (EDA)?\n\nIdentify and address extreme values in the data.\nCalculate and interpret summary statistics like mean, median, and standard deviation.\nBegin by analyzing all variables in the dataset simultaneously.\nVisualize the distribution of quantitative variables using histograms or density plots.\n\nWhat is the primary distinction between experimental data and observational data concerning the source of variation in the conditioning variable (x)?\n\nExperimental data involve random sampling, while observational data rely on convenience sampling.\nExperimental data are collected in a controlled setting, while observational data are gathered from real-world scenarios.\nIn experimental data, researchers manipulate the conditioning variable, while in observational data, variation in x occurs naturally or due to factors outside the researcher’s control.\nExperimental data are typically longitudinal, while observational data are cross-sectional.\n\nWhat is a latent variable, and how is it typically incorporated into data analysis?\n\nA latent variable is a directly observable and easily measurable variable that is central to the research question.\nA latent variable is an abstract concept that cannot be directly measured and is represented in the analysis using proxy variables.\nA latent variable is an extraneous factor that is not of primary interest but needs to be controlled for in the analysis.\nA latent variable is a variable that mediates the relationship between the independent and dependent variables.\n\nWhen is it appropriate to consider dropping extreme values from a dataset during exploratory data analysis?\n\nAlways, as extreme values always indicate errors in data collection.\nWhen the extreme values are confirmed errors or when they are not relevant to the research question and would unduly influence the analysis.\nWhen the dataset is particularly large, as extreme values have less impact on large samples.\nNever, as extreme values are crucial for understanding the true spread and nature of the data."
   },
   {
     "objectID": "rm-data/slides/week08.html",

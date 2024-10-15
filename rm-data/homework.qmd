@@ -56,9 +56,16 @@ figures and tables of the Book case study, and compare your results to what was 
 
 ## Homework 4 {#hw04}
 
+Nothing here
+
 ## Homework 5 {#hw05}
 
+Nothing here
+
 ## Homework 6 {#hw06}
+
+q1: Use the `wms-management-survey` dataset and pick a country. (Not two students should pick the same country). Estimate a linear regression with the management quality score (X) and employment (Y). Interpret the slope coefficient, create its 95% CI, and interpret that, too. Explore potential nonlinearities in the patterns of association by `lpoly`. Estimate a regression that can capture those nonlinearities, and carry out a test to see if you can reject that the linear approximation was good enough for the population of firms represented by the data.
+
 
 ## Homework 7 {#hw07}
 
