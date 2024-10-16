@@ -370,7 +370,71 @@ Important
 <li><a href="../rm-data/slides/week05-06.html">Slides</a></li>
 <li><a href="../rm-data/homework.html#hw05">Homework 5</a></li>
 <li><a href="../rm-data/homework.html#hw06">Homework 6</a></li>
+<li>Audio Summary v1</li>
 </ul>
+<div id="opus-player">
+    <audio id="opusPlayer" controls="">
+        <source src="../slides/audio/chapt_7_cg.mp3" type="audio/ogg; codecs=mpeg">
+        Your browser does not support the audio element.
+    </audio>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/opus-recorder/0.5.2/waveWorker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/opus-recorder/0.5.2/encoderWorker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/opus-recorder/0.5.2/decoderWorker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/opus-recorder/0.5.2/oggopusDecoder.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var player = document.getElementById('opusPlayer');
+    var oggOpusDecoder = new OggOpusDecoder();
+
+    player.addEventListener('error', function() {
+        var audioSrc = player.querySelector('source').src;
+        fetch(audioSrc)
+            .then(response => response.arrayBuffer())
+            .then(buffer => oggOpusDecoder.decode(buffer))
+            .then(decodedAudio => {
+                var blob = new Blob([decodedAudio], { type: 'audio/wav' });
+                var url = URL.createObjectURL(blob);
+                player.src = url;
+            });
+    });
+});
+</script>
+<ul>
+<li>Audio Summary v2</li>
+</ul>
+<div id="opus-player">
+    <audio id="opusPlayer" controls="">
+        <source src="../slides/audio/chapt_7_gg.mp3" type="audio/ogg; codecs=mpeg">
+        Your browser does not support the audio element.
+    </audio>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/opus-recorder/0.5.2/waveWorker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/opus-recorder/0.5.2/encoderWorker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/opus-recorder/0.5.2/decoderWorker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/opus-recorder/0.5.2/oggopusDecoder.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var player = document.getElementById('opusPlayer');
+    var oggOpusDecoder = new OggOpusDecoder();
+
+    player.addEventListener('error', function() {
+        var audioSrc = player.querySelector('source').src;
+        fetch(audioSrc)
+            .then(response => response.arrayBuffer())
+            .then(buffer => oggOpusDecoder.decode(buffer))
+            .then(decodedAudio => {
+                var blob = new Blob([decodedAudio], { type: 'audio/wav' });
+                var url = URL.createObjectURL(blob);
+                player.src = url;
+            });
+    });
+});
+</script>
 </section>
 <section id="week-7-regression-analysis-ii-multiple-regression" class="level4">
 <h4 class="anchored" data-anchor-id="week-7-regression-analysis-ii-multiple-regression">Week 7: Regression Analysis II: Multiple Regression</h4>
