@@ -12024,8 +12024,8 @@
     "objectID": "rm-data/slides/week07.html#motivation",
     "href": "rm-data/slides/week07.html#motivation",
     "title": "Multiple regression analysis",
-    "section": "",
-    "text": "We are interested in finding evidence for or against labor market discrimination of women. Compare wages for men and women who share similarities in wage relevant factors such as experience and education.\nFind a good deal on a hotel to spend a night in a European city- analyzed the pattern of hotel price and distance and many other features to find hotels that are underpriced not only for their location but also those other features."
+    "section": "Motivation",
+    "text": "Motivation\n\nWe are interested in finding evidence for or against labor market discrimination of women. Compare wages for men and women who share similarities in wage relevant factors such as experience and education.\nFind a good deal on a hotel to spend a night in a European city- analyzed the pattern of hotel price and distance and many other features to find hotels that are underpriced not only for their location but also those other features."
   },
   {
     "objectID": "rm-data/slides/week07.html#topics-to-cover",
@@ -12137,7 +12137,7 @@
     "href": "rm-data/slides/week07.html#mr-testing-joint-hypotheses-1",
     "title": "Multiple regression analysis",
     "section": "MR: Testing Joint hypotheses",
-    "text": "MR: Testing Joint hypotheses\n\n\n\nF-test"
+    "text": "MR: Testing Joint hypotheses\n\nF-test"
   },
   {
     "objectID": "rm-data/slides/week07.html#mr-testing-hypotheses-in-stata",
@@ -12340,7 +12340,7 @@
     "href": "rm-data/slides/week07.html#summary-take-away",
     "title": "Multiple regression analysis",
     "section": "Summary take-away",
-    "text": "Summary take-away\n\nMultiple regression are linear models with several \\(x\\) variables.\nMay include binary variables and interactions\nMultiple regression can take us closer to a causal interpretation and help make better predictions."
+    "text": "Summary take-away\n\nMultiple regression are linear models with several \\(x\\) variables.\nMay include binary variables and interactions\nMultiple regression can take us closer to a causal interpretation and help make better predictions.\n\n\n\n\nRios-Avila and Cia"
   },
   {
     "objectID": "rm-data/slides/week08.html#what-we-will-see-today",
