@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="NotebookLM by Google">
 
-<title>Research Methods I: Data Analysis for Economics and Policy – Econometrics MSC Levy</title>
+<title>Data Analysis in Economics – Econometrics MSC Levy</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -114,7 +115,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../adv_class/index.html">Courses</a></li><li class="breadcrumb-item"><a href="../rm-data/index.html">Research Methods I: Data Analysis for Economics and Policy</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Data Analysis in Economics</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -163,7 +164,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../rm-data/index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../rm-data/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Research Methods I: Data Analysis for Economics and Policy</span></a>
   </div>
 </li>
@@ -208,42 +209,55 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#syllabus" id="toc-syllabus" class="nav-link active" data-scroll-target="#syllabus">Syllabus</a></li>
-  <li><a href="#instructor-information" id="toc-instructor-information" class="nav-link" data-scroll-target="#instructor-information">Instructor Information</a></li>
-  <li><a href="#course-description" id="toc-course-description" class="nav-link" data-scroll-target="#course-description">Course Description</a></li>
-  <li><a href="#course-objectives" id="toc-course-objectives" class="nav-link" data-scroll-target="#course-objectives">Course Objectives</a></li>
-  <li><a href="#required-textbook" id="toc-required-textbook" class="nav-link" data-scroll-target="#required-textbook">Required Textbook</a></li>
-  <li><a href="#software-requirements" id="toc-software-requirements" class="nav-link" data-scroll-target="#software-requirements">Software Requirements</a></li>
-  <li><a href="#audio-podcasts" id="toc-audio-podcasts" class="nav-link" data-scroll-target="#audio-podcasts">Audio Podcasts</a></li>
-  <li><a href="#course-outline" id="toc-course-outline" class="nav-link" data-scroll-target="#course-outline">Course Outline</a>
+  <li><a href="#course-audio-materials" id="toc-course-audio-materials" class="nav-link active" data-scroll-target="#course-audio-materials">Course Audio Materials</a>
   <ul class="collapse">
-  <li><a href="#part-i-introduction-to-modern-research-tools" id="toc-part-i-introduction-to-modern-research-tools" class="nav-link" data-scroll-target="#part-i-introduction-to-modern-research-tools">Part I: Introduction to Modern Research Tools</a></li>
-  <li><a href="#part-ii-data-analysis-and-exploration" id="toc-part-ii-data-analysis-and-exploration" class="nav-link" data-scroll-target="#part-ii-data-analysis-and-exploration">Part II: Data Analysis and Exploration</a></li>
-  <li><a href="#part-iii-generalization-and-regression-analysis" id="toc-part-iii-generalization-and-regression-analysis" class="nav-link" data-scroll-target="#part-iii-generalization-and-regression-analysis">Part III: Generalization and Regression Analysis</a></li>
-  <li><a href="#part-iv-advanced-topics" id="toc-part-iv-advanced-topics" class="nav-link" data-scroll-target="#part-iv-advanced-topics">Part IV: Advanced Topics</a></li>
+  <li><a href="#origins-of-data" id="toc-origins-of-data" class="nav-link" data-scroll-target="#origins-of-data">1. Origins of Data</a></li>
+  <li><a href="#preparing-data-for-analysis" id="toc-preparing-data-for-analysis" class="nav-link" data-scroll-target="#preparing-data-for-analysis">2. Preparing Data for Analysis</a></li>
+  <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis">3. Exploratory Data Analysis</a></li>
+  <li><a href="#comparison-and-correlation" id="toc-comparison-and-correlation" class="nav-link" data-scroll-target="#comparison-and-correlation">4. Comparison and Correlation</a></li>
+  <li><a href="#generalizing-from-data" id="toc-generalizing-from-data" class="nav-link" data-scroll-target="#generalizing-from-data">5. Generalizing from Data</a></li>
+  <li><a href="#testing-hypotheses" id="toc-testing-hypotheses" class="nav-link" data-scroll-target="#testing-hypotheses">6. Testing Hypotheses</a></li>
+  <li><a href="#simple-regression" id="toc-simple-regression" class="nav-link" data-scroll-target="#simple-regression">7. Simple Regression</a></li>
+  <li><a href="#complicated-patterns-and-messy-data" id="toc-complicated-patterns-and-messy-data" class="nav-link" data-scroll-target="#complicated-patterns-and-messy-data">8. Complicated Patterns and Messy Data</a></li>
+  <li><a href="#generalizing-results-of-a-regression" id="toc-generalizing-results-of-a-regression" class="nav-link" data-scroll-target="#generalizing-results-of-a-regression">9. Generalizing Results of a Regression</a></li>
+  <li><a href="#multiple-linear-regression" id="toc-multiple-linear-regression" class="nav-link" data-scroll-target="#multiple-linear-regression">10. Multiple Linear Regression</a></li>
+  <li><a href="#modeling-probabilities" id="toc-modeling-probabilities" class="nav-link" data-scroll-target="#modeling-probabilities">11. Modeling Probabilities</a></li>
+  <li><a href="#regression-with-time-series-data" id="toc-regression-with-time-series-data" class="nav-link" data-scroll-target="#regression-with-time-series-data">12. Regression with Time Series Data</a></li>
+  <li><a href="#a-framework-for-prediction" id="toc-a-framework-for-prediction" class="nav-link" data-scroll-target="#a-framework-for-prediction">13. A Framework for Prediction</a></li>
+  <li><a href="#model-building-for-prediction" id="toc-model-building-for-prediction" class="nav-link" data-scroll-target="#model-building-for-prediction">14. Model Building for Prediction</a></li>
+  <li><a href="#regression-trees" id="toc-regression-trees" class="nav-link" data-scroll-target="#regression-trees">15. Regression Trees</a></li>
+  <li><a href="#random-forest-and-boosting" id="toc-random-forest-and-boosting" class="nav-link" data-scroll-target="#random-forest-and-boosting">16. Random Forest and Boosting</a></li>
+  <li><a href="#probability-prediction-and-classification" id="toc-probability-prediction-and-classification" class="nav-link" data-scroll-target="#probability-prediction-and-classification">17. Probability Prediction and Classification</a></li>
+  <li><a href="#forecasting-from-time-series-data" id="toc-forecasting-from-time-series-data" class="nav-link" data-scroll-target="#forecasting-from-time-series-data">18. Forecasting from Time Series Data</a></li>
+  <li><a href="#a-framework-for-causal-analysis" id="toc-a-framework-for-causal-analysis" class="nav-link" data-scroll-target="#a-framework-for-causal-analysis">19. A Framework for Causal Analysis</a></li>
+  <li><a href="#designing-and-analyzing-experiments" id="toc-designing-and-analyzing-experiments" class="nav-link" data-scroll-target="#designing-and-analyzing-experiments">20. Designing and Analyzing Experiments</a></li>
+  <li><a href="#regression-and-matching-with-observational-data" id="toc-regression-and-matching-with-observational-data" class="nav-link" data-scroll-target="#regression-and-matching-with-observational-data">21. Regression and Matching with Observational Data</a></li>
+  <li><a href="#difference-in-differences" id="toc-difference-in-differences" class="nav-link" data-scroll-target="#difference-in-differences">22. Difference-in-Differences</a></li>
+  <li><a href="#methods-for-panel-data" id="toc-methods-for-panel-data" class="nav-link" data-scroll-target="#methods-for-panel-data">23. Methods for Panel Data</a></li>
+  <li><a href="#appropriate-control-groups-for-panel-data" id="toc-appropriate-control-groups-for-panel-data" class="nav-link" data-scroll-target="#appropriate-control-groups-for-panel-data">24. Appropriate Control Groups for Panel Data</a></li>
   </ul></li>
-  <li><a href="#grading-policy" id="toc-grading-policy" class="nav-link" data-scroll-target="#grading-policy">Grading Policy</a>
-  <ul class="collapse">
-  <li><a href="#term-paper-schedule-60-of-final-grade" id="toc-term-paper-schedule-60-of-final-grade" class="nav-link" data-scroll-target="#term-paper-schedule-60-of-final-grade">Term Paper Schedule (60% of final grade)</a></li>
-  <li><a href="#additional-requirements" id="toc-additional-requirements" class="nav-link" data-scroll-target="#additional-requirements">Additional Requirements</a></li>
-  </ul></li>
-  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
-  <li><a href="#course-policies" id="toc-course-policies" class="nav-link" data-scroll-target="#course-policies">Course Policies</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../adv_class/index.html">Courses</a></li><li class="breadcrumb-item"><a href="../rm-data/index.html">Research Methods I: Data Analysis for Economics and Policy</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Research Methods I: Data Analysis for Economics and Policy</h1>
+<h1 class="title">Data Analysis in Economics</h1>
+<p class="subtitle lead">Audio Podcasts</p>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>NotebookLM by Google </p>
+          </div>
+  </div>
     
   
     
@@ -254,268 +268,236 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="syllabus" class="level2">
-<h2 class="anchored" data-anchor-id="syllabus">Syllabus</h2>
-<p>The detailed class syllabus is available <a href="../rm-data/syllabus.html">here</a>.</p>
-</section>
-<section id="instructor-information" class="level2">
-<h2 class="anchored" data-anchor-id="instructor-information">Instructor Information</h2>
-<ul>
-<li><strong>Instructor</strong>: Fernando Rios-Avila</li>
-<li><strong>Email</strong>: friosavi@levy.org</li>
-<li><strong>Office Hours</strong>: Wednesdays 1:30pm to 4:00pm, or by appointment. Other times can be arranged remotely.</li>
-<li><strong>Class Time</strong>: Wednesday, 9:30 am - 12:45 pm</li>
-</ul>
-</section>
-<section id="course-description" class="level2">
-<h2 class="anchored" data-anchor-id="course-description">Course Description</h2>
-<p>This course focuses on providing students with the tools and skills necessary to conduct data analysis for economics and policy research. Students will be exposed to the entire process of data analysis, from formulating questions and collecting data to cleaning, exploring, analyzing, and presenting results. The course covers exploratory data analysis, regression analysis, and introduces topics on prediction with machine learning. Students will gain hands-on experience using Stata, with Quarto for reproducible reporting, and GitHub for version control and collaboration.</p>
-</section>
-<section id="course-objectives" class="level2">
-<h2 class="anchored" data-anchor-id="course-objectives">Course Objectives</h2>
-<p>By the end of this course, students will be able to:</p>
-<ol type="1">
-<li>Apply advanced data analysis techniques to economic and policy questions.</li>
-<li>Use modern tools such as GitHub and Quarto for research collaboration and reproducibility.</li>
-<li>Formulate research questions and design appropriate data collection methods.</li>
-<li>Clean, organize, and explore data using various techniques and visualizations.</li>
-<li>Apply regression analysis techniques to analyze relationships between variables.</li>
-<li>Use machine learning methods for prediction and classification tasks.</li>
-<li>Implement data analysis techniques using Stata.</li>
-<li>Effectively communicate research findings through written reports and oral presentations.</li>
-</ol>
-</section>
-<section id="required-textbook" class="level2">
-<h2 class="anchored" data-anchor-id="required-textbook">Required Textbook</h2>
-<p>Békés, G., &amp; Kézdi, G. (2021). Data Analysis for Business, Economics, and Policy. Cambridge University Press.</p>
-</section>
-<section id="software-requirements" class="level2">
-<h2 class="anchored" data-anchor-id="software-requirements">Software Requirements</h2>
-<ul>
-<li><code>Stata</code>: A student license will be provided.</li>
-<li><code>Quarto</code>: Free and open-source software for reproducible research.</li>
-<li><code>VSCode</code>: Free and open-source code editor.</li>
-<li><code>GitHub/GitHub-Desktop</code>: Free platform for version control and collaboration.</li>
-<li><code>Zotero</code>: Free reference manager.</li>
-</ul>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>All homework assignments are required to be submitted in Quarto format, using GitHub repositories to submit the assignments.</p>
-</div>
-</div>
-</section>
-<section id="audio-podcasts" class="level2">
-<h2 class="anchored" data-anchor-id="audio-podcasts">Audio Podcasts</h2>
-<p>If you are interested in listening to an audio-podcast like summary of the chapters, you can find them <a href="../rm-data/playlist.html">here</a>.</p>
-<p>The audiofiles were created using NotebookLM by Google. The audiofiles are generated using the text from the book. The audiofiles are not perfect, but they can be useful to listen to the content of the book while you are doing other activities.</p>
-</section>
-<section id="course-outline" class="level2">
-<h2 class="anchored" data-anchor-id="course-outline">Course Outline</h2>
-<section id="part-i-introduction-to-modern-research-tools" class="level3">
-<h3 class="anchored" data-anchor-id="part-i-introduction-to-modern-research-tools">Part I: Introduction to Modern Research Tools</h3>
-<section id="week-1-course-overview-and-tools-setup" class="level4">
-<h4 class="anchored" data-anchor-id="week-1-course-overview-and-tools-setup">Week 1: Course Overview and Tools Setup</h4>
-<ul>
-<li><strong>Introduction to GitHub and Quarto</strong></li>
-<li><strong>Data Organization and Management</strong></li>
-<li><a href="../rm-data/slides/week01/week01.html">Slides</a></li>
-<li><a href="../rm-data/homework.html#hw01">Homework 1</a></li>
-</ul>
-</section>
-</section>
-<section id="part-ii-data-analysis-and-exploration" class="level3">
-<h3 class="anchored" data-anchor-id="part-ii-data-analysis-and-exploration">Part II: Data Analysis and Exploration</h3>
-<section id="week-2-introduction-to-data-analysis" class="level4">
-<h4 class="anchored" data-anchor-id="week-2-introduction-to-data-analysis">Week 2: Introduction to Data Analysis</h4>
-<ul>
-<li><strong>Data Collection and Preparation</strong></li>
-<li><strong>Tidy Data Principles</strong></li>
-<li>Reading: Békés &amp; Kézdi (2021), Chapters 1-2</li>
-<li><a href="../rm-data/slides/week02.html">Slides</a></li>
-<li><a href="../rm-data/homework.html#hw02">Homework 2</a></li>
-</ul>
-</section>
-<section id="week-3-data-exploration" class="level4">
-<h4 class="anchored" data-anchor-id="week-3-data-exploration">Week 3: Data Exploration</h4>
-<ul>
-<li><strong>Exploratory Data Analysis Techniques</strong></li>
-<li><strong>Data Cleaning and Tidy Data Principles</strong></li>
-<li>Reading: Békés &amp; Kézdi (2021), Chapters 3-4</li>
-<li><a href="../rm-data/slides/week03.html">Slides</a></li>
-<li><a href="../rm-data/homework.html#hw03">Homework 3</a></li>
-</ul>
-</section>
-</section>
-<section id="part-iii-generalization-and-regression-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="part-iii-generalization-and-regression-analysis">Part III: Generalization and Regression Analysis</h3>
-<section id="week-4-generalization-from-sample-to-population" class="level4">
-<h4 class="anchored" data-anchor-id="week-4-generalization-from-sample-to-population">Week 4: Generalization: From Sample to Population</h4>
-<ul>
-<li><strong>Sampling and Hypothesis Testing</strong></li>
-<li><strong>Confidence Intervals and Errors</strong></li>
-<li>Reading: Békés &amp; Kézdi (2021), Chapters 5-6</li>
-<li><a href="../rm-data/slides/week04.html">Slides</a></li>
-<li><a href="../rm-data/homework.html#hw04">Homework 4</a></li>
-</ul>
-</section>
-<section id="weeks-5-6-regression-analysis-i-simple-regression" class="level4">
-<h4 class="anchored" data-anchor-id="weeks-5-6-regression-analysis-i-simple-regression">Weeks 5-6: Regression Analysis I: Simple Regression</h4>
-<ul>
-<li>Date: October 9 and 16</li>
-<li><strong>Linear Regression and Causality</strong></li>
-<li><strong>Model Assumptions and Transformations</strong></li>
-<li>Reading: Békés &amp; Kézdi (2021), Chapters 7-9</li>
-<li><a href="../rm-data/slides/week05-06.html">Slides</a></li>
-<li><a href="../rm-data/homework.html#hw05">Homework 5</a></li>
-<li><a href="../rm-data/homework.html#hw06">Homework 6</a></li>
-<li>Audio Summary v1. Chapter 7</li>
-</ul>
-</section>
-<section id="week-7-regression-analysis-ii-multiple-regression" class="level4">
-<h4 class="anchored" data-anchor-id="week-7-regression-analysis-ii-multiple-regression">Week 7: Regression Analysis II: Multiple Regression</h4>
-<ul>
-<li>Date: October 18 (Make-up class)</li>
-<li><strong>Estimation and Inference</strong></li>
-<li><strong>Interactions and Non-linearities</strong></li>
-<li>Reading: Békés &amp; Kézdi (2021), Chapter 10</li>
-<li><a href="../rm-data/slides/week07.html">Slides</a></li>
-<li><a href="../rm-data/homework.html#hw07">Homework 7</a></li>
-</ul>
-</section>
-<section id="week-8-regression-analysis-iii-modeling-probabilities" class="level4">
-<h4 class="anchored" data-anchor-id="week-8-regression-analysis-iii-modeling-probabilities">Week 8: Regression Analysis III: Modeling Probabilities</h4>
-<ul>
-<li>Date: October 23</li>
-<li><strong>Logit and Probit Models</strong></li>
-<li><strong>Interpretation and Predictive Power</strong></li>
-<li>Reading: Békés &amp; Kézdi (2021), Chapter 11</li>
-<li><a href="../rm-data/slides/week08.html">Slides</a></li>
-<li><a href="../rm-data/homework.html#hw08">Homework 8</a></li>
-</ul>
-</section>
-</section>
-<section id="part-iv-advanced-topics" class="level3">
-<h3 class="anchored" data-anchor-id="part-iv-advanced-topics">Part IV: Advanced Topics</h3>
-<section id="week-9-time-series-analysis" class="level4">
-<h4 class="anchored" data-anchor-id="week-9-time-series-analysis">Week 9: Time Series Analysis</h4>
-<ul>
-<li>Date: October 30</li>
-<li><strong>Trend, Seasonality, and Stationarity</strong></li>
-<li>Reading: Békés &amp; Kézdi (2021), Chapter 12</li>
-<li><a href="../rm-data/slides/week09.html">Slides</a></li>
-<li><a href="../rm-data/homework.html#hw09">Homework 9</a></li>
-</ul>
-</section>
-<section id="week-10-prediction" class="level4">
-<h4 class="anchored" data-anchor-id="week-10-prediction">Week 10: Prediction</h4>
-<ul>
-<li>Date: November 6</li>
-<li><strong>Model Fit and Cross-validation</strong></li>
-<li>Reading: Békés &amp; Kézdi (2021), Chapter 13</li>
-<li><a href="../rm-data/slides/week10.html">Slides</a></li>
-<li><a href="../rm-data/homework.html#hw10">Homework 10</a></li>
-</ul>
-</section>
-<section id="week-11-model-building-for-prediction-lasso" class="level4">
-<h4 class="anchored" data-anchor-id="week-11-model-building-for-prediction-lasso">Week 11: Model Building for Prediction: LASSO</h4>
-<ul>
-<li>Date: November 13</li>
-<li><strong>LASSO for Prediction and Diagnosis</strong></li>
-<li>Reading: Békés &amp; Kézdi (2021), Chapter 14</li>
-<li><a href="slides/week11.qmd">Slides</a></li>
-<li><a href="../rm-data/homework.html#hw11">Homework 11</a></li>
-</ul>
-</section>
-<section id="week-12-predicting-probabilities-and-classification" class="level4">
-<h4 class="anchored" data-anchor-id="week-12-predicting-probabilities-and-classification">Week 12: Predicting Probabilities and Classification</h4>
-<ul>
-<li>Date: November 20</li>
-<li><strong>Classification Techniques and ROC Curves</strong></li>
-<li>Reading: Békés &amp; Kézdi (2021), Chapter 17</li>
-<li><a href="slides/week12.qmd">Slides</a></li>
-<li><a href="../rm-data/homework.html#hw12">Homework 12</a></li>
-</ul>
-</section>
-<section id="week-13-forecasting-data" class="level4">
-<h4 class="anchored" data-anchor-id="week-13-forecasting-data">Week 13: Forecasting Data</h4>
-<ul>
-<li>Date: November 27 (TBD)</li>
-<li><strong>ARIMA and Forecasting Techniques</strong></li>
-<li>Reading: Békés &amp; Kézdi (2021), Chapter 18</li>
-<li><a href="slides/week13.qmd">Slides</a></li>
-<li><a href="../rm-data/homework.html#hw13">Homework 13</a></li>
-</ul>
-</section>
-</section>
-</section>
-<section id="grading-policy" class="level2">
-<h2 class="anchored" data-anchor-id="grading-policy">Grading Policy</h2>
-<ul>
-<li><strong>Weekly Quizzes</strong>: 10%</li>
-<li><strong>Weekly Problem Sets</strong>: 30%</li>
-<li><strong>Term Paper</strong>: 60%</li>
-</ul>
-<section id="term-paper-schedule-60-of-final-grade" class="level3">
-<h3 class="anchored" data-anchor-id="term-paper-schedule-60-of-final-grade">Term Paper Schedule (60% of final grade)</h3>
-<ul>
-<li><p><strong>Part I</strong>: Research Proposal (5%, due Week 2). See <a href="../rm-data/example_proposals.html">here</a> for few examples of research proposals.</p></li>
-<li><p><strong>Part II</strong>: Data Collection and Cleaning (10%, due Week 4)</p></li>
-<li><p><strong>Interim Progress Report</strong> (5%, due Week 7): October 18</p></li>
-<li><p><strong>Peer Review Report</strong>: (Week 8): October 23</p></li>
-<li><p><strong>Part III</strong>: Data Analysis (15%, due Week 10): November 6</p></li>
-<li><p><strong>Peer Review Report</strong>: (Week 11): November 13</p></li>
-<li><p><strong>Part IV</strong>: (15%) Final Report: December 2</p></li>
-<li><p><strong>Presentation</strong> (5%) due Last Date of Class: December 4 or 11</p></li>
-</ul>
-<p>Complete research paper should include:</p>
-<ul>
-<li><p>Introduction</p></li>
-<li><p>Literature Review</p></li>
-<li><p>Data and Methodology</p></li>
-<li><p>Robustness Checks or Sensitivity/Sub-group Analysis</p></li>
-<li><p>Conclusion</p></li>
-<li><p>References</p></li>
-<li><p>Appendices (if any)</p></li>
-<li><p><strong>Presentation</strong> (5%)</p>
-<ul>
-<li>15-minute presentation of your research to the class</li>
-</ul></li>
-<li><p>See <a href="https://github.com/riosavila/term-paper">here</a> for an example for the kind of report expected at each stage, based on the first research proposal on the impact of remote work on urban housing prices.</p></li>
-</ul>
-</section>
-<section id="additional-requirements" class="level3">
-<h3 class="anchored" data-anchor-id="additional-requirements">Additional Requirements</h3>
-<ul>
-<li>You should submit a PDF of your report by the deadline, along with the Github repository link</li>
-<li>Your GitHub repository should include all code, data, and the Quarto document for your report</li>
-<li>At each stage, you should submit your work to GitHub to follow the progress of your project</li>
-</ul>
-</section>
-</section>
-<section id="resources" class="level2">
-<h2 class="anchored" data-anchor-id="resources">Resources</h2>
-<ul>
-<li><strong>Textbook</strong>: Békés, G., &amp; Kézdi, G. (2021). Data Analysis for Business, Economics, and Policy. Cambridge University Press. Additional resources are available on the book’s website: <a href="https://gabors-data-analysis.com/getting-started">Data Analysis</a></li>
-</ul>
-</section>
-<section id="course-policies" class="level2">
-<h2 class="anchored" data-anchor-id="course-policies">Course Policies</h2>
-<ul>
-<li><strong>Attendance</strong>: Attendance is highly recommended. Classes will not be recorded, and except for exceptional cases, there will be no online classes.</li>
-<li><strong>Late Assignments</strong>: Late assignments will not be accepted unless prior arrangements have been made with the instructor.</li>
-<li><strong>Academic Integrity</strong>: All work submitted must be your own. Plagiarism will not be tolerated and will result in a failing grade for the assignment or course.</li>
-<li><strong>AI Usage</strong>: The use of AI in the class is allowed. However, you must disclose any AI tools used in your assignments. AI is a tool you can use to generate ideas, edit your text, provide help with coding, etc. However, it is completely unacceptable to use AI to generate the entire assignment. You will have to be able to explain and defend your work in class.</li>
-</ul>
+<style>
+body {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.lecture {
+    background: #f8f9fa;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 5px;
+}
+
+audio {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.title {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.intro-text {
+    background: #e9ecef;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 20px 0;
+    line-height: 1.6;
+}
+</style>
+<section id="course-audio-materials" class="level1">
+<h1>Course Audio Materials</h1>
+<blockquote class="blockquote">
+<p>This collection features podcast-like summaries of each chapter, created using NotebookLM by Google. These AI-generated audio summaries provide concise overviews of the key concepts covered in each chapter, making them perfect for review and reinforcement of the material.</p>
+</blockquote>
+<section id="origins-of-data" class="level3 title">
+<h3 class="title anchored" data-anchor-id="origins-of-data">1. Origins of Data</h3>
+<audio controls="">
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-Econ1.mp3" type="audio/mp3">
+<p>Your browser does not support the audio element. </p>
+<p>:::</p>
+<p>:::</p>
+</audio></section>
+<section id="preparing-data-for-analysis" class="level3 title">
+<h3 class="title anchored" data-anchor-id="preparing-data-for-analysis">2. Preparing Data for Analysis</h3>
+<audio controls="">
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-Econ2.mp3" type="audio/mp3">
+<p>Your browser does not support the audio element. </p>
+<p>:::</p>
+<p>:::</p>
+</audio></section>
+<section id="exploratory-data-analysis" class="level3 title">
+<h3 class="title anchored" data-anchor-id="exploratory-data-analysis">3. Exploratory Data Analysis</h3>
+<audio controls="">
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ3.mp3" type="audio/mp3">
+<p>Your browser does not support the audio element. </p>
+<p>:::</p>
+<p>:::</p>
+</audio></section>
+<section id="comparison-and-correlation" class="level3 title">
+<h3 class="title anchored" data-anchor-id="comparison-and-correlation">4. Comparison and Correlation</h3>
+<audio controls="">
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ4.mp3" type="audio/mp3">
+<p>Your browser does not support the audio element. </p>
+<p>:::</p>
+<p>:::</p>
+</audio></section>
+<section id="generalizing-from-data" class="level3 title">
+<h3 class="title anchored" data-anchor-id="generalizing-from-data">5. Generalizing from Data</h3>
+<audio controls="">
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ5.mp3" type="audio/mp3">
+<p>Your browser does not support the audio element. </p>
+<p>:::</p>
+<p>:::</p>
+</audio></section>
+<section id="testing-hypotheses" class="level3 title">
+<h3 class="title anchored" data-anchor-id="testing-hypotheses">6. Testing Hypotheses</h3>
+<audio controls="">
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ6.mp3" type="audio/mp3">
+<p>Your browser does not support the audio element. </p>
+<p>:::</p>
+<p>:::</p>
+</audio></section>
+<section id="simple-regression" class="level3 title">
+<h3 class="title anchored" data-anchor-id="simple-regression">7. Simple Regression</h3>
+<audio controls="">
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ7.mp3" type="audio/mp3">
+<p>Your browser does not support the audio element. </p>
+<p>:::</p>
+<p>:::</p>
+</audio></section>
+<section id="complicated-patterns-and-messy-data" class="level3 title">
+<h3 class="title anchored" data-anchor-id="complicated-patterns-and-messy-data">8. Complicated Patterns and Messy Data</h3>
+<audio controls="">
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ8.mp3" type="audio/mp3">
+<p>Your browser does not support the audio element. </p>
+<p>:::</p>
+<p>:::</p>
+</audio></section>
+<section id="generalizing-results-of-a-regression" class="level3 title">
+<h3 class="title anchored" data-anchor-id="generalizing-results-of-a-regression">9. Generalizing Results of a Regression</h3>
+<audio controls="">
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ9.mp3" type="audio/mp3">
+<p>Your browser does not support the audio element. </p>
+<p>:::</p>
+<p>:::</p>
+</audio></section>
+<section id="multiple-linear-regression" class="level3 title">
+<h3 class="title anchored" data-anchor-id="multiple-linear-regression">10. Multiple Linear Regression</h3>
+<audio controls="">
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ10.mp3" type="audio/mp3">
+<p>Your browser does not support the audio element. </p>
+<p>:::</p>
+<p>:::</p>
+</audio></section>
+<section id="modeling-probabilities" class="level3 title">
+<h3 class="title anchored" data-anchor-id="modeling-probabilities">11. Modeling Probabilities</h3>
+<audio controls="">
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ11.mp3" type="audio/mp3">
+<p>Your browser does not support the audio element. </p>
+<p>:::</p>
+<p>:::</p>
+</audio></section>
+<section id="regression-with-time-series-data" class="level3 title">
+<h3 class="title anchored" data-anchor-id="regression-with-time-series-data">12. Regression with Time Series Data</h3>
+<audio controls="">
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-Econ12.mp3" type="audio/mp3">
+<p>Your browser does not support the audio element. </p>
+<p>:::</p>
+<p>:::</p>
+</audio></section>
+<section id="a-framework-for-prediction" class="level3 title">
+<h3 class="title anchored" data-anchor-id="a-framework-for-prediction">13. A Framework for Prediction</h3>
+<audio controls="">
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ13.mp3" type="audio/mp3">
+<p>Your browser does not support the audio element. </p>
+<p>:::</p>
+<p>:::</p>
+</audio></section>
+<section id="model-building-for-prediction" class="level3 title">
+<h3 class="title anchored" data-anchor-id="model-building-for-prediction">14. Model Building for Prediction</h3>
+<audio controls="">
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ14.mp3" type="audio/mp3">
+<p>Your browser does not support the audio element. </p>
+<p>:::</p>
+<p>:::</p>
+</audio></section>
+<section id="regression-trees" class="level3 title">
+<h3 class="title anchored" data-anchor-id="regression-trees">15. Regression Trees</h3>
+<audio controls="">
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ15.mp3" type="audio/mp3">
+<p>Your browser does not support the audio element. </p>
+<p>:::</p>
+<p>:::</p>
+</audio></section>
+<section id="random-forest-and-boosting" class="level3 title">
+<h3 class="title anchored" data-anchor-id="random-forest-and-boosting">16. Random Forest and Boosting</h3>
+<audio controls="">
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ16.mp3" type="audio/mp3">
+<p>Your browser does not support the audio element. </p>
+<p>:::</p>
+<p>:::</p>
+</audio></section>
+<section id="probability-prediction-and-classification" class="level3 title">
+<h3 class="title anchored" data-anchor-id="probability-prediction-and-classification">17. Probability Prediction and Classification</h3>
+<audio controls="">
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ17.mp3" type="audio/mp3">
+<p>Your browser does not support the audio element. </p>
+<p>:::</p>
+<p>:::</p>
+</audio></section>
+<section id="forecasting-from-time-series-data" class="level3 title">
+<h3 class="title anchored" data-anchor-id="forecasting-from-time-series-data">18. Forecasting from Time Series Data</h3>
+<audio controls="">
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ18.mp3" type="audio/mp3">
+<p>Your browser does not support the audio element. </p>
+<p>:::</p>
+<p>:::</p>
+</audio></section>
+<section id="a-framework-for-causal-analysis" class="level3 title">
+<h3 class="title anchored" data-anchor-id="a-framework-for-causal-analysis">19. A Framework for Causal Analysis</h3>
+<audio controls="">
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ19.mp3" type="audio/mp3">
+<p>Your browser does not support the audio element. </p>
+<p>:::</p>
+<p>:::</p>
+</audio></section>
+<section id="designing-and-analyzing-experiments" class="level3 title">
+<h3 class="title anchored" data-anchor-id="designing-and-analyzing-experiments">20. Designing and Analyzing Experiments</h3>
+<audio controls="">
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ20.mp3" type="audio/mp3">
+<p>Your browser does not support the audio element. </p>
+<p>:::</p>
+<p>:::</p>
+</audio></section>
+<section id="regression-and-matching-with-observational-data" class="level3 title">
+<h3 class="title anchored" data-anchor-id="regression-and-matching-with-observational-data">21. Regression and Matching with Observational Data</h3>
+<audio controls="">
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ21.mp3" type="audio/mp3">
+<p>Your browser does not support the audio element. </p>
+<p>:::</p>
+<p>:::</p>
+</audio></section>
+<section id="difference-in-differences" class="level3 title">
+<h3 class="title anchored" data-anchor-id="difference-in-differences">22. Difference-in-Differences</h3>
+<audio controls="">
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-Econ22.mp3" type="audio/mp3">
+<p>Your browser does not support the audio element. </p>
+<p>:::</p>
+<p>:::</p>
+</audio></section>
+<section id="methods-for-panel-data" class="level3 title">
+<h3 class="title anchored" data-anchor-id="methods-for-panel-data">23. Methods for Panel Data</h3>
+<audio controls="">
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-Econ23.mp3" type="audio/mp3">
+<p>Your browser does not support the audio element. </p>
+<p>:::</p>
+<p>:::</p>
+</audio></section>
+<section id="appropriate-control-groups-for-panel-data" class="level3 title">
+<h3 class="title anchored" data-anchor-id="appropriate-control-groups-for-panel-data">24. Appropriate Control Groups for Panel Data</h3>
+<audio controls="">
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-Econ24.mp3" type="audio/mp3">
+<p>Your browser does not support the audio element. </p>
+<p>:::</p>
 
 
+</audio></section>
 </section>
 
 </main> <!-- /main -->

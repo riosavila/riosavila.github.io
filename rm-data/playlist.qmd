@@ -1,0 +1,309 @@
+---
+title: "Data Analysis in Economics"
+subtitle: "Audio Podcasts"
+author: NotebookLM by Google
+format: 
+  html:
+    toc: true
+---
+
+<style>
+body {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.lecture {
+    background: #f8f9fa;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 5px;
+}
+
+audio {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.title {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.intro-text {
+    background: #e9ecef;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 20px 0;
+    line-height: 1.6;
+}
+</style>
+
+# Course Audio Materials
+
+> This collection features podcast-like summaries of each chapter, created using NotebookLM by Google. These AI-generated audio summaries provide concise overviews of the key concepts covered in each chapter, making them perfect for review and reinforcement of the material.
+
+
+
+### 1. Origins of Data {.title}
+
+<audio controls>
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-Econ1.mp3" type="audio/mp3">
+Your browser does not support the audio element.
+</audio>
+
+:::
+
+:::
+
+### 2. Preparing Data for Analysis {.title}
+
+<audio controls>
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-Econ2.mp3" type="audio/mp3">
+Your browser does not support the audio element.
+</audio>
+
+:::
+
+:::
+
+### 3. Exploratory Data Analysis {.title}
+
+<audio controls>
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ3.mp3" type="audio/mp3">
+Your browser does not support the audio element.
+</audio>
+
+:::
+
+:::
+
+### 4. Comparison and Correlation {.title}
+
+<audio controls>
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ4.mp3" type="audio/mp3">
+Your browser does not support the audio element.
+</audio>
+
+:::
+
+:::
+
+### 5. Generalizing from Data {.title}
+
+<audio controls>
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ5.mp3" type="audio/mp3">
+Your browser does not support the audio element.
+</audio>
+
+:::
+
+:::
+
+### 6. Testing Hypotheses {.title}
+
+<audio controls>
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ6.mp3" type="audio/mp3">
+Your browser does not support the audio element.
+</audio>
+
+:::
+
+:::
+
+### 7. Simple Regression {.title}
+
+<audio controls>
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ7.mp3" type="audio/mp3">
+Your browser does not support the audio element.
+</audio>
+
+:::
+
+:::
+
+### 8. Complicated Patterns and Messy Data {.title}
+
+<audio controls>
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ8.mp3" type="audio/mp3">
+Your browser does not support the audio element.
+</audio>
+
+:::
+
+:::
+
+### 9. Generalizing Results of a Regression {.title}
+
+<audio controls>
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ9.mp3" type="audio/mp3">
+Your browser does not support the audio element.
+</audio>
+
+:::
+
+:::
+
+### 10. Multiple Linear Regression {.title}
+
+<audio controls>
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ10.mp3" type="audio/mp3">
+Your browser does not support the audio element.
+</audio>
+
+:::
+
+:::
+
+### 11. Modeling Probabilities {.title}
+
+<audio controls>
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ11.mp3" type="audio/mp3">
+Your browser does not support the audio element.
+</audio>
+
+:::
+
+:::
+
+### 12. Regression with Time Series Data {.title}
+
+<audio controls>
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-Econ12.mp3" type="audio/mp3">
+Your browser does not support the audio element.
+</audio>
+
+:::
+
+:::
+
+### 13. A Framework for Prediction {.title}
+
+<audio controls>
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ13.mp3" type="audio/mp3">
+Your browser does not support the audio element.
+</audio>
+
+:::
+
+:::
+
+### 14. Model Building for Prediction {.title}
+
+<audio controls>
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ14.mp3" type="audio/mp3">
+Your browser does not support the audio element.
+</audio>
+
+:::
+
+:::
+
+### 15. Regression Trees {.title}
+
+<audio controls>
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ15.mp3" type="audio/mp3">
+Your browser does not support the audio element.
+</audio>
+
+:::
+
+:::
+
+### 16. Random Forest and Boosting {.title}
+
+<audio controls>
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ16.mp3" type="audio/mp3">
+Your browser does not support the audio element.
+</audio>
+
+:::
+
+:::
+
+### 17. Probability Prediction and Classification {.title}
+
+<audio controls>
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ17.mp3" type="audio/mp3">
+Your browser does not support the audio element.
+</audio>
+
+:::
+
+:::
+
+### 18. Forecasting from Time Series Data {.title}
+
+<audio controls>
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ18.mp3" type="audio/mp3">
+Your browser does not support the audio element.
+</audio>
+
+:::
+
+:::
+
+### 19. A Framework for Causal Analysis {.title}
+
+<audio controls>
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ19.mp3" type="audio/mp3">
+Your browser does not support the audio element.
+</audio>
+
+:::
+
+:::
+
+### 20. Designing and Analyzing Experiments {.title}
+
+<audio controls>
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ20.mp3" type="audio/mp3">
+Your browser does not support the audio element.
+</audio>
+
+:::
+
+:::
+
+### 21. Regression and Matching with Observational Data {.title}
+
+<audio controls>
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-econ21.mp3" type="audio/mp3">
+Your browser does not support the audio element.
+</audio>
+
+:::
+
+:::
+
+### 22. Difference-in-Differences {.title}
+
+<audio controls>
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-Econ22.mp3" type="audio/mp3">
+Your browser does not support the audio element.
+</audio>
+
+:::
+
+:::
+
+### 23. Methods for Panel Data {.title}
+
+<audio controls>
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-Econ23.mp3" type="audio/mp3">
+Your browser does not support the audio element.
+</audio>
+
+:::
+
+:::
+
+### 24. Appropriate Control Groups for Panel Data {.title}
+
+<audio controls>
+<source src="https://github.com/RMindMeld/audio_rm/raw/refs/heads/main/DA-Econ24.mp3" type="audio/mp3">
+Your browser does not support the audio element.
+</audio>
+
+:::

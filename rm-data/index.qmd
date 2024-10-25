@@ -46,6 +46,12 @@ Békés, G., & Kézdi, G. (2021). Data Analysis for Business, Economics, and Pol
 All homework assignments are required to be submitted in Quarto format, using GitHub repositories to submit the assignments.
 :::
 
+## Audio Podcasts
+
+If you are interested in listening to an audio-podcast like summary of the chapters, you can find them [here](playlist.qmd).
+
+The audiofiles were created using NotebookLM by Google. The audiofiles are generated using the text from the book. The audiofiles are not perfect, but they can be useful to listen to the content of the book while you are doing other activities.
+
 ## Course Outline
 
 ### Part I: Introduction to Modern Research Tools
@@ -91,65 +97,7 @@ All homework assignments are required to be submitted in Quarto format, using Gi
 - [Homework 6](homework.qmd#hw06)
 - Audio Summary v1. Chapter 7
 
- 
-```{=html}
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Opus Player</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/opus-recorder/0.5.2/waveWorker.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/opus-recorder/0.5.2/encoderWorker.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/opus-recorder/0.5.2/decoderWorker.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/opus-recorder/0.5.2/oggopusDecoder.min.js"></script>
-</head>
-<body>
-<div id="opus-player">
-    <audio id="opusPlayer" controls>
-        <source src="slides/audio/chapt_7_gg.opus" type="audio/ogg; codecs=opus">
-        Your browser does not support the audio element.
-    </audio>
-</div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var player = document.getElementById('opusPlayer');
-            var oggOpusDecoder = new OggOpusDecoder();
-
-            player.addEventListener('error', function() {
-                var audioSrc = player.querySelector('source').src;
-                fetch(audioSrc)
-                    .then(response => response.arrayBuffer())
-                    .then(buffer => oggOpusDecoder.decode(buffer))
-                    .then(decodedAudio => {
-                        var blob = new Blob([decodedAudio], { type: 'audio/wav' });
-                        var url = URL.createObjectURL(blob);
-                        player.src = url;
-                    });
-            });
-        });
-    </script>
-</body>
-```
-
-- Audio Summary v2. Chapter 7
-
-```{=html}
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Opus Player</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/opus-recorder/0.5.2/waveWorker.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/opus-recorder/0.5.2/encoderWorker.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/opus-recorder/0.5.2/decoderWorker.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/opus-recorder/0.5.2/oggopusDecoder.min.js"></script>
-</head>
-<div id="opus-player">
-    <audio id="opusPlayer" controls>
-        <source src="slides/audio/chapt_7_cg.opus" type="audio/ogg; codecs=opus">
-        Your browser does not support the audio element.
-    </audio>
-</div>
-```
-
+  
 #### Week 7: Regression Analysis II: Multiple Regression
 - Date: October 18 (Make-up class)
 - **Estimation and Inference**
