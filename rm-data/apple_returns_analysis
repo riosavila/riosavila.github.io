@@ -1,0 +1,82 @@
+---
+title: "Case Study: Apple Stock Returns vs Market Returns"
+format: 
+  html:
+    code-fold: true
+    fig-width: 10
+    fig-height: 6
+execute:
+  echo: true
+---
+
+## Introduction
+
+This case study examines how changes in Apple's stock price are related to changes in market prices (S&P500) during 2010-2020. We analyze monthly returns to understand:
+
+1. The relationship between Apple stock returns and market returns
+2. The relative risk of Apple stock compared to the market
+3. Whether Apple stock tends to amplify market movements
+
+## Data and Methodology
+
+We use monthly stock price data for Apple and the S&P500 index from 2010 to 2020. Returns are calculated as percentage changes in prices between consecutive months:
+
+$Return_t = \frac{Price_t - Price_{t-1}}{Price_{t-1}} \times 100$
+
+## Exploratory Analysis
+
+```{stata}
+#| output: asis
+do apple_sp500_analysis.do
+```
+
+### Time Series Visualization
+
+![](returns_time.png)
+
+The time series plot shows the monthly returns for both Apple stock and the S&P500 index. Key observations:
+
+- Both series show considerable volatility
+- Apple returns tend to have larger swings than the market
+- The series appear to move together, suggesting positive correlation
+
+### Descriptive Statistics
+
+The summary statistics reveal:
+
+- Mean returns are positive for both series
+- Apple shows higher volatility (standard deviation)
+- The range of returns is wider for Apple stock
+
+### Returns Relationship Analysis
+
+![](returns_scatter.png)
+
+The scatter plot with regression line shows:
+
+- A positive relationship between Apple and market returns
+- Apple's returns tend to amplify market movements (slope > 1)
+- Considerable dispersion around the regression line
+
+## Regression Analysis
+
+We estimate the following model:
+
+$R_{Apple,t} = \alpha + \beta R_{S\&P500,t} + \epsilon_t$
+
+Where:
+- $R_{Apple,t}$ is Apple's stock return in month t
+- $R_{S\&P500,t}$ is the S&P500 return in month t
+- $\beta$ measures the sensitivity of Apple returns to market returns
+- $\alpha$ represents the average excess return
+
+## Conclusions
+
+The analysis reveals:
+
+1. Apple stock tends to amplify market movements ($\beta > 1$)
+2. Higher volatility in Apple returns compared to market returns
+3. Positive but imprecisely estimated excess returns ($\alpha$)
+4. The relationship explains a moderate portion of Apple's return variation
+
+These findings suggest Apple stock was riskier than the market during this period, with returns that tend to move in the same direction as the market but with larger magnitude.

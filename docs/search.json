@@ -3510,14 +3510,14 @@
     "href": "rm-data/homework.html#hw08",
     "title": "HomeWorks",
     "section": "Homework 8",
-    "text": "Homework 8\nUse the stocks-prices dataset that can be found here. This dataset contains the closing prices for the SP500, Apple, Disney, GameStop, Meta and Nvidia at the end of the month. Using this data, choose one of the companies and reproduce the analysis of the Returns on a company stock and market returns case study (for example SP500 and Apple).\nThe full case study can be found here. You need to produce the same tables and figures as in the case study, with brief explanations of what you find. No need to use the Daily data, just the Monthly data."
+    "text": "Homework 8"
   },
   {
     "objectID": "rm-data/homework.html#hw09",
     "href": "rm-data/homework.html#hw09",
     "title": "HomeWorks",
     "section": "Homework 9",
-    "text": "Homework 9"
+    "text": "Homework 9\nUse the stocks-prices dataset that can be found here. This dataset contains the closing prices for the SP500, Apple, Disney, GameStop, Meta and Nvidia at the end of the month. Using this data, choose one of the companies and reproduce the analysis of the Returns on a company stock and market returns case study (for example SP500 and Apple).\nThe full case study can be found here. You need to produce the same tables and figures as in the case study, with brief explanations of what you find. No need to use the Daily data, just the Monthly data."
   },
   {
     "objectID": "rm-data/homework.html#hw10",
