@@ -13146,15 +13146,15 @@
     "objectID": "rm-data/slides/week09.html#motivation",
     "href": "rm-data/slides/week09.html#motivation",
     "title": "Time series data",
-    "section": "",
-    "text": "You are considering investing in a company stock, and you want to know how risky that investment is. You have downloaded data on daily stock prices for many years. How should you define returns? How should you assess whether and to what extent returns on the company stock move together with market returns?\nHeating and cooling are important uses of electricity. How does weather conditions affect electricity consumption? We are going to use monthly data on temperature and residential electricity consumption in Arizona. How to formulate a model which captures these factors?"
+    "section": "Motivation",
+    "text": "Motivation\n\nYou are considering investing in a company stock, and you want to know how risky that investment is. You have downloaded data on daily stock prices for many years. How should you define returns? How should you assess whether and to what extent returns on the company stock move together with market returns?\nHeating and cooling are important uses of electricity. How does weather conditions affect electricity consumption? We are going to use monthly data on temperature and residential electricity consumption in Arizona. How to formulate a model which captures these factors?"
   },
   {
     "objectID": "rm-data/slides/week09.html#what-is-special-in-the-analysis-of-time-series-data",
     "href": "rm-data/slides/week09.html#what-is-special-in-the-analysis-of-time-series-data",
     "title": "Time series data",
     "section": "What is special in the analysis of time series data?",
-    "text": "What is special in the analysis of time series data?\n\n\nDifferent\n\nWe have time series data if we observe one unit across many time periods.\nThere is a special notation: \\(y_t\\), \\(t = 1, 2, \\ldots, T\\)\nTime series data presents additional opportunities as well as additional challenges to compare variables.\n\n\n\n\n\nWith other features\n\nData wrangling novelties: frequency and aggregation\nSpecial nature of time series: serial correlation\nCoefficient interpretation."
+    "text": "What is special in the analysis of time series data?\n\n\nDifferent\n\nWe have time series data if we observe one unit across many time periods.\nThere is a special notation: \\(y_t\\), \\(t = 1, 2, \\ldots, T\\)\nTime series data presents additional opportunities as well as additional challenges to compare variables.\n\n\n\n\nWith other features\n\nData wrangling novelties: frequency and aggregation\nSpecial nature of time series: serial correlation\nCoefficient interpretation."
   },
   {
     "objectID": "rm-data/slides/week09.html#data-preparation",
@@ -13469,14 +13469,14 @@
     "href": "rm-data/slides/week09.html#main-takeaways",
     "title": "Time series data",
     "section": "Main takeaways",
-    "text": "Main takeaways\n\nRegressions with time series data allow for additional opportunities, but they pose additional challenges, too\nRegressions with time series data help uncover associations from changes and associations across time\nTrend, seasonality, and random walk-like non-stationarity are additional challenges\nDo not regress variables that have trend or seasonality; without dealing with them they produce spurious results"
+    "text": "Main takeaways\n\nRegressions with time series data allow for additional opportunities, but they pose additional challenges, too\nRegressions with time series data help uncover associations from changes and associations across time\nTrend, seasonality, and random walk-like non-stationarity are additional challenges\nDo not regress variables that have trend or seasonality; without dealing with them they produce spurious results\n\n\n\n\nRios-Avila and Cia"
   },
   {
     "objectID": "rm-data/slides/week10.html#motivation",
     "href": "rm-data/slides/week10.html#motivation",
     "title": "Prediction Setup",
-    "section": "",
-    "text": "Imagine you want to sell your car soon and need to predict its price. You have data on similar used cars, and several regression models could help estimate its value now and in a year. How do you choose the best model?\nOr, take an ice cream shop—using past sales and temperature data, you want to predict sales for the coming days. What factors should you consider to ensure your prediction is as accurate as possible?"
+    "section": "Motivation",
+    "text": "Motivation\n\nImagine you want to sell your car soon and need to predict its price. You have data on similar used cars, and several regression models could help estimate its value now and in a year. How do you choose the best model?\nOr, take an ice cream shop—using past sales and temperature data, you want to predict sales for the coming days. What factors should you consider to ensure your prediction is as accurate as possible?"
   },
   {
     "objectID": "rm-data/slides/week10.html#prediction-basics",
@@ -13889,7 +13889,7 @@
     "href": "rm-data/slides/week10.html#main-takeaways",
     "title": "Prediction Setup",
     "section": "Main takeaways",
-    "text": "Main takeaways\n\nPrediction uses the original data with \\(y\\) and \\(x\\) to predict the value of \\(y\\) for observations in the live data, in which \\(x\\) is observed but \\(y\\) is not\nPrediction uses a model that describes the patterns of association between \\(y\\) and \\(x\\) in the original data\nCross-validation can help find the best model in the population, or general pattern, represented by the original data\nStability of the patterns of association is needed for a prediction with high external validity"
+    "text": "Main takeaways\n\nPrediction uses the original data with \\(y\\) and \\(x\\) to predict the value of \\(y\\) for observations in the live data, in which \\(x\\) is observed but \\(y\\) is not\nPrediction uses a model that describes the patterns of association between \\(y\\) and \\(x\\) in the original data\nCross-validation can help find the best model in the population, or general pattern, represented by the original data\nStability of the patterns of association is needed for a prediction with high external validity\n\n\n\n\nRios-Avila and Cia"
   },
   {
     "objectID": "rm-data/slides/week10.html#what-is-different",

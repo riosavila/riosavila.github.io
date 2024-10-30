@@ -1,0 +1,46 @@
+---
+format: 
+    pdf:
+        margin-bottom: 0.7in
+        margin-top: 0.7in
+        margin-left: 0.7in
+        margin-right: 0.7in
+        fontsize: 12pt
+    
+---
+
+Quiz 5: Modeling Probabilities
+
+Name: ____________________________
+Grade: __/5
+ 
+1.  What is one potential issue with the linear probability model?
+    a) It is always homoskedastic, requiring complex adjustments.
+    b) It may predict probabilities that are less than zero or greater than one.
+    c) It cannot handle more than two explanatory variables.
+    d) It is too computationally intensive for modern computers.
+
+2.  What is the primary goal of "classification" in the context of binary y variables?
+    a) Predicting the exact probability of y = 1 for target observations.
+    b) Visualizing the relationship between predicted probabilities and actual outcomes using a calibration curve.
+    c) Assigning target observations to either the y = 1 or y = 0 category based on a predicted probability.
+    d) Identifying potential outliers in the dataset that could skew the results of the analysis.
+
+3. In the context of probability models, what are the "logit" and "probit" models designed to address?
+    a) The issue of non-linearity in the relationship between explanatory and dependent variables.
+    b) The need to account for heteroskedasticity in binary outcome data.
+    c) The challenge of interpreting the coefficients of linear probability models.
+    d) The problem of linear probability models potentially predicting probabilities outside the range of 0 to 1.**
+
+4. According to the excerpt, how do the predicted probabilities from logit and probit models typically compare?
+    a) They are usually very similar.
+    b) Logit models tend to predict higher probabilities than probit models.
+    c) Probit models are more accurate when the actual probabilities are close to 0 or 1.
+    d) The choice between logit and probit significantly impacts the interpretation of the results.
+
+5. How do marginal differences relate to the coefficients of linear probability models?
+    a) Marginal differences are the inverse of the corresponding LPM coefficients.
+    b) Marginal differences are always smaller in magnitude than LPM coefficients.
+    c) Marginal differences often have a similar interpretation to LPM coefficients.
+    d) There is no meaningful relationship between the two concepts.
+of the coefficients and marginal differences.
