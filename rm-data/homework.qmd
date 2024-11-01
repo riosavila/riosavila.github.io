@@ -73,6 +73,12 @@ q1: Use the `wms-management-survey` dataset and pick a country. (Not two student
 
 ## Homework 9 {#hw09}
 
+
+Use the stocks-prices dataset that can be found [here](stock_prices.dta). This dataset contains the closing prices for the SP500, Apple, Disney, GameStop, Meta and Nvidia at the end of the month. Using this data, choose one of the companies and reproduce the analysis of the Returns on a company stock and market returns case study (for example SP500 and Apple).
+
+The full case study can be found [here](case_study_returns.pdf). You need to produce the same tables and figures as in the case study, with brief explanations of what you find. No need to use the Daily data, just the Monthly data.
+
+
 ## Homework 10 {#hw10}
 
 ## Homework 11 {#hw11}

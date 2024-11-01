@@ -3517,7 +3517,7 @@
     "href": "rm-data/homework.html#hw09",
     "title": "HomeWorks",
     "section": "Homework 9",
-    "text": "Homework 9"
+    "text": "Homework 9\nUse the stocks-prices dataset that can be found here. This dataset contains the closing prices for the SP500, Apple, Disney, GameStop, Meta and Nvidia at the end of the month. Using this data, choose one of the companies and reproduce the analysis of the Returns on a company stock and market returns case study (for example SP500 and Apple).\nThe full case study can be found here. You need to produce the same tables and figures as in the case study, with brief explanations of what you find. No need to use the Daily data, just the Monthly data."
   },
   {
     "objectID": "rm-data/homework.html#hw10",
@@ -9334,8 +9334,8 @@
     "objectID": "rm-data/slides/week05-06.html#regression",
     "href": "rm-data/slides/week05-06.html#regression",
     "title": "Regression Analysis I",
-    "section": "Regression",
-    "text": "Regression\n\nRegression is the most widely used method of comparison in data analysis.\nDoing so uncovers the pattern of association between \\(y\\) and \\(x\\). Here, it is important what you use as \\(y\\) or \\(x\\).\nSimple regression uncovers mean-dependence between two variables.\n\nIt amounts to comparing average values of one variable, called the dependent variable (\\(y\\)), for observations that are different in the other variable, the explanatory variable (\\(x\\)).\n\nMultiple regression analysis involves more variables -&gt; for later."
+    "section": "",
+    "text": "Regression is the most widely used method of comparison in data analysis.\nDoing so uncovers the pattern of association between \\(y\\) and \\(x\\). Here, it is important what you use as \\(y\\) or \\(x\\).\nSimple regression uncovers mean-dependence between two variables.\n\nIt amounts to comparing average values of one variable, called the dependent variable (\\(y\\)), for observations that are different in the other variable, the explanatory variable (\\(x\\)).\n\nMultiple regression analysis involves more variables -&gt; for later."
   },
   {
     "objectID": "rm-data/slides/week05-06.html#regression---uses",
@@ -9447,7 +9447,7 @@
     "href": "rm-data/slides/week05-06.html#regression-coefficient-formula",
     "title": "Regression Analysis I",
     "section": "Regression coefficient formula",
-    "text": "Regression coefficient formula\nNotation\n\nPopulation coefficients are \\(\\alpha\\) and \\(\\beta\\).\nSample estimates - \\(\\hat{\\alpha}\\) and \\(\\hat{\\beta}\\)\nThe slope coefficient formula is \\[\\hat{\\beta} = \\frac{\\text{Cov}[x, y]}{\\text{Var}[x]} = \\frac{\\sum_{i=1}^n (x_i - \\bar{x})(y_i - \\bar{y})}{\\sum_{i=1}^n (x_i - \\bar{x})^2}\n\\]\nSlope coefficient formula is normalized version of the covariance between \\(x\\) and \\(y\\)."
+    "text": "Regression coefficient formula\n\nNotation\n\nPopulation coefficients are \\(\\alpha\\) and \\(\\beta\\).\nSample estimates - \\(\\hat{\\alpha}\\) and \\(\\hat{\\beta}\\)\nThe slope coefficient formula is \\[\\hat{\\beta} = \\frac{\\text{Cov}[x, y]}{\\text{Var}[x]} = \\frac{\\sum_{i=1}^n (x_i - \\bar{x})(y_i - \\bar{y})}{\\sum_{i=1}^n (x_i - \\bar{x})^2}\n\\]\nSlope coefficient formula is normalized version of the covariance between \\(x\\) and \\(y\\)."
   },
   {
     "objectID": "rm-data/slides/week05-06.html#regression-coefficient-formula-1",
@@ -9643,7 +9643,7 @@
     "href": "rm-data/slides/week05-06.html#hotel-price-distance-regression-and-functional-form",
     "title": "Regression Analysis I",
     "section": "Hotel price-distance regression and functional form",
-    "text": "Hotel price-distance regression and functional form\nComparing different models\n\nCode\nqui {\n  set linesize 255\n  capture gen log_price = log(price)\n  capture gen log_distance = log(distance)\n  regress price distance\n  est sto m1\n  regress log_price distance\n  est sto m2\n  regress price log_distance\n  est sto m3\n  regress log_price log_distance\n  est sto m4\n}\nesttab m1 m2 m3 m4, se md nostar nonumber note(\"\")\n\n\n\n\n\n\n\n\n\n\n\n\nprice\nlog_price\nprice\nlog_price\n\n\n\n\ndistance\n-12.05\n-0.104\n\n\n\n\n\n(2.001)\n(0.0161)\n\n\n\n\nlog_distance\n\n\n-21.28\n-0.176\n\n\n\n\n\n(2.251)\n(0.0183)\n\n\n_cons\n131.9\n4.829\n114.8\n4.682\n\n\n\n(3.740)\n(0.0301)\n(2.087)\n(0.0169)\n\n\nN\n321\n321\n320\n320\n\n\n\nAs Excercise, plot the different models."
+    "text": "Hotel price-distance regression and functional form\n\nComparing different models\n\nCode\nqui {\n  set linesize 255\n  capture gen log_price = log(price)\n  capture gen log_distance = log(distance)\n  regress price distance\n  est sto m1\n  regress log_price distance\n  est sto m2\n  regress price log_distance\n  est sto m3\n  regress log_price log_distance\n  est sto m4\n}\nesttab m1 m2 m3 m4, se md nostar nonumber note(\"\")\n\n\n\n\n\n\n\n\n\n\n\n\nprice\nlog_price\nprice\nlog_price\n\n\n\n\ndistance\n-12.05\n-0.104\n\n\n\n\n\n(2.001)\n(0.0161)\n\n\n\n\nlog_distance\n\n\n-21.28\n-0.176\n\n\n\n\n\n(2.251)\n(0.0183)\n\n\n_cons\n131.9\n4.829\n114.8\n4.682\n\n\n\n(3.740)\n(0.0301)\n(2.087)\n(0.0169)\n\n\nN\n321\n321\n320\n320\n\n\n\nAs Excercise, plot the different models."
   },
   {
     "objectID": "rm-data/slides/week05-06.html#which-model-shall-we-choose---substantive-reasons",
@@ -10042,7 +10042,7 @@
     "href": "rm-data/slides/week05-06.html#reading-homework",
     "title": "Regression Analysis I",
     "section": "Reading-Homework",
-    "text": "Reading-Homework\nRead Case Study as an example of a simple linear regression analysis.\n\n\n\nRios-Avila and Cia"
+    "text": "Reading-Homework\nRead Case Study as an example of a simple linear regression analysis."
   },
   {
     "objectID": "rmethods/10_pooldata.html#pooling-data-together-cross-section-and-panel-data",
@@ -13146,15 +13146,15 @@
     "objectID": "rm-data/slides/week09.html#motivation",
     "href": "rm-data/slides/week09.html#motivation",
     "title": "Time series data",
-    "section": "",
-    "text": "You are considering investing in a company stock, and you want to know how risky that investment is. You have downloaded data on daily stock prices for many years. How should you define returns? How should you assess whether and to what extent returns on the company stock move together with market returns?\nHeating and cooling are important uses of electricity. How does weather conditions affect electricity consumption? We are going to use monthly data on temperature and residential electricity consumption in Arizona. How to formulate a model which captures these factors?"
+    "section": "Motivation",
+    "text": "Motivation\n\nYou are considering investing in a company stock, and you want to know how risky that investment is. You have downloaded data on daily stock prices for many years. How should you define returns? How should you assess whether and to what extent returns on the company stock move together with market returns?\nHeating and cooling are important uses of electricity. How does weather conditions affect electricity consumption? We are going to use monthly data on temperature and residential electricity consumption in Arizona. How to formulate a model which captures these factors?"
   },
   {
     "objectID": "rm-data/slides/week09.html#what-is-special-in-the-analysis-of-time-series-data",
     "href": "rm-data/slides/week09.html#what-is-special-in-the-analysis-of-time-series-data",
     "title": "Time series data",
     "section": "What is special in the analysis of time series data?",
-    "text": "What is special in the analysis of time series data?\n\n\nDifferent\n\nWe have time series data if we observe one unit across many time periods.\nThere is a special notation: \\(y_t\\), \\(t = 1, 2, \\ldots, T\\)\nTime series data presents additional opportunities as well as additional challenges to compare variables.\n\n\n\n\n\nWith other features\n\nData wrangling novelties: frequency and aggregation\nSpecial nature of time series: serial correlation\nCoefficient interpretation."
+    "text": "What is special in the analysis of time series data?\n\n\nDifferent\n\nWe have time series data if we observe one unit across many time periods.\nThere is a special notation: \\(y_t\\), \\(t = 1, 2, \\ldots, T\\)\nTime series data presents additional opportunities as well as additional challenges to compare variables.\n\n\n\n\nWith other features\n\nData wrangling novelties: frequency and aggregation\nSpecial nature of time series: serial correlation\nCoefficient interpretation."
   },
   {
     "objectID": "rm-data/slides/week09.html#data-preparation",
@@ -13469,14 +13469,14 @@
     "href": "rm-data/slides/week09.html#main-takeaways",
     "title": "Time series data",
     "section": "Main takeaways",
-    "text": "Main takeaways\n\nRegressions with time series data allow for additional opportunities, but they pose additional challenges, too\nRegressions with time series data help uncover associations from changes and associations across time\nTrend, seasonality, and random walk-like non-stationarity are additional challenges\nDo not regress variables that have trend or seasonality; without dealing with them they produce spurious results"
+    "text": "Main takeaways\n\nRegressions with time series data allow for additional opportunities, but they pose additional challenges, too\nRegressions with time series data help uncover associations from changes and associations across time\nTrend, seasonality, and random walk-like non-stationarity are additional challenges\nDo not regress variables that have trend or seasonality; without dealing with them they produce spurious results\n\n\n\n\nRios-Avila and Cia"
   },
   {
     "objectID": "rm-data/slides/week10.html#motivation",
     "href": "rm-data/slides/week10.html#motivation",
     "title": "Prediction Setup",
-    "section": "",
-    "text": "Imagine you want to sell your car soon and need to predict its price. You have data on similar used cars, and several regression models could help estimate its value now and in a year. How do you choose the best model?\nOr, take an ice cream shop—using past sales and temperature data, you want to predict sales for the coming days. What factors should you consider to ensure your prediction is as accurate as possible?"
+    "section": "Motivation",
+    "text": "Motivation\n\nImagine you want to sell your car soon and need to predict its price. You have data on similar used cars, and several regression models could help estimate its value now and in a year. How do you choose the best model?\nOr, take an ice cream shop—using past sales and temperature data, you want to predict sales for the coming days. What factors should you consider to ensure your prediction is as accurate as possible?"
   },
   {
     "objectID": "rm-data/slides/week10.html#prediction-basics",
@@ -13889,7 +13889,7 @@
     "href": "rm-data/slides/week10.html#main-takeaways",
     "title": "Prediction Setup",
     "section": "Main takeaways",
-    "text": "Main takeaways\n\nPrediction uses the original data with \\(y\\) and \\(x\\) to predict the value of \\(y\\) for observations in the live data, in which \\(x\\) is observed but \\(y\\) is not\nPrediction uses a model that describes the patterns of association between \\(y\\) and \\(x\\) in the original data\nCross-validation can help find the best model in the population, or general pattern, represented by the original data\nStability of the patterns of association is needed for a prediction with high external validity"
+    "text": "Main takeaways\n\nPrediction uses the original data with \\(y\\) and \\(x\\) to predict the value of \\(y\\) for observations in the live data, in which \\(x\\) is observed but \\(y\\) is not\nPrediction uses a model that describes the patterns of association between \\(y\\) and \\(x\\) in the original data\nCross-validation can help find the best model in the population, or general pattern, represented by the original data\nStability of the patterns of association is needed for a prediction with high external validity\n\n\n\n\nRios-Avila and Cia"
   },
   {
     "objectID": "rm-data/slides/week10.html#what-is-different",
@@ -14021,5 +14021,12 @@
     "title": "Data Analysis in Economics",
     "section": "",
     "text": "Econometrics Masterclass\n            \n                Based on \"Data Analysis for Economic and Policy\"\n                \n                    Episodes created using NotebookLM by Google\n                \n            \n        \n\n        \n            \n                \n            \n\n            \n                \n                \n                \n                \n                \n                    \n                \n                \n                    0:00\n                    0:00"
+  },
+  {
+    "objectID": "rm-data/quizes/quiz-1 copy.html",
+    "href": "rm-data/quizes/quiz-1 copy.html",
+    "title": "Econometrics MSC Levy",
+    "section": "",
+    "text": "Quiz 5: Modeling Probabilities\nName: ____________________________ Grade: __/5\n\nWhat is one potential issue with the linear probability model?\n\nIt is always homoskedastic, requiring complex adjustments.\nIt may predict probabilities that are less than zero or greater than one.\nIt cannot handle more than two explanatory variables.\nIt is too computationally intensive for modern computers.\n\nWhat is the primary goal of “classification” in the context of binary y variables?\n\nPredicting the exact probability of y = 1 for target observations.\nVisualizing the relationship between predicted probabilities and actual outcomes using a calibration curve.\nAssigning target observations to either the y = 1 or y = 0 category based on a predicted probability.\nIdentifying potential outliers in the dataset that could skew the results of the analysis.\n\nIn the context of probability models, what are the “logit” and “probit” models designed to address?\n\nThe issue of non-linearity in the relationship between explanatory and dependent variables.\nThe need to account for heteroskedasticity in binary outcome data.\nThe challenge of interpreting the coefficients of linear probability models.\nThe problem of linear probability models potentially predicting probabilities outside the range of 0 to 1.**\n\nAccording to the excerpt, how do the predicted probabilities from logit and probit models typically compare?\n\nThey are usually very similar.\nLogit models tend to predict higher probabilities than probit models.\nProbit models are more accurate when the actual probabilities are close to 0 or 1.\nThe choice between logit and probit significantly impacts the interpretation of the results.\n\nHow do marginal differences relate to the coefficients of linear probability models?\n\nMarginal differences are the inverse of the corresponding LPM coefficients.\nMarginal differences are always smaller in magnitude than LPM coefficients.\nMarginal differences often have a similar interpretation to LPM coefficients.\nThere is no meaningful relationship between the two concepts. of the coefficients and marginal differences."
   }
 ]
