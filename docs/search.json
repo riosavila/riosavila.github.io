@@ -13497,7 +13497,7 @@
     "href": "rm-data/slides/week10.html#cs-price-apartments",
     "title": "Prediction Setup",
     "section": "CS: Price apartments",
-    "text": "CS: Price apartments\n\nYou are planning to run an AirBnB business\n\nMaybe several rooms\n\nTarget is continuous (in dollars)\nFeatures are varied from text to binary\nThe business question:\n\nHow should you price apartments/houses?"
+    "text": "CS: Price apartments\n\nYou are planning to run an AirBnB business\nTarget is continuous (in dollars)\nFeatures are varied from text to binary\nThe business question:\n\nHow should you price apartments/houses?"
   },
   {
     "objectID": "rm-data/slides/week10.html#cs-predict-companys-exit-from-business",
@@ -13511,14 +13511,14 @@
     "href": "rm-data/slides/week10.html#predictive-analysis-what-is-new",
     "title": "Prediction Setup",
     "section": "Predictive Analysis: what is new?",
-    "text": "Predictive Analysis: what is new?\n\nMost of econometrics focused on finding relationships between \\(X\\) and \\(Y\\)\n\nWhat is the relationship like (+/-, linear, etc.)\nIs it a robust relationship – true in the population /general pattern? (causal?)\n\nNow, we use \\(x_1, x_2, \\dots\\) to predict \\(y\\): \\(\\hat{y}_j = \\hat{f}(x_j)\\)\nHow is this different?\n\n\n\nWe care less about\n\nIndividual coefficient values, multicollinearity\n\nWe still care about the stability of our results.\nShould we care about causality?\n\nNot so much, we care more about making the best prediction."
+    "text": "Predictive Analysis: what is new?\n\nMost of econometrics focused on finding relationships between \\(X\\) and \\(Y\\)\n\nWhat is the relationship like (+/-, linear, etc.)\nIs it a robust relationship – true in the population /general pattern? (causal?)\n\nNow, we use \\(x_1, x_2, \\dots\\) to predict \\(y\\): \\(\\hat{y}_j = \\hat{f}(x_j)\\), How is this different?\n\n\n\nWe care less about\n\nIndividual coefficient values, multicollinearity\n\nWe still care about the stability of our results.\nBut, should we care about causality?\n\nNot so much, we care more about making the best prediction."
   },
   {
     "objectID": "rm-data/slides/week10.html#what-are-we-predicting",
     "href": "rm-data/slides/week10.html#what-are-we-predicting",
     "title": "Prediction Setup",
     "section": "What are we predicting?",
-    "text": "What are we predicting?\n\n\\(Y\\) is quantitative (e.g price)\n\nQuantitative prediction\n“Regression” problem\n\n\\(Y\\) is binary (e.g. Default or nor)\n\nProbability prediction\nClassification problem\nBroadly: \\(Y\\) takes values in a finite set of (unordered) classes (survived/died, sold/not sold, car model)\n\nTime series prediction (Forecasting). Make predictions about the future based on historical and current data."
+    "text": "What are we predicting?\n\n\\(Y\\) is quantitative (e.g price)\n\nQuantitative prediction. Expected price of a car given its characteristics.\nits a “Regression” problem\nWe could obtain a point prediction or an interval prediction (As before)\n\n\\(Y\\) is binary (e.g. Default or nor)\n\n\\(Y\\) takes values in a finite set of (unordered) classes (survived/died, sold/not sold, car model)\nWe may want to types of predictions: Probability prediction (\\(\\hat P(y|x=1)\\)) or classification (\\(\\hat y = 1 \\text{ or }0| x\\))\n\nTime series prediction (Forecasting).\n\nMake predictions about the future based on historical and current data.\n\\(\\hat y_t = f(x_{t-1}, x_{t-2}, \\dots)\\)"
   },
   {
     "objectID": "rm-data/slides/week10.html#our-focus-in-this-class",
@@ -13539,7 +13539,7 @@
     "href": "rm-data/slides/week10.html#the-prediction-error",
     "title": "Prediction Setup",
     "section": "The Prediction Error",
-    "text": "The Prediction Error\n\nThe Regression model can produce a Predicted value \\(\\hat{y}_j\\) for target observation \\(j\\)\nbut, actual value \\(y_j\\) is not known (that is why we are predicting)\nThus, there will be a prediction error\n\n\\[e_j = \\hat{y}_j - y_j\n\\]\n\nError = actual value - predicted value"
+    "text": "The Prediction Error\n\nWe have seen this.\nThe Regression model can produce a Predicted value \\(\\hat{y}_j\\) for target observation \\(j\\)\nbut, actual value \\(y_j\\) is not known (that is why we are predicting)\nThus, there will be a prediction error\n\n\\[e_j = \\hat{y}_j - y_j\n\\]\n\nError = actual value - predicted value"
   },
   {
     "objectID": "rm-data/slides/week10.html#prediction-error",
@@ -13553,7 +13553,7 @@
     "href": "rm-data/slides/week10.html#decomposing-the-prediction-error",
     "title": "Prediction Setup",
     "section": "Decomposing the prediction error",
-    "text": "Decomposing the prediction error\nAssume the best model for \\(Y\\) is \\(Y = f(X,Z,XZ) + \\epsilon\\)\n\nThe prediction error can be decomposed into three parts:\n\nestimation error: Difference between \\(f(X,Z,XZ)\\) and \\(\\hat f(X,Z,XZ)\\)\nmodel error: If we using \\(f(X,Z)\\), it would be the Difference between \\(f(X,Z)\\) and \\(f(X,Z,XZ)\\).\ngenuine error: error even if have the best possible model. \\(\\epsilon\\)"
+    "text": "Decomposing the prediction error\nAssume the best model for \\(Y\\) is \\(Y= f(X,Z)+\\epsilon\\), but we estimate \\(Y^E = g(X,Z)\\), and obtain \\(\\hat g(X,Z)\\)\n\nThe prediction error can be decomposed into three parts:\n\nestimation error: Difference between \\(g(X)\\) and \\(\\hat g(X)\\)\nmodel error: Difference between \\(f(X)\\) and \\(g(X)\\).\ngenuine error: error that cant be eliminated even if have the best possible model. \\(\\epsilon\\)"
   },
   {
     "objectID": "rm-data/slides/week10.html#interval-prediction-for-quantitative-target-variables",
@@ -13574,7 +13574,7 @@
     "href": "rm-data/slides/week10.html#loss-functions",
     "title": "Prediction Setup",
     "section": "Loss Functions",
-    "text": "Loss Functions\n\nWe use a Loss function to quantify the cost of prediction error\n\nIt attaches a value to the prediction error, specifying how bad it is\nThus, Loss function determines best predictor\n\nIdeally, it is derived from decision problem,\n\nHow much more costly is to overpredict than underpredict? (price is right!)\nThe shape and functional form could depent on the decision problem\n\nIn practice, highly crafted loss functions are rare (Machine learning, Neural Networks, Etc), so we use common ones\nLoss functions could be used to both estimate, but also to evaluate/compare models"
+    "text": "Loss Functions\n\nWe use a Loss function to quantify the cost of prediction error\n\nIt attaches a value to the prediction error, specifying how bad it is\nThus, Loss function determines best predictor\n\nIdeally, it is derived from decision problem,\n\nHow much more costly is to overpredict than underpredict?\n\nIn practice, highly crafted loss functions are rare (Machine learning, Neural Networks, Etc), so we use common ones\nLoss functions could be used to both estimate, but also to evaluate/compare models\nPlot Twist: Loss function for OLS is the L2 Square loss function"
   },
   {
     "objectID": "rm-data/slides/week10.html#loss-functions-1",
@@ -13707,7 +13707,7 @@
     "href": "rm-data/slides/week10.html#model-selection",
     "title": "Prediction Setup",
     "section": "Model selection",
-    "text": "Model selection"
+    "text": "Model selection\n\nModel selection is finding the best fit while avoiding overfitting, and aiming for high external validity.\nTo do this, we aim to choose a model that is flexible enough to capture the patterns in the data but not too flexible to capture noise.\n\nBias-Variance tradeoff\nBalancing the complexity of the model\n\nConsider two models. They could be different for two reasons:\n\ndifferent functional forms (spline vs. quadratic)\ndifferent number of variables (simple vs. complex)"
   },
   {
     "objectID": "rm-data/slides/week10.html#data-for-prediction",
@@ -13742,14 +13742,14 @@
     "href": "rm-data/slides/week10.html#overfitting",
     "title": "Prediction Setup",
     "section": "Overfitting",
-    "text": "Overfitting\n\nOverfitting is a key aspect of external validity\nfinding a model that fits the data better than alternative models\nbut makes worse actual prediction.\nThus, the problem of overfitting the original data is best split into two problems:\n\nfitting patterns in the original data that are not there in the population, or general pattern, it represents;\nfitting patterns in the world of the original data that will not be there in the world of the live data."
+    "text": "Overfitting\n\nOverfitting is a key aspect of external validity\n\nFinding a model that fits the data better than alternative models, but makes worse actual prediction.\n\nThus, the problem of overfitting the original data is best split into two problems:\n\nfitting patterns in the original data that are not there in the population, or general pattern, it represents;\nfitting patterns in the world of the original data that will not be there in the world of the live data."
   },
   {
     "objectID": "rm-data/slides/week10.html#reason-for-overfitting",
     "href": "rm-data/slides/week10.html#reason-for-overfitting",
     "title": "Prediction Setup",
     "section": "Reason for overfitting",
-    "text": "Reason for overfitting\n\nThe typical reason for overfitting is fitting a model that is too complex on the dataset.\nComplexity: number of estimated coefficients\nOften: fitting a model with too many predictor variables.\nIncluding too many variables from the dataset that do not really add to the predictive power of the regression,\noften because they are strongly correlated with other predictor variables.\nSpecifying too many interactions,\nToo detailed nonlinear patterns\n\nas piecewise linear splines with many knots\npolynomials of high degree."
+    "text": "Reason for overfitting\nThe typical reason for overfitting is fitting a model that is too complex on the dataset. - Complexity: number of estimated coefficients - Often: fitting a model with too many predictor variables. - Including too many variables from the dataset that do not really add to the predictive power of the regression. - Problems of multicollinearity, too many interactions, etc. - Too detailed nonlinear patterns - as piecewise linear splines with many knots - polynomials of high degree."
   },
   {
     "objectID": "rm-data/slides/week10.html#increasing-model-complexity",
@@ -13770,7 +13770,7 @@
     "href": "rm-data/slides/week10.html#indirect-evaluation-criteria",
     "title": "Prediction Setup",
     "section": "Indirect evaluation criteria",
-    "text": "Indirect evaluation criteria\n\nMain methods: AIC, BIC and adjusted \\(R^2\\)\nAdvantage: easy to compute\nDisadvantage: assumptions\nAdjusted \\(R^2\\) – just add a penalty for having many RHS vars\n\ncorrects with \\((n - 1)/(n - p - 1)\\)\n\nAkaike Information Criterion\n\nAIC = \\(-2 \\times \\ln(\\text{likelihood}) + 2 \\times k\\)\n\nSchwarz – Bayesian Information Criterion\n\nBIC = \\(-2 \\times \\ln(\\text{likelihood}) + \\ln(N) \\times k\\)\n\nBoth quantities that take the log likelihood and apply a penalty for the number of parameters being estimated.Both are based on information loss theory from the fifties.\nBIC puts heavier penalty on models with many RHS variables, than AIC."
+    "text": "Indirect evaluation criteria\n\nMain methods: AIC, BIC and adjusted \\(R^2\\)\n\nAdvantage: easy to compute\nDisadvantage: assumptions. They may not penalize enough.\n\nAdjusted \\(R^2\\) – just add a penalty for having many RHS vars\n\ncorrects with \\((n - 1)/(n - k - 1)\\)\n\nAIC = \\(-2 \\times \\ln(\\text{likelihood}) + 2 \\times k\\)\nBIC = \\(-2 \\times \\ln(\\text{likelihood}) + \\ln(N) \\times k\\)\n\nBoth are based on information loss theory\nBIC puts heavier penalty on models with many RHS variables, than AIC."
   },
   {
     "objectID": "rm-data/slides/week10.html#model-fit-evaluation",
@@ -13784,7 +13784,7 @@
     "href": "rm-data/slides/week10.html#finding-the-best-model-by-training-and-test-samples",
     "title": "Prediction Setup",
     "section": "Finding the best model by training and test samples",
-    "text": "Finding the best model by training and test samples\n\nApproach Nr.2: Directly\nEstimate it using a test (validation) set approach.\nNeeds cutting the dataset into training and test sample\nNo assumption\nNeed to pick evaluation criterion (loss function) = RMSE (root mean squared error)\nEstimate the model in part of the data (say, 80%).\n\nTraining sample\n\nEvaluate predictive performance on the rest of the data.\n\nTest sample\n\nAvoid overfitting in training data by evaluating on test data."
+    "text": "Finding the best model by training and test samples\n\nSimilar to bootstrapping (brute force approach for SE), its also possible to use a “bute-force” approach to find the best model.\nThis would require “imitating” the process of out-of-sample prediction.\n\nCut the dataset into training and test sample (80-20 ?)\nChoose Some evaluation criterion (loss function)\nEstimate the model on the training sample\nPredict and evaluate the model on the test sample\n\nProblem: 80% (or less), may be too small training. And 20% (one shoot) could be different from the rest of the data."
   },
   {
     "objectID": "rm-data/slides/week10.html#training-and-test-samples",
@@ -13805,7 +13805,7 @@
     "href": "rm-data/slides/week10.html#bic-vs-test-rmse",
     "title": "Prediction Setup",
     "section": "BIC vs test RMSE",
-    "text": "BIC vs test RMSE\n\nIn our experience, in practice, BIC is the best indirect criterion – closest to test sample.\nThe advantage of BIC is that it needs no sample splitting which may be a problem in small samples.\nThe advantage of test MSE is that it makes no assumption.\nBIC is a good first run, quick, is often not very wrong.\nUltimately, you want to do a test MSE."
+    "text": "BIC vs test RMSE\n\nIn practice, BIC is the best indirect criterion – closest to test sample.\nThe advantage of BIC is that it needs no sample splitting which may be a problem in small samples.\nThe advantage of test MSE is that it makes no assumption.\nBIC is a good first run, quick, is often not very wrong.\nTest MSE is the best, but may be computationally expensive."
   },
   {
     "objectID": "rm-data/slides/week10.html#case-study-model-selection",
@@ -13840,21 +13840,21 @@
     "href": "rm-data/slides/week10.html#external-validity-and-stable-patterns",
     "title": "Prediction Setup",
     "section": "External validity and stable patterns",
-    "text": "External validity and stable patterns\n\nBIC, Training-test, k-fold cross-validation…\nAll very nice\nBut, in the end, they all use the information in the data.\nHow would things look for the target observation(s)?\nThe issue of stationarity – how our data is related to other datasets we may use our model\nWe may have some ideas\nWe may use non-random test samples that may mimic the difference in our data and the target observations\nIn the end we can’t know but need to think about it.\nPlus be aware, that some difference is likely, so your model fit in an outside data source is likely to be worse…"
+    "text": "External validity and stable patterns\n\nBIC, Training-test, k-fold cross-validation… All very nice\n\nIn the end, they all use the information in the data.\n\nHow would things look for the target observation(s)? unknown!!\nThe issue of stationarity – how our data is related to other datasets we may use our model\nIn the end we can’t know but need to think about it.\n\nPlus, if there is no external validity, your model fit in an outside data source is likely to be worse…"
   },
   {
     "objectID": "rm-data/slides/week10.html#external-validity-and-stable-patterns-1",
     "href": "rm-data/slides/week10.html#external-validity-and-stable-patterns-1",
     "title": "Prediction Setup",
     "section": "External validity and stable patterns",
-    "text": "External validity and stable patterns\n\nMost predictions will be on future data\nHigh external validity requires that the environment is stationary.\nStationarity means that the way variables are distributed remains the same over time.\nHere that distribution is to be understood in a general way: the joint distribution of predictor variables and target variable are required to remain the same throughout the time covered in the data and the time of the forecast.\nStationarity ensures that the relationship between predictors and the target variable is the same in the data and the forecasted future.\nIf the relationship breaks down whatever we establish in our data won’t be true in the future, leading to wrong forecasts."
+    "text": "External validity and stable patterns\n\nMost predictions will be on future data\nHigh external validity requires that the environment is stationary.\nStationarity means that the way variables are distributed remains the same over time.\n\nEnsures that the relationship between predictors and the target variable is the same in the data and the forecasted future.\n\nIf the relationship breaks down whatever we establish in our data won’t be true in the future, leading to wrong forecasts."
   },
   {
     "objectID": "rm-data/slides/week10.html#external-validity-and-stable-patterns-2",
     "href": "rm-data/slides/week10.html#external-validity-and-stable-patterns-2",
     "title": "Prediction Setup",
     "section": "External validity and stable patterns",
-    "text": "External validity and stable patterns\n\nExternal validity and stable patterns - Very broad concept\nIt’s about representativeness of actual data \\(\\rightarrow\\) to live data\nOften hard to know.\nRemember hotels (other dates, other cities).\nDomain knowledge can help.\nStudy if patterns were stable in the past / other locations were stable can help."
+    "text": "External validity and stable patterns\n\nExternal validity and stable patterns - Very broad concept\nIt’s about representativeness of actual data \\(\\rightarrow\\) to live data\n\nRemember hotels? (other dates, other cities).\n\nDomain knowledge can help. Inner knowledge of the process can help.\nStudy if patterns were stable in the past / other locations were stable can help."
   },
   {
     "objectID": "rm-data/slides/week10.html#algorithms",
@@ -13896,7 +13896,7 @@
     "href": "rm-data/slides/week10.html#what-is-different",
     "title": "Prediction Setup",
     "section": "What is Different?",
-    "text": "What is Different?\n\nFeature engineering (variable selection) including variable selection, coding and functional form\nModel building and prediction\n\nDecision regarding model complexity and estimation\n\nRemember splines, polynomials\n\nMachine learning methods\n\nAutomated model selection under some conditions\n\n\nModel evaluation and selection\n\nCompare models based on some measure of fit\n\nKey idea: Focus on systematically combine estimation and model selection"
+    "text": "What is Different?\n\nIn principle, the process is the same as before, but we have a diffent goal.\n\nWe need to pay more attention to other aspects of the process.\n\nLabel Engeneering: What transformation is suitable for the target variable?\nFeature engineering (variable selection): What variables and functional forms should be included\nModel estimation and prediction, based on variable selection\n\nDecisions regarding model complexity and Specification (Know-How or Machine Learning)\n\nModel evaluation considering complexity and loss\nKey idea: Focus on systematically combine estimation and model selection"
   },
   {
     "objectID": "rm-data/slides/week10.html#supervised-machine-learning-technique-regression",
@@ -13910,7 +13910,7 @@
     "href": "rm-data/slides/week10.html#the-prediction-error-1",
     "title": "Prediction Setup",
     "section": "The Prediction Error",
-    "text": "The Prediction Error\n\nThe ideal prediction error, is zero: our predicted value is right on target.\nThe prediction error is defined by the direction of miss and size.\nDirection of miss:\n\nPositive if we overpredict the value: we predict a higher value than actual value.\nNegative if we underpredict the value: our prediction is too low.\nDegree of wrongness depends on the decision problem.\n\nSize:\n\nLarger in absolute value the further away our prediction is from the actual value.\nIt is smaller the closer we are.\nIt is always better to have a prediction with as small an error as possible."
+    "text": "The Prediction Error\n\nThe ideal prediction error, is zero: our predicted value is right on target.\n\nRare…\n\nThe prediction error carries information: direction and size.\nDirection of miss:\n\nPositive if we overpredict\nNegative if we underpredict\nDegree of wrongness depends on the decision problem. (price is right?)\n\nSize:\n\nmagnitude of the error may depend on the nature of the problem and the loss function."
   },
   {
     "objectID": "rm-data/slides/week10.html#some-common-loss-functions",
@@ -14023,10 +14023,137 @@
     "text": "Econometrics Masterclass\n            \n                Based on \"Data Analysis for Economic and Policy\"\n                \n                    Episodes created using NotebookLM by Google\n                \n            \n        \n\n        \n            \n                \n            \n\n            \n                \n                \n                \n                \n                \n                    \n                \n                \n                    0:00\n                    0:00"
   },
   {
+<<<<<<< Updated upstream
     "objectID": "rm-data/quizes/quiz-1 copy.html",
     "href": "rm-data/quizes/quiz-1 copy.html",
     "title": "Econometrics MSC Levy",
     "section": "",
     "text": "Quiz 5: Modeling Probabilities\nName: ____________________________ Grade: __/5\n\nWhat is one potential issue with the linear probability model?\n\nIt is always homoskedastic, requiring complex adjustments.\nIt may predict probabilities that are less than zero or greater than one.\nIt cannot handle more than two explanatory variables.\nIt is too computationally intensive for modern computers.\n\nWhat is the primary goal of “classification” in the context of binary y variables?\n\nPredicting the exact probability of y = 1 for target observations.\nVisualizing the relationship between predicted probabilities and actual outcomes using a calibration curve.\nAssigning target observations to either the y = 1 or y = 0 category based on a predicted probability.\nIdentifying potential outliers in the dataset that could skew the results of the analysis.\n\nIn the context of probability models, what are the “logit” and “probit” models designed to address?\n\nThe issue of non-linearity in the relationship between explanatory and dependent variables.\nThe need to account for heteroskedasticity in binary outcome data.\nThe challenge of interpreting the coefficients of linear probability models.\nThe problem of linear probability models potentially predicting probabilities outside the range of 0 to 1.**\n\nAccording to the excerpt, how do the predicted probabilities from logit and probit models typically compare?\n\nThey are usually very similar.\nLogit models tend to predict higher probabilities than probit models.\nProbit models are more accurate when the actual probabilities are close to 0 or 1.\nThe choice between logit and probit significantly impacts the interpretation of the results.\n\nHow do marginal differences relate to the coefficients of linear probability models?\n\nMarginal differences are the inverse of the corresponding LPM coefficients.\nMarginal differences are always smaller in magnitude than LPM coefficients.\nMarginal differences often have a similar interpretation to LPM coefficients.\nThere is no meaningful relationship between the two concepts. of the coefficients and marginal differences."
+=======
+    "objectID": "rm-data/slides/week10.html#prediction-basics-the-process",
+    "href": "rm-data/slides/week10.html#prediction-basics-the-process",
+    "title": "Prediction Setup",
+    "section": "Prediction Basics: The Process",
+    "text": "Prediction Basics: The Process\n\nThe idea of behind prediction is that we want to assign a value of \\(y\\)(\\(\\hat y\\)) (target or outcome) for observations we do not have the value.\nWhat we have, in our original data or working sample, is a set of observations with \\(y\\) and \\(x\\) values. We use them to “learn” the patterns of association between \\(y\\) and \\(x\\).\nBut for the target observations, we only have \\(x\\) values."
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#prediction-basics-the-process-1",
+    "href": "rm-data/slides/week10.html#prediction-basics-the-process-1",
+    "title": "Prediction Setup",
+    "section": "Prediction Basics: The Process",
+    "text": "Prediction Basics: The Process\n\nThe process of prediction involves:\n\nDetermine what is the target variable \\(y\\) and the features \\(x\\).\nUsing the original data to estimate a model that describes the patterns of association between \\(y\\) and \\(x\\).\nUsing the estimated model to predict the value of \\(y\\) for the target observations.\n\nEvaluation of the prediction (how actual data compares to predicted data)\nRinse and repeat: Choose a different model, evaluate, choose the best model.\n\nBest model for the Live data not the original data."
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#the-tool-supervised-machine-learning",
+    "href": "rm-data/slides/week10.html#the-tool-supervised-machine-learning",
+    "title": "Prediction Setup",
+    "section": "The Tool: Supervised Machine Learning",
+    "text": "The Tool: Supervised Machine Learning\n\nSupervised Machine Learning is a set of tools that help us predict the value of a target variable \\(Y\\) based on a set of features \\(X\\).\nWe will use one of the oldest and most commonly used method:\n\n\n\nLinear Regression"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#common-loss-functions",
+    "href": "rm-data/slides/week10.html#common-loss-functions",
+    "title": "Prediction Setup",
+    "section": "Common loss functions",
+    "text": "Common loss functions\n\n\n\\[SQR: L(e_j) = e^2_j = (\\hat{y}_j - y_j)^2\n\\]\n\nThe most widely used loss function\nSymmetric: Losses due to errors in opposing direction are same\nConvex: Twice as large errors generate more than twice (4x) as large losses\n\n\n\\[ABS: L(e_j) = |e_j| = Abs(\\hat{y}_j - y_j)\n\\]\n\nUsed for Median regression (Quantile regression)\nSymmetric: Losses due to errors in opposing direction are same\nLinear: Twice as large errors generate twice as large losses\nQuantile Regressions use Asymetric loss functions"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#how-to-choose-a-model",
+    "href": "rm-data/slides/week10.html#how-to-choose-a-model",
+    "title": "Prediction Setup",
+    "section": "How to choose a model?",
+    "text": "How to choose a model?\n\nTypically, we would say that the best model is the one that has the highest \\(R^2\\) or the lowest MSE.\n\nThis may be true for the original data, but not for the target observations.\nAlso, \\(R^2\\) and MSE always increase when we add more variables.\n\nSo, what we need is a way to check how well the models predict the target observations. (unobserved cases)\nWe want to avoid overfitting at all costs."
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#example",
+    "href": "rm-data/slides/week10.html#example",
+    "title": "Prediction Setup",
+    "section": "Example",
+    "text": "Example\n\nAssume the true model is \\(y = 1 + x -.5 x^2 + \\epsilon\\), with \\(\\epsilon ~ N(0,1.5)\\)\nwe create 100 observations from the above process but use only 30 for modeling. We try running regressions with ever more complex models\nMake predictions, and see how well we did.\n\n\n\n\n\n\\(R^2\\)\nMSE\nOoS MSE\n\n\n\n\n^1\n.3224669\n1.934762\n2.949084\n\n\n^2\n.6255072\n1.069401\n2.93478\n\n\n^3\n.6344791\n1.043781\n2.978827\n\n\n^4\n.713217\n.8189369\n4.138006\n\n\n^5\n.7259535\n.7825666\n3.557651\n\n\n\nSee how \\(R^2\\) increases monotonously, improving “in-sample fit”. But, the OoS MSE worsens after a certain point."
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#example-2",
+    "href": "rm-data/slides/week10.html#example-2",
+    "title": "Prediction Setup",
+    "section": "Example 2",
+    "text": "Example 2"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#underfit-vs-overfit",
+    "href": "rm-data/slides/week10.html#underfit-vs-overfit",
+    "title": "Prediction Setup",
+    "section": "Underfit vs overfit",
+    "text": "Underfit vs overfit\n\nA model that fits the data worse in the “working/original” data compared to the “live/target” data is said to “underfit” the model.\n\nSimple: we should build a better model.\n\nIf the model fits the data working better than target data, then it over-fits it. Needs to be corrected.\n\nOverfitting\n\nOverfitting is a key aspect of external validity\n\nFinding a model that fits the data better than alternative models, but makes worse actual prediction.\n\nOverfitting is a common problem in prediction analysis"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#finding-the-best-model-by-best-fit-and-penalty",
+    "href": "rm-data/slides/week10.html#finding-the-best-model-by-best-fit-and-penalty",
+    "title": "Prediction Setup",
+    "section": "Finding the best model by best fit and penalty",
+    "text": "Finding the best model by best fit and penalty\n\nAs shown earlier, traditional measures of fit, such as \\(R^2\\) and MSE, are not good for finding the best model. They always increase with the number of variables.\nWe were only able to conclude model fitness because we had the true model (and the Out-of-Sample data)\n\nThis is not the case in practice.\n\nSo, how do we find the best model?\n\nIndirectly: Penalize the number of variables\nDirectly: Use a training-test sample"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#example-redone",
+    "href": "rm-data/slides/week10.html#example-redone",
+    "title": "Prediction Setup",
+    "section": "Example, redone",
+    "text": "Example, redone\n\n\nCode\n* This is the full code for previous and current example\nclear\nset seed 10\nset obs 100\ngen x = runiform(-2 ,2)\ngen y = 1 + x - 0.5 * x^2 + 1.5* rnormal()\n \ncapture program drop fit_stat1\nprogram fit_stat1, rclass\n    tempvar yhat smp\n    gen `smp' = e(sample)\n    predict `yhat'\n    replace `yhat'=(y-`yhat')^2\n    \n    matrix result=e(r2)\n    sum `yhat' if `smp', meanonly\n    matrix result=result, r(mean)\n    sum `yhat' if !`smp', meanonly\n    matrix result=result, r(mean)\n    return matrix result = result\nend\n\nreg y c.x if _n&lt;=30\nfit_stat1\nmatrix rr2=r(result)\nreg y c.x##c.x if _n&lt;=30\nfit_stat1\nmatrix rr2=rr2\\r(result)\nreg y c.x##c.x##c.x if _n&lt;=30\nfit_stat1\nmatrix rr2=rr2\\r(result)\nreg y c.x##c.x##c.x##c.x if _n&lt;=30\nfit_stat1\nmatrix rr2=rr2\\r(result)\nreg y c.x##c.x##c.x##c.x##c.x if _n&lt;=30\nfit_stat1\nmatrix rr2=rr2\\r(result)\n\ncapture program drop fit_stat2\nprogram fit_stat2, rclass\n    tempvar yhat smp\n    gen `smp' = e(sample)\n    predict `yhat'\n    replace `yhat'=(y-`yhat')^2    \n    matrix result=e(r2), e(r2_a)\n    sum `yhat' if `smp', meanonly\n    matrix result=result, r(mean)\n    sum `yhat' if !`smp', meanonly\n    matrix result=result, r(mean)\n    qui: estat ic\n    matrix result=result, r(S)[1,5..6]\n    return matrix result = result\nend\n\nreg y c.x if _n&lt;=30\nfit_stat2\nmatrix rr2=r(result)\nreg y c.x##c.x if _n&lt;=30\nfit_stat2\nmatrix rr2=rr2\\r(result)\nreg y c.x##c.x##c.x if _n&lt;=30\nfit_stat2\nmatrix rr2=rr2\\r(result)\nreg y c.x##c.x##c.x##c.x if _n&lt;=30\nfit_stat2\nmatrix rr2=rr2\\r(result)\nreg y c.x##c.x##c.x##c.x##c.x if _n&lt;=30\nfit_stat2\nmatrix rr2=rr2\\r(result)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\(R^2\\)\n\\(aR^2\\)\nMSE\nOoS MSE\nAIC\nBIC\n\n\n\n\n^1\n0.3225\n0.2983\n1.9348\n2.9491\n108.9358\n111.7382\n\n\n^2\n0.6255\n0.5978\n1.0694\n2.9348\n93.1493\n97.3529\n\n\n^3\n0.6345\n0.5923\n1.0438\n2.9788\n94.4218\n100.0266\n\n\n^4\n0.7132\n0.6673\n0.8189\n4.1380\n89.1439\n96.1499\n\n\n^5\n0.7260\n0.6689\n0.7826\n3.5577\n89.7810\n98.1882"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#lets-make-things-better-k-fold-cross-validation",
+    "href": "rm-data/slides/week10.html#lets-make-things-better-k-fold-cross-validation",
+    "title": "Prediction Setup",
+    "section": "Lets make things Better: K-fold cross-validation",
+    "text": "Lets make things Better: K-fold cross-validation\n\nIf one is not enough, why not use more?\nSplit sample into \\(k=5\\) groups (equal size)\nNow, assume that each “fold” is the test sample, and the rest is the training sample.\n\nDo the excercise k times, and every observation will be in the test sample once.\n\nAdd up the MSEs, or get the average MSE.\nStill has a random component, but less so than a single split."
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#k-fold-cross-validation",
+    "href": "rm-data/slides/week10.html#k-fold-cross-validation",
+    "title": "Prediction Setup",
+    "section": "K-fold cross-validation",
+    "text": "K-fold cross-validation\n\nCode\n* This is the full code for previous and current example\nclear\nset seed 10\nqui: set obs 30\ngen x = runiform(-2 ,2)\ngen y = 1 + x - 0.5 * x^2 + 1.5* rnormal()\n\n** Create 5 folds\ngen fold = mod(_n,5)+1\n\ncapture program drop fit_stat3\nprogram fit_stat3, rclass\n    tempvar yhat aux\n    qui:gen `yhat' = .\n    qui:forvalues i = 1/5 {\n        reg `0' if fold!=`i'\n        predict `aux'\n        replace `yhat' = `aux' if fold==`i'\n        drop `aux'\n    }\n    qui: replace `yhat'=(y-`yhat')^2    \n    sum `yhat', meanonly\n    return scalar mse = r(mean)\nend\n\nfit_stat3 y c.x \ndisplay \"^1, mse: \" %5.3f `r(mse)' _n\nfit_stat3 y c.x##c.x \ndisplay \"^2, mse: \" %5.3f `r(mse)' _n\nfit_stat3 y c.x##c.x##c.x \ndisplay \"^3, mse: \" %5.3f `r(mse)' _n\nfit_stat3 y c.x##c.x##c.x##c.x \ndisplay \"^4, mse: \" %5.3f `r(mse)' _n\nfit_stat3 y c.x##c.x##c.x##c.x##c.x \ndisplay \"^5, mse: \" %5.3f `r(mse)' _n\n\n^1, mse: 4.851\n^2, mse: 3.196\n^3, mse: 2.805\n^4, mse: 3.085\n^5, mse: 3.160"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#when-krightarrowghtn.-loocv",
+    "href": "rm-data/slides/week10.html#when-krightarrowghtn.-loocv",
+    "title": "Prediction Setup",
+    "section": "When K\\(\\rightarrowght\\)N. LooCV",
+    "text": "When K\\(\\rightarrowght\\)N. LooCV"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#when-k-rightarrow-n.-loocv",
+    "href": "rm-data/slides/week10.html#when-k-rightarrow-n.-loocv",
+    "title": "Prediction Setup",
+    "section": "When K \\(\\rightarrow\\) N. LooCV",
+    "text": "When K \\(\\rightarrow\\) N. LooCV\n\nK-fold cross-validation has two weaknesses:\n\nRandomness: different splits may lead to different results\nSmall sample size for training may be too small\n\nAn alternative to address both is increasing K … until K=N\n\nThis is the Leave-one-out cross-validation (LOOCV)\nTrain on N-1 observations, predict on the left-out (N=1) observation\n\nThis can be computationally expensive, unless you are estimating Linear regression models.\n\nLOOCV its really fast for OLS"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#cs-predicting-the-price-of-used-cars",
+    "href": "rm-data/slides/week10.html#cs-predicting-the-price-of-used-cars",
+    "title": "Prediction Setup",
+    "section": "CS: Predicting the price of used cars",
+    "text": "CS: Predicting the price of used cars\n\nSUse data from here for replication.\nDrop car with price&gt;20k or those price = 1$.\nWhile distribution is skewed, Log(price) is not normal either. We will keep it as is.\nTwo areas, we keep Chicago only.\ndrop if odometer&gt;100K miles\nVariables: price, age, odometer, type, condition, cylinders, dealer"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#cs-competing-models",
+    "href": "rm-data/slides/week10.html#cs-competing-models",
+    "title": "Prediction Setup",
+    "section": "CS: Competing models:",
+    "text": "CS: Competing models:\n\nModel 1 age, age squared\nModel 2 age, age squared, odometer, odometer squared\nModel 3 age, age squared, odometer, odometer squared, LE, condition , dealer\nModel 4 age, age squared, odometer, odometer squared, LE, condition , dealer, SE, XLE, cylinder\nModel 5 same as Model 4 but with all variables interacted with age\nModel 6 same as Model 4 but with all variables interacted with condition\n\n\n\nCode\n* setup\nuse data_slides/used-cars.dta, clear\nglobal model1 age c.age#c.age\nglobal model2 $model1 lnodometer c.lnodometer#c.lnodometer\nglobal model3 $model2 LE i.condition_recode i.dealer\nglobal model4 $model3 SE XLE cylinder\nglobal model5 c.($model4)##c.age\nglobal model6 c.($model4)##i.condition_recode"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#cs-test-data",
+    "href": "rm-data/slides/week10.html#cs-test-data",
+    "title": "Prediction Setup",
+    "section": "CS: Test Data",
+    "text": "CS: Test Data\n\nAssume that 20% of the data is “target” data.\nLets run all models, using different evaluation criteria. And see which one is the best.\nSee below for the program..Rather long\n\n\n\nCode\ngen rnd = runiform()\nsort rnd\ngen test = _n/_N&lt;=.2\n\ncapture program drop fit_stat4\nprogram fit_stat4, rclass\n    reg `0' if test==0\n    tempvar yxhat\n    predict `yxhat' if test==1\n    replace `yxhat' = (price-`yxhat')^2  if test==1\n    matrix result = e(r2), e(r2_a)\n    estat ic\n    matrix result = result, r(S)[1,5..6]\n    ** K-fold cross-validation\n    capture drop fold\n    gen fold = runiform() if test==0\n    sort fold \n    drop fold\n    gen fold = mod(_n,5)+1 if test==0\n    \n    *** Kfold1\n    tempvar yhat aux\n    qui:gen `yhat' = .\n    qui:forvalues i = 1/5 {\n        reg `0' if fold!=`i' & test==0\n        predict `aux'\n        replace `yhat' = `aux' if fold==`i' & test==0\n        drop `aux'\n    }\n    qui: replace `yhat'=(price-`yhat')^2     \n    sum `yhat' if test==0, meanonly\n    matrix result = result, sqrt(r(mean))\n    *** Kfold2\n    capture drop fold\n    gen fold = runiform() if test==0\n    sort fold \n    drop fold\n    gen fold = mod(_n,5)+1 if test==0\n    \n    drop `yhat'  \n    qui:gen `yhat' = .\n    qui:forvalues i = 1/5 {\n        reg `0' if fold!=`i' & test==0\n        predict `aux'\n        replace `yhat' = `aux' if fold==`i' & test==0\n        drop `aux'\n    }\n    qui: replace `yhat'=(price-`yhat')^2    \n    sum `yhat' if test==0, meanonly\n    matrix result = result, sqrt(r(mean))\n    ** test on live data\n    sum `yxhat' if test==1, meanonly\n    matrix result = result, sqrt(r(mean))\n    matrix colname result = r2 r2_a AIC BIC Kfold1 Kfold2 test\n    ** \n    return matrix result = result\nend"
+  },
+  {
+    "objectID": "rm-data/slides/week10.html#cs-results",
+    "href": "rm-data/slides/week10.html#cs-results",
+    "title": "Prediction Setup",
+    "section": "CS: Results",
+    "text": "CS: Results\n\nCode\nqui: fit_stat4 price $model1\nmatrix fresults = r(result)\nqui: fit_stat4 price $model2\nmatrix fresults = fresults\\r(result)\nqui: fit_stat4 price $model3\nmatrix fresults = fresults\\r(result)\nqui: fit_stat4 price $model4\nmatrix fresults = fresults\\r(result)\nqui: fit_stat4 price $model5\nmatrix fresults = fresults\\r(result)\nqui: fit_stat4 price $model6\nmatrix fresults = fresults\\r(result)\nmatrix rowname fresults = Model1 Model2 Model3 Model4 Model5 Model6\nset linesize 250\nesttab matrix(fresults, fmt(%8.3f)) , md  nomtitle\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nr2\nr2_a\nAIC\nBIC\nKfold1\nKfold2\ntest\n\n\n\n\nModel1\n0.711\n0.708\n4823.338\n4834.032\n2472.245\n2470.654\n1697.617\n\n\nModel2\n0.776\n0.772\n4760.551\n4778.374\n2185.247\n2204.960\n1345.265\n\n\nModel3\n0.779\n0.771\n4766.944\n4802.590\n2270.672\n2307.392\n1346.395\n\n\nModel4\n0.785\n0.775\n4765.275\n4811.613\n2388.426\n2259.348\n1381.180\n\n\nModel5\n0.797\n0.778\n4772.246\n4857.794\n2605.005\n2425.626\n1481.571\n\n\nModel6\n0.851\n0.824\n4724.611\n4867.191\n2555.466\n2670.216\n1523.569\n\n\n\n\n\n\nRios-Avila and Cia"
+>>>>>>> Stashed changes
   }
 ]

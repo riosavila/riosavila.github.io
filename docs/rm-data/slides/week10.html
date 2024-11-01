@@ -418,18 +418,27 @@ Fernando Rios-Avila
 <li><p>Or, take an ice cream shop—using past sales and temperature data, you want to predict sales for the coming days. What factors should you consider to ensure your prediction is as accurate as possible?</p></li>
 </ul>
 </section>
-<section id="prediction-basics" class="slide level2">
-<h2>Prediction Basics</h2>
+<section id="prediction-basics-the-process" class="slide level2">
+<h2>Prediction Basics: The Process</h2>
 <ul>
-<li><p>We start with original data (what we have) <span class="math inline">\(\rightarrow\)</span> to build a model</p></li>
-<li><p>There is Live data (data we do not have yet)</p></li>
-<li><p>The Target variable <span class="math inline">\(Y\)</span> (=dependent variable, response, outcome)</p></li>
-<li><p>Predictor variables <span class="math inline">\(X\)</span> (= inputs, covariates, features, independent variables)</p></li>
-<li><p>The goal is to predict value of <span class="math inline">\(Y\)</span> for target observation <span class="math inline">\(j\)</span> in live data</p>
+<li>The idea of behind prediction is that we want to assign a value of <span class="math inline">\(y\)</span>(<span class="math inline">\(\hat y\)</span>) (target or outcome) for observations we do not have the value.</li>
+<li>What we have, in our original data or working sample, is a set of observations with <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> values. We use them to “learn” the patterns of association between <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span>.</li>
+<li>But for the target observations, we only have <span class="math inline">\(x\)</span> values.</li>
+</ul>
+</section>
+<section id="prediction-basics-the-process-1" class="slide level2">
+<h2>Prediction Basics: The Process</h2>
 <ul>
-<li>Actual value for <span class="math inline">\(Y_j\)</span> unknown</li>
-<li>but value for <span class="math inline">\(X_j\)</span> known</li>
-<li>Need predicted value of <span class="math inline">\(Y\)</span> for each target observation <span class="math inline">\(j\)</span></li>
+<li>The process of prediction involves:
+<ul>
+<li>Determine what is the <strong>target</strong> variable <span class="math inline">\(y\)</span> and the <strong>features</strong> <span class="math inline">\(x\)</span>.</li>
+<li>Using the original data to estimate a model that describes the patterns of association between <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span>.</li>
+<li>Using the estimated model to predict the value of <span class="math inline">\(y\)</span> for the target observations.</li>
+</ul></li>
+<li>Evaluation of the prediction (how actual data compares to predicted data)</li>
+<li>Rinse and repeat: Choose a different model, evaluate, choose the best model.
+<ul>
+<li>Best model for the Live data not the original data.</li>
 </ul></li>
 </ul>
 </section>
@@ -448,10 +457,7 @@ Fernando Rios-Avila
 <section id="cs-price-apartments" class="slide level2">
 <h2>CS: Price apartments</h2>
 <ul>
-<li>You are planning to run an AirBnB business
-<ul>
-<li>Maybe several rooms</li>
-</ul></li>
+<li>You are planning to run an AirBnB business</li>
 <li>Target is continuous (in dollars)</li>
 <li>Features are varied from text to binary</li>
 <li>The business question:
@@ -481,8 +487,7 @@ Fernando Rios-Avila
 <li>What is the relationship like (+/-, linear, etc.)</li>
 <li>Is it a robust relationship – true in the population /general pattern? (causal?)</li>
 </ul></li>
-<li>Now, we use <span class="math inline">\(x_1, x_2, \dots\)</span> to predict <span class="math inline">\(y\)</span>: <span class="math inline">\(\hat{y}_j = \hat{f}(x_j)\)</span></li>
-<li>How is this different?</li>
+<li>Now, we use <span class="math inline">\(x_1, x_2, \dots\)</span> to predict <span class="math inline">\(y\)</span>: <span class="math inline">\(\hat{y}_j = \hat{f}(x_j)\)</span>, How is this different?</li>
 </ul>
 <div class="fragment">
 <ul>
@@ -491,7 +496,7 @@ Fernando Rios-Avila
 <li>Individual coefficient values, multicollinearity</li>
 </ul></li>
 <li>We still care about the stability of our results.</li>
-<li>Should we care about causality?
+<li>But, should we care about causality?
 <ul>
 <li>Not so much, we care more about making the best prediction.</li>
 </ul></li>
@@ -501,66 +506,62 @@ Fernando Rios-Avila
 <section>
 <section id="different-types-of-prediction" class="title-slide slide level1 center">
 <h1>Different types of prediction</h1>
-
+<p>Target variables</p>
 </section>
 <section id="what-are-we-predicting" class="slide level2">
 <h2>What are we predicting?</h2>
 <ul>
 <li><span class="math inline">\(Y\)</span> is quantitative (e.g price)
 <ul>
-<li>Quantitative prediction</li>
-<li>“Regression” problem</li>
+<li>Quantitative prediction. Expected price of a car given its characteristics.</li>
+<li>its a “Regression” problem</li>
+<li>We could obtain a point prediction or an interval prediction (As before)</li>
 </ul></li>
 <li><span class="math inline">\(Y\)</span> is binary (e.g.&nbsp;Default or nor)
 <ul>
-<li>Probability prediction</li>
-<li>Classification problem</li>
-<li>Broadly: <span class="math inline">\(Y\)</span> takes values in a finite set of (unordered) classes (survived/died, sold/not sold, car model)</li>
+<li><span class="math inline">\(Y\)</span> takes values in a finite set of (unordered) classes (survived/died, sold/not sold, car model)</li>
+<li>We may want to types of predictions: Probability prediction (<span class="math inline">\(\hat P(y|x=1)\)</span>) or classification (<span class="math inline">\(\hat y = 1 \text{ or }0| x\)</span>)</li>
 </ul></li>
-<li>Time series prediction (Forecasting). Make predictions about the future based on historical and current data.</li>
+<li>Time series prediction (<strong>Forecasting</strong>).
+<ul>
+<li>Make predictions about the future based on historical and current data.</li>
+<li><span class="math inline">\(\hat y_t = f(x_{t-1}, x_{t-2}, \dots)\)</span></li>
+</ul></li>
 </ul>
 </section>
 <section id="what-is-different" class="slide level2">
 <h2>What is Different?</h2>
 <ul>
-<li>Feature engineering (variable selection) including variable selection, coding and functional form</li>
-<li>Model building and prediction
+<li>In principle, the process is the same as before, but we have a diffent goal.
 <ul>
-<li>Decision regarding model complexity and estimation
+<li>We need to pay more attention to other aspects of the process.</li>
+</ul></li>
+<li>Label Engeneering: What transformation is suitable for the target variable?</li>
+<li>Feature engineering (variable selection): What variables and functional forms should be included</li>
+<li>Model estimation and prediction, based on variable selection
 <ul>
-<li>Remember splines, polynomials</li>
+<li>Decisions regarding model complexity and Specification (Know-How or Machine Learning)</li>
 </ul></li>
-<li>Machine learning methods
-<ul>
-<li>Automated model selection under some conditions</li>
-</ul></li>
-</ul></li>
-<li>Model evaluation and selection
-<ul>
-<li>Compare models based on some measure of fit</li>
-</ul></li>
+<li>Model evaluation considering complexity and loss</li>
 <li>Key idea: Focus on systematically combine estimation and model selection</li>
 </ul>
 </section>
-<section id="supervised-machine-learning-technique-regression" class="slide level2">
-<h2>Supervised Machine Learning Technique: Regression</h2>
+<section id="the-tool-supervised-machine-learning" class="slide level2">
+<h2>The Tool: Supervised Machine Learning</h2>
 <ul>
-<li>Linear regression produces a predicted value for the dependent variable.
-<ul>
-<li><strong>Predictions</strong>: are the expected value of <span class="math inline">\(y\)</span> if we know <span class="math inline">\(x\)</span>.</li>
-</ul></li>
-<li>Linear regression with <span class="math inline">\(y, x_1, x_2, etc.,\)</span>, is a model for the conditional expected value of <span class="math inline">\(y\)</span>, which provide us with <span class="math inline">\(\beta's\)</span>.</li>
-<li>We need estimated coefficients <span class="math inline">\((\hat{\beta})\)</span> and actual <span class="math inline">\(x\)</span> values <span class="math inline">\((x_j)\)</span> to predict an actual value <span class="math inline">\(\hat{y}\)</span></li>
+<li>Supervised Machine Learning is a set of tools that help us predict the value of a target variable <span class="math inline">\(Y\)</span> based on a set of features <span class="math inline">\(X\)</span>.</li>
+<li>We will use one of the oldest and most commonly used method:</li>
 </ul>
-<p><span class="math display">\[\begin{aligned}
-y^E &amp;= \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots \\
-\hat{y}_j &amp;= \hat{\beta}_0 + \hat{\beta}_1 x_{1j} + \hat{\beta}_2 x_{2j} + \dots
-\end{aligned}
-\]</span></p>
+<div class="fragment">
+<ul>
+<li>Linear Regression</li>
+</ul>
+</div>
 </section>
 <section id="the-prediction-error" class="slide level2">
 <h2>The Prediction Error</h2>
 <ul>
+<li>We have seen this.</li>
 <li>The Regression model can produce a Predicted value <span class="math inline">\(\hat{y}_j\)</span> for target observation <span class="math inline">\(j\)</span></li>
 <li>but, actual value <span class="math inline">\(y_j\)</span> is not known (that is why we are predicting)</li>
 <li>Thus, there will be a prediction error</li>
@@ -574,67 +575,68 @@ y^E &amp;= \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots \\
 <section id="the-prediction-error-1" class="slide level2">
 <h2>The Prediction Error</h2>
 <ul>
-<li>The <strong>ideal</strong> prediction error, is zero: our predicted value is right on target.</li>
-<li>The prediction error is defined by the direction of miss and size.</li>
+<li>The <strong>ideal</strong> prediction error, is zero: our predicted value is right on target.
+<ul>
+<li>Rare…</li>
+</ul></li>
+<li>The prediction error carries information: direction and size.</li>
 <li>Direction of miss:
 <ul>
-<li>Positive if we overpredict the value: we predict a higher value than actual value.</li>
-<li>Negative if we underpredict the value: our prediction is too low.</li>
-<li>Degree of wrongness depends on the decision problem.</li>
+<li>Positive if we overpredict</li>
+<li>Negative if we underpredict</li>
+<li>Degree of wrongness depends on the decision problem. (price is right?)</li>
 </ul></li>
 <li>Size:
 <ul>
-<li>Larger in absolute value the further away our prediction is from the actual value.</li>
-<li>It is smaller the closer we are.</li>
-<li>It is always better to have a prediction with as small an error as possible.</li>
+<li>magnitude of the error may depend on the nature of the problem and the loss function.</li>
 </ul></li>
 </ul>
 </section>
 <section id="decomposing-the-prediction-error" class="slide level2">
 <h2>Decomposing the prediction error</h2>
-<p>Assume the best model for <span class="math inline">\(Y\)</span> is <span class="math inline">\(Y = f(X,Z,XZ) + \epsilon\)</span></p>
+<p>Assume the best model for <span class="math inline">\(Y\)</span> is <span class="math inline">\(Y= f(X,Z)+\epsilon\)</span>, but we estimate <span class="math inline">\(Y^E = g(X,Z)\)</span>, and obtain <span class="math inline">\(\hat g(X,Z)\)</span></p>
 <ul>
 <li>The prediction error can be decomposed into three parts:
 <ol type="1">
-<li><strong>estimation error</strong>: Difference between <span class="math inline">\(f(X,Z,XZ)\)</span> and <span class="math inline">\(\hat f(X,Z,XZ)\)</span></li>
-<li><strong>model error</strong>: If we using <span class="math inline">\(f(X,Z)\)</span>, it would be the Difference between <span class="math inline">\(f(X,Z)\)</span> and <span class="math inline">\(f(X,Z,XZ)\)</span>.</li>
-<li><strong>genuine error</strong>: error even if have the best possible model. <span class="math inline">\(\epsilon\)</span></li>
+<li><strong>estimation error</strong>: Difference between <span class="math inline">\(g(X)\)</span> and <span class="math inline">\(\hat g(X)\)</span></li>
+<li><strong>model error</strong>: Difference between <span class="math inline">\(f(X)\)</span> and <span class="math inline">\(g(X)\)</span>.</li>
+<li><strong>genuine error</strong>: error that cant be eliminated even if have the best possible model. <span class="math inline">\(\epsilon\)</span></li>
 </ol></li>
 </ul>
 </section>
 <section id="interval-prediction-for-quantitative-target-variables" class="slide level2">
 <h2>Interval prediction for quantitative target variables</h2>
 <ul>
-<li>One advantage of regressions - it’s easy quantify uncertainty of prediction
+<li><p>One advantage of regressions - it’s easy quantify uncertainty of prediction</p>
 <ul>
 <li>This can be used to obtain <strong>Interval predictions</strong></li>
 </ul></li>
-<li>Interval predictions quantify 2-out-of-3 sources of prediction uncertainty: estimation error and genuine (or irreducible) error.</li>
-<li>They do not include the third source, model uncertainty! (Bayesian methods can help with this)</li>
-<li>The 95% prediction interval (PI) tells where to expect the actual value for the target observation.</li>
-<li>The PI for linear regression requires homoskedasticity. (but could be relaxed)</li>
+<li><p>Interval predictions quantify 2-out-of-3 sources of prediction uncertainty: estimation error and genuine (or irreducible) error.</p></li>
+<li><p>They do not include the third source, model uncertainty! (Bayesian methods can help with this)</p></li>
+<li><p>The 95% prediction interval (PI) tells where to expect the actual value for the target observation.</p></li>
+<li><p>The PI for linear regression requires homoskedasticity. (but could be relaxed)</p></li>
 </ul>
 </section></section>
 <section>
 <section id="the-loss-function" class="title-slide slide level1 center">
 <h1>The Loss function</h1>
-<p>Choosing the best</p>
+<p>Not all errors are created equal</p>
 </section>
 <section id="loss-functions" class="slide level2">
 <h2>Loss Functions</h2>
 <ul>
-<li>We use a Loss function to quantify the <strong>cost</strong> of prediction error
+<li><p>We use a <strong>Loss</strong> function to quantify the <strong>cost</strong> of prediction error</p>
 <ul>
 <li>It attaches a value to the prediction error, specifying how <strong>bad</strong> it is</li>
 <li>Thus, Loss function determines best predictor</li>
 </ul></li>
-<li>Ideally, it is derived from decision problem,
+<li><p>Ideally, it is derived from decision problem,</p>
 <ul>
-<li>How much more costly is to overpredict than underpredict? (price is right!)</li>
-<li>The shape and functional form could depent on the decision problem</li>
+<li>How much more costly is to overpredict than underpredict?</li>
 </ul></li>
-<li>In practice, highly crafted loss functions are rare (Machine learning, Neural Networks, Etc), so we use common ones</li>
-<li>Loss functions could be used to both estimate, but also to <strong>evaluate/compare</strong> models</li>
+<li><p>In practice, highly crafted loss functions are rare (Machine learning, Neural Networks, Etc), so we use common ones</p></li>
+<li><p>Loss functions could be used to both estimate, but also to <strong>evaluate/compare</strong> models</p></li>
+<li><p>Plot Twist: Loss function for OLS is the L2 Square loss function</p></li>
 </ul>
 </section>
 <section id="loss-functions-1" class="slide level2">
@@ -655,7 +657,7 @@ y^E &amp;= \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots \\
 </section>
 <section id="loss-functions-of-various-shapes" class="slide level2">
 <h2>Loss Functions of Various Shapes</h2>
-<div id="2d075875" class="cell" data-execution_count="2">
+<div id="448f0684" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a></a><span class="kw">qui</span> {</span>
@@ -701,28 +703,27 @@ y^E &amp;= \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots \\
 <li>What kind of loss function would make sense?</li>
 </ul>
 </section>
-<section id="some-common-loss-functions" class="slide level2">
-<h2>Some common loss functions</h2>
-<p>Squared loss function:</p>
-<p><span class="math display">\[L(e_j) = e^2_j = (\hat{y}_j - y_j)^2
+<section id="common-loss-functions" class="slide level2">
+<h2>Common loss functions</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span class="math display">\[SQR: L(e_j) = e^2_j = (\hat{y}_j - y_j)^2
 \]</span></p>
 <ul>
 <li>The most widely used loss function</li>
 <li>Symmetric: Losses due to errors in opposing direction are same</li>
 <li>Convex: Twice as large errors generate more than twice (4x) as large losses</li>
 </ul>
-</section>
-<section id="some-common-loss-functions-1" class="slide level2">
-<h2>Some common loss functions</h2>
-<p>Absolute loss function:</p>
-<p><span class="math display">\[L(e_j) = e^2_j = Abs(\hat{y}_j - y_j)
+</div><div class="column" style="width:50%;">
+<p><span class="math display">\[ABS: L(e_j) = |e_j| = Abs(\hat{y}_j - y_j)
 \]</span></p>
 <ul>
 <li><p>Used for Median regression (Quantile regression)</p></li>
 <li><p>Symmetric: Losses due to errors in opposing direction are same</p></li>
 <li><p>Linear: Twice as large errors generate twice as large losses</p></li>
-<li><p>Quantile Regressions use Asymetric loss functions</p></li>
+<li><p>Quantile Regressions use <strong>Asymetric</strong> loss functions</p></li>
 </ul>
+</div></div>
 </section>
 <section id="mean-squared-error-mse" class="slide level2">
 <h2>Mean Squared Error: MSE</h2>
@@ -765,57 +766,47 @@ MSE &amp;= \frac{1}{J}\sum_{j=1}^J (\hat{y}_j - y_j)^2 \\
 <ul>
 <li>OLS is unbiased. Some other methods will allow for some bias in return for lower variance.</li>
 </ul>
-</section>
-<section id="case-study-used-cars-data" class="slide level2">
-<h2>Case study: used cars data</h2>
-<ul>
-<li>Suppose you want to sell your car of a certain make, type, year, miles, condition and other features.</li>
-<li>The prediction analysis helps uncover the average advertised price of cars with these characteristics</li>
-<li>That helps decide what price you may want to put on your ad.</li>
-</ul>
-</section>
-<section id="case-study-used-cars-data-1" class="slide level2">
-<h2>Case study: used cars data</h2>
-<ul>
-<li>Scraped from a website</li>
-<li>Year of make (age), Odometer (miles)</li>
-<li>Tech specifications such as fuel and drive</li>
-<li>Dealer or private seller</li>
-</ul>
-</section>
-<section id="case-study-loss-function" class="slide level2">
-<h2>Case study: Loss function</h2>
-<ul>
-<li>The loss function for predicting the value of our used car depends on how we value money and how we value how much time it takes to sell our car.</li>
-<li>A too low prediction may lead to selling our car cheap but fast;</li>
-<li>A too high prediction may make us wait a long time and, possibly, revising the sales price downwards before selling our car.</li>
-<li>Symmetric</li>
-<li>Sensitive to big deviations</li>
-<li>RMSE and OLS</li>
-</ul>
-</section>
-<section id="case-study---used-cars-features" class="slide level2">
-<h2>Case study - used cars: features</h2>
-<ul>
-<li>Odometer, measuring miles the car traveled (Continuous, linear)</li>
-<li>More specific type of the car: LE, XLE, SE (missing in about 30% of the observations). (Factor – set of dummies , incl N/A)</li>
-<li>Good condition, excellent condition or it is like new (missing for about one third of the ads). (Factor – set of dummies, incl N/A)</li>
-<li>Car’s engine has 6 cylinders (20% of ads say this; 43% says 4 cylinders, and the rest has no information on this). (Binary for 6 cylinders)</li>
-</ul>
-</section>
-<section id="case-study-models-by-hand" class="slide level2">
-<h2>Case study: models by hand</h2>
-<ul>
-<li>Model 1: age, age squared</li>
-<li>Model 2: age, age squared, odometer, odometer squared</li>
-<li>Model 3: age, age squared, odometer, odometer squared, LE, excellent condition, good condition, dealer</li>
-<li>Model 4: age, age squared, odometer, odometer squared, LE, excellent condition, good condition, dealer, LE, XLE, cylinder</li>
-<li>Model 5: same as Model 4 but with all variables interacted with age (won’t show in next table)</li>
-</ul>
-</section>
-<section id="case-study-car-price-model-results" class="slide level2">
-<h2>Case study: Car price model results</h2>
-<pre><code>(1)   (2)   (3)   (4)
+<!-- ## Case study: used cars data
+
+- Suppose you want to sell your car of a certain make, type, year, miles, condition and other features.
+- The prediction analysis helps uncover the average advertised price of cars with these characteristics
+- That helps decide what price you may want to put on your ad.
+
+What to do?
+
+- Scraped from a website
+- Year of make (age), Odometer (miles)
+- Tech specifications such as fuel and drive
+- Dealer or private seller
+
+## Case study: Loss function
+
+- The loss function for predicting the value of our used car depends on how we value money and how we value how much time it takes to sell our car.
+- A too low prediction may lead to selling our car cheap but fast;
+- A too high prediction may make us wait a long time and, possibly, revising the sales price downwards before selling our car.
+- Symmetric
+- Sensitive to big deviations
+- RMSE and OLS
+
+## Case study - used cars: features
+
+- Odometer, measuring miles the car traveled (Continuous, linear)
+- More specific type of the car: LE, XLE, SE (missing in about 30% of the observations). (Factor – set of dummies , incl N/A)
+- Good condition, excellent condition or it is like new (missing for about one third of the ads). (Factor – set of dummies, incl N/A)
+- Car's engine has 6 cylinders (20% of ads say this; 43% says 4 cylinders, and the rest has no information on this). (Binary for 6 cylinders)
+
+## Case study: models by hand
+
+- Model 1: age, age squared
+- Model 2: age, age squared, odometer, odometer squared
+- Model 3: age, age squared, odometer, odometer squared, LE, excellent condition, good condition, dealer
+- Model 4: age, age squared, odometer, odometer squared, LE, excellent condition, good condition, dealer, LE, XLE, cylinder
+- Model 5: same as Model 4 but with all variables interacted with age (won't show in next table)
+
+## Case study: Car price model results
+
+```
+(1)   (2)   (3)   (4)
 Variables Model 1 Model 2 Model 3 Model 4
 age     -1,530.09 -1,149.22 -873.47 -836.64
 agesq    35.05   27.65   18.21   17.63
@@ -829,415 +820,448 @@ cond_excellent                     176.49  190.40
 cond_good                          293.36  321.56
 cylind6                           -370.27
 dealer                            572.98  822.65
-Constant 18,365.45 18,860.20 19,431.89 18,963.35</code></pre>
+Constant 18,365.45 18,860.20 19,431.89 18,963.35
+```
+
+## Case study: Results
+
+- When doing prediction, coefficients are less important.
+- But we shall use them for sanity check: age negative, convex (flattens out)
+- SE may not be even displayed. It is helpful for model selection, but only along with other measures
+- and values of the predictor variables for our car: age = 10 (years), odometer= 12 (10 thousand miles), type= LE, excellent condition=1.
+- A point prediction, Model 3: age: -873.47, age squared=18.21, odometer -799.90, odometer sq = 18.81, LE=28.11, cond excellent: 176.49+ C=19.431.89
+- Predicted is price is 6073.
+
+## Case study: Prediction Interval
+
+- Calculating prediction intervals for the baseline models
+- Very wide interval despite high R2
+- Prediction is hard!
+- Even with a good model, you'll make plenty of errors
+- Should be aware
+- Let your clients know in advance...
+
+## Case study: Prediction Interval
+
+Based on the third model, we have a point prediction of $6073$
+Have a 80% prediction intervals (PI) – Ads for cars just like ours may ask a price ranging from $4,317$ to $7,829$ with a 80% chance.
+
+| Model 1 | Model 3 |
+|---------|---------|
+| Point prediction 6,569 | 6,073 |
+| Prediction Interval (80%) [4,296-8,843] | [4,317-7,829] |
+| Prediction Interval (95%) [3,085-10,053] | [3,382-8,763] |
+
+Note: Chicago cars. Prices in dollars.
+Source: used-cars dataset.
+-->
+</section></section>
+<section>
+<section id="finding-the-best-model" class="title-slide slide level1 center">
+<h1>Finding the best model</h1>
+<p>Too hot nor too cold, but just right</p>
 </section>
-<section id="case-study-results" class="slide level2">
-<h2>Case study: Results</h2>
+<section id="model-selection" class="slide level2">
+<h2>Model selection</h2>
 <ul>
-<li>When doing prediction, coefficients are less important.</li>
-<li>But we shall use them for sanity check: age negative, convex (flattens out)</li>
-<li>SE may not be even displayed. It is helpful for model selection, but only along with other measures</li>
-<li>and values of the predictor variables for our car: age = 10 (years), odometer= 12 (10 thousand miles), type= LE, excellent condition=1.</li>
-<li>A point prediction, Model 3: age: -873.47, age squared=18.21, odometer -799.90, odometer sq = 18.81, LE=28.11, cond excellent: 176.49+ C=19.431.89</li>
-<li>Predicted is price is 6073.</li>
+<li>Model selection is finding the best fit while avoiding overfitting, and aiming for high external validity.</li>
+<li>To do this, we aim to choose a model that is flexible enough to capture the patterns in the data but not too flexible to capture noise.
+<ul>
+<li>Bias-Variance tradeoff</li>
+<li>Balancing the complexity of the model</li>
+</ul></li>
+<li>Consider two models. They could be different for two reasons:
+<ul>
+<li>different functional forms (spline vs.&nbsp;quadratic)</li>
+<li>different number of variables (simple vs.&nbsp;complex)</li>
+</ul></li>
 </ul>
 </section>
-<section id="case-study-prediction-interval" class="slide level2">
-<h2>Case study: Prediction Interval</h2>
+<section id="how-to-choose-a-model" class="slide level2">
+<h2>How to choose a model?</h2>
 <ul>
-<li>Calculating prediction intervals for the baseline models</li>
-<li>Very wide interval despite high R2</li>
-<li>Prediction is hard!</li>
-<li>Even with a good model, you’ll make plenty of errors</li>
-<li>Should be aware</li>
-<li>Let your clients know in advance…</li>
+<li><p>Typically, we would say that the best model is the one that has the highest <span class="math inline">\(R^2\)</span> or the lowest MSE.</p>
+<ul>
+<li>This may be true for the original data, but not for the <strong>target</strong> observations.</li>
+<li>Also, <span class="math inline">\(R^2\)</span> and MSE always increase when we add more variables.</li>
+</ul></li>
+<li><p>So, what we need is a way to check how well the models predict the target observations. (unobserved cases)</p></li>
+<li><p>We want to avoid overfitting at all costs.</p></li>
 </ul>
 </section>
-<section id="case-study-prediction-interval-1" class="slide level2">
-<h2>Case study: Prediction Interval</h2>
-<p>Based on the third model, we have a point prediction of <span class="math inline">\(6073\)</span> Have a 80% prediction intervals (PI) – Ads for cars just like ours may ask a price ranging from <span class="math inline">\(4,317\)</span> to <span class="math inline">\(7,829\)</span> with a 80% chance.</p>
+<section id="example" class="slide level2">
+<h2>Example</h2>
+<ul>
+<li>Assume the true model is <span class="math inline">\(y = 1 + x -.5 x^2 + \epsilon\)</span>, with <span class="math inline">\(\epsilon ~ N(0,1.5)\)</span></li>
+<li>we create 100 observations from the above process but use only 30 for modeling. We try running regressions with ever more complex models</li>
+<li>Make predictions, and see how well we did.</li>
+</ul>
 <table class="caption-top">
 <thead>
 <tr class="header">
-<th>Model 1</th>
-<th>Model 3</th>
+<th></th>
+<th style="text-align: center;"><span class="math inline">\(R^2\)</span></th>
+<th style="text-align: center;">MSE</th>
+<th style="text-align: center;">OoS MSE</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Point prediction 6,569</td>
-<td>6,073</td>
+<td>^1</td>
+<td style="text-align: center;">.3224669</td>
+<td style="text-align: center;">1.934762</td>
+<td style="text-align: center;">2.949084</td>
 </tr>
 <tr class="even">
-<td>Prediction Interval (80%) [4,296-8,843]</td>
-<td>[4,317-7,829]</td>
+<td>^2</td>
+<td style="text-align: center;">.6255072</td>
+<td style="text-align: center;">1.069401</td>
+<td style="text-align: center;">2.93478</td>
 </tr>
 <tr class="odd">
-<td>Prediction Interval (95%) [3,085-10,053]</td>
-<td>[3,382-8,763]</td>
+<td>^3</td>
+<td style="text-align: center;">.6344791</td>
+<td style="text-align: center;">1.043781</td>
+<td style="text-align: center;">2.978827</td>
+</tr>
+<tr class="even">
+<td>^4</td>
+<td style="text-align: center;">.713217</td>
+<td style="text-align: center;">.8189369</td>
+<td style="text-align: center;">4.138006</td>
+</tr>
+<tr class="odd">
+<td>^5</td>
+<td style="text-align: center;">.7259535</td>
+<td style="text-align: center;">.7825666</td>
+<td style="text-align: center;">3.557651</td>
 </tr>
 </tbody>
 </table>
-<p>Note: Chicago cars. Prices in dollars. Source: used-cars dataset.</p>
+<p>See how <span class="math inline">\(R^2\)</span> increases monotonously, improving “in-sample fit”. But, the OoS MSE worsens after a certain point.</p>
 </section>
-<section id="model-selection" class="slide level2">
-<h2>Model selection</h2>
-</section>
-<section id="data-for-prediction" class="slide level2">
-<h2>Data for prediction</h2>
+<section id="example-2" class="slide level2">
+<h2>Example 2</h2>
+
+<img data-src="images/paste-8.png" class="r-stretch"></section>
+<section id="underfit-vs-overfit" class="slide level2">
+<h2>Underfit vs overfit</h2>
 <ul>
-<li>We have a dataset</li>
-<li>We wanna make some prediction</li>
-</ul>
-</section>
-<section id="model-selection-1" class="slide level2">
-<h2>Model selection</h2>
-<p>Model selection is finding the best fit while avoiding overfitting and aiming for high external validity</p>
-</section>
-<section id="external-validity-avoiding-overfitting-and-model-selection" class="slide level2">
-<h2>External validity, avoiding overfitting and model selection</h2>
-<ul>
-<li>Have a dataset and a target variable. Compare various models of prediction.</li>
-<li>How to choose a model?</li>
-<li>Pick a model that can predict well….</li>
-<li>Best prediction - best model that would produce the smallest prediction error.</li>
-<li>Context of squared loss function <span class="math inline">\(\rightarrow\)</span> finding the regression that would produce the smallest RMSE for the target observations.</li>
-<li>Pick a model that can predict well on the live data</li>
-</ul>
-</section>
-<section id="underfit-overfit" class="slide level2">
-<h2>Underfit, overfit</h2>
-<ul>
-<li>Comparing two models (model 1 and model 2)</li>
-<li>Model 1 can give a worse fit in the live data than model 2 in two ways.
-<ul>
-<li>Model 1 may give a worse fit both in the original data and the live data. In this case, we say that model 1 underfits the original data.
+<li>A model that fits the data worse in the “working/original” data compared to the “live/target” data is said to “underfit” the model.
 <ul>
 <li>Simple: we should build a better model.</li>
 </ul></li>
-<li>Model 1 may actually give a better fit in the original, but a worse fit in the live data. In this case, we say that model 1 overfits the original data.</li>
-</ul></li>
+<li>If the model fits the data working better than target data, then it over-fits it. Needs to be corrected.</li>
 </ul>
-</section>
-<section id="overfitting" class="slide level2">
-<h2>Overfitting</h2>
+<h3 id="overfitting">Overfitting</h3>
 <ul>
-<li>Overfitting is a key aspect of external validity</li>
-<li>finding a model that fits the data better than alternative models</li>
-<li>but makes worse actual prediction.</li>
-<li>Thus, the problem of overfitting the original data is best split into two problems:
+<li>Overfitting is a key aspect of external validity
 <ul>
-<li>fitting patterns in the original data that are not there in the population, or general pattern, it represents;</li>
-<li>fitting patterns in the world of the original data that will not be there in the world of the live data.</li>
+<li>Finding a model that fits the data better than alternative models, but makes worse actual prediction.</li>
 </ul></li>
+<li>Overfitting is a common problem in prediction analysis</li>
 </ul>
 </section>
 <section id="reason-for-overfitting" class="slide level2">
 <h2>Reason for overfitting</h2>
-<ul>
-<li>The typical reason for overfitting is fitting a model that is too complex on the dataset.</li>
-<li>Complexity: number of estimated coefficients</li>
-<li>Often: fitting a model with too many predictor variables.</li>
-<li>Including too many variables from the dataset that do not really add to the predictive power of the regression,</li>
-<li>often because they are strongly correlated with other predictor variables.</li>
-<li>Specifying too many interactions,</li>
-<li>Too detailed nonlinear patterns
-<ul>
-<li>as piecewise linear splines with many knots</li>
-<li>polynomials of high degree.</li>
-</ul></li>
-</ul>
+<p>The typical reason for overfitting is fitting a model that is too complex on the dataset. - Complexity: number of estimated coefficients - Often: fitting a model with too many predictor variables. - Including too many variables from the dataset that do not really add to the predictive power of the regression. - Problems of multicollinearity, too many interactions, etc. - Too detailed nonlinear patterns - as piecewise linear splines with many knots - polynomials of high degree.</p>
 </section>
-<section id="increasing-model-complexity" class="slide level2">
-<h2>Increasing model complexity</h2>
+<section id="finding-the-best-model-by-best-fit-and-penalty" class="slide level2">
+<h2>Finding the best model by best fit and penalty</h2>
 <ul>
-<li>As we increase model complexity
+<li>As shown earlier, traditional measures of fit, such as <span class="math inline">\(R^2\)</span> and MSE, are not good for finding the best model. They always increase with the number of variables.</li>
+<li>We were only able to conclude model fitness because we had the true model (and the Out-of-Sample data)
 <ul>
-<li>Such as number of features (variables)</li>
-<li>By adding interactions, etc.</li>
+<li>This is not the case in practice.</li>
 </ul></li>
-<li>We will see
+<li>So, how do we find the best model?
 <ul>
-<li>RMSE within dataset to fall monotonously</li>
-<li>RMSE for target observations (ie. not in our dataset) to fall and then rise as we overfit</li>
-</ul></li>
-<li>example to come in class 2</li>
-</ul>
-</section>
-<section id="finding-the-best-model-by-best-fit-and-penalty-the-bic" class="slide level2">
-<h2>Finding the best model by best fit and penalty: The BIC</h2>
-<ul>
-<li>Approach 1: Indirectly</li>
-<li>Estimate it by an adjustment</li>
-<li>Use a method based on some distributional assumptions</li>
-<li>Need to pick an evaluation criterion</li>
-<li>=In-sample evaluation with penalty</li>
-<li>Specify and estimate model using all data</li>
-<li>Use a measure of fit that helps avoid overfitting
-<ul>
-<li>Such as
-<ul>
-<li>adjusted <span class="math inline">\(R^2\)</span></li>
-<li>BIC = Bayesian Information Criterion, or Schwarz criterion</li>
-</ul></li>
+<li>Indirectly: Penalize the number of variables</li>
+<li>Directly: Use a training-test sample</li>
 </ul></li>
 </ul>
 </section>
 <section id="indirect-evaluation-criteria" class="slide level2">
 <h2>Indirect evaluation criteria</h2>
 <ul>
-<li>Main methods: AIC, BIC and adjusted <span class="math inline">\(R^2\)</span></li>
+<li>Main methods: AIC, BIC and adjusted <span class="math inline">\(R^2\)</span>
+<ul>
 <li>Advantage: easy to compute</li>
-<li>Disadvantage: assumptions</li>
+<li>Disadvantage: assumptions. They may not penalize enough.</li>
+</ul></li>
 <li>Adjusted <span class="math inline">\(R^2\)</span> – just add a penalty for having many RHS vars
 <ul>
-<li>corrects with <span class="math inline">\((n - 1)/(n - p - 1)\)</span></li>
+<li>corrects with <span class="math inline">\((n - 1)/(n - k - 1)\)</span></li>
 </ul></li>
-<li>Akaike Information Criterion
-<ul>
 <li>AIC = <span class="math inline">\(-2 \times \ln(\text{likelihood}) + 2 \times k\)</span></li>
-</ul></li>
-<li>Schwarz – Bayesian Information Criterion
+<li>BIC = <span class="math inline">\(-2 \times \ln(\text{likelihood}) + \ln(N) \times k\)</span>
 <ul>
-<li>BIC = <span class="math inline">\(-2 \times \ln(\text{likelihood}) + \ln(N) \times k\)</span></li>
-</ul></li>
-<li>Both quantities that take the log likelihood and apply a penalty for the number of parameters being estimated.Both are based on information loss theory from the fifties.</li>
+<li>Both are based on information loss theory</li>
 <li>BIC puts heavier penalty on models with many RHS variables, than AIC.</li>
+</ul></li>
 </ul>
 </section>
-<section id="model-fit-evaluation" class="slide level2">
-<h2>Model fit evaluation</h2>
-<ul>
-<li>Use a good measure of fit to compare models.</li>
-<li>Don’t
-<ul>
-<li>Don’t use MSE or R-squared (the two very closely related).</li>
-<li>They choose best fit in data and don’t care about overfitting.</li>
-</ul></li>
-<li>In practice, use BIC.</li>
-<li>BIC good approximation of what more sophisticated methods would pick. Or even more conservative…</li>
-<li>That introduces a “penalty term”</li>
-<li>More predictor variables leads to worse value</li>
-<li>Even more so in large samples.</li>
-</ul>
+<section id="example-redone" class="slide level2">
+<h2>Example, redone</h2>
+<div id="3d0133a6" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a></a>* This is the full code <span class="kw">for</span> previous and current example</span>
+<span id="cb2-2"><a></a><span class="kw">clear</span></span>
+<span id="cb2-3"><a></a><span class="kw">set</span> <span class="dv">seed</span> 10</span>
+<span id="cb2-4"><a></a><span class="kw">set</span> <span class="kw">obs</span> 100</span>
+<span id="cb2-5"><a></a><span class="kw">gen</span> x = runiform(-2 ,2)</span>
+<span id="cb2-6"><a></a><span class="kw">gen</span> <span class="fu">y</span> = 1 + x - 0.5 * x^2 + 1.5* rnormal()</span>
+<span id="cb2-7"><a></a> </span>
+<span id="cb2-8"><a></a><span class="kw">capture</span> <span class="kw">program</span> <span class="kw">drop</span> fit_stat1</span>
+<span id="cb2-9"><a></a><span class="kw">program</span> fit_stat1, rclass</span>
+<span id="cb2-10"><a></a>    <span class="kw">tempvar</span> yhat smp</span>
+<span id="cb2-11"><a></a>    <span class="kw">gen</span> <span class="ot">`smp'</span> = <span class="fu">e</span>(<span class="kw">sample</span>)</span>
+<span id="cb2-12"><a></a>    <span class="kw">predict</span> <span class="ot">`yhat'</span></span>
+<span id="cb2-13"><a></a>    <span class="kw">replace</span> <span class="ot">`yhat'</span>=(<span class="fu">y</span>-<span class="ot">`yhat'</span>)^2</span>
+<span id="cb2-14"><a></a>    </span>
+<span id="cb2-15"><a></a>    <span class="fu">matrix</span> result=<span class="fu">e</span>(r2)</span>
+<span id="cb2-16"><a></a>    <span class="kw">sum</span> <span class="ot">`yhat'</span> <span class="kw">if</span> <span class="ot">`smp'</span>, <span class="kw">meanonly</span></span>
+<span id="cb2-17"><a></a>    <span class="fu">matrix</span> result=result, <span class="fu">r</span>(<span class="kw">mean</span>)</span>
+<span id="cb2-18"><a></a>    <span class="kw">sum</span> <span class="ot">`yhat'</span> <span class="kw">if</span> !<span class="ot">`smp'</span>, <span class="kw">meanonly</span></span>
+<span id="cb2-19"><a></a>    <span class="fu">matrix</span> result=result, <span class="fu">r</span>(<span class="kw">mean</span>)</span>
+<span id="cb2-20"><a></a>    <span class="fu">return</span> <span class="fu">matrix</span> result = result</span>
+<span id="cb2-21"><a></a><span class="kw">end</span></span>
+<span id="cb2-22"><a></a></span>
+<span id="cb2-23"><a></a><span class="kw">reg</span> <span class="fu">y</span> c.x <span class="kw">if</span> <span class="dt">_n</span>&lt;=30</span>
+<span id="cb2-24"><a></a>fit_stat1</span>
+<span id="cb2-25"><a></a><span class="fu">matrix</span> rr2=<span class="fu">r</span>(result)</span>
+<span id="cb2-26"><a></a><span class="kw">reg</span> <span class="fu">y</span> c.x##c.x <span class="kw">if</span> <span class="dt">_n</span>&lt;=30</span>
+<span id="cb2-27"><a></a>fit_stat1</span>
+<span id="cb2-28"><a></a><span class="fu">matrix</span> rr2=rr2\<span class="fu">r</span>(result)</span>
+<span id="cb2-29"><a></a><span class="kw">reg</span> <span class="fu">y</span> c.x##c.x##c.x <span class="kw">if</span> <span class="dt">_n</span>&lt;=30</span>
+<span id="cb2-30"><a></a>fit_stat1</span>
+<span id="cb2-31"><a></a><span class="fu">matrix</span> rr2=rr2\<span class="fu">r</span>(result)</span>
+<span id="cb2-32"><a></a><span class="kw">reg</span> <span class="fu">y</span> c.x##c.x##c.x##c.x <span class="kw">if</span> <span class="dt">_n</span>&lt;=30</span>
+<span id="cb2-33"><a></a>fit_stat1</span>
+<span id="cb2-34"><a></a><span class="fu">matrix</span> rr2=rr2\<span class="fu">r</span>(result)</span>
+<span id="cb2-35"><a></a><span class="kw">reg</span> <span class="fu">y</span> c.x##c.x##c.x##c.x##c.x <span class="kw">if</span> <span class="dt">_n</span>&lt;=30</span>
+<span id="cb2-36"><a></a>fit_stat1</span>
+<span id="cb2-37"><a></a><span class="fu">matrix</span> rr2=rr2\<span class="fu">r</span>(result)</span>
+<span id="cb2-38"><a></a></span>
+<span id="cb2-39"><a></a><span class="kw">capture</span> <span class="kw">program</span> <span class="kw">drop</span> fit_stat2</span>
+<span id="cb2-40"><a></a><span class="kw">program</span> fit_stat2, rclass</span>
+<span id="cb2-41"><a></a>    <span class="kw">tempvar</span> yhat smp</span>
+<span id="cb2-42"><a></a>    <span class="kw">gen</span> <span class="ot">`smp'</span> = <span class="fu">e</span>(<span class="kw">sample</span>)</span>
+<span id="cb2-43"><a></a>    <span class="kw">predict</span> <span class="ot">`yhat'</span></span>
+<span id="cb2-44"><a></a>    <span class="kw">replace</span> <span class="ot">`yhat'</span>=(<span class="fu">y</span>-<span class="ot">`yhat'</span>)^2    </span>
+<span id="cb2-45"><a></a>    <span class="fu">matrix</span> result=<span class="fu">e</span>(r2), <span class="fu">e</span>(r2_a)</span>
+<span id="cb2-46"><a></a>    <span class="kw">sum</span> <span class="ot">`yhat'</span> <span class="kw">if</span> <span class="ot">`smp'</span>, <span class="kw">meanonly</span></span>
+<span id="cb2-47"><a></a>    <span class="fu">matrix</span> result=result, <span class="fu">r</span>(<span class="kw">mean</span>)</span>
+<span id="cb2-48"><a></a>    <span class="kw">sum</span> <span class="ot">`yhat'</span> <span class="kw">if</span> !<span class="ot">`smp'</span>, <span class="kw">meanonly</span></span>
+<span id="cb2-49"><a></a>    <span class="fu">matrix</span> result=result, <span class="fu">r</span>(<span class="kw">mean</span>)</span>
+<span id="cb2-50"><a></a>    <span class="kw">qui</span>: <span class="kw">estat</span> <span class="kw">ic</span></span>
+<span id="cb2-51"><a></a>    <span class="fu">matrix</span> result=result, <span class="fu">r</span>(S)[1,5..6]</span>
+<span id="cb2-52"><a></a>    <span class="fu">return</span> <span class="fu">matrix</span> result = result</span>
+<span id="cb2-53"><a></a><span class="kw">end</span></span>
+<span id="cb2-54"><a></a></span>
+<span id="cb2-55"><a></a><span class="kw">reg</span> <span class="fu">y</span> c.x <span class="kw">if</span> <span class="dt">_n</span>&lt;=30</span>
+<span id="cb2-56"><a></a>fit_stat2</span>
+<span id="cb2-57"><a></a><span class="fu">matrix</span> rr2=<span class="fu">r</span>(result)</span>
+<span id="cb2-58"><a></a><span class="kw">reg</span> <span class="fu">y</span> c.x##c.x <span class="kw">if</span> <span class="dt">_n</span>&lt;=30</span>
+<span id="cb2-59"><a></a>fit_stat2</span>
+<span id="cb2-60"><a></a><span class="fu">matrix</span> rr2=rr2\<span class="fu">r</span>(result)</span>
+<span id="cb2-61"><a></a><span class="kw">reg</span> <span class="fu">y</span> c.x##c.x##c.x <span class="kw">if</span> <span class="dt">_n</span>&lt;=30</span>
+<span id="cb2-62"><a></a>fit_stat2</span>
+<span id="cb2-63"><a></a><span class="fu">matrix</span> rr2=rr2\<span class="fu">r</span>(result)</span>
+<span id="cb2-64"><a></a><span class="kw">reg</span> <span class="fu">y</span> c.x##c.x##c.x##c.x <span class="kw">if</span> <span class="dt">_n</span>&lt;=30</span>
+<span id="cb2-65"><a></a>fit_stat2</span>
+<span id="cb2-66"><a></a><span class="fu">matrix</span> rr2=rr2\<span class="fu">r</span>(result)</span>
+<span id="cb2-67"><a></a><span class="kw">reg</span> <span class="fu">y</span> c.x##c.x##c.x##c.x##c.x <span class="kw">if</span> <span class="dt">_n</span>&lt;=30</span>
+<span id="cb2-68"><a></a>fit_stat2</span>
+<span id="cb2-69"><a></a><span class="fu">matrix</span> rr2=rr2\<span class="fu">r</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<table class="caption-top" style="width:100%;">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;"><span class="math inline">\(R^2\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(aR^2\)</span></th>
+<th style="text-align: center;">MSE</th>
+<th style="text-align: center;">OoS MSE</th>
+<th style="text-align: center;">AIC</th>
+<th style="text-align: center;">BIC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>^1</td>
+<td style="text-align: center;">0.3225</td>
+<td style="text-align: center;">0.2983</td>
+<td style="text-align: center;">1.9348</td>
+<td style="text-align: center;">2.9491</td>
+<td style="text-align: center;">108.9358</td>
+<td style="text-align: center;">111.7382</td>
+</tr>
+<tr class="even">
+<td>^2</td>
+<td style="text-align: center;">0.6255</td>
+<td style="text-align: center;">0.5978</td>
+<td style="text-align: center;">1.0694</td>
+<td style="text-align: center;">2.9348</td>
+<td style="text-align: center;">93.1493</td>
+<td style="text-align: center;">97.3529</td>
+</tr>
+<tr class="odd">
+<td>^3</td>
+<td style="text-align: center;">0.6345</td>
+<td style="text-align: center;">0.5923</td>
+<td style="text-align: center;">1.0438</td>
+<td style="text-align: center;">2.9788</td>
+<td style="text-align: center;">94.4218</td>
+<td style="text-align: center;">100.0266</td>
+</tr>
+<tr class="even">
+<td>^4</td>
+<td style="text-align: center;">0.7132</td>
+<td style="text-align: center;">0.6673</td>
+<td style="text-align: center;">0.8189</td>
+<td style="text-align: center;">4.1380</td>
+<td style="text-align: center;">89.1439</td>
+<td style="text-align: center;">96.1499</td>
+</tr>
+<tr class="odd">
+<td>^5</td>
+<td style="text-align: center;">0.7260</td>
+<td style="text-align: center;">0.6689</td>
+<td style="text-align: center;">0.7826</td>
+<td style="text-align: center;">3.5577</td>
+<td style="text-align: center;">89.7810</td>
+<td style="text-align: center;">98.1882</td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="finding-the-best-model-by-training-and-test-samples" class="slide level2">
 <h2>Finding the best model by training and test samples</h2>
 <ul>
-<li>Approach Nr.2: Directly</li>
-<li>Estimate it using a test (validation) set approach.</li>
-<li>Needs cutting the dataset into training and test sample</li>
-<li>No assumption</li>
-<li>Need to pick evaluation criterion (loss function) = RMSE (root mean squared error)</li>
-<li>Estimate the model in part of the data (say, 80%).
-<ul>
-<li>Training sample</li>
-</ul></li>
-<li>Evaluate predictive performance on the rest of the data.
-<ul>
-<li>Test sample</li>
-</ul></li>
-<li>Avoid overfitting in training data by evaluating on test data.</li>
+<li>Similar to bootstrapping (brute force approach for SE), its also possible to use a “bute-force” approach to find the best model.</li>
+<li>This would require “imitating” the process of out-of-sample prediction.
+<ol type="1">
+<li><strong>Cut</strong> the dataset into training and test sample (80-20 ?)</li>
+<li>Choose Some evaluation criterion (loss function)</li>
+<li>Estimate the model on the training sample</li>
+<li>Predict and evaluate the model on the test sample</li>
+</ol></li>
+<li>Problem: 80% (or less), may be too small training. And 20% (one shoot) could be different from the rest of the data.</li>
 </ul>
 </section>
-<section id="training-and-test-samples" class="slide level2">
-<h2>Training and Test Samples</h2>
+<section id="lets-make-things-better-k-fold-cross-validation" class="slide level2">
+<h2>Lets make things Better: K-fold cross-validation</h2>
 <ul>
-<li>Creating two sub-samples</li>
-<li>Randomly! (ie. not 1—80 and 81—100)</li>
-<li>Randomly generate an ID, sort and create two sub-samples.</li>
-<li>Training sample 80%
+<li>If one is not enough, why not use more?</li>
+<li>Split sample into <span class="math inline">\(k=5\)</span> groups (equal size)</li>
+<li>Now, assume that each “fold” is the test sample, and the rest is the training sample.
 <ul>
-<li>Regressions will be on run on this sample</li>
-<li>Coefficients estimated</li>
+<li>Do the excercise k times, and every observation will be in the test sample once.</li>
 </ul></li>
-<li>Test (validation) sample 20%
-<ul>
-<li>Using estimated coefficients, we predict values for flats in the validation sample</li>
-<li>Calculate residual, RMSE in the test sample</li>
-</ul></li>
-<li>RMSE rather than MSE – smaller numbers….</li>
+<li>Add up the MSEs, or get the average MSE.</li>
+<li>Still has a random component, but less so than a single split.</li>
 </ul>
 </section>
-<section id="fold-cross-validation" class="slide level2">
-<h2>5-fold cross-validation</h2>
+<section id="k-fold-cross-validation" class="slide level2">
+<h2>K-fold cross-validation</h2>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a>* This is the full code <span class="kw">for</span> previous and current example</span>
+<span id="cb3-2"><a></a><span class="kw">clear</span></span>
+<span id="cb3-3"><a></a><span class="kw">set</span> <span class="dv">seed</span> 10</span>
+<span id="cb3-4"><a></a><span class="kw">qui</span>: <span class="kw">set</span> <span class="kw">obs</span> 30</span>
+<span id="cb3-5"><a></a><span class="kw">gen</span> x = runiform(-2 ,2)</span>
+<span id="cb3-6"><a></a><span class="kw">gen</span> <span class="fu">y</span> = 1 + x - 0.5 * x^2 + 1.5* rnormal()</span>
+<span id="cb3-7"><a></a></span>
+<span id="cb3-8"><a></a>** Create 5 folds</span>
+<span id="cb3-9"><a></a><span class="kw">gen</span> fold = <span class="fu">mod</span>(<span class="dt">_n</span>,5)+1</span>
+<span id="cb3-10"><a></a></span>
+<span id="cb3-11"><a></a><span class="kw">capture</span> <span class="kw">program</span> <span class="kw">drop</span> fit_stat3</span>
+<span id="cb3-12"><a></a><span class="kw">program</span> fit_stat3, rclass</span>
+<span id="cb3-13"><a></a>    <span class="kw">tempvar</span> yhat aux</span>
+<span id="cb3-14"><a></a>    <span class="kw">qui</span>:<span class="kw">gen</span> <span class="ot">`yhat'</span> = .</span>
+<span id="cb3-15"><a></a>    <span class="kw">qui</span>:<span class="kw">forvalues</span> i = 1/5 {</span>
+<span id="cb3-16"><a></a>        <span class="kw">reg</span> <span class="ot">`0'</span> <span class="kw">if</span> fold!=<span class="ot">`i'</span></span>
+<span id="cb3-17"><a></a>        <span class="kw">predict</span> <span class="ot">`aux'</span></span>
+<span id="cb3-18"><a></a>        <span class="kw">replace</span> <span class="ot">`yhat'</span> = <span class="ot">`aux'</span> <span class="kw">if</span> fold==<span class="ot">`i'</span></span>
+<span id="cb3-19"><a></a>        <span class="kw">drop</span> <span class="ot">`aux'</span></span>
+<span id="cb3-20"><a></a>    }</span>
+<span id="cb3-21"><a></a>    <span class="kw">qui</span>: <span class="kw">replace</span> <span class="ot">`yhat'</span>=(<span class="fu">y</span>-<span class="ot">`yhat'</span>)^2    </span>
+<span id="cb3-22"><a></a>    <span class="kw">sum</span> <span class="ot">`yhat'</span>, <span class="kw">meanonly</span></span>
+<span id="cb3-23"><a></a>    <span class="fu">return</span> <span class="fu">scalar</span> <span class="kw">mse</span> = <span class="fu">r</span>(<span class="kw">mean</span>)</span>
+<span id="cb3-24"><a></a><span class="kw">end</span></span>
+<span id="cb3-25"><a></a></span>
+<span id="cb3-26"><a></a>fit_stat3 <span class="fu">y</span> c.x </span>
+<span id="cb3-27"><a></a><span class="kw">display</span> <span class="st">"^1, mse: "</span> %5.3f <span class="ot">`r(mse)'</span> <span class="dt">_n</span></span>
+<span id="cb3-28"><a></a>fit_stat3 <span class="fu">y</span> c.x##c.x </span>
+<span id="cb3-29"><a></a><span class="kw">display</span> <span class="st">"^2, mse: "</span> %5.3f <span class="ot">`r(mse)'</span> <span class="dt">_n</span></span>
+<span id="cb3-30"><a></a>fit_stat3 <span class="fu">y</span> c.x##c.x##c.x </span>
+<span id="cb3-31"><a></a><span class="kw">display</span> <span class="st">"^3, mse: "</span> %5.3f <span class="ot">`r(mse)'</span> <span class="dt">_n</span></span>
+<span id="cb3-32"><a></a>fit_stat3 <span class="fu">y</span> c.x##c.x##c.x##c.x </span>
+<span id="cb3-33"><a></a><span class="kw">display</span> <span class="st">"^4, mse: "</span> %5.3f <span class="ot">`r(mse)'</span> <span class="dt">_n</span></span>
+<span id="cb3-34"><a></a>fit_stat3 <span class="fu">y</span> c.x##c.x##c.x##c.x##c.x </span>
+<span id="cb3-35"><a></a><span class="kw">display</span> <span class="st">"^5, mse: "</span> %5.3f <span class="ot">`r(mse)'</span> <span class="dt">_n</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p>^1, mse: 4.851</p>
+<p>^2, mse: 3.196</p>
+<p>^3, mse: 2.805</p>
+<p>^4, mse: 3.085</p>
+<p>^5, mse: 3.160</p>
+</section>
+<section id="when-k-rightarrow-n.-loocv" class="slide level2">
+<h2>When K <span class="math inline">\(\rightarrow\)</span> N. LooCV</h2>
 <ul>
-<li>Split sample <span class="math inline">\(k=5\)</span> times to train and test</li>
-<li>For each folds:
+<li>K-fold cross-validation has two weaknesses:
+<ol type="1">
+<li>Randomness: different splits may lead to different results</li>
+<li>Small sample size for training may be too small</li>
+</ol></li>
+<li>An alternative to address both is increasing K … until K=N
 <ul>
-<li>Estimate model on training.</li>
-<li>Get coefficients.</li>
-<li>Use them to estimate on Test</li>
-<li>Calculate test MSE</li>
+<li>This is the Leave-one-out cross-validation (LOOCV)</li>
+<li>Train on N-1 observations, predict on the left-out (N=1) observation</li>
 </ul></li>
-<li>Average and take Sqrt</li>
-<li>Repeat for models</li>
-<li>Pick model w lowest avg RMSE</li>
+<li>This can be computationally expensive, unless you are estimating Linear regression models.
+<ul>
+<li>LOOCV its really fast for OLS</li>
+</ul></li>
 </ul>
 </section>
 <section id="bic-vs-test-rmse" class="slide level2">
 <h2>BIC vs test RMSE</h2>
 <ul>
-<li>In our experience, in practice, BIC is the best indirect criterion – closest to test sample.</li>
+<li>In practice, BIC is the best indirect criterion – closest to test sample.</li>
 <li>The advantage of BIC is that it needs no sample splitting which may be a problem in small samples.</li>
 <li>The advantage of test MSE is that it makes no assumption.</li>
 <li>BIC is a good first run, quick, is often not very wrong.</li>
-<li>Ultimately, you want to do a test MSE.</li>
-</ul>
-</section>
-<section id="case-study-model-selection" class="slide level2">
-<h2>Case study: Model selection</h2>
-<ul>
-<li>We have the ingredients, we need to pick a model.</li>
-<li>This process involves variable selection and a decision rule of choosing the model based on some loss function.</li>
-<li>BIC on the actual data</li>
-<li>Test-sample RMSE</li>
-<li>Cross-validated (CV) RMSE</li>
-<li>If enough data / computer power, use CV RMSE</li>
-<li>With larger dataset, overfit becomes less of an issue.</li>
-</ul>
-</section>
-<section id="case-study-model-selection-1" class="slide level2">
-<h2>Case study: Model selection</h2>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>Model</th>
-<th>N vars</th>
-<th>N coeff</th>
-<th>R-squared</th>
-<th>RMSE</th>
-<th>BIC</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1 Model 1</td>
-<td>3</td>
-<td>0.85</td>
-<td>1,755</td>
-<td>5,018</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>2 Model 2</td>
-<td>5</td>
-<td>0.90</td>
-<td>1,433</td>
-<td>4,910</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>3 Model 3</td>
-<td>9</td>
-<td>0.91</td>
-<td>1,322</td>
-<td>4,893</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>4 Model 4</td>
-<td>12</td>
-<td>0.92</td>
-<td>1,273</td>
-<td>4,894</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>5 Model 5</td>
-<td>22</td>
-<td>0.92</td>
-<td>1,239</td>
-<td>4,935</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>Note: In sample values. Model 1: age, age squared, Model 2= Model 1 +odometer, odometer squared, Model 3= Model2 + SE, excellent condition, good condition, dealer, Model 4= Model 3 + LE, XLE, like new condition, 6cylinder, Model 5 = Model 4 + many interactions. Source: used-cars dataset.</p>
-</section>
-<section id="case-study-model-selection-2" class="slide level2">
-<h2>Case study: Model selection</h2>
-<ul>
-<li>Cross-validate using 4-fold cross validation.</li>
-<li>Run the regression on 3/4 of the sample, predicting on the remaining 1/4 of the sample, get RMSE on test sample.</li>
-<li>We then average out RMSE values over the 4 test samples</li>
-</ul>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>Fold No.</th>
-<th>Model 1</th>
-<th>Model 2</th>
-<th>Model 3</th>
-<th>Model 4</th>
-<th>Model 5</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1 Fold1</td>
-<td>1,734</td>
-<td>1,428</td>
-<td>1,331</td>
-<td>1,395</td>
-<td>1,391</td>
-</tr>
-<tr class="even">
-<td>2 Fold2</td>
-<td>2,010</td>
-<td>1,781</td>
-<td>1,692</td>
-<td>1,638</td>
-<td>1,693</td>
-</tr>
-<tr class="odd">
-<td>3 Fold3</td>
-<td>1,465</td>
-<td>1,251</td>
-<td>1,256</td>
-<td>1,253</td>
-<td>1,436</td>
-</tr>
-<tr class="even">
-<td>4 Fold4</td>
-<td>1,823</td>
-<td>1,325</td>
-<td>1,250</td>
-<td>1,246</td>
-<td>1,307</td>
-</tr>
-<tr class="odd">
-<td>5 Average</td>
-<td>1,769</td>
-<td>1,460</td>
-<td>1,394</td>
-<td>1,392</td>
-<td>1,464</td>
-</tr>
-</tbody>
-</table>
-<p>Source: used-cars dataset.</p>
-</section>
-<section id="case-study-model-selection-3" class="slide level2">
-<h2>Case study: Model selection</h2>
-<ul>
-<li>Model 3 has lowest BIC, lowest average RMSE on test samples. Model 4 is close.</li>
-<li>Interestingly, both approaches suggests that Model 3 is the one that has the best prediction properties</li>
-<li>Small sample, simple model.</li>
+<li>Test MSE is the best, but may be computationally expensive.</li>
 </ul>
 </section>
 <section id="external-validity-and-stable-patterns" class="slide level2">
 <h2>External validity and stable patterns</h2>
 <ul>
-<li>BIC, Training-test, k-fold cross-validation…</li>
-<li>All very nice</li>
-<li>But, in the end, they all use the information in the data.</li>
-<li>How would things look for the target observation(s)?</li>
+<li>BIC, Training-test, k-fold cross-validation… All very nice
+<ul>
+<li>In the end, they all use the information in the data.</li>
+</ul></li>
+<li>How would things look for the target observation(s)? unknown!!</li>
 <li>The issue of stationarity – how our data is related to other datasets we may use our model</li>
-<li>We may have some ideas</li>
-<li>We may use non-random test samples that may mimic the difference in our data and the target observations</li>
-<li>In the end we can’t know but need to think about it.</li>
-<li>Plus be aware, that some difference is likely, so your model fit in an outside data source is likely to be worse…</li>
+<li>In the end we can’t know but need to think about it.
+<ul>
+<li>Plus, if there is no external validity, your model fit in an outside data source is likely to be worse…</li>
+</ul></li>
 </ul>
 </section>
 <section id="external-validity-and-stable-patterns-1" class="slide level2">
@@ -1245,9 +1269,10 @@ Constant 18,365.45 18,860.20 19,431.89 18,963.35</code></pre>
 <ul>
 <li>Most predictions will be on future data</li>
 <li>High external validity requires that the environment is stationary.</li>
-<li>Stationarity means that the way variables are distributed remains the same over time.</li>
-<li>Here that distribution is to be understood in a general way: the joint distribution of predictor variables and target variable are required to remain the same throughout the time covered in the data and the time of the forecast.</li>
-<li>Stationarity ensures that the relationship between predictors and the target variable is the same in the data and the forecasted future.</li>
+<li>Stationarity means that the way variables are distributed remains the same over time.
+<ul>
+<li>Ensures that the relationship between predictors and the target variable is the same in the data and the forecasted future.</li>
+</ul></li>
 <li>If the relationship breaks down whatever we establish in our data won’t be true in the future, leading to wrong forecasts.</li>
 </ul>
 </section>
@@ -1255,56 +1280,12 @@ Constant 18,365.45 18,860.20 19,431.89 18,963.35</code></pre>
 <h2>External validity and stable patterns</h2>
 <ul>
 <li>External validity and stable patterns - Very broad concept</li>
-<li>It’s about representativeness of actual data <span class="math inline">\(\rightarrow\)</span> to live data</li>
-<li>Often hard to know.</li>
-<li>Remember hotels (other dates, other cities).</li>
-<li>Domain knowledge can help.</li>
+<li>It’s about representativeness of actual data <span class="math inline">\(\rightarrow\)</span> to live data
+<ul>
+<li>Remember hotels? (other dates, other cities).</li>
+</ul></li>
+<li>Domain knowledge can help. Inner knowledge of the process can help.</li>
 <li>Study if patterns were stable in the past / other locations were stable can help.</li>
-</ul>
-</section>
-<section id="algorithms" class="slide level2">
-<h2>Algorithms</h2>
-</section>
-<section id="machine-learning-and-the-role-of-algorithms" class="slide level2">
-<h2>Machine Learning and the Role of Algorithms</h2>
-<ul>
-<li>Predictive analytics is often used for data analysis whose goal is prediction. But a more popular, and related, term is machine learning.</li>
-<li>Machine learning is an umbrella concept for methods that use algorithms to find patterns in data and use them for prediction purposes.</li>
-<li>An algorithm is a set of rules and steps that defines how to generate an output (predicted values) using various inputs (variables, observations in the original data).</li>
-<li>A formula is an example of an algorithm – one that can be formulated in terms of an equation.</li>
-<li>OLS formula for estimating the coefficients of a linear regression is an algorithm.</li>
-</ul>
-</section>
-<section id="machine-learning-algorithms" class="slide level2">
-<h2>Machine Learning Algorithms</h2>
-<ul>
-<li>Machine learning is about algorithms, machines and learning</li>
-<li>Algorithms specify each and every step to follow in a clear way.</li>
-<li>Not all algorithms can be translated into a formula.
-<ul>
-<li>The bootstrap estimation of a standard error (Chapter 5, Section 5.6) is an example.</li>
-<li>K-fold cross-validation.</li>
-</ul></li>
-<li>Heavy use of machines = computers. Steps of algorithm translated into computer code and make the computer follow those steps. Fast.</li>
-<li>Learning - learn something from the data with data and an algorithms.
-<ul>
-<li>Predicted value of <span class="math inline">\(y =?\)</span> If combine <span class="math inline">\(x\)</span> variables using a particular model.</li>
-<li>learning which model is best for predicting <span class="math inline">\(y\)</span> as well as what that predicted value is.</li>
-</ul></li>
-</ul>
-</section>
-<section id="what-is-machine-learning" class="slide level2">
-<h2>What is, machine learning?</h2>
-<ul>
-<li>Many definitions, discussions.</li>
-<li>Here: Machine learning is an approach to predictive data analysis – achieving the best possible prediction from available data.</li>
-<li>Consequence 1: understanding the patterns of associations between <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> is of secondary importance.</li>
-<li>We need stable patterns for good prediction in live data, but that is it.</li>
-<li>The machine learning attitude - a preference for evaluating methods based on data as opposed to abstract principles.</li>
-<li>Original data to live data</li>
-<li>Not a general rule or philosophy</li>
-<li>Machine learning broadly: all prediction models including OLS</li>
-<li>Machine learning narrowly: prediction models with no formula, ie not OLS</li>
 </ul>
 </section>
 <section id="main-takeaways" class="slide level2">
@@ -1315,6 +1296,218 @@ Constant 18,365.45 18,860.20 19,431.89 18,963.35</code></pre>
 <li>Cross-validation can help find the best model in the population, or general pattern, represented by the original data</li>
 <li>Stability of the patterns of association is needed for a prediction with high external validity</li>
 </ul>
+</section>
+<section id="cs-predicting-the-price-of-used-cars" class="slide level2">
+<h2>CS: Predicting the price of used cars</h2>
+<ul>
+<li>SUse data from <a href="data_slides/used-cars.dta">here</a> for replication.</li>
+<li>Drop car with price&gt;20k or those price = 1$.</li>
+<li>While distribution is skewed, Log(price) is not normal either. We will keep it as is.</li>
+<li>Two areas, we keep Chicago only.</li>
+<li>drop if odometer&gt;100K miles</li>
+<li>Variables: price, age, odometer, type, condition, cylinders, dealer</li>
+</ul>
+</section>
+<section id="cs-competing-models" class="slide level2">
+<h2>CS: Competing models:</h2>
+<ul>
+<li>Model 1 age, age squared</li>
+<li>Model 2 age, age squared, odometer, odometer squared</li>
+<li>Model 3 age, age squared, odometer, odometer squared, LE, condition , dealer</li>
+<li>Model 4 age, age squared, odometer, odometer squared, LE, condition , dealer, SE, XLE, cylinder</li>
+<li>Model 5 same as Model 4 but with all variables interacted with age</li>
+<li>Model 6 same as Model 4 but with all variables interacted with condition</li>
+</ul>
+<div id="7042ea2c" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a></a>* setup</span>
+<span id="cb4-2"><a></a><span class="kw">use</span> data_slides/used-cars.dta, <span class="kw">clear</span></span>
+<span id="cb4-3"><a></a><span class="kw">global</span> model1 age c.age#c.age</span>
+<span id="cb4-4"><a></a><span class="kw">global</span> model2 <span class="ot">$model1</span> lnodometer c.lnodometer#c.lnodometer</span>
+<span id="cb4-5"><a></a><span class="kw">global</span> model3 <span class="ot">$model2</span> LE i.condition_recode i.dealer</span>
+<span id="cb4-6"><a></a><span class="kw">global</span> model4 <span class="ot">$model3</span> <span class="kw">SE</span> XLE cylinder</span>
+<span id="cb4-7"><a></a><span class="kw">global</span> model5 c.(<span class="ot">$model4</span>)##c.age</span>
+<span id="cb4-8"><a></a><span class="kw">global</span> model6 c.(<span class="ot">$model4</span>)##i.condition_recode</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="cs-test-data" class="slide level2">
+<h2>CS: Test Data</h2>
+<ul>
+<li>Assume that 20% of the data is “target” data.</li>
+<li>Lets run all models, using different evaluation criteria. And see which one is the best.</li>
+<li>See below for the program..Rather long</li>
+</ul>
+<div id="53816d9d" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a></a><span class="kw">gen</span> rnd = runiform()</span>
+<span id="cb5-2"><a></a><span class="kw">sort</span> rnd</span>
+<span id="cb5-3"><a></a><span class="kw">gen</span> <span class="kw">test</span> = <span class="dt">_n</span>/_N&lt;=.2</span>
+<span id="cb5-4"><a></a></span>
+<span id="cb5-5"><a></a><span class="kw">capture</span> <span class="kw">program</span> <span class="kw">drop</span> fit_stat4</span>
+<span id="cb5-6"><a></a><span class="kw">program</span> fit_stat4, rclass</span>
+<span id="cb5-7"><a></a>    <span class="kw">reg</span> <span class="ot">`0'</span> <span class="kw">if</span> <span class="kw">test</span>==0</span>
+<span id="cb5-8"><a></a>    <span class="kw">tempvar</span> yxhat</span>
+<span id="cb5-9"><a></a>    <span class="kw">predict</span> <span class="ot">`yxhat'</span> <span class="kw">if</span> <span class="kw">test</span>==1</span>
+<span id="cb5-10"><a></a>    <span class="kw">replace</span> <span class="ot">`yxhat'</span> = (price-<span class="ot">`yxhat'</span>)^2  <span class="kw">if</span> <span class="kw">test</span>==1</span>
+<span id="cb5-11"><a></a>    <span class="fu">matrix</span> result = <span class="fu">e</span>(r2), <span class="fu">e</span>(r2_a)</span>
+<span id="cb5-12"><a></a>    <span class="kw">estat</span> <span class="kw">ic</span></span>
+<span id="cb5-13"><a></a>    <span class="fu">matrix</span> result = result, <span class="fu">r</span>(S)[1,5..6]</span>
+<span id="cb5-14"><a></a>    ** K-fold <span class="kw">cross</span>-validation</span>
+<span id="cb5-15"><a></a>    <span class="kw">capture</span> <span class="kw">drop</span> fold</span>
+<span id="cb5-16"><a></a>    <span class="kw">gen</span> fold = runiform() <span class="kw">if</span> <span class="kw">test</span>==0</span>
+<span id="cb5-17"><a></a>    <span class="kw">sort</span> fold </span>
+<span id="cb5-18"><a></a>    <span class="kw">drop</span> fold</span>
+<span id="cb5-19"><a></a>    <span class="kw">gen</span> fold = <span class="fu">mod</span>(<span class="dt">_n</span>,5)+1 <span class="kw">if</span> <span class="kw">test</span>==0</span>
+<span id="cb5-20"><a></a>    </span>
+<span id="cb5-21"><a></a>    *** Kfold1</span>
+<span id="cb5-22"><a></a>    <span class="kw">tempvar</span> yhat aux</span>
+<span id="cb5-23"><a></a>    <span class="kw">qui</span>:<span class="kw">gen</span> <span class="ot">`yhat'</span> = .</span>
+<span id="cb5-24"><a></a>    <span class="kw">qui</span>:<span class="kw">forvalues</span> i = 1/5 {</span>
+<span id="cb5-25"><a></a>        <span class="kw">reg</span> <span class="ot">`0'</span> <span class="kw">if</span> fold!=<span class="ot">`i'</span> &amp; <span class="kw">test</span>==0</span>
+<span id="cb5-26"><a></a>        <span class="kw">predict</span> <span class="ot">`aux'</span></span>
+<span id="cb5-27"><a></a>        <span class="kw">replace</span> <span class="ot">`yhat'</span> = <span class="ot">`aux'</span> <span class="kw">if</span> fold==<span class="ot">`i'</span> &amp; <span class="kw">test</span>==0</span>
+<span id="cb5-28"><a></a>        <span class="kw">drop</span> <span class="ot">`aux'</span></span>
+<span id="cb5-29"><a></a>    }</span>
+<span id="cb5-30"><a></a>    <span class="kw">qui</span>: <span class="kw">replace</span> <span class="ot">`yhat'</span>=(price-<span class="ot">`yhat'</span>)^2     </span>
+<span id="cb5-31"><a></a>    <span class="kw">sum</span> <span class="ot">`yhat'</span> <span class="kw">if</span> <span class="kw">test</span>==0, <span class="kw">meanonly</span></span>
+<span id="cb5-32"><a></a>    <span class="fu">matrix</span> result = result, <span class="fu">sqrt</span>(<span class="fu">r</span>(<span class="kw">mean</span>))</span>
+<span id="cb5-33"><a></a>    *** Kfold2</span>
+<span id="cb5-34"><a></a>    <span class="kw">capture</span> <span class="kw">drop</span> fold</span>
+<span id="cb5-35"><a></a>    <span class="kw">gen</span> fold = runiform() <span class="kw">if</span> <span class="kw">test</span>==0</span>
+<span id="cb5-36"><a></a>    <span class="kw">sort</span> fold </span>
+<span id="cb5-37"><a></a>    <span class="kw">drop</span> fold</span>
+<span id="cb5-38"><a></a>    <span class="kw">gen</span> fold = <span class="fu">mod</span>(<span class="dt">_n</span>,5)+1 <span class="kw">if</span> <span class="kw">test</span>==0</span>
+<span id="cb5-39"><a></a>    </span>
+<span id="cb5-40"><a></a>    <span class="kw">drop</span> <span class="ot">`yhat'</span>  </span>
+<span id="cb5-41"><a></a>    <span class="kw">qui</span>:<span class="kw">gen</span> <span class="ot">`yhat'</span> = .</span>
+<span id="cb5-42"><a></a>    <span class="kw">qui</span>:<span class="kw">forvalues</span> i = 1/5 {</span>
+<span id="cb5-43"><a></a>        <span class="kw">reg</span> <span class="ot">`0'</span> <span class="kw">if</span> fold!=<span class="ot">`i'</span> &amp; <span class="kw">test</span>==0</span>
+<span id="cb5-44"><a></a>        <span class="kw">predict</span> <span class="ot">`aux'</span></span>
+<span id="cb5-45"><a></a>        <span class="kw">replace</span> <span class="ot">`yhat'</span> = <span class="ot">`aux'</span> <span class="kw">if</span> fold==<span class="ot">`i'</span> &amp; <span class="kw">test</span>==0</span>
+<span id="cb5-46"><a></a>        <span class="kw">drop</span> <span class="ot">`aux'</span></span>
+<span id="cb5-47"><a></a>    }</span>
+<span id="cb5-48"><a></a>    <span class="kw">qui</span>: <span class="kw">replace</span> <span class="ot">`yhat'</span>=(price-<span class="ot">`yhat'</span>)^2    </span>
+<span id="cb5-49"><a></a>    <span class="kw">sum</span> <span class="ot">`yhat'</span> <span class="kw">if</span> <span class="kw">test</span>==0, <span class="kw">meanonly</span></span>
+<span id="cb5-50"><a></a>    <span class="fu">matrix</span> result = result, <span class="fu">sqrt</span>(<span class="fu">r</span>(<span class="kw">mean</span>))</span>
+<span id="cb5-51"><a></a>    ** <span class="kw">test</span> <span class="kw">on</span> live <span class="kw">data</span></span>
+<span id="cb5-52"><a></a>    <span class="kw">sum</span> <span class="ot">`yxhat'</span> <span class="kw">if</span> <span class="kw">test</span>==1, <span class="kw">meanonly</span></span>
+<span id="cb5-53"><a></a>    <span class="fu">matrix</span> result = result, <span class="fu">sqrt</span>(<span class="fu">r</span>(<span class="kw">mean</span>))</span>
+<span id="cb5-54"><a></a>    <span class="fu">matrix</span> colname result = r2 r2_a AIC BIC Kfold1 Kfold2 <span class="kw">test</span></span>
+<span id="cb5-55"><a></a>    ** </span>
+<span id="cb5-56"><a></a>    <span class="fu">return</span> <span class="fu">matrix</span> result = result</span>
+<span id="cb5-57"><a></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="cs-results" class="slide level2">
+<h2>CS: Results</h2>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a></a><span class="kw">qui</span>: fit_stat4 price <span class="ot">$model1</span></span>
+<span id="cb6-2"><a></a><span class="fu">matrix</span> fresults = <span class="fu">r</span>(result)</span>
+<span id="cb6-3"><a></a><span class="kw">qui</span>: fit_stat4 price <span class="ot">$model2</span></span>
+<span id="cb6-4"><a></a><span class="fu">matrix</span> fresults = fresults\<span class="fu">r</span>(result)</span>
+<span id="cb6-5"><a></a><span class="kw">qui</span>: fit_stat4 price <span class="ot">$model3</span></span>
+<span id="cb6-6"><a></a><span class="fu">matrix</span> fresults = fresults\<span class="fu">r</span>(result)</span>
+<span id="cb6-7"><a></a><span class="kw">qui</span>: fit_stat4 price <span class="ot">$model4</span></span>
+<span id="cb6-8"><a></a><span class="fu">matrix</span> fresults = fresults\<span class="fu">r</span>(result)</span>
+<span id="cb6-9"><a></a><span class="kw">qui</span>: fit_stat4 price <span class="ot">$model5</span></span>
+<span id="cb6-10"><a></a><span class="fu">matrix</span> fresults = fresults\<span class="fu">r</span>(result)</span>
+<span id="cb6-11"><a></a><span class="kw">qui</span>: fit_stat4 price <span class="ot">$model6</span></span>
+<span id="cb6-12"><a></a><span class="fu">matrix</span> fresults = fresults\<span class="fu">r</span>(result)</span>
+<span id="cb6-13"><a></a><span class="fu">matrix</span> rowname fresults = Model1 Model2 Model3 Model4 Model5 Model6</span>
+<span id="cb6-14"><a></a><span class="kw">set</span> <span class="dv">linesize</span> 250</span>
+<span id="cb6-15"><a></a>esttab <span class="fu">matrix</span>(fresults, fmt(%8.3f)) , md  nomtitle</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<table class="caption-top">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">r2</th>
+<th style="text-align: center;">r2_a</th>
+<th style="text-align: center;">AIC</th>
+<th style="text-align: center;">BIC</th>
+<th style="text-align: center;">Kfold1</th>
+<th style="text-align: center;">Kfold2</th>
+<th style="text-align: center;">test</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Model1</td>
+<td style="text-align: center;">0.711</td>
+<td style="text-align: center;">0.708</td>
+<td style="text-align: center;">4823.338</td>
+<td style="text-align: center;">4834.032</td>
+<td style="text-align: center;">2472.245</td>
+<td style="text-align: center;">2470.654</td>
+<td style="text-align: center;">1697.617</td>
+</tr>
+<tr class="even">
+<td>Model2</td>
+<td style="text-align: center;">0.776</td>
+<td style="text-align: center;">0.772</td>
+<td style="text-align: center;">4760.551</td>
+<td style="text-align: center;">4778.374</td>
+<td style="text-align: center;">2185.247</td>
+<td style="text-align: center;">2204.960</td>
+<td style="text-align: center;">1345.265</td>
+</tr>
+<tr class="odd">
+<td>Model3</td>
+<td style="text-align: center;">0.779</td>
+<td style="text-align: center;">0.771</td>
+<td style="text-align: center;">4766.944</td>
+<td style="text-align: center;">4802.590</td>
+<td style="text-align: center;">2270.672</td>
+<td style="text-align: center;">2307.392</td>
+<td style="text-align: center;">1346.395</td>
+</tr>
+<tr class="even">
+<td>Model4</td>
+<td style="text-align: center;">0.785</td>
+<td style="text-align: center;">0.775</td>
+<td style="text-align: center;">4765.275</td>
+<td style="text-align: center;">4811.613</td>
+<td style="text-align: center;">2388.426</td>
+<td style="text-align: center;">2259.348</td>
+<td style="text-align: center;">1381.180</td>
+</tr>
+<tr class="odd">
+<td>Model5</td>
+<td style="text-align: center;">0.797</td>
+<td style="text-align: center;">0.778</td>
+<td style="text-align: center;">4772.246</td>
+<td style="text-align: center;">4857.794</td>
+<td style="text-align: center;">2605.005</td>
+<td style="text-align: center;">2425.626</td>
+<td style="text-align: center;">1481.571</td>
+</tr>
+<tr class="even">
+<td>Model6</td>
+<td style="text-align: center;">0.851</td>
+<td style="text-align: center;">0.824</td>
+<td style="text-align: center;">4724.611</td>
+<td style="text-align: center;">4867.191</td>
+<td style="text-align: center;">2555.466</td>
+<td style="text-align: center;">2670.216</td>
+<td style="text-align: center;">1523.569</td>
+</tr>
+</tbody>
+</table>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">

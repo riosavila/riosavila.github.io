@@ -21,166 +21,178 @@ execute:
 
 ## Motivation
 
-- Imagine you want to sell your car soon and need to predict its price. You have data on similar used cars, and several regression models could help estimate its value now and in a year. How do you choose the best model? 
- 
-- Or, take an ice cream shop—using past sales and temperature data, you want to predict sales for the coming days. What factors should you consider to ensure your prediction is as accurate as possible?
- 
-## Prediction Basics
+-   Imagine you want to sell your car soon and need to predict its price. You have data on similar used cars, and several regression models could help estimate its value now and in a year. How do you choose the best model?
 
-- We start with original data (what we have) $\rightarrow$ to build a model
-- There is Live data (data we do not have yet)
-  
-- The Target variable $Y$ (=dependent variable, response, outcome)
-- Predictor variables $X$ (= inputs, covariates, features, independent variables)
+-   Or, take an ice cream shop—using past sales and temperature data, you want to predict sales for the coming days. What factors should you consider to ensure your prediction is as accurate as possible?
 
-- The goal is to predict value of $Y$ for target observation $j$ in live data
-  - Actual value for $Y_j$ unknown
-  - but value for $X_j$ known
-  - Need predicted value of $Y$ for each target observation $j$
+## Prediction Basics: The Process
+
+-   The idea of behind prediction is that we want to assign a value of $y$($\hat y$) (target or outcome) for observations we do not have the value.
+-   What we have, in our original data or working sample, is a set of observations with $y$ and $x$ values. We use them to "learn" the patterns of association between $y$ and $x$.
+-   But for the target observations, we only have $x$ values.
+
+## Prediction Basics: The Process
+
+-   The process of prediction involves:
+    -   Determine what is the **target** variable $y$ and the **features** $x$.
+    -   Using the original data to estimate a model that describes the patterns of association between $y$ and $x$.
+    -   Using the estimated model to predict the value of $y$ for the target observations.
+-   Evaluation of the prediction (how actual data compares to predicted data)
+-   Rinse and repeat: Choose a different model, evaluate, choose the best model.
+    -   Best model for the Live data not the original data.
 
 ## CS: Price cars
 
-- You want to sell your car through online advertising
-- Target is continuous (in dollars)
-- Features are continuous or categorical
-- The business question:
-  - What price should you put into the ad?
+-   You want to sell your car through online advertising
+-   Target is continuous (in dollars)
+-   Features are continuous or categorical
+-   The business question:
+    -   What price should you put into the ad?
 
-##  CS: Price apartments 
+## CS: Price apartments
 
-- You are planning to run an AirBnB business
-  - Maybe several rooms
-- Target is continuous (in dollars)
-- Features are varied from text to binary
-- The business question:
-  - How should you price apartments/houses?
+-   You are planning to run an AirBnB business
+-   Target is continuous (in dollars)
+-   Features are varied from text to binary
+-   The business question:
+    -   How should you price apartments/houses?
 
-## CS: Predict company's exit from business 
+## CS: Predict company's exit from business
 
-- You have a consulting company
-- Predict which firms will go out of business (exit) from a pool of partners
-- Target is binary: exit / stay
-- Features of financial and management info
-- Business decision:
-  - Which firms to give loan to?
+-   You have a consulting company
+-   Predict which firms will go out of business (exit) from a pool of partners
+-   Target is binary: exit / stay
+-   Features of financial and management info
+-   Business decision:
+    -   Which firms to give loan to?
 
 ## Predictive Analysis: what is new?
 
-- Most of econometrics focused on finding relationships between $X$ and $Y$
-  - What is the relationship like (+/-, linear, etc.)
-  - Is it a robust relationship – true in the population /general pattern? (causal?)
-- Now, we use $x_1, x_2, \dots$ to predict $y$: $\hat{y}_j = \hat{f}(x_j)$
-- How is this different?
-  
-:::{.fragment}  
-  - We care less about
-    - Individual coefficient values, multicollinearity
-  - We still care about the stability of our results.
-  - Should we care about causality?
-    - Not so much, we care more about making the best prediction.
+-   Most of econometrics focused on finding relationships between $X$ and $Y$
+    -   What is the relationship like (+/-, linear, etc.)
+    -   Is it a robust relationship – true in the population /general pattern? (causal?)
+-   Now, we use $x_1, x_2, \dots$ to predict $y$: $\hat{y}_j = \hat{f}(x_j)$, How is this different?
+
+::: fragment
+-   We care less about
+    -   Individual coefficient values, multicollinearity
+-   We still care about the stability of our results.
+-   But, should we care about causality?
+    -   Not so much, we care more about making the best prediction.
 :::
 
 # Different types of prediction
 
+Target variables
+
 ## What are we predicting?
 
-- $Y$ is quantitative (e.g price)
-  - Quantitative prediction
-  - "Regression" problem
-- $Y$ is binary (e.g. Default or nor)
-  - Probability prediction
-  - Classification problem
-  - Broadly: $Y$ takes values in a finite set of (unordered) classes (survived/died, sold/not sold, car model)
-- Time series prediction (Forecasting). Make predictions about the future based on historical and current data.
+-   $Y$ is quantitative (e.g price)
+    -   Quantitative prediction. Expected price of a car given its characteristics.
+    -   its a "Regression" problem
+    -   We could obtain a point prediction or an interval prediction (As before)
+-   $Y$ is binary (e.g. Default or nor)
+    -   $Y$ takes values in a finite set of (unordered) classes (survived/died, sold/not sold, car model)
+    -   We may want to types of predictions: Probability prediction ($\hat P(y|x=1)$) or classification ($\hat y = 1 \text{ or }0| x$)
+-   Time series prediction (**Forecasting**).
+    -   Make predictions about the future based on historical and current data.
+    -   $\hat y_t = f(x_{t-1}, x_{t-2}, \dots)$
 
 ## What is Different?
 
-- Feature engineering (variable selection) including variable selection, coding and functional form
-- Model building and prediction
-  - Decision regarding model complexity and estimation
-    - Remember splines, polynomials
-  - Machine learning methods
-    - Automated model selection under some conditions
-- Model evaluation and selection
-  - Compare models based on some measure of fit
-- Key idea: Focus on systematically combine estimation and model selection
+-   In principle, the process is the same as before, but we have a diffent goal.
+    -   We need to pay more attention to other aspects of the process.
+-   Label Engeneering: What transformation is suitable for the target variable?
+-   Feature engineering (variable selection): What variables and functional forms should be included
+-   Model estimation and prediction, based on variable selection
+    -   Decisions regarding model complexity and Specification (Know-How or Machine Learning)
+-   Model evaluation considering complexity and loss
+-   Key idea: Focus on systematically combine estimation and model selection
 
-## Supervised Machine Learning Technique: Regression
+## The Tool: Supervised Machine Learning
 
-- Linear regression produces a predicted value for the dependent variable.
-  - **Predictions**: are the expected value of $y$ if we know $x$.
-- Linear regression with $y, x_1, x_2, etc.,$, is a model for the conditional expected value of $y$, which provide us with $\beta's$.
-- We need estimated coefficients $(\hat{\beta})$ and actual $x$ values $(x_j)$ to predict an actual value $\hat{y}$
-  
-$$\begin{aligned}
-y^E &= \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots \\
-\hat{y}_j &= \hat{\beta}_0 + \hat{\beta}_1 x_{1j} + \hat{\beta}_2 x_{2j} + \dots
-\end{aligned}
-$$
+-   Supervised Machine Learning is a set of tools that help us predict the value of a target variable $Y$ based on a set of features $X$.
+-   We will use one of the oldest and most commonly used method:
+
+::: fragment
+-   Linear Regression
+:::
 
 ## The Prediction Error
 
-- The Regression model can produce a Predicted value $\hat{y}_j$ for target observation $j$
-- but, actual value $y_j$ is not known (that is why we are predicting)
-- Thus, there will be a prediction error
+-   We have seen this.
+-   The Regression model can produce a Predicted value $\hat{y}_j$ for target observation $j$
+-   but, actual value $y_j$ is not known (that is why we are predicting)
+-   Thus, there will be a prediction error
 
 $$e_j = \hat{y}_j - y_j
 $$
 
-- Error = actual value - predicted value
+-   Error = actual value - predicted value
 
 ## The Prediction Error
 
-- The **ideal** prediction error, is zero: our predicted value is right on target.
-- The prediction error is defined by the direction of miss and size.
-- Direction of miss:
-  - Positive if we overpredict the value: we predict a higher value than actual value.
-  - Negative if we underpredict the value: our prediction is too low.
-  - Degree of wrongness depends on the decision problem.
-- Size:
-  - Larger in absolute value the further away our prediction is from the actual value.
-  - It is smaller the closer we are.
-  - It is always better to have a prediction with as small an error as possible.
+-   The **ideal** prediction error, is zero: our predicted value is right on target.
+    -   Rare...
+-   The prediction error carries information: direction and size.
+-   Direction of miss:
+    -   Positive if we overpredict
+    -   Negative if we underpredict
+    -   Degree of wrongness depends on the decision problem. (price is right?)
+-   Size:
+    -   magnitude of the error may depend on the nature of the problem and the loss function.
 
 ## Decomposing the prediction error
 
-Assume the best model for $Y$ is $Y = f(X,Z,XZ) + \epsilon$ 
+Assume the best model for $Y$ is $Y= f(X,Z)+\epsilon$, but we estimate $Y^E = g(X,Z)$, and obtain $\hat g(X,Z)$
 
-- The prediction error can be decomposed into three parts:
-  1. **estimation error**: Difference between $f(X,Z,XZ)$ and $\hat f(X,Z,XZ)$
-  2. **model error**: If we using $f(X,Z)$, it would be the Difference between $f(X,Z)$ and $f(X,Z,XZ)$.
-  3. **genuine error**: error even if have the best possible model. $\epsilon$
+-   The prediction error can be decomposed into three parts:
+    1.  **estimation error**: Difference between $g(X)$ and $\hat g(X)$
+    2.  **model error**: Difference between $f(X)$ and $g(X)$.
+    3.  **genuine error**: error that cant be eliminated even if have the best possible model. $\epsilon$
 
 ## Interval prediction for quantitative target variables
 
-- One advantage of regressions - it's easy quantify uncertainty of prediction
-  - This can be used to obtain **Interval predictions**
-- Interval predictions quantify 2-out-of-3 sources of prediction uncertainty: estimation error and genuine (or irreducible) error.
-- They do not include the third source, model uncertainty! (Bayesian methods can help with this)
-- The 95% prediction interval (PI) tells where to expect the actual value for the target observation.
-- The PI for linear regression requires homoskedasticity. (but could be relaxed)
+-   One advantage of regressions - it's easy quantify uncertainty of prediction
+
+    -   This can be used to obtain **Interval predictions**
+
+-   Interval predictions quantify 2-out-of-3 sources of prediction uncertainty: estimation error and genuine (or irreducible) error.
+
+-   They do not include the third source, model uncertainty! (Bayesian methods can help with this)
+
+-   The 95% prediction interval (PI) tells where to expect the actual value for the target observation.
+
+-   The PI for linear regression requires homoskedasticity. (but could be relaxed)
 
 # The Loss function
-Choosing the best 
+
+Not all errors are created equal
 
 ## Loss Functions
 
-- We use a Loss function to quantify the **cost** of prediction error
-  - It attaches a value to the prediction error, specifying how **bad** it is
-  - Thus, Loss function determines best predictor
-- Ideally, it is derived from decision problem, 
-  - How much more costly is to overpredict than underpredict? (price is right!)
-  - The shape and functional form could depent on the decision problem
-- In practice, highly crafted loss functions are rare (Machine learning, Neural Networks, Etc), so we use common ones
-- Loss functions could be used to both estimate, but also to **evaluate/compare**  models
+-   We use a **Loss** function to quantify the **cost** of prediction error
+
+    -   It attaches a value to the prediction error, specifying how **bad** it is
+    -   Thus, Loss function determines best predictor
+
+-   Ideally, it is derived from decision problem,
+
+    -   How much more costly is to overpredict than underpredict?
+
+-   In practice, highly crafted loss functions are rare (Machine learning, Neural Networks, Etc), so we use common ones
+
+-   Loss functions could be used to both estimate, but also to **evaluate/compare** models
+
+-   Plot Twist: Loss function for OLS is the L2 Square loss function
 
 ## Loss Functions
 
-- The most important Loss functions have the following characteristics:
-  - **Symmetry**: losses due to errors in opposing direction are similar 
-    - **Asymmetric loss**: overprediction is more costly than underprediction
-  - **Convexity**: Twice as large errors generate more than twice as large losses. (We penalize large errors more than small ones)
-    - **Linear loss**: Errors are penalized proportionally to their size
+-   The most important Loss functions have the following characteristics:
+    -   **Symmetry**: losses due to errors in opposing direction are similar
+        -   **Asymmetric loss**: overprediction is more costly than underprediction
+    -   **Convexity**: Twice as large errors generate more than twice as large losses. (We penalize large errors more than small ones)
+        -   **Linear loss**: Errors are penalized proportionally to their size
 
 ## Loss Functions of Various Shapes
 
@@ -206,49 +218,51 @@ line ll ll2 ll3 r, lw(1 1 1) ///
 
 ## Examples 1 – used cars
 
-- The loss function for predicting the value of our used car depends on how we value money and how we value how much time it takes to sell our car (value of your car).
-- A too low prediction may lead to selling our car cheap but fast;
-- A too high prediction may make us wait a long time and, possibly, revising the sales price downwards before selling our car.
-- What kind of loss function would make sense?
+-   The loss function for predicting the value of our used car depends on how we value money and how we value how much time it takes to sell our car (value of your car).
+-   A too low prediction may lead to selling our car cheap but fast;
+-   A too high prediction may make us wait a long time and, possibly, revising the sales price downwards before selling our car.
+-   What kind of loss function would make sense?
 
 ## Examples 2 - creditors
 
-- Creditors decide whether to issue a loan only to potential debtors that are predicted to pay it back with high likelihood.
-- Two kinds of errors are possible:
-  - debtors that would pay back their loan don't get a loan
-  - debtors that would not pay back their loan get one nevertheless.
-- The costs of the first error are due to missed business opportunity; the costs of the second error are due to direct loss of money.
-- These losses may be quantified in relatively straightforward ways.
-- What kind of loss function would make sense?
+-   Creditors decide whether to issue a loan only to potential debtors that are predicted to pay it back with high likelihood.
+-   Two kinds of errors are possible:
+    -   debtors that would pay back their loan don't get a loan
+    -   debtors that would not pay back their loan get one nevertheless.
+-   The costs of the first error are due to missed business opportunity; the costs of the second error are due to direct loss of money.
+-   These losses may be quantified in relatively straightforward ways.
+-   What kind of loss function would make sense?
 
-## Some common loss functions
+## Common loss functions
 
-Squared loss function:
-  
-$$L(e_j) = e^2_j = (\hat{y}_j - y_j)^2
+::::: columns
+::: {.column width="50%"}
+$$SQR: L(e_j) = e^2_j = (\hat{y}_j - y_j)^2
 $$
 
-- The most widely used loss function
-- Symmetric: Losses due to errors in opposing direction are same
-- Convex: Twice as large errors generate more than twice (4x) as large losses
+-   The most widely used loss function
+-   Symmetric: Losses due to errors in opposing direction are same
+-   Convex: Twice as large errors generate more than twice (4x) as large losses
+:::
 
-## Some common loss functions
-
-Absolute loss function:
-  
-$$L(e_j) = e^2_j = Abs(\hat{y}_j - y_j)
+::: {.column width="50%"}
+$$ABS: L(e_j) = |e_j| = Abs(\hat{y}_j - y_j)
 $$
 
-- Used for Median regression (Quantile regression)
-- Symmetric: Losses due to errors in opposing direction are same
-- Linear: Twice as large errors generate twice as large losses
+-   Used for Median regression (Quantile regression)
 
-- Quantile Regressions use Asymetric loss functions
+-   Symmetric: Losses due to errors in opposing direction are same
 
-## Mean Squared Error: MSE 
+-   Linear: Twice as large errors generate twice as large losses
 
-- The most common way to quantify and aggregate the loss function is using the Mean Squared Error (MSE) 
-- Squared loss $\rightarrow$ Mean Squared Error (MSE)
+-   Quantile Regressions use **Asymetric** loss functions
+:::
+:::::
+
+## Mean Squared Error: MSE
+
+-   The most common way to quantify and aggregate the loss function is using the Mean Squared Error (MSE)
+-   Squared loss $\rightarrow$ Mean Squared Error (MSE)
 
 $$\begin{align*}
 \text{MSE} &= \frac{1}{K} \sum_{k=1}^K (\hat{y}_k - y_k)^2 \\
@@ -256,21 +270,22 @@ $$\begin{align*}
 \end{align*}
 $$
 
-- Using this function typically implies we are interested in the Mean as the best predictor
+-   Using this function typically implies we are interested in the Mean as the best predictor
 
 ## MSE decomposition : Bias and Variance
 
-- The MSE can be decomposed into two parts: **Bias** and **Variance**
-$$\begin{align*}
-MSE &= \frac{1}{J}\sum_{j=1}^J (\hat{y}_j - y_j)^2 \\
- &= \left(\frac{1}{J}\sum_{j=1}^J (\hat{y}_j - y_j)\right)^2 + \frac{1}{J}\sum_{j=1}^J (\hat y_j - \bar{\hat y})^2 \\
- &= \text{Bias}^2 + \text{PredictionVariance}
-\end{align*}
-$$
+-   The MSE can be decomposed into two parts: **Bias** and **Variance** $$\begin{align*}
+    MSE &= \frac{1}{J}\sum_{j=1}^J (\hat{y}_j - y_j)^2 \\
+     &= \left(\frac{1}{J}\sum_{j=1}^J (\hat{y}_j - y_j)\right)^2 + \frac{1}{J}\sum_{j=1}^J (\hat y_j - \bar{\hat y})^2 \\
+     &= \text{Bias}^2 + \text{PredictionVariance}
+    \end{align*}
+    $$
 
-- The bias of a prediction is the average of its prediction error.
-  - How far off is the average prediction from the actual value?
-- The variance of a prediction describes shows how it varies around its average.
+-   The bias of a prediction is the average of its prediction error.
+
+    -   How far off is the average prediction from the actual value?
+
+-   The variance of a prediction describes shows how it varies around its average.
 
 ## MSE decomposition : Bias and Variance
 
@@ -280,15 +295,16 @@ $$\begin{align*}
          &= \text{Bias}^2 + \text{PredictionVariance}
 \end{align*}$$
 
-- OLS is unbiased. Some other methods will allow for some bias in return for lower variance.
+-   OLS is unbiased. Some other methods will allow for some bias in return for lower variance.
 
-## Case study: used cars data
+````{=html}
+<!-- ## Case study: used cars data
 
 - Suppose you want to sell your car of a certain make, type, year, miles, condition and other features.
 - The prediction analysis helps uncover the average advertised price of cars with these characteristics
 - That helps decide what price you may want to put on your ad.
 
-## Case study: used cars data
+What to do?
 
 - Scraped from a website
 - Year of make (age), Odometer (miles)
@@ -370,263 +386,419 @@ Have a 80% prediction intervals (PI) – Ads for cars just like ours may ask a p
 
 Note: Chicago cars. Prices in dollars.
 Source: used-cars dataset.
+-->
+````
+
+# Finding the best model
+
+Too hot nor too cold, but just right
 
 ## Model selection
 
-## Data for prediction
+-   Model selection is finding the best fit while avoiding overfitting, and aiming for high external validity.
+-   To do this, we aim to choose a model that is flexible enough to capture the patterns in the data but not too flexible to capture noise.
+    -   Bias-Variance tradeoff
+    -   Balancing the complexity of the model
+-   Consider two models. They could be different for two reasons:
+    -   different functional forms (spline vs. quadratic)
+    -   different number of variables (simple vs. complex)
 
-- We have a dataset
-- We wanna make some prediction
+## How to choose a model?
 
-## Model selection
+-   Typically, we would say that the best model is the one that has the highest $R^2$ or the lowest MSE.
 
-Model selection is finding the best fit while avoiding overfitting and aiming for high external validity
+    -   This may be true for the original data, but not for the **target** observations.
+    -   Also, $R^2$ and MSE always increase when we add more variables.
 
-## External validity, avoiding overfitting and model selection
+-   So, what we need is a way to check how well the models predict the target observations. (unobserved cases)
 
-- Have a dataset and a target variable. Compare various models of prediction.
-- How to choose a model?
-- Pick a model that can predict well....
-- Best prediction - best model that would produce the smallest prediction error.
-- Context of squared loss function $\rightarrow$ finding the regression that would produce the smallest RMSE for the target observations.
-- Pick a model that can predict well on the live data
+-   We want to avoid overfitting at all costs.
 
-## Underfit, overfit
+## Example
 
-- Comparing two models (model 1 and model 2)
-- Model 1 can give a worse fit in the live data than model 2 in two ways.
-  - Model 1 may give a worse fit both in the original data and the live data. In this case, we say that model 1 underfits the original data.
-    - Simple: we should build a better model.
-  - Model 1 may actually give a better fit in the original, but a worse fit in the live data. In this case, we say that model 1 overfits the original data.
+-   Assume the true model is $y = 1 + x -.5 x^2 + \epsilon$, with $\epsilon ~ N(0,1.5)$
+-   we create 100 observations from the above process but use only 30 for modeling. We try running regressions with ever more complex models
+-   Make predictions, and see how well we did.
 
-## Overfitting
+|     |  $R^2$   |   MSE    | OoS MSE  |
+|-----|:--------:|:--------:|:--------:|
+| \^1 | .3224669 | 1.934762 | 2.949084 |
+| \^2 | .6255072 | 1.069401 | 2.93478  |
+| \^3 | .6344791 | 1.043781 | 2.978827 |
+| \^4 | .713217  | .8189369 | 4.138006 |
+| \^5 | .7259535 | .7825666 | 3.557651 |
 
-- Overfitting is a key aspect of external validity
-- finding a model that fits the data better than alternative models
-- but makes worse actual prediction.
-- Thus, the problem of overfitting the original data is best split into two problems:
-  - fitting patterns in the original data that are not there in the population, or general pattern, it represents;
-  - fitting patterns in the world of the original data that will not be there in the world of the live data.
+See how $R^2$ increases monotonously, improving "in-sample fit". But, the OoS MSE worsens after a certain point.
+
+## Example 2
+
+![](images/paste-8.png)
+
+## Underfit vs overfit
+
+-   A model that fits the data worse in the "working/original" data compared to the "live/target" data is said to "underfit" the model.
+    -   Simple: we should build a better model.
+-   If the model fits the data working better than target data, then it over-fits it. Needs to be corrected.
+
+### Overfitting
+
+-   Overfitting is a key aspect of external validity
+    -   Finding a model that fits the data better than alternative models, but makes worse actual prediction.
+-   Overfitting is a common problem in prediction analysis
 
 ## Reason for overfitting
 
-- The typical reason for overfitting is fitting a model that is too complex on the dataset.
-- Complexity: number of estimated coefficients
-- Often: fitting a model with too many predictor variables.
-- Including too many variables from the dataset that do not really add to the predictive power of the regression,
-- often because they are strongly correlated with other predictor variables.
-- Specifying too many interactions,
-- Too detailed nonlinear patterns
-  - as piecewise linear splines with many knots
-  - polynomials of high degree.
+The typical reason for overfitting is fitting a model that is too complex on the dataset.
+-   Complexity: number of estimated coefficients
+-   Often: fitting a model with too many predictor variables.
+-   Including too many variables from the dataset that do not really add to the predictive power of the regression.
+-   Problems of multicollinearity, too many interactions, etc.
+-   Too detailed nonlinear patterns
+    -   as piecewise linear splines with many knots
+    -   polynomials of high degree.
 
-## Increasing model complexity
+## Finding the best model by best fit and penalty
 
-- As we increase model complexity
-  - Such as number of features (variables)
-  - By adding interactions, etc.
-- We will see
-  - RMSE within dataset to fall monotonously
-  - RMSE for target observations (ie. not in our dataset) to fall and then rise as we overfit
-- example to come in class 2
-
-## Finding the best model by best fit and penalty: The BIC
-
-- Approach 1: Indirectly
-- Estimate it by an adjustment
-- Use a method based on some distributional assumptions
-- Need to pick an evaluation criterion
-- =In-sample evaluation with penalty
-- Specify and estimate model using all data
-- Use a measure of fit that helps avoid overfitting
-  - Such as
-    - adjusted $R^2$
-    - BIC = Bayesian Information Criterion, or Schwarz criterion
+-   As shown earlier, traditional measures of fit, such as $R^2$ and MSE, are not good for finding the best model. They always increase with the number of variables.
+-   We were only able to conclude model fitness because we had the true model (and the Out-of-Sample data) 
+    -   This is not the case in practice.
+-   So, how do we find the best model?
+    -   Indirectly: Penalize the number of variables
+    -   Directly: Use a training-test sample  
 
 ## Indirect evaluation criteria
 
-- Main methods: AIC, BIC and adjusted $R^2$
-- Advantage: easy to compute
-- Disadvantage: assumptions
-- Adjusted $R^2$ – just add a penalty for having many RHS vars
-  - corrects with $(n - 1)/(n - p - 1)$
-- Akaike Information Criterion
-  - AIC = $-2 \times \ln(\text{likelihood}) + 2 \times k$
-- Schwarz – Bayesian Information Criterion
-  - BIC = $-2 \times \ln(\text{likelihood}) + \ln(N) \times k$
-- Both quantities that take the log likelihood and apply a penalty for the number of parameters being estimated.Both are based on information loss theory from the fifties.
-- BIC puts heavier penalty on models with many RHS variables, than AIC.
+-   Main methods: AIC, BIC and adjusted $R^2$
+    -   Advantage: easy to compute
+    -   Disadvantage: assumptions. They may not penalize enough.
+-   Adjusted $R^2$ – just add a penalty for having many RHS vars
+    -   corrects with $(n - 1)/(n - k - 1)$
+-   AIC = $-2 \times \ln(\text{likelihood}) + 2 \times k$
+-   BIC = $-2 \times \ln(\text{likelihood}) + \ln(N) \times k$
+    -   Both are based on information loss theory 
+    -   BIC puts heavier penalty on models with many RHS variables, than AIC.
 
-## Model fit evaluation
+## Example, redone
 
-- Use a good measure of fit to compare models.
-- Don't
-  - Don't use MSE or R-squared (the two very closely related).
-  - They choose best fit in data and don't care about overfitting.
-- In practice, use BIC.
-- BIC good approximation of what more sophisticated methods would pick. Or even more conservative...
-- That introduces a "penalty term"
-- More predictor variables leads to worse value
-- Even more so in large samples.
+```{stata}
+*| code-fold: true
+*| echo: true
+*| output: false
+*| eval: false
+* This is the full code for previous and current example
+clear
+set seed 10
+set obs 100
+gen x = runiform(-2 ,2)
+gen y = 1 + x - 0.5 * x^2 + 1.5* rnormal()
+ 
+capture program drop fit_stat1
+program fit_stat1, rclass
+    tempvar yhat smp
+    gen `smp' = e(sample)
+    predict `yhat'
+    replace `yhat'=(y-`yhat')^2
+    
+    matrix result=e(r2)
+    sum `yhat' if `smp', meanonly
+    matrix result=result, r(mean)
+    sum `yhat' if !`smp', meanonly
+    matrix result=result, r(mean)
+    return matrix result = result
+end
+
+reg y c.x if _n<=30
+fit_stat1
+matrix rr2=r(result)
+reg y c.x##c.x if _n<=30
+fit_stat1
+matrix rr2=rr2\r(result)
+reg y c.x##c.x##c.x if _n<=30
+fit_stat1
+matrix rr2=rr2\r(result)
+reg y c.x##c.x##c.x##c.x if _n<=30
+fit_stat1
+matrix rr2=rr2\r(result)
+reg y c.x##c.x##c.x##c.x##c.x if _n<=30
+fit_stat1
+matrix rr2=rr2\r(result)
+
+capture program drop fit_stat2
+program fit_stat2, rclass
+    tempvar yhat smp
+    gen `smp' = e(sample)
+    predict `yhat'
+    replace `yhat'=(y-`yhat')^2    
+    matrix result=e(r2), e(r2_a)
+    sum `yhat' if `smp', meanonly
+    matrix result=result, r(mean)
+    sum `yhat' if !`smp', meanonly
+    matrix result=result, r(mean)
+    qui: estat ic
+    matrix result=result, r(S)[1,5..6]
+    return matrix result = result
+end
+
+reg y c.x if _n<=30
+fit_stat2
+matrix rr2=r(result)
+reg y c.x##c.x if _n<=30
+fit_stat2
+matrix rr2=rr2\r(result)
+reg y c.x##c.x##c.x if _n<=30
+fit_stat2
+matrix rr2=rr2\r(result)
+reg y c.x##c.x##c.x##c.x if _n<=30
+fit_stat2
+matrix rr2=rr2\r(result)
+reg y c.x##c.x##c.x##c.x##c.x if _n<=30
+fit_stat2
+matrix rr2=rr2\r(result)
+```
+
+|              |      $R^2$   |  $aR^2$      |      MSE     | OoS MSE      |          AIC |          BIC |
+| ------------ | :----------: | :----------: | :----------: | :----------: | :----------: | :----------: |
+| ^1           |       0.3225 |       0.2983 |       1.9348 |       2.9491 |     108.9358 |     111.7382 |
+| ^2           |       0.6255 |       0.5978 |       1.0694 |       2.9348 |      93.1493 |      97.3529 |
+| ^3           |       0.6345 |       0.5923 |       1.0438 |       2.9788 |      94.4218 |     100.0266 |
+| ^4           |       0.7132 |       0.6673 |       0.8189 |       4.1380 |      89.1439 |      96.1499 |
+| ^5           |       0.7260 |       0.6689 |       0.7826 |       3.5577 |      89.7810 |      98.1882 |
+
 
 ## Finding the best model by training and test samples
 
-- Approach Nr.2: Directly
-- Estimate it using a test (validation) set approach.
-- Needs cutting the dataset into training and test sample
-- No assumption
-- Need to pick evaluation criterion (loss function) = RMSE (root mean squared error)
-- Estimate the model in part of the data (say, 80%).
-  - Training sample
-- Evaluate predictive performance on the rest of the data.
-  - Test sample
-- Avoid overfitting in training data by evaluating on test data.
+-   Similar to bootstrapping (brute force approach for SE), its also possible to use a "bute-force" approach to find the best model.
+-   This would require "imitating" the process of out-of-sample prediction.
+    1.   **Cut** the dataset into training and test sample (80-20 ?)
+    2.   Choose Some evaluation criterion (loss function) 
+    3.   Estimate the model on the training sample
+    4.   Predict and evaluate the model on the test sample
 
-## Training and Test Samples
+- Problem: 80% (or less), may be too small training. And 20% (one shoot) could be different from the rest of the data. 
+  
+## Lets make things Better: K-fold cross-validation
 
-- Creating two sub-samples
-- Randomly! (ie. not 1—80 and 81—100)
-- Randomly generate an ID, sort and create two sub-samples.
-- Training sample 80%
-  - Regressions will be on run on this sample
-  - Coefficients estimated
-- Test (validation) sample 20%
-  - Using estimated coefficients, we predict values for flats in the validation sample
-  - Calculate residual, RMSE in the test sample
-- RMSE rather than MSE – smaller numbers....
+-   If one is not enough, why not use more?
+-   Split sample into $k=5$ groups (equal size)
+-   Now, assume that each "fold" is the test sample, and the rest is the training sample. 
+    -   Do the excercise k times, and every observation will be in the test sample once.
+-   Add up the MSEs, or get the average MSE. 
+-   Still has a random component, but less so than a single split.
 
-## 5-fold cross-validation
+## K-fold cross-validation
 
-- Split sample $k=5$ times to train and test
-- For each folds:
-  - Estimate model on training.
-  - Get coefficients.
-  - Use them to estimate on Test
-  - Calculate test MSE
-- Average and take Sqrt
-- Repeat for models
-- Pick model w lowest avg RMSE
+```{stata}
+*| code-fold: true
+*| echo: true
+*| output: asis
+* This is the full code for previous and current example
+clear
+set seed 10
+qui: set obs 30
+gen x = runiform(-2 ,2)
+gen y = 1 + x - 0.5 * x^2 + 1.5* rnormal()
+
+** Create 5 folds
+gen fold = mod(_n,5)+1
+
+capture program drop fit_stat3
+program fit_stat3, rclass
+    tempvar yhat aux
+    qui:gen `yhat' = .
+    qui:forvalues i = 1/5 {
+        reg `0' if fold!=`i'
+        predict `aux'
+        replace `yhat' = `aux' if fold==`i'
+        drop `aux'
+    }
+    qui: replace `yhat'=(y-`yhat')^2    
+    sum `yhat', meanonly
+    return scalar mse = r(mean)
+end
+
+fit_stat3 y c.x 
+display "^1, mse: " %5.3f `r(mse)' _n
+fit_stat3 y c.x##c.x 
+display "^2, mse: " %5.3f `r(mse)' _n
+fit_stat3 y c.x##c.x##c.x 
+display "^3, mse: " %5.3f `r(mse)' _n
+fit_stat3 y c.x##c.x##c.x##c.x 
+display "^4, mse: " %5.3f `r(mse)' _n
+fit_stat3 y c.x##c.x##c.x##c.x##c.x 
+display "^5, mse: " %5.3f `r(mse)' _n
+```
+
+## When K $\rightarrow$ N. LooCV
+
+- K-fold cross-validation has two weaknesses:
+    1.  Randomness: different splits may lead to different results
+    2.  Small sample size for training may be too small
+- An alternative to address both is increasing K ... until K=N
+  - This is the Leave-one-out cross-validation (LOOCV)
+  - Train on N-1 observations, predict on the left-out (N=1) observation
+- This can be computationally expensive, unless you are estimating Linear regression models.
+  - LOOCV its really fast for OLS
 
 ## BIC vs test RMSE
 
-- In our experience, in practice, BIC is the best indirect criterion – closest to test sample.
-- The advantage of BIC is that it needs no sample splitting which may be a problem in small samples.
-- The advantage of test MSE is that it makes no assumption.
-- BIC is a good first run, quick, is often not very wrong.
-- Ultimately, you want to do a test MSE.
+-   In practice, BIC is the best indirect criterion – closest to test sample.
+-   The advantage of BIC is that it needs no sample splitting which may be a problem in small samples.
+-   The advantage of test MSE is that it makes no assumption.
+-   BIC is a good first run, quick, is often not very wrong.
+-   Test MSE is the best, but may be computationally expensive.
+  
+## External validity and stable patterns
 
-## Case study: Model selection
-
-- We have the ingredients, we need to pick a model.
-- This process involves variable selection and a decision rule of choosing the model based on some loss function.
-- BIC on the actual data
-- Test-sample RMSE
-- Cross-validated (CV) RMSE
-- If enough data / computer power, use CV RMSE
-- With larger dataset, overfit becomes less of an issue.
-
-## Case study: Model selection
-
-| Model | N vars | N coeff | R-squared | RMSE | BIC |
-|-------|---------|---------|-----------|------|-----|
-| 1 Model 1 | 3 | 0.85 | 1,755 | 5,018 |
-| 2 Model 2 | 5 | 0.90 | 1,433 | 4,910 |
-| 3 Model 3 | 9 | 0.91 | 1,322 | 4,893 |
-| 4 Model 4 | 12 | 0.92 | 1,273 | 4,894 |
-| 5 Model 5 | 22 | 0.92 | 1,239 | 4,935 |
-
-Note: In sample values. Model 1: age, age squared, Model 2= Model 1 +odometer, odometer squared, Model 3= Model2 + SE, excellent condition, good condition, dealer, Model 4= Model 3 + LE, XLE, like new condition, 6cylinder, Model 5 = Model 4 + many interactions.
-Source: used-cars dataset.
-
-## Case study: Model selection
-
-- Cross-validate using 4-fold cross validation.
-- Run the regression on 3/4 of the sample, predicting on the remaining 1/4 of the sample, get RMSE on test sample.
-- We then average out RMSE values over the 4 test samples
-
-| Fold No. | Model 1 | Model 2 | Model 3 | Model 4 | Model 5 |
-|----------|---------|---------|---------|---------|---------|
-| 1 Fold1  | 1,734   | 1,428   | 1,331   | 1,395   | 1,391   |
-| 2 Fold2  | 2,010   | 1,781   | 1,692   | 1,638   | 1,693   |
-| 3 Fold3  | 1,465   | 1,251   | 1,256   | 1,253   | 1,436   |
-| 4 Fold4  | 1,823   | 1,325   | 1,250   | 1,246   | 1,307   |
-| 5 Average| 1,769   | 1,460   | 1,394   | 1,392   | 1,464   |
-
-Source: used-cars dataset.
-
-## Case study: Model selection
-
-- Model 3 has lowest BIC, lowest average RMSE on test samples. Model 4 is close.
-- Interestingly, both approaches suggests that Model 3 is the one that has the best prediction properties
-- Small sample, simple model.
+-   BIC, Training-test, k-fold cross-validation... All very nice
+    -   In the end, they all use the information in the data.
+-   How would things look for the target observation(s)? unknown!!
+-   The issue of stationarity – how our data is related to other datasets we may use our model
+-   In the end we can't know but need to think about it.
+    -   Plus, if there is no external validity, your model fit in an outside data source is likely to be worse...
 
 ## External validity and stable patterns
 
-- BIC, Training-test, k-fold cross-validation...
-- All very nice
-- But, in the end, they all use the information in the data.
-- How would things look for the target observation(s)?
-- The issue of stationarity – how our data is related to other datasets we may use our model
-- We may have some ideas
-- We may use non-random test samples that may mimic the difference in our data and the target observations
-- In the end we can't know but need to think about it.
-- Plus be aware, that some difference is likely, so your model fit in an outside data source is likely to be worse...
+-   Most predictions will be on future data
+-   High external validity requires that the environment is stationary.
+-   Stationarity means that the way variables are distributed remains the same over time.
+    -   Ensures that the relationship between predictors and the target variable is the same in the data and the forecasted future.
+-   If the relationship breaks down whatever we establish in our data won't be true in the future, leading to wrong forecasts.
 
 ## External validity and stable patterns
 
-- Most predictions will be on future data
-- High external validity requires that the environment is stationary.
-- Stationarity means that the way variables are distributed remains the same over time.
-- Here that distribution is to be understood in a general way: the joint distribution of predictor variables and target variable are required to remain the same throughout the time covered in the data and the time of the forecast.
-- Stationarity ensures that the relationship between predictors and the target variable is the same in the data and the forecasted future.
-- If the relationship breaks down whatever we establish in our data won't be true in the future, leading to wrong forecasts.
-
-## External validity and stable patterns
-
-- External validity and stable patterns - Very broad concept
-- It's about representativeness of actual data $\rightarrow$ to live data
-- Often hard to know.
-- Remember hotels (other dates, other cities).
-- Domain knowledge can help.
-- Study if patterns were stable in the past / other locations were stable can help.
-
-## Algorithms
-
-## Machine Learning and the Role of Algorithms
-
-- Predictive analytics is often used for data analysis whose goal is prediction. But a more popular, and related, term is machine learning.
-- Machine learning is an umbrella concept for methods that use algorithms to find patterns in data and use them for prediction purposes.
-- An algorithm is a set of rules and steps that defines how to generate an output (predicted values) using various inputs (variables, observations in the original data).
-- A formula is an example of an algorithm – one that can be formulated in terms of an equation.
-- OLS formula for estimating the coefficients of a linear regression is an algorithm.
-
-## Machine Learning Algorithms
-
-- Machine learning is about algorithms, machines and learning
-- Algorithms specify each and every step to follow in a clear way.
-- Not all algorithms can be translated into a formula.
-  - The bootstrap estimation of a standard error (Chapter 5, Section 5.6) is an example.
-  - K-fold cross-validation.
-- Heavy use of machines = computers. Steps of algorithm translated into computer code and make the computer follow those steps. Fast.
-- Learning - learn something from the data with data and an algorithms.
-  - Predicted value of $y =?$ If combine $x$ variables using a particular model.
-  - learning which model is best for predicting $y$ as well as what that predicted value is.
-
-## What is, machine learning?
-
-- Many definitions, discussions.
-- Here: Machine learning is an approach to predictive data analysis – achieving the best possible prediction from available data.
-- Consequence 1: understanding the patterns of associations between $y$ and $x$ is of secondary importance.
-- We need stable patterns for good prediction in live data, but that is it.
-- The machine learning attitude - a preference for evaluating methods based on data as opposed to abstract principles.
-- Original data to live data
-- Not a general rule or philosophy
-- Machine learning broadly: all prediction models including OLS
-- Machine learning narrowly: prediction models with no formula, ie not OLS
+-   External validity and stable patterns - Very broad concept
+-   It's about representativeness of actual data $\rightarrow$ to live data
+    -   Remember hotels? (other dates, other cities).
+-   Domain knowledge can help. Inner knowledge of the process can help.
+-   Study if patterns were stable in the past / other locations were stable can help.
 
 ## Main takeaways
 
-- Prediction uses the original data with $y$ and $x$ to predict the value of $y$ for observations in the live data, in which $x$ is observed but $y$ is not
-- Prediction uses a model that describes the patterns of association between $y$ and $x$ in the original data
-- Cross-validation can help find the best model in the population, or general pattern, represented by the original data
-- Stability of the patterns of association is needed for a prediction with high external validity
+-   Prediction uses the original data with $y$ and $x$ to predict the value of $y$ for observations in the live data, in which $x$ is observed but $y$ is not
+-   Prediction uses a model that describes the patterns of association between $y$ and $x$ in the original data
+-   Cross-validation can help find the best model in the population, or general pattern, represented by the original data
+-   Stability of the patterns of association is needed for a prediction with high external validity
+
+## CS: Predicting the price of used cars
+
+- SUse data from [here](data_slides/used-cars.dta) for replication.
+- Drop car with price>20k or those price = 1$.
+- While distribution is skewed, Log(price) is not normal either. We will keep it as is.
+- Two areas, we keep Chicago only.
+- drop if odometer>100K miles
+- Variables: price, age, odometer, type, condition, cylinders, dealer
+
+## CS: Competing models:
+
+- Model 1 age, age squared
+- Model 2 age, age squared, odometer, odometer squared
+- Model 3 age, age squared, odometer, odometer squared, LE, condition , dealer
+- Model 4 age, age squared, odometer, odometer squared, LE, condition , dealer, SE, XLE, cylinder
+- Model 5 same as Model 4 but with all variables interacted with age
+- Model 6 same as Model 4 but with all variables interacted with condition
+
+```{stata}
+*| code-fold: true
+*| echo: true
+*| output: false
+* setup
+use data_slides/used-cars.dta, clear
+global model1 age c.age#c.age
+global model2 $model1 lnodometer c.lnodometer#c.lnodometer
+global model3 $model2 LE i.condition_recode i.dealer
+global model4 $model3 SE XLE cylinder
+global model5 c.($model4)##c.age
+global model6 c.($model4)##i.condition_recode
+```
+
+## CS: Test Data
+
+- Assume that 20% of the data is "target" data. 
+- Lets run all models, using different evaluation criteria. And see which one is the best.
+- See below for the program..Rather long
+```{stata}
+*| code-fold: true
+*| echo: true
+*| output: false
+gen rnd = runiform()
+sort rnd
+gen test = _n/_N<=.2
+
+capture program drop fit_stat4
+program fit_stat4, rclass
+    reg `0' if test==0
+    tempvar yxhat
+    predict `yxhat' if test==1
+    replace `yxhat' = (price-`yxhat')^2  if test==1
+    matrix result = e(r2), e(r2_a)
+    estat ic
+    matrix result = result, r(S)[1,5..6]
+    ** K-fold cross-validation
+    capture drop fold
+    gen fold = runiform() if test==0
+    sort fold 
+    drop fold
+    gen fold = mod(_n,5)+1 if test==0
+    
+    *** Kfold1
+    tempvar yhat aux
+    qui:gen `yhat' = .
+    qui:forvalues i = 1/5 {
+        reg `0' if fold!=`i' & test==0
+        predict `aux'
+        replace `yhat' = `aux' if fold==`i' & test==0
+        drop `aux'
+    }
+    qui: replace `yhat'=(price-`yhat')^2     
+    sum `yhat' if test==0, meanonly
+    matrix result = result, sqrt(r(mean))
+    *** Kfold2
+    capture drop fold
+    gen fold = runiform() if test==0
+    sort fold 
+    drop fold
+    gen fold = mod(_n,5)+1 if test==0
+    
+    drop `yhat'  
+    qui:gen `yhat' = .
+    qui:forvalues i = 1/5 {
+        reg `0' if fold!=`i' & test==0
+        predict `aux'
+        replace `yhat' = `aux' if fold==`i' & test==0
+        drop `aux'
+    }
+    qui: replace `yhat'=(price-`yhat')^2    
+    sum `yhat' if test==0, meanonly
+    matrix result = result, sqrt(r(mean))
+    ** test on live data
+    sum `yxhat' if test==1, meanonly
+    matrix result = result, sqrt(r(mean))
+    matrix colname result = r2 r2_a AIC BIC Kfold1 Kfold2 test
+    ** 
+    return matrix result = result
+end
+
+```
+
+## CS: Results
+
+```{stata}
+*| code-fold: true
+*| echo: true
+*| output: asis
+qui: fit_stat4 price $model1
+matrix fresults = r(result)
+qui: fit_stat4 price $model2
+matrix fresults = fresults\r(result)
+qui: fit_stat4 price $model3
+matrix fresults = fresults\r(result)
+qui: fit_stat4 price $model4
+matrix fresults = fresults\r(result)
+qui: fit_stat4 price $model5
+matrix fresults = fresults\r(result)
+qui: fit_stat4 price $model6
+matrix fresults = fresults\r(result)
+matrix rowname fresults = Model1 Model2 Model3 Model4 Model5 Model6
+set linesize 250
+esttab matrix(fresults, fmt(%8.3f)) , md  nomtitle
+```

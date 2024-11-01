@@ -1,0 +1,42 @@
+---
+title: "Feedback on Predicting the Next-Quarter Corporate Profit with Vector Autoregression"
+format: 
+    pdf:
+        documentclass: article 
+        number-sections: true
+        margin-top: 1in
+        margin-bottom: 1in
+        margin-left: 1in
+        margin-right: 1in
+        linestretch:  1.5
+        fontsize: 11pt
+    html: default 
+author: "Anonymous"        
+---
+
+# Positive Feedback
+
+The theoretical background and framework is really strong.
+
+Your research question is very clearly laid out. 
+
+Your interpretation of the VAR results is the most fleshed out. This is a strong part of your analysis.
+
+It's great that you explained the limitations of the regression model in your conclusion.
+
+# Questions and Suggestions
+
+I suggest avoiding the use of first-person narrative in a report like this.
+
+I couldn't find an explanation for the RHS variables, do you explain what those are in the report?
+
+The use of math is impressive, but I think you could clarify your explanation of why the VAR formula is relevant to your specific research.
+
+I think something needs to be fixed where you're referencing your regression table. See the following sentence: The result of the regression is in “../results/reg_table_1.txt”, and we only present the significant part related to corporate profit here.
+
+I think all your figures could use a little bit more explanantion and interpretations.
+
+Did you use splines to create your last graph?
+
+Typo: heterskedasticity - You misspelled heteroskedasticity.
+
