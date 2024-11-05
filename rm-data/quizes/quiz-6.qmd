@@ -1,0 +1,56 @@
+---
+format: 
+    pdf:
+        margin-bottom: 0.7in
+        margin-top: 0.7in
+        margin-left: 0.7in
+        margin-right: 0.7in
+        fontsize: 12pt
+    
+---
+
+Quiz 6: Time Series Analysis
+
+Name: ____________________________
+Grade: __/5
+
+1.  Which of the following is a defining characteristic of time series data?
+    a. Observations are collected from different units at the same time point.
+    b. Observations are collected from the same unit at different time points.
+    c. Observations are collected from different units at different time points.
+    d. Observations are collected randomly without any time consideration.
+
+
+2.  The chapter recommends aggregating data to a lower frequency when:
+    a. The time series frequencies of the dependent and independent variables are different.
+    b.  There are too many data points, making analysis computationally expensive.
+    c.  The data exhibits high levels of noise.
+    d.  The research question requires a long-term perspective.
+
+3. Which of the following is an example of seasonality in time series data?
+    a. A gradual increase in average temperature over several decades
+    b.  A sudden spike in stock prices due to unexpected news
+    c.  Higher sales of ice cream during the summer months
+    d.  A long-term decline in the value of a currency
+
+4. Why is it important to understand trends and seasonality in time series data before conducting regression analysis?
+    a. They can introduce spurious correlations between variables.
+    b.  They improve the accuracy of regression coefficient estimates.
+    c.  They simplify the interpretation of regression results.
+    d.  They are required assumptions for most regression models.
+
+
+5. What does stationarity mean in the context of time series data?
+    a. The variable has a constant mean, variance, and autocorrelation structure over time.
+    b.  The variable exhibits a clear upward or downward trend.
+    c.  The variable follows a repeating pattern at regular intervals.
+    d.  The variable is independent of its past values.
+
+
+6. What is a spurious regression?
+   
+    a. A regression that shows a statistically significant relationship between variables that are not truly related.
+    b. A regression that fails to meet the assumptions of linearity and normality.
+    c. A regression that includes too many irrelevant variables.
+    d. A regression that uses data with measurement errors.
+
