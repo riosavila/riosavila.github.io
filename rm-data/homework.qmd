@@ -81,6 +81,10 @@ The full case study can be found [here](case_study_returns.pdf). You need to pro
 
 ## Homework 10 {#hw10}
 
+Use the data on house prices [here](hhprice_train.dta). This dataset contains the prices of houses in a city, along with many other house charcteristics. You are obtaining 80% of the data to estimate the model. Build a model that you think its best to predict the price of a house. You can use any of the variables in the dataset, and you can create new variables if you think they are useful.
+
+Describe at least 3 different specifications you tried, and which one you choose and why. The one with the best fit on the test data (I have access to) can skip next homework.
+
 ## Homework 11 {#hw11}
 
 ## Homework 12 {#hw12}

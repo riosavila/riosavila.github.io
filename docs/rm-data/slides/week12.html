@@ -1,0 +1,2272 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Fernando Rios-Avila">
+<meta name="dcterms.date" content="2024-11-05">
+
+<title>Probability and Classification – Econometrics MSC Levy</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Econometrics MSC Levy</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../resources.html"> 
+<span class="menu-text">Resources</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Probability and Classification</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Courses</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../adv_class/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Advance Econometrics: Causal Effects</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../rmethods/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Research Methods: Econometrics I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../rmethods2/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Research Methods II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../rm-data/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Research Methods I: Data Analysis for Economics and Policy</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Math Refresher</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../mathref/math_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Math Refresher</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../mathref/math_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Math Refresher</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../mathref/math_3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Math Refresher</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#motivation" id="toc-motivation" class="nav-link active" data-scroll-target="#motivation">Motivation</a></li>
+  <li><a href="#previously-on-da" id="toc-previously-on-da" class="nav-link" data-scroll-target="#previously-on-da">Previously on DA</a></li>
+  <li><a href="#prediction-with-qualitative-target" id="toc-prediction-with-qualitative-target" class="nav-link" data-scroll-target="#prediction-with-qualitative-target">Prediction with qualitative target</a></li>
+  <li><a href="#classification-the-extra-step" id="toc-classification-the-extra-step" class="nav-link" data-scroll-target="#classification-the-extra-step">Classification: The extra step</a>
+  <ul class="collapse">
+  <li><a href="#the-process" id="toc-the-process" class="nav-link" data-scroll-target="#the-process">The process</a></li>
+  <li><a href="#refresher-probability-models" id="toc-refresher-probability-models" class="nav-link" data-scroll-target="#refresher-probability-models">Refresher: Probability Models</a></li>
+  <li><a href="#whats-new-with-binary-target" id="toc-whats-new-with-binary-target" class="nav-link" data-scroll-target="#whats-new-with-binary-target">What’s New with Binary target?</a></li>
+  <li><a href="#whats-not-new-with-binary-target" id="toc-whats-not-new-with-binary-target" class="nav-link" data-scroll-target="#whats-not-new-with-binary-target">What’s NOT new with Binary target?</a></li>
+  <li><a href="#probability-prediction-and-process" id="toc-probability-prediction-and-process" class="nav-link" data-scroll-target="#probability-prediction-and-process">Probability prediction and process</a></li>
+  <li><a href="#classification-process" id="toc-classification-process" class="nav-link" data-scroll-target="#classification-process">Classification process</a></li>
+  <li><a href="#classification-table-confusion-matrix" id="toc-classification-table-confusion-matrix" class="nav-link" data-scroll-target="#classification-table-confusion-matrix">Classification Table: Confusion Matrix</a></li>
+  <li><a href="#classification-table-making-errors" id="toc-classification-table-making-errors" class="nav-link" data-scroll-target="#classification-table-making-errors">Classification Table: making errors</a></li>
+  <li><a href="#measures-of-classification" id="toc-measures-of-classification" class="nav-link" data-scroll-target="#measures-of-classification">Measures of classification</a></li>
+  </ul></li>
+  <li><a href="#theory-the-roc" id="toc-theory-the-roc" class="nav-link" data-scroll-target="#theory-the-roc">Theory: The ROC</a>
+  <ul class="collapse">
+  <li><a href="#measures-of-classification-1" id="toc-measures-of-classification-1" class="nav-link" data-scroll-target="#measures-of-classification-1">Measures of classification</a></li>
+  <li><a href="#roc-curve" id="toc-roc-curve" class="nav-link" data-scroll-target="#roc-curve">ROC Curve</a></li>
+  <li><a href="#roc-curve-intuition" id="toc-roc-curve-intuition" class="nav-link" data-scroll-target="#roc-curve-intuition">ROC Curve Intuition</a></li>
+  <li><a href="#roc-curve-intuition-1" id="toc-roc-curve-intuition-1" class="nav-link" data-scroll-target="#roc-curve-intuition-1">ROC Curve Intuition</a></li>
+  <li><a href="#area-under-roc-curve" id="toc-area-under-roc-curve" class="nav-link" data-scroll-target="#area-under-roc-curve">Area Under ROC Curve</a></li>
+  <li><a href="#stata-corner" id="toc-stata-corner" class="nav-link" data-scroll-target="#stata-corner">Stata Corner</a></li>
+  <li><a href="#model-selection-nr.1-probability-models" id="toc-model-selection-nr.1-probability-models" class="nav-link" data-scroll-target="#model-selection-nr.1-probability-models">Model selection Nr.1: Probability models</a></li>
+  </ul></li>
+  <li><a href="#theory-classification-and-loss-function" id="toc-theory-classification-and-loss-function" class="nav-link" data-scroll-target="#theory-classification-and-loss-function">Theory: Classification and loss function</a>
+  <ul class="collapse">
+  <li><a href="#how-we-make-classification-from-predicted-probability" id="toc-how-we-make-classification-from-predicted-probability" class="nav-link" data-scroll-target="#how-we-make-classification-from-predicted-probability">How we make classification from predicted probability?</a></li>
+  <li><a href="#classification-select-the-threshold-with-loss-function" id="toc-classification-select-the-threshold-with-loss-function" class="nav-link" data-scroll-target="#classification-select-the-threshold-with-loss-function">Classification: select the threshold with loss function</a></li>
+  <li><a href="#when-to-use-formula" id="toc-when-to-use-formula" class="nav-link" data-scroll-target="#when-to-use-formula">When to use Formula</a></li>
+  <li><a href="#class-imbalance" id="toc-class-imbalance" class="nav-link" data-scroll-target="#class-imbalance">Class imbalance</a></li>
+  <li><a href="#class-imbalance-the-consequences" id="toc-class-imbalance-the-consequences" class="nav-link" data-scroll-target="#class-imbalance-the-consequences">Class imbalance: the consequences</a></li>
+  <li><a href="#class-imbalance-what-to-do" id="toc-class-imbalance-what-to-do" class="nav-link" data-scroll-target="#class-imbalance-what-to-do">Class imbalance: what to do</a></li>
+  <li><a href="#case-study" id="toc-case-study" class="nav-link" data-scroll-target="#case-study">Case study</a></li>
+  <li><a href="#firm-exit-case-study-case-study-background" id="toc-firm-exit-case-study-case-study-background" class="nav-link" data-scroll-target="#firm-exit-case-study-case-study-background">Firm exit case study: Case study: background</a></li>
+  <li><a href="#firm-exit-case-study-business-case" id="toc-firm-exit-case-study-business-case" class="nav-link" data-scroll-target="#firm-exit-case-study-business-case">Firm exit case study: business case</a></li>
+  <li><a href="#firm-exit-case-study-bisnode-firms-dataset" id="toc-firm-exit-case-study-bisnode-firms-dataset" class="nav-link" data-scroll-target="#firm-exit-case-study-bisnode-firms-dataset">Firm exit case study: bisnode-firms dataset</a></li>
+  <li><a href="#firm-exit-case-study-label-target-engineering" id="toc-firm-exit-case-study-label-target-engineering" class="nav-link" data-scroll-target="#firm-exit-case-study-label-target-engineering">Firm exit case study: Label (target) engineering</a></li>
+  <li><a href="#firm-exit-case-study-sample-design" id="toc-firm-exit-case-study-sample-design" class="nav-link" data-scroll-target="#firm-exit-case-study-sample-design">Firm exit case study: Sample design</a></li>
+  <li><a href="#firm-exit-case-study-features---overview" id="toc-firm-exit-case-study-features---overview" class="nav-link" data-scroll-target="#firm-exit-case-study-features---overview">Firm exit case study: Features - overview</a></li>
+  <li><a href="#firm-exit-case-study-features---overview-1" id="toc-firm-exit-case-study-features---overview-1" class="nav-link" data-scroll-target="#firm-exit-case-study-features---overview-1">Firm exit case study: Features - overview</a></li>
+  <li><a href="#firm-exit-case-study-features---overview-2" id="toc-firm-exit-case-study-features---overview-2" class="nav-link" data-scroll-target="#firm-exit-case-study-features---overview-2">Firm exit case study: Features - overview</a></li>
+  <li><a href="#firm-exit-case-study-feature-engineering" id="toc-firm-exit-case-study-feature-engineering" class="nav-link" data-scroll-target="#firm-exit-case-study-feature-engineering">Firm exit case study: Feature engineering</a></li>
+  <li><a href="#firm-exit-case-study-feature-engineering-tools" id="toc-firm-exit-case-study-feature-engineering-tools" class="nav-link" data-scroll-target="#firm-exit-case-study-feature-engineering-tools">Firm exit case study: Feature engineering tools</a></li>
+  <li><a href="#firm-exit-case-study-feature-engineering-1" id="toc-firm-exit-case-study-feature-engineering-1" class="nav-link" data-scroll-target="#firm-exit-case-study-feature-engineering-1">Firm exit case study: Feature engineering</a></li>
+  <li><a href="#firm-exit-case-study-firm-sales-growth" id="toc-firm-exit-case-study-firm-sales-growth" class="nav-link" data-scroll-target="#firm-exit-case-study-firm-sales-growth">Firm exit case study: Firm sales growth</a></li>
+  <li><a href="#firm-exit-case-study-firm-sales-growth-1" id="toc-firm-exit-case-study-firm-sales-growth-1" class="nav-link" data-scroll-target="#firm-exit-case-study-firm-sales-growth-1">Firm exit case study: Firm sales growth</a></li>
+  <li><a href="#firm-exit-case-study-winsorizing" id="toc-firm-exit-case-study-winsorizing" class="nav-link" data-scroll-target="#firm-exit-case-study-winsorizing">Firm exit case study: Winsorizing</a></li>
+  <li><a href="#firm-exit-case-study-firm-sales-growth-2" id="toc-firm-exit-case-study-firm-sales-growth-2" class="nav-link" data-scroll-target="#firm-exit-case-study-firm-sales-growth-2">Firm exit case study: Firm sales growth</a></li>
+  <li><a href="#case-study-firm-exit-model-features-1" id="toc-case-study-firm-exit-model-features-1" class="nav-link" data-scroll-target="#case-study-firm-exit-model-features-1">Case study: firm exit: Model features 1</a></li>
+  <li><a href="#firm-exit-case-study-model-features-2" id="toc-firm-exit-case-study-model-features-2" class="nav-link" data-scroll-target="#firm-exit-case-study-model-features-2">Firm exit case study: Model features 2</a></li>
+  <li><a href="#firm-exit-case-study-models" id="toc-firm-exit-case-study-models" class="nav-link" data-scroll-target="#firm-exit-case-study-models">Firm exit case study: Models</a></li>
+  <li><a href="#firm-exit-case-study-data" id="toc-firm-exit-case-study-data" class="nav-link" data-scroll-target="#firm-exit-case-study-data">Firm exit case study: Data</a></li>
+  <li><a href="#firm-exit-case-study-comparing-model-fit" id="toc-firm-exit-case-study-comparing-model-fit" class="nav-link" data-scroll-target="#firm-exit-case-study-comparing-model-fit">Firm exit case study: Comparing model fit</a></li>
+  <li><a href="#classification" id="toc-classification" class="nav-link" data-scroll-target="#classification">Classification</a></li>
+  <li><a href="#firm-exit-case-study-roc-curve" id="toc-firm-exit-case-study-roc-curve" class="nav-link" data-scroll-target="#firm-exit-case-study-roc-curve">Firm exit case study: ROC curve</a></li>
+  <li><a href="#firm-exit-case-study-roc-curves" id="toc-firm-exit-case-study-roc-curves" class="nav-link" data-scroll-target="#firm-exit-case-study-roc-curves">Firm exit case study: ROC curves</a></li>
+  <li><a href="#firm-exit-case-study-auc" id="toc-firm-exit-case-study-auc" class="nav-link" data-scroll-target="#firm-exit-case-study-auc">Firm exit case study: AUC</a></li>
+  <li><a href="#firm-exit-case-study-comparing-two-thresholds" id="toc-firm-exit-case-study-comparing-two-thresholds" class="nav-link" data-scroll-target="#firm-exit-case-study-comparing-two-thresholds">Firm exit case study: Comparing two thresholds</a></li>
+  <li><a href="#firm-exit-case-study-comparing-two-thresholds-1" id="toc-firm-exit-case-study-comparing-two-thresholds-1" class="nav-link" data-scroll-target="#firm-exit-case-study-comparing-two-thresholds-1">Firm exit case study: Comparing two thresholds</a></li>
+  <li><a href="#firm-exit-case-study-threshold-choice-consequences" id="toc-firm-exit-case-study-threshold-choice-consequences" class="nav-link" data-scroll-target="#firm-exit-case-study-threshold-choice-consequences">Firm exit case study: Threshold choice consequences</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#firm-exit-case-study-the-loss-function" id="toc-firm-exit-case-study-the-loss-function" class="nav-link" data-scroll-target="#firm-exit-case-study-the-loss-function">Firm exit case study: The loss function</a></li>
+  <li><a href="#firm-exit-case-study-finding-the-threshold" id="toc-firm-exit-case-study-finding-the-threshold" class="nav-link" data-scroll-target="#firm-exit-case-study-finding-the-threshold">Firm exit case study: Finding the threshold</a></li>
+  <li><a href="#firm-exit-case-study-finding-the-threshold-1" id="toc-firm-exit-case-study-finding-the-threshold-1" class="nav-link" data-scroll-target="#firm-exit-case-study-finding-the-threshold-1">Firm exit case study: Finding the threshold</a></li>
+  <li><a href="#firm-exit-case-study" id="toc-firm-exit-case-study" class="nav-link" data-scroll-target="#firm-exit-case-study">Firm exit case study</a></li>
+  <li><a href="#firm-exit-case-studysummary-of-process-with-loss-function" id="toc-firm-exit-case-studysummary-of-process-with-loss-function" class="nav-link" data-scroll-target="#firm-exit-case-studysummary-of-process-with-loss-function">Firm exit case study:Summary of process with loss function</a></li>
+  <li><a href="#firm-exit-case-studysummary-of-process-with-loss-function-1" id="toc-firm-exit-case-studysummary-of-process-with-loss-function-1" class="nav-link" data-scroll-target="#firm-exit-case-studysummary-of-process-with-loss-function-1">Firm exit case study:Summary of process with loss function</a></li>
+  <li><a href="#firm-exit-case-study-cart" id="toc-firm-exit-case-study-cart" class="nav-link" data-scroll-target="#firm-exit-case-study-cart">Firm exit case study: CART</a></li>
+  <li><a href="#firm-exit-case-study-random-forest" id="toc-firm-exit-case-study-random-forest" class="nav-link" data-scroll-target="#firm-exit-case-study-random-forest">Firm exit case study: Random Forest</a></li>
+  <li><a href="#firm-exit-case-study-random-forest-1" id="toc-firm-exit-case-study-random-forest-1" class="nav-link" data-scroll-target="#firm-exit-case-study-random-forest-1">Firm exit case study: Random Forest</a></li>
+  <li><a href="#firm-exit-case-study-random-forest-2" id="toc-firm-exit-case-study-random-forest-2" class="nav-link" data-scroll-target="#firm-exit-case-study-random-forest-2">Firm exit case study: Random Forest</a></li>
+  <li><a href="#repetition-for-sake-of-argument" id="toc-repetition-for-sake-of-argument" class="nav-link" data-scroll-target="#repetition-for-sake-of-argument">Repetition for sake of argument</a></li>
+  <li><a href="#firm-exit-case-study-random-forest-3" id="toc-firm-exit-case-study-random-forest-3" class="nav-link" data-scroll-target="#firm-exit-case-study-random-forest-3">Firm exit case study: Random Forest</a></li>
+  <li><a href="#firm-exit-case-study-comparing-two-thresholds-2" id="toc-firm-exit-case-study-comparing-two-thresholds-2" class="nav-link" data-scroll-target="#firm-exit-case-study-comparing-two-thresholds-2">Firm exit case study: Comparing two thresholds</a></li>
+  <li><a href="#firm-exit-case-study-summary-of-process-with-rf" id="toc-firm-exit-case-study-summary-of-process-with-rf" class="nav-link" data-scroll-target="#firm-exit-case-study-summary-of-process-with-rf">Firm exit case study: Summary of process with RF</a></li>
+  <li><a href="#firm-exit-case-study-summary-of-model-for-model-selection" id="toc-firm-exit-case-study-summary-of-model-for-model-selection" class="nav-link" data-scroll-target="#firm-exit-case-study-summary-of-model-for-model-selection">Firm exit case study: Summary of model for model selection</a></li>
+  <li><a href="#firm-exit-case-study-business-application" id="toc-firm-exit-case-study-business-application" class="nav-link" data-scroll-target="#firm-exit-case-study-business-application">Firm exit case study: Business application</a></li>
+  <li><a href="#firm-exit-case-study-business-application-1" id="toc-firm-exit-case-study-business-application-1" class="nav-link" data-scroll-target="#firm-exit-case-study-business-application-1">Firm exit case study: Business application</a></li>
+  <li><a href="#firm-exit-case-study-business-application-2" id="toc-firm-exit-case-study-business-application-2" class="nav-link" data-scroll-target="#firm-exit-case-study-business-application-2">Firm exit case study: Business application</a></li>
+  <li><a href="#summary-1" id="toc-summary-1" class="nav-link" data-scroll-target="#summary-1">Summary</a></li>
+  <li><a href="#summary-2" id="toc-summary-2" class="nav-link" data-scroll-target="#summary-2">Summary</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="week12.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Probability and Classification</h1>
+<p class="subtitle lead">Am I a man, or am I a muppet?</p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Fernando Rios-Avila </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Levy Economics Institute
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 5, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="motivation" class="level2">
+<h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
+<ul>
+<li>Say you work for a consultancy agency helping a bank. You are asked to predict which firms will default on their loans.
+<ul>
+<li>What would be better: a model that predicts probabilities or a model that classifies firms into default or not default?</li>
+<li>How do you use to decide which firms should get a loan.</li>
+</ul></li>
+<li>Companies need to assess the likelihood of their suppliers or clients staying in business, as it impacts their own operations.
+<ul>
+<li>How to use historical data on company exits, along with key features, to predict the probability of a company’s exit.</li>
+</ul></li>
+</ul>
+</section>
+<section id="previously-on-da" class="level2">
+<h2 class="anchored" data-anchor-id="previously-on-da">Previously on DA</h2>
+<ul>
+<li>In the previous weeks, we have covered the basics of prediction when the target is quantitative.
+<ul>
+<li>Almost stright forward: predict the value of the target. Consider many specifications and pick the best one.</li>
+</ul></li>
+<li>We also cover the basic of probability modeling
+<ul>
+<li>LPM, Logit and probit models: When your dependent variable is Binary.</li>
+</ul></li>
+<li>However, we have not fully cover how to use these models for prediction.</li>
+</ul>
+</section>
+<section id="prediction-with-qualitative-target" class="level2">
+<h2 class="anchored" data-anchor-id="prediction-with-qualitative-target">Prediction with qualitative target</h2>
+<ul>
+<li>Consider cases where <span class="math inline">\(Y\)</span> is qualitative
+<ul>
+<li>Whether a debtor defaults (will default) on their loan</li>
+<li>Email is spam or not</li>
+<li>Game result is win / lose (no draw).</li>
+</ul></li>
+<li>For all this cases, the target (dep variable) is binary.</li>
+<li>The question is: Given this, What is the best way to predict the target?
+<ul>
+<li>Predict the probability of “success” (default, spam, win)</li>
+<li>or make a classification (default, spam, win) based on a probability.</li>
+</ul></li>
+</ul>
+</section>
+<section id="classification-the-extra-step" class="level1">
+<h1>Classification: The extra step</h1>
+<section id="the-process" class="level2">
+<h2 class="anchored" data-anchor-id="the-process">The process</h2>
+<ul>
+<li>Predict probability: We have done this.
+<ul>
+<li>Predicted probability between 0 and 1 (logit, probit or LPM in extreme cases)</li>
+<li>For each observation we predicted a probability. Often that is it.</li>
+</ul></li>
+</ul>
+<p>if logit: <span class="math display">\[\Pr[y_i = 1|x_i] = \Lambda \times (\beta_0 + \beta_1x_i) = \frac{\exp (\beta_0 + \beta_1x_i)}{1 + \exp (\beta_0 + \beta_1x_i)}\]</span></p>
+<ul>
+<li><p>Thats it! You can probably go couple of steps further and use various specifications, as well as LASSO (for logit) to pick the best model.</p></li>
+<li><p>Best model can still be picked based on RMSE, brier score or Calibration.</p></li>
+</ul>
+</section>
+<section id="refresher-probability-models" class="level2">
+<h2 class="anchored" data-anchor-id="refresher-probability-models">Refresher: Probability Models</h2>
+<ul>
+<li><p>LPM - not this time: Predicted value MUST be between 0 and 1</p></li>
+<li><p>Logit or probit (or other non-linear probability models)</p></li>
+<li><p>Nonlinear probability models <span class="math display">\[\Pr[y_i = 1|x_i] = \Lambda(\beta_0 + \beta_1x_i) = \frac{\exp (\beta_0 + \beta_1x_i)}{1 + \exp (\beta_0 + \beta_1x_i)}\]</span></p>
+<ul>
+<li>Predicted probability between 0 and 1</li>
+<li>Starts with a linear combination of the explanatory variables</li>
+<li>Multiplies them with coefficients, just like linear regression</li>
+<li>And then transforms that into something that is always between 0 and 1, the predicted probability.</li>
+</ul></li>
+</ul>
+</section>
+<section id="whats-new-with-binary-target" class="level2">
+<h2 class="anchored" data-anchor-id="whats-new-with-binary-target">What’s New with Binary target?</h2>
+<ul>
+<li>The predicted Probability is not a value.</li>
+<li>Desire to classify
+<ul>
+<li>assign 0 or 1</li>
+<li>based on a probability that comes from a model</li>
+<li>But how?</li>
+</ul></li>
+<li>We also need new measures of fit
+<ul>
+<li>Some based on probabilities</li>
+<li>Others based on classification</li>
+</ul></li>
+</ul>
+</section>
+<section id="whats-not-new-with-binary-target" class="level2">
+<h2 class="anchored" data-anchor-id="whats-not-new-with-binary-target">What’s NOT new with Binary target?</h2>
+<ul>
+<li>Need best fit
+<ul>
+<li>With highest external validity</li>
+</ul></li>
+<li>Usual worries: overfit
+<ul>
+<li>Cross-validation helps avoid worst overfit</li>
+</ul></li>
+<li>Models similar to those used earlier
+<ul>
+<li>Regression-like models (probability models)</li>
+<li>Tree-based models (CART, Random Forest) &lt;- We will not cover this</li>
+</ul></li>
+</ul>
+</section>
+<section id="probability-prediction-and-process" class="level2">
+<h2 class="anchored" data-anchor-id="probability-prediction-and-process">Probability prediction and process</h2>
+<ul>
+<li>We build models to predict probability when:
+<ul>
+<li>aim is to predict probabilities – (Duh!)</li>
+<li>aim is to classify (predict 0 or 1) – (we need probabilities first)</li>
+</ul></li>
+<li>Build models
+<ul>
+<li>several Logit models by domain knowledge</li>
+<li>LASSO - Logit LASSO</li>
+</ul></li>
+<li>Pick the best model via cross-validation using RMSE / Brier score
+<ul>
+<li>Or other LOSS function, if you have one</li>
+</ul></li>
+</ul>
+</section>
+<section id="classification-process" class="level2">
+<h2 class="anchored" data-anchor-id="classification-process">Classification process</h2>
+<ul>
+<li>After you predict your conditional probability, you can make classifications based on some threshold or Rule.
+<ul>
+<li>For example if <span class="math inline">\(\Pr[y = 1] &gt; 0.5\)</span> then predict 1, otherwise predict 0</li>
+<li>But we can choose any threshold. but how? (say top 10%?)</li>
+</ul></li>
+<li>We need to consider that we can make errors
+<ul>
+<li>False negative</li>
+<li>False positive</li>
+</ul></li>
+<li>Thus we need to consider a threshold that minimizes the expected errors</li>
+</ul>
+</section>
+<section id="classification-table-confusion-matrix" class="level2">
+<h2 class="anchored" data-anchor-id="classification-table-confusion-matrix">Classification Table: Confusion Matrix</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><span class="math inline">\(y_j = 0\)</span></th>
+<th><span class="math inline">\(y_j = 1\)</span></th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\hat{y}_j = 0\)</span></td>
+<td>TN</td>
+<td>FN</td>
+<td>TN + FN</td>
+</tr>
+<tr class="even">
+<td>Predicted negative</td>
+<td>(true negative)</td>
+<td>(false negative)</td>
+<td>(all classified negative)</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\hat{y}_j = 1\)</span></td>
+<td>FP</td>
+<td>TP</td>
+<td>FP + TP</td>
+</tr>
+<tr class="even">
+<td>Predicted positive</td>
+<td>(false positive)</td>
+<td>(true positive)</td>
+<td>(all classified positive)</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td>TN + FP</td>
+<td>FN + TP</td>
+<td>TN + FN + FP + TP</td>
+</tr>
+<tr class="even">
+<td>(all actual negative)</td>
+<td>(all actual positive)</td>
+<td>(N, all observations)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="classification-table-making-errors" class="level2">
+<h2 class="anchored" data-anchor-id="classification-table-making-errors">Classification Table: making errors</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><span class="math inline">\(y_j = 0\)</span></th>
+<th><span class="math inline">\(y_j = 1\)</span></th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\hat{y}_j = 0\)</span></td>
+<td>Predict firm stay</td>
+<td>Predict firm stay</td>
+<td>TN + FN</td>
+</tr>
+<tr class="even">
+<td>Predicted negative</td>
+<td>(Firm did stay )</td>
+<td>(Firm exited )</td>
+<td>(all classified stay )</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\hat{y}_j = 1\)</span></td>
+<td>Predict firm exit</td>
+<td>Predict firm exit</td>
+<td>FP + TP</td>
+</tr>
+<tr class="even">
+<td>Predicted positive</td>
+<td>(Firm stayed )</td>
+<td>(Firm did exit)</td>
+<td>(all classified exit)</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td>TN + FP</td>
+<td>FN + TP</td>
+<td>TN + FN + FP + TP</td>
+</tr>
+<tr class="even">
+<td>(all actual stay )</td>
+<td>(all actual exit)</td>
+<td>(N, all observations)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="measures-of-classification" class="level2">
+<h2 class="anchored" data-anchor-id="measures-of-classification">Measures of classification</h2>
+<p>There are several measures of classification, each with a different focus.</p>
+<ul>
+<li>Accuracy <span class="math inline">\(=(TP+TN)/N\)</span>
+<ul>
+<li>The proportion of rightly guessed observations</li>
+<li>Hit rate</li>
+</ul></li>
+<li>Sensitivity <span class="math inline">\(=TP / (TP+FN)\)</span>
+<ul>
+<li>The proportion of true positives among all actual positives</li>
+<li>Probability of predicted <span class="math inline">\(y\)</span> is 1 conditional on <span class="math inline">\(y = 1\)</span></li>
+</ul></li>
+<li>Specificity <span class="math inline">\(= TN/(TN+FP)\)</span>
+<ul>
+<li>The proportion of true negatives among all actual negatives</li>
+<li>Probability predicted <span class="math inline">\(y\)</span> is 0 conditional on <span class="math inline">\(y = 0\)</span></li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="theory-the-roc" class="level1">
+<h1>Theory: The ROC</h1>
+<p>Sensitivity vs Specificity</p>
+<section id="measures-of-classification-1" class="level2">
+<h2 class="anchored" data-anchor-id="measures-of-classification-1">Measures of classification</h2>
+<ul>
+<li>The key point is that there is a trade-off between making false positive and false negative errors.</li>
+<li>This is the essential insight in classification</li>
+<li>This can be expressed with specificity and sensitivity.</li>
+</ul>
+</section>
+<section id="roc-curve" class="level2">
+<h2 class="anchored" data-anchor-id="roc-curve">ROC Curve</h2>
+<ul>
+<li>The ROC curve is a popular graphic for simultaneously displaying specificity and sensitivity for all possible thresholds.</li>
+<li>ROC: Receiver operating characteristic curve
+<ul>
+<li>Name from engineering</li>
+</ul></li>
+<li>For each threshold, we can compute confusion table <span class="math inline">\(\rightarrow\)</span> calculate sensitivity and specificity</li>
+<li>Then, we can plot sensitivity vs 1-specificity for all thresholds
+<ul>
+<li>Horizontal axis: False positive rate (one minus specificity) = the proportion of FP among actual negatives</li>
+<li>Vertical axis: is true positive rate (sensitivity) = proportion of TP among actual positives</li>
+</ul></li>
+</ul>
+</section>
+<section id="roc-curve-intuition" class="level2">
+<h2 class="anchored" data-anchor-id="roc-curve-intuition">ROC Curve Intuition</h2>
+<ul>
+<li>Consider this:
+<ul>
+<li>If the threshold is 0, we predict all observations as 1. The sensitivity is 1, but the specificity is 0.</li>
+<li>If the threshold is 1, we predict all observations as 0. The sensitivity is 0, but the specificity is 1.</li>
+<li>The “ideal” threshold is somewhere in between.</li>
+</ul></li>
+<li>ROC curve shows how true positives and false positives increases relative to each other.</li>
+</ul>
+</section>
+<section id="roc-curve-intuition-1" class="level2">
+<h2 class="anchored" data-anchor-id="roc-curve-intuition-1">ROC Curve Intuition</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">Random Covariate</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Nof Children</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Full Model</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p><img src="images/paste-9.png" class="img-fluid"></p>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p><img src="images/paste-10.png" class="img-fluid"></p>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<p><img src="images/paste-11.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="area-under-roc-curve" class="level2">
+<h2 class="anchored" data-anchor-id="area-under-roc-curve">Area Under ROC Curve</h2>
+<ul>
+<li>ROC curve: the closer it is to the top left column, the better the (insample) prediction.</li>
+<li>Area under ROC (AUC) curve summarizes quality of probabilistic prediction
+<ul>
+<li>For all possible threshold choices</li>
+<li>Area <span class="math inline">\(=\)</span> 0.5 if random classification</li>
+<li>Area <span class="math inline">\(&gt;\)</span> 0.5 if curve mostly over 45 degree line</li>
+</ul></li>
+<li>AUC is a good statistic to compare models
+<ul>
+<li>Defined from a non-threshold dependent model (ROC)</li>
+<li>The larger the better</li>
+<li>Ranges between 0 and 1.</li>
+</ul></li>
+</ul>
+</section>
+<section id="stata-corner" class="level2">
+<h2 class="anchored" data-anchor-id="stata-corner">Stata Corner</h2>
+<ul>
+<li>Logit estimation: <code>logit y x1 x2 x3</code></li>
+<li>Predict probabilities: <code>predict yhat, pr</code></li>
+<li>Classification:
+<ul>
+<li><code>gen yhat_class = (yhat &gt; 0.5)</code></li>
+<li><code>estat classification</code></li>
+</ul></li>
+<li>ROC curve: <code>lroc</code></li>
+</ul>
+</section>
+<section id="model-selection-nr.1-probability-models" class="level2">
+<h2 class="anchored" data-anchor-id="model-selection-nr.1-probability-models">Model selection Nr.1: Probability models</h2>
+<ul>
+<li>Model selection when we have no loss function, based on probability models only
+<ul>
+<li>Predict probabilities (No actual classification)</li>
+<li>Use predicted probability to calculate RMSE</li>
+<li>Pick by smallest RMSE</li>
+</ul></li>
+<li>Or
+<ul>
+<li>Draw up ROC curve and get AUC, Pick the model with the largest AUC</li>
+<li>More frequently used in practice</li>
+<li>Less sensitive to class imbalance</li>
+</ul></li>
+<li>In practice, AUC is more frequently used</li>
+</ul>
+</section>
+</section>
+<section id="theory-classification-and-loss-function" class="level1">
+<h1>Theory: Classification and loss function</h1>
+<section id="how-we-make-classification-from-predicted-probability" class="level2">
+<h2 class="anchored" data-anchor-id="how-we-make-classification-from-predicted-probability">How we make classification from predicted probability?</h2>
+<ul>
+<li>We set a threshold!</li>
+<li>The process of classification
+<ul>
+<li>If probability of event is higher than this threshold<span class="math inline">\(\rightarrow\)</span> assign (predict) class 1; and 0 otherwise.</li>
+</ul></li>
+<li>Who sets the threshold?
+<ul>
+<li>Usually approximated by 0.5</li>
+<li>or by the frequency of the event in the data</li>
+</ul></li>
+</ul>
+</section>
+<section id="classification-select-the-threshold-with-loss-function" class="level2">
+<h2 class="anchored" data-anchor-id="classification-select-the-threshold-with-loss-function">Classification: select the threshold with loss function</h2>
+<ul>
+<li>Find optimal threshold with loss function.
+<ul>
+<li>A loss function is a dollar value assigned to false positive and false negative.</li>
+<li>Most often the costs of FP and FN are very different.</li>
+</ul></li>
+</ul>
+<p>Consider loss function</p>
+<p><span class="math display">\[E[loss] = \Pr[FN] \times loss(FN) + \Pr[FP] \times loss(FP)\]</span></p>
+<ul>
+<li>In ideal case, the minimization of this suggests that optimal threshold is:</li>
+</ul>
+<p><span class="math display">\[\text{Threshold} = \frac{loss(FP)}{loss(FN) + loss(FP)}\]</span></p>
+<ul>
+<li>Or we can try finding the threshold that minimizes the expected loss using Cross-validation. (Software issue)</li>
+</ul>
+</section>
+<section id="when-to-use-formula" class="level2">
+<h2 class="anchored" data-anchor-id="when-to-use-formula">When to use Formula</h2>
+<ul>
+<li>Formula
+<ul>
+<li>When dataset is “large”</li>
+<li>When our model has a “good” fit <span class="math inline">\(\text{Threshold}_{\min E (loss)} = \frac{loss(FP)}{loss(FN) + loss(FP)}\)</span></li>
+</ul></li>
+<li>In practice
+<ul>
+<li>Pro: easy to use, often close enough</li>
+<li>Con: not the best cutoff, especially for smaller data, and poorer model</li>
+</ul></li>
+</ul>
+<!--
+## Theory: Now, with trees
+
+## Classification tree
+
+-   Classification tree, predict the class (0/1)
+-   Same: Building trees with recursive binary splitting
+-   Different: prediction is not the mean of values, but the share of $y = 1$
+    -   Probability$\leftrightarrow$Frequency
+    -   Based on threshold
+-   Different: Loss function
+
+## New loss function
+
+-   In a classification tree, the measure of fit is node impurity.
+-   Extent to which nodes contain observations with both $y = 0$ and $y = 1$ or only $y = 0$ or $y = 1$.
+-   A widely used measure is the Gini index of node impurity.
+-   Let's consider a split, for node $m$, and let $\hat{p}_m$ represent the share of observations with $y = 1$. $\text{Gini} = 2\hat{p}_m(1 - \hat{p}_m)$
+-   The index is very small if all observations have either $y = 0$ or all have $y = 1$.
+-   The closer $\hat{p}_m$ to 0.5 the larger the value of the index.
+-   Thus, a small value implies that the node is made up entirely of a single class.
+
+## New loss function
+
+-   It turns out so using the Gini index of node impurity or using MSE to find the best fit leads to the same result.
+-   See Appendix Ch17.U2
+
+## Random forest
+
+-   Similar approach to regression trees
+-   Do classification trees, on bootstrapped datasets, and aggregate them.
+-   Often perform better than logit models.
+-   Similarly to OLS vs Random Forest
+    -   No need for model building
+    -   Better probability prediction
+    -   Slower
+-   Boosting can also be used for binary $y$.
+
+## Random forest: two options
+
+-   Similar approach to regression trees
+-   Do classification trees, on bootstrapped datasets, and aggregate them
+-   Technically two options:
+    -   Probability forest + threshold search with algorithm
+    -   Classification forest + threshold formula
+
+## Random forest: probability forest
+
+Probability forest + threshold search / algo
+
+-   Predicted probabilities
+-   Use them to find threshold or use formula to classify
+-   Aggregates the probability predictions of each tree by averaging them across all trees.
+-   The model's predicted probabilities are simply these averages.
+-   For predicting probabilities – this is the version to use.
+-   For classification – can be used, too, by simply applying the optimal classification threshold to the predicted probabilities.
+
+## Random forest
+
+## Random forest: classification forest
+
+Classification forest + threshold formula
+
+-   Carries out the classification at the end of each individual tree + aggregates those classifications $\rightarrow$ final classification
+-   Input formula based threshold as tuning parameter
+-   For predicting probabilities, this is not a good approach.
+-   For classification, this is the right model
+-   For classification, we can use probability or classification forest.
+-   Results tend to be very similar
+-   We have to find the optimal classification threshold using a loss function.
+
+## Random forest : key technical insight
+
+-   Two options yield results that are very close
+-   Not the same
+-   Both are okay to use
+-   Do not use "majority voting"!!!
+-   Default for R classification random forest is $t = 0.5$. Python is better.
+-   $\text{Loss}(FN) = \text{Loss}(FP)$ - Called "majority voting"
+-   Seems convincing. But it's misleading!
+-   Loss function could be anything!!!
+
+## Random Forest summary
+
+-   Random Forest works well for prediction when target is binary
+-   May always use for probability prediction
+-   Use for classification only with an explicit loss function
+-->
+</section>
+<section id="class-imbalance" class="level2">
+<h2 class="anchored" data-anchor-id="class-imbalance">Class imbalance</h2>
+<ul>
+<li>A potential issue for some dataset - relative frequency of the classes.</li>
+<li>Class imbalance = the event we care about is very rare or very frequent (<span class="math inline">\(\Pr(y = 1)\)</span> or <span class="math inline">\(\Pr(y = 0)\)</span> is very small)
+<ul>
+<li>Fraud</li>
+<li>Sport injury</li>
+</ul></li>
+<li>What is rare?
+<ul>
+<li>Something like 1%, 0.1%. (10% should be okay.)</li>
+<li>Depends on size: in larger dataset we can identify rare patterns better.</li>
+</ul></li>
+<li>Consequence: Hard to find those rare events.</li>
+</ul>
+</section>
+<section id="class-imbalance-the-consequences" class="level2">
+<h2 class="anchored" data-anchor-id="class-imbalance-the-consequences">Class imbalance: the consequences</h2>
+<ul>
+<li>Methods we use not good at handling it.</li>
+<li>Both for the models to predict probabilities, and for the measures of fit used for model selection.</li>
+<li>The functional form assumptions behind the logit model tend to matter more, the closer the probabilities are to zero or one.</li>
+<li>Cross-validation can be less effective at avoiding overfitting with very rare or very frequent events if the dataset is not very big.</li>
+<li>Usual measures of fit can be less good at differentiating models.</li>
+<li>Consequence
+<ul>
+<li>Poor model performance</li>
+<li>Model fitting and selection setup not ideal</li>
+</ul></li>
+</ul>
+</section>
+<section id="class-imbalance-what-to-do" class="level2">
+<h2 class="anchored" data-anchor-id="class-imbalance-what-to-do">Class imbalance: what to do</h2>
+<ul>
+<li>What to do? Two key insights.
+<ol type="1">
+<li>Know when it’s happening. Ready for poor performance.</li>
+<li>May need an action: rebalance sample to help build better models</li>
+</ol></li>
+<li>Downsampling – randomly drop observations from frequent class to balance out more
+<ul>
+<li>Before: 100,000 observations 1% event rate (99,000 <span class="math inline">\(y = 1\)</span>, 1,000 <span class="math inline">\(y = 0\)</span>)</li>
+<li>After 10,000 observations 10% event rate (9,000 <span class="math inline">\(y = 1\)</span>, 1,000 <span class="math inline">\(y = 0\)</span>)</li>
+</ul></li>
+<li>Over-sampling of rare events</li>
+<li>Smart algorithms
+<ul>
+<li>Synthetic Minority Over-Sampling Technique (SMOTE)</li>
+<li>Others</li>
+</ul></li>
+</ul>
+</section>
+<section id="case-study" class="level2">
+<h2 class="anchored" data-anchor-id="case-study">Case study</h2>
+</section>
+<section id="firm-exit-case-study-case-study-background" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-case-study-background">Firm exit case study: Case study: background</h2>
+<ul>
+<li>Banks and business partners are often interested in the stability of their customers.</li>
+<li>Predicting which firms will be around to do business with is an important part of many prediction projects.</li>
+<li>Working with financial and non-financial information, your task may be to predict which firms are more likely to default than others.</li>
+</ul>
+</section>
+<section id="firm-exit-case-study-business-case" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-business-case">Firm exit case study: business case</h2>
+<ul>
+<li>Suppose we work for a consultancy, whose aim is to advise banks on client selection or purchasing managers on supplier selection.</li>
+<li>“We do business with a firm, is this firm going to be around in the near future?” - they may ask.</li>
+<li>Our aim is to predict corporate default - exit from the market.</li>
+<li>That is it.</li>
+<li>Not more specific.</li>
+<li>We have to figure out and decide on target, features, etc.</li>
+</ul>
+</section>
+<section id="firm-exit-case-study-bisnode-firms-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-bisnode-firms-dataset">Firm exit case study: bisnode-firms dataset</h2>
+<ul>
+<li>Firm data</li>
+<li>Many different type of variables
+<ul>
+<li>Financial</li>
+<li>Management</li>
+<li>Ownership</li>
+<li>Status (HQ)</li>
+</ul></li>
+<li>Dataset is a panel data</li>
+<li>We created earlier</li>
+<li>Rows are identified by company id (comp-id) and year.</li>
+<li>We’ll focus on a cross-section of 2012.</li>
+</ul>
+</section>
+<section id="firm-exit-case-study-label-target-engineering" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-label-target-engineering">Firm exit case study: Label (target) engineering</h2>
+<ul>
+<li>Defining our target.</li>
+<li>In the data, there is no “exit” - we have to define it!</li>
+<li>A firm is operational in year <span class="math inline">\(t\)</span>, but is not in business in <span class="math inline">\(t + 2\)</span>.</li>
+<li>The target is hence a binary variable called exit,
+<ul>
+<li>1 if the firm exited within 2 years</li>
+<li>0 otherwise.</li>
+</ul></li>
+<li>This definition is broad
+<ul>
+<li>Defaults / forced exit</li>
+<li>Orderly closure</li>
+<li>Acquisitions</li>
+</ul></li>
+</ul>
+</section>
+<section id="firm-exit-case-study-sample-design" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-sample-design">Firm exit case study: Sample design</h2>
+<ul>
+<li>Look at a cross section
+<ul>
+<li>Year=2012</li>
+<li>status_alive=1</li>
+</ul></li>
+<li>Keep if established in 2012</li>
+<li>We do not care about all firms. Not very small and very large
+<ul>
+<li>Below 10 million euros</li>
+<li>Above 1000 euros</li>
+</ul></li>
+<li>Hardest call: keep when important variables are not missing
+<ul>
+<li>Balance sheet like liquid assets</li>
+<li>Ownership like foreign</li>
+<li>Industry classification</li>
+</ul></li>
+<li>End with 19K observation, 20% default rate</li>
+</ul>
+</section>
+<section id="firm-exit-case-study-features---overview" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-features---overview">Firm exit case study: Features - overview</h2>
+<ul>
+<li>Key predictors
+<ul>
+<li>size: sales, sales growth</li>
+<li>management: foreign, female, young, number of managers</li>
+<li>region, industry, firm age</li>
+<li>other financial variables from the balance sheet and P&amp;L.</li>
+</ul></li>
+<li>For financial variables, we use ratios (to sales or size of balance sheet).</li>
+<li>Here it will turn out be important to look at functional form carefully, especially regarding financial variables.</li>
+<li>Mix domain knowledge and statistics.</li>
+</ul>
+</section>
+<section id="firm-exit-case-study-features---overview-1" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-features---overview-1">Firm exit case study: Features - overview</h2>
+<ul>
+<li>We consider key predictors and do feature engineering</li>
+<li>Feature engineering -What’s the role, why matter?</li>
+</ul>
+</section>
+<section id="firm-exit-case-study-features---overview-2" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-features---overview-2">Firm exit case study: Features - overview</h2>
+<ul>
+<li>Great deal of unknown characteristics</li>
+<li>Dataset is small/medium sized for the task
+<ul>
+<li>19K rows and dozens of columns</li>
+</ul></li>
+<li>Functional form could matter greatly for financial variables</li>
+<li>For financial variables, we use ratios (to sales or size of balance sheet).</li>
+<li>Here it will turn out be important to look at functional form carefully, especially regarding financial variables.</li>
+<li>Mix domain knowledge and statistics.</li>
+<li>Plenty of analyst calls.</li>
+</ul>
+</section>
+<section id="firm-exit-case-study-feature-engineering" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-feature-engineering">Firm exit case study: Feature engineering</h2>
+<ul>
+<li>Growth rates
+<ul>
+<li>1 year growth rate of sales. Log difference.</li>
+<li>Could use longer time period. Lose observations</li>
+<li>Should depend on client needs. Maybe: I am interested in 3y+ firms.</li>
+</ul></li>
+<li>Ownership, management info
+<ul>
+<li>Keep if well covered, impute some. Could drop additional firms if key vars missing</li>
+<li>Again, depends on business</li>
+<li>Sometimes simplify (unless big data)
+<ul>
+<li>Binary: ceo_young = ceo_age_mod&lt;40 &amp; ceo_age_mod&gt;15</li>
+</ul></li>
+</ul></li>
+<li>Industry categories - too many, need merge</li>
+<li>Foreign ownership - above a threshold</li>
+<li>Numerical variables from balance sheet
+<ul>
+<li>Check functional form - logs, polynomials</li>
+</ul></li>
+</ul>
+</section>
+<section id="firm-exit-case-study-feature-engineering-tools" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-feature-engineering-tools">Firm exit case study: Feature engineering tools</h2>
+<ul>
+<li>Check coverage</li>
+<li>Decide on imputation vs drop</li>
+<li>Categorical (factor) variables
+<ul>
+<li>Tabulate</li>
+</ul></li>
+<li>Numerical variables
+<ul>
+<li>Check functional form - logs, polynomials</li>
+<li>Look at relationships in scatterplot, loess and decide</li>
+</ul></li>
+</ul>
+</section>
+<section id="firm-exit-case-study-feature-engineering-1" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-feature-engineering-1">Firm exit case study: Feature engineering</h2>
+<ul>
+<li>May need to make cleaning steps.</li>
+<li>Create binary variables (flags) when implementing changes to values.</li>
+<li>When financial values are negative: replace with zero and add a flag to capture imputation.</li>
+<li>Make changes
+<ul>
+<li>for values that may have additional information in non-linear way</li>
+<li>Value is exactly 0</li>
+</ul></li>
+</ul>
+</section>
+<section id="firm-exit-case-study-firm-sales-growth" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-firm-sales-growth">Firm exit case study: Firm sales growth</h2>
+<ul>
+<li>Annual growth in sales (difference in log sales) vs default</li>
+<li>Weird shape…</li>
+</ul>
+</section>
+<section id="firm-exit-case-study-firm-sales-growth-1" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-firm-sales-growth-1">Firm exit case study: Firm sales growth</h2>
+<ul>
+<li>Annual growth in sales vs default</li>
+<li>Weird shape…</li>
+<li>… because of extremes, really</li>
+<li>few firms below, say -1.5 and above 1.5</li>
+<li>The rest looks ok</li>
+</ul>
+</section>
+<section id="firm-exit-case-study-winsorizing" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-winsorizing">Firm exit case study: Winsorizing</h2>
+<ul>
+<li>When edge of a distribution is weird</li>
+<li>Not just a u-shaped polynomial</li>
+<li>Domain knowledge helps!</li>
+<li>Winsorizing is a process to keep observations with extreme values in sample
+<ul>
+<li>for each variable, we
+<ul>
+<li>identify a threshold value, and replace values outside that threshold with the threshold value itself</li>
+<li>and add a flag variable.</li>
+</ul></li>
+</ul></li>
+<li>Two ways to do it:
+<ul>
+<li>an automatic approach, where the lowest and highest 1 percent or 5 percent is replaced and flagged.</li>
+<li>Pick thresholds by domain knowledge as well as by looking at lowess. Preferred.</li>
+</ul></li>
+</ul>
+</section>
+<section id="firm-exit-case-study-firm-sales-growth-2" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-firm-sales-growth-2">Firm exit case study: Firm sales growth</h2>
+<ul>
+<li>The winsorized value simply equals original value in a range and flat below/after.</li>
+</ul>
+</section>
+<section id="case-study-firm-exit-model-features-1" class="level2">
+<h2 class="anchored" data-anchor-id="case-study-firm-exit-model-features-1">Case study: firm exit: Model features 1</h2>
+<ul>
+<li>Firm: Age of firm, squared age, a dummy if newly established, industry categories, location regions for its headquarters, and dummy if located in a big city.</li>
+<li>Financial 1: Winsorized financial variables: fixed, liquid (incl current), intangible assets, current liabilities, inventories, equity shares, subscribed capital, sales revenues, income before tax, extra income, material, personal and extra expenditure.</li>
+<li>Financial 2: Flags (extreme, low, high, zero - when applicable) and polynomials: Quadratic terms are created for profit and loss, extra profit and loss, income before tax, and share equity.</li>
+<li>Growth: Sales growth is captured by a winsorized growth variable, its quadratic term and flags for extreme low and high values.</li>
+</ul>
+</section>
+<section id="firm-exit-case-study-model-features-2" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-model-features-2">Firm exit case study: Model features 2</h2>
+<ul>
+<li>HR: For the CEO: female dummy, winsorized age and flags, flag for missing information, foreign management dummy; and labor cost, and flag for missing labor cost information.</li>
+<li>Data Quality: Variables related to the data quality of the financial information flag for a problem, and the length of the year that the balance sheet covers.</li>
+<li>Interactions: Interactions with sales growth, firm size, and industry.</li>
+</ul>
+</section>
+<section id="firm-exit-case-study-models" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-models">Firm exit case study: Models</h2>
+<p>Models (number of predictors)</p>
+<ul>
+<li>Logit M1: handpicked few variables (<span class="math inline">\(p = 11\)</span>)</li>
+<li>Logit M2: handpicked few variables + Firm (<span class="math inline">\(p = 18\)</span>)</li>
+<li>Logit M3: Firm, Financial 1, Growth (<span class="math inline">\(p = 35\)</span>)</li>
+<li>Logit M4: M3 + Financial 2 + HR + Data Quality (<span class="math inline">\(p = 79\)</span>)</li>
+<li>Logit M5: M4 + interactions (<span class="math inline">\(p = 153\)</span>)</li>
+<li>Logit LASSO: M5 + LASSO (<span class="math inline">\(p = 142\)</span>)</li>
+<li>Number of coefficients = N of predictors +1 (constant)</li>
+</ul>
+</section>
+<section id="firm-exit-case-study-data" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-data">Firm exit case study: Data</h2>
+<ul>
+<li><span class="math inline">\(N = 19,036\)</span></li>
+<li><span class="math inline">\(N = 15,229\)</span> in work set (80%)</li>
+<li>Cross validation 5x training + test sets
+<ul>
+<li>Used for cross-validation</li>
+</ul></li>
+<li><span class="math inline">\(N = 3,807\)</span> in holdout set (20%)
+<ul>
+<li>Used only for diagnostics of selected model.</li>
+</ul></li>
+</ul>
+</section>
+<section id="firm-exit-case-study-comparing-model-fit" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-comparing-model-fit">Firm exit case study: Comparing model fit</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Variables</th>
+<th>Coefficients</th>
+<th>CV RMSE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Logit M1</td>
+<td>4</td>
+<td>12</td>
+</tr>
+<tr class="even">
+<td>Logit M2</td>
+<td>9</td>
+<td>19</td>
+</tr>
+<tr class="odd">
+<td>Logit M3</td>
+<td>22</td>
+<td>36</td>
+</tr>
+<tr class="even">
+<td>Logit M4</td>
+<td>30</td>
+<td>80</td>
+</tr>
+<tr class="odd">
+<td>Logit M5</td>
+<td>30</td>
+<td>154</td>
+</tr>
+<tr class="even">
+<td>Logit LASSO</td>
+<td>30</td>
+<td>143</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>5-fold cross-validated on work set, average RMSE</li>
+<li>Will use Logit M4 model as benchmark</li>
+</ul>
+</section>
+<section id="classification" class="level2">
+<h2 class="anchored" data-anchor-id="classification">Classification</h2>
+<ul>
+<li>Picked a model on RMSE/Brier score</li>
+<li>For classification, we will need a threshold</li>
+</ul>
+</section>
+<section id="firm-exit-case-study-roc-curve" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-roc-curve">Firm exit case study: ROC curve</h2>
+<ul>
+<li>ROC curve shows trade-off for various values of the threshold</li>
+<li>Go through values of the ROC curve for selected threshold values, between 0.05 and 0.75, by steps of 0.05</li>
+</ul>
+</section>
+<section id="firm-exit-case-study-roc-curves" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-roc-curves">Firm exit case study: ROC curves</h2>
+</section>
+<section id="firm-exit-case-study-auc" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-auc">Firm exit case study: AUC</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>RMSE</th>
+<th>AUC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Logit M1</td>
+<td>0.374</td>
+<td>0.738</td>
+</tr>
+<tr class="even">
+<td>Logit M2</td>
+<td>0.366</td>
+<td>0.771</td>
+</tr>
+<tr class="odd">
+<td>Logit M3</td>
+<td>0.364</td>
+<td>0.777</td>
+</tr>
+<tr class="even">
+<td>Logit M4</td>
+<td>0.362</td>
+<td>0.782</td>
+</tr>
+<tr class="odd">
+<td>Logit M5</td>
+<td>0.363</td>
+<td>0.777</td>
+</tr>
+<tr class="even">
+<td>Logit LASSO</td>
+<td>0.362</td>
+<td>0.768</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Can calculate the AUC for all our models</li>
+<li>Model selection by RMSE or AUC</li>
+<li>Here: same (could be different if close)</li>
+</ul>
+</section>
+<section id="firm-exit-case-study-comparing-two-thresholds" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-comparing-two-thresholds">Firm exit case study: Comparing two thresholds</h2>
+<ul>
+<li>Take the Logit M4 model, predict probabilities and use that to classify on the holdout set</li>
+<li>Two thresholds: 50% and 20%</li>
+<li>Predict exit if probability &gt; threshold</li>
+</ul>
+</section>
+<section id="firm-exit-case-study-comparing-two-thresholds-1" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-comparing-two-thresholds-1">Firm exit case study: Comparing two thresholds</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Threshold: 0.5</th>
+<th>Threshold: 0.2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Actual stay</td>
+<td>75%</td>
+<td>57%</td>
+</tr>
+<tr class="even">
+<td>Actual exit</td>
+<td>6%</td>
+<td>14%</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td>81%</td>
+<td>71%</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="firm-exit-case-study-threshold-choice-consequences" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-threshold-choice-consequences">Firm exit case study: Threshold choice consequences</h2>
+<ul>
+<li>Having a higher threshold leads to
+<ul>
+<li>fewer predicted exits:
+<ul>
+<li>10% when the threshold is 50% (36% for threshold 20%).</li>
+</ul></li>
+<li>fewer false positives (4% versus 22%)</li>
+<li>more false negatives (15% versus 7%).</li>
+</ul></li>
+<li>The 50% threshold leads to a higher accuracy rate than the 20% threshold
+<ul>
+<li>50% threshold: 75% + 6% = 81%</li>
+<li>20% threshold: 57% + 14% = 71%</li>
+<li>even though the 20% threshold is very close to the actual proportion of exiting firms.</li>
+</ul></li>
+</ul>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>First option: no loss fn</p>
+<ul>
+<li>On the work set, do 5 fold CV and loop over models</li>
+<li>Do Probability predictions</li>
+<li>Calculate average RMSE on test for each fold</li>
+<li>Draw ROC Curve and calculate AUC for each fold</li>
+<li>Pick best model based on avg RMSE</li>
+<li>Take best model and estimate RMSE on holdout<span class="math inline">\(\rightarrow\)</span>best guess for live data performance</li>
+<li>Output: probability ranking - most likely to least likely.</li>
+<li>Show ROC curve and confusion table with logit on holdout 4 at <span class="math inline">\(t = 0.5\)</span> and <span class="math inline">\(t = 0.2\)</span> - to illustrate trade-off.</li>
+</ul>
+</section>
+<section id="firm-exit-case-study-the-loss-function" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-the-loss-function">Firm exit case study: The loss function</h2>
+<ul>
+<li>Loss function = FN, FP</li>
+<li>What matters is FN/FP</li>
+<li>FN=10
+<ul>
+<li>If the model predicts staying in business and the firm exits the market (a false negative), the bank loses all 10 thousand euros.</li>
+</ul></li>
+<li>FP=1
+<ul>
+<li>If predict exit and the bank denies the loan but the firm stays in business in fact (a false positive), the bank loses the profit opportunity of 1 thousand euros.</li>
+</ul></li>
+<li>With correct decisions, there is no loss.</li>
+</ul>
+</section>
+<section id="firm-exit-case-study-finding-the-threshold" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-finding-the-threshold">Firm exit case study: Finding the threshold</h2>
+<ul>
+<li>Find threshold by formula or algo</li>
+<li>Formula: the optimal classification threshold is <span class="math inline">\(1/11 = 0.091\)</span></li>
+<li>Algo: search thru possible cutoffs</li>
+</ul>
+</section>
+<section id="firm-exit-case-study-finding-the-threshold-1" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-finding-the-threshold-1">Firm exit case study: Finding the threshold</h2>
+<ul>
+<li>Consider all thresholds <span class="math inline">\(T = 0.01, 0.02—1\)</span></li>
+<li>Calculate the expected loss for all thresholds</li>
+<li>Pick when loss function has the minimum</li>
+<li>Done in CV, this is fold Nr.5.</li>
+</ul>
+</section>
+<section id="firm-exit-case-study" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study">Firm exit case study</h2>
+<ul>
+<li>Model selection process
+<ul>
+<li>Predict probabilities</li>
+<li>Use predicted probabilities and loss function to pick optimal threshold</li>
+<li>Use that threshold to calculate expected loss</li>
+<li>Pick model with smallest expected loss (in 5-fold CV)</li>
+</ul></li>
+<li>We run the threshold selection algorithm on the work set, with 5-fold cross-validation.</li>
+<li>Best is model Logit M4</li>
+<li>the optimal classification threshold by algo is 0.082. Close to formula (0.091)</li>
+<li>The average expected loss of 0.64.</li>
+</ul>
+</section>
+<section id="firm-exit-case-studysummary-of-process-with-loss-function" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-studysummary-of-process-with-loss-function">Firm exit case study:Summary of process with loss function</h2>
+<ul>
+<li>On the work set, do 5 fold CV and loop over models</li>
+<li>Do Probability predictions</li>
+<li>Calculate average RMSE on each test folds</li>
+<li>Draw ROC Curve and find optimal threshold with loss function (1,10)
+<ul>
+<li>show: threshold search - loss plots and ROC curve for fold 5</li>
+</ul></li>
+<li>Summarize: for each model: average of optimal thresholds, threshold for fold 5, average expected loss, expected loss for fold Nr.5.</li>
+<li>Pick best model based on average expected loss</li>
+<li>Take best model, re-estimate it on work set + find optimal threshold and estimate expected loss on holdout set</li>
+</ul>
+<p>Here is the continued content in Quarto format:</p>
+</section>
+<section id="firm-exit-case-studysummary-of-process-with-loss-function-1" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-studysummary-of-process-with-loss-function-1">Firm exit case study:Summary of process with loss function</h2>
+<ul>
+<li>Confusion table on holdout with optimal threshold<span class="math inline">\(\rightarrow\)</span>what to expect in live data.</li>
+</ul>
+</section>
+<section id="firm-exit-case-study-cart" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-cart">Firm exit case study: CART</h2>
+<ul>
+<li>CART
+<ul>
+<li>a small tree we built for illustration purposes</li>
+<li>with only three variables:
+<ul>
+<li>firm size (sales),</li>
+<li>binary variable for having a foreign management</li>
+<li>Binary if the firm is new.</li>
+</ul></li>
+<li>Terminal nodes with share of exit predictions</li>
+</ul></li>
+</ul>
+</section>
+<section id="firm-exit-case-study-random-forest" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-random-forest">Firm exit case study: Random Forest</h2>
+<ul>
+<li>The model outperforms the logit models, with a cross validated RMSE of 0.358 and AUC of 0.808.</li>
+<li>We used predicted probabilities to find the optimal thresholds, and used this to make the classification.</li>
+<li>The expected loss: 0.587
+<ul>
+<li>smaller than for the best logit (0.642)</li>
+</ul></li>
+<li>For the random forest we re-estimate the model on work set, and do prediction on holdout set.</li>
+<li>Holdout RMSE RF is 0.358 (vs 0.366 best logit)</li>
+<li>Holdout AUC is 0.808 vs 0.784 for best logit.</li>
+</ul>
+</section>
+<section id="firm-exit-case-study-random-forest-1" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-random-forest-1">Firm exit case study: Random Forest</h2>
+<ul>
+<li>Note that finding the optimal threshold is rather important.</li>
+<li>If used a 0.5 threshold, the expected loss jumped to <span class="math inline">\(-1.540\)</span> vs <span class="math inline">\(-0.587\)</span> for the best threshold model.</li>
+<li>This is 2.6 times the loss from the optimal threshold.</li>
+<li>The default option in random forest (and many ML models) for classification is majority voting</li>
+<li>Majority voting is threshold=50%</li>
+</ul>
+</section>
+<section id="firm-exit-case-study-random-forest-2" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-random-forest-2">Firm exit case study: Random Forest</h2>
+<ul>
+<li>Note that finding the optimal threshold is rather important.</li>
+<li>Used a 0.5 threshold, the expected loss jumped to <span class="math inline">\(-1.540\)</span> vs <span class="math inline">\(-0.587\)</span> for the best threshold model.</li>
+<li>This is 2.6 times the loss from the optimal threshold.</li>
+<li>The default option in random forest (and many ML models) for classification is majority voting</li>
+<li>Majority voting is threshold=50% - NO!!!!!</li>
+<li>Don’t use it!!!!!!</li>
+<li>Unless loss function: FN=FP</li>
+</ul>
+</section>
+<section id="repetition-for-sake-of-argument" class="level2">
+<h2 class="anchored" data-anchor-id="repetition-for-sake-of-argument">Repetition for sake of argument</h2>
+<p>If you don’t have a loss function, you can’t classify.</p>
+</section>
+<section id="firm-exit-case-study-random-forest-3" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-random-forest-3">Firm exit case study: Random Forest</h2>
+<ul>
+<li>No loss function
+<ul>
+<li>Predict probabilities</li>
+</ul></li>
+<li>Loss function
+<ul>
+<li>Predict probabilities</li>
+<li>Take these probabilities and classify by threshold selected</li>
+</ul></li>
+<li>Alternative: use threshold and change the classification rule
+<ul>
+<li>Can be done in caret/ranger</li>
+</ul></li>
+</ul>
+</section>
+<section id="firm-exit-case-study-comparing-two-thresholds-2" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-comparing-two-thresholds-2">Firm exit case study: Comparing two thresholds</h2>
+<ul>
+<li>Predict exit if probability&gt;10.9%</li>
+<li>Expected loss: <span class="math inline">\((1.33 \times 10 + 45.4 \times 1)/100 = 0.587\)</span></li>
+</ul>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>actual stay</th>
+<th>actual exit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>predicted stay</td>
+<td>33.6%</td>
+<td>1.3%</td>
+</tr>
+<tr class="even">
+<td>predicted exit</td>
+<td>45.4%</td>
+<td>19.7%</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="firm-exit-case-study-summary-of-process-with-rf" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-summary-of-process-with-rf">Firm exit case study: Summary of process with RF</h2>
+<ul>
+<li>Run probability forest on work set with 5-CV</li>
+<li>Get average (ie over the folds) RMSE and AUC</li>
+<li>Now use loss function (1,10) and search for best thresholds and expected loss over folds</li>
+<li>Show ROC, loss on fold 5</li>
+<li>Optimal Threshold, average expected loss is calculated</li>
+<li>Take model to holdout and estimate RMSE, AUC and expected loss<span class="math inline">\(\rightarrow\)</span>what you expect in live data</li>
+<li>+1 Show expected loss with classification RF and default majority voting to compare</li>
+</ul>
+</section>
+<section id="firm-exit-case-study-summary-of-model-for-model-selection" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-summary-of-model-for-model-selection">Firm exit case study: Summary of model for model selection</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 10%">
+<col style="width: 11%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>Preds</th>
+<th>Coeffs</th>
+<th>RMSE</th>
+<th>AUC</th>
+<th>threshold</th>
+<th>exp. loss</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Logit M1</td>
+<td>11</td>
+<td>12</td>
+<td>0.374</td>
+<td>0.736</td>
+<td>0.089</td>
+<td>0.722</td>
+</tr>
+<tr class="even">
+<td>Logit M4</td>
+<td>36</td>
+<td>79</td>
+<td>0.362</td>
+<td>0.784</td>
+<td>0.082</td>
+<td>0.619</td>
+</tr>
+<tr class="odd">
+<td>Logit LASSO</td>
+<td>36</td>
+<td>143</td>
+<td>0.362</td>
+<td>0.768</td>
+<td>0.106</td>
+<td>0.642</td>
+</tr>
+<tr class="even">
+<td>RF probability</td>
+<td>36</td>
+<td>n.a.</td>
+<td>0.354</td>
+<td>0.808</td>
+<td>0.098</td>
+<td>0.587</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>RMSE, AZC, Threshold, Loss: all 5-fold CV results (averages).</li>
+</ul>
+</section>
+<section id="firm-exit-case-study-business-application" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-business-application">Firm exit case study: Business application</h2>
+<ul>
+<li>Consider this setup
+<ul>
+<li>For each firm we review, we get 1000 euros in revenues,</li>
+<li>Loss function: loans to bad companies = <span class="math inline">\(-10,000\)</span> euros,</li>
+<li>missed loans to good ones = <span class="math inline">\(-1,000\)</span> euros.</li>
+</ul></li>
+</ul>
+</section>
+<section id="firm-exit-case-study-business-application-1" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-business-application-1">Firm exit case study: Business application</h2>
+<ul>
+<li>Simplest model 1 classifies with expected loss 0.722 euro per firm, the Random Forest model has 0.587 euro.</li>
+<li>Building a better model yields 135 euros higher profit per firm <span class="math inline">\((0.722 - 0.587) \times 1000 = 135\)</span></li>
+<li>If we do 1000 deals, it is 135,000 euros in profit.</li>
+<li>If a regulator asks for an interpretable model, we shall compare with the logit M4 model and have 103,000 euros in expected profit.</li>
+<li>Why does it matter?</li>
+</ul>
+</section>
+<section id="firm-exit-case-study-business-application-2" class="level2">
+<h2 class="anchored" data-anchor-id="firm-exit-case-study-business-application-2">Firm exit case study: Business application</h2>
+<ul>
+<li>Random Forest gets us 135K profit, best logit is 103K compared to some simple model.</li>
+<li>We can take this and compare to development costs</li>
+<li>Profit for good analysis.</li>
+</ul>
+</section>
+<section id="summary-1" class="level2">
+<h2 class="anchored" data-anchor-id="summary-1">Summary</h2>
+<ul>
+<li>Decide whether the goal is predicting probabilities or classification.</li>
+<li>The outcome of prediction with a binary target variable is always the predicted probabilities as a function of predictors.</li>
+<li>When our goal is probability prediction, we should find the best model that predicts probabilities by cross-validation + RMSE/AUC.</li>
+<li>When our goal is classification, we should find the best model that has the smallest expected loss.
+<ul>
+<li>With formula for threshold or search algorithm</li>
+<li>Finding the optimal classification threshold needs a loss function.</li>
+</ul></li>
+</ul>
+</section>
+<section id="summary-2" class="level2">
+<h2 class="anchored" data-anchor-id="summary-2">Summary</h2>
+<ul>
+<li>Without a loss function, no classification.</li>
+<li>If you don’t have one, make it up.</li>
+<li>Don’t rely on default 0.5.</li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
