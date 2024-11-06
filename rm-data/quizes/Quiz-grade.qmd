@@ -1,7 +1,18 @@
-Lazaroes 4 4
+Lazaroes 4 4 
 Joe 4 5
 Emi 4 5
 Chenning 4 5
 Brendon 4 5
 Shane 4 5
 Kailin 3 0 
+
+q4 q5 
+
+Lazaroes q5=1 q4=0
+
+Joe q5=5 q4=5
+Emi q5=0 q4=5
+Chenning q5=5 q4=5
+Brendon q5=5 q4=5
+Shane q5=5 q4=4
+Kailin q5=4 q4=4

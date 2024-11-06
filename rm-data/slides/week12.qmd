@@ -178,8 +178,7 @@ Sensitivity vs Specificity
 
 ## ROC Curve Intuition
 
-:::{.panel-tabset}
-
+::: panel-tabset
 ## Random Covariate
 
 ![](images/paste-9.png)
@@ -191,7 +190,6 @@ Sensitivity vs Specificity
 ## Full Model
 
 ![](images/paste-11.png)
-
 :::
 
 ## Area Under ROC Curve
@@ -208,13 +206,13 @@ Sensitivity vs Specificity
 
 ## Stata Corner
 
-- Logit estimation: `logit y x1 x2 x3`
-- Predict probabilities: `predict yhat, pr`
-- Classification: 
-  - `gen yhat_class = (yhat > 0.5)` 
-  - `estat classification`
-- ROC curve: `lroc`
-  
+-   Logit estimation: `logit y x1 x2 x3`
+-   Predict probabilities: `predict yhat, pr`
+-   Classification:
+    -   `gen yhat_class = (yhat > 0.5)`
+    -   `estat classification`
+-   ROC curve: `lroc`
+
 ## Model selection Nr.1: Probability models
 
 -   Model selection when we have no loss function, based on probability models only
@@ -248,12 +246,12 @@ Consider loss function
 
 $$E[loss] = \Pr[FN] \times loss(FN) + \Pr[FP] \times loss(FP)$$
 
-- In ideal case, the minimization of this suggests that optimal threshold is:
+-   In ideal case, the minimization of this suggests that optimal threshold is:
 
 $$\text{Threshold} = \frac{loss(FP)}{loss(FN) + loss(FP)}$$
 
-- Or we can try finding the threshold that minimizes the expected loss using Cross-validation. (Software issue)
- 
+-   Or we can try finding the threshold that minimizes the expected loss using Cross-validation. (Software issue)
+
 ## When to use Formula
 
 -   Formula
@@ -263,6 +261,7 @@ $$\text{Threshold} = \frac{loss(FP)}{loss(FN) + loss(FP)}$$
     -   Pro: easy to use, often close enough
     -   Con: not the best cutoff, especially for smaller data, and poorer model
 
+```{=html}
 <!--
 ## Theory: Now, with trees
 
@@ -351,41 +350,38 @@ Classification forest + threshold formula
 -   May always use for probability prediction
 -   Use for classification only with an explicit loss function
 -->
+```
 
 ## Class imbalance
 
 -   A potential issue for some dataset - relative frequency of the classes.
 -   Class imbalance = the event we care about is very rare or very frequent ($\Pr(y = 1)$ or $\Pr(y = 0)$ is very small)
-    -   Fraud
-    -   Sport injury
+    -   Fraud, Sport injury
 -   What is rare?
     -   Something like 1%, 0.1%. (10% should be okay.)
     -   Depends on size: in larger dataset we can identify rare patterns better.
 -   Consequence: Hard to find those rare events.
+    -   You may be able to identify some patterns by chance.
 
 ## Class imbalance: the consequences
 
 -   Methods we use not good at handling it.
 -   Both for the models to predict probabilities, and for the measures of fit used for model selection.
 -   The functional form assumptions behind the logit model tend to matter more, the closer the probabilities are to zero or one.
--   Cross-validation can be less effective at avoiding overfitting with very rare or very frequent events if the dataset is not very big.
+-   Cross-validation can be less effective at avoiding overfitting with very rare or very frequent events if the dataset is not very big. (Many samples will not even have the event.)
 -   Usual measures of fit can be less good at differentiating models.
--   Consequence
-    -   Poor model performance
-    -   Model fitting and selection setup not ideal
+-   Consequence: Model fitting and selection setup not ideal
 
 ## Class imbalance: what to do
 
 -   What to do? Two key insights.
-    1.  Know when it's happening. Ready for poor performance.
+    1.  Know when it's happening, and be ready for poor performance.
     2.  May need an action: rebalance sample to help build better models
 -   Downsampling – randomly drop observations from frequent class to balance out more
     -   Before: 100,000 observations 1% event rate (99,000 $y = 1$, 1,000 $y = 0$)
     -   After 10,000 observations 10% event rate (9,000 $y = 1$, 1,000 $y = 0$)
 -   Over-sampling of rare events
--   Smart algorithms
-    -   Synthetic Minority Over-Sampling Technique (SMOTE)
-    -   Others
+-   try Smart algorithms: Synthetic Minority Over-Sampling Technique (SMOTE)
 
 ## Case study
 
@@ -394,37 +390,22 @@ Classification forest + threshold formula
 -   Banks and business partners are often interested in the stability of their customers.
 -   Predicting which firms will be around to do business with is an important part of many prediction projects.
 -   Working with financial and non-financial information, your task may be to predict which firms are more likely to default than others.
-
-## Firm exit case study: business case
-
--   Suppose we work for a consultancy, whose aim is to advise banks on client selection or purchasing managers on supplier selection.
--   "We do business with a firm, is this firm going to be around in the near future?" - they may ask.
--   Our aim is to predict corporate default - exit from the market.
--   That is it.
--   Not more specific.
--   We have to figure out and decide on target, features, etc.
+-   Goal: Predict corporate default - exit from the market.
+    -   We have to figure out and decide on target, features, etc.
 
 ## Firm exit case study: bisnode-firms dataset
 
 -   Firm data
 -   Many different type of variables
-    -   Financial
-    -   Management
-    -   Ownership
-    -   Status (HQ)
+    -   Financial, Management, Ownership, Status (HQ)
 -   Dataset is a panel data
--   We created earlier
 -   Rows are identified by company id (comp-id) and year.
--   We'll focus on a cross-section of 2012.
+-   **We'll focus on a cross-section of 2012.**
 
 ## Firm exit case study: Label (target) engineering
 
--   Defining our target.
--   In the data, there is no "exit" - we have to define it!
--   A firm is operational in year $t$, but is not in business in $t + 2$.
--   The target is hence a binary variable called exit,
-    -   1 if the firm exited within 2 years
-    -   0 otherwise.
+-   Defining our target. There is no "exit" - we have to define it!
+-   Option: If a firm is operational in year $t$, but is not in business in $t + 2$ -\> Exit.
 -   This definition is broad
     -   Defaults / forced exit
     -   Orderly closure
@@ -455,45 +436,25 @@ Classification forest + threshold formula
 -   For financial variables, we use ratios (to sales or size of balance sheet).
 -   Here it will turn out be important to look at functional form carefully, especially regarding financial variables.
 -   Mix domain knowledge and statistics.
-
-## Firm exit case study: Features - overview
-
--   We consider key predictors and do feature engineering
--   Feature engineering -What's the role, why matter?
-
-## Firm exit case study: Features - overview
-
--   Great deal of unknown characteristics
--   Dataset is small/medium sized for the task
-    -   19K rows and dozens of columns
--   Functional form could matter greatly for financial variables
--   For financial variables, we use ratios (to sales or size of balance sheet).
--   Here it will turn out be important to look at functional form carefully, especially regarding financial variables.
--   Mix domain knowledge and statistics.
 -   Plenty of analyst calls.
 
 ## Firm exit case study: Feature engineering
 
 -   Growth rates
     -   1 year growth rate of sales. Log difference.
-    -   Could use longer time period. Lose observations
-    -   Should depend on client needs. Maybe: I am interested in 3y+ firms.
+    -   Could use longer time period, but Lose observations\
 -   Ownership, management info
-    -   Keep if well covered, impute some. Could drop additional firms if key vars missing
-    -   Again, depends on business
-    -   Sometimes simplify (unless big data)
-        -   Binary: ceo_young = ceo_age_mod\<40 & ceo_age_mod\>15
--   Industry categories - too many, need merge
+    -   Keep if well covered, impute some, but drop if key vars missing
+    -   Sometimes simplify (unless big data): `ceo_young = ceo_age_mod <40  & ceo_age_mod >15`
+-   Industry categories - need simplify
 -   Foreign ownership - above a threshold
--   Numerical variables from balance sheet
-    -   Check functional form - logs, polynomials
+-   Numerical variables from balance sheet: Check functional form - logs, polynomials
 
 ## Firm exit case study: Feature engineering tools
 
--   Check coverage
+-   Check coverage (missing values)
 -   Decide on imputation vs drop
 -   Categorical (factor) variables
-    -   Tabulate
 -   Numerical variables
     -   Check functional form - logs, polynomials
     -   Look at relationships in scatterplot, loess and decide
@@ -503,28 +464,18 @@ Classification forest + threshold formula
 -   May need to make cleaning steps.
 -   Create binary variables (flags) when implementing changes to values.
 -   When financial values are negative: replace with zero and add a flag to capture imputation.
--   Make changes
-    -   for values that may have additional information in non-linear way
-    -   Value is exactly 0
-
-## Firm exit case study: Firm sales growth
-
+    -   Zeros will not work with logs.
 -   Annual growth in sales (difference in log sales) vs default
--   Weird shape...
+    -   Try editing variables by Winsorizing and adding flags for extreme values.
+    -   Some ODD shapes due to extreme values.
 
-## Firm exit case study: Firm sales growth
+## The Weird Shape
 
--   Annual growth in sales vs default
--   Weird shape...
--   ... because of extremes, really
--   few firms below, say -1.5 and above 1.5
--   The rest looks ok
+![](images/paste-12.png)
 
-## Firm exit case study: Winsorizing
+## ![](images/paste-13.png)Firm exit case study: Winsorizing
 
--   When edge of a distribution is weird
--   Not just a u-shaped polynomial
--   Domain knowledge helps!
+-   When edge of a distribution is weird...
 -   Winsorizing is a process to keep observations with extreme values in sample
     -   for each variable, we
         -   identify a threshold value, and replace values outside that threshold with the threshold value itself
@@ -535,20 +486,22 @@ Classification forest + threshold formula
 
 ## Firm exit case study: Firm sales growth
 
+![](images/paste-15.png)
+
 -   The winsorized value simply equals original value in a range and flat below/after.
 
 ## Case study: firm exit: Model features 1
 
--   Firm: Age of firm, squared age, a dummy if newly established, industry categories, location regions for its headquarters, and dummy if located in a big city.
--   Financial 1: Winsorized financial variables: fixed, liquid (incl current), intangible assets, current liabilities, inventories, equity shares, subscribed capital, sales revenues, income before tax, extra income, material, personal and extra expenditure.
--   Financial 2: Flags (extreme, low, high, zero - when applicable) and polynomials: Quadratic terms are created for profit and loss, extra profit and loss, income before tax, and share equity.
--   Growth: Sales growth is captured by a winsorized growth variable, its quadratic term and flags for extreme low and high values.
+-   **Firm**: Age of firm, squared age, a dummy if newly established, industry categories, location regions for its headquarters, and dummy if located in a big city.
+-   **Financial 1**: Winsorized financial variables: fixed, liquid (incl current), intangible assets, current liabilities, inventories, equity shares, subscribed capital, sales revenues, income before tax, extra income, material, personal and extra expenditure.
+-   **Financial 2**: Flags (extreme, low, high, zero - when applicable) and polynomials: Quadratic terms are created for profit and loss, extra profit and loss, income before tax, and share equity.
+-   **Growth**: Sales growth is captured by a winsorized growth variable, its quadratic term and flags for extreme low and high values.
 
 ## Firm exit case study: Model features 2
 
--   HR: For the CEO: female dummy, winsorized age and flags, flag for missing information, foreign management dummy; and labor cost, and flag for missing labor cost information.
--   Data Quality: Variables related to the data quality of the financial information flag for a problem, and the length of the year that the balance sheet covers.
--   Interactions: Interactions with sales growth, firm size, and industry.
+-   **HR**: For the CEO: female dummy, winsorized age and flags, flag for missing information, foreign management dummy; and labor cost, and flag for missing labor cost information.
+-   **Data Quality**: Variables related to the data quality of the financial information flag for a problem, and the length of the year that the balance sheet covers.
+-   **Interactions**: Interactions with sales growth, firm size, and industry.
 
 ## Firm exit case study: Models
 
@@ -573,14 +526,14 @@ Models (number of predictors)
 
 ## Firm exit case study: Comparing model fit
 
-| Variables   | Coefficients | CV RMSE |
-|-------------|--------------|---------|
-| Logit M1    | 4            | 12      |
-| Logit M2    | 9            | 19      |
-| Logit M3    | 22           | 36      |
-| Logit M4    | 30           | 80      |
-| Logit M5    | 30           | 154     |
-| Logit LASSO | 30           | 143     |
+|              | Variables | Coefficients  | CV RMSE   |
+|--------------|-----------|---------------|-----------|
+| Logit M1     | 4         | 12            | 0.374     |
+| Logit M2     | 9         | 19            | 0.366     |
+| Logit M3     | 22        | 36            | 0.364     |
+| **Logit M4** | **30**    | **80**        | **0.362** |
+| Logit M5     | 30        | 154           | 0.363     |
+| Logit LASSO  | 30        | 143           | 0.362     |
 
 -   5-fold cross-validated on work set, average RMSE
 -   Will use Logit M4 model as benchmark
@@ -592,21 +545,23 @@ Models (number of predictors)
 
 ## Firm exit case study: ROC curve
 
+![](images/paste-16.png)
+
 -   ROC curve shows trade-off for various values of the threshold
 -   Go through values of the ROC curve for selected threshold values, between 0.05 and 0.75, by steps of 0.05
 
-## Firm exit case study: ROC curves
+##  
 
 ## Firm exit case study: AUC
 
-| Model       | RMSE  | AUC   |
-|-------------|-------|-------|
-| Logit M1    | 0.374 | 0.738 |
-| Logit M2    | 0.366 | 0.771 |
-| Logit M3    | 0.364 | 0.777 |
-| Logit M4    | 0.362 | 0.782 |
-| Logit M5    | 0.363 | 0.777 |
-| Logit LASSO | 0.362 | 0.768 |
+| Model        | RMSE      | AUC       |
+|--------------|-----------|-----------|
+| Logit M1     | 0.374     | 0.738     |
+| Logit M2     | 0.366     | 0.771     |
+| Logit M3     | 0.364     | 0.777     |
+| **Logit M4** | **0.362** | **0.782** |
+| Logit M5     | 0.363     | 0.777     |
+| Logit LASSO  | 0.362     | 0.768     |
 
 -   Can calculate the AUC for all our models
 -   Model selection by RMSE or AUC
@@ -620,11 +575,13 @@ Models (number of predictors)
 
 ## Firm exit case study: Comparing two thresholds
 
-|             | Threshold: 0.5 | Threshold: 0.2 |
-|-------------|----------------|----------------|
-| Actual stay | 75%            | 57%            |
-| Actual exit | 6%             | 14%            |
-| Total       | 81%            | 71%            |
+|   | Threshold: 0.5 |   |   | Threshold: 0.2 |   |   |
+|-----------|-----------|-----------|-----------|-----------|-----------|-----------|
+|  | Actual stay | Actual exit | Total | Actual stay | Actual exit | Total |
+| Predicted stay | 75% | 15% | 90% | 57% | 7% | 64% |
+| Predicted exit | 4% | 6% | 10% | 22% | 14% | 36% |
+| Total | 79% | 21% | 100% | 79% | 21% | 100% |
+ 
 
 ## Firm exit case study: Threshold choice consequences
 
