@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-07ba0ad10f5680c660e360ac31d2f3b6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.33">
+
+  <meta name="author" content="Fernando Rios-Avila">
+  <meta name="dcterms.date" content="2024-11-12">
+  <title>Econometrics MSC Levy – Model Building for Prediction</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-97edfe54b73ff960639f8ac44205bcc0.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Model Building for Prediction</h1>
+  <p class="subtitle">Last’s Weeks on Steroids</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Fernando Rios-Avila 
+</div>
+        <p class="quarto-title-affiliation">
+            Levy Economics Institute
+          </p>
+    </div>
+</div>
+
+  <p class="date">November 12, 2024</p>
+</section>
+<section id="motivation" class="slide level2">
+<h2>Motivation</h2>
+<ul>
+<li>You want to predict apartment rental prices using location, size, amenities, and other features. But with so many variables available,
+<ul>
+<li>how should you specify the candidate models?</li>
+<li>Which variables should they include, in what functional forms, and with what interactions?</li>
+<li>How can you make sure the candidates include truly effective predictive models?</li>
+</ul></li>
+<li>You want to predict hourly sales for a new shop, based on data from a similar existing shop.
+<ul>
+<li>How should you define your y variable, and how should you select predictor variables for regression models to find the best fit?</li>
+<li>Finally, how can you evaluate the prediction in a way that informs decision-makers about the uncertainty of your prediction?</li>
+</ul></li>
+</ul>
+</section>
+<section id="what-is-old-whats-the-new" class="slide level2">
+<h2>What is old? whats the new?</h2>
+<ul>
+<li><p>We have learned about the basics of prediction.</p>
+<ul>
+<li>We need to worry about the out-of-sample prediction error. Not the in-sample error.</li>
+</ul></li>
+<li><p>We know we can use cross-validation to select the best model.</p></li>
+<li><p>And we know we can construct the best model by hand, because we have domain knowledge.</p></li>
+</ul>
+<p>But what if we have a lot of variables? What if we have a lot of data?</p>
+</section>
+<section id="as-k-grows-large-kxk-grows-larger" class="slide level2">
+<h2>As <span class="math inline">\(K\)</span> grows large <span class="math inline">\(KxK\)</span> grows larger</h2>
+<ul>
+<li>1 variable, 1 model</li>
+<li>2 variables, 3 models</li>
+<li>3 variables, 7 models</li>
+<li>10 variables, 1023 models!</li>
+<li>20 variables, 1,048,575 models!</li>
+</ul>
+</section>
+<section id="prediction-process-key-steps" class="slide level2">
+<h2>Prediction process: key steps</h2>
+<ul>
+<li>Start with defining your “question” - what you want to predict.</li>
+<li>Based on the question, the target variable is defined (operationalize in the data).
+<ul>
+<li>Followed by defining the sample to be used (as the target)</li>
+<li>Determine the target variable and functional form (label engineering)</li>
+</ul></li>
+<li>Define the list of predictors (feature engineering)
+<ul>
+<li>Build the model(s)</li>
+<li>evaluate the model</li>
+<li>make the prediction</li>
+</ul></li>
+</ul>
+</section>
+<section id="sample-design" class="slide level2">
+<h2>Sample design</h2>
+<ul>
+<li>In a prediction exercise, we are interested in predicting target for units that look those in the live data.
+<ul>
+<li>Select a sample that is representative of the live/target data.</li>
+</ul></li>
+<li>But, there is a trade-off:
+<ul>
+<li>Keep observations close to what we’ll have in live data,</li>
+<li>Or aim for a large sample size.</li>
+</ul></li>
+<li>Sample design is eventually a compromise</li>
+</ul>
+</section>
+<section id="sample-design-filtering" class="slide level2">
+<h2>Sample design: filtering</h2>
+<ul>
+<li>Before settling on a model, we need to design the sample.</li>
+<li>Filtering our data to match the business/ policy question.</li>
+<li>It may involve dropping observations based on key <strong>predictor</strong> values.
+<ul>
+<li>We would be looking for 3-4 star hotels, not all of them.</li>
+</ul></li>
+</ul>
+</section>
+<section id="sample-design-spotting-errors" class="slide level2">
+<h2>Sample design: Spotting errors</h2>
+<ul>
+<li>For prediction exercise, we should spend more time on finding and deleting errors.
+<ul>
+<li>We have no chance predicting extreme values, and certainly not errors.</li>
+<li>They provide no information, and they may distort the model.</li>
+</ul></li>
+<li>Keeping an extreme value that is likely to be an error, will have a high cost - the quadratic errors in the loss function will tilt the curve and our prediction will be off for most observations.
+<ul>
+<li>OLS is very sensitive to outliers.</li>
+</ul></li>
+<li><strong>Stronger</strong> focus on dropping observations we think are errors.</li>
+<li>If data is missing, You may either drop the observation or try to understand why it is missing, and use that in the prediction.</li>
+</ul>
+</section>
+<section id="case-study-of-used-cars-sample-design" class="slide level2">
+<h2>Case study of used cars: Sample design</h2>
+<ul>
+<li>Dropping hybrid cars, manual gear, truck</li>
+<li>Drop cars without a clean title (i.e., cars that had to be removed from registration due to a major accident)</li>
+<li>Drop when suspect cars with clearly erroneous data on miles run,</li>
+<li>Drop cars in a fair (=bad) condition, cars that are new</li>
+<li>Data cleaning resulted in 281 observations ( I kept Fair and new)</li>
+</ul>
+</section>
+<section id="label-engineering---defining-target" class="slide level2">
+<h2>Label engineering - defining target</h2>
+<ul>
+<li>We need to define what will our target variable be.</li>
+<li>In some cases, this requires no action, the business question may define it:
+<ul>
+<li>the price of the hotel is one such case.</li>
+</ul></li>
+<li>Often it requires thinking and decision-making about definition.
+<ul>
+<li>How to define <strong>default</strong>, <strong>injury</strong>, <strong>purchase</strong>
+<ul>
+<li>Binary vs continuous.</li>
+<li>Log vs level</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="label-engineering---log-vs-level" class="slide level2">
+<h2>Label engineering - log vs level</h2>
+<ul>
+<li>When price is the target variable, its relation to predictor variables is often closer to linear when expressed in log price.</li>
+<li>Log differences approximate relative, or percentage, differences, and relative price differences are often more stable.</li>
+<li>The related technical advantage is that the distribution of log prices is often close to normal, which makes linear regressions give better approximation to average differences.
+<ul>
+<li>Also, Log() is not the only transformation that can be used.</li>
+</ul></li>
+<li>Choosing the right functional form is important but not always easy.
+<ul>
+<li>Econometrics vs prediction mindset</li>
+</ul></li>
+</ul>
+</section>
+<section id="label-engineering---log-vs-level-1" class="slide level2">
+<h2>Label engineering - log vs level</h2>
+<ul>
+<li>When the target variable is expressed in log terms, we want to predict the value of the target variable (<span class="math inline">\(\hat y\)</span>) not its <span class="math inline">\(log(y)\)</span>.</li>
+<li>Simply doing this <span class="math inline">\(e^{\log y}\)</span> is not the same as obtaining <span class="math inline">\(\hat y\)</span>.</li>
+</ul>
+<p>Technical details:</p>
+<p><span class="math inline">\(\hat{y}_j = e^{ \widehat{\log y}_j + \hat e_j}\)</span></p>
+<ul>
+<li>But, because <span class="math inline">\(\hat e_j\)</span> is not observed, we need to approximate it via “Some” method.
+<ul>
+<li>If we assume that the error term is normally distributed: <span class="math display">\[\hat{y}_j = e^{\widehat{\ln y}_j} e^{\hat{\sigma}^2/2}\]</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="used-cars-case-study-label-engineering---log" class="slide level2">
+<h2>Used cars case study: Label engineering - log?</h2>
+<ul>
+<li>Business case is about price itself, continuous</li>
+<li>But model can have level or log price as target</li>
+<li>Look at some patterns</li>
+<li>Compare model performance</li>
+<li>Log vs level model - some coefficients easier interpreted</li>
+<li>When we have two cars of same age and type; the one with 10% more miles in the odometer is predicted to be sold for 0.5% less.</li>
+<li>SE version is 1300 dollar more costly.</li>
+</ul>
+</section>
+<section id="used-cars-case-study-label-engineering---log-1" class="slide level2">
+<h2>Used cars case study: Label engineering - log?</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>Point prediction</th>
+<th>80% PI: upper bound</th>
+<th>80% PI: lower bound</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>in logs</td>
+<td>8.63</td>
+<td>8.18</td>
+<td>9.08</td>
+</tr>
+<tr class="even">
+<td>Recalculated to level</td>
+<td>5,932</td>
+<td>3,783</td>
+<td>9,301</td>
+</tr>
+<tr class="odd">
+<td>In levels</td>
+<td>6,073</td>
+<td>4,317</td>
+<td>7,829</td>
+</tr>
+</tbody>
+</table>
+<p>Asymetric for Log-model, Symetric for Linear Model</p>
+<p>Pick what works better</p>
+</section>
+<section id="feature-engineering" class="slide level2">
+<h2>Feature engineering</h2>
+<ul>
+<li>Requires the most effort</li>
+<li>Feature engineering - defining the list and functional form of variables we will consider as predictor.</li>
+<li>Importantly, we use both domain knowledge - information about the actual market, product or the society - and statistics to make decisions.</li>
+</ul>
+</section>
+<section id="feature-engineering---checklist" class="slide level2">
+<h2>Feature engineering - checklist</h2>
+<ol type="1">
+<li>What to do with missing values</li>
+<li>Dealing with ordered categorical values - continuous or set of binaries</li>
+<li>How to use text to create variables (Identify key words)</li>
+<li>Selecting functional form</li>
+<li>Thinking interactions</li>
+</ol>
+</section>
+<section id="what-to-do-with-missing-values" class="slide level2">
+<h2>What to do with missing values</h2>
+<ul>
+<li>Missing at random: Observations with missing variables are not systematically different from rest, may replace with sample mean and add binary flag.</li>
+<li>Missing systematically, by nonrandom selection: Must analyze reasons, may simply mean =0, look at the source of the data / questionnaire.</li>
+<li>If very few missing and it is random, do not do anything.</li>
+<li>Few cases, you may want to impute or look for proxies.</li>
+</ul>
+</section>
+<section id="what-to-do-with-different-type-of-variables" class="slide level2">
+<h2>What to do with different type of variables</h2>
+<ul>
+<li>Binary (e.g, yes/no; male/female; 1/2) – create a 0/1 binary variable</li>
+<li>String / factor – check values, and create a set of binaries.</li>
+<li>Continuous – nothing to do. Make sure it is stored as number. Perhaps Winsorize.</li>
+<li>Text – Natural Language Processing. Mining the text to get useful info.
+<ul>
+<li>Counting words, looking for key words, etc.</li>
+</ul></li>
+</ul>
+</section>
+<section id="case-study-predicting-airbnb-apartment-prices" class="slide level2">
+<h2>Case study: Predicting Airbnb Apartment Prices</h2>
+<ul>
+<li>London,UK</li>
+<li><a href="http://insideairbnb.com" class="uri">http://insideairbnb.com</a></li>
+<li>50K observations</li>
+<li>94 variables, including many binaries for location and amenities</li>
+<li>Key variables: size, type, location, amenities</li>
+<li>Quantitative target: - price (in USD)</li>
+<li>In reality: GBP</li>
+</ul>
+</section>
+<section id="case-study-predicting-airbnb-apartment-prices-1" class="slide level2">
+<h2>Case study: Predicting Airbnb Apartment Prices</h2>
+<ul>
+<li>Key issue is to look at variables and think functional form</li>
+<li>Guests to accommodate goes up to 16, but most apartments accommodate 1 through 7. Keep as is. Add variables for type. No need for complicated models</li>
+<li>Regarding other predictors, we have several binary variables, which we kept as they were: type of bed, type of property (apartment, house, room), cancellation policy.</li>
+<li>Look at possible need for interactions by domain knowledge / visualization</li>
+</ul>
+</section>
+<section id="graphical-way-of-finding-relationships" class="slide level2">
+<h2>Graphical way of finding relationships</h2>
+
+<img data-src="images/paste-17.png" class="r-stretch"></section>
+<section id="graphical-way-of-finding-interactions" class="slide level2">
+<h2>Graphical way of finding interactions</h2>
+
+<img data-src="images/paste-20.png" class="r-stretch"></section>
+<section>
+<section id="trying-all-models" class="title-slide slide level1 center">
+<h1>Trying all models?</h1>
+
+</section>
+<section id="model-building" class="slide level2">
+<h2>Model building</h2>
+<p>Two methods to build models:</p>
+<ul>
+<li>by hand - mix domain knowledge and statistics</li>
+<li>by smart algorithms = machine learning</li>
+</ul>
+</section>
+<section id="model-building-and-selection-build-model-by-hand" class="slide level2">
+<h2>Model building and selection: Build model by hand</h2>
+<ul>
+<li>Use domain knowledge drives picking key variables</li>
+<li>Drop garbage - drop variables those that are useless. May be because of poor coverage or quality, or they may be irrelevant.</li>
+<li>Look at a pairwise correlations. Multi-collinearity is an issue for smaller datasets</li>
+<li>Prefer variables that are easier to update - cheaper operation of a prediction model used in production</li>
+<li>Matters when you have relatively many variables compared to size of observations</li>
+</ul>
+</section>
+<section id="selecting-variables-in-regressions-by-lasso" class="slide level2">
+<h2>Selecting Variables in Regressions by LASSO</h2>
+<ul>
+<li>Key question: which features to enter into model, how to select?
+<ul>
+<li>By hand – domain knowledge. Advantage: interpretation, external validity</li>
+<li>Disadvantage: with many features it’s very hard. Esp. with many possible interactions!</li>
+</ul></li>
+<li>There is room for an automatic selection process.</li>
+<li>Some are computationally very intensive (compare every option?)</li>
+<li>Advantage: no need to use outside info</li>
+<li>Disadvantage: may be sensitive to overfitting, hard to interpret</li>
+</ul>
+</section>
+<section id="lasso-idea" class="slide level2">
+<h2>LASSO idea</h2>
+<ul>
+<li>LASSO (the acronym of Least Absolute Shrinkage and Selection Operator) is a method to select variables to include in a linear regression to produce good predictions and avoid overfitting.</li>
+<li>LASSO is a shrinkage method: it shrinks coefficients towards zero to reduce variance
+<ul>
+<li>Cost is in bias - LASSO is not unbiased</li>
+<li>Unlike OLS</li>
+</ul></li>
+<li>LASSO is a feature selection method as well</li>
+</ul>
+</section>
+<section id="lasso-process" class="slide level2">
+<h2>LASSO process</h2>
+<ul>
+<li>It starts with a large set of potential predictor variables that, typically, include many interactions, polynomials for nonlinear patterns, etc.</li>
+<li>LASSO modifies the way regression coefficients are estimated by adding a penalty term for too many coefficients.</li>
+<li>The way its penalty works makes LASSO assign zero coefficients to variables whose inclusion does not improve the fit of the regression much.</li>
+<li>Assigning zero coefficients to some variables means not including them in the regression.</li>
+</ul>
+</section>
+<section id="side-note-lasso-vs-bic" class="slide level2">
+<h2>Side note: LASSO vs BIC</h2>
+<ul>
+<li>The purpose is similar to the adjusted in-sample measures of fit, such as the BIC.</li>
+<li>To find a regression that balances fitting the data and the number of variables.</li>
+<li>But its result is different:
+<ul>
+<li>instead of producing a better measure of fit to help find the best one</li>
+<li>it alters coefficients to produce a better regression directly.</li>
+</ul></li>
+</ul>
+</section>
+<section id="lasso" class="slide level2">
+<h2>LASSO</h2>
+<p>Consider the linear regression with i=1…n observations and k variables, denoted 1…k:</p>
+<p><span class="math display">\[y^E = \beta_0 + \sum_{j=1}^k \beta_jx_j\]</span></p>
+<p>Coefficients are estimated by OLS: which minimizes the sum of squared residuals:</p>
+<p><span class="math display">\[\min_\beta \sum_{i=1}^N (y_i - (\beta_0 + \sum_{j=1}^k \beta_jx_{ij}))^2\]</span></p>
+<p>LASSO modifies this minimization by a penalty term:</p>
+<p><span class="math display">\[\min_\beta \sum_{i=1}^N (y_i - (\beta_0 + \sum_{j=1}^k \beta_jx_{ij}))^2 + \lambda \sum_{j=1}^k |\beta_j|\]</span></p>
+</section>
+<section id="lasso-how-it-works" class="slide level2">
+<h2>LASSO: how it works</h2>
+<ul>
+<li><span class="math inline">\(\lambda\)</span> — tuning parameter.</li>
+<li>weight for penalty term vs OLS fit –&gt; Strength of the variable selection</li>
+<li>Main effect of this constraint is to force many coefficients to zero.</li>
+<li>Best way to keep the sum of the absolute value of the coefficients low while maximizing fit –&gt; zero coefficients on variables whose inclusion improves fit only a little.</li>
+<li>This adjustment gets rid of the weakest predictors.</li>
+</ul>
+</section>
+<section id="lasso-how-it-works-1" class="slide level2">
+<h2>LASSO: how it works</h2>
+<ul>
+<li>The value of the tuning parameter <span class="math inline">\(\lambda\)</span> drives the strength of this selection.</li>
+<li>Larger <span class="math inline">\(\lambda\)</span> values lead to more aggressive selection and thus fewer variables left in the regression.</li>
+<li>But how can one specify a <span class="math inline">\(\lambda\)</span> value that leads to the best prediction?</li>
+<li>We don’t need, the algorithm does</li>
+<li>The LASSO algorithm can numerically solve for coefficients and the <span class="math inline">\(\lambda\)</span> parameter at once.</li>
+<li>This makes it fast.</li>
+<li>Unlike OLS, we have no closed form solutions.</li>
+</ul>
+</section>
+<section id="other-shrinkage-methods" class="slide level2">
+<h2>Other shrinkage methods</h2>
+<ul>
+<li>So LASSO is a shrinkage method: it shrinks coefficients towards zero to reduce variance</li>
+<li>There are other ways, other functional forms</li>
+<li>Ridge regression has a quadratic penalty:</li>
+</ul>
+<p><span class="math display">\[\min_\beta \sum_{i=1}^N (y_i - (\beta_0 + \sum_{j=1}^k \beta_jx_{ij}))^2 + \lambda \sum_{j=1}^k \beta_j^2\]</span></p>
+<ul>
+<li>No coefficient is shrunk to zero. But close…</li>
+</ul>
+</section>
+<section id="lasso-and-ridge" class="slide level2">
+<h2>Lasso and Ridge</h2>
+<ul>
+<li>Lasso, Ridge regressions called regularization</li>
+<li>LASSO is “L1”, Ridge is “L2”</li>
+<li>Both may help reduce overfitting</li>
+<li>LASSO also acts as feature selection model</li>
+<li>Elastic net helps find a parameter between <span class="math inline">\(|\beta_j|\)</span> and <span class="math inline">\(\beta_j^2\)</span> via cross validation</li>
+</ul>
+</section>
+<section id="airbnb-pricing-model-building" class="slide level2">
+<h2>Airbnb Pricing Model building</h2>
+<ul>
+<li>Process: build many models that differ in terms of features:
+<ul>
+<li>Which predictors are included</li>
+<li>Functional form of predictors</li>
+</ul></li>
+<li>Here: specified eight linear regression models for predicting price.</li>
+<li>Data has 4393 observations. This is our original data.</li>
+<li>80% is our work set (3515 observations), the rest we will use for diagnostics.</li>
+</ul>
+</section>
+<section id="versions-of-the-airbnb-apartment-price-prediction-models" class="slide level2">
+<h2>Versions of the Airbnb apartment price prediction models</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 29%">
+<col style="width: 23%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Mod</th>
+<th>Predictor variables</th>
+<th>N var</th>
+<th>N coeff</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>M1</td>
+<td>guests accommodated, linearly</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>M2</td>
+<td>= M1 + N beds, N days review, type: property, room, bed type</td>
+<td>6</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<td>M3</td>
+<td>= M2 + bathroom, cancellation, review score, N reviews (3 cat)+ F(miss)</td>
+<td>11</td>
+<td>15</td>
+</tr>
+<tr class="even">
+<td>M4</td>
+<td>= M3 + N guest squared, square+cubic for days since 1st review</td>
+<td>11</td>
+<td>17</td>
+</tr>
+<tr class="odd">
+<td>M5</td>
+<td>= M4 + room type + N reviews interacted with property type</td>
+<td>11</td>
+<td>22</td>
+</tr>
+<tr class="even">
+<td>M6</td>
+<td>=M5 + air conditioning, pets allowed - interacted with property type</td>
+<td>13</td>
+<td>28</td>
+</tr>
+<tr class="odd">
+<td>M7</td>
+<td>=M6 + all other amenities</td>
+<td>70</td>
+<td>72</td>
+</tr>
+<tr class="even">
+<td>M8</td>
+<td>=M7 + all other amenities interacted with property type + bed type</td>
+<td>70</td>
+<td>293</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="comparing-model-fit-measures" class="slide level2">
+<h2>Comparing model fit measures</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 19%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 21%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>N predictors</th>
+<th>R-squared</th>
+<th>BIC</th>
+<th>Training RMSE</th>
+<th>Test RMSE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(1)</td>
+<td>1</td>
+<td>0.40</td>
+<td>36042</td>
+<td>40.48</td>
+<td>40.16</td>
+</tr>
+<tr class="even">
+<td>(2)</td>
+<td>7</td>
+<td>0.48</td>
+<td>35598</td>
+<td>37.73</td>
+<td>37.38</td>
+</tr>
+<tr class="odd">
+<td>(3)</td>
+<td>14</td>
+<td>0.51</td>
+<td>35478</td>
+<td>36.78</td>
+<td>36.51</td>
+</tr>
+<tr class="even">
+<td>(4)</td>
+<td>16</td>
+<td>0.57</td>
+<td>24076</td>
+<td>31.95</td>
+<td>32.24</td>
+</tr>
+<tr class="odd">
+<td>(5)</td>
+<td>21</td>
+<td>0.57</td>
+<td>24096</td>
+<td>31.82</td>
+<td>32.18</td>
+</tr>
+<tr class="even">
+<td>(6)</td>
+<td>27</td>
+<td>0.58</td>
+<td>24113</td>
+<td>31.60</td>
+<td>32.19</td>
+</tr>
+<tr class="odd">
+<td><strong>(7)</strong></td>
+<td><strong>71</strong></td>
+<td>0.61</td>
+<td><strong>24281</strong></td>
+<td>30.42</td>
+<td><strong>31.77</strong></td>
+</tr>
+<tr class="even">
+<td>(8)</td>
+<td>293</td>
+<td>0.66</td>
+<td>25675</td>
+<td>28.04</td>
+<td>51.41</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="training-and-test-set-rmse-for-eight-models" class="slide level2">
+<h2>Training and test set RMSE for eight models</h2>
+<ul>
+<li>Training RMSE falls with complexity</li>
+<li>Test RMSE falls then rises</li>
+<li>We pick Model M7 based on lowest CV RMSE.</li>
+</ul>
+</section>
+<section id="the-lasso-model" class="slide level2">
+<h2>The LASSO model</h2>
+<ul>
+<li>Start with M8 and appr 300 candidate variables in the regression.</li>
+<li>We ran the LASSO algorithm with 5-fold cross-validation for selecting the optimal value for λ.</li>
+<li>LASSO regression just marginally better but: LASSO is automatic, a great advantage.</li>
+<li>Here: domain knowledge helped create M7. In other cases, LASSO could be great.</li>
+</ul>
+</section></section>
+<section>
+<section id="post-prediction-analysis-diagnostics" class="title-slide slide level1 center">
+<h1>Post prediction analysis, diagnostics</h1>
+
+</section>
+<section id="evaluating-the-prediction-using-a-holdout-set" class="slide level2">
+<h2>Evaluating the Prediction Using a Holdout Set</h2>
+<ul>
+<li>Model selection: selecting the best model using cross-validation</li>
+<li>Once we have picked the best model, we advised going back and using the entire original data for the final estimate and to make a prediction.</li>
+<li>What part of the data should we use to evaluate that final prediction?</li>
+<li>The solution is <strong>a random split</strong> before we do the analysis.</li>
+<li>Work set: We do all of the work using one part of the data: model building, selecting the best model and then making the prediction itself.</li>
+<li>Holdout set: another part of the data for evaluating the prediction itself. <strong>Don’t touch till the end</strong>.</li>
+</ul>
+</section>
+<section id="the-holdout-set" class="slide level2">
+<h2>The holdout set</h2>
+<ul>
+<li>To do diagnostics and give a good estimate of how the model may work in the live data
+<ul>
+<li>Additional twist to the process</li>
+<li>The holdout set.</li>
+</ul></li>
+<li>Holdout set is set is not used in any way for modelling – taken out in the beginning
+<ul>
+<li>This avoids cross-contamination</li>
+</ul></li>
+<li>Used to give best guess for performance in live data</li>
+<li>Used to do diagnostics of our model</li>
+</ul>
+</section>
+<section id="post-prediction-diagnostics" class="slide level2">
+<h2>Post-prediction diagnostics</h2>
+<ul>
+<li>Post-prediction diagnostics - understand better how our model works</li>
+<li>We look at prediction interval to learn about what precision we may expect to see of the estimates.</li>
+<li>We look at how the model work for different classes of observations</li>
+<li>such as young and old cars.</li>
+</ul>
+</section>
+<section id="cross-validation-and-holdout-set-procedure" class="slide level2">
+<h2>Cross-validation and holdout set procedure</h2>
+<ol type="1">
+<li>Starting with the original data, split it into a larger work set and a smaller holdout set.</li>
+<li>Further split the work set into training sets and test sets for k-fold cross-validation.</li>
+<li>Build models and select the best model using that training-test split.</li>
+<li>Re-estimate the best model using all observations in the work set.</li>
+<li>Take the estimated best model and apply it to the holdout set.</li>
+<li>Evaluate the prediction using the holdout set.</li>
+</ol>
+</section>
+<section id="illustration-of-the-uses-of-the-original-data-and-the-live-data" class="slide level2">
+<h2>Illustration of the uses of the original data and the live data</h2>
+
+<img data-src="images/paste-21.png" class="r-stretch"></section>
+<section id="post-prediction-diagnostics-1" class="slide level2">
+<h2>Post-prediction diagnostics</h2>
+<ul>
+<li>Post-prediction diagnostics - understand better how our model works</li>
+<li>We look at prediction interval to learn about what precision we may expect to see of the estimates.</li>
+<li>We look at how the model work for different classes of observations</li>
+<li>such as young and old cars.</li>
+</ul>
+</section>
+<section id="data-work-and-holdout" class="slide level2">
+<h2>Data work and holdout</h2>
+<ul>
+<li>Data has 4393 observations. This is our original data.</li>
+<li>random 20% holdout set with 878 observations.</li>
+<li>The remaining 80% is our work set (3515 observations).</li>
+<li>Work set will be used for cross-validation with several folds of training and test sets.</li>
+</ul>
+</section>
+<section id="diagnostics" class="slide level2">
+<h2>Diagnostics</h2>
+<ul>
+<li>Chose the OLS estimated M7.</li>
+<li>What can we say about model performance?</li>
+<li>After estimating the model on all observations in the work sample, we calculated its RMSE in the holdout sample. The RMSE for M7 is 41</li>
+<li>Higher than CV RMSE, could be other way around.</li>
+<li>Look at diagnostics on the holdout set.</li>
+</ul>
+</section>
+<section id="diagnostics-prices" class="slide level2">
+<h2>Diagnostics: prices</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="images/paste-22.png"></p>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>y-y-hat plot</li>
+<li>higher values not really caught.</li>
+</ul>
+</div></div>
+</section>
+<section id="diagnostics-variation-by-size" class="slide level2">
+<h2>Diagnostics: variation by size</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="images/paste-24.png"></p>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>The model generates a very wide 80% PI for average apartment</li>
+<li>bar plot with PI bands</li>
+<li>wide intervals</li>
+<li>linear and thus, hurts small numbers more</li>
+</ul>
+</div></div>
+</section>
+<section id="prediction-with-big-data" class="slide level2">
+<h2>Prediction with Big Data</h2>
+<ul>
+<li>The principles of prediction are the same with Big Data as with moderate-sized data</li>
+<li>Big Data leads to smaller estimation error.</li>
+<li>This reduction makes the total prediction error smaller</li>
+<li>The magnitude of irreducible error, and problems with external validity, remain the same with Big Data</li>
+</ul>
+</section>
+<section id="prediction-with-big-data-1" class="slide level2">
+<h2>Prediction with Big Data</h2>
+<ul>
+<li>Another upside is that large number of rows sometimes comes with large number of variables</li>
+<li>Room for more complex models</li>
+<li>Consideration: computing power (But there is AWS and Cloud Computing)</li>
+<li>When N is too large, we can take a random sample and select the best model with the help of usual cross-validation using that random sample</li>
+</ul>
+</section>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
+<ul>
+<li>Our aim was to build a prediction model for pricing apartments</li>
+<li>We built a model, M7, with domain knowledge, and a horse race between models of various complexity</li>
+<li>Picked the winner by cross-validated RMSE</li>
+<li>The model is useful for predication, but there is a great deal of uncertainty as suggested by diagnostics (on the holdout set)</li>
+</ul>
+</section>
+<section id="think-external-validity" class="slide level2">
+<h2>Think external validity</h2>
+<ul>
+<li>Future dataset will look different</li>
+<li>Think about how much</li>
+<li>Really matters in prediction</li>
+<li>If uncertain, pick simpler model</li>
+</ul>
+</section>
+<section id="main-takeaways" class="slide level2">
+<h2>Main takeaways</h2>
+<ul>
+<li>We can never evaluate all possible models to find the best one</li>
+<li>Model building is important to specify models that are likely among the best</li>
+<li>LASSO is an algorithm that can help in model building, by selecting the x variables and their functional forms</li>
+<li>Exploratory data analysis and domain knowledge remain important alongside powerful algorithms, for assessing and improving the external validity of predictions</li>
+</ul>
+</section></section>
+<section>
+<section id="stata-corner" class="title-slide slide level1 center">
+<h1>Stata Corner</h1>
+
+</section>
+<section id="stata-lasso" class="slide level2">
+<h2>Stata: LASSO</h2>
+<ul>
+<li>Lasso is one of the few machine learning algorithms that is available in Stata.
+<ul>
+<li>Stata also has a feature for elastic net and Ridge.</li>
+<li>for now just focus on LASSO. <code>help lasso</code></li>
+</ul></li>
+<li>The syntax</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a></a> lasso <span class="kw">model</span> depvar [(alwaysvars)] othervars [<span class="kw">if</span>] [<span class="kw">in</span>] [<span class="kw">weight</span>] [, options]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>It has various selection options (<code>selection()</code>) but we can use the default.</li>
+</ul>
+</section>
+<section id="stata-lasso-1" class="slide level2 scrollable">
+<h2>Stata: LASSO</h2>
+<div id="b252bc3f" class="cell" data-codefold="false" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a></a><span class="kw">webuse</span> cattaneo2, <span class="kw">clear</span></span>
+<span id="cb2-2"><a></a>lasso linear bweight c.mage##c.mage c.fage##c.fage c.mage#c.fage c.fedu##c.medu <span class="co">///</span></span>
+<span id="cb2-3"><a></a>    i.(mmarried mhisp fhisp foreign alcohol msmoke fbaby prenatal1), <span class="kw">nolog</span></span>
+<span id="cb2-4"><a></a><span class="kw">ereturn</span> <span class="kw">display</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Excerpt from Cattaneo (2010) Journal of Econometrics 155: 138–154)
+
+Lasso linear model                          No. of obs        =      4,642
+                                            No. of covariates =         26
+Selection: Cross-validation                 No. of CV folds   =         10
+
+--------------------------------------------------------------------------
+         |                                No. of      Out-of-      CV mean
+         |                               nonzero       sample   prediction
+      ID |     Description      lambda     coef.    R-squared        error
+---------+----------------------------------------------------------------
+       1 |    first lambda    107.1305         0       0.0001     334929.8
+      37 |   lambda before    3.761556        10       0.0561     316156.2
+    * 38 | selected lambda     3.42739        11       0.0561     316154.9
+      39 |    lambda after     3.12291        11       0.0561     316156.8
+      65 |     last lambda    .2780062        19       0.0550     316532.1
+--------------------------------------------------------------------------
+* lambda selected by cross-validation.
+------------------------------------------------------------------------------
+     bweight | Coefficient
+-------------+----------------------------------------------------------------
+        mage |   .0026703
+             |
+      c.fedu#|
+      c.medu |   .3136748
+             |
+    mmarried |
+Not married  |  -140.4633
+     0.mhisp |  -34.00255
+   0.foreign |   63.71057
+   0.alcohol |   40.29426
+             |
+      msmoke |
+    0 daily  |   167.9734
+ 6–10 daily  |  -36.54529
+  11+ daily  |   -78.1332
+             |
+       fbaby |
+         No  |   51.02337
+             |
+   prenatal1 |
+         No  |  -42.31267
+       _cons |   3137.903
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="stata-lasso-2" class="slide level2 scrollable">
+<h2>Stata: LASSO</h2>
+<div id="ca5d5b97" class="cell" data-codefold="false" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a></a><span class="kw">qui</span>: <span class="kw">ssc</span> install elasticregress</span>
+<span id="cb4-2"><a></a><span class="kw">webuse</span> cattaneo2, <span class="kw">clear</span></span>
+<span id="cb4-3"><a></a>lassoregress bweight c.mage##c.mage c.fage##c.fage c.mage#c.fage c.fedu##c.medu <span class="co">///</span></span>
+<span id="cb4-4"><a></a>    i.(mmarried mhisp fhisp foreign alcohol msmoke fbaby prenatal1), </span>
+<span id="cb4-5"><a></a><span class="kw">ereturn</span> <span class="kw">display</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Excerpt from Cattaneo (2010) Journal of Econometrics 155: 138–154)
+
+LASSO regression                       Number of observations     =      4,642
+                                       R-squared                  =     0.0597
+                                       alpha                      =     1.0000
+                                       lambda                     =     2.7733
+                                       Cross-validation MSE       =  3.165e+05
+                                       Number of folds            =         10
+                                       Number of lambda tested    =        100
+------------------------------------------------------------------------------
+     bweight | Coefficient
+-------------+----------------------------------------------------------------
+        mage |          0
+             |
+      c.mage#|
+      c.mage |          0
+             |
+        fage |          0
+             |
+      c.fage#|
+      c.fage |          0
+             |
+      c.mage#|
+      c.fage |          0
+             |
+        fedu |          0
+        medu |   .5584781
+             |
+      c.fedu#|
+      c.medu |   .3520153
+             |
+    mmarried |
+Not married  |          0  (empty)
+    Married  |   151.3538
+             |
+       mhisp |
+          0  |          0  (empty)
+          1  |   38.93988
+             |
+       fhisp |
+          0  |          0  (empty)
+          1  |          0
+             |
+     foreign |
+          0  |          0  (empty)
+          1  |  -72.23538
+             |
+     alcohol |
+          0  |          0  (empty)
+          1  |   -49.0195
+             |
+      msmoke |
+    0 daily  |          0  (empty)
+  1–5 daily  |  -144.4353
+ 6–10 daily  |  -206.2044
+  11+ daily  |  -247.3819
+             |
+       fbaby |
+         No  |          0  (empty)
+        Yes  |  -50.38466
+             |
+   prenatal1 |
+         No  |          0  (empty)
+        Yes  |          0
+             |
+       _cons |     3256.7
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+     bweight | Coefficient
+-------------+----------------------------------------------------------------
+        mage |          0
+             |
+      c.mage#|
+      c.mage |          0
+             |
+        fage |          0
+             |
+      c.fage#|
+      c.fage |          0
+             |
+      c.mage#|
+      c.fage |          0
+             |
+        fedu |          0
+        medu |   .5584781
+             |
+      c.fedu#|
+      c.medu |   .3520153
+             |
+    mmarried |
+Not married  |          0  (empty)
+    Married  |   151.3538
+             |
+       mhisp |
+          0  |          0  (empty)
+          1  |   38.93988
+             |
+       fhisp |
+          0  |          0  (empty)
+          1  |          0
+             |
+     foreign |
+          0  |          0  (empty)
+          1  |  -72.23538
+             |
+     alcohol |
+          0  |          0  (empty)
+          1  |   -49.0195
+             |
+      msmoke |
+    0 daily  |          0  (empty)
+  1–5 daily  |  -144.4353
+ 6–10 daily  |  -206.2044
+  11+ daily  |  -247.3819
+             |
+       fbaby |
+         No  |          0  (empty)
+        Yes  |  -50.38466
+             |
+   prenatal1 |
+         No  |          0  (empty)
+        Yes  |          0
+             |
+       _cons |     3256.7
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p><em>Rios-Avila and Cia</em></p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1280,
+
+        height: 720,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const onCopySuccess = function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
+      });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>

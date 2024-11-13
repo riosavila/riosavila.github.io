@@ -8,7 +8,7 @@ date: last-modified
 date-format: long
 format:
   revealjs:
-    theme: [ clean.scss]
+    theme: [ clean2.scss]
     slide-number: true
     footer: "*Rios-Avila and Cia*"
     width:  1440

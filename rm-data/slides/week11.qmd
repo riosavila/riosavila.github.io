@@ -8,11 +8,11 @@ date: last-modified
 date-format: long
 format:
   revealjs:
-    theme: [ clean.scss]
+    theme: [ clean2.scss]
     slide-number: true
     footer: "*Rios-Avila and Cia*"
-    width:  1440
-    height: 810
+    width:  1280
+    height: 720
 ---
 
 ## Motivation
@@ -134,7 +134,7 @@ $\hat{y}_j = e^{ \widehat{\log y}_j + \hat e_j}$
 ## Used cars case study: Label engineering - log?
 
 | Model | Point prediction | 80% PI: upper bound | 80% PI: lower bound |
-|---------------------|---------------|---------------|---------------|
+|----|----|----|----|
 | in logs | 8.63 | 8.18 | 9.08 |
 | Recalculated to level | 5,932 | 3,783 | 9,301 |
 | In levels | 6,073 | 4,317 | 7,829 |
@@ -199,7 +199,6 @@ Pick what works better
 
 # Trying all models?
 
-
 ## Model building
 
 Two methods to build models:
@@ -250,7 +249,7 @@ Two methods to build models:
 
 ## LASSO
 
-Consider the linear regression with i=1...n observations and k variables, denoted 1...k: 
+Consider the linear regression with i=1...n observations and k variables, denoted 1...k:
 
 $$y^E = \beta_0 + \sum_{j=1}^k \beta_jx_j$$
 
@@ -258,7 +257,7 @@ Coefficients are estimated by OLS: which minimizes the sum of squared residuals:
 
 $$\min_\beta \sum_{i=1}^N (y_i - (\beta_0 + \sum_{j=1}^k \beta_jx_{ij}))^2$$
 
-LASSO modifies this minimization by a penalty term: 
+LASSO modifies this minimization by a penalty term:
 
 $$\min_\beta \sum_{i=1}^N (y_i - (\beta_0 + \sum_{j=1}^k \beta_jx_{ij}))^2 + \lambda \sum_{j=1}^k |\beta_j|$$
 
@@ -306,12 +305,11 @@ $$\min_\beta \sum_{i=1}^N (y_i - (\beta_0 + \sum_{j=1}^k \beta_jx_{ij}))^2 + \la
 -   Here: specified eight linear regression models for predicting price.
 -   Data has 4393 observations. This is our original data.
 -   80% is our work set (3515 observations), the rest we will use for diagnostics.
--   Minor revision re textbook, small differences to numbers
 
 ## Versions of the Airbnb apartment price prediction models
 
 | Mod | Predictor variables | N var | N coeff |
-|------------|-------------------------------------|------------|------------|
+|-----------------|---------------------|-----------------|-----------------|
 | M1 | guests accommodated, linearly | 1 | 2 |
 | M2 | = M1 + N beds, N days review, type: property, room, bed type | 6 | 8 |
 | M3 | = M2 + bathroom, cancellation, review score, N reviews (3 cat)+ F(miss) | 11 | 15 |
@@ -323,22 +321,22 @@ $$\min_\beta \sum_{i=1}^N (y_i - (\beta_0 + \sum_{j=1}^k \beta_jx_{ij}))^2 + \la
 
 ## Comparing model fit measures
 
-| Model | N predictors | R-squared | BIC   | Training RMSE | Test RMSE |
-|-------|--------------|-----------|-------|---------------|-----------|
-| \(1\) | 1            | 0.40      | 36042 | 40.48         | 40.16     |
-| \(2\) | 7            | 0.48      | 35598 | 37.73         | 37.38     |
-| \(3\) | 14           | 0.51      | 35478 | 36.78         | 36.51     |
-| \(4\) | 16           | 0.57      | 24076 | 31.95         | 32.24     |
-| \(5\) | 21           | 0.57      | 24096 | 31.82         | 32.18     |
-| \(6\) | 27           | 0.58      | 24113 | 31.60         | 32.19     |
-| \(7\) | 71           | 0.61      | 24281 | 30.42         | 31.77     |
-| \(8\) | 293          | 0.66      | 25675 | 28.04         | 51.41     |
+| Model   | N predictors | R-squared | BIC       | Training RMSE | Test RMSE |
+|---------|--------------|-----------|-----------|---------------|-----------|
+| \(1\)   | 1            | 0.40      | 36042     | 40.48         | 40.16     |
+| \(2\)   | 7            | 0.48      | 35598     | 37.73         | 37.38     |
+| \(3\)   | 14           | 0.51      | 35478     | 36.78         | 36.51     |
+| \(4\)   | 16           | 0.57      | 24076     | 31.95         | 32.24     |
+| \(5\)   | 21           | 0.57      | 24096     | 31.82         | 32.18     |
+| \(6\)   | 27           | 0.58      | 24113     | 31.60         | 32.19     |
+| **(7)** | **71**       | 0.61      | **24281** | 30.42         | **31.77** |
+| \(8\)   | 293          | 0.66      | 25675     | 28.04         | 51.41     |
 
 ## Training and test set RMSE for eight models
 
 -   Training RMSE falls with complexity
 -   Test RMSE falls then rises
--   We pick Model M7 based on lowest CV RMSE..
+-   We pick Model M7 based on lowest CV RMSE.
 
 ## The LASSO model
 
@@ -354,30 +352,19 @@ $$\min_\beta \sum_{i=1}^N (y_i - (\beta_0 + \sum_{j=1}^k \beta_jx_{ij}))^2 + \la
 -   Model selection: selecting the best model using cross-validation
 -   Once we have picked the best model, we advised going back and using the entire original data for the final estimate and to make a prediction.
 -   What part of the data should we use to evaluate that final prediction?
--   The solution is a random split before we do the analysis.
+-   The solution is **a random split** before we do the analysis.
 -   Work set: We do all of the work using one part of the data: model building, selecting the best model and then making the prediction itself.
--   Holdout set: another part of the data for evaluating the prediction itself. Don't touch till the end.
-
-## Illustration of the uses of the original data and the live data
-
-![](images/original-live-data.png)
+-   Holdout set: another part of the data for evaluating the prediction itself. **Don't touch till the end**.
 
 ## The holdout set
 
 -   To do diagnostics and give a good estimate of how the model may work in the live data
--   Additional twist to the process
--   The holdout set.
+    -   Additional twist to the process
+    -   The holdout set.
 -   Holdout set is set is not used in any way for modelling – taken out in the beginning
+    -   This avoids cross-contamination
 -   Used to give best guess for performance in live data
 -   Used to do diagnostics of our model
-
-## The holdout set
-
--   Actual dataset
--   Work set + holdout set
--   Work is for 5-fold CV with training set 1,2... 5 and test set 1,2,...5.
--   Live data is the data we'll use our model but do not have.
--   Other names used (such as validation for test, test for holdout).
 
 ## Post-prediction diagnostics
 
@@ -397,7 +384,7 @@ $$\min_\beta \sum_{i=1}^N (y_i - (\beta_0 + \sum_{j=1}^k \beta_jx_{ij}))^2 + \la
 
 ## Illustration of the uses of the original data and the live data
 
-![](images/original-live-data.png)
+![](images/paste-21.png)
 
 ## Post-prediction diagnostics
 
@@ -423,36 +410,31 @@ $$\min_\beta \sum_{i=1}^N (y_i - (\beta_0 + \sum_{j=1}^k \beta_jx_{ij}))^2 + \la
 
 ## Diagnostics: prices
 
-``` r
-#| fig-width: 6
-#| fig-height: 3
-plot(airbnb_holdout$price, airbnb_holdout$price - airbnb_holdout$price_hat, pch = 16, col = "grey50")
-```
+::::: columns
+::: {.column width="50%"}
+![](images/paste-22.png)
+:::
 
+::: {.column width="50%"}
 -   y-y-hat plot
 -   higher values not really caught.
+:::
+:::::
 
 ## Diagnostics: variation by size
 
-``` r
-#| fig-width: 6
-#| fig-height: 3
-airbnb_holdout %>%
-  mutate(guests_cat = cut(guests, breaks = c(0, 2, 4, 6, 8, 10, 12, 14, 16), labels = 1:8)) %>%
-  group_by(guests_cat) %>%
-  summarize(price_mean = mean(price), 
-            price_hat_mean = mean(price_hat),
-            price_hat_lb = quantile(price_hat, 0.1),
-            price_hat_ub = quantile(price_hat, 0.9)) %>%
-  ggplot(aes(x = guests_cat, y = price_mean)) +
-  geom_bar(stat = "identity", fill = "grey80") +
-  geom_errorbar(aes(ymin = price_hat_lb, ymax = price_hat_ub), width = 0.2)
-```
+::::: columns
+::: {.column width="50%"}
+![](images/paste-24.png)
+:::
 
+::: {.column width="50%"}
 -   The model generates a very wide 80% PI for average apartment
 -   bar plot with PI bands
 -   wide intervals
 -   linear and thus, hurts small numbers more
+:::
+:::::
 
 ## Prediction with Big Data
 
@@ -465,7 +447,7 @@ airbnb_holdout %>%
 
 -   Another upside is that large number of rows sometimes comes with large number of variables
 -   Room for more complex models
--   Consideration: computing power
+-   Consideration: computing power (But there is AWS and Cloud Computing)
 -   When N is too large, we can take a random sample and select the best model with the help of usual cross-validation using that random sample
 
 ## Summary
@@ -488,3 +470,42 @@ airbnb_holdout %>%
 -   Model building is important to specify models that are likely among the best
 -   LASSO is an algorithm that can help in model building, by selecting the x variables and their functional forms
 -   Exploratory data analysis and domain knowledge remain important alongside powerful algorithms, for assessing and improving the external validity of predictions
+
+# Stata Corner
+
+## Stata: LASSO
+
+- Lasso is one of the few machine learning algorithms that is available in Stata. 
+  - Stata also has a feature for elastic net and Ridge.
+  - for now just focus on LASSO. `help lasso`
+- The syntax
+
+```stata
+ lasso model depvar [(alwaysvars)] othervars [if] [in] [weight] [, options]
+```
+- It has various selection options (`selection()`) but we can use the default.
+
+## Stata: LASSO {.scrollable}
+
+```{stata}
+*| echo: true
+*| codefold: false
+webuse cattaneo2, clear
+lasso linear bweight c.mage##c.mage c.fage##c.fage c.mage#c.fage c.fedu##c.medu ///
+    i.(mmarried mhisp fhisp foreign alcohol msmoke fbaby prenatal1), nolog
+ereturn display
+
+```
+
+## Stata: LASSO {.scrollable}
+
+```{stata}
+*| echo: true
+*| codefold: false
+ 
+qui: ssc install elasticregress
+webuse cattaneo2, clear
+lassoregress bweight c.mage##c.mage c.fage##c.fage c.mage#c.fage c.fedu##c.medu ///
+    i.(mmarried mhisp fhisp foreign alcohol msmoke fbaby prenatal1), 
+ereturn display
+```
