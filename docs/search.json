@@ -9693,7 +9693,7 @@
     "href": "rm-data/homework.html#hw10",
     "title": "HomeWorks",
     "section": "Homework 10",
-    "text": "Homework 10\nUse the data on house prices here. This dataset contains the prices of houses in a city, along with many other house charcteristics. You are obtaining 80% of the data to estimate the model. Build a model that you think its best to predict the price of a house. You can use any of the variables in the dataset, and you can create new variables if you think they are useful.\nDescribe at least 3 different specifications you tried, and which one you choose and why. The one with the best fit on the test data (I have access to) can skip next homework."
+    "text": "Homework 10\nUse the data on house prices here. This dataset contains the prices of houses in a city, along with many other house charcteristics. You are obtaining 80% of the data to estimate the model. Build a model that you think its best to predict the price of a house. You can use any of the variables in the dataset, and you can create new variables if you think they are useful.\nDescribe at least 3 different specifications you tried, and which one you choose and why. The one with the best fit on the test data (I have access to) can skip next homework.\nSee the winner here"
   },
   {
     "objectID": "rm-data/homework.html#hw11",
@@ -14631,5 +14631,12 @@
     "title": "Research Methods: Econometrics I",
     "section": "Part IV: Time Series",
     "text": "Part IV: Time Series\n\n11. Chapter 10 - 11\nBasics of Regression analysis with TSD\n\n\n12. Chapter 12 & 18\nAdvanced TSD Problems\n\n\nFinal TBD"
+  },
+  {
+    "objectID": "rm-data/quizes/quiz-1 copy.html",
+    "href": "rm-data/quizes/quiz-1 copy.html",
+    "title": "Econometrics MSC Levy",
+    "section": "",
+    "text": "Quiz 5: Modeling Probabilities\nName: ____________________________ Grade: __/5\n\nWhat is one potential issue with the linear probability model?\n\nIt is always homoskedastic, requiring complex adjustments.\nIt may predict probabilities that are less than zero or greater than one.\nIt cannot handle more than two explanatory variables.\nIt is too computationally intensive for modern computers.\n\nWhat is the primary goal of “classification” in the context of binary y variables?\n\nPredicting the exact probability of y = 1 for target observations.\nVisualizing the relationship between predicted probabilities and actual outcomes using a calibration curve.\nAssigning target observations to either the y = 1 or y = 0 category based on a predicted probability.\nIdentifying potential outliers in the dataset that could skew the results of the analysis.\n\nIn the context of probability models, what are the “logit” and “probit” models designed to address?\n\nThe issue of non-linearity in the relationship between explanatory and dependent variables.\nThe need to account for heteroskedasticity in binary outcome data.\nThe challenge of interpreting the coefficients of linear probability models.\nThe problem of linear probability models potentially predicting probabilities outside the range of 0 to 1.**\n\nAccording to the excerpt, how do the predicted probabilities from logit and probit models typically compare?\n\nThey are usually very similar.\nLogit models tend to predict higher probabilities than probit models.\nProbit models are more accurate when the actual probabilities are close to 0 or 1.\nThe choice between logit and probit significantly impacts the interpretation of the results.\n\nHow do marginal differences relate to the coefficients of linear probability models?\n\nMarginal differences are the inverse of the corresponding LPM coefficients.\nMarginal differences are always smaller in magnitude than LPM coefficients.\nMarginal differences often have a similar interpretation to LPM coefficients.\nThere is no meaningful relationship between the two concepts. of the coefficients and marginal differences."
   }
 ]

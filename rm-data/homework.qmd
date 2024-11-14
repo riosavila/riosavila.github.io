@@ -85,6 +85,8 @@ Use the data on house prices [here](hhprice_train.dta). This dataset contains th
 
 Describe at least 3 different specifications you tried, and which one you choose and why. The one with the best fit on the test data (I have access to) can skip next homework.
 
+See the winner [here](hw10/hw10_ranking.html)
+
 ## Homework 11 {#hw11}
 
 ## Homework 12 {#hw12}
