@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-6fbc3b7d0ac83ab8a043646d6c6d94a5.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.33">
+
+  <meta name="author" content="Fernando Rios-Avila">
+  <title>Econometrics MSC Levy – Research Methods II</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #24292e;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #24292e; } /* Normal */
+    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
+    code span.an { color: #6a737d; } /* Annotation */
+    code span.at { color: #d73a49; } /* Attribute */
+    code span.bn { color: #005cc5; } /* BaseN */
+    code span.bu { color: #d73a49; } /* BuiltIn */
+    code span.cf { color: #d73a49; } /* ControlFlow */
+    code span.ch { color: #032f62; } /* Char */
+    code span.cn { color: #005cc5; } /* Constant */
+    code span.co { color: #6a737d; } /* Comment */
+    code span.cv { color: #6a737d; } /* CommentVar */
+    code span.do { color: #6a737d; } /* Documentation */
+    code span.dt { color: #d73a49; } /* DataType */
+    code span.dv { color: #005cc5; } /* DecVal */
+    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
+    code span.ex { color: #d73a49; font-weight: bold; } /* Extension */
+    code span.fl { color: #005cc5; } /* Float */
+    code span.fu { color: #6f42c1; } /* Function */
+    code span.im { color: #032f62; } /* Import */
+    code span.in { color: #6a737d; } /* Information */
+    code span.kw { color: #d73a49; } /* Keyword */
+    code span.op { color: #24292e; } /* Operator */
+    code span.ot { color: #6f42c1; } /* Other */
+    code span.pp { color: #d73a49; } /* Preprocessor */
+    code span.re { color: #6a737d; } /* RegionMarker */
+    code span.sc { color: #005cc5; } /* SpecialChar */
+    code span.ss { color: #032f62; } /* SpecialString */
+    code span.st { color: #032f62; } /* String */
+    code span.va { color: #e36209; } /* Variable */
+    code span.vs { color: #032f62; } /* VerbatimString */
+    code span.wa { color: #ff5555; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-27a844e7d43f0d31b27642e48490372a.css">
+  <link rel="stylesheet" href="styles.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+  
+
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Research Methods II</h1>
+  <p class="subtitle">Session 3: Measuring Inequality</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Fernando Rios-Avila 
+</div>
+</div>
+</div>
+
+</section>
+<section>
+<section id="measuring-inequality" class="title-slide slide level1 center">
+<h1>Measuring Inequality</h1>
+
+</section>
+<section id="what-is-inequality" class="slide level2">
+<h2>What is Inequality?</h2>
+<ul>
+<li><strong>Economic inequality</strong> refers to how economic variables are distributed among individuals in a group, among groups in a population, or among countries.</li>
+<li>Inequality of What?
+<ul>
+<li>inequality of opportunities, for example access to employment or education</li>
+<li>inequality of outcomes, for example material dimensions of human well-being, such as the level of income, educational attainment, health status and so on.</li>
+</ul></li>
+<li>For now we will focus on <strong>income</strong> inequality.</li>
+</ul>
+</section>
+<section id="how-do-you-analyze-measure-inequality" class="slide level2">
+<h2>How do you analyze (measure) inequality?</h2>
+<ul>
+<li><p>There are various approaches that have been used for the analysis of Inequality</p>
+<ul>
+<li>Intuitive approach
+<ul>
+<li>Unaxiomatic approach used to describe inequality.</li>
+</ul></li>
+<li>Normative approach-Social welfare
+<ul>
+<li>Uses explicit concepts of welfare functions to quantify inequality</li>
+</ul></li>
+<li>Information theory
+<ul>
+<li>Quantifies inequality treating it as a problem of comparing income distribution probabilities.</li>
+</ul></li>
+<li>Axiomatic approach
+<ul>
+<li>Uses a series of axioms to create measures of inequality</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="preliminaries" class="slide level2">
+<h2>Preliminaries</h2>
+<ul>
+<li>Regardless of the approach, there are some basic steps required to measure inequality
+<ul>
+<li>Define the population of interest</li>
+<li>Define the measure of interest</li>
+<li>Adjust for prices (if necessary)</li>
+<li>Adjust for individual heterogeneity (needs) (if necessary)</li>
+</ul></li>
+</ul>
+</section>
+<section id="mathematical-preliminaries" class="slide level2">
+<h2>Mathematical Preliminaries</h2>
+<ul>
+<li>Let <span class="math inline">\(y_i\)</span> be the income of individual <span class="math inline">\(i\)</span> in the population. Assume that <span class="math inline">\(y_i&gt;&gt;0\)</span>.</li>
+<li>Assume that <span class="math inline">\(y_i\)</span> can be characterized by a probability distribution function <span class="math inline">\(f(y)\)</span>.</li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+y_i &amp;\sim f(y) \rightarrow \int_{-\infty}^{z} f(y) dy = F(z) \\
+F(0)&amp;=0 \ \&amp; \ F(\infty)=1 \\
+F(Q_y(p)) &amp;=p \rightarrow Q_y(p) = F^{-1}(p)
+\end{aligned}
+\]</span></p>
+<p>The <span class="math inline">\(p_{th}\)</span> quantile of <span class="math inline">\(y_i\)</span> is the value <span class="math inline">\(Q_y(p)\)</span> such that <span class="math inline">\(p\)</span> percent of the population has income below <span class="math inline">\(Q_y(p)\)</span>.</p>
+</section>
+<section id="mathematical-preliminaries-1" class="slide level2">
+<h2>Mathematical Preliminaries</h2>
+<p>Mean of Standard of Living:</p>
+<p><span class="math display">\[\mu_y = E(y) = \int_{-\infty}^{\infty} y f(y) dy=\int_0^1Q(p)dp
+\]</span></p>
+<p>Finally, the inequality measure can be written as:</p>
+<p><span class="math display">\[I(y)=I(\mu_y, f(.)) = I(\mu_y, F(.))
+\]</span></p>
+</section>
+<section id="visualization-tools" class="slide level2">
+<h2>Visualization tools</h2>
+<ul>
+<li>There are several tools that can be used to visualize income distribution:
+<ul>
+<li>Density Function/Histogram</li>
+<li>Pen parade/Cumulative Distribution Function</li>
+<li>Lorenz Curve</li>
+</ul></li>
+</ul>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Density/Histogram</a></li><li><a href="#tabset-1-2">Plots</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<ul>
+<li><p>Density functions and histograms are used to visualize the distribution of income in the population.</p></li>
+<li><p>They could be used to detect multimodality, skewness, etc</p></li>
+<li><p>And could be used to compare distributions across groups.</p></li>
+<li><p><code>Stata</code> Commands</p>
+<p><code>histogram varname [weight] [if]</code></p>
+<p><code>kdensity varname [weight] [if]</code></p></li>
+</ul>
+</div>
+<div id="tabset-1-2">
+<div id="aa9e6a93" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a></a><span class="kw">set</span> <span class="dv">scheme</span> white2</span>
+<span id="cb1-2"><a></a><span class="kw">set</span> <span class="dv">linesize</span> 255</span>
+<span id="cb1-3"><a></a>color_style tableau</span>
+<span id="cb1-4"><a></a><span class="kw">qui</span>:frause oaxaca, <span class="kw">clear</span></span>
+<span id="cb1-5"><a></a><span class="kw">sum</span> wt, <span class="kw">meanonly</span></span>
+<span id="cb1-6"><a></a><span class="kw">gen</span> <span class="kw">int</span> wt2 = <span class="fu">round</span>(wt/<span class="fu">r</span>(<span class="fu">min</span>))</span>
+<span id="cb1-7"><a></a><span class="kw">qui</span>:<span class="kw">two</span> <span class="kw">histogram</span> lnwage [fw=wt2] <span class="co">///</span></span>
+<span id="cb1-8"><a></a>    || <span class="kw">kdensity</span> lnwage [<span class="fu">w</span>=wt2], <span class="co">///</span></span>
+<span id="cb1-9"><a></a>    <span class="bn">ysize</span>(5) <span class="bn">xsize</span>(9) <span class="bn">xtitle</span>(<span class="st">"Log Wages"</span>) <span class="co">///</span></span>
+<span id="cb1-10"><a></a>    <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"Histogram"</span> 2 <span class="st">"Kernel Density"</span>) pos(6) col(2)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<style>div.jp-Notebook .datagrid-container {min-height: 448px; }</style>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="session_3_files/figure-revealjs/cell-2-output-2.png"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="section-1" class="slide level2 scrollable">
+<h2></h2>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">PenParade/CDF</a></li><li><a href="#tabset-2-2">plot</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
+<ul>
+<li>A different approach to visualize the distribution.</li>
+<li>The Pen Parade plots the values of the variable of interest in ascending order.
+<ul>
+<li>y-axis: Q(p); x-axis: p</li>
+</ul></li>
+<li>The CDF plots the cumulative distribution of the variable of interest.
+<ul>
+<li>y-axis: p; x-axis: Q(p)</li>
+</ul></li>
+<li>They give you a sense of the distribution, and easy comparison across high and low values.</li>
+</ul>
+</div>
+<div id="tabset-2-2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a></a><span class="kw">qui</span>:<span class="kw">pctile</span> qlnwage = lnwage [<span class="fu">w</span>=wt], nq(100)</span>
+<span id="cb2-2"><a></a><span class="kw">qui</span>:<span class="kw">gen</span>  qwage = <span class="fu">exp</span>(qlnwage)</span>
+<span id="cb2-3"><a></a><span class="kw">qui</span>:<span class="kw">gen</span> <span class="kw">p</span> = <span class="dt">_n</span> <span class="kw">if</span> <span class="dt">_n</span>&lt;100</span>
+<span id="cb2-4"><a></a><span class="kw">scatter</span> qwage <span class="kw">p</span>, <span class="kw">connect</span>(<span class="ot">l</span>) <span class="bn">name</span>(m1, <span class="kw">replace</span>) <span class="bn">ysize</span>(5) <span class="bn">xsize</span>(8) <span class="bn">title</span>(<span class="st">"Pen Parade"</span>)</span>
+<span id="cb2-5"><a></a><span class="kw">scatter</span> <span class="kw">p</span> qwage, <span class="kw">connect</span>(<span class="ot">l</span>) <span class="bn">name</span>(m2, <span class="kw">replace</span>) <span class="bn">ysize</span>(5) <span class="bn">xsize</span>(8) <span class="bn">title</span>(<span class="st">"Cumulative Distribution Function"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="61ee6fb4" class="cell quarto-layout-panel" data-execution_count="2" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="session_3_files/figure-revealjs/cell-3-output-1.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="session_3_files/figure-revealjs/cell-3-output-2.png"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+<div class="panel-tabset">
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Lorenz Curve</a></li><li><a href="#tabset-3-2">Code</a></li><li><a href="#tabset-3-3">Plot</a></li><li><a href="#tabset-3-4">Alternative:</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1">
+<ul>
+<li><p>Perhaps the most popular tool to visualize income distribution.</p></li>
+<li><p>This curve plots the cumulative share of income vs the cumulative share of population.</p>
+<ul>
+<li>How much of total income is held by the bottom X% of the population ?</li>
+</ul></li>
+<li><p>“Easy” to read:</p>
+<ul>
+<li>The closest it is to the 45 degree line, the more equal the distribution.</li>
+</ul></li>
+<li><p>Not easy to implement with negative and zero incomes.</p></li>
+<li><p>Comparison across groups may be ambiguous.</p></li>
+<li><p>its always increasing at an increasing rate respect to X%</p></li>
+</ul>
+</div>
+<div id="tabset-3-2">
+<p>Assume data is sorted by income</p>
+<div class="columns">
+<div class="column" style="width:47%;">
+<p>x-axis: Cum share of population</p>
+<p><span class="math display">\[P_j = \frac{\sum_{i=1}^j w_i}{\sum_{i=1}^n w_i}\]</span></p>
+</div><div class="column" style="width:47%;">
+<p>y-axis: Cum share of income</p>
+<p><span class="math display">\[LC_j = \frac{\sum_{i=1}^j y_i w_i}{\sum_{i=1}^n y_iw_i}\]</span></p>
+</div></div>
+<div id="fe9f88d5" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a>frause oaxaca, <span class="kw">clear</span></span>
+<span id="cb3-2"><a></a><span class="kw">gen</span> wage = <span class="fu">exp</span>(lnwage)</span>
+<span id="cb3-3"><a></a><span class="kw">sort</span> wage wt  <span class="co">// sort by income and weight </span></span>
+<span id="cb3-4"><a></a><span class="co">// Estimate Totals for non missing data</span></span>
+<span id="cb3-5"><a></a><span class="kw">egen</span> twage = <span class="kw">sum</span>(wage * wt) <span class="kw">if</span> wage!=.</span>
+<span id="cb3-6"><a></a><span class="kw">egen</span> tpop  = <span class="kw">sum</span>(wt)        <span class="kw">if</span> wage!=.</span>
+<span id="cb3-7"><a></a><span class="co">// get cumulative shares</span></span>
+<span id="cb3-8"><a></a><span class="kw">gen</span> lc_i = <span class="kw">sum</span>( (wage*wt/twage) )*100 <span class="kw">if</span> wage!=.</span>
+<span id="cb3-9"><a></a><span class="kw">gen</span> p_i  = <span class="kw">sum</span>( (wt/tpop) )*100      <span class="kw">if</span> wage!=.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-3-3">
+<div id="f3878def" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a></a><span class="kw">two</span> (<span class="kw">line</span> lc_i p_i) <span class="co">/// Lorenz Curve</span></span>
+<span id="cb4-2"><a></a>    ( <span class="kw">function</span> x, <span class="kw">range</span>(0 100) ) , <span class="co">/// 45 degree line</span></span>
+<span id="cb4-3"><a></a>    aspect(1) <span class="bn">ysize</span>(5) <span class="bn">xsize</span>(8) <span class="co">///</span></span>
+<span id="cb4-4"><a></a>    <span class="bn">xtitle</span>(<span class="st">"Cumulative Share of Population"</span>) <span class="co">///</span></span>
+<span id="cb4-5"><a></a>    <span class="bn">ytitle</span>(<span class="st">"Cumulative Share of Income"</span>) <span class="co">///</span></span>
+<span id="cb4-6"><a></a>    <span class="bn">legend</span>(<span class="kw">off</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="session_3_files/figure-revealjs/cell-5-output-1.png"></p>
+<figcaption>Lorenz Curve</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-3-4">
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a></a><span class="kw">ssc</span> install glcurve <span class="co">// installs command for Generalized Lorenz Curve</span></span>
+<span id="cb5-2"><a></a>glcurve wage [aw = wt], <span class="co">/// provides variable and weight</span></span>
+<span id="cb5-3"><a></a>    lorenz <span class="co">// Request ploting the Lorenz Curve</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="inequality-measures" class="slide level2">
+<h2>Inequality Measures</h2>
+<p>There are several measures of inequality. The most popular are:</p>
+<ul>
+<li><p>Interquantile Range (IQR) (or normalizations) <span class="math display">\[IQR(\#1,\#2) = Q(\#2) - Q(\#1)
+\]</span></p></li>
+<li><p>Interquantile Share Ratio (Palma ratio (10/40)) <span class="math display">\[ISR(\#1,\#2) = \frac{1-LC(\#2)}{LC(\#1)}
+\]</span></p></li>
+<li><p>Coefficient of Variation (CV) <span class="math display">\[CV = \frac{\sigma_y}{\mu_y}
+\]</span></p></li>
+</ul>
+</section>
+<section id="inequality-measures-1" class="slide level2">
+<h2>Inequality Measures</h2>
+<ul>
+<li>Lorenz Curve:</li>
+</ul>
+<p><span class="math display">\[LC(p) = \frac{\int_0^p Q_y(u)du}{\int_0^1 Q_y(u)du}
+= \frac{1}{\mu_y} \int_0^p Q_y(u)du
+\]</span></p>
+<ul>
+<li>Properties 1: Lorenz Curve is a non-decreasing function of <span class="math inline">\(p\)</span>.</li>
+</ul>
+<p><span class="math display">\[\frac{\partial LC(p)}{\partial p} = \frac{Q_y(p)}{\mu_y} \geq 0\]</span></p>
+<ul>
+<li>Properties 2: Lorenz Curve is a concave function of <span class="math inline">\(p\)</span> (increases at a fasterate). <span class="math display">\[\frac{\partial^2 LC(p)}{\partial p^2} = \frac{1}{\mu_y f(y)} \geq 0\]</span></li>
+</ul>
+</section>
+<section id="inequality-measures-gini-coefficient" class="slide level2">
+<h2>Inequality Measures: Gini Coefficient</h2>
+<ul>
+<li>The Gini coefficient is the most popular measure of inequality.</li>
+<li>It is defined as (2x) the area between the Lorenz Curve and the 45 degree line.</li>
+</ul>
+<p><span class="math display">\[Gini(y) = 2 \int_0^1 (p-LC(p)) dp\]</span></p>
+<ul>
+<li><p>where <span class="math inline">\(p-LC(p)\)</span> is the “loss” of income the Bottom <span class="math inline">\(p\)</span> percent of the population experiences.</p></li>
+<li><p>It is bounded between 0 (perfect Equality) and 1 (complete Inequality).</p></li>
+<li><p>When Lorenz do not cross, Gini provides unambiguous ranking of inequality.</p></li>
+</ul>
+<p><span class="math display">\[Gini(y) = \frac{2}{\mu_y} Cov(y_p,p)\]</span></p>
+</section>
+<section id="implementation" class="slide level2 scrollable">
+<h2>Implementation</h2>
+<ul>
+<li><code>Stata</code> has plenty of commands that can be used to estimate Gini
+<ul>
+<li><code>search gini</code> for few examples</li>
+</ul></li>
+<li>I suggest 3 commands:
+<ul>
+<li><code>fastgini</code> (<code>ssc install fastgini</code>)</li>
+<li><code>ineqdeco</code> (<code>ssc install ineqdeco</code>)</li>
+<li><code>sgini</code> (<code>ssc install sgini</code>)</li>
+<li><code>rif</code> (<code>ssc install rif</code>)</li>
+</ul></li>
+</ul>
+</section>
+<section id="section-3" class="slide level2 scrollable">
+<h2></h2>
+<div id="33a10113" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a></a><span class="kw">capture</span>:<span class="kw">ssc</span> install sgini</span>
+<span id="cb6-2"><a></a>sgini wage </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Gini coefficient for wage
+
+-----------------------
+    Variable |      v=2
+-------------+---------
+        wage |   0.2460
+-----------------------</code></pre>
+</div>
+</div>
+<div id="6cdac46c" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a></a><span class="kw">capture</span>:<span class="kw">ssc</span> install ineqdeco</span>
+<span id="cb8-2"><a></a>ineqdeco wage [pw=wt]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> 
+Percentile ratios
+
+----------------------------------------------------------
+  All obs |    p90/p10     p90/p50     p10/p50     p75/p25
+----------+-----------------------------------------------
+          |      3.154       1.694       0.537       1.771
+----------------------------------------------------------
+  
+Generalized Entropy indices GE(a), where a = income difference
+ sensitivity parameter, and Gini coefficient
+
+----------------------------------------------------------------------
+  All obs |     GE(-1)       GE(0)       GE(1)       GE(2)        Gini
+----------+-----------------------------------------------------------
+          |    0.23199     0.14240     0.12282     0.13398     0.26273
+----------------------------------------------------------------------
+   
+Atkinson indices, A(e), where e &gt; 0 is the inequality aversion parameter
+
+----------------------------------------------
+  All obs |     A(0.5)        A(1)        A(2)
+----------+-----------------------------------
+          |    0.06292     0.13273     0.31693
+----------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="other-inequality-measures" class="slide level2">
+<h2>Other Inequality Measures</h2>
+<ul>
+<li><p>There are other approaches that can be used to measure inequality.</p>
+<ul>
+<li>Normative approach-Social welfare: Uses explicit concepts of welfare functions to quantify inequality</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[I_A(y,\varepsilon) = 1 - \left( \frac{1}{N} \sum_{i=1}^N \left(\frac{y_i}{\mu_y}\right)^{1-\varepsilon} \right)^\frac{1}{1-\varepsilon}
+\]</span></p>
+<p>where is a measure of inequality aversion.</p>
+<ul>
+<li>Information theory: Quantifies inequality treating it as a problem of comparing income distribution probabilities. How far are we from Full Entropy</li>
+</ul>
+<p><span class="math display">\[I_{GE}(Y,\alpha)=\frac{1}{\alpha(1-\alpha)}\left[\frac{1}{N} \sum \left(\frac{y_i}{\mu_y}\right)^\alpha -1\right]
+\]</span></p>
+<ul>
+<li>Axiomatic approach
+<ul>
+<li>Uses a series of axioms to create measures of inequality</li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="how-to-compare-inequality" class="title-slide slide level1 center">
+<h1>How to Compare Inequality</h1>
+<p>a note</p>
+</section>
+<section id="significance-test" class="slide level2">
+<h2>Significance test</h2>
+<ul>
+<li>As discussed in Session 1, we can use a t-test to compare means.
+<ul>
+<li>This requires estimating the standard error of the mean, use <code>mean</code> command, or <code>regress</code></li>
+</ul></li>
+<li>Similarly, it may be as important to test whether two distributions (or inequality measures) are different.
+<ul>
+<li>This requires estimating the standard error of the inequality measure.</li>
+<li>This is not as straightforward as the mean.</li>
+</ul></li>
+<li>Easiest methods:
+<ul>
+<li><strong>Bootstrap</strong>: requires <em>bootstrap weights</em> for survey data.</li>
+<li><strong>Influence function</strong>: requires deriving the influence function of the inequality measure.</li>
+</ul></li>
+</ul>
+</section>
+<section id="bootstrap" class="slide level2 scrollable">
+<h2>Bootstrap</h2>
+<ul>
+<li>Bootstrap its a non-parametric method to estimate the standard error of a statistic. Its based on Resampling and re-estimating data.</li>
+</ul>
+<p><code>bootstrap gini=r(coeff): sgini wage</code></p>
+<div id="c2869766" class="cell" data-execution_count="7">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+warning: sgini does not set e(sample), so no observations will be excluded from the resampling because of missing values or other reasons. To exclude observations, press Break, save the data, drop any observations that are to be excluded, and rerun
+         bootstrap.
+
+Bootstrap results                                        Number of obs = 1,647
+                                                         Replications  =    50
+
+      Command: sgini wage
+         gini: r(coeff)
+
+------------------------------------------------------------------------------
+             |   Observed   Bootstrap                         Normal-based
+             | coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        gini |   .2460329   .0063639    38.66   0.000     .2335599    .2585059
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<ul>
+<li>RIF (Recentered Influence Function) is a method that uses the moment conditions to estimate the standard error of a statistic.</li>
+</ul>
+<p><code>rifhdreg wage , rif(gini)</code></p>
+<div id="d2e387b6" class="cell" data-execution_count="8">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Linear regression                               Number of obs     =      1,434
+                                                F(0, 1433)        =       0.00
+                                                Prob &gt; F          =          .
+                                                R-squared         =     0.0000
+                                                Root MSE          =     .24613
+
+------------------------------------------------------------------------------
+             |               Robust
+        wage | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       _cons |   .2460329   .0064995    37.85   0.000     .2332833    .2587825
+------------------------------------------------------------------------------
+Distributional Statistic: gini
+Sample Mean    RIF gini :  .24603</code></pre>
+</div>
+</div>
+<ul>
+<li>Better yet, because you can use regressions (RIF-regressions), you can use weights, and test for differences in inequality across groups.</li>
+</ul>
+<p><code>rifhdreg wage ibn.female [pw=wt], rif(gini) over(female) noconstant</code></p>
+<div id="c162bb23" class="cell" data-execution_count="9">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Linear regression                               Number of obs     =      1,434
+                                                F(2, 1432)        =     640.56
+                                                Prob &gt; F          =     0.0000
+                                                R-squared         =     0.5056
+                                                Root MSE          =     .25631
+
+------------------------------------------------------------------------------
+             |               Robust
+        wage | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      female |
+          0  |   .2377884   .0084103    28.27   0.000     .2212907    .2542862
+          1  |   .2820059   .0128488    21.95   0.000     .2568015    .3072103
+------------------------------------------------------------------------------
+Distributional Statistic: gini
+Sample Mean    RIF gini :  .25805</code></pre>
+</div>
+</div>
+<p><code>rifhdreg wage i.female [pw=wt], rif(gini) over(female)</code></p>
+<div id="4773c76b" class="cell" data-execution_count="10">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Linear regression                               Number of obs     =      1,434
+                                                F(1, 1432)        =       8.29
+                                                Prob &gt; F          =     0.0040
+                                                R-squared         =     0.0073
+                                                Root MSE          =     .25631
+
+------------------------------------------------------------------------------
+             |               Robust
+        wage | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+    1.female |   .0442175   .0153565     2.88   0.004     .0140938    .0743412
+       _cons |   .2377884   .0084103    28.27   0.000     .2212907    .2542862
+------------------------------------------------------------------------------
+Distributional Statistic: gini
+Sample Mean    RIF gini :  .25805</code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="how-to-decompose-inequality" class="title-slide slide level1 center">
+<h1>How to Decompose Inequality</h1>
+
+</section>
+<section id="introduction" class="slide level2">
+<h2>Introduction</h2>
+<ul>
+<li>Some times, we may be interested in determining what factors, and what extent, explain inequality.
+<ul>
+<li>But what do we mean by “explain”?</li>
+</ul></li>
+<li>There are several approaches to decompose inequality.
+<ul>
+<li>by sources: Explain how inequality is related to source of income</li>
+<li>by groups: How much of the inequality is explained by inequality within groups, and between groups.</li>
+</ul></li>
+<li>We could also consider how inequality gaps are related to characteristics or returns to such characteristics.</li>
+</ul>
+</section>
+<section id="decompose-by-sources" class="slide level2">
+<h2>Decompose by sources</h2>
+<ul>
+<li>Some inequality indices are well suited to decompose inequality by sources.
+<ul>
+<li>Variance Decomposition (Shorrocks 1982)</li>
+<li>Gini Decomposition by source (Lerman and Yitzhaki 1985)</li>
+</ul></li>
+<li>The idea is assess inequality (or concentration) of each source of income, and then combine them to obtain their contribution to overall inequality.</li>
+</ul>
+</section>
+<section id="section-4" class="slide level2">
+<h2></h2>
+<h3 id="variance-decomposition">Variance Decomposition</h3>
+<p>Setup: <span class="math display">\[\begin{aligned}
+Y &amp;= y_1 + y_2 + \cdots + y_n  \\
+I_V(Y) &amp;= V(Y) = Cov(Y,Y) \\
+&amp;= Cov(Y,y_1) + Cov(Y,y_2) + \cdots \\
+\end{aligned}
+\]</span></p>
+<p>Covariance, however could be rewritten as: <span class="math inline">\(Cov(Y,y_k)=\rho_k \sigma_Y \sigma_{y_k}\)</span>, thus</p>
+<p><span class="math display">\[\begin{aligned}
+V(y) = \sigma^2_Y &amp;= \rho_1 \sigma_Y \sigma_{y_1} + \rho_2 \sigma_Y \sigma_{y_2} + \cdots \\
+\sigma_Y&amp;=   \rho_1 \sigma_{y_1} + \rho_2 \sigma_{y_2} + \cdots  \\
+\end{aligned}
+\]</span></p>
+<p>Finally, if we divide all by <span class="math inline">\(\mu_y\)</span> and multiply by <span class="math inline">\(\mu_{yk}/\mu_{yk}\)</span>, we get:</p>
+<p><span class="math display">\[\begin{aligned}
+\frac{\sigma_Y}{\mu_y} = CV(y) &amp;=   \rho_1 \frac{1}{\mu_{y}} \frac{\mu_{y1}}{\mu_{y1}}\sigma_{y_1} + \rho_2 \frac{1}{\mu_{y}} \frac{\mu_{y2}}{\mu_{y2}}  \sigma_{y_2} + \cdots  \\
+&amp;= \rho_1 sh_1 CV(y_1) + \rho_2 sh_2 CV(y_2) + \cdots  \\
+\end{aligned}
+\]</span></p>
+</section>
+<section id="example-stata" class="slide level2 scrollable">
+<h2>Example <code>Stata</code></h2>
+<p><code>ssc install ineqfac</code></p>
+<div id="90ee0ce9" class="cell larger" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a></a>frause limew1972.dta, <span class="kw">clear</span></span>
+<span id="cb14-2"><a></a><span class="kw">capture</span>: <span class="kw">ssc</span> install ineqfac</span>
+<span id="cb14-3"><a></a>ineqfac basemi inchomewealth incnonhomewealth govtr_n pubcon tx_n valhp [aw=hhwgt]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> 
+Inequality decomposition by factor components (Shorrocks' method)
+-------------------------------------------------------------------------------
+Factor              |  100*s_f     S_f   100*m_f/m  rho_f   CV_f CV_f/CV(Total)
+--------------------+----------------------------------------------------------
+basemi              |   29.115    0.284   44.434   0.711   0.900    0.922
+inchomewealth       |    1.872    0.018    4.302   0.318   1.335    1.367
+incnonhomewealth    |   43.136    0.421    7.905   0.754   7.065    7.235
+govtr_n             |   -0.979   -0.010    5.868  -0.107   1.528    1.565
+pubcon              |    2.091    0.020    8.303   0.238   1.035    1.060
+tx_n                |   15.629    0.153   11.462   0.754   1.767    1.809
+valhp               |    9.136    0.089   17.726   0.502   1.003    1.027
+--------------------+----------------------------------------------------------
+Total               |  100.000    0.977  100.000   1.000   0.977    1.000
+-------------------------------------------------------------------------------
+Note: s_f is the proportionate contribution of factor f
+ to inequality of Total, where ...
+ s_f = rho_f*sd(f)/sd(Total) 
+     = rho_f*[m(factor_f)/m(totvar)]*[CV(factor_f)/CV(totvar)].
+ S_f = s_f*CV(Total). rho_f = corr(f,Total). 
+ m_f = mean(f). sd(f) = std.dev. of f. CV_f = sd(f)/m_f.</code></pre>
+</div>
+</div>
+</section>
+<section id="section-5" class="slide level2">
+<h2></h2>
+<h3 id="gini-decomposition-by-source">Gini Decomposition by source</h3>
+<ul>
+<li>The Gini index could also be decomposed by source of income.</li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+Gini(y) &amp;= \frac{2}{\mu_y} Cov(y,F(y)) = \frac{2}{\mu_y} Cov\left(\sum y_k,F(y)\right) =\frac{2}{\mu_y} \sum Cov\left( y_k,F(y)\right)
+\end{aligned}
+\]</span></p>
+<ul>
+<li>So Gini is the sum of the covariance of each source of income with <span class="math inline">\(F(y)\)</span></li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+Gini(y) &amp;= \sum \frac{2}{\mu_y} \times Cov( y_k,F(y)) \times \frac{\mu_{yk}}{\mu_{yk}} \times \frac{Cov( y_k,F(y_k))}{Cov ( y_k,F(y_k))} \\
+&amp;=\sum \frac{Cov ( y_k,F(y) )}{Cov ( y_k,F(y_k) )} \times \frac{2Cov( y_k,F(y_k)}{\mu_{yk}} \times \frac{\mu_{yk}}{\mu_y}  \\
+&amp;= \sum R_k \times G_k \times sh_k
+\end{aligned}
+\]</span></p>
+</section>
+<section id="section-6" class="slide level2">
+<h2></h2>
+<h3 id="gini-decomposition-by-source-1">Gini Decomposition by source</h3>
+<p><span class="math display">\[\begin{aligned}
+Gini(y)&amp;= \sum R_k \times G_k \times sh_k
+\end{aligned}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(R_k\)</span> = Gini Correlation; <span class="math inline">\(G_k\)</span> = Gini of source <span class="math inline">\(k\)</span>; <span class="math inline">\(sh_k\)</span> = share of source <span class="math inline">\(k\)</span> in total income.</li>
+<li><span class="math inline">\(R_k\time G_k\)</span> is the Concentration Index of <span class="math inline">\(Y_k\)</span></li>
+</ul>
+</section>
+<section id="example-stata-1" class="slide level2 scrollable">
+<h2>Example <code>Stata</code></h2>
+<p>You probably already have it installed</p>
+<p><code>ssc install sgini</code></p>
+<div id="d60f1453" class="cell larger" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a></a>sgini basemi inchomewealth incnonhomewealth govtr_n pubcon tx_n valhp [aw=hhwgt], source</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Gini coefficient for basemi, inchomewealth, incnonhomewealth, govtr_n, pubcon, tx_n, valhp
+
+Note: inchomewealth has 690 negative observations (used in calculations).
+Note: incnonhomewealth has 10359 negative observations (used in calculations).
+-----------------------
+    Variable |      v=2
+-------------+---------
+      basemi |   0.4787
+inchomewea~h |   0.6161
+incnonhome~h |   0.9503
+     govtr_n |   0.7099
+      pubcon |   0.4913
+        tx_n |   0.6036
+       valhp |   0.5021
+-----------------------
+
+Decomposition by source:
+  TOTAL =  basemi +  inchomewealth +  incnonhomewealth +  govtr_n +  pubcon +  tx_n +  valhp
+
+
+Parameter: v=2
+--------------------------------------------------------------------------------
+             |    Share   Coeff.    Corr.    Conc.  Contri.  %Contri. Elasticity
+    Variable |        s        g        r    c=g*r    s*g*r   s*g*r/G  s*g*r/G-s
+-------------+------------------------------------------------------------------
+      basemi |   0.4443   0.4787   0.8870   0.4246   0.1887   0.4868    0.0425
+inchomewea~h |   0.0430   0.6161   0.4617   0.2845   0.0122   0.0316   -0.0114
+incnonhome~h |   0.0790   0.9503   0.7724   0.7340   0.0580   0.1497    0.0707
+     govtr_n |   0.0587   0.7099  -0.2298  -0.1631  -0.0096  -0.0247   -0.0834
+      pubcon |   0.0830   0.4913   0.4593   0.2257   0.0187   0.0483   -0.0347
+        tx_n |   0.1146   0.6036   0.8776   0.5297   0.0607   0.1567    0.0420
+       valhp |   0.1773   0.5021   0.6601   0.3314   0.0587   0.1516   -0.0257
+-------------+------------------------------------------------------------------
+       TOTAL |   1.0000   0.3876   1.0000   0.3876   0.3876   1.0000    0.0000
+--------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="decompose-by-groups" class="slide level2">
+<h2>Decompose by groups</h2>
+<ul>
+<li>There is a second type of decomposition one may be interested in.
+<ul>
+<li>How much of the inequality is explained by inequality within groups, and between groups.</li>
+</ul></li>
+<li>For example, consider two cases:
+<ul>
+<li>Two (eq size) groups that have access to the same level of income, but within each group, all resources are held by one individual.</li>
+<li>Two (eq size) groups, one has 80% of the income, and the other 20%, but within groups income is equally distributed.</li>
+</ul></li>
+<li>It is possible to understand the source of inequality by decomposing it by groups.
+<ul>
+<li>Entropy Indices (and Atkinson) are well suited for this type of decomposition. (see help ineqdeco)</li>
+<li>GINI is not as straight forward but possible.</li>
+</ul></li>
+</ul>
+</section>
+<section id="section-7" class="slide level2">
+<h2></h2>
+<h3 id="gini-decomposition-by-groups">GINI Decomposition by groups</h3>
+<ul>
+<li><p>Decomposition of the GINI coefficient by groups Milanovic and Yitzhaki (2002)</p></li>
+<li><p>The method: To decompose the GINI by groups, one can use the following:</p></li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+Gini(y) &amp;= \sum_{k=1}^K s_k O_k Gini(y_k) + Gini_{bw}
+\end{aligned}
+\]</span></p>
+<ul>
+<li>where <span class="math inline">\(s_i\)</span> is the share of group <span class="math inline">\(i\)</span> in total income, <span class="math inline">\(Gini(y_k)\)</span> is the Gini of group <span class="math inline">\(k\)</span>, <span class="math inline">\(O_k\)</span> is a measure of overlapping across groups, and <span class="math inline">\(Gini_{bw}\)</span> is the Gini between groups.</li>
+</ul>
+<p><span class="math display">\[Gini_{bw} = \frac{2}{\mu_y} Cov(\mu_i,\bar F_i)\]</span></p>
+</section>
+<section id="section-8" class="slide level2">
+<h2></h2>
+<h3 id="overlapping">Overlapping</h3>
+<ul>
+<li><p>Overlapping <span class="math inline">\(O_k\)</span> measures to what extend the distribution of income in group <span class="math inline">\(k\)</span> overlaps with the distribution of income in other groups.</p></li>
+<li><p>If there is no overlapping, then <span class="math inline">\(O_k=p_i\)</span> (the population share of group k, and incomes are fully stratified).</p></li>
+<li><p>Otherwise, this adjustment factors ensures that the sum of the Gini of each group is equal to the Gini of the total population + Between Gini.</p></li>
+</ul>
+</section>
+<section id="example-stata-2" class="slide level2 scrollable">
+<h2>Example <code>Stata</code></h2>
+<p><code>ssc install anogi</code> (Tom Masterson is one of the authors)<br>
+<code>ssc install moremata</code> (needed for <code>anogi</code>)</p>
+<div id="52c68e0f" class="cell larger" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a></a><span class="kw">capture</span>:<span class="kw">ssc</span> install anogi</span>
+<span id="cb18-2"><a></a><span class="kw">capture</span>:<span class="kw">ssc</span> install moremata</span>
+<span id="cb18-3"><a></a>anogi limew [aw= hhwgt ], <span class="kw">by</span>(educl) <span class="kw">detail</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Analysis of Gini
+
+--------------------------------------------------
+                          |      Coef.          %
+--------------------------+-----------------------
+Overall Gini              |   .3875623     100.00
+                          |
+G_wo = sum s_i*G_i*O_i    |   .3405469      87.87
+G_b                       |   .0470154      12.13
+                          |
+IG   = sum s_i*G_i        |   .3657639      94.38
+IGO  = sum s_i*G_i(O_i-1) |   -.025217      -6.51
+BGp  = G_bp               |   .1317698      34.00
+BGO  = G_b - G_bp         |  -.0847544     -21.87
+--------------------------+-----------------------
+Mean of limew             |    20403.6
+N. of obs                 |      44872
+N. of subgroups           |          4
+--------------------------------------------------
+
+
+Detailed statistics for subgroups
+
+-------------------------------------------------------------------------------------------
+             |         N          p       mean          s          G          O          F 
+-------------+-----------------------------------------------------------------------------
+           1 |  18244.58   .4065916   15466.07   .3081992   .3844549   .9986868   .3963075 
+           2 |  14552.19   .3243045   21019.76   .3340981    .338758   .9239628   .5363091 
+           3 |  5609.305   .1250068   22705.72   .1391112   .3640736   .9435821   .5546081 
+           4 |  6465.924   .1440971   30951.73   .2185916   .3817625   .8370495   .6634934 
+-------------------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</section></section>
+<section id="thats-all-for-today" class="title-slide slide level1 center">
+<h1>Thats all for today…</h1>
+<p>Until next week!</p>
+
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1600,
+
+        height: 900,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const onCopySuccess = function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
+      });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>

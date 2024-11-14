@@ -1,0 +1,1707 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-07ba0ad10f5680c660e360ac31d2f3b6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.33">
+
+  <meta name="author" content="Fernando Rios-Avila">
+  <title>Econometrics MSC Levy – Multiple Regression Analysis</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-27a844e7d43f0d31b27642e48490372a.css">
+  <link rel="stylesheet" href="styles.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" data-background-image="https://www.mysantacruzrealestate.com/uploads/shutterstock_179346260_500.jpg" data-background-opacity="0.3" data-background-size="contain" class="quarto-title-block center">
+  <h1 class="title">Multiple Regression Analysis</h1>
+  <p class="subtitle">Adding and Understanding features</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Fernando Rios-Avila 
+</div>
+</div>
+</div>
+
+</section>
+<section id="introduction" class="slide level2">
+<h2>Introduction</h2>
+<ul>
+<li><p>Multiple Linear Regression models (MLRM), estimated via OLS, have very good properties, if all Assumptions (A1-A5,A6’) Hold.</p></li>
+<li><p>Up until now, we have discussed how to estimate them, and analyze them under “optimal” assumptions, in simplified cases.</p></li>
+<li><p>Today we will be adding other “minor” Features to MLR, and aim to better understand its features</p></li>
+</ul>
+</section>
+<section id="scaling-and-shifting" class="slide level2">
+<h2>Scaling and shifting</h2>
+<ol type="1">
+<li><p>Something that we do not emphasize enough. Before analyzing your data, its important to analyze the nature of the data (summary stats, ranges, scales)</p></li>
+<li><p>When I talk about Scaling and shifting, I refer exclusibly to affine transormations of the following type:</p></li>
+</ol>
+<p><span class="math display">\[x^* = a*x+c \text{ or } x^* = a*(x+c1)+c2
+\]</span></p>
+<p>They either Shift, or change the scale of the data. Not the shape! (logs change shape)</p>
+<ol start="3" type="1">
+<li><p>If one applies affine transformations to the data, it will have <strong>NO</strong> effect on your model what-so-ever. (Same t’s same F’s, same <span class="math inline">\(R^2\)</span>)</p></li>
+<li><p>But, your <span class="math inline">\(\beta's\)</span> will change. This could help understading and explaining the results.</p></li>
+</ol>
+</section>
+<section id="example" class="slide level2 smaller">
+<h2>Example:</h2>
+<div id="97a6476f" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a></a><span class="kw">set</span> <span class="dv">linesize</span> 255</span>
+<span id="cb1-2"><a></a>frause bwght, <span class="kw">clear</span></span>
+<span id="cb1-3"><a></a><span class="kw">gen</span> bwkg = bwghtlbs*0.454</span>
+<span id="cb1-4"><a></a><span class="kw">gen</span> bwgr = bwkg*1000</span>
+<span id="cb1-5"><a></a><span class="kw">regress</span> bwght male <span class="bn">white</span> cigs lfaminc </span>
+<span id="cb1-6"><a></a><span class="kw">est</span> sto m1</span>
+<span id="cb1-7"><a></a><span class="kw">regress</span> bwghtlbs male <span class="bn">white</span> cigs lfaminc</span>
+<span id="cb1-8"><a></a><span class="kw">est</span> sto m2</span>
+<span id="cb1-9"><a></a><span class="kw">regress</span> bwkg male <span class="bn">white</span> cigs lfaminc</span>
+<span id="cb1-10"><a></a><span class="kw">est</span> sto m3</span>
+<span id="cb1-11"><a></a><span class="kw">regress</span> bwgr male <span class="bn">white</span> cigs lfaminc</span>
+<span id="cb1-12"><a></a><span class="kw">est</span> sto m4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<table class="table-striped table-hover caption-top">
+<caption>Birthweight and Cig</caption>
+<colgroup>
+<col style="width: 10%">
+<col style="width: 12%">
+<col style="width: 10%">
+<col style="width: 12%">
+<col style="width: 10%">
+<col style="width: 12%">
+<col style="width: 10%">
+<col style="width: 12%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">Oz</th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;">lbs</th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;">Kgs</th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;">Gr</th>
+<th style="text-align: center;"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>male</td>
+<td style="text-align: center;">3.123***</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">0.195***</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">0.089***</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">88.605***</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td></td>
+<td style="text-align: center;">(1.071)</td>
+<td style="text-align: center;">[2.916]</td>
+<td style="text-align: center;">(0.067)</td>
+<td style="text-align: center;">[2.916]</td>
+<td style="text-align: center;">(0.030)</td>
+<td style="text-align: center;">[2.916]</td>
+<td style="text-align: center;">(30.389)</td>
+<td style="text-align: center;">[2.916]</td>
+</tr>
+<tr class="odd">
+<td>white</td>
+<td style="text-align: center;">5.404***</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">0.338***</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">0.153***</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">153.346***</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td></td>
+<td style="text-align: center;">(1.392)</td>
+<td style="text-align: center;">[3.882]</td>
+<td style="text-align: center;">(0.087)</td>
+<td style="text-align: center;">[3.882]</td>
+<td style="text-align: center;">(0.039)</td>
+<td style="text-align: center;">[3.882]</td>
+<td style="text-align: center;">(39.497)</td>
+<td style="text-align: center;">[3.882]</td>
+</tr>
+<tr class="odd">
+<td>cigs</td>
+<td style="text-align: center;">-0.480***</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">-0.030***</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">-0.014***</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">-13.628***</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td></td>
+<td style="text-align: center;">(0.091)</td>
+<td style="text-align: center;">[-5.288]</td>
+<td style="text-align: center;">(0.006)</td>
+<td style="text-align: center;">[-5.288]</td>
+<td style="text-align: center;">(0.003)</td>
+<td style="text-align: center;">[-5.288]</td>
+<td style="text-align: center;">(2.577)</td>
+<td style="text-align: center;">[-5.288]</td>
+</tr>
+<tr class="odd">
+<td>lfaminc</td>
+<td style="text-align: center;">1.053*</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">0.066*</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">0.030*</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">29.867*</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td></td>
+<td style="text-align: center;">(0.632)</td>
+<td style="text-align: center;">[1.664]</td>
+<td style="text-align: center;">(0.040)</td>
+<td style="text-align: center;">[1.664]</td>
+<td style="text-align: center;">(0.018)</td>
+<td style="text-align: center;">[1.664]</td>
+<td style="text-align: center;">(17.946)</td>
+<td style="text-align: center;">[1.664]</td>
+</tr>
+<tr class="odd">
+<td>_cons</td>
+<td style="text-align: center;">110.603***</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">6.913***</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">3.138***</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">3138.351***</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td></td>
+<td style="text-align: center;">(2.071)</td>
+<td style="text-align: center;">[53.410]</td>
+<td style="text-align: center;">(0.129)</td>
+<td style="text-align: center;">[53.410]</td>
+<td style="text-align: center;">(0.059)</td>
+<td style="text-align: center;">[53.410]</td>
+<td style="text-align: center;">(58.760)</td>
+<td style="text-align: center;">[53.410]</td>
+</tr>
+<tr class="odd">
+<td><em>N</em></td>
+<td style="text-align: center;">1388</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">1388</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">1388</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">1388</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td><em>R</em><sup>2</sup></td>
+<td style="text-align: center;">0.046</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">0.046</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">0.046</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">0.046</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="scaling-xs-and-ys" class="slide level2">
+<h2>Scaling X’s and Y’s</h2>
+<ul>
+<li>Re-scaling <span class="math inline">\(y\)</span> will affect the all coefficients.
+<ul>
+<li>Reducing Scale, reduces scale of coefficients</li>
+</ul></li>
+<li>Re-scaling <span class="math inline">\(x's\)</span> will only affect its coefficient and possible the constant.
+<ul>
+<li>Reducing (increasing) Scale will increase (reduce) Scale of coefficient</li>
+</ul></li>
+<li>In both cases, Shifting the variable only affects the constant.</li>
+</ul>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Important</strong></p>
+</div>
+<div class="callout-content">
+<p>Re-Scaling is an important tool/trick that can be used for interpreting more complex models.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="beta-or-standardized-coefficients" class="slide level2">
+<h2>Beta or Standardized Coefficients</h2>
+<ul>
+<li>In some fields (health), making inferences based on default scales can be difficult (the impact of 1microgram ?).</li>
+<li>To avoid this type of problem researchers may opt to use <strong>Standardized</strong> or <strong>Beta</strong> coefficients.
+<ul>
+<li>How a <span class="math inline">\(sd\)</span> change in <span class="math inline">\(X's\)</span> affect the outcome (in <span class="math inline">\(sd\)</span>)</li>
+</ul></li>
+<li>Getting these coefficient is similar to applying the following transformation to all variables:</li>
+</ul>
+<p><span class="math display">\[\tilde w = \frac{w-\bar w}{\sigma_w} \rightarrow E(\tilde w)=0 \text{ and } Var(\tilde w) = 1
+\]</span></p>
+<div class="sourceCode" id="cb2" style="font-size: 1.3em"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a></a><span class="kw">reg</span> <span class="fu">y</span> x1 <span class="kw">x2</span> x3, beta</span>
+<span id="cb2-2"><a></a><span class="kw">est</span> sto m1</span>
+<span id="cb2-3"><a></a>esttab m1, beta </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>It also helps you make comparison of the relative importance of each covariate explanatory power.</li>
+</ul>
+</section>
+<section id="functional-forms-single-dummies" class="slide level2">
+<h2>Functional Forms: Single Dummies</h2>
+<ul>
+<li><p>Dummies are variables that take only two values (preferably 0 and 1).</p></li>
+<li><p>They are used to capture qualitative (binary) characteristics (ie Democrat, Union worker, etc)</p></li>
+<li><p>When used in regression analysis, they represent “shifts” in the Intercept: <span class="math display">\[y = b_0 + b_1 male + b_2 x_1 + b_3 x_2 + e
+\]</span></p>
+<ul>
+<li>Here, <span class="math inline">\(b_0\)</span> would be the “intercept” for “women” (base) while <span class="math inline">\(b_0+b_1\)</span> would be the intercept for men.
+<ul>
+<li>Under A4, <span class="math inline">\(b_1\)</span> is the expected outcome difference <strong>men</strong> have over <strong>women</strong>, everything else constant.</li>
+</ul></li>
+</ul></li>
+<li><p>Unless further restrictions are used, you can’t add Dummies for both categories in the model.</p></li>
+</ul>
+<div class="sourceCode" id="cb3" style="font-size: 1.3em"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a></a>* Stata Code</span>
+<span id="cb3-2"><a></a><span class="kw">reg</span> <span class="fu">y</span> x1 <span class="kw">x2</span> <span class="kw">d</span>    &lt;-- Possible <span class="kw">if</span> <span class="kw">d</span> = 0 <span class="kw">or</span> 1</span>
+<span id="cb3-3"><a></a><span class="kw">reg</span> <span class="fu">y</span> x1 <span class="kw">x2</span> i.<span class="kw">d</span>  &lt;-- Better</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="functional-forms-multiple-dummies" class="slide level2">
+<h2>Functional Forms: Multiple Dummies</h2>
+<ul>
+<li>We can use dummies to represent multiple (nonoverlapping) characteristics like Race, ranking or age group).</li>
+<li>One needs a “base” or comparison group to analyze coefficients (or more).</li>
+<li>Ordered variables can be used as continuous, but using them as dummies requires creating dummies for each category.</li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+y &amp;= b_0 + b_1 black + b_2 hispanic + b_3 other + b_4 x + e &amp; || Base = White \\
+y &amp;= b_0 + b_1 young + b_2 old + b_3 x + e &amp; || Base = Adult
+\end{aligned}
+\]</span></p>
+<ul>
+<li>When using with ordered data, multiple dummies may create somewhat counterintuitive results</li>
+</ul>
+<div class="sourceCode" id="cb4" style="font-size: 1.3em"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a></a><span class="kw">tab</span> race, <span class="kw">gen</span>(race_)  &lt;- creates dummies</span>
+<span id="cb4-2"><a></a><span class="kw">reg</span> <span class="fu">y</span> i.race x1 <span class="kw">x2</span> x3 &lt;- generally uses first <span class="fu">group</span> <span class="kw">as</span> base</span>
+<span id="cb4-3"><a></a><span class="kw">reg</span> <span class="fu">y</span> ib2.race x1 <span class="kw">x2</span> x3 &lt;- indicates a particular <span class="st">"base"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="example-1" class="slide level2 scrollable">
+<h2>Example</h2>
+<div id="a19245cc" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a></a>frause beauty, <span class="kw">clear</span></span>
+<span id="cb5-2"><a></a>** Union also a dummy. </span>
+<span id="cb5-3"><a></a>** looks <span class="kw">as</span> Continous</span>
+<span id="cb5-4"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> lwage exper <span class="kw">union</span> educ female looks</span>
+<span id="cb5-5"><a></a><span class="kw">est</span> sto m1</span>
+<span id="cb5-6"><a></a><span class="kw">gen</span> looks_good = looks&gt;=4 <span class="kw">if</span> !<span class="fu">missing</span>(looks)</span>
+<span id="cb5-7"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> lwage exper <span class="kw">union</span> educ female looks_good</span>
+<span id="cb5-8"><a></a><span class="kw">est</span> sto m2</span>
+<span id="cb5-9"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> lwage exper <span class="kw">union</span> educ female i.looks</span>
+<span id="cb5-10"><a></a><span class="kw">est</span> sto m3</span>
+<span id="cb5-11"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> lwage exper <span class="kw">union</span> educ female ib3.looks</span>
+<span id="cb5-12"><a></a><span class="kw">est</span> sto m4</span>
+<span id="cb5-13"><a></a>esttab m1 m2 m3 m4, se <span class="kw">star</span>( * 0.1 ** 0.05 *** 0.01  ) nogaps nomtitle</span>
+<span id="cb5-14"><a></a><span class="kw">display</span> <span class="dt">_n</span> <span class="st">"Exact Change Union : "</span> %5.3f (<span class="fu">exp</span>(_b[<span class="kw">union</span>])-1)*100 <span class="st">"%"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+----------------------------------------------------------------------------
+                      (1)             (2)             (3)             (4)   
+----------------------------------------------------------------------------
+exper              0.0137***       0.0134***       0.0135***       0.0135***
+                (0.00119)       (0.00120)       (0.00120)       (0.00120)   
+union               0.201***        0.201***        0.196***        0.196***
+                 (0.0305)        (0.0307)        (0.0306)        (0.0306)   
+educ               0.0737***       0.0750***       0.0735***       0.0735***
+                (0.00528)       (0.00528)       (0.00528)       (0.00528)   
+female             -0.448***       -0.450***       -0.446***       -0.446***
+                 (0.0293)        (0.0294)        (0.0293)        (0.0293)   
+looks              0.0555***                                                
+                 (0.0201)                                                   
+looks_good                         0.0276                                   
+                                 (0.0299)                                   
+1.looks                                                 0          -0.266** 
+                                                      (.)         (0.134)   
+2.looks                                             0.146          -0.121***
+                                                  (0.139)        (0.0439)   
+3.looks                                             0.266**             0   
+                                                  (0.134)             (.)   
+4.looks                                             0.264*       -0.00255   
+                                                  (0.136)        (0.0312)   
+5.looks                                             0.422**         0.156   
+                                                  (0.173)         (0.111)   
+_cons               0.408***        0.565***        0.338**         0.604***
+                 (0.0968)        (0.0774)         (0.149)        (0.0781)   
+----------------------------------------------------------------------------
+N                    1260            1260            1260            1260   
+----------------------------------------------------------------------------
+Standard errors in parentheses
+* p&lt;0.1, ** p&lt;0.05, *** p&lt;0.01
+
+Exact Change Union : 21.598%</code></pre>
+</div>
+</div>
+</section>
+<section id="functional-forms-logarithms" class="slide level2">
+<h2>Functional Forms: Logarithms</h2>
+<ul>
+<li>Using Logarithms can help modeling some nonlinearities in the data.</li>
+<li>Because it changes the “shape” of variables, it also changes the interpretation (Changes vs %Changes)</li>
+<li>By reducing dispersion of dep. variable, CLM assumptions may hold.</li>
+</ul>
+<p>But:</p>
+<ul>
+<li>Cannot or should not be applied to all data types (ie Dummies, negatives, shares)</li>
+<li>(log-lin model): It is often better to use the exact percentage change rather than approximation: <span class="math display">\[\begin{aligned}
+log(y) &amp;= b_0 + b_1 x_1 + b_2 x_2 + b_3 D + e \\
+\frac{\% \Delta y}{\Delta D} &amp;= 100 (exp(b_3)-1)\%
+\end{aligned}
+\]</span></li>
+</ul>
+</section>
+<section>
+<section id="break" class="title-slide slide level1 center">
+<h1>Break?!</h1>
+
+</section>
+<section id="functional-forms-polynomials-x2-x3-etc" class="slide level2">
+<h2>Functional Forms: Polynomials (<span class="math inline">\(x^2, x^3, etc\)</span>)</h2>
+<ul>
+<li>Up to this point, we have only considered linear models (<span class="math inline">\(X's\)</span> enter asis or in logs). This almost always works! (Taylor expansion justification)
+<ul>
+<li>Specially if interested in Average Effects</li>
+</ul></li>
+<li>Some times, you may be interest in capturing some heterogeneity for <span class="math inline">\(dy/dx\)</span>. That can be done just adding “ANY” transformation of <span class="math inline">\(X\)</span> in the model (<span class="math inline">\(sin(x), 1/x, \sqrt x\)</span>, etc)</li>
+<li>For practical, and theoretical purposes, however, we usually concentrate on quadratic terms.
+<ul>
+<li>For example: Increasing returns with decreasing marginal returns</li>
+<li>We may be interested in “turning” points</li>
+</ul></li>
+<li>However, we now need to be careful about marginal effects!</li>
+</ul>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+<p><span class="math display">\[\begin{aligned}
+y &amp;=b_0+b_1 x_1 + b_2 x_1^2 + b_3 x_2 + e \\
+\frac{dy}{dx_1} &amp;= b_1+2b_2 x_1 =0 \\
+x_1^* &amp;= - \frac{b_1}{2b_2} x_1
+\end{aligned}
+\]</span></p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>To consider</strong></p>
+</div>
+<div class="callout-content">
+<ol type="1">
+<li>Marginal effects are no longer constant. You need an <span class="math inline">\(x_1\)</span> value to obtain them (mean? average?)</li>
+<li>With Quadratic models, there is <strong><em>ALWAYS</em></strong> a turning point (but may not be relevant)</li>
+<li>MFX can be positive or negative for <strong><em>some</em></strong> value of <span class="math inline">\(x_1\)</span> (but may not be relevant)</li>
+<li>Unless something else is done, coefficients may not make sense on their own.</li>
+</ol>
+</div>
+</div>
+</div>
+<ul>
+<li>Why not add further polynomials?
+<ul>
+<li>Estimating them is easy (except for numerical precision), but adds complexity for interpretation. Nothing else.</li>
+</ul></li>
+</ul>
+</section>
+<section id="example-2" class="slide level2 scrollable">
+<h2>Example</h2>
+<div id="9c3aa1e8" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a></a>frause hprice2, <span class="kw">clear</span></span>
+<span id="cb7-2"><a></a><span class="kw">gen</span> rooms2=rooms*rooms</span>
+<span id="cb7-3"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> lprice lnox dist rooms </span>
+<span id="cb7-4"><a></a><span class="kw">est</span> sto m0</span>
+<span id="cb7-5"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> lprice lnox dist rooms rooms2</span>
+<span id="cb7-6"><a></a><span class="kw">est</span> sto m1</span>
+<span id="cb7-7"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> lprice lnox dist c.rooms c.rooms#c.rooms</span>
+<span id="cb7-8"><a></a><span class="kw">est</span> sto m2</span>
+<span id="cb7-9"><a></a>esttab m0 m1 m2, se varwidth(20) <span class="kw">star</span>(* 0.1 ** 0.05 *** 0.01) nogaps</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+--------------------------------------------------------------------
+                              (1)             (2)             (3)   
+                           lprice          lprice          lprice   
+--------------------------------------------------------------------
+lnox                       -0.968***       -0.975***       -0.975***
+                          (0.110)         (0.106)         (0.106)   
+dist                      -0.0291***      -0.0223**       -0.0223** 
+                         (0.0102)       (0.00995)       (0.00995)   
+rooms                       0.302***       -0.724***       -0.724***
+                         (0.0189)         (0.171)         (0.171)   
+rooms2                                     0.0794***                
+                                         (0.0131)                   
+c.rooms#c.rooms                                            0.0794***
+                                                         (0.0131)   
+_cons                       9.793***        13.05***        13.05***
+                          (0.271)         (0.599)         (0.599)   
+--------------------------------------------------------------------
+N                             506             506             506   
+--------------------------------------------------------------------
+Standard errors in parentheses
+* p&lt;0.1, ** p&lt;0.05, *** p&lt;0.01</code></pre>
+</div>
+</div>
+<ul>
+<li>Negative coefficient for <span class="math inline">\(rooms\)</span>, so is there a problem?
+<ul>
+<li>Find “turnpoint” and summary Stats</li>
+</ul></li>
+</ul>
+<p>Turn point: 4.55</p>
+<div id="e58a6bdc" class="cell" data-execution_count="6">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Variable |       Min        p1        p5       p10       p25       p50       p75       p90       p99       Max
+-------------+----------------------------------------------------------------------------------------------------
+       rooms |      3.56      4.52       5.3      5.59      5.88      6.21      6.62      7.15      8.34      8.78
+------------------------------------------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<ul>
+<li>Does it make a difference how we estimate the model?</li>
+</ul>
+<div id="fb3e2f39" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> lprice lnox dist rooms rooms2</span>
+<span id="cb10-2"><a></a>margins, <span class="kw">dydx</span>(rooms)</span>
+<span id="cb10-3"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> lprice lnox dist c.rooms c.rooms#c.rooms</span>
+<span id="cb10-4"><a></a>margins, <span class="kw">dydx</span>(rooms) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Average marginal effects                                   Number of obs = 506
+Model VCE: OLS
+
+Expression: Linear prediction, predict()
+dy/dx wrt:  rooms
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |      dy/dx   std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       rooms |  -.7236433   .1706763    -4.24   0.000    -1.058973   -.3883139
+------------------------------------------------------------------------------
+
+Average marginal effects                                   Number of obs = 506
+Model VCE: OLS
+
+Expression: Linear prediction, predict()
+dy/dx wrt:  rooms
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |      dy/dx   std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       rooms |   .2747106   .0188463    14.58   0.000     .2376831    .3117382
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="functional-forms-interactions-i-d1d2" class="slide level2">
+<h2>Functional Forms: Interactions I (<span class="math inline">\(d1*d2\)</span>)</h2>
+<ul>
+<li>It is possible to use multiple (unrelated) dummy variables.</li>
+<li>Dummy interactions are feasible to allow for differential means across groups combined groups.</li>
+<li>You still need a reference group that should be identified: <span class="math display">\[\begin{aligned}
+y &amp;= a_0 + a_1 female + a_2 union + a_3 female \times union + e \\
+y &amp;= b_0 + b_1 female \times nonunion + b_2 male \times union +b_3 female \times union + e
+\end{aligned}
+\]</span> Both models are equivalent. Also <span class="math display">\[\begin{aligned}
+&amp; E(y|male,nonunion)    &amp;&amp; =a_0  &amp;&amp;= b_0   \\
+&amp; E(y|female,nonunion) &amp;&amp; = a_0 + a_1 &amp;&amp; = b_0 + b_1 \\
+&amp; E(y|male,union) &amp;&amp; =a_0+a_2  &amp;&amp;= b_0+b_2 \\
+&amp; E(y|female,union)  &amp;&amp; = a_0 + a_1 + a_2 + a_3  &amp;&amp;= b_0 + b_3
+\end{aligned}
+\]</span></li>
+</ul>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<p>For this, you may need to use manual dummy creation, or use explicit interactions:</p>
+<div class="sourceCode" id="cb12" style="font-size: 1.5em"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a></a><span class="kw">reg</span> <span class="fu">y</span> i.d1 i.d2 i.d1#i.d2</span>
+<span id="cb12-2"><a></a><span class="kw">reg</span> <span class="fu">y</span> i.d1##i.d2</span>
+<span id="cb12-3"><a></a><span class="kw">reg</span> <span class="fu">y</span> i.d1#i.d2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol type="1">
+<li>You set the interactions</li>
+<li>Similar to one, but <code>Stata</code> does it for you</li>
+<li>Creates full set of interactions, as in 2nd model before</li>
+</ol>
+<p>Options 1 and 3 will allow you using <code>margins</code>. For overall groups (all women, all unions) you need to decide how to get representative samples.</p>
+</section>
+<section id="functional-forms-interactions-ii-x1x2" class="slide level2">
+<h2>Functional Forms: Interactions II (<span class="math inline">\(x1*x2\)</span>)</h2>
+<ul>
+<li>You may be interested in allowing for some interaction across continuous variables.
+<ul>
+<li>ie Interacted effect of household size and number of bedrooms</li>
+</ul></li>
+<li>As with Polynomials, this allows for heterogeneity, thus effects are not constant.</li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+y &amp;= a_0 + a_1 x_1 + a_2 x_2 + a_3 x_1 x_2 + e \\
+\frac{\Delta E(y|x_1,x_2) }{\Delta x_1} &amp;= a_1  + a_3 x_2 \\
+\frac{\Delta E(y|x_1,x_2) }{\Delta x_2} &amp;= a_2  + a_3 x_1
+\end{aligned}
+\]</span></p>
+<ul>
+<li>Thus, coefficients, on their own, are difficult to interpret, unless <span class="math inline">\(x_1\)</span> or <span class="math inline">\(x_2\)</span> are zero</li>
+</ul>
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+<h3 id="shortcut-affine-transformation">Shortcut: Affine transformation</h3>
+<ul>
+<li>There is a trick that could help easy and direct interpretation. re-scaling variables:</li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+y &amp;= b_0 + b_1 x_1 + b_2 x_2 + b_3 (x_1-\bar x_1)(x_2-\bar x_2) + e \\
+\frac{\Delta E(y|x_1,x_2) }{\Delta x_1} &amp;= b_1  + b_3 (x_2-\bar x_2) \simeq b_1 \\
+\frac{\Delta E(y|x_1,x_2) }{\Delta x_2} &amp;= b_2  + b_3 (x_1-\bar x_1) \simeq b_2
+\end{aligned}
+\]</span></p>
+<ul>
+<li>Also works with quadratic terms!</li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+y &amp;= b_0 + b_1 x_1 + b_2 (x_1-\bar x_1)^2 + b_3 x_2 + e \\
+\frac{\Delta E(y|x_1,x_2) }{\Delta x_1} &amp;= b_1  + 2 b_2 (x_1-\bar x_1) \simeq b_1 \\
+\end{aligned}
+\]</span></p>
+</section>
+<section id="functional-forms-interactions-iii-d1x1" class="slide level2">
+<h2>Functional Forms: Interactions III (<span class="math inline">\(d1*x1\)</span>)</h2>
+<ul>
+<li>Dummy variables allows for shifts to the constant (intercept).</li>
+<li>Interacting with continuous variables allows for shifts in slopes!.
+<ul>
+<li>This can be useful to testing hypothesis: differences in returns to education by gender.</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[wage=b_0 + b_1 female + b_2 educ + b_3 educ \times female + e
+\]</span></p>
+<ul>
+<li><span class="math inline">\(b_1\)</span>: Baseline wage differential between men and women.</li>
+<li><span class="math inline">\(b_2+b_3\)</span>: Returns to education for women.</li>
+<li><span class="math inline">\(b_1 + b_3 \overline{educ}\)</span>: Average wage difference between men and women.</li>
+</ul>
+<p><code>Stata</code>:</p>
+<div class="sourceCode" id="cb13" style="font-size: 1.3em"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a></a><span class="kw">reg</span> <span class="fu">y</span> x1 i.<span class="kw">d</span> c.x1#i.<span class="kw">d</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="functional-forms-full-interactions-with-dummies" class="slide level2">
+<h2>Functional Forms: Full Interactions (with dummies)</h2>
+<ul>
+<li>It is possible to estimate models where all variables are interacted with a single dummy. This allows you to test the hypothesis if two groups have the same underlying parameters.
+<ul>
+<li>Do men and women have the same wage structure?</li>
+</ul></li>
+<li>Full interactions is equivalent to estimating separate models:</li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+FT: &amp; y = b_0 + b_1 x_1 + b_2 x_2 + g_0 d +g_1 x_1 d +g_2 x_2 d +e \\
+D0: &amp; y = b_0 + b_1 x_1 + b_2 x_2  +e  &amp;&amp; \text{ if d=0 } \\
+D1: &amp; y = (b_0+g_0) + (b_1+g_1) x_1 + (b_2+g_2) x_2 +e &amp;&amp; \text{ if d=1 } \\
+    &amp; y = a_0 + a_1 x_1 + a_1 x_2 +e &amp;&amp; \text{ if d=1 } \\
+CS1: &amp; H_0: g_0=g_1=g_2=0
+\end{aligned}
+\]</span></p>
+</section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+<h3 id="chow-test">Chow test</h3>
+<ul>
+<li><span class="math inline">\(CS1\)</span> can be tested using F-stat for multiple hypothesis.</li>
+<li>But, under homoskedasticty, one could also use what is known as the <strong>Chow test</strong></li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+M1 &amp;: y = b_0 + b_1 x_1 + b_2 x_2 + e \\
+M2 &amp;: y = b_0 + b_1 x_1 + b_2 x_2 + b_3 d + e \\
+if \ D=0 &amp;: y = b_{00} + b_{01} x_1 + b_{02} x2 + e_0 \\
+if \ D=1 &amp;: y = b_{10} + b_{11} x_1 + b_{12} x2 + e_1
+\end{aligned}
+\]</span></p>
+<p>F-Stat (similar to before):</p>
+<p><span class="math display">\[\begin{aligned}
+F_{M1} = \frac{(SSR_{M1}-SSR_0-SSR_1)/(k+1)}{(SSR_0+SSR_1)/(n - 2(k+1))} \\
+F_{M2} = \frac{(SSR_{M2}-SSR_0-SSR_1)/k}{(SSR_0+SSR_1)/(n - 2(k+1))}
+\end{aligned}
+\]</span></p>
+</section>
+<section id="example-3" class="slide level2 scrollable">
+<h2>Example</h2>
+<div id="39150549" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a></a> frause gpa3, <span class="kw">clear</span></span>
+<span id="cb14-2"><a></a><span class="kw">drop</span> <span class="kw">if</span> cumgpa==0</span>
+<span id="cb14-3"><a></a><span class="kw">replace</span> sat = sat /100</span>
+<span id="cb14-4"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> cumgpa sat hsperc tothrs</span>
+<span id="cb14-5"><a></a><span class="kw">est</span> sto m1</span>
+<span id="cb14-6"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> cumgpa sat hsperc tothrs female</span>
+<span id="cb14-7"><a></a><span class="kw">est</span> sto m2</span>
+<span id="cb14-8"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> cumgpa sat hsperc tothrs <span class="kw">if</span> female==0</span>
+<span id="cb14-9"><a></a><span class="kw">est</span> sto m3</span>
+<span id="cb14-10"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> cumgpa sat hsperc tothrs <span class="kw">if</span> female==1</span>
+<span id="cb14-11"><a></a><span class="kw">est</span> sto m4</span>
+<span id="cb14-12"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> cumgpa i.female##c.(sat hsperc tothrs)</span>
+<span id="cb14-13"><a></a><span class="kw">est</span> sto m5</span>
+<span id="cb14-14"><a></a>esttab m1 m2 m3 m4 m5, mtitle( Simple With_fem Men Women Full_int) <span class="co">///</span></span>
+<span id="cb14-15"><a></a>se <span class="kw">star</span>(* .1 ** 0.05 *** 0.01) nogaps noomitted </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(98 observations deleted)
+variable sat was int now float
+(634 real changes made)
+
+--------------------------------------------------------------------------------------------
+                      (1)             (2)             (3)             (4)             (5)   
+                   Simple        With_fem             Men           Women        Full_int   
+--------------------------------------------------------------------------------------------
+sat                0.0933***       0.0938***       0.0679***        0.177***       0.0679***
+                 (0.0133)        (0.0130)        (0.0151)        (0.0244)        (0.0146)   
+hsperc           -0.00865***     -0.00730***     -0.00748***     -0.00869***     -0.00748***
+                (0.00105)       (0.00106)       (0.00119)       (0.00219)       (0.00116)   
+tothrs          -0.000599       -0.000586        -0.00155**       0.00141        -0.00155** 
+               (0.000662)      (0.000647)      (0.000771)       (0.00111)      (0.000748)   
+female                              0.277***                                                
+                                 (0.0493)                                                   
+0.female                                                                                0   
+                                                                                      (.)   
+1.female                                                                           -0.855** 
+                                                                                  (0.333)   
+1.female#c~t                                                                        0.109***
+                                                                                 (0.0310)   
+1.female#c~c                                                                     -0.00121   
+                                                                                (0.00271)   
+1.female#c~s                                                                      0.00296** 
+                                                                                (0.00145)   
+_cons               1.900***        1.782***        2.070***        1.215***        2.070***
+                  (0.149)         (0.147)         (0.173)         (0.257)         (0.168)   
+--------------------------------------------------------------------------------------------
+N                     634             634             483             151             634   
+--------------------------------------------------------------------------------------------
+Standard errors in parentheses
+* p&lt;.1, ** p&lt;0.05, *** p&lt;0.01</code></pre>
+</div>
+</div>
+<div id="e42ed156" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a></a><span class="kw">test</span> 1.female#c.sat 1.female#c.hsperc 1.female#c.tothrs</span>
+<span id="cb16-2"><a></a><span class="kw">test</span> 1.female 1.female#c.sat 1.female#c.hsperc 1.female#c.tothrs</span>
+<span id="cb16-3"><a></a>margins female, <span class="kw">dydx</span>(sat hsperc tothrs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ ( 1)  1.female#c.sat = 0
+ ( 2)  1.female#c.hsperc = 0
+ ( 3)  1.female#c.tothrs = 0
+
+       F(  3,   626) =    6.26
+            Prob &gt; F =    0.0003
+
+ ( 1)  1.female = 0
+ ( 2)  1.female#c.sat = 0
+ ( 3)  1.female#c.hsperc = 0
+ ( 4)  1.female#c.tothrs = 0
+
+       F(  4,   626) =   12.75
+            Prob &gt; F =    0.0000
+
+Average marginal effects                                   Number of obs = 634
+Model VCE: OLS
+
+Expression: Linear prediction, predict()
+dy/dx wrt:  sat hsperc tothrs
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |      dy/dx   std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+sat          |
+      female |
+          0  |   .0679302    .014607     4.65   0.000     .0392454    .0966149
+          1  |   .1772582   .0273126     6.49   0.000     .1236229    .2308936
+-------------+----------------------------------------------------------------
+hsperc       |
+      female |
+          0  |    -.00748   .0011573    -6.46   0.000    -.0097526   -.0052073
+          1  |  -.0086922   .0024524    -3.54   0.000    -.0135081   -.0038763
+-------------+----------------------------------------------------------------
+tothrs       |
+      female |
+          0  |  -.0015482   .0007477    -2.07   0.039    -.0030165   -.0000798
+          1  |    .001412   .0012472     1.13   0.258    -.0010371    .0038612
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="break-1" class="title-slide slide level1 center">
+<h1>Break?!</h1>
+
+</section>
+<section id="avg-partial-effects-vs-partial-effects-at-x_c" class="slide level2">
+<h2>Avg Partial effects vs Partial effects at <span class="math inline">\(X_c\)</span></h2>
+<ul>
+<li>Whenever you have interactions, higher order polynomials (or any nonlinear transformation of <span class="math inline">\(X\)</span>), marginal effects are no longer constant, and may depend on additional information:</li>
+</ul>
+<p><span class="math display">\[y = b_0 + b_1 x_1 + b_2 x_1^2 + e \rightarrow \frac{dy}{dx} = b_1 + 2b_2 x_1
+\]</span></p>
+<ul>
+<li>What to do in this cases?
+<ol type="1">
+<li>Estimate Average marginal effects: <span class="math inline">\(AME = E\left(\frac{dy}{dx}\right) = b_1 + 2b_2 \overline{x}_1\)</span></li>
+<li>Estimate Marginal effects at means: <span class="math inline">\(MEM = \frac{dy}{dx}\Big|_{x=\bar x} = b_1 + 2b_2 \overline{x}_1\)</span></li>
+<li>Estimate Marginal effects at relevant values</li>
+<li>Report ALL marginal effects</li>
+</ol></li>
+</ul>
+</section>
+<section id="section-4" class="slide level2">
+<h2></h2>
+<ul>
+<li>In <code>Stata</code> you can do this only for interactions. For constructed variables you need <code>f_able</code>, or do it by hand.</li>
+</ul>
+<div class="sourceCode" id="cb18" style="font-size: 1.3em"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a></a><span class="kw">reg</span> <span class="fu">y</span> c.x1##c.x1##c.x1</span>
+<span id="cb18-2"><a></a>margins, <span class="kw">dydx</span>(x1) &lt;-- Default is Average Marginal Effects</span>
+<span id="cb18-3"><a></a>margins, <span class="kw">dydx</span>(x1) atmeans &lt;-- Request marginal <span class="kw">effects</span> <span class="fu">at</span> <span class="kw">means</span></span>
+<span id="cb18-4"><a></a>margins, <span class="kw">dydx</span>(x1) <span class="fu">at</span>(x1=(1/5)) &lt;-- Request marginal <span class="kw">effects</span> <span class="fu">at</span> specific <span class="kw">values</span> <span class="kw">of</span> x1</span>
+<span id="cb18-5"><a></a>* and plot afterwards</span>
+<span id="cb18-6"><a></a>marginsplot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="goodness-of-fit-r2-vs-r2_adj" class="slide level2">
+<h2>Goodness of Fit: <span class="math inline">\(R^2\)</span> vs <span class="math inline">\(R^2_{adj}\)</span></h2>
+<h4 id="with-great-power">With Great power…</h4>
+<p><strong>IMPORTANT</strong>: Low <span class="math inline">\(R^2\)</span> does not mean a bad model, nor high <span class="math inline">\(R^2\)</span> mean a good one.</p>
+<ul>
+<li>If <span class="math inline">\(N\)</span> is constant, adding more variables to your model will increase the Goodness of fit <span class="math inline">\(R^2\)</span> (even if marginally)
+<ul>
+<li>This may lead to the incorrect intuition of choosing models with the highest <span class="math inline">\(R^2\)</span></li>
+<li>This is wrong because <span class="math inline">\(R^2\)</span> only measures in-sample fitness.</li>
+</ul></li>
+<li>Alternative, the Adjusted <span class="math inline">\(R^2\)</span> (<span class="math inline">\(R_{adj}^2\)</span>), which penalizes using multiple controls</li>
+</ul>
+<p><span class="math display">\[R^2_{adj} = 1-\frac{SSR/(n-k-1)}{SST/(n-1)}=1-(1-R^2)\frac{n-1}{n-k-1}
+\]</span></p>
+<ul>
+<li>More controls <span class="math inline">\(k\)</span> will not always increase <span class="math inline">\(R^2_{adj}\)</span></li>
+</ul>
+</section>
+<section id="section-5" class="slide level2">
+<h2></h2>
+<h3 id="r2_adj-and-model-selection"><span class="math inline">\(R^2_{adj}\)</span> and Model Selection</h3>
+<ul>
+<li><span class="math inline">\(R^2_{adj}\)</span> can be used to choose between nested models.
+<ul>
+<li>If adding variables improves <span class="math inline">\(R_{adj}^2\)</span>, then choose that model.</li>
+</ul></li>
+<li>But it can also be used to choose between non-nested models:</li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+M1: &amp; y = b_0 + b_1 x_1 + b_2 x_2 + e \\
+M2: &amp; y = b_0 + b_1 x_1 + b_3 x_3 + e \\
+M3: &amp; y = b_0 + b_1 ln(x_1) + b_2 ln(x_2) + e \\
+M4: &amp; y = b_0 + b_1 x_1 + b_2 x_2 + b_3 x_3 + e
+\end{aligned}
+\]</span></p>
+</section>
+<section id="log-models-and-prediction" class="slide level2">
+<h2>log models and Prediction</h2>
+<ul>
+<li>Transforming the Depvariable with logs is quite useful for interpretation, and addressing overdispersion</li>
+<li>However, obtaining predictions from such models is not straight forward:</li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+ln(y) &amp;= a_0 + a_1 x_1 + a_2 x_2 + \varepsilon \\
+y &amp;= exp(a_0 + a_1 x_1 + a_2 x_2 + \varepsilon ) \\
+E(y|x_1,x_2) &amp;=E(e^{a_0 + a_1 x_1 + a_2 x_2}) \times E(e^ \varepsilon ) \\
+&amp; E(e^ \varepsilon )\neq 1
+\end{aligned}
+\]</span></p>
+<ul>
+<li>To make Predictions in a log model we need some approximation for <span class="math inline">\(E(e^ \varepsilon )\)</span></li>
+</ul>
+</section>
+<section id="section-6" class="slide level2">
+<h2></h2>
+<h3 id="we-have-options">We have Options:</h3>
+<p>Lets call <span class="math inline">\(E(e^ \varepsilon ) = \alpha_0\)</span></p>
+<p><strong>Option 1</strong> : <span class="math inline">\(\alpha_0 = n^{-1} \sum( \exp {\hat\varepsilon})\)</span></p>
+<p><strong>Option 2</strong> : Under Normality of <span class="math inline">\(\varepsilon\)</span>, <span class="math inline">\(\alpha_0 = \exp(\hat \sigma^2/2)\)</span></p>
+<p><strong>Option 3</strong> : Call <span class="math inline">\(\hat m = \exp(a_0 + a_1 x_1 + a_2 x_2)\)</span>.</p>
+<p>Regress <span class="math inline">\(y\)</span> on <span class="math inline">\(\hat m\)</span> without intercept. <span class="math inline">\(\alpha_0 = \frac{\hat m'y}{\hat m'\hat m}\)</span></p>
+<ul>
+<li>Your <span class="math inline">\(\hat y\)</span> prediction can now be used to estimate a comparable <span class="math inline">\(R^2\)</span></li>
+</ul>
+<p><span class="math display">\[R^2 = Corr(y,\hat y)^2 \text{ or } 1-\frac{\sum(y_i-\alpha_0 \hat m_i)^2}{\sum(y-\bar y)^2}
+\]</span></p>
+</section>
+<section id="section-7" class="slide level2 scrollable">
+<h2></h2>
+<h3 id="example-4">Example</h3>
+<div id="9c68ee6e" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb19-1"><a></a>frause oaxaca, <span class="kw">clear</span></span>
+<span id="cb19-2"><a></a><span class="kw">drop</span> <span class="kw">if</span> lnwage==.</span>
+<span id="cb19-3"><a></a><span class="kw">gen</span> wage = <span class="fu">exp</span>(lnwage)</span>
+<span id="cb19-4"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> lnwage educ exper tenure female married divorced</span>
+<span id="cb19-5"><a></a><span class="kw">predict</span> lnw_hat</span>
+<span id="cb19-6"><a></a><span class="kw">predict</span> lnw_res, res</span>
+<span id="cb19-7"><a></a>** Case 1:</span>
+<span id="cb19-8"><a></a><span class="kw">egen</span> alpha_01 = <span class="kw">mean</span>( <span class="fu">exp</span>(lnw_res))</span>
+<span id="cb19-9"><a></a>** Case 2:</span>
+<span id="cb19-10"><a></a><span class="kw">qui</span>:<span class="kw">sum</span> lnw_res</span>
+<span id="cb19-11"><a></a><span class="kw">gen</span> alpha_02 = <span class="fu">exp</span>(<span class="fu">r</span>(Var)/2)</span>
+<span id="cb19-12"><a></a><span class="kw">gen</span> elnw_hat = <span class="fu">exp</span>(lnw_hat)</span>
+<span id="cb19-13"><a></a><span class="kw">qui</span>: <span class="kw">reg</span> wage elnw_hat, <span class="kw">nocons</span></span>
+<span id="cb19-14"><a></a><span class="kw">gen</span> alpha_03 = _b[elnw_hat]</span>
+<span id="cb19-15"><a></a><span class="kw">gen</span> wage_1 = elnw_hat</span>
+<span id="cb19-16"><a></a><span class="kw">gen</span> wage_2 = elnw_hat*alpha_01</span>
+<span id="cb19-17"><a></a><span class="kw">gen</span> wage_3 = elnw_hat*alpha_02</span>
+<span id="cb19-18"><a></a><span class="kw">gen</span> wage_4 = elnw_hat*alpha_03</span>
+<span id="cb19-19"><a></a><span class="kw">mata</span>:  <span class="fu">y</span> = st_data(.,<span class="st">"wage"</span>); my = <span class="kw">mean</span>(<span class="fu">y</span>)</span>
+<span id="cb19-20"><a></a><span class="kw">mata</span>:  <span class="fu">yh</span> = st_data(.,<span class="st">"wage_1 wage_2 wage_3 wage_4"</span>)</span>
+<span id="cb19-21"><a></a><span class="kw">mata</span>:<span class="st">"R2_1 "</span>; 1 - <span class="kw">sum</span>((<span class="fu">y</span>:-<span class="fu">yh</span>[,1]):^2)/<span class="kw">sum</span>( (<span class="fu">y</span>:-my):^2 )</span>
+<span id="cb19-22"><a></a><span class="kw">mata</span>:<span class="st">"R2_2 "</span>; 1 - <span class="kw">sum</span>((<span class="fu">y</span>:-<span class="fu">yh</span>[,2]):^2)/<span class="kw">sum</span>( (<span class="fu">y</span>:-my):^2 )</span>
+<span id="cb19-23"><a></a><span class="kw">mata</span>:<span class="st">"R2_3 "</span>; 1 - <span class="kw">sum</span>((<span class="fu">y</span>:-<span class="fu">yh</span>[,3]):^2)/<span class="kw">sum</span>( (<span class="fu">y</span>:-my):^2 )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Excerpt from the Swiss Labor Market Survey 1998)
+(213 observations deleted)
+(option xb assumed; fitted values)
+  R2_1 
+  .1569552664
+  R2_2 
+  .1692562931
+  R2_3 
+  .1658805115</code></pre>
+</div>
+</div>
+</section>
+<section id="limited-dependent-variables" class="slide level2">
+<h2>Limited Dependent variables</h2>
+<ul>
+<li>So far, we have impliclity assumed your dep. variable is continuous and unbounded.</li>
+<li>However, OLS imposes no distributional assumptions (A6 is more convinience)</li>
+<li>This means that LRM using OLS can be used for variables with limited distribution!
+<ul>
+<li>like Dummies or count variables</li>
+</ul></li>
+</ul>
+</section>
+<section id="linear-probability-model---lpm" class="slide level2">
+<h2>Linear Probability Model - LPM</h2>
+<ul>
+<li>LPM can be used when the dep.variable is a dummy, and the goal is to explain the Likelihood of something to happen.</li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+D &amp;= b_0 + b_1 x_1 + b_2 x_2 +b_3 x_3 + e \\
+E(D|Xs) &amp;= P(D=1|Xs) \\
+        &amp;= b_0 + b_1 x_1 + b_2 x_2 +b_3 x_3
+\end{aligned}
+\]</span></p>
+<p>Note:</p>
+<ul>
+<li>For marginal effects, we no longer consider effects at the individual level.</li>
+<li>Instead we look into conditional means, and likelihood</li>
+</ul>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb21-1"><a></a>frause mroz, <span class="kw">clear</span></span>
+<span id="cb21-2"><a></a><span class="kw">qui</span>: <span class="kw">reg</span> inlf  age educ exper kidsge6 kidslt6 nwifeinc </span>
+<span id="cb21-3"><a></a>model_display</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p>E(inlf|X) = 0.707 - 0.018 age + 0.040 educ + 0.023 exper + 0.013 kidsge6 - 0.272 kidslt6 - 0.003 nwifeinc</p>
+<p>N = 753 R^2 = 0.254</p>
+</section>
+<section id="section-8" class="slide level2">
+<h2></h2>
+<h3 id="problems-with-lpm">Problems with LPM</h3>
+<ul>
+<li>LPM are easy to estimate and interpret but it has some problems:
+<ul>
+<li>Predictions could fall below 0 or above 1 (what does it mean?)</li>
+<li>Unless more flexible functional forms are allowed, mfx are fixed.</li>
+<li>The model is, by construction, Heteroskedastic:</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[Var(y|x)=p(x)*(1-p(x))
+\]</span></p>
+<p>Thus SE will be incorrect, affecting inference</p>
+</section>
+<section id="modeling-count-data" class="slide level2">
+<h2>Modeling Count Data</h2>
+<ul>
+<li>You could also use LRM (via OLS) to model count data.
+<ul>
+<li>Count data is always possitive, but with discrete values</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[Children = b_0 + b_1 age + b_2 education + e\]</span></p>
+<ul>
+<li>Nothing changes for estimation, but its useful to change language:</li>
+</ul>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb22-1"><a></a>frause fertil2, <span class="kw">clear</span></span>
+<span id="cb22-2"><a></a><span class="kw">qui</span> <span class="kw">reg</span> children age educ</span>
+<span id="cb22-3"><a></a>model_display</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<p>E(children|X) = -1.997 + 0.175 age - 0.090 educ</p>
+<p>N = 4361 R^2 = 0.560</p>
+<ul>
+<li>1 year of education decreases # of children in .09.</li>
+<li>1 year of education decreases Fertility .09 children per women.</li>
+<li>Every 100 women, If they were 1 year more educated, we would expect to see 9 fewer children among them.</li>
+</ul>
+</section>
+<section id="prediction-policy-and-shifting" class="slide level2 scrollable">
+<h2>Prediction, Policy and Shifting</h2>
+<ul>
+<li>As mentioned before, intercepts, or constant in model regressions are usually meaningless.
+<ul>
+<li>Because <span class="math inline">\(a_0 = E(y|X=0)\)</span> (does it make sense)</li>
+</ul></li>
+<li>Constant, however, can be useful if we apply some transformations to the data. <span class="math display">\[y = b_0 +  b_1 (x_1 - c_1) +  b_2 (x_2 - c_2) +  b_3 (x_3 - c_3) +e
+\]</span></li>
+</ul>
+<p>In this case <span class="math inline">\(b_0\)</span> is the expected value of <span class="math inline">\(y\)</span> when <span class="math inline">\(x_1=c_1\)</span>, <span class="math inline">\(x_2=c_2\)</span> and <span class="math inline">\(x_3=c_3\)</span>. Thus, its now Useful!</p>
+<ul>
+<li><p>Using this <strong>affine</strong> transformation, we can easily make predictions (and get SE) for any specific values of interest.</p>
+<ul>
+<li>Granted, you could also use “margins”</li>
+</ul></li>
+</ul>
+<div id="d41b64a2" class="cell" data-execution_count="13">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><a></a>frause gpa2, <span class="kw">clear</span></span>
+<span id="cb23-2"><a></a><span class="kw">gen</span> sat0=sat-1200</span>
+<span id="cb23-3"><a></a><span class="kw">gen</span> hsperc0=hsperc-30</span>
+<span id="cb23-4"><a></a><span class="kw">gen</span> hsize0=hsize-5</span>
+<span id="cb23-5"><a></a><span class="kw">gen</span> hsize20=hsize^2-25</span>
+<span id="cb23-6"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> colgpa sat hsperc c.hsize##c.hsize</span>
+<span id="cb23-7"><a></a>margins, <span class="fu">at</span>(sat = 1200 hsperc = 30 hsize = 5)</span>
+<span id="cb23-8"><a></a><span class="kw">reg</span> colgpa sat0 hsperc0 hsize0 hsize20</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Adjusted predictions                                     Number of obs = 4,137
+Model VCE: OLS
+
+Expression: Linear prediction, predict()
+At: sat    = 1200
+    hsperc =   30
+    hsize  =    5
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       _cons |   2.700075   .0198778   135.83   0.000     2.661104    2.739047
+------------------------------------------------------------------------------
+
+      Source |       SS           df       MS      Number of obs   =     4,137
+-------------+----------------------------------   F(4, 4132)      =    398.02
+       Model |  499.030503         4  124.757626   Prob &gt; F        =    0.0000
+    Residual |  1295.16517     4,132  .313447524   R-squared       =    0.2781
+-------------+----------------------------------   Adj R-squared   =    0.2774
+       Total |  1794.19567     4,136  .433799728   Root MSE        =    .55986
+
+------------------------------------------------------------------------------
+      colgpa | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        sat0 |   .0014925   .0000652    22.89   0.000     .0013646    .0016204
+     hsperc0 |  -.0138558    .000561   -24.70   0.000    -.0149557   -.0127559
+      hsize0 |  -.0608815   .0165012    -3.69   0.000    -.0932328   -.0285302
+     hsize20 |   .0054603   .0022698     2.41   0.016     .0010102    .0099104
+       _cons |   2.700075   .0198778   135.83   0.000     2.661104    2.739047
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="section-9" class="slide level2">
+<h2></h2>
+<h3 id="policy-evaluation">Policy Evaluation</h3>
+<ul>
+<li><p>When modeling <span class="math inline">\(y = b_0 + \delta \ trt + b_1 x_1 + b_2 x_2 + e\)</span> the treatment effect <span class="math inline">\(\delta\)</span> was estimated under homogeneity assumption (only intercept shift)</p></li>
+<li><p>This assumption can be relaxed by estimating separate models or using interactions.</p></li>
+<li><p>Effects can be estimated manually (separate models), margins or using shifts!</p></li>
+</ul>
+<p>Using Separate models: <span class="math display">\[\begin{aligned}
+y &amp;= b^0_0 +  b^0_1 x_1 + b^0_2 x_2 + e^0 \text{ if trt=0} \\
+y &amp;= b^1_0 +  b^1_1 x_1 + b^1_2 x_2 + e^1 \text{ if trt=1} \\
+&amp; ATE = E(\hat y_1 - \hat y_0 ) \\
+&amp; ATT = E(\hat y_1 - \hat y_0 | trt=1) \\
+&amp; ATU = E(\hat y_1 - \hat y_0 | trt=0)
+\end{aligned}
+\]</span></p>
+</section>
+<section id="section-10" class="slide level2">
+<h2></h2>
+<p>Or using Model Shits</p>
+<p><span class="math display">\[\begin{aligned}
+y  &amp;= b_0 + \delta_{ate} trt + b_1 x_1 + g_1 trt (x_1- E(x_1)) + e \\
+y  &amp;= b_0 + \delta_{att} trt + b_1 x_1 + g_1 trt (x_1- E(x_1|trt=1)) + e \\
+y  &amp;= b_0 + \delta_{atu} trt + b_1 x_1 + g_1 trt (x_1- E(x_1|trt=0)) + e \\
+\end{aligned}
+\]</span></p>
+<div id="58be300b" class="cell" data-execution_count="14">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb25-1"><a></a>frause jtrain98, <span class="kw">clear</span></span>
+<span id="cb25-2"><a></a><span class="kw">foreach</span> i <span class="kw">in</span> earn96 educ age married {</span>
+<span id="cb25-3"><a></a>  <span class="kw">sum</span> <span class="ot">`i'</span> <span class="kw">if</span> train==0, <span class="kw">meanonly</span></span>
+<span id="cb25-4"><a></a>  <span class="kw">gen</span> atu_<span class="ot">`i'</span> = (<span class="ot">`i'</span> - <span class="fu">r</span>(<span class="kw">mean</span>))*train</span>
+<span id="cb25-5"><a></a>  <span class="kw">sum</span> <span class="ot">`i'</span> <span class="kw">if</span> train==1, <span class="kw">meanonly</span></span>
+<span id="cb25-6"><a></a>  <span class="kw">gen</span> att_<span class="ot">`i'</span> = (<span class="ot">`i'</span> - <span class="fu">r</span>(<span class="kw">mean</span>))*train</span>
+<span id="cb25-7"><a></a>  <span class="kw">sum</span> <span class="ot">`i'</span> , <span class="kw">meanonly</span></span>
+<span id="cb25-8"><a></a>  <span class="kw">gen</span> ate_<span class="ot">`i'</span> = (<span class="ot">`i'</span> - <span class="fu">r</span>(<span class="kw">mean</span>))*train</span>
+<span id="cb25-9"><a></a>}</span>
+<span id="cb25-10"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> earn98 train earn96 educ age married</span>
+<span id="cb25-11"><a></a><span class="kw">est</span> sto m1</span>
+<span id="cb25-12"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> earn98 train earn96 educ age married ate*</span>
+<span id="cb25-13"><a></a><span class="kw">est</span> sto m2</span>
+<span id="cb25-14"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> earn98 train earn96 educ age married atu*</span>
+<span id="cb25-15"><a></a><span class="kw">est</span> sto m3</span>
+<span id="cb25-16"><a></a><span class="kw">qui</span>:<span class="kw">reg</span> earn98 train earn96 educ age married att*</span>
+<span id="cb25-17"><a></a><span class="kw">est</span> sto m4</span>
+<span id="cb25-18"><a></a></span>
+<span id="cb25-19"><a></a>esttab m1 m2 m3 m4, <span class="kw">keep</span>(train) mtitle(Homogenous ATE ATU ATT) se</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+----------------------------------------------------------------------------
+                      (1)             (2)             (3)             (4)   
+               Homogenous             ATE             ATU             ATT   
+----------------------------------------------------------------------------
+train               2.411***        3.106***        3.533***        2.250***
+                  (0.435)         (0.532)         (0.667)         (0.449)   
+----------------------------------------------------------------------------
+N                    1130            1130            1130            1130   
+----------------------------------------------------------------------------
+Standard errors in parentheses
+* p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001</code></pre>
+</div>
+</div>
+</section></section>
+<section id="thanks-all" class="title-slide slide level1 center">
+<h1>Thanks all !</h1>
+<p>Next week Lifting Assumptions: Heteroskedasticity</p>
+
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1600,
+
+        height: 900,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const onCopySuccess = function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
+      });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>
