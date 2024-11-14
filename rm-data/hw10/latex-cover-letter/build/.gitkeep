@@ -1,0 +1,2 @@
+# This file ensures the build directory is tracked in version control
+# Even when the directory is empty

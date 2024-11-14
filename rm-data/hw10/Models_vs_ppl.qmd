@@ -1,0 +1,33 @@
+---
+title: "Untitled"
+format: html
+---
+
+Lazaroes
+
+NO HW10
+
+Chening
+
+HW 
+reg target council* suburb_* seller_* i.type_h distance distance_2 rooms rooms_2 bathroom bathroom_2 car l_landsize latitud latitud_2 longitud longitud_2 prop_count date c.rooms#c.bathroom c.distance#c.(l_landsize l_buildingarea rooms car i.type_h) l_buildingarea yearbuilt 
+
+Emi
+
+No best model. Ask to clarify
+
+JOE
+
+NO HW10
+
+Brendon
+
+reg log_price rooms manyb_room type_h distance goodagent goodsuburb, robust
+
+Kailin
+
+regress price rooms rooms_squared distance bathroom car landsize landsize_squared buildingarea yearbuilt 
+
+Shane
+
+reg ln_price i.suburb i.region i.type i.bedroom2 i.bathroom i.car i.region#i.bed_spline* ln_area i.yearbuilt ln_land c.ln_area#c.ln_land sq_dist_center dist_cbd_car date c.date#c.ln_area c.date#i.bedroom2 c.date#c.ln_land c.date#c.cbd_car2
