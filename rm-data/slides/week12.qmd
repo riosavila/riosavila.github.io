@@ -365,8 +365,8 @@ Classification forest + threshold formula
 
 ## Class imbalance: the consequences
 
--   Methods we use not good at handling it.
--   Both for the models to predict probabilities, and for the measures of fit used for model selection.
+-   Methods we use are **not** good at handling it.
+    -   Both for the models to predict probabilities, and for the measures of fit used for model selection.
 -   The functional form assumptions behind the logit model tend to matter more, the closer the probabilities are to zero or one.
 -   Cross-validation can be less effective at avoiding overfitting with very rare or very frequent events if the dataset is not very big. (Many samples will not even have the event.)
 -   Usual measures of fit can be less good at differentiating models.
@@ -382,8 +382,10 @@ Classification forest + threshold formula
     -   After 10,000 observations 10% event rate (9,000 $y = 1$, 1,000 $y = 0$)
 -   Over-sampling of rare events
 -   try Smart algorithms: Synthetic Minority Over-Sampling Technique (SMOTE)
+    -   Create synthetic observations that are similar to the rare events
+    -   synthetic rare = Combination of rare and infrequent events 
 
-## Case study
+# Case study
 
 ## Firm exit case study: Case study: background
 
@@ -393,7 +395,7 @@ Classification forest + threshold formula
 -   Goal: Predict corporate default - exit from the market.
     -   We have to figure out and decide on target, features, etc.
 
-## Firm exit case study: bisnode-firms dataset
+## Firm exit case study: `bisnode-firms` dataset
 
 -   Firm data
 -   Many different type of variables
@@ -413,9 +415,8 @@ Classification forest + threshold formula
 
 ## Firm exit case study: Sample design
 
--   Look at a cross section
-    -   Year=2012
-    -   status_alive=1
+-   Look at a cross section in 2012
+    -   If alive in Year=2014, status_alive=1
 -   Keep if established in 2012
 -   We do not care about all firms. Not very small and very large
     -   Below 10 million euros
@@ -550,7 +551,6 @@ Models (number of predictors)
 -   ROC curve shows trade-off for various values of the threshold
 -   Go through values of the ROC curve for selected threshold values, between 0.05 and 0.75, by steps of 0.05
 
-##  
 
 ## Firm exit case study: AUC
 
@@ -655,115 +655,7 @@ First option: no loss fn
 -   Take best model, re-estimate it on work set + find optimal threshold and estimate expected loss on holdout set
 
 Here is the continued content in Quarto format:
-
-## Firm exit case study:Summary of process with loss function
-
--   Confusion table on holdout with optimal threshold$\rightarrow$what to expect in live data.
-
-## Firm exit case study: CART
-
--   CART
-    -   a small tree we built for illustration purposes
-    -   with only three variables:
-        -   firm size (sales),
-        -   binary variable for having a foreign management
-        -   Binary if the firm is new.
-    -   Terminal nodes with share of exit predictions
-
-## Firm exit case study: Random Forest
-
--   The model outperforms the logit models, with a cross validated RMSE of 0.358 and AUC of 0.808.
--   We used predicted probabilities to find the optimal thresholds, and used this to make the classification.
--   The expected loss: 0.587
-    -   smaller than for the best logit (0.642)
--   For the random forest we re-estimate the model on work set, and do prediction on holdout set.
--   Holdout RMSE RF is 0.358 (vs 0.366 best logit)
--   Holdout AUC is 0.808 vs 0.784 for best logit.
-
-## Firm exit case study: Random Forest
-
--   Note that finding the optimal threshold is rather important.
--   If used a 0.5 threshold, the expected loss jumped to $-1.540$ vs $-0.587$ for the best threshold model.
--   This is 2.6 times the loss from the optimal threshold.
--   The default option in random forest (and many ML models) for classification is majority voting
--   Majority voting is threshold=50%
-
-## Firm exit case study: Random Forest
-
--   Note that finding the optimal threshold is rather important.
--   Used a 0.5 threshold, the expected loss jumped to $-1.540$ vs $-0.587$ for the best threshold model.
--   This is 2.6 times the loss from the optimal threshold.
--   The default option in random forest (and many ML models) for classification is majority voting
--   Majority voting is threshold=50% - NO!!!!!
--   Don't use it!!!!!!
--   Unless loss function: FN=FP
-
-## Repetition for sake of argument
-
-If you don't have a loss function, you can't classify.
-
-## Firm exit case study: Random Forest
-
--   No loss function
-    -   Predict probabilities
--   Loss function
-    -   Predict probabilities
-    -   Take these probabilities and classify by threshold selected
--   Alternative: use threshold and change the classification rule
-    -   Can be done in caret/ranger
-
-## Firm exit case study: Comparing two thresholds
-
--   Predict exit if probability\>10.9%
--   Expected loss: $(1.33 \times 10 + 45.4 \times 1)/100 = 0.587$
-
-|                | actual stay | actual exit |
-|----------------|-------------|-------------|
-| predicted stay | 33.6%       | 1.3%        |
-| predicted exit | 45.4%       | 19.7%       |
-
-## Firm exit case study: Summary of process with RF
-
--   Run probability forest on work set with 5-CV
--   Get average (ie over the folds) RMSE and AUC
--   Now use loss function (1,10) and search for best thresholds and expected loss over folds
--   Show ROC, loss on fold 5
--   Optimal Threshold, average expected loss is calculated
--   Take model to holdout and estimate RMSE, AUC and expected loss$\rightarrow$what you expect in live data
--   +1 Show expected loss with classification RF and default majority voting to compare
-
-## Firm exit case study: Summary of model for model selection
-
-| Model          | Preds | Coeffs | RMSE  | AUC   | threshold | exp. loss |
-|----------------|-------|--------|-------|-------|-----------|-----------|
-| Logit M1       | 11    | 12     | 0.374 | 0.736 | 0.089     | 0.722     |
-| Logit M4       | 36    | 79     | 0.362 | 0.784 | 0.082     | 0.619     |
-| Logit LASSO    | 36    | 143    | 0.362 | 0.768 | 0.106     | 0.642     |
-| RF probability | 36    | n.a.   | 0.354 | 0.808 | 0.098     | 0.587     |
-
--   RMSE, AZC, Threshold, Loss: all 5-fold CV results (averages).
-
-## Firm exit case study: Business application
-
--   Consider this setup
-    -   For each firm we review, we get 1000 euros in revenues,
-    -   Loss function: loans to bad companies = $-10,000$ euros,
-    -   missed loans to good ones = $-1,000$ euros.
-
-## Firm exit case study: Business application
-
--   Simplest model 1 classifies with expected loss 0.722 euro per firm, the Random Forest model has 0.587 euro.
--   Building a better model yields 135 euros higher profit per firm $(0.722 - 0.587) \times 1000 = 135$
--   If we do 1000 deals, it is 135,000 euros in profit.
--   If a regulator asks for an interpretable model, we shall compare with the logit M4 model and have 103,000 euros in expected profit.
--   Why does it matter?
-
-## Firm exit case study: Business application
-
--   Random Forest gets us 135K profit, best logit is 103K compared to some simple model.
--   We can take this and compare to development costs
--   Profit for good analysis.
-
+ 
 ## Summary
 
 -   Decide whether the goal is predicting probabilities or classification.

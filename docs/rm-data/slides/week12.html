@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.6.33">
 
   <meta name="author" content="Fernando Rios-Avila">
-  <meta name="dcterms.date" content="2024-11-14">
+  <meta name="dcterms.date" content="2024-11-19">
   <title>Econometrics MSC Levy – Probability and Classification</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -142,7 +142,7 @@ Fernando Rios-Avila
     </div>
 </div>
 
-  <p class="date">November 14, 2024</p>
+  <p class="date">November 19, 2024</p>
 </section>
 <section id="motivation" class="slide level2">
 <h2>Motivation</h2>
@@ -699,8 +699,10 @@ Classification forest + threshold formula
 <section id="class-imbalance-the-consequences" class="slide level2">
 <h2>Class imbalance: the consequences</h2>
 <ul>
-<li>Methods we use not good at handling it.</li>
+<li>Methods we use are <strong>not</strong> good at handling it.
+<ul>
 <li>Both for the models to predict probabilities, and for the measures of fit used for model selection.</li>
+</ul></li>
 <li>The functional form assumptions behind the logit model tend to matter more, the closer the probabilities are to zero or one.</li>
 <li>Cross-validation can be less effective at avoiding overfitting with very rare or very frequent events if the dataset is not very big. (Many samples will not even have the event.)</li>
 <li>Usual measures of fit can be less good at differentiating models.</li>
@@ -721,11 +723,17 @@ Classification forest + threshold formula
 <li>After 10,000 observations 10% event rate (9,000 <span class="math inline">\(y = 1\)</span>, 1,000 <span class="math inline">\(y = 0\)</span>)</li>
 </ul></li>
 <li>Over-sampling of rare events</li>
-<li>try Smart algorithms: Synthetic Minority Over-Sampling Technique (SMOTE)</li>
+<li>try Smart algorithms: Synthetic Minority Over-Sampling Technique (SMOTE)
+<ul>
+<li>Create synthetic observations that are similar to the rare events</li>
+<li>synthetic rare = Combination of rare and infrequent events</li>
+</ul></li>
 </ul>
-</section>
-<section id="case-study" class="slide level2">
-<h2>Case study</h2>
+</section></section>
+<section>
+<section id="case-study" class="title-slide slide level1 center">
+<h1>Case study</h1>
+
 </section>
 <section id="firm-exit-case-study-case-study-background" class="slide level2">
 <h2>Firm exit case study: Case study: background</h2>
@@ -740,7 +748,7 @@ Classification forest + threshold formula
 </ul>
 </section>
 <section id="firm-exit-case-study-bisnode-firms-dataset" class="slide level2">
-<h2>Firm exit case study: bisnode-firms dataset</h2>
+<h2>Firm exit case study: <code>bisnode-firms</code> dataset</h2>
 <ul>
 <li>Firm data</li>
 <li>Many different type of variables
@@ -768,10 +776,9 @@ Classification forest + threshold formula
 <section id="firm-exit-case-study-sample-design" class="slide level2">
 <h2>Firm exit case study: Sample design</h2>
 <ul>
-<li>Look at a cross section
+<li>Look at a cross section in 2012
 <ul>
-<li>Year=2012</li>
-<li>status_alive=1</li>
+<li>If alive in Year=2014, status_alive=1</li>
 </ul></li>
 <li>Keep if established in 2012</li>
 <li>We do not care about all firms. Not very small and very large
@@ -997,9 +1004,6 @@ Classification forest + threshold formula
 <li>Go through values of the ROC curve for selected threshold values, between 0.05 and 0.75, by steps of 0.05</li>
 </ul>
 </section>
-<section id="section" class="slide level2">
-<h2></h2>
-</section>
 <section id="firm-exit-case-study-auc" class="slide level2">
 <h2>Firm exit case study: AUC</h2>
 <table class="caption-top">
@@ -1218,221 +1222,6 @@ Classification forest + threshold formula
 <li>Take best model, re-estimate it on work set + find optimal threshold and estimate expected loss on holdout set</li>
 </ul>
 <p>Here is the continued content in Quarto format:</p>
-</section>
-<section id="firm-exit-case-studysummary-of-process-with-loss-function-1" class="slide level2">
-<h2>Firm exit case study:Summary of process with loss function</h2>
-<ul>
-<li>Confusion table on holdout with optimal threshold<span class="math inline">\(\rightarrow\)</span>what to expect in live data.</li>
-</ul>
-</section>
-<section id="firm-exit-case-study-cart" class="slide level2">
-<h2>Firm exit case study: CART</h2>
-<ul>
-<li>CART
-<ul>
-<li>a small tree we built for illustration purposes</li>
-<li>with only three variables:
-<ul>
-<li>firm size (sales),</li>
-<li>binary variable for having a foreign management</li>
-<li>Binary if the firm is new.</li>
-</ul></li>
-<li>Terminal nodes with share of exit predictions</li>
-</ul></li>
-</ul>
-</section>
-<section id="firm-exit-case-study-random-forest" class="slide level2">
-<h2>Firm exit case study: Random Forest</h2>
-<ul>
-<li>The model outperforms the logit models, with a cross validated RMSE of 0.358 and AUC of 0.808.</li>
-<li>We used predicted probabilities to find the optimal thresholds, and used this to make the classification.</li>
-<li>The expected loss: 0.587
-<ul>
-<li>smaller than for the best logit (0.642)</li>
-</ul></li>
-<li>For the random forest we re-estimate the model on work set, and do prediction on holdout set.</li>
-<li>Holdout RMSE RF is 0.358 (vs 0.366 best logit)</li>
-<li>Holdout AUC is 0.808 vs 0.784 for best logit.</li>
-</ul>
-</section>
-<section id="firm-exit-case-study-random-forest-1" class="slide level2">
-<h2>Firm exit case study: Random Forest</h2>
-<ul>
-<li>Note that finding the optimal threshold is rather important.</li>
-<li>If used a 0.5 threshold, the expected loss jumped to <span class="math inline">\(-1.540\)</span> vs <span class="math inline">\(-0.587\)</span> for the best threshold model.</li>
-<li>This is 2.6 times the loss from the optimal threshold.</li>
-<li>The default option in random forest (and many ML models) for classification is majority voting</li>
-<li>Majority voting is threshold=50%</li>
-</ul>
-</section>
-<section id="firm-exit-case-study-random-forest-2" class="slide level2">
-<h2>Firm exit case study: Random Forest</h2>
-<ul>
-<li>Note that finding the optimal threshold is rather important.</li>
-<li>Used a 0.5 threshold, the expected loss jumped to <span class="math inline">\(-1.540\)</span> vs <span class="math inline">\(-0.587\)</span> for the best threshold model.</li>
-<li>This is 2.6 times the loss from the optimal threshold.</li>
-<li>The default option in random forest (and many ML models) for classification is majority voting</li>
-<li>Majority voting is threshold=50% - NO!!!!!</li>
-<li>Don’t use it!!!!!!</li>
-<li>Unless loss function: FN=FP</li>
-</ul>
-</section>
-<section id="repetition-for-sake-of-argument" class="slide level2">
-<h2>Repetition for sake of argument</h2>
-<p>If you don’t have a loss function, you can’t classify.</p>
-</section>
-<section id="firm-exit-case-study-random-forest-3" class="slide level2">
-<h2>Firm exit case study: Random Forest</h2>
-<ul>
-<li>No loss function
-<ul>
-<li>Predict probabilities</li>
-</ul></li>
-<li>Loss function
-<ul>
-<li>Predict probabilities</li>
-<li>Take these probabilities and classify by threshold selected</li>
-</ul></li>
-<li>Alternative: use threshold and change the classification rule
-<ul>
-<li>Can be done in caret/ranger</li>
-</ul></li>
-</ul>
-</section>
-<section id="firm-exit-case-study-comparing-two-thresholds-2" class="slide level2">
-<h2>Firm exit case study: Comparing two thresholds</h2>
-<ul>
-<li>Predict exit if probability&gt;10.9%</li>
-<li>Expected loss: <span class="math inline">\((1.33 \times 10 + 45.4 \times 1)/100 = 0.587\)</span></li>
-</ul>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th></th>
-<th>actual stay</th>
-<th>actual exit</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>predicted stay</td>
-<td>33.6%</td>
-<td>1.3%</td>
-</tr>
-<tr class="even">
-<td>predicted exit</td>
-<td>45.4%</td>
-<td>19.7%</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="firm-exit-case-study-summary-of-process-with-rf" class="slide level2">
-<h2>Firm exit case study: Summary of process with RF</h2>
-<ul>
-<li>Run probability forest on work set with 5-CV</li>
-<li>Get average (ie over the folds) RMSE and AUC</li>
-<li>Now use loss function (1,10) and search for best thresholds and expected loss over folds</li>
-<li>Show ROC, loss on fold 5</li>
-<li>Optimal Threshold, average expected loss is calculated</li>
-<li>Take model to holdout and estimate RMSE, AUC and expected loss<span class="math inline">\(\rightarrow\)</span>what you expect in live data</li>
-<li>+1 Show expected loss with classification RF and default majority voting to compare</li>
-</ul>
-</section>
-<section id="firm-exit-case-study-summary-of-model-for-model-selection" class="slide level2">
-<h2>Firm exit case study: Summary of model for model selection</h2>
-<table class="caption-top">
-<colgroup>
-<col style="width: 23%">
-<col style="width: 10%">
-<col style="width: 11%">
-<col style="width: 10%">
-<col style="width: 10%">
-<col style="width: 16%">
-<col style="width: 16%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Model</th>
-<th>Preds</th>
-<th>Coeffs</th>
-<th>RMSE</th>
-<th>AUC</th>
-<th>threshold</th>
-<th>exp. loss</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Logit M1</td>
-<td>11</td>
-<td>12</td>
-<td>0.374</td>
-<td>0.736</td>
-<td>0.089</td>
-<td>0.722</td>
-</tr>
-<tr class="even">
-<td>Logit M4</td>
-<td>36</td>
-<td>79</td>
-<td>0.362</td>
-<td>0.784</td>
-<td>0.082</td>
-<td>0.619</td>
-</tr>
-<tr class="odd">
-<td>Logit LASSO</td>
-<td>36</td>
-<td>143</td>
-<td>0.362</td>
-<td>0.768</td>
-<td>0.106</td>
-<td>0.642</td>
-</tr>
-<tr class="even">
-<td>RF probability</td>
-<td>36</td>
-<td>n.a.</td>
-<td>0.354</td>
-<td>0.808</td>
-<td>0.098</td>
-<td>0.587</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>RMSE, AZC, Threshold, Loss: all 5-fold CV results (averages).</li>
-</ul>
-</section>
-<section id="firm-exit-case-study-business-application" class="slide level2">
-<h2>Firm exit case study: Business application</h2>
-<ul>
-<li>Consider this setup
-<ul>
-<li>For each firm we review, we get 1000 euros in revenues,</li>
-<li>Loss function: loans to bad companies = <span class="math inline">\(-10,000\)</span> euros,</li>
-<li>missed loans to good ones = <span class="math inline">\(-1,000\)</span> euros.</li>
-</ul></li>
-</ul>
-</section>
-<section id="firm-exit-case-study-business-application-1" class="slide level2">
-<h2>Firm exit case study: Business application</h2>
-<ul>
-<li>Simplest model 1 classifies with expected loss 0.722 euro per firm, the Random Forest model has 0.587 euro.</li>
-<li>Building a better model yields 135 euros higher profit per firm <span class="math inline">\((0.722 - 0.587) \times 1000 = 135\)</span></li>
-<li>If we do 1000 deals, it is 135,000 euros in profit.</li>
-<li>If a regulator asks for an interpretable model, we shall compare with the logit M4 model and have 103,000 euros in expected profit.</li>
-<li>Why does it matter?</li>
-</ul>
-</section>
-<section id="firm-exit-case-study-business-application-2" class="slide level2">
-<h2>Firm exit case study: Business application</h2>
-<ul>
-<li>Random Forest gets us 135K profit, best logit is 103K compared to some simple model.</li>
-<li>We can take this and compare to development costs</li>
-<li>Profit for good analysis.</li>
-</ul>
 </section>
 <section id="summary-1" class="slide level2">
 <h2>Summary</h2>

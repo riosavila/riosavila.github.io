@@ -12339,14 +12339,14 @@
     "href": "rm-data/slides/week12.html#class-imbalance-the-consequences",
     "title": "Probability and Classification",
     "section": "Class imbalance: the consequences",
-    "text": "Class imbalance: the consequences\n\nMethods we use not good at handling it.\nBoth for the models to predict probabilities, and for the measures of fit used for model selection.\nThe functional form assumptions behind the logit model tend to matter more, the closer the probabilities are to zero or one.\nCross-validation can be less effective at avoiding overfitting with very rare or very frequent events if the dataset is not very big. (Many samples will not even have the event.)\nUsual measures of fit can be less good at differentiating models.\nConsequence: Model fitting and selection setup not ideal"
+    "text": "Class imbalance: the consequences\n\nMethods we use are not good at handling it.\n\nBoth for the models to predict probabilities, and for the measures of fit used for model selection.\n\nThe functional form assumptions behind the logit model tend to matter more, the closer the probabilities are to zero or one.\nCross-validation can be less effective at avoiding overfitting with very rare or very frequent events if the dataset is not very big. (Many samples will not even have the event.)\nUsual measures of fit can be less good at differentiating models.\nConsequence: Model fitting and selection setup not ideal"
   },
   {
     "objectID": "rm-data/slides/week12.html#class-imbalance-what-to-do",
     "href": "rm-data/slides/week12.html#class-imbalance-what-to-do",
     "title": "Probability and Classification",
     "section": "Class imbalance: what to do",
-    "text": "Class imbalance: what to do\n\nWhat to do? Two key insights.\n\nKnow when it’s happening, and be ready for poor performance.\nMay need an action: rebalance sample to help build better models\n\nDownsampling – randomly drop observations from frequent class to balance out more\n\nBefore: 100,000 observations 1% event rate (99,000 \\(y = 1\\), 1,000 \\(y = 0\\))\nAfter 10,000 observations 10% event rate (9,000 \\(y = 1\\), 1,000 \\(y = 0\\))\n\nOver-sampling of rare events\ntry Smart algorithms: Synthetic Minority Over-Sampling Technique (SMOTE)"
+    "text": "Class imbalance: what to do\n\nWhat to do? Two key insights.\n\nKnow when it’s happening, and be ready for poor performance.\nMay need an action: rebalance sample to help build better models\n\nDownsampling – randomly drop observations from frequent class to balance out more\n\nBefore: 100,000 observations 1% event rate (99,000 \\(y = 1\\), 1,000 \\(y = 0\\))\nAfter 10,000 observations 10% event rate (9,000 \\(y = 1\\), 1,000 \\(y = 0\\))\n\nOver-sampling of rare events\ntry Smart algorithms: Synthetic Minority Over-Sampling Technique (SMOTE)\n\nCreate synthetic observations that are similar to the rare events\nsynthetic rare = Combination of rare and infrequent events"
   },
   {
     "objectID": "rm-data/slides/week12.html#case-study",
@@ -12381,7 +12381,7 @@
     "href": "rm-data/slides/week12.html#firm-exit-case-study-sample-design",
     "title": "Probability and Classification",
     "section": "Firm exit case study: Sample design",
-    "text": "Firm exit case study: Sample design\n\nLook at a cross section\n\nYear=2012\nstatus_alive=1\n\nKeep if established in 2012\nWe do not care about all firms. Not very small and very large\n\nBelow 10 million euros\nAbove 1000 euros\n\nHardest call: keep when important variables are not missing\n\nBalance sheet like liquid assets\nOwnership like foreign\nIndustry classification\n\nEnd with 19K observation, 20% default rate"
+    "text": "Firm exit case study: Sample design\n\nLook at a cross section in 2012\n\nIf alive in Year=2014, status_alive=1\n\nKeep if established in 2012\nWe do not care about all firms. Not very small and very large\n\nBelow 10 million euros\nAbove 1000 euros\n\nHardest call: keep when important variables are not missing\n\nBalance sheet like liquid assets\nOwnership like foreign\nIndustry classification\n\nEnd with 19K observation, 20% default rate"
   },
   {
     "objectID": "rm-data/slides/week12.html#firm-exit-case-study-features---overview",

@@ -1,0 +1,53 @@
+---
+title: "Predicting Top 20% Chefs in MasterChef"
+format: html
+---
+
+# Task: Predicting and Classifying the Chances of Reaching the Top 10% Chefs
+
+In this task, you will analyze a simulated dataset of chefs participating in the fictional cooking show "MasterChef." Your goal is to build a model that predicts the probability of being in the top 10% of chefs, based on their characteristics.
+
+## Dataset Description
+
+The dataset `master_chef_simulated_data_with_names.csv` contains information about 3000 chefs, with the following variables:
+
+- **Name**: The chef's full name.
+- **Age**: Chef's age in years.
+- **Experience**: Years of professional cooking experience.
+- **KnifeSkills**: A score (1-10) assessing knife-handling skills.
+- **PlatingAesthetics**: A score (1-10) for visual presentation.
+- **Creativity**: A score (1-10) for innovative cooking.
+- **ChallengeWinRate**: Percentage of cooking challenges won.
+- **JudgesFeedback**: Average feedback score from judges (1-10).
+- **StressManagement**: A score (1-10) for managing stress under pressure.
+- **SocialMediaFollowing**: A normalized score for social media popularity (0-10).
+- **Education**: Highest level of education attained (categorical).
+- **Country**: The chef's country of origin.
+- **CuisineSpecialty**: Primary cuisine specialty (categorical).
+- **AudiencePopularity**: Audience rating (0-10).
+- **SignatureDishes**: Number of signature dishes created.
+- **UniqueIngredients**: Number of unique ingredients used in dishes.
+- **HoursPracticed**: Average weekly hours of practice.
+- **Top20Percent**: Indicator variable (1 if the chef is in the top 20%, 0 otherwise).
+
+## Objectives
+
+1. **Descriptive Analysis**:
+   - Summarize the dataset to understand the distributions of key variables.
+   - Explore how variables differ between chefs in the top 20% and those who are not.
+
+2. **Predictive Modeling**:
+   - Use logistic regression to predict the probability of being in the top 20% (`Top20Percent`) based on the available characteristics.
+   - Identify the most influential predictors of success.
+
+3. **Model Evaluation**:
+   - Assess the model's goodness-of-fit and predictive power.
+   - Use appropriate metrics (e.g., pseudo R-squared, ROC curve, and classification accuracy).
+
+## Deliverables
+
+Write a short report summarizing your findings, including the following:
+
+- The logistic regression model and its interpretation.
+- Evaluation metrics and conclusion on the model’s predictive power.
+- Submit your Stata do-file or log-file documenting your workflow.
