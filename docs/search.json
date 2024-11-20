@@ -12262,7 +12262,7 @@
     "href": "rm-data/slides/week12.html#measures-of-classification-1",
     "title": "Probability and Classification",
     "section": "Measures of classification",
-    "text": "Measures of classification\n\nThe key point is that there is a trade-off between making false positive and false negative errors.\nThis is the essential insight in classification\nThis can be expressed with specificity and sensitivity."
+    "text": "Measures of classification\n\nThe key point is that there is a trade-off between making false positive and false negative errors.\nThis is the essential insight in classification\nThis can be expressed with specificity and sensitivity.\n\nif your Threshold is low, You can detect all the positives, but you will also detect many false positives. Sensitivity is high.\nif your Threshold is high, You can detect all the negatives, but you will also detect many false negatives. Specificity is high."
   },
   {
     "objectID": "rm-data/slides/week12.html#roc-curve",
@@ -12535,7 +12535,7 @@
     "href": "rm-data/slides/week12.html#firm-exit-case-study-finding-the-threshold-1",
     "title": "Probability and Classification",
     "section": "Firm exit case study: Finding the threshold",
-    "text": "Firm exit case study: Finding the threshold\n\nConsider all thresholds \\(T = 0.01, 0.02—1\\)\nCalculate the expected loss for all thresholds\nPick when loss function has the minimum\nDone in CV, this is fold Nr.5."
+    "text": "Firm exit case study: Finding the threshold\n\n\n\n\n\nConsider all thresholds \\(T = 0.01, 0.02—1\\)\nCalculate the expected loss for all thresholds\nPick when loss function has the minimum\nDone in CV, this is fold Nr.5."
   },
   {
     "objectID": "rm-data/slides/week12.html#firm-exit-case-study",
@@ -12549,7 +12549,7 @@
     "href": "rm-data/slides/week12.html#firm-exit-case-studysummary-of-process-with-loss-function",
     "title": "Probability and Classification",
     "section": "Firm exit case study:Summary of process with loss function",
-    "text": "Firm exit case study:Summary of process with loss function\n\nOn the work set, do 5 fold CV and loop over models\nDo Probability predictions\nCalculate average RMSE on each test folds\nDraw ROC Curve and find optimal threshold with loss function (1,10)\n\nshow: threshold search - loss plots and ROC curve for fold 5\n\nSummarize: for each model: average of optimal thresholds, threshold for fold 5, average expected loss, expected loss for fold Nr.5.\nPick best model based on average expected loss\nTake best model, re-estimate it on work set + find optimal threshold and estimate expected loss on holdout set\n\nHere is the continued content in Quarto format:"
+    "text": "Firm exit case study:Summary of process with loss function\n\nOn the work set, do 5 fold CV and loop over models\nDo Probability predictions\nCalculate average RMSE on each test folds\nDraw ROC Curve and find optimal threshold with loss function (1,10)\n\nshow: threshold search - loss plots and ROC curve for fold 5\n\nSummarize: for each model: average of optimal thresholds, threshold for fold 5, average expected loss, expected loss for fold Nr.5.\nPick best model based on average expected loss\nTake best model, re-estimate it on work set + find optimal threshold and estimate expected loss on holdout set"
   },
   {
     "objectID": "rm-data/slides/week12.html#firm-exit-case-studysummary-of-process-with-loss-function-1",
@@ -14638,5 +14638,19 @@
     "title": "Econometrics MSC Levy",
     "section": "",
     "text": "Quiz 5: Modeling Probabilities\nName: ____________________________ Grade: __/5\n\nWhat is one potential issue with the linear probability model?\n\nIt is always homoskedastic, requiring complex adjustments.\nIt may predict probabilities that are less than zero or greater than one.\nIt cannot handle more than two explanatory variables.\nIt is too computationally intensive for modern computers.\n\nWhat is the primary goal of “classification” in the context of binary y variables?\n\nPredicting the exact probability of y = 1 for target observations.\nVisualizing the relationship between predicted probabilities and actual outcomes using a calibration curve.\nAssigning target observations to either the y = 1 or y = 0 category based on a predicted probability.\nIdentifying potential outliers in the dataset that could skew the results of the analysis.\n\nIn the context of probability models, what are the “logit” and “probit” models designed to address?\n\nThe issue of non-linearity in the relationship between explanatory and dependent variables.\nThe need to account for heteroskedasticity in binary outcome data.\nThe challenge of interpreting the coefficients of linear probability models.\nThe problem of linear probability models potentially predicting probabilities outside the range of 0 to 1.**\n\nAccording to the excerpt, how do the predicted probabilities from logit and probit models typically compare?\n\nThey are usually very similar.\nLogit models tend to predict higher probabilities than probit models.\nProbit models are more accurate when the actual probabilities are close to 0 or 1.\nThe choice between logit and probit significantly impacts the interpretation of the results.\n\nHow do marginal differences relate to the coefficients of linear probability models?\n\nMarginal differences are the inverse of the corresponding LPM coefficients.\nMarginal differences are always smaller in magnitude than LPM coefficients.\nMarginal differences often have a similar interpretation to LPM coefficients.\nThere is no meaningful relationship between the two concepts. of the coefficients and marginal differences."
+  },
+  {
+    "objectID": "rm-data/slides/week12.html#winzordize",
+    "href": "rm-data/slides/week12.html#winzordize",
+    "title": "Probability and Classification",
+    "section": "Winzordize",
+    "text": "Winzordize"
+  },
+  {
+    "objectID": "rm-data/slides/week12.html#firm-exit-case-study-model-features-1",
+    "href": "rm-data/slides/week12.html#firm-exit-case-study-model-features-1",
+    "title": "Probability and Classification",
+    "section": "Firm exit case study: Model features 1",
+    "text": "Firm exit case study: Model features 1\n\nFirm: Age of firm, squared age, a dummy if newly established, industry categories, location regions for its headquarters, and dummy if located in a big city.\nFinancial 1: Winsorized financial variables: fixed, liquid (incl current), intangible assets, current liabilities, inventories, equity shares, subscribed capital, sales revenues, income before tax, extra income, material, personal and extra expenditure.\nFinancial 2: Flags (extreme, low, high, zero - when applicable) and polynomials: Quadratic terms are created for profit and loss, extra profit and loss, income before tax, and share equity.\nGrowth: Sales growth is captured by a winsorized growth variable, its quadratic term and flags for extreme low and high values."
   }
 ]

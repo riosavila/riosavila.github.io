@@ -11,8 +11,8 @@ format:
     theme: [ clean2.scss]
     slide-number: true
     footer: "*Rios-Avila and Cia*"
-    width:  1440
-    height: 810
+    width:  1280
+    height: 720
 ---
 
 ## Motivation
@@ -52,8 +52,7 @@ format:
 
 if logit: $$\Pr[y_i = 1|x_i] = \Lambda \times (\beta_0 + \beta_1x_i) = \frac{\exp (\beta_0 + \beta_1x_i)}{1 + \exp (\beta_0 + \beta_1x_i)}$$
 
--   Thats it!
-    You can probably go couple of steps further and use various specifications, as well as LASSO (for logit) to pick the best model.
+-   Thats it! You can probably go couple of steps further and use various specifications, as well as LASSO (for logit) to pick the best model.
 
 -   Best model can still be picked based on RMSE, brier score or Calibration.
 
@@ -157,6 +156,8 @@ Sensitivity vs Specificity
 -   The key point is that there is a trade-off between making false positive and false negative errors.
 -   This is the essential insight in classification
 -   This can be expressed with specificity and sensitivity.
+    -   if your Threshold is low, You can detect all the positives, but you will also detect many false positives. Sensitivity is high.
+    -   if your Threshold is high, You can detect all the negatives, but you will also detect many false negatives. Specificity is high.
 
 ## ROC Curve
 
@@ -383,7 +384,7 @@ Classification forest + threshold formula
 -   Over-sampling of rare events
 -   try Smart algorithms: Synthetic Minority Over-Sampling Technique (SMOTE)
     -   Create synthetic observations that are similar to the rare events
-    -   synthetic rare = Combination of rare and infrequent events 
+    -   synthetic rare = Combination of rare and infrequent events
 
 # Case study
 
@@ -474,7 +475,11 @@ Classification forest + threshold formula
 
 ![](images/paste-12.png)
 
-## ![](images/paste-13.png)Firm exit case study: Winsorizing
+## Winzordize
+
+![](images/paste-13.png)
+
+## Firm exit case study: Winsorizing
 
 -   When edge of a distribution is weird...
 -   Winsorizing is a process to keep observations with extreme values in sample
@@ -491,7 +496,7 @@ Classification forest + threshold formula
 
 -   The winsorized value simply equals original value in a range and flat below/after.
 
-## Case study: firm exit: Model features 1
+## Firm exit case study: Model features 1
 
 -   **Firm**: Age of firm, squared age, a dummy if newly established, industry categories, location regions for its headquarters, and dummy if located in a big city.
 -   **Financial 1**: Winsorized financial variables: fixed, liquid (incl current), intangible assets, current liabilities, inventories, equity shares, subscribed capital, sales revenues, income before tax, extra income, material, personal and extra expenditure.
@@ -527,14 +532,14 @@ Models (number of predictors)
 
 ## Firm exit case study: Comparing model fit
 
-|              | Variables | Coefficients  | CV RMSE   |
-|--------------|-----------|---------------|-----------|
-| Logit M1     | 4         | 12            | 0.374     |
-| Logit M2     | 9         | 19            | 0.366     |
-| Logit M3     | 22        | 36            | 0.364     |
-| **Logit M4** | **30**    | **80**        | **0.362** |
-| Logit M5     | 30        | 154           | 0.363     |
-| Logit LASSO  | 30        | 143           | 0.362     |
+|              | Variables | Coefficients | CV RMSE   |
+|--------------|-----------|--------------|-----------|
+| Logit M1     | 4         | 12           | 0.374     |
+| Logit M2     | 9         | 19           | 0.366     |
+| Logit M3     | 22        | 36           | 0.364     |
+| **Logit M4** | **30**    | **80**       | **0.362** |
+| Logit M5     | 30        | 154          | 0.363     |
+| Logit LASSO  | 30        | 143          | 0.362     |
 
 -   5-fold cross-validated on work set, average RMSE
 -   Will use Logit M4 model as benchmark
@@ -550,7 +555,6 @@ Models (number of predictors)
 
 -   ROC curve shows trade-off for various values of the threshold
 -   Go through values of the ROC curve for selected threshold values, between 0.05 and 0.75, by steps of 0.05
-
 
 ## Firm exit case study: AUC
 
@@ -581,7 +585,6 @@ Models (number of predictors)
 | Predicted stay | 75% | 15% | 90% | 57% | 7% | 64% |
 | Predicted exit | 4% | 6% | 10% | 22% | 14% | 36% |
 | Total | 79% | 21% | 100% | 79% | 21% | 100% |
- 
 
 ## Firm exit case study: Threshold choice consequences
 
@@ -626,10 +629,18 @@ First option: no loss fn
 
 ## Firm exit case study: Finding the threshold
 
+::::: columns
+::: {.column width="50%"}
+![](images/paste-25.png)
+:::
+
+::: {.column width="50%"}
 -   Consider all thresholds $T = 0.01, 0.02—1$
 -   Calculate the expected loss for all thresholds
 -   Pick when loss function has the minimum
 -   Done in CV, this is fold Nr.5.
+:::
+:::::
 
 ## Firm exit case study
 
@@ -654,14 +665,12 @@ First option: no loss fn
 -   Pick best model based on average expected loss
 -   Take best model, re-estimate it on work set + find optimal threshold and estimate expected loss on holdout set
 
-Here is the continued content in Quarto format:
- 
 ## Summary
 
 -   Decide whether the goal is predicting probabilities or classification.
 -   The outcome of prediction with a binary target variable is always the predicted probabilities as a function of predictors.
 -   When our goal is probability prediction, we should find the best model that predicts probabilities by cross-validation + RMSE/AUC.
--   When our goal is classification, we should find the best model that has the smallest expected loss.
+-   When our goal is classification, we should find the best model that has the smallest **expected loss**.
     -   With formula for threshold or search algorithm
     -   Finding the optimal classification threshold needs a loss function.
 

@@ -438,7 +438,11 @@ Fernando Rios-Avila
 <ul>
 <li>The key point is that there is a trade-off between making false positive and false negative errors.</li>
 <li>This is the essential insight in classification</li>
-<li>This can be expressed with specificity and sensitivity.</li>
+<li>This can be expressed with specificity and sensitivity.
+<ul>
+<li>if your Threshold is low, You can detect all the positives, but you will also detect many false positives. Sensitivity is high.</li>
+<li>if your Threshold is high, You can detect all the negatives, but you will also detect many false negatives. Specificity is high.</li>
+</ul></li>
 </ul>
 </section>
 <section id="roc-curve" class="slide level2">
@@ -863,8 +867,12 @@ Classification forest + threshold formula
 <h2>The Weird Shape</h2>
 
 <img data-src="images/paste-12.png" class="r-stretch"></section>
+<section id="winzordize" class="slide level2">
+<h2>Winzordize</h2>
+
+<img data-src="images/paste-13.png" class="r-stretch"></section>
 <section id="firm-exit-case-study-winsorizing" class="slide level2">
-<h2><img data-src="images/paste-13.png">Firm exit case study: Winsorizing</h2>
+<h2>Firm exit case study: Winsorizing</h2>
 <ul>
 <li>When edge of a distribution is weird…</li>
 <li>Winsorizing is a process to keep observations with extreme values in sample
@@ -889,8 +897,8 @@ Classification forest + threshold formula
 <li>The winsorized value simply equals original value in a range and flat below/after.</li>
 </ul>
 </section>
-<section id="case-study-firm-exit-model-features-1" class="slide level2">
-<h2>Case study: firm exit: Model features 1</h2>
+<section id="firm-exit-case-study-model-features-1" class="slide level2">
+<h2>Firm exit case study: Model features 1</h2>
 <ul>
 <li><strong>Firm</strong>: Age of firm, squared age, a dummy if newly established, industry categories, location regions for its headquarters, and dummy if located in a big city.</li>
 <li><strong>Financial 1</strong>: Winsorized financial variables: fixed, liquid (incl current), intangible assets, current liabilities, inventories, equity shares, subscribed capital, sales revenues, income before tax, extra income, material, personal and extra expenditure.</li>
@@ -1184,12 +1192,17 @@ Classification forest + threshold formula
 </section>
 <section id="firm-exit-case-study-finding-the-threshold-1" class="slide level2">
 <h2>Firm exit case study: Finding the threshold</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="images/paste-25.png"></p>
+</div><div class="column" style="width:50%;">
 <ul>
 <li>Consider all thresholds <span class="math inline">\(T = 0.01, 0.02—1\)</span></li>
 <li>Calculate the expected loss for all thresholds</li>
 <li>Pick when loss function has the minimum</li>
 <li>Done in CV, this is fold Nr.5.</li>
 </ul>
+</div></div>
 </section>
 <section id="firm-exit-case-study" class="slide level2">
 <h2>Firm exit case study</h2>
@@ -1221,7 +1234,6 @@ Classification forest + threshold formula
 <li>Pick best model based on average expected loss</li>
 <li>Take best model, re-estimate it on work set + find optimal threshold and estimate expected loss on holdout set</li>
 </ul>
-<p>Here is the continued content in Quarto format:</p>
 </section>
 <section id="summary-1" class="slide level2">
 <h2>Summary</h2>
@@ -1229,7 +1241,7 @@ Classification forest + threshold formula
 <li>Decide whether the goal is predicting probabilities or classification.</li>
 <li>The outcome of prediction with a binary target variable is always the predicted probabilities as a function of predictors.</li>
 <li>When our goal is probability prediction, we should find the best model that predicts probabilities by cross-validation + RMSE/AUC.</li>
-<li>When our goal is classification, we should find the best model that has the smallest expected loss.
+<li>When our goal is classification, we should find the best model that has the smallest <strong>expected loss</strong>.
 <ul>
 <li>With formula for threshold or search algorithm</li>
 <li>Finding the optimal classification threshold needs a loss function.</li>
@@ -1427,9 +1439,9 @@ Classification forest + threshold formula
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1440,
+        width: 1280,
 
-        height: 810,
+        height: 720,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
