@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Master’s Level Data Science Exercise">
 
-<title>HomeWorks – Econometrics MSC Levy</title>
+<title>Student Performance Analysis Project – Econometrics MSC Levy</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +24,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-07ba0ad10f5680c660e360ac31d2f3b6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-8b864f0777c60eecff11d75b6b2e1175.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-718e120f6cea4cb22a3782fd6515e804.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-b419ee48e562ff16f6fcb69ddd314bbf.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-07ba0ad10f5680c660e360ac31d2f3b6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-da7f89f7568ba9d18e8702fc3f4ac066.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,7 +69,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../../../styles.css">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -80,7 +79,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Econometrics MSC Levy</span>
     </a>
   </div>
@@ -91,21 +90,20 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="../../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../resources.html"> 
+    <a class="nav-link" href="../../../resources.html"> 
 <span class="menu-text">Resources</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about.html"> 
+    <a class="nav-link" href="../../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -114,7 +112,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">HomeWorks</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Student Performance Analysis Project</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -145,25 +143,25 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../adv_class/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../adv_class/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Advance Econometrics: Causal Effects</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../rmethods/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../rmethods/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Research Methods: Econometrics I</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../rmethods2/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../rmethods2/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Research Methods II</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../rm-data/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../rm-data/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Research Methods I: Data Analysis for Economics and Policy</span></a>
   </div>
 </li>
@@ -180,19 +178,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../mathref/math_1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../mathref/math_1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Math Refresher</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../mathref/math_2.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../mathref/math_2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Math Refresher</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../mathref/math_3.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../mathref/math_3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Math Refresher</span></a>
   </div>
 </li>
@@ -208,25 +206,25 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#hw01" id="toc-hw01" class="nav-link active" data-scroll-target="#hw01">Homework 1</a>
+  <li><a href="#project-overview" id="toc-project-overview" class="nav-link active" data-scroll-target="#project-overview">Project Overview</a>
   <ul class="collapse">
-  <li><a href="#topics" id="toc-topics" class="nav-link" data-scroll-target="#topics">Topics</a></li>
+  <li><a href="#objective" id="toc-objective" class="nav-link" data-scroll-target="#objective">Objective</a></li>
+  <li><a href="#dataset" id="toc-dataset" class="nav-link" data-scroll-target="#dataset">Dataset</a></li>
   </ul></li>
-  <li><a href="#hw02" id="toc-hw02" class="nav-link" data-scroll-target="#hw02">Homework 2</a></li>
-  <li><a href="#hw03" id="toc-hw03" class="nav-link" data-scroll-target="#hw03">Homework 3</a></li>
-  <li><a href="#hw04" id="toc-hw04" class="nav-link" data-scroll-target="#hw04">Homework 4</a></li>
-  <li><a href="#hw05" id="toc-hw05" class="nav-link" data-scroll-target="#hw05">Homework 5</a></li>
-  <li><a href="#hw06" id="toc-hw06" class="nav-link" data-scroll-target="#hw06">Homework 6</a></li>
-  <li><a href="#hw07" id="toc-hw07" class="nav-link" data-scroll-target="#hw07">Homework 7</a></li>
-  <li><a href="#hw08" id="toc-hw08" class="nav-link" data-scroll-target="#hw08">Homework 8</a></li>
-  <li><a href="#hw09" id="toc-hw09" class="nav-link" data-scroll-target="#hw09">Homework 9</a></li>
-  <li><a href="#hw10" id="toc-hw10" class="nav-link" data-scroll-target="#hw10">Homework 10</a></li>
-  <li><a href="#hw11" id="toc-hw11" class="nav-link" data-scroll-target="#hw11">Homework 11</a></li>
-  <li><a href="#hw12" id="toc-hw12" class="nav-link" data-scroll-target="#hw12">Homework 12</a>
+  <li><a href="#data-dictionary" id="toc-data-dictionary" class="nav-link" data-scroll-target="#data-dictionary">Data Dictionary</a>
   <ul class="collapse">
-  <li><a href="#task-predicting-the-chances-of-reaching-the-top-10-chefs" id="toc-task-predicting-the-chances-of-reaching-the-top-10-chefs" class="nav-link" data-scroll-target="#task-predicting-the-chances-of-reaching-the-top-10-chefs">Task: Predicting the Chances of Reaching the Top 10% Chefs</a></li>
+  <li><a href="#student-performance-dataset-student_performance_dataset.csv" id="toc-student-performance-dataset-student_performance_dataset.csv" class="nav-link" data-scroll-target="#student-performance-dataset-student_performance_dataset.csv">Student Performance Dataset (<code>student_performance_dataset.csv</code>)</a></li>
   </ul></li>
-  <li><a href="#hw13" id="toc-hw13" class="nav-link" data-scroll-target="#hw13">Homework 13</a></li>
+  <li><a href="#analysis-tasks" id="toc-analysis-tasks" class="nav-link" data-scroll-target="#analysis-tasks">Analysis Tasks</a>
+  <ul class="collapse">
+  <li><a href="#task-1-exploratory-data-analysis-20" id="toc-task-1-exploratory-data-analysis-20" class="nav-link" data-scroll-target="#task-1-exploratory-data-analysis-20">Task 1: Exploratory Data Analysis (20%)</a></li>
+  <li><a href="#task-2-regression-modeling-40" id="toc-task-2-regression-modeling-40" class="nav-link" data-scroll-target="#task-2-regression-modeling-40">Task 2: Regression Modeling (40%)</a></li>
+  <li><a href="#task-3-binary-outcome-prediction-40" id="toc-task-3-binary-outcome-prediction-40" class="nav-link" data-scroll-target="#task-3-binary-outcome-prediction-40">Task 3: Binary Outcome Prediction (40%)</a></li>
+  </ul></li>
+  <li><a href="#submission-requirements" id="toc-submission-requirements" class="nav-link" data-scroll-target="#submission-requirements">Submission Requirements</a></li>
+  <li><a href="#evaluation-criteria" id="toc-evaluation-criteria" class="nav-link" data-scroll-target="#evaluation-criteria">Evaluation Criteria</a></li>
+  <li><a href="#bonus-challenges" id="toc-bonus-challenges" class="nav-link" data-scroll-target="#bonus-challenges">Bonus Challenges</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
     </div>
@@ -235,13 +233,19 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">HomeWorks</h1>
+<h1 class="title">Student Performance Analysis Project</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Master’s Level Data Science Exercise </p>
+          </div>
+  </div>
     
   
     
@@ -252,158 +256,154 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This document provides the homework for the each week of the course.</p>
-<section id="hw01" class="level2">
-<h2 class="anchored" data-anchor-id="hw01">Homework 1</h2>
-<p>Choose one of the following topics, and create a PDF version of it using Quarto. For this, create a new repository in your GitHub account, this repository should be named <code>homework_1</code>, and contain the QMD file that you will use to create the PDF.</p>
-<p>For this homework use the following resources</p>
-<ul>
-<li>Template: <a href="hw-material/pdf-template.txt">template</a> <a href="hw-material/pdf-template.html">html</a>
-<ul>
-<li>Just copy the Heading of this file in your QMD file</li>
-</ul></li>
-<li>Bibliography: <a href="hw-material/references.bib">reference.bib</a>
-<ul>
-<li>Add this in the same folder as your QMD file</li>
-</ul></li>
-<li>All figures, if any, can be saved as PNG or JPG files from the linked pages.</li>
-<li>Tables, if any, may have to be replicated using <code>markdown</code> tables.</li>
-</ul>
-<p>Submit the link to your repository, the PDF and QMD files via email.</p>
-<section id="topics" class="level3">
-<h3 class="anchored" data-anchor-id="topics">Topics</h3>
-<ul>
-<li>The Impact of Resource Management in StarCraft: A Strategic Analysis My replication
-<ul>
-<li><a href="hw-material/report1.html">html</a></li>
-<li><a href="hw-material/report1.pdf">pdf</a></li>
-<li><a href="../rm-data/hw-material/report1-example.html">qmd</a></li>
-</ul></li>
-<li>The Strategic Depth of StarCraft and Its Esports Legacy <a href="hw-material/report2.html">html</a> <a href="hw-material/report2.pdf">pdf</a></li>
-<li>The Mathematics of Dungeons and Dragons: A Statistical Adventure <a href="hw-material/report3.html">html</a> <a href="hw-material/report3.pdf">pdf</a></li>
-<li>The Rise of LitRPG: Blending Literature and Gaming <a href="hw-material/report4.html">html</a> <a href="hw-material/report4.pdf">pdf</a></li>
-<li>The Impact of ‘The Good Guys’ on Modern Fantasy Literature <a href="hw-material/report5.html">html</a> <a href="hw-material/report5.pdf">pdf</a></li>
-<li>Economic Dynamics in Eric Ugland’s ‘The Good Guys’ Series <a href="hw-material/report6.html">html</a> <a href="hw-material/report6.pdf">pdf</a></li>
-<li>The Impact of House Allegiances on Power Dynamics in Westeros <a href="hw-material/report7.html">html</a> <a href="hw-material/report7.pdf">pdf</a></li>
-</ul>
+<section id="project-overview" class="level2">
+<h2 class="anchored" data-anchor-id="project-overview">Project Overview</h2>
+<section id="objective" class="level3">
+<h3 class="anchored" data-anchor-id="objective">Objective</h3>
+<p>This project aims to analyze student performance using a synthetic dataset that captures complex interactions between individual, academic, and socio-economic characteristics. You will apply advanced statistical modeling techniques to understand the factors influencing academic success and graduation probability.</p>
+</section>
+<section id="dataset" class="level3">
+<h3 class="anchored" data-anchor-id="dataset">Dataset</h3>
+<p>A comprehensive synthetic dataset (<code>student_performance_dataset.csv</code>) is provided, capturing multidimensional aspects of student performance.</p>
 </section>
 </section>
-<section id="hw02" class="level2">
-<h2 class="anchored" data-anchor-id="hw02">Homework 2</h2>
+<section id="data-dictionary" class="level2">
+<h2 class="anchored" data-anchor-id="data-dictionary">Data Dictionary</h2>
+<section id="student-performance-dataset-student_performance_dataset.csv" class="level3">
+<h3 class="anchored" data-anchor-id="student-performance-dataset-student_performance_dataset.csv">Student Performance Dataset (<code>student_performance_dataset.csv</code>)</h3>
+<p><strong>Demographic Variables</strong>:</p>
 <ul>
-<li>Download country–year panel data on three variables (“indicators”) of your choice from the World Bank website <a href="https://data.worldbank.org/" class="uri">https://data.worldbank.org/</a>, or using their API program (<code>wbdata</code>).</li>
-<li>Once you have the data, clean it up and save a tidy version of it in a Stata file.</li>
-<li>Indicate which countries are ranked highest and lowest in each of the three indicators in the year 2000.</li>
-<li>Write a short report on what you did to obtain the data, how many countries and years you ended up with in the data (after cleannig), and what difficulties you encountered, if any.</li>
+<li><code>student_id</code>: Unique identifier for each student</li>
+<li><code>name</code>: Student’s name</li>
+<li><code>age</code>: Student’s age</li>
+<li><code>gender</code>: Student’s gender identity</li>
+<li><code>major</code>: Academic major</li>
+<li><code>learning_style</code>: Predominant learning style</li>
+<li><code>parents_education_level</code>: Highest education level of parents</li>
 </ul>
-<p>It is not necessary to download the data directly into Stata. You can download the data in CSV format, excel, and then Copy-paste or import it into Stata.</p>
-</section>
-<section id="hw03" class="level2">
-<h2 class="anchored" data-anchor-id="hw03">Homework 3</h2>
+<p><strong>Academic Performance Variables</strong>:</p>
 <ul>
-<li>Choose the same 2016/7 season from the <code>football</code> dataset as in data exercise (Book) and produce a different table showing the extent of home team advantage. Compare the results and discuss what you find.</li>
+<li><code>high_school_gpa</code>: High school academic performance</li>
+<li><code>study_hours_per_week</code>: Average weekly study time</li>
+<li><code>english_proficiency</code>: English language skills score</li>
+<li><code>math_proficiency</code>: Mathematics skills score</li>
+<li><code>science_proficiency</code>: Scientific reasoning skills score</li>
+<li><code>final_gpa</code>: Cumulative college GPA</li>
+<li><code>graduation_within_4_years</code>: Binary indicator of timely graduation</li>
+<li><code>academic_performance_description</code>: Qualitative performance assessment</li>
 </ul>
-<p>or</p>
+<p><strong>Contextual Variables</strong>:</p>
 <ul>
-<li>Using the <code>wms-management-survey</code> dataset, pick a country different from Mexico, reproduce all figures and tables of the Book case study, and compare your results to what was found for Mexico.</li>
+<li><code>family_income</code>: Household income</li>
+<li><code>personal_essay</code>: Student’s reflective writing sample</li>
 </ul>
 </section>
-<section id="hw04" class="level2">
-<h2 class="anchored" data-anchor-id="hw04">Homework 4</h2>
-<p>Nothing here</p>
 </section>
-<section id="hw05" class="level2">
-<h2 class="anchored" data-anchor-id="hw05">Homework 5</h2>
-<p>Nothing here</p>
-</section>
-<section id="hw06" class="level2">
-<h2 class="anchored" data-anchor-id="hw06">Homework 6</h2>
-<p>q1: Use the <code>wms-management-survey</code> dataset and pick a country. (Not two students should pick the same country). Estimate a linear regression with the management quality score (X) and employment (Y). Interpret the slope coefficient, create its 95% CI, and interpret that, too. Explore potential nonlinearities in the patterns of association by <code>lpoly</code>. Estimate a regression that can capture those nonlinearities, and carry out a test to see if you can reject that the linear approximation was good enough for the population of firms represented by the data.</p>
-</section>
-<section id="hw07" class="level2">
-<h2 class="anchored" data-anchor-id="hw07">Homework 7</h2>
-</section>
-<section id="hw08" class="level2">
-<h2 class="anchored" data-anchor-id="hw08">Homework 8</h2>
-</section>
-<section id="hw09" class="level2">
-<h2 class="anchored" data-anchor-id="hw09">Homework 9</h2>
-<p>Use the stocks-prices dataset that can be found <a href="stock_prices.dta">here</a>. This dataset contains the closing prices for the SP500, Apple, Disney, GameStop, Meta and Nvidia at the end of the month. Using this data, choose one of the companies and reproduce the analysis of the Returns on a company stock and market returns case study (for example SP500 and Apple).</p>
-<p>The full case study can be found <a href="case_study_returns.pdf">here</a>. You need to produce the same tables and figures as in the case study, with brief explanations of what you find. No need to use the Daily data, just the Monthly data.</p>
-</section>
-<section id="hw10" class="level2">
-<h2 class="anchored" data-anchor-id="hw10">Homework 10</h2>
-<p>Use the data on house prices <a href="hhprice_train.dta">here</a>. This dataset contains the prices of houses in a city, along with many other house charcteristics. You are obtaining 80% of the data to estimate the model. Build a model that you think its best to predict the price of a house. You can use any of the variables in the dataset, and you can create new variables if you think they are useful.</p>
-<p>Describe at least 3 different specifications you tried, and which one you choose and why. The one with the best fit on the test data (I have access to) can skip next homework.</p>
-<p>See the winner <a href="hw10/hw10_ranking.html">here</a></p>
-</section>
-<section id="hw11" class="level2">
-<h2 class="anchored" data-anchor-id="hw11">Homework 11</h2>
-</section>
-<section id="hw12" class="level2">
-<h2 class="anchored" data-anchor-id="hw12">Homework 12</h2>
-<section id="task-predicting-the-chances-of-reaching-the-top-10-chefs" class="level3">
-<h3 class="anchored" data-anchor-id="task-predicting-the-chances-of-reaching-the-top-10-chefs">Task: Predicting the Chances of Reaching the Top 10% Chefs</h3>
-<p>In this task, you will analyze a simulated dataset of chefs participating in the fictional cooking show “MasterChef.” Your goal is to build a model that predicts the probability of being in the ~top 20% of chefs, based on their characteristics.</p>
-<section id="dataset-description" class="level4">
-<h4 class="anchored" data-anchor-id="dataset-description">Dataset Description</h4>
-<p>The dataset <a href="master_chef_test.dta">here</a> contains information about 3000 chefs, with the following variables:</p>
-<ul>
-<li><strong>Name</strong>: The chef’s full name.</li>
-<li><strong>Age</strong>: Chef’s age in years.</li>
-<li><strong>Experience</strong>: Years of professional cooking experience.</li>
-<li><strong>KnifeSkills</strong>: A score (1-10) assessing knife-handling skills.</li>
-<li><strong>PlatingAesthetics</strong>: A score (1-10) for visual presentation.</li>
-<li><strong>Creativity</strong>: A score (1-10) for innovative cooking.</li>
-<li><strong>ChallengeWinRate</strong>: Percentage of cooking challenges won.</li>
-<li><strong>JudgesFeedback</strong>: Average feedback score from judges (1-10).</li>
-<li><strong>StressManagement</strong>: A score (1-10) for managing stress under pressure.</li>
-<li><strong>SocialMediaFollowing</strong>: A normalized score for social media popularity (0-10).</li>
-<li><strong>Education</strong>: Highest level of education attained (categorical).</li>
-<li><strong>Country</strong>: The chef’s country of origin.</li>
-<li><strong>CuisineSpecialty</strong>: Primary cuisine specialty (categorical).</li>
-<li><strong>AudiencePopularity</strong>: Audience rating (0-10).</li>
-<li><strong>SignatureDishes</strong>: Number of signature dishes created.</li>
-<li><strong>UniqueIngredients</strong>: Number of unique ingredients used in dishes.</li>
-<li><strong>HoursPracticed</strong>: Average weekly hours of practice.</li>
-<li><strong>Top20Percent</strong>: Indicator variable (1 if the chef is in the top 20%, 0 otherwise).</li>
-</ul>
-</section>
-<section id="objectives" class="level4">
-<h4 class="anchored" data-anchor-id="objectives">Objectives</h4>
+<section id="analysis-tasks" class="level2">
+<h2 class="anchored" data-anchor-id="analysis-tasks">Analysis Tasks</h2>
+<section id="task-1-exploratory-data-analysis-20" class="level3">
+<h3 class="anchored" data-anchor-id="task-1-exploratory-data-analysis-20">Task 1: Exploratory Data Analysis (20%)</h3>
 <ol type="1">
-<li><p><strong>Descriptive Analysis</strong>:</p>
+<li>Comprehensive exploratory analysis
 <ul>
-<li>Summarize the dataset to understand the distributions of key variables.</li>
-<li>Explore how variables differ between chefs in the top 20% and those who are not.</li>
+<li>Descriptive statistics for numerical variables</li>
+<li>Distribution analysis of performance metrics</li>
+<li>Correlation matrix between academic and demographic variables</li>
 </ul></li>
-<li><p><strong>Predictive Modeling</strong>:</p>
+<li>Visualization Requirements:
 <ul>
-<li>Use logistic regression to predict the probability of being in the top 20% (<code>Top20Percent</code>) based on the available characteristics.</li>
-<li>Identify the most influential predictors of success.</li>
-</ul></li>
-<li><p><strong>Model Evaluation</strong>:</p>
-<ul>
-<li>Assess the model’s goodness-of-fit and predictive power.</li>
-<li>Use appropriate metrics (e.g., pseudo R-squared, ROC curve, and classification accuracy).</li>
+<li>Performance variations across majors</li>
+<li>Study hours and GPA relationship</li>
+<li>Learning style performance distributions</li>
 </ul></li>
 </ol>
 </section>
-<section id="deliverables" class="level4">
-<h4 class="anchored" data-anchor-id="deliverables">Deliverables</h4>
-<p>Write a short report summarizing your findings, including the following:</p>
+<section id="task-2-regression-modeling-40" class="level3">
+<h3 class="anchored" data-anchor-id="task-2-regression-modeling-40">Task 2: Regression Modeling (40%)</h3>
+<p><strong>Objective</strong>: Develop regression models to predict academic performance</p>
+<ol type="1">
+<li>Linear Regression: Predicting Final GPA
 <ul>
-<li>Key descriptive statistics.</li>
-<li>The logistic regression model and its interpretation.</li>
-<li>Evaluation metrics and conclusion on the model’s predictive power.</li>
-<li>Submit your Stata do-file or log-file documenting your workflow.</li>
-<li>Your “model” will be evaluated against everyone else’s using a Test data.</li>
+<li>Dependent Variable: <code>final_gpa</code></li>
+<li>Independent Variables:
+<ul>
+<li><code>high_school_gpa</code></li>
+<li><code>study_hours_per_week</code></li>
+<li><code>parents_education_level</code></li>
+<li>Subject proficiency scores</li>
+<li>Demographic factors</li>
+</ul></li>
+</ul>
+Requirements:
+<ul>
+<li>Implement multiple linear regression</li>
+<li>Check and address multicollinearity</li>
+<li>Validate model assumptions</li>
+<li>Interpret coefficients and statistical significance</li>
+</ul></li>
+<li>Regularized Regression
+<ul>
+<li>Apply Ridge/Lasso regression</li>
+<li>Compare model performance metrics</li>
+<li>Discuss feature importance</li>
+</ul></li>
+</ol>
+</section>
+<section id="task-3-binary-outcome-prediction-40" class="level3">
+<h3 class="anchored" data-anchor-id="task-3-binary-outcome-prediction-40">Task 3: Binary Outcome Prediction (40%)</h3>
+<p><strong>Objective</strong>: Predict graduation probability</p>
+<ul>
+<li>Dependent Variable: <code>graduation_within_4_years</code></li>
+<li>Independent Variables:
+<ul>
+<li>Academic performance metrics</li>
+<li>Socioeconomic indicators</li>
+<li>Learning style</li>
+<li>Subject proficiencies</li>
+</ul></li>
+</ul>
+<p>Requirements:</p>
+<ul>
+<li>Implement both Logit and Probit models</li>
+<li>Compare model performance using:
+<ul>
+<li>Accuracy</li>
+<li>AUC-ROC</li>
+<li>Confusion matrix</li>
+</ul></li>
+<li>Interpret marginal effects</li>
+<li>Discuss model selection criteria</li>
 </ul>
 </section>
 </section>
+<section id="submission-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="submission-requirements">Submission Requirements</h2>
+<ol type="1">
+<li>Comprehensive analysis report (max 15 pages)</li>
+<li>Fully documented code</li>
+<li>Detailed result interpretations</li>
+<li>Discussion of limitations and potential improvements</li>
+</ol>
 </section>
-<section id="hw13" class="level2">
-<h2 class="anchored" data-anchor-id="hw13">Homework 13</h2>
+<section id="evaluation-criteria" class="level2">
+<h2 class="anchored" data-anchor-id="evaluation-criteria">Evaluation Criteria</h2>
+<ul>
+<li>Technical Complexity (40%)</li>
+<li>Statistical Rigor (30%)</li>
+<li>Visualization Quality (15%)</li>
+<li>Interpretation Depth (15%)</li>
+</ul>
+</section>
+<section id="bonus-challenges" class="level2">
+<h2 class="anchored" data-anchor-id="bonus-challenges">Bonus Challenges</h2>
+<ol type="1">
+<li>Explore machine learning extensions</li>
+<li>Develop advanced feature engineering techniques</li>
+<li>Create predictive models for academic interventions</li>
+</ol>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
 
 
 </section>
@@ -429,150 +429,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
-  const disableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'prefetch';
-    }
-  }
-  const enableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'stylesheet';
-    }
-  }
-  const manageTransitions = (selector, allowTransitions) => {
-    const els = window.document.querySelectorAll(selector);
-    for (let i=0; i < els.length; i++) {
-      const el = els[i];
-      if (allowTransitions) {
-        el.classList.remove('notransition');
-      } else {
-        el.classList.add('notransition');
-      }
-    }
-  }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-      }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
-        }
-      });
-    }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
-    }
-  }
-  const toggleColorMode = (alternate) => {
-    // Switch the stylesheets
-    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-    manageTransitions('#quarto-margin-sidebar .nav-link', false);
-    if (alternate) {
-      enableStylesheet(alternateStylesheets);
-      for (const sheetNode of alternateStylesheets) {
-        if (sheetNode.id === "quarto-bootstrap") {
-          toggleBodyColorMode(sheetNode);
-        }
-      }
-    } else {
-      disableStylesheet(alternateStylesheets);
-      toggleBodyColorPrimary();
-    }
-    manageTransitions('#quarto-margin-sidebar .nav-link', true);
-    // Switch the toggles
-    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-    for (let i=0; i < toggles.length; i++) {
-      const toggle = toggles[i];
-      if (toggle) {
-        if (alternate) {
-          toggle.classList.add("alternate");     
-        } else {
-          toggle.classList.remove("alternate");
-        }
-      }
-    }
-    // Hack to workaround the fact that safari doesn't
-    // properly recolor the scrollbar when toggling (#1455)
-    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-      manageTransitions("body", false);
-      window.scrollTo(0, 1);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        manageTransitions("body", true);
-      }, 40);  
-    }
-  }
-  const isFileUrl = () => { 
-    return window.location.protocol === 'file:';
-  }
-  const hasAlternateSentinel = () => {  
-    let styleSentinel = getColorSchemeSentinel();
-    if (styleSentinel !== null) {
-      return styleSentinel === "alternate";
-    } else {
-      return false;
-    }
-  }
-  const setStyleSentinel = (alternate) => {
-    const value = alternate ? "alternate" : "default";
-    if (!isFileUrl()) {
-      window.localStorage.setItem("quarto-color-scheme", value);
-    } else {
-      localAlternateSentinel = value;
-    }
-  }
-  const getColorSchemeSentinel = () => {
-    if (!isFileUrl()) {
-      const storageValue = window.localStorage.getItem("quarto-color-scheme");
-      return storageValue != null ? storageValue : localAlternateSentinel;
-    } else {
-      return localAlternateSentinel;
-    }
-  }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-  // Dark / light mode switch
-  window.quartoToggleColorScheme = () => {
-    // Read the current dark / light value 
-    let toAlternate = !hasAlternateSentinel();
-    toggleColorMode(toAlternate);
-    setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
-  };
-  // Ensure there is a toggle, if there isn't float one in the top right
-  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-    const a = window.document.createElement('a');
-    a.classList.add('top-right');
-    a.classList.add('quarto-color-scheme-toggle');
-    a.href = "";
-    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-    const i = window.document.createElement("i");
-    i.classList.add('bi');
-    a.appendChild(i);
-    window.document.body.appendChild(a);
-  }
-  // Switch to dark mode if need be
-  if (hasAlternateSentinel()) {
-    toggleColorMode(true);
-  } else {
-    toggleColorMode(false);
-  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {

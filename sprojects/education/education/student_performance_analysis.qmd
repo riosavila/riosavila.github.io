@@ -6,7 +6,6 @@ format:
     toc: true
     code-fold: true
     theme: cosmo
-bibliography: references.bib
 ---
 
 ## Project Overview

@@ -9707,7 +9707,7 @@
     "href": "rm-data/homework.html#hw12",
     "title": "HomeWorks",
     "section": "Homework 12",
-    "text": "Homework 12"
+    "text": "Homework 12\n\nTask: Predicting the Chances of Reaching the Top 10% Chefs\nIn this task, you will analyze a simulated dataset of chefs participating in the fictional cooking show “MasterChef.” Your goal is to build a model that predicts the probability of being in the ~top 20% of chefs, based on their characteristics.\n\nDataset Description\nThe dataset here contains information about 3000 chefs, with the following variables:\n\nName: The chef’s full name.\nAge: Chef’s age in years.\nExperience: Years of professional cooking experience.\nKnifeSkills: A score (1-10) assessing knife-handling skills.\nPlatingAesthetics: A score (1-10) for visual presentation.\nCreativity: A score (1-10) for innovative cooking.\nChallengeWinRate: Percentage of cooking challenges won.\nJudgesFeedback: Average feedback score from judges (1-10).\nStressManagement: A score (1-10) for managing stress under pressure.\nSocialMediaFollowing: A normalized score for social media popularity (0-10).\nEducation: Highest level of education attained (categorical).\nCountry: The chef’s country of origin.\nCuisineSpecialty: Primary cuisine specialty (categorical).\nAudiencePopularity: Audience rating (0-10).\nSignatureDishes: Number of signature dishes created.\nUniqueIngredients: Number of unique ingredients used in dishes.\nHoursPracticed: Average weekly hours of practice.\nTop20Percent: Indicator variable (1 if the chef is in the top 20%, 0 otherwise).\n\n\n\nObjectives\n\nDescriptive Analysis:\n\nSummarize the dataset to understand the distributions of key variables.\nExplore how variables differ between chefs in the top 20% and those who are not.\n\nPredictive Modeling:\n\nUse logistic regression to predict the probability of being in the top 20% (Top20Percent) based on the available characteristics.\nIdentify the most influential predictors of success.\n\nModel Evaluation:\n\nAssess the model’s goodness-of-fit and predictive power.\nUse appropriate metrics (e.g., pseudo R-squared, ROC curve, and classification accuracy).\n\n\n\n\nDeliverables\nWrite a short report summarizing your findings, including the following:\n\nKey descriptive statistics.\nThe logistic regression model and its interpretation.\nEvaluation metrics and conclusion on the model’s predictive power.\nSubmit your Stata do-file or log-file documenting your workflow.\nYour “model” will be evaluated against everyone else’s using a Test data."
   },
   {
     "objectID": "rm-data/homework.html#hw13",
@@ -14652,5 +14652,117 @@
     "title": "Probability and Classification",
     "section": "Firm exit case study: Model features 1",
     "text": "Firm exit case study: Model features 1\n\nFirm: Age of firm, squared age, a dummy if newly established, industry categories, location regions for its headquarters, and dummy if located in a big city.\nFinancial 1: Winsorized financial variables: fixed, liquid (incl current), intangible assets, current liabilities, inventories, equity shares, subscribed capital, sales revenues, income before tax, extra income, material, personal and extra expenditure.\nFinancial 2: Flags (extreme, low, high, zero - when applicable) and polynomials: Quadratic terms are created for profit and loss, extra profit and loss, income before tax, and share equity.\nGrowth: Sales growth is captured by a winsorized growth variable, its quadratic term and flags for extreme low and high values."
+  },
+  {
+    "objectID": "sprojects/education/education/student_performance_analysis.html",
+    "href": "sprojects/education/education/student_performance_analysis.html",
+    "title": "Student Performance Analysis Project",
+    "section": "",
+    "text": "This project aims to analyze student performance using a synthetic dataset that captures complex interactions between individual, academic, and socio-economic characteristics. You will apply advanced statistical modeling techniques to understand the factors influencing academic success and graduation probability.\n\n\n\nA comprehensive synthetic dataset (student_performance_dataset.csv) is provided, capturing multidimensional aspects of student performance."
+  },
+  {
+    "objectID": "sprojects/education/education/student_performance_analysis.html#project-overview",
+    "href": "sprojects/education/education/student_performance_analysis.html#project-overview",
+    "title": "Student Performance Analysis Project",
+    "section": "",
+    "text": "This project aims to analyze student performance using a synthetic dataset that captures complex interactions between individual, academic, and socio-economic characteristics. You will apply advanced statistical modeling techniques to understand the factors influencing academic success and graduation probability.\n\n\n\nA comprehensive synthetic dataset (student_performance_dataset.csv) is provided, capturing multidimensional aspects of student performance."
+  },
+  {
+    "objectID": "sprojects/education/education/student_performance_analysis.html#data-dictionary",
+    "href": "sprojects/education/education/student_performance_analysis.html#data-dictionary",
+    "title": "Student Performance Analysis Project",
+    "section": "Data Dictionary",
+    "text": "Data Dictionary\n\nStudent Performance Dataset (student_performance_dataset.csv)\nDemographic Variables:\n\nstudent_id: Unique identifier for each student\nname: Student’s name\nage: Student’s age\ngender: Student’s gender identity\nmajor: Academic major\nlearning_style: Predominant learning style\nparents_education_level: Highest education level of parents\n\nAcademic Performance Variables:\n\nhigh_school_gpa: High school academic performance\nstudy_hours_per_week: Average weekly study time\nenglish_proficiency: English language skills score\nmath_proficiency: Mathematics skills score\nscience_proficiency: Scientific reasoning skills score\nfinal_gpa: Cumulative college GPA\ngraduation_within_4_years: Binary indicator of timely graduation\nacademic_performance_description: Qualitative performance assessment\n\nContextual Variables:\n\nfamily_income: Household income\npersonal_essay: Student’s reflective writing sample"
+  },
+  {
+    "objectID": "sprojects/education/education/student_performance_analysis.html#analysis-tasks",
+    "href": "sprojects/education/education/student_performance_analysis.html#analysis-tasks",
+    "title": "Student Performance Analysis Project",
+    "section": "Analysis Tasks",
+    "text": "Analysis Tasks\n\nTask 1: Exploratory Data Analysis (20%)\n\nComprehensive exploratory analysis\n\nDescriptive statistics for numerical variables\nDistribution analysis of performance metrics\nCorrelation matrix between academic and demographic variables\n\nVisualization Requirements:\n\nPerformance variations across majors\nStudy hours and GPA relationship\nLearning style performance distributions\n\n\n\n\nTask 2: Regression Modeling (40%)\nObjective: Develop regression models to predict academic performance\n\nLinear Regression: Predicting Final GPA\n\nDependent Variable: final_gpa\nIndependent Variables:\n\nhigh_school_gpa\nstudy_hours_per_week\nparents_education_level\nSubject proficiency scores\nDemographic factors\n\n\nRequirements:\n\nImplement multiple linear regression\nCheck and address multicollinearity\nValidate model assumptions\nInterpret coefficients and statistical significance\n\nRegularized Regression\n\nApply Ridge/Lasso regression\nCompare model performance metrics\nDiscuss feature importance\n\n\n\n\nTask 3: Binary Outcome Prediction (40%)\nObjective: Predict graduation probability\n\nDependent Variable: graduation_within_4_years\nIndependent Variables:\n\nAcademic performance metrics\nSocioeconomic indicators\nLearning style\nSubject proficiencies\n\n\nRequirements:\n\nImplement both Logit and Probit models\nCompare model performance using:\n\nAccuracy\nAUC-ROC\nConfusion matrix\n\nInterpret marginal effects\nDiscuss model selection criteria"
+  },
+  {
+    "objectID": "sprojects/education/education/student_performance_analysis.html#submission-requirements",
+    "href": "sprojects/education/education/student_performance_analysis.html#submission-requirements",
+    "title": "Student Performance Analysis Project",
+    "section": "Submission Requirements",
+    "text": "Submission Requirements\n\nComprehensive analysis report (max 15 pages)\nFully documented code\nDetailed result interpretations\nDiscussion of limitations and potential improvements"
+  },
+  {
+    "objectID": "sprojects/education/education/student_performance_analysis.html#evaluation-criteria",
+    "href": "sprojects/education/education/student_performance_analysis.html#evaluation-criteria",
+    "title": "Student Performance Analysis Project",
+    "section": "Evaluation Criteria",
+    "text": "Evaluation Criteria\n\nTechnical Complexity (40%)\nStatistical Rigor (30%)\nVisualization Quality (15%)\nInterpretation Depth (15%)"
+  },
+  {
+    "objectID": "sprojects/education/education/student_performance_analysis.html#bonus-challenges",
+    "href": "sprojects/education/education/student_performance_analysis.html#bonus-challenges",
+    "title": "Student Performance Analysis Project",
+    "section": "Bonus Challenges",
+    "text": "Bonus Challenges\n\nExplore machine learning extensions\nDevelop advanced feature engineering techniques\nCreate predictive models for academic interventions"
+  },
+  {
+    "objectID": "sprojects/education/education/student_performance_analysis.html#references",
+    "href": "sprojects/education/education/student_performance_analysis.html#references",
+    "title": "Student Performance Analysis Project",
+    "section": "References",
+    "text": "References"
+  },
+  {
+    "objectID": "sprojects/education/education/readme.html",
+    "href": "sprojects/education/education/readme.html",
+    "title": "Student Performance Analysis Project",
+    "section": "",
+    "text": "This project aims to analyze student performance using a synthetic dataset that captures complex interactions between individual, academic, and socio-economic characteristics. You will apply advanced statistical modeling techniques to understand the factors influencing academic success and graduation probability.\n\n\n\nA comprehensive synthetic dataset (student_performance_dataset.csv) is provided, capturing multidimensional aspects of student performance."
+  },
+  {
+    "objectID": "sprojects/education/education/readme.html#project-overview",
+    "href": "sprojects/education/education/readme.html#project-overview",
+    "title": "Student Performance Analysis Project",
+    "section": "",
+    "text": "This project aims to analyze student performance using a synthetic dataset that captures complex interactions between individual, academic, and socio-economic characteristics. You will apply advanced statistical modeling techniques to understand the factors influencing academic success and graduation probability.\n\n\n\nA comprehensive synthetic dataset (student_performance_dataset.csv) is provided, capturing multidimensional aspects of student performance."
+  },
+  {
+    "objectID": "sprojects/education/education/readme.html#data-dictionary",
+    "href": "sprojects/education/education/readme.html#data-dictionary",
+    "title": "Student Performance Analysis Project",
+    "section": "Data Dictionary",
+    "text": "Data Dictionary\n\nStudent Performance Dataset (student_performance_dataset.csv)\nDemographic Variables:\n\nstudent_id: Unique identifier for each student\nname: Student’s name\nage: Student’s age\ngender: Student’s gender identity\nmajor: Academic major\nlearning_style: Predominant learning style\nparents_education_level: Highest education level of parents\n\nAcademic Performance Variables:\n\nhigh_school_gpa: High school academic performance\nstudy_hours_per_week: Average weekly study time\nenglish_proficiency: English language skills score\nmath_proficiency: Mathematics skills score\nscience_proficiency: Scientific reasoning skills score\nfinal_gpa: Cumulative college GPA\ngraduation_within_4_years: Binary indicator of timely graduation\nacademic_performance_description: Qualitative performance assessment\n\nContextual Variables:\n\nfamily_income: Household income\npersonal_essay: Student’s reflective writing sample"
+  },
+  {
+    "objectID": "sprojects/education/education/readme.html#analysis-tasks",
+    "href": "sprojects/education/education/readme.html#analysis-tasks",
+    "title": "Student Performance Analysis Project",
+    "section": "Analysis Tasks",
+    "text": "Analysis Tasks\n\nTask 1: Exploratory Data Analysis (20%)\n\nComprehensive exploratory analysis\n\nDescriptive statistics for numerical variables\nDistribution analysis of performance metrics\nCorrelation matrix between academic and demographic variables\n\nVisualization Requirements:\n\nPerformance variations across majors\nStudy hours and GPA relationship\nLearning style performance distributions\n\n\n\n\nTask 2: Regression Modeling (40%)\nObjective: Develop regression models to predict academic performance\n\nLinear Regression: Predicting Final GPA\n\nDependent Variable: final_gpa\nIndependent Variables:\n\nhigh_school_gpa\nstudy_hours_per_week\nparents_education_level\nSubject proficiency scores\nDemographic factors\n\n\nRequirements:\n\nImplement multiple linear regression\nCheck and address multicollinearity\nValidate model assumptions\nInterpret coefficients and statistical significance\n\nRegularized Regression\n\nApply Ridge/Lasso regression\nCompare model performance metrics\nDiscuss feature importance\n\n\n\n\nTask 3: Binary Outcome Prediction (40%)\nObjective: Predict graduation probability\n\nDependent Variable: graduation_within_4_years\nIndependent Variables:\n\nAcademic performance metrics\nSocioeconomic indicators\nLearning style\nSubject proficiencies\n\n\nRequirements:\n\nImplement both Logit and Probit models\nCompare model performance using:\n\nAccuracy\nAUC-ROC\nConfusion matrix\n\nInterpret marginal effects\nDiscuss model selection criteria"
+  },
+  {
+    "objectID": "sprojects/education/education/readme.html#submission-requirements",
+    "href": "sprojects/education/education/readme.html#submission-requirements",
+    "title": "Student Performance Analysis Project",
+    "section": "Submission Requirements",
+    "text": "Submission Requirements\n\nComprehensive analysis report (max 15 pages)\nFully documented code\nDetailed result interpretations\nDiscussion of limitations and potential improvements"
+  },
+  {
+    "objectID": "sprojects/education/education/readme.html#evaluation-criteria",
+    "href": "sprojects/education/education/readme.html#evaluation-criteria",
+    "title": "Student Performance Analysis Project",
+    "section": "Evaluation Criteria",
+    "text": "Evaluation Criteria\n\nTechnical Complexity (40%)\nStatistical Rigor (30%)\nVisualization Quality (15%)\nInterpretation Depth (15%)"
+  },
+  {
+    "objectID": "sprojects/education/education/readme.html#bonus-challenges",
+    "href": "sprojects/education/education/readme.html#bonus-challenges",
+    "title": "Student Performance Analysis Project",
+    "section": "Bonus Challenges",
+    "text": "Bonus Challenges\n\nExplore machine learning extensions\nDevelop advanced feature engineering techniques\nCreate predictive models for academic interventions"
+  },
+  {
+    "objectID": "sprojects/education/education/readme.html#references",
+    "href": "sprojects/education/education/readme.html#references",
+    "title": "Student Performance Analysis Project",
+    "section": "References",
+    "text": "References"
   }
 ]
