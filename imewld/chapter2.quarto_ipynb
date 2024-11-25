@@ -1,0 +1,266 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Chapter 2: The Simple Regression Model\"\n",
+        "jupyter: nbstata\n",
+        "format: \n",
+        "    html: default\n",
+        "execute: \n",
+        "  echo: true\n",
+        "---\n",
+        "\n",
+        "\n",
+        "## Example 2.3: CEO Salary and Return on Equity\n",
+        "\n",
+        "Model:\n",
+        "\n",
+        "$$salary = \\beta_0 + \\beta_1 roe + u$$\n",
+        "\n",
+        ":::{.callout}"
+      ],
+      "id": "110ec66d"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "frause ceosal1, clear\n",
+        "regress salary roe    \n",
+        "\n",
+        "display \"Prediction: \" _b[_cons] \" +\" _b[roe] \"*30\" \"=\" _b[_cons] + _b[roe] *30"
+      ],
+      "id": "d843fc95",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::\n",
+        "\n",
+        "## Example 2.4: Wage and Education\n",
+        "\n",
+        ":::{.callout}"
+      ],
+      "id": "6b1418f8"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "frause wage1, clear\n",
+        "regress wage educ"
+      ],
+      "id": "b3798663",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::\n",
+        "\n",
+        "## Example 2.5: Voting Outcomes and Campaign Expenditures\n",
+        "\n",
+        ":::{.callout}"
+      ],
+      "id": "4eabd19b"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "frause vote1, clear\n",
+        "regress votea sharea"
+      ],
+      "id": "2ebdbf09",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::\n",
+        "\n",
+        "## Example 2.6: CEO Salary and Return on Equity\n",
+        "\n",
+        ":::{.callout}"
+      ],
+      "id": "c392d3fe"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "frause ceosal1, clear\n",
+        "qui:regress salary roe  \n",
+        "predict salaryhat, xb\n",
+        "predict uhat , resid\n",
+        "\n",
+        "list roe salary salaryhat uhat  in 1/10"
+      ],
+      "id": "1bc6cc53",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::\n",
+        "\n",
+        "## Example 2.7: Wage and Education\n",
+        "\n",
+        ":::{.callout}"
+      ],
+      "id": "4ba15278"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "frause wage1, clear\n",
+        "qui:regress wage educ\n",
+        "sum wage educ\n",
+        "display \"b0+b1*E(educ)= \" _b[_cons] + _b[educ]*r(mean)"
+      ],
+      "id": "8b15db96",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::\n",
+        "\n",
+        "## Example 2.8: CEO Salary and Return on Equity\n"
+      ],
+      "id": "00503962"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "frause ceosal1, clear\n",
+        "gen one=1\n",
+        "mata:y = st_data(., \"salary\")\n",
+        "mata:x = st_data(., \"one roe\")\n",
+        "mata:b = invsym(x'*x)*x'*y\n",
+        "mata:yhat = x*b\n",
+        "mata:uhat = y - yhat\n",
+        "mata:sst = sum((y :- mean(y)):^2)\n",
+        "mata:sse = sum((yhat :- mean(y)):^2)\n",
+        "mata:ssr = sum((y :- yhat):^2)\n",
+        "mata:rsq = 1 - ssr/sst;rsq\n",
+        "mata:rsq = sse/sst;rsq"
+      ],
+      "id": "4759a20d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Example 2.10: a log wage model\n",
+        "\n",
+        "Model\n",
+        "\n",
+        "$$log(wage) = \\beta_0 + \\beta_1 educ + u$$\n",
+        "\n",
+        ":::{.callout}"
+      ],
+      "id": "aa0c0a3e"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "frause wage1, clear\n",
+        "gen logwage = log(wage)\n",
+        "regress logwage educ"
+      ],
+      "id": "a0b59656",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::\n",
+        "\n",
+        "## Example 2.11: CEO Salary and Firms Sales\n",
+        "\n",
+        "Model:\n",
+        "\n",
+        "$$log(salary) = \\beta_0 + \\beta_1 log(sales) + u$$\n",
+        "\n",
+        ":::{.callout}"
+      ],
+      "id": "2aac1ce0"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "frause ceosal1, clear\n",
+        "gen logsalary = log(salary)\n",
+        "gen logsales = log(sales)\n",
+        "reg logsalary logsales"
+      ],
+      "id": "e30cbcea",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::\n",
+        "\n",
+        "## Example 2.14: Evaluating a Job Training Program\n",
+        "\n",
+        ":::{.callout}"
+      ],
+      "id": "326ebac4"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "frause jtrain2, clear\n",
+        "reg re78 train"
+      ],
+      "id": "0db77704",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::\n"
+      ],
+      "id": "4f7e8991"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "nbstata",
+      "language": "stata",
+      "display_name": "Stata (nbstata)",
+      "path": "C:\\Users\\Fernando\\AppData\\Roaming\\jupyter\\kernels\\nbstata"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

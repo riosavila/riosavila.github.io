@@ -14764,5 +14764,418 @@
     "title": "Student Performance Analysis Project",
     "section": "References",
     "text": "References"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#forecast-setup",
+    "href": "rm-data/slides/week13.html#forecast-setup",
+    "title": "Forecasting from Time Series Data",
+    "section": "Forecast setup",
+    "text": "Forecast setup\n\nIt is difficult to make predictions, especially about the future. (Niels Bohr; possibly an old Danish proverb)\n\n\nIt is fairly easy to make forecasts for variables that have a decently stable pattern over time\n\nWeekly FastMovingGoods product sales, sensor of gadgets used regularly\n\nIt is very hard to make forecasts of really interesting variables\n\nGDP with Recession, crisis,\nHigh tech gadgets with new products\nStock market prices\n\nwhy???\n\nTradition!"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#forecasting-basics",
+    "href": "rm-data/slides/week13.html#forecasting-basics",
+    "title": "Forecasting from Time Series Data",
+    "section": "Forecasting basics",
+    "text": "Forecasting basics\n\nForecasting is a special case of prediction.\nForecasting makes use of time series data on \\(y\\), and possibly other variables \\(x\\).\nThe original data used for forecasting is a time series from 1 through \\(T\\), such as \\(y_1, y_2, ..., y_T\\)\nThe forecast is prepared for time periods after the original data ends, such as \\(\\hat{y}_{T+1}, \\hat{y}_{T+2}, ..., \\hat{y}_{T+H}\\). This is the live time series data."
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#forecast-horizon",
+    "href": "rm-data/slides/week13.html#forecast-horizon",
+    "title": "Forecasting from Time Series Data",
+    "section": "Forecast horizon",
+    "text": "Forecast horizon\n\nWhat is it?\n\nThe length of the live time series data (here \\(H\\)) = the forecast horizon.\n\nShort-horizon forecasts are carried out for a few observations after the original time series;\n\n5-10 years of monthly data \\(\\rightarrow\\) forecast a 3-12 months ahead\n10 years of quarterly data \\(\\rightarrow\\) predict ahead of a few quarters\n\nLong-horizon forecasts are carried out for many observations.\n\nOften: data on activity, operation\n5 years of daily data \\(\\rightarrow\\) forecast daily ahead for a year\n2 months of hourly activity data \\(\\rightarrow\\) predict weeks ahead"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#cross-validation-in-time-series",
+    "href": "rm-data/slides/week13.html#cross-validation-in-time-series",
+    "title": "Forecasting from Time Series Data",
+    "section": "Cross-validation in time series",
+    "text": "Cross-validation in time series\n\nCross-validation is essential in time series\n\nThe ability to build a model that works well for the future, without overfitting\n\nBut it is tricky\n\nyou cannot just randomly split the data.\n\nTime series is time dependent\n\nBut there are Options"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#cross-validation-options",
+    "href": "rm-data/slides/week13.html#cross-validation-options",
+    "title": "Forecasting from Time Series Data",
+    "section": "Cross-validation: Options",
+    "text": "Cross-validation: Options\n\nOP1: Select a “test set” of few periods where to evaluate the model\n\nUse all information before and the test set to build the model\nAnd a common “end of sample” test set\nGood for long-horizon forecasts\n\nOP2: Select a “test set” of few periods where to evaluate the model\n\nUse “X” periods before the test set to build the model\nRepeat with the next Window\nGood for short-horizon forecasts"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#cross-validation",
+    "href": "rm-data/slides/week13.html#cross-validation",
+    "title": "Forecasting from Time Series Data",
+    "section": "Cross-validation",
+    "text": "Cross-validation\n\nOption 1: Full sampleOption 2: Rolling window"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#message",
+    "href": "rm-data/slides/week13.html#message",
+    "title": "Forecasting from Time Series Data",
+    "section": "Message:",
+    "text": "Message:\n\nThe strategy for prediction and cross-validation depends on the forecast horizon.\n\nFor short-horizon forecasts, you really need to consider the time dependence of the data.\nFor long-horizon forecasts, you try to capture long-term patterns in the data."
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#long-horizon-forecasting-seasonality-and-predictable-events",
+    "href": "rm-data/slides/week13.html#long-horizon-forecasting-seasonality-and-predictable-events",
+    "title": "Forecasting from Time Series Data",
+    "section": "Long-horizon forecasting: Seasonality and predictable events",
+    "text": "Long-horizon forecasting: Seasonality and predictable events\n\nLook for aspect of data that matter for long time\nFocus on predictable aspects of time series\n\nTrend(s) + Seasonality + Other regular events\n\nTwo options to model trend: estimate average change or trend line\n\n\\(y = f(T,S,E)\\) or\n\\(\\%\\Delta y \\text{ or } \\Delta y =g(T,S,E)\\)\n\nSeasonality: ie model with set of variables (11 months), maybe interactions\nOther regular events - set of binary vars (War, Covid, New Policy, etc)"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#long-horizon-forecasting-growth-rates",
+    "href": "rm-data/slides/week13.html#long-horizon-forecasting-growth-rates",
+    "title": "Forecasting from Time Series Data",
+    "section": "Long-horizon forecasting: Growth rates",
+    "text": "Long-horizon forecasting: Growth rates\nFirst model - estimate average change:\n\\[\\hat{\\Delta}y = \\hat{\\alpha}\\]\nFor prediction this means:\n\\[\n\\begin{aligned}\n\\hat{y}_{T+1} &= y_T + \\hat{\\Delta}y \\\\\n\\hat{y}_{T+2} &= \\hat{y}_{T+1} + \\hat{\\Delta}y = y_T + 2 \\times \\hat{\\Delta}y \\\\\n\\dots \\\\\n\\hat{y}_{T+H} &= y_T xx+ H \\times \\hat{\\Delta}y\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#long-horizon-forecasting-trends",
+    "href": "rm-data/slides/week13.html#long-horizon-forecasting-trends",
+    "title": "Forecasting from Time Series Data",
+    "section": "Long-horizon forecasting: Trends",
+    "text": "Long-horizon forecasting: Trends\nEstimate trend line: \\[\\hat{y}_t = \\hat{\\alpha} + \\hat{\\delta}t\\]\n\n\\(\\hat{\\alpha}\\) is predicted \\(y\\) when \\(t = 0\\)\n\\(\\hat{\\delta}\\) tells us how much predicted \\(y\\) changes if \\(t\\) is increased by one unit.\nYou can also use more complex trends. (but one should still be concerned about overfitting)"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#long-horizon-forecasting-trends---compare-options",
+    "href": "rm-data/slides/week13.html#long-horizon-forecasting-trends---compare-options",
+    "title": "Forecasting from Time Series Data",
+    "section": "Long-horizon forecasting: Trends - compare options",
+    "text": "Long-horizon forecasting: Trends - compare options\n\nDifference in models\n\nModel changes:\n\nAssumes that \\(y\\) continues from the last observation, and increase by the same amount each time. What if Last observation is unusual?\n\nModel trend line\n\nAssumes that \\(y\\) remains close to the trend line. Last unusual observation would not matter for the forecast, because it would be the trend line.\n\n\nNeither approach is inherently better than the other"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#long-horizon-forecasting-seasonality",
+    "href": "rm-data/slides/week13.html#long-horizon-forecasting-seasonality",
+    "title": "Forecasting from Time Series Data",
+    "section": "Long-horizon forecasting: Seasonality",
+    "text": "Long-horizon forecasting: Seasonality\n\nCapture regular fluctuations\nMonths, days of the week, hours, combinations"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#case-study-abq-swimming",
+    "href": "rm-data/slides/week13.html#case-study-abq-swimming",
+    "title": "Forecasting from Time Series Data",
+    "section": "Case study: ABQ swimming",
+    "text": "Case study: ABQ swimming\n\nSwimming pool data\nAlbuquerque (ABQ), New Mexico, USA\nBig data, transaction level entry data logged from sales systems\n1.5m observations\n\nThis CS:\n\nSample: Single swimming pool\nAggregated: number of ticket sales per day\nAfter some sample design - regular tickets only"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#case-study-modelling",
+    "href": "rm-data/slides/week13.html#case-study-modelling",
+    "title": "Forecasting from Time Series Data",
+    "section": "Case study: Modelling",
+    "text": "Case study: Modelling\n\nTrend is simple – use simple linear trend: \\(\\alpha t\\)\n\nMaybe not really important at all\nPerhaps consider exponential trend? (log-linear model)\n\nSeasonality is important and tricky"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#case-study-daily-ticket-sales",
+    "href": "rm-data/slides/week13.html#case-study-daily-ticket-sales",
+    "title": "Forecasting from Time Series Data",
+    "section": "Case study: Daily ticket sales",
+    "text": "Case study: Daily ticket sales\n\nDaily Sales 5Yrs"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#case-study-monthly-and-daily-seasonality-in-the-number-of-tickets-sold",
+    "href": "rm-data/slides/week13.html#case-study-monthly-and-daily-seasonality-in-the-number-of-tickets-sold",
+    "title": "Forecasting from Time Series Data",
+    "section": "Case study: Monthly and daily seasonality in the number of tickets sold",
+    "text": "Case study: Monthly and daily seasonality in the number of tickets sold\n#| fig-height: 4\n#| fig-width: 8\nggplot(data, aes(month, sales)) +\n  geom_boxplot()\n\nggplot(data, aes(weekday, sales)) +\n  geom_boxplot()"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#case-study-daily-ticket-sales-a-heatmap",
+    "href": "rm-data/slides/week13.html#case-study-daily-ticket-sales-a-heatmap",
+    "title": "Forecasting from Time Series Data",
+    "section": "Case study: Daily ticket sales: A heatmap",
+    "text": "Case study: Daily ticket sales: A heatmap\n\n\n\nTool to model seasonality\nEach cell is average sales for a given combination of day and month over years\nColors help see pattern"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#case-study-modeling",
+    "href": "rm-data/slides/week13.html#case-study-modeling",
+    "title": "Forecasting from Time Series Data",
+    "section": "Case study: Modeling",
+    "text": "Case study: Modeling\n\nTrend is simple - linear trend\nSeasonality is tricky - need to model and simplify\n\nMonths\nDays of the week\nUSA holidays (dummies)\nSummer break (depends?)\nInteraction of summer break and day of the week\nInteraction of weekend and month"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#case-study-model-features-and-rmse",
+    "href": "rm-data/slides/week13.html#case-study-model-features-and-rmse",
+    "title": "Forecasting from Time Series Data",
+    "section": "Case study: Model features and RMSE",
+    "text": "Case study: Model features and RMSE\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntrend\nmonths\ndays\nholidays\nschool*days\ndays*months\nRMSE\n\n\n\n\nM1\nX\nX\n\n\n\n\n32.35\n\n\nM2\nX\nX\nX\n\n\n\n31.45\n\n\nM3\nX\nX\nX\nX\n\n\n29.46\n\n\nM4\nX\nX\nX\nX\nX\n\n27.61\n\n\nM5\nX\nX\nX\nX\nX\nX\n26.90\n\n\nM6 (log)\nX\nX\nX\nX\nX\n\n30.99\n\n\nM7 (Prophet-ML)\nX\nX\nX\nX\nN/A\n\n29.47\n\n\n\nNote: Trend is linear trend, days is day-of-the-week, holidays: national US holidays, school*days is school holiday (mid-May to mid-August and late December) interacted with days of week.\nRMSE is cross-validated.\nSource: swim-transactions dataset.\nDaily time series, 2010–2016, N=2522 (work set 2010–2015, N=2162)."
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#case-study-compared-actual-vs-predicted-on-holdout-set-2016",
+    "href": "rm-data/slides/week13.html#case-study-compared-actual-vs-predicted-on-holdout-set-2016",
+    "title": "Forecasting from Time Series Data",
+    "section": "Case study: Compared actual vs predicted on holdout set (2016)",
+    "text": "Case study: Compared actual vs predicted on holdout set (2016)"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#case-study-diagnostics---holdout-set-2016",
+    "href": "rm-data/slides/week13.html#case-study-diagnostics---holdout-set-2016",
+    "title": "Forecasting from Time Series Data",
+    "section": "Case study: Diagnostics - holdout set (2016)",
+    "text": "Case study: Diagnostics - holdout set (2016)\n\n\nActual vs predicted August 2016\n\n\nMonthly RMSE"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#case-study-diagnostics-vs-model-building",
+    "href": "rm-data/slides/week13.html#case-study-diagnostics-vs-model-building",
+    "title": "Forecasting from Time Series Data",
+    "section": "Case study: Diagnostics vs model building",
+    "text": "Case study: Diagnostics vs model building\n\nHere we used diagnostics to learn about what to expect, strength and weaknesses of the already selected model.\n\nThis means, no going back to drawing board.\n\nBut, we could have said, lets run some checks on the training set and maybe alter the model accordingly.\n\nAs we normally do with scatterplots, lowess, tabulations, etc\nHere: something weird happening in December.\n\nAct, build a new model and test, etc."
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#an-algorithm-to-build-a-models-prophet",
+    "href": "rm-data/slides/week13.html#an-algorithm-to-build-a-models-prophet",
+    "title": "Forecasting from Time Series Data",
+    "section": "An algorithm to build a models: Prophet",
+    "text": "An algorithm to build a models: Prophet\n\nAnother option is an algo built by Facebook folks\nProphet is a forecasting procedure algorithm - https://facebook.github.io/prophet/\nTrends + seasonality + change in trends + add-on for special events (holidays)\nFind functional form flexibly, try out many different combinations\nIn a smart way"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#case-study-using-prophet",
+    "href": "rm-data/slides/week13.html#case-study-using-prophet",
+    "title": "Forecasting from Time Series Data",
+    "section": "Case study: Using Prophet",
+    "text": "Case study: Using Prophet\n\nProphet\n\nTrends + seasonality + special events\n\nIn our case study as good as simple model, not as good as best model\nBut fairly close\nAnd automatic.."
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#short-run-horizon-serial-correlation-and-arima",
+    "href": "rm-data/slides/week13.html#short-run-horizon-serial-correlation-and-arima",
+    "title": "Forecasting from Time Series Data",
+    "section": "Short run horizon, serial correlation and ARIMA",
+    "text": "Short run horizon, serial correlation and ARIMA"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#short-horizon-forecasting-what-is-new",
+    "href": "rm-data/slides/week13.html#short-horizon-forecasting-what-is-new",
+    "title": "Forecasting from Time Series Data",
+    "section": "Short-horizon forecasting: what is new?",
+    "text": "Short-horizon forecasting: what is new?\n\nSerial correlation is essential\n\nData Depends on itself, and Errors Also Depend on Themselves\n\nModeling how a shock fades away \\(\\leftarrow\\) Hopefully things “return to normal”\nHow?\n\nAutoregressive (AR) models, capture the patterns of serial correlation – \\(y\\) at time \\(t\\) is regressed on its lags, that is its past values, \\(t - 1, t - 2, etc\\).\n\nThe simplest includes one lag only, AR(1): \\[y_t^E = \\beta_0 + \\beta_1 y_{t-1}\\]\nInterested in estimating \\(\\beta_1\\) or \\(\\rho\\).\n\nIf \\(\\rho = 1\\) is random walk (unpredictable),\nif \\(\\rho = 0\\) is white noise (also unpredictable, but stable)."
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#short-horizon-forecasting-ar1",
+    "href": "rm-data/slides/week13.html#short-horizon-forecasting-ar1",
+    "title": "Forecasting from Time Series Data",
+    "section": "Short-horizon forecasting: AR(1)",
+    "text": "Short-horizon forecasting: AR(1)\n\nOne-period-ahead forecast from an AR(1):\n\nIts a recursive formula:\n\n\n\\[\\begin{aligned}\n\\hat{y}_{T+1} &= \\hat{\\beta}_0 + \\hat{\\beta}_1 y_T \\\\\n\\hat{y}_{T+2} &= \\hat{\\beta}_0 + \\hat{\\beta}_1 \\hat y_{T+1}  \\\\\n              &=  \\hat{\\beta}_0 + \\hat{\\beta}_1 \\hat{\\beta}_0 + \\hat{\\beta}_1^2  y_T \\\\\n\\dots                \\\\\n\\hat{y}_{T+k} &= \\hat{\\beta}_0 \\sum_{s=1}^{k}  \\hat{\\beta}_1^{s-1} + \\hat{\\beta}_1^{k} y_T\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#short-horizon-forecasting-arima",
+    "href": "rm-data/slides/week13.html#short-horizon-forecasting-arima",
+    "title": "Forecasting from Time Series Data",
+    "section": "Short-horizon forecasting: ARIMA",
+    "text": "Short-horizon forecasting: ARIMA\n\nARIMA(p,d,q) models that are generalizations of the AR(1) model\n\ncan approximate any pattern of serial correlation.\n\nARIMA models are put together from three parts: AR(p), I(d) and MA(q).\nbut What are these?"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#short-horizon-forecasting-the-innovation-e_t",
+    "href": "rm-data/slides/week13.html#short-horizon-forecasting-the-innovation-e_t",
+    "title": "Forecasting from Time Series Data",
+    "section": "Short-horizon forecasting: The innovation \\(e_t\\)",
+    "text": "Short-horizon forecasting: The innovation \\(e_t\\)\n\nNovelty: idea of innovation = difference in \\(y\\) from the value that could be expected beforehand. \\[e_t = y_t - y^E_t\\]\nContent: new in \\(y_t\\) on top of what was expected of it.\ninnovation: \\(y^E\\) is based on previous \\(y\\) observations.\nToday’s \\(y\\) value = what we expected of it based on what we knew yesterday + plus what’s new today: the innovation. \\[y_t = y^E_t + e_t\\]\nNote: Innovation is formally like prediction error. But now, past values used for prediction."
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#short-horizon-forecasting-arimap00",
+    "href": "rm-data/slides/week13.html#short-horizon-forecasting-arimap00",
+    "title": "Forecasting from Time Series Data",
+    "section": "Short-horizon forecasting: ARIMA(p,0,0)",
+    "text": "Short-horizon forecasting: ARIMA(p,0,0)\nStart: generalize AR(1): AR(p) or ARIMA(p,0,0) \\[y_t = \\beta_0 + \\beta_1 y_{t-1} + \\beta_2 y_{t-2} + ... + \\beta_p y_{t-p} + e_t\\]\nFlexible way to model how shocks fade away As we forecast further ahead – use the predicted values in the formula, additional error in the forecasts due to larger estimation error and model error."
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#short-horizon-forecasting-arimap10",
+    "href": "rm-data/slides/week13.html#short-horizon-forecasting-arimap10",
+    "title": "Forecasting from Time Series Data",
+    "section": "Short-horizon forecasting: ARIMA(p,1,0)",
+    "text": "Short-horizon forecasting: ARIMA(p,1,0)\nNow, look at first differences: ARIMA(p,1,0) \\[\\Delta y_t = \\beta_0 + \\beta_1 \\Delta y_{t-1} + \\beta_2 \\Delta y_{t-2} + ... + \\beta_p \\Delta y_{t-p} + e_t\\]\n\n\\(\\beta_0\\) captures the trend,\n\\(e_t\\) captures how the change in \\(y\\) is different from expected based on AR(p) part."
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#short-horizon-forecasting-arima001",
+    "href": "rm-data/slides/week13.html#short-horizon-forecasting-arima001",
+    "title": "Forecasting from Time Series Data",
+    "section": "Short-horizon forecasting: ARIMA(0,0,1)",
+    "text": "Short-horizon forecasting: ARIMA(0,0,1)\nMA(1) model is a linear combination of two consecutive innovations: \\[y_t = e_t + \\theta e_{t-1}\\]\nNot a regression model: can’t interpret \\(\\theta\\) as a coefficient. $= $ moving average coefficient, \\(|\\theta|&lt; 1\\). the current value of \\(y\\) is the linear combination of this period’s innovation and last period’s innovation \\(\\theta\\) is what multiplies last period’s innovation. Estimated via a algo called maximum likelihood (not OLS!) It’s a linear combination, not a simple average coefficients on \\(e_t\\) and \\(e_{t-1}\\) don’t add up to one"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#short-horizon-forecasting-arima00q",
+    "href": "rm-data/slides/week13.html#short-horizon-forecasting-arima00q",
+    "title": "Forecasting from Time Series Data",
+    "section": "Short-horizon forecasting: ARIMA(0,0,q)",
+    "text": "Short-horizon forecasting: ARIMA(0,0,q)\nThe MA(q) model (an ARIMA(0,0,q)) is a generalization of the MA(1): \\[y_t = e_t + \\theta_1 e_{t-1} + ... + \\theta_q e_{t-q}\\]\nSimilarly to an AR model, we can specify an MA model for the changes in \\(y\\), which would be an ARIMA(0,1,q)."
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#short-horizon-forecasting-ma-vs-ar",
+    "href": "rm-data/slides/week13.html#short-horizon-forecasting-ma-vs-ar",
+    "title": "Forecasting from Time Series Data",
+    "section": "Short-horizon forecasting: MA vs AR",
+    "text": "Short-horizon forecasting: MA vs AR\n\nMA models of serial correlation.\nMA(1) – first order serial correlation = Corr \\((y_t, y_{t-1}) = \\theta/(1 + \\theta^2)\\).\nHas \\(\\theta\\) and nothing else, monotonic function.\nFirst order serial correlation is stronger, the larger \\(\\theta\\) is (in absolute value).\nsecond order serial correlation is zero, and so are all other serial correlations: Corr \\((y_t, y_{t-2}) = 0\\), Corr \\((y_t, y_{t-3}) = 0\\), etc.\nUnlike AR(1) model: serial correlations decrease but don’t drop to zero.\nAR and MA models capture different patterns of serial correlation.\nCombination offers flexibility"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#short-horizon-forecasting-arimapdq",
+    "href": "rm-data/slides/week13.html#short-horizon-forecasting-arimapdq",
+    "title": "Forecasting from Time Series Data",
+    "section": "Short-horizon forecasting: ARIMA(p,d,q)",
+    "text": "Short-horizon forecasting: ARIMA(p,d,q)\n\nThe ARIMA model combines three approaches to modeling time series data:\n\nAR(p): autoregressive models, We have seen this\nI(d): models of differences, This is new\n\nRelates to models that you first take the difference before modeling.\nFor example \\(\\Delta y_t = y_t - y_{t-1} = \\alpha\\) is a I(1) model\n\nMA(q) models: moving average models: Concentrates on the error term, and how much it “depends” on past errors.\n\nFor example \\(y_t = e_t + \\theta e_{t-1}\\) is a MA(1) model\n\\(\\theta\\) has to be estimated via maximum likelihood, not OLS."
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#short-horizon-forecasting-arima-1",
+    "href": "rm-data/slides/week13.html#short-horizon-forecasting-arima-1",
+    "title": "Forecasting from Time Series Data",
+    "section": "Short-horizon forecasting: ARIMA",
+    "text": "Short-horizon forecasting: ARIMA\n\nThe analogous model when \\(y\\) is in changes is an ARIMA(p,1,q): \\[\\Delta y_t = \\beta_0 + \\beta_1 \\Delta y_{t-1} + ... + \\beta_p \\Delta y_{t-p} + e_t + \\theta_1 e_{t-1} + ... + \\theta_q e_{t-q}\\]\nHow to choose (p,d,q)?\n\nWhichever works best in a cross-validated exercise!\nTry out a few and pick the one that works best\n“auto-arima” - an algo that tries out many options\nkeep it simple, \\(d = 0, 1\\) and \\(p = 0, 1, 2\\) and \\(q = 0, 1, 2\\) rarely more"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#short-horizon-forecasting-arima-2",
+    "href": "rm-data/slides/week13.html#short-horizon-forecasting-arima-2",
+    "title": "Forecasting from Time Series Data",
+    "section": "Short-horizon forecasting: ARIMA",
+    "text": "Short-horizon forecasting: ARIMA\n\nThere is a lot more about time series models one can learn."
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#case-study-case--shiller-home-price-index",
+    "href": "rm-data/slides/week13.html#case-study-case--shiller-home-price-index",
+    "title": "Forecasting from Time Series Data",
+    "section": "Case study: Case- Shiller home price index",
+    "text": "Case study: Case- Shiller home price index\n\nCase-Shiller home price index, Los Angeles\nMonthly index of home prices\nData available: fred.stlouisfed.org\nUse 18 years of monthly data"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#case-study-case-shiller-home-price-data",
+    "href": "rm-data/slides/week13.html#case-study-case-shiller-home-price-data",
+    "title": "Forecasting from Time Series Data",
+    "section": "Case study: Case Shiller home price data",
+    "text": "Case study: Case Shiller home price data\n\n18 years of data 2000-2017\nwork: 2000-2016, holdout is 2017\ncross-validate with rolling window, 4-fold\n\ntrain is 2000-2012, test is 2013\n…\ntrain is 2003-2015, test is 2016\n\nWe’ll predict 12 months ahead\nRMSE - symmetric and quadratic loss\nAssume getting index right matters exactly the same"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#case-study-target-variable",
+    "href": "rm-data/slides/week13.html#case-study-target-variable",
+    "title": "Forecasting from Time Series Data",
+    "section": "Case study: target variable",
+    "text": "Case study: target variable\n\nWhat should be the target variable?\n\nThe price index\nThe log of the price index\nFirst difference\n\nWe’ll try out, and pick via cross-validation\nThe model should include seasonal dummies (could be more complicated)\nThe model may include a linear trend or capture it with \\(\\Delta y\\) as target\nThe model can have any form of ARIMA"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#case-study-case--shiller-home-price-index---prediction-from-arima-models",
+    "href": "rm-data/slides/week13.html#case-study-case--shiller-home-price-index---prediction-from-arima-models",
+    "title": "Forecasting from Time Series Data",
+    "section": "Case study: Case- Shiller home price index - prediction from ARIMA models",
+    "text": "Case study: Case- Shiller home price index - prediction from ARIMA models\n\n\n\nid\ntarget\nARIMA\ntrend\nseason\nAR\nI\nMA\nRMSE\n\n\n\n\nM1\np\nNO\nX\nX\n\n\n\n31.9\n\n\nM2\np\nYES\n1\n1\n2\n\n\n9.5\n\n\nM3\np\nYES\nX\n1\n1\n1\n0\n4.1\n\n\nM4\np\nYES\nX\nX\n2\n0\n0\n2.3\n\n\nM5\ndp\nNO\nX\nX\n\n\n\n18.8\n\n\nM6\nlnp\nYES\nX\n0\n2\n0\n0\n7.2"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#case-study-prediction-with-best-model-m4",
+    "href": "rm-data/slides/week13.html#case-study-prediction-with-best-model-m4",
+    "title": "Forecasting from Time Series Data",
+    "section": "Case study: Prediction with best model M4",
+    "text": "Case study: Prediction with best model M4"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#case-study-prediction-with-best-model-m4-uncertainty",
+    "href": "rm-data/slides/week13.html#case-study-prediction-with-best-model-m4-uncertainty",
+    "title": "Forecasting from Time Series Data",
+    "section": "Case study: Prediction with best model M4: Uncertainty",
+    "text": "Case study: Prediction with best model M4: Uncertainty"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#var",
+    "href": "rm-data/slides/week13.html#var",
+    "title": "Forecasting from Time Series Data",
+    "section": "VAR",
+    "text": "VAR\n\nBetter forecasts with the help of other variables, at least for short forecast horizons.\nNeed forecasts of the \\(x\\) variable as well – we need a model.\nVector autoregression (VAR), is a method that incorporates other variables in time series regressions and can use those other variables for forecasting \\(y\\).\nA set of time series regressions."
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#var-simplest-model",
+    "href": "rm-data/slides/week13.html#var-simplest-model",
+    "title": "Forecasting from Time Series Data",
+    "section": "VAR: simplest model",
+    "text": "VAR: simplest model\nThe simplest VAR model has \\(y\\) and one \\(x\\) variable, and it includes one lag of each = VAR(1) model. Data have all variables at the same frequency VAT(1) = set of two TS regressions: \\[\\begin{align*}\ny_t^E &= \\beta_{10} + \\beta_{11} y_{t-1} + \\beta_{12} x_{t-1} \\\\\nx_t^E &= \\beta_{20} + \\beta_{21} y_{t-1} + \\beta_{22} x_{t-1}\n\\end{align*}\\]"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#var-forecast",
+    "href": "rm-data/slides/week13.html#var-forecast",
+    "title": "Forecasting from Time Series Data",
+    "section": "VAR forecast",
+    "text": "VAR forecast\nOne-period-ahead forecast for \\(y\\), only need estimates from the first one: \\[\\hat{y}_{T+1} = \\hat{\\beta}_{10} + \\hat{\\beta}_{11} y_T + \\hat{\\beta}_{12} x_T\\]\nFor forecasting \\(y\\) further ahead, we do need all coefficient estimates. Such forecasts use forecast values of \\(x\\) as well as \\(y\\). A two-period-ahead forecast of \\(y\\) from a VAR(1) is \\[\\hat{y}_{T+2} = \\hat{\\beta}_{10} + \\hat{\\beta}_{11} \\hat{y}_{T+1} + \\hat{\\beta}_{12} \\hat{x}_{T+1}\\] where \\(\\hat{y}_{T+1} = \\hat{\\beta}_{10} + \\hat{\\beta}_{11} y_T + \\hat{\\beta}_{12} x_T\\), and \\(\\hat{x}_{T+1} = \\hat{\\beta}_{20} + \\hat{\\beta}_{21} y_T + \\hat{\\beta}_{22} x_T\\). Forecasts for \\(T + 3, T + 4, etc.,\\) are analogous."
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#var-characteristics",
+    "href": "rm-data/slides/week13.html#var-characteristics",
+    "title": "Forecasting from Time Series Data",
+    "section": "VAR characteristics",
+    "text": "VAR characteristics\nThere are four important characteristics of a VAR:\n\nA VAR has a regression for each of the variables.\nThe right-hand side of each equation has all variables.\nRight-hand-side variables are in lags only.\nAll right-hand-side variables in all regressions have the same number of lags"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#case-study-additional-predictors-1",
+    "href": "rm-data/slides/week13.html#case-study-additional-predictors-1",
+    "title": "Forecasting from Time Series Data",
+    "section": "Case study: Additional predictors 1",
+    "text": "Case study: Additional predictors 1\n#| fig-height: 4\n#| fig-width: 8\ndata &lt;- read.csv(\"case_shiller.csv\")\nggplot(data, aes(date, unemployment_rate)) +\n  geom_line()\n\nggplot(data, aes(date, diff(unemployment_rate))) +\n  geom_line()"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#case-study-additional-predictors-2",
+    "href": "rm-data/slides/week13.html#case-study-additional-predictors-2",
+    "title": "Forecasting from Time Series Data",
+    "section": "Case study: Additional predictors 2",
+    "text": "Case study: Additional predictors 2\n#| fig-height: 4\n#| fig-width: 8  \nggplot(data, aes(date, log(employment))) +\n  geom_line()\n\nggplot(data, aes(date, diff(log(employment)))) +\n  geom_line()"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#case-study-case--shiller-home-price-index---model-selection-2",
+    "href": "rm-data/slides/week13.html#case-study-case--shiller-home-price-index---model-selection-2",
+    "title": "Forecasting from Time Series Data",
+    "section": "Case study: Case- Shiller home price index - Model selection 2",
+    "text": "Case study: Case- Shiller home price index - Model selection 2\nRun the VAR model and compare to previous results.\n\n\n\nid\ntarget\nARIMA\ntrend\nseason\nAR\nI\nMA\nRMSE\n\n\n\n\nM1\np\nNO\nX\nX\n\n\n\n31.9\n\n\nM2\np\nYES\n1\n1\n2\n\n\n9.5\n\n\nM3\np\nYES\nX\n1\n1\n1\n0\n4.1\n\n\nM4\np\nYES\nX\nX\n2\n0\n0\n2.3\n\n\nM5\ndp\nNO\nX\nX\n\n\n\n18.8\n\n\nM6\nlnp\nYES\nX\n0\n2\n0\n0\n7.2\n\n\nM7a\ndp\nVAR\n\n\n\n\n\n7.8\n\n\nM7b\ndp\nVAR\nX\n\n\n\n\n4.5"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#case-study-case--shiller-home-price-index---var",
+    "href": "rm-data/slides/week13.html#case-study-case--shiller-home-price-index---var",
+    "title": "Forecasting from Time Series Data",
+    "section": "Case study: Case- Shiller home price index - VAR",
+    "text": "Case study: Case- Shiller home price index - VAR\n\nIn this case study, VAR did not improve on ARIMA."
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#external-validity-in-time-series",
+    "href": "rm-data/slides/week13.html#external-validity-in-time-series",
+    "title": "Forecasting from Time Series Data",
+    "section": "External validity in time series",
+    "text": "External validity in time series\n\nExternal validity is about the stability of patterns in the data\n\nSuch as trends, seasonality\n\nStationarity is what we look for:\n\nDistribution of the target, predictors is stable over time\nCorrelation patterns also stable over time\n\nExternal validity is massive risk with time series by design: predict for future"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#case-study-external-validity",
+    "href": "rm-data/slides/week13.html#case-study-external-validity",
+    "title": "Forecasting from Time Series Data",
+    "section": "Case study: External validity",
+    "text": "Case study: External validity\n\nLook across years to see stability\nFour rolling windows, test sets were 2013,14,15,16"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#case-study-case--shiller-home-price-index---model-fit-on-test-sets",
+    "href": "rm-data/slides/week13.html#case-study-case--shiller-home-price-index---model-fit-on-test-sets",
+    "title": "Forecasting from Time Series Data",
+    "section": "Case study: Case- Shiller home price index - model fit on test sets",
+    "text": "Case study: Case- Shiller home price index - model fit on test sets\nFour test set (in work set) with rolling window CV. RMSE in each test set for each model.\n\n\n\nFold1\nFold2\nFold3\nFold4\nAverage\n\n\n\n\n14.90\n17.58\n34.44\n48.58\n31.9\n\n\n14.83\n8.39\n6.23\n5.52\n9.5\n\n\n6.68\n1.39\n3.29\n3.22\n4.1\n\n\n2.22\n1.96\n2.88\n1.20\n2.2\n\n\n33.94\n9.79\n10.44\n7.39\n18.8\n\n\n2.49\n4.95\n9.22\n9.54\n7.2\n\n\n13.30\n5.85\n3.52\n4.28\n7.8\n\n\n5.24\n2.51\n5.18\n4.75\n4.5"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#case-study-prediction-with-best-model-m4-for-2018",
+    "href": "rm-data/slides/week13.html#case-study-prediction-with-best-model-m4-for-2018",
+    "title": "Forecasting from Time Series Data",
+    "section": "Case study: Prediction with best model M4 for 2018",
+    "text": "Case study: Prediction with best model M4 for 2018"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#summary",
+    "href": "rm-data/slides/week13.html#summary",
+    "title": "Forecasting from Time Series Data",
+    "section": "Summary",
+    "text": "Summary\n\nTime series prediction is both simple and very hard\n\nSimple as some basic models work okay\nModel trend as first difference or linear trend\nModel seasonality, regular events\nSome basic method of capturing serial correlation\n\nTime series prediction model building is also very hard\n\nGetting seasonality, holidays, changing patterns right\nGetting target variable and ARIMA(p,d,q) selection needs competing models\n\nMost importantly: external validity is a huge problem\n\nStability may easily break down, and there is nothing we can do."
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#case-study-monthly-and-daily-seasonality",
+    "href": "rm-data/slides/week13.html#case-study-monthly-and-daily-seasonality",
+    "title": "Forecasting from Time Series Data",
+    "section": "Case study: Monthly and daily seasonality",
+    "text": "Case study: Monthly and daily seasonality\n\n\n\n\n\nMonth\n\n\n\n\n\n\nDay of the Week"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#short-horizon-forecasting-arimapdq-1",
+    "href": "rm-data/slides/week13.html#short-horizon-forecasting-arimapdq-1",
+    "title": "Forecasting from Time Series Data",
+    "section": "Short-horizon forecasting: ARIMA(p,d,q)",
+    "text": "Short-horizon forecasting: ARIMA(p,d,q)\nAR(p) and an MA(q) yield an ARIMA(p,0,q) model: \\[y_t = \\beta_0 + \\beta_1 y_{t-1} + ... + \\beta_p y_{t-p} + e_t + \\theta_1 e_{t-1} + ... + \\theta_q e_{t-q}\\]\nThe analogous model when \\(y\\) is in changes"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#arima-mix-and-match",
+    "href": "rm-data/slides/week13.html#arima-mix-and-match",
+    "title": "Forecasting from Time Series Data",
+    "section": "ARIMA: Mix and Match",
+    "text": "ARIMA: Mix and Match\n\nARIMA(2,1,0): \\(\\Delta y_t = \\beta_0 + \\beta_1 \\Delta y_{t-1} + \\beta_2 \\Delta y_{t-2} + e_t\\)\nARIMA(0,1,1): \\(\\Delta y_t = \\beta_0 + \\theta e_{t-1} + e_t\\)\nARIMA(0,2,2): \\(\\Delta^2 y_t = \\beta_0 + \\theta_1 e_{t-1} + \\theta_2 e_{t-2} + e_t\\)\nARIMA(p,d,q): \\(\\Delta^q y_t = \\beta_0 + \\sum_{i=1}^{p} \\beta_i \\Delta^q y_{t-i} + \\sum_{j=1}^{q} \\theta_j e_{t-j}\\)"
   }
 ]

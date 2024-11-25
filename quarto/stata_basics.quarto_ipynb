@@ -1,0 +1,54 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Stata-output\"\n",
+        "format: \n",
+        "    html: default\n",
+        "    pdf: default\n",
+        "---\n",
+        "\n",
+        "\n",
+        "# Analyzing Oaxaca dataset\n",
+        "\n",
+        " \n",
+        "smaller \n"
+      ],
+      "id": "450d5e45"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "*| output: asis\n",
+        "*| echo: false\n",
+        "display \"```{=html}\"\n",
+        "display_file regressx.htm\n"
+      ],
+      "id": "c08b6c08",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "```\n"
+      ],
+      "id": "1e11ecef"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "nbstata",
+      "language": "stata",
+      "display_name": "Stata (nbstata)",
+      "path": "C:\\Users\\Fernando\\AppData\\Roaming\\jupyter\\kernels\\nbstata"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

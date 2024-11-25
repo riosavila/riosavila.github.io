@@ -1,0 +1,198 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Chapter 3: Multiple Regression Analysis: Estimation\"\n",
+        "jupyter: nbstata\n",
+        "format: \n",
+        "    html: default\n",
+        "execute: \n",
+        "  echo: true\n",
+        "---\n",
+        "\n",
+        "\n",
+        "## Example 3.1: Determinants of College GPA\n",
+        "\n",
+        "Model:\n",
+        "\n",
+        "$$colGPA = \\beta_0 + \\beta_1hsGPA + \\beta_2ACT + u$$\n"
+      ],
+      "id": "f689e35d"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "frause gpa1, clear\n",
+        "regress colgpa hsgpa act\n",
+        "regress colgpa act"
+      ],
+      "id": "ecec8832",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Example 3.2: Hourly Wage Equation\n",
+        "\n",
+        "Model:\n",
+        "\n",
+        "$$log(wage)=\\beta_0 + \\beta_1educ + \\beta_2exper + \\beta_3tenure + u$$\n"
+      ],
+      "id": "c250e771"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "frause wage1, clear\n",
+        "gen logwage = log(wage)\n",
+        "reg logwage educ exper tenure"
+      ],
+      "id": "db765fc5",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Partialling Out Interpretation of Multiple Regression\n",
+        "\n",
+        "Model:\n",
+        "\n",
+        "$$log(wage)=\\beta_0 + \\beta_1educ + \\beta_2exper + \\beta_3tenure + u$$\n",
+        "\n",
+        "We could estimate the same models with the followin:\n",
+        "\n",
+        "$$educ=\\gamma_0 + \\gamma_1exper + \\gamma_2tenure + v$$\n",
+        "\n",
+        "$$log(wage)=\\beta_0 + \\beta_1 \\hat v + u$$\n"
+      ],
+      "id": "62b639d3"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "qui:reg logwage exper tenure\n",
+        "predict logwage_res, resid\n",
+        "qui:reg educ exper tenure\n",
+        "predict educ_res, resid\n",
+        "reg logwage_res educ_res"
+      ],
+      "id": "f7a71c06",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Example 3.4 : Determinants of College GPA\n",
+        "\n",
+        "See example 3.1\n",
+        "\n",
+        "## Example 3.5 : Explaining Arrest Records\n"
+      ],
+      "id": "216aa1e1"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "frause crime1, clear\n",
+        "regress narr86 pcnv  ptime86 qemp86"
+      ],
+      "id": "c41115e5",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "regress narr86 pcnv avgsen ptime86 qemp86"
+      ],
+      "id": "0a702b8d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Variance Inflation Factors\n"
+      ],
+      "id": "0aae1d57"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "qui:regress narr86 pcnv avgsen ptime86 qemp86\n",
+        "estat vif"
+      ],
+      "id": "e416c1ed",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "qui:regress pcnv avgsen ptime86 qemp86\n",
+        "display \"VIF for pcnv:   \" 1/(1-e(r2))\n",
+        "qui:regress avgsen ptime86 qemp86 pcnv\n",
+        "display \"VIF for avgsen: \" 1/(1-e(r2))"
+      ],
+      "id": "01a44e4b",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Example 3.7 : Evaluating a Job Training Program\n"
+      ],
+      "id": "8c211826"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "frause jtrain98, clear\n",
+        "regress earn98 train"
+      ],
+      "id": "0e387a6c",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "regress earn98 train earn96 educ age married  "
+      ],
+      "id": "d8bbace3",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "nbstata",
+      "language": "stata",
+      "display_name": "Stata (nbstata)",
+      "path": "C:\\Users\\Fernando\\AppData\\Roaming\\jupyter\\kernels\\nbstata"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
