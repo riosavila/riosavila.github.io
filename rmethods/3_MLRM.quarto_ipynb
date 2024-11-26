@@ -23,7 +23,7 @@
         "    css: styles.css \n",
         "---"
       ],
-      "id": "88c4dc25"
+      "id": "8109bdb1"
     },
     {
       "cell_type": "code",
@@ -59,7 +59,7 @@
         "    display \"N=\" %10.0f `=e(N)' \" R2=\" %5.3f `=e(r2)'\n",
         "end"
       ],
-      "id": "7c621ff9",
+      "id": "519b3b88",
       "execution_count": null,
       "outputs": []
     },
@@ -189,7 +189,7 @@
         "\n",
         "## `mata` Interlute (for those curious) {.scrollable}\n"
       ],
-      "id": "adda52cb"
+      "id": "3e529578"
     },
     {
       "cell_type": "code",
@@ -203,7 +203,7 @@
         "mata: xx=x'x ; ixx=invsym(xx) ; xy = x'y \n",
         "mata: b = ixx * xy ; b"
       ],
-      "id": "12cc6835",
+      "id": "9f3ca894",
       "execution_count": null,
       "outputs": []
     },
@@ -232,7 +232,7 @@
         "\n",
         "## Example\n"
       ],
-      "id": "d892640e"
+      "id": "d3779243"
     },
     {
       "cell_type": "code",
@@ -249,7 +249,7 @@
         "local b3:display %5.3f _b[tenure]\n",
         "display \"\\$log(wage) = `b0' + `b1' educ + `b2' exper + `b3' tenure$\""
       ],
-      "id": "2eeedb7a",
+      "id": "d5bd53db",
       "execution_count": null,
       "outputs": []
     },
@@ -303,7 +303,7 @@
         "\n",
         "## Example {.scrollable}\n"
       ],
-      "id": "535db69e"
+      "id": "89c57f4f"
     },
     {
       "cell_type": "code",
@@ -328,7 +328,7 @@
         "}\n",
         "esttab m1 m2 m3, se  "
       ],
-      "id": "a8d0e08e",
+      "id": "cdfa3ab7",
       "execution_count": null,
       "outputs": []
     },
@@ -553,7 +553,7 @@
         "  \n",
         "- For prediction you do not need to worry about \"endogeneity\" as much. Just on Predictive power (how ??)\n"
       ],
-      "id": "8d7dfa7a"
+      "id": "62dad88a"
     },
     {
       "cell_type": "code",
@@ -568,7 +568,7 @@
         "predict wage_hat\n",
         "list wage wage_hat educ female age agesq single married in 1/5"
       ],
-      "id": "194422b7",
+      "id": "1bd96ea6",
       "execution_count": null,
       "outputs": []
     },
@@ -582,7 +582,7 @@
         "\n",
         "- For housing, the Assessed price of a house should be all information needed to assess the price of the house. (other ammenities should not matter)\n"
       ],
-      "id": "d0a05a65"
+      "id": "b7ee3256"
     },
     {
       "cell_type": "code",
@@ -597,7 +597,7 @@
         "qui:reg price assess bdrms llotsize lsqrft colonial\n",
         "model_display"
       ],
-      "id": "4c08a7e1",
+      "id": "c2885a94",
       "execution_count": null,
       "outputs": []
     },
@@ -613,7 +613,7 @@
         "qui:reg lprice lassess bdrms llotsize lsqrft colonial\n",
         "model_display"
       ],
-      "id": "c54a5816",
+      "id": "2015b305",
       "execution_count": null,
       "outputs": []
     },
@@ -627,7 +627,7 @@
         "\n",
         "- It does require that groups are similar in terms of unobservables.\n"
       ],
-      "id": "6dbce929"
+      "id": "0db3c640"
     },
     {
       "cell_type": "code",
@@ -641,7 +641,7 @@
         "qui:reg lnwage female \n",
         "model_display"
       ],
-      "id": "0789a04f",
+      "id": "06193c01",
       "execution_count": null,
       "outputs": []
     },
@@ -656,7 +656,7 @@
         "qui:reg lnwage female educ age agesq single married exper tenure\n",
         "model_display"
       ],
-      "id": "76cba11c",
+      "id": "d1803ac2",
       "execution_count": null,
       "outputs": []
     },
@@ -669,7 +669,7 @@
         "- Under Random Assingment SRM was enough to estimate ATTs. \n",
         "- But if assigment was conditionally random, a better approach would be using MLRM\n"
       ],
-      "id": "ec7e8b87"
+      "id": "de6f7980"
     },
     {
       "cell_type": "code",
@@ -683,7 +683,7 @@
         "qui:reg earn98 train \n",
         "model_display"
       ],
-      "id": "306aff8a",
+      "id": "e87874a0",
       "execution_count": null,
       "outputs": []
     },
@@ -698,7 +698,7 @@
         "qui:reg earn98 train earn96 educ age married\n",
         "model_display"
       ],
-      "id": "1288b31d",
+      "id": "bbe74d99",
       "execution_count": null,
       "outputs": []
     },
@@ -709,7 +709,7 @@
         "# Thats all for Today\n",
         "Next Week: Inference and Asymptotics"
       ],
-      "id": "1a65c973"
+      "id": "b3bb2293"
     }
   ],
   "metadata": {

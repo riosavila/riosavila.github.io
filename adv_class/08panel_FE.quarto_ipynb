@@ -242,7 +242,7 @@
         "\n",
         "## Stata Example{.scrollable}"
       ],
-      "id": "79fa3a5a"
+      "id": "37c7e44d"
     },
     {
       "cell_type": "code",
@@ -253,7 +253,7 @@
         "set linesize 150;\n",
         "#delimit cr"
       ],
-      "id": "58de242d",
+      "id": "95a51cc8",
       "execution_count": null,
       "outputs": []
     },
@@ -273,7 +273,7 @@
         "esttab m1 m2 m3 m4 m5, mtitle(ols re fe refe1 refe2) compress se b(3);\n",
         "hausman m3 m2;"
       ],
-      "id": "2ea1d4db",
+      "id": "9245cbfa",
       "execution_count": null,
       "outputs": []
     },
@@ -318,7 +318,7 @@
         "\n",
         "## cre in Stata {.scrollable}\n"
       ],
-      "id": "405030de"
+      "id": "356f2b28"
     },
     {
       "cell_type": "code",
@@ -331,7 +331,7 @@
         "** Experimental\n",
         "cre, abs(schid year): reg math4 lunch lenrol lrexpp, cluster(schid)"
       ],
-      "id": "46e135b2",
+      "id": "d568a244",
       "execution_count": null,
       "outputs": []
     },
@@ -452,7 +452,7 @@
         "\n",
         "# Next Class (Friday) Instrumental Variables!"
       ],
-      "id": "541e29df"
+      "id": "db936067"
     }
   ],
   "metadata": {

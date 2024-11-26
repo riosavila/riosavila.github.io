@@ -45,7 +45,7 @@
         "\n",
         "One of the key metrics in competitive StarCraft is Actions Per Minute (APM). This measure reflects a player's ability to execute complex strategies rapidly. @kim2016 found a strong correlation between APM and player skill level. The following figure illustrates this relationship:\n"
       ],
-      "id": "fb505a72"
+      "id": "0d09d86f"
     },
     {
       "cell_type": "code",
@@ -108,7 +108,7 @@
         "\n",
         "# References"
       ],
-      "id": "16d38398"
+      "id": "d7d95ab6"
     }
   ],
   "metadata": {
@@ -116,7 +116,7 @@
       "name": "python3",
       "language": "python",
       "display_name": "Python 3 (ipykernel)",
-      "path": "C:\\Python310\\share\\jupyter\\kernels\\python3"
+      "path": "C:\\Users\\Fernando\\AppData\\Roaming\\Python\\share\\jupyter\\kernels\\python3"
     }
   },
   "nbformat": 4,

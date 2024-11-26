@@ -24,7 +24,7 @@
         "\n",
         "## What do we mean Limited??\n"
       ],
-      "id": "89b5f4d6"
+      "id": "dc250a5c"
     },
     {
       "cell_type": "code",
@@ -47,7 +47,7 @@
         "graph combine m1 m2 m3 m4\n",
         "graph export images/fig9_1.png, width(1000) replace"
       ],
-      "id": "934a0516",
+      "id": "1de1fdf0",
       "execution_count": null,
       "outputs": []
     },
@@ -198,7 +198,7 @@
         "\n",
         "##\n"
       ],
-      "id": "1ab9ea62"
+      "id": "e0e338cd"
     },
     {
       "cell_type": "code",
@@ -223,7 +223,7 @@
         "  ren ll2 likelihood\n",
         "  *scatter likelihood theta \n"
       ],
-      "id": "582e95f6",
+      "id": "02a3b12c",
       "execution_count": null,
       "outputs": []
     },
@@ -234,7 +234,7 @@
         "*| echo: false\n",
         "qui:scatter likelihood theta "
       ],
-      "id": "7d5f46fc",
+      "id": "76f83160",
       "execution_count": null,
       "outputs": []
     },
@@ -258,7 +258,7 @@
         "\n",
         "## Stata - Example {.scrollable}\n"
       ],
-      "id": "61058d51"
+      "id": "4d09fa90"
     },
     {
       "cell_type": "code",
@@ -278,7 +278,7 @@
         "qui:margins, dydx(*) post\n",
         "est sto m3b"
       ],
-      "id": "bda16bfc",
+      "id": "da373f79",
       "execution_count": null,
       "outputs": []
     },
@@ -292,7 +292,7 @@
         "esttab m1 m2a m2b m3a m3b, scalar(r2 ll) cell(b(fmt(%5.3f)) ///\n",
         "se(par([ ])) p( par(( )) ) )  gap  mtitle(LPM Logit Logit-mfx Probit Probit-mfx)"
       ],
-      "id": "e5ffcea7",
+      "id": "f3174edc",
       "execution_count": null,
       "outputs": []
     },
@@ -310,7 +310,7 @@
         "est sto restricted\n",
         "lrtest unrestricted restricted"
       ],
-      "id": "c02d89cf",
+      "id": "f4175ad2",
       "execution_count": null,
       "outputs": []
     },
@@ -337,7 +337,7 @@
         "- $y$ is \"conditionally-normal\" and is Fully Observed.\n",
         "- You can estimate the model using OLS or ML\n"
       ],
-      "id": "d8a18ca6"
+      "id": "cd52e6b1"
     },
     {
       "cell_type": "code",
@@ -353,7 +353,7 @@
         "}\n",
         "qui:histogram fob"
       ],
-      "id": "409445b5",
+      "id": "9311069d",
       "execution_count": null,
       "outputs": []
     },
@@ -366,7 +366,7 @@
         "- Data is observed for everyone, but is \"censored\" for some. `tobit`\n",
         "  - Either corner solution (how many hours you study) or Recoded: $y_{obs} = max(c,y^*)$\n"
       ],
-      "id": "2cf47901"
+      "id": "27464332"
     },
     {
       "cell_type": "code",
@@ -377,7 +377,7 @@
         "qui: replace fob = -2 if fob<-2\n",
         "qui:histogram fob, xlabel(-4 (2) 4)"
       ],
-      "id": "0439f702",
+      "id": "ad221038",
       "execution_count": null,
       "outputs": []
     },
@@ -390,7 +390,7 @@
         "- Below (or above) some threshold, you do not have information on $y$. `truncreg` \n",
         "$$y_{obs} = y^* \\text{ if } y^*>c$$\n"
       ],
-      "id": "911d0096"
+      "id": "1ef3a0fd"
     },
     {
       "cell_type": "code",
@@ -401,7 +401,7 @@
         "qui: replace fob = . if fob<=-2\n",
         "qui:histogram fob, xlabel(-4 (2) 4)"
       ],
-      "id": "6f01fd69",
+      "id": "515158ca",
       "execution_count": null,
       "outputs": []
     },
@@ -492,7 +492,7 @@
         "\n",
         "## Example {.scrollable}\n"
       ],
-      "id": "70aed1fa"
+      "id": "ccc1891b"
     },
     {
       "cell_type": "code",
@@ -506,7 +506,7 @@
         "qui:emargins, dydx(*) predict(ystar(0,.)) estore(m4)\n",
         "esttab m1 m2 m3 m4, mtitle(Latent P(y>0) E(y|y>0) E(y) ) b(3) se"
       ],
-      "id": "0833c8de",
+      "id": "2b9a935f",
       "execution_count": null,
       "outputs": []
     },
@@ -532,7 +532,7 @@
         "- Furthermore, applies to cases with different censoring thresholds!\n",
         "  - Typical Example, Unemployment duration\n"
       ],
-      "id": "0af96111"
+      "id": "e2e81574"
     },
     {
       "cell_type": "code",
@@ -543,7 +543,7 @@
         "gen uudur = ldurat if cens==0  // upper limit = . if censored.\n",
         "intreg lldur uudur workprg priors tserved felon alcohol drugs black married educ age"
       ],
-      "id": "ace6b0ce",
+      "id": "6b46c55d",
       "execution_count": null,
       "outputs": []
     },
@@ -556,7 +556,7 @@
         "- If Data is simply not there, as shown before, one needs to adjust Estimates.\n",
         "- marginal effects decisions are similar to Tobit\n"
       ],
-      "id": "c74f6183"
+      "id": "777fdbfb"
     },
     {
       "cell_type": "code",
@@ -569,7 +569,7 @@
         "emargins, dydx(*) predict(e(0,.)) estore(m2b)\n",
         "esttab m1 m1b m3 m2b, mtitle(Lat-Tobit Lat-Trunc E(y>0)-Tobit E(y>0)-Trunc ) b(3) se"
       ],
-      "id": "5b02737d",
+      "id": "215ae059",
       "execution_count": null,
       "outputs": []
     },
@@ -610,7 +610,7 @@
         "\n",
         "## Example{.scrollable}\n"
       ],
-      "id": "bbd0ba16"
+      "id": "16168e12"
     },
     {
       "cell_type": "code",
@@ -626,7 +626,7 @@
         "esttab m1 m2 m3, se b(3) mtitle(LRM Poisson Poisson-mfx) ///\n",
         "keep(pcnv ptime86  qemp86 inc86 black hispan) label varwidth(20) wrap"
       ],
-      "id": "24c0ddb0",
+      "id": "d30ae77d",
       "execution_count": null,
       "outputs": []
     },
@@ -648,7 +648,7 @@
         "# Thats all. \n",
         "Next class: Pool and Basic Panel data analysis"
       ],
-      "id": "494954e5"
+      "id": "bc4f2101"
     }
   ],
   "metadata": {

@@ -165,7 +165,7 @@
         "\n",
         "`kdensity var [if] [weight]`\n"
       ],
-      "id": "d9f8f51b"
+      "id": "2e1dea43"
     },
     {
       "cell_type": "code",
@@ -184,7 +184,7 @@
         "end\n",
         "getmata tg* = tg"
       ],
-      "id": "1c2a75f8",
+      "id": "cd276b72",
       "execution_count": null,
       "outputs": []
     },
@@ -194,7 +194,7 @@
       "source": [
         "scatter tg1 tg2, name(mx, replace)"
       ],
-      "id": "f19aaa6b",
+      "id": "af5e42e1",
       "execution_count": null,
       "outputs": []
     },
@@ -330,7 +330,7 @@
         "## {.scrollable}\n",
         "### Implementation\n"
       ],
-      "id": "71cde829"
+      "id": "2c45eb88"
     },
     {
       "cell_type": "code",
@@ -339,7 +339,7 @@
         "webuse motorcycle, clear\n",
         "scatter accel time "
       ],
-      "id": "6db91f9e",
+      "id": "30b7093a",
       "execution_count": null,
       "outputs": []
     },
@@ -362,7 +362,7 @@
         "color_style viridis\n",
         "two scatter accel time || line yh* time, xsize(7) ysize(5)"
       ],
-      "id": "97694988",
+      "id": "dd07b861",
       "execution_count": null,
       "outputs": []
     },
@@ -789,7 +789,7 @@
         "\n",
         "# The end: Next time Quantile regressions"
       ],
-      "id": "e8f7574b"
+      "id": "cf840d91"
     }
   ],
   "metadata": {

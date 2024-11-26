@@ -190,7 +190,7 @@
         "\n",
         "## Small Example \n"
       ],
-      "id": "b6d7da15"
+      "id": "83fb6e2a"
     },
     {
       "cell_type": "code",
@@ -204,7 +204,7 @@
         "two (line cigsale year if state ==3) (line mean_cig year if state==1), ///\n",
         "    legend(order(1 \"California\" 2 \"Avg Other States\") pos(6) col(2)) xline(1988)"
       ],
-      "id": "62d3f7c7",
+      "id": "174ba57c",
       "execution_count": null,
       "outputs": []
     },
@@ -214,7 +214,7 @@
       "source": [
         "## \n"
       ],
-      "id": "508590bc"
+      "id": "77697212"
     },
     {
       "cell_type": "code",
@@ -224,7 +224,7 @@
         "qui:reshape wide cigsale lnincome beer age15to24 retprice , i(year) j(state)\n",
         "ren cigsale1 mcigsale"
       ],
-      "id": "31eada9c",
+      "id": "562703f2",
       "execution_count": null,
       "outputs": []
     },
@@ -242,7 +242,7 @@
         "\n",
         "## \n"
       ],
-      "id": "40070c6c"
+      "id": "28335361"
     },
     {
       "cell_type": "code",
@@ -258,7 +258,7 @@
         "  (line mcigh1 mcigh2   year, lw(0.5)  ) , ///\n",
         "  legend(order(1 \"California\" 2 \"OLS Synthetic\" 3 \"LASSO Synthetic\")) xline(1988)"
       ],
-      "id": "bed6d63d",
+      "id": "66db08af",
       "execution_count": null,
       "outputs": []
     },
@@ -287,7 +287,7 @@
         "\n",
         "##\n"
       ],
-      "id": "163921ce"
+      "id": "f978d567"
     },
     {
       "cell_type": "code",
@@ -315,7 +315,7 @@
         "  (line mcigh1 mcigh2   year if new==1, lw(0.5)  ) , ///\n",
         "  legend(order(1 \"California\" 2 \"OLS Synthetic\" 3 \"LASSO Synthetic\")) xline(1988)"
       ],
-      "id": "5b585243",
+      "id": "9bae2fe1",
       "execution_count": null,
       "outputs": []
     },
@@ -379,7 +379,7 @@
         "  \n",
         "## Lets continue the example:\n"
       ],
-      "id": "91b1850f"
+      "id": "7be19a89"
     },
     {
       "cell_type": "code",
@@ -435,7 +435,7 @@
         " \t}\n",
         "}"
       ],
-      "id": "16b6c805",
+      "id": "62ef9d0b",
       "execution_count": null,
       "outputs": []
     },
@@ -445,7 +445,7 @@
       "source": [
         "**All Cases**"
       ],
-      "id": "63df6f81"
+      "id": "c9968ac0"
     },
     {
       "cell_type": "code",
@@ -453,7 +453,7 @@
       "source": [
         "two $toplot (line tef3 _time, lw(1) color(navy*.8)), xline(1989) legend(off)"
       ],
-      "id": "3545441b",
+      "id": "b07e3e28",
       "execution_count": null,
       "outputs": []
     },
@@ -466,7 +466,7 @@
         "**Good Cases**\n",
         "Restricts to States with Good RMSEP (less than 2 California)"
       ],
-      "id": "84b9f9de"
+      "id": "52c5f056"
     },
     {
       "cell_type": "code",
@@ -474,7 +474,7 @@
       "source": [
         "two $toplot2 (line tef3 _time, lw(1) color(navy*.8)), xline(1989) legend(off)"
       ],
-      "id": "cae998a6",
+      "id": "afc52bff",
       "execution_count": null,
       "outputs": []
     },
@@ -484,7 +484,7 @@
       "source": [
         "## RMSE Ratio\n"
       ],
-      "id": "37cf39dd"
+      "id": "45b652b1"
     },
     {
       "cell_type": "code",
@@ -502,7 +502,7 @@
         " legend(order( 2 \"California\")) ///\n",
         "  ytitle(RMSE ratio)  xtitle(RMSE rank)"
       ],
-      "id": "1dd94316",
+      "id": "cde338b9",
       "execution_count": null,
       "outputs": []
     },
@@ -512,7 +512,7 @@
       "source": [
         "## p-values\n"
       ],
-      "id": "76855dae"
+      "id": "b34104c3"
     },
     {
       "cell_type": "code",
@@ -529,7 +529,7 @@
         " \n",
         "two bar pv _time if _time>1988 & rnk2<32, ylabel(0(2)15) xlabel(1989/2000)"
       ],
-      "id": "81e12845",
+      "id": "d271b1bc",
       "execution_count": null,
       "outputs": []
     },
@@ -567,7 +567,7 @@
         "Your papers! \n",
         "And Goodluck Friday"
       ],
-      "id": "ff1c261c"
+      "id": "bf4791fc"
     }
   ],
   "metadata": {

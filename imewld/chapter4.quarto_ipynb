@@ -25,7 +25,7 @@
         "$$H_0: \\beta_1 = \\beta_2 \\rightarrow \\beta_1 - \\beta_2 = 0$$\n",
         "$$H_1: \\beta_1 < \\beta_2 \\rightarrow \\beta_1 - \\beta_2 < 0$$\n"
       ],
-      "id": "6939eb21"
+      "id": "f4146173"
     },
     {
       "cell_type": "code",
@@ -34,7 +34,7 @@
         "frause twoyear, clear\n",
         "reg lwage jc univ exper"
       ],
-      "id": "e95bf76b",
+      "id": "96d4d315",
       "execution_count": null,
       "outputs": []
     },
@@ -44,7 +44,7 @@
       "source": [
         "test jc = univ"
       ],
-      "id": "9c5b5599",
+      "id": "be47e850",
       "execution_count": null,
       "outputs": []
     },
@@ -59,7 +59,7 @@
         "$$log(wage)=\\beta_0 +(\\theta + \\beta_2) jc + \\beta_2 univ + \\beta_3 exper + u$$\n",
         "$$log(wage)=\\beta_0 +\\theta jc + \\beta_2 (univ+jc) + \\beta_3 exper + u$$\n"
       ],
-      "id": "85898d75"
+      "id": "efc7668e"
     },
     {
       "cell_type": "code",
@@ -68,7 +68,7 @@
         "gen univjc = univ + jc\n",
         "reg lwage jc univjc exper"
       ],
-      "id": "6e1fb2e1",
+      "id": "90204ac3",
       "execution_count": null,
       "outputs": []
     }

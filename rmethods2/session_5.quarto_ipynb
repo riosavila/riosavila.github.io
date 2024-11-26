@@ -343,7 +343,7 @@
         "## {.scrollable}\n",
         "### Example: `Stata`\n"
       ],
-      "id": "10237d21"
+      "id": "84694d59"
     },
     {
       "cell_type": "code",
@@ -359,7 +359,7 @@
         "    gen m_`i' = `i' if runiform()>.25\n",
         "}"
       ],
-      "id": "bb72a38c",
+      "id": "52288277",
       "execution_count": null,
       "outputs": []
     },
@@ -369,7 +369,7 @@
       "source": [
         "Setting data for -`mi`- commands\n"
       ],
-      "id": "402112da"
+      "id": "2a282430"
     },
     {
       "cell_type": "code",
@@ -381,7 +381,7 @@
         "mi register imputed m_*\n",
         "mi impute chain (reg) m_* = lnwage single female, add(10) "
       ],
-      "id": "b03dc9c8",
+      "id": "a1a971f8",
       "execution_count": null,
       "outputs": []
     },
@@ -391,7 +391,7 @@
       "source": [
         "Estmating the model(s):\n"
       ],
-      "id": "ae0d25cd"
+      "id": "c2c4e739"
     },
     {
       "cell_type": "code",
@@ -403,7 +403,7 @@
         "est sto m1\n",
         "regress lnwage educ exper tenure age single  female"
       ],
-      "id": "9bbd6041",
+      "id": "3db58441",
       "execution_count": null,
       "outputs": []
     },
@@ -443,7 +443,7 @@
         "\n",
         "Imputing data for wages in `oaxaca`.\n"
       ],
-      "id": "e46412bb"
+      "id": "2259c59f"
     },
     {
       "cell_type": "code",
@@ -463,7 +463,7 @@
         "sum lnwage if misswage==1 \n",
         "sum lnwage "
       ],
-      "id": "3a6e0c1a",
+      "id": "88167559",
       "execution_count": null,
       "outputs": []
     },
@@ -503,7 +503,7 @@
         "\n",
         "Using single Score (Data reduction)\n"
       ],
-      "id": "aa3f353e"
+      "id": "5f1d1f2d"
     },
     {
       "cell_type": "code",
@@ -523,7 +523,7 @@
         "qui:pca educ age agesq female single married \n",
         "qui:predict pc1, score"
       ],
-      "id": "3cb3c7f5",
+      "id": "70836805",
       "execution_count": null,
       "outputs": []
     },
@@ -533,7 +533,7 @@
       "source": [
         "For imputation, lets do something simple, Use data from the closet observation (with lower score) as donor.\n"
       ],
-      "id": "8cd0c960"
+      "id": "0731eae5"
     },
     {
       "cell_type": "code",
@@ -555,7 +555,7 @@
         "\t\n",
         "}\n"
       ],
-      "id": "15614d92",
+      "id": "c3568ed0",
       "execution_count": null,
       "outputs": []
     },
@@ -573,7 +573,7 @@
         "# Till next time!\n",
         "What happens when not some but ALL data is missing?"
       ],
-      "id": "db76e02a"
+      "id": "802b1313"
     }
   ],
   "metadata": {

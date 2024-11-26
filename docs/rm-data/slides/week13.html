@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.6.33">
 
   <meta name="author" content="Fernando Rios-Avila">
-  <meta name="dcterms.date" content="2024-11-25">
+  <meta name="dcterms.date" content="2024-11-26">
   <title>Econometrics MSC Levy – Forecasting from Time Series Data</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -29,71 +29,6 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      { color: #003b4f; background-color: #f1f3f5; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #003b4f; } /* Normal */
-    code span.al { color: #ad0000; } /* Alert */
-    code span.an { color: #5e5e5e; } /* Annotation */
-    code span.at { color: #657422; } /* Attribute */
-    code span.bn { color: #ad0000; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #20794d; } /* Char */
-    code span.cn { color: #8f5902; } /* Constant */
-    code span.co { color: #5e5e5e; } /* Comment */
-    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
-    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
-    code span.dt { color: #ad0000; } /* DataType */
-    code span.dv { color: #ad0000; } /* DecVal */
-    code span.er { color: #ad0000; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #ad0000; } /* Float */
-    code span.fu { color: #4758ab; } /* Function */
-    code span.im { color: #00769e; } /* Import */
-    code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
-    code span.op { color: #5e5e5e; } /* Operator */
-    code span.ot { color: #003b4f; } /* Other */
-    code span.pp { color: #ad0000; } /* Preprocessor */
-    code span.sc { color: #5e5e5e; } /* SpecialChar */
-    code span.ss { color: #20794d; } /* SpecialString */
-    code span.st { color: #20794d; } /* String */
-    code span.va { color: #111111; } /* Variable */
-    code span.vs { color: #20794d; } /* VerbatimString */
-    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-97edfe54b73ff960639f8ac44205bcc0.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -207,7 +142,7 @@ Fernando Rios-Avila
     </div>
 </div>
 
-  <p class="date">November 25, 2024</p>
+  <p class="date">November 26, 2024</p>
 </section>
 <section id="forecast-setup" class="slide level2">
 <h2>Forecast setup</h2>
@@ -609,8 +544,7 @@ Daily time series, 2010–2016, N=2522 (work set 2010–2015, N=2162).</p>
 <ul>
 <li>Data Depends on itself, and Errors Also Depend on Themselves</li>
 </ul></li>
-<li><p>Modeling how a shock fades away <span class="math inline">\(\leftarrow\)</span> Hopefully things “return to normal”</p></li>
-<li><p>How?</p>
+<li><p>Modeling how a shock fades away <span class="math inline">\(\leftarrow\)</span> Hopefully things “return to normal”</p>
 <ul>
 <li>Autoregressive (AR) models, capture the patterns of serial correlation – <span class="math inline">\(y\)</span> at time <span class="math inline">\(t\)</span> is regressed on its lags, that is its past values, <span class="math inline">\(t - 1, t - 2, etc\)</span>.</li>
 </ul></li>
@@ -680,42 +614,14 @@ Daily time series, 2010–2016, N=2522 (work set 2010–2015, N=2162).</p>
 <li>ARIMA(2,1,0): <span class="math inline">\(\Delta y_t = \beta_0 + \beta_1 \Delta y_{t-1} + \beta_2 \Delta y_{t-2} + e_t\)</span></li>
 <li>ARIMA(0,1,1): <span class="math inline">\(\Delta y_t = \beta_0 + \theta e_{t-1} + e_t\)</span></li>
 <li>ARIMA(0,2,2): <span class="math inline">\(\Delta^2 y_t = \beta_0 + \theta_1 e_{t-1} + \theta_2 e_{t-2} + e_t\)</span></li>
-<li>ARIMA(p,d,q): <span class="math inline">\(\Delta^q y_t = \beta_0 + \sum_{i=1}^{p} \beta_i \Delta^q y_{t-i} + \sum_{j=1}^{q} \theta_j e_{t-j}\)</span></li>
+<li>ARIMA(p,d,q): <span class="math inline">\(\Delta^q y_t = \beta_0 + \sum_{i=1}^{p} \beta_i \Delta^q y_{t-i} + \sum_{j=1}^{q} \theta_j e_{t-j}+e_t\)</span></li>
 </ul>
+<p>In practice, You rarely see <span class="math inline">\(d&gt;2\)</span>, although <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> can be larger (depending on frequency of data)</p>
 </section>
-<section id="short-horizon-forecasting-arima001" class="slide level2">
-<h2>Short-horizon forecasting: ARIMA(0,0,1)</h2>
-<p>MA(1) model is a linear combination of two consecutive innovations: <span class="math display">\[y_t = e_t + \theta e_{t-1}\]</span></p>
-<p>Not a regression model: can’t interpret <span class="math inline">\(\theta\)</span> as a coefficient. $= $ moving average coefficient, <span class="math inline">\(|\theta|&lt; 1\)</span>. the current value of <span class="math inline">\(y\)</span> is the linear combination of this period’s innovation and last period’s innovation <span class="math inline">\(\theta\)</span> is what multiplies last period’s innovation. Estimated via a algo called maximum likelihood (not OLS!) It’s a linear combination, not a simple average coefficients on <span class="math inline">\(e_t\)</span> and <span class="math inline">\(e_{t-1}\)</span> don’t add up to one</p>
-</section>
-<section id="short-horizon-forecasting-arima00q" class="slide level2">
-<h2>Short-horizon forecasting: ARIMA(0,0,q)</h2>
-<p>The MA(q) model (an ARIMA(0,0,q)) is a generalization of the MA(1): <span class="math display">\[y_t = e_t + \theta_1 e_{t-1} + ... + \theta_q e_{t-q}\]</span></p>
-<p>Similarly to an AR model, we can specify an MA model for the changes in <span class="math inline">\(y\)</span>, which would be an ARIMA(0,1,q).</p>
-</section>
-<section id="short-horizon-forecasting-ma-vs-ar" class="slide level2">
-<h2>Short-horizon forecasting: MA vs AR</h2>
+<section id="how-to-choose-pdq" class="slide level2">
+<h2>How to choose (p,d,q)?</h2>
 <ul>
-<li>MA models of serial correlation.</li>
-<li>MA(1) – first order serial correlation = Corr <span class="math inline">\((y_t, y_{t-1}) = \theta/(1 + \theta^2)\)</span>.</li>
-<li>Has <span class="math inline">\(\theta\)</span> and nothing else, monotonic function.</li>
-<li>First order serial correlation is stronger, the larger <span class="math inline">\(\theta\)</span> is (in absolute value).</li>
-<li>second order serial correlation is zero, and so are all other serial correlations: Corr <span class="math inline">\((y_t, y_{t-2}) = 0\)</span>, Corr <span class="math inline">\((y_t, y_{t-3}) = 0\)</span>, etc.</li>
-<li>Unlike AR(1) model: serial correlations decrease but don’t drop to zero.</li>
-<li>AR and MA models capture different patterns of serial correlation.</li>
-<li>Combination offers flexibility</li>
-</ul>
-</section>
-<section id="short-horizon-forecasting-arimapdq-1" class="slide level2">
-<h2>Short-horizon forecasting: ARIMA(p,d,q)</h2>
-<p>AR(p) and an MA(q) yield an ARIMA(p,0,q) model: <span class="math display">\[y_t = \beta_0 + \beta_1 y_{t-1} + ... + \beta_p y_{t-p} + e_t + \theta_1 e_{t-1} + ... + \theta_q e_{t-q}\]</span></p>
-<p>The analogous model when <span class="math inline">\(y\)</span> is in changes</p>
-</section>
-<section id="short-horizon-forecasting-arima-1" class="slide level2">
-<h2>Short-horizon forecasting: ARIMA</h2>
-<ul>
-<li><p>The analogous model when <span class="math inline">\(y\)</span> is in changes is an ARIMA(p,1,q): <span class="math display">\[\Delta y_t = \beta_0 + \beta_1 \Delta y_{t-1} + ... + \beta_p \Delta y_{t-p} + e_t + \theta_1 e_{t-1} + ... + \theta_q e_{t-q}\]</span></p></li>
-<li><p>How to choose (p,d,q)?</p>
+<li>Empirical approach
 <ul>
 <li>Whichever works best in a cross-validated exercise!</li>
 <li>Try out a few and pick the one that works best</li>
@@ -724,10 +630,25 @@ Daily time series, 2010–2016, N=2522 (work set 2010–2015, N=2162).</p>
 </ul></li>
 </ul>
 </section>
-<section id="short-horizon-forecasting-arima-2" class="slide level2">
-<h2>Short-horizon forecasting: ARIMA</h2>
+<section id="how-to-choose-pdq-1" class="slide level2">
+<h2>How to choose (p,d,q)?</h2>
 <ul>
-<li>There is a lot more about time series models one can learn.</li>
+<li><p>Box-Jenkins Methodology</p></li>
+<li><p>Step 1: Determine <span class="math inline">\(d\)</span>. Typically you test if the data is stationary (ADF test or PP test). You difference the data until it is stationary.</p></li>
+<li><p>Step 2: To determine <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> you look at the ACF and PACF of the differenced (if applicable) data.</p>
+<ul>
+<li>ACF or Autocorrelation function
+<ul>
+<li><span class="math inline">\(corr(y_t, y_{t-1})\)</span>, <span class="math inline">\(corr(y_t, y_{t-2})\)</span>, etc.</li>
+<li>Helps Identify MA component (based on spikes)</li>
+</ul></li>
+<li>PACF or Partial autocorrelation function
+<ul>
+<li><span class="math inline">\(y_t = \beta_0 + \beta_1 y_{t-1}+ e_t\)</span></li>
+<li><span class="math inline">\(y_t = \beta_0 + \beta_1 y_{t-1}+\beta_2{t-2} y_{t-2} e_t\)</span>,etc</li>
+<li>Helps Identify the AR component</li>
+</ul></li>
+</ul></li>
 </ul>
 </section>
 <section id="case-study-case--shiller-home-price-index" class="slide level2">
@@ -750,7 +671,7 @@ Daily time series, 2010–2016, N=2522 (work set 2010–2015, N=2162).</p>
 <li>…</li>
 <li>train is 2003-2015, test is 2016</li>
 </ul></li>
-<li>We’ll predict 12 months ahead</li>
+<li>Predict 12 months ahead</li>
 <li>RMSE - symmetric and quadratic loss</li>
 <li>Assume getting index right matters exactly the same</li>
 </ul>
@@ -762,7 +683,7 @@ Daily time series, 2010–2016, N=2522 (work set 2010–2015, N=2162).</p>
 <ul>
 <li>The price index</li>
 <li>The log of the price index</li>
-<li>First difference</li>
+<li>First difference &lt;- Shortcut to assume I(1) process</li>
 </ul></li>
 <li>We’ll try out, and pick via cross-validation</li>
 <li>The model should include seasonal dummies (could be more complicated)</li>
@@ -856,34 +777,64 @@ Daily time series, 2010–2016, N=2522 (work set 2010–2015, N=2162).</p>
 </tbody>
 </table>
 </section>
-<section id="case-study-prediction-with-best-model-m4" class="slide level2">
-<h2>Case study: Prediction with best model M4</h2>
-
-<img data-src="images/case_shiller_prediction.png" class="r-stretch"></section>
 <section id="case-study-prediction-with-best-model-m4-uncertainty" class="slide level2">
 <h2>Case study: Prediction with best model M4: Uncertainty</h2>
 
-<img data-src="images/case_shiller_uncertainty.png" class="r-stretch"></section>
+<img data-src="images/paste-44.png" class="r-stretch quarto-figure-center" id="fig-1"><p class="caption">
+Figure&nbsp;1
+</p></section>
+<section id="stata-corner" class="slide level2">
+<h2><code>Stata</code> Corner</h2>
+<p>In Stata, the easiest way to estimate ARIMA models is using <code>arima</code> command:</p>
+<ul>
+<li>ARIMA(2,2,2) model: <code>arima y, arima(2,2,2)</code></li>
+</ul>
+<p>Predictions are a bit tricky. You can use <code>predict</code> command with the <code>dynamic</code> option to predict out-of-sample values. But also need to indicate “which” periods to start using the model predictions</p>
+<ul>
+<li><code>predict yhat, dynamic(ym(2017,1)) [y]</code></li>
+</ul>
+<p><code>yhat</code> is the new variable, <code>ym(2017,1)</code> indicates the first period of 2017, and <code>[y]</code> indicates that we want to predict the “real” dependent variable. Not the changes or transformations.</p>
+<p>No built-in option for CI predictions.</p>
+</section></section>
+<section>
+<section id="vector-autoregression" class="title-slide slide level1 center">
+<h1>Vector Autoregression</h1>
+<p>When you need more than one variable</p>
+</section>
 <section id="var" class="slide level2">
 <h2>VAR</h2>
 <ul>
 <li>Better forecasts with the help of other variables, at least for short forecast horizons.</li>
 <li>Need forecasts of the <span class="math inline">\(x\)</span> variable as well – we need a model.</li>
 <li>Vector autoregression (VAR), is a method that incorporates other variables in time series regressions and can use those other variables for forecasting <span class="math inline">\(y\)</span>.</li>
+<li>Technically, you are not “ONLY” forecasting <span class="math inline">\(y\)</span> anymore, but a set of time series regressions.</li>
 <li>A set of time series regressions.</li>
 </ul>
+<p><span class="math display">\[{y_t, x_t, z_t} =W_t= \beta_0 + W_{t-1}\beta_1 + W_{t-2}\beta_2 + \dots + W_{t-p}\beta_p + e_t
+\]</span></p>
 </section>
 <section id="var-simplest-model" class="slide level2">
 <h2>VAR: simplest model</h2>
-<p>The simplest VAR model has <span class="math inline">\(y\)</span> and one <span class="math inline">\(x\)</span> variable, and it includes one lag of each = VAR(1) model. Data have all variables at the same frequency VAT(1) = set of two TS regressions: <span class="math display">\[\begin{align*}
+<p>The simplest VAR model has <span class="math inline">\(y\)</span> and one <span class="math inline">\(x\)</span> variable, and it includes one lag of each = VAR(1) model.</p>
+<p>It assumes that all data have the same frequency. <span class="math display">\[\begin{align*}
 y_t^E &amp;= \beta_{10} + \beta_{11} y_{t-1} + \beta_{12} x_{t-1} \\
 x_t^E &amp;= \beta_{20} + \beta_{21} y_{t-1} + \beta_{22} x_{t-1}
-\end{align*}\]</span></p>
+\end{align*}
+\]</span></p>
 </section>
 <section id="var-forecast" class="slide level2">
 <h2>VAR forecast</h2>
-<p>One-period-ahead forecast for <span class="math inline">\(y\)</span>, only need estimates from the first one: <span class="math display">\[\hat{y}_{T+1} = \hat{\beta}_{10} + \hat{\beta}_{11} y_T + \hat{\beta}_{12} x_T\]</span></p>
-<p>For forecasting <span class="math inline">\(y\)</span> further ahead, we do need all coefficient estimates. Such forecasts use forecast values of <span class="math inline">\(x\)</span> as well as <span class="math inline">\(y\)</span>. A two-period-ahead forecast of <span class="math inline">\(y\)</span> from a VAR(1) is <span class="math display">\[\hat{y}_{T+2} = \hat{\beta}_{10} + \hat{\beta}_{11} \hat{y}_{T+1} + \hat{\beta}_{12} \hat{x}_{T+1}\]</span> where <span class="math inline">\(\hat{y}_{T+1} = \hat{\beta}_{10} + \hat{\beta}_{11} y_T + \hat{\beta}_{12} x_T\)</span>, and <span class="math inline">\(\hat{x}_{T+1} = \hat{\beta}_{20} + \hat{\beta}_{21} y_T + \hat{\beta}_{22} x_T\)</span>. Forecasts for <span class="math inline">\(T + 3, T + 4, etc.,\)</span> are analogous.</p>
+<ul>
+<li><p><strong>One-period-ahead</strong> forecast for <span class="math inline">\(y\)</span>, only need estimates from the first one: <span class="math display">\[\hat{y}_{T+1} = \hat{\beta}_{10} + \hat{\beta}_{11} y_T + \hat{\beta}_{12} x_T
+\]</span></p></li>
+<li><p>For forecasting <span class="math inline">\(y\)</span> further ahead, we do need all coefficient estimates, and forecast values of <span class="math inline">\(x\)</span> as well.</p></li>
+<li><p>A two-period-ahead forecast of <span class="math inline">\(y\)</span> from a VAR(1) is</p></li>
+</ul>
+<p><span class="math display">\[
+\hat{y}_{T+2} = \hat{\beta}_{10} + \hat{\beta}_{11} \hat{y}_{T+1} + \hat{\beta}_{12} \hat{x}_{T+1}
+\]</span></p>
+<p>and <span class="math inline">\(\hat{x}_{T+1}\)</span> and <span class="math inline">\(\hat{y}_{T+1}\)</span> are from the first forecast.</p>
+<p>Forecasts for <span class="math inline">\(T + 3, T + 4, etc.,\)</span> are analogous.</p>
 </section>
 <section id="var-characteristics" class="slide level2">
 <h2>VAR characteristics</h2>
@@ -894,27 +845,29 @@ x_t^E &amp;= \beta_{20} + \beta_{21} y_{t-1} + \beta_{22} x_{t-1}
 <li>Right-hand-side variables are in lags only.</li>
 <li>All right-hand-side variables in all regressions have the same number of lags</li>
 </ul>
+<p>Note: More often than not, you need the “system” to be stable/stationary. This is a bit more complex than just checking the target variable. (You need to see the Matrix of coefficients)</p>
 </section>
-<section id="case-study-additional-predictors-1" class="slide level2">
-<h2>Case study: Additional predictors 1</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co">#| fig-height: 4</span></span>
-<span id="cb1-2"><a></a><span class="co">#| fig-width: 8</span></span>
-<span id="cb1-3"><a></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"case_shiller.csv"</span>)</span>
-<span id="cb1-4"><a></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(date, unemployment_rate)) <span class="sc">+</span></span>
-<span id="cb1-5"><a></a>  <span class="fu">geom_line</span>()</span>
-<span id="cb1-6"><a></a></span>
-<span id="cb1-7"><a></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(date, <span class="fu">diff</span>(unemployment_rate))) <span class="sc">+</span></span>
-<span id="cb1-8"><a></a>  <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="case-study-unemployment-rate" class="slide level2">
+<h2>Case study: Unemployment Rate</h2>
+<div class="columns">
+<div class="column">
+<h3 id="u.-rate">U. Rate</h3>
+<p><img data-src="images/paste-45.png"></p>
+</div><div class="column">
+<h3 id="change-in-u.-rate">Change in U. Rate</h3>
+<p><img data-src="images/paste-46.png"></p>
+</div></div>
 </section>
-<section id="case-study-additional-predictors-2" class="slide level2">
-<h2>Case study: Additional predictors 2</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="co">#| fig-height: 4</span></span>
-<span id="cb2-2"><a></a><span class="co">#| fig-width: 8  </span></span>
-<span id="cb2-3"><a></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(date, <span class="fu">log</span>(employment))) <span class="sc">+</span></span>
-<span id="cb2-4"><a></a>  <span class="fu">geom_line</span>()</span>
-<span id="cb2-5"><a></a></span>
-<span id="cb2-6"><a></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(date, <span class="fu">diff</span>(<span class="fu">log</span>(employment)))) <span class="sc">+</span></span>
-<span id="cb2-7"><a></a>  <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="case-study-employed-population" class="slide level2">
+<h2>Case study: Employed Population</h2>
+<div class="columns">
+<div class="column">
+<h3 id="lnemp">ln(emp)</h3>
+<p><img data-src="images/paste-47.png"></p>
+</div><div class="column">
+<h3 id="change-in-lnemp">Change in ln(emp)</h3>
+<p><img data-src="images/paste-48.png"></p>
+</div></div>
 </section>
 <section id="case-study-case--shiller-home-price-index---model-selection-2" class="slide level2">
 <h2>Case study: Case- Shiller home price index - Model selection 2</h2>
@@ -1009,7 +962,7 @@ x_t^E &amp;= \beta_{20} + \beta_{21} y_{t-1} + \beta_{22} x_{t-1}
 <td></td>
 <td></td>
 <td></td>
-<td>7.8</td>
+<td><strong>7.8</strong></td>
 </tr>
 <tr class="even">
 <td>M7b</td>
@@ -1020,37 +973,39 @@ x_t^E &amp;= \beta_{20} + \beta_{21} y_{t-1} + \beta_{22} x_{t-1}
 <td></td>
 <td></td>
 <td></td>
-<td>4.5</td>
+<td><strong>4.5</strong></td>
 </tr>
 </tbody>
 </table>
-</section>
-<section id="case-study-case--shiller-home-price-index---var" class="slide level2">
-<h2>Case study: Case- Shiller home price index - VAR</h2>
 <ul>
 <li>In this case study, VAR did not improve on ARIMA.</li>
 </ul>
 </section>
+<section id="var-in-stata" class="slide level2">
+<h2>VAR in <code>Stata</code></h2>
+<p>Stata has a feature for the estimation of VAR models called…Var</p>
+<p><code>var depvarlist [if] [in] [,lags(#) exog(varlist) Other]</code></p>
+<ul>
+<li><p><code>depvarlist</code> are all the variables one needs to analyze.</p></li>
+<li><p><code>lags(#)</code> indicates how many (and which) lags to use.</p></li>
+</ul>
+<p>For prediction look into <code>fcast</code>, <code>predict</code> or <code>forecast</code></p>
+</section>
 <section id="external-validity-in-time-series" class="slide level2">
 <h2>External validity in time series</h2>
 <ul>
-<li>External validity is about the stability of patterns in the data
+<li><p>External validity is about the stability of patterns in the data</p>
 <ul>
-<li>Such as trends, seasonality</li>
+<li>Such as trends, seasonality (Do they repeat? or do we need to update?)</li>
 </ul></li>
-<li>Stationarity is what we look for:
+<li><p>Stationarity is what we look for:</p>
 <ul>
 <li>Distribution of the target, predictors is stable over time</li>
 <li>Correlation patterns also stable over time</li>
+<li>We can then make predictions of the future!</li>
 </ul></li>
-<li>External validity is massive risk with time series by design: predict for future</li>
-</ul>
-</section>
-<section id="case-study-external-validity" class="slide level2">
-<h2>Case study: External validity</h2>
-<ul>
-<li>Look across years to see stability</li>
-<li>Four rolling windows, test sets were 2013,14,15,16</li>
+<li><p>External validity is massive risk with time series by design: predict for future</p></li>
+<li><p>What if we update the model with NEW data. How well would it do?</p></li>
 </ul>
 </section>
 <section id="case-study-case--shiller-home-price-index---model-fit-on-test-sets" class="slide level2">
@@ -1059,6 +1014,7 @@ x_t^E &amp;= \beta_{20} + \beta_{21} y_{t-1} + \beta_{22} x_{t-1}
 <table class="caption-top">
 <thead>
 <tr class="header">
+<th></th>
 <th>Fold1</th>
 <th>Fold2</th>
 <th>Fold3</th>
@@ -1068,6 +1024,7 @@ x_t^E &amp;= \beta_{20} + \beta_{21} y_{t-1} + \beta_{22} x_{t-1}
 </thead>
 <tbody>
 <tr class="odd">
+<td>M1</td>
 <td>14.90</td>
 <td>17.58</td>
 <td>34.44</td>
@@ -1075,6 +1032,7 @@ x_t^E &amp;= \beta_{20} + \beta_{21} y_{t-1} + \beta_{22} x_{t-1}
 <td>31.9</td>
 </tr>
 <tr class="even">
+<td>M2</td>
 <td>14.83</td>
 <td>8.39</td>
 <td>6.23</td>
@@ -1082,6 +1040,7 @@ x_t^E &amp;= \beta_{20} + \beta_{21} y_{t-1} + \beta_{22} x_{t-1}
 <td>9.5</td>
 </tr>
 <tr class="odd">
+<td>M3</td>
 <td>6.68</td>
 <td>1.39</td>
 <td>3.29</td>
@@ -1089,6 +1048,7 @@ x_t^E &amp;= \beta_{20} + \beta_{21} y_{t-1} + \beta_{22} x_{t-1}
 <td>4.1</td>
 </tr>
 <tr class="even">
+<td><strong>M4</strong></td>
 <td>2.22</td>
 <td>1.96</td>
 <td>2.88</td>
@@ -1096,6 +1056,7 @@ x_t^E &amp;= \beta_{20} + \beta_{21} y_{t-1} + \beta_{22} x_{t-1}
 <td>2.2</td>
 </tr>
 <tr class="odd">
+<td>M5</td>
 <td>33.94</td>
 <td>9.79</td>
 <td>10.44</td>
@@ -1103,6 +1064,7 @@ x_t^E &amp;= \beta_{20} + \beta_{21} y_{t-1} + \beta_{22} x_{t-1}
 <td>18.8</td>
 </tr>
 <tr class="even">
+<td>M6</td>
 <td>2.49</td>
 <td>4.95</td>
 <td>9.22</td>
@@ -1110,6 +1072,7 @@ x_t^E &amp;= \beta_{20} + \beta_{21} y_{t-1} + \beta_{22} x_{t-1}
 <td>7.2</td>
 </tr>
 <tr class="odd">
+<td>M7a</td>
 <td>13.30</td>
 <td>5.85</td>
 <td>3.52</td>
@@ -1117,6 +1080,7 @@ x_t^E &amp;= \beta_{20} + \beta_{21} y_{t-1} + \beta_{22} x_{t-1}
 <td>7.8</td>
 </tr>
 <tr class="even">
+<td>M7b</td>
 <td>5.24</td>
 <td>2.51</td>
 <td>5.18</td>
@@ -1128,8 +1092,10 @@ x_t^E &amp;= \beta_{20} + \beta_{21} y_{t-1} + \beta_{22} x_{t-1}
 </section>
 <section id="case-study-prediction-with-best-model-m4-for-2018" class="slide level2">
 <h2>Case study: Prediction with best model M4 for 2018</h2>
-
-<img data-src="images/case_shiller_2018.png" class="r-stretch"></section>
+<div>
+<p><img data-src="images/paste-49.png"></p>
+</div>
+</section>
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
 <ul>

@@ -186,7 +186,7 @@
         "\n",
         "This command has options for Fixed Effects, Between Effects and Random Effects. \n"
       ],
-      "id": "472d241e"
+      "id": "ed92313c"
     },
     {
       "cell_type": "code",
@@ -196,7 +196,7 @@
         "** Good idea to Set the data as panel data\n",
         "xtset nr year"
       ],
-      "id": "86dac410",
+      "id": "89450694",
       "execution_count": null,
       "outputs": []
     },
@@ -218,7 +218,7 @@
         "est sto m4\n",
         "esttab m1 m2 m3 m4, se b(4) noomit nonumber mtitle(OLS OLS_CL RE FE)"
       ],
-      "id": "a6c8e1bb",
+      "id": "38a66eca",
       "execution_count": null,
       "outputs": []
     },
@@ -245,7 +245,7 @@
         "  3. Othewise, we suspect RE are inconsistent, and we use FE.\n",
         "- For most applied work, however, FE is generally prefered to RE\n"
       ],
-      "id": "8ad1f0e2"
+      "id": "98fdcd9c"
     },
     {
       "cell_type": "code",
@@ -260,7 +260,7 @@
         "est sto re\n",
         "hausman fe re"
       ],
-      "id": "c6b8ea0a",
+      "id": "e86e9494",
       "execution_count": null,
       "outputs": []
     },
@@ -309,7 +309,7 @@
         "\n",
         "## Example {.scrollable}\n"
       ],
-      "id": "a17f700d"
+      "id": "27cb7edc"
     },
     {
       "cell_type": "code",
@@ -323,7 +323,7 @@
         "** FE vs RE\n",
         "test mn_exper mn_expersq mn_married mn_union"
       ],
-      "id": "77d8b23f",
+      "id": "43c86eb2",
       "execution_count": null,
       "outputs": []
     },
@@ -333,7 +333,7 @@
       "source": [
         "Comparing across models:\n"
       ],
-      "id": "f29d8a3e"
+      "id": "e7788b8d"
     },
     {
       "cell_type": "code",
@@ -345,7 +345,7 @@
         "est sto m3\n",
         "esttab m1 m2 m3, se b(4) noomit nonumber mtitle(FE CRE RE)"
       ],
-      "id": "c9925e2b",
+      "id": "665348a4",
       "execution_count": null,
       "outputs": []
     },
@@ -362,7 +362,7 @@
         "\n",
         "- You could also extend this to using Multiple fixed effects (time and individual), but some equivalences are lost.\n"
       ],
-      "id": "ab9c60f9"
+      "id": "f5fca047"
     },
     {
       "cell_type": "code",
@@ -371,7 +371,7 @@
         "fra install cre\n",
         "cre , abs(nr): xtreg lwage educ black hisp exper expersq married union, re "
       ],
-      "id": "e425165b",
+      "id": "836b2c9e",
       "execution_count": null,
       "outputs": []
     },
@@ -398,7 +398,7 @@
         "Next week: Switching gears to Time Series Analysis\n",
         "- When the present, the past and the future matter"
       ],
-      "id": "8bec603d"
+      "id": "880e3868"
     }
   ],
   "metadata": {

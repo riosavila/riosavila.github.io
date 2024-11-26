@@ -288,7 +288,7 @@
         "\n",
         "## Example {.scrollable}\n"
       ],
-      "id": "348ecc67"
+      "id": "e3726f46"
     },
     {
       "cell_type": "code",
@@ -316,7 +316,7 @@
         "\treplace `i' = (`i'-r(mean))/r(sd)\n",
         "}"
       ],
-      "id": "e1caa803",
+      "id": "56f1ac03",
       "execution_count": null,
       "outputs": []
     },
@@ -326,7 +326,7 @@
       "source": [
         "Next we create ranks for each observation, assuming no stratification.\n"
       ],
-      "id": "63967d83"
+      "id": "6968be0b"
     },
     {
       "cell_type": "code",
@@ -336,7 +336,7 @@
         "bysort smp (pscore):gen rnk2=_n\n",
         "bysort smp (pc1)   :gen rnk3=_n"
       ],
-      "id": "e032c15c",
+      "id": "08b1dc86",
       "execution_count": null,
       "outputs": []
     },
@@ -346,7 +346,7 @@
       "source": [
         "Finally, the imputation. Simply \"matching\" information from the donor to the recipient."
       ],
-      "id": "61c1c3fe"
+      "id": "201f3448"
     },
     {
       "cell_type": "code",
@@ -367,7 +367,7 @@
         "gsort -smp rnk3\n",
         "replace wage3 = wage_s[rnk3] if smp==0"
       ],
-      "id": "bae1b66e",
+      "id": "07930347",
       "execution_count": null,
       "outputs": []
     },
@@ -377,7 +377,7 @@
       "source": [
         "Simple quality assessment. "
       ],
-      "id": "f8cd92ac"
+      "id": "bf0fbde5"
     },
     {
       "cell_type": "code",
@@ -394,7 +394,7 @@
         "est sto m4\n",
         "esttab m1 m2 m3 m4 , se mtitle(True Wageh pscore pca)"
       ],
-      "id": "52dc1410",
+      "id": "e05c122f",
       "execution_count": null,
       "outputs": []
     },
@@ -405,7 +405,7 @@
         "# Next Class: Micro Simulation\n",
         "just more imputations"
       ],
-      "id": "4ff8f57b"
+      "id": "ff45bdc9"
     }
   ],
   "metadata": {

@@ -129,7 +129,7 @@
         "\n",
         "## Hotel Stars histograms\n"
       ],
-      "id": "f5085d0f"
+      "id": "89b42ae2"
     },
     {
       "cell_type": "code",
@@ -142,7 +142,7 @@
         "use data_slides/hotels-vienna.dta, clear\n",
         "label var stars \"Stars Rating N Stars\""
       ],
-      "id": "a217c476",
+      "id": "32d18b8b",
       "execution_count": null,
       "outputs": []
     },
@@ -154,7 +154,7 @@
         "\n",
         ":::{.column width=\"50%\"}"
       ],
-      "id": "d5ab302d"
+      "id": "1ad6e057"
     },
     {
       "cell_type": "code",
@@ -167,7 +167,7 @@
         "qui:histogram stars, d frequency ///\n",
         "    scale(1.5) addlabels xlabel(1(.5)5)"
       ],
-      "id": "b216a6a6",
+      "id": "23b5009c",
       "execution_count": null,
       "outputs": []
     },
@@ -179,7 +179,7 @@
         "\n",
         ":::{.column width=\"50%\"}"
       ],
-      "id": "f625a7ac"
+      "id": "b9d9eb1b"
     },
     {
       "cell_type": "code",
@@ -191,7 +191,7 @@
         "qui:histogram stars, d percent ///\n",
         "    scale(1.5) addlabels xlabel(1(.5)5)"
       ],
-      "id": "02f6ab08",
+      "id": "e7aebcae",
       "execution_count": null,
       "outputs": []
     },
@@ -208,7 +208,7 @@
         "\n",
         ":::{.column width=\"50%\"}"
       ],
-      "id": "a1de51c0"
+      "id": "b7fde688"
     },
     {
       "cell_type": "code",
@@ -220,7 +220,7 @@
         "qui:histogram price, d  ///\n",
         "    scale(1.5) width(1) "
       ],
-      "id": "22ac2c68",
+      "id": "71c92992",
       "execution_count": null,
       "outputs": []
     },
@@ -232,7 +232,7 @@
         "\n",
         ":::{.column width=\"50%\"}"
       ],
-      "id": "5fe443f3"
+      "id": "96107afd"
     },
     {
       "cell_type": "code",
@@ -244,7 +244,7 @@
         "qui:histogram price,  ///\n",
         "    scale(1.5) width(30)"
       ],
-      "id": "042c56f3",
+      "id": "181ef420",
       "execution_count": null,
       "outputs": []
     },
@@ -270,7 +270,7 @@
         "\n",
         "## Exmp1\n"
       ],
-      "id": "8bbbcad8"
+      "id": "c24ad5a2"
     },
     {
       "cell_type": "code",
@@ -282,7 +282,7 @@
         " *| kdensity price,   ///\n",
         "    scale(1.5)  note(\"\") bw(10)"
       ],
-      "id": "9a6aae5f",
+      "id": "176b5b1a",
       "execution_count": null,
       "outputs": []
     },
@@ -292,7 +292,7 @@
       "source": [
         "## Exmp2\n"
       ],
-      "id": "a98b8ff7"
+      "id": "e8b22b2d"
     },
     {
       "cell_type": "code",
@@ -304,7 +304,7 @@
         " kdensity price,   ///\n",
         "    scale(1.5)  note(\"\") bw(1)"
       ],
-      "id": "84c14cb8",
+      "id": "15ddd35c",
       "execution_count": null,
       "outputs": []
     },
@@ -314,7 +314,7 @@
       "source": [
         "## Exmp3\n"
       ],
-      "id": "5e1ccca4"
+      "id": "db059e67"
     },
     {
       "cell_type": "code",
@@ -326,7 +326,7 @@
         " kdensity price,   ///\n",
         "    scale(1.5)  note(\"\") bw(30)"
       ],
-      "id": "a6919f80",
+      "id": "b70d6314",
       "execution_count": null,
       "outputs": []
     },
@@ -502,7 +502,7 @@
         "\n",
         "## Full Sample"
       ],
-      "id": "d152a845"
+      "id": "338d6a83"
     },
     {
       "cell_type": "code",
@@ -518,7 +518,7 @@
         "graph box price, scale(1.4)  ///\n",
         "  ytitle(\"Price in dollars (log Scale)\") "
       ],
-      "id": "d4c69bf5",
+      "id": "2152b779",
       "execution_count": null,
       "outputs": []
     },
@@ -528,7 +528,7 @@
       "source": [
         "## By Stars\n"
       ],
-      "id": "c1dbb79f"
+      "id": "e3d0c25b"
     },
     {
       "cell_type": "code",
@@ -545,7 +545,7 @@
         "  over(stars)  xsize(10) ysize(4) ///\n",
         "  ytitle(\"Price in dollars (log Scale)\")  "
       ],
-      "id": "8cf39689",
+      "id": "8f80df45",
       "execution_count": null,
       "outputs": []
     },
@@ -589,7 +589,7 @@
         "\n",
         ":::{.column width=\"50%\"}\n"
       ],
-      "id": "475ce75c"
+      "id": "e689e1be"
     },
     {
       "cell_type": "code",
@@ -600,7 +600,7 @@
         "\n",
         "twoway function y = normalden(x), range(-4 4) lw(1) "
       ],
-      "id": "01138659",
+      "id": "9a29db80",
       "execution_count": null,
       "outputs": []
     },
@@ -625,7 +625,7 @@
         "\n",
         ":::{.column width=\"50%\"}\n"
       ],
-      "id": "a28e6af7"
+      "id": "f4a120ea"
     },
     {
       "cell_type": "code",
@@ -638,7 +638,7 @@
         "gen y = exp(rnormal()/2+2)\n",
         "histogram y"
       ],
-      "id": "26ac6d67",
+      "id": "ca357d7c",
       "execution_count": null,
       "outputs": []
     },
@@ -796,7 +796,7 @@
         "\n",
         "::: {.column width=\"50%\"}"
       ],
-      "id": "f38f83e8"
+      "id": "90939e26"
     },
     {
       "cell_type": "code",
@@ -816,7 +816,7 @@
         "legend(order(1 \"All\" 2 \"Vienna\" 3 \"London\")) ///\n",
         "xtitle(\"Hotel Prices\") xsize(9) ysize(6)"
       ],
-      "id": "69252a95",
+      "id": "fbf94ad7",
       "execution_count": null,
       "outputs": []
     },
@@ -855,7 +855,7 @@
         "\n",
         "-   Firm size: Consider three bins: small (100–199), medium (200–999), large (1000+)\n"
       ],
-      "id": "87f37ca2"
+      "id": "1d75e9d8"
     },
     {
       "cell_type": "code",
@@ -869,7 +869,7 @@
         "keep if inrange(emp_firm,100,5000)\n",
         "recode emp_firm (100/199=1 \"Small\") (200/999=2 \"Medium\") (1000/5000=3 \"Large\"), gen(firm_size)"
       ],
-      "id": "f597e53e",
+      "id": "f41b4500",
       "execution_count": null,
       "outputs": []
     },
@@ -882,7 +882,7 @@
         "::::: columns\n",
         "::: {.column width=\"50%\"}"
       ],
-      "id": "eae84091"
+      "id": "9175638c"
     },
     {
       "cell_type": "code",
@@ -898,7 +898,7 @@
         "esttab, cells(\"mean(fmt(2)) p50(fmt(2)) sd(fmt(2))\") label ///\n",
         "  nonumber nomtitle md "
       ],
-      "id": "1ab446a0",
+      "id": "a9b7af57",
       "execution_count": null,
       "outputs": []
     },
@@ -910,7 +910,7 @@
         "\n",
         "::: {.column width=\"50%\"}"
       ],
-      "id": "1dfea3b9"
+      "id": "7248f0bb"
     },
     {
       "cell_type": "code",
@@ -924,7 +924,7 @@
         "\n",
         "esttab , cell(colpct(fmt(2))) unstack nonumber collab(none) nomtitle noline md"
       ],
-      "id": "12c2b844",
+      "id": "c31e64b8",
       "execution_count": null,
       "outputs": []
     },
@@ -960,7 +960,7 @@
         "::::: columns\n",
         "::: {.column width=\"50%\"}"
       ],
-      "id": "1425b576"
+      "id": "b8b4b9e0"
     },
     {
       "cell_type": "code",
@@ -973,7 +973,7 @@
         "scatter management emp_firm, xtitle(\"Firm size\") ytitle(\"Management score\") ///\n",
         "  legend(off) scale(1.5) "
       ],
-      "id": "fe227449",
+      "id": "8a36b1c7",
       "execution_count": null,
       "outputs": []
     },
@@ -985,7 +985,7 @@
         "\n",
         "::: {.column width=\"50%\"}"
       ],
-      "id": "24d987a8"
+      "id": "8e1373f7"
     },
     {
       "cell_type": "code",
@@ -1005,7 +1005,7 @@
         "  scale(1.5) legend(off) ylabel(1/5) ///\n",
         "  note(\"Using 20 bins\")"
       ],
-      "id": "e035a151",
+      "id": "e1a639ca",
       "execution_count": null,
       "outputs": []
     },
@@ -1028,7 +1028,7 @@
         "::: panel-tabset\n",
         "## Model Based Scatterplot\n"
       ],
-      "id": "9ed796fd"
+      "id": "95ee6969"
     },
     {
       "cell_type": "code",
@@ -1042,7 +1042,7 @@
         "    xtitle(\"Firm size\") ytitle(\"Management score\") ///\n",
         "    legend(off) scale(1.5)"
       ],
-      "id": "4d6a838b",
+      "id": "37947d10",
       "execution_count": null,
       "outputs": []
     },
@@ -1052,7 +1052,7 @@
       "source": [
         "## Scale Change\n"
       ],
-      "id": "50399e09"
+      "id": "ae3c21c0"
     },
     {
       "cell_type": "code",
@@ -1065,7 +1065,7 @@
         "  xtitle(\"Firm size\") ytitle(\"Management score\") ///\n",
         "  xscale(log) scale(1.5) xlabel(100 250 500 1000 2000 3000 4000 5000)"
       ],
-      "id": "2d2e6e06",
+      "id": "b39185b6",
       "execution_count": null,
       "outputs": []
     },
@@ -1241,7 +1241,7 @@
         "\n",
         "## Stata Corner\n"
       ],
-      "id": "84bd8e15"
+      "id": "02862557"
     },
     {
       "cell_type": "code",
@@ -1260,7 +1260,7 @@
         "label var mng_mean \"Management Score (Mean)\"\n",
         "label var mng_pca \"Management Score (PCA)\""
       ],
-      "id": "b3305fbd",
+      "id": "94d7d6be",
       "execution_count": null,
       "outputs": []
     },
@@ -1270,7 +1270,7 @@
       "source": [
         "## Scatter PCA vs Mean"
       ],
-      "id": "e2b58638"
+      "id": "9eae2a2d"
     },
     {
       "cell_type": "code",
@@ -1283,7 +1283,7 @@
         "scatter mng_pca mng_mean , xtitle(\"Management Score (Mean)\") ytitle(\"Management Score (PCA)\") ///\n",
         "  scale(1.5)"
       ],
-      "id": "d33970e2",
+      "id": "1f0a1ec9",
       "execution_count": null,
       "outputs": []
     },
@@ -1402,7 +1402,7 @@
         "\n",
         "- This transformation will be used often in economics."
       ],
-      "id": "be0c1e63"
+      "id": "84f287c3"
     }
   ],
   "metadata": {

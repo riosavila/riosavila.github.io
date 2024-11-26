@@ -45,7 +45,7 @@
         "\n",
         "To better understand the complex web of alliances in Westeros, we've created a network graph representing the relationships between major houses throughout the series.\n"
       ],
-      "id": "e3807153"
+      "id": "e98209ee"
     },
     {
       "cell_type": "code",
@@ -120,7 +120,7 @@
         "\n",
         "[^1]: The presence of dragons could be represented by an additional term in the Lanchester equations, significantly increasing the α coefficient for the house possessing them.\n"
       ],
-      "id": "186f66ac"
+      "id": "63eb6647"
     }
   ],
   "metadata": {
@@ -128,7 +128,7 @@
       "name": "python3",
       "language": "python",
       "display_name": "Python 3 (ipykernel)",
-      "path": "C:\\Python310\\share\\jupyter\\kernels\\python3"
+      "path": "C:\\Users\\Fernando\\AppData\\Roaming\\Python\\share\\jupyter\\kernels\\python3"
     }
   },
   "nbformat": 4,

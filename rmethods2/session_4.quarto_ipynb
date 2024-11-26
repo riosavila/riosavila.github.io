@@ -228,7 +228,7 @@
         "\n",
         "## Example: {.scrollable}\n"
       ],
-      "id": "d39d5309"
+      "id": "35adc7eb"
     },
     {
       "cell_type": "code",
@@ -238,7 +238,7 @@
         "frause oaxaca, clear\n",
         "drop if lnwage == ."
       ],
-      "id": "5e65215e",
+      "id": "c8a7413c",
       "execution_count": null,
       "outputs": []
     },
@@ -252,7 +252,7 @@
         "- Identify your model of interest: Simple Specification\n",
         "- And obtain Summary Statistics\n"
       ],
-      "id": "d79db5d2"
+      "id": "0eb20988"
     },
     {
       "cell_type": "code",
@@ -261,7 +261,7 @@
         "*| classes: larger\n",
         "tabstat lnwage educ exper age married , by(female)"
       ],
-      "id": "59ef7191",
+      "id": "8d2e0ef2",
       "execution_count": null,
       "outputs": []
     },
@@ -277,7 +277,7 @@
         "qui:mean educ exper age married cns if female == 1\n",
         "matrix x_women = e(b)"
       ],
-      "id": "552af45f",
+      "id": "13cd9d2a",
       "execution_count": null,
       "outputs": []
     },
@@ -287,7 +287,7 @@
       "source": [
         "Second, estimate models of interest\n"
       ],
-      "id": "f2e5e33b"
+      "id": "95d72968"
     },
     {
       "cell_type": "code",
@@ -303,7 +303,7 @@
         "est sto women\n",
         "esttab men women, nogaps se mtitle(\"Men\" \"Women\")"
       ],
-      "id": "30721815",
+      "id": "da41bc0f",
       "execution_count": null,
       "outputs": []
     },
@@ -336,7 +336,7 @@
         "\n",
         "matrix list result, format(%9.4f)"
       ],
-      "id": "911549c7",
+      "id": "f5a3ffda",
       "execution_count": null,
       "outputs": []
     },
@@ -349,7 +349,7 @@
         "\n",
         "## The `oaxaca` way {.scrollable}\n"
       ],
-      "id": "fe40e7f5"
+      "id": "ed1841d1"
     },
     {
       "cell_type": "code",
@@ -362,7 +362,7 @@
         "est sto m2\n",
         "esttab m1 m2, wide mtitle(bw_Xm Xm_bw)"
       ],
-      "id": "3fb0f1c3",
+      "id": "b754fd6d",
       "execution_count": null,
       "outputs": []
     },
@@ -486,7 +486,7 @@
         "## {.scrollable}\n",
         "### Example\n"
       ],
-      "id": "220225b0"
+      "id": "a896da32"
     },
     {
       "cell_type": "code",
@@ -514,7 +514,7 @@
         "esttab m1 m2a m2b m3, nogaps se ///\n",
         "mtitle(Men Men_as_w Wmen_as_m Women)"
       ],
-      "id": "8ac11702",
+      "id": "bac24fd3",
       "execution_count": null,
       "outputs": []
     },
@@ -531,7 +531,7 @@
         "  - $DX$ = (3) vs (4) = 3.277-3.267 = 0.010\n",
         "  - $DB$ = (1) vs (3) = 3.440-3.277 = 0.163\n"
       ],
-      "id": "8228e91e"
+      "id": "76eae884"
     },
     {
       "cell_type": "code",
@@ -542,7 +542,7 @@
         "reg lnwage female [pw=ipw1] \n",
         "reg lnwage female [pw=ipw2] "
       ],
-      "id": "4def4301",
+      "id": "98afc333",
       "execution_count": null,
       "outputs": []
     },
@@ -557,7 +557,7 @@
         "\n",
         "- It also allows you to move away from focusing on differences in means. Any transformation of the outcome is now valid! \n"
       ],
-      "id": "1bb6744f"
+      "id": "ff8bd3f8"
     },
     {
       "cell_type": "code",
@@ -567,7 +567,7 @@
         "rifhdreg wage female [pw=ipw1] , rif(gini) over(female)\n",
         "rifhdreg wage female [pw=ipw2] , rif(gini) over(female)"
       ],
-      "id": "5a0c7eae",
+      "id": "0554f22a",
       "execution_count": null,
       "outputs": []
     },
@@ -591,7 +591,7 @@
         "\n",
         "## Example {.scrollable}\n"
       ],
-      "id": "b520548d"
+      "id": "86087ca3"
     },
     {
       "cell_type": "code",
@@ -616,7 +616,7 @@
         "esttab m1 m2 m3 m4, se nogaps ///\n",
         "mtitle(Mean Gini 25th iqsr_4010)"
       ],
-      "id": "3935b676",
+      "id": "a2f868ef",
       "execution_count": null,
       "outputs": []
     },
@@ -627,7 +627,7 @@
         "# Thats all for today!\n",
         "Next week Significance levels and Missing Data"
       ],
-      "id": "d9c0c280"
+      "id": "49771f5f"
     }
   ],
   "metadata": {

@@ -97,7 +97,7 @@
         "\n",
         "## Visually\n"
       ],
-      "id": "d7f4e6a3"
+      "id": "5090e00e"
     },
     {
       "cell_type": "code",
@@ -157,7 +157,7 @@
         "\t\t\t  title(\"Population\") xsize(5) ysize(5)\tlegend(off)\t\t\n",
         "graph export images/ch1_4.png, replace width(700)"
       ],
-      "id": "17d9018d",
+      "id": "66f51f23",
       "execution_count": null,
       "outputs": []
     },
@@ -232,7 +232,7 @@
         "\n",
         "# Next: [Single Linear Regression](2_SRA.html)"
       ],
-      "id": "8ac70908"
+      "id": "524becfc"
     }
   ],
   "metadata": {

@@ -132,7 +132,7 @@
         "\n",
         "## Simulating effects `Stata`{.scrollable}\n"
       ],
-      "id": "ef1e92b4"
+      "id": "c957f847"
     },
     {
       "cell_type": "code",
@@ -155,7 +155,7 @@
         "** For Everyone 100 obs\n",
         "tabstat t, by(trt)"
       ],
-      "id": "74e01d0c",
+      "id": "7b225ba6",
       "execution_count": null,
       "outputs": []
     },
@@ -169,7 +169,7 @@
         "\n",
         "The most naive estimator is to just estimate the mean difference in \"post-treatment\" outcome after treatment was in place. But that would be very biased!\n"
       ],
-      "id": "c06a0711"
+      "id": "ef67e681"
     },
     {
       "cell_type": "code",
@@ -181,7 +181,7 @@
         "list y yy1 yy0 trt in 1/10\n",
         "reg  y trt"
       ],
-      "id": "aac41d0e",
+      "id": "7e292edb",
       "execution_count": null,
       "outputs": []
     },
@@ -302,7 +302,7 @@
         "\n",
         "## Stata Example {.scrollable}\n"
       ],
-      "id": "76155e06"
+      "id": "02596607"
     },
     {
       "cell_type": "code",
@@ -314,7 +314,7 @@
         "tabstat t y0 y1 yrct, by(trt2)\n",
         "reg yrct trt2"
       ],
-      "id": "a2e27341",
+      "id": "50b75b01",
       "execution_count": null,
       "outputs": []
     },
@@ -427,7 +427,7 @@
         "\n",
         "# Next Class: REG and Panel FE"
       ],
-      "id": "05f2d7e8"
+      "id": "6cd12812"
     }
   ],
   "metadata": {

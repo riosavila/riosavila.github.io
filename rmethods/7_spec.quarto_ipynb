@@ -64,7 +64,7 @@
         "    - We will only consider quadratic terms and interactions,\n",
         "    - but there is a large literature on making very flexible estimations (non-paramatric analysis)\n"
       ],
-      "id": "a803830f"
+      "id": "5b632c21"
     },
     {
       "cell_type": "code",
@@ -84,7 +84,7 @@
         "qui:reg y c.x##c.x##c.x\n",
         "margins, dydx(x)"
       ],
-      "id": "aadb9b36",
+      "id": "9f467acf",
       "execution_count": null,
       "outputs": []
     },
@@ -204,7 +204,7 @@
         "- Further assumptions are required (Past exogenous of present)\n",
         "- But allows controlling for underlying factors or historical factors\n"
       ],
-      "id": "4f9b8eca"
+      "id": "aa1782e3"
     },
     {
       "cell_type": "code",
@@ -220,7 +220,7 @@
         "esttab m1 m2 m3, se star(* .1 ** 0.05 *** 0.01) b(3) ///\n",
         "mtitle(crimert crimert change_crrt)"
       ],
-      "id": "0cdf964c",
+      "id": "465be78e",
       "execution_count": null,
       "outputs": []
     },
@@ -259,7 +259,7 @@
         "\n",
         "- However **variance** will be larger than when using true data:\n"
       ],
-      "id": "d050258a"
+      "id": "0ebeb214"
     },
     {
       "cell_type": "code",
@@ -274,7 +274,7 @@
         "est sto m2\n",
         "esttab m1 m2, se"
       ],
-      "id": "fd9be7ea",
+      "id": "372980db",
       "execution_count": null,
       "outputs": []
     },
@@ -297,7 +297,7 @@
         "\n",
         "## \n"
       ],
-      "id": "55e507f8"
+      "id": "10e015e9"
     },
     {
       "cell_type": "code",
@@ -313,7 +313,7 @@
         "est sto m2\n",
         "esttab m1 m2, se"
       ],
-      "id": "89323019",
+      "id": "7445cb84",
       "execution_count": null,
       "outputs": []
     },
@@ -374,7 +374,7 @@
         "\n",
         "## Example\n"
       ],
-      "id": "ed7db25c"
+      "id": "96d37c04"
     },
     {
       "cell_type": "code",
@@ -393,7 +393,7 @@
         "color_style tableau\n",
         "scatter lev rst"
       ],
-      "id": "889afb6d",
+      "id": "9fd0827f",
       "execution_count": null,
       "outputs": []
     },
@@ -433,7 +433,7 @@
         "Next week Midterm!\n",
         "and after that helping with A4"
       ],
-      "id": "2a1a87ac"
+      "id": "56103603"
     }
   ],
   "metadata": {

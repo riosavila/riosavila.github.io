@@ -494,7 +494,7 @@
         "\n",
         "## Stata: LASSO {.scrollable}\n"
       ],
-      "id": "62ab516f"
+      "id": "653978f7"
     },
     {
       "cell_type": "code",
@@ -508,7 +508,7 @@
         "    i.(mmarried mhisp fhisp foreign alcohol msmoke fbaby prenatal1), nolog\n",
         "ereturn display"
       ],
-      "id": "f0773697",
+      "id": "888aebd2",
       "execution_count": null,
       "outputs": []
     },
@@ -518,7 +518,7 @@
       "source": [
         "## Stata: LASSO {.scrollable}\n"
       ],
-      "id": "a9df1bd1"
+      "id": "960483df"
     },
     {
       "cell_type": "code",
@@ -534,7 +534,7 @@
         "    i.(mmarried mhisp fhisp foreign alcohol msmoke fbaby prenatal1), \n",
         "ereturn display"
       ],
-      "id": "b6a32b44",
+      "id": "df820a19",
       "execution_count": null,
       "outputs": []
     }

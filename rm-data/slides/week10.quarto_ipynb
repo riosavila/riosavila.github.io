@@ -203,7 +203,7 @@
         "\n",
         "## Loss Functions of Various Shapes\n"
       ],
-      "id": "5c0c929d"
+      "id": "6e268e79"
     },
     {
       "cell_type": "code",
@@ -227,7 +227,7 @@
         "    legend(order(1 \"Symetric-Convex\" 2 \"Symetric-Linear\" 3 \"Asymetric-Convex\") )\n",
         "}"
       ],
-      "id": "5b2f29e9",
+      "id": "2bbd8110",
       "execution_count": null,
       "outputs": []
     },
@@ -501,7 +501,7 @@
         "\n",
         "## Example, redone\n"
       ],
-      "id": "76d189b9"
+      "id": "5256caeb"
     },
     {
       "cell_type": "code",
@@ -581,7 +581,7 @@
         "fit_stat2\n",
         "matrix rr2=rr2\\r(result)"
       ],
-      "id": "07367747",
+      "id": "c931dc73",
       "execution_count": null,
       "outputs": []
     },
@@ -620,7 +620,7 @@
         "\n",
         "## K-fold cross-validation\n"
       ],
-      "id": "9330d704"
+      "id": "62da166f"
     },
     {
       "cell_type": "code",
@@ -665,7 +665,7 @@
         "fit_stat3 y c.x##c.x##c.x##c.x##c.x \n",
         "display \"^5, mse: \" %5.3f `r(mse)' _n"
       ],
-      "id": "50e0f7f9",
+      "id": "bce3b0c6",
       "execution_count": null,
       "outputs": []
     },
@@ -742,7 +742,7 @@
         "- Model 5 same as Model 4 but with all variables interacted with age\n",
         "- Model 6 same as Model 4 but with all variables interacted with condition\n"
       ],
-      "id": "048716bf"
+      "id": "c924ab3f"
     },
     {
       "cell_type": "code",
@@ -760,7 +760,7 @@
         "global model5 c.($model4)##c.age\n",
         "global model6 c.($model4)##i.condition_recode"
       ],
-      "id": "ccd9024e",
+      "id": "88f98927",
       "execution_count": null,
       "outputs": []
     },
@@ -774,7 +774,7 @@
         "- Lets run all models, using different evaluation criteria. And see which one is the best.\n",
         "- See below for the program..Rather long"
       ],
-      "id": "bd260272"
+      "id": "b6f965de"
     },
     {
       "cell_type": "code",
@@ -841,7 +841,7 @@
         "    return matrix result = result\n",
         "end"
       ],
-      "id": "dbf9b788",
+      "id": "6bc6770e",
       "execution_count": null,
       "outputs": []
     },
@@ -851,7 +851,7 @@
       "source": [
         "## CS: Results\n"
       ],
-      "id": "a777642c"
+      "id": "e5baf9af"
     },
     {
       "cell_type": "code",
@@ -876,7 +876,7 @@
         "set linesize 250\n",
         "esttab matrix(fresults, fmt(%8.3f)) , md  nomtitle"
       ],
-      "id": "aa4fb583",
+      "id": "dc7903ad",
       "execution_count": null,
       "outputs": []
     }

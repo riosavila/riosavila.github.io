@@ -49,7 +49,7 @@
         "\n",
         "The unique structure of LitRPG novels has led to high levels of reader engagement. To illustrate this, we conducted a survey of 1000 LitRPG readers, asking them to rate their engagement levels compared to traditional fantasy novels.\n"
       ],
-      "id": "383b1ee7"
+      "id": "aab8a0b8"
     },
     {
       "cell_type": "code",
@@ -118,7 +118,7 @@
         "\n",
         "# References\n"
       ],
-      "id": "c1fed2e0"
+      "id": "b5fbf1cc"
     }
   ],
   "metadata": {
@@ -126,7 +126,7 @@
       "name": "python3",
       "language": "python",
       "display_name": "Python 3 (ipykernel)",
-      "path": "C:\\Python310\\share\\jupyter\\kernels\\python3"
+      "path": "C:\\Users\\Fernando\\AppData\\Roaming\\Python\\share\\jupyter\\kernels\\python3"
     }
   },
   "nbformat": 4,

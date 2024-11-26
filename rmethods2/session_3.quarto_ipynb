@@ -105,7 +105,7 @@
         "\n",
         "## Plots\n"
       ],
-      "id": "5b6c5b70"
+      "id": "2d331424"
     },
     {
       "cell_type": "code",
@@ -124,7 +124,7 @@
         "    ysize(5) xsize(9) xtitle(\"Log Wages\") ///\n",
         "    legend(order(1 \"Histogram\" 2 \"Kernel Density\") pos(6) col(2)) "
       ],
-      "id": "5c17762b",
+      "id": "b02e509e",
       "execution_count": null,
       "outputs": []
     },
@@ -149,7 +149,7 @@
         "\n",
         "## plot\n"
       ],
-      "id": "6f127891"
+      "id": "cf53abd6"
     },
     {
       "cell_type": "code",
@@ -164,7 +164,7 @@
         "scatter qwage p, connect(l) name(m1, replace) ysize(5) xsize(8) title(\"Pen Parade\")\n",
         "scatter p qwage, connect(l) name(m2, replace) ysize(5) xsize(8) title(\"Cumulative Distribution Function\")"
       ],
-      "id": "99ff2505",
+      "id": "7fdc63f3",
       "execution_count": null,
       "outputs": []
     },
@@ -215,7 +215,7 @@
         "\n",
         "::::\n"
       ],
-      "id": "702ffc7f"
+      "id": "e576c42d"
     },
     {
       "cell_type": "code",
@@ -234,7 +234,7 @@
         "gen lc_i = sum( (wage*wt/twage) )*100 if wage!=.\n",
         "gen p_i  = sum( (wt/tpop) )*100      if wage!=."
       ],
-      "id": "87160419",
+      "id": "7ebc31d3",
       "execution_count": null,
       "outputs": []
     },
@@ -244,7 +244,7 @@
       "source": [
         "## Plot\n"
       ],
-      "id": "eb7d6b67"
+      "id": "1619842c"
     },
     {
       "cell_type": "code",
@@ -260,7 +260,7 @@
         "    ytitle(\"Cumulative Share of Income\") ///\n",
         "    legend(off)"
       ],
-      "id": "4bdd482a",
+      "id": "fe112204",
       "execution_count": null,
       "outputs": []
     },
@@ -337,7 +337,7 @@
         "\n",
         "## {.scrollable}"
       ],
-      "id": "cb097ea8"
+      "id": "7533f313"
     },
     {
       "cell_type": "code",
@@ -348,7 +348,7 @@
         "capture:ssc install sgini\n",
         "sgini wage "
       ],
-      "id": "a9bd47ec",
+      "id": "a989bd4b",
       "execution_count": null,
       "outputs": []
     },
@@ -361,7 +361,7 @@
         "capture:ssc install ineqdeco\n",
         "ineqdeco wage [pw=wt]"
       ],
-      "id": "f675ff8e",
+      "id": "ab733aa9",
       "execution_count": null,
       "outputs": []
     },
@@ -408,7 +408,7 @@
         "  \n",
         "`bootstrap gini=r(coeff): sgini wage`\n"
       ],
-      "id": "3c46ec52"
+      "id": "e16ec1cc"
     },
     {
       "cell_type": "code",
@@ -417,7 +417,7 @@
         "*| echo: false\n",
         "bootstrap gini=r(coeff), nodots: sgini wage"
       ],
-      "id": "bf61ad2b",
+      "id": "45dedeaf",
       "execution_count": null,
       "outputs": []
     },
@@ -429,7 +429,7 @@
         "\n",
         "`rifhdreg wage , rif(gini)`\n"
       ],
-      "id": "6f8fa972"
+      "id": "460525cc"
     },
     {
       "cell_type": "code",
@@ -438,7 +438,7 @@
         "*| echo: false\n",
         "rifhdreg wage, rif(gini) robust"
       ],
-      "id": "5fe74210",
+      "id": "2af00bc6",
       "execution_count": null,
       "outputs": []
     },
@@ -450,7 +450,7 @@
         "\n",
         "`rifhdreg wage ibn.female [pw=wt], rif(gini) over(female) noconstant`\n"
       ],
-      "id": "8a38503b"
+      "id": "081fa063"
     },
     {
       "cell_type": "code",
@@ -459,7 +459,7 @@
         "*| echo: false\n",
         "rifhdreg wage ibn.female [pw=wt], rif(gini) over(female) noconstant"
       ],
-      "id": "f0bcdf46",
+      "id": "5376282d",
       "execution_count": null,
       "outputs": []
     },
@@ -469,7 +469,7 @@
       "source": [
         "`rifhdreg wage i.female [pw=wt], rif(gini) over(female)`\n"
       ],
-      "id": "62a1393b"
+      "id": "62034935"
     },
     {
       "cell_type": "code",
@@ -478,7 +478,7 @@
         "*| echo: false\n",
         "rifhdreg wage i.female [pw=wt], rif(gini) over(female)"
       ],
-      "id": "5d582be0",
+      "id": "fdf0e5f3",
       "execution_count": null,
       "outputs": []
     },
@@ -537,7 +537,7 @@
         "\n",
         "`ssc install ineqfac`\n"
       ],
-      "id": "b52af344"
+      "id": "acc4498f"
     },
     {
       "cell_type": "code",
@@ -550,7 +550,7 @@
         "capture: ssc install ineqfac\n",
         "ineqfac basemi inchomewealth incnonhomewealth govtr_n pubcon tx_n valhp [aw=hhwgt]"
       ],
-      "id": "1df51231",
+      "id": "a5f5ad7a",
       "execution_count": null,
       "outputs": []
     },
@@ -594,7 +594,7 @@
         "\n",
         "`ssc install sgini`\n"
       ],
-      "id": "cca85563"
+      "id": "b19312e1"
     },
     {
       "cell_type": "code",
@@ -606,7 +606,7 @@
         " \n",
         "sgini basemi inchomewealth incnonhomewealth govtr_n pubcon tx_n valhp [aw=hhwgt], source"
       ],
-      "id": "a35c6260",
+      "id": "d3edf42e",
       "execution_count": null,
       "outputs": []
     },
@@ -654,7 +654,7 @@
         "`ssc install anogi` (Tom Masterson is one of the authors)  \n",
         "`ssc install moremata` (needed for `anogi`)\n"
       ],
-      "id": "ecb18545"
+      "id": "76aa230c"
     },
     {
       "cell_type": "code",
@@ -667,7 +667,7 @@
         "capture:ssc install moremata\n",
         "anogi limew [aw= hhwgt ], by(educl) detail"
       ],
-      "id": "bda2ced6",
+      "id": "68252016",
       "execution_count": null,
       "outputs": []
     },
@@ -678,7 +678,7 @@
         "# Thats all for today...\n",
         "Until next week!"
       ],
-      "id": "4c03b196"
+      "id": "6d3798f0"
     }
   ],
   "metadata": {

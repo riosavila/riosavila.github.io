@@ -17,7 +17,7 @@
         " \n",
         "smaller \n"
       ],
-      "id": "450d5e45"
+      "id": "dde5dd79"
     },
     {
       "cell_type": "code",
@@ -28,7 +28,7 @@
         "display \"```{=html}\"\n",
         "display_file regressx.htm\n"
       ],
-      "id": "c08b6c08",
+      "id": "f90c32ad",
       "execution_count": null,
       "outputs": []
     },
@@ -38,7 +38,7 @@
       "source": [
         "```\n"
       ],
-      "id": "1e11ecef"
+      "id": "6eb16685"
     }
   ],
   "metadata": {

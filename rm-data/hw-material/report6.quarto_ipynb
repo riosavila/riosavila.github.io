@@ -54,7 +54,7 @@
         "\n",
         "To visualize the economic disparities between different zones in the game world, we've compiled data on average player wealth across five major regions. @fig-wealth illustrates these differences:\n"
       ],
-      "id": "62c8e743"
+      "id": "e50436b5"
     },
     {
       "cell_type": "code",
@@ -111,7 +111,7 @@
         "\n",
         "[^1]: This economic progression system is a common feature in many RPGs and LitRPG novels, serving as a form of \"gamified capitalism\" that keeps players engaged and motivated.\n"
       ],
-      "id": "16bd1d5f"
+      "id": "df93209a"
     }
   ],
   "metadata": {
@@ -119,7 +119,7 @@
       "name": "python3",
       "language": "python",
       "display_name": "Python 3 (ipykernel)",
-      "path": "C:\\Python310\\share\\jupyter\\kernels\\python3"
+      "path": "C:\\Users\\Fernando\\AppData\\Roaming\\Python\\share\\jupyter\\kernels\\python3"
     }
   },
   "nbformat": 4,

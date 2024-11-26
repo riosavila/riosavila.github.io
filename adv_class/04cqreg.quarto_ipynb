@@ -142,7 +142,7 @@
         "\n",
         "#### Using Bootstrap"
       ],
-      "id": "4596146f"
+      "id": "d858d28e"
     },
     {
       "cell_type": "code",
@@ -155,7 +155,7 @@
         "          q75=r(r4) q90=r(r5), reps(1000) nodots: ///\n",
         "          _pctile wage  , p(10 25 50 75 90)"
       ],
-      "id": "1f980d62",
+      "id": "74c6c63b",
       "execution_count": null,
       "outputs": []
     },
@@ -165,7 +165,7 @@
       "source": [
         "#### Analytical SE\n"
       ],
-      "id": "0df8ef90"
+      "id": "17cd2ff6"
     },
     {
       "cell_type": "code",
@@ -181,7 +181,7 @@
         "gen se = sqrt(p*(1-p)/935)/fwage\n",
         "tabstat wage se if inlist(wage,500,668,905,1160,1444), by(wage)"
       ],
-      "id": "8208958f",
+      "id": "a907dc3b",
       "execution_count": null,
       "outputs": []
     },
@@ -324,7 +324,7 @@
         "\n",
         "### Visualizing Differences in Interpretation\n"
       ],
-      "id": "d17ec340"
+      "id": "d4f4f75c"
     },
     {
       "cell_type": "code",
@@ -347,7 +347,7 @@
         "gen xs = x + rn\n",
         "gen xs1 = x1 + rn"
       ],
-      "id": "005787ba",
+      "id": "1265444e",
       "execution_count": null,
       "outputs": []
     },
@@ -359,7 +359,7 @@
         "\n",
         "## Fixed Rank\n"
       ],
-      "id": "4b30a462"
+      "id": "d44ac61f"
     },
     {
       "cell_type": "code",
@@ -372,7 +372,7 @@
         "    pcarrow y x y1 x1 if _n<30, color(navy*.7) lw(0.5) ///\n",
         "    legend(off) ysize(6) xsize(10)"
       ],
-      "id": "9bce7b8d",
+      "id": "5644212f",
       "execution_count": null,
       "outputs": []
     },
@@ -382,7 +382,7 @@
       "source": [
         "## Varying Rank\n"
       ],
-      "id": "ba3d9389"
+      "id": "bedfcb4d"
     },
     {
       "cell_type": "code",
@@ -394,7 +394,7 @@
         "    pcarrow y x y2 x1 if _n<30, color(navy*.7) lw(0.5) ///\n",
         "    legend(off) ysize(6) xsize(10)"
       ],
-      "id": "a1d34e74",
+      "id": "01fc55ff",
       "execution_count": null,
       "outputs": []
     },
@@ -406,7 +406,7 @@
         "\n",
         "## Example: Wages...\n"
       ],
-      "id": "e9c5c862"
+      "id": "cb617732"
     },
     {
       "cell_type": "code",
@@ -424,7 +424,7 @@
         "* ssc install estout\n",
         "esttab m1 m2 m3, se nogaps mtitle(q10 q50 q90)"
       ],
-      "id": "45fe64b4",
+      "id": "a6e6d91e",
       "execution_count": null,
       "outputs": []
     },
@@ -535,7 +535,7 @@
         "\n",
         "### Example (with `mmqreg`)\n"
       ],
-      "id": "fde08495"
+      "id": "8c83318a"
     },
     {
       "cell_type": "code",
@@ -546,7 +546,7 @@
         "qui:mmqreg lnwage educ exper tenure female, robust\n",
         "qregplot educ exper tenure female, cons q(5(5)95)"
       ],
-      "id": "38b1101a",
+      "id": "4e92806f",
       "execution_count": null,
       "outputs": []
     },
@@ -594,7 +594,7 @@
         "  \n",
         "## Simulating some data\n"
       ],
-      "id": "100894b5"
+      "id": "0ee12848"
     },
     {
       "cell_type": "code",
@@ -615,7 +615,7 @@
         "gen x2 = rnormal()+vi+err\n",
         "gen y = 1+x1+x2+ui+rnormal()*exp(0.2*x1-0.2*x2+0.3*ui)"
       ],
-      "id": "2d181ad1",
+      "id": "ae07d69e",
       "execution_count": null,
       "outputs": []
     },
@@ -629,7 +629,7 @@
         "\n",
         "Assume you observe those fixed effects:"
       ],
-      "id": "0c0c26b9"
+      "id": "1ca112ca"
     },
     {
       "cell_type": "code",
@@ -645,7 +645,7 @@
         "est sto m30\n",
         "esttab m10 m20 m30, se nogaps mtitle(q10 q50 q90)"
       ],
-      "id": "ecb22990",
+      "id": "4b0b4a9d",
       "execution_count": null,
       "outputs": []
     },
@@ -655,7 +655,7 @@
       "source": [
         "## Ignoring Fixed Effects\n"
       ],
-      "id": "ab9f9553"
+      "id": "fd30a86c"
     },
     {
       "cell_type": "code",
@@ -670,7 +670,7 @@
         "est sto m3\n",
         "esttab m1 m2 m3 m10 m20 m30, se nogaps mtitle(q10 q50 q90)"
       ],
-      "id": "fba4a0d6",
+      "id": "e9d3a385",
       "execution_count": null,
       "outputs": []
     },
@@ -686,7 +686,7 @@
         "\n",
         "$$Q_p(y|X) = X\\beta + \\alpha \\bar X + \\epsilon$$\n"
       ],
-      "id": "1b1a3816"
+      "id": "12263481"
     },
     {
       "cell_type": "code",
@@ -704,7 +704,7 @@
         "est sto m3\n",
         "esttab m1 m2 m3 m10 m20 m30, se nogaps mtitle(q10 q50 q90)"
       ],
-      "id": "da652664",
+      "id": "ab8fa767",
       "execution_count": null,
       "outputs": []
     },
@@ -725,7 +725,7 @@
         "\\end{aligned}\n",
         "$$\n"
       ],
-      "id": "6efad400"
+      "id": "c34a7072"
     },
     {
       "cell_type": "code",
@@ -742,7 +742,7 @@
         "est sto m3\n",
         "esttab m1 m2 m3 m10 m20 m30, se nogaps mtitle(q10 q50 q90)"
       ],
-      "id": "5264c46a",
+      "id": "f2b5e3ca",
       "execution_count": null,
       "outputs": []
     },
@@ -760,7 +760,7 @@
         "\\end{aligned}\n",
         "$$\n"
       ],
-      "id": "1c257c5f"
+      "id": "d4bd85e9"
     },
     {
       "cell_type": "code",
@@ -776,7 +776,7 @@
         "est sto m3\n",
         "esttab m1 m2 m3 m10 m20 m30, se nogaps mtitle(q10 q50 q90)"
       ],
-      "id": "db739144",
+      "id": "f0535d10",
       "execution_count": null,
       "outputs": []
     },
@@ -797,7 +797,7 @@
         "\\end {aligned}\n",
         "$$\n"
       ],
-      "id": "6bddcd0a"
+      "id": "fcc3a232"
     },
     {
       "cell_type": "code",
@@ -814,7 +814,7 @@
         "est sto m3\n",
         "esttab m1 m2 m3 m10 m20 m30, se nogaps mtitle(q10 q50 q90)"
       ],
-      "id": "bb9d7af4",
+      "id": "67e924bb",
       "execution_count": null,
       "outputs": []
     },
@@ -826,7 +826,7 @@
         "\n",
         "Unconditional Quantile Regressions and RIF-Regressions"
       ],
-      "id": "bdafb182"
+      "id": "5d23880d"
     }
   ],
   "metadata": {

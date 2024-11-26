@@ -164,7 +164,7 @@
         "\n",
         "## MR: Collinearity \n"
       ],
-      "id": "3c1c08f9"
+      "id": "a5c9ee60"
     },
     {
       "cell_type": "code",
@@ -176,7 +176,7 @@
         "qui:regress lnwage female educ exper tenure c.age c.age#c.age, robust\n",
         "estat vif"
       ],
-      "id": "7b115f27",
+      "id": "5631e1a9",
       "execution_count": null,
       "outputs": []
     },
@@ -218,7 +218,7 @@
         "\n",
         "## Regression"
       ],
-      "id": "d9013558"
+      "id": "946dfec0"
     },
     {
       "cell_type": "code",
@@ -230,7 +230,7 @@
         "regress  citations  fines i.taxes i.csize i.college, robust nohead\n",
         "** regress, coefleg to know \"names\" of variables"
       ],
-      "id": "21ed6811",
+      "id": "80aedcea",
       "execution_count": null,
       "outputs": []
     },
@@ -240,7 +240,7 @@
       "source": [
         "## Joint test\n"
       ],
-      "id": "54442fe9"
+      "id": "3ea228dd"
     },
     {
       "cell_type": "code",
@@ -250,7 +250,7 @@
         "*| code-fold: false\n",
         "test 1.taxes 1.college // <- automatically test the joint hypothesis"
       ],
-      "id": "3292a35e",
+      "id": "509b1d8a",
       "execution_count": null,
       "outputs": []
     },
@@ -260,7 +260,7 @@
       "source": [
         "## Single test Combined\n"
       ],
-      "id": "b39bd555"
+      "id": "e38de5f2"
     },
     {
       "cell_type": "code",
@@ -271,7 +271,7 @@
         "** \"H0: 2*B_Taxes = B_fines\"\n",
         "lincom 2*1.taxes-fines"
       ],
-      "id": "7519d623",
+      "id": "d4bce08d",
       "execution_count": null,
       "outputs": []
     },
@@ -623,7 +623,7 @@
         "- May include binary variables and interactions\n",
         "- Multiple regression can take us closer to a causal interpretation and help make better predictions."
       ],
-      "id": "e2d5c541"
+      "id": "cff08e16"
     }
   ],
   "metadata": {

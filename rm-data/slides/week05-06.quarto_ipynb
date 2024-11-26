@@ -113,7 +113,7 @@
         "\n",
         "## Case Study: Finding a good deal among hotels\n"
       ],
-      "id": "7599e363"
+      "id": "825babd6"
     },
     {
       "cell_type": "code",
@@ -132,7 +132,7 @@
         "legend(order(2 \"bw(.3)\" 4 \"bw(.6)\" 6 \"bw(.15)\")) ///\n",
         "ytitle(\"Price\") xtitle(\"Distance from CityCenter\")"
       ],
-      "id": "4ee8f507",
+      "id": "29ced8ee",
       "execution_count": null,
       "outputs": []
     },
@@ -224,7 +224,7 @@
         ":::\n",
         "::: {.column width=\"50%\"}"
       ],
-      "id": "3a3107b5"
+      "id": "301026da"
     },
     {
       "cell_type": "code",
@@ -242,7 +242,7 @@
         "   (line yh x, color(navy)) (pcarrow yh x y x, color(gs9)), ///\n",
         "legend(off)"
       ],
-      "id": "887d75cc",
+      "id": "e982e9fd",
       "execution_count": null,
       "outputs": []
     },
@@ -268,7 +268,7 @@
         "\n",
         "## Case Study: Finding a good deal among hotels\n"
       ],
-      "id": "e8b207c2"
+      "id": "e3bda7dd"
     },
     {
       "cell_type": "code",
@@ -289,7 +289,7 @@
         "ytitle(\"Price\") xtitle(\"Distance from CityCenter\") ///\n",
         "scale(1.4) note(Alpha = 131.9 Beta = -12)"
       ],
-      "id": "6b91ed1a",
+      "id": "806259d7",
       "execution_count": null,
       "outputs": []
     },
@@ -319,7 +319,7 @@
         "\n",
         "## Case Study: Finding a good deal among hotels\n"
       ],
-      "id": "33a5d2b5"
+      "id": "4f274b23"
     },
     {
       "cell_type": "code",
@@ -334,7 +334,7 @@
         "qui:sort res\n",
         "list hotel_id price distance pr_hat res star in 1/5"
       ],
-      "id": "bb8f8ede",
+      "id": "37cf7c8c",
       "execution_count": null,
       "outputs": []
     },
@@ -559,7 +559,7 @@
         "## Hotel price-distance regression and functional form\n",
         "### Comparing different models\n"
       ],
-      "id": "81217673"
+      "id": "e4cde7e4"
     },
     {
       "cell_type": "code",
@@ -583,7 +583,7 @@
         "}\n",
         "esttab m1 m2 m3 m4, se md nostar nonumber note(\"\")"
       ],
-      "id": "f75ed795",
+      "id": "dec29028",
       "execution_count": null,
       "outputs": []
     },
@@ -652,7 +652,7 @@
         "- You need to create all necessary variables, given your knots.\n",
         "- Say we choose knots 1 and 2 for the price analysis\n"
       ],
-      "id": "5d2d0248"
+      "id": "8acc3487"
     },
     {
       "cell_type": "code",
@@ -664,7 +664,7 @@
         "*              v Knot  v knot2\n",
         "mkspline dist1 1 dist2 2 dist3= distance  "
       ],
-      "id": "869dbdec",
+      "id": "1684bfb8",
       "execution_count": null,
       "outputs": []
     },
@@ -674,7 +674,7 @@
       "source": [
         "## Results\n"
       ],
-      "id": "f4208ee1"
+      "id": "cbbfb5ba"
     },
     {
       "cell_type": "code",
@@ -685,7 +685,7 @@
         "\n",
         "regress price dist1 dist2 dist3"
       ],
-      "id": "692fbe1a",
+      "id": "8b931e0c",
       "execution_count": null,
       "outputs": []
     },
@@ -736,7 +736,7 @@
         "\n",
         "## Life expectancy and income\n"
       ],
-      "id": "b5d81f5f"
+      "id": "04d53b81"
     },
     {
       "cell_type": "code",
@@ -748,7 +748,7 @@
         "keep if year == 2017\n",
         "sum gdppc lifeexp"
       ],
-      "id": "ed902822",
+      "id": "147af1d6",
       "execution_count": null,
       "outputs": []
     },
@@ -762,7 +762,7 @@
         "\n",
         "## Life Exp vs GDPpc\n"
       ],
-      "id": "6a34adc8"
+      "id": "74ed5876"
     },
     {
       "cell_type": "code",
@@ -776,7 +776,7 @@
         "ytitle(Life Expectancy) xtitle(GDP per capita) ///\n",
         "xlabel(0(25)100)"
       ],
-      "id": "b87402cd",
+      "id": "4181ebac",
       "execution_count": null,
       "outputs": []
     },
@@ -786,7 +786,7 @@
       "source": [
         "## Life Exp vs Log GDPpc\n"
       ],
-      "id": "a9651ed8"
+      "id": "01dede0a"
     },
     {
       "cell_type": "code",
@@ -800,7 +800,7 @@
         "ytitle(Life Expectancy) xtitle(GDP per capita) ///\n",
         "xscale(log) xlabel(1 2 5 10 25 50 100)"
       ],
-      "id": "c46427e1",
+      "id": "78a25a74",
       "execution_count": null,
       "outputs": []
     },
@@ -810,7 +810,7 @@
       "source": [
         "## Regression\n"
       ],
-      "id": "be357abf"
+      "id": "4c098ff1"
     },
     {
       "cell_type": "code",
@@ -824,7 +824,7 @@
         "predict life_hat\n",
         "sort resid"
       ],
-      "id": "0d6e89d9",
+      "id": "effda20b",
       "execution_count": null,
       "outputs": []
     },
@@ -834,7 +834,7 @@
       "source": [
         "## Interesting Findings\n"
       ],
-      "id": "6b87757d"
+      "id": "58f9dfcc"
     },
     {
       "cell_type": "code",
@@ -844,7 +844,7 @@
         "*| code-fold: false\n",
         "list countryname lifeexp gdppc life_hat if inrange(_n,1,5) | inrange(_n,178,182) "
       ],
-      "id": "ec2f4e47",
+      "id": "221acae0",
       "execution_count": null,
       "outputs": []
     },
@@ -1017,7 +1017,7 @@
         "\n",
         "## Life expectancy and GDP per capita - weights\n"
       ],
-      "id": "3468c822"
+      "id": "cca872e8"
     },
     {
       "cell_type": "code",
@@ -1037,7 +1037,7 @@
         "ytitle(Life Expectancy) xtitle(GDP per capita) ///\n",
         "xscale(log) xlabel(1 2 5 10 25 50 100)"
       ],
-      "id": "79492fb8",
+      "id": "24d34b73",
       "execution_count": null,
       "outputs": []
     },
@@ -1273,7 +1273,7 @@
         "\n",
         "## Prediction interval\n"
       ],
-      "id": "ed037d3e"
+      "id": "ae96ca23"
     },
     {
       "cell_type": "code",
@@ -1299,7 +1299,7 @@
         "       (scatter lnwage age, color(navy)) (line lnwage_hat age, color(navy)) ///\n",
         "       , legend(off) ytitle(Log Wages) xtitle(Age)"
       ],
-      "id": "918adc59",
+      "id": "cf9dfdfa",
       "execution_count": null,
       "outputs": []
     },
@@ -1391,7 +1391,7 @@
         "\n",
         "Read [Case Study](CaseStudy_SLR.qmd) as an example of a simple linear regression analysis."
       ],
-      "id": "23d696d6"
+      "id": "1556c34a"
     }
   ],
   "metadata": {

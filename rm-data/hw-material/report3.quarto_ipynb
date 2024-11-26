@@ -45,7 +45,7 @@
         "\n",
         "Character creation in D&D often involves rolling dice to determine ability scores. The most common method is rolling 4d6 and dropping the lowest die. Let's visualize the distribution of these rolls:\n"
       ],
-      "id": "f4c8509b"
+      "id": "d35a231e"
     },
     {
       "cell_type": "code",
@@ -109,7 +109,7 @@
         "\n",
         "[^1]: This simplified equation assumes a linear probability distribution and does not account for critical successes or failures, which are typically represented by rolling a natural 20 or 1, respectively.\n"
       ],
-      "id": "6cf21d07"
+      "id": "8fabad6f"
     }
   ],
   "metadata": {
@@ -117,7 +117,7 @@
       "name": "python3",
       "language": "python",
       "display_name": "Python 3 (ipykernel)",
-      "path": "C:\\Python310\\share\\jupyter\\kernels\\python3"
+      "path": "C:\\Users\\Fernando\\AppData\\Roaming\\Python\\share\\jupyter\\kernels\\python3"
     }
   },
   "nbformat": 4,

@@ -300,7 +300,7 @@
         "  \n",
         "## IV Strength {.scrollable}\n"
       ],
-      "id": "c9b074fe"
+      "id": "b2101fbd"
     },
     {
       "cell_type": "code",
@@ -336,7 +336,7 @@
         "\tereturn post b\n",
         "end"
       ],
-      "id": "4e07bf13",
+      "id": "9e2380a0",
       "execution_count": null,
       "outputs": []
     },
@@ -370,7 +370,7 @@
         "```\n",
         "## IV Strength: Bias distribution \n"
       ],
-      "id": "db4598ba"
+      "id": "a3cf4f94"
     },
     {
       "cell_type": "code",
@@ -392,7 +392,7 @@
         "graph combine m1 m2 m3 m4 m5, col(3) xcommon ycommon\n",
         "graph export resources/cmb.png, width(1500)  replace"
       ],
-      "id": "d62754d0",
+      "id": "846a728a",
       "execution_count": null,
       "outputs": []
     },
@@ -434,7 +434,7 @@
         "\n",
         "## Simulation Example: {.scrollable}\n"
       ],
-      "id": "a63d857a"
+      "id": "80ab7085"
     },
     {
       "cell_type": "code",
@@ -453,7 +453,7 @@
         "gen Ds =(  (e_1 + e_2)*.5)>0\n",
         "gen y = 1 + D*(sex==0) +2*D*(sex==1)+e_3+e_2"
       ],
-      "id": "67a763f5",
+      "id": "55c50071",
       "execution_count": null,
       "outputs": []
     },
@@ -466,7 +466,7 @@
         "ivregress 2sls y (D=z2)\n",
         "ivregress 2sls y (D=z1 z2)"
       ],
-      "id": "a2f9ce45",
+      "id": "41e2deec",
       "execution_count": null,
       "outputs": []
     },
@@ -534,7 +534,7 @@
         "\n",
         "# Til Next time: Matching and Reweithing\n"
       ],
-      "id": "30cac78f"
+      "id": "c1bbc1b7"
     }
   ],
   "metadata": {

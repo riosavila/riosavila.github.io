@@ -94,7 +94,7 @@
         "\n",
         "## Graphically\n"
       ],
-      "id": "25ea6eaf"
+      "id": "c5d4d92d"
     },
     {
       "cell_type": "code",
@@ -103,7 +103,7 @@
         "*| echo: false\n",
         "ssc install did_imputation"
       ],
-      "id": "de81f83d",
+      "id": "425a16a2",
       "execution_count": null,
       "outputs": []
     },
@@ -137,7 +137,7 @@
         "\tlegend(order(1 \"Control\" 2 \"Treated\" 3 \"Counterfactual\" 4 \"ATT\")) ///\n",
         "    ysize(10) xsize(15)\n"
       ],
-      "id": "30aa32ed",
+      "id": "60973a5f",
       "execution_count": null,
       "outputs": []
     },
@@ -259,7 +259,7 @@
         "\n",
         "Some Data Preparation\n"
       ],
-      "id": "8c77faa5"
+      "id": "39891d82"
     },
     {
       "cell_type": "code",
@@ -272,7 +272,7 @@
         "keep  if treated==0 | sample==2\n",
         "bysort id (year):gen dy = re[2]-re[1]"
       ],
-      "id": "c462723b",
+      "id": "fc647f5e",
       "execution_count": null,
       "outputs": []
     },
@@ -282,7 +282,7 @@
       "source": [
         "Using `teffects`:\n"
       ],
-      "id": "b0b5a66e"
+      "id": "8e857e1e"
     },
     {
       "cell_type": "code",
@@ -294,7 +294,7 @@
         "\n",
         "teffects ra (dy educ black married nodegree hisp re74) (experimental) if year==1975 , atet"
       ],
-      "id": "126a7da3",
+      "id": "659d26c6",
       "execution_count": null,
       "outputs": []
     },
@@ -304,7 +304,7 @@
       "source": [
         "Using `drdid`:\n"
       ],
-      "id": "59f72184"
+      "id": "5f63f48b"
     },
     {
       "cell_type": "code",
@@ -316,7 +316,7 @@
         " \n",
         "drdid re educ black married nodegree hisp re74 , ivar(id) time(year) tr(experimental) reg"
       ],
-      "id": "618b6c86",
+      "id": "3c5c96ef",
       "execution_count": null,
       "outputs": []
     },
@@ -326,7 +326,7 @@
       "source": [
         "by hand:\n"
       ],
-      "id": "fe802947"
+      "id": "425f3740"
     },
     {
       "cell_type": "code",
@@ -340,7 +340,7 @@
         "gen att_i = dy-dy_hat\n",
         "tabstat att_i, by(exper) "
       ],
-      "id": "f928ed4d",
+      "id": "b1f69c9e",
       "execution_count": null,
       "outputs": []
     },
@@ -402,7 +402,7 @@
         "\n",
         "## The \"Bad Controls\" Problem\n"
       ],
-      "id": "714cd349"
+      "id": "27beb303"
     },
     {
       "cell_type": "code",
@@ -454,7 +454,7 @@
         "\tlegend(order(1 \"Always Treated\" 2 \"Early treated\" 3 \"Late Treated\" 4 \"Never Treated\"))\t\n",
         "graph export fig3.png, width(1000)\treplace"
       ],
-      "id": "294f3745",
+      "id": "8b183eb7",
       "execution_count": null,
       "outputs": []
     },
@@ -480,7 +480,7 @@
         "\n",
         "## The \"Bad Controls\" Problem\n"
       ],
-      "id": "f253dca6"
+      "id": "3a16f7a3"
     },
     {
       "cell_type": "code",
@@ -535,7 +535,7 @@
         "\tlegend(order(1 \"Always Treated\" 2 \"Early treated\" 3 \"Late Treated\" 4 \"Never Treated\"))\t\n",
         "graph export fig3b.png, width(1000)\treplace\t"
       ],
-      "id": "e071e005",
+      "id": "62538e93",
       "execution_count": null,
       "outputs": []
     },
@@ -592,7 +592,7 @@
         "\n",
         "## Graphically\n"
       ],
-      "id": "84011492"
+      "id": "68b79926"
     },
     {
       "cell_type": "code",
@@ -613,7 +613,7 @@
         "reghdfe trt , abs(id t) resid\n",
         "bysort gvar t:gen flag = _n"
       ],
-      "id": "24238809",
+      "id": "b49bd586",
       "execution_count": null,
       "outputs": []
     },
@@ -633,7 +633,7 @@
         "\txscale(range(0 11)) ///\n",
         "\tlegend(order(1 \"Always Treated\" 2 \"Early Treated\" 5 \"Late Treated\" 6 \"Latest Treated\"))\n"
       ],
-      "id": "4d77a242",
+      "id": "a88c105b",
       "execution_count": null,
       "outputs": []
     },
@@ -759,7 +759,7 @@
         "- There are two implementations of the method in Stata: `did_imputation` and `did2s`. In addition to the original GMM estimator described in @gardner2022twostage.\n",
         "- However, the most flexible and Robust implementation is `did_imputation`.\n"
       ],
-      "id": "b11af03e"
+      "id": "98225afd"
     },
     {
       "cell_type": "code",
@@ -780,7 +780,7 @@
         "sum te if post==0\n",
         "sum te if post==1"
       ],
-      "id": "f6abe036",
+      "id": "5854d26f",
       "execution_count": null,
       "outputs": []
     },
@@ -790,7 +790,7 @@
       "source": [
         "using `did_imputation`:\n"
       ],
-      "id": "1671f122"
+      "id": "605b3942"
     },
     {
       "cell_type": "code",
@@ -808,7 +808,7 @@
         "did_imputation asmrs stfips year gvar2, autosample\n",
         "did_imputation asmrs stfips year gvar2, autosample horizon(1/10) pretrends(5)"
       ],
-      "id": "abdf63ee",
+      "id": "8bdeac32",
       "execution_count": null,
       "outputs": []
     },
@@ -875,7 +875,7 @@
         "\n",
         "Base Estimation:\n"
       ],
-      "id": "1bdd6bcc"
+      "id": "7db9fcb0"
     },
     {
       "cell_type": "code",
@@ -891,7 +891,7 @@
         "jwdid lemp, ivar(countyreal) tvar(year) gvar(first_treat) \n",
         "estat simple"
       ],
-      "id": "be43031f",
+      "id": "8396f982",
       "execution_count": null,
       "outputs": []
     },
@@ -901,7 +901,7 @@
       "source": [
         "Adding controls"
       ],
-      "id": "a974bac0"
+      "id": "4d53ad16"
     },
     {
       "cell_type": "code",
@@ -913,7 +913,7 @@
         "jwdid lemp lpop, ivar(countyreal) tvar(year) gvar(first_treat) \n",
         "estat simple"
       ],
-      "id": "d09e3736",
+      "id": "f74a9fe4",
       "execution_count": null,
       "outputs": []
     },
@@ -923,7 +923,7 @@
       "source": [
         "Compared to `did_imputation`"
       ],
-      "id": "c76af44a"
+      "id": "37f2f84f"
     },
     {
       "cell_type": "code",
@@ -936,7 +936,7 @@
         "gen first2=first_treat if first_treat>0\n",
         "did_imputation lemp countyreal year first2"
       ],
-      "id": "15c89e52",
+      "id": "589aaec3",
       "execution_count": null,
       "outputs": []
     },
@@ -950,7 +950,7 @@
         "qui:jwdid lemp, ivar(countyreal) tvar(year) gvar(first_treat) \n",
         "estat simple"
       ],
-      "id": "007b8795",
+      "id": "ebcabbeb",
       "execution_count": null,
       "outputs": []
     },
@@ -960,7 +960,7 @@
       "source": [
         "Estimating an effect similar to @sun_estimating_2021\n"
       ],
-      "id": "0e785198"
+      "id": "37919d7d"
     },
     {
       "cell_type": "code",
@@ -973,7 +973,7 @@
         "\tnever //<- request full interaction\n",
         "estat event"
       ],
-      "id": "cc7d11b6",
+      "id": "1ef900e4",
       "execution_count": null,
       "outputs": []
     },
@@ -983,7 +983,7 @@
       "source": [
         "It is also possible to add further restrictions to \"event/calendar/group\" aggregates\n"
       ],
-      "id": "31b3389f"
+      "id": "23f680c6"
     },
     {
       "cell_type": "code",
@@ -998,7 +998,7 @@
         "gen subsample = inrange(__event__,2,6)\n",
         "estat event, other(subsample)"
       ],
-      "id": "30564784",
+      "id": "67323838",
       "execution_count": null,
       "outputs": []
     },
@@ -1103,7 +1103,7 @@
         "\n",
         "- `csdid2` works almost identically to `csdid`, its faster, but some functions are not yet documented (helpfile is still missing). Will use this one here\n"
       ],
-      "id": "9f24a9b4"
+      "id": "8de0b159"
     },
     {
       "cell_type": "code",
@@ -1124,7 +1124,7 @@
         "\tgvar(gvar)   \n",
         "** Default uses \"never treated\", and produces Long gaps."
       ],
-      "id": "d25f01a0",
+      "id": "d4b13b65",
       "execution_count": null,
       "outputs": []
     },
@@ -1135,7 +1135,7 @@
         "- `csdid2` is creating the full set of ATT(g,t) estimations for the data. But will produce no result\n",
         "- To obtain results and plotting, one must use post estimation commands:\n"
       ],
-      "id": "6f5a5614"
+      "id": "bd84b469"
     },
     {
       "cell_type": "code",
@@ -1151,7 +1151,7 @@
         "** Its also possible to restrict to specific groups/cohorts rgroup( list of numbers)\n",
         "** or restrict to specific years rcalendar( list of numbers)"
       ],
-      "id": "4c226614",
+      "id": "12f45164",
       "execution_count": null,
       "outputs": []
     },
@@ -1161,7 +1161,7 @@
       "source": [
         "`estat plot`, will produce a figure from the last estimation\n"
       ],
-      "id": "6f7bad8f"
+      "id": "d8937ef8"
     },
     {
       "cell_type": "code",
@@ -1174,7 +1174,7 @@
         "estat plot, xsize(10) ysize(8)\n",
         "graph export figev.png, replace width(800)"
       ],
-      "id": "d3e601f3",
+      "id": "56938902",
       "execution_count": null,
       "outputs": []
     },
@@ -1213,7 +1213,7 @@
         "::: {#refs}\n",
         "::: \n"
       ],
-      "id": "14f28f4c"
+      "id": "eac7eddd"
     }
   ],
   "metadata": {

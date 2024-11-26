@@ -51,7 +51,7 @@
         "\n",
         "## Example: {.smaller}\n"
       ],
-      "id": "1534b52b"
+      "id": "a86b5345"
     },
     {
       "cell_type": "code",
@@ -71,7 +71,7 @@
         "regress bwgr male white cigs lfaminc\n",
         "est sto m4"
       ],
-      "id": "27cb28a8",
+      "id": "b018df1c",
       "execution_count": null,
       "outputs": []
     },
@@ -86,7 +86,7 @@
         " (se( par) t(par(\"[\" \"]\")) )) starlevels(* 0.1 ** 0.05 *** 0.01) ///\n",
         "r2 nonumber mtitle(\"Oz\" \"lbs\" \"Kgs\" \"Gr\") collabels(none) md note(\": Birthweight and Cig {.striped .hover}\")"
       ],
-      "id": "10c689c1",
+      "id": "5174aca5",
       "execution_count": null,
       "outputs": []
     },
@@ -166,7 +166,7 @@
         "\n",
         "## Example {.scrollable}\n"
       ],
-      "id": "e90b4f43"
+      "id": "bc5b82ee"
     },
     {
       "cell_type": "code",
@@ -188,7 +188,7 @@
         "esttab m1 m2 m3 m4, se star( * 0.1 ** 0.05 *** 0.01  ) nogaps nomtitle\n",
         "display _n \"Exact Change Union : \" %5.3f (exp(_b[union])-1)*100 \"%\""
       ],
-      "id": "c47ae050",
+      "id": "03f4302f",
       "execution_count": null,
       "outputs": []
     },
@@ -249,7 +249,7 @@
         "\n",
         "## Example {.scrollable}\n"
       ],
-      "id": "d8ef1f0b"
+      "id": "af03ae7c"
     },
     {
       "cell_type": "code",
@@ -266,7 +266,7 @@
         "est sto m2\n",
         "esttab m0 m1 m2, se varwidth(20) star(* 0.1 ** 0.05 *** 0.01) nogaps"
       ],
-      "id": "3c21ec71",
+      "id": "4acec853",
       "execution_count": null,
       "outputs": []
     },
@@ -277,7 +277,7 @@
         "- Negative coefficient for $rooms$, so is there a problem? \n",
         "  - Find \"turnpoint\" and summary Stats\n"
       ],
-      "id": "0d1d818e"
+      "id": "c951a57f"
     },
     {
       "cell_type": "code",
@@ -288,7 +288,7 @@
         "qui:reg lprice lnox dist rooms rooms2\n",
         "display \"Turn point:\" %5.2f -_b[rooms]/(2*_b[rooms2])"
       ],
-      "id": "2ef51d0a",
+      "id": "918ebfac",
       "execution_count": null,
       "outputs": []
     },
@@ -299,7 +299,7 @@
         "*| echo: false\n",
         "tabstat rooms, stats(min p1 p5 p10 p25  p50 p75 p90 p99 max)"
       ],
-      "id": "a2e806fb",
+      "id": "da35b982",
       "execution_count": null,
       "outputs": []
     },
@@ -309,7 +309,7 @@
       "source": [
         "- Does it make a difference how we estimate the model?\n"
       ],
-      "id": "f0a7fe6c"
+      "id": "577a746d"
     },
     {
       "cell_type": "code",
@@ -321,7 +321,7 @@
         "qui:reg lprice lnox dist c.rooms c.rooms#c.rooms\n",
         "margins, dydx(rooms) "
       ],
-      "id": "e79e7f5a",
+      "id": "2d31effa",
       "execution_count": null,
       "outputs": []
     },
@@ -458,7 +458,7 @@
         "\n",
         "## Example {.scrollable}\n"
       ],
-      "id": "f179522c"
+      "id": "5448e24b"
     },
     {
       "cell_type": "code",
@@ -481,7 +481,7 @@
         "esttab m1 m2 m3 m4 m5, mtitle( Simple With_fem Men Women Full_int) ///\n",
         "se star(* .1 ** 0.05 *** 0.01) nogaps noomitted "
       ],
-      "id": "63006f8c",
+      "id": "5b38da4d",
       "execution_count": null,
       "outputs": []
     },
@@ -494,7 +494,7 @@
         "test 1.female 1.female#c.sat 1.female#c.hsperc 1.female#c.tothrs\n",
         "margins female, dydx(sat hsperc tothrs)"
       ],
-      "id": "ea3593a8",
+      "id": "5d37d52a",
       "execution_count": null,
       "outputs": []
     },
@@ -596,7 +596,7 @@
         "## {.scrollable}\n",
         "### Example\n"
       ],
-      "id": "93d5b2b6"
+      "id": "0a9f647e"
     },
     {
       "cell_type": "code",
@@ -627,7 +627,7 @@
         "mata:\"R2_2 \"; 1 - sum((y:-yh[,2]):^2)/sum( (y:-my):^2 )\n",
         "mata:\"R2_3 \"; 1 - sum((y:-yh[,3]):^2)/sum( (y:-my):^2 )"
       ],
-      "id": "d36c300e",
+      "id": "2a50e0c9",
       "execution_count": null,
       "outputs": []
     },
@@ -658,7 +658,7 @@
         "- For marginal effects, we no longer consider effects at the individual level.\n",
         "- Instead we look into conditional means, and likelihood\n"
       ],
-      "id": "cb3b36e6"
+      "id": "061f40ca"
     },
     {
       "cell_type": "code",
@@ -669,7 +669,7 @@
         "qui: reg inlf  age educ exper kidsge6 kidslt6 nwifeinc \n",
         "model_display"
       ],
-      "id": "9337b403",
+      "id": "3dfe38a5",
       "execution_count": null,
       "outputs": []
     },
@@ -699,7 +699,7 @@
         "\n",
         "- Nothing changes for estimation, but its useful to change language:\n"
       ],
-      "id": "8bab5e9b"
+      "id": "155a7ffd"
     },
     {
       "cell_type": "code",
@@ -710,7 +710,7 @@
         "qui reg children age educ\n",
         "model_display"
       ],
-      "id": "a7024680",
+      "id": "e59e8987",
       "execution_count": null,
       "outputs": []
     },
@@ -736,7 +736,7 @@
         "\n",
         "  - Granted, you could also use \"margins\"\n"
       ],
-      "id": "659af9a8"
+      "id": "9bd92ff0"
     },
     {
       "cell_type": "code",
@@ -751,7 +751,7 @@
         "margins, at(sat = 1200 hsperc = 30 hsize = 5)\n",
         "reg colgpa sat0 hsperc0 hsize0 hsize20"
       ],
-      "id": "b5bd31b0",
+      "id": "41a2712b",
       "execution_count": null,
       "outputs": []
     },
@@ -789,7 +789,7 @@
         "\\end{aligned}\n",
         "$$\n"
       ],
-      "id": "372ca654"
+      "id": "cc8d5f4a"
     },
     {
       "cell_type": "code",
@@ -815,7 +815,7 @@
         "\n",
         "esttab m1 m2 m3 m4, keep(train) mtitle(Homogenous ATE ATU ATT) se"
       ],
-      "id": "4d651594",
+      "id": "716a6dee",
       "execution_count": null,
       "outputs": []
     },
@@ -826,7 +826,7 @@
         "# Thanks all !\n",
         "Next week Lifting Assumptions: Heteroskedasticity"
       ],
-      "id": "df5b6178"
+      "id": "eeb9fc3b"
     }
   ],
   "metadata": {

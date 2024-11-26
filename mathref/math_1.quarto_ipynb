@@ -65,7 +65,7 @@
         "\n",
         "`Stata` can be used to calculate numerical derivatives. `mata` (matrix algebra language) has powerful rutines for numerical differentiation.  `Stata` also has some capabilities, and you can always do it manually.\n"
       ],
-      "id": "d22bfa6d"
+      "id": "3fd7760d"
     },
     {
       "cell_type": "code",
@@ -84,7 +84,7 @@
         "gen diff2 = (dydx2 - dydx3)\n",
         "line diff1 diff2 x"
       ],
-      "id": "8f5e18fd",
+      "id": "034e5843",
       "execution_count": null,
       "outputs": []
     },
@@ -244,7 +244,7 @@
         "\n",
         "The last condition is the constraint, and it implies that the constraint must be satisfied. The second-order conditions are the same as before."
       ],
-      "id": "7e1a10ee"
+      "id": "9839dd8c"
     }
   ],
   "metadata": {

@@ -50,7 +50,7 @@
         "\n",
         "- Because not all distributions are made equal!\n"
       ],
-      "id": "415011df"
+      "id": "d82dd12c"
     },
     {
       "cell_type": "code",
@@ -92,7 +92,7 @@
         "\n",
         "graph export images/f4_1.png, replace width(1200)  "
       ],
-      "id": "ff6fa197",
+      "id": "68958131",
       "execution_count": null,
       "outputs": []
     },
@@ -239,7 +239,7 @@
         "\n",
         "##\n"
       ],
-      "id": "e4b6a902"
+      "id": "d2011c8c"
     },
     {
       "cell_type": "code",
@@ -263,7 +263,7 @@
         "\txlabel(-4(2)4)\tylabel(0(.1).5)  xsize(8) ysize(4)\n",
         "graph export images/f4_2.png, height(1000)\treplace"
       ],
-      "id": "42c92100",
+      "id": "943b845b",
       "execution_count": null,
       "outputs": []
     },
@@ -289,7 +289,7 @@
         "\n",
         "## "
       ],
-      "id": "122623ba"
+      "id": "d097336c"
     },
     {
       "cell_type": "code",
@@ -310,7 +310,7 @@
         "\txlabel(-4(2)7)\tylabel(0(.1).5) xsize(8) ysize(4)  \n",
         "graph export images/f4_3.png, height(1000)\treplace\n"
       ],
-      "id": "2a053ec5",
+      "id": "e6777ed6",
       "execution_count": null,
       "outputs": []
     },
@@ -322,7 +322,7 @@
         "\n",
         "## Example: Determinants of College GPA {.scrollable}\n"
       ],
-      "id": "9081f483"
+      "id": "24e4099e"
     },
     {
       "cell_type": "code",
@@ -333,7 +333,7 @@
         "frause gpa1, clear\n",
         "reg colgpa hsgpa act skipped"
       ],
-      "id": "741ce4a3",
+      "id": "51ffb1bf",
       "execution_count": null,
       "outputs": []
     },
@@ -348,7 +348,7 @@
         "\n",
         "- Test, $a=95%$, $|t_{skip}|=3.2$ vs $t_{n-k-1}(0.975)$: \n"
       ],
-      "id": "1cc4ce7a"
+      "id": "8b4e8b5a"
     },
     {
       "cell_type": "code",
@@ -360,7 +360,7 @@
         "*| echo: true\n",
         "display invt(141-4,0.975)"
       ],
-      "id": "55e0a02e",
+      "id": "2e7a9957",
       "execution_count": null,
       "outputs": []
     },
@@ -391,7 +391,7 @@
         "  \n",
         "- Each GPA point in highschool translates into half a point in College GPA. vs Is less than .5\n"
       ],
-      "id": "0d28b697"
+      "id": "7cfd3cd7"
     },
     {
       "cell_type": "code",
@@ -402,7 +402,7 @@
         "test hsgpa = 0.5\n",
         "lincom hsgpa - 0.5"
       ],
-      "id": "5d9c188b",
+      "id": "583a7eb2",
       "execution_count": null,
       "outputs": []
     },
@@ -430,7 +430,7 @@
         "\n",
         "## \n"
       ],
-      "id": "f868868d"
+      "id": "23a42865"
     },
     {
       "cell_type": "code",
@@ -453,7 +453,7 @@
         "\tylabel(0(.1).5) xlabel(-5 0 5 -1.5 2.5)\n",
         "graph export images/f4_4.png, replace width(1200)"
       ],
-      "id": "94652837",
+      "id": "e52382f4",
       "execution_count": null,
       "outputs": []
     },
@@ -495,7 +495,7 @@
         "\n",
         "##\n"
       ],
-      "id": "a8b53bde"
+      "id": "7e4ee66f"
     },
     {
       "cell_type": "code",
@@ -524,7 +524,7 @@
         "\tylabel(0(.1).5) xlabel(-5 0 5 )  \n",
         "graph export images/f4_5.png, replace width(1000)"
       ],
-      "id": "3e5a4c6d",
+      "id": "dbb4fc3d",
       "execution_count": null,
       "outputs": []
     },
@@ -666,7 +666,7 @@
         "\n",
         "## Example {.scrollable}\n"
       ],
-      "id": "ee9ea6d8"
+      "id": "49d9389a"
     },
     {
       "cell_type": "code",
@@ -676,7 +676,7 @@
         "frause hprice1, clear\n",
         "reg lprice lasses bdrms llotsize lsqrft"
       ],
-      "id": "9f9cf70a",
+      "id": "3176c3c8",
       "execution_count": null,
       "outputs": []
     },
@@ -688,7 +688,7 @@
         "test (lasses=1)\n",
         "test (lasses=1) (bdrms=llotsize=lsqrft=0)"
       ],
-      "id": "9f88d9c3",
+      "id": "2bd6ac59",
       "execution_count": null,
       "outputs": []
     },
@@ -700,7 +700,7 @@
         "frause mlb1, clear\n",
         "reg lsalary years gamesyr bavg hrunsyr rbisy"
       ],
-      "id": "64d2b832",
+      "id": "996b6bb4",
       "execution_count": null,
       "outputs": []
     },
@@ -711,7 +711,7 @@
         "*| code-fold: false\n",
         "test bavg hrunsyr rbisy"
       ],
-      "id": "6f575dc1",
+      "id": "b25e6625",
       "execution_count": null,
       "outputs": []
     },
@@ -748,7 +748,7 @@
         "\n",
         "## Consistency vs Bias\n"
       ],
-      "id": "ac5cc4a6"
+      "id": "cd5bb8fa"
     },
     {
       "cell_type": "code",
@@ -787,7 +787,7 @@
         "ytitle(\"Sample Size\") xtitle(\"99% CI\")  legend(off) \n",
         "graph export images/f4_7.png, width(1200) replace"
       ],
-      "id": "372e6d57",
+      "id": "d614ea42",
       "execution_count": null,
       "outputs": []
     },
@@ -845,7 +845,7 @@
         "\n",
         "## Example:{.scrollable}\n"
       ],
-      "id": "9e0da5e4"
+      "id": "f572f0b7"
     },
     {
       "cell_type": "code",
@@ -860,7 +860,7 @@
         "** H0: avgsen=0 and tottime=0\n",
         "test (avgsen=0) (tottime=0)"
       ],
-      "id": "92c88216",
+      "id": "96c4ba3c",
       "execution_count": null,
       "outputs": []
     },
@@ -878,7 +878,7 @@
         "* regress residuals againts all variables\n",
         "reg u_tilde  pcnv avgsen tottime ptime86 qemp86"
       ],
-      "id": "2ddaeba4",
+      "id": "765866ec",
       "execution_count": null,
       "outputs": []
     },
@@ -892,7 +892,7 @@
         "display \"Chi2(2)=\" `=e(N)*e(r2)'\n",
         "display \"Its p-value=\" %5.4f `=1-chi2(2, `=e(N)*e(r2)' )'"
       ],
-      "id": "a1cbd2ca",
+      "id": "ff283e12",
       "execution_count": null,
       "outputs": []
     },
@@ -907,7 +907,7 @@
         "# Part II: \n",
         "# Addressing Problems with MRA\n"
       ],
-      "id": "1b6fc179"
+      "id": "ac52acf5"
     }
   ],
   "metadata": {

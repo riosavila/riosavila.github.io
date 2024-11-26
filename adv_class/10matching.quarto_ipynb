@@ -126,7 +126,7 @@
         "\n",
         "Consider the following dataset:\n"
       ],
-      "id": "012d4432"
+      "id": "0bc9bbbf"
     },
     {
       "cell_type": "code",
@@ -138,7 +138,7 @@
         "gen class1=class==1\n",
         "tab survived class1 , nofreq col"
       ],
-      "id": "54be1f43",
+      "id": "f2b8aee2",
       "execution_count": null,
       "outputs": []
     },
@@ -150,7 +150,7 @@
         "\n",
         "What if the composition of individuals differs across classes (women and children)\n"
       ],
-      "id": "9d759092"
+      "id": "7f5d6051"
     },
     {
       "cell_type": "code",
@@ -159,7 +159,7 @@
         "tab age class1, nofreq col\n",
         "tab sex class1, nofreq col"
       ],
-      "id": "7ba4c735",
+      "id": "b023d488",
       "execution_count": null,
       "outputs": []
     },
@@ -173,7 +173,7 @@
         "\n",
         "A better approach would be to look into the survival probabilities stratifying the data:\n"
       ],
-      "id": "6e16e903"
+      "id": "f1f1b410"
     },
     {
       "cell_type": "code",
@@ -183,7 +183,7 @@
         "bysort age sex class1:egen sr_mean=mean(survived==2)\n",
         "table (age sex) (class1), stat(mean surv) nototal"
       ],
-      "id": "f9788514",
+      "id": "b708590b",
       "execution_count": null,
       "outputs": []
     },
@@ -193,7 +193,7 @@
       "source": [
         "So even within each group, the survival probability is larger in first class. What about Average?\n"
       ],
-      "id": "26ef09d9"
+      "id": "f38f748b"
     },
     {
       "cell_type": "code",
@@ -206,7 +206,7 @@
         "sum teff if class1==0 // ATU\n",
         "sum teff  // ATE"
       ],
-      "id": "a6f71cae",
+      "id": "aeab24a5",
       "execution_count": null,
       "outputs": []
     },
@@ -240,7 +240,7 @@
         "\n",
         "For example:\n"
       ],
-      "id": "30599fcb"
+      "id": "b3657efb"
     },
     {
       "cell_type": "code",
@@ -250,7 +250,7 @@
         "keep price rooms type_h\n",
         "tab rooms type_h"
       ],
-      "id": "067a5abf",
+      "id": "a5321e40",
       "execution_count": null,
       "outputs": []
     },
@@ -266,7 +266,7 @@
         "\n",
         "The answer is, probably no. Too many groups to track, to many micro cells to make use of:\n"
       ],
-      "id": "b20bbea2"
+      "id": "c08fa8e7"
     },
     {
       "cell_type": "code",
@@ -278,7 +278,7 @@
         "bysort strata:egen flag=mean(female)\n",
         "list educ isco female if (flag==0 | flag==1) & educ == 10, sep(0)"
       ],
-      "id": "c11f9f0f",
+      "id": "52f63b11",
       "execution_count": null,
       "outputs": []
     },
@@ -395,7 +395,7 @@
         "This file contains information on experimental and observed data for the analysis of \n",
         "training on earnings program:\n"
       ],
-      "id": "b24cf525"
+      "id": "857c64cd"
     },
     {
       "cell_type": "code",
@@ -408,7 +408,7 @@
         "label values sample sample\n",
         "tab sample treated,m"
       ],
-      "id": "61cd4cf0",
+      "id": "eb19a542",
       "execution_count": null,
       "outputs": []
     },
@@ -418,7 +418,7 @@
       "source": [
         "First Experimental design - RCT\n"
       ],
-      "id": "31b566b1"
+      "id": "710c0dd9"
     },
     {
       "cell_type": "code",
@@ -428,7 +428,7 @@
         "tabstat age educ black married nodegree , by(treated)\n",
         "logit treated age educ black hisp married nodegree "
       ],
-      "id": "8d737b9c",
+      "id": "0a172c69",
       "execution_count": null,
       "outputs": []
     },
@@ -439,7 +439,7 @@
         "## {.scrollable}\n",
         "Then using PScore Matching CPS\n"
       ],
-      "id": "aae6b9d1"
+      "id": "f515390b"
     },
     {
       "cell_type": "code",
@@ -450,7 +450,7 @@
         "reg re treated\n",
         "tabstat age educ black hisp married nodegree , by(treated)"
       ],
-      "id": "9c86fcd3",
+      "id": "7b465b41",
       "execution_count": null,
       "outputs": []
     },
@@ -462,7 +462,7 @@
         "\n",
         "We need to do trimming\n"
       ],
-      "id": "a6440712"
+      "id": "b59df456"
     },
     {
       "cell_type": "code",
@@ -474,7 +474,7 @@
         "tabstat age educ black hisp married nodegree , by(treated)\n",
         "reg re treated"
       ],
-      "id": "993d04ec",
+      "id": "9560659d",
       "execution_count": null,
       "outputs": []
     },
@@ -486,7 +486,7 @@
         "\n",
         "Lets do some matching"
       ],
-      "id": "81fc0ac7"
+      "id": "e40268ec"
     },
     {
       "cell_type": "code",
@@ -501,7 +501,7 @@
         "teffects psmatch (re) (treated age educ black   married nodegree  ) ,  nn(2)\n",
         "tebalance summarize"
       ],
-      "id": "dbdc54b0",
+      "id": "652c0b08",
       "execution_count": null,
       "outputs": []
     },
@@ -514,7 +514,7 @@
         "A missing variable? Earnings in previous year.\n",
         "May capture information of Need to do treatment (selection)\n"
       ],
-      "id": "839e6736"
+      "id": "8600ffa4"
     },
     {
       "cell_type": "code",
@@ -530,7 +530,7 @@
         "\n",
         "teffects psmatch (dre) (treated age educ black   married nodegree  ) ,  nn(2)"
       ],
-      "id": "b556c9ff",
+      "id": "2c53f9fb",
       "execution_count": null,
       "outputs": []
     },
@@ -601,7 +601,7 @@
         "teffects ipwra (dre age educ black   married nodegree) (treated age educ black   married nodegree), iter(3) nolog\n",
         "```\n"
       ],
-      "id": "5eb09a08"
+      "id": "984f31f6"
     },
     {
       "cell_type": "code",
@@ -616,7 +616,7 @@
         "teffects ipwra (dre age educ black   married nodegree) (treated age educ black married nodegree), iter(3) nolog\n",
         "display \"```\""
       ],
-      "id": "c9d006f6",
+      "id": "cc065b91",
       "execution_count": null,
       "outputs": []
     },
@@ -626,7 +626,7 @@
       "source": [
         "# Next: Regression Discontinuity\n"
       ],
-      "id": "3eb0c36b"
+      "id": "4600bf7f"
     }
   ],
   "metadata": {

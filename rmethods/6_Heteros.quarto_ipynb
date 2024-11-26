@@ -28,7 +28,7 @@
         "\n",
         "-   This means: the conditional variance of the errors is not constant across control characteristics.\n"
       ],
-      "id": "e3a6b7b9"
+      "id": "3ac17ca6"
     },
     {
       "cell_type": "code",
@@ -45,7 +45,7 @@
         "    (histogram lnw if female==0, pstyle(p2) w(0.1) color(%50) start(-1)), ///\n",
         "    legend(order(1 \"Women\" 2 \"Men\")) xtitle(\"log(wage)\")"
       ],
-      "id": "09abfc46",
+      "id": "0d7b4988",
       "execution_count": null,
       "outputs": []
     },
@@ -73,7 +73,7 @@
         "\n",
         "$x = uniform(-1,1)$\n"
       ],
-      "id": "af7b3a3b"
+      "id": "f0932216"
     },
     {
       "cell_type": "code",
@@ -109,7 +109,7 @@
         "    legend(order(3 \"Normal\" 1 \"With Homoskedasticty\" 2 \"with Heteroskedasticity\"))\n",
         "graph export images/fig6_1.png, replace height(1000)"
       ],
-      "id": "0fb9b13d",
+      "id": "d23accb6",
       "execution_count": null,
       "outputs": []
     },
@@ -255,7 +255,7 @@
         "\\end{aligned}\n",
         "$$\n"
       ],
-      "id": "e3d15dbf"
+      "id": "bf4f12cf"
     },
     {
       "cell_type": "code",
@@ -282,7 +282,7 @@
         "display \"nR^2:   \" e(N)*e(r2)\n",
         "display \"p(chi2) \" %5.3f chi2tail(e(df_m),e(N)*e(r2))"
       ],
-      "id": "5429f85e",
+      "id": "43916619",
       "execution_count": null,
       "outputs": []
     },
@@ -311,7 +311,7 @@
         "display \"nR^2:   \" e(N)*e(r2)\n",
         "display \"p(chi2) \" %5.3f chi2tail(e(df_m),e(N)*e(r2))"
       ],
-      "id": "fdfb965c",
+      "id": "01565913",
       "execution_count": null,
       "outputs": []
     },
@@ -487,7 +487,7 @@
         "\n",
         "## Example {.scrollable}\n"
       ],
-      "id": "b6845848"
+      "id": "4c989b2a"
     },
     {
       "cell_type": "code",
@@ -520,7 +520,7 @@
         "est sto m6\n",
         "set linesize 255"
       ],
-      "id": "80d9883f",
+      "id": "31c5b613",
       "execution_count": null,
       "outputs": []
     },
@@ -532,7 +532,7 @@
         "nonum cell( b( fmt( 3) star ) se( par(( )) ) p( par([ ]) ) ) ///\n",
         "star(* .1 ** 0.05 *** 0.01  )"
       ],
-      "id": "7e1e1e25",
+      "id": "acf3611d",
       "execution_count": null,
       "outputs": []
     },
@@ -553,7 +553,7 @@
         "\n",
         "## LPM Example {.scrollable}\n"
       ],
-      "id": "3b5a1a80"
+      "id": "70752f13"
     },
     {
       "cell_type": "code",
@@ -566,7 +566,7 @@
         "reg pc hsgpa act parcoll\n",
         "predict res_1, res"
       ],
-      "id": "490133d8",
+      "id": "76bc96e2",
       "execution_count": null,
       "outputs": []
     },
@@ -579,7 +579,7 @@
         "gen hx = pchat*(1-pchat)\n",
         "sum pchat hx"
       ],
-      "id": "774f91ed",
+      "id": "9ecc3739",
       "execution_count": null,
       "outputs": []
     },
@@ -591,7 +591,7 @@
         "reg pc hsgpa act parcoll [w=1/hx]\n",
         "predict res_2, res"
       ],
-      "id": "22ed983a",
+      "id": "4478ac20",
       "execution_count": null,
       "outputs": []
     },
@@ -608,7 +608,7 @@
         "display \"Weighted\"\n",
         "reg res_2 hsgpa act parcoll, notable"
       ],
-      "id": "2d69de49",
+      "id": "389c783c",
       "execution_count": null,
       "outputs": []
     },
@@ -619,7 +619,7 @@
         "# The end...for now\n",
         "Next Week: Problems of Specification"
       ],
-      "id": "a8c66491"
+      "id": "30c094b5"
     }
   ],
   "metadata": {

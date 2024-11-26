@@ -22,7 +22,7 @@
         "\n",
         ":::{.callout}"
       ],
-      "id": "110ec66d"
+      "id": "baae1fdb"
     },
     {
       "cell_type": "code",
@@ -33,7 +33,7 @@
         "\n",
         "display \"Prediction: \" _b[_cons] \" +\" _b[roe] \"*30\" \"=\" _b[_cons] + _b[roe] *30"
       ],
-      "id": "d843fc95",
+      "id": "29879f57",
       "execution_count": null,
       "outputs": []
     },
@@ -47,7 +47,7 @@
         "\n",
         ":::{.callout}"
       ],
-      "id": "6b1418f8"
+      "id": "8809544c"
     },
     {
       "cell_type": "code",
@@ -56,7 +56,7 @@
         "frause wage1, clear\n",
         "regress wage educ"
       ],
-      "id": "b3798663",
+      "id": "3f720d13",
       "execution_count": null,
       "outputs": []
     },
@@ -70,7 +70,7 @@
         "\n",
         ":::{.callout}"
       ],
-      "id": "4eabd19b"
+      "id": "2b79350a"
     },
     {
       "cell_type": "code",
@@ -79,7 +79,7 @@
         "frause vote1, clear\n",
         "regress votea sharea"
       ],
-      "id": "2ebdbf09",
+      "id": "895cd26a",
       "execution_count": null,
       "outputs": []
     },
@@ -93,7 +93,7 @@
         "\n",
         ":::{.callout}"
       ],
-      "id": "c392d3fe"
+      "id": "674c4508"
     },
     {
       "cell_type": "code",
@@ -106,7 +106,7 @@
         "\n",
         "list roe salary salaryhat uhat  in 1/10"
       ],
-      "id": "1bc6cc53",
+      "id": "73f5b5e1",
       "execution_count": null,
       "outputs": []
     },
@@ -120,7 +120,7 @@
         "\n",
         ":::{.callout}"
       ],
-      "id": "4ba15278"
+      "id": "78096cbe"
     },
     {
       "cell_type": "code",
@@ -131,7 +131,7 @@
         "sum wage educ\n",
         "display \"b0+b1*E(educ)= \" _b[_cons] + _b[educ]*r(mean)"
       ],
-      "id": "8b15db96",
+      "id": "466f611f",
       "execution_count": null,
       "outputs": []
     },
@@ -143,7 +143,7 @@
         "\n",
         "## Example 2.8: CEO Salary and Return on Equity\n"
       ],
-      "id": "00503962"
+      "id": "dea7c1b9"
     },
     {
       "cell_type": "code",
@@ -162,7 +162,7 @@
         "mata:rsq = 1 - ssr/sst;rsq\n",
         "mata:rsq = sse/sst;rsq"
       ],
-      "id": "4759a20d",
+      "id": "d296f7e6",
       "execution_count": null,
       "outputs": []
     },
@@ -178,7 +178,7 @@
         "\n",
         ":::{.callout}"
       ],
-      "id": "aa0c0a3e"
+      "id": "674504ca"
     },
     {
       "cell_type": "code",
@@ -188,7 +188,7 @@
         "gen logwage = log(wage)\n",
         "regress logwage educ"
       ],
-      "id": "a0b59656",
+      "id": "5d72aeab",
       "execution_count": null,
       "outputs": []
     },
@@ -206,7 +206,7 @@
         "\n",
         ":::{.callout}"
       ],
-      "id": "2aac1ce0"
+      "id": "19ab5aab"
     },
     {
       "cell_type": "code",
@@ -217,7 +217,7 @@
         "gen logsales = log(sales)\n",
         "reg logsalary logsales"
       ],
-      "id": "e30cbcea",
+      "id": "5a27e790",
       "execution_count": null,
       "outputs": []
     },
@@ -231,7 +231,7 @@
         "\n",
         ":::{.callout}"
       ],
-      "id": "326ebac4"
+      "id": "f4388ae2"
     },
     {
       "cell_type": "code",
@@ -240,7 +240,7 @@
         "frause jtrain2, clear\n",
         "reg re78 train"
       ],
-      "id": "0db77704",
+      "id": "384f5af8",
       "execution_count": null,
       "outputs": []
     },
@@ -250,7 +250,7 @@
       "source": [
         ":::\n"
       ],
-      "id": "4f7e8991"
+      "id": "44fcacd3"
     }
   ],
   "metadata": {

@@ -51,7 +51,7 @@
         "\n",
         "## Can you recognized this type of data?\n"
       ],
-      "id": "689d2b62"
+      "id": "235e34bd"
     },
     {
       "cell_type": "code",
@@ -81,7 +81,7 @@
         "graph combine fig1 fig2, ysize(6) xsize(12) \n",
         "graph export images/fig13_2.png, replace"
       ],
-      "id": "62137132",
+      "id": "4c310a3b",
       "execution_count": null,
       "outputs": []
     },
@@ -267,7 +267,7 @@
         "\n",
         "$x_t = x_{t-1} + v_t$ & $y_t = y_{t-1} + u_t$\n"
       ],
-      "id": "7bf690c0"
+      "id": "2f4a8635"
     },
     {
       "cell_type": "code",
@@ -281,7 +281,7 @@
         "graph combine fig1 fig2, ysize(6) xsize(12) \n",
         "graph export images/fig13_4.png, replace"
       ],
-      "id": "4b42ead3",
+      "id": "b0cd7400",
       "execution_count": null,
       "outputs": []
     },
@@ -338,7 +338,7 @@
         "\n",
         "## Example {.scrollable}\n"
       ],
-      "id": "910c000a"
+      "id": "04f7eb97"
     },
     {
       "cell_type": "code",
@@ -350,7 +350,7 @@
         "** Setup as time series\n",
         "tsset year"
       ],
-      "id": "882cea31",
+      "id": "a06838bf",
       "execution_count": null,
       "outputs": []
     },
@@ -360,7 +360,7 @@
       "source": [
         "The model: $gfr = \\alpha + \\delta_0 pe_t + \\delta_1 pe_{t-1} + \\delta_2 pe_{t-2}+ e_t$\n"
       ],
-      "id": "ca4fda2f"
+      "id": "c08c7818"
     },
     {
       "cell_type": "code",
@@ -370,7 +370,7 @@
         "*| classes: larger\n",
         "reg gfr pe l.pe l2.pe  "
       ],
-      "id": "208bbfa8",
+      "id": "3ddc102a",
       "execution_count": null,
       "outputs": []
     },
@@ -382,7 +382,7 @@
         "\n",
         "Naive approach: Look at auto correlation:\n"
       ],
-      "id": "a5c8950f"
+      "id": "ef9608d7"
     },
     {
       "cell_type": "code",
@@ -393,7 +393,7 @@
         "** Naive apprach\n",
         "corr pe l.pe gfr l.gfr"
       ],
-      "id": "bae2033f",
+      "id": "0776ceab",
       "execution_count": null,
       "outputs": []
     },
@@ -403,7 +403,7 @@
       "source": [
         "Formal Approach: Dickey-Fuller Test for Unit Root\n"
       ],
-      "id": "40ab01f1"
+      "id": "0346c120"
     },
     {
       "cell_type": "code",
@@ -412,7 +412,7 @@
         "reg d.pe l.pe, nohead\n",
         "reg d.gfr l.gfr, nohead"
       ],
-      "id": "993e5995",
+      "id": "615d952f",
       "execution_count": null,
       "outputs": []
     },
@@ -422,7 +422,7 @@
       "source": [
         "Same conclusions. Are their differences stationary?\n"
       ],
-      "id": "874a297c"
+      "id": "987dad03"
     },
     {
       "cell_type": "code",
@@ -433,7 +433,7 @@
         "reg d.dpe l.dpe, nohead\n",
         "reg d.dgfr l.dgfr, nohead"
       ],
-      "id": "3b0c02ef",
+      "id": "245d6876",
       "execution_count": null,
       "outputs": []
     },
@@ -443,7 +443,7 @@
       "source": [
         "Now it should be better to use model in differences for analysi:\n"
       ],
-      "id": "c38568d1"
+      "id": "ad72fc2b"
     },
     {
       "cell_type": "code",
@@ -451,7 +451,7 @@
       "source": [
         "reg dgfr dpe l.dpe l2.dpe  "
       ],
-      "id": "fefca4e3",
+      "id": "c547195b",
       "execution_count": null,
       "outputs": []
     },
@@ -563,7 +563,7 @@
         "  - Both can be used when serial correlation is of higher order, but only CO can be used if order is 3 or higher\n",
         "  - Both methods are iterative\n"
       ],
-      "id": "0fcaa473"
+      "id": "10b74539"
     },
     {
       "cell_type": "code",
@@ -573,7 +573,7 @@
         "tsset year\n",
         "reg inf unem"
       ],
-      "id": "993d2e75",
+      "id": "39f48ffd",
       "execution_count": null,
       "outputs": []
     },
@@ -585,7 +585,7 @@
         "\n",
         "prais inf unem, "
       ],
-      "id": "6af83446",
+      "id": "33cc1c79",
       "execution_count": null,
       "outputs": []
     },
@@ -607,7 +607,7 @@
         "  \n",
         "- In other words, this kind of corrects for the fact that the error term is correlated across time.\n"
       ],
-      "id": "3888ff5b"
+      "id": "f9bdd72c"
     },
     {
       "cell_type": "code",
@@ -617,7 +617,7 @@
         "newey inf unem, lag(1)\n",
         "newey inf unem, lag(2)"
       ],
-      "id": "42fe568b",
+      "id": "48b40f09",
       "execution_count": null,
       "outputs": []
     },
@@ -678,7 +678,7 @@
         "  \n",
         "# And we are done! "
       ],
-      "id": "eb697472"
+      "id": "1e31360a"
     }
   ],
   "metadata": {

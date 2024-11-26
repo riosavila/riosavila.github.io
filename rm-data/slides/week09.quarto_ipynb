@@ -166,7 +166,7 @@
         "\n",
         "## \n"
       ],
-      "id": "b8d3ce8e"
+      "id": "9ea931a5"
     },
     {
       "cell_type": "code",
@@ -192,7 +192,7 @@
         "*scatter  y x , connect(l) name(m1, replace) \n",
         "*line y x n, name(m2, replace) "
       ],
-      "id": "faed0768",
+      "id": "73ab439d",
       "execution_count": null,
       "outputs": []
     },
@@ -207,7 +207,7 @@
         "scatter  y x , connect(l) name(m1, replace) \n",
         "line y x n, name(m2, replace) "
       ],
-      "id": "76e18d3d",
+      "id": "201ab1d1",
       "execution_count": null,
       "outputs": []
     },
@@ -303,7 +303,7 @@
         "\n",
         "## Case study: Stock price and stock market index value\n"
       ],
-      "id": "f43fa1fb"
+      "id": "da972459"
     },
     {
       "cell_type": "code",
@@ -320,7 +320,7 @@
         "line p_sp500 date, name(m1, replace)\n",
         "line p_msft date, name(m2, replace)"
       ],
-      "id": "50b0c6b9",
+      "id": "79d7fdb3",
       "execution_count": null,
       "outputs": []
     },
@@ -342,7 +342,7 @@
         "\n",
         "## Microsoft and S&P 500 stock prices - ts plot\n"
       ],
-      "id": "296ea061"
+      "id": "e0d66b14"
     },
     {
       "cell_type": "code",
@@ -362,7 +362,7 @@
         "line p_sp500 ym, name(m1, replace)\n",
         "line p_msft ym, name(m2, replace)"
       ],
-      "id": "a879b5a9",
+      "id": "3425200c",
       "execution_count": null,
       "outputs": []
     },
@@ -382,7 +382,7 @@
         "\n",
         "## Microsoft and S&P 500 - index returns (pct)\n"
       ],
-      "id": "e0964ec1"
+      "id": "a25cb3c0"
     },
     {
       "cell_type": "code",
@@ -406,7 +406,7 @@
         "line ret_sp500 ym, name(m1, replace)\n",
         "line ret_msft ym, name(m2, replace)"
       ],
-      "id": "00f47af2",
+      "id": "ebe962c1",
       "execution_count": null,
       "outputs": []
     },
@@ -416,7 +416,7 @@
       "source": [
         "## Unit root test: Microsoft and S&P 500 returns{.scrollable}\n"
       ],
-      "id": "69eaae56"
+      "id": "f8589385"
     },
     {
       "cell_type": "code",
@@ -429,7 +429,7 @@
         "pperron ret_sp500\n",
         "pperron ret_msft"
       ],
-      "id": "d090cb53",
+      "id": "9890c128",
       "execution_count": null,
       "outputs": []
     },
@@ -706,7 +706,7 @@
         "- Trend, seasonality, and random walk-like non-stationarity are additional challenges\n",
         "- Do not regress variables that have trend or seasonality; without dealing with them they produce spurious results"
       ],
-      "id": "8d4e35d4"
+      "id": "4fd11f89"
     }
   ],
   "metadata": {

@@ -17,8 +17,7 @@ format:
 
 ## Forecast setup
 
-> It is difficult to make predictions, especially about the future.
-> (Niels Bohr; possibly an old Danish proverb)
+> It is difficult to make predictions, especially about the future. (Niels Bohr; possibly an old Danish proverb)
 
 -   It is fairly easy to make forecasts for variables that have a decently stable pattern over time
     -   Weekly FastMovingGoods product sales, sensor of gadgets used regularly
@@ -259,8 +258,6 @@ What you learn today, you can use tomorrow
 
 -   Modeling how a shock fades away $\leftarrow$ Hopefully things "return to normal"
 
--   How?
-
     -   Autoregressive (AR) models, capture the patterns of serial correlation – $y$ at time $t$ is regressed on its lags, that is its past values, $t - 1, t - 2, etc$.
 
 -   The simplest includes one lag only, AR(1): $$y_t^E = \beta_0 + \beta_1 y_{t-1}$$
@@ -327,9 +324,7 @@ In practice, You rarely see $d>2$, although $p$ and $q$ can be larger (depending
 
 -   Box-Jenkins Methodology
 
--   Step 1: Determine $d$.
-    Typically you test if the data is stationary (ADF test or PP test).
-    You difference the data until it is stationary.
+-   Step 1: Determine $d$. Typically you test if the data is stationary (ADF test or PP test). You difference the data until it is stationary.
 
 -   Step 2: To determine $p$ and $q$ you look at the ACF and PACF of the differenced (if applicable) data.
 
@@ -384,23 +379,23 @@ In practice, You rarely see $d>2$, although $p$ and $q$ can be larger (depending
 
 ## Case study: Prediction with best model M4: Uncertainty
 
-:::{#fig-1}
-
+::: {#fig-1}
 ![](images/paste-44.png)
-
 :::
 
 ## `Stata` Corner
 
 In Stata, the easiest way to estimate ARIMA models is using `arima` command:
 
-- ARIMA(2,2,2) model: `arima y, arima(2,2,2)`
+-   ARIMA(2,2,2) model: `arima y, arima(2,2,2)`
 
 Predictions are a bit tricky. You can use `predict` command with the `dynamic` option to predict out-of-sample values. But also need to indicate "which" periods to start using the model predictions
 
-- `predict yhat, dynamic(ym(2017,1)) [y]`
+-   `predict yhat, dynamic(ym(2017,1)) [y]`
 
 `yhat` is the new variable, `ym(2017,1)` indicates the first period of 2017, and `[y]` indicates that we want to predict the "real" dependent variable. Not the changes or transformations.
+
+No built-in option for CI predictions.
 
 # Vector Autoregression
 
@@ -411,23 +406,37 @@ When you need more than one variable
 -   Better forecasts with the help of other variables, at least for short forecast horizons.
 -   Need forecasts of the $x$ variable as well – we need a model.
 -   Vector autoregression (VAR), is a method that incorporates other variables in time series regressions and can use those other variables for forecasting $y$.
+-   Technically, you are not "ONLY" forecasting $y$ anymore, but a set of time series regressions.
 -   A set of time series regressions.
+
+$${y_t, x_t, z_t} =W_t= \beta_0 + W_{t-1}\beta_1 + W_{t-2}\beta_2 + \dots + W_{t-p}\beta_p + e_t
+$$
 
 ## VAR: simplest model
 
 The simplest VAR model has $y$ and one $x$ variable, and it includes one lag of each = VAR(1) model.
-Data have all variables at the same frequency VAT(1) = set of two TS regressions: $$\begin{align*}
+
+It assumes that all data have the same frequency. $$\begin{align*}
 y_t^E &= \beta_{10} + \beta_{11} y_{t-1} + \beta_{12} x_{t-1} \\
 x_t^E &= \beta_{20} + \beta_{21} y_{t-1} + \beta_{22} x_{t-1}
-\end{align*}$$
+\end{align*}
+$$
 
 ## VAR forecast
 
-One-period-ahead forecast for $y$, only need estimates from the first one: $$\hat{y}_{T+1} = \hat{\beta}_{10} + \hat{\beta}_{11} y_T + \hat{\beta}_{12} x_T$$
+-   **One-period-ahead** forecast for $y$, only need estimates from the first one: $$\hat{y}_{T+1} = \hat{\beta}_{10} + \hat{\beta}_{11} y_T + \hat{\beta}_{12} x_T
+    $$
 
-For forecasting $y$ further ahead, we do need all coefficient estimates.
-Such forecasts use forecast values of $x$ as well as $y$.
-A two-period-ahead forecast of $y$ from a VAR(1) is $$\hat{y}_{T+2} = \hat{\beta}_{10} + \hat{\beta}_{11} \hat{y}_{T+1} + \hat{\beta}_{12} \hat{x}_{T+1}$$ where $\hat{y}_{T+1} = \hat{\beta}_{10} + \hat{\beta}_{11} y_T + \hat{\beta}_{12} x_T$, and $\hat{x}_{T+1} = \hat{\beta}_{20} + \hat{\beta}_{21} y_T + \hat{\beta}_{22} x_T$.
+-   For forecasting $y$ further ahead, we do need all coefficient estimates, and forecast values of $x$ as well.
+
+-   A two-period-ahead forecast of $y$ from a VAR(1) is
+
+$$
+\hat{y}_{T+2} = \hat{\beta}_{10} + \hat{\beta}_{11} \hat{y}_{T+1} + \hat{\beta}_{12} \hat{x}_{T+1}
+$$
+
+and $\hat{x}_{T+1}$ and $\hat{y}_{T+1}$ are from the first forecast.
+
 Forecasts for $T + 3, T + 4, etc.,$ are analogous.
 
 ## VAR characteristics
@@ -439,83 +448,107 @@ There are four important characteristics of a VAR:
 -   Right-hand-side variables are in lags only.
 -   All right-hand-side variables in all regressions have the same number of lags
 
-## Case study: Additional predictors 1
+Note: More often than not, you need the "system" to be stable/stationary. This is a bit more complex than just checking the target variable. (You need to see the Matrix of coefficients)
 
-``` r
-#| fig-height: 4
-#| fig-width: 8
-data <- read.csv("case_shiller.csv")
-ggplot(data, aes(date, unemployment_rate)) +
-  geom_line()
+## Case study: Unemployment Rate
 
-ggplot(data, aes(date, diff(unemployment_rate))) +
-  geom_line()
-```
+::::: columns
+::: column
+### U. Rate
 
-## Case study: Additional predictors 2
+![](images/paste-45.png)
+:::
 
-``` r
-#| fig-height: 4
-#| fig-width: 8  
-ggplot(data, aes(date, log(employment))) +
-  geom_line()
+::: column
+### Change in U. Rate
 
-ggplot(data, aes(date, diff(log(employment)))) +
-  geom_line()
-```
+![](images/paste-46.png)
+:::
+:::::
+
+## Case study: Employed Population
+
+::::: columns
+::: column
+### ln(emp)
+
+![](images/paste-47.png)
+:::
+
+::: column
+### Change in ln(emp)
+
+![](images/paste-48.png)
+:::
+:::::
 
 ## Case study: Case- Shiller home price index - Model selection 2
 
 Run the VAR model and compare to previous results.
 
-| id  | target | ARIMA | trend | season | AR  | I   | MA  | RMSE |
-|-----|--------|-------|-------|--------|-----|-----|-----|------|
-| M1  | p      | NO    | X     | X      |     |     |     | 31.9 |
-| M2  | p      | YES   | 1     | 1      | 2   |     |     | 9.5  |
-| M3  | p      | YES   | X     | 1      | 1   | 1   | 0   | 4.1  |
-| M4  | p      | YES   | X     | X      | 2   | 0   | 0   | 2.3  |
-| M5  | dp     | NO    | X     | X      |     |     |     | 18.8 |
-| M6  | lnp    | YES   | X     | 0      | 2   | 0   | 0   | 7.2  |
-| M7a | dp     | VAR   |       |        |     |     |     | 7.8  |
-| M7b | dp     | VAR   | X     |        |     |     |     | 4.5  |
-
-## Case study: Case- Shiller home price index - VAR
+| id  | target | ARIMA | trend | season | AR  | I   | MA  | RMSE    |
+|-----|--------|-------|-------|--------|-----|-----|-----|---------|
+| M1  | p      | NO    | X     | X      |     |     |     | 31.9    |
+| M2  | p      | YES   | 1     | 1      | 2   |     |     | 9.5     |
+| M3  | p      | YES   | X     | 1      | 1   | 1   | 0   | 4.1     |
+| M4  | p      | YES   | X     | X      | 2   | 0   | 0   | 2.3     |
+| M5  | dp     | NO    | X     | X      |     |     |     | 18.8    |
+| M6  | lnp    | YES   | X     | 0      | 2   | 0   | 0   | 7.2     |
+| M7a | dp     | VAR   |       |        |     |     |     | **7.8** |
+| M7b | dp     | VAR   | X     |        |     |     |     | **4.5** |
 
 -   In this case study, VAR did not improve on ARIMA.
+
+## VAR in `Stata`
+
+Stata has a feature for the estimation of VAR models called...Var
+
+`var depvarlist [if] [in] [,lags(#) exog(varlist) Other]`
+
+-   `depvarlist` are all the variables one needs to analyze.
+
+-   `lags(#)` indicates how many (and which) lags to use.
+
+For prediction look into `fcast`, `predict` or `forecast`
 
 ## External validity in time series
 
 -   External validity is about the stability of patterns in the data
-    -   Such as trends, seasonality
+
+    -   Such as trends, seasonality (Do they repeat? or do we need to update?)
+
 -   Stationarity is what we look for:
+
     -   Distribution of the target, predictors is stable over time
     -   Correlation patterns also stable over time
+    -   We can then make predictions of the future!
+
 -   External validity is massive risk with time series by design: predict for future
 
-## Case study: External validity
-
--   Look across years to see stability
--   Four rolling windows, test sets were 2013,14,15,16
+-   What if we update the model with NEW data. How well would it do?
 
 ## Case study: Case- Shiller home price index - model fit on test sets
 
-Four test set (in work set) with rolling window CV.
-RMSE in each test set for each model.
+Four test set (in work set) with rolling window CV. RMSE in each test set for each model.
 
-| Fold1 | Fold2 | Fold3 | Fold4 | Average |
-|-------|-------|-------|-------|---------|
-| 14.90 | 17.58 | 34.44 | 48.58 | 31.9    |
-| 14.83 | 8.39  | 6.23  | 5.52  | 9.5     |
-| 6.68  | 1.39  | 3.29  | 3.22  | 4.1     |
-| 2.22  | 1.96  | 2.88  | 1.20  | 2.2     |
-| 33.94 | 9.79  | 10.44 | 7.39  | 18.8    |
-| 2.49  | 4.95  | 9.22  | 9.54  | 7.2     |
-| 13.30 | 5.85  | 3.52  | 4.28  | 7.8     |
-| 5.24  | 2.51  | 5.18  | 4.75  | 4.5     |
+|        | Fold1 | Fold2 | Fold3 | Fold4 | Average |
+|--------|-------|-------|-------|-------|---------|
+| M1     | 14.90 | 17.58 | 34.44 | 48.58 | 31.9    |
+| M2     | 14.83 | 8.39  | 6.23  | 5.52  | 9.5     |
+| M3     | 6.68  | 1.39  | 3.29  | 3.22  | 4.1     |
+| **M4** | 2.22  | 1.96  | 2.88  | 1.20  | 2.2     |
+| M5     | 33.94 | 9.79  | 10.44 | 7.39  | 18.8    |
+| M6     | 2.49  | 4.95  | 9.22  | 9.54  | 7.2     |
+| M7a    | 13.30 | 5.85  | 3.52  | 4.28  | 7.8     |
+| M7b    | 5.24  | 2.51  | 5.18  | 4.75  | 4.5     |
 
 ## Case study: Prediction with best model M4 for 2018
 
-![](images/case_shiller_2018.png)
+<div>
+
+![](images/paste-49.png)
+
+</div>
 
 ## Summary
 

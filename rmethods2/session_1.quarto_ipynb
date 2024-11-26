@@ -182,7 +182,7 @@
         "\n",
         "- Second National Health and Nutrition Examination Survey (NHANES) \n"
       ],
-      "id": "bfcd2296"
+      "id": "1c626ba7"
     },
     {
       "cell_type": "code",
@@ -197,7 +197,7 @@
         "gen wage = exp(lnwage)\n",
         "tab wt"
       ],
-      "id": "ecb8e128",
+      "id": "2519c9fc",
       "execution_count": null,
       "outputs": []
     },
@@ -207,7 +207,7 @@
       "source": [
         "Weights Distribution\n"
       ],
-      "id": "97bb8b78"
+      "id": "bcbd3a73"
     },
     {
       "cell_type": "code",
@@ -217,7 +217,7 @@
         "*| code-fold: false\n",
         "tab wt"
       ],
-      "id": "8dbf2118",
+      "id": "c878e21d",
       "execution_count": null,
       "outputs": []
     },
@@ -227,7 +227,7 @@
       "source": [
         "Summary Statistics:\n"
       ],
-      "id": "29fea89a"
+      "id": "272016ee"
     },
     {
       "cell_type": "code",
@@ -240,7 +240,7 @@
         "** weighted\n",
         "sum wage [aw=wt],d"
       ],
-      "id": "cd1899b5",
+      "id": "3fa42663",
       "execution_count": null,
       "outputs": []
     },
@@ -250,7 +250,7 @@
       "source": [
         "Accounting for weights for summary Statistics\n"
       ],
-      "id": "acfb3fde"
+      "id": "9f96ff6c"
     },
     {
       "cell_type": "code",
@@ -264,7 +264,7 @@
         "mean wage [pw=wt]\n",
         "mean wage [pw=wt], over(female)"
       ],
-      "id": "4cbe4920",
+      "id": "a9c38597",
       "execution_count": null,
       "outputs": []
     },
@@ -274,7 +274,7 @@
       "source": [
         "Tables and cross tables\n"
       ],
-      "id": "3cd7be9e"
+      "id": "07bc5725"
     },
     {
       "cell_type": "code",
@@ -287,7 +287,7 @@
         "\n",
         "tab educ female [w=wt]"
       ],
-      "id": "6391620e",
+      "id": "a192447b",
       "execution_count": null,
       "outputs": []
     },
@@ -297,7 +297,7 @@
       "source": [
         "Better approach: `svyset`\n"
       ],
-      "id": "8b7c969f"
+      "id": "35b93fd9"
     },
     {
       "cell_type": "code",
@@ -313,7 +313,7 @@
         "mean zinc [pw=finalwgt]\n",
         "svy: mean zinc      "
       ],
-      "id": "33a7fd53",
+      "id": "43c34038",
       "execution_count": null,
       "outputs": []
     },
@@ -347,7 +347,7 @@
         "-   But you can use OLS to test the difference in means with weights!\n",
         "    -   Make sure you use \"robust\" standard errors, or \"pw\" option.\n"
       ],
-      "id": "a28b4faa"
+      "id": "23dacc5a"
     },
     {
       "cell_type": "code",
@@ -362,7 +362,7 @@
         "gen wage = exp(lnwage)\n",
         "reg wage i.female [pw=wt],"
       ],
-      "id": "eb7d2520",
+      "id": "764ae085",
       "execution_count": null,
       "outputs": []
     },
@@ -564,7 +564,7 @@
         "\n",
         "`mata`: Input Data\n"
       ],
-      "id": "fdc194c6"
+      "id": "d5ecf6ca"
     },
     {
       "cell_type": "code",
@@ -577,7 +577,7 @@
         "mata: y  = (129 \\ 99 \\ 165)\n",
         "mata: hh = ( 181 , 114 , 98)"
       ],
-      "id": "da4f519e",
+      "id": "801ca7d2",
       "execution_count": null,
       "outputs": []
     },
@@ -587,7 +587,7 @@
       "source": [
         "Estimate Total Production\n"
       ],
-      "id": "db7dca64"
+      "id": "5de267fc"
     },
     {
       "cell_type": "code",
@@ -598,7 +598,7 @@
         "*| code-fold: false\n",
         "mata: tp = colsum(x):+hh ; tp"
       ],
-      "id": "8b53265f",
+      "id": "e0abc6a8",
       "execution_count": null,
       "outputs": []
     },
@@ -608,7 +608,7 @@
       "source": [
         "Estimate Technical Coefficients\n"
       ],
-      "id": "524a95c4"
+      "id": "4418d443"
     },
     {
       "cell_type": "code",
@@ -620,7 +620,7 @@
         "// Technical Coefficients\n",
         "mata:ai = x:/tp ; ai"
       ],
-      "id": "00b1f23a",
+      "id": "306f6e84",
       "execution_count": null,
       "outputs": []
     },
@@ -630,7 +630,7 @@
       "source": [
         "Estimate Change in Demand: 20% increase in Agriculture\n"
       ],
-      "id": "8717648d"
+      "id": "3a309a52"
     },
     {
       "cell_type": "code",
@@ -642,7 +642,7 @@
         "// Technical Coefficients\n",
         "mata:dy = y :* (.2 \\ 0 \\ 0); dy"
       ],
-      "id": "a481c3ab",
+      "id": "393574ca",
       "execution_count": null,
       "outputs": []
     },
@@ -652,7 +652,7 @@
       "source": [
         "Estimate Change in Production\n"
       ],
-      "id": "053faebc"
+      "id": "7d2e7fdc"
     },
     {
       "cell_type": "code",
@@ -664,7 +664,7 @@
         "// Change in Production\n",
         "mata:dx = qrinv(I(3)-ai)*dy; dx"
       ],
-      "id": "9d0cc130",
+      "id": "f188a017",
       "execution_count": null,
       "outputs": []
     },
@@ -674,7 +674,7 @@
       "source": [
         "Estimate Change in Labor Demand\n"
       ],
-      "id": "5cca721e"
+      "id": "9917150c"
     },
     {
       "cell_type": "code",
@@ -685,7 +685,7 @@
         "*| code-fold: false\n",
         "mata:dl = (hh:/tp)':*dx; dl"
       ],
-      "id": "e9daf401",
+      "id": "14bf0637",
       "execution_count": null,
       "outputs": []
     },
@@ -768,7 +768,7 @@
         "-   How to use IO tables to simulate changes in production and labor demand.\n",
         "-   Understand how SAM can be used to represent an Economy"
       ],
-      "id": "8fc2ce87"
+      "id": "eefcddfa"
     }
   ],
   "metadata": {

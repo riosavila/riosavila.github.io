@@ -14945,7 +14945,7 @@
     "href": "rm-data/slides/week13.html#short-horizon-forecasting-what-is-new",
     "title": "Forecasting from Time Series Data",
     "section": "Short-horizon forecasting: what is new?",
-    "text": "Short-horizon forecasting: what is new?\n\nSerial correlation is essential\n\nData Depends on itself, and Errors Also Depend on Themselves\n\nModeling how a shock fades away \\(\\leftarrow\\) Hopefully things “return to normal”\nHow?\n\nAutoregressive (AR) models, capture the patterns of serial correlation – \\(y\\) at time \\(t\\) is regressed on its lags, that is its past values, \\(t - 1, t - 2, etc\\).\n\nThe simplest includes one lag only, AR(1): \\[y_t^E = \\beta_0 + \\beta_1 y_{t-1}\\]\nInterested in estimating \\(\\beta_1\\) or \\(\\rho\\).\n\nIf \\(\\rho = 1\\) is random walk (unpredictable),\nif \\(\\rho = 0\\) is white noise (also unpredictable, but stable)."
+    "text": "Short-horizon forecasting: what is new?\n\nSerial correlation is essential\n\nData Depends on itself, and Errors Also Depend on Themselves\n\nModeling how a shock fades away \\(\\leftarrow\\) Hopefully things “return to normal”\n\nAutoregressive (AR) models, capture the patterns of serial correlation – \\(y\\) at time \\(t\\) is regressed on its lags, that is its past values, \\(t - 1, t - 2, etc\\).\n\nThe simplest includes one lag only, AR(1): \\[y_t^E = \\beta_0 + \\beta_1 y_{t-1}\\]\nInterested in estimating \\(\\beta_1\\) or \\(\\rho\\).\n\nIf \\(\\rho = 1\\) is random walk (unpredictable),\nif \\(\\rho = 0\\) is white noise (also unpredictable, but stable)."
   },
   {
     "objectID": "rm-data/slides/week13.html#short-horizon-forecasting-ar1",
@@ -15036,14 +15036,14 @@
     "href": "rm-data/slides/week13.html#case-study-case-shiller-home-price-data",
     "title": "Forecasting from Time Series Data",
     "section": "Case study: Case Shiller home price data",
-    "text": "Case study: Case Shiller home price data\n\n18 years of data 2000-2017\nwork: 2000-2016, holdout is 2017\ncross-validate with rolling window, 4-fold\n\ntrain is 2000-2012, test is 2013\n…\ntrain is 2003-2015, test is 2016\n\nWe’ll predict 12 months ahead\nRMSE - symmetric and quadratic loss\nAssume getting index right matters exactly the same"
+    "text": "Case study: Case Shiller home price data\n\n18 years of data 2000-2017\nwork: 2000-2016, holdout is 2017\ncross-validate with rolling window, 4-fold\n\ntrain is 2000-2012, test is 2013\n…\ntrain is 2003-2015, test is 2016\n\nPredict 12 months ahead\nRMSE - symmetric and quadratic loss\nAssume getting index right matters exactly the same"
   },
   {
     "objectID": "rm-data/slides/week13.html#case-study-target-variable",
     "href": "rm-data/slides/week13.html#case-study-target-variable",
     "title": "Forecasting from Time Series Data",
     "section": "Case study: target variable",
-    "text": "Case study: target variable\n\nWhat should be the target variable?\n\nThe price index\nThe log of the price index\nFirst difference\n\nWe’ll try out, and pick via cross-validation\nThe model should include seasonal dummies (could be more complicated)\nThe model may include a linear trend or capture it with \\(\\Delta y\\) as target\nThe model can have any form of ARIMA"
+    "text": "Case study: target variable\n\nWhat should be the target variable?\n\nThe price index\nThe log of the price index\nFirst difference &lt;- Shortcut to assume I(1) process\n\nWe’ll try out, and pick via cross-validation\nThe model should include seasonal dummies (could be more complicated)\nThe model may include a linear trend or capture it with \\(\\Delta y\\) as target\nThe model can have any form of ARIMA"
   },
   {
     "objectID": "rm-data/slides/week13.html#case-study-case--shiller-home-price-index---prediction-from-arima-models",
@@ -15064,35 +15064,35 @@
     "href": "rm-data/slides/week13.html#case-study-prediction-with-best-model-m4-uncertainty",
     "title": "Forecasting from Time Series Data",
     "section": "Case study: Prediction with best model M4: Uncertainty",
-    "text": "Case study: Prediction with best model M4: Uncertainty"
+    "text": "Case study: Prediction with best model M4: Uncertainty\n\n\nFigure 1"
   },
   {
     "objectID": "rm-data/slides/week13.html#var",
     "href": "rm-data/slides/week13.html#var",
     "title": "Forecasting from Time Series Data",
     "section": "VAR",
-    "text": "VAR\n\nBetter forecasts with the help of other variables, at least for short forecast horizons.\nNeed forecasts of the \\(x\\) variable as well – we need a model.\nVector autoregression (VAR), is a method that incorporates other variables in time series regressions and can use those other variables for forecasting \\(y\\).\nA set of time series regressions."
+    "text": "VAR\n\nBetter forecasts with the help of other variables, at least for short forecast horizons.\nNeed forecasts of the \\(x\\) variable as well – we need a model.\nVector autoregression (VAR), is a method that incorporates other variables in time series regressions and can use those other variables for forecasting \\(y\\).\nTechnically, you are not “ONLY” forecasting \\(y\\) anymore, but a set of time series regressions.\nA set of time series regressions.\n\n\\[{y_t, x_t, z_t} =W_t= \\beta_0 + W_{t-1}\\beta_1 + W_{t-2}\\beta_2 + \\dots + W_{t-p}\\beta_p + e_t\n\\]"
   },
   {
     "objectID": "rm-data/slides/week13.html#var-simplest-model",
     "href": "rm-data/slides/week13.html#var-simplest-model",
     "title": "Forecasting from Time Series Data",
     "section": "VAR: simplest model",
-    "text": "VAR: simplest model\nThe simplest VAR model has \\(y\\) and one \\(x\\) variable, and it includes one lag of each = VAR(1) model. Data have all variables at the same frequency VAT(1) = set of two TS regressions: \\[\\begin{align*}\ny_t^E &= \\beta_{10} + \\beta_{11} y_{t-1} + \\beta_{12} x_{t-1} \\\\\nx_t^E &= \\beta_{20} + \\beta_{21} y_{t-1} + \\beta_{22} x_{t-1}\n\\end{align*}\\]"
+    "text": "VAR: simplest model\nThe simplest VAR model has \\(y\\) and one \\(x\\) variable, and it includes one lag of each = VAR(1) model.\nIt assumes that all data have the same frequency. \\[\\begin{align*}\ny_t^E &= \\beta_{10} + \\beta_{11} y_{t-1} + \\beta_{12} x_{t-1} \\\\\nx_t^E &= \\beta_{20} + \\beta_{21} y_{t-1} + \\beta_{22} x_{t-1}\n\\end{align*}\n\\]"
   },
   {
     "objectID": "rm-data/slides/week13.html#var-forecast",
     "href": "rm-data/slides/week13.html#var-forecast",
     "title": "Forecasting from Time Series Data",
     "section": "VAR forecast",
-    "text": "VAR forecast\nOne-period-ahead forecast for \\(y\\), only need estimates from the first one: \\[\\hat{y}_{T+1} = \\hat{\\beta}_{10} + \\hat{\\beta}_{11} y_T + \\hat{\\beta}_{12} x_T\\]\nFor forecasting \\(y\\) further ahead, we do need all coefficient estimates. Such forecasts use forecast values of \\(x\\) as well as \\(y\\). A two-period-ahead forecast of \\(y\\) from a VAR(1) is \\[\\hat{y}_{T+2} = \\hat{\\beta}_{10} + \\hat{\\beta}_{11} \\hat{y}_{T+1} + \\hat{\\beta}_{12} \\hat{x}_{T+1}\\] where \\(\\hat{y}_{T+1} = \\hat{\\beta}_{10} + \\hat{\\beta}_{11} y_T + \\hat{\\beta}_{12} x_T\\), and \\(\\hat{x}_{T+1} = \\hat{\\beta}_{20} + \\hat{\\beta}_{21} y_T + \\hat{\\beta}_{22} x_T\\). Forecasts for \\(T + 3, T + 4, etc.,\\) are analogous."
+    "text": "VAR forecast\n\nOne-period-ahead forecast for \\(y\\), only need estimates from the first one: \\[\\hat{y}_{T+1} = \\hat{\\beta}_{10} + \\hat{\\beta}_{11} y_T + \\hat{\\beta}_{12} x_T\n\\]\nFor forecasting \\(y\\) further ahead, we do need all coefficient estimates, and forecast values of \\(x\\) as well.\nA two-period-ahead forecast of \\(y\\) from a VAR(1) is\n\n\\[\n\\hat{y}_{T+2} = \\hat{\\beta}_{10} + \\hat{\\beta}_{11} \\hat{y}_{T+1} + \\hat{\\beta}_{12} \\hat{x}_{T+1}\n\\]\nand \\(\\hat{x}_{T+1}\\) and \\(\\hat{y}_{T+1}\\) are from the first forecast.\nForecasts for \\(T + 3, T + 4, etc.,\\) are analogous."
   },
   {
     "objectID": "rm-data/slides/week13.html#var-characteristics",
     "href": "rm-data/slides/week13.html#var-characteristics",
     "title": "Forecasting from Time Series Data",
     "section": "VAR characteristics",
-    "text": "VAR characteristics\nThere are four important characteristics of a VAR:\n\nA VAR has a regression for each of the variables.\nThe right-hand side of each equation has all variables.\nRight-hand-side variables are in lags only.\nAll right-hand-side variables in all regressions have the same number of lags"
+    "text": "VAR characteristics\nThere are four important characteristics of a VAR:\n\nA VAR has a regression for each of the variables.\nThe right-hand side of each equation has all variables.\nRight-hand-side variables are in lags only.\nAll right-hand-side variables in all regressions have the same number of lags\n\nNote: More often than not, you need the “system” to be stable/stationary. This is a bit more complex than just checking the target variable. (You need to see the Matrix of coefficients)"
   },
   {
     "objectID": "rm-data/slides/week13.html#case-study-additional-predictors-1",
@@ -15113,7 +15113,7 @@
     "href": "rm-data/slides/week13.html#case-study-case--shiller-home-price-index---model-selection-2",
     "title": "Forecasting from Time Series Data",
     "section": "Case study: Case- Shiller home price index - Model selection 2",
-    "text": "Case study: Case- Shiller home price index - Model selection 2\nRun the VAR model and compare to previous results.\n\n\n\nid\ntarget\nARIMA\ntrend\nseason\nAR\nI\nMA\nRMSE\n\n\n\n\nM1\np\nNO\nX\nX\n\n\n\n31.9\n\n\nM2\np\nYES\n1\n1\n2\n\n\n9.5\n\n\nM3\np\nYES\nX\n1\n1\n1\n0\n4.1\n\n\nM4\np\nYES\nX\nX\n2\n0\n0\n2.3\n\n\nM5\ndp\nNO\nX\nX\n\n\n\n18.8\n\n\nM6\nlnp\nYES\nX\n0\n2\n0\n0\n7.2\n\n\nM7a\ndp\nVAR\n\n\n\n\n\n7.8\n\n\nM7b\ndp\nVAR\nX\n\n\n\n\n4.5"
+    "text": "Case study: Case- Shiller home price index - Model selection 2\nRun the VAR model and compare to previous results.\n\n\n\nid\ntarget\nARIMA\ntrend\nseason\nAR\nI\nMA\nRMSE\n\n\n\n\nM1\np\nNO\nX\nX\n\n\n\n31.9\n\n\nM2\np\nYES\n1\n1\n2\n\n\n9.5\n\n\nM3\np\nYES\nX\n1\n1\n1\n0\n4.1\n\n\nM4\np\nYES\nX\nX\n2\n0\n0\n2.3\n\n\nM5\ndp\nNO\nX\nX\n\n\n\n18.8\n\n\nM6\nlnp\nYES\nX\n0\n2\n0\n0\n7.2\n\n\nM7a\ndp\nVAR\n\n\n\n\n\n7.8\n\n\nM7b\ndp\nVAR\nX\n\n\n\n\n4.5\n\n\n\n\nIn this case study, VAR did not improve on ARIMA."
   },
   {
     "objectID": "rm-data/slides/week13.html#case-study-case--shiller-home-price-index---var",
@@ -15127,7 +15127,7 @@
     "href": "rm-data/slides/week13.html#external-validity-in-time-series",
     "title": "Forecasting from Time Series Data",
     "section": "External validity in time series",
-    "text": "External validity in time series\n\nExternal validity is about the stability of patterns in the data\n\nSuch as trends, seasonality\n\nStationarity is what we look for:\n\nDistribution of the target, predictors is stable over time\nCorrelation patterns also stable over time\n\nExternal validity is massive risk with time series by design: predict for future"
+    "text": "External validity in time series\n\nExternal validity is about the stability of patterns in the data\n\nSuch as trends, seasonality (Do they repeat? or do we need to update?)\n\nStationarity is what we look for:\n\nDistribution of the target, predictors is stable over time\nCorrelation patterns also stable over time\nWe can then make predictions of the future!\n\nExternal validity is massive risk with time series by design: predict for future\nWhat if we update the model with NEW data. How well would it do?"
   },
   {
     "objectID": "rm-data/slides/week13.html#case-study-external-validity",
@@ -15141,7 +15141,7 @@
     "href": "rm-data/slides/week13.html#case-study-case--shiller-home-price-index---model-fit-on-test-sets",
     "title": "Forecasting from Time Series Data",
     "section": "Case study: Case- Shiller home price index - model fit on test sets",
-    "text": "Case study: Case- Shiller home price index - model fit on test sets\nFour test set (in work set) with rolling window CV. RMSE in each test set for each model.\n\n\n\nFold1\nFold2\nFold3\nFold4\nAverage\n\n\n\n\n14.90\n17.58\n34.44\n48.58\n31.9\n\n\n14.83\n8.39\n6.23\n5.52\n9.5\n\n\n6.68\n1.39\n3.29\n3.22\n4.1\n\n\n2.22\n1.96\n2.88\n1.20\n2.2\n\n\n33.94\n9.79\n10.44\n7.39\n18.8\n\n\n2.49\n4.95\n9.22\n9.54\n7.2\n\n\n13.30\n5.85\n3.52\n4.28\n7.8\n\n\n5.24\n2.51\n5.18\n4.75\n4.5"
+    "text": "Case study: Case- Shiller home price index - model fit on test sets\nFour test set (in work set) with rolling window CV. RMSE in each test set for each model.\n\n\n\n\nFold1\nFold2\nFold3\nFold4\nAverage\n\n\n\n\nM1\n14.90\n17.58\n34.44\n48.58\n31.9\n\n\nM2\n14.83\n8.39\n6.23\n5.52\n9.5\n\n\nM3\n6.68\n1.39\n3.29\n3.22\n4.1\n\n\nM4\n2.22\n1.96\n2.88\n1.20\n2.2\n\n\nM5\n33.94\n9.79\n10.44\n7.39\n18.8\n\n\nM6\n2.49\n4.95\n9.22\n9.54\n7.2\n\n\nM7a\n13.30\n5.85\n3.52\n4.28\n7.8\n\n\nM7b\n5.24\n2.51\n5.18\n4.75\n4.5"
   },
   {
     "objectID": "rm-data/slides/week13.html#case-study-prediction-with-best-model-m4-for-2018",
@@ -15176,6 +15176,48 @@
     "href": "rm-data/slides/week13.html#arima-mix-and-match",
     "title": "Forecasting from Time Series Data",
     "section": "ARIMA: Mix and Match",
-    "text": "ARIMA: Mix and Match\n\nARIMA(2,1,0): \\(\\Delta y_t = \\beta_0 + \\beta_1 \\Delta y_{t-1} + \\beta_2 \\Delta y_{t-2} + e_t\\)\nARIMA(0,1,1): \\(\\Delta y_t = \\beta_0 + \\theta e_{t-1} + e_t\\)\nARIMA(0,2,2): \\(\\Delta^2 y_t = \\beta_0 + \\theta_1 e_{t-1} + \\theta_2 e_{t-2} + e_t\\)\nARIMA(p,d,q): \\(\\Delta^q y_t = \\beta_0 + \\sum_{i=1}^{p} \\beta_i \\Delta^q y_{t-i} + \\sum_{j=1}^{q} \\theta_j e_{t-j}\\)"
+    "text": "ARIMA: Mix and Match\n\nARIMA(2,1,0): \\(\\Delta y_t = \\beta_0 + \\beta_1 \\Delta y_{t-1} + \\beta_2 \\Delta y_{t-2} + e_t\\)\nARIMA(0,1,1): \\(\\Delta y_t = \\beta_0 + \\theta e_{t-1} + e_t\\)\nARIMA(0,2,2): \\(\\Delta^2 y_t = \\beta_0 + \\theta_1 e_{t-1} + \\theta_2 e_{t-2} + e_t\\)\nARIMA(p,d,q): \\(\\Delta^q y_t = \\beta_0 + \\sum_{i=1}^{p} \\beta_i \\Delta^q y_{t-i} + \\sum_{j=1}^{q} \\theta_j e_{t-j}+e_t\\)\n\nIn practice, You rarely see \\(d&gt;2\\), although \\(p\\) and \\(q\\) can be larger (depending on frequency of data)"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#how-to-choose-pdq",
+    "href": "rm-data/slides/week13.html#how-to-choose-pdq",
+    "title": "Forecasting from Time Series Data",
+    "section": "How to choose (p,d,q)?",
+    "text": "How to choose (p,d,q)?\n\nEmpirical approach\n\nWhichever works best in a cross-validated exercise!\nTry out a few and pick the one that works best\n“auto-arima” - an algo that tries out many options\nkeep it simple, \\(d = 0, 1\\) and \\(p = 0, 1, 2\\) and \\(q = 0, 1, 2\\) rarely more"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#how-to-choose-pdq-1",
+    "href": "rm-data/slides/week13.html#how-to-choose-pdq-1",
+    "title": "Forecasting from Time Series Data",
+    "section": "How to choose (p,d,q)?",
+    "text": "How to choose (p,d,q)?\n\nBox-Jenkins Methodology\nStep 1: Determine \\(d\\). Typically you test if the data is stationary (ADF test or PP test). You difference the data until it is stationary.\nStep 2: To determine \\(p\\) and \\(q\\) you look at the ACF and PACF of the differenced (if applicable) data.\n\nACF or Autocorrelation function\n\n\\(corr(y_t, y_{t-1})\\), \\(corr(y_t, y_{t-2})\\), etc.\nHelps Identify MA component (based on spikes)\n\nPACF or Partial autocorrelation function\n\n\\(y_t = \\beta_0 + \\beta_1 y_{t-1}+ e_t\\)\n\\(y_t = \\beta_0 + \\beta_1 y_{t-1}+\\beta_2{t-2} y_{t-2} e_t\\),etc\nHelps Identify the AR component"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#stata-corner",
+    "href": "rm-data/slides/week13.html#stata-corner",
+    "title": "Forecasting from Time Series Data",
+    "section": "Stata Corner",
+    "text": "Stata Corner\nIn Stata, the easiest way to estimate ARIMA models is using arima command:\n\nARIMA(2,2,2) model: arima y, arima(2,2,2)\n\nPredictions are a bit tricky. You can use predict command with the dynamic option to predict out-of-sample values. But also need to indicate “which” periods to start using the model predictions\n\npredict yhat, dynamic(ym(2017,1)) [y]\n\nyhat is the new variable, ym(2017,1) indicates the first period of 2017, and [y] indicates that we want to predict the “real” dependent variable. Not the changes or transformations.\nNo built-in option for CI predictions."
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#case-study-unemployment-rate",
+    "href": "rm-data/slides/week13.html#case-study-unemployment-rate",
+    "title": "Forecasting from Time Series Data",
+    "section": "Case study: Unemployment Rate",
+    "text": "Case study: Unemployment Rate\n\n\nU. Rate\n\n\nChange in U. Rate"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#case-study-employed-population",
+    "href": "rm-data/slides/week13.html#case-study-employed-population",
+    "title": "Forecasting from Time Series Data",
+    "section": "Case study: Employed Population",
+    "text": "Case study: Employed Population\n\n\nln(emp)\n\n\nChange in ln(emp)"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#var-in-stata",
+    "href": "rm-data/slides/week13.html#var-in-stata",
+    "title": "Forecasting from Time Series Data",
+    "section": "VAR in Stata",
+    "text": "VAR in Stata\nStata has a feature for the estimation of VAR models called…Var\nvar depvarlist [if] [in] [,lags(#) exog(varlist) Other]\n\ndepvarlist are all the variables one needs to analyze.\nlags(#) indicates how many (and which) lags to use.\n\nFor prediction look into fcast, predict or forecast"
   }
 ]

@@ -38,7 +38,7 @@
         "\n",
         "# Example\n"
       ],
-      "id": "227d28c4"
+      "id": "c31fe873"
     },
     {
       "cell_type": "code",
@@ -50,7 +50,7 @@
         "graph_width = default\n",
         "graph_height = default"
       ],
-      "id": "d3f1589d",
+      "id": "52c9a211",
       "execution_count": null,
       "outputs": []
     },
@@ -60,7 +60,7 @@
       "source": [
         "## Data"
       ],
-      "id": "306de3e8"
+      "id": "7af6b7ac"
     },
     {
       "cell_type": "code",
@@ -78,7 +78,7 @@
         "gen y = x1 + (x2-x1)*(runiform()<.5)\n",
         "kdensity y, ysize(6) xsize(10)"
       ],
-      "id": "17e7cea6",
+      "id": "2f31194f",
       "execution_count": null,
       "outputs": []
     },
@@ -101,7 +101,7 @@
         "\n",
         "## Graphical representation  \n"
       ],
-      "id": "dda1c9d6"
+      "id": "5587ce06"
     },
     {
       "cell_type": "code",
@@ -129,7 +129,7 @@
         "ytitle(Mean) xtitle(SD) xsize(6) ysize(6)\n",
         "graph export \"s2_fig1.png\", replace width(1000)"
       ],
-      "id": "cf0d9c48",
+      "id": "c0634f59",
       "execution_count": null,
       "outputs": []
     },
@@ -141,7 +141,7 @@
         "\n",
         "## How Good we did?\n"
       ],
-      "id": "3e5c3478"
+      "id": "12f2d541"
     },
     {
       "cell_type": "code",
@@ -151,7 +151,7 @@
         "*| fig-align: center\n",
         "kdensity y, ysize(6) xsize(10) normal"
       ],
-      "id": "276090f5",
+      "id": "836de01c",
       "execution_count": null,
       "outputs": []
     },
@@ -273,7 +273,7 @@
         "\n",
         "Load the data\n"
       ],
-      "id": "d4ccd242"
+      "id": "b4c5545d"
     },
     {
       "cell_type": "code",
@@ -286,7 +286,7 @@
         "des highbp height weight age female\n",
         "sum   highbp height weight age female i.race [w=finalwgt]"
       ],
-      "id": "3e720c97",
+      "id": "e96b1418",
       "execution_count": null,
       "outputs": []
     },
@@ -296,7 +296,7 @@
       "source": [
         "Estimate mode: LPM using weights\n"
       ],
-      "id": "c31afd30"
+      "id": "93ad8376"
     },
     {
       "cell_type": "code",
@@ -308,7 +308,7 @@
         "reg highbp height weight age female i.race [pw=finalwgt]\n",
         "* or svy: reg highbp height weight age female i.race "
       ],
-      "id": "c325052f",
+      "id": "44fd7d9f",
       "execution_count": null,
       "outputs": []
     },
@@ -318,7 +318,7 @@
       "source": [
         "Estimate mode: Logit using weights\n"
       ],
-      "id": "1c1024f6"
+      "id": "7f3bf25f"
     },
     {
       "cell_type": "code",
@@ -330,7 +330,7 @@
         "logit highbp height weight age female i.race [pw=finalwgt]\n",
         "* or svy: reg highbp height weight age female i.race "
       ],
-      "id": "4e9a1cfd",
+      "id": "55362305",
       "execution_count": null,
       "outputs": []
     },
@@ -340,7 +340,7 @@
       "source": [
         "Joint significance test\n"
       ],
-      "id": "ec7d4f07"
+      "id": "0fc32dcd"
     },
     {
       "cell_type": "code",
@@ -351,7 +351,7 @@
         "*| classes: larger\n",
         "test 2.race 3.race"
       ],
-      "id": "bab4d653",
+      "id": "ea3e32f5",
       "execution_count": null,
       "outputs": []
     },
@@ -361,7 +361,7 @@
       "source": [
         "Marginal Effects: You need to use `margins` command\n"
       ],
-      "id": "2bfeba3d"
+      "id": "72c719c6"
     },
     {
       "cell_type": "code",
@@ -372,7 +372,7 @@
         "*| classes: larger\n",
         "margins, dydx(*)"
       ],
-      "id": "d24d8468",
+      "id": "cf81acc2",
       "execution_count": null,
       "outputs": []
     },
@@ -382,7 +382,7 @@
       "source": [
         "Predicted Probabilities\n"
       ],
-      "id": "88ab1389"
+      "id": "deabd4ba"
     },
     {
       "cell_type": "code",
@@ -396,7 +396,7 @@
         "histogram pr_hat  \n",
         "graph export s2fig2.png, replace width(1000)"
       ],
-      "id": "c2f2180f",
+      "id": "a663a7fc",
       "execution_count": null,
       "outputs": []
     },
@@ -406,7 +406,7 @@
       "source": [
         "From here, we could also predict HighBP\n"
       ],
-      "id": "06724050"
+      "id": "9eccdfd5"
     },
     {
       "cell_type": "code",
@@ -418,7 +418,7 @@
         "gen dpr_hat = pr_hat>.5\n",
         "tab dpr_hat highbp [w=finalwgt]"
       ],
-      "id": "2b5754fa",
+      "id": "bf399143",
       "execution_count": null,
       "outputs": []
     },
@@ -440,7 +440,7 @@
         "\n",
         "## Visualizing the problem \n"
       ],
-      "id": "e1ba84e0"
+      "id": "3df8976c"
     },
     {
       "cell_type": "code",
@@ -469,7 +469,7 @@
         "graph combine m1 m2, ycommon\n",
         "graph export s2fig4.png, replace width(1000)"
       ],
-      "id": "86c2ef63",
+      "id": "fe1f3a82",
       "execution_count": null,
       "outputs": []
     },
@@ -508,7 +508,7 @@
         "\n",
         "## Visualizing the solution\n"
       ],
-      "id": "0397a067"
+      "id": "6928149b"
     },
     {
       "cell_type": "code",
@@ -526,7 +526,7 @@
         "graph combine m1 m2, ycommon\n",
         "graph export s2fig5.png, replace width(1000)"
       ],
-      "id": "ccba21a2",
+      "id": "df694934",
       "execution_count": null,
       "outputs": []
     },
@@ -598,7 +598,7 @@
         "\n",
         "## Visualizing the solution\n"
       ],
-      "id": "546944a8"
+      "id": "737e12fa"
     },
     {
       "cell_type": "code",
@@ -613,7 +613,7 @@
         "legend(order(1 \"Censored Data\" 2 \"E(Y|Y>0)\" 3 \"E(Y)\" 4 \"Y_c\"))\n",
         "graph export s2fig6.png, replace width(1000)"
       ],
-      "id": "c9093b6d",
+      "id": "31d2fb60",
       "execution_count": null,
       "outputs": []
     },
@@ -640,7 +640,7 @@
         "\n",
         "##\n"
       ],
-      "id": "472325c8"
+      "id": "79f7b88e"
     },
     {
       "cell_type": "code",
@@ -663,7 +663,7 @@
         "\n",
         "graph export s2fig7.png, replace width(1000)"
       ],
-      "id": "8469c5aa",
+      "id": "b78ab7d3",
       "execution_count": null,
       "outputs": []
     },
@@ -687,7 +687,7 @@
         "\n",
         "##\n"
       ],
-      "id": "697bbec3"
+      "id": "51b2942d"
     },
     {
       "cell_type": "code",
@@ -702,7 +702,7 @@
         "\n",
         "graph export s2fig8.png, replace width(1000)"
       ],
-      "id": "83fbfa99",
+      "id": "8692e8c9",
       "execution_count": null,
       "outputs": []
     },
@@ -781,7 +781,7 @@
         "\n",
         "Lets start by loading some data\n"
       ],
-      "id": "a2344331"
+      "id": "63093f38"
     },
     {
       "cell_type": "code",
@@ -793,7 +793,7 @@
         "webuse womenwk, clear\n",
         "describe"
       ],
-      "id": "8600b2e6",
+      "id": "bc88155f",
       "execution_count": null,
       "outputs": []
     },
@@ -803,7 +803,7 @@
       "source": [
         "In `Stata`, we can use command `heckman` to estimate the Heckman selection model, but lets start by doing this manually\n"
       ],
-      "id": "9c82bb0c"
+      "id": "b20b3d90"
     },
     {
       "cell_type": "code",
@@ -817,7 +817,7 @@
         "probit works married children educ age\n",
         "predict zg, xb"
       ],
-      "id": "38fad644",
+      "id": "42d1813c",
       "execution_count": null,
       "outputs": []
     },
@@ -829,7 +829,7 @@
         "\n",
         "The outcome model:\n"
       ],
-      "id": "91d9d59c"
+      "id": "a01c87c1"
     },
     {
       "cell_type": "code",
@@ -842,7 +842,7 @@
         "reg  wage educ age mill\n",
         "est sto hkit"
       ],
-      "id": "99f0b3c7",
+      "id": "17638ad0",
       "execution_count": null,
       "outputs": []
     },
@@ -852,7 +852,7 @@
       "source": [
         "Lets compare the outcome with Stata's Heckman\n"
       ],
-      "id": "17923fa8"
+      "id": "b02d22f3"
     },
     {
       "cell_type": "code",
@@ -870,7 +870,7 @@
         "heckman wage educ age, select(works = married children educ age) \n",
         "est sto heckmle"
       ],
-      "id": "daedbb31",
+      "id": "8e749aa7",
       "execution_count": null,
       "outputs": []
     },
@@ -883,7 +883,7 @@
         "*| classes: larger\n",
         "esttab ols hkit hecktwo heckmle, se(%9.3f) b(%9.3f) star(* 0.10 ** 0.05 *** 0.01) nogaps mtitle(OLS Heckit Hkm-two Hkm-mle) nonum"
       ],
-      "id": "915cd66e",
+      "id": "cf4b4d3d",
       "execution_count": null,
       "outputs": []
     },
@@ -905,7 +905,7 @@
         "\n",
         "## Extra example {.scrollable}\n"
       ],
-      "id": "cc7881b3"
+      "id": "24b8b2a9"
     },
     {
       "cell_type": "code",
@@ -923,7 +923,7 @@
         "heckman lnwage educ exper tenure  , select(lfp =educ age   married divorced kids6 kids714) two\n",
         "est sto hk_two"
       ],
-      "id": "ed6e6812",
+      "id": "b0d07740",
       "execution_count": null,
       "outputs": []
     },
@@ -936,7 +936,7 @@
         "*| classes: larger\n",
         "esttab ols hk_mle hk_two, se(%9.3f) b(%9.3f) star(* 0.10 ** 0.05 *** 0.01) nogaps mtitle(OLS Heckit Hkm-two) nonum  "
       ],
-      "id": "8957e35b",
+      "id": "74fd864d",
       "execution_count": null,
       "outputs": []
     },
@@ -947,7 +947,7 @@
         "# The End...\n",
         "Til next week"
       ],
-      "id": "c8d3ea33"
+      "id": "14389fa1"
     }
   ],
   "metadata": {

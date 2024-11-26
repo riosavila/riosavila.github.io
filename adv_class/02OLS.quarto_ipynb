@@ -88,7 +88,7 @@
         "\\frac{1}{N} \\sum_i X_i'y_i=(X'X)^{-1}X'y\n",
         "$$\n"
       ],
-      "id": "c841fb01"
+      "id": "bd3a5766"
     },
     {
       "cell_type": "code",
@@ -106,7 +106,7 @@
         "  b\n",
         "end  "
       ],
-      "id": "2f83389a",
+      "id": "bc472df8",
       "execution_count": null,
       "outputs": []
     },
@@ -199,7 +199,7 @@
         "\\end{aligned}\n",
         "$$\n"
       ],
-      "id": "836bce73"
+      "id": "68f04c14"
     },
     {
       "cell_type": "code",
@@ -210,7 +210,7 @@
         "mata: var_b_000 = mean(err:^2) * invsym(x'x)\n",
         "mata: b,sqrt(diagonal(var_b_000))"
       ],
-      "id": "41e54abc",
+      "id": "734d0f06",
       "execution_count": null,
       "outputs": []
     },
@@ -227,7 +227,7 @@
         "\n",
         "Where we account for the fact true errors are not observed, but rather residuals are estimated, adjusting the degrees of freedom.\n"
       ],
-      "id": "5a3f42ce"
+      "id": "9548d373"
     },
     {
       "cell_type": "code",
@@ -241,7 +241,7 @@
         "    b,sqrt(diagonal(var_b_00))\n",
         "end"
       ],
-      "id": "733e0c0c",
+      "id": "805b7503",
       "execution_count": null,
       "outputs": []
     },
@@ -274,7 +274,7 @@
         "Var(\\hat\\beta)_{1}=\\frac{N}{N-K-1}Var(\\hat\\beta)_{0}\n",
         "$$\n"
       ],
-      "id": "d298dbb6"
+      "id": "cec96210"
     },
     {
       "cell_type": "code",
@@ -289,7 +289,7 @@
         "    b,sqrt(diagonal(var_b_0)),sqrt(diagonal(var_b_1))\n",
         "end"
       ],
-      "id": "fda398dd",
+      "id": "0a5f2852",
       "execution_count": null,
       "outputs": []
     },
@@ -325,7 +325,7 @@
         "\n",
         "## Coding Robust SE\n"
       ],
-      "id": "7db984e8"
+      "id": "b4d7bd1f"
     },
     {
       "cell_type": "code",
@@ -346,7 +346,7 @@
         "    sqrt(diagonal(var_b_2)),sqrt(diagonal(var_b_3))\n",
         "end  "
       ],
-      "id": "6a1808aa",
+      "id": "7334aac8",
       "execution_count": null,
       "outputs": []
     },
@@ -441,7 +441,7 @@
         "\n",
         "-   Similar to HC. CV0 does not correct for degrees of freedom. CV1, however, accounts for Degrees of freedom in the model, and clusters.\n"
       ],
-      "id": "6a58778c"
+      "id": "375e1417"
     },
     {
       "cell_type": "code",
@@ -467,7 +467,7 @@
         "    b,sqrt(diagonal(cv0)),sqrt(diagonal(cv1))\n",
         "end    "
       ],
-      "id": "5dbe9029",
+      "id": "65515693",
       "execution_count": null,
       "outputs": []
     },
@@ -477,7 +477,7 @@
       "source": [
         "or compare it to\n"
       ],
-      "id": "d5c8b524"
+      "id": "6cb9a7db"
     },
     {
       "cell_type": "code",
@@ -485,7 +485,7 @@
       "source": [
         "reg lnwage educ exper female, cluster(isco)"
       ],
-      "id": "599c38d4",
+      "id": "a036f78e",
       "execution_count": null,
       "outputs": []
     },
@@ -495,7 +495,7 @@
       "source": [
         "## Visualizing the difference {.scrollable}\n"
       ],
-      "id": "54f6de8a"
+      "id": "19608aef"
     },
     {
       "cell_type": "code",
@@ -531,7 +531,7 @@
         "    (scatter rr11 rr12 if 51-rr11 == rr12, ms(s) msize(2.1) color(gs1)  ) ///\n",
         "    , aspect(1) legend(off)  xtitle(\"\") ytitle(\"\") yscale(off) xscale(off) xsize(6) ysize(6) "
       ],
-      "id": "6efcdffc",
+      "id": "4a3148e7",
       "execution_count": null,
       "outputs": []
     },
@@ -545,7 +545,7 @@
         "\n",
         "## First Cluster"
       ],
-      "id": "1a7c87a8"
+      "id": "4438e842"
     },
     {
       "cell_type": "code",
@@ -554,7 +554,7 @@
         "two (scatter rr11 rr12 if rr13==1,  ms(s) msize(2.1))  ///\n",
         "    , aspect(1) legend(off)  xtitle(\"\") ytitle(\"\") yscale(off) xscale(off) name(m1, replace) "
       ],
-      "id": "d1dce669",
+      "id": "e4aa7d50",
       "execution_count": null,
       "outputs": []
     },
@@ -564,7 +564,7 @@
       "source": [
         "## Second Cluster"
       ],
-      "id": "277ec199"
+      "id": "f06286bc"
     },
     {
       "cell_type": "code",
@@ -573,7 +573,7 @@
         "two (scatter rr11 rr12 if rr14==1,  ms(s) msize(2.1))  ///\n",
         "    , aspect(1) legend(off)  xtitle(\"\") ytitle(\"\") yscale(off) xscale(off) name(m2, replace)    "
       ],
-      "id": "734d768b",
+      "id": "6fdd1415",
       "execution_count": null,
       "outputs": []
     },
@@ -583,7 +583,7 @@
       "source": [
         "## Combining Clusters"
       ],
-      "id": "5c94b49c"
+      "id": "b0796738"
     },
     {
       "cell_type": "code",
@@ -592,7 +592,7 @@
         "two (scatter rr11 rr12 if rr14==1 | rr13==1,  ms(s) msize(2.1))  ///\n",
         "    , aspect(1) legend(off)  xtitle(\"\") ytitle(\"\") yscale(off) xscale(off) name(m3, replace)"
       ],
-      "id": "bcb3e698",
+      "id": "fb14379f",
       "execution_count": null,
       "outputs": []
     },
@@ -789,7 +789,7 @@
         "\n",
         "3.  This last command may allow you to bootstrap multiple models at the same time, although it does require a bit of programming. (and a do file)\n"
       ],
-      "id": "16300d5b"
+      "id": "59bf14dd"
     },
     {
       "cell_type": "code",
@@ -813,7 +813,7 @@
         "end\n",
         "bootstrap: bs_wages_children"
       ],
-      "id": "5db4ec74",
+      "id": "833e8224",
       "execution_count": null,
       "outputs": []
     },
@@ -831,7 +831,7 @@
         "\n",
         "- And in `Stata18+`, you have `wildbootstrap` (although is meant for clustered SE)\n"
       ],
-      "id": "b5af1711"
+      "id": "7e8d5c30"
     },
     {
       "cell_type": "code",
@@ -843,7 +843,7 @@
         "boottest exper, nograph\n",
         "boottest female, nograph"
       ],
-      "id": "cdb1a20a",
+      "id": "704fa77f",
       "execution_count": null,
       "outputs": []
     },
@@ -944,7 +944,7 @@
         "## {.scrollable}\n",
         "### Example in `Stata` \n"
       ],
-      "id": "a5aebb09"
+      "id": "a45fd060"
     },
     {
       "cell_type": "code",
@@ -963,7 +963,7 @@
         "end\n",
         "nlcom _b[ c.wage@0.female]/_b[ c.wage@1.female] "
       ],
-      "id": "a2289df6",
+      "id": "c5f6c6b6",
       "execution_count": null,
       "outputs": []
     },
@@ -1073,7 +1073,7 @@
         " \\beta = (X'X + \\lambda I)^{-1}{X'y}\n",
         "$$\n"
       ],
-      "id": "58d9da56"
+      "id": "c9a8a288"
     },
     {
       "cell_type": "code",
@@ -1106,7 +1106,7 @@
         "    bb0:/sd_x,bb1:/sd_x,bb10:/sd_x,bb100:/sd_x,bb1000:/sd_x,bb10000:/sd_x, bb100000:/sd_x\n",
         "end "
       ],
-      "id": "1e6cd031",
+      "id": "7c914c3c",
       "execution_count": null,
       "outputs": []
     },
@@ -1150,7 +1150,7 @@
         "\n",
         "## Brief Example:\n"
       ],
-      "id": "7d1a2b08"
+      "id": "13494287"
     },
     {
       "cell_type": "code",
@@ -1169,7 +1169,7 @@
         "predict p_elastic\n",
         "}"
       ],
-      "id": "9c89bfc8",
+      "id": "65ea6577",
       "execution_count": null,
       "outputs": []
     },
@@ -1185,7 +1185,7 @@
         "\n",
         "# Next: Non & Semi Parametric models"
       ],
-      "id": "0e66b297"
+      "id": "f9591f32"
     }
   ],
   "metadata": {

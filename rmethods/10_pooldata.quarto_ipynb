@@ -48,7 +48,7 @@
         "\n",
         "Lets use the data `fertil1` to estimate the changes in fertility rates across time. This data comes from the *General Social Survey*.\n"
       ],
-      "id": "3dee8a00"
+      "id": "45e8bd11"
     },
     {
       "cell_type": "code",
@@ -57,7 +57,7 @@
         "frause fertil1, clear\n",
         "regress kids educ age agesq black east northcen west farm othrural town smcity i.year, robust  "
       ],
-      "id": "3eed499c",
+      "id": "0a2f464d",
       "execution_count": null,
       "outputs": []
     },
@@ -68,7 +68,7 @@
         "- This allow us to see how fertility rates have changed across time.\n",
         "- One could even interact the year dummies with other variables to see how the effect of other variables have changed across time.\n"
       ],
-      "id": "2b7b0da6"
+      "id": "1deef900"
     },
     {
       "cell_type": "code",
@@ -77,7 +77,7 @@
         "frause cps78_85, clear\n",
         "regress lwage i.year##c.(educ i.female) exper expersq union, robust cformat(%5.4f)"
       ],
-      "id": "c31294fc",
+      "id": "f4df7a21",
       "execution_count": null,
       "outputs": []
     },
@@ -95,7 +95,7 @@
         "\n",
         "## Example {.scrollable}\n"
       ],
-      "id": "73c41ee0"
+      "id": "ff66c901"
     },
     {
       "cell_type": "code",
@@ -104,7 +104,7 @@
         "frause cps78_85, clear\n",
         "regress lwage i.year##c.(educ i.female exper expersq i.union), robust"
       ],
-      "id": "49aee355",
+      "id": "2d0b8936",
       "execution_count": null,
       "outputs": []
     },
@@ -115,7 +115,7 @@
         "*| code-fold: false\n",
         "test 85.year#c.educ 85.year#1.female 85.year#c.exper   85.year#c.expersq 85.year#1.union"
       ],
-      "id": "bf4e04b7",
+      "id": "863b4f5d",
       "execution_count": null,
       "outputs": []
     },
@@ -139,7 +139,7 @@
         "\n",
         "using only 1981 data. But this would not be a good idea. Why?\n"
       ],
-      "id": "ef688ca9"
+      "id": "69786142"
     },
     {
       "cell_type": "code",
@@ -149,7 +149,7 @@
         "frause kielmc, clear\n",
         "regress rprice nearinc if year == 1981, robust"
       ],
-      "id": "4b2c9558",
+      "id": "6cc747e0",
       "execution_count": null,
       "outputs": []
     },
@@ -162,7 +162,7 @@
         "- We could also estimate the model using only 1971 data.\n",
         "  What would this be showing us?\n"
       ],
-      "id": "5e70b721"
+      "id": "6e1deede"
     },
     {
       "cell_type": "code",
@@ -171,7 +171,7 @@
         "*| classes: larger\n",
         "regress rprice nearinc if year == 1978, robust"
       ],
-      "id": "b4968fed",
+      "id": "3ee5843c",
       "execution_count": null,
       "outputs": []
     },
@@ -217,7 +217,7 @@
         "\n",
         "Where $\\beta_3$ is the treatment effect. (only for 2x2 DD)\n"
       ],
-      "id": "1c06093d"
+      "id": "f716960e"
     },
     {
       "cell_type": "code",
@@ -225,7 +225,7 @@
       "source": [
         "regress rprice nearinc##y81, robust"
       ],
-      "id": "dc39a560",
+      "id": "16ee4a05",
       "execution_count": null,
       "outputs": []
     },
@@ -354,7 +354,7 @@
         "\n",
         "## Example {.scrollable}\n"
       ],
-      "id": "601f77d0"
+      "id": "0f7661ff"
     },
     {
       "cell_type": "code",
@@ -386,7 +386,7 @@
         "est sto m3\n",
         "esttab m1 m2 m3, se r2"
       ],
-      "id": "6de74d64",
+      "id": "d887afe8",
       "execution_count": null,
       "outputs": []
     },
@@ -468,7 +468,7 @@
         "# Thats all for today \n",
         "Next class...Advance Panel Data Methods"
       ],
-      "id": "aaeaafe0"
+      "id": "07296713"
     }
   ],
   "metadata": {

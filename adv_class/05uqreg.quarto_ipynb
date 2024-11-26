@@ -212,7 +212,7 @@
         "\n",
         "Goal: Evaluate the impact of an increase in Fines on # of citations. (using reweighting)"
       ],
-      "id": "92e47132"
+      "id": "63952c63"
     },
     {
       "cell_type": "code",
@@ -230,7 +230,7 @@
         "** Here we have a simulation of a policy that increases fines\n",
         "replace fines = 0.1*(12-fines)+fines if smp==1"
       ],
-      "id": "2c736705",
+      "id": "dc2c6a2b",
       "execution_count": null,
       "outputs": []
     },
@@ -242,7 +242,7 @@
         "\n",
         "And estimate IPW weights"
       ],
-      "id": "530fdaa7"
+      "id": "39c066f9"
     },
     {
       "cell_type": "code",
@@ -256,7 +256,7 @@
         "gen wgt = pr_smp / (1-pr_smp) \n",
         "replace wgt = 1 if smp==1"
       ],
-      "id": "92fd1191",
+      "id": "1746e2c7",
       "execution_count": null,
       "outputs": []
     },
@@ -266,7 +266,7 @@
       "source": [
         "Have the IPW weights helped simulate the policy? "
       ],
-      "id": "57d21d5b"
+      "id": "b8eb2422"
     },
     {
       "cell_type": "code",
@@ -278,7 +278,7 @@
         "color_style tableau\n",
         "xi:tabstat fines i.csize college  taxes [w=wgt],  by(smp)"
       ],
-      "id": "1bed9d27",
+      "id": "afa1de3e",
       "execution_count": null,
       "outputs": []
     },
@@ -288,7 +288,7 @@
       "source": [
         "I can now compare the distribution of fines before and after the policy\n"
       ],
-      "id": "fd8d5bd4"
+      "id": "64dfe866"
     },
     {
       "cell_type": "code",
@@ -298,7 +298,7 @@
         "    (kdensity citations if smp==0 [w=wgt]) /// \n",
         "    , legend(order(1 \"Before Policy\" 2 \"After Policy\"))"
       ],
-      "id": "32359e57",
+      "id": "aa23804b",
       "execution_count": null,
       "outputs": []
     },
@@ -308,7 +308,7 @@
       "source": [
         "Seems to be a contraction of # citations:\n"
       ],
-      "id": "e4fdd685"
+      "id": "4b89df34"
     },
     {
       "cell_type": "code",
@@ -320,7 +320,7 @@
         "display \"After Policy\"\n",
         "tabstat citations if smp ==0 [w=wgt],  stats(p10 p25 p50 mean p75 p90  )"
       ],
-      "id": "48a154ac",
+      "id": "c12780e9",
       "execution_count": null,
       "outputs": []
     },
@@ -701,7 +701,7 @@
         "\n",
         "Truly going nonlinear. When $\\beta$ is no longer linear in $y$ (nor is the error)"
       ],
-      "id": "626f81cf"
+      "id": "244756bb"
     }
   ],
   "metadata": {

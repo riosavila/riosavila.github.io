@@ -134,7 +134,7 @@
         "\n",
         "- Start with a simple univariate model: $P[low|smoke] = \\alpha + \\beta[smoke]$"
       ],
-      "id": "9d010a92"
+      "id": "2bb8c464"
     },
     {
       "cell_type": "code",
@@ -146,7 +146,7 @@
         "drop if age < 15 | age > 40 | lwt > 200\n",
         "reg low smoke, robust"
       ],
-      "id": "bade17f9",
+      "id": "6bc4917f",
       "execution_count": null,
       "outputs": []
     },
@@ -182,7 +182,7 @@
         "   \n",
         "## LPM with many regressors III"
       ],
-      "id": "cbcc9b14"
+      "id": "37adc198"
     },
     {
       "cell_type": "code",
@@ -202,7 +202,7 @@
         "esttab lpm_results,   se  wide nonumber ///\n",
         "collabel(b se) md drop(1.race) nomtitle b(3) nonotes"
       ],
-      "id": "ca31a92c",
+      "id": "45505099",
       "execution_count": null,
       "outputs": []
     },
@@ -236,7 +236,7 @@
         "\n",
         "## LPM's predicted probabilities\n"
       ],
-      "id": "a76c4f1a"
+      "id": "00bbbd85"
     },
     {
       "cell_type": "code",
@@ -250,7 +250,7 @@
         "qui:histogram low_hat\n",
         "sum low_hat"
       ],
-      "id": "b85bfd94",
+      "id": "806974d1",
       "execution_count": null,
       "outputs": []
     },
@@ -270,7 +270,7 @@
         "\n",
         "## What we find"
       ],
-      "id": "0f97d7d7"
+      "id": "cf1b0974"
     },
     {
       "cell_type": "code",
@@ -286,7 +286,7 @@
         "list low_hat smoke age race any_premature hist_hyper  no_of_visits_1tr wgt_bef_preg   if flag==1\n",
         "list low_hat smoke age race any_premature hist_hyper  no_of_visits_1tr wgt_bef_preg   if flag==2"
       ],
-      "id": "bb6bff28",
+      "id": "d738a9b2",
       "execution_count": null,
       "outputs": []
     },
@@ -340,7 +340,7 @@
         "\n",
         ":::{.column width=60%}\n"
       ],
-      "id": "ec158ddb"
+      "id": "16c1ce6a"
     },
     {
       "cell_type": "code",
@@ -366,7 +366,7 @@
         "legend(order(1 \"LPM\" 2 \"Logit\" 3 \"Probit\") pos(3) ring(0) col(1)) \n",
         "}"
       ],
-      "id": "f54614e6",
+      "id": "3196a5ad",
       "execution_count": null,
       "outputs": []
     },
@@ -431,7 +431,7 @@
         "\n",
         "## Predictions for LMP, Logit and Probit I.\n"
       ],
-      "id": "ba688d46"
+      "id": "81c1ef00"
     },
     {
       "cell_type": "code",
@@ -462,7 +462,7 @@
         "      legend(order(1 \"Logit\" 2 \"Probit\" 3 \"LPM\") pos(3) ring(0) col(1))\n",
         "}"
       ],
-      "id": "41c17a83",
+      "id": "3fdff20a",
       "execution_count": null,
       "outputs": []
     },
@@ -472,7 +472,7 @@
       "source": [
         "## Coefficient results for logit and probit {.smaller}\n"
       ],
-      "id": "98a89071"
+      "id": "37ceb9ba"
     },
     {
       "cell_type": "code",
@@ -496,7 +496,7 @@
         "mtitle(LPM Logit Logit_MFX Probit Probit_MFX) collabel(none) md ///\n",
         "star(* 0.10 ** 0.05 *** 0.01) nonotes "
       ],
-      "id": "a77a0df2",
+      "id": "ecc96683",
       "execution_count": null,
       "outputs": []
     },
@@ -603,7 +603,7 @@
         "\n",
         "## Calibration curve\n"
       ],
-      "id": "58f9e11e"
+      "id": "24b364c2"
     },
     {
       "cell_type": "code",
@@ -618,7 +618,7 @@
         "legend(order(1 \"LPM\" 2 \"Logit\" 3 \"Probit\") ) scale(1.5) ///\n",
         "xtitle(\"Predicted probability\") ytitle(\"Avg outcome\")"
       ],
-      "id": "6ab409b6",
+      "id": "18a0cffb",
       "execution_count": null,
       "outputs": []
     },
@@ -638,7 +638,7 @@
         "- No trivial goodness of fit. Brier score or pseudo-R-Squared.\n",
         "- Calibration is important for prediction."
       ],
-      "id": "1af68b3f"
+      "id": "9d21cab1"
     }
   ],
   "metadata": {

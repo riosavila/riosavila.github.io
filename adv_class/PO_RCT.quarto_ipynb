@@ -23,7 +23,7 @@
         "\n",
         "The goal: estimate two potential outcomes for wages. One following Womens wage structure, and the other using Men wage structure.\n"
       ],
-      "id": "c1fc408b"
+      "id": "06c6cd95"
     },
     {
       "cell_type": "code",
@@ -41,7 +41,7 @@
         "predict xb0, xb\n",
         "predict s0, sigma"
       ],
-      "id": "1b989311",
+      "id": "1561174c",
       "execution_count": null,
       "outputs": []
     },
@@ -60,7 +60,7 @@
         "\\end{aligned} \n",
         "$$\n"
       ],
-      "id": "a2cd15e1"
+      "id": "891f1550"
     },
     {
       "cell_type": "code",
@@ -70,7 +70,7 @@
         "gen lnwage0 = rnormal(xb1,s1)\n",
         "gen teff=lnwage1-lnwage0"
       ],
-      "id": "24d4006c",
+      "id": "62fa1cf8",
       "execution_count": null,
       "outputs": []
     },
@@ -84,7 +84,7 @@
         "Y_i = Y_i(0) + trt_i * \\delta_i\n",
         "$$\n"
       ],
-      "id": "17155858"
+      "id": "42016ba0"
     },
     {
       "cell_type": "code",
@@ -93,7 +93,7 @@
         "gen trt = runiform()<.5\n",
         "replace lnwage = lnwage0 + trt * teff"
       ],
-      "id": "5c523328",
+      "id": "f894b591",
       "execution_count": null,
       "outputs": []
     },
@@ -105,7 +105,7 @@
         "\n",
         "Now that we have a randomized treatment, we could start exploring the data:\n"
       ],
-      "id": "f5e80e86"
+      "id": "7d84378b"
     },
     {
       "cell_type": "code",
@@ -115,7 +115,7 @@
         "two (kdensity lnwage if trt == 1) (kdensity lnwage if trt == 0) , ///\n",
         "    legend(order(1 \"Treated\" 2 \"Untreated\"))"
       ],
-      "id": "bfe46bde",
+      "id": "226ef417",
       "execution_count": null,
       "outputs": []
     },
@@ -128,7 +128,7 @@
         "\n",
         "## Estimation of ATE Effect\n"
       ],
-      "id": "5d183e10"
+      "id": "c88c6b56"
     },
     {
       "cell_type": "code",
@@ -141,7 +141,7 @@
         "reg lnwage  trt, robust\n",
         "est sto m0"
       ],
-      "id": "29dc79a4",
+      "id": "e39516c2",
       "execution_count": null,
       "outputs": []
     },
@@ -151,7 +151,7 @@
       "source": [
         "Because treatment is randomized, we could also add other controls to the model, and improve on precision\n"
       ],
-      "id": "11162da2"
+      "id": "dc926feb"
     },
     {
       "cell_type": "code",
@@ -167,7 +167,7 @@
         "\n",
         "esttab m0 m1 m2 m3, se nonum mtitle(\"m0\" \"m1\" \"m2\" \"m3\") keep(trt) md"
       ],
-      "id": "f15bdaaa",
+      "id": "045b076e",
       "execution_count": null,
       "outputs": []
     },
@@ -180,7 +180,7 @@
         "We could just use other outcomes that shouldnt be affected by the treatment. \n",
         "You expect they have no impact on outcome\n"
       ],
-      "id": "88f49188"
+      "id": "83c0c2b4"
     },
     {
       "cell_type": "code",
@@ -194,7 +194,7 @@
         "est sto m1\n",
         "esttab m0 m1 , se nonum mtitle(\"m0\" \"m1\") keep(trt) md"
       ],
-      "id": "d2bc56e0",
+      "id": "d2a4920d",
       "execution_count": null,
       "outputs": []
     },
@@ -207,7 +207,7 @@
         "You should also try to create balance tables, where you compare and test if characteristics are similar across \n",
         "treated and control groups:\n"
       ],
-      "id": "045f1bde"
+      "id": "c4c0caf4"
     },
     {
       "cell_type": "code",
@@ -216,7 +216,7 @@
         "tabstat age agesq married divorced kids6 kids714 , by(trt)\n",
         "sureg age agesq married divorced kids6 kids714 =trt, "
       ],
-      "id": "5829ca53",
+      "id": "2e230b0d",
       "execution_count": null,
       "outputs": []
     },
@@ -226,7 +226,7 @@
       "source": [
         "Here, the goal is just to see if `trt` is not-significant across groups\n"
       ],
-      "id": "334d7e64"
+      "id": "6f601a2a"
     }
   ],
   "metadata": {
