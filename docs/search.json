@@ -15219,5 +15219,26 @@
     "title": "Forecasting from Time Series Data",
     "section": "VAR in Stata",
     "text": "VAR in Stata\nStata has a feature for the estimation of VAR models called…Var\nvar depvarlist [if] [in] [,lags(#) exog(varlist) Other]\n\ndepvarlist are all the variables one needs to analyze.\nlags(#) indicates how many (and which) lags to use.\n\nFor prediction look into fcast, predict or forecast"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#extra-arima-with-forcast",
+    "href": "rm-data/slides/week13.html#extra-arima-with-forcast",
+    "title": "Forecasting from Time Series Data",
+    "section": "Extra: ARIMA with Forcast",
+    "text": "Extra: ARIMA with Forcast\nNews! I just got word from Stata Technical services regarding Arima and the Forcasting and CI.\nThe official word is as follows:\n\nIt is possible to obtain Confidence Intervals with arima using the forecast command. This uses simulations to obtain the CI.\n\nLets do an example"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#extra-arima-with-forcast-1",
+    "href": "rm-data/slides/week13.html#extra-arima-with-forcast-1",
+    "title": "Forecasting from Time Series Data",
+    "section": "Extra: ARIMA with Forcast",
+    "text": "Extra: ARIMA with Forcast\nStep 4: Plot the forecast\n\n\nCode\nqui replace sd_x = 0 if sd_x ==.\ngenerate low = f_x - invnormal(0.975)*sd_x\ngenerate up  = f_x + invnormal(0.975)*sd_x\n\ncolor_style bay\ntwo (rarea low up t, color(gs12)) (line x t , lwidth(.5) ) ///\n     (line f_x t, lwidth(.5)  ),  ///\n     ytitle(\"x\") xtitle(\"Time\") legend(off) ///\n     note(\"ARIMA(2,1,2) with 95% CI\") // Adds a note"
+  },
+  {
+    "objectID": "rm-data/slides/week13.html#extra-example",
+    "href": "rm-data/slides/week13.html#extra-example",
+    "title": "Forecasting from Time Series Data",
+    "section": "Extra Example",
+    "text": "Extra Example\nStep 1: Setup, I will simulate data for an ARIMA(2,1,2) model\n\n\nCode\nclear\nset seed 2\nset obs 100\ngen t = _n\ntsset t\ngen ut = rnormal()*0.01\ngen dxt = 0\nreplace dxt =  .5 *l.dxt + .2 *l2.dxt + ut + 0.5*l.ut - 0.25*l2.ut if t&gt;2\ngen x=sum(dxt)\n\n\nStep 2: Estimate the ARIMA(2,1,2) model using t=1 to 80\n\n\nCode\nqui: arima x if t&lt;=80, arima(2,1,2)  \nest sto arima_est\n\n\nStep 3: Forecast the next 20 periods, with 95% CI\n\n\nCode\ncapture forecast clear        // \"clears\" the last forecast\nforecast create arima_predict // Sets the Forecast setup\nforecast estimates arima_est, names(Dx) // Names the outcome Dx\nforecast identity x = L.x + Dx // reconstructs x (the forecast)\nforecast solve, prefix(f_) begin(81) ///\nsimulate(betas, statistic(stddev, prefix(sd_)) reps(200)) /// Forcast and does the simulation"
   }
 ]

@@ -562,3 +562,80 @@ Four test set (in work set) with rolling window CV. RMSE in each test set for ea
     -   Getting target variable and ARIMA(p,d,q) selection needs competing models
 -   Most importantly: external validity is a huge problem
     -   Stability may easily break down, and there is nothing we can do.
+
+## Extra: ARIMA with Forcast
+
+News! I just got word from Stata Technical services regarding Arima and the Forcasting and CI.
+
+The official word is as follows: 
+
+> It is possible to obtain Confidence Intervals with `arima` using the `forecast` command. This uses
+> simulations to obtain the CI. 
+
+Lets do an example
+
+## Extra Example
+
+**Step 1**: Setup, I will simulate data for an ARIMA(2,1,2) model
+
+```{stata}
+*| code-fold: true
+*| echo: true
+*| output: false
+clear
+set seed 2
+set obs 100
+gen t = _n
+tsset t
+gen ut = rnormal()*0.01
+gen dxt = 0
+replace dxt =  .5 *l.dxt + .2 *l2.dxt + ut + 0.5*l.ut - 0.25*l2.ut if t>2
+gen x=sum(dxt)
+```
+
+**Step 2**: Estimate the ARIMA(2,1,2) model using t=1 to 80
+
+```{stata}
+*| code-fold: true
+*| echo: true
+
+qui: arima x if t<=80, arima(2,1,2)  
+est sto arima_est
+```
+
+**Step 3**: Forecast the next 20 periods, with 95% CI
+
+```{stata}
+*| code-fold: true
+*| output: false
+*| echo: true
+capture forecast clear        // "clears" the last forecast
+forecast create arima_predict // Sets the Forecast setup
+forecast estimates arima_est, names(Dx) // Names the outcome Dx
+forecast identity x = L.x + Dx // reconstructs x (the forecast)
+forecast solve, prefix(f_) begin(81) ///
+simulate(betas, statistic(stddev, prefix(sd_)) reps(200)) /// Forcast and does the simulation
+
+```
+
+## Extra: ARIMA with Forcast
+
+Step 4: Plot the forecast
+
+```{stata}
+*| code-fold: true
+*| echo: true
+qui replace sd_x = 0 if sd_x ==.
+generate low = f_x - invnormal(0.975)*sd_x
+generate up  = f_x + invnormal(0.975)*sd_x
+
+color_style bay
+two (rarea low up t, color(gs12)) (line x t , lwidth(.5) ) ///
+     (line f_x t, lwidth(.5)  ),  ///
+     ytitle("x") xtitle("Time") legend(off) ///
+     note("ARIMA(2,1,2) with 95% CI") // Adds a note
+```
+
+
+
+
