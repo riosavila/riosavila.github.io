@@ -1,0 +1,15 @@
+Areas of Improvement
+
+1. There are many results and insights the paper is not able to explain. Considering the time constrains, and complexity of the model, its understandable, however you will like to review the paper focusing more on the interpretation aspects of your results, if you want to push this paper further.
+
+Given the nature of the paper, and the role of volatility, you may also want to expand your methodologies, and explore GARCH models. Those are focused on modeling not only the changes of variables (ARIMA) but also the role of volatility when that happens.
+
+You may also want to provide more detail on the interpretation of the GRANGER tests results. 
+
+2. For a term paper, the analysis was good, but perhaps you want to explore using these ideas further, with data that is updated faster than what you already had access too. This could make it even more interesting for other analysis. 
+
+That being said, its not uncommon to produce models with "lagged" data. 
+
+3. Along with GARCH, you may want to explore more "state of the art" methods for analysis of financial data. The area of financial econometrics has grown a lot. And you could benefit from going deeper in some of those for a deeper version of your paper.
+
+4. A technical aspect of what you present in your paper. Goodness of fit. As far as I remember, Stata does not have an automatic model selection feature. But perhaps software like Eviews could do that. There is a chance that your model is overly complex.

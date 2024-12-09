@@ -1,0 +1,11 @@
+1. Your data and methodological section need to be improved. On the one hand, for data, you need to say more about what kind of data you are collecting and why. Potentially adding this with the descriptive Statistics. For an upgraded project, you will need to add more counties and States. I am also slightly concerned you have only 33 Counties. What happens to the rest? This is part of your Data and Methods 
+2. Same for method. A single line with the model you will estimate its not enough, you need to provide some logic behind it. What variables you are considering, what you expect to find. etc.
+3. Not sure about the difference between Table1 and Table2. What each variable represent? and why the sample size difference.
+4. You have plenty of graphs, but no explanation of what they are, or why would we care. Keep in mind that a figure in your paper is a figure that needs to be described.
+5. Once we get to your models, there is little explanation. You need to be able to tell me a story of what you wanted to say for your thesis, and what you can say with your data.
+6. Seems you ended up with 33Obs. That is a very small sample, so you probably need to drop some of your explanatory variables.
+I would also suggest 
+a) expand your data
+b) try using panel data, pooling different years of data
+7. I think I was expecting a bit more of the paper. You have a lot of space to make it a nice research paper. 
+Your first part of the paper its really good, but didn't match up with the Empirical section

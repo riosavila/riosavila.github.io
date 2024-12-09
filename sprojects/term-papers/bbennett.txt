@@ -1,0 +1,8 @@
+1. Your introduction could set up the paper expectations better. Why do we care, and why is it a problem. 
+2. The Lit review its OK, specially for a term paper. But you do need to explore more on what have others done, if you decide to expand on this topic. Keep in mind that Levy team will probably be covering a similar project in the future.
+Also, you need to provide more information of why it childcare its important, and how it affects the labor market. Not only research on whether or not it has an effect.
+3. Your Methodology requires more work. You typically include the model specification (what variables will be added), and why those variables were included. You may also want to add what did you expect about those variables.
+4. Something Odd with your statistics. Its very rare to have a mean of 373 and variance of 1906. Perhaps need to look in to the data and either address the excess number of zeroes, or check for outliers. 
+5. Table2, what is your dependent variable? Not clear from the table itself. 
+6. Table 3, Not clear if  its a LPM or logit/probit. Try to Clarify
+Overall, a nice start. I would encourage you to expand on this idea for your master thesis
