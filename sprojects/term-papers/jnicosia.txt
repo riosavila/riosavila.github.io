@@ -1,0 +1,10 @@
+Seems to me that you have come a long way from the beginning of the semester. I hope you got some good tools for the future.
+1. You could expand your introduction a bit more, but its overall ok for the term paper.
+2. Good Lit Review for the term paper
+3. The Scope of your variables to analysis is limited. I would have liked to see some more information being used here. Perhaps with more data and time, you could get additional insights.
+4. For section 3, you would need to include those summary statistics, just to have an idea (better idea) of what you are using, and how it looks before diving into your analysis.
+
+5. I think you did a good job here, but there is still a lot of space to improve the findings. Start by considering other measures of wellbeing that are out there.
+
+Your explanation and interpretation could also be improved. Perhaps, for example, you could explore how the relationship between your variables of interest has changed across time. For instance, is the Literacy and GDP relationship gotten better or worse over the last years?
+

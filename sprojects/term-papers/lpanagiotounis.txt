@@ -1,0 +1,15 @@
+The overall structure of the paper its reasonable for a term paper. However, there are quite few details that may need to be adjusted or corrected if you decide to work on this further.
+
+1. Your intro its quite short. Your abstract has more information about what your paper is about than the intro. So that may need to be adjusted.
+2. Same with your Lit review. You have just 3 papers talking about the problem of infra-structure, You will need to do a heavy revision of the literature. Perhaps more important, add information of how your paper fits the lit and contributes to it.
+3. Data and methodology needs lots of work. Its not enough to simply list the variables. But instead to describe them, including summary statistics, as well as potential issues with the data. For instance, I recall you mention some issues regarding data availability (some years would not have data on say, RailLines). Thus the question is how did you fix that? Which countries were kept in the sample? etc
+4. For methodology, you are actually using RANDOM effects. not Fixed effects estimation. This model does not automoatically include Year fixed effects. So that needs to be clarified.
+5. Your second model doesn't make much sense. Logs on every variable makes little sense.
+6. Using GDP_PC is not a good approach, because of the Scale issues. I would simply skip that. Now, going on your Log-Lin model, Im slightly puzzled on why the results change so much, or that RailRoads is no longer significant. 
+7. You should have explained here how is it that you "fixed" your data for the analysis. Similarly, here is where its evident you need your summary statistics
+8. Not clear why you only included two graphs on the paper. Were they the most relevant? Its also puzzling that the implications you show there are not reflected in the regression. 
+9. Your Lasso is not correct. Your Dep variable is not a dummy, so you should have done its a simple Lasso. However, Lasso only makes sense when using many covariates. Which is not the case here.
+10. The Kernel Density doesn't fit the narrative either.
+11. Your conclusion doesn't really fit the content of your paper.
+
+
