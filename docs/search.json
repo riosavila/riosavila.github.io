@@ -15240,5 +15240,61 @@
     "title": "Forecasting from Time Series Data",
     "section": "Extra Example",
     "text": "Extra Example\nStep 1: Setup, I will simulate data for an ARIMA(2,1,2) model\n\n\nCode\nclear\nset seed 2\nset obs 100\ngen t = _n\ntsset t\ngen ut = rnormal()*0.01\ngen dxt = 0\nreplace dxt =  .5 *l.dxt + .2 *l2.dxt + ut + 0.5*l.ut - 0.25*l2.ut if t&gt;2\ngen x=sum(dxt)\n\n\nStep 2: Estimate the ARIMA(2,1,2) model using t=1 to 80\n\n\nCode\nqui: arima x if t&lt;=80, arima(2,1,2)  \nest sto arima_est\n\n\nStep 3: Forecast the next 20 periods, with 95% CI\n\n\nCode\ncapture forecast clear        // \"clears\" the last forecast\nforecast create arima_predict // Sets the Forecast setup\nforecast estimates arima_est, names(Dx) // Names the outcome Dx\nforecast identity x = L.x + Dx // reconstructs x (the forecast)\nforecast solve, prefix(f_) begin(81) ///\nsimulate(betas, statistic(stddev, prefix(sd_)) reps(200)) /// Forcast and does the simulation"
+  },
+  {
+    "objectID": "rm-data/sprojects/index.html",
+    "href": "rm-data/sprojects/index.html",
+    "title": "Term Papers Index",
+    "section": "",
+    "text": "bbennett.pdf\nchenning.pdf\necooper.pdf\njnicosia.pdf\nLpanagiotounis.pdf\nswray.pdf"
+  },
+  {
+    "objectID": "rm-data/sprojects/index.html#pdf-files",
+    "href": "rm-data/sprojects/index.html#pdf-files",
+    "title": "Term Papers Index",
+    "section": "",
+    "text": "bbennett.pdf\nchenning.pdf\necooper.pdf\njnicosia.pdf\nLpanagiotounis.pdf\nswray.pdf"
+  },
+  {
+    "objectID": "rm-data/sprojects/index.html#text-files",
+    "href": "rm-data/sprojects/index.html#text-files",
+    "title": "Term Papers Index",
+    "section": "Text Files",
+    "text": "Text Files\n\nbbennett.txt\nchenning.txt\necooper.txt\njnicosia.txt\nlpanagiotounis.txt\nswray.txt"
+  },
+  {
+    "objectID": "rm-data/sprojects/index.html#notes",
+    "href": "rm-data/sprojects/index.html#notes",
+    "title": "Term Papers Index",
+    "section": "Notes",
+    "text": "Notes\nThis index provides links to term papers and related documents in the term-papers folder."
+  },
+  {
+    "objectID": "rm-data/sprojects/term-papers-index.html",
+    "href": "rm-data/sprojects/term-papers-index.html",
+    "title": "Term Papers Index",
+    "section": "",
+    "text": "bbennett.pdf\nchenning.pdf\necooper.pdf\njnicosia.pdf\nLpanagiotounis.pdf\nswray.pdf"
+  },
+  {
+    "objectID": "rm-data/sprojects/term-papers-index.html#pdf-files",
+    "href": "rm-data/sprojects/term-papers-index.html#pdf-files",
+    "title": "Term Papers Index",
+    "section": "",
+    "text": "bbennett.pdf\nchenning.pdf\necooper.pdf\njnicosia.pdf\nLpanagiotounis.pdf\nswray.pdf"
+  },
+  {
+    "objectID": "rm-data/sprojects/term-papers-index.html#text-files",
+    "href": "rm-data/sprojects/term-papers-index.html#text-files",
+    "title": "Term Papers Index",
+    "section": "Text Files",
+    "text": "Text Files\n\nbbennett.txt\nchenning.txt\necooper.txt\njnicosia.txt\nlpanagiotounis.txt\nswray.txt"
+  },
+  {
+    "objectID": "rm-data/sprojects/term-papers-index.html#notes",
+    "href": "rm-data/sprojects/term-papers-index.html#notes",
+    "title": "Term Papers Index",
+    "section": "Notes",
+    "text": "Notes\nThis index provides links to term papers and related documents in the term-papers folder."
   }
 ]

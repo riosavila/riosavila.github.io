@@ -1,0 +1,25 @@
+---
+title: Term Papers Index
+---
+
+## PDF Files
+
+- [bbennett.pdf](term-papers/bbennett.pdf)
+- [chenning.pdf](term-papers/chenning.pdf)
+- [ecooper.pdf](term-papers/ecooper.pdf)
+- [jnicosia.pdf](term-papers/jnicosia.pdf)
+- [Lpanagiotounis.pdf](term-papers/Lpanagiotounis.pdf)
+- [swray.pdf](term-papers/swray.pdf)
+
+## Text Files
+
+- [bbennett.txt](term-papers/bbennett.txt)
+- [chenning.txt](term-papers/chenning.txt)
+- [ecooper.txt](term-papers/ecooper.txt)
+- [jnicosia.txt](term-papers/jnicosia.txt)
+- [lpanagiotounis.txt](term-papers/lpanagiotounis.txt)
+- [swray.txt](term-papers/swray.txt)
+
+## Notes
+
+This index provides links to term papers and related documents in the term-papers folder.
