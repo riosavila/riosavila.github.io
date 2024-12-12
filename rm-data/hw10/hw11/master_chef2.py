@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-np.random.seed(42)  # For reproducibility
+np.random.seed(52)  # For reproducibility
 
 # Number of chefs
 n = 3000
