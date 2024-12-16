@@ -144,4 +144,10 @@ Write a short report summarizing your findings, including the following:
 - Submit your Stata do-file or log-file documenting your workflow.
 - Your "model" will be evaluated against everyone else's using a Test data.
 
+#### Show down!
+
+See Results [here](bump_chart.html){.external}
+
+**Winner: Shane**
+
 ## Homework 13 {#hw13}
