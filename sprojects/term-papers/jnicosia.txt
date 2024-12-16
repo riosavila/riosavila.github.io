@@ -1,6 +1,6 @@
 Seems to me that you have come a long way from the beginning of the semester. I hope you got some good tools for the future.
 1. You could expand your introduction a bit more, but its overall ok for the term paper.
-2. Good Lit Review for the term paper
+2. Good Lit Review for the term paper. But you may also want to include (if you extend this) the work that is done at the institute. LIMEW, in principle, is a measure that accounts for other goods and services. The Human Developed Index is another one you may want to consider, among others. In other words, you need to explore further other indices or measures out there (literature) that have been used to measure Welfare for a country.
 3. The Scope of your variables to analysis is limited. I would have liked to see some more information being used here. Perhaps with more data and time, you could get additional insights.
 4. For section 3, you would need to include those summary statistics, just to have an idea (better idea) of what you are using, and how it looks before diving into your analysis.
 

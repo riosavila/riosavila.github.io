@@ -4,12 +4,15 @@ Areas of Improvement
 
 Given the nature of the paper, and the role of volatility, you may also want to expand your methodologies, and explore GARCH models. Those are focused on modeling not only the changes of variables (ARIMA) but also the role of volatility when that happens.
 
-You may also want to provide more detail on the interpretation of the GRANGER tests results. 
+You may also want to provide more detail on the interpretation of the GRANGER tests results. This may be particularly relevant to compare if the "right" side of the equation explains the "left" side better or vice-versa.
 
 2. For a term paper, the analysis was good, but perhaps you want to explore using these ideas further, with data that is updated faster than what you already had access too. This could make it even more interesting for other analysis. 
 
 That being said, its not uncommon to produce models with "lagged" data. 
 
-3. Along with GARCH, you may want to explore more "state of the art" methods for analysis of financial data. The area of financial econometrics has grown a lot. And you could benefit from going deeper in some of those for a deeper version of your paper.
+3. In the paper itself, it wasn't clear why you wanted to do the analysis for SP500. If I understood the original equation correctly, it is valid for the country as a whole. But for a simpler unit, even a compound asset such as SP500, I dont think it makes much sense as a direct comparison.
+Nevertheless, as a external validation exercise, I can see hits value.
 
-4. A technical aspect of what you present in your paper. Goodness of fit. As far as I remember, Stata does not have an automatic model selection feature. But perhaps software like Eviews could do that. There is a chance that your model is overly complex.
+4. Along with GARCH, you may want to explore more "state of the art" methods for analysis of financial data. The area of financial econometrics has grown a lot. And you could benefit from going deeper in some of those for a deeper version of your paper.
+
+5. A technical aspect of what you present in your paper. Goodness of fit. As far as I remember, Stata does not have an automatic model selection feature. But perhaps software like Eviews could do that. There is a chance that your model is overly complex.

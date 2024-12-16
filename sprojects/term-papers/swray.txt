@@ -1,7 +1,8 @@
 1. Your introduction needs to be expanded. Its good for an abstract that gives me an idea of what is what you will be doing in the paper, but not for an introduction where you should be included a motivation as well.
 2. I like how you set up your "lit" review. However, at times its very technical. 
 3. From what I understand, you had a good point and are trying to present a lot of information in a short amount of space. Considering this, I would aim to restructure your results to have a more clear and concise message.
-4. As I suggested Chenning, perhaps you will benefit from exploring more Finanacial Econometrics literature. This would better allow you to model and understand time series data.
-5. For tables. Do not forget adding those "notes" what what they mean, providing, perhaps, two versions. One for the main document. A streamlined version of the tables that make it clear what is what you are looking at and how to interpret it. And the Appendix version, which has all the details of the RAW models.
+4. I also noticed during the presentation that you have different model specifications based on "best predictive model". While that is a reasonable approach for prediction itself, you would do better by using the same specification. This would simplify the complexity of the current structure, and will make it easier to understand what is happening. 
+5. As I suggested Chenning, perhaps you will benefit from exploring more Financial Econometrics literature. This would better allow you to model and understand time series data.
+5. For tables. Do not forget adding those "notes" what hey mean, providing, perhaps, two versions. One for the main document. A streamlined version of the tables that make it clear what is what you are looking at and how to interpret it. And the Appendix version, which has all the details of the RAW models.
 
 Overall, good job. 
